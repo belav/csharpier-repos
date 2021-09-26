@@ -26,11 +26,12 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(Socket).Assembly.GetType(
-                "System.Net.Sockets.SocketsTelemetry",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type esType = typeof(Socket).Assembly
+                .GetType(
+                    "System.Net.Sockets.SocketsTelemetry",
+                    throwOnError: true,
+                    ignoreCase: false
+                );
             Assert.NotNull(esType);
 
             Assert.Equal("System.Net.Sockets", EventSource.GetName(esType));
@@ -105,54 +106,53 @@ namespace System.Net.Sockets.Tests
         )
         {
             RemoteExecutor.Invoke(
-                    async (connectMethod, acceptMethod) =>
-                    {
-                        using var listener = new TestEventListener(
-                            "System.Net.Sockets",
-                            EventLevel.Verbose,
-                            0.1
-                        );
-                        listener.AddActivityTracking();
+                async (connectMethod, acceptMethod) =>
+                {
+                    using var listener = new TestEventListener(
+                        "System.Net.Sockets",
+                        EventLevel.Verbose,
+                        0.1
+                    );
+                    listener.AddActivityTracking();
 
-                        var events =
-                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                        await listener.RunWithCallbackAsync(
-                            e => events.Enqueue((e, e.ActivityId)),
-                            async () =>
-                            {
-                                using var server = new Socket(SocketType.Stream, ProtocolType.Tcp);
-                                server.Bind(new IPEndPoint(IPAddress.Loopback, 0));
-                                server.Listen();
+                    var events =
+                        new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                    await listener.RunWithCallbackAsync(
+                        e => events.Enqueue((e, e.ActivityId)),
+                        async () =>
+                        {
+                            using var server = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                            server.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+                            server.Listen();
 
-                                using var client = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                            using var client = new Socket(SocketType.Stream, ProtocolType.Tcp);
 
-                                Task acceptTask = GetHelperBase(acceptMethod).AcceptAsync(server);
-                                await WaitForEventAsync(events, "AcceptStart");
+                            Task acceptTask = GetHelperBase(acceptMethod).AcceptAsync(server);
+                            await WaitForEventAsync(events, "AcceptStart");
 
-                                await GetHelperBase(connectMethod)
-                                    .ConnectAsync(client, server.LocalEndPoint);
-                                await acceptTask;
+                            await GetHelperBase(connectMethod)
+                                .ConnectAsync(client, server.LocalEndPoint);
+                            await acceptTask;
 
-                                await WaitForEventAsync(events, "AcceptStop");
-                                await WaitForEventAsync(events, "ConnectStop");
+                            await WaitForEventAsync(events, "AcceptStop");
+                            await WaitForEventAsync(events, "ConnectStop");
 
-                                await WaitForEventCountersAsync(events);
-                            }
-                        );
-                        Assert.DoesNotContain(events, ev => ev.Event.EventId == 0); // errors from the EventSource itself
+                            await WaitForEventCountersAsync(events);
+                        }
+                    );
+                    Assert.DoesNotContain(events, ev => ev.Event.EventId == 0); // errors from the EventSource itself
 
-                        VerifyStartStopEvents(events, connect: true, expectedCount: 1);
-                        VerifyStartStopEvents(events, connect: false, expectedCount: 1);
+                    VerifyStartStopEvents(events, connect: true, expectedCount: 1);
+                    VerifyStartStopEvents(events, connect: false, expectedCount: 1);
 
-                        Assert.DoesNotContain(events, e => e.Event.EventName == "ConnectFailed");
-                        Assert.DoesNotContain(events, e => e.Event.EventName == "AcceptFailed");
+                    Assert.DoesNotContain(events, e => e.Event.EventName == "ConnectFailed");
+                    Assert.DoesNotContain(events, e => e.Event.EventName == "AcceptFailed");
 
-                        VerifyEventCounters(events, connectCount: 1);
-                    },
-                    connectMethod,
-                    acceptMethod
-                )
-                .Dispose();
+                    VerifyEventCounters(events, connectCount: 1);
+                },
+                connectMethod,
+                acceptMethod
+            ).Dispose();
         }
 
         [OuterLoop]
@@ -164,48 +164,47 @@ namespace System.Net.Sockets.Tests
         )
         {
             RemoteExecutor.Invoke(
-                    async (connectMethod, useDnsEndPointString) =>
-                    {
-                        using var listener = new TestEventListener(
-                            "System.Net.Sockets",
-                            EventLevel.Verbose,
-                            0.1
-                        );
-                        listener.AddActivityTracking();
+                async (connectMethod, useDnsEndPointString) =>
+                {
+                    using var listener = new TestEventListener(
+                        "System.Net.Sockets",
+                        EventLevel.Verbose,
+                        0.1
+                    );
+                    listener.AddActivityTracking();
 
-                        var events =
-                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                        await listener.RunWithCallbackAsync(
-                            e => events.Enqueue((e, e.ActivityId)),
-                            async () =>
-                            {
-                                using var client = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                    var events =
+                        new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                    await listener.RunWithCallbackAsync(
+                        e => events.Enqueue((e, e.ActivityId)),
+                        async () =>
+                        {
+                            using var client = new Socket(SocketType.Stream, ProtocolType.Tcp);
 
-                                SocketHelperBase socketHelper = GetHelperBase(connectMethod);
+                            SocketHelperBase socketHelper = GetHelperBase(connectMethod);
 
-                                EndPoint endPoint = await GetRemoteEndPointAsync(
-                                    useDnsEndPointString,
-                                    port: 443
-                                );
-                                await socketHelper.ConnectAsync(client, endPoint);
+                            EndPoint endPoint = await GetRemoteEndPointAsync(
+                                useDnsEndPointString,
+                                port: 443
+                            );
+                            await socketHelper.ConnectAsync(client, endPoint);
 
-                                await WaitForEventAsync(events, "ConnectStop");
+                            await WaitForEventAsync(events, "ConnectStop");
 
-                                await WaitForEventCountersAsync(events);
-                            }
-                        );
-                        Assert.DoesNotContain(events, ev => ev.Event.EventId == 0); // errors from the EventSource itself
+                            await WaitForEventCountersAsync(events);
+                        }
+                    );
+                    Assert.DoesNotContain(events, ev => ev.Event.EventId == 0); // errors from the EventSource itself
 
-                        VerifyStartStopEvents(events, connect: true, expectedCount: 1);
+                    VerifyStartStopEvents(events, connect: true, expectedCount: 1);
 
-                        Assert.DoesNotContain(events, e => e.Event.EventName == "ConnectFailed");
+                    Assert.DoesNotContain(events, e => e.Event.EventName == "ConnectFailed");
 
-                        VerifyEventCounters(events, connectCount: 1, connectOnly: true);
-                    },
-                    connectMethod,
-                    useDnsEndPoint.ToString()
-                )
-                .Dispose();
+                    VerifyEventCounters(events, connectCount: 1, connectOnly: true);
+                },
+                connectMethod,
+                useDnsEndPoint.ToString()
+            ).Dispose();
         }
 
         [OuterLoop]
@@ -227,64 +226,56 @@ namespace System.Net.Sockets.Tests
             }
 
             RemoteExecutor.Invoke(
-                    async (connectMethod, useDnsEndPointString) =>
-                    {
-                        EndPoint endPoint = await GetRemoteEndPointAsync(
-                            useDnsEndPointString,
-                            port: 12345
-                        );
+                async (connectMethod, useDnsEndPointString) =>
+                {
+                    EndPoint endPoint = await GetRemoteEndPointAsync(
+                        useDnsEndPointString,
+                        port: 12345
+                    );
 
-                        using var listener = new TestEventListener(
-                            "System.Net.Sockets",
-                            EventLevel.Verbose,
-                            0.1
-                        );
-                        listener.AddActivityTracking();
+                    using var listener = new TestEventListener(
+                        "System.Net.Sockets",
+                        EventLevel.Verbose,
+                        0.1
+                    );
+                    listener.AddActivityTracking();
 
-                        var events =
-                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                        await listener.RunWithCallbackAsync(
-                            e => events.Enqueue((e, e.ActivityId)),
-                            async () =>
-                            {
-                                using var client = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                    var events =
+                        new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                    await listener.RunWithCallbackAsync(
+                        e => events.Enqueue((e, e.ActivityId)),
+                        async () =>
+                        {
+                            using var client = new Socket(SocketType.Stream, ProtocolType.Tcp);
 
-                                SocketHelperBase socketHelper = GetHelperBase(connectMethod);
+                            SocketHelperBase socketHelper = GetHelperBase(connectMethod);
 
-                                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
-                                    async () =>
-                                    {
-                                        Task connectTask = socketHelper.ConnectAsync(
-                                            client,
-                                            endPoint
-                                        );
-                                        await WaitForEventAsync(events, "ConnectStart");
-                                        Task disposeTask = Task.Run(() => client.Dispose());
-                                        await new[]
-                                        {
-                                            connectTask,
-                                            disposeTask
-                                        }.WhenAllOrAnyFailed();
-                                    }
-                                );
-
-                                if (ex is SocketException se)
+                            Exception ex = await Assert.ThrowsAnyAsync<Exception>(
+                                async () =>
                                 {
-                                    Assert.NotEqual(SocketError.TimedOut, se.SocketErrorCode);
+                                    Task connectTask = socketHelper.ConnectAsync(client, endPoint);
+                                    await WaitForEventAsync(events, "ConnectStart");
+                                    Task disposeTask = Task.Run(() => client.Dispose());
+                                    await new[] { connectTask, disposeTask }.WhenAllOrAnyFailed();
                                 }
+                            );
 
-                                await WaitForEventAsync(events, "ConnectStop");
-
-                                await WaitForEventCountersAsync(events);
+                            if (ex is SocketException se)
+                            {
+                                Assert.NotEqual(SocketError.TimedOut, se.SocketErrorCode);
                             }
-                        );
 
-                        VerifyConnectFailureEvents(events);
-                    },
-                    connectMethod,
-                    useDnsEndPoint.ToString()
-                )
-                .Dispose();
+                            await WaitForEventAsync(events, "ConnectStop");
+
+                            await WaitForEventCountersAsync(events);
+                        }
+                    );
+
+                    VerifyConnectFailureEvents(events);
+                },
+                connectMethod,
+                useDnsEndPoint.ToString()
+            ).Dispose();
         }
 
         [OuterLoop]
@@ -301,68 +292,63 @@ namespace System.Net.Sockets.Tests
             }
 
             RemoteExecutor.Invoke(
-                    async acceptMethod =>
-                    {
-                        using var listener = new TestEventListener(
-                            "System.Net.Sockets",
-                            EventLevel.Verbose,
-                            0.1
-                        );
-                        listener.AddActivityTracking();
+                async acceptMethod =>
+                {
+                    using var listener = new TestEventListener(
+                        "System.Net.Sockets",
+                        EventLevel.Verbose,
+                        0.1
+                    );
+                    listener.AddActivityTracking();
 
-                        var events =
-                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                        await listener.RunWithCallbackAsync(
-                            e => events.Enqueue((e, e.ActivityId)),
-                            async () =>
-                            {
-                                using var server = new Socket(SocketType.Stream, ProtocolType.Tcp);
-                                server.Bind(new IPEndPoint(IPAddress.Loopback, 0));
-                                server.Listen();
+                    var events =
+                        new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                    await listener.RunWithCallbackAsync(
+                        e => events.Enqueue((e, e.ActivityId)),
+                        async () =>
+                        {
+                            using var server = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                            server.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+                            server.Listen();
 
-                                await Assert.ThrowsAnyAsync<Exception>(
-                                    async () =>
-                                    {
-                                        Task acceptTask = GetHelperBase(acceptMethod)
-                                            .AcceptAsync(server);
-                                        await WaitForEventAsync(events, "AcceptStart");
-                                        Task disposeTask = Task.Run(() => server.Dispose());
-                                        await new[]
-                                        {
-                                            acceptTask,
-                                            disposeTask
-                                        }.WhenAllOrAnyFailed();
-                                    }
-                                );
+                            await Assert.ThrowsAnyAsync<Exception>(
+                                async () =>
+                                {
+                                    Task acceptTask = GetHelperBase(acceptMethod)
+                                        .AcceptAsync(server);
+                                    await WaitForEventAsync(events, "AcceptStart");
+                                    Task disposeTask = Task.Run(() => server.Dispose());
+                                    await new[] { acceptTask, disposeTask }.WhenAllOrAnyFailed();
+                                }
+                            );
 
-                                await WaitForEventAsync(events, "AcceptStop");
+                            await WaitForEventAsync(events, "AcceptStop");
 
-                                await WaitForEventCountersAsync(events);
-                            }
-                        );
-                        Assert.DoesNotContain(events, ev => ev.Event.EventId == 0); // errors from the EventSource itself
+                            await WaitForEventCountersAsync(events);
+                        }
+                    );
+                    Assert.DoesNotContain(events, ev => ev.Event.EventId == 0); // errors from the EventSource itself
 
-                        VerifyStartStopEvents(events, connect: false, expectedCount: 1);
+                    VerifyStartStopEvents(events, connect: false, expectedCount: 1);
 
-                        (EventWrittenEventArgs Event, Guid ActivityId) failed = Assert.Single(
-                            events,
-                            e => e.Event.EventName == "AcceptFailed"
-                        );
-                        Assert.Equal(2, failed.Event.Payload.Count);
-                        Assert.True(Enum.IsDefined((SocketError)failed.Event.Payload[0]));
-                        Assert.IsType<string>(failed.Event.Payload[1]);
+                    (EventWrittenEventArgs Event, Guid ActivityId) failed = Assert.Single(
+                        events,
+                        e => e.Event.EventName == "AcceptFailed"
+                    );
+                    Assert.Equal(2, failed.Event.Payload.Count);
+                    Assert.True(Enum.IsDefined((SocketError)failed.Event.Payload[0]));
+                    Assert.IsType<string>(failed.Event.Payload[1]);
 
-                        (_, Guid startActivityId) = Assert.Single(
-                            events,
-                            e => e.Event.EventName == "AcceptStart"
-                        );
-                        Assert.Equal(startActivityId, failed.ActivityId);
+                    (_, Guid startActivityId) = Assert.Single(
+                        events,
+                        e => e.Event.EventName == "AcceptStart"
+                    );
+                    Assert.Equal(startActivityId, failed.ActivityId);
 
-                        VerifyEventCounters(events, connectCount: 0);
-                    },
-                    acceptMethod
-                )
-                .Dispose();
+                    VerifyEventCounters(events, connectCount: 0);
+                },
+                acceptMethod
+            ).Dispose();
         }
 
         [OuterLoop]
@@ -383,85 +369,82 @@ namespace System.Net.Sockets.Tests
             }
 
             RemoteExecutor.Invoke(
-                    async (connectMethod, useDnsEndPointString) =>
-                    {
-                        EndPoint endPoint = await GetRemoteEndPointAsync(
-                            useDnsEndPointString,
-                            port: 12345
-                        );
+                async (connectMethod, useDnsEndPointString) =>
+                {
+                    EndPoint endPoint = await GetRemoteEndPointAsync(
+                        useDnsEndPointString,
+                        port: 12345
+                    );
 
-                        using var listener = new TestEventListener(
-                            "System.Net.Sockets",
-                            EventLevel.Verbose,
-                            0.1
-                        );
-                        listener.AddActivityTracking();
+                    using var listener = new TestEventListener(
+                        "System.Net.Sockets",
+                        EventLevel.Verbose,
+                        0.1
+                    );
+                    listener.AddActivityTracking();
 
-                        var events =
-                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                        await listener.RunWithCallbackAsync(
-                            e => events.Enqueue((e, e.ActivityId)),
-                            async () =>
-                            {
-                                using var client = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                    var events =
+                        new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                    await listener.RunWithCallbackAsync(
+                        e => events.Enqueue((e, e.ActivityId)),
+                        async () =>
+                        {
+                            using var client = new Socket(SocketType.Stream, ProtocolType.Tcp);
 
-                                await Assert.ThrowsAnyAsync<Exception>(
-                                    async () =>
+                            await Assert.ThrowsAnyAsync<Exception>(
+                                async () =>
+                                {
+                                    switch (connectMethod)
                                     {
-                                        switch (connectMethod)
-                                        {
-                                            case "Task":
-                                                using (var cts = new CancellationTokenSource())
+                                        case "Task":
+                                            using (var cts = new CancellationTokenSource())
+                                            {
+                                                ValueTask connectTask = client.ConnectAsync(
+                                                    endPoint,
+                                                    cts.Token
+                                                );
+                                                await WaitForEventAsync(events, "ConnectStart");
+                                                cts.Cancel();
+                                                await connectTask;
+                                            }
+                                            break;
+
+                                        case "Eap":
+                                            using (var saea = new SocketAsyncEventArgs())
+                                            {
+                                                var tcs = new TaskCompletionSource();
+                                                saea.RemoteEndPoint = endPoint;
+                                                saea.Completed += (_, __) =>
                                                 {
-                                                    ValueTask connectTask = client.ConnectAsync(
-                                                        endPoint,
-                                                        cts.Token
+                                                    Assert.NotEqual(
+                                                        SocketError.Success,
+                                                        saea.SocketError
                                                     );
-                                                    await WaitForEventAsync(events, "ConnectStart");
-                                                    cts.Cancel();
-                                                    await connectTask;
-                                                }
-                                                break;
-
-                                            case "Eap":
-                                                using (var saea = new SocketAsyncEventArgs())
-                                                {
-                                                    var tcs = new TaskCompletionSource();
-                                                    saea.RemoteEndPoint = endPoint;
-                                                    saea.Completed += (_, __) =>
-                                                    {
-                                                        Assert.NotEqual(
-                                                            SocketError.Success,
-                                                            saea.SocketError
-                                                        );
-                                                        tcs.SetException(
-                                                            new SocketException(
-                                                                (int)saea.SocketError
-                                                            )
-                                                        );
-                                                    };
-                                                    Assert.True(client.ConnectAsync(saea));
-                                                    await WaitForEventAsync(events, "ConnectStart");
-                                                    Socket.CancelConnectAsync(saea);
-                                                    await tcs.Task;
-                                                }
-                                                break;
-                                        }
+                                                    tcs.SetException(
+                                                        new SocketException((int)saea.SocketError)
+                                                    );
+                                                };
+                                                Assert.True(client.ConnectAsync(saea));
+                                                await WaitForEventAsync(events, "ConnectStart");
+                                                Socket.CancelConnectAsync(saea);
+                                                await tcs.Task;
+                                            }
+                                            break;
                                     }
-                                );
+                                }
+                            );
 
-                                await WaitForEventAsync(events, "ConnectStop");
+                            await WaitForEventAsync(events, "ConnectStop");
 
-                                await WaitForEventCountersAsync(events);
-                            }
-                        );
+                            await WaitForEventCountersAsync(events);
+                        }
+                    );
 
-                        VerifyConnectFailureEvents(events);
-                    },
-                    connectMethod,
-                    useDnsEndPoint.ToString()
-                )
-                .Dispose();
+                    VerifyConnectFailureEvents(events);
+                },
+                connectMethod,
+                useDnsEndPoint.ToString()
+            ).Dispose();
         }
 
         private static void VerifyConnectFailureEvents(
@@ -494,109 +477,86 @@ namespace System.Net.Sockets.Tests
         public void EventSource_EventsRaisedAsExpected()
         {
             RemoteExecutor.Invoke(
-                    async () =>
-                    {
-                        using (
-                            var listener = new TestEventListener(
-                                "System.Net.Sockets",
-                                EventLevel.Verbose,
-                                0.1
-                            )
+                async () =>
+                {
+                    using (
+                        var listener = new TestEventListener(
+                            "System.Net.Sockets",
+                            EventLevel.Verbose,
+                            0.1
                         )
-                        {
-                            listener.AddActivityTracking();
+                    )
+                    {
+                        listener.AddActivityTracking();
 
-                            var events =
-                                new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                            await listener.RunWithCallbackAsync(
-                                e => events.Enqueue((e, e.ActivityId)),
-                                async () =>
-                                {
-                                    // Invoke several tests to execute code paths while tracing is enabled
+                        var events =
+                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                        await listener.RunWithCallbackAsync(
+                            e => events.Enqueue((e, e.ActivityId)),
+                            async () =>
+                            {
+                                // Invoke several tests to execute code paths while tracing is enabled
 
-                                    await new SendReceive_Sync(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .ConfigureAwait(false);
-                                    await new SendReceive_Sync(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            true
-                                        )
-                                        .ConfigureAwait(false);
+                                await new SendReceive_Sync(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .ConfigureAwait(false);
+                                await new SendReceive_Sync(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .ConfigureAwait(false);
 
-                                    await new SendReceive_Task(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .ConfigureAwait(false);
-                                    await new SendReceive_Task(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            true
-                                        )
-                                        .ConfigureAwait(false);
+                                await new SendReceive_Task(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .ConfigureAwait(false);
+                                await new SendReceive_Task(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .ConfigureAwait(false);
 
-                                    await new SendReceive_Eap(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .ConfigureAwait(false);
-                                    await new SendReceive_Eap(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            true
-                                        )
-                                        .ConfigureAwait(false);
+                                await new SendReceive_Eap(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .ConfigureAwait(false);
+                                await new SendReceive_Eap(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .ConfigureAwait(false);
 
-                                    await new SendReceive_Apm(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .ConfigureAwait(false);
-                                    await new SendReceive_Apm(null).SendRecv_Stream_TCP(
-                                            IPAddress.Loopback,
-                                            true
-                                        )
-                                        .ConfigureAwait(false);
+                                await new SendReceive_Apm(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .ConfigureAwait(false);
+                                await new SendReceive_Apm(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .ConfigureAwait(false);
 
-                                    await new SendReceiveUdpClient().SendToRecvFromAsync_Datagram_UDP_UdpClient(
-                                            IPAddress.Loopback
-                                        )
-                                        .ConfigureAwait(false);
-                                    await new SendReceiveUdpClient().SendToRecvFromAsync_Datagram_UDP_UdpClient(
-                                            IPAddress.Loopback
-                                        )
-                                        .ConfigureAwait(false);
+                                await new SendReceiveUdpClient()
+                                    .SendToRecvFromAsync_Datagram_UDP_UdpClient(IPAddress.Loopback)
+                                    .ConfigureAwait(false);
+                                await new SendReceiveUdpClient()
+                                    .SendToRecvFromAsync_Datagram_UDP_UdpClient(IPAddress.Loopback)
+                                    .ConfigureAwait(false);
 
-                                    await new NetworkStreamTest().CopyToAsync_AllDataCopied(
-                                            4096,
-                                            true
-                                        )
-                                        .ConfigureAwait(false);
-                                    await new NetworkStreamTest().Timeout_Roundtrips()
-                                        .ConfigureAwait(false);
+                                await new NetworkStreamTest()
+                                    .CopyToAsync_AllDataCopied(4096, true)
+                                    .ConfigureAwait(false);
+                                await new NetworkStreamTest()
+                                    .Timeout_Roundtrips()
+                                    .ConfigureAwait(false);
 
-                                    await WaitForEventCountersAsync(events);
-                                }
-                            );
-                            Assert.DoesNotContain(events, ev => ev.Event.EventId == 0); // errors from the EventSource itself
+                                await WaitForEventCountersAsync(events);
+                            }
+                        );
+                        Assert.DoesNotContain(events, ev => ev.Event.EventId == 0); // errors from the EventSource itself
 
-                            VerifyStartStopEvents(events, connect: true, expectedCount: 10);
+                        VerifyStartStopEvents(events, connect: true, expectedCount: 10);
 
-                            Assert.DoesNotContain(
-                                events,
-                                e => e.Event.EventName == "ConnectFailed"
-                            );
+                        Assert.DoesNotContain(events, e => e.Event.EventName == "ConnectFailed");
 
-                            VerifyEventCounters(
-                                events,
-                                connectCount: 10,
-                                shouldHaveTransferedBytes: true,
-                                shouldHaveDatagrams: true
-                            );
-                        }
+                        VerifyEventCounters(
+                            events,
+                            connectCount: 10,
+                            shouldHaveTransferedBytes: true,
+                            shouldHaveDatagrams: true
+                        );
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         private static void VerifyStartStopEvents(
@@ -607,8 +567,8 @@ namespace System.Net.Sockets.Tests
         {
             string startName = connect ? "ConnectStart" : "AcceptStart";
             (EventWrittenEventArgs Event, Guid ActivityId)[] starts = events.Where(
-                    e => e.Event.EventName == startName
-                )
+                e => e.Event.EventName == startName
+            )
                 .ToArray();
             Assert.Equal(expectedCount, starts.Length);
             foreach ((EventWrittenEventArgs Event, _) in starts)
@@ -619,8 +579,8 @@ namespace System.Net.Sockets.Tests
 
             string stopName = connect ? "ConnectStop" : "AcceptStop";
             (EventWrittenEventArgs Event, Guid ActivityId)[] stops = events.Where(
-                    e => e.Event.EventName == stopName
-                )
+                e => e.Event.EventName == stopName
+            )
                 .ToArray();
             Assert.Equal(expectedCount, stops.Length);
             Assert.All(stops, stop => Assert.Empty(stop.Event.Payload));
@@ -682,8 +642,8 @@ namespace System.Net.Sockets.Tests
         )
         {
             Dictionary<string, double[]> eventCounters = events.Where(
-                    e => e.Event.EventName == "EventCounters"
-                )
+                e => e.Event.EventName == "EventCounters"
+            )
                 .Select(e => (IDictionary<string, object>)e.Event.Payload.Single())
                 .GroupBy(
                     d => (string)d["Name"],

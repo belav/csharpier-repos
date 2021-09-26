@@ -70,10 +70,8 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
 
             // Map status to response code - this is customizable via options.
             if (
-                !_healthCheckOptions.ResultStatusCodes.TryGetValue(
-                    result.Status,
-                    out var statusCode
-                )
+                !_healthCheckOptions.ResultStatusCodes
+                    .TryGetValue(result.Status, out var statusCode)
             )
             {
                 var message =

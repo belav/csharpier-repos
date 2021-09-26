@@ -107,7 +107,8 @@ namespace System.IO.Tests.Enumeration
             EnumerationOptions options
         )
         {
-            return new DirectoryInfo(directory).GetFiles(pattern, options)
+            return new DirectoryInfo(directory)
+                .GetFiles(pattern, options)
                 .Select(i => i.FullName)
                 .ToArray();
         }

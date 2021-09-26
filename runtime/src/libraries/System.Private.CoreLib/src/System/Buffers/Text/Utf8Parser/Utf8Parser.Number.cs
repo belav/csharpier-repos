@@ -122,9 +122,9 @@ namespace System.Buffers.Text
                 maxDigitCount
             );
             source.Slice(
-                    startIndexNonLeadingDigitsBeforeDecimal,
-                    numNonLeadingDigitsBeforeDecimalToCopy
-                )
+                startIndexNonLeadingDigitsBeforeDecimal,
+                numNonLeadingDigitsBeforeDecimalToCopy
+            )
                 .CopyTo(digits);
             dstIndex = numNonLeadingDigitsBeforeDecimalToCopy;
             number.Scale = numNonLeadingDigitsBeforeDecimal;

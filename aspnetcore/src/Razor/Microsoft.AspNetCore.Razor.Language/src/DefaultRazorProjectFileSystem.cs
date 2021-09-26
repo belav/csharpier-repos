@@ -37,9 +37,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 .Select(
                     file =>
                     {
-                        var relativePhysicalPath = file.FullName.Substring(
-                            absoluteBasePath.Length + 1
-                        ); // Include leading separator
+                        var relativePhysicalPath = file.FullName
+                            .Substring(absoluteBasePath.Length + 1); // Include leading separator
                         var filePath =
                             "/" + relativePhysicalPath.Replace(Path.DirectorySeparatorChar, '/');
 

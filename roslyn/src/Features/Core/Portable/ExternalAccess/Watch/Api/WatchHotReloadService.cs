@@ -81,11 +81,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
             CancellationToken cancellationToken
         ) =>
             await _encService.StartDebuggingSessionAsync(
-                    solution,
-                    DebuggerService.Instance,
-                    captureMatchingDocuments: true,
-                    cancellationToken
-                )
+                solution,
+                DebuggerService.Instance,
+                captureMatchingDocuments: true,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
         /// <summary>
@@ -103,10 +103,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
         )
         {
             var results = await _encService.EmitSolutionUpdateAsync(
-                    solution,
-                    s_solutionActiveStatementSpanProvider,
-                    cancellationToken
-                )
+                solution,
+                s_solutionActiveStatementSpanProvider,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (results.ModuleUpdates.Status == ManagedModuleUpdateStatus.Ready)
@@ -114,10 +114,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
                 _encService.CommitSolutionUpdate(out _);
             }
 
-            var updates = results.ModuleUpdates.Updates.SelectAsArray(
-                update =>
-                    new Update(update.Module, update.ILDelta, update.MetadataDelta, update.PdbDelta)
-            );
+            var updates = results.ModuleUpdates.Updates
+                .SelectAsArray(
+                    update =>
+                        new Update(
+                            update.Module,
+                            update.ILDelta,
+                            update.MetadataDelta,
+                            update.PdbDelta
+                        )
+                );
 
             var diagnostics = await results.GetAllDiagnosticsAsync(solution, cancellationToken)
                 .ConfigureAwait(false);

@@ -212,11 +212,8 @@ Hello from page";
                 responseContent,
                 "/TagHelper/PostWithHandler"
             );
-            var expectedContent = string.Format(
-                CultureInfo.InvariantCulture,
-                expected,
-                forgeryToken
-            );
+            var expectedContent = string
+                .Format(CultureInfo.InvariantCulture, expected, forgeryToken);
 
             Assert.Equal(expectedContent, responseContent, ignoreLineEndingDifferences: true);
         }

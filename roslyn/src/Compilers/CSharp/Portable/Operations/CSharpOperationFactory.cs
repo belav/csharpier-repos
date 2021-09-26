@@ -499,9 +499,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 case BoundKind.UsingLocalDeclarations:
                 {
                     var multipleDeclaration = (BoundMultipleLocalDeclarationsBase)declaration;
-                    var builder = ArrayBuilder<IVariableDeclaratorOperation>.GetInstance(
-                        multipleDeclaration.LocalDeclarations.Length
-                    );
+                    var builder = ArrayBuilder<IVariableDeclaratorOperation>
+                        .GetInstance(multipleDeclaration.LocalDeclarations.Length);
                     foreach (var decl in multipleDeclaration.LocalDeclarations)
                     {
                         builder.Add(
@@ -1125,10 +1124,10 @@ namespace Microsoft.CodeAnalysis.Operations
             ImmutableArray<IOperation> arguments = CreateFromArray<BoundExpression, IOperation>(
                 boundDynamicInvocation.Arguments
             );
-            ImmutableArray<string> argumentNames =
-                boundDynamicInvocation.ArgumentNamesOpt.NullToEmpty();
-            ImmutableArray<RefKind> argumentRefKinds =
-                boundDynamicInvocation.ArgumentRefKindsOpt.NullToEmpty();
+            ImmutableArray<string> argumentNames = boundDynamicInvocation.ArgumentNamesOpt
+                .NullToEmpty();
+            ImmutableArray<RefKind> argumentRefKinds = boundDynamicInvocation.ArgumentRefKindsOpt
+                .NullToEmpty();
             SyntaxNode syntax = boundDynamicInvocation.Syntax;
             ITypeSymbol? type = boundDynamicInvocation.GetPublicTypeSymbol();
             bool isImplicit = boundDynamicInvocation.WasCompilerGenerated;
@@ -1195,10 +1194,10 @@ namespace Microsoft.CodeAnalysis.Operations
             ImmutableArray<IOperation> arguments = CreateBoundDynamicIndexerAccessArguments(
                 boundDynamicIndexerAccess
             );
-            ImmutableArray<string> argumentNames =
-                boundDynamicIndexerAccess.ArgumentNamesOpt.NullToEmpty();
-            ImmutableArray<RefKind> argumentRefKinds =
-                boundDynamicIndexerAccess.ArgumentRefKindsOpt.NullToEmpty();
+            ImmutableArray<string> argumentNames = boundDynamicIndexerAccess.ArgumentNamesOpt
+                .NullToEmpty();
+            ImmutableArray<RefKind> argumentRefKinds = boundDynamicIndexerAccess.ArgumentRefKindsOpt
+                .NullToEmpty();
             SyntaxNode syntax = boundDynamicIndexerAccess.Syntax;
             ITypeSymbol? type = boundDynamicIndexerAccess.GetPublicTypeSymbol();
             bool isImplicit = boundDynamicIndexerAccess.WasCompilerGenerated;
@@ -1274,8 +1273,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 ImmutableArray<IOperation> arguments = CreateBoundDynamicIndexerAccessArguments(
                     boundObjectInitializerMember
                 );
-                ImmutableArray<string> argumentNames =
-                    boundObjectInitializerMember.ArgumentNamesOpt.NullToEmpty();
+                ImmutableArray<string> argumentNames = boundObjectInitializerMember.ArgumentNamesOpt
+                    .NullToEmpty();
                 ImmutableArray<RefKind> argumentRefKinds =
                     boundObjectInitializerMember.ArgumentRefKindsOpt.NullToEmpty();
                 return new DynamicIndexerAccessOperation(
@@ -1390,8 +1389,8 @@ namespace Microsoft.CodeAnalysis.Operations
             );
             string memberName = boundDynamicObjectInitializerMember.MemberName;
             ImmutableArray<ITypeSymbol> typeArguments = ImmutableArray<ITypeSymbol>.Empty;
-            ITypeSymbol containingType =
-                boundDynamicObjectInitializerMember.ReceiverType.GetPublicSymbol();
+            ITypeSymbol containingType = boundDynamicObjectInitializerMember.ReceiverType
+                .GetPublicSymbol();
             SyntaxNode syntax = boundDynamicObjectInitializerMember.Syntax;
             ITypeSymbol? type = boundDynamicObjectInitializerMember.GetPublicTypeSymbol();
             bool isImplicit = boundDynamicObjectInitializerMember.WasCompilerGenerated;
@@ -2024,8 +2023,8 @@ namespace Microsoft.CodeAnalysis.Operations
             Conversion outConversion = boundCompoundAssignmentOperator.FinalConversion;
             bool isLifted = boundCompoundAssignmentOperator.Operator.Kind.IsLifted();
             bool isChecked = boundCompoundAssignmentOperator.Operator.Kind.IsChecked();
-            IMethodSymbol operatorMethod =
-                boundCompoundAssignmentOperator.Operator.Method.GetPublicSymbol();
+            IMethodSymbol operatorMethod = boundCompoundAssignmentOperator.Operator.Method
+                .GetPublicSymbol();
             SyntaxNode syntax = boundCompoundAssignmentOperator.Syntax;
             ITypeSymbol? type = boundCompoundAssignmentOperator.GetPublicTypeSymbol();
             bool isImplicit = boundCompoundAssignmentOperator.WasCompilerGenerated;
@@ -2087,9 +2086,8 @@ namespace Microsoft.CodeAnalysis.Operations
             // if child has syntax node point to same syntax node as bad expression, then this invalid expression is implicit
             bool isImplicit =
                 boundBadExpression.WasCompilerGenerated
-                || boundBadExpression.ChildBoundNodes.Any(
-                    e => e?.Syntax == boundBadExpression.Syntax
-                );
+                || boundBadExpression.ChildBoundNodes
+                    .Any(e => e?.Syntax == boundBadExpression.Syntax);
             var children = CreateFromArray<BoundExpression, IOperation>(
                 boundBadExpression.ChildBoundNodes
             );
@@ -2263,8 +2261,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 BinaryOperatorKind operatorKind = Helper.DeriveBinaryOperatorKind(
                     boundBinaryOperator.OperatorKind
                 );
-                IMethodSymbol operatorMethod =
-                    boundBinaryOperator.LogicalOperator.GetPublicSymbol();
+                IMethodSymbol operatorMethod = boundBinaryOperator.LogicalOperator
+                    .GetPublicSymbol();
                 IMethodSymbol unaryOperatorMethod =
                     boundBinaryOperator.OperatorKind.Operator() == CSharp.BinaryOperatorKind.And
                         ? boundBinaryOperator.FalseOperator.GetPublicSymbol()
@@ -2357,11 +2355,12 @@ namespace Microsoft.CodeAnalysis.Operations
             if (
                 valueConversion.Exists
                 && !valueConversion.IsIdentity
-                && boundNullCoalescingOperator.Type.Equals(
-                    boundNullCoalescingOperator.LeftOperand.Type?.StrippedType(),
-                    TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                && boundNullCoalescingOperator.Type
+                    .Equals(
+                        boundNullCoalescingOperator.LeftOperand.Type?.StrippedType(),
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
             )
             {
                 valueConversion = Conversion.Identity;
@@ -2742,8 +2741,8 @@ namespace Microsoft.CodeAnalysis.Operations
             );
             IOperation body = Create(boundForStatement.Body);
             ImmutableArray<ILocalSymbol> locals = boundForStatement.OuterLocals.GetPublicSymbols();
-            ImmutableArray<ILocalSymbol> conditionLocals =
-                boundForStatement.InnerLocals.GetPublicSymbols();
+            ImmutableArray<ILocalSymbol> conditionLocals = boundForStatement.InnerLocals
+                .GetPublicSymbols();
             ILabelSymbol continueLabel = boundForStatement.ContinueLabel.GetPublicSymbol();
             ILabelSymbol exitLabel = boundForStatement.BreakLabel.GetPublicSymbol();
             SyntaxNode syntax = boundForStatement.Syntax;
@@ -2782,18 +2781,18 @@ namespace Microsoft.CodeAnalysis.Operations
                 info = new ForEachLoopOperationInfo(
                     enumeratorInfoOpt.ElementType.GetPublicSymbol(),
                     enumeratorInfoOpt.GetEnumeratorInfo.Method.GetPublicSymbol(),
-                    (
-                        (PropertySymbol)enumeratorInfoOpt.CurrentPropertyGetter.AssociatedSymbol
-                    ).GetPublicSymbol(),
+                    ((PropertySymbol)enumeratorInfoOpt.CurrentPropertyGetter.AssociatedSymbol)
+                        .GetPublicSymbol(),
                     enumeratorInfoOpt.MoveNextInfo.Method.GetPublicSymbol(),
                     isAsynchronous: enumeratorInfoOpt.IsAsync,
                     needsDispose: enumeratorInfoOpt.NeedsDisposal,
                     knownToImplementIDisposable: enumeratorInfoOpt.NeedsDisposal
-                      ? compilation.Conversions.ClassifyImplicitConversionFromType(
-                            enumeratorInfoOpt.GetEnumeratorInfo.Method.ReturnType,
-                            iDisposable,
-                            ref discardedUseSiteInfo
-                        ).IsImplicit
+                      ? compilation.Conversions
+                            .ClassifyImplicitConversionFromType(
+                                enumeratorInfoOpt.GetEnumeratorInfo.Method.ReturnType,
+                                iDisposable,
+                                ref discardedUseSiteInfo
+                            ).IsImplicit
                       : false,
                     enumeratorInfoOpt.PatternDisposeInfo?.Method.GetPublicSymbol(),
                     enumeratorInfoOpt.CurrentConversion,
@@ -2872,8 +2871,8 @@ namespace Microsoft.CodeAnalysis.Operations
             IOperation body = Create(boundForEachStatement.Body);
             ForEachLoopOperationInfo? info = GetForEachLoopOperatorInfo(boundForEachStatement);
 
-            ImmutableArray<ILocalSymbol> locals =
-                boundForEachStatement.IterationVariables.GetPublicSymbols();
+            ImmutableArray<ILocalSymbol> locals = boundForEachStatement.IterationVariables
+                .GetPublicSymbols();
 
             ILabelSymbol continueLabel = boundForEachStatement.ContinueLabel.GetPublicSymbol();
             ILabelSymbol exitLabel = boundForEachStatement.BreakLabel.GetPublicSymbol();
@@ -2979,7 +2978,8 @@ namespace Microsoft.CodeAnalysis.Operations
             DisposeOperationInfo disposeOperationInfo =
                 boundUsingStatement.PatternDisposeInfoOpt is object
                     ? new DisposeOperationInfo(
-                          disposeMethod: boundUsingStatement.PatternDisposeInfoOpt.Method.GetPublicSymbol(),
+                          disposeMethod: boundUsingStatement.PatternDisposeInfoOpt.Method
+                              .GetPublicSymbol(),
                           disposeArguments: CreateDisposeArguments(
                               boundUsingStatement.PatternDisposeInfoOpt,
                               boundUsingStatement.Syntax
@@ -3055,24 +3055,25 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             // If there is no Enter2 method, then there will be no lock taken reference
             bool legacyMode =
-                _semanticModel.Compilation.CommonGetWellKnownTypeMember(
-                    WellKnownMember.System_Threading_Monitor__Enter2
-                ) == null;
+                _semanticModel.Compilation
+                    .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Enter2)
+                == null;
             ILocalSymbol? lockTakenSymbol = legacyMode
                 ? null
                 : new SynthesizedLocal(
                       (
                           _semanticModel.GetEnclosingSymbol(boundLockStatement.Syntax.SpanStart)
                           as IMethodSymbol
-                      ).GetSymbol(),
+                      )
+                          .GetSymbol(),
                       TypeWithAnnotations.Create(
-                          ((CSharpCompilation)_semanticModel.Compilation).GetSpecialType(
-                              SpecialType.System_Boolean
-                          )
+                          ((CSharpCompilation)_semanticModel.Compilation)
+                              .GetSpecialType(SpecialType.System_Boolean)
                       ),
                       SynthesizedLocalKind.LockTaken,
                       syntaxOpt: boundLockStatement.Argument.Syntax
-                  ).GetPublicSymbol();
+                  )
+                  .GetPublicSymbol();
             IOperation lockedValue = Create(boundLockStatement.Argument);
             IOperation body = Create(boundLockStatement.Body);
             SyntaxNode syntax = boundLockStatement.Syntax;
@@ -3097,9 +3098,8 @@ namespace Microsoft.CodeAnalysis.Operations
             // if child has syntax node point to same syntax node as bad statement, then this invalid statement is implicit
             bool isImplicit =
                 boundBadStatement.WasCompilerGenerated
-                || boundBadStatement.ChildBoundNodes.Any(
-                    e => e?.Syntax == boundBadStatement.Syntax
-                );
+                || boundBadStatement.ChildBoundNodes
+                    .Any(e => e?.Syntax == boundBadStatement.Syntax);
             var children = CreateFromArray<BoundNode, IOperation>(
                 boundBadStatement.ChildBoundNodes
             );
@@ -3380,9 +3380,8 @@ namespace Microsoft.CodeAnalysis.Operations
             ImmutableArray<BoundExpression> parts
         )
         {
-            var builder = ArrayBuilder<IInterpolatedStringContentOperation>.GetInstance(
-                parts.Length
-            );
+            var builder = ArrayBuilder<IInterpolatedStringContentOperation>
+                .GetInstance(parts.Length);
             foreach (var part in parts)
             {
                 if (part.Kind == BoundKind.StringInsert)
@@ -3480,7 +3479,8 @@ namespace Microsoft.CodeAnalysis.Operations
             {
                 variable = (
                     (BoundDiscardExpression)boundDeclarationPattern.VariableAccess
-                ).ExpressionSymbol.GetPublicSymbol();
+                ).ExpressionSymbol
+                    .GetPublicSymbol();
             }
 
             ITypeSymbol inputType = boundDeclarationPattern.InputType.GetPublicSymbol();
@@ -3510,7 +3510,8 @@ namespace Microsoft.CodeAnalysis.Operations
             ITypeSymbol matchedType = (
                 boundRecursivePattern.DeclaredType?.Type
                 ?? boundRecursivePattern.InputType.StrippedType()
-            ).GetPublicSymbol();
+            )
+                .GetPublicSymbol();
             ImmutableArray<IPatternOperation> deconstructionSubpatterns =
                 boundRecursivePattern.Deconstruction is { IsDefault: false } deconstructions
                     ? deconstructions.SelectAsArray(
@@ -3614,8 +3615,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 BoundSwitchSection,
                 ISwitchCaseOperation
             >(boundSwitchStatement.SwitchSections);
-            ImmutableArray<ILocalSymbol> locals =
-                boundSwitchStatement.InnerLocals.GetPublicSymbols();
+            ImmutableArray<ILocalSymbol> locals = boundSwitchStatement.InnerLocals
+                .GetPublicSymbols();
             ILabelSymbol exitLabel = boundSwitchStatement.BreakLabel.GetPublicSymbol();
             SyntaxNode syntax = boundSwitchStatement.Syntax;
             bool isImplicit = boundSwitchStatement.WasCompilerGenerated;
@@ -3951,7 +3952,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
             Debug.Assert(
                 !patternDisposeInfo.Expanded
-                    || patternDisposeInfo.Method.GetParameters()
+                    || patternDisposeInfo.Method
+                        .GetParameters()
                         .Last()
                         .OriginalDefinition.Type.IsSZArray()
             );

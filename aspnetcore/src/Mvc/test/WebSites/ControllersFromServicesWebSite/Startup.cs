@@ -27,13 +27,14 @@ namespace ControllersFromServicesWebSite
                 .ConfigureApplicationPartManager(
                     manager =>
                     {
-                        manager.ApplicationParts.Add(
-                            new TypesPart(
-                                typeof(AnotherController),
-                                typeof(ComponentFromServicesViewComponent),
-                                typeof(InServicesTagHelper)
-                            )
-                        );
+                        manager.ApplicationParts
+                            .Add(
+                                new TypesPart(
+                                    typeof(AnotherController),
+                                    typeof(ComponentFromServicesViewComponent),
+                                    typeof(InServicesTagHelper)
+                                )
+                            );
 
                         foreach (
                             var part in CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(
@@ -85,7 +86,8 @@ namespace ControllersFromServicesWebSite
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
+            new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .UseKestrel()
                 .UseIISIntegration();

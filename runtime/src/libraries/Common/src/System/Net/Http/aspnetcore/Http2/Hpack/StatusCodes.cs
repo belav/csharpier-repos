@@ -273,9 +273,8 @@ namespace System.Net.Http.HPack
                     return BytesStatus511;
 
                 default:
-                    return Encoding.ASCII.GetBytes(
-                        statusCode.ToString(CultureInfo.InvariantCulture)
-                    );
+                    return Encoding.ASCII
+                        .GetBytes(statusCode.ToString(CultureInfo.InvariantCulture));
             }
         }
     }

@@ -102,8 +102,8 @@ namespace CoreXml.Test.XLinq
                     if (resultNodes.Count() > 1 && systemXml.Count() > 0)
                     {
                         string resultID = (string)systemXml.Select(
-                                x => x.Element(ns + "expectedResult")
-                            )
+                            x => x.Element(ns + "expectedResult")
+                        )
                             .Attributes("id")
                             .FirstOrDefault();
                         status = (string)resultNodes.Where(x => x.Attribute("id").Value == resultID)

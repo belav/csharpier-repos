@@ -18,10 +18,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(IDictionary<int, string>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(IDictionary<int, string>)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider
@@ -33,27 +31,27 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockKvpBinder = new Mock<IExtensibleModelBinder>();
             mockKvpBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
-                        mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName)
+                        mbc.Model = mbc.ValueProvider
+                            .GetValue(mbc.ModelName)
                             .ConvertTo(mbc.ModelType);
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(KeyValuePair<int, string>),
-                mockKvpBinder.Object,
-                false /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(KeyValuePair<int, string>),
+                    mockKvpBinder.Object,
+                    false /* suppressPrefixCheck */
+                );
 
             // Act
-            bool retVal = new DictionaryModelBinder<int, string>().BindModel(
-                controllerContext,
-                bindingContext
-            );
+            bool retVal = new DictionaryModelBinder<int, string>()
+                .BindModel(controllerContext, bindingContext);
 
             // Assert
             Assert.True(retVal);

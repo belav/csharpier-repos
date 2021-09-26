@@ -20,12 +20,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (left, right) => object.Equals(left, right),
                 (left, right) => !object.Equals(left, right),
                 EqualityUnit.Create(
-                        new FileLinePositionSpan(
-                            "C:\\goo.cs",
-                            new LinePosition(1, 2),
-                            new LinePosition(3, 5)
-                        )
+                    new FileLinePositionSpan(
+                        "C:\\goo.cs",
+                        new LinePosition(1, 2),
+                        new LinePosition(3, 5)
                     )
+                )
                     .WithNotEqualValues(
                         new FileLinePositionSpan(
                             "C:\\Goo.cs",
@@ -34,12 +34,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         )
                     ),
                 EqualityUnit.Create(
-                        new FileLinePositionSpan(
-                            "C:\\goo.cs",
-                            new LinePosition(1, 2),
-                            new LinePosition(3, 5)
-                        )
+                    new FileLinePositionSpan(
+                        "C:\\goo.cs",
+                        new LinePosition(1, 2),
+                        new LinePosition(3, 5)
                     )
+                )
                     .WithNotEqualValues(
                         new FileLinePositionSpan(
                             "C:\\bar.cs",
@@ -48,12 +48,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         )
                     ),
                 EqualityUnit.Create(
-                        new FileLinePositionSpan(
-                            "C:\\goo.cs",
-                            new LinePosition(1, 2),
-                            new LinePosition(3, 5)
-                        )
+                    new FileLinePositionSpan(
+                        "C:\\goo.cs",
+                        new LinePosition(1, 2),
+                        new LinePosition(3, 5)
                     )
+                )
                     .WithNotEqualValues(
                         new FileLinePositionSpan(
                             "C:\\goo.cs",
@@ -62,12 +62,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         )
                     ),
                 EqualityUnit.Create(
-                        new FileLinePositionSpan(
-                            "C:\\goo.cs",
-                            new LinePosition(1, 2),
-                            new LinePosition(3, 5)
-                        )
+                    new FileLinePositionSpan(
+                        "C:\\goo.cs",
+                        new LinePosition(1, 2),
+                        new LinePosition(3, 5)
                     )
+                )
                     .WithNotEqualValues(
                         new FileLinePositionSpan(
                             "C:\\goo.cs",
@@ -129,32 +129,38 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 "C:\\goo.cs",
                 new LinePosition(1, 2),
                 new LinePosition(3, 5)
-            ).GetHashCode();
+            )
+                .GetHashCode();
             var hash2 = new FileLinePositionSpan(
                 "C:\\goo1.cs",
                 new LinePosition(1, 2),
                 new LinePosition(3, 5)
-            ).GetHashCode();
+            )
+                .GetHashCode();
             var hash3 = new FileLinePositionSpan(
                 "C:\\goo.cs",
                 new LinePosition(1, 3),
                 new LinePosition(3, 5)
-            ).GetHashCode();
+            )
+                .GetHashCode();
             var hash4 = new FileLinePositionSpan(
                 "C:\\goo.cs",
                 new LinePosition(1, 2),
                 new LinePosition(6, 5)
-            ).GetHashCode();
+            )
+                .GetHashCode();
             var hash5 = new FileLinePositionSpan(
                 "C:\\goo.cs",
                 new LinePosition(2, 2),
                 new LinePosition(6, 5)
-            ).GetHashCode();
+            )
+                .GetHashCode();
             var hash6 = new FileLinePositionSpan(
                 "C:\\goo.cs",
                 new LinePosition(2, 2),
                 new LinePosition(6, 8)
-            ).GetHashCode();
+            )
+                .GetHashCode();
 
             Assert.NotEqual(hash1, hash2);
             Assert.NotEqual(hash1, hash3);
@@ -174,7 +180,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     "C:\\goo.cs",
                     new LinePosition(1, 2),
                     new LinePosition(3, 5)
-                ).ToString()
+                )
+                    .ToString()
             );
             Assert.Equal(
                 "\\server\\goo.vb: (1,2)-(3,5)",
@@ -182,7 +189,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     "\\server\\goo.vb",
                     new LinePosition(1, 2),
                     new LinePosition(3, 5)
-                ).ToString()
+                )
+                    .ToString()
             );
             Assert.Equal(
                 "~\\goo.huh: (1,2)-(3,5)",
@@ -190,7 +198,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     "~\\goo.huh",
                     new LinePosition(1, 2),
                     new LinePosition(3, 5)
-                ).ToString()
+                )
+                    .ToString()
             );
         }
     }

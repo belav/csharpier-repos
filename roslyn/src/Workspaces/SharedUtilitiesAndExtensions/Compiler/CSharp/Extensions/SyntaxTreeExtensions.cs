@@ -110,13 +110,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         {
             var token = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
 
-            return token.GetAncestors<TypeDeclarationSyntax>()
-                .Where(
-                    t =>
-                    {
-                        return BaseTypeDeclarationContainsPosition(t, position);
-                    }
-                );
+            return token.GetAncestors<TypeDeclarationSyntax>().Where(
+                t =>
+                {
+                    return BaseTypeDeclarationContainsPosition(t, position);
+                }
+            );
         }
 
         private static bool BaseTypeDeclarationContainsPosition(
@@ -557,10 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // work at the end of a file.
             if (position == root.FullWidth())
             {
-                token = root.EndOfFileToken.GetPreviousToken(
-                    includeSkipped: true,
-                    includeDirectives: true
-                );
+                token = root.EndOfFileToken
+                    .GetPreviousToken(includeSkipped: true, includeDirectives: true);
             }
 
             if (token.Kind() == SyntaxKind.CharacterLiteralToken)

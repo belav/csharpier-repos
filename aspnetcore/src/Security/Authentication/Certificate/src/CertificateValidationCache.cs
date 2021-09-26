@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
             _cache.Set(
                 ComputeKey(certificate),
                 result.Clone(),
-                new MemoryCacheEntryOptions().SetSize(1)
+                new MemoryCacheEntryOptions()
+                    .SetSize(1)
                     .SetSlidingExpiration(_options.CacheEntryExpiration)
                     .SetAbsoluteExpiration(certificate.NotAfter)
             );

@@ -62,21 +62,20 @@ namespace RoutingSandbox
             }
 
             return new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            .UseIISIntegration()
-                            .UseContentRoot(Environment.CurrentDirectory)
-                            .UseStartup(startupType);
-                    }
-                )
-                .ConfigureLogging(
-                    b =>
-                    {
-                        b.AddConsole();
-                        b.SetMinimumLevel(LogLevel.Critical);
-                    }
-                );
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel()
+                        .UseIISIntegration()
+                        .UseContentRoot(Environment.CurrentDirectory)
+                        .UseStartup(startupType);
+                }
+            ).ConfigureLogging(
+                b =>
+                {
+                    b.AddConsole();
+                    b.SetMinimumLevel(LogLevel.Critical);
+                }
+            );
         }
     }
 }

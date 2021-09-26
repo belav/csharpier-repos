@@ -50,9 +50,8 @@ namespace AutoMapper
     }
     public class MapperConfiguration : IGlobalConfiguration
     {
-        private static readonly MethodInfo MappingError = typeof(MapperConfiguration).GetMethod(
-            nameof(GetMappingError)
-        );
+        private static readonly MethodInfo MappingError = typeof(MapperConfiguration)
+            .GetMethod(nameof(GetMappingError));
 
         private readonly IObjectMapper[] _mappers;
         private readonly Dictionary<TypePair, TypeMap> _configuredMaps;
@@ -124,7 +123,8 @@ namespace AutoMapper
         public void CompileMappings()
         {
             foreach (
-                var request in _resolvedMaps.Keys.Where(t => !t.IsGenericTypeDefinition)
+                var request in _resolvedMaps.Keys
+                    .Where(t => !t.IsGenericTypeDefinition)
                     .Select(types => new MapRequest(types, types))
                     .ToArray()
             )

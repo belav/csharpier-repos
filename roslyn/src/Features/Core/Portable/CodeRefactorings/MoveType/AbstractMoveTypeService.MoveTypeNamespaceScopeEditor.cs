@@ -43,11 +43,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 if (node.Parent is TNamespaceDeclarationSyntax namespaceDeclaration)
                 {
                     return await GetNamespaceScopeChangedSolutionAsync(
-                            namespaceDeclaration,
-                            node,
-                            documentToEdit,
-                            CancellationToken
-                        )
+                        namespaceDeclaration,
+                        node,
+                        documentToEdit,
+                        CancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -90,9 +90,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     DisplayNameOptions.IncludeNamespaces
                 );
                 var newNamespaceDeclaration = syntaxGenerator.NamespaceDeclaration(
-                        name,
-                        WithElasticTrivia(typeToMove)
-                    )
+                    name,
+                    WithElasticTrivia(typeToMove)
+                )
                     .WithAdditionalAnnotations(NamespaceScopeMovedAnnotation);
 
                 if (itemsBefore.Any() && itemsAfter.Any())

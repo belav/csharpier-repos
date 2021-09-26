@@ -87,9 +87,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         context: null
                     ),
                     enforceDefEncoding: true,
-                    enforceOwningType: _factory.CompilationModuleGroup.EnforceOwningType(
-                        moduleToken.Module
-                    ),
+                    enforceOwningType: _factory.CompilationModuleGroup
+                        .EnforceOwningType(moduleToken.Module),
                     factory.SignatureContext,
                     isInstantiatingStub: false
                 );

@@ -360,9 +360,8 @@ namespace Microsoft.AspNetCore.Owin
                 return _entries.Where(pair => pair.Value.TryGet(_context, out value))
                     .Select(pair => pair.Key)
                     .Concat(
-                        _context.Items.Keys.Select(
-                            key => Convert.ToString(key, CultureInfo.InvariantCulture)
-                        )
+                        _context.Items.Keys
+                            .Select(key => Convert.ToString(key, CultureInfo.InvariantCulture))
                     )
                     .ToList();
             }

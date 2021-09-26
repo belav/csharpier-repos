@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public void Should_throw_by_default_when_transaction()
         {
-            var optionsBuilder = new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .EnableServiceProviderCaching(false)
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
             using var context = new DbContext(optionsBuilder.Options);
@@ -33,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 CoreStrings.WarningAsErrorTemplate(
                     InMemoryEventId.TransactionIgnoredWarning,
                     InMemoryResources.LogTransactionsNotSupported(
-                            new TestLogger<InMemoryLoggingDefinitions>()
-                        )
+                        new TestLogger<InMemoryLoggingDefinitions>()
+                    )
                         .GenerateMessage(),
                     "InMemoryEventId.TransactionIgnoredWarning"
                 ),
@@ -47,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public void Should_throw_by_default_when_transaction_enlisted()
         {
-            var optionsBuilder = new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .EnableServiceProviderCaching(false)
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
             using var context = new DbContext(optionsBuilder.Options);
@@ -55,8 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 CoreStrings.WarningAsErrorTemplate(
                     InMemoryEventId.TransactionIgnoredWarning,
                     InMemoryResources.LogTransactionsNotSupported(
-                            new TestLogger<InMemoryLoggingDefinitions>()
-                        )
+                        new TestLogger<InMemoryLoggingDefinitions>()
+                    )
                         .GenerateMessage(),
                     "InMemoryEventId.TransactionIgnoredWarning"
                 ),
@@ -69,9 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public void Should_not_throw_by_default_when_transaction_and_ignored()
         {
-            var optionsBuilder = new DbContextOptionsBuilder().ConfigureWarnings(
-                    w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)
-                )
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .EnableServiceProviderCaching(false)
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -84,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var loggerFactory = new ListLoggerFactory();
 
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddSingleton<ILoggerFactory>(loggerFactory)
                 .BuildServiceProvider();
 
@@ -105,8 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 CoreStrings.WarningAsErrorTemplate(
                     CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
                     CoreResources.LogLazyLoadOnDisposedContext(
-                            new TestLogger<InMemoryLoggingDefinitions>()
-                        )
+                        new TestLogger<InMemoryLoggingDefinitions>()
+                    )
                         .GenerateMessage("WarningAsErrorEntity", "Nav"),
                     "CoreEventId.LazyLoadOnDisposedContextWarning"
                 ),
@@ -119,7 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var loggerFactory = new ListLoggerFactory();
 
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddSingleton<ILoggerFactory>(loggerFactory)
                 .BuildServiceProvider();
 
@@ -150,14 +153,15 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Null(entity.Nav);
 
-            var log = loggerFactory.Log.Single(
-                l =>
-                    l.Message
-                    == CoreResources.LogLazyLoadOnDisposedContext(
+            var log = loggerFactory.Log
+                .Single(
+                    l =>
+                        l.Message
+                        == CoreResources.LogLazyLoadOnDisposedContext(
                             new TestLogger<InMemoryLoggingDefinitions>()
                         )
-                        .GenerateMessage("WarningAsErrorEntity", "Nav")
-            );
+                            .GenerateMessage("WarningAsErrorEntity", "Nav")
+                );
 
             Assert.Equal(LogLevel.Warning, log.Level);
         }
@@ -167,7 +171,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var loggerFactory = new ListLoggerFactory();
 
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddSingleton<ILoggerFactory>(loggerFactory)
                 .BuildServiceProvider();
 
@@ -198,14 +203,15 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Null(entity.Nav);
 
-            var log = loggerFactory.Log.Single(
-                l =>
-                    l.Message
-                    == CoreResources.LogLazyLoadOnDisposedContext(
+            var log = loggerFactory.Log
+                .Single(
+                    l =>
+                        l.Message
+                        == CoreResources.LogLazyLoadOnDisposedContext(
                             new TestLogger<InMemoryLoggingDefinitions>()
                         )
-                        .GenerateMessage("WarningAsErrorEntity", "Nav")
-            );
+                            .GenerateMessage("WarningAsErrorEntity", "Nav")
+                );
 
             Assert.Equal(LogLevel.Debug, log.Level);
         }
@@ -215,7 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var loggerFactory = new ListLoggerFactory();
 
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddSingleton<ILoggerFactory>(loggerFactory)
                 .BuildServiceProvider();
 
@@ -234,8 +241,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 Assert.Contains(
                     CoreResources.LogNavigationLazyLoading(
-                            new TestLogger<InMemoryLoggingDefinitions>()
-                        )
+                        new TestLogger<InMemoryLoggingDefinitions>()
+                    )
                         .GenerateMessage("WarningAsErrorEntity", "Nav"),
                     loggerFactory.Log.Select(l => l.Message)
                 );
@@ -244,8 +251,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Assert.NotNull(entity.Nav);
                 Assert.DoesNotContain(
                     CoreResources.LogNavigationLazyLoading(
-                            new TestLogger<InMemoryLoggingDefinitions>()
-                        )
+                        new TestLogger<InMemoryLoggingDefinitions>()
+                    )
                         .GenerateMessage("WarningAsErrorEntity", "Nav"),
                     loggerFactory.Log.Select(l => l.Message)
                 );
@@ -255,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public void No_throw_when_event_id_not_registered()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             using var context = new WarningAsErrorContext(

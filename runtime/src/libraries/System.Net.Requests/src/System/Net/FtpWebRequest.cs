@@ -1260,11 +1260,12 @@ namespace System.Net
 
                         // This to update response status and exit message if any.
                         // Note that status 221 "Service closing control connection" is always suppressed.
-                        _ftpWebResponse!.UpdateStatus(
-                            connection.StatusCode,
-                            connection.StatusLine,
-                            connection.ExitMessage
-                        );
+                        _ftpWebResponse!
+                            .UpdateStatus(
+                                connection.StatusCode,
+                                connection.StatusLine,
+                                connection.ExitMessage
+                            );
                     }
 
                     stageMode = RequestStage.ReleaseConnection;
@@ -1353,9 +1354,8 @@ namespace System.Net
                         {
                             if (_aborted)
                             {
-                                ((ICloseEx)stream).CloseEx(
-                                    CloseExState.Abort | CloseExState.Silent
-                                );
+                                ((ICloseEx)stream)
+                                    .CloseEx(CloseExState.Abort | CloseExState.Silent);
                                 break;
                             }
                             _stream = stream;
@@ -1378,11 +1378,12 @@ namespace System.Net
 
                             // This to update response status and exit message if any.
                             // Note that the status 221 "Service closing control connection" is always suppressed.
-                            _ftpWebResponse!.UpdateStatus(
-                                connection.StatusCode,
-                                connection.StatusLine,
-                                connection.ExitMessage
-                            );
+                            _ftpWebResponse!
+                                .UpdateStatus(
+                                    connection.StatusCode,
+                                    connection.StatusLine,
+                                    connection.ExitMessage
+                                );
                         }
 
                         stageMode = RequestStage.ReleaseConnection;

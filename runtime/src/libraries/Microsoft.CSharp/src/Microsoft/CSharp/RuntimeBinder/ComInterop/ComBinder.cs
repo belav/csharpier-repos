@@ -240,11 +240,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                         Expression.Convert(instance.Expression, binder.Type),
                         BindingRestrictions.GetExpressionRestriction(
                             Expression.Call(
-                                typeof(ComBinder).GetMethod(
-                                    nameof(ComBinder.IsComObject),
-                                    System.Reflection.BindingFlags.Static
-                                        | System.Reflection.BindingFlags.Public
-                                ),
+                                typeof(ComBinder)
+                                    .GetMethod(
+                                        nameof(ComBinder.IsComObject),
+                                        System.Reflection.BindingFlags.Static
+                                            | System.Reflection.BindingFlags.Public
+                                    ),
                                 Helpers.Convert(instance.Expression, typeof(object))
                             )
                         )

@@ -96,10 +96,10 @@ namespace Microsoft.AspNetCore.Hosting
             var done = new ManualResetEventSlim(false);
             using (var cts = new CancellationTokenSource())
             {
-                var shutdownMessage =
-                    host.Services.GetRequiredService<WebHostOptions>().SuppressStatusMessages
-                        ? string.Empty
-                        : "Application is shutting down...";
+                var shutdownMessage = host.Services
+                    .GetRequiredService<WebHostOptions>().SuppressStatusMessages
+                    ? string.Empty
+                    : "Application is shutting down...";
                 using (
                     var lifetime = new WebHostLifetime(cts, done, shutdownMessage: shutdownMessage)
                 )
@@ -141,8 +141,8 @@ namespace Microsoft.AspNetCore.Hosting
                     );
                     Console.WriteLine($"Content root path: {hostingEnvironment?.ContentRootPath}");
 
-                    var serverAddresses =
-                        host.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
+                    var serverAddresses = host.ServerFeatures
+                        .Get<IServerAddressesFeature>()?.Addresses;
                     if (serverAddresses != null)
                     {
                         foreach (var address in serverAddresses)

@@ -285,7 +285,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
                         .GetDocuments(locationTyped.Uri)
                         .Single()
                         .GetTextAsync()
-                ).ToString();
+                )
+                    .ToString();
 
                 Assert.NotNull(documentTextFromWorkspace);
                 Assert.Equal(documentText, documentTextFromWorkspace);

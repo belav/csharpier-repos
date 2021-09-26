@@ -103,11 +103,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
 
         private bool StartsWithBasePath(string subpath, out PathString rest)
         {
-            return new PathString(subpath).StartsWithSegments(
-                BasePath,
-                FilePathComparison,
-                out rest
-            );
+            return new PathString(subpath)
+                .StartsWithSegments(BasePath, FilePathComparison, out rest);
         }
 
         private class StaticWebAssetsDirectoryRoot : IDirectoryContents
@@ -136,7 +133,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
 
             private IEnumerator<IFileInfo> GenerateEnum()
             {
-                return new[] { new StaticWebAssetsFileInfo(_nextSegment) }.Cast<IFileInfo>()
+                return new[] { new StaticWebAssetsFileInfo(_nextSegment) }
+                    .Cast<IFileInfo>()
                     .GetEnumerator();
             }
 

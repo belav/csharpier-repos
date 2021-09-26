@@ -127,11 +127,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                         if (
                             !boundParameters.Any(
                                 p =>
-                                    string.Equals(
-                                        p.ParameterName,
-                                        metadata.PropertyName,
-                                        StringComparison.Ordinal
-                                    )
+                                    string
+                                        .Equals(
+                                            p.ParameterName,
+                                            metadata.PropertyName,
+                                            StringComparison.Ordinal
+                                        )
                                     && p.ModelType == metadata.ModelType
                             )
                         )

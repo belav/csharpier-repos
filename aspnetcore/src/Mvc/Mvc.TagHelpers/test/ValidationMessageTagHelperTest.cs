@@ -249,16 +249,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var modelExpression = CreateModelExpression("Hello");
             var generator = new Mock<IHtmlGenerator>();
             generator.Setup(
-                    mock =>
-                        mock.GenerateValidationMessage(
-                            expectedViewContext,
-                            modelExpression.ModelExplorer,
-                            modelExpression.Name,
-                            null,
-                            null,
-                            null
-                        )
-                )
+                mock =>
+                    mock.GenerateValidationMessage(
+                        expectedViewContext,
+                        modelExpression.ModelExplorer,
+                        modelExpression.Name,
+                        null,
+                        null,
+                        null
+                    )
+            )
                 .Returns(new TagBuilder("span"))
                 .Verifiable();
 
@@ -320,16 +320,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             var setup = generator.Setup(
-                    mock =>
-                        mock.GenerateValidationMessage(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<ModelExplorer>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                mock =>
+                    mock.GenerateValidationMessage(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<ModelExplorer>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(tagBuilder);
 
             var validationMessageTagHelper = new ValidationMessageTagHelper(generator.Object)
@@ -388,16 +388,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
             var setup = generator.Setup(
-                    mock =>
-                        mock.GenerateValidationMessage(
-                            It.IsAny<ViewContext>(),
-                            It.IsAny<ModelExplorer>(),
-                            It.IsAny<string>(),
-                            expectedMessage,
-                            It.IsAny<string>(),
-                            It.IsAny<object>()
-                        )
-                )
+                mock =>
+                    mock.GenerateValidationMessage(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<ModelExplorer>(),
+                        It.IsAny<string>(),
+                        expectedMessage,
+                        It.IsAny<string>(),
+                        It.IsAny<object>()
+                    )
+            )
                 .Returns(tagBuilder);
 
             var validationMessageTagHelper = new ValidationMessageTagHelper(generator.Object)

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             var parseOptions = new CSharpParseOptions(
                 kind: SourceCodeKind.Regular,
                 documentationMode: DocumentationMode.None
-            ).WithFeatures(new[] { new KeyValuePair<string, string>("IOperation", "true") });
+            )
+                .WithFeatures(new[] { new KeyValuePair<string, string>("IOperation", "true") });
             var compilation = CreateCompilation(code, parseOptions: parseOptions);
             var options = new AnalyzerOptions(
                 new[] { new TestAdditionalText() }.ToImmutableArray<AdditionalText>()

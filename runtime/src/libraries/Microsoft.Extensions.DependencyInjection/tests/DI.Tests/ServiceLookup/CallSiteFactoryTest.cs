@@ -1051,12 +1051,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         )
         {
             // Arrange
-            var expectedMessage = string.Join(
-                Environment.NewLine,
-                $"Unable to activate type '{type}'. The following constructors are ambiguous:",
-                GetConstructor(type, expectedConstructorParameterTypes[0]),
-                GetConstructor(type, expectedConstructorParameterTypes[1])
-            );
+            var expectedMessage = string
+                .Join(
+                    Environment.NewLine,
+                    $"Unable to activate type '{type}'. The following constructors are ambiguous:",
+                    GetConstructor(type, expectedConstructorParameterTypes[0]),
+                    GetConstructor(type, expectedConstructorParameterTypes[1])
+                );
 
             // Act and Assert
             var ex = Assert.Throws<InvalidOperationException>(() => callSiteFactory(type));

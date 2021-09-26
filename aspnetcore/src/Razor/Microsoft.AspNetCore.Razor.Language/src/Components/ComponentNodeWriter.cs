@@ -49,13 +49,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             // case.
             //
             // We provide an error for this case just to be friendly.
-            var content = string.Join(
-                "",
-                node.Children.OfType<IntermediateToken>().Select(t => t.Content)
-            );
-            context.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_CodeBlockInAttribute(node.Source, content)
-            );
+            var content = string
+                .Join("", node.Children.OfType<IntermediateToken>().Select(t => t.Content));
+            context.Diagnostics
+                .Add(ComponentDiagnosticFactory.Create_CodeBlockInAttribute(node.Source, content));
             return;
         }
 
@@ -159,10 +156,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 switch (parameter.Source)
                 {
                     case ComponentAttributeIntermediateNode attribute:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(
-                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
-                            ComponentsApi.RenderTreeBuilder.AddAttribute
-                        );
+                        context.CodeWriter
+                            .WriteStartInstanceMethodInvocation(
+                                ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                                ComponentsApi.RenderTreeBuilder.AddAttribute
+                            );
                         context.CodeWriter.Write(parameter.SeqName);
                         context.CodeWriter.Write(", ");
 
@@ -174,10 +172,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         break;
 
                     case SplatIntermediateNode:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(
-                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
-                            ComponentsApi.RenderTreeBuilder.AddMultipleAttributes
-                        );
+                        context.CodeWriter
+                            .WriteStartInstanceMethodInvocation(
+                                ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                                ComponentsApi.RenderTreeBuilder.AddMultipleAttributes
+                            );
                         context.CodeWriter.Write(parameter.SeqName);
                         context.CodeWriter.Write(", ");
 
@@ -186,10 +185,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         break;
 
                     case ComponentChildContentIntermediateNode childContent:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(
-                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
-                            ComponentsApi.RenderTreeBuilder.AddAttribute
-                        );
+                        context.CodeWriter
+                            .WriteStartInstanceMethodInvocation(
+                                ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                                ComponentsApi.RenderTreeBuilder.AddAttribute
+                            );
                         context.CodeWriter.Write(parameter.SeqName);
                         context.CodeWriter.Write(", ");
 
@@ -201,30 +201,31 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         break;
 
                     case SetKeyIntermediateNode:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(
-                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
-                            ComponentsApi.RenderTreeBuilder.SetKey
-                        );
+                        context.CodeWriter
+                            .WriteStartInstanceMethodInvocation(
+                                ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                                ComponentsApi.RenderTreeBuilder.SetKey
+                            );
                         context.CodeWriter.Write(parameter.ParameterName);
                         context.CodeWriter.WriteEndMethodInvocation();
                         break;
 
                     case ReferenceCaptureIntermediateNode capture:
-                        context.CodeWriter.WriteStartInstanceMethodInvocation(
-                            ComponentsApi.RenderTreeBuilder.BuilderParameter,
-                            capture.IsComponentCapture
-                              ? ComponentsApi.RenderTreeBuilder.AddComponentReferenceCapture
-                              : ComponentsApi.RenderTreeBuilder.AddElementReferenceCapture
-                        );
+                        context.CodeWriter
+                            .WriteStartInstanceMethodInvocation(
+                                ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                                capture.IsComponentCapture
+                                  ? ComponentsApi.RenderTreeBuilder.AddComponentReferenceCapture
+                                  : ComponentsApi.RenderTreeBuilder.AddElementReferenceCapture
+                            );
                         context.CodeWriter.Write(parameter.SeqName);
                         context.CodeWriter.Write(", ");
 
                         var cast = capture.IsComponentCapture
                             ? $"({capture.ComponentCaptureTypeName})"
                             : string.Empty;
-                        context.CodeWriter.Write(
-                            $"(__value) => {{ {parameter.ParameterName}({cast}__value); }}"
-                        );
+                        context.CodeWriter
+                            .Write($"(__value) => {{ {parameter.ParameterName}({cast}__value); }}");
                         context.CodeWriter.WriteEndMethodInvocation();
                         break;
 
@@ -239,10 +240,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 }
             }
 
-            context.CodeWriter.WriteInstanceMethodInvocation(
-                ComponentsApi.RenderTreeBuilder.BuilderParameter,
-                ComponentsApi.RenderTreeBuilder.CloseComponent
-            );
+            context.CodeWriter
+                .WriteInstanceMethodInvocation(
+                    ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                    ComponentsApi.RenderTreeBuilder.CloseComponent
+                );
 
             writer.WriteLine("}");
 
@@ -270,10 +272,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 writer.Write(node.MethodName);
                 writer.Write("_CaptureParameters<");
                 writer.Write(
-                    string.Join(
-                        ", ",
-                        node.Component.Component.GetTypeParameters().Select(a => a.Name)
-                    )
+                    string
+                        .Join(
+                            ", ",
+                            node.Component.Component.GetTypeParameters().Select(a => a.Name)
+                        )
                 );
                 writer.Write(">");
 

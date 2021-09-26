@@ -51,16 +51,16 @@ class C
 }
 ";
             CreateCompilation(
-                    test,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
-                )
+                test,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+            )
                 .VerifyDiagnostics(
                     // (9,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
                     //             case 2 when args.Length == 2:
                     Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "case 2 when args.Length == 2:"
-                        )
+                        ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                        "case 2 when args.Length == 2:"
+                    )
                         .WithArguments("pattern matching", "7.0")
                         .WithLocation(9, 13),
                     // (11,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
@@ -105,67 +105,66 @@ class C
     public static void NeverReturns() => throw new NullReferenceException();
 }";
             CreateCompilation(test).VerifyDiagnostics();
-            CreateCompilation(test, parseOptions: TestOptions.Regular6)
-                .VerifyDiagnostics(
-                    // (6,14): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
-                    //         void NeverReturnsFunction() => throw new NullReferenceException();
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "NeverReturnsFunction")
-                        .WithArguments("local functions", "7.0")
-                        .WithLocation(6, 14),
-                    // (6,40): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                    //         void NeverReturnsFunction() => throw new NullReferenceException();
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "throw new NullReferenceException()"
-                        )
-                        .WithArguments("throw expression", "7.0")
-                        .WithLocation(6, 40),
-                    // (7,21): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                    //         int x = b ? throw new NullReferenceException() : 1;
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "throw new NullReferenceException()"
-                        )
-                        .WithArguments("throw expression", "7.0")
-                        .WithLocation(7, 21),
-                    // (8,21): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                    //         x = b ? 2 : throw new NullReferenceException();
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "throw new NullReferenceException()"
-                        )
-                        .WithArguments("throw expression", "7.0")
-                        .WithLocation(8, 21),
-                    // (9,18): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                    //         s = s ?? throw new NullReferenceException();
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "throw new NullReferenceException()"
-                        )
-                        .WithArguments("throw expression", "7.0")
-                        .WithLocation(9, 18),
-                    // (11,47): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                    //         throw new NullReferenceException() ?? throw new NullReferenceException() ?? throw null;
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "throw new NullReferenceException() ?? throw null"
-                        )
-                        .WithArguments("throw expression", "7.0")
-                        .WithLocation(11, 47),
-                    // (11,85): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                    //         throw new NullReferenceException() ?? throw new NullReferenceException() ?? throw null;
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw null")
-                        .WithArguments("throw expression", "7.0")
-                        .WithLocation(11, 85),
-                    // (13,42): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                    //     public static void NeverReturns() => throw new NullReferenceException();
-                    Diagnostic(
-                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
-                            "throw new NullReferenceException()"
-                        )
-                        .WithArguments("throw expression", "7.0")
-                        .WithLocation(13, 42)
-                );
+            CreateCompilation(test, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
+                // (6,14): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
+                //         void NeverReturnsFunction() => throw new NullReferenceException();
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "NeverReturnsFunction")
+                    .WithArguments("local functions", "7.0")
+                    .WithLocation(6, 14),
+                // (6,40): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                //         void NeverReturnsFunction() => throw new NullReferenceException();
+                Diagnostic(
+                    ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                    "throw new NullReferenceException()"
+                )
+                    .WithArguments("throw expression", "7.0")
+                    .WithLocation(6, 40),
+                // (7,21): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                //         int x = b ? throw new NullReferenceException() : 1;
+                Diagnostic(
+                    ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                    "throw new NullReferenceException()"
+                )
+                    .WithArguments("throw expression", "7.0")
+                    .WithLocation(7, 21),
+                // (8,21): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                //         x = b ? 2 : throw new NullReferenceException();
+                Diagnostic(
+                    ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                    "throw new NullReferenceException()"
+                )
+                    .WithArguments("throw expression", "7.0")
+                    .WithLocation(8, 21),
+                // (9,18): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                //         s = s ?? throw new NullReferenceException();
+                Diagnostic(
+                    ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                    "throw new NullReferenceException()"
+                )
+                    .WithArguments("throw expression", "7.0")
+                    .WithLocation(9, 18),
+                // (11,47): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                //         throw new NullReferenceException() ?? throw new NullReferenceException() ?? throw null;
+                Diagnostic(
+                    ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                    "throw new NullReferenceException() ?? throw null"
+                )
+                    .WithArguments("throw expression", "7.0")
+                    .WithLocation(11, 47),
+                // (11,85): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                //         throw new NullReferenceException() ?? throw new NullReferenceException() ?? throw null;
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw null")
+                    .WithArguments("throw expression", "7.0")
+                    .WithLocation(11, 85),
+                // (13,42): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                //     public static void NeverReturns() => throw new NullReferenceException();
+                Diagnostic(
+                    ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                    "throw new NullReferenceException()"
+                )
+                    .WithArguments("throw expression", "7.0")
+                    .WithLocation(13, 42)
+            );
         }
 
         [Fact]
@@ -190,47 +189,46 @@ class C
     }
     static void M(string s) {}
 }";
-            CreateCompilationWithMscorlib46(test)
-                .VerifyDiagnostics(
-                    // (7,17): error CS1525: Invalid expression term 'throw'
-                    //         s = s + throw new NullReferenceException();
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw new NullReferenceException()")
-                        .WithArguments("throw")
-                        .WithLocation(7, 17),
-                    // (8,18): error CS1525: Invalid expression term 'throw'
-                    //         if (b || throw new NullReferenceException()) { }
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw new NullReferenceException()")
-                        .WithArguments("throw")
-                        .WithLocation(8, 18),
-                    // (11,27): error CS8115: A throw expression is not allowed in this context.
-                    //         var z = from x in throw new NullReferenceException() select x;
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(11, 27),
-                    // (12,11): error CS8115: A throw expression is not allowed in this context.
-                    //         M(throw new NullReferenceException());
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(12, 11),
-                    // (13,15): error CS8115: A throw expression is not allowed in this context.
-                    //         throw throw null;
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(13, 15),
-                    // (14,9): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
-                    //         (int, int) w = (1, throw null);
-                    Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(int, int)")
-                        .WithArguments("System.ValueTuple`2")
-                        .WithLocation(14, 9),
-                    // (14,28): error CS8115: A throw expression is not allowed in this context.
-                    //         (int, int) w = (1, throw null);
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(14, 28),
-                    // (14,24): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
-                    //         (int, int) w = (1, throw null);
-                    Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(1, throw null)")
-                        .WithArguments("System.ValueTuple`2")
-                        .WithLocation(14, 24),
-                    // (15,16): error CS8115: A throw expression is not allowed in this context.
-                    //         return throw null;
-                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(15, 16),
-                    // (14,9): warning CS0162: Unreachable code detected
-                    //         (int, int) w = (1, throw null);
-                    Diagnostic(ErrorCode.WRN_UnreachableCode, "(").WithLocation(14, 9)
-                );
+            CreateCompilationWithMscorlib46(test).VerifyDiagnostics(
+                // (7,17): error CS1525: Invalid expression term 'throw'
+                //         s = s + throw new NullReferenceException();
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw new NullReferenceException()")
+                    .WithArguments("throw")
+                    .WithLocation(7, 17),
+                // (8,18): error CS1525: Invalid expression term 'throw'
+                //         if (b || throw new NullReferenceException()) { }
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw new NullReferenceException()")
+                    .WithArguments("throw")
+                    .WithLocation(8, 18),
+                // (11,27): error CS8115: A throw expression is not allowed in this context.
+                //         var z = from x in throw new NullReferenceException() select x;
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(11, 27),
+                // (12,11): error CS8115: A throw expression is not allowed in this context.
+                //         M(throw new NullReferenceException());
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(12, 11),
+                // (13,15): error CS8115: A throw expression is not allowed in this context.
+                //         throw throw null;
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(13, 15),
+                // (14,9): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
+                //         (int, int) w = (1, throw null);
+                Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(int, int)")
+                    .WithArguments("System.ValueTuple`2")
+                    .WithLocation(14, 9),
+                // (14,28): error CS8115: A throw expression is not allowed in this context.
+                //         (int, int) w = (1, throw null);
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(14, 28),
+                // (14,24): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
+                //         (int, int) w = (1, throw null);
+                Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(1, throw null)")
+                    .WithArguments("System.ValueTuple`2")
+                    .WithLocation(14, 24),
+                // (15,16): error CS8115: A throw expression is not allowed in this context.
+                //         return throw null;
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(15, 16),
+                // (14,9): warning CS0162: Unreachable code detected
+                //         (int, int) w = (1, throw null);
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "(").WithLocation(14, 9)
+            );
         }
 
         [Fact]
@@ -389,8 +387,8 @@ class C
         public void QueryContextualPatternVariable_01()
         {
             SyntaxFactory.ParseExpression(
-                    "from s in a where s is string where s.Length > 1 select s"
-                )
+                "from s in a where s is string where s.Length > 1 select s"
+            )
                 .GetDiagnostics()
                 .Verify();
             SyntaxFactory.ParseExpression("M(out int? x)").GetDiagnostics().Verify();
@@ -2508,9 +2506,9 @@ case KeyValuePair<String, DateTime>[] pairs2:
                 // (1,1): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // 1 switch {a => b, c => d}
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
-                        "1 switch {a => b, c => d}"
-                    )
+                    ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                    "1 switch {a => b, c => d}"
+                )
                     .WithArguments("recursive patterns", "8.0")
                     .WithLocation(1, 1)
             );
@@ -2638,9 +2636,9 @@ case KeyValuePair<String, DateTime>[] pairs2:
                 // (1,1): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // 1 switch { (a, b, c) => d }
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
-                        "1 switch { (a, b, c) => d }"
-                    )
+                    ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                    "1 switch { (a, b, c) => d }"
+                )
                     .WithArguments("recursive patterns", "8.0")
                     .WithLocation(1, 1)
             );
@@ -8300,7 +8298,9 @@ switch (e)
                 "o is {} + d",
                 // (1,9): error CS1073: Unexpected token '+'
                 // o is {} + d
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "+").WithArguments("+").WithLocation(1, 9)
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "+")
+                    .WithArguments("+")
+                    .WithLocation(1, 9)
             );
             N(SyntaxKind.AddExpression);
             {

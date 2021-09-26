@@ -64,13 +64,12 @@ namespace System.Web.Http.Filters
                 CallBase = true
             };
             bool onActionExecutingInvoked = false;
-            filterMock.Setup(f => f.OnActionExecuting(It.IsAny<HttpActionContext>()))
-                .Callback(
-                    () =>
-                    {
-                        onActionExecutingInvoked = true;
-                    }
-                );
+            filterMock.Setup(f => f.OnActionExecuting(It.IsAny<HttpActionContext>())).Callback(
+                () =>
+                {
+                    onActionExecutingInvoked = true;
+                }
+            );
             bool? flagWhenContinuationInvoked = null;
             Func<Task<HttpResponseMessage>> continuation = () =>
             {
@@ -342,12 +341,12 @@ namespace System.Web.Http.Filters
                 Task.FromResult(new HttpResponseMessage());
 
             filterMock.Setup(
-                    f =>
-                        f.OnActionExecutedAsync(
-                            It.IsAny<HttpActionExecutedContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                f =>
+                    f.OnActionExecutedAsync(
+                        It.IsAny<HttpActionExecutedContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(TaskHelpers.Completed());
             filterMock.Setup(f => f.OnActionExecuted(It.IsAny<HttpActionExecutedContext>()))
                 .Callback(
@@ -386,20 +385,15 @@ namespace System.Web.Http.Filters
                 Task.FromResult(new HttpResponseMessage());
 
             filterMock.Setup(
-                    f =>
-                        f.OnActionExecutingAsync(
-                            It.IsAny<HttpActionContext>(),
-                            CancellationToken.None
-                        )
-                )
+                f => f.OnActionExecutingAsync(It.IsAny<HttpActionContext>(), CancellationToken.None)
+            )
                 .Returns(TaskHelpers.Completed());
-            filterMock.Setup(f => f.OnActionExecuting(It.IsAny<HttpActionContext>()))
-                .Callback(
-                    () =>
-                    {
-                        throw new InvalidOperationException();
-                    }
-                );
+            filterMock.Setup(f => f.OnActionExecuting(It.IsAny<HttpActionContext>())).Callback(
+                () =>
+                {
+                    throw new InvalidOperationException();
+                }
+            );
 
             var filter = (IActionFilter)filterMock.Object;
 

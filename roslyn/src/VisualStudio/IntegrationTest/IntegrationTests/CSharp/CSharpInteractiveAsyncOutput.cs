@@ -41,10 +41,8 @@ t3.Start();"
             VisualStudio.InteractiveWindow.SubmitText(@"1+2");
             Wait(seconds: 1);
 
-            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(
-                prompt: "....",
-                output: "$"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .ReplPromptConsistency(prompt: "....", output: "$");
 
             Wait(seconds: 1);
 
@@ -54,19 +52,15 @@ t3.Start();"
             VisualStudio.InteractiveWindow.SubmitText(@"1+5");
             Wait(seconds: 1);
 
-            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(
-                prompt: "....",
-                output: "$"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .ReplPromptConsistency(prompt: "....", output: "$");
 
             VisualStudio.InteractiveWindow.SubmitText(@"#cls");
             VisualStudio.InteractiveWindow.SubmitText(@"1+5");
             Wait(seconds: 1);
 
-            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(
-                prompt: "....",
-                output: "$"
-            );
+            VisualStudio.InteractiveWindow.Verify
+                .ReplPromptConsistency(prompt: "....", output: "$");
 
             VisualStudio.InteractiveWindow.SubmitText(
                 @"t1.Abort();

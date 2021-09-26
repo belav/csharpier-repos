@@ -40,10 +40,8 @@ namespace Microsoft.CodeAnalysis.Razor
             var targetAssembly = context.Items.GetTargetAssembly();
             if (
                 targetAssembly is not null
-                && !SymbolEqualityComparer.Default.Equals(
-                    targetAssembly,
-                    renderTreeBuilder.ContainingAssembly
-                )
+                && !SymbolEqualityComparer.Default
+                    .Equals(targetAssembly, renderTreeBuilder.ContainingAssembly)
             )
             {
                 return;
@@ -62,10 +60,8 @@ namespace Microsoft.CodeAnalysis.Razor
             builder.CaseSensitive = true;
             builder.Documentation = ComponentResources.SplatTagHelper_Documentation;
 
-            builder.Metadata.Add(
-                ComponentMetadata.SpecialKindKey,
-                ComponentMetadata.Splat.TagHelperKind
-            );
+            builder.Metadata
+                .Add(ComponentMetadata.SpecialKindKey, ComponentMetadata.Splat.TagHelperKind);
             builder.Metadata.Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
             builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata.Splat.RuntimeName;
 

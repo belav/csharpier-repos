@@ -378,21 +378,21 @@ namespace Microsoft.AspNetCore.Hosting
                     _builder.Properties[typeof(ConfigureContainerBuilder)] =
                         configureContainerBuilder;
 
-                    var actionType = typeof(Action<, >).MakeGenericType(
-                        typeof(HostBuilderContext),
-                        containerType
-                    );
+                    var actionType = typeof(Action<, >)
+                        .MakeGenericType(typeof(HostBuilderContext), containerType);
 
                     // Get the private ConfigureContainer method on this type then close over the container type
-                    var configureCallback = typeof(GenericWebHostBuilder).GetMethod(
-                        nameof(ConfigureContainerImpl),
-                        BindingFlags.NonPublic | BindingFlags.Instance
-                    )!.MakeGenericMethod(containerType).CreateDelegate(actionType, this);
+                    var configureCallback = typeof(GenericWebHostBuilder)
+                        .GetMethod(
+                            nameof(ConfigureContainerImpl),
+                            BindingFlags.NonPublic | BindingFlags.Instance
+                        )!
+                        .MakeGenericMethod(containerType)
+                        .CreateDelegate(actionType, this);
 
                     // _builder.ConfigureContainer<T>(ConfigureContainer);
-                    typeof(IHostBuilder).GetMethod(
-                        nameof(IHostBuilder.ConfigureContainer)
-                    )!.MakeGenericMethod(containerType)
+                    typeof(IHostBuilder).GetMethod(nameof(IHostBuilder.ConfigureContainer))!
+                        .MakeGenericMethod(containerType)
                         .InvokeWithoutWrappingExceptions(
                             _builder,
                             new object[] { configureCallback }
@@ -481,10 +481,8 @@ namespace Microsoft.AspNetCore.Hosting
                     Configuration = context.Configuration,
                     HostingEnvironment = new HostingEnvironment(),
                 };
-                webHostBuilderContext.HostingEnvironment.Initialize(
-                    context.HostingEnvironment.ContentRootPath,
-                    options
-                );
+                webHostBuilderContext.HostingEnvironment
+                    .Initialize(context.HostingEnvironment.ContentRootPath, options);
                 context.Properties[typeof(WebHostBuilderContext)] = webHostBuilderContext;
                 context.Properties[typeof(WebHostOptions)] = options;
                 return webHostBuilderContext;

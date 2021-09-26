@@ -74,8 +74,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return documents.WhereAsArray(
                 document =>
                 {
-                    var documentPropertiesService =
-                        document.Services.GetService<DocumentPropertiesService>();
+                    var documentPropertiesService = document.Services
+                        .GetService<DocumentPropertiesService>();
 
                     // When a client name is specified, only return documents that have a matching client name.
                     // Allows the razor lsp server to return results only for razor documents.
@@ -173,19 +173,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                     return "typescript";
                 default:
                     throw new ArgumentException(
-                        string.Format(
-                            "Document project language {0} is not valid",
-                            document.Project.Language
-                        )
+                        string
+                            .Format(
+                                "Document project language {0} is not valid",
+                                document.Project.Language
+                            )
                     );
             }
         }
 
         public static ClassifiedTextElement GetClassifiedText(this DefinitionItem definition) =>
             new ClassifiedTextElement(
-                definition.DisplayParts.Select(
-                    part => new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)
-                )
+                definition.DisplayParts
+                    .Select(
+                        part =>
+                            new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)
+                    )
             );
 
         public static bool IsRazorDocument(this Document document)

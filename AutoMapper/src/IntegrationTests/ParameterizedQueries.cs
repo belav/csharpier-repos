@@ -40,9 +40,10 @@ namespace AutoMapper.IntegrationTests.Parameterization
         {
             protected override void Seed(ClientContext context)
             {
-                context.Entities.AddRange(
-                    new[] { new Entity { Value = "Value1" }, new Entity { Value = "Value2" } }
-                );
+                context.Entities
+                    .AddRange(
+                        new[] { new Entity { Value = "Value1" }, new Entity { Value = "Value2" } }
+                    );
                 base.Seed(context);
             }
         }
@@ -84,9 +85,8 @@ namespace AutoMapper.IntegrationTests.Parameterization
                 dtos.All(dto => dto.UserName == username).ShouldBeTrue();
 
                 username = "Jane";
-                query = db.Entities.Select(
-                    e => new EntityDto { Id = e.Id, Value = e.Value, UserName = username }
-                );
+                query = db.Entities
+                    .Select(e => new EntityDto { Id = e.Id, Value = e.Value, UserName = username });
                 dtos = await query.ToListAsync();
                 dtos.All(dto => dto.UserName == username).ShouldBeTrue();
                 constantVisitor = new ConstantVisitor();

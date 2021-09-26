@@ -358,10 +358,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 foreach (var (analyzer, _) in _analyzerStateMap)
                 {
                     var actionCounts = await driver.GetAnalyzerActionCountsAsync(
-                            analyzer,
-                            _compilationOptions,
-                            cancellationToken
-                        )
+                        analyzer,
+                        _compilationOptions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     builder.Add(analyzer, actionCounts);
                 }
@@ -438,10 +438,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (compilationEvent is SymbolDeclaredCompilationEvent symbolDeclaredEvent)
             {
                 await OnSymbolDeclaredEventProcessedAsync(
-                        symbolDeclaredEvent,
-                        analyzers,
-                        onSymbolAndMembersProcessedAsync
-                    )
+                    symbolDeclaredEvent,
+                    analyzers,
+                    onSymbolAndMembersProcessedAsync
+                )
                     .ConfigureAwait(false);
             }
 

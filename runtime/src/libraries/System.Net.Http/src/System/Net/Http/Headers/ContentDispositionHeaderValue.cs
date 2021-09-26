@@ -88,12 +88,13 @@ namespace System.Net.Http.Headers
                 {
                     string? sizeString = sizeParameter.Value;
                     if (
-                        ulong.TryParse(
-                            sizeString,
-                            NumberStyles.Integer,
-                            CultureInfo.InvariantCulture,
-                            out value
-                        )
+                        ulong
+                            .TryParse(
+                                sizeString,
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out value
+                            )
                     )
                     {
                         return (long)value;
@@ -172,11 +173,12 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return string.Equals(
-                    _dispositionType,
-                    other._dispositionType,
-                    StringComparison.OrdinalIgnoreCase
-                ) && HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
+            return string
+                    .Equals(
+                        _dispositionType,
+                        other._dispositionType,
+                        StringComparison.OrdinalIgnoreCase
+                    ) && HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
         }
 
         public override int GetHashCode()
@@ -199,11 +201,8 @@ namespace System.Net.Http.Headers
         public static ContentDispositionHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (ContentDispositionHeaderValue)GenericHeaderParser.ContentDispositionParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (ContentDispositionHeaderValue)GenericHeaderParser.ContentDispositionParser
+                .ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -215,12 +214,8 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.ContentDispositionParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser.ContentDispositionParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (ContentDispositionHeaderValue)output!;

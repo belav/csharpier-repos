@@ -83,33 +83,34 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var viewName = "MyView";
             var actionContext = GetActionContext();
-            var expected = string.Join(
-                Environment.NewLine,
-                $"The view '{viewName}' was not found. The following locations were searched:",
-                "Location1",
-                "Location2"
-            );
+            var expected = string
+                .Join(
+                    Environment.NewLine,
+                    $"The view '{viewName}' was not found. The following locations were searched:",
+                    "Location1",
+                    "Location2"
+                );
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, Enumerable.Empty<string>()))
                 .Verifiable();
 
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "Location1", "Location2" }))
                 .Verifiable();
 
@@ -135,35 +136,36 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var viewName = "MyView";
             var actionContext = GetActionContext();
-            var expected = string.Join(
-                Environment.NewLine,
-                $"The view '{viewName}' was not found. The following locations were searched:",
-                "Location1",
-                "Location2",
-                "Location3",
-                "Location4"
-            );
+            var expected = string
+                .Join(
+                    Environment.NewLine,
+                    $"The view '{viewName}' was not found. The following locations were searched:",
+                    "Location1",
+                    "Location2",
+                    "Location3",
+                    "Location4"
+                );
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "Location1", "Location2" }))
                 .Verifiable();
 
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "Location3", "Location4" }))
                 .Verifiable();
 
@@ -189,35 +191,36 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var viewName = "MyView";
             var actionContext = GetActionContext();
-            var expected = string.Join(
-                Environment.NewLine,
-                $"The view '{viewName}' was not found. The following locations were searched:",
-                "Location1",
-                "Location2",
-                "Location3",
-                "Location4"
-            );
+            var expected = string
+                .Join(
+                    Environment.NewLine,
+                    $"The view '{viewName}' was not found. The following locations were searched:",
+                    "Location1",
+                    "Location2",
+                    "Location3",
+                    "Location4"
+                );
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "Location1", "Location2" }))
                 .Verifiable();
 
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, new[] { "Location3", "Location4" }))
                 .Verifiable();
 
@@ -256,24 +259,24 @@ namespace Microsoft.AspNetCore.Mvc
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, Enumerable.Empty<string>()))
                 .Verifiable();
 
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            viewName, /*isMainPage*/
-                            true
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        viewName, /*isMainPage*/
+                        true
+                    )
+            )
                 .Returns(ViewEngineResult.Found(viewName, view.Object))
                 .Verifiable();
 

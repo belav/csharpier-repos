@@ -161,13 +161,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 // If we support patterns then we can do "return obj is MyType myType && ..."
                 expressions.Add(
-                    factory.SyntaxGeneratorInternal.IsPatternExpression(
-                        objNameExpression,
-                        factory.SyntaxGeneratorInternal.DeclarationPattern(
-                            containingType,
-                            localName
+                    factory.SyntaxGeneratorInternal
+                        .IsPatternExpression(
+                            objNameExpression,
+                            factory.SyntaxGeneratorInternal
+                                .DeclarationPattern(containingType, localName)
                         )
-                    )
                 );
             }
             else if (containingType.IsValueType)
@@ -276,9 +275,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 var symbolNameExpression = factory.IdentifierName(member.Name);
                 var thisSymbol = factory.MemberAccessExpression(
-                        factory.ThisExpression(),
-                        symbolNameExpression
-                    )
+                    factory.ThisExpression(),
+                    symbolNameExpression
+                )
                     .WithAdditionalAnnotations(Simplification.Simplifier.Annotation);
                 var otherSymbol = factory.MemberAccessExpression(
                     localNameExpression,
@@ -420,10 +419,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // We compare ignoring nested nullability here, as it's possible the underlying object could have implemented IEquatable<Type>
                 // or IEquatable<Type?>. From the perspective of this, either is allowable.
                 var constructed = iequatableType.Construct(memberType);
-                return memberType.AllInterfaces.Contains(
-                    constructed,
-                    equalityComparer: SymbolEqualityComparer.Default
-                );
+                return memberType.AllInterfaces
+                    .Contains(constructed, equalityComparer: SymbolEqualityComparer.Default);
             }
 
             return false;

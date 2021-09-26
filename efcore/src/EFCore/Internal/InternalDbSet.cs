@@ -83,9 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                         );
                     }
 
-                    var findSameTypeName = _context.Model.FindSameTypeNameWithDifferentNamespace(
-                        typeof(TEntity)
-                    );
+                    var findSameTypeName = _context.Model
+                        .FindSameTypeNameWithDifferentNamespace(typeof(TEntity));
                     //if the same name exists in your entity types we will show you the full namespace of the type
                     if (!string.IsNullOrEmpty(findSameTypeName))
                     {
@@ -242,10 +241,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
             var entry = EntryWithoutDetectChanges(Check.NotNull(entity, nameof(entity)));
 
             await SetEntityStateAsync(
-                    entry.GetInfrastructure(),
-                    EntityState.Added,
-                    cancellationToken
-                )
+                entry.GetInfrastructure(),
+                EntityState.Added,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return entry;
@@ -329,10 +328,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
             foreach (var entity in entities)
             {
                 await SetEntityStateAsync(
-                        stateManager.GetOrCreateEntry(entity, EntityType),
-                        EntityState.Added,
-                        default
-                    )
+                    stateManager.GetOrCreateEntry(entity, EntityType),
+                    EntityState.Added,
+                    default
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -410,10 +409,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
             foreach (var entity in entities)
             {
                 await SetEntityStateAsync(
-                        stateManager.GetOrCreateEntry(entity),
-                        EntityState.Added,
-                        cancellationToken
-                    )
+                    stateManager.GetOrCreateEntry(entity),
+                    EntityState.Added,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -595,13 +594,13 @@ namespace Microsoft.EntityFrameworkCore.Internal
         {
             return entry.EntityState == EntityState.Detached
               ? _context.GetDependencies()
-                    .EntityGraphAttacher.AttachGraphAsync(
-                        entry,
-                        entityState,
-                        entityState,
-                        forceStateWhenUnknownKey: true,
-                        cancellationToken: cancellationToken
-                    )
+                .EntityGraphAttacher.AttachGraphAsync(
+                    entry,
+                    entityState,
+                    entityState,
+                    forceStateWhenUnknownKey: true,
+                    cancellationToken: cancellationToken
+                )
               : entry.SetEntityStateAsync(
                     entityState,
                     acceptChanges: true,

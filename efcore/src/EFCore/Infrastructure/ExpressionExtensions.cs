@@ -35,10 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <param name="characterLimit"> An optional limit to the number of characters included. Additional output will be truncated. </param>
         /// <returns> The printable representation. </returns>
         public static string Print(this Expression expression, int? characterLimit = null) =>
-            new ExpressionPrinter().Print(
-                Check.NotNull(expression, nameof(expression)),
-                characterLimit
-            );
+            new ExpressionPrinter()
+                .Print(Check.NotNull(expression, nameof(expression)), characterLimit);
 
         /// <summary>
         ///     Creates a <see cref="MemberExpression"></see> that represents accessing either a field or a property.
@@ -89,11 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             return Expression.Assign(memberExpression, valueExpression);
         }
 
-        private static readonly Type _assignBinaryExpressionType =
-            typeof(Expression).Assembly.GetType(
-                "System.Linq.Expressions.AssignBinaryExpression",
-                throwOnError: true
-            )!;
+        private static readonly Type _assignBinaryExpressionType = typeof(Expression).Assembly
+            .GetType("System.Linq.Expressions.AssignBinaryExpression", throwOnError: true)!;
 
         /// <summary>
         ///     If the given a method-call expression represents a call to <see cref="EF.Property{TProperty}" />, then this

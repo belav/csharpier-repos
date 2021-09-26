@@ -22,7 +22,8 @@ namespace AutoMapper.UnitTests.Bug
                     new MapperConfiguration(
                         cfg => cfg.CreateMap<Source, Destination>().ForMember("X", s => { })
                     )
-            ).ShouldThrow<ArgumentOutOfRangeException>();
+            )
+                .ShouldThrow<ArgumentOutOfRangeException>();
         }
     }
 }

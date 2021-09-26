@@ -115,9 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                var mergedAttributesBuilder = ArrayBuilder<
-                    SyntaxList<AttributeListSyntax>
-                >.GetInstance();
+                var mergedAttributesBuilder = ArrayBuilder<SyntaxList<AttributeListSyntax>>
+                    .GetInstance();
 
                 foreach (var syntaxRef in _syntaxRefs)
                 {
@@ -409,14 +408,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         //Debug.Assert(this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(this.ConstraintTypes));
                         //Debug.Assert(this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(ImmutableArray<TypeSymbol>.CreateFrom(this.Interfaces)));
                         Debug.Assert(
-                            this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(
-                                this.EffectiveBaseClassNoUseSiteDiagnostics
-                            )
+                            this.ContainingSymbol
+                                .IsContainingSymbolOfAllTypeParameters(
+                                    this.EffectiveBaseClassNoUseSiteDiagnostics
+                                )
                         );
                         Debug.Assert(
-                            this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(
-                                this.DeducedBaseTypeNoUseSiteDiagnostics
-                            )
+                            this.ContainingSymbol
+                                .IsContainingSymbolOfAllTypeParameters(
+                                    this.DeducedBaseTypeNoUseSiteDiagnostics
+                                )
                         );
                         break;
 
@@ -508,10 +509,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (attribute.IsTargetAttribute(this, AttributeDescription.NullableAttribute))
             {
                 // NullableAttribute should not be set explicitly.
-                ((BindingDiagnosticBag)arguments.Diagnostics).Add(
-                    ErrorCode.ERR_ExplicitNullableAttribute,
-                    arguments.AttributeSyntaxOpt.Location
-                );
+                ((BindingDiagnosticBag)arguments.Diagnostics)
+                    .Add(
+                        ErrorCode.ERR_ExplicitNullableAttribute,
+                        arguments.AttributeSyntaxOpt.Location
+                    );
             }
 
             base.DecodeWellKnownAttribute(ref arguments);

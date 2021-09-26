@@ -14,7 +14,8 @@ namespace VoidMainWithExitCodeApp
             int exitCode = int.Parse(args[0]);
             int mode = int.Parse(args[1]);
 
-            PropertyInfo set_ExitCode = typeof(Environment).GetTypeInfo()
+            PropertyInfo set_ExitCode = typeof(Environment)
+                .GetTypeInfo()
                 .GetDeclaredProperty("ExitCode");
             MethodInfo Exit = typeof(Environment).GetTypeInfo().GetDeclaredMethod("Exit");
 

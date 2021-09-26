@@ -69,8 +69,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 || options.TokenValidationParameters.IssuerSigningKey == null
             )
             {
-                var store =
-                    messageReceivedContext.HttpContext.RequestServices.GetRequiredService<ISigningCredentialStore>();
+                var store = messageReceivedContext.HttpContext.RequestServices
+                    .GetRequiredService<ISigningCredentialStore>();
                 var credential = await store.GetSigningCredentialsAsync();
                 options.Authority =
                     options.Authority

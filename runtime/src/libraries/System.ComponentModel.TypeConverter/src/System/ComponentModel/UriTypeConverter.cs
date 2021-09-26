@@ -85,12 +85,13 @@ namespace System
             {
                 if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo ctor = typeof(Uri).GetConstructor(
-                        BindingFlags.Public | BindingFlags.Instance,
-                        null,
-                        new Type[] { typeof(string), typeof(UriKind) },
-                        null
-                    );
+                    ConstructorInfo ctor = typeof(Uri)
+                        .GetConstructor(
+                            BindingFlags.Public | BindingFlags.Instance,
+                            null,
+                            new Type[] { typeof(string), typeof(UriKind) },
+                            null
+                        );
                     Debug.Assert(ctor != null, "Couldn't find constructor");
                     return new InstanceDescriptor(
                         ctor,

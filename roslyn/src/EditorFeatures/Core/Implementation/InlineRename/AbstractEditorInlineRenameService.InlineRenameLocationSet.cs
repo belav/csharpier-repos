@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 _renameInfo = renameInfo;
                 _renameLocationSet = renameLocationSet;
-                this.Locations = renameLocationSet.Locations.Where(RenameLocation.ShouldRename)
+                this.Locations = renameLocationSet.Locations
+                    .Where(RenameLocation.ShouldRename)
                     .Select(ConvertLocation)
                     .ToImmutableArray();
             }
@@ -49,10 +50,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             )
             {
                 var conflicts = await _renameLocationSet.ResolveConflictsAsync(
-                        _renameInfo.GetFinalSymbolName(replacementText),
-                        nonConflictSymbols: null,
-                        cancellationToken: cancellationToken
-                    )
+                    _renameInfo.GetFinalSymbolName(replacementText),
+                    nonConflictSymbols: null,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 Contract.ThrowIfTrue(conflicts.ErrorMessage != null);

@@ -79,11 +79,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
                     return TryNavigateToMetadataSymbol(workspace, symbolKey);
                 }
 
-                return SourceSpans[0].TryNavigateTo(
-                    showInPreviewTab,
-                    activateTab,
-                    cancellationToken
-                );
+                return SourceSpans[0]
+                    .TryNavigateTo(showInPreviewTab, activateTab, cancellationToken);
             }
 
             private bool CanNavigateToMetadataSymbol(Workspace workspace, string symbolKey) =>
@@ -103,10 +100,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
                         return service.TryNavigateToSymbol(
                             symbol,
                             project,
-                            project.Solution.Options.WithChangedOption(
-                                NavigationOptions.PreferProvisionalTab,
-                                true
-                            )
+                            project.Solution.Options
+                                .WithChangedOption(NavigationOptions.PreferProvisionalTab, true)
                         );
                     }
                 );
@@ -155,9 +150,10 @@ namespace Microsoft.CodeAnalysis.FindUsages
                     return (null, null);
                 }
 
-                var project = workspace.CurrentSolution.GetProject(
-                    ProjectId.CreateFromSerialized(Guid.Parse(projectIdGuid), projectDebugName)
-                );
+                var project = workspace.CurrentSolution
+                    .GetProject(
+                        ProjectId.CreateFromSerialized(Guid.Parse(projectIdGuid), projectDebugName)
+                    );
 
                 if (project == null)
                 {

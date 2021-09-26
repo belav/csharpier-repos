@@ -48,19 +48,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             "dataReader"
         );
 
-        private static readonly MethodInfo _getFieldValueMethod =
-            typeof(DbDataReader).GetRuntimeMethod(
-                nameof(DbDataReader.GetFieldValue),
-                new[] { typeof(int) }
-            )!;
+        private static readonly MethodInfo _getFieldValueMethod = typeof(DbDataReader)
+            .GetRuntimeMethod(nameof(DbDataReader.GetFieldValue), new[] { typeof(int) })!;
 
-        private static readonly MethodInfo _isDbNullMethod = typeof(DbDataReader).GetRuntimeMethod(
-            nameof(DbDataReader.IsDBNull),
-            new[] { typeof(int) }
-        )!;
+        private static readonly MethodInfo _isDbNullMethod = typeof(DbDataReader)
+            .GetRuntimeMethod(nameof(DbDataReader.IsDBNull), new[] { typeof(int) })!;
 
         private static readonly MethodInfo _throwReadValueExceptionMethod =
-            typeof(TypedRelationalValueBufferFactoryFactory).GetTypeInfo()
+            typeof(TypedRelationalValueBufferFactoryFactory)
+                .GetTypeInfo()
                 .GetDeclaredMethod(nameof(ThrowReadValueException))!;
 
         /// <summary>
@@ -158,9 +154,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool detailedErrorsEnabled
         ) =>
             Expression.Lambda<Func<DbDataReader, object[]>>(
-                    Expression.NewArrayInit(
-                        typeof(object),
-                        cacheKey.TypeMaterializationInfo.Select(
+                Expression.NewArrayInit(
+                    typeof(object),
+                    cacheKey.TypeMaterializationInfo
+                        .Select(
                             (mi, i) =>
                                 CreateGetValueExpression(
                                     DataReaderParameter,
@@ -169,9 +166,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                     detailedErrorsEnabled
                                 )
                         )
-                    ),
-                    DataReaderParameter
-                )
+                ),
+                DataReaderParameter
+            )
                 .Compile();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -250,9 +247,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 indexExpression
             );
 
-            valueExpression = materializationInfo.Mapping.CustomizeDataReaderExpression(
-                valueExpression
-            );
+            valueExpression = materializationInfo.Mapping
+                .CustomizeDataReaderExpression(valueExpression);
 
             var converter = materializationInfo.Mapping.Converter;
 

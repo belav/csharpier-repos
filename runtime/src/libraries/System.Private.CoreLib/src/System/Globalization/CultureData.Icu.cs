@@ -36,11 +36,12 @@ namespace System.Globalization
             if (index > 0)
             {
                 alternateSortName = realNameBuffer.AsSpan(index + 1);
-                realNameBuffer = string.Concat(
-                    realNameBuffer.AsSpan(0, index),
-                    ICU_COLLATION_KEYWORD,
-                    alternateSortName
-                );
+                realNameBuffer = string
+                    .Concat(
+                        realNameBuffer.AsSpan(0, index),
+                        ICU_COLLATION_KEYWORD,
+                        alternateSortName
+                    );
             }
 
             // Get the locale name from ICU
@@ -143,12 +144,13 @@ namespace System.Globalization
             }
 
             char* buffer = stackalloc char[ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY];
-            bool result = Interop.Globalization.GetLocaleInfoString(
-                localeName,
-                (uint)type,
-                buffer,
-                ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY
-            );
+            bool result = Interop.Globalization
+                .GetLocaleInfoString(
+                    localeName,
+                    (uint)type,
+                    buffer,
+                    ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY
+                );
             if (!result)
             {
                 // Failed, just use empty string
@@ -175,11 +177,8 @@ namespace System.Globalization
             }
 
             int value = 0;
-            bool result = Interop.Globalization.GetLocaleInfoInt(
-                _sWindowsName,
-                (uint)type,
-                ref value
-            );
+            bool result = Interop.Globalization
+                .GetLocaleInfoInt(_sWindowsName, (uint)type, ref value);
             if (!result)
             {
                 // Failed, just use 0
@@ -199,12 +198,13 @@ namespace System.Globalization
 
             int primaryGroupingSize = 0;
             int secondaryGroupingSize = 0;
-            bool result = Interop.Globalization.GetLocaleInfoGroupingSizes(
-                _sWindowsName,
-                (uint)type,
-                ref primaryGroupingSize,
-                ref secondaryGroupingSize
-            );
+            bool result = Interop.Globalization
+                .GetLocaleInfoGroupingSizes(
+                    _sWindowsName,
+                    (uint)type,
+                    ref primaryGroupingSize,
+                    ref secondaryGroupingSize
+                );
             if (!result)
             {
                 Debug.Fail("[CultureData.IcuGetLocaleInfo(LocaleGroupingData type)] failed");
@@ -230,12 +230,13 @@ namespace System.Globalization
 
             char* buffer = stackalloc char[ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY];
 
-            bool result = Interop.Globalization.GetLocaleTimeFormat(
-                _sWindowsName,
-                shortFormat,
-                buffer,
-                ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY
-            );
+            bool result = Interop.Globalization
+                .GetLocaleTimeFormat(
+                    _sWindowsName,
+                    shortFormat,
+                    buffer,
+                    ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY
+                );
             if (!result)
             {
                 // Failed, just use empty string
@@ -255,10 +256,8 @@ namespace System.Globalization
 
         private static string IcuGetLanguageDisplayName(string cultureName)
         {
-            return new CultureInfo(cultureName)._cultureData.IcuGetLocaleInfo(
-                cultureName,
-                LocaleStringData.LocalizedDisplayName
-            );
+            return new CultureInfo(cultureName)._cultureData
+                .IcuGetLocaleInfo(cultureName, LocaleStringData.LocalizedDisplayName);
         }
 
         private static string? IcuGetRegionDisplayName()

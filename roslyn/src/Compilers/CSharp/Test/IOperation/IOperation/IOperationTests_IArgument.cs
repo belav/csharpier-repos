@@ -2966,13 +2966,11 @@ IObjectCreationOperation (Constructor: P..ctor([System.Boolean[missing]? x = tru
                 // (9,5): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     P(bool? x = true)
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"P(bool? x = true)
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"P(bool? x = true)
     {
     }"
-                    )
-                    .WithArguments("System.Void")
-                    .WithLocation(9, 5),
+                ).WithArguments("System.Void").WithLocation(9, 5),
                 // (2,7): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // class P
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
@@ -3262,13 +3260,11 @@ IObjectCreationOperation (Constructor: P..ctor([System.Boolean[missing]? x = nul
                 // (9,5): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     P(bool? x = null)
                 Diagnostic(
-                        ErrorCode.ERR_PredefinedTypeNotFound,
-                        @"P(bool? x = null)
+                    ErrorCode.ERR_PredefinedTypeNotFound,
+                    @"P(bool? x = null)
     {
     }"
-                    )
-                    .WithArguments("System.Void")
-                    .WithLocation(9, 5),
+                ).WithArguments("System.Void").WithLocation(9, 5),
                 // (6,30): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //         return /*<bind>*/new P()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")

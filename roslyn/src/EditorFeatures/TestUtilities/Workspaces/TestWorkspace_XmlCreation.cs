@@ -103,18 +103,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 return new XAttribute(
                     LanguageVersionAttributeName,
-                    CodeAnalysis.CSharp.LanguageVersionFacts.ToDisplayString(
-                        csharpOptions.LanguageVersion
-                    )
+                    CodeAnalysis.CSharp.LanguageVersionFacts
+                        .ToDisplayString(csharpOptions.LanguageVersion)
                 );
             }
             else if (vbOptions != null)
             {
                 return new XAttribute(
                     LanguageVersionAttributeName,
-                    CodeAnalysis.VisualBasic.LanguageVersionFacts.ToDisplayString(
-                        vbOptions.LanguageVersion
-                    )
+                    CodeAnalysis.VisualBasic.LanguageVersionFacts
+                        .ToDisplayString(vbOptions.LanguageVersion)
                 );
             }
             else
@@ -162,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             else if (options is CodeAnalysis.VisualBasic.VisualBasicCompilationOptions vbOptions)
             {
                 element.Add(
-                    vbOptions.GlobalImports.AsEnumerable()
+                    vbOptions.GlobalImports
+                        .AsEnumerable()
                         .Select(i => new XElement(GlobalImportElementName, i.Name))
                 );
 

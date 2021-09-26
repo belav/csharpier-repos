@@ -13,10 +13,8 @@ namespace System.IO.IsolatedStorage
 
         static GetStoreTests()
         {
-            s_verifyScopeMethod = typeof(IsolatedStorage).GetMethod(
-                "VerifyScope",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
+            s_verifyScopeMethod = typeof(IsolatedStorage)
+                .GetMethod("VerifyScope", BindingFlags.NonPublic | BindingFlags.Static);
         }
 
         [Theory, MemberData(nameof(ValidScopes))]

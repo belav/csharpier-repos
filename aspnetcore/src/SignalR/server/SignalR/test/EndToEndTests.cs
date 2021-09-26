@@ -127,11 +127,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var bytes = Encoding.UTF8.GetBytes(message);
                     logger.LogInformation("Sending {length} byte frame", bytes.Length);
                     await ws.SendAsync(
-                            new ArraySegment<byte>(bytes),
-                            WebSocketMessageType.Binary,
-                            endOfMessage: true,
-                            CancellationToken.None
-                        )
+                        new ArraySegment<byte>(bytes),
+                        WebSocketMessageType.Binary,
+                        endOfMessage: true,
+                        CancellationToken.None
+                    )
                         .DefaultTimeout();
 
                     logger.LogInformation("Receiving frame");
@@ -144,10 +144,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     logger.LogInformation("Closing socket");
                     await ws.CloseOutputAsync(
-                            WebSocketCloseStatus.NormalClosure,
-                            "",
-                            CancellationToken.None
-                        )
+                        WebSocketCloseStatus.NormalClosure,
+                        "",
+                        CancellationToken.None
+                    )
                         .DefaultTimeout();
                     logger.LogInformation("Waiting for close");
                     result = await ws.ReceiveAsync(buffer, CancellationToken.None).DefaultTimeout();
@@ -179,11 +179,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     logger.LogInformation("Sending {length} byte frame", bytes.Length);
                     // We're sending a partial frame, we should still get the data
                     await ws.SendAsync(
-                            new ArraySegment<byte>(bytes),
-                            WebSocketMessageType.Binary,
-                            endOfMessage: false,
-                            CancellationToken.None
-                        )
+                        new ArraySegment<byte>(bytes),
+                        WebSocketMessageType.Binary,
+                        endOfMessage: false,
+                        CancellationToken.None
+                    )
                         .DefaultTimeout();
 
                     logger.LogInformation("Receiving frame");
@@ -196,10 +196,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                     logger.LogInformation("Closing socket");
                     await ws.CloseOutputAsync(
-                            WebSocketCloseStatus.NormalClosure,
-                            "",
-                            CancellationToken.None
-                        )
+                        WebSocketCloseStatus.NormalClosure,
+                        "",
+                        CancellationToken.None
+                    )
                         .DefaultTimeout();
                     logger.LogInformation("Waiting for close");
                     result = await ws.ReceiveAsync(buffer, CancellationToken.None).DefaultTimeout();
@@ -376,10 +376,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     logger.LogInformation("Receiving message");
                     Assert.Equal(
                         message,
-                        Encoding.UTF8.GetString(
-                            await connection.Transport.Input.ReadAsync(bytes.Length)
-                                .DefaultTimeout()
-                        )
+                        Encoding.UTF8
+                            .GetString(
+                                await connection.Transport.Input
+                                    .ReadAsync(bytes.Length)
+                                    .DefaultTimeout()
+                            )
                     );
                     logger.LogInformation("Completed receive");
                 }
@@ -437,7 +439,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     {
                         logger.LogInformation("Receiving message");
                         // Big timeout here because it can take a while to receive all the bytes
-                        var receivedData = await connection.Transport.Input.ReadAsync(bytes.Length)
+                        var receivedData = await connection.Transport.Input
+                            .ReadAsync(bytes.Length)
                             .DefaultTimeout(TimeSpan.FromMinutes(2));
                         Assert.Equal(message, Encoding.UTF8.GetString(receivedData));
                         logger.LogInformation("Completed receive");
@@ -660,7 +663,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var logger = LoggerFactory.CreateLogger<EndToEndTests>();
 
                 var url = server.Url + "/uncreatable";
-                var connection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var connection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(url, transportType)
                     .Build();
                 try
@@ -729,7 +733,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 var logger = LoggerFactory.CreateLogger<EndToEndTests>();
 
                 var url = server.Url + "/authHub";
-                var connection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var connection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(url, HttpTransportType.LongPolling)
                     .Build();
 
@@ -779,7 +784,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 }
 
                 var url = server.Url + "/authHub";
-                var connection = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                var connection = new HubConnectionBuilder()
+                    .WithLoggerFactory(LoggerFactory)
                     .WithUrl(
                         url,
                         HttpTransportType.LongPolling,

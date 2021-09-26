@@ -135,8 +135,8 @@ namespace System.Linq.Parallel
                 // If the index is not correct, we need to reindex.
                 if (_prematureMerge)
                 {
-                    ListQueryResults<TLeftInput> listResults =
-                        QueryOperator<TLeftInput>.ExecuteAndCollectResults(
+                    ListQueryResults<TLeftInput> listResults = QueryOperator<TLeftInput>
+                        .ExecuteAndCollectResults(
                             inputStream,
                             partitionCount,
                             OutputOrdered,
@@ -157,15 +157,15 @@ namespace System.Linq.Parallel
             //
             if (_prematureMerge)
             {
-                PartitionedStream<TLeftInput, int> inputStreamInt =
-                    QueryOperator<TLeftInput>.ExecuteAndCollectResults(
-                            inputStream,
-                            partitionCount,
-                            OutputOrdered,
-                            preferStriping,
-                            settings
-                        )
-                        .GetPartitionedStream();
+                PartitionedStream<TLeftInput, int> inputStreamInt = QueryOperator<TLeftInput>
+                    .ExecuteAndCollectResults(
+                        inputStream,
+                        partitionCount,
+                        OutputOrdered,
+                        preferStriping,
+                        settings
+                    )
+                    .GetPartitionedStream();
                 WrapPartitionedStreamNotIndexed(inputStreamInt, recipient, settings);
             }
             else
@@ -266,9 +266,9 @@ namespace System.Linq.Parallel
                         .SelectMany(_rightChildSelector, _resultSelector);
                 }
                 return (IEnumerable<TOutput>)CancellableEnumerable.Wrap(
-                        Child.AsSequentialQuery(token),
-                        token
-                    )
+                    Child.AsSequentialQuery(token),
+                    token
+                )
                     .SelectMany(_rightChildSelector);
             }
             else
@@ -281,9 +281,9 @@ namespace System.Linq.Parallel
                 }
 
                 return (IEnumerable<TOutput>)CancellableEnumerable.Wrap(
-                        Child.AsSequentialQuery(token),
-                        token
-                    )
+                    Child.AsSequentialQuery(token),
+                    token
+                )
                     .SelectMany(_indexedRightChildSelector);
             }
         }

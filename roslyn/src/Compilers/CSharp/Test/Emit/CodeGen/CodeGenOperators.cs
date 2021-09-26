@@ -1772,13 +1772,12 @@ public class Test
         a = M ?? a;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,13): error CS0019: Operator '??' cannot be applied to operands of type 'method group' and 'System.Action'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "M ?? a")
-                        .WithArguments("??", "method group", "System.Action")
-                        .WithLocation(7, 13)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,13): error CS0019: Operator '??' cannot be applied to operands of type 'method group' and 'System.Action'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "M ?? a")
+                    .WithArguments("??", "method group", "System.Action")
+                    .WithLocation(7, 13)
+            );
         }
 
         /// <summary>
@@ -2530,10 +2529,10 @@ class P
     }
 }";
             CompileAndVerify(
-                    source,
-                    expectedOutput: "0",
-                    options: TestOptions.ReleaseExe.WithWarningLevel(5)
-                )
+                source,
+                expectedOutput: "0",
+                options: TestOptions.ReleaseExe.WithWarningLevel(5)
+            )
                 .VerifyDiagnostics(
                     // (3,1): hidden CS8019: Unnecessary using directive.
                     // using System.Linq;
@@ -2542,9 +2541,9 @@ class P
                     // (4,1): hidden CS8019: Unnecessary using directive.
                     // using System.Collections.Generic;
                     Diagnostic(
-                            ErrorCode.HDN_UnusedUsingDirective,
-                            "using System.Collections.Generic;"
-                        )
+                        ErrorCode.HDN_UnusedUsingDirective,
+                        "using System.Collections.Generic;"
+                    )
                         .WithLocation(4, 1),
                     // (23,26): warning CS8848: Operator 'from' cannot be used here due to precedence. Use parentheses to disambiguate.
                     //         var b = false && from x in src select x;
@@ -2592,10 +2591,9 @@ class Program
         }
     }
 }";
-            CompileAndVerify(source)
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(source).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  5
@@ -2611,7 +2609,7 @@ class Program
   IL_001d:  pop
   IL_001e:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(543453, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543453")]
@@ -4202,10 +4200,9 @@ class C
 }";
 
             //NOTE: all xors optimized away
-            var comp = CompileAndVerify(text)
-                .VerifyIL(
-                    "C.M",
-                    @"
+            var comp = CompileAndVerify(text).VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  2
@@ -4223,7 +4220,7 @@ class C
   IL_0019:  call       ""void System.Console.WriteLine(bool)""
   IL_001e:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(544943, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544943")]
@@ -4424,14 +4421,13 @@ public class Test
 ";
 
             CompileAndVerify(
-                    text,
-                    expectedOutput: @"
+                text,
+                expectedOutput: @"
 2
 2"
-                )
-                .VerifyIL(
-                    "Test.TestINop<T>",
-                    @"
+            ).VerifyIL(
+                "Test.TestINop<T>",
+                @"
 {
   // Code size       73 (0x49)
   .maxstack  3
@@ -4466,7 +4462,7 @@ public class Test
   IL_0048:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(546750, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546750")]
@@ -4487,10 +4483,9 @@ struct S
 ";
 
             // NOTE: don't need a ref local in this case.
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "S.Test",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "S.Test",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  3
@@ -4503,7 +4498,7 @@ struct S
   IL_000e:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -5513,8 +5508,8 @@ class test<T> where T : c0
 1"
             );
             compilation.VerifyIL(
-                    "test<T>.Repro1(T)",
-                    @"
+                "test<T>.Repro1(T)",
+                @"
 {
   // Code size       80 (0x50)
   .maxstack  4
@@ -5551,10 +5546,9 @@ class test<T> where T : c0
   IL_004f:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "test<T>.Repro2(T)",
-                    @"
+            ).VerifyIL(
+                "test<T>.Repro2(T)",
+                @"
 {
   // Code size       45 (0x2d)
   .maxstack  2
@@ -5573,7 +5567,7 @@ class test<T> where T : c0
   IL_002c:  ret
 }
 "
-                );
+            );
         }
 
         [Fact()]

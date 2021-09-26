@@ -246,11 +246,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         protected class OrderProduct
         {
-            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
-                nameof(OrderId)
-            );
-            public static readonly PropertyInfo ProductIdProperty =
-                typeof(OrderProduct).GetProperty(nameof(ProductId));
+            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct)
+                .GetProperty(nameof(OrderId));
+            public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct)
+                .GetProperty(nameof(ProductId));
 
             public int OrderId { get; set; }
             public int ProductId { get; set; }
@@ -260,9 +259,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         protected class Product
         {
-            public static readonly PropertyInfo IdProperty = typeof(Product).GetProperty(
-                nameof(Id)
-            );
+            public static readonly PropertyInfo IdProperty = typeof(Product)
+                .GetProperty(nameof(Id));
 
             public int Id { get; set; }
 
@@ -356,9 +354,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var options = new LoggingOptions();
             options.Initialize(
-                new DbContextOptionsBuilder().EnableSensitiveDataLogging(
-                    sensitiveDataLoggingEnabled
-                ).Options
+                new DbContextOptionsBuilder()
+                    .EnableSensitiveDataLogging(sensitiveDataLoggingEnabled).Options
             );
             return new DiagnosticsLogger<DbLoggerCategory.Model.Validation>(
                 LoggerFactory,
@@ -375,9 +372,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var options = new LoggingOptions();
             options.Initialize(
-                new DbContextOptionsBuilder().EnableSensitiveDataLogging(
-                    sensitiveDataLoggingEnabled
-                ).Options
+                new DbContextOptionsBuilder()
+                    .EnableSensitiveDataLogging(sensitiveDataLoggingEnabled).Options
             );
             return new DiagnosticsLogger<DbLoggerCategory.Model>(
                 LoggerFactory,
@@ -411,7 +407,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             bool sensitiveDataLoggingEnabled = false
         ) =>
             TestHelpers.CreateContextServices(
-                new ServiceCollection().AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(
+                new ServiceCollection()
+                    .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(
                         _ => CreateModelLogger(sensitiveDataLoggingEnabled)
                     )
                     .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model.Validation>>(

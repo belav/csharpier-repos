@@ -35,10 +35,8 @@ namespace System.Text.Json.Tests
 
         private static string GetDebuggerDisplayProperty<T>(T value)
         {
-            return (string)typeof(T).GetProperty(
-                    "DebuggerDisplay",
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                )
+            return (string)typeof(T)
+                .GetProperty("DebuggerDisplay", BindingFlags.Instance | BindingFlags.NonPublic)
                 .GetValue(value);
         }
     }

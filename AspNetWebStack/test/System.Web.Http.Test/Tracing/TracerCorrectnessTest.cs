@@ -339,14 +339,15 @@ namespace System.Web.Http.Tracing
         public void All_Tracers_Are_Tested()
         {
             // Arrange & Act
-            Type[] allTracerTypes = typeof(ITraceWriter).Assembly.GetTypes()
+            Type[] allTracerTypes = typeof(ITraceWriter).Assembly
+                .GetTypes()
                 .Where(t => !t.IsAbstract && t.Name.EndsWith("Tracer"))
                 .ToArray();
             Type[] allKnownTracerTypes = AllKnownTracers.Select<object[], Type>(tds => (Type)tds[1])
                 .ToArray();
             Type[] untestedTypes = allTracerTypes.Where(
-                    tAll => !allKnownTracerTypes.Any(tKnown => tKnown == tAll)
-                )
+                tAll => !allKnownTracerTypes.Any(tKnown => tKnown == tAll)
+            )
                 .ToArray();
             untestedTypes = untestedTypes.OrderBy<Type, string>(t => t.Name).ToArray();
 
@@ -357,10 +358,11 @@ namespace System.Web.Http.Tracing
                     "These tracer types must be added to {0}.AllKnownTracers:{1}        {2}",
                     this.GetType().Name,
                     Environment.NewLine,
-                    string.Join(
-                        Environment.NewLine + "        ",
-                        untestedTypes.Select<Type, string>(t => t.Name)
-                    )
+                    string
+                        .Join(
+                            Environment.NewLine + "        ",
+                            untestedTypes.Select<Type, string>(t => t.Name)
+                        )
                 )
             );
         }
@@ -404,13 +406,13 @@ namespace System.Web.Http.Tracing
         {
             // Arrange & Act
             string[] declaredMembers = tracerType.GetMembers(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                )
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            )
                 .Select<MemberInfo, string>(m => m.Name)
                 .ToArray();
             string[] unDeclaredExcludedMembers = exclusions.Where(
-                    e => !declaredMembers.Contains(e.Substring(e.LastIndexOf('.') + 1))
-                )
+                e => !declaredMembers.Contains(e.Substring(e.LastIndexOf('.') + 1))
+            )
                 .ToArray();
 
             // Assert
@@ -558,8 +560,8 @@ namespace System.Web.Http.Tracing
             }
 
             MethodInfo matchingMethod = tracerType.GetMethods(
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                )
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            )
                 .FirstOrDefault(m => DoMethodsMatch(methodInfo, m));
             return matchingMethod != null
                 && matchingMethod.DeclaringType != methodInfo.DeclaringType;

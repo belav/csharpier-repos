@@ -57,12 +57,10 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             }
 
             return await CaseCorrectAsync(
-                    document,
-                    root.GetAnnotatedNodesAndTokens(annotation)
-                        .Select(n => n.Span)
-                        .ToImmutableArray(),
-                    cancellationToken
-                )
+                document,
+                root.GetAnnotatedNodesAndTokens(annotation).Select(n => n.Span).ToImmutableArray(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -87,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             ImmutableArray<TextSpan> spans,
             CancellationToken cancellationToken = default
         ) =>
-            document.Project.LanguageServices.GetRequiredService<ICaseCorrectionService>()
+            document.Project.LanguageServices
+                .GetRequiredService<ICaseCorrectionService>()
                 .CaseCorrectAsync(document, spans, cancellationToken);
 
         /// <summary>
@@ -99,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             Workspace workspace,
             CancellationToken cancellationToken = default
         ) =>
-            workspace.Services.GetLanguageServices(root.Language)
+            workspace.Services
+                .GetLanguageServices(root.Language)
                 .GetRequiredService<ICaseCorrectionService>()
                 .CaseCorrect(root, spans, workspace, cancellationToken);
     }

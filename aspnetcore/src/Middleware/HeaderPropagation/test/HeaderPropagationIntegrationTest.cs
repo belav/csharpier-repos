@@ -26,47 +26,44 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             Exception captured = null;
 
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .ConfigureServices(
-                                services =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().ConfigureServices(
+                        services =>
+                        {
+                            services.AddHttpClient("test").AddHeaderPropagation();
+                            services.AddHeaderPropagation(
+                                options =>
                                 {
-                                    services.AddHttpClient("test").AddHeaderPropagation();
-                                    services.AddHeaderPropagation(
-                                        options =>
-                                        {
-                                            options.Headers.Add("X-TraceId");
-                                        }
-                                    );
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    // note: no header propagation middleware
-
-                                    app.Run(
-                                        async context =>
-                                        {
-                                            try
-                                            {
-                                                var client =
-                                                    context.RequestServices.GetRequiredService<IHttpClientFactory>()
-                                                        .CreateClient("test");
-                                                await client.GetAsync("http://localhost/"); // will throw
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                captured = ex;
-                                            }
-                                        }
-                                    );
+                                    options.Headers.Add("X-TraceId");
                                 }
                             );
-                    }
-                )
-                .Build();
+                        }
+                    ).Configure(
+                        app =>
+                        {
+                            // note: no header propagation middleware
+
+                            app.Run(
+                                async context =>
+                                {
+                                    try
+                                    {
+                                        var client = context.RequestServices
+                                            .GetRequiredService<IHttpClientFactory>()
+                                            .CreateClient("test");
+                                        await client.GetAsync("http://localhost/"); // will throw
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        captured = ex;
+                                    }
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -173,18 +170,16 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
         public async Task Builder_UseHeaderPropagation_Without_AddHeaderPropagation_Throws()
         {
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHeaderPropagation();
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHeaderPropagation();
+                        }
+                    );
+                }
+            ).Build();
 
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
                 () => host.StartAsync()
@@ -227,44 +222,41 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
         )
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseHeaderPropagation();
-                                    app.UseMiddleware<SimpleMiddleware>();
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseHeaderPropagation();
+                            app.UseMiddleware<SimpleMiddleware>();
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            services.AddHeaderPropagation(configure);
+                            var client = services.AddHttpClient(
+                                "example.com",
+                                c => c.BaseAddress = new Uri("http://example.com")
                             )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddHeaderPropagation(configure);
-                                    var client = services.AddHttpClient(
-                                            "example.com",
-                                            c => c.BaseAddress = new Uri("http://example.com")
-                                        )
-                                        .ConfigureHttpMessageHandlerBuilder(
-                                            b =>
-                                            {
-                                                b.PrimaryHandler = primaryHandler;
-                                            }
-                                        );
+                                .ConfigureHttpMessageHandlerBuilder(
+                                    b =>
+                                    {
+                                        b.PrimaryHandler = primaryHandler;
+                                    }
+                                );
 
-                                    if (configureClient != null)
-                                    {
-                                        client.AddHeaderPropagation(configureClient);
-                                    }
-                                    else
-                                    {
-                                        client.AddHeaderPropagation();
-                                    }
-                                }
-                            );
-                    }
-                )
-                .Build();
+                            if (configureClient != null)
+                            {
+                                client.AddHeaderPropagation(configureClient);
+                            }
+                            else
+                            {
+                                client.AddHeaderPropagation();
+                            }
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

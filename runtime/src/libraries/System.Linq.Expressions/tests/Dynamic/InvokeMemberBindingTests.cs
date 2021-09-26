@@ -211,9 +211,9 @@ namespace System.Dynamic.Tests
         )
         {
             TypeBuilder typeBuild = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("TestAssembly"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("TestAssembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("TestModule")
                 .DefineType("TestType", TypeAttributes.Public);
             FieldBuilder field = typeBuild.DefineField(
@@ -506,9 +506,9 @@ namespace System.Dynamic.Tests
                     _ =>
                         Activator.CreateInstance(
                             AssemblyBuilder.DefineDynamicAssembly(
-                                    new AssemblyName("TestAssembly"),
-                                    AssemblyBuilderAccess.RunAndCollect
-                                )
+                                new AssemblyName("TestAssembly"),
+                                AssemblyBuilderAccess.RunAndCollect
+                            )
                                 .DefineDynamicModule("TestModule")
                                 .DefineType("TestType", TypeAttributes.Public)
                                 .CreateType()

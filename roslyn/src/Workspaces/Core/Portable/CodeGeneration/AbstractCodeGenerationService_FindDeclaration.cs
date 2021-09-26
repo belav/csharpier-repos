@@ -153,11 +153,11 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         {
             var option = options ?? CodeGenerationOptions.Default;
             var (declaration, _) = await FindMostRelevantDeclarationAsync(
-                    solution,
-                    namespaceOrType,
-                    option,
-                    cancellationToken
-                )
+                solution,
+                namespaceOrType,
+                option,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return declaration;
         }
@@ -209,10 +209,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 // used to separate out the nested type.  It would be nice to detect this and do the
                 // right thing.
                 declaration = await SelectFirstOrDefaultAsync(
-                        declarations,
-                        token.GetRequiredParent().AncestorsAndSelf().Contains,
-                        cancellationToken
-                    )
+                    declarations,
+                    token.GetRequiredParent().AncestorsAndSelf().Contains,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 fallbackDeclaration = declaration;
                 if (CanAddTo(declaration, solution, cancellationToken, out availableIndices))
@@ -222,10 +222,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
                 // Then, prefer a declaration from the same file.
                 declaration = await SelectFirstOrDefaultAsync(
-                        declarations.Where(r => r.SyntaxTree == locationOpt.SourceTree),
-                        node => true,
-                        cancellationToken
-                    )
+                    declarations.Where(r => r.SyntaxTree == locationOpt.SourceTree),
+                    node => true,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 fallbackDeclaration ??= declaration;
                 if (CanAddTo(declaration, solution, cancellationToken, out availableIndices))

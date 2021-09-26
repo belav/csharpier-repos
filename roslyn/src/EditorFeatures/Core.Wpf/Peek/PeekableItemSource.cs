@@ -41,11 +41,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
         public void AugmentPeekSession(IPeekSession session, IList<IPeekableItem> peekableItems)
         {
             if (
-                !string.Equals(
-                    session.RelationshipName,
-                    PredefinedPeekRelationships.Definitions.Name,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                !string
+                    .Equals(
+                        session.RelationshipName,
+                        PredefinedPeekRelationships.Definitions.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return;
@@ -85,10 +86,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                         }
 
                         var navigableItems = goToDefinitionService.FindDefinitionsAsync(
-                                document,
-                                triggerPoint.Value.Position,
-                                cancellationToken
-                            )
+                            document,
+                            triggerPoint.Value.Position,
+                            cancellationToken
+                        )
                             .WaitAndGetResult(cancellationToken);
 
                         results = GetPeekableItemsForNavigableItems(
@@ -103,11 +104,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                         var semanticModel = document.GetSemanticModelAsync(cancellationToken)
                             .WaitAndGetResult(cancellationToken);
                         var symbol = SymbolFinder.GetSemanticInfoAtPositionAsync(
-                                semanticModel,
-                                triggerPoint.Value.Position,
-                                document.Project.Solution.Workspace,
-                                cancellationToken
-                            )
+                            semanticModel,
+                            triggerPoint.Value.Position,
+                            document.Project.Solution.Workspace,
+                            cancellationToken
+                        )
                             .WaitAndGetResult(cancellationToken)
                             .GetAnySymbol(includeType: true);
 
@@ -119,24 +120,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                         symbol = symbol.GetOriginalUnreducedDefinition();
 
                         // Get the symbol back from the originating workspace
-                        var symbolMappingService =
-                            document.Project.Solution.Workspace.Services.GetRequiredService<ISymbolMappingService>();
+                        var symbolMappingService = document.Project.Solution.Workspace.Services
+                            .GetRequiredService<ISymbolMappingService>();
 
                         var mappingResult = symbolMappingService.MapSymbolAsync(
-                                document,
-                                symbol,
-                                cancellationToken
-                            )
+                            document,
+                            symbol,
+                            cancellationToken
+                        )
                             .WaitAndGetResult(cancellationToken);
 
                         mappingResult ??= new SymbolMappingResult(document.Project, symbol);
 
                         results = _peekableItemFactory.GetPeekableItemsAsync(
-                                mappingResult.Symbol,
-                                mappingResult.Project,
-                                _peekResultFactory,
-                                cancellationToken
-                            )
+                            mappingResult.Symbol,
+                            mappingResult.Project,
+                            _peekResultFactory,
+                            cancellationToken
+                        )
                             .WaitAndGetResult(cancellationToken);
                     }
 
@@ -155,8 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             if (navigableItems != null)
             {
                 var workspace = project.Solution.Workspace;
-                var navigationService =
-                    workspace.Services.GetRequiredService<IDocumentNavigationService>();
+                var navigationService = workspace.Services
+                    .GetRequiredService<IDocumentNavigationService>();
 
                 foreach (var item in navigableItems)
                 {

@@ -131,10 +131,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi2).GetMethod(
-                    nameof(Bmi2.ZeroHighBits),
-                    new Type[] { typeof(UInt32), typeof(UInt32) }
-                )
+            var result = typeof(Bmi2)
+                .GetMethod(nameof(Bmi2.ZeroHighBits), new Type[] { typeof(UInt32), typeof(UInt32) })
                 .Invoke(
                     null,
                     new object[]
@@ -238,9 +236,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi2)}.{nameof(Bmi2.ZeroHighBits)}<UInt32>(UInt32, UInt32): ZeroHighBits failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi2)}.{nameof(Bmi2.ZeroHighBits)}<UInt32>(UInt32, UInt32): ZeroHighBits failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

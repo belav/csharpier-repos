@@ -43,10 +43,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 _diagnosticReporter.Report(
                     reportingMode,
-                    string.Format(
-                        WorkspacesResources.Solution_file_not_found_colon_0,
-                        absolutePath
-                    ),
+                    string
+                        .Format(WorkspacesResources.Solution_file_not_found_colon_0, absolutePath),
                     msg => new FileNotFoundException(msg)
                 );
                 return false;

@@ -448,8 +448,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(IsScriptClass);
             return (SynthesizedInteractiveInitializerMethod)GetMembers(
-                    SynthesizedInteractiveInitializerMethod.InitializerName
-                )
+                SynthesizedInteractiveInitializerMethod.InitializerName
+            )
                 .Single();
         }
 
@@ -1256,8 +1256,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
         )
         {
-            ArrayBuilder<TypeWithAnnotations> builder =
-                ArrayBuilder<TypeWithAnnotations>.GetInstance();
+            ArrayBuilder<TypeWithAnnotations> builder = ArrayBuilder<TypeWithAnnotations>
+                .GetInstance();
             GetAllTypeArguments(builder, ref useSiteInfo);
             return builder.ToImmutableAndFree();
         }
@@ -1685,9 +1685,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         arity > 0
                         && arity < ValueTupleRestPosition
-                        && ((NamedTypeSymbol)typeToCheck).IsTupleTypeOfCardinality(
-                            out tupleCardinality
-                        )
+                        && ((NamedTypeSymbol)typeToCheck)
+                            .IsTupleTypeOfCardinality(out tupleCardinality)
                     )
                     {
                         Debug.Assert(tupleCardinality < ValueTupleRestPosition);

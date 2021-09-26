@@ -581,11 +581,12 @@ namespace System.DirectoryServices.ActiveDirectory
                             if (
                                 (bindingInfo.Length > prefix.Length)
                                 && (
-                                    string.Equals(
-                                        bindingInfo.Substring(0, prefix.Length),
-                                        prefix,
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    string
+                                        .Equals(
+                                            bindingInfo.Substring(0, prefix.Length),
+                                            prefix,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
                                 )
                             )
                             {

@@ -195,8 +195,8 @@ namespace System.Reflection.Tests
         public void GetFields()
         {
             List<FieldInfo> fields = TestModule.GetFields(
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                )
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            )
                 .OrderBy(f => f.Name)
                 .ToList();
             Assert.Equal(2, fields.Count);
@@ -276,8 +276,8 @@ namespace System.Reflection.Tests
             AssertExtensions.SequenceEqual(new[] { "TestMethodFoo", "TestMethodFoo" }, methodNames);
 
             methodNames = TestModule.GetMethods(
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                )
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            )
                 .Select(m => m.Name)
                 .ToArray();
             AssertExtensions.SequenceEqual(
@@ -301,7 +301,8 @@ namespace System.Reflection.Tests
             {
                 new object[] { 1234 },
                 new object[] { typeof(ModuleTests).GetMethod("ResolveType").MetadataToken },
-            }.Union(NullTokens);
+            }
+                .Union(NullTokens);
 
         [Theory]
         [MemberData(nameof(BadResolveTypes))]
@@ -316,7 +317,8 @@ namespace System.Reflection.Tests
         }
 
         public static IEnumerable<object[]> Methods =>
-            typeof(ModuleTests).GetMethods(
+            typeof(ModuleTests)
+                .GetMethods(
                     BindingFlags.Public
                         | BindingFlags.NonPublic
                         | BindingFlags.Static
@@ -337,7 +339,8 @@ namespace System.Reflection.Tests
                 new object[] { 1234 },
                 new object[] { typeof(ModuleTests).MetadataToken },
                 new object[] { typeof(ModuleTests).MetadataToken + 1000 },
-            }.Union(NullTokens);
+            }
+                .Union(NullTokens);
 
         [Theory]
         [MemberData(nameof(BadResolveMethods))]
@@ -352,7 +355,8 @@ namespace System.Reflection.Tests
         }
 
         public static IEnumerable<object[]> Fields =>
-            typeof(ModuleTests).GetFields(
+            typeof(ModuleTests)
+                .GetFields(
                     BindingFlags.Public
                         | BindingFlags.NonPublic
                         | BindingFlags.Static
@@ -373,7 +377,8 @@ namespace System.Reflection.Tests
                 new object[] { 1234 },
                 new object[] { typeof(ModuleTests).MetadataToken },
                 new object[] { typeof(ModuleTests).MetadataToken + 1000 },
-            }.Union(NullTokens);
+            }
+                .Union(NullTokens);
 
         [Theory]
         [MemberData(nameof(BadResolveFields))]
@@ -393,7 +398,8 @@ namespace System.Reflection.Tests
                 new object[] { 1234 },
                 new object[] { typeof(ModuleTests).MetadataToken },
                 new object[] { typeof(ModuleTests).MetadataToken + 1000 },
-            }.Union(NullTokens);
+            }
+                .Union(NullTokens);
 
         [Theory]
         [MemberData(nameof(BadResolveStrings))]

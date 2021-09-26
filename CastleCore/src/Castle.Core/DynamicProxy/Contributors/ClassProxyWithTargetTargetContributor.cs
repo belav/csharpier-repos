@@ -108,12 +108,9 @@ namespace Castle.DynamicProxy.Contributors
         {
             if (!method.HasTarget)
             {
-                return new InheritanceInvocationTypeGenerator(
-                    targetType,
-                    method,
-                    null,
-                    null
-                ).Generate(@class, namingScope).BuildType();
+                return new InheritanceInvocationTypeGenerator(targetType, method, null, null)
+                    .Generate(@class, namingScope)
+                    .BuildType();
             }
             return new CompositionInvocationTypeGenerator(
                 method.Method.DeclaringType,
@@ -121,7 +118,9 @@ namespace Castle.DynamicProxy.Contributors
                 method.Method,
                 false,
                 null
-            ).Generate(@class, namingScope).BuildType();
+            )
+                .Generate(@class, namingScope)
+                .BuildType();
         }
 
         private IInvocationCreationContributor GetContributor(Type @delegate, MetaMethod method)
@@ -148,19 +147,20 @@ namespace Castle.DynamicProxy.Contributors
             var key = new CacheKey(
                 typeof(Delegate),
                 targetType,
-                new[] { method.MethodOnTarget.ReturnType }.Concat(
-                        ArgumentsUtil.GetTypes(method.MethodOnTarget.GetParameters())
-                    )
+                new[] { method.MethodOnTarget.ReturnType }
+                    .Concat(ArgumentsUtil.GetTypes(method.MethodOnTarget.GetParameters()))
                     .ToArray(),
                 null
             );
 
-            return scope.TypeCache.GetOrAddWithoutTakingLock(
-                key,
-                _ =>
-                    new DelegateTypeGenerator(method, targetType).Generate(@class, namingScope)
-                        .BuildType()
-            );
+            return scope.TypeCache
+                .GetOrAddWithoutTakingLock(
+                    key,
+                    _ =>
+                        new DelegateTypeGenerator(method, targetType)
+                            .Generate(@class, namingScope)
+                            .BuildType()
+                );
         }
 
         private Type GetInvocationType(MetaMethod method, ClassEmitter @class)
@@ -177,10 +177,8 @@ namespace Castle.DynamicProxy.Contributors
 
             // no locking required as we're already within a lock
 
-            return scope.TypeCache.GetOrAddWithoutTakingLock(
-                key,
-                _ => BuildInvocationType(method, @class)
-            );
+            return scope.TypeCache
+                .GetOrAddWithoutTakingLock(key, _ => BuildInvocationType(method, @class));
         }
 
         private MethodGenerator IndirectlyCalledMethodGenerator(
@@ -198,7 +196,9 @@ namespace Castle.DynamicProxy.Contributors
                 null,
                 false,
                 contributor
-            ).Generate(proxy, namingScope).BuildType();
+            )
+                .Generate(proxy, namingScope)
+                .BuildType();
             return new MethodWithInvocationGenerator(
                 method,
                 skipInterceptors ? NullExpression.Instance : proxy.GetField("__interceptors"),

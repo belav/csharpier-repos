@@ -14,9 +14,10 @@ namespace System.Net.Http.Formatting.Parsers
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties<InternetMessageFormatHeaderParser>(
-                TypeAssert.TypeProperties.IsClass
-            );
+            Assert.Type
+                .HasProperties<InternetMessageFormatHeaderParser>(
+                    TypeAssert.TypeProperties.IsClass
+                );
         }
 
         [Fact]
@@ -283,15 +284,12 @@ namespace System.Net.Http.Formatting.Parsers
                 },
             };
 
-            byte[] data = InternetMessageFormatHeaderParserTests.CreateBuffer(
-                headerData.Select(
-                        (kv) =>
-                        {
-                            return String.Format("{0}: {1}", kv.Key, kv.Value);
-                        }
-                    )
-                    .ToArray()
-            );
+            byte[] data = InternetMessageFormatHeaderParserTests.CreateBuffer(headerData.Select(
+                    (kv) =>
+                    {
+                        return String.Format("{0}: {1}", kv.Key, kv.Value);
+                    }
+                ).ToArray());
             for (var cnt = 1; cnt <= data.Length; cnt++)
             {
                 HttpHeaders headers;

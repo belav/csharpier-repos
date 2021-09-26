@@ -110,9 +110,8 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_LengthRangeConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
-                "length(5, 10)"
-            );
+            var constraint = new DefaultInlineConstraintResolver()
+                .ResolveConstraint("length(5, 10)");
 
             LengthRouteConstraint lengthConstraint = Assert.IsType<LengthRouteConstraint>(
                 constraint
@@ -141,9 +140,8 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_MaxLengthConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
-                "maxlength(10)"
-            );
+            var constraint = new DefaultInlineConstraintResolver()
+                .ResolveConstraint("maxlength(10)");
 
             var maxLengthRouteConstraint = Assert.IsType<MaxLengthRouteConstraint>(constraint);
             Assert.Equal(10, maxLengthRouteConstraint.MaxLength);
@@ -161,9 +159,8 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_MinLengthConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
-                "minlength(3)"
-            );
+            var constraint = new DefaultInlineConstraintResolver()
+                .ResolveConstraint("minlength(3)");
 
             var minLengthRouteConstraint = Assert.IsType<MinLengthRouteConstraint>(constraint);
             Assert.Equal(3, minLengthRouteConstraint.MinLength);
@@ -178,9 +175,8 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_RangeConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
-                "range(5, 10)"
-            );
+            var constraint = new DefaultInlineConstraintResolver()
+                .ResolveConstraint("range(5, 10)");
 
             RangeRouteConstraint rangeConstraint = Assert.IsType<RangeRouteConstraint>(constraint);
             Assert.Equal(5, rangeConstraint.Min);
@@ -190,9 +186,8 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_RegexConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
-                "regex(abc,defg)"
-            );
+            var constraint = new DefaultInlineConstraintResolver()
+                .ResolveConstraint("regex(abc,defg)");
 
             RegexRouteConstraint regexConstraint = Assert.IsType<RegexRouteConstraint>(constraint);
             Assert.Equal("abc,defg", regexConstraint.Pattern);

@@ -236,10 +236,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "True", verify: Verification.Passes)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "True", verify: Verification.Passes).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       75 (0x4b)
   .maxstack  5
@@ -272,7 +271,7 @@ class Test
   IL_0045:  call       ""void System.Console.Write(bool)""
   IL_004a:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -300,10 +299,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "True", verify: Verification.Passes)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "True", verify: Verification.Passes).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       75 (0x4b)
   .maxstack  5
@@ -336,7 +334,7 @@ class Test
   IL_0045:  call       ""void System.Console.Write(bool)""
   IL_004a:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -361,10 +359,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "3", verify: Verification.Passes)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "3", verify: Verification.Passes).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       72 (0x48)
   .maxstack  4
@@ -401,7 +398,7 @@ class Test
   IL_0042:  call       ""void System.Console.Write(object)""
   IL_0047:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -430,10 +427,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "BlueTrue", verify: Verification.Fails)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "BlueTrue", verify: Verification.Fails).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       70 (0x46)
   .maxstack  3
@@ -465,7 +461,7 @@ class Test
   IL_0040:  call       ""void System.Console.Write(bool)""
   IL_0045:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -575,10 +571,9 @@ class Test
                 TestOptions.ReleaseExe
             );
 
-            CompileAndVerify(comp, expectedOutput: "P10", verify: Verification.Fails)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(comp, expectedOutput: "P10", verify: Verification.Fails).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  3
@@ -590,7 +585,7 @@ class Test
   IL_0016:  call       ""void Test.Test1<char, byte>(System.ReadOnlySpan<char>, System.ReadOnlySpan<byte>)""
   IL_001b:  ret
 }"
-                );
+            );
         }
 
         [Fact]

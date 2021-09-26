@@ -91,13 +91,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var originalInterfaceType = interfaceMember.ContainingType.OriginalDefinition;
             var originalInterfaceMember = interfaceMember.OriginalDefinition;
 
-            var constructedInterfaces = typeSymbol.AllInterfaces.Where(
-                i =>
-                    SymbolEquivalenceComparer.Instance.Equals(
-                        i.OriginalDefinition,
-                        originalInterfaceType
-                    )
-            );
+            var constructedInterfaces = typeSymbol.AllInterfaces
+                .Where(
+                    i =>
+                        SymbolEquivalenceComparer.Instance
+                            .Equals(i.OriginalDefinition, originalInterfaceType)
+                );
 
             foreach (var constructedInterface in constructedInterfaces)
             {
@@ -106,8 +105,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // OriginalSymbolMatch allows types to be matched across different assemblies if they are considered to
                 // be the same type, which provides a more accurate implementations list for interfaces.
                 var constructedInterfaceMember = await constructedInterface.GetMembers(
-                        interfaceMember.Name
-                    )
+                    interfaceMember.Name
+                )
                     .FirstOrDefaultAsync(
                         typeSymbol =>
                             SymbolFinder.OriginalSymbolsMatchAsync(
@@ -184,10 +183,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 from member in typeSymbol.GetMembers().OfType<TSymbol>()
                 from explicitInterfaceMethod in member.ExplicitInterfaceImplementations()
                 where
-                    SymbolEquivalenceComparer.Instance.Equals(
-                        explicitInterfaceMethod,
-                        constructedInterfaceMember
-                    )
+                    SymbolEquivalenceComparer.Instance
+                        .Equals(explicitInterfaceMethod, constructedInterfaceMember)
                 select member;
 
             var provider = workspace.Services.GetLanguageServices(typeSymbol.Language);
@@ -217,11 +214,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 where
                     member.DeclaredAccessibility == Accessibility.Public
                     && !member.IsStatic
-                    && SignatureComparer.Instance.HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
-                        member,
-                        constructedInterfaceMember,
-                        syntaxFacts.IsCaseSensitive
-                    )
+                    && SignatureComparer.Instance
+                        .HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
+                            member,
+                            constructedInterfaceMember,
+                            syntaxFacts.IsCaseSensitive
+                        )
                 select member;
 
             return explicitMatches.FirstOrDefault() ?? implicitMatches.FirstOrDefault();

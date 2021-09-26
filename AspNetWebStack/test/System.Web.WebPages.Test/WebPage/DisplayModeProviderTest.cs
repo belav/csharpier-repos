@@ -190,10 +190,10 @@ namespace System.Web.WebPages.Test
 
             // Act
             var availableDisplayModes = displayModeProvider.GetAvailableDisplayModesForContext(
-                    httpContext.Object,
-                    displayMode2.Object,
-                    requireConsistentDisplayMode: true
-                )
+                httpContext.Object,
+                displayMode2.Object,
+                requireConsistentDisplayMode: true
+            )
                 .ToList();
 
             // Assert
@@ -223,10 +223,10 @@ namespace System.Web.WebPages.Test
 
             // Act
             var availableDisplayModes = displayModeProvider.GetAvailableDisplayModesForContext(
-                    httpContext.Object,
-                    displayMode2.Object,
-                    requireConsistentDisplayMode: false
-                )
+                httpContext.Object,
+                displayMode2.Object,
+                requireConsistentDisplayMode: false
+            )
                 .ToList();
 
             // Assert
@@ -256,10 +256,10 @@ namespace System.Web.WebPages.Test
 
             // Act
             var availableDisplayModes = displayModeProvider.GetAvailableDisplayModesForContext(
-                    httpContext.Object,
-                    displayMode1.Object,
-                    requireConsistentDisplayMode: false
-                )
+                httpContext.Object,
+                displayMode1.Object,
+                requireConsistentDisplayMode: false
+            )
                 .ToList();
 
             // Assert

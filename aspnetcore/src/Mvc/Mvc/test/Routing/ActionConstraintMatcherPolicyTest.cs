@@ -440,8 +440,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // or else the policy will No-op.
             var actionDescriptorProvider = new Mock<IActionDescriptorProvider>();
             actionDescriptorProvider.Setup(
-                    a => a.OnProvidersExecuted(It.IsAny<ActionDescriptorProviderContext>())
-                )
+                a => a.OnProvidersExecuted(It.IsAny<ActionDescriptorProviderContext>())
+            )
                 .Callback<ActionDescriptorProviderContext>(
                     c =>
                     {

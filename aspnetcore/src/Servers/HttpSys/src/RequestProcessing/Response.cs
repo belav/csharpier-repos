@@ -78,11 +78,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            Resources.Exception_InvalidStatusCode,
-                            value
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                Resources.Exception_InvalidStatusCode,
+                                value
+                            )
                     );
                 }
                 CheckResponseStarted();
@@ -418,9 +419,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             Headers.IsReadOnly = false; // Temporarily unlock
             if (StatusCode == (ushort)StatusCodes.Status401Unauthorized)
             {
-                RequestContext.Server.Options.Authentication.SetAuthenticationChallenge(
-                    RequestContext
-                );
+                RequestContext.Server.Options.Authentication
+                    .SetAuthenticationChallenge(RequestContext);
             }
 
             var flags = HttpApiTypes.HTTP_FLAGS.NONE;
@@ -582,9 +582,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         }
                         headerName = headerPair.Key;
                         StringValues headerValues = headerPair.Value;
-                        lookup = HttpApiTypes.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
-                            headerName
-                        );
+                        lookup = HttpApiTypes.HTTP_RESPONSE_HEADER_ID
+                            .IndexOfKnownHeader(headerName);
 
                         // Http.Sys doesn't let us send the Connection: Upgrade header as a Known header.
                         if (

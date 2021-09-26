@@ -1638,10 +1638,8 @@ namespace Internal.TypeSystem.Interop
             //
 
 #if READYTORUN
-            var stringToAnsi = Context.SystemModule.GetKnownType(
-                    "System.StubHelpers",
-                    "AnsiBSTRMarshaler"
-                )
+            var stringToAnsi = Context.SystemModule
+                .GetKnownType("System.StubHelpers", "AnsiBSTRMarshaler")
                 .GetKnownMethod("ConvertToNative", null);
             int flags =
                 (PInvokeFlags.BestFitMapping ? 0x1 : 0)
@@ -1669,10 +1667,8 @@ namespace Internal.TypeSystem.Interop
             ILEmitter emitter = _ilCodeStreams.Emitter;
 
 #if READYTORUN
-            var ansiToString = Context.SystemModule.GetKnownType(
-                    "System.StubHelpers",
-                    "AnsiBSTRMarshaler"
-                )
+            var ansiToString = Context.SystemModule
+                .GetKnownType("System.StubHelpers", "AnsiBSTRMarshaler")
                 .GetKnownMethod("ConvertToManaged", null);
 #else
             var ansiToString = Context.GetHelperEntryPoint("InteropHelpers", "AnsiStringToString");
@@ -1686,10 +1682,8 @@ namespace Internal.TypeSystem.Interop
         {
             var emitter = _ilCodeStreams.Emitter;
 #if READYTORUN
-            MethodDesc clearNative = Context.SystemModule.GetKnownType(
-                    "System.StubHelpers",
-                    "AnsiBSTRMarshaler"
-                )
+            MethodDesc clearNative = Context.SystemModule
+                .GetKnownType("System.StubHelpers", "AnsiBSTRMarshaler")
                 .GetKnownMethod("ClearNative", null);
             LoadNativeValue(codeStream);
             codeStream.Emit(ILOpcode.call, emitter.NewToken(clearNative));
@@ -1984,32 +1978,26 @@ namespace Internal.TypeSystem.Interop
             codeStream.Emit(ILOpcode.dup);
             codeStream.Emit(ILOpcode.brfalse, lNullPointer);
 
-            codeStream.Emit(
-                ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
+            codeStream.Emit(ILOpcode.call, _ilCodeStreams.Emitter.NewToken(
 #if READYTORUN
-                    InteropTypes.GetMarshal(Context)
-                        .GetKnownMethod(
-                            "GetFunctionPointerForDelegate",
+                    InteropTypes.GetMarshal(Context).GetKnownMethod(
+                        "GetFunctionPointerForDelegate",
 #else
                     InteropTypes.GetPInvokeMarshal(Context)
                         .GetKnownMethod(
                             "GetFunctionPointerForDelegate",
 #endif
-                            new MethodSignature(
-                                MethodSignatureFlags.Static,
-                                0,
-                                Context.GetWellKnownType(WellKnownType.IntPtr),
-                                new TypeDesc[]
-                                {
-                                    Context.GetWellKnownType(
-                                        WellKnownType.MulticastDelegate
-                                    ).BaseType
-                                }
-                            )
+                        new MethodSignature(
+                            MethodSignatureFlags.Static,
+                            0,
+                            Context.GetWellKnownType(WellKnownType.IntPtr),
+                            new TypeDesc[]
+                            {
+                                Context.GetWellKnownType(WellKnownType.MulticastDelegate).BaseType
+                            }
                         )
-                )
-            );
+                    )
+                ));
 
             codeStream.Emit(ILOpcode.br, lDone);
 
@@ -2037,51 +2025,56 @@ namespace Internal.TypeSystem.Interop
             codeStream.Emit(ILOpcode.ldtoken, _ilCodeStreams.Emitter.NewToken(ManagedType));
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    systemType.GetKnownMethod("GetTypeFromHandle", null)
-                )
+                _ilCodeStreams.Emitter
+                    .NewToken(systemType.GetKnownMethod("GetTypeFromHandle", null))
             );
 
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropTypes.GetMarshal(Context)
-                        .GetKnownMethod(
-                            "GetDelegateForFunctionPointer",
-                            new MethodSignature(
-                                MethodSignatureFlags.Static,
-                                0,
-                                Context.GetWellKnownType(WellKnownType.MulticastDelegate).BaseType,
-                                new TypeDesc[]
-                                {
-                                    Context.GetWellKnownType(WellKnownType.IntPtr),
-                                    systemType
-                                }
+                _ilCodeStreams.Emitter
+                    .NewToken(
+                        InteropTypes.GetMarshal(Context)
+                            .GetKnownMethod(
+                                "GetDelegateForFunctionPointer",
+                                new MethodSignature(
+                                    MethodSignatureFlags.Static,
+                                    0,
+                                    Context.GetWellKnownType(
+                                        WellKnownType.MulticastDelegate
+                                    ).BaseType,
+                                    new TypeDesc[]
+                                    {
+                                        Context.GetWellKnownType(WellKnownType.IntPtr),
+                                        systemType
+                                    }
+                                )
                             )
-                        )
-                )
+                    )
             );
 #else
             codeStream.Emit(ILOpcode.ldtoken, _ilCodeStreams.Emitter.NewToken(ManagedType));
 
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropTypes.GetPInvokeMarshal(Context)
-                        .GetKnownMethod(
-                            "GetDelegateForFunctionPointer",
-                            new MethodSignature(
-                                MethodSignatureFlags.Static,
-                                0,
-                                Context.GetWellKnownType(WellKnownType.MulticastDelegate).BaseType,
-                                new TypeDesc[]
-                                {
-                                    Context.GetWellKnownType(WellKnownType.IntPtr),
-                                    Context.GetWellKnownType(WellKnownType.RuntimeTypeHandle)
-                                }
+                _ilCodeStreams.Emitter
+                    .NewToken(
+                        InteropTypes.GetPInvokeMarshal(Context)
+                            .GetKnownMethod(
+                                "GetDelegateForFunctionPointer",
+                                new MethodSignature(
+                                    MethodSignatureFlags.Static,
+                                    0,
+                                    Context.GetWellKnownType(
+                                        WellKnownType.MulticastDelegate
+                                    ).BaseType,
+                                    new TypeDesc[]
+                                    {
+                                        Context.GetWellKnownType(WellKnownType.IntPtr),
+                                        Context.GetWellKnownType(WellKnownType.RuntimeTypeHandle)
+                                    }
+                                )
                             )
-                        )
-                )
+                    )
             );
 #endif
 
@@ -2106,9 +2099,8 @@ namespace Internal.TypeSystem.Interop
                 LoadManagedValue(codeStream);
                 codeStream.Emit(
                     ILOpcode.call,
-                    _ilCodeStreams.Emitter.NewToken(
-                        InteropTypes.GetGC(Context).GetKnownMethod("KeepAlive", null)
-                    )
+                    _ilCodeStreams.Emitter
+                        .NewToken(InteropTypes.GetGC(Context).GetKnownMethod("KeepAlive", null))
                 );
             }
         }

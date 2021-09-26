@@ -421,9 +421,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     // This ensures that the Task created by ConnectAsync will run on the default
                     // TaskScheduler (i.e., on a threadpool thread) which was the intent all along.
                     await Task.Run(
-                            () => pipeStream.ConnectAsync(timeoutMs, cancellationToken),
-                            cancellationToken
-                        )
+                        () => pipeStream.ConnectAsync(timeoutMs, cancellationToken),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 catch (Exception e) when (e is IOException || e is TimeoutException)

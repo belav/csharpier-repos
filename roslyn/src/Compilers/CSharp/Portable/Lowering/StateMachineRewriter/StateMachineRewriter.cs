@@ -243,11 +243,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 mapToPreviousFields
                                 && slotAllocatorOpt.TryGetPreviousHoistedLocalSlotIndex(
                                     declaratorSyntax,
-                                    F.ModuleBuilderOpt.Translate(
-                                        fieldType,
-                                        declaratorSyntax,
-                                        diagnostics.DiagnosticBag
-                                    ),
+                                    F.ModuleBuilderOpt
+                                        .Translate(
+                                            fieldType,
+                                            declaratorSyntax,
+                                            diagnostics.DiagnosticBag
+                                        ),
                                     synthesizedKind,
                                     id,
                                     diagnostics.DiagnosticBag,
@@ -625,10 +626,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 F.Syntax,
                                 stateMachineType => F.Local(resultVariable)
                             ),
-                            copySrc[method.ThisParameter].Replacement(
-                                F.Syntax,
-                                stateMachineType => F.This()
-                            )
+                            copySrc[method.ThisParameter]
+                                .Replacement(F.Syntax, stateMachineType => F.This())
                         )
                     );
                 }
@@ -647,10 +646,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         stateMachineType => F.Local(resultVariable)
                     );
                     // this.parameterProxy
-                    BoundExpression parameterProxy = copySrc[parameter].Replacement(
-                        F.Syntax,
-                        stateMachineType => F.This()
-                    );
+                    BoundExpression parameterProxy = copySrc[parameter]
+                        .Replacement(F.Syntax, stateMachineType => F.This());
                     BoundStatement copy = InitializeParameterField(
                         getEnumeratorMethod,
                         parameter,

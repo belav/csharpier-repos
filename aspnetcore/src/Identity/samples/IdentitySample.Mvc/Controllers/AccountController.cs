@@ -398,8 +398,8 @@ namespace IdentitySample.Controllers
             }
             var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
             var factorOptions = userFactors.Select(
-                    purpose => new SelectListItem { Text = purpose, Value = purpose }
-                )
+                purpose => new SelectListItem { Text = purpose, Value = purpose }
+            )
                 .ToList();
             return View(
                 new SendCodeViewModel

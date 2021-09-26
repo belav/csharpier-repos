@@ -533,9 +533,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 EventSymbol @event = (EventSymbol)associatedPropertyOrEvent;
                 if (@event.IsWindowsRuntimeEvent)
                 {
-                    NamedTypeSymbol tokenTableType = this.DeclaringCompilation.GetWellKnownType(
-                        WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T
-                    );
+                    NamedTypeSymbol tokenTableType = this.DeclaringCompilation
+                        .GetWellKnownType(
+                            WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T
+                        );
                     Binder.ReportUseSite(
                         tokenTableType,
                         diagnosticsForFirstDeclarator,

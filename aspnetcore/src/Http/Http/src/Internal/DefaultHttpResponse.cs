@@ -94,9 +94,10 @@ namespace Microsoft.AspNetCore.Http
                     return;
                 }
 
-                _features.Collection.Set<IHttpResponseBodyFeature>(
-                    new StreamResponseBodyFeature(value, otherFeature)
-                );
+                _features.Collection
+                    .Set<IHttpResponseBodyFeature>(
+                        new StreamResponseBodyFeature(value, otherFeature)
+                    );
             }
         }
 

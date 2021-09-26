@@ -124,9 +124,10 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Sse2.X64.ConvertScalarToVector128Int64(
-                Unsafe.ReadUnaligned<Int64>(ref Unsafe.As<Int64, byte>(ref _data))
-            );
+            var result = Sse2.X64
+                .ConvertScalarToVector128Int64(
+                    Unsafe.ReadUnaligned<Int64>(ref Unsafe.As<Int64, byte>(ref _data))
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_data, _dataTable.outArrayPtr);
@@ -136,7 +137,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse2.X64).GetMethod(
+            var result = typeof(Sse2.X64)
+                .GetMethod(
                     nameof(Sse2.X64.ConvertScalarToVector128Int64),
                     new Type[] { typeof(Int64) }
                 )
@@ -277,15 +279,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Sse2.X64)}.{nameof(Sse2.X64.ConvertScalarToVector128Int64)}<Int64>(Int64): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   result: ({string.Join(", ", result)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Sse2.X64)}.{nameof(Sse2.X64.ConvertScalarToVector128Int64)}<Int64>(Int64): {method} failed:"
+                    );
+                TestLibrary.TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework
+                    .LogInformation($"   result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

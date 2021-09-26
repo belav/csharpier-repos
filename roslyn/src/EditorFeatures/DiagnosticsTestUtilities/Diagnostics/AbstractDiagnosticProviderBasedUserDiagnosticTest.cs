@@ -174,9 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             var testDriver = new TestDiagnosticAnalyzerDriver(workspace, document.Project);
             var filterSpan = parameters.includeDiagnosticsOutsideSelection ? (TextSpan?)null : span;
-            var diagnostics = (
-                await testDriver.GetAllDiagnosticsAsync(document, filterSpan)
-            ).ToImmutableArray();
+            var diagnostics = (await testDriver.GetAllDiagnosticsAsync(document, filterSpan))
+                .ToImmutableArray();
             AssertNoAnalyzerExceptionDiagnostics(diagnostics);
 
             if (fixer == null)
@@ -248,9 +247,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var testOptions = new TestParameters(parseOptions, compilationOptions, options);
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, testOptions))
             {
-                var diagnostics = (
-                    await GetDiagnosticsAsync(workspace, testOptions)
-                ).ToImmutableArray();
+                var diagnostics = (await GetDiagnosticsAsync(workspace, testOptions))
+                    .ToImmutableArray();
                 diagnostics = diagnostics.WhereAsArray(d => d.Id == diagnosticId);
                 Assert.Equal(1, diagnostics.Count());
 

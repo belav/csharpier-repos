@@ -318,19 +318,21 @@ namespace System.DirectoryServices.AccountManagement
                         targetIsFromGC
                         || (
                             !string.IsNullOrEmpty(this.domainDnsName)
-                            && !string.Equals(
-                                this.DnsDomainName,
-                                dnsDomainName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            && !string
+                                .Equals(
+                                    this.DnsDomainName,
+                                    dnsDomainName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                     {
-                        constructedContext = SDSCache.Domain.GetContext(
-                            dnsDomainName,
-                            this.Credentials,
-                            this.OwningContext.Options
-                        );
+                        constructedContext = SDSCache.Domain
+                            .GetContext(
+                                dnsDomainName,
+                                this.Credentials,
+                                this.OwningContext.Options
+                            );
                     }
 
                     if (targetIsFromGC)
@@ -1313,11 +1315,12 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             Debug.Assert(
-                string.Equals(
-                    suggestedAdProperty,
-                    "userWorkstations",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        suggestedAdProperty,
+                        "userWorkstations",
+                        StringComparison.OrdinalIgnoreCase
+                    )
             );
 
             // The userWorkstations attribute is odd.  Rather than being a multivalued string attribute, it's a single-valued
@@ -1399,11 +1402,12 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             Debug.Assert(
-                string.Equals(
-                    suggestedAdProperty,
-                    "userAccountControl",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        suggestedAdProperty,
+                        "userAccountControl",
+                        StringComparison.OrdinalIgnoreCase
+                    )
             );
 
             SDSUtils.AccountControlFromDirectoryEntry(
@@ -1860,11 +1864,12 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             Debug.Assert(
-                string.Equals(
-                    suggestedAdProperty,
-                    "userAccountControl",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        suggestedAdProperty,
+                        "userAccountControl",
+                        StringComparison.OrdinalIgnoreCase
+                    )
             );
 
             SDSUtils.AccountControlToDirectoryEntry(

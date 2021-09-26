@@ -36,25 +36,29 @@ public class Foo<U>
     public static void Meth_In()
     {
         // NotInlined.NotInlinedMeth is not inlined
-        NotInlined<int>.NotInlinedMeth();
+        NotInlined<int>
+            .NotInlinedMeth();
     }
 
     public static void Meth_NotIn()
     {
         // Inlined.InlinedMeth is  inlined
-        Inlined<int>.InlinedMeth();
+        Inlined<int>
+            .InlinedMeth();
     }
 
     public static void ValMeth_In()
     {
         // NotInlinedVal.NotInlinedValMeth is not inlined
-        NotInlinedVal<int>.NotInlinedValMeth();
+        NotInlinedVal<int>
+            .NotInlinedValMeth();
     }
 
     public static void ValMeth_NotIn()
     {
         // InlinedVal.InlinedValMeth is  inlined
-        InlinedVal<int>.InlinedValMeth();
+        InlinedVal<int>
+            .InlinedValMeth();
     }
 }
 

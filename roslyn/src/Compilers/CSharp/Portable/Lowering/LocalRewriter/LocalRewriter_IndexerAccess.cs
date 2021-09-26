@@ -32,10 +32,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // loweredReceiver = BoundConversion.Synthesized(loweredReceiver.Syntax, loweredReceiver, Conversion.Identity, false, false, null, DynamicTypeSymbol.Instance);
 
                 result = _dynamicFactory.MakeDynamicGetMember(
-                        loweredReceiver,
-                        indexedPropertyName,
-                        resultIndexed: true
-                    )
+                    loweredReceiver,
+                    indexedPropertyName,
+                    resultIndexed: true
+                )
                     .ToExpression();
             }
             else
@@ -73,11 +73,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             EmbedIfNeedTo(loweredReceiver, node.ApplicableIndexers, node.Syntax);
 
             return _dynamicFactory.MakeDynamicGetIndex(
-                    MakeDynamicIndexerAccessReceiver(node, loweredReceiver),
-                    loweredArguments,
-                    argumentNames,
-                    refKinds
-                )
+                MakeDynamicIndexerAccessReceiver(node, loweredReceiver),
+                loweredArguments,
+                argumentNames,
+                refKinds
+            )
                 .ToExpression();
         }
 

@@ -300,14 +300,15 @@ namespace System.Net.Http.Formatting
                 );
             }
 
-            return base.WriteToStreamAsync(
-                type,
-                value,
-                writeStream,
-                content,
-                transportContext,
-                cancellationToken
-            );
+            return base
+                .WriteToStreamAsync(
+                    type,
+                    value,
+                    writeStream,
+                    content,
+                    transportContext,
+                    cancellationToken
+                );
         }
 
         /// <inheritdoc />

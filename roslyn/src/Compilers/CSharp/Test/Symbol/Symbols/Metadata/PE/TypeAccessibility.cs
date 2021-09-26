@@ -31,13 +31,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 from n in module0.GlobalNamespace.GetMembers()
                 where n.Kind == SymbolKind.Namespace && n.Name.Equals("System")
                 select n
-            ).Cast<NamespaceSymbol>().Single();
+            )
+                .Cast<NamespaceSymbol>()
+                .Single();
 
-            var obj = (
-                from t in system.GetTypeMembers()
-                where t.Name.Equals("Object")
-                select t
-            ).Single();
+            var obj = (from t in system.GetTypeMembers() where t.Name.Equals("Object") select t)
+                .Single();
 
             Assert.Equal(Accessibility.Public, obj.DeclaredAccessibility);
 
@@ -45,27 +44,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 from t in module0.GlobalNamespace.GetTypeMembers()
                 where t.Name.Equals("FXAssembly")
                 select t
-            ).Single();
+            )
+                .Single();
 
             Assert.Equal(Accessibility.Internal, frameworkAssembly.DeclaredAccessibility);
 
-            var @enum = (
-                from t in system.GetTypeMembers()
-                where t.Name.Equals("Enum")
-                select t
-            ).Single();
+            var @enum = (from t in system.GetTypeMembers() where t.Name.Equals("Enum") select t)
+                .Single();
 
             var console = (
                 from t in system.GetTypeMembers()
                 where t.Name.Equals("Console")
                 select t
-            ).Single();
+            )
+                .Single();
 
             var controlKeyState = (
                 from t in console.GetTypeMembers()
                 where t.Name.Equals("ControlKeyState")
                 select t
-            ).Single();
+            )
+                .Single();
 
             Assert.Equal(Accessibility.Internal, controlKeyState.DeclaredAccessibility);
 
@@ -73,13 +72,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 from t in system.GetTypeMembers()
                 where t.Name.Equals("ActivationContext")
                 select t
-            ).Single();
+            )
+                .Single();
 
             var contextForm = (
                 from t in activationContext.GetTypeMembers()
                 where t.Name.Equals("ContextForm")
                 select t
-            ).Single();
+            )
+                .Single();
 
             Assert.Equal(Accessibility.Public, contextForm.DeclaredAccessibility);
 
@@ -87,31 +88,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 from t in system.GetMembers()
                 where t.Kind == SymbolKind.Namespace && t.Name.Equals("Runtime")
                 select t
-            ).Cast<NamespaceSymbol>().Single();
+            )
+                .Cast<NamespaceSymbol>()
+                .Single();
 
             var remoting = (
                 from t in runtime.GetMembers()
                 where t.Kind == SymbolKind.Namespace && t.Name.Equals("Remoting")
                 select t
-            ).Cast<NamespaceSymbol>().Single();
+            )
+                .Cast<NamespaceSymbol>()
+                .Single();
 
             var messaging = (
                 from t in remoting.GetMembers()
                 where t.Kind == SymbolKind.Namespace && t.Name.Equals("Messaging")
                 select t
-            ).Cast<NamespaceSymbol>().Single();
+            )
+                .Cast<NamespaceSymbol>()
+                .Single();
 
             var messageSmuggler = (
                 from t in messaging.GetTypeMembers()
                 where t.Name.Equals("MessageSmuggler")
                 select t
-            ).Single();
+            )
+                .Single();
 
             var serializedArg = (
                 from t in messageSmuggler.GetTypeMembers()
                 where t.Name.Equals("SerializedArg")
                 select t
-            ).Single();
+            )
+                .Single();
 
             Assert.Equal(Accessibility.Protected, serializedArg.DeclaredAccessibility);
 
@@ -119,25 +128,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 from t in system.GetMembers()
                 where t.Kind == SymbolKind.Namespace && t.Name.Equals("Security")
                 select t
-            ).Cast<NamespaceSymbol>().Single();
+            )
+                .Cast<NamespaceSymbol>()
+                .Single();
 
             var accessControl = (
                 from t in security.GetMembers()
                 where t.Kind == SymbolKind.Namespace && t.Name.Equals("AccessControl")
                 select t
-            ).Cast<NamespaceSymbol>().Single();
+            )
+                .Cast<NamespaceSymbol>()
+                .Single();
 
             var nativeObjectSecurity = (
                 from t in accessControl.GetTypeMembers()
                 where t.Name.Equals("NativeObjectSecurity")
                 select t
-            ).Single();
+            )
+                .Single();
 
             var exceptionFromErrorCode = (
                 from t in nativeObjectSecurity.GetTypeMembers()
                 where t.Name.Equals("ExceptionFromErrorCode")
                 select t
-            ).Single();
+            )
+                .Single();
 
             Assert.Equal(
                 Accessibility.ProtectedOrInternal,

@@ -27,11 +27,12 @@ namespace Microsoft.Extensions.ApiDescription.Tool
         {
             if (PrefixOutput)
             {
-                return string.Join(
-                    Environment.NewLine,
-                    value.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
-                        .Select(l => prefix + l)
-                );
+                return string
+                    .Join(
+                        Environment.NewLine,
+                        value.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                            .Select(l => prefix + l)
+                    );
             }
 
             return value;

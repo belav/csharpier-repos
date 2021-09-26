@@ -45,9 +45,9 @@ public class FromNativePaths
 
         // In case there were multiple paths in CORE_LIBRARIES, assume that the last one is the one added in the test script.
         coreLibraries = coreLibraries.Split(
-                new[] { TestLibrary.Utilities.IsWindows ? ';' : ':' },
-                StringSplitOptions.RemoveEmptyEntries
-            )
+            new[] { TestLibrary.Utilities.IsWindows ? ';' : ':' },
+            StringSplitOptions.RemoveEmptyEntries
+        )
             .Last();
 
         if (!Directory.Exists(coreLibraries))

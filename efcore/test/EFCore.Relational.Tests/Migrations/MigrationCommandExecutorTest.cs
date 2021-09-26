@@ -305,10 +305,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                optionsExtension
-                    ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString)
-            );
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
+                .AddOrUpdateExtension(
+                    optionsExtension
+                        ?? new FakeRelationalOptionsExtension()
+                            .WithConnectionString(ConnectionString)
+                );
 
             return optionsBuilder.Options;
         }
@@ -321,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 new RelationalCommandBuilderDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory.Instance
+                            .Create<RelationalTypeMappingSourceDependencies>()
                     )
                 ),
                 commandText,

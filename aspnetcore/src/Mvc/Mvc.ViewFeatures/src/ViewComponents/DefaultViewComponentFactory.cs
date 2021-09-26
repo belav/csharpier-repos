@@ -40,11 +40,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             _activator = activator;
 
             _getPropertiesToActivate = type =>
-                PropertyActivator<ViewComponentContext>.GetPropertiesToActivate(
-                    type,
-                    typeof(ViewComponentContextAttribute),
-                    CreateActivateInfo
-                );
+                PropertyActivator<ViewComponentContext>
+                    .GetPropertiesToActivate(
+                        type,
+                        typeof(ViewComponentContextAttribute),
+                        CreateActivateInfo
+                    );
 
             _injectActions = new ConcurrentDictionary<
                 Type,

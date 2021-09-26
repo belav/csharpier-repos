@@ -798,11 +798,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             bool hasAnyDiagnostics;
-            var attribute = arguments.Binder.GetAttribute(
-                arguments.AttributeSyntax,
-                arguments.AttributeType,
-                out hasAnyDiagnostics
-            );
+            var attribute = arguments.Binder
+                .GetAttribute(
+                    arguments.AttributeSyntax,
+                    arguments.AttributeType,
+                    out hasAnyDiagnostics
+                );
             ConstantValue value;
             if (attribute.HasErrors)
             {
@@ -913,7 +914,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     AttributeSyntax,
                     CSharpAttributeData,
                     AttributeLocation
-                >.Decode(ref arguments, AttributeTargets.Parameter, MessageProvider.Instance);
+                >
+                    .Decode(ref arguments, AttributeTargets.Parameter, MessageProvider.Instance);
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.IDispatchConstantAttribute)
@@ -1208,7 +1210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
             else if (
-                !compilation.Conversions.ClassifyConversionFromType(
+                !compilation.Conversions
+                    .ClassifyConversionFromType(
                         (TypeSymbol)arg.TypeInternal,
                         this.Type,
                         ref useSiteInfo
@@ -1293,10 +1296,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation.Conversions.HasCallerLineNumberConversion(
-                    TypeWithAnnotations.Type,
-                    ref useSiteInfo
-                )
+                !compilation.Conversions
+                    .HasCallerLineNumberConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
                 // CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
@@ -1344,10 +1345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation.Conversions.HasCallerInfoStringConversion(
-                    TypeWithAnnotations.Type,
-                    ref useSiteInfo
-                )
+                !compilation.Conversions
+                    .HasCallerInfoStringConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
                 // CS4018: CallerFilePathAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
@@ -1404,10 +1403,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation.Conversions.HasCallerInfoStringConversion(
-                    TypeWithAnnotations.Type,
-                    ref useSiteInfo
-                )
+                !compilation.Conversions
+                    .HasCallerInfoStringConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
                 // CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
@@ -1469,9 +1466,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (
                     !Type.Equals(
-                        this.DeclaringCompilation.GetWellKnownType(
-                            WellKnownType.System_Threading_CancellationToken
-                        )
+                        this.DeclaringCompilation
+                            .GetWellKnownType(WellKnownType.System_Threading_CancellationToken)
                     )
                 )
                 {
@@ -1480,11 +1476,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 else if (
                     this.ContainingSymbol is MethodSymbol method
                     && method.IsAsync
-                    && method.ReturnType.OriginalDefinition.Equals(
-                        this.DeclaringCompilation.GetWellKnownType(
-                            WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                    && method.ReturnType.OriginalDefinition
+                        .Equals(
+                            this.DeclaringCompilation
+                                .GetWellKnownType(
+                                    WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                                )
                         )
-                    )
                 )
                 {
                     // Note: async methods that return this type must be iterators. This is enforced elsewhere
@@ -1539,13 +1537,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            base.PostDecodeWellKnownAttributes(
-                boundAttributes,
-                allAttributeSyntaxNodes,
-                diagnostics,
-                symbolPart,
-                decodedData
-            );
+            base
+                .PostDecodeWellKnownAttributes(
+                    boundAttributes,
+                    allAttributeSyntaxNodes,
+                    diagnostics,
+                    symbolPart,
+                    decodedData
+                );
         }
 
         /// <summary>

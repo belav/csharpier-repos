@@ -203,9 +203,8 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var executor = context.HttpContext.RequestServices.GetRequiredService<
-                IActionResultExecutor<RedirectToPageResult>
-            >();
+            var executor = context.HttpContext.RequestServices
+                .GetRequiredService<IActionResultExecutor<RedirectToPageResult>>();
             return executor.ExecuteAsync(context, this);
         }
     }

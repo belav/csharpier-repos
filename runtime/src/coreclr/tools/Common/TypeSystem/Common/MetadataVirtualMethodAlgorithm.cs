@@ -561,9 +561,8 @@ namespace Internal.TypeSystem
             if (separatedMethods != null)
             {
                 foreach (
-                    MethodDesc seperatedMethod in MethodDescHashtable.Enumerator.Get(
-                        separatedMethods
-                    )
+                    MethodDesc seperatedMethod in MethodDescHashtable.Enumerator
+                        .Get(separatedMethods)
                 )
                 {
                     unificationGroup.RemoveFromGroup(seperatedMethod);
@@ -593,9 +592,10 @@ namespace Internal.TypeSystem
                     )
                     {
                         if (
-                            implSlot.Signature.EqualsWithCovariantReturnType(
-                                unificationGroup.DefiningMethod.Signature
-                            )
+                            implSlot.Signature
+                                .EqualsWithCovariantReturnType(
+                                    unificationGroup.DefiningMethod.Signature
+                                )
                         )
                         {
                             unificationGroup.AddMethodRequiringSlotUnification(declSlot);
@@ -618,9 +618,8 @@ namespace Internal.TypeSystem
                             addDeclGroup.IsInGroupOrIsDefiningSlot(declSlot)
                                 || (
                                     addDeclGroup.RequiresSlotUnification(declSlot)
-                                    && addDeclGroup.DefiningMethod.Signature.EqualsWithCovariantReturnType(
-                                        declSlot.Signature
-                                    )
+                                    && addDeclGroup.DefiningMethod.Signature
+                                        .EqualsWithCovariantReturnType(declSlot.Signature)
                                 )
                         );
 
@@ -670,9 +669,10 @@ namespace Internal.TypeSystem
                     else if (unificationGroup.RequiresSlotUnification(declSlot))
                     {
                         if (
-                            implSlot.Signature.EqualsWithCovariantReturnType(
-                                unificationGroup.DefiningMethod.Signature
-                            )
+                            implSlot.Signature
+                                .EqualsWithCovariantReturnType(
+                                    unificationGroup.DefiningMethod.Signature
+                                )
                         )
                         {
                             unificationGroup.AddMethodRequiringSlotUnification(implSlot);

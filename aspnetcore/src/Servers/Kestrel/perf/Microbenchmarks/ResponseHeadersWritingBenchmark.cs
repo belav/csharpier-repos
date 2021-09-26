@@ -17,12 +17,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 {
     public class ResponseHeadersWritingBenchmark
     {
-        private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes(
-            "\r\nServer: " + Constants.ServerName
-        );
-        private static readonly byte[] _helloWorldPayload = Encoding.ASCII.GetBytes(
-            "Hello, World!"
-        );
+        private static readonly byte[] _bytesServer = Encoding.ASCII
+            .GetBytes("\r\nServer: " + Constants.ServerName);
+        private static readonly byte[] _helloWorldPayload = Encoding.ASCII
+            .GetBytes("Hello, World!");
 
         private HttpResponseHeaders _responseHeaders;
         private IHeaderDictionary _responseHeadersDict;

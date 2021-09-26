@@ -17,8 +17,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
     /// </summary>
     public class LazyLoadingInterceptor : IInterceptor
     {
-        private static readonly PropertyInfo _lazyLoaderProperty =
-            typeof(IProxyLazyLoader).GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
+        private static readonly PropertyInfo _lazyLoaderProperty = typeof(IProxyLazyLoader)
+            .GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
 
         private static readonly MethodInfo _lazyLoaderGetter = _lazyLoaderProperty.GetMethod!;
         private static readonly MethodInfo _lazyLoaderSetter = _lazyLoaderProperty.SetMethod!;

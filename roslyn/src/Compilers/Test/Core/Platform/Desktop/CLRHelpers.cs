@@ -66,10 +66,11 @@ namespace Roslyn.Test.Utilities.Desktop
             // This API isn't available on Mono hence we must use reflection to access it.
             Debug.Assert(!MonoHelpers.IsRunningOnMono());
 
-            var getRuntimeInterfaceAsObject = typeof(RuntimeEnvironment).GetMethod(
-                "GetRuntimeInterfaceAsObject",
-                BindingFlags.Public | BindingFlags.Static
-            );
+            var getRuntimeInterfaceAsObject = typeof(RuntimeEnvironment)
+                .GetMethod(
+                    "GetRuntimeInterfaceAsObject",
+                    BindingFlags.Public | BindingFlags.Static
+                );
             return getRuntimeInterfaceAsObject.Invoke(null, new object[] { clsid, riid });
         }
 

@@ -67,11 +67,12 @@ namespace System.IO.Ports.Tests
 
                 Assert.True(
                     stream.WriteTimeout == -1,
-                    string.Format(
-                        "Err_1707azhpbn Verifying the default value of WriteTimeout Expected={0} Actual={1} FAILED",
-                        -1,
-                        stream.WriteTimeout
-                    )
+                    string
+                        .Format(
+                            "Err_1707azhpbn Verifying the default value of WriteTimeout Expected={0} Actual={1} FAILED",
+                            -1,
+                            stream.WriteTimeout
+                        )
                 );
             }
         }
@@ -453,11 +454,12 @@ namespace System.IO.Ports.Tests
             Thread.Sleep(DEFAULT_WAIT_LONG_TIMEOUT);
             Assert.False(
                 t.IsCompleted,
-                string.Format(
-                    "Err_17071ahpa!!! {0} terminated with a long timeout of {1}ms",
-                    writeMethod.Method.Name,
-                    com1.BaseStream.WriteTimeout
-                )
+                string
+                    .Format(
+                        "Err_17071ahpa!!! {0} terminated with a long timeout of {1}ms",
+                        writeMethod.Method.Name,
+                        com1.BaseStream.WriteTimeout
+                    )
             );
             com1.Handshake = Handshake.None;
             TCSupport.WaitForTaskCompletion(t);
@@ -503,12 +505,13 @@ namespace System.IO.Ports.Tests
             // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
             Assert.True(
                 percentageDifference <= MAX_ACCEPTABLE_WARMUP_PERCENTAGE_DIFFERENCE,
-                string.Format(
-                    "Err_88558amuph!!!: The write method timedout in {0} expected {1} percentage difference: {2} when called for the first time",
-                    actualTime,
-                    expectedTime,
-                    percentageDifference
-                )
+                string
+                    .Format(
+                        "Err_88558amuph!!!: The write method timedout in {0} expected {1} percentage difference: {2} when called for the first time",
+                        actualTime,
+                        expectedTime,
+                        percentageDifference
+                    )
             );
 
             actualTime = 0;
@@ -538,12 +541,13 @@ namespace System.IO.Ports.Tests
             // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
             Assert.True(
                 percentageDifference <= MAX_ACCEPTABLE_PERCENTAGE_DIFFERENCE,
-                string.Format(
-                    "Err_56485ahpbz!!!: The write method timedout in {0} expected {1} percentage difference: {2}",
-                    actualTime,
-                    expectedTime,
-                    percentageDifference
-                )
+                string
+                    .Format(
+                        "Err_56485ahpbz!!!: The write method timedout in {0} expected {1} percentage difference: {2}",
+                        actualTime,
+                        expectedTime,
+                        percentageDifference
+                    )
             );
         }
 
@@ -584,11 +588,12 @@ namespace System.IO.Ports.Tests
             // Verify that the time the method took to timeout is less then the maximum acceptable time
             Assert.True(
                 actualTime <= MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT,
-                string.Format(
-                    "Err_277a0ahpsb!!!: With a timeout of 0 the write method timedout in {0} expected something less then {1} when called for the first time",
-                    actualTime,
-                    MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT
-                )
+                string
+                    .Format(
+                        "Err_277a0ahpsb!!!: With a timeout of 0 the write method timedout in {0} expected something less then {1} when called for the first time",
+                        actualTime,
+                        MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT
+                    )
             );
 
             actualTime = 0;
@@ -617,11 +622,12 @@ namespace System.IO.Ports.Tests
             // Verify that the time the method took to timeout is less then the maximum acceptable time
             Assert.True(
                 actualTime <= MAX_ACCEPTABLE_ZERO_TIMEOUT,
-                string.Format(
-                    "Err_112389ahbp!!!: With a timeout of 0 the write method timedout in {0} expected something less then {1}",
-                    actualTime,
-                    MAX_ACCEPTABLE_ZERO_TIMEOUT
-                )
+                string
+                    .Format(
+                        "Err_112389ahbp!!!: With a timeout of 0 the write method timedout in {0} expected something less then {1}",
+                        actualTime,
+                        MAX_ACCEPTABLE_ZERO_TIMEOUT
+                    )
             );
         }
 

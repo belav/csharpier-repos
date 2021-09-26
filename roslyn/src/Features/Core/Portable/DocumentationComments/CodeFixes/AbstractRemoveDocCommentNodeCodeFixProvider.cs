@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken)
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
 
             if (GetParamNode(root, context.Span) != null)
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
         {
             if (paramNodeIndex > 0)
             {
-                var previousNodeTextTrimmed = paramNodeSiblings[paramNodeIndex - 1].ToFullString()
+                var previousNodeTextTrimmed = paramNodeSiblings[paramNodeIndex - 1]
+                    .ToFullString()
                     .Trim();
 
                 if (

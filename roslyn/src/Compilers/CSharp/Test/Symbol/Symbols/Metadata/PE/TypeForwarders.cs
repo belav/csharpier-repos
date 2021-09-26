@@ -67,9 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(
                 base1,
                 module1.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module1.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)derived1).Handle
-                    )
+                    (TypeReferenceHandle)module1.Module
+                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)derived1).Handle)
                 ]
             );
             Assert.True(
@@ -137,12 +136,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             // System.Func`1 in both isn't ambiguous because one forwards to the other.
             Assert.Equal(
                 funcType,
-                compilation.Assembly.GetTypeByMetadataName(
-                    funcTypeMetadataName,
-                    includeReferences: true,
-                    isWellKnownType: false,
-                    conflicts: out var _
-                )
+                compilation.Assembly
+                    .GetTypeByMetadataName(
+                        funcTypeMetadataName,
+                        includeReferences: true,
+                        isWellKnownType: false,
+                        conflicts: out var _
+                    )
             );
         }
 
@@ -287,7 +287,8 @@ class Derived : Base
             compilation.VerifyDiagnostics(
                 // (2,17): error CS0731: The type forwarder for type 'Base' in assembly 'pe2' causes a cycle
                 // class Derived : Base
-                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base").WithArguments("Base", "pe2"),
+                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base")
+                    .WithArguments("Base", "pe2"),
                 // (2,17): error CS1070: The type name 'Base' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
                 // class Derived : Base
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Base")
@@ -375,7 +376,8 @@ class Test
             compilation.VerifyDiagnostics(
                 // (6,9): error CS0731: The type forwarder for type 'Base' in assembly 'pe3' causes a cycle
                 //         Base b = new Base();
-                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base").WithArguments("Base", "pe3"),
+                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base")
+                    .WithArguments("Base", "pe3"),
                 // (6,9): error CS1070: The type name 'Base' could not be found. This type has been forwarded to assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
                 //         Base b = new Base();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Base")
@@ -385,7 +387,8 @@ class Test
                     ),
                 // (6,22): error CS0731: The type forwarder for type 'Base' in assembly 'pe3' causes a cycle
                 //         Base b = new Base();
-                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base").WithArguments("Base", "pe3"),
+                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base")
+                    .WithArguments("Base", "pe3"),
                 // (6,22): error CS1070: The type name 'Base' could not be found. This type has been forwarded to assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
                 //         Base b = new Base();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Base")
@@ -843,9 +846,8 @@ class Test : Derived
             );
 
             Assert.Empty(
-                comp3.GetReferencedAssemblySymbol(ref2).Modules[
-                    0
-                ].ReferencedAssemblySymbols.OfType<MissingAssemblySymbol>()
+                comp3.GetReferencedAssemblySymbol(ref2).Modules[0].ReferencedAssemblySymbols
+                    .OfType<MissingAssemblySymbol>()
                     .First()
                     .GetPublicSymbol()
                     .GetForwardedTypes()
@@ -893,56 +895,55 @@ class Test
 
             var ref1 = CompileIL(il1, prependDefaultHeader: false);
 
-            CreateCompilation(csharp, new[] { ref1 })
-                .VerifyDiagnostics(
-                    // (5,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
-                    //     Outer.Inner M() { return null; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Outer")
-                        .WithArguments(
-                            "Outer",
-                            "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        )
-                        .WithLocation(5, 5),
-                    // (8,5): error CS0246: The type or namespace name 'Generic' could not be found (are you missing a using directive or an assembly reference?)
-                    //     Generic G0 { get; set; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Generic")
-                        .WithArguments("Generic")
-                        .WithLocation(8, 5),
-                    // (9,5): error CS1070: The type name 'Generic<>' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
-                    //     Generic<int> G1 { get; set; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Generic<int>")
-                        .WithArguments(
-                            "Generic<>",
-                            "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        )
-                        .WithLocation(9, 5),
-                    // (10,5): error CS0246: The type or namespace name 'Generic<,>' could not be found (are you missing a using directive or an assembly reference?)
-                    //     Generic<int, int> G2 { get; set; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Generic<int, int>")
-                        .WithArguments("Generic<,>")
-                        .WithLocation(10, 5),
-                    // (4,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
-                    //     Outer P { get; set; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Outer")
-                        .WithArguments(
-                            "Outer",
-                            "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        )
-                        .WithLocation(4, 5),
-                    // (6,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
-                    //     Outer.Inner<string> F;
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Outer")
-                        .WithArguments(
-                            "Outer",
-                            "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        )
-                        .WithLocation(6, 5),
-                    // (6,25): warning CS0169: The field 'Test.F' is never used
-                    //     Outer.Inner<string> F;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "F")
-                        .WithArguments("Test.F")
-                        .WithLocation(6, 25)
-                );
+            CreateCompilation(csharp, new[] { ref1 }).VerifyDiagnostics(
+                // (5,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                //     Outer.Inner M() { return null; }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Outer")
+                    .WithArguments(
+                        "Outer",
+                        "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(5, 5),
+                // (8,5): error CS0246: The type or namespace name 'Generic' could not be found (are you missing a using directive or an assembly reference?)
+                //     Generic G0 { get; set; }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Generic")
+                    .WithArguments("Generic")
+                    .WithLocation(8, 5),
+                // (9,5): error CS1070: The type name 'Generic<>' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                //     Generic<int> G1 { get; set; }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Generic<int>")
+                    .WithArguments(
+                        "Generic<>",
+                        "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(9, 5),
+                // (10,5): error CS0246: The type or namespace name 'Generic<,>' could not be found (are you missing a using directive or an assembly reference?)
+                //     Generic<int, int> G2 { get; set; }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Generic<int, int>")
+                    .WithArguments("Generic<,>")
+                    .WithLocation(10, 5),
+                // (4,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                //     Outer P { get; set; }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Outer")
+                    .WithArguments(
+                        "Outer",
+                        "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(4, 5),
+                // (6,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                //     Outer.Inner<string> F;
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Outer")
+                    .WithArguments(
+                        "Outer",
+                        "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(6, 5),
+                // (6,25): warning CS0169: The field 'Test.F' is never used
+                //     Outer.Inner<string> F;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "F")
+                    .WithArguments("Test.F")
+                    .WithLocation(6, 25)
+            );
         }
 
         [Fact]
@@ -978,24 +979,20 @@ class Test
             var ref1 = CompileIL(il1, prependDefaultHeader: false);
 
             // NOTE: nothing about forwarded types.
-            CreateCompilation(csharp, new[] { ref1 })
-                .VerifyDiagnostics(
-                    // (4,5): error CS0246: The type or namespace name 'upper' could not be found (are you missing a using directive or an assembly reference?)
-                    //     upper P1 { get; set; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "upper")
-                        .WithArguments("upper"),
-                    // (5,5): error CS0246: The type or namespace name 'uPPeR' could not be found (are you missing a using directive or an assembly reference?)
-                    //     uPPeR P2 { get; set; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "uPPeR")
-                        .WithArguments("uPPeR"),
-                    // (6,5): error CS0246: The type or namespace name 'LOWER' could not be found (are you missing a using directive or an assembly reference?)
-                    //     LOWER.mixed P3 { get; set; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "LOWER")
-                        .WithArguments("LOWER"),
-                    // (7,5): error CS0246: The type or namespace name 'lOwEr' could not be found (are you missing a using directive or an assembly reference?)
-                    //     lOwEr.MIXED P4 { get; set; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "lOwEr").WithArguments("lOwEr")
-                );
+            CreateCompilation(csharp, new[] { ref1 }).VerifyDiagnostics(
+                // (4,5): error CS0246: The type or namespace name 'upper' could not be found (are you missing a using directive or an assembly reference?)
+                //     upper P1 { get; set; }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "upper").WithArguments("upper"),
+                // (5,5): error CS0246: The type or namespace name 'uPPeR' could not be found (are you missing a using directive or an assembly reference?)
+                //     uPPeR P2 { get; set; }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "uPPeR").WithArguments("uPPeR"),
+                // (6,5): error CS0246: The type or namespace name 'LOWER' could not be found (are you missing a using directive or an assembly reference?)
+                //     LOWER.mixed P3 { get; set; }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "LOWER").WithArguments("LOWER"),
+                // (7,5): error CS0246: The type or namespace name 'lOwEr' could not be found (are you missing a using directive or an assembly reference?)
+                //     lOwEr.MIXED P4 { get; set; }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "lOwEr").WithArguments("lOwEr")
+            );
         }
 
         [Fact]
@@ -1025,16 +1022,15 @@ class Test
 
             var ref1 = CompileIL(il1, prependDefaultHeader: false);
 
-            CreateCompilation(csharp, new[] { ref1 })
-                .VerifyDiagnostics(
-                    // (6,29): error CS1068: The type name 'Forwarded' could not be found in the global namespace. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
-                    //         var f = new global::Forwarded();
-                    Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFoundFwd, "Forwarded")
-                        .WithArguments(
-                            "Forwarded",
-                            "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        )
-                );
+            CreateCompilation(csharp, new[] { ref1 }).VerifyDiagnostics(
+                // (6,29): error CS1068: The type name 'Forwarded' could not be found in the global namespace. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                //         var f = new global::Forwarded();
+                Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFoundFwd, "Forwarded")
+                    .WithArguments(
+                        "Forwarded",
+                        "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+            );
         }
 
         [Fact]
@@ -1045,15 +1041,14 @@ class Test
                 @"
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(null)]
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (2,12): error CS0735: Invalid type specified as an argument for TypeForwardedTo attribute
-                    // [assembly: System.Runtime.CompilerServices.TypeForwardedTo(null)]
-                    Diagnostic(
-                        ErrorCode.ERR_InvalidFwdType,
-                        "System.Runtime.CompilerServices.TypeForwardedTo(null)"
-                    )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (2,12): error CS0735: Invalid type specified as an argument for TypeForwardedTo attribute
+                // [assembly: System.Runtime.CompilerServices.TypeForwardedTo(null)]
+                Diagnostic(
+                    ErrorCode.ERR_InvalidFwdType,
+                    "System.Runtime.CompilerServices.TypeForwardedTo(null)"
+                )
+            );
         }
 
         [WorkItem(529761, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529761")]
@@ -1086,20 +1081,19 @@ class Test
 
             var ref1 = CompileIL(il1, prependDefaultHeader: false);
 
-            CreateCompilation(csharp, new[] { ref1 })
-                .VerifyDiagnostics(
-                    // (8,21): error CS1069: The type name 'Forwarded' could not be found in the namespace 'Namespace'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
-                    //         var f = new Forwarded();
-                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "Forwarded")
-                        .WithArguments(
-                            "Forwarded",
-                            "Namespace",
-                            "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        ),
-                    // (2,1): info CS8019: Unnecessary using directive.
-                    // using Namespace;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Namespace;")
-                );
+            CreateCompilation(csharp, new[] { ref1 }).VerifyDiagnostics(
+                // (8,21): error CS1069: The type name 'Forwarded' could not be found in the namespace 'Namespace'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                //         var f = new Forwarded();
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "Forwarded")
+                    .WithArguments(
+                        "Forwarded",
+                        "Namespace",
+                        "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    ),
+                // (2,1): info CS8019: Unnecessary using directive.
+                // using Namespace;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Namespace;")
+            );
         }
 
         [Fact]
@@ -1131,20 +1125,19 @@ class Test
 
             var ref1 = CompileIL(il1, prependDefaultHeader: false);
 
-            CreateCompilation(csharp, new[] { ref1 })
-                .VerifyDiagnostics(
-                    // (8,21): error CS1069: The type name 'Forwarded<>' could not be found in the namespace 'Namespace'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
-                    //         var f = new Forwarded<int>();
-                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "Forwarded<int>")
-                        .WithArguments(
-                            "Forwarded<>",
-                            "Namespace",
-                            "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        ),
-                    // (2,1): info CS8019: Unnecessary using directive.
-                    // using Namespace;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Namespace;")
-                );
+            CreateCompilation(csharp, new[] { ref1 }).VerifyDiagnostics(
+                // (8,21): error CS1069: The type name 'Forwarded<>' could not be found in the namespace 'Namespace'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                //         var f = new Forwarded<int>();
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "Forwarded<int>")
+                    .WithArguments(
+                        "Forwarded<>",
+                        "Namespace",
+                        "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    ),
+                // (2,1): info CS8019: Unnecessary using directive.
+                // using Namespace;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Namespace;")
+            );
         }
 
         [Fact]
@@ -1839,54 +1832,54 @@ namespace NS
         {
             string moduleA = @"public class Goo{ public static string A = ""Original""; }";
             var bitsA = CreateCompilation(
-                    moduleA,
-                    options: TestOptions.ReleaseDll,
-                    assemblyName: "asm2"
-                )
+                moduleA,
+                options: TestOptions.ReleaseDll,
+                assemblyName: "asm2"
+            )
                 .EmitToArray();
             var refA = MetadataReference.CreateFromImage(bitsA);
 
             string moduleB =
                 @"using System; class Program2222 { static void Main(string[] args) { Console.WriteLine(Goo.A); } }";
             var bitsB = CreateCompilation(
-                    moduleB,
-                    new[] { refA },
-                    TestOptions.ReleaseExe,
-                    assemblyName: "test"
-                )
+                moduleB,
+                new[] { refA },
+                TestOptions.ReleaseExe,
+                assemblyName: "test"
+            )
                 .EmitToArray();
 
             string module0 = @"public class Goo{ public static string A = ""Substituted""; }";
             var bits0 = CreateCompilation(
-                    module0,
-                    options: TestOptions.ReleaseModule,
-                    assemblyName: "asm0"
-                )
+                module0,
+                options: TestOptions.ReleaseModule,
+                assemblyName: "asm0"
+            )
                 .EmitToArray();
             var ref0 = ModuleMetadata.CreateFromImage(bits0).GetReference();
 
             string module1 = "using System;";
             var bits1 = CreateCompilation(
-                    module1,
-                    new[] { ref0 },
-                    options: TestOptions.ReleaseDll,
-                    assemblyName: "asm1"
-                )
+                module1,
+                new[] { ref0 },
+                options: TestOptions.ReleaseDll,
+                assemblyName: "asm1"
+            )
                 .EmitToArray();
             var ref1 = AssemblyMetadata.Create(
-                    ModuleMetadata.CreateFromImage(bits1),
-                    ModuleMetadata.CreateFromImage(bits0)
-                )
+                ModuleMetadata.CreateFromImage(bits1),
+                ModuleMetadata.CreateFromImage(bits0)
+            )
                 .GetReference();
 
             string module2 =
                 @"using System; [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(Goo))]";
             var bits2 = CreateCompilation(
-                    module2,
-                    new[] { ref1 },
-                    options: TestOptions.ReleaseDll,
-                    assemblyName: "asm2"
-                )
+                module2,
+                new[] { ref1 },
+                options: TestOptions.ReleaseDll,
+                assemblyName: "asm2"
+            )
                 .EmitToArray();
 
             // runtime check:
@@ -2002,25 +1995,23 @@ public class CF1
 
             // Exported types in .NET module cause PEVerify to fail.
             CompileAndVerify(
-                    appCompilation,
-                    verify: Verification.Fails,
-                    symbolValidator: m =>
-                    {
-                        var peReader1 = ((PEModuleSymbol)m).Module.GetMetadataReader();
-                        Assert.Equal(1, peReader1.GetTableRowCount(TableIndex.ExportedType));
-                        ValidateExportedTypeRow(peReader1.ExportedTypes.First(), peReader1, "CF1");
+                appCompilation,
+                verify: Verification.Fails,
+                symbolValidator: m =>
+                {
+                    var peReader1 = ((PEModuleSymbol)m).Module.GetMetadataReader();
+                    Assert.Equal(1, peReader1.GetTableRowCount(TableIndex.ExportedType));
+                    ValidateExportedTypeRow(peReader1.ExportedTypes.First(), peReader1, "CF1");
 
-                        // Attributes should not actually be emitted.
-                        Assert.Equal(
-                            0,
-                            m.ContainingAssembly.GetAttributes(
-                                    AttributeDescription.TypeForwardedToAttribute
-                                )
-                                .Count()
-                        );
-                    }
-                )
-                .VerifyDiagnostics();
+                    // Attributes should not actually be emitted.
+                    Assert.Equal(
+                        0,
+                        m.ContainingAssembly
+                            .GetAttributes(AttributeDescription.TypeForwardedToAttribute)
+                            .Count()
+                    );
+                }
+            ).VerifyDiagnostics();
 
             var ilSource =
                 @"
@@ -2078,23 +2069,21 @@ public class CF1
             Assert.Equal(1, peReader.CustomAttributes.Count);
 
             CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: m =>
-                    {
-                        var peReader1 = ((PEModuleSymbol)m).Module.GetMetadataReader();
-                        Assert.Equal(0, peReader1.GetTableRowCount(TableIndex.ExportedType));
+                appCompilation,
+                symbolValidator: m =>
+                {
+                    var peReader1 = ((PEModuleSymbol)m).Module.GetMetadataReader();
+                    Assert.Equal(0, peReader1.GetTableRowCount(TableIndex.ExportedType));
 
-                        // Attributes should not actually be emitted.
-                        Assert.Equal(
-                            0,
-                            m.ContainingAssembly.GetAttributes(
-                                    AttributeDescription.TypeForwardedToAttribute
-                                )
-                                .Count()
-                        );
-                    }
-                )
-                .VerifyDiagnostics();
+                    // Attributes should not actually be emitted.
+                    Assert.Equal(
+                        0,
+                        m.ContainingAssembly
+                            .GetAttributes(AttributeDescription.TypeForwardedToAttribute)
+                            .Count()
+                    );
+                }
+            ).VerifyDiagnostics();
 
             appCompilation = CreateCompilation(
                 app,
@@ -2123,15 +2112,14 @@ public class CF1
                 options: TestOptions.ReleaseDll
             );
 
-            appCompilation.GetDeclarationDiagnostics()
-                .Verify(
-                    // error CS0012: The type 'CF1' is defined in an assembly that is not referenced. You must add a reference to assembly 'Test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
-                    Diagnostic(ErrorCode.ERR_NoTypeDef)
-                        .WithArguments(
-                            "CF1",
-                            "ForwarderTargetAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        )
-                );
+            appCompilation.GetDeclarationDiagnostics().Verify(
+                // error CS0012: The type 'CF1' is defined in an assembly that is not referenced. You must add a reference to assembly 'Test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                Diagnostic(ErrorCode.ERR_NoTypeDef)
+                    .WithArguments(
+                        "CF1",
+                        "ForwarderTargetAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+            );
         }
 
         #region Helpers

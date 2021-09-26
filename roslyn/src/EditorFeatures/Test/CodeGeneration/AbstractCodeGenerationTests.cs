@@ -31,12 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
         {
             var projectId = ProjectId.CreateNewId();
 
-            var project = workspace.CurrentSolution.AddProject(
-                    projectId,
-                    languageName,
-                    $"{languageName}.dll",
-                    languageName
-                )
+            var project = workspace.CurrentSolution
+                .AddProject(projectId, languageName, $"{languageName}.dll", languageName)
                 .GetProject(projectId);
 
             var normalizedSyntax = syntaxNode.NormalizeWhitespace().ToFullString();
@@ -97,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             if (cs != null || csSimple != null)
             {
-                var codeDefFactory = workspace.Services.GetLanguageServices(LanguageNames.CSharp)
+                var codeDefFactory = workspace.Services
+                    .GetLanguageServices(LanguageNames.CSharp)
                     .GetService<SyntaxGenerator>();
 
                 var node = nodeCreator(codeDefFactory);
@@ -130,9 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             if (vb != null || vbSimple != null)
             {
-                var codeDefFactory = workspace.Services.GetLanguageServices(
-                        LanguageNames.VisualBasic
-                    )
+                var codeDefFactory = workspace.Services
+                    .GetLanguageServices(LanguageNames.VisualBasic)
                     .GetService<SyntaxGenerator>();
 
                 var node = nodeCreator(codeDefFactory);

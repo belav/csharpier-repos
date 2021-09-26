@@ -34,10 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             }
 
             if (
-                !SymbolEqualityComparer.Default.Equals(
-                    method.ContainingType,
-                    HtmlHelperPartialExtensionsType
-                )
+                !SymbolEqualityComparer.Default
+                    .Equals(method.ContainingType, HtmlHelperPartialExtensionsType)
             )
             {
                 return false;

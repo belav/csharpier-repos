@@ -34,58 +34,65 @@ namespace NativeIISSample
                 {
                     context.Response.ContentType = "text/plain";
 
-                    await context.Response.WriteAsync(
-                        "Hello World - " + DateTimeOffset.Now + Environment.NewLine
-                    );
+                    await context.Response
+                        .WriteAsync("Hello World - " + DateTimeOffset.Now + Environment.NewLine);
                     await context.Response.WriteAsync(Environment.NewLine);
 
                     await context.Response.WriteAsync("Address:" + Environment.NewLine);
-                    await context.Response.WriteAsync(
-                        "Scheme: " + context.Request.Scheme + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "Host: " + context.Request.Headers["Host"] + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "PathBase: " + context.Request.PathBase.Value + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "Path: " + context.Request.Path.Value + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "Query: " + context.Request.QueryString.Value + Environment.NewLine
-                    );
+                    await context.Response
+                        .WriteAsync("Scheme: " + context.Request.Scheme + Environment.NewLine);
+                    await context.Response
+                        .WriteAsync(
+                            "Host: " + context.Request.Headers["Host"] + Environment.NewLine
+                        );
+                    await context.Response
+                        .WriteAsync(
+                            "PathBase: " + context.Request.PathBase.Value + Environment.NewLine
+                        );
+                    await context.Response
+                        .WriteAsync("Path: " + context.Request.Path.Value + Environment.NewLine);
+                    await context.Response
+                        .WriteAsync(
+                            "Query: " + context.Request.QueryString.Value + Environment.NewLine
+                        );
                     await context.Response.WriteAsync(Environment.NewLine);
 
                     await context.Response.WriteAsync("Connection:" + Environment.NewLine);
-                    await context.Response.WriteAsync(
-                        "RemoteIp: " + context.Connection.RemoteIpAddress + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "RemotePort: " + context.Connection.RemotePort + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "LocalIp: " + context.Connection.LocalIpAddress + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "LocalPort: " + context.Connection.LocalPort + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "ClientCert: " + context.Connection.ClientCertificate + Environment.NewLine
-                    );
+                    await context.Response
+                        .WriteAsync(
+                            "RemoteIp: " + context.Connection.RemoteIpAddress + Environment.NewLine
+                        );
+                    await context.Response
+                        .WriteAsync(
+                            "RemotePort: " + context.Connection.RemotePort + Environment.NewLine
+                        );
+                    await context.Response
+                        .WriteAsync(
+                            "LocalIp: " + context.Connection.LocalIpAddress + Environment.NewLine
+                        );
+                    await context.Response
+                        .WriteAsync(
+                            "LocalPort: " + context.Connection.LocalPort + Environment.NewLine
+                        );
+                    await context.Response
+                        .WriteAsync(
+                            "ClientCert: "
+                                + context.Connection.ClientCertificate
+                                + Environment.NewLine
+                        );
                     await context.Response.WriteAsync(Environment.NewLine);
 
-                    await context.Response.WriteAsync(
-                        "User: " + context.User.Identity.Name + Environment.NewLine
-                    );
+                    await context.Response
+                        .WriteAsync("User: " + context.User.Identity.Name + Environment.NewLine);
                     if (_authSchemeProvider != null)
                     {
                         var scheme = await _authSchemeProvider.GetSchemeAsync(
                             IISServerDefaults.AuthenticationScheme
                         );
-                        await context.Response.WriteAsync(
-                            "DisplayName: " + scheme?.DisplayName + Environment.NewLine
-                        );
+                        await context.Response
+                            .WriteAsync(
+                                "DisplayName: " + scheme?.DisplayName + Environment.NewLine
+                            );
                     }
 
                     await context.Response.WriteAsync(Environment.NewLine);
@@ -93,18 +100,17 @@ namespace NativeIISSample
                     await context.Response.WriteAsync("Headers:" + Environment.NewLine);
                     foreach (var header in context.Request.Headers)
                     {
-                        await context.Response.WriteAsync(
-                            header.Key + ": " + header.Value + Environment.NewLine
-                        );
+                        await context.Response
+                            .WriteAsync(header.Key + ": " + header.Value + Environment.NewLine);
                     }
                     await context.Response.WriteAsync(Environment.NewLine);
 
-                    await context.Response.WriteAsync(
-                        "Environment Variables:" + Environment.NewLine
-                    );
+                    await context.Response
+                        .WriteAsync("Environment Variables:" + Environment.NewLine);
                     var vars = Environment.GetEnvironmentVariables();
                     foreach (
-                        var key in vars.Keys.Cast<string>()
+                        var key in vars.Keys
+                            .Cast<string>()
                             .OrderBy(key => key, StringComparer.OrdinalIgnoreCase)
                     )
                     {
@@ -118,12 +124,13 @@ namespace NativeIISSample
 
                     foreach (var varName in IISServerVarNames)
                     {
-                        await context.Response.WriteAsync(
-                            varName
-                                + ": "
-                                + context.GetServerVariable(varName)
-                                + Environment.NewLine
-                        );
+                        await context.Response
+                            .WriteAsync(
+                                varName
+                                    + ": "
+                                    + context.GetServerVariable(varName)
+                                    + Environment.NewLine
+                            );
                     }
 
                     await context.Response.WriteAsync(Environment.NewLine);
@@ -137,7 +144,8 @@ namespace NativeIISSample
                     }
 
                     await context.Response.WriteAsync(Environment.NewLine);
-                    var addresses = context.RequestServices.GetService<IServer>()
+                    var addresses = context.RequestServices
+                        .GetService<IServer>()
                         .Features.Get<IServerAddressesFeature>();
                     foreach (var key in addresses.Addresses)
                     {
@@ -163,15 +171,11 @@ namespace NativeIISSample
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            .UseIIS()
-                            .UseIISIntegration()
-                            .UseStartup<Startup>();
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().UseIIS().UseIISIntegration().UseStartup<Startup>();
+                }
+            ).Build();
 
             return host.RunAsync();
         }

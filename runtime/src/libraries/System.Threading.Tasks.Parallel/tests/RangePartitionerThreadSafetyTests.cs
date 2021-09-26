@@ -143,10 +143,11 @@ namespace System.Threading.Tasks.Tests
                     // 'actual' ran out of elements before expected.
                     Assert.True(
                         e2.MoveNext(),
-                        string.Format(
-                            "Partitioner returned fewer elements. Next element expected: {0}",
-                            e1.Current
-                        )
+                        string
+                            .Format(
+                                "Partitioner returned fewer elements. Next element expected: {0}",
+                                e1.Current
+                            )
                     );
 
                     Assert.Equal(e1.Current, e2.Current);
@@ -154,10 +155,11 @@ namespace System.Threading.Tasks.Tests
 
                 Assert.False(
                     e2.MoveNext(),
-                    string.Format(
-                        "Partitioner returned more elements. Next element returned by partitioner: {0}",
-                        e2.Current
-                    )
+                    string
+                        .Format(
+                            "Partitioner returned more elements. Next element returned by partitioner: {0}",
+                            e2.Current
+                        )
                 );
             }
         }

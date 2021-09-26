@@ -428,10 +428,10 @@ namespace System.Xml.Linq
             PushElement(e);
             XNamespace ns = e.Name.Namespace;
             await _writer.WriteStartElementAsync(
-                    GetPrefixOfNamespace(ns, true),
-                    e.Name.LocalName,
-                    ns.NamespaceName
-                )
+                GetPrefixOfNamespace(ns, true),
+                e.Name.LocalName,
+                ns.NamespaceName
+            )
                 .ConfigureAwait(false);
             XAttribute? a = e.lastAttr;
             if (a != null)
@@ -443,13 +443,13 @@ namespace System.Xml.Linq
                     string localName = a.Name.LocalName;
                     string namespaceName = ns.NamespaceName;
                     await _writer.WriteAttributeStringAsync(
-                            GetPrefixOfNamespace(ns, false),
-                            localName,
-                            namespaceName.Length == 0 && localName == "xmlns"
-                              ? XNamespace.xmlnsPrefixNamespace
-                              : namespaceName,
-                            a.Value
-                        )
+                        GetPrefixOfNamespace(ns, false),
+                        localName,
+                        namespaceName.Length == 0 && localName == "xmlns"
+                          ? XNamespace.xmlnsPrefixNamespace
+                          : namespaceName,
+                        a.Value
+                    )
                         .ConfigureAwait(false);
                 } while (a != e.lastAttr);
             }

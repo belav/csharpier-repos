@@ -127,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             )
             {
                 foreach (
-                    var derivedType in foreignKey.DeclaringEntityType.GetDirectlyDerivedTypes()
+                    var derivedType in foreignKey.DeclaringEntityType
+                        .GetDirectlyDerivedTypes()
                         .ToList()
                 )
                 {

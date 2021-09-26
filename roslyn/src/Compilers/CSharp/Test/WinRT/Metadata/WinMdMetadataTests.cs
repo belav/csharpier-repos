@@ -138,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "System.Runtime.WindowsRuntime.dll",
                 (
                     (PENamedTypeSymbol)((((PropertySymbol)(blk)).GetMethod).ReturnType)
-                ).ContainingModule.ToString()
+                ).ContainingModule
+                    .ToString()
             );
         }
 
@@ -197,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     (Microsoft.CodeAnalysis.CSharp.Symbols.ConstructedNamedTypeSymbol)(
                         ((Microsoft.CodeAnalysis.CSharp.Symbols.MethodSymbol)puint).ReturnType
                     )
-                ).ToString()
+                )
+                    .ToString()
             );
         }
 
@@ -260,7 +262,8 @@ public class MyAttribute : System.Attribute
                 {
                     var module = (PEModuleSymbol)m;
                     var c = (PENamedTypeSymbol)module.GlobalNamespace.GetTypeMember("C");
-                    var attributeHandle = module.Module.MetadataReader.GetCustomAttributes(c.Handle)
+                    var attributeHandle = module.Module.MetadataReader
+                        .GetCustomAttributes(c.Handle)
                         .Single();
                     string value;
                     module.Module.TryExtractStringValueFromAttribute(attributeHandle, out value);

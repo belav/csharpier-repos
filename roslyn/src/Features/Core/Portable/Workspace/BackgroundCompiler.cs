@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.Host
             _workspace = workspace;
 
             // make a scheduler that runs on the thread pool
-            var listenerProvider =
-                workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider = workspace.Services
+                .GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
             _taskQueue = new TaskQueue(listenerProvider.GetListener(), TaskScheduler.Default);
 
             _cancellationSource = new CancellationTokenSource();
@@ -175,26 +175,25 @@ namespace Microsoft.CodeAnalysis.Host
                 )
                 .Select(p => p.GetCompilationAsync(cancellationToken))
                 .ToArray();
-            return Task.WhenAll(compilationTasks)
-                .SafeContinueWith(
-                    t =>
+            return Task.WhenAll(compilationTasks).SafeContinueWith(
+                t =>
+                {
+                    logger.Dispose();
+                    if (t.Status == TaskStatus.RanToCompletion)
                     {
-                        logger.Dispose();
-                        if (t.Status == TaskStatus.RanToCompletion)
+                        lock (_buildGate)
                         {
-                            lock (_buildGate)
+                            if (!cancellationToken.IsCancellationRequested)
                             {
-                                if (!cancellationToken.IsCancellationRequested)
-                                {
-                                    _mostRecentCompilations = t.Result;
-                                }
+                                _mostRecentCompilations = t.Result;
                             }
                         }
-                    },
-                    CancellationToken.None,
-                    TaskContinuationOptions.None,
-                    TaskScheduler.Default
-                );
+                    }
+                },
+                CancellationToken.None,
+                TaskContinuationOptions.None,
+                TaskScheduler.Default
+            );
         }
     }
 }

@@ -252,7 +252,7 @@ namespace Microsoft.CodeAnalysis.Debugging
             return nameAndArity.Arity == 0
               ? members
               : members.OfType<IMethodSymbol>()
-                    .Where(m => m.TypeParameters.Length == nameAndArity.Arity);
+                .Where(m => m.TypeParameters.Length == nameAndArity.Arity);
         }
 
         private async Task<IEnumerable<INamedTypeSymbol>> GetAllTypesAsync(

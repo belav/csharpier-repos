@@ -284,9 +284,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             var getHashCodeNameExpression = factory.IdentifierName(GetHashCodeName);
             var thisSymbol = factory.MemberAccessExpression(
-                    factory.ThisExpression(),
-                    factory.IdentifierName(member.Name)
-                )
+                factory.ThisExpression(),
+                factory.IdentifierName(member.Name)
+            )
                 .WithAdditionalAnnotations(Simplification.Simplifier.Annotation);
 
             // Caller only wanted the reference to the member, nothing else added.

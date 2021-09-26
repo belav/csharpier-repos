@@ -166,12 +166,10 @@ namespace System.Web.Mvc.Test
             mockAuthContext.Setup(c => c.HttpContext.User.Identity.IsAuthenticated).Returns(false);
             mockAuthContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
             mockAuthContext.Setup(
-                    c =>
-                        c.ActionDescriptor.ControllerDescriptor.IsDefined(
-                            typeof(AllowAnonymousAttribute),
-                            true
-                        )
-                )
+                c =>
+                    c.ActionDescriptor.ControllerDescriptor
+                        .IsDefined(typeof(AllowAnonymousAttribute), true)
+            )
                 .Returns(false);
             AuthorizationContext authContext = mockAuthContext.Object;
 
@@ -215,23 +213,22 @@ namespace System.Web.Mvc.Test
             mockHelper.Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>())).Returns(true);
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
-            MethodInfo callbackMethod = typeof(AuthorizeAttribute).GetMethod(
-                "CacheValidateHandler",
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            MethodInfo callbackMethod = typeof(AuthorizeAttribute)
+                .GetMethod("CacheValidateHandler", BindingFlags.Instance | BindingFlags.NonPublic);
             Mock<AuthorizationContext> mockFilterContext = new Mock<AuthorizationContext>();
             mockFilterContext.Setup(
-                    c => c.HttpContext.Response.Cache.SetProxyMaxAge(new TimeSpan(0))
-                )
+                c => c.HttpContext.Response.Cache.SetProxyMaxAge(new TimeSpan(0))
+            )
                 .Verifiable();
             mockFilterContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
             mockFilterContext.Setup(
-                    c =>
-                        c.HttpContext.Response.Cache.AddValidationCallback(
+                c =>
+                    c.HttpContext.Response.Cache
+                        .AddValidationCallback(
                             It.IsAny<HttpCacheValidateHandler>(),
                             null /* data */
                         )
-                )
+            )
                 .Callback(
                     delegate(HttpCacheValidateHandler handler, object data)
                     {
@@ -241,12 +238,10 @@ namespace System.Web.Mvc.Test
                 )
                 .Verifiable();
             mockFilterContext.Setup(
-                    c =>
-                        c.ActionDescriptor.ControllerDescriptor.IsDefined(
-                            typeof(AllowAnonymousAttribute),
-                            true
-                        )
-                )
+                c =>
+                    c.ActionDescriptor.ControllerDescriptor
+                        .IsDefined(typeof(AllowAnonymousAttribute), true)
+            )
                 .Returns(false);
             AuthorizationContext filterContext = mockFilterContext.Object;
 
@@ -286,8 +281,8 @@ namespace System.Web.Mvc.Test
             Mock<AuthorizationContext> mockFilterContext = new Mock<AuthorizationContext>();
             mockFilterContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
             mockFilterContext.Setup(
-                    c => c.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
-                )
+                c => c.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
+            )
                 .Returns(true);
 
             // Act
@@ -314,12 +309,10 @@ namespace System.Web.Mvc.Test
             Mock<AuthorizationContext> mockFilterContext = new Mock<AuthorizationContext>();
             mockFilterContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
             mockFilterContext.Setup(
-                    c =>
-                        c.ActionDescriptor.ControllerDescriptor.IsDefined(
-                            typeof(AllowAnonymousAttribute),
-                            true
-                        )
-                )
+                c =>
+                    c.ActionDescriptor.ControllerDescriptor
+                        .IsDefined(typeof(AllowAnonymousAttribute), true)
+            )
                 .Returns(true);
 
             // Act

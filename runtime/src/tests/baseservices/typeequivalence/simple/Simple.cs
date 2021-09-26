@@ -126,9 +126,8 @@ public class Simple
         {
             string input = "stringToScale";
             string expectedBaseValue = string.Concat(Enumerable.Repeat(input, baseScale));
-            string expectedDerivedValue = string.Concat(
-                Enumerable.Repeat(expectedBaseValue, derivedScale)
-            );
+            string expectedDerivedValue = string
+                .Concat(Enumerable.Repeat(expectedBaseValue, derivedScale));
 
             Assert.AreEqual(expectedBaseValue, baseInterface.ScaleString(input));
             Assert.AreEqual(expectedDerivedValue, derivedBase.ScaleString(input));
@@ -220,7 +219,8 @@ public class Simple
         Type otherAsmInterfaceType = otherAsm.GetType().GetInterface(nameof(IEmptyType));
 
         Assert.IsFalse(
-            typeof(Generic<>).MakeGenericType(inAsmInterfaceType)
+            typeof(Generic<>)
+                .MakeGenericType(inAsmInterfaceType)
                 .IsEquivalentTo(typeof(Generic<>).MakeGenericType(otherAsmInterfaceType))
         );
     }
@@ -235,7 +235,8 @@ public class Simple
         Type otherAsmInterfaceType = otherAsm.GetType().GetInterface(nameof(IEmptyType));
 
         Assert.IsTrue(
-            typeof(IGeneric<>).MakeGenericType(inAsmInterfaceType)
+            typeof(IGeneric<>)
+                .MakeGenericType(inAsmInterfaceType)
                 .IsEquivalentTo(typeof(IGeneric<>).MakeGenericType(otherAsmInterfaceType))
         );
     }

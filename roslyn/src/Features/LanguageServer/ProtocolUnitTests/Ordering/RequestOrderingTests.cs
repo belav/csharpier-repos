@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
     public partial class RequestOrderingTests : AbstractLanguageServerProtocolTests
     {
         protected override TestComposition Composition =>
-            base.Composition.AddParts(typeof(MutatingRequestHandlerProvider))
+            base.Composition
+                .AddParts(typeof(MutatingRequestHandlerProvider))
                 .AddParts(typeof(NonMutatingRequestHandlerProvider))
                 .AddParts(typeof(FailingRequestHandlerProvider))
                 .AddParts(typeof(FailingMutatingRequestHandlerProvider))
@@ -183,10 +184,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
             Assert.Equal(expectedSolution, solution);
 
             // Apply some random change to the workspace that the LSP server doesn't "see"
-            testLspServer.TestWorkspace.SetCurrentSolution(
-                s => s.WithProjectName(s.Projects.First().Id, "NewName"),
-                WorkspaceChangeKind.ProjectChanged
-            );
+            testLspServer.TestWorkspace
+                .SetCurrentSolution(
+                    s => s.WithProjectName(s.Projects.First().Id, "NewName"),
+                    WorkspaceChangeKind.ProjectChanged
+                );
 
             expectedSolution = testLspServer.GetCurrentSolution();
 

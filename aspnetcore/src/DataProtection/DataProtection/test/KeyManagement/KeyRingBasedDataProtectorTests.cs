@@ -60,8 +60,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor.Setup(
-                    o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
-                )
+                o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+            )
                 .Returns<ArraySegment<byte>, ArraySegment<byte>>(
                     (actualPlaintext, actualAad) =>
                     {
@@ -105,8 +105,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor.Setup(
-                    o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
-                )
+                o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+            )
                 .Returns<ArraySegment<byte>, ArraySegment<byte>>(
                     (actualPlaintext, actualAad) =>
                     {
@@ -582,8 +582,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor.Setup(
-                    o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
-                )
+                o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+            )
                 .Returns<ArraySegment<byte>, ArraySegment<byte>>(
                     (actualCiphertext, actualAad) =>
                     {
@@ -618,12 +618,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             );
 
             // Act
-            byte[] retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(
-                protectedData,
-                ignoreRevocationErrors: true,
-                requiresMigration: out var requiresMigration,
-                wasRevoked: out var wasRevoked
-            );
+            byte[] retVal = ((IPersistedDataProtector)protector)
+                .DangerousUnprotect(
+                    protectedData,
+                    ignoreRevocationErrors: true,
+                    requiresMigration: out var requiresMigration,
+                    wasRevoked: out var wasRevoked
+                );
 
             // Assert
             Assert.Equal(expectedPlaintext, retVal);
@@ -646,8 +647,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor.Setup(
-                    o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
-                )
+                o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+            )
                 .Returns<ArraySegment<byte>, ArraySegment<byte>>(
                     (actualCiphertext, actualAad) =>
                     {
@@ -685,12 +686,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Assert.Equal(expectedPlaintext, retVal);
 
             // Act & assert - IPersistedDataProtector
-            retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(
-                protectedData,
-                ignoreRevocationErrors: false,
-                requiresMigration: out var requiresMigration,
-                wasRevoked: out var wasRevoked
-            );
+            retVal = ((IPersistedDataProtector)protector)
+                .DangerousUnprotect(
+                    protectedData,
+                    ignoreRevocationErrors: false,
+                    requiresMigration: out var requiresMigration,
+                    wasRevoked: out var wasRevoked
+                );
             Assert.Equal(expectedPlaintext, retVal);
             Assert.False(requiresMigration);
             Assert.False(wasRevoked);
@@ -712,8 +714,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor.Setup(
-                    o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
-                )
+                o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+            )
                 .Returns<ArraySegment<byte>, ArraySegment<byte>>(
                     (actualCiphertext, actualAad) =>
                     {
@@ -759,12 +761,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Assert.Equal(expectedPlaintext, retVal);
 
             // Act & assert - IPersistedDataProtector
-            retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(
-                protectedData,
-                ignoreRevocationErrors: false,
-                requiresMigration: out var requiresMigration,
-                wasRevoked: out var wasRevoked
-            );
+            retVal = ((IPersistedDataProtector)protector)
+                .DangerousUnprotect(
+                    protectedData,
+                    ignoreRevocationErrors: false,
+                    requiresMigration: out var requiresMigration,
+                    wasRevoked: out var wasRevoked
+                );
             Assert.Equal(expectedPlaintext, retVal);
             Assert.True(requiresMigration);
             Assert.False(wasRevoked);
@@ -819,8 +822,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor.Setup(
-                    o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
-                )
+                o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+            )
                 .Returns<ArraySegment<byte>, ArraySegment<byte>>(
                     (actualPlaintext, actualAad) =>
                     {
@@ -841,7 +844,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 logger: GetLogger(),
                 originalPurposes: null,
                 newPurpose: "purpose1"
-            ).CreateProtector("purpose2");
+            )
+                .CreateProtector("purpose2");
 
             // Act
             byte[] retVal = protector.Protect(expectedPlaintext);
@@ -852,14 +856,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
         private static byte[] BuildAadFromPurposeStrings(Guid keyId, params string[] purposes)
         {
-            var expectedAad = new byte[]
-            {
-                0x09,
-                0xF0,
-                0xC9,
-                0xF0
-            } // magic header
-            .Concat(keyId.ToByteArray()) // key id
+            var expectedAad = new byte[] { 0x09, 0xF0, 0xC9, 0xF0 } // magic header
+                .Concat(keyId.ToByteArray()) // key id
                 .Concat(BitConverter.GetBytes(IPAddress.HostToNetworkOrder(purposes.Length))); // purposeCount
 
             foreach (string purpose in purposes)
@@ -880,14 +878,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
         private static byte[] BuildProtectedDataFromCiphertext(Guid keyId, byte[] ciphertext)
         {
-            return new byte[]
-            {
-                0x09,
-                0xF0,
-                0xC9,
-                0xF0
-            } // magic header
-            .Concat(keyId.ToByteArray()) // key id
+            return new byte[] { 0x09, 0xF0, 0xC9, 0xF0 } // magic header
+                .Concat(keyId.ToByteArray()) // key id
                 .Concat(ciphertext)
                 .ToArray();
         }

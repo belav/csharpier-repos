@@ -581,10 +581,11 @@ public class LoadDebuggerTest
         if (pdb_base64 != null)
             pdb_bytes = Convert.FromBase64String(pdb_base64);
 
-        var loadedAssembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(
-            new System.IO.MemoryStream(asm_bytes),
-            new System.IO.MemoryStream(pdb_bytes)
-        );
+        var loadedAssembly = System.Runtime.Loader.AssemblyLoadContext.Default
+            .LoadFromStream(
+                new System.IO.MemoryStream(asm_bytes),
+                new System.IO.MemoryStream(pdb_bytes)
+            );
         Console.WriteLine($"Loaded - {loadedAssembly}");
     }
 }

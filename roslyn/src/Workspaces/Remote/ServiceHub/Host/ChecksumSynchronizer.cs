@@ -44,23 +44,23 @@ namespace Microsoft.CodeAnalysis.Remote
                 // first, get solution checksum object for the given solution checksum
                 var solutionChecksumObject =
                     await _assetProvider.GetAssetAsync<SolutionStateChecksums>(
-                            solutionChecksum,
-                            cancellationToken
-                        )
+                        solutionChecksum,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 // second, get direct children of the solution
                 await SynchronizeAssets_NoLockAsync(
-                        solutionChecksumObject.Children,
-                        cancellationToken
-                    )
+                    solutionChecksumObject.Children,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // third and last get direct children for all projects and documents in the solution
                 await SynchronizeProjectAssets_NoLockAsync(
-                        solutionChecksumObject.Projects,
-                        cancellationToken
-                    )
+                    solutionChecksumObject.Projects,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -94,28 +94,28 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 var projectChecksumObject =
                     await _assetProvider.GetAssetAsync<ProjectStateChecksums>(
-                            projectChecksum,
-                            cancellationToken
-                        )
+                        projectChecksum,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 await CollectChecksumChildrenAsync(
-                        checksums,
-                        projectChecksumObject.Documents,
-                        cancellationToken
-                    )
+                    checksums,
+                    projectChecksumObject.Documents,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await CollectChecksumChildrenAsync(
-                        checksums,
-                        projectChecksumObject.AdditionalDocuments,
-                        cancellationToken
-                    )
+                    checksums,
+                    projectChecksumObject.AdditionalDocuments,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await CollectChecksumChildrenAsync(
-                        checksums,
-                        projectChecksumObject.AnalyzerConfigDocuments,
-                        cancellationToken
-                    )
+                    checksums,
+                    projectChecksumObject.AnalyzerConfigDocuments,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -161,9 +161,9 @@ namespace Microsoft.CodeAnalysis.Remote
             foreach (var checksum in checksums)
             {
                 var checksumObject = await _assetProvider.GetAssetAsync<ChecksumWithChildren>(
-                        checksum,
-                        cancellationToken
-                    )
+                    checksum,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 AddIfNeeded(set, checksumObject.Children);
             }

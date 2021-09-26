@@ -63,12 +63,12 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 }
 
                 ConstructorCandidates = await GetConstructorCandidatesInfoAsync(
-                        ContainingType,
-                        selectedMembers,
-                        document,
-                        parametersForSelectedMembers,
-                        cancellationToken
-                    )
+                    ContainingType,
+                    selectedMembers,
+                    document,
+                    parametersForSelectedMembers,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return !ConstructorCandidates.IsEmpty;
@@ -93,19 +93,18 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 CancellationToken cancellationToken
             )
             {
-                using var _ = ArrayBuilder<ConstructorCandidate>.GetInstance(
-                    out var applicableConstructors
-                );
+                using var _ = ArrayBuilder<ConstructorCandidate>
+                    .GetInstance(out var applicableConstructors);
 
                 foreach (var constructor in containingType.InstanceConstructors)
                 {
                     if (
                         await IsApplicableConstructorAsync(
-                                constructor,
-                                document,
-                                parametersForSelectedMembers.SelectAsArray(p => p.Name),
-                                cancellationToken
-                            )
+                            constructor,
+                            document,
+                            parametersForSelectedMembers.SelectAsArray(p => p.Name),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
@@ -133,7 +132,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
 
                 if (constructorParams.Length == 2)
                 {
-                    var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+                    var compilation = await document.Project
+                        .GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var deserializationConstructorCheck = new DeserializationConstructorCheck(
                         compilation
@@ -167,9 +167,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 IMethodSymbol constructor
             )
             {
-                using var _0 = ArrayBuilder<IParameterSymbol>.GetInstance(
-                    out var missingParametersBuilder
-                );
+                using var _0 = ArrayBuilder<IParameterSymbol>
+                    .GetInstance(out var missingParametersBuilder);
                 using var _1 = ArrayBuilder<ISymbol>.GetInstance(out var missingMembersBuilder);
 
                 var constructorParamNames = constructor.Parameters.SelectAsArray(p => p.Name);

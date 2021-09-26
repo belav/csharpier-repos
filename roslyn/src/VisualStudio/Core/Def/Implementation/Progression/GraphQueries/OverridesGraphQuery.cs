@@ -30,10 +30,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             )
             {
                 var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                        solution,
-                        context.InputNodes,
-                        cancellationToken
-                    )
+                    solution,
+                    context.InputNodes,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var node in context.InputNodes)
@@ -46,10 +46,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     )
                     {
                         var overrides = await SymbolFinder.FindOverridesAsync(
-                                symbol,
-                                solution,
-                                cancellationToken: cancellationToken
-                            )
+                            symbol,
+                            solution,
+                            cancellationToken: cancellationToken
+                        )
                             .ConfigureAwait(false);
                         foreach (var o in overrides)
                         {

@@ -21,9 +21,9 @@ namespace WebviewAppShared
                 new(
                     () =>
                         jsRuntime.InvokeAsync<IJSObjectReference>(
-                                "import",
-                                "./_content/WebviewAppShared/exampleJsInterop.js"
-                            )
+                            "import",
+                            "./_content/WebviewAppShared/exampleJsInterop.js"
+                        )
                             .AsTask()
                 );
         }

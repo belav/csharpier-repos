@@ -56,13 +56,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 )
             )
             {
-                var result = await server.HttpClientSlim.PostAsync(
-                    $"https://localhost:{server.Port}/",
-                    new FormUrlEncodedContent(
-                        new[] { new KeyValuePair<string, string>("content", "Hello World?") }
-                    ),
-                    validateCertificate: false
-                );
+                var result = await server.HttpClientSlim
+                    .PostAsync(
+                        $"https://localhost:{server.Port}/",
+                        new FormUrlEncodedContent(
+                            new[] { new KeyValuePair<string, string>("content", "Hello World?") }
+                        ),
+                        validateCertificate: false
+                    );
 
                 Assert.Equal("content=Hello+World%3F", result);
             }
@@ -71,7 +72,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [Fact]
         public async Task CanReadAndWriteWithHttpsConnectionMiddlewareWithPemCertificate()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new Dictionary<string, string>
                     {
                         ["Certificates:Default:Path"] = Path.Combine(
@@ -125,13 +127,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 )
             )
             {
-                var result = await server.HttpClientSlim.PostAsync(
-                    $"https://localhost:{server.Port}/",
-                    new FormUrlEncodedContent(
-                        new[] { new KeyValuePair<string, string>("content", "Hello World?") }
-                    ),
-                    validateCertificate: false
-                );
+                var result = await server.HttpClientSlim
+                    .PostAsync(
+                        $"https://localhost:{server.Port}/",
+                        new FormUrlEncodedContent(
+                            new[] { new KeyValuePair<string, string>("content", "Hello World?") }
+                        ),
+                        validateCertificate: false
+                    );
 
                 Assert.Equal("content=Hello+World%3F", result);
             }
@@ -178,10 +181,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 )
             )
             {
-                var result = await server.HttpClientSlim.GetStringAsync(
-                    $"https://localhost:{server.Port}/",
-                    validateCertificate: false
-                );
+                var result = await server.HttpClientSlim
+                    .GetStringAsync(
+                        $"https://localhost:{server.Port}/",
+                        validateCertificate: false
+                    );
                 Assert.Equal("hello world", result);
             }
         }
@@ -235,10 +239,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 )
             )
             {
-                var result = await server.HttpClientSlim.GetStringAsync(
-                    $"https://localhost:{server.Port}/",
-                    validateCertificate: false
-                );
+                var result = await server.HttpClientSlim
+                    .GetStringAsync(
+                        $"https://localhost:{server.Port}/",
+                        validateCertificate: false
+                    );
                 Assert.Equal("hello world", result);
             }
         }
@@ -297,10 +302,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 )
             )
             {
-                var result = await server.HttpClientSlim.GetStringAsync(
-                    $"https://localhost:{server.Port}/",
-                    validateCertificate: false
-                );
+                var result = await server.HttpClientSlim
+                    .GetStringAsync(
+                        $"https://localhost:{server.Port}/",
+                        validateCertificate: false
+                    );
                 Assert.Equal("hello world", result);
             }
         }
@@ -344,10 +350,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 )
             )
             {
-                var result = await server.HttpClientSlim.GetStringAsync(
-                    $"https://localhost:{server.Port}/",
-                    validateCertificate: false
-                );
+                var result = await server.HttpClientSlim
+                    .GetStringAsync(
+                        $"https://localhost:{server.Port}/",
+                        validateCertificate: false
+                    );
                 Assert.Equal("hello world", result);
             }
         }
@@ -712,10 +719,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 )
             )
             {
-                var result = await server.HttpClientSlim.GetStringAsync(
-                    $"https://localhost:{server.Port}/",
-                    validateCertificate: false
-                );
+                var result = await server.HttpClientSlim
+                    .GetStringAsync(
+                        $"https://localhost:{server.Port}/",
+                        validateCertificate: false
+                    );
                 Assert.Equal("https", result);
             }
         }

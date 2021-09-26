@@ -451,11 +451,12 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void RefreshLoggingEnabledFull()
         {
-            loggingEnabled = FrameworkEventSource.Log.IsEnabled(
-                EventLevel.Verbose,
-                FrameworkEventSource.Keywords.ThreadPool
-                    | FrameworkEventSource.Keywords.ThreadTransfer
-            );
+            loggingEnabled = FrameworkEventSource.Log
+                .IsEnabled(
+                    EventLevel.Verbose,
+                    FrameworkEventSource.Keywords.ThreadPool
+                        | FrameworkEventSource.Keywords.ThreadTransfer
+                );
         }
 
         internal void EnsureThreadRequested()
@@ -526,9 +527,8 @@ namespace System.Threading
         {
             Debug.Assert(ThreadPool.SupportsTimeSensitiveWorkItems);
 
-            bool success = timeSensitiveWorkQueue!.TryDequeue(
-                out IThreadPoolWorkItem? timeSensitiveWorkItem
-            );
+            bool success = timeSensitiveWorkQueue!
+                .TryDequeue(out IThreadPoolWorkItem? timeSensitiveWorkItem);
             Debug.Assert(success == (timeSensitiveWorkItem != null));
             return timeSensitiveWorkItem;
         }

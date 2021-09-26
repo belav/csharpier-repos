@@ -74,10 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             if (arity == 0)
                 return string.Empty;
-            return string.Format(
-                "<{0}>",
-                string.Join(",", TemplateArgEnumerable.Instance.Take(arity))
-            );
+            return string
+                .Format("<{0}>", string.Join(",", TemplateArgEnumerable.Instance.Take(arity)));
         }
 
         private static void AppendEmptyClass(StringBuilder sb, string root, int arity)

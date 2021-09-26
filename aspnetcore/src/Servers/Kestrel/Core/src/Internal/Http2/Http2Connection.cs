@@ -1400,10 +1400,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 throw;
             }
 
-            KestrelEventSource.Log.RequestQueuedStart(
-                _currentHeadersStream,
-                AspNetCore.Http.HttpProtocol.Http2
-            );
+            KestrelEventSource.Log
+                .RequestQueuedStart(_currentHeadersStream, AspNetCore.Http.HttpProtocol.Http2);
             // Must not allow app code to block the connection handling loop.
             ThreadPool.UnsafeQueueUserWorkItem(_currentHeadersStream, preferLocal: false);
         }
@@ -1581,9 +1579,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     if (TryClose())
                     {
                         _frameWriter.WriteGoAwayAsync(
-                                _highestOpenedStreamId,
-                                Http2ErrorCode.NO_ERROR
-                            )
+                            _highestOpenedStreamId,
+                            Http2ErrorCode.NO_ERROR
+                        )
                             .Preserve();
                     }
                 }

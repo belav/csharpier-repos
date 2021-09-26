@@ -58,10 +58,11 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
             var diagnostics = compilation.GetDiagnostics();
             if (diagnostics.Length != 0)
             {
-                var message = string.Join(
-                    Environment.NewLine,
-                    diagnostics.Select(d => CSharpDiagnosticFormatter.Instance.Format(d))
-                );
+                var message = string
+                    .Join(
+                        Environment.NewLine,
+                        diagnostics.Select(d => CSharpDiagnosticFormatter.Instance.Format(d))
+                    );
                 throw new InvalidOperationException(
                     $"Compilation failed:{Environment.NewLine}{message}"
                 );

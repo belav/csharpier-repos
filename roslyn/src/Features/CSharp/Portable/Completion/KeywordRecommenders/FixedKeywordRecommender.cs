@@ -43,11 +43,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         {
             return context.TargetToken.IsUnsafeContext()
                 && (
-                    context.SyntaxTree.IsGlobalMemberDeclarationContext(
-                        context.Position,
-                        SyntaxKindSet.AllGlobalMemberModifiers,
-                        cancellationToken
-                    )
+                    context.SyntaxTree
+                        .IsGlobalMemberDeclarationContext(
+                            context.Position,
+                            SyntaxKindSet.AllGlobalMemberModifiers,
+                            cancellationToken
+                        )
                     || context.IsMemberDeclarationContext(
                         validModifiers: s_validModifiers,
                         validTypeDeclarations: SyntaxKindSet.StructOnlyTypeDeclarations,

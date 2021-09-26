@@ -26,9 +26,9 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act
             ModelClientValidationRule clientRule = attribute.GetClientValidationRules(
-                    metadata,
-                    null
-                )
+                metadata,
+                null
+            )
                 .Single();
 
             // Assert

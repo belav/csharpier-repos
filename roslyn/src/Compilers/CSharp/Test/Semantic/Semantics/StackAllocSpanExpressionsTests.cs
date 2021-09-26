@@ -230,7 +230,7 @@ unsafe class Test
         public void ConversionError()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -239,30 +239,29 @@ class Test
         short y = (short)stackalloc int[10];    // explicit
     }
 }",
-                    TestOptions.UnsafeReleaseDll
+                TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics(
+                // (6,20): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double' is not possible.
+                //         double x = stackalloc int[10];          // implicit
+                Diagnostic(ErrorCode.ERR_StackAllocConversionNotPossible, "stackalloc int[10]")
+                    .WithArguments("int", "double")
+                    .WithLocation(6, 20),
+                // (7,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'short' is not possible.
+                //         short y = (short)stackalloc int[10];    // explicit
+                Diagnostic(
+                    ErrorCode.ERR_StackAllocConversionNotPossible,
+                    "(short)stackalloc int[10]"
                 )
-                .VerifyDiagnostics(
-                    // (6,20): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double' is not possible.
-                    //         double x = stackalloc int[10];          // implicit
-                    Diagnostic(ErrorCode.ERR_StackAllocConversionNotPossible, "stackalloc int[10]")
-                        .WithArguments("int", "double")
-                        .WithLocation(6, 20),
-                    // (7,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'short' is not possible.
-                    //         short y = (short)stackalloc int[10];    // explicit
-                    Diagnostic(
-                            ErrorCode.ERR_StackAllocConversionNotPossible,
-                            "(short)stackalloc int[10]"
-                        )
-                        .WithArguments("int", "short")
-                        .WithLocation(7, 19)
-                );
+                    .WithArguments("int", "short")
+                    .WithLocation(7, 19)
+            );
         }
 
         [Fact]
         public void MissingSpanType()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -270,26 +269,25 @@ class Test
         Span<int> a = stackalloc int [10];
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (6,9): error CS0246: The type or namespace name 'Span<>' could not be found (are you missing a using directive or an assembly reference?)
-                    //         Span<int> a = stackalloc int [10];
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Span<int>")
-                        .WithArguments("Span<>")
-                        .WithLocation(6, 9),
-                    // (6,23): error CS0518: Predefined type 'System.Span`1' is not defined or imported
-                    //         Span<int> a = stackalloc int [10];
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "stackalloc int [10]")
-                        .WithArguments("System.Span`1")
-                        .WithLocation(6, 23)
-                );
+            ).VerifyDiagnostics(
+                // (6,9): error CS0246: The type or namespace name 'Span<>' could not be found (are you missing a using directive or an assembly reference?)
+                //         Span<int> a = stackalloc int [10];
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Span<int>")
+                    .WithArguments("Span<>")
+                    .WithLocation(6, 9),
+                // (6,23): error CS0518: Predefined type 'System.Span`1' is not defined or imported
+                //         Span<int> a = stackalloc int [10];
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "stackalloc int [10]")
+                    .WithArguments("System.Span`1")
+                    .WithLocation(6, 23)
+            );
         }
 
         [Fact]
         public void MissingSpanConstructor()
         {
             CreateCompilation(
-                    @"
+                @"
 namespace System
 {
     ref struct Span<T>
@@ -303,21 +301,20 @@ namespace System
         }
     }
 }"
-                )
-                .VerifyEmitDiagnostics(
-                    // (11,27): error CS0656: Missing compiler required member 'System.Span`1..ctor'
-                    //             Span<int> a = stackalloc int [10];
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "stackalloc int [10]")
-                        .WithArguments("System.Span`1", ".ctor")
-                        .WithLocation(11, 27)
-                );
+            ).VerifyEmitDiagnostics(
+                // (11,27): error CS0656: Missing compiler required member 'System.Span`1..ctor'
+                //             Span<int> a = stackalloc int [10];
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "stackalloc int [10]")
+                    .WithArguments("System.Span`1", ".ctor")
+                    .WithLocation(11, 27)
+            );
         }
 
         [Fact]
         public void ConditionalExpressionOnSpan_BothStackallocSpans()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -325,16 +322,15 @@ class Test
         var x = true ? stackalloc int [10] : stackalloc int [5];
     }
 }",
-                    TestOptions.UnsafeReleaseDll
-                )
-                .VerifyDiagnostics();
+                TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void ConditionalExpressionOnSpan_Convertible()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -343,16 +339,15 @@ class Test
         var x = true ? stackalloc int [10] : (Span<int>)stackalloc int [5];
     }
 }",
-                    TestOptions.UnsafeReleaseDll
-                )
-                .VerifyDiagnostics();
+                TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void ConditionalExpressionOnSpan_NoCast()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -361,25 +356,24 @@ class Test
         var x = true ? stackalloc int [10] : (Span<int>)stackalloc short [5];
     }
 }",
-                    TestOptions.UnsafeReleaseDll
+                TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics(
+                // (7,46): error CS8346: Conversion of a stackalloc expression of type 'short' to type 'Span<int>' is not possible.
+                //         var x = true ? stackalloc int [10] : (Span<int>)stackalloc short [5];
+                Diagnostic(
+                    ErrorCode.ERR_StackAllocConversionNotPossible,
+                    "(Span<int>)stackalloc short [5]"
                 )
-                .VerifyDiagnostics(
-                    // (7,46): error CS8346: Conversion of a stackalloc expression of type 'short' to type 'Span<int>' is not possible.
-                    //         var x = true ? stackalloc int [10] : (Span<int>)stackalloc short [5];
-                    Diagnostic(
-                            ErrorCode.ERR_StackAllocConversionNotPossible,
-                            "(Span<int>)stackalloc short [5]"
-                        )
-                        .WithArguments("short", "System.Span<int>")
-                        .WithLocation(7, 46)
-                );
+                    .WithArguments("short", "System.Span<int>")
+                    .WithLocation(7, 46)
+            );
         }
 
         [Fact]
         public void ConditionalExpressionOnSpan_CompatibleTypes()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -389,16 +383,15 @@ class Test
         var x = true ? stackalloc int [10] : a;
     }
 }",
-                    TestOptions.UnsafeReleaseDll
-                )
-                .VerifyDiagnostics();
+                TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics();
         }
 
         [Fact]
         public void ConditionalExpressionOnSpan_IncompatibleTypes()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -408,22 +401,21 @@ class Test
         var x = true ? stackalloc int [10] : a;
     }
 }",
-                    TestOptions.UnsafeReleaseDll
-                )
-                .VerifyDiagnostics(
-                    // (8,17): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'System.Span<int>' and 'System.Span<short>'
-                    //         var x = true ? stackalloc int [10] : a;
-                    Diagnostic(ErrorCode.ERR_InvalidQM, "true ? stackalloc int [10] : a")
-                        .WithArguments("System.Span<int>", "System.Span<short>")
-                        .WithLocation(8, 17)
-                );
+                TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics(
+                // (8,17): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'System.Span<int>' and 'System.Span<short>'
+                //         var x = true ? stackalloc int [10] : a;
+                Diagnostic(ErrorCode.ERR_InvalidQM, "true ? stackalloc int [10] : a")
+                    .WithArguments("System.Span<int>", "System.Span<short>")
+                    .WithLocation(8, 17)
+            );
         }
 
         [Fact]
         public void ConditionalExpressionOnSpan_Nested()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 class Test
 {
     bool N() => true;
@@ -441,9 +433,8 @@ class Test
                     : stackalloc int[5];
     }
 }",
-                    TestOptions.UnsafeReleaseDll
-                )
-                .VerifyDiagnostics();
+                TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -459,10 +450,10 @@ class Test
     }
 }";
             CreateCompilationWithMscorlibAndSpan(
-                    source,
-                    TestOptions.UnsafeReleaseDll,
-                    parseOptions: TestOptions.Regular7_3
-                )
+                source,
+                TestOptions.UnsafeReleaseDll,
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics(
                     // (6,12): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
                     //         if(stackalloc int[10] == stackalloc int[10]) { }
@@ -480,9 +471,9 @@ class Test
                     // (6,12): error CS0019: Operator '==' cannot be applied to operands of type 'Span<int>' and 'Span<int>'
                     //         if(stackalloc int[10] == stackalloc int[10]) { }
                     Diagnostic(
-                            ErrorCode.ERR_BadBinaryOps,
-                            "stackalloc int[10] == stackalloc int[10]"
-                        )
+                        ErrorCode.ERR_BadBinaryOps,
+                        "stackalloc int[10] == stackalloc int[10]"
+                    )
                         .WithArguments("==", "System.Span<int>", "System.Span<int>")
                         .WithLocation(6, 12)
                 );
@@ -491,12 +482,11 @@ class Test
         [Fact]
         public void NewStackAllocSpanSyntaxProducesErrorsOnEarlierVersions_Statements()
         {
-            var parseOptions = new CSharpParseOptions().WithLanguageVersion(
-                LanguageVersion.CSharp7
-            );
+            var parseOptions = new CSharpParseOptions()
+                .WithLanguageVersion(LanguageVersion.CSharp7);
 
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -505,27 +495,25 @@ class Test
         Span<int> x = stackalloc int[10];
     }
 }",
-                    options: TestOptions.UnsafeReleaseDll,
-                    parseOptions: parseOptions
-                )
-                .VerifyDiagnostics(
-                    // (7,23): error CS8107: Feature 'ref structs' is not available in C# 7. Please use language version 7.2 or greater.
-                    //         Span<int> x = stackalloc int[10];
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc int[10]")
-                        .WithArguments("ref structs", "7.2")
-                        .WithLocation(7, 23)
-                );
+                options: TestOptions.UnsafeReleaseDll,
+                parseOptions: parseOptions
+            ).VerifyDiagnostics(
+                // (7,23): error CS8107: Feature 'ref structs' is not available in C# 7. Please use language version 7.2 or greater.
+                //         Span<int> x = stackalloc int[10];
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc int[10]")
+                    .WithArguments("ref structs", "7.2")
+                    .WithLocation(7, 23)
+            );
         }
 
         [Fact]
         public void NewStackAllocSpanSyntaxProducesErrorsOnEarlierVersions_Expressions()
         {
-            var parseOptions = new CSharpParseOptions().WithLanguageVersion(
-                LanguageVersion.CSharp7
-            );
+            var parseOptions = new CSharpParseOptions()
+                .WithLanguageVersion(LanguageVersion.CSharp7);
 
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 class Test
 {
     void M(bool condition)
@@ -535,28 +523,27 @@ class Test
             : stackalloc int[100];
     }
 }",
-                    options: TestOptions.UnsafeReleaseDll,
-                    parseOptions: parseOptions
-                )
-                .VerifyDiagnostics(
-                    // (7,15): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language version 7.2 or greater.
-                    //             ? stackalloc int[10]
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc int[10]")
-                        .WithArguments("ref structs", "7.2")
-                        .WithLocation(7, 15),
-                    // (8,15): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language version 7.2 or greater.
-                    //             : stackalloc int[100];
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc int[100]")
-                        .WithArguments("ref structs", "7.2")
-                        .WithLocation(8, 15)
-                );
+                options: TestOptions.UnsafeReleaseDll,
+                parseOptions: parseOptions
+            ).VerifyDiagnostics(
+                // (7,15): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language version 7.2 or greater.
+                //             ? stackalloc int[10]
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc int[10]")
+                    .WithArguments("ref structs", "7.2")
+                    .WithLocation(7, 15),
+                // (8,15): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language version 7.2 or greater.
+                //             : stackalloc int[100];
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc int[100]")
+                    .WithArguments("ref structs", "7.2")
+                    .WithLocation(8, 15)
+            );
         }
 
         [Fact]
         public void StackAllocSyntaxProducesUnsafeErrorInSafeCode()
         {
             CreateCompilation(
-                    @"
+                @"
 class Test
 {
     void M()
@@ -564,13 +551,12 @@ class Test
         var x = stackalloc int[10];
     }
 }",
-                    options: TestOptions.UnsafeReleaseDll
-                )
-                .VerifyDiagnostics(
-                    // (6,17): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                    //         var x = stackalloc int[10];
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[10]").WithLocation(6, 17)
-                );
+                options: TestOptions.UnsafeReleaseDll
+            ).VerifyDiagnostics(
+                // (6,17): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                //         var x = stackalloc int[10];
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[10]").WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -589,9 +575,9 @@ public class Test
 }
 ";
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
-                )
+                test,
+                options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
+            )
                 .VerifyDiagnostics(
                     // (6,16): error CS1674: 'Span<int>': type used in a using statement must be implicitly convertible to 'System.IDisposable'
                     //         using (var v = stackalloc int[1])
@@ -617,9 +603,9 @@ public class Test
 }
 ";
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
-                )
+                test,
+                options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
+            )
                 .VerifyDiagnostics(
                     // (6,39): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'IDisposable' is not possible.
                     //         using (System.IDisposable v = stackalloc int[1])
@@ -642,14 +628,13 @@ unsafe public class Test
     }
 }
 ";
-            CreateCompilation(test, options: TestOptions.UnsafeDebugDll)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0283: The type 'int*' cannot be declared const
-                    //         const int* p = stackalloc int[1];
-                    Diagnostic(ErrorCode.ERR_BadConstType, "int*")
-                        .WithArguments("int*")
-                        .WithLocation(6, 15)
-                );
+            CreateCompilation(test, options: TestOptions.UnsafeDebugDll).VerifyDiagnostics(
+                // (6,15): error CS0283: The type 'int*' cannot be declared const
+                //         const int* p = stackalloc int[1];
+                Diagnostic(ErrorCode.ERR_BadConstType, "int*")
+                    .WithArguments("int*")
+                    .WithLocation(6, 15)
+            );
         }
 
         [Fact]
@@ -667,16 +652,16 @@ public class Test
 }
 ";
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
-                )
+                test,
+                options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
+            )
                 .VerifyDiagnostics(
                     // (7,23): error CS8172: Cannot initialize a by-reference variable with a value
                     //         ref Span<int> p = stackalloc int[1];
                     Diagnostic(
-                            ErrorCode.ERR_InitializeByReferenceVariableWithValue,
-                            "p = stackalloc int[1]"
-                        )
+                        ErrorCode.ERR_InitializeByReferenceVariableWithValue,
+                        "p = stackalloc int[1]"
+                    )
                         .WithLocation(7, 23),
                     // (7,27): error CS1510: A ref or out value must be an assignable variable
                     //         ref Span<int> p = stackalloc int[1];
@@ -700,10 +685,10 @@ public class Test
 }
 ";
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
-                    parseOptions: TestOptions.Regular7_3
-                )
+                test,
+                options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics(
                     // (7,31): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
                     //         ref Span<int> p = ref stackalloc int[1];
@@ -712,9 +697,9 @@ public class Test
                         .WithLocation(7, 31)
                 );
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
-                )
+                test,
+                options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
+            )
                 .VerifyDiagnostics(
                     // (7,31): error CS1510: A ref or out value must be an assignable variable
                     //         ref Span<int> p = ref stackalloc int[1];
@@ -741,10 +726,10 @@ public class Test
 }
 ";
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
-                    parseOptions: TestOptions.Regular7_3
-                )
+                test,
+                options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics(
                     // (7,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
                     //         N(stackalloc int[1]);
@@ -753,10 +738,10 @@ public class Test
                         .WithLocation(7, 11)
                 );
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
-                    parseOptions: TestOptions.Regular8
-                )
+                test,
+                options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular8
+            )
                 .VerifyDiagnostics();
         }
 
@@ -774,10 +759,10 @@ public class Test
 }
 ";
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
-                    parseOptions: TestOptions.Regular7_3
-                )
+                test,
+                options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics(
                     // (6,23): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
                     //         int length = (stackalloc int [10]).Length;
@@ -786,10 +771,10 @@ public class Test
                         .WithLocation(6, 23)
                 );
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
-                    parseOptions: TestOptions.Regular8
-                )
+                test,
+                options: TestOptions.ReleaseDll.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular8
+            )
                 .VerifyDiagnostics();
         }
 
@@ -813,10 +798,10 @@ unsafe public class Test
 }
 ";
             CreateCompilationWithMscorlibAndSpan(
-                    test,
-                    TestOptions.UnsafeReleaseExe,
-                    parseOptions: TestOptions.Regular7_3
-                )
+                test,
+                TestOptions.UnsafeReleaseExe,
+                parseOptions: TestOptions.Regular7_3
+            )
                 .VerifyDiagnostics(
                     // (7,16): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
                     //         Invoke(stackalloc int [10]);
@@ -838,7 +823,7 @@ unsafe public class Test
         public void StackAllocWithDynamic()
         {
             CreateCompilation(
-                    @"
+                @"
 class Program
 {
     static void Main()
@@ -846,21 +831,20 @@ class Program
         var d = stackalloc dynamic[10];
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (6,33): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
-                    //         var d = stackalloc dynamic[10];
-                    Diagnostic(ErrorCode.ERR_ManagedAddr, "dynamic")
-                        .WithArguments("dynamic")
-                        .WithLocation(6, 28)
-                );
+            ).VerifyDiagnostics(
+                // (6,33): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                //         var d = stackalloc dynamic[10];
+                Diagnostic(ErrorCode.ERR_ManagedAddr, "dynamic")
+                    .WithArguments("dynamic")
+                    .WithLocation(6, 28)
+            );
         }
 
         [Fact]
         public void StackAllocWithDynamicSpan()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Program
 {
@@ -869,14 +853,13 @@ class Program
         Span<dynamic> d = stackalloc dynamic[10];
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (7,38): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
-                    //         Span<dynamic> d = stackalloc dynamic[10];
-                    Diagnostic(ErrorCode.ERR_ManagedAddr, "dynamic")
-                        .WithArguments("dynamic")
-                        .WithLocation(7, 38)
-                );
+            ).VerifyDiagnostics(
+                // (7,38): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                //         Span<dynamic> d = stackalloc dynamic[10];
+                Diagnostic(ErrorCode.ERR_ManagedAddr, "dynamic")
+                    .WithArguments("dynamic")
+                    .WithLocation(7, 38)
+            );
         }
 
         [Fact]
@@ -959,21 +942,20 @@ class Program
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(6, 38)
                 );
-            CreateCompilationWithMscorlibAndSpan(source)
-                .VerifyDiagnostics(
-                    // (6,17): error CS0019: Operator '??' cannot be applied to operands of type 'Span<int>' and 'Span<int>'
-                    //         var x = stackalloc int[1] ?? stackalloc int[2];
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "stackalloc int[1] ?? stackalloc int[2]")
-                        .WithArguments("??", "System.Span<int>", "System.Span<int>")
-                        .WithLocation(6, 17)
-                );
+            CreateCompilationWithMscorlibAndSpan(source).VerifyDiagnostics(
+                // (6,17): error CS0019: Operator '??' cannot be applied to operands of type 'Span<int>' and 'Span<int>'
+                //         var x = stackalloc int[1] ?? stackalloc int[2];
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "stackalloc int[1] ?? stackalloc int[2]")
+                    .WithArguments("??", "System.Span<int>", "System.Span<int>")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
         public void StackAllocInCastAndConditionalOperator()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 class Test
 {
@@ -987,9 +969,8 @@ class Test
         return new Test();
     }
 }",
-                    TestOptions.ReleaseDll
-                )
-                .VerifyDiagnostics();
+                TestOptions.ReleaseDll
+            ).VerifyDiagnostics();
         }
 
         [Fact]
@@ -997,7 +978,7 @@ class Test
         public void StackAllocToSpanWithRefStructType()
         {
             CreateCompilationWithMscorlibAndSpan(
-                    @"
+                @"
 using System;
 ref struct S {}
 class Test
@@ -1008,24 +989,23 @@ class Test
         var implicitError = explicitError.Length > 0 ? stackalloc S[10] : stackalloc S[100];
     }
 }"
-                )
-                .VerifyDiagnostics(
-                    // (8,14): error CS0306: The type 'S' may not be used as a type argument
-                    //         Span<S> explicitError = default;
-                    Diagnostic(ErrorCode.ERR_BadTypeArgument, "S")
-                        .WithArguments("S")
-                        .WithLocation(8, 14),
-                    // (9,67): error CS0306: The type 'S' may not be used as a type argument
-                    //         var implicitError = explicitError.Length > 0 ? stackalloc S[10] : stackalloc S[100];
-                    Diagnostic(ErrorCode.ERR_BadTypeArgument, "S[10]")
-                        .WithArguments("S")
-                        .WithLocation(9, 67),
-                    // (9,86): error CS0306: The type 'S' may not be used as a type argument
-                    //         var implicitError = explicitError.Length > 0 ? stackalloc S[10] : stackalloc S[100];
-                    Diagnostic(ErrorCode.ERR_BadTypeArgument, "S[100]")
-                        .WithArguments("S")
-                        .WithLocation(9, 86)
-                );
+            ).VerifyDiagnostics(
+                // (8,14): error CS0306: The type 'S' may not be used as a type argument
+                //         Span<S> explicitError = default;
+                Diagnostic(ErrorCode.ERR_BadTypeArgument, "S")
+                    .WithArguments("S")
+                    .WithLocation(8, 14),
+                // (9,67): error CS0306: The type 'S' may not be used as a type argument
+                //         var implicitError = explicitError.Length > 0 ? stackalloc S[10] : stackalloc S[100];
+                Diagnostic(ErrorCode.ERR_BadTypeArgument, "S[10]")
+                    .WithArguments("S")
+                    .WithLocation(9, 67),
+                // (9,86): error CS0306: The type 'S' may not be used as a type argument
+                //         var implicitError = explicitError.Length > 0 ? stackalloc S[10] : stackalloc S[100];
+                Diagnostic(ErrorCode.ERR_BadTypeArgument, "S[100]")
+                    .WithArguments("S")
+                    .WithLocation(9, 86)
+            );
         }
 
         [Fact]
@@ -1073,17 +1053,17 @@ class Test
                     // (20,67): error CS0315: The type 'NonComparable' cannot be used as type parameter 'T' in the generic type or method 'Span<T>'. There is no boxing conversion from 'NonComparable' to 'System.IComparable'.
                     //         var implicitError = explicitError.Length > 0 ? stackalloc NonComparable[10] : stackalloc NonComparable[100];
                     Diagnostic(
-                            ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
-                            "NonComparable[10]"
-                        )
+                        ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
+                        "NonComparable[10]"
+                    )
                         .WithArguments("System.Span<T>", "System.IComparable", "T", "NonComparable")
                         .WithLocation(20, 67),
                     // (20,98): error CS0315: The type 'NonComparable' cannot be used as type parameter 'T' in the generic type or method 'Span<T>'. There is no boxing conversion from 'NonComparable' to 'System.IComparable'.
                     //         var implicitError = explicitError.Length > 0 ? stackalloc NonComparable[10] : stackalloc NonComparable[100];
                     Diagnostic(
-                            ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
-                            "NonComparable[100]"
-                        )
+                        ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
+                        "NonComparable[100]"
+                    )
                         .WithArguments("System.Span<T>", "System.IComparable", "T", "NonComparable")
                         .WithLocation(20, 98)
                 );

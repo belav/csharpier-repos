@@ -490,14 +490,12 @@ namespace System.Web.Http.Owin
                 MockBehavior.Strict
             );
             string authenticationType = null;
-            mock.Setup(m => m.AuthenticateAsync(It.IsAny<string>()))
-                .Callback<string>(
-                    (a) =>
-                    {
-                        authenticationType = a;
-                    }
-                )
-                .Returns(() => authenticate.Invoke(authenticationType));
+            mock.Setup(m => m.AuthenticateAsync(It.IsAny<string>())).Callback<string>(
+                (a) =>
+                {
+                    authenticationType = a;
+                }
+            ).Returns(() => authenticate.Invoke(authenticationType));
             return mock.Object;
         }
 

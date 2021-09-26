@@ -1555,9 +1555,8 @@ namespace Microsoft.Extensions.FileProviders
                                     Path.Combine(subDirectoryName, subSubDirectoryName, fileName)
                                 );
 
-                            var pattern = string.Format(
-                                Path.Combine(subDirectoryName, "**", "*.cshtml")
-                            );
+                            var pattern = string
+                                .Format(Path.Combine(subDirectoryName, "**", "*.cshtml"));
                             var token = provider.Watch(pattern);
 
                             fileSystemWatcher.CallOnChanged(
@@ -1762,11 +1761,11 @@ namespace Microsoft.Extensions.FileProviders
                 );
 
                 await Task.WhenAll(
-                        oldDirectoryTcs.Task,
-                        newDirectoryTcs.Task,
-                        newSubDirectoryTcs.Task,
-                        newFileTcs.Task
-                    )
+                    oldDirectoryTcs.Task,
+                    newDirectoryTcs.Task,
+                    newSubDirectoryTcs.Task,
+                    newFileTcs.Task
+                )
                     .WaitAsync(TimeSpan.FromSeconds(30));
 
                 Assert.False(

@@ -219,11 +219,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
             {
                 var attribute = attributes[i];
                 if (
-                    !string.Equals(
-                        attribute.Name,
-                        attributeName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !string
+                        .Equals(attribute.Name, attributeName, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     continue;

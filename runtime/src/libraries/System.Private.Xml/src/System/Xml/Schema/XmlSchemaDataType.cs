@@ -312,10 +312,11 @@ namespace System.Xml.Schema
             if (convert)
             {
                 canonicalUri = nameTable.Add(
-                    string.Concat(
-                        uri.AsSpan(0, offset),
-                        uri.Substring(offset, uri.Length - offset).ToUpperInvariant()
-                    )
+                    string
+                        .Concat(
+                            uri.AsSpan(0, offset),
+                            uri.Substring(offset, uri.Length - offset).ToUpperInvariant()
+                        )
                 );
             }
             else

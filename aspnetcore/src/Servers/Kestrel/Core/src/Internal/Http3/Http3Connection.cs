@@ -90,10 +90,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 // Ensure TimeoutControl._lastTimestamp is initialized before anything that could set timeouts runs.
                 _timeoutControl.Initialize(_systemClock.UtcNowTicks);
 
-                var connectionHeartbeatFeature =
-                    _context.ConnectionFeatures.Get<IConnectionHeartbeatFeature>();
-                var connectionLifetimeNotificationFeature =
-                    _context.ConnectionFeatures.Get<IConnectionLifetimeNotificationFeature>();
+                var connectionHeartbeatFeature = _context.ConnectionFeatures
+                    .Get<IConnectionHeartbeatFeature>();
+                var connectionLifetimeNotificationFeature = _context.ConnectionFeatures
+                    .Get<IConnectionLifetimeNotificationFeature>();
 
                 // These features should never be null in Kestrel itself, if this middleware is ever refactored to run outside of kestrel,
                 // we'll need to handle these missing.
@@ -116,16 +116,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
                 // Register for graceful shutdown of the server
                 using var shutdownRegistration =
-                    connectionLifetimeNotificationFeature?.ConnectionClosedRequested.Register(
-                        state => ((Http3Connection)state!).StopProcessingNextRequest(),
-                        this
-                    );
+                    connectionLifetimeNotificationFeature?.ConnectionClosedRequested
+                        .Register(
+                            state => ((Http3Connection)state!).StopProcessingNextRequest(),
+                            this
+                        );
 
                 // Register for connection close
-                using var closedRegistration = _context.ConnectionContext.ConnectionClosed.Register(
-                    state => ((Http3Connection)state!).OnConnectionClosed(),
-                    this
-                );
+                using var closedRegistration = _context.ConnectionContext.ConnectionClosed
+                    .Register(state => ((Http3Connection)state!).OnConnectionClosed(), this);
 
                 await InnerProcessStreamsAsync(httpApplication);
             }
@@ -296,8 +295,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                             break;
                         }
 
-                        var quicStreamFeature =
-                            streamContext.Features.Get<IStreamDirectionFeature>();
+                        var quicStreamFeature = streamContext.Features
+                            .Get<IStreamDirectionFeature>();
                         var streamIdFeature = streamContext.Features.Get<IStreamIdFeature>();
 
                         Debug.Assert(quicStreamFeature != null);
@@ -345,10 +344,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                                 _activeRequestCount++;
                                 _streams[streamId] = http3Stream;
                             }
-                            KestrelEventSource.Log.RequestQueuedStart(
-                                stream,
-                                AspNetCore.Http.HttpProtocol.Http3
-                            );
+                            KestrelEventSource.Log
+                                .RequestQueuedStart(stream, AspNetCore.Http.HttpProtocol.Http3);
                             ThreadPool.UnsafeQueueUserWorkItem(stream, preferLocal: false);
                         }
                     }

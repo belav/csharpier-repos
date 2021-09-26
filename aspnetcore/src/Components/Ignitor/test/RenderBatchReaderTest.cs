@@ -189,10 +189,10 @@ namespace Ignitor
                             ),
                             RenderTreeFrame.Attribute(124, "Attribute with nonstring value", 1),
                             RenderTreeFrame.Attribute(
-                                    125,
-                                    "Attribute with delegate value",
-                                    new Action(() => { })
-                                )
+                                125,
+                                "Attribute with delegate value",
+                                new Action(() => { })
+                            )
                                 .WithAttributeEventHandlerId((ulong)uint.MaxValue + 1),
                             RenderTreeFrame.ChildComponent(126, typeof(object))
                                 .WithComponentSubtreeLength(5678)

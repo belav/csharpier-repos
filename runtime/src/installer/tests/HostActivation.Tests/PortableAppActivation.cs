@@ -74,10 +74,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var dotnet = fixture.BuiltDotnet;
-            var appDll = fixture.TestProject.AppDll.Replace(
-                Path.DirectorySeparatorChar,
-                Path.AltDirectorySeparatorChar
-            );
+            var appDll = fixture.TestProject.AppDll
+                .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 
             dotnet.Exec(appDll)
                 .CaptureStdErr()
@@ -124,13 +122,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var additionalProbingPath = sharedTestState.RepoDirectories.NugetPackages;
 
             dotnet.Exec(
-                    "exec",
-                    "--runtimeconfig",
-                    runtimeConfig,
-                    "--additionalprobingpath",
-                    additionalProbingPath,
-                    appDll
-                )
+                "exec",
+                "--runtimeconfig",
+                runtimeConfig,
+                "--additionalprobingpath",
+                additionalProbingPath,
+                appDll
+            )
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
@@ -489,7 +487,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                             invalidDotNet,
                             sharedTestState.RepoDirectories.BuiltDotnet,
                             "missingFramework"
-                        ).Build().BinPath;
+                        )
+                            .Build().BinPath;
                     expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure.ToString("x");
                     expectedUrlQuery =
                         $"framework={Constants.MicrosoftNETCoreApp}&framework_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
@@ -503,9 +502,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
                 var result = command.WaitForExit(true).Should().Fail();
 
-                result.And.HaveStdErrContaining(
-                    $"- https://aka.ms/dotnet-core-applaunch?{expectedUrlQuery}"
-                );
+                result.And
+                    .HaveStdErrContaining(
+                        $"- https://aka.ms/dotnet-core-applaunch?{expectedUrlQuery}"
+                    );
                 if (expectedUrlParameter != null)
                 {
                     result.And.HaveStdErrContaining(expectedUrlParameter);
@@ -557,7 +557,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                             invalidDotNet,
                             sharedTestState.RepoDirectories.BuiltDotnet,
                             "missingFramework"
-                        ).Build().BinPath;
+                        )
+                            .Build().BinPath;
                     expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure.ToString("x");
                     expectedUrlQuery =
                         $"framework={Constants.MicrosoftNETCoreApp}&framework_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
@@ -574,7 +575,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
                 var result = command.WaitForExit(true).Should().Fail();
 
-                result.And.HaveStdErrContaining(
+                result.And
+                    .HaveStdErrContaining(
                         $"Showing error dialog for application: '{Path.GetFileName(appExe)}' - error code: 0x{expectedErrorCode}"
                     )
                     .And.HaveStdErrContaining(
@@ -610,15 +612,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                string expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure.ToString(
-                    "x"
-                );
+                string expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure
+                    .ToString("x");
 
                 var dotnetBuilder = new DotNetBuilder(
                     dotnetWithMockHostFxr,
                     sharedTestState.RepoDirectories.BuiltDotnet,
                     "hostfxrFrameworkMissingFailure"
-                ).RemoveHostFxr().AddMockHostFxr(new Version(2, 2, 0));
+                )
+                    .RemoveHostFxr()
+                    .AddMockHostFxr(new Version(2, 2, 0));
                 var dotnet = dotnetBuilder.Build();
 
                 Command command = Command.Create(appExe)
@@ -807,15 +810,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 );
                 BuiltDotNet = new DotNetCli(RepoDirectories.BuiltDotnet);
 
-                PortableAppFixture_Built = new TestProjectFixture(
-                    "PortableApp",
-                    RepoDirectories
-                ).EnsureRestored().BuildProject();
+                PortableAppFixture_Built = new TestProjectFixture("PortableApp", RepoDirectories)
+                    .EnsureRestored()
+                    .BuildProject();
 
                 PortableAppFixture_Published = new TestProjectFixture(
                     "PortableApp",
                     RepoDirectories
-                ).EnsureRestored().PublishProject();
+                )
+                    .EnsureRestored()
+                    .PublishProject();
 
                 MockApp = new TestApp(
                     SharedFramework.CalculateUniqueTestDirectory(

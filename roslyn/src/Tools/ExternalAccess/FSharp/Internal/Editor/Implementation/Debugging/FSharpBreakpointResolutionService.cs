@@ -46,6 +46,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor.Implement
             (
                 await _service.ResolveBreakpointsAsync(solution, name, cancellationToken)
                     .ConfigureAwait(false)
-            ).Select(r => r.UnderlyingObject);
+            )
+                .Select(r => r.UnderlyingObject);
     }
 }

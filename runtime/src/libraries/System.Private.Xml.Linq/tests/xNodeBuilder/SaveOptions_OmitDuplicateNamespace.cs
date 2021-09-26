@@ -143,10 +143,13 @@ namespace CoreXml.Test.XLinq
                                         parentDecls.IsNamespaceDeclaration
                                         && (string)parentDecls == (string)a
                                     select parentDecls
-                                ).Any()
+                                )
+                                    .Any()
                             )
                         select a
-                    ).ToList().Remove();
+                    )
+                        .ToList()
+                        .Remove();
 
                     // Write XElement using XmlWriter without omitting
                     string removedByManual = SaveXElement(elemObj, SaveOptions.DisableFormatting);

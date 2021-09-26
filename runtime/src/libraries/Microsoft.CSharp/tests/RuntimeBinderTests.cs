@@ -86,18 +86,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Class1 typed = new Class1();
 
             // make a callsite as if it is contained inside "Microsoft.CSharp.RuntimeBinder.RuntimeBinderException"
-            MySite.mySite = CallSite<Action<CallSite, object>>.Create(
-                Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
-                    CSharpBinderFlags.ResultDiscarded,
-                    "Foo",
-                    null,
-                    typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException),
-                    new CSharpArgumentInfo[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            MySite.mySite = CallSite<Action<CallSite, object>>
+                .Create(
+                    Microsoft.CSharp.RuntimeBinder.Binder
+                        .InvokeMember(
+                            CSharpBinderFlags.ResultDiscarded,
+                            "Foo",
+                            null,
+                            typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException),
+                            new CSharpArgumentInfo[]
+                            {
+                                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            }
+                        )
+                );
 
             MySite.mySite.Target(MySite.mySite, typed);
 
@@ -105,18 +107,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.Equal("CALLED", Class1.Result);
 
             // make a callsite as if it is contained inside "System.Exception"
-            MySite.mySite = CallSite<Action<CallSite, object>>.Create(
-                Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
-                    CSharpBinderFlags.ResultDiscarded,
-                    "Foo",
-                    null,
-                    typeof(System.Exception),
-                    new CSharpArgumentInfo[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                    }
-                )
-            );
+            MySite.mySite = CallSite<Action<CallSite, object>>
+                .Create(
+                    Microsoft.CSharp.RuntimeBinder.Binder
+                        .InvokeMember(
+                            CSharpBinderFlags.ResultDiscarded,
+                            "Foo",
+                            null,
+                            typeof(System.Exception),
+                            new CSharpArgumentInfo[]
+                            {
+                                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            }
+                        )
+                );
 
             // call should fail because "Foo" is internal to the calling context.
             Assert.Throws<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(
@@ -305,7 +309,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, object, object, object>> site = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, object, object, object> targ = site.Target;
             object res = targ(site, new SomeType(), 9);
             Assert.Equal("ABC 9", res);
@@ -327,7 +332,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             CallSite<Func<CallSite, object, object, object>> site = CallSite<
                 Func<CallSite, object, object, object>
-            >.Create(binder);
+            >
+                .Create(binder);
             Func<CallSite, object, object, object> targ = site.Target;
             Assert.Throws<RuntimeBinderException>(() => targ(site, new SomePrivateType(), 9));
             Assert.Throws<RuntimeBinderException>(() => targ(site, new SomeInternalType(), 9));
@@ -371,24 +377,25 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void AmbiguousMemberError()
         {
             CallSite<Func<CallSite, ICounterBoth, int, object>> compileTimeTypeValueSetter =
-                CallSite<Func<CallSite, ICounterBoth, int, object>>.Create(
-                    Binder.SetMember(
-                        CSharpBinderFlags.None,
-                        "ExplicitCount",
-                        GetType(),
-                        new[]
-                        {
-                            CSharpArgumentInfo.Create(
-                                CSharpArgumentInfoFlags.UseCompileTimeType,
-                                null
-                            ),
-                            CSharpArgumentInfo.Create(
-                                CSharpArgumentInfoFlags.UseCompileTimeType,
-                                null
-                            )
-                        }
-                    )
-                );
+                CallSite<Func<CallSite, ICounterBoth, int, object>>
+                    .Create(
+                        Binder.SetMember(
+                            CSharpBinderFlags.None,
+                            "ExplicitCount",
+                            GetType(),
+                            new[]
+                            {
+                                CSharpArgumentInfo.Create(
+                                    CSharpArgumentInfoFlags.UseCompileTimeType,
+                                    null
+                                ),
+                                CSharpArgumentInfo.Create(
+                                    CSharpArgumentInfoFlags.UseCompileTimeType,
+                                    null
+                                )
+                            }
+                        )
+                    );
             Func<CallSite, ICounterBoth, int, object> target0 = compileTimeTypeValueSetter.Target;
             string message =
                 Assert.Throws<RuntimeBinderException>(
@@ -406,21 +413,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
 
             CallSite<Func<CallSite, ICounterBoth, object, object>> runTimeTypeValueSetter =
-                CallSite<Func<CallSite, ICounterBoth, object, object>>.Create(
-                    Binder.SetMember(
-                        CSharpBinderFlags.None,
-                        "ExplicitCount",
-                        GetType(),
-                        new[]
-                        {
-                            CSharpArgumentInfo.Create(
-                                CSharpArgumentInfoFlags.UseCompileTimeType,
-                                null
-                            ),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                        }
-                    )
-                );
+                CallSite<Func<CallSite, ICounterBoth, object, object>>
+                    .Create(
+                        Binder.SetMember(
+                            CSharpBinderFlags.None,
+                            "ExplicitCount",
+                            GetType(),
+                            new[]
+                            {
+                                CSharpArgumentInfo.Create(
+                                    CSharpArgumentInfoFlags.UseCompileTimeType,
+                                    null
+                                ),
+                                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            }
+                        )
+                    );
             var target1 = runTimeTypeValueSetter.Target;
             Assert.Equal(
                 message,
@@ -431,17 +439,21 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             CallSite<Func<CallSite, ICounterBoth, object>> getter = CallSite<
                 Func<CallSite, ICounterBoth, object>
-            >.Create(
-                Binder.GetMember(
-                    CSharpBinderFlags.None,
-                    "ExplicitCount",
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
-                    }
-                )
-            );
+            >
+                .Create(
+                    Binder.GetMember(
+                        CSharpBinderFlags.None,
+                        "ExplicitCount",
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(
+                                CSharpArgumentInfoFlags.UseCompileTimeType,
+                                null
+                            )
+                        }
+                    )
+                );
 
             Func<CallSite, ICounterBoth, object> target2 = getter.Target;
             Assert.Equal(

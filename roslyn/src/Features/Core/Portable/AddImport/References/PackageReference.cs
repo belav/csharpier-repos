@@ -40,12 +40,12 @@ namespace Microsoft.CodeAnalysis.AddImport
             )
             {
                 var textChanges = await GetTextChangesAsync(
-                        document,
-                        node,
-                        placeSystemNamespaceFirst,
-                        allowInHiddenRegions,
-                        cancellationToken
-                    )
+                    document,
+                    node,
+                    placeSystemNamespaceFirst,
+                    allowInHiddenRegions,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return AddImportFixData.CreateForPackageSymbol(

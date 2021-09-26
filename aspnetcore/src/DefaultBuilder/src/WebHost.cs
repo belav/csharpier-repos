@@ -181,60 +181,58 @@ namespace Microsoft.AspNetCore
             }
 
             builder.ConfigureAppConfiguration(
-                    (hostingContext, config) =>
+                (hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile(
+                            $"appsettings.{env.EnvironmentName}.json",
+                            optional: true,
+                            reloadOnChange: true
+                        );
+
+                    if (env.IsDevelopment())
                     {
-                        var env = hostingContext.HostingEnvironment;
-
-                        config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                            .AddJsonFile(
-                                $"appsettings.{env.EnvironmentName}.json",
-                                optional: true,
-                                reloadOnChange: true
-                            );
-
-                        if (env.IsDevelopment())
+                        var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
+                        if (appAssembly != null)
                         {
-                            var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
-                            if (appAssembly != null)
-                            {
-                                config.AddUserSecrets(appAssembly, optional: true);
-                            }
-                        }
-
-                        config.AddEnvironmentVariables();
-
-                        if (args != null)
-                        {
-                            config.AddCommandLine(args);
+                            config.AddUserSecrets(appAssembly, optional: true);
                         }
                     }
-                )
-                .ConfigureLogging(
-                    (hostingContext, loggingBuilder) =>
+
+                    config.AddEnvironmentVariables();
+
+                    if (args != null)
                     {
-                        loggingBuilder.Configure(
-                            options =>
-                            {
-                                options.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.SpanId
-                                    | ActivityTrackingOptions.TraceId
-                                    | ActivityTrackingOptions.ParentId;
-                            }
-                        );
-                        loggingBuilder.AddConfiguration(
-                            hostingContext.Configuration.GetSection("Logging")
-                        );
-                        loggingBuilder.AddConsole();
-                        loggingBuilder.AddDebug();
-                        loggingBuilder.AddEventSourceLogger();
+                        config.AddCommandLine(args);
                     }
-                )
-                .UseDefaultServiceProvider(
-                    (context, options) =>
-                    {
-                        options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
-                    }
-                );
+                }
+            ).ConfigureLogging(
+                (hostingContext, loggingBuilder) =>
+                {
+                    loggingBuilder.Configure(
+                        options =>
+                        {
+                            options.ActivityTrackingOptions =
+                                ActivityTrackingOptions.SpanId
+                                | ActivityTrackingOptions.TraceId
+                                | ActivityTrackingOptions.ParentId;
+                        }
+                    );
+                    loggingBuilder.AddConfiguration(
+                        hostingContext.Configuration.GetSection("Logging")
+                    );
+                    loggingBuilder.AddConsole();
+                    loggingBuilder.AddDebug();
+                    loggingBuilder.AddEventSourceLogger();
+                }
+            ).UseDefaultServiceProvider(
+                (context, options) =>
+                {
+                    options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+                }
+            );
 
             ConfigureWebDefaults(builder);
 
@@ -256,73 +254,69 @@ namespace Microsoft.AspNetCore
                 }
             );
             builder.UseKestrel(
-                    (builderContext, options) =>
-                    {
-                        options.Configure(
-                            builderContext.Configuration.GetSection("Kestrel"),
-                            reloadOnChange: true
-                        );
-                    }
-                )
-                .ConfigureServices(
-                    (hostingContext, services) =>
-                    {
-                        // Fallback
-                        services.PostConfigure<HostFilteringOptions>(
-                            options =>
+                (builderContext, options) =>
+                {
+                    options.Configure(
+                        builderContext.Configuration.GetSection("Kestrel"),
+                        reloadOnChange: true
+                    );
+                }
+            ).ConfigureServices(
+                (hostingContext, services) =>
+                {
+                    // Fallback
+                    services.PostConfigure<HostFilteringOptions>(
+                        options =>
+                        {
+                            if (options.AllowedHosts == null || options.AllowedHosts.Count == 0)
                             {
-                                if (options.AllowedHosts == null || options.AllowedHosts.Count == 0)
-                                {
-                                    // "AllowedHosts": "localhost;127.0.0.1;[::1]"
-                                    var hosts = hostingContext.Configuration["AllowedHosts"]?.Split(
-                                        new[] { ';' },
-                                        StringSplitOptions.RemoveEmptyEntries
-                                    );
-                                    // Fall back to "*" to disable.
-                                    options.AllowedHosts = (
-                                        hosts?.Length > 0 ? hosts : new[] { "*" }
-                                    );
-                                }
+                                // "AllowedHosts": "localhost;127.0.0.1;[::1]"
+                                var hosts = hostingContext.Configuration["AllowedHosts"]?.Split(
+                                    new[] { ';' },
+                                    StringSplitOptions.RemoveEmptyEntries
+                                );
+                                // Fall back to "*" to disable.
+                                options.AllowedHosts = (hosts?.Length > 0 ? hosts : new[] { "*" });
                             }
-                        );
-                        // Change notification
-                        services.AddSingleton<IOptionsChangeTokenSource<HostFilteringOptions>>(
-                            new ConfigurationChangeTokenSource<HostFilteringOptions>(
-                                hostingContext.Configuration
-                            )
-                        );
+                        }
+                    );
+                    // Change notification
+                    services.AddSingleton<IOptionsChangeTokenSource<HostFilteringOptions>>(
+                        new ConfigurationChangeTokenSource<HostFilteringOptions>(
+                            hostingContext.Configuration
+                        )
+                    );
 
-                        services.AddTransient<IStartupFilter, HostFilteringStartupFilter>();
+                    services.AddTransient<IStartupFilter, HostFilteringStartupFilter>();
 
-                        if (
-                            string.Equals(
+                    if (
+                        string
+                            .Equals(
                                 "true",
                                 hostingContext.Configuration["ForwardedHeaders_Enabled"],
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        )
-                        {
-                            services.Configure<ForwardedHeadersOptions>(
-                                options =>
-                                {
-                                    options.ForwardedHeaders =
-                                        ForwardedHeaders.XForwardedFor
-                                        | ForwardedHeaders.XForwardedProto;
-                                    // Only loopback proxies are allowed by default. Clear that restriction because forwarders are
-                                    // being enabled by explicit configuration.
-                                    options.KnownNetworks.Clear();
-                                    options.KnownProxies.Clear();
-                                }
-                            );
+                    )
+                    {
+                        services.Configure<ForwardedHeadersOptions>(
+                            options =>
+                            {
+                                options.ForwardedHeaders =
+                                    ForwardedHeaders.XForwardedFor
+                                    | ForwardedHeaders.XForwardedProto;
+                                // Only loopback proxies are allowed by default. Clear that restriction because forwarders are
+                                // being enabled by explicit configuration.
+                                options.KnownNetworks.Clear();
+                                options.KnownProxies.Clear();
+                            }
+                        );
 
-                            services.AddTransient<IStartupFilter, ForwardedHeadersStartupFilter>();
-                        }
-
-                        services.AddRouting();
+                        services.AddTransient<IStartupFilter, ForwardedHeadersStartupFilter>();
                     }
-                )
-                .UseIIS()
-                .UseIISIntegration();
+
+                    services.AddRouting();
+                }
+            ).UseIIS().UseIISIntegration();
         }
 
         /// <summary>

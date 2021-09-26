@@ -30,8 +30,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                 options =>
                 {
                     options.ConfigureWarnings(
-                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
-                        )
+                        b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                    )
                         .UseSqlite(connection);
                 }
             );
@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             var count = 0;
 
             foreach (
-                var property in context.Model.GetEntityTypes()
+                var property in context.Model
+                    .GetEntityTypes()
                     .Single(e => e.GetTableName() == table)
                     .GetProperties()
             )

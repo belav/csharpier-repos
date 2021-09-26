@@ -44,9 +44,8 @@ namespace System.Runtime.Serialization.Json
                             }
                             else
                             {
-                                tempDelegate = new JsonFormatReaderGenerator().GenerateClassReader(
-                                    TraditionalClassDataContract
-                                );
+                                tempDelegate = new JsonFormatReaderGenerator()
+                                    .GenerateClassReader(TraditionalClassDataContract);
                             }
 
                             Interlocked.MemoryBarrier();
@@ -81,9 +80,8 @@ namespace System.Runtime.Serialization.Json
                             }
                             else
                             {
-                                tempDelegate = new JsonFormatWriterGenerator().GenerateClassWriter(
-                                    TraditionalClassDataContract
-                                );
+                                tempDelegate = new JsonFormatWriterGenerator()
+                                    .GenerateClassWriter(TraditionalClassDataContract);
                             }
 
                             Interlocked.MemoryBarrier();
@@ -157,7 +155,8 @@ namespace System.Runtime.Serialization.Json
             {
                 _typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value)
                     ? traditionalDataContract.Name.Value
-                    : string.Concat(
+                    : string
+                      .Concat(
                           traditionalDataContract.Name.Value,
                           JsonGlobals.NameValueSeparatorString,
                           XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(

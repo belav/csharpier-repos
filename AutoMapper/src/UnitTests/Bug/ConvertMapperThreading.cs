@@ -23,17 +23,12 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_work()
         {
-            var tasks = Enumerable.Range(0, 5)
-                .Select(
-                    i =>
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                new MapperConfiguration(c => c.CreateMap<Source, Destination>());
-                            }
-                        )
-                )
-                .ToArray();
+            var tasks = Enumerable.Range(0, 5).Select(i => Task.Factory.StartNew(
+                        () =>
+                        {
+                            new MapperConfiguration(c => c.CreateMap<Source, Destination>());
+                        }
+                    )).ToArray();
             try
             {
                 Task.WaitAll(tasks);

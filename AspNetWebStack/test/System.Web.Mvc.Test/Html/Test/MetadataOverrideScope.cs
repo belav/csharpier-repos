@@ -46,15 +46,15 @@ namespace System.Web.Mvc.Html.Test
             // metadata instance will call _oldMetadataProvider there.
             var metadataProvider = new Mock<ModelMetadataProvider>();
             metadataProvider.Setup(
-                    p => p.GetMetadataForProperties(It.IsAny<object>(), It.IsAny<Type>())
-                )
+                p => p.GetMetadataForProperties(It.IsAny<object>(), It.IsAny<Type>())
+            )
                 .Returns(
                     (object container, Type containerType) =>
                         _oldMetadataProvider.GetMetadataForProperties(container, containerType)
                 );
             metadataProvider.Setup(
-                    p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
-                )
+                p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
+            )
                 .Returns(
                     (Func<object> modelAccessor, Type modelType) =>
                         _oldMetadataProvider.GetMetadataForType(modelAccessor, modelType)
@@ -69,13 +69,13 @@ namespace System.Web.Mvc.Html.Test
                         GetMetadataForType(modelAccessor, modelType)
                 );
             metadataProvider.Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            It.IsAny<Type>(),
-                            It.IsAny<string>()
-                        )
-                )
+                p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Returns(
                     (Func<object> modelAccessor, Type containerType, string propertyName) =>
                         GetMetadataForProperty(modelAccessor, containerType, propertyName)
@@ -84,13 +84,13 @@ namespace System.Web.Mvc.Html.Test
             // Calls to GetMetadataForProperties for the modelType are incorrect because _metadata.Provider must
             // reference _oldMetadataProvider and not this mock.
             metadataProvider.Setup(
-                    p =>
-                        p.GetMetadataForProperty(
-                            It.IsAny<Func<object>>(),
-                            _modelType,
-                            It.IsAny<string>()
-                        )
-                )
+                p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        _modelType,
+                        It.IsAny<string>()
+                    )
+            )
                 .Throws<InvalidOperationException>();
 
             // Finally make our ModelMetadataProvider visible everywhere.

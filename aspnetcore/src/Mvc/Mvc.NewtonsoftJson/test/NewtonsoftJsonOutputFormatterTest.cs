@@ -314,14 +314,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             var stream = new Mock<Stream> { CallBase = true };
             stream.Setup(
-                    v =>
-                        v.WriteAsync(
-                            It.IsAny<byte[]>(),
-                            It.IsAny<int>(),
-                            It.IsAny<int>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                v =>
+                    v.WriteAsync(
+                        It.IsAny<byte[]>(),
+                        It.IsAny<int>(),
+                        It.IsAny<int>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(Task.CompletedTask);
             stream.Setup(v => v.FlushAsync(It.IsAny<CancellationToken>()))
                 .Returns(Task.CompletedTask);

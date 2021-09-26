@@ -73,9 +73,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                     candidateSymbols.AddRange(symbolInfo.CandidateSymbols);
                 }
 
-                using var __ = ArrayBuilder<(TExpressionSyntax, ITypeSymbol)>.GetInstance(
-                    out var mutablePotentialConversionTypes
-                );
+                using var __ = ArrayBuilder<(TExpressionSyntax, ITypeSymbol)>
+                    .GetInstance(out var mutablePotentialConversionTypes);
                 foreach (var candidateSymbol in candidateSymbols.OfType<IMethodSymbol>())
                 {
                     if (
@@ -213,10 +212,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                         syntaxFacts.IsDeclarationExpression(argumentExpression)
                         && semanticModel.GetTypeInfo(argumentExpression, cancellationToken).Type
                             is ITypeSymbol argumentType
-                        && semanticModel.Compilation.ClassifyCommonConversion(
-                            argumentType,
-                            parameterType
-                        ).IsIdentity
+                        && semanticModel.Compilation
+                            .ClassifyCommonConversion(argumentType, parameterType).IsIdentity
                     )
                     {
                         // Direct conversion from a declaration expression to a type is unspecified, thus we classify the

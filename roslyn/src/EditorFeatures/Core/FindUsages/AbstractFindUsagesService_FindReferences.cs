@@ -94,11 +94,11 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             CancellationToken cancellationToken
         )
         {
-            var factory =
-                solution.Workspace.Services.GetRequiredService<IDefinitionsAndReferencesFactory>();
+            var factory = solution.Workspace.Services
+                .GetRequiredService<IDefinitionsAndReferencesFactory>();
             return definitions.Select(
-                    d => factory.GetThirdPartyDefinitionItem(solution, d, cancellationToken)
-                )
+                d => factory.GetThirdPartyDefinitionItem(solution, d, cancellationToken)
+            )
                 .WhereNotNull()
                 .ToImmutableArray();
         }
@@ -115,10 +115,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             // If this is a symbol from a metadata-as-source project, then map that symbol back to a symbol in the primary workspace.
             var symbolAndProjectOpt =
                 await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(
-                        document,
-                        position,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             if (symbolAndProjectOpt == null)
                 return;
@@ -139,11 +139,12 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
         )
         {
             await context.SetSearchTitleAsync(
-                    string.Format(
+                string
+                    .Format(
                         EditorFeaturesResources._0_references,
                         FindUsagesHelpers.GetDisplayName(symbol)
                     )
-                )
+            )
                 .ConfigureAwait(false);
 
             var options = FindReferencesSearchOptions.GetFeatureOptionsForStartingSymbol(symbol);
@@ -165,9 +166,9 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             var cancellationToken = context.CancellationToken;
             var solution = project.Solution;
             var client = await RemoteHostClient.TryGetClientAsync(
-                    solution.Workspace,
-                    cancellationToken
-                )
+                solution.Workspace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (client != null)
             {
@@ -182,18 +183,18 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                 );
 
                 _ = await client.TryInvokeAsync<IRemoteFindUsagesService>(
-                        solution,
-                        (service, solutionInfo, callbackId, cancellationToken) =>
-                            service.FindReferencesAsync(
-                                solutionInfo,
-                                callbackId,
-                                symbolAndProjectId,
-                                options,
-                                cancellationToken
-                            ),
-                        serverCallback,
-                        cancellationToken
-                    )
+                    solution,
+                    (service, solutionInfo, callbackId, cancellationToken) =>
+                        service.FindReferencesAsync(
+                            solutionInfo,
+                            callbackId,
+                            symbolAndProjectId,
+                            options,
+                            cancellationToken
+                        ),
+                    serverCallback,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else
@@ -239,13 +240,13 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             // bother with true/false/null as those are likely to have way too many results
             // to be useful.
             var token = await syntaxTree.GetTouchingTokenAsync(
-                    position,
-                    t =>
-                        syntaxFacts.IsNumericLiteral(t)
-                        || syntaxFacts.IsCharacterLiteral(t)
-                        || syntaxFacts.IsStringLiteral(t),
-                    cancellationToken
-                )
+                position,
+                t =>
+                    syntaxFacts.IsNumericLiteral(t)
+                    || syntaxFacts.IsCharacterLiteral(t)
+                    || syntaxFacts.IsStringLiteral(t),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (token.RawKind == 0)
@@ -302,12 +303,12 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             // We'll take those results, massage them, and forward them along to the
             // FindUsagesContext instance we were given.
             await SymbolFinder.FindLiteralReferencesAsync(
-                    tokenValue,
-                    Type.GetTypeCode(tokenValue.GetType()),
-                    solution,
-                    progressAdapter,
-                    cancellationToken
-                )
+                tokenValue,
+                Type.GetTypeCode(tokenValue.GetType()),
+                solution,
+                progressAdapter,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return true;

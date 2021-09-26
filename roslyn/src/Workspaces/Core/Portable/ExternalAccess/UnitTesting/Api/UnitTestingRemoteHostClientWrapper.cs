@@ -48,13 +48,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         {
             Contract.ThrowIfTrue(IsDefault);
             await UnderlyingObject.RunRemoteAsync(
-                    (WellKnownServiceHubService)service,
-                    targetName,
-                    solution,
-                    arguments,
-                    callbackTarget,
-                    cancellationToken
-                )
+                (WellKnownServiceHubService)service,
+                targetName,
+                solution,
+                arguments,
+                callbackTarget,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return true;
         }
@@ -70,13 +70,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         {
             Contract.ThrowIfTrue(IsDefault);
             return await UnderlyingObject.RunRemoteAsync<T>(
-                    (WellKnownServiceHubService)service,
-                    targetName,
-                    solution,
-                    arguments,
-                    callbackTarget,
-                    cancellationToken
-                )
+                (WellKnownServiceHubService)service,
+                targetName,
+                solution,
+                arguments,
+                callbackTarget,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -89,10 +89,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             Contract.ThrowIfTrue(IsDefault);
             return new UnitTestingRemoteServiceConnectionWrapper(
                 await UnderlyingObject.CreateConnectionAsync(
-                        (WellKnownServiceHubService)service,
-                        callbackTarget,
-                        cancellationToken
-                    )
+                    (WellKnownServiceHubService)service,
+                    callbackTarget,
+                    cancellationToken
+                )
                     .ConfigureAwait(false)
             );
         }

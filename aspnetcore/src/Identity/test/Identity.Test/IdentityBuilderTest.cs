@@ -48,9 +48,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverrideUserStore()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>().AddUserStore<MyUberThingy>();
             var thingy =
                 services.BuildServiceProvider().GetRequiredService<IUserStore<PocoUser>>()
@@ -61,9 +60,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverrideRoleStore()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>().AddRoleStore<MyUberThingy>();
             var thingy =
                 services.BuildServiceProvider().GetRequiredService<IRoleStore<PocoRole>>()
@@ -74,7 +72,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverridePrincipalFactory()
         {
-            var services = new ServiceCollection().AddLogging()
+            var services = new ServiceCollection()
+                .AddLogging()
                 .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>()
                 .AddClaimsPrincipalFactory<MyClaimsPrincipalFactory>()
@@ -91,7 +90,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverrideUserConfirmation()
         {
-            var services = new ServiceCollection().AddLogging()
+            var services = new ServiceCollection()
+                .AddLogging()
                 .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>()
                 .AddClaimsPrincipalFactory<MyClaimsPrincipalFactory>()
@@ -108,9 +108,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverrideRoleValidator()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>().AddRoleValidator<MyUberThingy>();
             var thingy =
                 services.BuildServiceProvider().GetRequiredService<IRoleValidator<PocoRole>>()
@@ -121,9 +120,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverrideUserValidator()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>().AddUserValidator<MyUberThingy>();
             var thingy =
                 services.BuildServiceProvider().GetRequiredService<IUserValidator<PocoUser>>()
@@ -134,9 +132,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverridePasswordValidator()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>().AddPasswordValidator<MyUberThingy>();
             var thingy =
                 services.BuildServiceProvider().GetRequiredService<IPasswordValidator<PocoUser>>()
@@ -147,9 +144,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverrideUserManager()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>()
                 .AddUserStore<NoopUserStore>()
                 .AddUserManager<MyUserManager>();
@@ -162,9 +158,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverrideRoleManager()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>()
                 .AddRoleStore<NoopRoleStore>()
                 .AddRoleManager<MyRoleManager>();
@@ -177,9 +172,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void CanOverrideSignInManager()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                    new ConfigurationBuilder().Build()
-                )
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
                 .AddHttpContextAccessor()
                 .AddLogging();
             services.AddIdentity<PocoUser, PocoRole>()
@@ -197,9 +191,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void EnsureDefaultServices()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddLogging()
                 .AddIdentity<PocoUser, PocoRole>()
                 .AddUserStore<NoopUserStore>()
@@ -231,9 +224,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void EnsureDefaultTokenProviders()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             services.AddIdentity<PocoUser, PocoRole>().AddDefaultTokenProviders();
 
             var provider = services.BuildServiceProvider();
@@ -247,9 +239,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void AddManagerWithWrongTypesThrows()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             var builder = services.AddIdentity<PocoUser, PocoRole>();
             Assert.Throws<InvalidOperationException>(() => builder.AddUserManager<object>());
             Assert.Throws<InvalidOperationException>(() => builder.AddRoleManager<object>());
@@ -259,9 +250,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [Fact]
         public void AddTokenProviderWithWrongTypesThrows()
         {
-            var services = new ServiceCollection().AddSingleton<IConfiguration>(
-                new ConfigurationBuilder().Build()
-            );
+            var services = new ServiceCollection()
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
             var builder = services.AddIdentity<PocoUser, PocoRole>();
             Assert.Throws<InvalidOperationException>(
                 () => builder.AddTokenProvider<object>("whatevs")

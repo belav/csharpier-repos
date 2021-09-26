@@ -1341,8 +1341,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var url = LinkFrom(
-                    "http://localhost/DefaultValuesRoute/Default/DefaultValues/DefaultParameter/123"
-                )
+                "http://localhost/DefaultValuesRoute/Default/DefaultValues/DefaultParameter/123"
+            )
                 .To(new { id = "17" });
 
             // Act

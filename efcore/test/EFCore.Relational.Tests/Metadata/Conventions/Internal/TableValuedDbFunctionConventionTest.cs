@@ -20,10 +20,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
         {
             var modelBuilder = CreateModelBuilder();
             modelBuilder.HasDbFunction(
-                typeof(TableValuedDbFunctionConventionTest).GetMethod(
-                    nameof(GetKeylessEntities),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+                typeof(TableValuedDbFunctionConventionTest)
+                    .GetMethod(
+                        nameof(GetKeylessEntities),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )
             );
 
             modelBuilder.Entity<KeylessEntity>().HasNoKey();
@@ -41,10 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             var modelBuilder = CreateModelBuilder();
             modelBuilder.Entity<TestEntity>().ToTable("TestTable").HasKey(e => e.Name);
             modelBuilder.HasDbFunction(
-                typeof(TableValuedDbFunctionConventionTest).GetMethod(
-                    nameof(GetEntities),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+                typeof(TableValuedDbFunctionConventionTest)
+                    .GetMethod(nameof(GetEntities), BindingFlags.NonPublic | BindingFlags.Static)
             );
 
             var model = Finalize(modelBuilder);
@@ -64,10 +63,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             var modelBuilder = CreateModelBuilder();
             modelBuilder.Owned<KeylessEntity>();
             modelBuilder.HasDbFunction(
-                typeof(TableValuedDbFunctionConventionTest).GetMethod(
-                    nameof(GetKeylessEntities),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+                typeof(TableValuedDbFunctionConventionTest)
+                    .GetMethod(
+                        nameof(GetKeylessEntities),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )
             );
 
             Assert.Equal(
@@ -85,10 +85,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             var modelBuilder = CreateModelBuilder();
             modelBuilder.Entity<TestEntity>().OwnsOne(e => e.KeylessEntity);
             modelBuilder.HasDbFunction(
-                typeof(TableValuedDbFunctionConventionTest).GetMethod(
-                    nameof(GetKeylessEntities),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+                typeof(TableValuedDbFunctionConventionTest)
+                    .GetMethod(
+                        nameof(GetKeylessEntities),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )
             );
 
             Assert.Equal(
@@ -105,10 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
         {
             var modelBuilder = CreateModelBuilder();
             modelBuilder.HasDbFunction(
-                typeof(TableValuedDbFunctionConventionTest).GetMethod(
-                    nameof(GetScalars),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+                typeof(TableValuedDbFunctionConventionTest)
+                    .GetMethod(nameof(GetScalars), BindingFlags.NonPublic | BindingFlags.Static)
             );
 
             Assert.Equal(

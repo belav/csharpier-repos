@@ -3523,14 +3523,13 @@ class C
 
             var tree = SyntaxFactory.ParseSyntaxTree(source);
             var root = tree.GetRoot();
-            tree.GetDiagnostics(root)
-                .Verify(
-                    // (7,36): error CS1003: Syntax error, 'when' expected
-                    //         catch (System.Exception e) if (true) { }
-                    CSharpTestBase.Diagnostic(ErrorCode.ERR_SyntaxError, "if")
-                        .WithArguments("when", "if")
-                        .WithLocation(7, 36)
-                );
+            tree.GetDiagnostics(root).Verify(
+                // (7,36): error CS1003: Syntax error, 'when' expected
+                //         catch (System.Exception e) if (true) { }
+                CSharpTestBase.Diagnostic(ErrorCode.ERR_SyntaxError, "if")
+                    .WithArguments("when", "if")
+                    .WithLocation(7, 36)
+            );
 
             var filterClause = root.DescendantNodes().OfType<CatchFilterClauseSyntax>().Single();
             Assert.Equal(SyntaxKind.WhenKeyword, filterClause.WhenKeyword.Kind());
@@ -3599,20 +3598,19 @@ class Program
 ";
 
             var tree = SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.Regular);
-            tree.GetDiagnostics(tree.GetRoot())
-                .Verify(
-                    // (9,10): error CS1026: ) expected
-                    //         }
-                    CSharpTestBase.Diagnostic(ErrorCode.ERR_CloseParenExpected, "")
-                        .WithLocation(9, 10),
-                    // (9,10): error CS1002: ; expected
-                    //         }
-                    CSharpTestBase.Diagnostic(ErrorCode.ERR_SemicolonExpected, "")
-                        .WithLocation(9, 10),
-                    // (9,10): error CS1513: } expected
-                    //         }
-                    CSharpTestBase.Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(9, 10)
-                );
+            tree.GetDiagnostics(tree.GetRoot()).Verify(
+                // (9,10): error CS1026: ) expected
+                //         }
+                CSharpTestBase.Diagnostic(ErrorCode.ERR_CloseParenExpected, "")
+                    .WithLocation(9, 10),
+                // (9,10): error CS1002: ; expected
+                //         }
+                CSharpTestBase.Diagnostic(ErrorCode.ERR_SemicolonExpected, "")
+                    .WithLocation(9, 10),
+                // (9,10): error CS1513: } expected
+                //         }
+                CSharpTestBase.Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(9, 10)
+            );
         }
 
         [WorkItem(6676, "https://github.com/dotnet/roslyn/issues/6676")]

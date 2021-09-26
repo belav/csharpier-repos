@@ -164,17 +164,17 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             )
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var state = await State.GenerateAsync(
-                        (TService)this,
-                        semanticDocument,
-                        node,
-                        cancellationToken
-                    )
+                    (TService)this,
+                    semanticDocument,
+                    node,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (state != null)
                 {
@@ -187,10 +187,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     {
                         result.Add(
                             new MyCodeAction(
-                                string.Format(
-                                    FeaturesResources.Generate_constructor_in_0_with_fields,
-                                    state.TypeToGenerateIn.Name
-                                ),
+                                string
+                                    .Format(
+                                        FeaturesResources.Generate_constructor_in_0_with_fields,
+                                        state.TypeToGenerateIn.Name
+                                    ),
                                 c =>
                                     state.GetChangedDocumentAsync(
                                         document,
@@ -207,10 +208,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     {
                         result.Add(
                             new MyCodeAction(
-                                string.Format(
-                                    FeaturesResources.Generate_constructor_in_0_with_properties,
-                                    state.TypeToGenerateIn.Name
-                                ),
+                                string
+                                    .Format(
+                                        FeaturesResources.Generate_constructor_in_0_with_properties,
+                                        state.TypeToGenerateIn.Name
+                                    ),
                                 c =>
                                     state.GetChangedDocumentAsync(
                                         document,
@@ -225,10 +227,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     // Always offer to just generate the constructor and nothing else.
                     result.Add(
                         new MyCodeAction(
-                            string.Format(
-                                FeaturesResources.Generate_constructor_in_0,
-                                state.TypeToGenerateIn.Name
-                            ),
+                            string
+                                .Format(
+                                    FeaturesResources.Generate_constructor_in_0,
+                                    state.TypeToGenerateIn.Name
+                                ),
                             c =>
                                 state.GetChangedDocumentAsync(
                                     document,
@@ -273,9 +276,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     return true;
                 case Accessibility.ProtectedAndInternal:
                 case Accessibility.Internal:
-                    return document.SemanticModel.Compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                        symbol.ContainingAssembly
-                    );
+                    return document.SemanticModel.Compilation.Assembly
+                        .IsSameAssemblyOrHasFriendAccessTo(symbol.ContainingAssembly);
 
                 default:
                     return false;
@@ -319,24 +321,19 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 .ToImmutableArray();
 
             var parameterNames = reservedNames.Concat(
-                    arguments.Select(
-                        a =>
-                            this.GenerateNameForArgument(
-                                document.SemanticModel,
-                                a,
-                                cancellationToken
-                            )
-                    )
+                arguments.Select(
+                    a => this.GenerateNameForArgument(document.SemanticModel, a, cancellationToken)
                 )
+            )
                 .ToImmutableArray();
 
             var syntaxFacts = document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
             var comparer = syntaxFacts.StringComparer;
             return NameGenerator.EnsureUniqueness(
-                    parameterNames,
-                    isFixed,
-                    canUse: s => !reservedNames.Any(n => comparer.Equals(s, n))
-                )
+                parameterNames,
+                isFixed,
+                canUse: s => !reservedNames.Any(n => comparer.Equals(s, n))
+            )
                 .Select(
                     (name, index) => new ParameterName(name, isFixed[index], parameterNamingRule)
                 )

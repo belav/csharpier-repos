@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore
                 >
             > relationalAction
         ) =>
-            new DbContextOptionsBuilder().UseInternalServiceProvider(
+            new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(
                     services.AddEntityFrameworkSqlServer().BuildServiceProvider()
                 )
                 .UseSqlServer("Data Source=LoggingSqlServerTest.db", relationalAction);

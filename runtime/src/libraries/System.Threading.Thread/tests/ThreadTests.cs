@@ -222,17 +222,16 @@ namespace System.Threading.Threads.Tests
         public static void ApartmentState_NoAttributePresent_DefaultState_Windows()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
-                        AssertExtensions.ThrowsContains<InvalidOperationException>(
-                            () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA),
-                            "MTA"
-                        );
-                        Thread.CurrentThread.SetApartmentState(ApartmentState.MTA);
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
+                    AssertExtensions.ThrowsContains<InvalidOperationException>(
+                        () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA),
+                        "MTA"
+                    );
+                    Thread.CurrentThread.SetApartmentState(ApartmentState.MTA);
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -240,18 +239,14 @@ namespace System.Threading.Threads.Tests
         public static void ApartmentState_NoAttributePresent_DefaultState_Unix()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Assert.Equal(
-                            ApartmentState.Unknown,
-                            Thread.CurrentThread.GetApartmentState()
-                        );
-                        Assert.Throws<PlatformNotSupportedException>(
-                            () => Thread.CurrentThread.SetApartmentState(ApartmentState.MTA)
-                        );
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Assert.Equal(ApartmentState.Unknown, Thread.CurrentThread.GetApartmentState());
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () => Thread.CurrentThread.SetApartmentState(ApartmentState.MTA)
+                    );
+                }
+            ).Dispose();
         }
 
         private static bool IsWindowsNanoServerAndRemoteExecutorSupported =>
@@ -262,15 +257,14 @@ namespace System.Threading.Threads.Tests
         public static void ApartmentState_NoAttributePresent_DefaultState_Nano()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Assert.Throws<InvalidOperationException>(
-                            () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
-                        );
-                        Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Assert.Throws<InvalidOperationException>(
+                        () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
+                    );
+                    Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -278,14 +272,13 @@ namespace System.Threading.Threads.Tests
         public static void ApartmentState_NoAttributePresent_STA_Unix()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Assert.Throws<PlatformNotSupportedException>(
-                            () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
-                        );
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
+                    );
+                }
+            ).Dispose();
         }
 
         [Theory]
@@ -609,26 +602,25 @@ namespace System.Threading.Threads.Tests
             // We run test on remote process because we need to set same principal policy
             // On .NET Framework default principal policy is PrincipalPolicy.UnauthenticatedPrincipal
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
+                () =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
 
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        Thread.CurrentPrincipal = null;
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Thread.CurrentPrincipal = null;
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        Thread.CurrentPrincipal = new ClaimsPrincipal();
-                        Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
+                    Thread.CurrentPrincipal = new ClaimsPrincipal();
+                    Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
 
-                        Thread.CurrentPrincipal = null;
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Thread.CurrentPrincipal = null;
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        Thread.CurrentPrincipal = new ClaimsPrincipal();
-                        Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
-                    }
-                )
-                .Dispose();
+                    Thread.CurrentPrincipal = new ClaimsPrincipal();
+                    Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -788,15 +780,14 @@ namespace System.Threading.Threads.Tests
             // On Linux, changing the main thread name affects ProcessName.
             // To avoid that, .NET ignores requests to change the main thread name.
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        const string ThreadName = "my-thread";
-                        Thread.CurrentThread.Name = ThreadName;
-                        Assert.Equal(ThreadName, Thread.CurrentThread.Name);
-                        Assert.NotEqual(ThreadName, Process.GetCurrentProcess().ProcessName);
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    const string ThreadName = "my-thread";
+                    Thread.CurrentThread.Name = ThreadName;
+                    Assert.Equal(ThreadName, Thread.CurrentThread.Name);
+                    Assert.NotEqual(ThreadName, Process.GetCurrentProcess().ProcessName);
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1376,18 +1367,15 @@ namespace System.Threading.Threads.Tests
         public static void WindowsPrincipalPolicyTest_Windows()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
-                        Assert.Equal(
-                            Environment.UserDomainName + @"\" + Environment.UserName,
-                            Thread.CurrentPrincipal.Identity.Name
-                        );
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+                    Assert.Equal(
+                        Environment.UserDomainName + @"\" + Environment.UserName,
+                        Thread.CurrentPrincipal.Identity.Name
+                    );
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -1401,27 +1389,24 @@ namespace System.Threading.Threads.Tests
         public static void WindowsPrincipalPolicyTest_Windows_NewThreads()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
+                () =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
 
-                        IPrincipal currentPrincipal = Thread.CurrentPrincipal;
+                    IPrincipal currentPrincipal = Thread.CurrentPrincipal;
 
-                        Assert.NotNull(currentPrincipal);
-                        Assert.True(currentPrincipal.Identity.IsAuthenticated);
+                    Assert.NotNull(currentPrincipal);
+                    Assert.True(currentPrincipal.Identity.IsAuthenticated);
 
-                        var first = new Thread(CheckPrincipal);
-                        first.Start(currentPrincipal);
-                        first.Join();
+                    var first = new Thread(CheckPrincipal);
+                    first.Start(currentPrincipal);
+                    first.Join();
 
-                        var second = new Thread(CheckPrincipal);
-                        second.Start(currentPrincipal);
-                        second.Join();
-                    }
-                )
-                .Dispose();
+                    var second = new Thread(CheckPrincipal);
+                    second.Start(currentPrincipal);
+                    second.Join();
+                }
+            ).Dispose();
 
             static void CheckPrincipal(object principal)
             {
@@ -1435,22 +1420,21 @@ namespace System.Threading.Threads.Tests
         public static void NoPrincipalPolicyTest_NewThreads()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
+                () =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
 
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        var first = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
-                        first.Start();
-                        first.Join();
+                    var first = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
+                    first.Start();
+                    first.Join();
 
-                        var second = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
-                        second.Start();
-                        second.Join();
-                    }
-                )
-                .Dispose();
+                    var second = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
+                    second.Start();
+                    second.Join();
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -1464,26 +1448,23 @@ namespace System.Threading.Threads.Tests
         public static void NoPrincipalToWindowsPrincipalPolicyTest_Windows_NewThreads()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
+                () =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
 
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        var first = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
-                        first.Start();
-                        first.Join();
+                    var first = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
+                    first.Start();
+                    first.Join();
 
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
 
-                        var second = new Thread(CheckPrincipal);
-                        second.Start(Thread.CurrentPrincipal);
-                        second.Join();
-                    }
-                )
-                .Dispose();
+                    var second = new Thread(CheckPrincipal);
+                    second.Start(Thread.CurrentPrincipal);
+                    second.Join();
+                }
+            ).Dispose();
 
             static void CheckPrincipal(object principal)
             {
@@ -1498,42 +1479,36 @@ namespace System.Threading.Threads.Tests
         public static void WindowsPrincipalPolicyTest_Unix()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
-                        Assert.Throws<PlatformNotSupportedException>(() => Thread.CurrentPrincipal);
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+                    Assert.Throws<PlatformNotSupportedException>(() => Thread.CurrentPrincipal);
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void UnauthenticatedPrincipalTest()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.UnauthenticatedPrincipal
-                        );
-                        Assert.Equal(string.Empty, Thread.CurrentPrincipal.Identity.Name);
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    AppDomain.CurrentDomain
+                        .SetPrincipalPolicy(PrincipalPolicy.UnauthenticatedPrincipal);
+                    Assert.Equal(string.Empty, Thread.CurrentPrincipal.Identity.Name);
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void DefaultPrincipalPolicyTest()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Assert.Null(Thread.CurrentPrincipal);
-                    }
-                )
-                .Dispose();
+                () =>
+                {
+                    Assert.Null(Thread.CurrentPrincipal);
+                }
+            ).Dispose();
         }
 
         [Fact]

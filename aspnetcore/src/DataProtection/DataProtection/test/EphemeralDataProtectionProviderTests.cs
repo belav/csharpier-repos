@@ -16,9 +16,8 @@ namespace Microsoft.AspNetCore.DataProtection
         {
             // Arrange
             var dataProtector1 = new EphemeralDataProtectionProvider().CreateProtector("purpose");
-            var dataProtector2 = new EphemeralDataProtectionProvider(
-                NullLoggerFactory.Instance
-            ).CreateProtector("purpose");
+            var dataProtector2 = new EphemeralDataProtectionProvider(NullLoggerFactory.Instance)
+                .CreateProtector("purpose");
             byte[] bytes = Encoding.UTF8.GetBytes("Hello there!");
 
             // Act & assert

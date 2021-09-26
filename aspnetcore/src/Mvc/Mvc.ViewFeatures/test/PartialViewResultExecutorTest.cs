@@ -32,23 +32,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewName = "my-view";
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    e =>
-                        e.GetView( /*executingFilePath*/
-                            null,
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.GetView( /*executingFilePath*/
+                        null,
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound(viewName, Enumerable.Empty<string>()))
                 .Verifiable();
             viewEngine.Setup(
-                    e =>
-                        e.FindView(
-                            context,
-                            viewName, /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        context,
+                        viewName, /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.Found(viewName, Mock.Of<IView>()))
                 .Verifiable();
 
@@ -132,23 +132,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewName = "myview";
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    e =>
-                        e.GetView( /*executingFilePath*/
-                            null,
-                            "myview", /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.GetView( /*executingFilePath*/
+                        null,
+                        "myview", /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("myview", expectedLocations))
                 .Verifiable();
             viewEngine.Setup(
-                    e =>
-                        e.FindView(
-                            context,
-                            "myview", /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        context,
+                        "myview", /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("myview", Enumerable.Empty<string>()));
 
             var viewResult = new PartialViewResult
@@ -179,23 +179,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewName = "myview";
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    e =>
-                        e.GetView( /*executingFilePath*/
-                            null,
-                            "myview", /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.GetView( /*executingFilePath*/
+                        null,
+                        "myview", /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("myview", Enumerable.Empty<string>()))
                 .Verifiable();
             viewEngine.Setup(
-                    e =>
-                        e.FindView(
-                            context,
-                            "myview", /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        context,
+                        "myview", /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("myview", expectedLocations));
 
             var viewResult = new PartialViewResult
@@ -226,23 +226,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewName = "myview";
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    e =>
-                        e.GetView( /*executingFilePath*/
-                            null,
-                            "myview", /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.GetView( /*executingFilePath*/
+                        null,
+                        "myview", /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("myview", new[] { "location1", "location2" }))
                 .Verifiable();
             viewEngine.Setup(
-                    e =>
-                        e.FindView(
-                            context,
-                            "myview", /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        context,
+                        "myview", /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("myview", new[] { "location3", "location4" }));
 
             var viewResult = new PartialViewResult
@@ -309,23 +309,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewName = "myview";
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    e =>
-                        e.GetView( /*executingFilePath*/
-                            null,
-                            "myview", /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.GetView( /*executingFilePath*/
+                        null,
+                        "myview", /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("myview", Enumerable.Empty<string>()))
                 .Verifiable();
             viewEngine.Setup(
-                    e =>
-                        e.FindView(
-                            context,
-                            "myview", /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        context,
+                        "myview", /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("myview", new string[] { "location/myview" }));
 
             var viewResult = new PartialViewResult
@@ -428,25 +428,25 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    e =>
-                        e.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns<string, string, bool>(
                     (executing, name, isMainPage) =>
                         ViewEngineResult.NotFound(name, Enumerable.Empty<string>())
                 );
             viewEngine.Setup(
-                    e =>
-                        e.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                e =>
+                    e.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns<ActionContext, string, bool>(
                     (context, name, isMainPage) => ViewEngineResult.Found(name, Mock.Of<IView>())
                 );

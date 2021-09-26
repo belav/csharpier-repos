@@ -203,7 +203,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
 
                     var testLogFiles = new DirectoryInfo(
                         Path.Combine(tempDir, ThisAssemblyName, TFM, "FakeTestClass")
-                    ).EnumerateFiles();
+                    )
+                        .EnumerateFiles();
                     var testLog = Assert.Single(testLogFiles);
                     var testFileName = Path.GetFileNameWithoutExtension(testLog.Name);
 
@@ -323,10 +324,10 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
 
         private static string MakeConsistent(string input)
         {
-            return string.Join(
-                Environment.NewLine,
-                input.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
-                    .Select(
+            return string
+                .Join(
+                    Environment.NewLine,
+                    input.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Select(
                         line =>
                         {
                             var strippedPrefix =
@@ -347,7 +348,7 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                             return strippedTimestampOffset;
                         }
                     )
-            );
+                );
         }
     }
 }

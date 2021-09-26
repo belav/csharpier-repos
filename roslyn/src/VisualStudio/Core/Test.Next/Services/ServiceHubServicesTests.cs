@@ -39,9 +39,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
     {
         private static TestWorkspace CreateWorkspace(Type[] additionalParts = null) =>
             new TestWorkspace(
-                composition: FeaturesTestCompositions.Features.WithTestHostParts(
-                        TestHost.OutOfProcess
-                    )
+                composition: FeaturesTestCompositions.Features
+                    .WithTestHostParts(TestHost.OutOfProcess)
                     .AddParts(additionalParts)
             );
 
@@ -145,10 +144,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // check that text already exist in remote side
             Assert.True(
-                client.TestData.WorkspaceManager.SolutionAssetCache.TryGetAsset<SerializableSourceText>(
-                    newState.Text,
-                    out var serializableRemoteText
-                )
+                client.TestData.WorkspaceManager.SolutionAssetCache
+                    .TryGetAsset<SerializableSourceText>(
+                        newState.Text,
+                        out var serializableRemoteText
+                    )
             );
             Assert.Equal(
                 newText.ToString(),
@@ -166,10 +166,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             using var workspace = CreateWorkspace();
             workspace.SetOptions(
-                workspace.Options.WithChangedOption(
-                    TodoCommentOptions.TokenList,
-                    "HACK:1|TODO:1|UNDONE:1|UnresolvedMergeConflict:0"
-                )
+                workspace.Options
+                    .WithChangedOption(
+                        TodoCommentOptions.TokenList,
+                        "HACK:1|TODO:1|UNDONE:1|UnresolvedMergeConflict:0"
+                    )
             );
             workspace.InitializeDocuments(
                 LanguageNames.CSharp,
@@ -357,11 +358,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             var workspace = CreateWorkspace(new[] { typeof(NoCompilationLanguageServiceFactory) });
             var solution =
-                workspace.CurrentSolution.AddProject(
-                    "unknown",
-                    "unknown",
-                    NoCompilationConstants.LanguageName
-                ).Solution;
+                workspace.CurrentSolution
+                    .AddProject("unknown", "unknown", NoCompilationConstants.LanguageName).Solution;
 
             using var client = await InProcRemoteHostClient.GetTestClientAsync(workspace)
                 .ConfigureAwait(false);
@@ -575,10 +573,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 var projectStateShouldSame = projectId != currentProjectId;
                 Assert.Equal(
                     projectStateShouldSame,
-                    object.ReferenceEquals(
-                        solution1.GetProject(currentProjectId).State,
-                        solution2.GetProject(currentProjectId).State
-                    )
+                    object
+                        .ReferenceEquals(
+                            solution1.GetProject(currentProjectId).State,
+                            solution2.GetProject(currentProjectId).State
+                        )
                 );
 
                 if (!projectStateShouldSame)
@@ -596,10 +595,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                         var documentStateShouldSame = documentId != currentDocumentId;
                         Assert.Equal(
                             documentStateShouldSame,
-                            object.ReferenceEquals(
-                                solution1.GetDocument(currentDocumentId).State,
-                                solution2.GetDocument(currentDocumentId).State
-                            )
+                            object
+                                .ReferenceEquals(
+                                    solution1.GetDocument(currentDocumentId).State,
+                                    solution2.GetDocument(currentDocumentId).State
+                                )
                         );
                     }
                 }
@@ -656,12 +656,12 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             string documentName
         )
         {
-            var project = solution.Projects.First(
-                p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
-            );
-            var document = project.Documents.First(
-                d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
-            );
+            var project = solution.Projects
+                .First(p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase));
+            var document = project.Documents
+                .First(
+                    d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
+                );
 
             return (project, document);
         }

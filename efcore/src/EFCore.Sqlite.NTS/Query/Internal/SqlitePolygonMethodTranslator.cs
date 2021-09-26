@@ -20,11 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqlitePolygonMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _getInteriorRingN =
-            typeof(Polygon).GetRequiredRuntimeMethod(
-                nameof(Polygon.GetInteriorRingN),
-                new[] { typeof(int) }
-            );
+        private static readonly MethodInfo _getInteriorRingN = typeof(Polygon)
+            .GetRequiredRuntimeMethod(nameof(Polygon.GetInteriorRingN), new[] { typeof(int) });
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 

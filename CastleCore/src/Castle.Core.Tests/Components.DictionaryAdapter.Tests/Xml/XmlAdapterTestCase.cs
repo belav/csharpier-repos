@@ -32,7 +32,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         protected static XmlDocument Xml(params string[] xml)
         {
             var document = new XmlDocument();
-            var text = string.Concat(xml)
+            var text = string
+                .Concat(xml)
                 .Replace("$xsd", "xmlns:xsd='http://www.w3.org/2001/XMLSchema'")
                 .Replace("$xsi", "xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'")
                 .Replace("$x", "xmlns:x='urn:schemas-castle-org:xml-reference'");
@@ -59,10 +60,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             var xmlAdapter = new XmlAdapter(storage);
 
-            var descriptor = new PropertyDescriptor().AddBehaviors(
-                XmlMetadataBehavior.Default,
-                xmlAdapter
-            );
+            var descriptor = new PropertyDescriptor()
+                .AddBehaviors(XmlMetadataBehavior.Default, xmlAdapter);
 
             if (config != null)
                 config(descriptor);

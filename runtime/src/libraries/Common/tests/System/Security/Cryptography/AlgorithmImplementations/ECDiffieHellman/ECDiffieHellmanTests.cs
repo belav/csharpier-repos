@@ -204,16 +204,19 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     X = (
                         "014AACFCDA18F77EBF11DC0A2D394D3032E86C3AC0B5F558916361163EA6AD3DB27"
                         + "F6476D6C6E5D9C4A77BCCC5C0069D481718DACA3B1B13035AF5D246C4DC0CE0EA"
-                    ).HexToByteArray(),
+                    )
+                        .HexToByteArray(),
                     Y = (
                         "00CA500F75537C782E027DE568F148334BF56F7E24C3830792236B5D20F7A33E998"
                         + "62B1744D2413E4C4AC29DBA42FC48D23AE5B916BED73997EC69B3911C686C5164"
-                    ).HexToByteArray(),
+                    )
+                        .HexToByteArray(),
                 },
                 D = (
                     "00202F9F5480723D1ACF15372CE0B99B6CC3E8772FFDDCF828EEEB314B3EAA35B19"
                     + "886AAB1E6871E548C261C7708BF561A4C373D3EED13F0749851F57B86DC049D71"
-                ).HexToByteArray(),
+                )
+                    .HexToByteArray(),
             };
 
             ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create();

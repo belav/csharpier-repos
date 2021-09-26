@@ -276,13 +276,14 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
             var localizationOptionsAccesor = Options.Create(localizationOptions);
 
-            options.ClientModelValidatorProviders.Add(
-                new DataAnnotationsClientModelValidatorProvider(
-                    new ValidationAttributeAdapterProvider(),
-                    localizationOptionsAccesor,
-                    localizerFactory
-                )
-            );
+            options.ClientModelValidatorProviders
+                .Add(
+                    new DataAnnotationsClientModelValidatorProvider(
+                        new ValidationAttributeAdapterProvider(),
+                        localizationOptionsAccesor,
+                        localizerFactory
+                    )
+                );
 
             var urlHelperFactory = new Mock<IUrlHelperFactory>();
             urlHelperFactory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
@@ -312,7 +313,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 innerHelper = innerHelperWrapper(innerHelper);
             }
 
-            var serviceProvider = new ServiceCollection().AddSingleton(viewEngine)
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton(viewEngine)
                 .AddSingleton(urlHelperFactory.Object)
                 .AddSingleton(Mock.Of<IViewComponentHelper>())
                 .AddSingleton(innerHelper)
@@ -348,35 +350,33 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         private static ICompositeViewEngine CreateViewEngine()
         {
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    async (ViewContext v) =>
-                    {
-                        view.ToString();
-                        await v.Writer.WriteAsync(FormatOutput(v.ViewData.ModelExplorer));
-                    }
-                )
-                .Returns(Task.FromResult(0));
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                async (ViewContext v) =>
+                {
+                    view.ToString();
+                    await v.Writer.WriteAsync(FormatOutput(v.ViewData.ModelExplorer));
+                }
+            ).Returns(Task.FromResult(0));
 
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
             viewEngine.Setup(
-                    v =>
-                        v.GetView( /*executingFilePath*/
-                            null,
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.GetView( /*executingFilePath*/
+                        null,
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.NotFound("MyView", Enumerable.Empty<string>()))
                 .Verifiable();
             viewEngine.Setup(
-                    v =>
-                        v.FindView(
-                            It.IsAny<ActionContext>(),
-                            It.IsAny<string>(), /*isMainPage*/
-                            false
-                        )
-                )
+                v =>
+                    v.FindView(
+                        It.IsAny<ActionContext>(),
+                        It.IsAny<string>(), /*isMainPage*/
+                        false
+                    )
+            )
                 .Returns(ViewEngineResult.Found("MyView", view.Object))
                 .Verifiable();
 
@@ -385,24 +385,23 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
         public static string FormatOutput(IHtmlHelper helper, object model)
         {
-            var modelExplorer = helper.MetadataProvider.GetModelExplorerForType(
-                model.GetType(),
-                model
-            );
+            var modelExplorer = helper.MetadataProvider
+                .GetModelExplorerForType(model.GetType(), model);
             return FormatOutput(modelExplorer);
         }
 
         private static string FormatOutput(ModelExplorer modelExplorer)
         {
             var metadata = modelExplorer.Metadata;
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "Model = {0}, ModelType = {1}, PropertyName = {2}, SimpleDisplayText = {3}",
-                modelExplorer.Model ?? "(null)",
-                metadata.ModelType == null ? "(null)" : metadata.ModelType.FullName,
-                metadata.PropertyName ?? "(null)",
-                modelExplorer.GetSimpleDisplayText() ?? "(null)"
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "Model = {0}, ModelType = {1}, PropertyName = {2}, SimpleDisplayText = {3}",
+                    modelExplorer.Model ?? "(null)",
+                    metadata.ModelType == null ? "(null)" : metadata.ModelType.FullName,
+                    metadata.PropertyName ?? "(null)",
+                    modelExplorer.GetSimpleDisplayText() ?? "(null)"
+                );
         }
 
         private static IUrlHelper CreateUrlHelper()

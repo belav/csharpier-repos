@@ -50,18 +50,18 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             )
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var state = await State.GenerateDeconstructMethodStateAsync(
-                        (TService)this,
-                        semanticDocument,
-                        leftSide,
-                        typeToGenerateIn,
-                        cancellationToken
-                    )
+                    (TService)this,
+                    semanticDocument,
+                    leftSide,
+                    typeToGenerateIn,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return state != null

@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Remote
             // We only checksum off of the contents of the file.  During load, we can't really compute any other
             // information since we don't necessarily know about other files, metadata, or dependencies.  So during
             // load, we allow for the previous semantic classifications to be used as long as the file contents match.
-            var checksums = await document.State.GetStateChecksumsAsync(cancellationToken)
+            var checksums = await document.State
+                .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
             var textChecksum = checksums.Text;
             return textChecksum;
@@ -132,11 +133,11 @@ namespace Microsoft.CodeAnalysis.Remote
             var checksum = await GetChecksumAsync(document, cancellationToken)
                 .ConfigureAwait(false);
             var matches = await storage.ChecksumMatchesAsync(
-                    documentKey,
-                    PersistenceName,
-                    checksum,
-                    cancellationToken
-                )
+                documentKey,
+                PersistenceName,
+                checksum,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (matches)
                 return;
@@ -147,11 +148,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 // Compute classifications for the full span.
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
                 await classificationService.AddSemanticClassificationsAsync(
-                        document,
-                        new TextSpan(0, text.Length),
-                        classifiedSpans,
-                        cancellationToken
-                    )
+                    document,
+                    new TextSpan(0, text.Length),
+                    classifiedSpans,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 using var stream = SerializableBytes.CreateWritableStream();
@@ -162,12 +163,12 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 stream.Position = 0;
                 await storage.WriteStreamAsync(
-                        documentKey,
-                        PersistenceName,
-                        stream,
-                        checksum,
-                        cancellationToken
-                    )
+                    documentKey,
+                    PersistenceName,
+                    stream,
+                    checksum,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -186,9 +187,8 @@ namespace Microsoft.CodeAnalysis.Remote
             // spans we emit.
 
             using var _1 = ArrayBuilder<string>.GetInstance(out var classificationTypes);
-            using var _2 = PooledDictionary<string, int>.GetInstance(
-                out var seenClassificationTypes
-            );
+            using var _2 = PooledDictionary<string, int>
+                .GetInstance(out var seenClassificationTypes);
 
             foreach (var classifiedSpan in classifiedSpans)
             {
@@ -236,10 +236,10 @@ namespace Microsoft.CodeAnalysis.Remote
                 async cancellationToken =>
                 {
                     var classifiedSpans = await TryGetOrReadCachedSemanticClassificationsAsync(
-                            documentKey,
-                            checksum,
-                            cancellationToken
-                        )
+                        documentKey,
+                        checksum,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (classifiedSpans.IsDefault)
                         return null;
@@ -266,10 +266,10 @@ namespace Microsoft.CodeAnalysis.Remote
 
             // Otherwise, attempt to read in classifications from persistence store.
             classifiedSpans = await TryReadCachedSemanticClassificationsAsync(
-                    documentKey,
-                    checksum,
-                    cancellationToken
-                )
+                documentKey,
+                checksum,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (classifiedSpans.IsDefault)
                 return default;
@@ -347,22 +347,22 @@ namespace Microsoft.CodeAnalysis.Remote
                 return default;
 
             var storage = await persistenceService.GetStorageAsync(
-                    workspace,
-                    documentKey.Project.Solution,
-                    checkBranchId: false,
-                    cancellationToken
-                )
+                workspace,
+                documentKey.Project.Solution,
+                checkBranchId: false,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             await using var _ = storage.ConfigureAwait(false);
             if (storage == null)
                 return default;
 
             using var stream = await storage.ReadStreamAsync(
-                    documentKey,
-                    PersistenceName,
-                    checksum,
-                    cancellationToken
-                )
+                documentKey,
+                PersistenceName,
+                checksum,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             using var reader = ObjectReader.TryGetReader(
                 stream,
@@ -385,19 +385,15 @@ namespace Microsoft.CodeAnalysis.Remote
                 // For space efficiency, the unique classification types are emitted in one array up front, and then the
                 // specific classification type is referred to by index when emitting the individual spans.
                 var classificationTypesCount = reader.ReadInt32();
-                using var _1 = ArrayBuilder<string>.GetInstance(
-                    classificationTypesCount,
-                    out var classificationTypes
-                );
+                using var _1 = ArrayBuilder<string>
+                    .GetInstance(classificationTypesCount, out var classificationTypes);
 
                 for (var i = 0; i < classificationTypesCount; i++)
                     classificationTypes.Add(reader.ReadString());
 
                 var classifiedSpanCount = reader.ReadInt32();
-                using var _2 = ArrayBuilder<ClassifiedSpan>.GetInstance(
-                    classifiedSpanCount,
-                    out var classifiedSpans
-                );
+                using var _2 = ArrayBuilder<ClassifiedSpan>
+                    .GetInstance(classifiedSpanCount, out var classifiedSpans);
 
                 for (var i = 0; i < classifiedSpanCount; i++)
                 {
@@ -421,9 +417,8 @@ namespace Microsoft.CodeAnalysis.Remote
             catch
             {
                 // We're reading and interpreting arbitrary data from disk.  This may be invalid for any reason.
-                Internal.Log.Logger.Log(
-                    FunctionId.RemoteSemanticClassificationCacheService_ExceptionInCacheRead
-                );
+                Internal.Log.Logger
+                    .Log(FunctionId.RemoteSemanticClassificationCacheService_ExceptionInCacheRead);
                 return default;
             }
         }

@@ -45,9 +45,8 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
                 new TestFile("Secret2", "SecretValue2")
             );
 
-            var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o => o.FileProvider = testFileProvider
-                )
+            var config = new ConfigurationBuilder()
+                .AddKeyPerFile(o => o.FileProvider = testFileProvider)
                 .Build();
 
             Assert.Equal("SecretValue1", config["Secret1"]);
@@ -63,9 +62,8 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
                 new TestFile("directory")
             );
 
-            var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o => o.FileProvider = testFileProvider
-                )
+            var config = new ConfigurationBuilder()
+                .AddKeyPerFile(o => o.FileProvider = testFileProvider)
                 .Build();
 
             Assert.Equal("SecretValue1", config["Secret1"]);
@@ -81,9 +79,8 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
                 new TestFile("Secret0__Key", "SecretValue0")
             );
 
-            var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o => o.FileProvider = testFileProvider
-                )
+            var config = new ConfigurationBuilder()
+                .AddKeyPerFile(o => o.FileProvider = testFileProvider)
                 .Build();
 
             Assert.Equal("SecretValue0", config["Secret0:Key"]);
@@ -100,9 +97,8 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
                 new TestFile("Secret2", "SecretValue2")
             );
 
-            var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o => o.FileProvider = testFileProvider
-                )
+            var config = new ConfigurationBuilder()
+                .AddKeyPerFile(o => o.FileProvider = testFileProvider)
                 .Build();
 
             Assert.Null(config["ignore.Secret0"]);
@@ -120,13 +116,12 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
             );
 
             var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o =>
-                    {
-                        o.FileProvider = testFileProvider;
-                        o.IgnoreCondition = null;
-                    }
-                )
-                .Build();
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.IgnoreCondition = null;
+                }
+            ).Build();
 
             Assert.Equal("SecretValue0", config["ignore.Secret0"]);
             Assert.Equal("SecretValue1", config["ignore.Secret1"]);
@@ -143,13 +138,12 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
             );
 
             var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o =>
-                    {
-                        o.FileProvider = testFileProvider;
-                        o.IgnoreCondition = s => true;
-                    }
-                )
-                .Build();
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.IgnoreCondition = s => true;
+                }
+            ).Build();
 
             Assert.Empty(config.AsEnumerable());
         }
@@ -164,13 +158,12 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
             );
 
             var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o =>
-                    {
-                        o.FileProvider = testFileProvider;
-                        o.IgnorePrefix = "me";
-                    }
-                )
-                .Build();
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.IgnorePrefix = "me";
+                }
+            ).Build();
 
             Assert.Null(config["meSecret0"]);
             Assert.Null(config["meSecret1"]);
@@ -187,13 +180,12 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
             );
 
             var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o =>
-                    {
-                        o.FileProvider = testFileProvider;
-                        o.IgnorePrefix = null;
-                    }
-                )
-                .Build();
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.IgnorePrefix = null;
+                }
+            ).Build();
 
             Assert.Equal("SecretValue0", config["ignore.Secret0"]);
             Assert.Equal("SecretValue1", config["ignore.Secret1"]);
@@ -208,9 +200,8 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
                 new TestFile("Text", "Foo")
             );
 
-            var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o => o.FileProvider = testFileProvider
-                )
+            var config = new ConfigurationBuilder()
+                .AddKeyPerFile(o => o.FileProvider = testFileProvider)
                 .Build();
 
             MyOptions options = null;
@@ -246,13 +237,12 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
             );
 
             var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o =>
-                    {
-                        o.FileProvider = testFileProvider;
-                        o.ReloadOnChange = true;
-                    }
-                )
-                .Build();
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.ReloadOnChange = true;
+                }
+            ).Build();
 
             Assert.Equal("SecretValue1", config["Secret1"]);
             Assert.Equal("SecretValue2", config["Secret2"]);
@@ -276,13 +266,12 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
             );
 
             var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o =>
-                    {
-                        o.FileProvider = testFileProvider;
-                        o.ReloadOnChange = false;
-                    }
-                )
-                .Build();
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.ReloadOnChange = false;
+                }
+            ).Build();
 
             Assert.Equal("SecretValue1", config["Secret1"]);
             Assert.Equal("SecretValue2", config["Secret2"]);
@@ -302,13 +291,12 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile.Test
             var testFileProvider = new TestFileProvider();
 
             var config = new ConfigurationBuilder().AddKeyPerFile(
-                    o =>
-                    {
-                        o.FileProvider = testFileProvider;
-                        o.ReloadOnChange = true;
-                    }
-                )
-                .Build();
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.ReloadOnChange = true;
+                }
+            ).Build();
 
             Assert.Empty(config.AsEnumerable());
 

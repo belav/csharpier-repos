@@ -199,11 +199,11 @@ namespace Microsoft.CodeAnalysis.Tools
                 );
 
                 var formatResult = await CodeFormatter.FormatWorkspaceAsync(
-                        formatOptions,
-                        logger,
-                        cancellationTokenSource.Token,
-                        binaryLogPath: GetBinaryLogPath(s_parseResult, binarylog)
-                    )
+                    formatOptions,
+                    logger,
+                    cancellationTokenSource.Token,
+                    binaryLogPath: GetBinaryLogPath(s_parseResult, binarylog)
+                )
                     .ConfigureAwait(false);
 
                 return GetExitCode(formatResult, check);

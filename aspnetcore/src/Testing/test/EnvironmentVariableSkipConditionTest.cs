@@ -51,13 +51,14 @@ namespace Microsoft.AspNetCore.Testing
             // Assert
             Assert.True(isMet);
             Assert.Equal(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    _skipReason,
-                    "Run",
-                    environmentVariableValue,
-                    attribute.RunOnMatch
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        _skipReason,
+                        "Run",
+                        environmentVariableValue,
+                        attribute.RunOnMatch
+                    ),
                 attribute.SkipReason
             );
         }
@@ -79,13 +80,14 @@ namespace Microsoft.AspNetCore.Testing
             // Assert
             Assert.True(isMet);
             Assert.Equal(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    _skipReason,
-                    "Run",
-                    "(null)",
-                    attribute.RunOnMatch
-                ),
+                string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        _skipReason,
+                        "Run",
+                        "(null)",
+                        attribute.RunOnMatch
+                    ),
                 attribute.SkipReason
             );
         }

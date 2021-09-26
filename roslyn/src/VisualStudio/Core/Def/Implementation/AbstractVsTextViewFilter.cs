@@ -123,24 +123,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                             if (document != null)
                             {
-                                var languageDebugInfo =
-                                    document.Project.LanguageServices.GetService<ILanguageDebugInfoService>();
+                                var languageDebugInfo = document.Project.LanguageServices
+                                    .GetService<ILanguageDebugInfoService>();
                                 if (languageDebugInfo != null)
                                 {
                                     var spanOpt = textSnapshot.TryGetSpan(textSpan);
                                     if (spanOpt.HasValue)
                                     {
                                         var dataTipInfo = languageDebugInfo.GetDataTipInfoAsync(
-                                                document,
-                                                spanOpt.Value.Start,
-                                                cancellationToken
-                                            )
+                                            document,
+                                            spanOpt.Value.Start,
+                                            cancellationToken
+                                        )
                                             .WaitAndGetResult(cancellationToken);
                                         if (!dataTipInfo.IsDefault)
                                         {
-                                            var resultSpan = dataTipInfo.Span.ToSnapshotSpan(
-                                                textSnapshot
-                                            );
+                                            var resultSpan = dataTipInfo.Span
+                                                .ToSnapshotSpan(textSnapshot);
                                             var textOpt = dataTipInfo.Text;
 
                                             pSpan[0] = resultSpan.ToVsTextSpan();
@@ -225,42 +224,44 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (subjectBuffer != null)
             {
                 // PointTrackingMode and PositionAffinity chosen arbitrarily.
-                var positionInSubjectBuffer = textView.BufferGraph.MapDownToBuffer(
-                    pointInViewBuffer,
-                    PointTrackingMode.Positive,
-                    subjectBuffer,
-                    PositionAffinity.Successor
-                );
-                if (!positionInSubjectBuffer.HasValue)
-                {
-                    positionInSubjectBuffer = textView.BufferGraph.MapDownToBuffer(
+                var positionInSubjectBuffer = textView.BufferGraph
+                    .MapDownToBuffer(
                         pointInViewBuffer,
                         PointTrackingMode.Positive,
                         subjectBuffer,
-                        PositionAffinity.Predecessor
+                        PositionAffinity.Successor
                     );
+                if (!positionInSubjectBuffer.HasValue)
+                {
+                    positionInSubjectBuffer = textView.BufferGraph
+                        .MapDownToBuffer(
+                            pointInViewBuffer,
+                            PointTrackingMode.Positive,
+                            subjectBuffer,
+                            PositionAffinity.Predecessor
+                        );
                 }
 
                 if (positionInSubjectBuffer.HasValue)
                 {
                     var position = positionInSubjectBuffer.Value;
 
-                    var document =
-                        subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var document = subjectBuffer.CurrentSnapshot
+                        .GetOpenDocumentInCurrentContextWithChanges();
                     if (document != null)
                     {
                         var matchingSpan = braceMatcher.FindMatchingSpanAsync(
-                                document,
-                                position,
-                                cancellationToken
-                            )
+                            document,
+                            position,
+                            cancellationToken
+                        )
                             .WaitAndGetResult(cancellationToken);
 
                         if (matchingSpan.HasValue)
                         {
                             var resultsInView = textView.GetSpanInView(
-                                    matchingSpan.Value.ToSnapshotSpan(subjectBuffer.CurrentSnapshot)
-                                )
+                                matchingSpan.Value.ToSnapshotSpan(subjectBuffer.CurrentSnapshot)
+                            )
                                 .ToList();
                             if (resultsInView.Count == 1)
                             {
@@ -292,16 +293,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                     {
                                         // case a.
                                         var closingSpans = braceMatcher.FindMatchingSpanAsync(
-                                                document,
-                                                matchingSpan.Value.Start,
-                                                cancellationToken
-                                            )
+                                            document,
+                                            matchingSpan.Value.Start,
+                                            cancellationToken
+                                        )
                                             .WaitAndGetResult(cancellationToken);
                                         var vsClosingSpans = textView.GetSpanInView(
-                                                closingSpans.Value.ToSnapshotSpan(
-                                                    subjectBuffer.CurrentSnapshot
-                                                )
-                                            )
+                                            closingSpans.Value
+                                                .ToSnapshotSpan(subjectBuffer.CurrentSnapshot)
+                                        )
                                             .ToList()
                                             .First()
                                             .ToVsTextSpan();
@@ -321,16 +321,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                                         // case b.
                                         var openingSpans = braceMatcher.FindMatchingSpanAsync(
-                                                document,
-                                                matchingSpan.Value.End,
-                                                cancellationToken
-                                            )
+                                            document,
+                                            matchingSpan.Value.End,
+                                            cancellationToken
+                                        )
                                             .WaitAndGetResult(cancellationToken);
                                         var vsOpeningSpans = textView.GetSpanInView(
-                                                openingSpans.Value.ToSnapshotSpan(
-                                                    subjectBuffer.CurrentSnapshot
-                                                )
-                                            )
+                                            openingSpans.Value
+                                                .ToSnapshotSpan(subjectBuffer.CurrentSnapshot)
+                                        )
                                             .ToList()
                                             .First()
                                             .ToVsTextSpan();

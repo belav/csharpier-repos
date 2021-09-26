@@ -253,13 +253,14 @@ namespace System.Diagnostics.Tracing
                 newActivity.startStopOptions = options;
                 newActivity.eventName = eventName;
                 newActivity.startStopOptions.Opcode = EventOpcode.Start;
-                this.eventSource.Write(
-                    eventName,
-                    ref newActivity.startStopOptions,
-                    ref newActivity.activityId,
-                    ref relatedActivityId,
-                    ref data
-                );
+                this.eventSource
+                    .Write(
+                        eventName,
+                        ref newActivity.startStopOptions,
+                        ref newActivity.activityId,
+                        ref relatedActivityId,
+                        ref data
+                    );
             }
             else
             {
@@ -305,13 +306,14 @@ namespace System.Diagnostics.Tracing
                 eventName += "Stop";
             }
             this.startStopOptions.Opcode = EventOpcode.Stop;
-            this.eventSource.Write(
-                eventName,
-                ref this.startStopOptions,
-                ref this.activityId,
-                ref s_empty,
-                ref data
-            );
+            this.eventSource
+                .Write(
+                    eventName,
+                    ref this.startStopOptions,
+                    ref this.activityId,
+                    ref s_empty,
+                    ref data
+                );
         }
 
         private enum State

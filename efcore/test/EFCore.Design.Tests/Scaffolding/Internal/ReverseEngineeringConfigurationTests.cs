@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 assembly,
                 new TestOperationReporter(),
                 new string[0]
-            ).Build("Microsoft.EntityFrameworkCore.SqlServer")
+            )
+                .Build("Microsoft.EntityFrameworkCore.SqlServer")
                 .GetRequiredService<IReverseEngineerScaffolder>();
 
             Assert.Equal(

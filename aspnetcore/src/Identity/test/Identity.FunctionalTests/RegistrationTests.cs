@@ -35,8 +35,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             ;
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             var userName = $"{Guid.NewGuid()}@example.com";
@@ -124,8 +124,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                 services.SetupGlobalAuthorizeFilter();
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             var userName = $"{Guid.NewGuid()}@example.com";
@@ -143,8 +143,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                 services.SetupTestThirdPartyLogin();
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             var guid = Guid.NewGuid();
@@ -166,8 +166,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             }
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             var guid = Guid.NewGuid();
@@ -195,8 +195,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             }
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             var guid = Guid.NewGuid();
@@ -221,8 +221,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                 services.SetupTestThirdPartyLogin();
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             var guid = Guid.NewGuid();
@@ -245,8 +245,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                 services.SetupTestThirdPartyLogin().SetupGlobalAuthorizeFilter();
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             var guid = Guid.NewGuid();
@@ -274,8 +274,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
                     );
 
             var client = ServerFactory.WithWebHostBuilder(
-                    whb => whb.ConfigureServices(ConfigureTestServices)
-                )
+                whb => whb.ConfigureServices(ConfigureTestServices)
+            )
                 .CreateClient();
 
             var guid = Guid.NewGuid();

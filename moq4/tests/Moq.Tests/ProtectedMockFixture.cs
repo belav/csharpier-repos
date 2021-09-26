@@ -326,7 +326,8 @@ namespace Moq.Tests
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .SetupSet<string>(string.Empty, ItExpr.IsAny<string>())
             );
         }
@@ -352,7 +353,8 @@ namespace Moq.Tests
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .SetupSet<int>("PublicValue", ItExpr.IsAny<int>())
             );
         }
@@ -362,7 +364,8 @@ namespace Moq.Tests
         {
             Assert.Throws<NotSupportedException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .SetupSet<string>("NonVirtualValue", ItExpr.IsAny<string>())
             );
         }
@@ -492,7 +495,8 @@ namespace Moq.Tests
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    new Mock<MethodOverloads>().Protected()
+                    new Mock<MethodOverloads>()
+                        .Protected()
                         .Setup<string>("Do", "1", "2")
                         .Returns("3")
             );
@@ -606,7 +610,8 @@ namespace Moq.Tests
             var actual = Record.Exception(
                 () =>
                 {
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .Verify<string>("StringArg", Times.Once(), ItExpr.IsAny<int>());
                 }
             );
@@ -843,7 +848,8 @@ namespace Moq.Tests
         {
             Assert.Throws<NotSupportedException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .VerifyGet<string>("NonVirtualValue", Times.Once())
             );
         }
@@ -874,7 +880,8 @@ namespace Moq.Tests
         {
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .VerifySet<string>(null, Times.Once(), ItExpr.IsAny<string>())
             );
         }
@@ -884,7 +891,8 @@ namespace Moq.Tests
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .VerifySet<string>(string.Empty, Times.Once(), ItExpr.IsAny<int>())
             );
         }
@@ -894,7 +902,8 @@ namespace Moq.Tests
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .VerifySet<int>("Foo", Times.Once(), ItExpr.IsAny<int>())
             );
         }
@@ -904,7 +913,8 @@ namespace Moq.Tests
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .VerifySet<int>("OnlyGet", Times.Once(), ItExpr.IsAny<int>())
             );
         }
@@ -914,7 +924,8 @@ namespace Moq.Tests
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .VerifySet<int>("PublicValue", Times.Once(), ItExpr.IsAny<int>())
             );
         }
@@ -924,7 +935,8 @@ namespace Moq.Tests
         {
             Assert.Throws<NotSupportedException>(
                 () =>
-                    new Mock<FooBase>().Protected()
+                    new Mock<FooBase>()
+                        .Protected()
                         .VerifySet<string>("NonVirtualValue", Times.Once(), ItExpr.IsAny<string>())
             );
         }

@@ -190,8 +190,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             var registry = CreateRegistry(circuitIdFactory);
             var handler = new Mock<CircuitHandler> { CallBase = true };
             handler.Setup(
-                    h => h.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>())
-                )
+                h => h.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>())
+            )
                 .Throws(new InvalidTimeZoneException());
             var circuitHost = TestCircuitHost.Create(
                 circuitIdFactory.CreateCircuitId(),
@@ -223,11 +223,12 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             // Arrange
             var registry = CreateRegistry();
             var circuitHost = TestCircuitHost.Create();
-            registry.DisconnectedCircuits.Set(
-                circuitHost.CircuitId.Secret,
-                circuitHost,
-                new MemoryCacheEntryOptions { Size = 1 }
-            );
+            registry.DisconnectedCircuits
+                .Set(
+                    circuitHost.CircuitId.Secret,
+                    circuitHost,
+                    new MemoryCacheEntryOptions { Size = 1 }
+                );
 
             // Act
             await registry.DisconnectAsync(circuitHost, circuitHost.Client.ConnectionId);

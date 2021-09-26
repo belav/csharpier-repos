@@ -194,11 +194,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                         $"Diagnostics were changed for document: {document.FilePath}"
                     );
                     await ComputeAndReportCurrentDiagnosticsAsync(
-                            context,
-                            progress,
-                            document,
-                            cancellationToken
-                        )
+                        context,
+                        progress,
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -269,11 +269,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             {
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
                 var diagnostics = await GetDiagnosticsAsync(
-                        context,
-                        document,
-                        diagnosticMode,
-                        cancellationToken
-                    )
+                    context,
+                    document,
+                    diagnosticMode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 context.TraceInformation($"Got {diagnostics.Length} diagnostics");
 

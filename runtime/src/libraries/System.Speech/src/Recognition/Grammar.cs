@@ -1034,12 +1034,8 @@ namespace System.Speech.Recognition
             // This must be before the SAPI load to avoid some conflict with SAPI server when getting at the
             // the stream
             if (
-                System.Speech.Internal.SrgsCompiler.CfgGrammar.LoadIL(
-                    stream,
-                    out assemblyContent,
-                    out assemblyDebugSymbols,
-                    out scripts
-                )
+                System.Speech.Internal.SrgsCompiler.CfgGrammar
+                    .LoadIL(stream, out assemblyContent, out assemblyDebugSymbols, out scripts)
             )
             {
                 // Check all methods referenced in the rule; availability, public and arguments

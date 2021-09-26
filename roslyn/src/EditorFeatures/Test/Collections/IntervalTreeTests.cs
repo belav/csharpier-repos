@@ -350,38 +350,31 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections
                         var set1 = new HashSet<string>(
                             tree.GetIntervalsThatOverlapWith(start, length).Select(i => i.Item3)
                         );
-                        var set2 = new HashSet<string>(
-                            spans.Where(
-                                    t =>
-                                    {
-                                        return span.OverlapsWith(new Span(t.Item1, t.Item2));
-                                    }
-                                )
-                                .Select(t => t.Item3)
-                        );
+                        var set2 = new HashSet<string>(spans.Where(
+                                t =>
+                                {
+                                    return span.OverlapsWith(new Span(t.Item1, t.Item2));
+                                }
+                            ).Select(t => t.Item3));
                         Assert.True(set1.SetEquals(set2));
 
                         var set3 = new HashSet<string>(
                             tree.GetIntervalsThatIntersectWith(start, length).Select(i => i.Item3)
                         );
-                        var set4 = new HashSet<string>(
-                            spans.Where(
-                                    t =>
-                                    {
-                                        return span.IntersectsWith(new Span(t.Item1, t.Item2));
-                                    }
-                                )
-                                .Select(t => t.Item3)
-                        );
+                        var set4 = new HashSet<string>(spans.Where(
+                                t =>
+                                {
+                                    return span.IntersectsWith(new Span(t.Item1, t.Item2));
+                                }
+                            ).Select(t => t.Item3));
                         Assert.True(set3.SetEquals(set4));
                     }
                 }
 
                 Assert.Equal(spans.Count, tree.Count());
                 Assert.True(
-                    new HashSet<string>(spans.Select(t => t.Item3)).SetEquals(
-                        tree.Select(i => i.Item3)
-                    )
+                    new HashSet<string>(spans.Select(t => t.Item3))
+                        .SetEquals(tree.Select(i => i.Item3))
                 );
             }
         }

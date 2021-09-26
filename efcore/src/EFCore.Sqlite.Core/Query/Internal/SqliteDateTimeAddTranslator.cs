@@ -19,60 +19,58 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteDateTimeAddTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _addMilliseconds =
-            typeof(DateTime).GetRequiredRuntimeMethod(
-                nameof(DateTime.AddMilliseconds),
-                new[] { typeof(double) }
-            );
+        private static readonly MethodInfo _addMilliseconds = typeof(DateTime)
+            .GetRequiredRuntimeMethod(nameof(DateTime.AddMilliseconds), new[] { typeof(double) });
 
-        private static readonly MethodInfo _addTicks = typeof(DateTime).GetRequiredRuntimeMethod(
-            nameof(DateTime.AddTicks),
-            new[] { typeof(long) }
-        );
+        private static readonly MethodInfo _addTicks = typeof(DateTime)
+            .GetRequiredRuntimeMethod(nameof(DateTime.AddTicks), new[] { typeof(long) });
 
         private readonly Dictionary<MethodInfo, string> _methodInfoToUnitSuffix =
             new()
             {
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddYears),
-                        new[] { typeof(int) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(nameof(DateTime.AddYears), new[] { typeof(int) }),
                     " years"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddMonths),
-                        new[] { typeof(int) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddMonths),
+                            new[] { typeof(int) }
+                        ),
                     " months"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddDays),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddDays),
+                            new[] { typeof(double) }
+                        ),
                     " days"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddHours),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddHours),
+                            new[] { typeof(double) }
+                        ),
                     " hours"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddMinutes),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddMinutes),
+                            new[] { typeof(double) }
+                        ),
                     " minutes"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddSeconds),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddSeconds),
+                            new[] { typeof(double) }
+                        ),
                     " seconds"
                 }
             };

@@ -152,10 +152,11 @@ namespace System.IO.Tests
             int count,
             CancellationToken cancellationToken
         ) =>
-            Task.Factory.FromAsync(
-                (callback, state) => stream.BeginRead(buffer, offset, count, callback, state),
-                iar => stream.EndRead(iar),
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) => stream.BeginRead(buffer, offset, count, callback, state),
+                    iar => stream.EndRead(iar),
+                    null
+                );
     }
 }

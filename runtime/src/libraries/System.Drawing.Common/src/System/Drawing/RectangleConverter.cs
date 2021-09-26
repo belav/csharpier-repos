@@ -156,9 +156,10 @@ namespace System.Drawing
                 if (destinationType == typeof(InstanceDescriptor))
                 {
                     Rectangle rect = (Rectangle)value;
-                    ConstructorInfo ctor = typeof(Rectangle).GetConstructor(
-                        new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
-                    );
+                    ConstructorInfo ctor = typeof(Rectangle)
+                        .GetConstructor(
+                            new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
+                        );
 
                     if (ctor != null)
                     {

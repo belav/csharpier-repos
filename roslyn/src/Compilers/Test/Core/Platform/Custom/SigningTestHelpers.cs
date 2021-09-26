@@ -71,8 +71,8 @@ namespace Roslyn.Test.Utilities
         {
             try
             {
-                IClrStrongName strongName =
-                    new DesktopStrongNameProvider().GetStrongNameInterface();
+                IClrStrongName strongName = new DesktopStrongNameProvider()
+                    .GetStrongNameInterface();
 
                 //EDMAURER use marshal to be safe?
                 fixed (byte* p = keyBlob)
@@ -92,11 +92,12 @@ namespace Roslyn.Test.Utilities
             internal VirtualizedStrongNameFileSystem(string tempPath = null) : base(tempPath) { }
             private static bool PathEquals(string left, string right)
             {
-                return string.Equals(
-                    FileUtilities.NormalizeAbsolutePath(left),
-                    FileUtilities.NormalizeAbsolutePath(right),
-                    StringComparison.OrdinalIgnoreCase
-                );
+                return string
+                    .Equals(
+                        FileUtilities.NormalizeAbsolutePath(left),
+                        FileUtilities.NormalizeAbsolutePath(right),
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
 
             internal override bool FileExists(string fullPath)

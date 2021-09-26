@@ -81,19 +81,20 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                         AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configurationFile);
                         try
                         {
-                            typeof(ConfigurationManager).GetField(
+                            typeof(ConfigurationManager)
+                                .GetField(
                                     "s_initState",
                                     BindingFlags.Static | BindingFlags.NonPublic
                                 )
                                 .SetValue(null, 0);
-                            typeof(ConfigurationManager).GetField(
+                            typeof(ConfigurationManager)
+                                .GetField(
                                     "s_configSystem",
                                     BindingFlags.Static | BindingFlags.NonPublic
                                 )
                                 .SetValue(null, null);
-                            typeof(ConfigurationManager).Assembly.GetType(
-                                    "System.Configuration.ClientConfigPaths"
-                                )
+                            typeof(ConfigurationManager).Assembly
+                                .GetType("System.Configuration.ClientConfigPaths")
                                 .GetField("s_current", BindingFlags.Static | BindingFlags.NonPublic)
                                 .SetValue(null, null);
                         }

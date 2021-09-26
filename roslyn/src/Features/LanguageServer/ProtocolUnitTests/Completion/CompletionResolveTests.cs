@@ -44,9 +44,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
             );
 
             var completionList = await RunGetCompletionsAsync(testLspServer, completionParams);
-            var serverCompletionItem = completionList.Items.FirstOrDefault(
-                item => item.Label == "A"
-            );
+            var serverCompletionItem = completionList.Items
+                .FirstOrDefault(item => item.Label == "A");
             var completionResultId =
                 ((CompletionResolveData)serverCompletionItem.Data).ResultId.Value;
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -66,10 +65,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
             );
 
             var results = (LSP.VSCompletionItem)await RunResolveCompletionItemAsync(
-                    testLspServer,
-                    clientCompletionItem,
-                    clientCapabilities
-                )
+                testLspServer,
+                clientCompletionItem,
+                clientCapabilities
+            )
                 .ConfigureAwait(false);
             AssertJsonEquals(expected, results);
         }
@@ -97,9 +96,8 @@ class B : A
                 LSP.CompletionTriggerKind.Invoked
             );
             var completionList = await RunGetCompletionsAsync(testLspServer, completionParams);
-            var serverCompletionItem = completionList.Items.FirstOrDefault(
-                item => item.Label == "M()"
-            );
+            var serverCompletionItem = completionList.Items
+                .FirstOrDefault(item => item.Label == "M()");
             var completionResultId =
                 ((CompletionResolveData)serverCompletionItem.Data).ResultId.Value;
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -110,10 +108,10 @@ class B : A
             };
 
             var results = (LSP.VSCompletionItem)await RunResolveCompletionItemAsync(
-                    testLspServer,
-                    clientCompletionItem,
-                    clientCapabilities
-                )
+                testLspServer,
+                clientCompletionItem,
+                clientCapabilities
+            )
                 .ConfigureAwait(false);
 
             Assert.NotNull(results.TextEdit);
@@ -150,9 +148,8 @@ class B : A
                 LSP.CompletionTriggerKind.Invoked
             );
             var completionList = await RunGetCompletionsAsync(testLspServer, completionParams);
-            var serverCompletionItem = completionList.Items.FirstOrDefault(
-                item => item.Label == "M()"
-            );
+            var serverCompletionItem = completionList.Items
+                .FirstOrDefault(item => item.Label == "M()");
             var completionResultId =
                 ((CompletionResolveData)serverCompletionItem.Data).ResultId.Value;
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -172,10 +169,10 @@ class B : A
             };
 
             var results = (LSP.VSCompletionItem)await RunResolveCompletionItemAsync(
-                    testLspServer,
-                    clientCompletionItem,
-                    clientCapabilities
-                )
+                testLspServer,
+                clientCompletionItem,
+                clientCapabilities
+            )
                 .ConfigureAwait(false);
 
             Assert.NotNull(results.TextEdit);
@@ -210,12 +207,12 @@ class B : A
 
             var selectedItem = CodeAnalysis.Completion.CompletionItem.Create(displayText: "M");
             var textEdit = await CompletionResolveHandler.GenerateTextEditAsync(
-                    document,
-                    new TestCaretOutOfScopeCompletionService(),
-                    selectedItem,
-                    snippetsSupported: true,
-                    CancellationToken.None
-                )
+                document,
+                new TestCaretOutOfScopeCompletionService(),
+                selectedItem,
+                snippetsSupported: true,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             Assert.Equal(

@@ -24,9 +24,8 @@ namespace System.IO.Ports
 #endif
 
             using (
-                RegistryKey serialKey = Registry.LocalMachine.OpenSubKey(
-                    @"HARDWARE\DEVICEMAP\SERIALCOMM"
-                )
+                RegistryKey serialKey = Registry.LocalMachine
+                    .OpenSubKey(@"HARDWARE\DEVICEMAP\SERIALCOMM")
             )
             {
                 if (serialKey != null)

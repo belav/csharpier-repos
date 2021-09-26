@@ -52,12 +52,13 @@ namespace System.Linq.Expressions.Interpreter
             IReadOnlyList<object>? objects
         )
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "LoadCached({0}: {1})",
-                _index,
-                objects![(int)_index]
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "LoadCached({0}: {1})",
+                    _index,
+                    objects![(int)_index]
+                );
         }
 
         public override string ToString() => "LoadCached(" + _index + ")";

@@ -183,10 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         private void ExistingServiceTest(Func<ServiceCollectionMap, ServiceCollectionMap> adder)
         {
-            var serviceCollection = new ServiceCollection().AddSingleton<
-                IFakeService,
-                FakeService
-            >();
+            var serviceCollection = new ServiceCollection()
+                .AddSingleton<IFakeService, FakeService>();
 
             var descriptor = serviceCollection.Single();
 

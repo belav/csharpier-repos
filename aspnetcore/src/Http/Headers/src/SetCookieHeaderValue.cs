@@ -27,11 +27,14 @@ namespace Microsoft.Net.Http.Headers
         private const string SecureToken = "secure";
         // RFC Draft: https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00
         private const string SameSiteToken = "samesite";
-        private static readonly string SameSiteNoneToken = SameSiteMode.None.ToString()
+        private static readonly string SameSiteNoneToken = SameSiteMode.None
+            .ToString()
             .ToLowerInvariant();
-        private static readonly string SameSiteLaxToken = SameSiteMode.Lax.ToString()
+        private static readonly string SameSiteLaxToken = SameSiteMode.Lax
+            .ToString()
             .ToLowerInvariant();
-        private static readonly string SameSiteStrictToken = SameSiteMode.Strict.ToString()
+        private static readonly string SameSiteStrictToken = SameSiteMode.Strict
+            .ToString()
             .ToLowerInvariant();
 
         private const string HttpOnlyToken = "httponly";

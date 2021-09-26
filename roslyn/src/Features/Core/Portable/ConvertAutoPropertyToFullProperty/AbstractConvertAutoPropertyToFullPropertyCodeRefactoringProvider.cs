@@ -121,11 +121,11 @@ namespace Microsoft.CodeAnalysis.ConvertAutoPropertyToFullProperty
                 generator
             );
             var fullProperty = generator.WithAccessorDeclarations(
-                    GetPropertyWithoutInitializer(property),
-                    newSetAccessor == null
-                      ? new SyntaxNode[] { newGetAccessor }
-                      : new SyntaxNode[] { newGetAccessor, newSetAccessor }
-                )
+                GetPropertyWithoutInitializer(property),
+                newSetAccessor == null
+                  ? new SyntaxNode[] { newGetAccessor }
+                  : new SyntaxNode[] { newGetAccessor, newSetAccessor }
+            )
                 .WithLeadingTrivia(property.GetLeadingTrivia());
             fullProperty = ConvertPropertyToExpressionBodyIfDesired(options, fullProperty);
             var editor = new SyntaxEditor(root, workspace);

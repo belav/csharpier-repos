@@ -21,8 +21,8 @@ namespace Wasm.Build.Tests
         public void RemoveFromCache(string buildPath)
         {
             KeyValuePair<BuildArgs, BuildProduct>? foundKvp = _buildPaths.Where(
-                    kvp => kvp.Value.BuildPath == buildPath
-                )
+                kvp => kvp.Value.BuildPath == buildPath
+            )
                 .SingleOrDefault();
             if (foundKvp == null)
                 throw new Exception($"Could not find build path {buildPath} in cache to remove.");

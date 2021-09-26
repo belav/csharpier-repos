@@ -1289,9 +1289,8 @@ namespace System
                                 AddSpecialInterface(
                                     ref list,
                                     filter,
-                                    (RuntimeType)typeof(IReadOnlyCollection<>).MakeGenericType(
-                                        arrayType
-                                    ),
+                                    (RuntimeType)typeof(IReadOnlyCollection<>)
+                                        .MakeGenericType(arrayType),
                                     false
                                 );
                             }
@@ -2090,11 +2089,8 @@ namespace System
             )
             {
                 GetMemberCache<RuntimeConstructorInfo>(ref m_constructorInfoCache);
-                return m_constructorInfoCache!.AddMethod(
-                    declaringType,
-                    constructor,
-                    CacheType.Constructor
-                );
+                return m_constructorInfoCache!
+                    .AddMethod(declaringType, constructor, CacheType.Constructor);
             }
 
             internal FieldInfo GetField(RuntimeFieldHandleInternal field)
@@ -2264,12 +2260,13 @@ namespace System
                 {
                     // declaredType is not Array, not generic, and not assignable from reflectedType
                     throw new ArgumentException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            SR.Argument_ResolveMethodHandle,
-                            reflectedType.ToString(),
-                            declaredType.ToString()
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                SR.Argument_ResolveMethodHandle,
+                                reflectedType.ToString(),
+                                declaredType.ToString()
+                            )
                     );
                 }
             }
@@ -2364,10 +2361,8 @@ namespace System
         private static PropertyInfo GetPropertyInfo(RuntimeType reflectedType, int tkProperty)
         {
             RuntimePropertyInfo property;
-            RuntimePropertyInfo[] candidates = reflectedType.Cache.GetPropertyList(
-                MemberListType.All,
-                null
-            );
+            RuntimePropertyInfo[] candidates = reflectedType.Cache
+                .GetPropertyList(MemberListType.All, null);
 
             for (int i = 0; i < candidates.Length; i++)
             {
@@ -3240,13 +3235,13 @@ namespace System
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
         {
             return GetMethodCandidates(
-                    null,
-                    GenericParameterCountAny,
-                    bindingAttr,
-                    CallingConventions.Any,
-                    null,
-                    false
-                )
+                null,
+                GenericParameterCountAny,
+                bindingAttr,
+                CallingConventions.Any,
+                null,
+                false
+            )
                 .ToArray();
         }
 
@@ -3520,10 +3515,9 @@ namespace System
                     }
 
                     // All the methods have the exact same name and sig so return the most derived one.
-                    return System.DefaultBinder.FindMostDerivedNewSlotMeth(
-                            candidates.ToArray(),
-                            candidates.Count
-                        ) as MethodInfo;
+                    return System.DefaultBinder
+                            .FindMostDerivedNewSlotMeth(candidates.ToArray(), candidates.Count)
+                        as MethodInfo;
                 }
             }
 
@@ -3625,12 +3619,8 @@ namespace System
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System.DefaultBinder.ExactPropertyBinding(
-                    candidates.ToArray(),
-                    returnType,
-                    types,
-                    modifiers
-                );
+                return System.DefaultBinder
+                    .ExactPropertyBinding(candidates.ToArray(), returnType, types, modifiers);
 
             binder ??= DefaultBinder;
             return binder.SelectProperty(
@@ -4127,10 +4117,8 @@ namespace System
                 if (foundSigType)
                     return new SignatureConstructedGenericType(this, instantiation);
 
-                return System.Reflection.Emit.TypeBuilderInstantiation.MakeGenericType(
-                    this,
-                    (Type[])(instantiation.Clone())
-                );
+                return System.Reflection.Emit.TypeBuilderInstantiation
+                    .MakeGenericType(this, (Type[])(instantiation.Clone()));
             }
 
             SanityCheckGenericArguments(instantiationRuntimeType, genericParameters);
@@ -4489,12 +4477,8 @@ namespace System
                 }
                 else
                 {
-                    instance = ((ConstructorInfo)invokeMethod).Invoke(
-                        bindingAttr,
-                        binder,
-                        args,
-                        culture
-                    );
+                    instance = ((ConstructorInfo)invokeMethod)
+                        .Invoke(bindingAttr, binder, args, culture);
                     if (state != null)
                         binder.ReorderArgumentArray(ref args, state);
                 }
@@ -4692,9 +4676,8 @@ namespace System
                 }
 
                 if (
-                    ((DispatchWrapperType)aArgsWrapperTypes[i]).HasFlag(
-                        DispatchWrapperType.SafeArray
-                    )
+                    ((DispatchWrapperType)aArgsWrapperTypes[i])
+                        .HasFlag(DispatchWrapperType.SafeArray)
                 )
                 {
                     Type wrapperType = null!;

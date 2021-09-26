@@ -36,15 +36,13 @@ namespace Roslyn.Test.Utilities
             Type type
         )
         {
-            return assembly.GetTypes()
-                .Where(
-                    t =>
-                    {
-                        return t.GetFields(BindingFlags.Public | BindingFlags.Static)
-                            .Any(f => type.IsAssignableFrom(f.FieldType));
-                    }
-                )
-                .ToList();
+            return assembly.GetTypes().Where(
+                t =>
+                {
+                    return t.GetFields(BindingFlags.Public | BindingFlags.Static)
+                        .Any(f => type.IsAssignableFrom(f.FieldType));
+                }
+            ).ToList();
         }
 
         public static string GetCultureInvariantString(object value)
@@ -60,10 +58,8 @@ namespace Roslyn.Test.Utilities
 
             if (valueType == typeof(DateTime))
             {
-                return ((DateTime)value).ToString(
-                    "M/d/yyyy h:mm:ss tt",
-                    CultureInfo.InvariantCulture
-                );
+                return ((DateTime)value)
+                    .ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
             }
 
             if (valueType == typeof(float))

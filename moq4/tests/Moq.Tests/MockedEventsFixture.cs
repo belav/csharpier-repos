@@ -227,14 +227,14 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<string>>();
 
             mock.Setup(
-                    add =>
-                        add.Do(
-                            It.IsAny<string>(),
-                            It.IsAny<int>(),
-                            It.IsAny<bool>(),
-                            It.IsAny<string>()
-                        )
-                )
+                add =>
+                    add.Do(
+                        It.IsAny<string>(),
+                        It.IsAny<int>(),
+                        It.IsAny<bool>(),
+                        It.IsAny<string>()
+                    )
+            )
                 .Raises(
                     m => m.Added += null,
                     (string s, int i, bool b, string v) =>

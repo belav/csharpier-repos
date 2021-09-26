@@ -99,21 +99,23 @@ namespace System.Runtime.Serialization.Json
             {
                 XmlDictionaryReader tempDictionaryReader =
                     XmlDictionaryReader.CreateDictionaryReader(reader);
-                buffer = ByteArrayHelperWithString.Instance.ReadArray(
-                    tempDictionaryReader,
-                    JsonGlobals.itemString,
-                    string.Empty,
-                    tempDictionaryReader.Quotas.MaxArrayLength
-                );
+                buffer = ByteArrayHelperWithString.Instance
+                    .ReadArray(
+                        tempDictionaryReader,
+                        JsonGlobals.itemString,
+                        string.Empty,
+                        tempDictionaryReader.Quotas.MaxArrayLength
+                    );
             }
             else
             {
-                buffer = ByteArrayHelperWithString.Instance.ReadArray(
-                    dictionaryReader,
-                    JsonGlobals.itemString,
-                    string.Empty,
-                    dictionaryReader.Quotas.MaxArrayLength
-                );
+                buffer = ByteArrayHelperWithString.Instance
+                    .ReadArray(
+                        dictionaryReader,
+                        JsonGlobals.itemString,
+                        string.Empty,
+                        dictionaryReader.Quotas.MaxArrayLength
+                    );
             }
             return buffer;
         }
@@ -305,12 +307,13 @@ namespace System.Runtime.Serialization.Json
                 return false;
             }
 
-            array = this.DateTimeArrayHelper.ReadArray(
-                dictionaryReader,
-                XmlDictionaryString.GetString(itemName),
-                XmlDictionaryString.GetString(itemNamespace),
-                GetArrayLengthQuota(context)
-            );
+            array = this.DateTimeArrayHelper
+                .ReadArray(
+                    dictionaryReader,
+                    XmlDictionaryString.GetString(itemName),
+                    XmlDictionaryString.GetString(itemNamespace),
+                    GetArrayLengthQuota(context)
+                );
             context.IncrementItemCount(array.Length);
 
             return true;

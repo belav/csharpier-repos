@@ -20,8 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteRegexMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _regexIsMatchMethodInfo =
-            typeof(Regex).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _regexIsMatchMethodInfo = typeof(Regex)
+            .GetRequiredRuntimeMethod(
                 nameof(Regex.IsMatch),
                 new Type[] { typeof(string), typeof(string) }
             );

@@ -19,9 +19,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             bool trimOptionalParameters
         )
         {
-            var potentiallyConfictingMethods = renamedMethod.ContainingType.GetMembers(
-                    renamedMethod.Name
-                )
+            var potentiallyConfictingMethods = renamedMethod.ContainingType
+                .GetMembers(renamedMethod.Name)
                 .OfType<IMethodSymbol>()
                 .Where(m => !m.Equals(renamedMethod) && m.Arity == renamedMethod.Arity);
 
@@ -39,9 +38,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             bool trimOptionalParameters
         )
         {
-            var potentiallyConfictingProperties = renamedProperty.ContainingType.GetMembers(
-                    renamedProperty.Name
-                )
+            var potentiallyConfictingProperties = renamedProperty.ContainingType
+                .GetMembers(renamedProperty.Name)
                 .OfType<IPropertySymbol>()
                 .Where(
                     m =>

@@ -30,24 +30,23 @@ public struct A
     public static int Main() { return 1; }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (4,7): error CS0573: 'A': cannot have instance property or field initializers in structs
-                    //     A a = new A();   // CS8036
-                    Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "a")
-                        .WithArguments("A")
-                        .WithLocation(4, 7),
-                    // (4,7): error CS0523: Struct member 'A.a' of type 'A' causes a cycle in the struct layout
-                    //     A a = new A();   // CS8036
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "a")
-                        .WithArguments("A.a", "A")
-                        .WithLocation(4, 7),
-                    // (4,7): warning CS0169: The field 'A.a' is never used
-                    //     A a = new A();   // CS8036
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "a")
-                        .WithArguments("A.a")
-                        .WithLocation(4, 7)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (4,7): error CS0573: 'A': cannot have instance property or field initializers in structs
+                //     A a = new A();   // CS8036
+                Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "a")
+                    .WithArguments("A")
+                    .WithLocation(4, 7),
+                // (4,7): error CS0523: Struct member 'A.a' of type 'A' causes a cycle in the struct layout
+                //     A a = new A();   // CS8036
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "a")
+                    .WithArguments("A.a", "A")
+                    .WithLocation(4, 7),
+                // (4,7): warning CS0169: The field 'A.a' is never used
+                //     A a = new A();   // CS8036
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "a")
+                    .WithArguments("A.a")
+                    .WithLocation(4, 7)
+            );
         }
 
         [
@@ -68,14 +67,13 @@ struct S {
     }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (3,25): error CS0573: 'S': cannot have instance property or field initializers in structs
-                    //     event System.Action E = null;
-                    Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "E")
-                        .WithArguments("S")
-                        .WithLocation(3, 25)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (3,25): error CS0573: 'S': cannot have instance property or field initializers in structs
+                //     event System.Action E = null;
+                Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "E")
+                    .WithArguments("S")
+                    .WithLocation(3, 25)
+            );
         }
 
         [
@@ -402,10 +400,9 @@ class Test
             Assert.True(method.IsDefaultValueTypeConstructor());
 
             //TODO (tomat)
-            CompileAndVerify(c2)
-                .VerifyIL(
-                    "C.M",
-                    @"
+            CompileAndVerify(c2).VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -417,7 +414,7 @@ class Test
   IL_000e:  call       ""void System.Console.WriteLine(object)""
   IL_0013:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -439,10 +436,9 @@ public class C
 }
 ";
 
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "C.M",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -454,7 +450,7 @@ public class C
   IL_000e:  call       ""void System.Console.WriteLine(object)""
   IL_0013:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -493,10 +489,9 @@ public class C
             // Calls constructor (vs initobj), then initobj
             var compilation = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource);
             // TODO (tomat)
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "C.M",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  1
@@ -511,7 +506,7 @@ public class C
   IL_001d:  call       ""void System.Console.WriteLine(object)""
   IL_0022:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(541309, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541309")]
@@ -553,10 +548,9 @@ public class C
             // Shouldn't there be an error for trying to call an inaccessible ctor?
             var comp = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource);
 
-            CompileAndVerify(comp)
-                .VerifyIL(
-                    "C.M",
-                    @"
+            CompileAndVerify(comp).VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  1
@@ -573,7 +567,7 @@ public class C
   IL_0021:  call       ""void System.Console.WriteLine(object)""
   IL_0026:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(543934, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543934")]
@@ -595,11 +589,10 @@ public class TestClass
     }
 }
 ";
-            CreateCompilation(csSource)
-                .VerifyDiagnostics(
-                    // (13,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new TestStruct().IntI")
-                );
+            CreateCompilation(csSource).VerifyDiagnostics(
+                // (13,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new TestStruct().IntI")
+            );
         }
 
         [WorkItem(543896, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543896")]
@@ -623,12 +616,11 @@ public class mem033
         new S().P = 1; // CS0131 
     }
 }";
-            CreateCompilation(csSource)
-                .VerifyDiagnostics(
-                    // (14,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                    //         new S().P = 1; // CS0131
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new S().P")
-                );
+            CreateCompilation(csSource).VerifyDiagnostics(
+                // (14,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                //         new S().P = 1; // CS0131
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new S().P")
+            );
         }
 
         [WorkItem(545498, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545498")]
@@ -671,17 +663,16 @@ public struct X1
 }
 
 ";
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (11,5): error CS0568: Structs cannot contain explicit parameterless constructors
-                    //     X1()
-                    Diagnostic(ErrorCode.ERR_StructsCantContainDefaultConstructor, "X1")
-                        .WithLocation(11, 5),
-                    // (4,13): error CS0568: Structs cannot contain explicit parameterless constructors
-                    //     private X()
-                    Diagnostic(ErrorCode.ERR_StructsCantContainDefaultConstructor, "X")
-                        .WithLocation(4, 13)
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (11,5): error CS0568: Structs cannot contain explicit parameterless constructors
+                //     X1()
+                Diagnostic(ErrorCode.ERR_StructsCantContainDefaultConstructor, "X1")
+                    .WithLocation(11, 5),
+                // (4,13): error CS0568: Structs cannot contain explicit parameterless constructors
+                //     private X()
+                Diagnostic(ErrorCode.ERR_StructsCantContainDefaultConstructor, "X")
+                    .WithLocation(4, 13)
+            );
         }
 
         [Fact]

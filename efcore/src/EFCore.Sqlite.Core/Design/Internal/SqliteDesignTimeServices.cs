@@ -29,10 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Design.Internal
         public virtual void ConfigureDesignTimeServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddEntityFrameworkSqlite();
-            new EntityFrameworkRelationalDesignServicesBuilder(serviceCollection).TryAdd<
-                IDatabaseModelFactory,
-                SqliteDatabaseModelFactory
-            >()
+            new EntityFrameworkRelationalDesignServicesBuilder(serviceCollection)
+                .TryAdd<IDatabaseModelFactory, SqliteDatabaseModelFactory>()
                 .TryAdd<IProviderConfigurationCodeGenerator, SqliteCodeGenerator>()
                 .TryAddCoreServices();
         }

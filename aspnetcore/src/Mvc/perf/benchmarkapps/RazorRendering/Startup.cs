@@ -79,11 +79,13 @@ public class Startup
 
     public static IWebHostBuilder CreateWebHostBuilder(string[] args)
     {
-        var configuration = new ConfigurationBuilder().AddEnvironmentVariables()
+        var configuration = new ConfigurationBuilder()
+            .AddEnvironmentVariables()
             .AddCommandLine(args)
             .Build();
 
-        return new WebHostBuilder().UseKestrel()
+        return new WebHostBuilder()
+            .UseKestrel()
             .UseUrls("http://+:5000")
             .UseConfiguration(configuration)
             .UseContentRoot(Directory.GetCurrentDirectory())

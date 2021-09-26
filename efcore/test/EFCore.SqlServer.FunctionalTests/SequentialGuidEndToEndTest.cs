@@ -17,7 +17,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_sequential_GUID_end_to_end_async()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_explicit_values()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             var guids = new List<Guid>();
@@ -99,9 +101,9 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder.UseSqlServer(
-                        SqlServerTestStore.CreateConnectionString(_databaseName),
-                        b => b.ApplyConfiguration()
-                    )
+                    SqlServerTestStore.CreateConnectionString(_databaseName),
+                    b => b.ApplyConfiguration()
+                )
                     .UseInternalServiceProvider(_serviceProvider);
         }
 

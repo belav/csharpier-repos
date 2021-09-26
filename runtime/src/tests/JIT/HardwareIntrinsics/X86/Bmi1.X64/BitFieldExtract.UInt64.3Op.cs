@@ -127,11 +127,12 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Bmi1.X64.BitFieldExtract(
-                Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
-                Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data2)),
-                Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data3))
-            );
+            var result = Bmi1.X64
+                .BitFieldExtract(
+                    Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
+                    Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data2)),
+                    Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data3))
+                );
 
             ValidateResult(_data1, _data2, _data3, result);
         }
@@ -140,7 +141,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi1.X64).GetMethod(
+            var result = typeof(Bmi1.X64)
+                .GetMethod(
                     nameof(Bmi1.X64.BitFieldExtract),
                     new Type[] { typeof(UInt64), typeof(Byte), typeof(Byte) }
                 )
@@ -250,9 +252,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.BitFieldExtract)}<UInt64>(UInt64, Byte, Byte): BitFieldExtract failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.BitFieldExtract)}<UInt64>(UInt64, Byte, Byte): BitFieldExtract failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"   op1: {op1}");
                 TestLibrary.TestFramework.LogInformation($"   op2: {op2}");
                 TestLibrary.TestFramework.LogInformation($"   op3: {op3}");

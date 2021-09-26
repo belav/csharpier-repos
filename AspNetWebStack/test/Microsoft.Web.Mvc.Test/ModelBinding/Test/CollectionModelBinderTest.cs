@@ -21,10 +21,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider
@@ -36,28 +34,31 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
-                        mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName)
+                        mbc.Model = mbc.ValueProvider
+                            .GetValue(mbc.ModelName)
                             .ConvertTo(mbc.ModelType);
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                false /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    false /* suppressPrefixCheck */
+                );
 
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindComplexCollectionFromIndexes(
-                controllerContext,
-                bindingContext,
-                new[] { "foo", "bar", "baz" }
-            );
+            List<int> boundCollection = CollectionModelBinder<int>
+                .BindComplexCollectionFromIndexes(
+                    controllerContext,
+                    bindingContext,
+                    new[] { "foo", "bar", "baz" }
+                );
 
             // Assert
             Assert.Equal(new[] { 42, 0, 200 }, boundCollection.ToArray());
@@ -75,10 +76,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider
@@ -91,28 +90,31 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
-                        mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName)
+                        mbc.Model = mbc.ValueProvider
+                            .GetValue(mbc.ModelName)
                             .ConvertTo(mbc.ModelType);
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                false /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    false /* suppressPrefixCheck */
+                );
 
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindComplexCollectionFromIndexes(
-                controllerContext,
-                bindingContext,
-                null /* indexNames */
-            );
+            List<int> boundCollection = CollectionModelBinder<int>
+                .BindComplexCollectionFromIndexes(
+                    controllerContext,
+                    bindingContext,
+                    null /* indexNames */
+                );
 
             // Assert
             Assert.Equal(new[] { 42, 100 }, boundCollection.ToArray());
@@ -130,10 +132,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider
@@ -147,21 +147,23 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
-                        mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName)
+                        mbc.Model = mbc.ValueProvider
+                            .GetValue(mbc.ModelName)
                             .ConvertTo(mbc.ModelType);
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
 
             CollectionModelBinder<int> modelBinder = new CollectionModelBinder<int>();
 
@@ -180,10 +182,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider
@@ -194,21 +194,23 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
-                        mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName)
+                        mbc.Model = mbc.ValueProvider
+                            .GetValue(mbc.ModelName)
                             .ConvertTo(mbc.ModelType);
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
 
             CollectionModelBinder<int> modelBinder = new CollectionModelBinder<int>();
 
@@ -224,12 +226,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void BindSimpleCollection_RawValueIsEmptyCollection_ReturnsEmptyList()
         {
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(
-                null,
-                null,
-                new object[0],
-                null
-            );
+            List<int> boundCollection = CollectionModelBinder<int>
+                .BindSimpleCollection(null, null, new object[0], null);
 
             // Assert
             Assert.NotNull(boundCollection);
@@ -240,12 +238,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void BindSimpleCollection_RawValueIsNull_ReturnsNull()
         {
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(
-                null,
-                null,
-                null,
-                null
-            );
+            List<int> boundCollection = CollectionModelBinder<int>
+                .BindSimpleCollection(null, null, null, null);
 
             // Assert
             Assert.Null(boundCollection);
@@ -259,22 +253,16 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider()
             };
 
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(
-                controllerContext,
-                bindingContext,
-                new int[1],
-                culture
-            );
+            List<int> boundCollection = CollectionModelBinder<int>
+                .BindSimpleCollection(controllerContext, bindingContext, new int[1], culture);
 
             // Assert
             Assert.Equal(new[] { 0 }, boundCollection.ToArray());
@@ -289,10 +277,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(int)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider()
@@ -301,8 +287,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelValidationNode childValidationNode = null;
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -312,19 +298,16 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
 
             // Act
-            List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(
-                controllerContext,
-                bindingContext,
-                new int[1],
-                culture
-            );
+            List<int> boundCollection = CollectionModelBinder<int>
+                .BindSimpleCollection(controllerContext, bindingContext, new int[1], culture);
 
             // Assert
             Assert.Equal(new[] { 42 }, boundCollection.ToArray());

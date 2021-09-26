@@ -45,9 +45,8 @@ namespace Templates.Test
         }
 
         public abstract string ProjectType { get; }
-        private static readonly bool _isCIEnvironment = !string.IsNullOrWhiteSpace(
-            Environment.GetEnvironmentVariable("ContinuousIntegrationBuild")
-        );
+        private static readonly bool _isCIEnvironment = !string
+            .IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ContinuousIntegrationBuild"));
 
         protected async override Task InitializeCoreAsync(TestContext context)
         {
@@ -71,9 +70,8 @@ namespace Templates.Test
                 _ => null
             };
 
-            var builder = new ConfigurationBuilder().AddJsonFile(
-                    Path.Combine(basePath, "playwrightSettings.json")
-                )
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile(Path.Combine(basePath, "playwrightSettings.json"))
                 .AddJsonFile(
                     Path.Combine(basePath, $"playwrightSettings.{os}.json"),
                     optional: true
@@ -82,9 +80,9 @@ namespace Templates.Test
             if (_isCIEnvironment)
             {
                 builder.AddJsonFile(
-                        Path.Combine(basePath, "playwrightSettings.ci.json"),
-                        optional: true
-                    )
+                    Path.Combine(basePath, "playwrightSettings.ci.json"),
+                    optional: true
+                )
                     .AddJsonFile(
                         Path.Combine(basePath, $"playwrightSettings.ci.{os}.json"),
                         optional: true

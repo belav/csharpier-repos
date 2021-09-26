@@ -67,11 +67,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             var other = obj as AutoCompleteEditHandler;
             return base.Equals(other)
-                && string.Equals(
-                    other.AutoCompleteString,
-                    AutoCompleteString,
-                    StringComparison.Ordinal
-                )
+                && string
+                    .Equals(other.AutoCompleteString, AutoCompleteString, StringComparison.Ordinal)
                 && AutoCompleteAtEndOfSpan == other.AutoCompleteAtEndOfSpan;
         }
 

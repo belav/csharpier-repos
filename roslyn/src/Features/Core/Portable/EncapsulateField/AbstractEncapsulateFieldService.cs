@@ -118,17 +118,19 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             var fields = ImmutableArray.Create(field);
             return ImmutableArray.Create<CodeAction>(
                 new MyCodeAction(
-                    string.Format(
-                        FeaturesResources.Encapsulate_field_colon_0_and_use_property,
-                        field.Name
-                    ),
+                    string
+                        .Format(
+                            FeaturesResources.Encapsulate_field_colon_0_and_use_property,
+                            field.Name
+                        ),
                     c => EncapsulateFieldsAsync(document, fields, updateReferences: true, c)
                 ),
                 new MyCodeAction(
-                    string.Format(
-                        FeaturesResources.Encapsulate_field_colon_0_but_still_use_field,
-                        field.Name
-                    ),
+                    string
+                        .Format(
+                            FeaturesResources.Encapsulate_field_colon_0_but_still_use_field,
+                            field.Name
+                        ),
                     c => EncapsulateFieldsAsync(document, fields, updateReferences: false, c)
                 )
             );
@@ -147,9 +149,9 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             {
                 var solution = document.Project.Solution;
                 var client = await RemoteHostClient.TryGetClientAsync(
-                        solution.Workspace,
-                        cancellationToken
-                    )
+                    solution.Workspace,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (client != null)
                 {
@@ -161,17 +163,17 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                         IRemoteEncapsulateFieldService,
                         ImmutableArray<(DocumentId, ImmutableArray<TextChange>)>
                     >(
-                            solution,
-                            (service, solutionInfo, cancellationToken) =>
-                                service.EncapsulateFieldsAsync(
-                                    solutionInfo,
-                                    document.Id,
-                                    fieldSymbolKeys,
-                                    updateReferences,
-                                    cancellationToken
-                                ),
-                            cancellationToken
-                        )
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.EncapsulateFieldsAsync(
+                                solutionInfo,
+                                document.Id,
+                                fieldSymbolKeys,
+                                updateReferences,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (!result.HasValue)
@@ -180,20 +182,20 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                     }
 
                     return await RemoteUtilities.UpdateSolutionAsync(
-                            solution,
-                            result.Value,
-                            cancellationToken
-                        )
+                        solution,
+                        result.Value,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
 
             return await EncapsulateFieldsInCurrentProcessAsync(
-                    document,
-                    fields,
-                    updateReferences,
-                    cancellationToken
-                )
+                document,
+                fields,
+                updateReferences,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -226,11 +228,11 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                     continue;
 
                 var nextSolution = await EncapsulateFieldAsync(
-                        document,
-                        currentField,
-                        updateReferences,
-                        cancellationToken
-                    )
+                    document,
+                    currentField,
+                    updateReferences,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (nextSolution == null)
                     continue;
@@ -255,7 +257,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             var fieldDeclaration = field.DeclaringSyntaxReferences.First();
             var declarationAnnotation = new SyntaxAnnotation();
             document = document.WithSyntaxRoot(
-                fieldDeclaration.SyntaxTree.GetRoot(cancellationToken)
+                fieldDeclaration.SyntaxTree
+                    .GetRoot(cancellationToken)
                     .ReplaceNode(
                         fieldDeclaration.GetSyntax(cancellationToken),
                         fieldDeclaration.GetSyntax(cancellationToken)
@@ -300,32 +303,32 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                 return null;
 
             var solutionNeedingProperty = await UpdateReferencesAsync(
-                    updateReferences,
-                    solution,
-                    document,
-                    field,
-                    finalFieldName,
-                    generatedPropertyName,
-                    cancellationToken
-                )
+                updateReferences,
+                solution,
+                document,
+                field,
+                finalFieldName,
+                generatedPropertyName,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             document = solutionNeedingProperty.GetDocument(document.Id);
 
             var markFieldPrivate = field.DeclaredAccessibility != Accessibility.Private;
             var rewrittenFieldDeclaration = await RewriteFieldNameAndAccessibilityAsync(
-                    finalFieldName,
-                    markFieldPrivate,
-                    document,
-                    declarationAnnotation,
-                    cancellationToken
-                )
+                finalFieldName,
+                markFieldPrivate,
+                document,
+                declarationAnnotation,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             document = await Formatter.FormatAsync(
-                    document.WithSyntaxRoot(rewrittenFieldDeclaration),
-                    Formatter.Annotation,
-                    cancellationToken: cancellationToken
-                )
+                document.WithSyntaxRoot(rewrittenFieldDeclaration),
+                Formatter.Annotation,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             solution = document.Project.Solution;
@@ -333,18 +336,18 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             {
                 var linkedDocument = solution.GetDocument(linkedDocumentId);
                 var updatedLinkedRoot = await RewriteFieldNameAndAccessibilityAsync(
-                        finalFieldName,
-                        markFieldPrivate,
-                        linkedDocument,
-                        declarationAnnotation,
-                        cancellationToken
-                    )
+                    finalFieldName,
+                    markFieldPrivate,
+                    linkedDocument,
+                    declarationAnnotation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var updatedLinkedDocument = await Formatter.FormatAsync(
-                        linkedDocument.WithSyntaxRoot(updatedLinkedRoot),
-                        Formatter.Annotation,
-                        cancellationToken: cancellationToken
-                    )
+                    linkedDocument.WithSyntaxRoot(updatedLinkedRoot),
+                    Formatter.Annotation,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
                 solution = updatedLinkedDocument.Project.Solution;
             }
@@ -372,12 +375,12 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             );
 
             var solutionWithProperty = await AddPropertyAsync(
-                    document,
-                    document.Project.Solution,
-                    field,
-                    generatedProperty,
-                    cancellationToken
-                )
+                document,
+                document.Project.Solution,
+                field,
+                generatedProperty,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return solutionWithProperty;
@@ -406,16 +409,17 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                 if (finalFieldName != field.Name && constructorLocations.Count > 0)
                 {
                     solution = await RenameAsync(
-                            solution,
-                            field,
-                            finalFieldName,
-                            location => IntersectsWithAny(location, constructorLocations),
-                            cancellationToken
-                        )
+                        solution,
+                        field,
+                        finalFieldName,
+                        location => IntersectsWithAny(location, constructorLocations),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     document = solution.GetDocument(document.Id);
-                    var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+                    var compilation = await document.Project
+                        .GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
 
                     field =
@@ -427,24 +431,24 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
 
                 // Outside the constructor we want to rename references to the field to final property name.
                 return await RenameAsync(
-                        solution,
-                        field,
-                        generatedPropertyName,
-                        location => !IntersectsWithAny(location, constructorLocations),
-                        cancellationToken
-                    )
+                    solution,
+                    field,
+                    generatedPropertyName,
+                    location => !IntersectsWithAny(location, constructorLocations),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else
             {
                 // Just rename everything.
                 return await Renamer.RenameSymbolAsync(
-                        solution,
-                        field,
-                        generatedPropertyName,
-                        solution.Options,
-                        cancellationToken
-                    )
+                    solution,
+                    field,
+                    generatedPropertyName,
+                    solution.Options,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -458,11 +462,11 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
         )
         {
             var initialLocations = await Renamer.FindRenameLocationsAsync(
-                    solution,
-                    field,
-                    RenameOptionSet.From(solution),
-                    cancellationToken
-                )
+                solution,
+                field,
+                RenameOptionSet.From(solution),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var resolution = await initialLocations.Filter(filter)
@@ -514,24 +518,24 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
 
             var destination = field.ContainingType;
             var updatedDocument = await codeGenerationService.AddPropertyAsync(
-                    destinationSolution,
-                    destination,
-                    property,
-                    options,
-                    cancellationToken
-                )
+                destinationSolution,
+                destination,
+                property,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             updatedDocument = await Formatter.FormatAsync(
-                    updatedDocument,
-                    Formatter.Annotation,
-                    cancellationToken: cancellationToken
-                )
+                updatedDocument,
+                Formatter.Annotation,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             updatedDocument = await Simplifier.ReduceAsync(
-                    updatedDocument,
-                    cancellationToken: cancellationToken
-                )
+                updatedDocument,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return updatedDocument.Project.Solution;
@@ -571,9 +575,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                 )
             );
 
-            return Simplifier.Annotation.AddAnnotationToSymbol(
-                Formatter.Annotation.AddAnnotationToSymbol(propertySymbol)
-            );
+            return Simplifier.Annotation
+                .AddAnnotationToSymbol(Formatter.Annotation.AddAnnotationToSymbol(propertySymbol));
         }
 
         protected abstract (string fieldName, string propertyName) GenerateFieldAndPropertyNames(

@@ -249,9 +249,9 @@ namespace Microsoft.CodeAnalysis.CodeActions
                     arrayBuilder.Add(
                         new ApplyChangesOperation(
                             await this.PostProcessChangesAsync(
-                                    ac.ChangedSolution,
-                                    cancellationToken
-                                )
+                                ac.ChangedSolution,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         )
                     );
@@ -285,17 +285,17 @@ namespace Microsoft.CodeAnalysis.CodeActions
             foreach (var projectChanges in solutionChanges.GetProjectChanges())
             {
                 var documentsToProcess = projectChanges.GetChangedDocuments(
-                        onlyGetDocumentsWithTextChanges: true
-                    )
+                    onlyGetDocumentsWithTextChanges: true
+                )
                     .Concat(projectChanges.GetAddedDocuments());
 
                 foreach (var documentId in documentsToProcess)
                 {
                     var document = processedSolution.GetRequiredDocument(documentId);
                     var processedDocument = await PostProcessChangesAsync(
-                            document,
-                            cancellationToken
-                        )
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     processedSolution = processedDocument.Project.Solution;
                 }
@@ -310,9 +310,9 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 {
                     var document = processedSolution.GetRequiredDocument(documentId);
                     var processedDocument = await PostProcessChangesAsync(
-                            document,
-                            cancellationToken
-                        )
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     processedSolution = processedDocument.Project.Solution;
                 }
@@ -342,40 +342,40 @@ namespace Microsoft.CodeAnalysis.CodeActions
             if (document.SupportsSyntaxTree)
             {
                 document = await ImportAdder.AddImportsFromSymbolAnnotationAsync(
-                        document,
-                        Simplifier.AddImportsAnnotation,
-                        cancellationToken: cancellationToken
-                    )
+                    document,
+                    Simplifier.AddImportsAnnotation,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 document = await Simplifier.ReduceAsync(
-                        document,
-                        Simplifier.Annotation,
-                        cancellationToken: cancellationToken
-                    )
+                    document,
+                    Simplifier.Annotation,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // format any node with explicit formatter annotation
                 document = await Formatter.FormatAsync(
-                        document,
-                        Formatter.Annotation,
-                        cancellationToken: cancellationToken
-                    )
+                    document,
+                    Formatter.Annotation,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // format any elastic whitespace
                 document = await Formatter.FormatAsync(
-                        document,
-                        SyntaxAnnotation.ElasticAnnotation,
-                        cancellationToken: cancellationToken
-                    )
+                    document,
+                    SyntaxAnnotation.ElasticAnnotation,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 document = await CaseCorrector.CaseCorrectAsync(
-                        document,
-                        CaseCorrector.Annotation,
-                        cancellationToken
-                    )
+                    document,
+                    CaseCorrector.Annotation,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

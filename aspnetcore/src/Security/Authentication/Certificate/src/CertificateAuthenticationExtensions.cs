@@ -101,10 +101,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<CertificateValidationCacheOptions>? configureOptions = null
         )
         {
-            builder.Services.AddSingleton<
-                ICertificateValidationCache,
-                CertificateValidationCache
-            >();
+            builder.Services
+                .AddSingleton<ICertificateValidationCache, CertificateValidationCache>();
             if (configureOptions != null)
             {
                 builder.Services.Configure(configureOptions);

@@ -95,10 +95,11 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                             Assert.Equal("itfailed", ex.Data["error"]);
                             Assert.Equal("whyitfailed", ex.Data["error_description"]);
                             Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
-                            ctx.Response.Redirect(
-                                "/error?FailureMessage="
-                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                            );
+                            ctx.Response
+                                .Redirect(
+                                    "/error?FailureMessage="
+                                        + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                                );
                             ctx.HandleResponse();
                             return Task.FromResult(0);
                         }

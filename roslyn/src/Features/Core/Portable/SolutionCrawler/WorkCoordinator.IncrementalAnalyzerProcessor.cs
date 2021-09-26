@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                     _listener = listener;
                     _registration = registration;
-                    _cacheService =
-                        registration.Workspace.Services.GetService<IProjectCacheService>();
+                    _cacheService = registration.Workspace.Services
+                        .GetService<IProjectCacheService>();
 
                     _lazyDiagnosticAnalyzerService = new Lazy<IDiagnosticAnalyzerService?>(
                         () => GetDiagnosticAnalyzerService(analyzerProviders)
@@ -98,11 +98,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
 
                     // event and worker queues
-                    _documentTracker =
-                        _registration.Workspace.Services.GetService<IDocumentTrackingService>();
+                    _documentTracker = _registration.Workspace.Services
+                        .GetService<IDocumentTrackingService>();
 
-                    var globalNotificationService =
-                        _registration.Workspace.Services.GetRequiredService<IGlobalOperationNotificationService>();
+                    var globalNotificationService = _registration.Workspace.Services
+                        .GetRequiredService<IGlobalOperationNotificationService>();
 
                     _highPriorityProcessor = new HighPriorityProcessor(
                         listener,
@@ -138,8 +138,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     // alternatively, we could just MEF import IDiagnosticAnalyzerService directly
                     // this can be null in test env.
                     return (IDiagnosticAnalyzerService?)analyzerProviders.Where(
-                            p => p.Value is IDiagnosticAnalyzerService
-                        )
+                        p => p.Value is IDiagnosticAnalyzerService
+                    )
                         .SingleOrDefault()?.Value;
                 }
 
@@ -269,10 +269,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     var analyzersToExecute = item.GetApplicableAnalyzers(allAnalyzers);
 
                     var analyzersWithOverriddenAnalysisScope = analyzersToExecute.Where(
-                            a =>
-                                a.GetOverriddenBackgroundAnalysisScope(options, analysisScope)
-                                != analysisScope
-                        )
+                        a =>
+                            a.GetOverriddenBackgroundAnalysisScope(options, analysisScope)
+                            != analysisScope
+                    )
                         .ToImmutableHashSet();
 
                     if (!analyzersWithOverriddenAnalysisScope.IsEmpty)
@@ -362,12 +362,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     )
                     {
                         await RunAnalyzersAsync(
-                                analyzers,
-                                textDocument,
-                                workItem,
-                                (a, d, c) => AnalyzeSyntaxAsync(a, d, reasons, c),
-                                cancellationToken
-                            )
+                            analyzers,
+                            textDocument,
+                            workItem,
+                            (a, d, c) => AnalyzeSyntaxAsync(a, d, reasons, c),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -383,23 +383,23 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     )
                     {
                         await RunAnalyzersAsync(
-                                analyzers,
-                                document,
-                                workItem,
-                                (a, d, c) => a.AnalyzeDocumentAsync(d, null, reasons, c),
-                                cancellationToken
-                            )
+                            analyzers,
+                            document,
+                            workItem,
+                            (a, d, c) => a.AnalyzeDocumentAsync(d, null, reasons, c),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     else
                     {
                         // if we don't need to re-analyze whole body, see whether we need to at least re-analyze one method.
                         await RunBodyAnalyzersAsync(
-                                analyzers,
-                                workItem,
-                                document,
-                                cancellationToken
-                            )
+                            analyzers,
+                            workItem,
+                            document,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -420,10 +420,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         else if (analyzer is IIncrementalAnalyzer2 analyzer2)
                         {
                             await analyzer2.AnalyzeNonSourceDocumentAsync(
-                                    textDocument,
-                                    reasons,
-                                    cancellationToken
-                                )
+                                textDocument,
+                                reasons,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         }
                     }
@@ -458,15 +458,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         }
 
                         await GetOrDefaultAsync(
-                                value,
-                                async (v, c) =>
-                                {
-                                    await runnerAsync(local, v, c).ConfigureAwait(false);
-                                    return (object?)null;
-                                },
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false);
+                            value,
+                            async (v, c) =>
+                            {
+                                await runnerAsync(local, v, c).ConfigureAwait(false);
+                                return (object?)null;
+                            },
+                            cancellationToken
+                        ).ConfigureAwait(false);
                     }
                 }
 
@@ -480,10 +479,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     try
                     {
                         var root = await GetOrDefaultAsync(
-                                document,
-                                (d, c) => d.GetSyntaxRootAsync(c),
-                                cancellationToken
-                            )
+                            document,
+                            (d, c) => d.GetSyntaxRootAsync(c),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
                         var reasons = workItem.InvocationReasons;
@@ -491,12 +490,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         {
                             // as a fallback mechanism, if we can't run one method body due to some missing service, run whole document analyzer.
                             await RunAnalyzersAsync(
-                                    analyzers,
-                                    document,
-                                    workItem,
-                                    (a, d, c) => a.AnalyzeDocumentAsync(d, null, reasons, c),
-                                    cancellationToken
-                                )
+                                analyzers,
+                                document,
+                                workItem,
+                                (a, d, c) => a.AnalyzeDocumentAsync(d, null, reasons, c),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             return;
                         }
@@ -513,24 +512,24 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             // no active member means, change is out side of a method body, but it didn't affect semantics (such as change in comment)
                             // in that case, we update whole document (just this document) so that we can have updated locations.
                             await RunAnalyzersAsync(
-                                    analyzers,
-                                    document,
-                                    workItem,
-                                    (a, d, c) => a.AnalyzeDocumentAsync(d, null, reasons, c),
-                                    cancellationToken
-                                )
+                                analyzers,
+                                document,
+                                workItem,
+                                (a, d, c) => a.AnalyzeDocumentAsync(d, null, reasons, c),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             return;
                         }
 
                         // re-run just the body
                         await RunAnalyzersAsync(
-                                analyzers,
-                                document,
-                                workItem,
-                                (a, d, c) => a.AnalyzeDocumentAsync(d, activeMember, reasons, c),
-                                cancellationToken
-                            )
+                            analyzers,
+                            document,
+                            workItem,
+                            (a, d, c) => a.AnalyzeDocumentAsync(d, activeMember, reasons, c),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     catch (Exception e)
@@ -634,21 +633,25 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         List<WorkItem> items
                     )
                     {
-                        _incrementalAnalyzerProcessor._normalPriorityProcessor.GetTestAccessor()
+                        _incrementalAnalyzerProcessor._normalPriorityProcessor
+                            .GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
 
                         var projectItems = items.Select(
                             i => i.ToProjectWorkItem(EmptyAsyncToken.Instance)
                         );
-                        _incrementalAnalyzerProcessor._lowPriorityProcessor.GetTestAccessor()
+                        _incrementalAnalyzerProcessor._lowPriorityProcessor
+                            .GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
                     }
 
                     internal void WaitUntilCompletion()
                     {
-                        _incrementalAnalyzerProcessor._normalPriorityProcessor.GetTestAccessor()
+                        _incrementalAnalyzerProcessor._normalPriorityProcessor
+                            .GetTestAccessor()
                             .WaitUntilCompletion();
-                        _incrementalAnalyzerProcessor._lowPriorityProcessor.GetTestAccessor()
+                        _incrementalAnalyzerProcessor._lowPriorityProcessor
+                            .GetTestAccessor()
                             .WaitUntilCompletion();
                     }
                 }
@@ -694,12 +697,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             {
                                 // Sort list so DiagnosticIncrementalAnalyzers (if any) come first.  OrderBy orders 'false' keys before 'true'.
                                 analyzers = _analyzerProviders.Select(
-                                        p =>
-                                            ValueTuple.Create(
-                                                p.Value.CreateIncrementalAnalyzer(workspace),
-                                                p.Metadata.HighPriorityForActiveFile
-                                            )
-                                    )
+                                    p =>
+                                        ValueTuple.Create(
+                                            p.Value.CreateIncrementalAnalyzer(workspace),
+                                            p.Metadata.HighPriorityForActiveFile
+                                        )
+                                )
                                     .Where(t => t.Item1 != null)
                                     .OrderBy(t => !(t.Item1 is DiagnosticIncrementalAnalyzer))
                                     .ToImmutableArray()!;

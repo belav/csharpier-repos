@@ -1110,9 +1110,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         private string PostProcess(string printedExpression)
         {
             var processedPrintedExpression = printedExpression.Replace(
-                    "Microsoft.EntityFrameworkCore.Query.",
-                    ""
-                )
+                "Microsoft.EntityFrameworkCore.Query.",
+                ""
+            )
                 .Replace("Microsoft.EntityFrameworkCore.", "")
                 .Replace(Environment.NewLine + Environment.NewLine, Environment.NewLine);
 

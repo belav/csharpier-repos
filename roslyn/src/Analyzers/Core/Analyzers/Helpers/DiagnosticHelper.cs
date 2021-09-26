@@ -111,10 +111,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
 
-            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty.Add(
-                WellKnownDiagnosticTags.Unnecessary,
-                Enumerable.Range(additionalLocations.Length, additionalUnnecessaryLocations.Length)
-            );
+            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty
+                .Add(
+                    WellKnownDiagnosticTags.Unnecessary,
+                    Enumerable.Range(
+                        additionalLocations.Length,
+                        additionalUnnecessaryLocations.Length
+                    )
+                );
             return CreateWithLocationTags(
                 descriptor,
                 location,
@@ -171,10 +175,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
 
-            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty.Add(
-                WellKnownDiagnosticTags.Unnecessary,
-                Enumerable.Range(additionalLocations.Length, additionalUnnecessaryLocations.Length)
-            );
+            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty
+                .Add(
+                    WellKnownDiagnosticTags.Unnecessary,
+                    Enumerable.Range(
+                        additionalLocations.Length,
+                        additionalUnnecessaryLocations.Length
+                    )
+                );
             return CreateWithLocationTags(
                 descriptor,
                 location,
@@ -368,10 +376,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
                 else
                 {
-                    using var argumentsBuilderDisposer = ArrayBuilder<string>.GetInstance(
-                        length,
-                        out var argumentsBuilder
-                    );
+                    using var argumentsBuilderDisposer = ArrayBuilder<string>
+                        .GetInstance(length, out var argumentsBuilder);
                     for (var i = 0; i < length; i++)
                     {
                         argumentsBuilder.Add(reader.ReadString());

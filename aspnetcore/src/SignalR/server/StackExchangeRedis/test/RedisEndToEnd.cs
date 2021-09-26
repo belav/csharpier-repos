@@ -209,7 +209,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             string userName = null
         )
         {
-            var hubConnectionBuilder = new HubConnectionBuilder().WithLoggerFactory(loggerFactory)
+            var hubConnectionBuilder = new HubConnectionBuilder()
+                .WithLoggerFactory(loggerFactory)
                 .WithUrl(
                     url,
                     transportType,

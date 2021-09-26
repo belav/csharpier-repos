@@ -111,7 +111,8 @@ namespace Moq
         {
             if (this.observations != null)
             {
-                return this.observations.Where(
+                return this.observations
+                    .Where(
                         o =>
                             fromTimestampInclusive <= o.Timestamp
                             && o.Timestamp < toTimestampExclusive

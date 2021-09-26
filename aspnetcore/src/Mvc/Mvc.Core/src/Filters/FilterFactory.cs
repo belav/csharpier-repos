@@ -28,10 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             var staticFilterItems = new FilterItem[actionDescriptor.FilterDescriptors.Count];
 
-            var orderedFilters = actionDescriptor.FilterDescriptors.OrderBy(
-                    filter => filter,
-                    FilterDescriptorOrderComparer.Comparer
-                )
+            var orderedFilters = actionDescriptor.FilterDescriptors
+                .OrderBy(filter => filter, FilterDescriptorOrderComparer.Comparer)
                 .ToList();
 
             for (var i = 0; i < orderedFilters.Count; i++)

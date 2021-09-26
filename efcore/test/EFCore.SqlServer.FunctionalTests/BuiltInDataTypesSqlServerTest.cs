@@ -4076,7 +4076,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
             var typeMapper = context.GetService<IRelationalTypeMappingSource>();
 
             foreach (
-                var property in context.Model.GetEntityTypes()
+                var property in context.Model
+                    .GetEntityTypes()
                     .SelectMany(e => e.GetDeclaredProperties())
             )
             {
@@ -4345,7 +4346,8 @@ WHERE [b].[Id] = 13"
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
             {
-                var options = base.AddOptions(builder)
+                var options = base
+                    .AddOptions(builder)
                     .ConfigureWarnings(c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
 
                 new SqlServerDbContextOptionsBuilder(options).MinBatchSize(1);

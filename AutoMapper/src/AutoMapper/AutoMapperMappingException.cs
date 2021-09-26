@@ -79,11 +79,13 @@ namespace AutoMapper
         {
             get
             {
-                return string.Join(
-                    Environment.NewLine,
-                    base.StackTrace.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
-                        .Where(str => !str.TrimStart().StartsWith("at AutoMapper."))
-                );
+                return string
+                    .Join(
+                        Environment.NewLine,
+                        base.StackTrace
+                            .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                            .Where(str => !str.TrimStart().StartsWith("at AutoMapper."))
+                    );
             }
         }
 #endif
@@ -165,12 +167,13 @@ namespace AutoMapper
             {
                 if (Types.HasValue)
                 {
-                    var message = string.Format(
-                        "The following member on {0} cannot be mapped: \n\t{2} \nAdd a custom mapping expression, ignore, add a custom resolver, or modify the destination type {1}.",
-                        Types.Value.DestinationType.FullName,
-                        Types.Value.DestinationType.FullName,
-                        MemberMap?.DestinationName
-                    );
+                    var message = string
+                        .Format(
+                            "The following member on {0} cannot be mapped: \n\t{2} \nAdd a custom mapping expression, ignore, add a custom resolver, or modify the destination type {1}.",
+                            Types.Value.DestinationType.FullName,
+                            Types.Value.DestinationType.FullName,
+                            MemberMap?.DestinationName
+                        );
 
                     message += "\nContext:";
 
@@ -246,15 +249,14 @@ namespace AutoMapper
             get
             {
                 if (Errors != null)
-                    return string.Join(
-                        Environment.NewLine,
-                        base.StackTrace.Split(
-                                new[] { Environment.NewLine },
-                                StringSplitOptions.None
-                            )
-                            .Where(str => !str.TrimStart().StartsWith("at AutoMapper."))
-                            .ToArray()
-                    );
+                    return string
+                        .Join(
+                            Environment.NewLine,
+                            base.StackTrace
+                                .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                                .Where(str => !str.TrimStart().StartsWith("at AutoMapper."))
+                                .ToArray()
+                        );
 
                 return base.StackTrace;
             }

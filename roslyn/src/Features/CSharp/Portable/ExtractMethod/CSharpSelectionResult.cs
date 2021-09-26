@@ -39,10 +39,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             var firstTokenAnnotation = new SyntaxAnnotation();
             var lastTokenAnnotation = new SyntaxAnnotation();
 
-            var root = await document.Document.GetSyntaxRootAsync(cancellationToken)
+            var root = await document.Document
+                .GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var newDocument = await SemanticDocument.CreateAsync(
-                    document.Document.WithSyntaxRoot(
+                document.Document
+                    .WithSyntaxRoot(
                         root.AddAnnotations(
                             new[]
                             {
@@ -57,8 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             }
                         )
                     ),
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (selectionInExpression)

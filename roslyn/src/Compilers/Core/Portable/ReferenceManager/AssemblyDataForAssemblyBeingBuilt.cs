@@ -36,9 +36,8 @@ namespace Microsoft.CodeAnalysis
 
                 _referencedAssemblyData = referencedAssemblyData;
 
-                var refs = ArrayBuilder<AssemblyIdentity>.GetInstance(
-                    referencedAssemblyData.Length + modules.Length
-                ); //approximate size
+                var refs = ArrayBuilder<AssemblyIdentity>
+                    .GetInstance(referencedAssemblyData.Length + modules.Length); //approximate size
                 foreach (AssemblyData data in referencedAssemblyData)
                 {
                     refs.Add(data.Identity);

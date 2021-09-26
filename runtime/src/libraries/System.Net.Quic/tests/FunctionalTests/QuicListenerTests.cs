@@ -17,21 +17,19 @@ namespace System.Net.Quic.Tests
         public async Task Listener_Backlog_Success()
         {
             await Task.Run(
-                    async () =>
-                    {
-                        using QuicListener listener = CreateQuicListener();
+                async () =>
+                {
+                    using QuicListener listener = CreateQuicListener();
 
-                        using QuicConnection clientConnection = CreateQuicConnection(
-                            listener.ListenEndPoint
-                        );
-                        var clientStreamTask = clientConnection.ConnectAsync();
+                    using QuicConnection clientConnection = CreateQuicConnection(
+                        listener.ListenEndPoint
+                    );
+                    var clientStreamTask = clientConnection.ConnectAsync();
 
-                        using QuicConnection serverConnection =
-                            await listener.AcceptConnectionAsync();
-                        await clientStreamTask;
-                    }
-                )
-                .WaitAsync(TimeSpan.FromSeconds(6));
+                    using QuicConnection serverConnection = await listener.AcceptConnectionAsync();
+                    await clientStreamTask;
+                }
+            ).WaitAsync(TimeSpan.FromSeconds(6));
         }
     }
 

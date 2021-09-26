@@ -130,10 +130,10 @@ internal class Packet256Tracer
                 var minMask = And(notNullMask, Or(nullMinMask, lessMinMask));
                 var minDis = BlendVariable(mins.Distances, distance, minMask);
                 var minIndices = BlendVariable(
-                        mins.ThingIndices.AsSingle(),
-                        Vector256.Create(i).AsSingle(),
-                        minMask
-                    )
+                    mins.ThingIndices.AsSingle(),
+                    Vector256.Create(i).AsSingle(),
+                    minMask
+                )
                     .AsInt32();
                 mins.Distances = minDis;
                 mins.ThingIndices = minIndices;

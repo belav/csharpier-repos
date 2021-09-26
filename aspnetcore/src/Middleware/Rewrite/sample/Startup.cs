@@ -43,9 +43,10 @@ namespace RewriteSample
             app.Run(
                 context =>
                 {
-                    return context.Response.WriteAsync(
-                        $"Rewritten Url: {context.Request.Path + context.Request.QueryString}"
-                    );
+                    return context.Response
+                        .WriteAsync(
+                            $"Rewritten Url: {context.Request.Path + context.Request.QueryString}"
+                        );
                 }
             );
         }
@@ -53,28 +54,25 @@ namespace RewriteSample
         public static Task Main(string[] args)
         {
             var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel(
-                                options =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel(
+                        options =>
+                        {
+                            options.Listen(IPAddress.Loopback, 5000);
+                            options.Listen(
+                                IPAddress.Loopback,
+                                5001,
+                                listenOptions =>
                                 {
-                                    options.Listen(IPAddress.Loopback, 5000);
-                                    options.Listen(
-                                        IPAddress.Loopback,
-                                        5001,
-                                        listenOptions =>
-                                        {
-                                            // Configure SSL
-                                            listenOptions.UseHttps("testCert.pfx", "testPassword");
-                                        }
-                                    );
+                                    // Configure SSL
+                                    listenOptions.UseHttps("testCert.pfx", "testPassword");
                                 }
-                            )
-                            .UseStartup<Startup>()
-                            .UseContentRoot(Directory.GetCurrentDirectory());
-                    }
-                )
-                .Build();
+                            );
+                        }
+                    ).UseStartup<Startup>().UseContentRoot(Directory.GetCurrentDirectory());
+                }
+            ).Build();
 
             return host.RunAsync();
         }

@@ -99,9 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
         public override string ToString() =>
-            ((IReadOnlySkipNavigation)this).ToDebugString(
-                MetadataDebugStringOptions.SingleLineDefault
-            );
+            ((IReadOnlySkipNavigation)this)
+                .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -112,13 +111,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual DebugView DebugView =>
             new(
                 () =>
-                    ((IReadOnlySkipNavigation)this).ToDebugString(
-                        MetadataDebugStringOptions.ShortDefault
-                    ),
+                    ((IReadOnlySkipNavigation)this)
+                        .ToDebugString(MetadataDebugStringOptions.ShortDefault),
                 () =>
-                    ((IReadOnlySkipNavigation)this).ToDebugString(
-                        MetadataDebugStringOptions.LongDefault
-                    )
+                    ((IReadOnlySkipNavigation)this)
+                        .ToDebugString(MetadataDebugStringOptions.LongDefault)
             );
 
         /// <inheritdoc />

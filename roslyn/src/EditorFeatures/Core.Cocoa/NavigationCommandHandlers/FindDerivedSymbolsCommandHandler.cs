@@ -82,13 +82,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             {
                 return (
                     await SymbolFinder.FindImplementationsAsync(
-                            namedTypeSymbol,
-                            solution,
-                            null,
-                            cancellationToken
-                        )
+                        namedTypeSymbol,
+                        solution,
+                        null,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
-                ).OfType<ISymbol>();
+                )
+                    .OfType<ISymbol>();
             }
             else if (
                 symbol is INamedTypeSymbol namedTypeSymbol2
@@ -97,26 +98,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             {
                 return (
                     await SymbolFinder.FindImplementationsAsync(
-                            namedTypeSymbol2,
-                            solution,
-                            null,
-                            cancellationToken
-                        )
+                        namedTypeSymbol2,
+                        solution,
+                        null,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
-                ).OfType<ISymbol>();
+                )
+                    .OfType<ISymbol>();
             }
             // if it's not, but is instead a class, we can use FindDerivedClassesAsync
             else if (symbol is INamedTypeSymbol namedTypeSymbol3)
             {
                 return (
                     await SymbolFinder.FindDerivedClassesAsync(
-                            namedTypeSymbol3,
-                            solution,
-                            null,
-                            cancellationToken
-                        )
+                        namedTypeSymbol3,
+                        solution,
+                        null,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
-                ).OfType<ISymbol>();
+                )
+                    .OfType<ISymbol>();
             }
             // and lastly, if it's a method, we can use FindOverridesAsync
             else

@@ -13,12 +13,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [Fact]
         public void Sets_DefaultTimeout_when_connectionString()
         {
-            var services = SqliteTestHelpers.Instance.CreateContextServices(
-                new DbContextOptionsBuilder().UseSqlite(
-                    "Data Source=:memory:",
-                    x => x.CommandTimeout(42)
-                ).Options
-            );
+            var services = SqliteTestHelpers.Instance
+                .CreateContextServices(
+                    new DbContextOptionsBuilder()
+                        .UseSqlite("Data Source=:memory:", x => x.CommandTimeout(42)).Options
+                );
 
             var connection =
                 (SqliteConnection)services.GetRequiredService<IRelationalConnection>().DbConnection;
@@ -33,12 +32,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 DefaultTimeout = 21
             };
-            var services = SqliteTestHelpers.Instance.CreateContextServices(
-                new DbContextOptionsBuilder().UseSqlite(
-                    originalConnection,
-                    x => x.CommandTimeout(42)
-                ).Options
-            );
+            var services = SqliteTestHelpers.Instance
+                .CreateContextServices(
+                    new DbContextOptionsBuilder()
+                        .UseSqlite(originalConnection, x => x.CommandTimeout(42)).Options
+                );
 
             var connection =
                 (SqliteConnection)services.GetRequiredService<IRelationalConnection>().DbConnection;

@@ -66,15 +66,16 @@ namespace System.Linq.Parallel
 #if DEBUG
             _received = true;
 #endif
-            _mergeExecutor = MergeExecutor<TOutput>.Execute<TKey>(
-                partitionedStream,
-                _forEffectMerge,
-                _mergeOptions,
-                _taskScheduler,
-                _isOrdered,
-                _cancellationState,
-                _queryId
-            );
+            _mergeExecutor = MergeExecutor<TOutput>
+                .Execute<TKey>(
+                    partitionedStream,
+                    _forEffectMerge,
+                    _mergeOptions,
+                    _taskScheduler,
+                    _isOrdered,
+                    _cancellationState,
+                    _queryId
+                );
 
             TraceHelpers.TraceInfo(
                 "[timing]: {0}: finished opening - QueryOperator<>::GetEnumerator",

@@ -180,12 +180,13 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
                 {
                     int value;
                     if (
-                        int.TryParse(
-                            tokens.ExpiresIn,
-                            NumberStyles.Integer,
-                            CultureInfo.InvariantCulture,
-                            out value
-                        )
+                        int
+                            .TryParse(
+                                tokens.ExpiresIn,
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out value
+                            )
                     )
                     {
                         // https://www.w3.org/TR/xmlschema-2/#dateTime
@@ -238,10 +239,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
 
             // PKCE https://tools.ietf.org/html/rfc7636#section-4.5, see BuildChallengeUrl
             if (
-                context.Properties.Items.TryGetValue(
-                    OAuthConstants.CodeVerifierKey,
-                    out var codeVerifier
-                )
+                context.Properties.Items
+                    .TryGetValue(OAuthConstants.CodeVerifierKey, out var codeVerifier)
             )
             {
                 tokenRequestParameters.Add(OAuthConstants.CodeVerifierKey, codeVerifier!);
@@ -251,9 +250,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             var requestContent = new FormUrlEncodedContent(tokenRequestParameters!);
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, Options.TokenEndpoint);
-            requestMessage.Headers.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json")
-            );
+            requestMessage.Headers.Accept
+                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
             requestMessage.Content = requestContent;
             requestMessage.Version = Backchannel.DefaultRequestVersion;
             var response = await Backchannel.SendAsync(requestMessage, Context.RequestAborted);

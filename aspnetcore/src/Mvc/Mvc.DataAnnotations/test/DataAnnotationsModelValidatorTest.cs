@@ -50,10 +50,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     new SampleModel { Name = "one" },
                     new SampleModel { Name = "two" }
                 };
-                var method = typeof(ModelValidationResultComparer).GetMethod(
-                    nameof(ModelValidationResultComparer.GetHashCode),
-                    new[] { typeof(ModelValidationResult) }
-                );
+                var method = typeof(ModelValidationResultComparer)
+                    .GetMethod(
+                        nameof(ModelValidationResultComparer.GetHashCode),
+                        new[] { typeof(ModelValidationResult) }
+                    );
                 var parameter = method.GetParameters()[0]; // GetHashCode(ModelValidationResult obj)
 
                 // metadata, container, model, expected MemberName
@@ -493,7 +494,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var service = new Mock<IExampleService>();
             service.Setup(x => x.DoSomething()).Verifiable();
 
-            var provider = new ServiceCollection().AddSingleton(service.Object)
+            var provider = new ServiceCollection()
+                .AddSingleton(service.Object)
                 .BuildServiceProvider();
 
             var httpContext = new Mock<HttpContext>();

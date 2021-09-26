@@ -43,33 +43,30 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         public static void WriteExpectedOutput(bool value)
         {
             RemoteExecutor.Invoke(
-                    (_value) =>
+                (_value) =>
+                {
+                    string message = "Write this message please";
+                    bool setErrorStream = bool.Parse(_value);
+                    using (var stringWriter = new StringWriter())
                     {
-                        string message = "Write this message please";
-                        bool setErrorStream = bool.Parse(_value);
-                        using (var stringWriter = new StringWriter())
-                        {
-                            if (setErrorStream)
-                                Console.SetError(stringWriter);
-                            else
-                                Console.SetOut(stringWriter);
+                        if (setErrorStream)
+                            Console.SetError(stringWriter);
+                        else
+                            Console.SetOut(stringWriter);
 
-                            using (
-                                var listener = new ConsoleTraceListener(
-                                    useErrorStream: setErrorStream
-                                )
-                            )
-                            {
-                                listener.Write(message);
-                                string writerOutput = stringWriter.ToString();
-                                Assert.Equal(message, writerOutput);
-                                Assert.DoesNotContain(Environment.NewLine, writerOutput);
-                            }
+                        using (
+                            var listener = new ConsoleTraceListener(useErrorStream: setErrorStream)
+                        )
+                        {
+                            listener.Write(message);
+                            string writerOutput = stringWriter.ToString();
+                            Assert.Equal(message, writerOutput);
+                            Assert.DoesNotContain(Environment.NewLine, writerOutput);
                         }
-                    },
-                    value.ToString()
-                )
-                .Dispose();
+                    }
+                },
+                value.ToString()
+            ).Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -78,34 +75,28 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         public static void WriteLineExpectedOutput(bool value)
         {
             RemoteExecutor.Invoke(
-                    (_value) =>
+                (_value) =>
+                {
+                    string message = "A new message to the listener";
+                    bool setErrorStream = bool.Parse(_value);
+                    using (var stringWriter = new StringWriter())
                     {
-                        string message = "A new message to the listener";
-                        bool setErrorStream = bool.Parse(_value);
-                        using (var stringWriter = new StringWriter())
-                        {
-                            if (setErrorStream)
-                                Console.SetError(stringWriter);
-                            else
-                                Console.SetOut(stringWriter);
+                        if (setErrorStream)
+                            Console.SetError(stringWriter);
+                        else
+                            Console.SetOut(stringWriter);
 
-                            using (
-                                var listener = new ConsoleTraceListener(
-                                    useErrorStream: setErrorStream
-                                )
-                            )
-                            {
-                                listener.WriteLine(message);
-                                Assert.Contains(
-                                    message,
-                                    stringWriter.ToString() + Environment.NewLine
-                                );
-                            }
+                        using (
+                            var listener = new ConsoleTraceListener(useErrorStream: setErrorStream)
+                        )
+                        {
+                            listener.WriteLine(message);
+                            Assert.Contains(message, stringWriter.ToString() + Environment.NewLine);
                         }
-                    },
-                    value.ToString()
-                )
-                .Dispose();
+                    }
+                },
+                value.ToString()
+            ).Dispose();
         }
     }
 }

@@ -78,11 +78,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     // We look for the original attribute so we can restore the exact attribute name the user typed in
                     // approximately the same position where the user wrote it in the Razor source.
                     if (
-                        string.Equals(
-                            attributeName,
-                            context.AllAttributes[i].Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                attributeName,
+                                context.AllAttributes[i].Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         CopyHtmlAttribute(i, tagHelperOutput, context);
@@ -134,10 +135,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 }
                 else if (string.Equals(attribute.Key, "class", StringComparison.OrdinalIgnoreCase))
                 {
-                    var found = tagHelperOutput.Attributes.TryGetAttribute(
-                        "class",
-                        out var classAttribute
-                    );
+                    var found = tagHelperOutput.Attributes
+                        .TryGetAttribute("class", out var classAttribute);
                     Debug.Assert(found);
 
                     var newAttribute = new TagHelperAttribute(
@@ -219,10 +218,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             }
 
             if (
-                !tagHelperOutput.Attributes.TryGetAttribute(
-                    "class",
-                    out TagHelperAttribute classAttribute
-                )
+                !tagHelperOutput.Attributes
+                    .TryGetAttribute("class", out TagHelperAttribute classAttribute)
             )
             {
                 tagHelperOutput.Attributes.Add("class", classValue);
@@ -239,9 +236,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 }
 
                 var arrayOfClasses = currentClassValue.Split(
-                        SpaceChars,
-                        StringSplitOptions.RemoveEmptyEntries
-                    )
+                    SpaceChars,
+                    StringSplitOptions.RemoveEmptyEntries
+                )
                     .SelectMany(
                         perhapsEncoded =>
                             perhapsEncoded.Split(
@@ -302,10 +299,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             }
 
             if (
-                !tagHelperOutput.Attributes.TryGetAttribute(
-                    "class",
-                    out TagHelperAttribute classAttribute
-                )
+                !tagHelperOutput.Attributes
+                    .TryGetAttribute("class", out TagHelperAttribute classAttribute)
             )
             {
                 return;
@@ -332,9 +327,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             }
 
             var listOfClasses = currentClassValue.Split(
-                    SpaceChars,
-                    StringSplitOptions.RemoveEmptyEntries
-                )
+                SpaceChars,
+                StringSplitOptions.RemoveEmptyEntries
+            )
                 .SelectMany(
                     perhapsEncoded =>
                         perhapsEncoded.Split(

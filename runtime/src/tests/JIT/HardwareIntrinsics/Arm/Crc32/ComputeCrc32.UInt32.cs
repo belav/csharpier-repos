@@ -131,7 +131,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Crc32).GetMethod(
+            var result = typeof(Crc32)
+                .GetMethod(
                     nameof(Crc32.ComputeCrc32),
                     new Type[] { typeof(UInt32), typeof(UInt32) }
                 )
@@ -238,9 +239,10 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Crc32)}.{nameof(Crc32.ComputeCrc32)}<UInt32>(UInt32, UInt32): ComputeCrc32 failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Crc32)}.{nameof(Crc32.ComputeCrc32)}<UInt32>(UInt32, UInt32): ComputeCrc32 failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

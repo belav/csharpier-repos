@@ -48,15 +48,14 @@ namespace Microsoft.CodeAnalysis.Remote
                     var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                         .ConfigureAwait(false);
                     var document = solution.GetDocument(documentId)!;
-                    var compilation = await document.Project.GetRequiredCompilationAsync(
-                            cancellationToken
-                        )
+                    var compilation = await document.Project
+                        .GetRequiredCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var symbol = SymbolKey.ResolveString(
-                            receiverTypeSymbolKeyData,
-                            compilation,
-                            cancellationToken: cancellationToken
-                        )
+                        receiverTypeSymbolKeyData,
+                        compilation,
+                        cancellationToken: cancellationToken
+                    )
                         .GetAnySymbol();
 
                     if (symbol is ITypeSymbol receiverTypeSymbol)
@@ -68,26 +67,26 @@ namespace Microsoft.CodeAnalysis.Remote
                             syntaxFacts.StringComparer
                         );
                         var targetTypes = targetTypesSymbolKeyData.Select(
-                                symbolKey =>
-                                    SymbolKey.ResolveString(
-                                            symbolKey,
-                                            compilation,
-                                            cancellationToken: cancellationToken
-                                        )
-                                        .GetAnySymbol() as ITypeSymbol
-                            )
+                            symbolKey =>
+                                SymbolKey.ResolveString(
+                                    symbolKey,
+                                    compilation,
+                                    cancellationToken: cancellationToken
+                                )
+                                    .GetAnySymbol() as ITypeSymbol
+                        )
                             .WhereNotNull()
                             .ToImmutableArray();
 
                         return await ExtensionMethodImportCompletionHelper.GetUnimportedExtensionMethodsInCurrentProcessAsync(
-                                document,
-                                position,
-                                receiverTypeSymbol,
-                                namespaceInScopeSet,
-                                targetTypes,
-                                forceIndexCreation,
-                                cancellationToken
-                            )
+                            document,
+                            position,
+                            receiverTypeSymbol,
+                            namespaceInScopeSet,
+                            targetTypes,
+                            forceIndexCreation,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 

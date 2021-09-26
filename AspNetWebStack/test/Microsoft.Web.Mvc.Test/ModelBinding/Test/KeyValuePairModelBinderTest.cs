@@ -19,10 +19,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(KeyValuePair<int, string>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider()
@@ -49,10 +47,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(KeyValuePair<int, string>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider()
@@ -60,8 +56,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -69,11 +65,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
 
             KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
                 int,
@@ -99,10 +96,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(KeyValuePair<int, string>)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider()
@@ -110,8 +105,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -119,15 +114,16 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
             Mock<IExtensibleModelBinder> mockStringBinder = new Mock<IExtensibleModelBinder>();
             mockStringBinder.Setup(
-                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
-                )
+                o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+            )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -135,11 +131,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(string),
-                mockStringBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(string),
+                    mockStringBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
 
             KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
                 int,

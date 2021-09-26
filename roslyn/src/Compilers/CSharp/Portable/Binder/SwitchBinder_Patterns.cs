@@ -110,15 +110,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            var sectionBuilder = ArrayBuilder<BoundSwitchSection>.GetInstance(
-                switchSections.Length
-            );
+            var sectionBuilder = ArrayBuilder<BoundSwitchSection>
+                .GetInstance(switchSections.Length);
             bool anyPreviousErrors = false;
             foreach (var oldSection in switchSections)
             {
-                var labelBuilder = ArrayBuilder<BoundSwitchLabel>.GetInstance(
-                    oldSection.SwitchLabels.Length
-                );
+                var labelBuilder = ArrayBuilder<BoundSwitchLabel>
+                    .GetInstance(oldSection.SwitchLabels.Length);
                 foreach (var label in oldSection.SwitchLabels)
                 {
                     var newLabel = label;
@@ -227,9 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // Bind match sections
-            var boundSwitchSectionsBuilder = ArrayBuilder<BoundSwitchSection>.GetInstance(
-                SwitchSyntax.Sections.Count
-            );
+            var boundSwitchSectionsBuilder = ArrayBuilder<BoundSwitchSection>
+                .GetInstance(SwitchSyntax.Sections.Count);
             defaultLabel = null;
             foreach (SwitchSectionSyntax sectionSyntax in SwitchSyntax.Sections)
             {
@@ -275,9 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // Bind switch section statements
-            var boundStatementsBuilder = ArrayBuilder<BoundStatement>.GetInstance(
-                node.Statements.Count
-            );
+            var boundStatementsBuilder = ArrayBuilder<BoundStatement>
+                .GetInstance(node.Statements.Count);
             foreach (StatementSyntax statement in node.Statements)
             {
                 var boundStatement = sectionBinder.BindStatement(statement, diagnostics);

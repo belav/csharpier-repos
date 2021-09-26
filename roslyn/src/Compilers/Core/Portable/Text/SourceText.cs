@@ -764,7 +764,8 @@ namespace Microsoft.CodeAnalysis.Text
                                 where !c.Span.IsEmpty || c.NewText?.Length > 0
                                 orderby c.Span
                                 select c
-                            ).ToList();
+                            )
+                                .ToList();
                             return WithChanges(changes);
                         }
 

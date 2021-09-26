@@ -79,9 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         {
             using (_gate.DisposableWait())
             {
-                var projectPath = inputNode.Id.GetNestedValueByName<Uri>(
-                    CodeGraphNodeIdName.Assembly
-                );
+                var projectPath = inputNode.Id
+                    .GetNestedValueByName<Uri>(CodeGraphNodeIdName.Assembly);
                 var filePath = inputNode.Id.GetNestedValueByName<Uri>(CodeGraphNodeIdName.File);
 
                 if (projectPath == null || filePath == null)
@@ -89,14 +88,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     return;
                 }
 
-                var project = _solution.Projects.FirstOrDefault(
-                    p =>
-                        string.Equals(
-                            p.FilePath,
-                            projectPath.OriginalString,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                );
+                var project = _solution.Projects
+                    .FirstOrDefault(
+                        p =>
+                            string
+                                .Equals(
+                                    p.FilePath,
+                                    projectPath.OriginalString,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                    );
                 if (project == null)
                 {
                     return;
@@ -104,14 +105,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
                 _nodeToContextProjectMap.Add(inputNode, project);
 
-                var document = project.Documents.FirstOrDefault(
-                    d =>
-                        string.Equals(
-                            d.FilePath,
-                            filePath.OriginalString,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                );
+                var document = project.Documents
+                    .FirstOrDefault(
+                        d =>
+                            string
+                                .Equals(
+                                    d.FilePath,
+                                    filePath.OriginalString,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                    );
                 if (document == null)
                 {
                     return;
@@ -229,14 +232,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             if (preferredLocation == null && symbol.Locations.Any(loc => loc.IsInMetadata))
             {
                 var newSymbol = await SymbolFinder.FindSourceDefinitionAsync(
-                        symbol,
-                        contextProject.Solution,
-                        _cancellationToken
-                    )
+                    symbol,
+                    contextProject.Solution,
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (newSymbol != null)
                 {
-                    preferredLocation = newSymbol.Locations.Where(loc => loc.IsInSource)
+                    preferredLocation = newSymbol.Locations
+                        .Where(loc => loc.IsInSource)
                         .FirstOrDefault();
                 }
             }
@@ -306,93 +310,93 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             {
                 case SymbolKind.Assembly:
                     node = await GetOrCreateNodeAssemblyAsync(
-                            graph,
-                            (IAssemblySymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        graph,
+                        (IAssemblySymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
                 case SymbolKind.Namespace:
                     node = await GetOrCreateNodeForNamespaceAsync(
-                            graph,
-                            (INamespaceSymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        graph,
+                        (INamespaceSymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
                 case SymbolKind.NamedType:
                 case SymbolKind.ErrorType:
                     node = await GetOrCreateNodeForNamedTypeAsync(
-                            graph,
-                            (INamedTypeSymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        graph,
+                        (INamedTypeSymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
                 case SymbolKind.Method:
                     node = await GetOrCreateNodeForMethodAsync(
-                            graph,
-                            (IMethodSymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        graph,
+                        (IMethodSymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
                 case SymbolKind.Field:
                     node = await GetOrCreateNodeForFieldAsync(
-                            graph,
-                            (IFieldSymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        graph,
+                        (IFieldSymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
                 case SymbolKind.Property:
                     node = await GetOrCreateNodeForPropertyAsync(
-                            graph,
-                            (IPropertySymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        graph,
+                        (IPropertySymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
                 case SymbolKind.Event:
                     node = await GetOrCreateNodeForEventAsync(
-                            graph,
-                            (IEventSymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        graph,
+                        (IEventSymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
                 case SymbolKind.Parameter:
                     node = await GetOrCreateNodeForParameterAsync(
-                            graph,
-                            (IParameterSymbol)symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        graph,
+                        (IParameterSymbol)symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
                 case SymbolKind.Local:
                 case SymbolKind.RangeVariable:
                     node = await GetOrCreateNodeForLocalVariableAsync(
-                            graph,
-                            symbol,
-                            solution,
-                            cancellationToken
-                        )
+                        graph,
+                        symbol,
+                        solution,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     break;
 
@@ -414,10 +418,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var id = await GraphNodeIdCreation.GetIdForParameterAsync(
-                    parameterSymbol,
-                    solution,
-                    cancellationToken
-                )
+                parameterSymbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = graph.Nodes.GetOrCreate(id);
             node.AddCategory(CodeNodeCategories.Parameter);
@@ -437,10 +441,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var id = await GraphNodeIdCreation.GetIdForLocalVariableAsync(
-                    localSymbol,
-                    solution,
-                    cancellationToken
-                )
+                localSymbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = graph.Nodes.GetOrCreate(id);
             node.AddCategory(NodeCategories.LocalExpression);
@@ -456,10 +460,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var id = await GraphNodeIdCreation.GetIdForAssemblyAsync(
-                    assemblySymbol,
-                    solution,
-                    cancellationToken
-                )
+                assemblySymbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = graph.Nodes.GetOrCreate(id);
             node.AddCategory(CodeNodeCategories.Assembly);
@@ -469,9 +473,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
         private static void UpdateLabelsForNode(ISymbol symbol, Solution solution, GraphNode node)
         {
-            var progressionLanguageService = solution.Workspace.Services.GetLanguageServices(
-                    symbol.Language
-                )
+            var progressionLanguageService = solution.Workspace.Services
+                .GetLanguageServices(symbol.Language)
                 .GetService<IProgressionLanguageService>();
 
             // A call from unittest may not have a proper language service.
@@ -538,23 +541,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     var methodSymbol = (IMethodSymbol)symbol;
                     if (methodSymbol.MethodKind == MethodKind.Constructor)
                     {
-                        node.Label =
-                            CodeQualifiedIdentifierBuilder.SpecialNames.GetConstructorLabel(
-                                methodSymbol.ContainingSymbol.Name
-                            );
+                        node.Label = CodeQualifiedIdentifierBuilder.SpecialNames
+                            .GetConstructorLabel(methodSymbol.ContainingSymbol.Name);
                     }
                     else if (methodSymbol.MethodKind == MethodKind.StaticConstructor)
                     {
-                        node.Label =
-                            CodeQualifiedIdentifierBuilder.SpecialNames.GetStaticConstructorLabel(
-                                methodSymbol.ContainingSymbol.Name
-                            );
+                        node.Label = CodeQualifiedIdentifierBuilder.SpecialNames
+                            .GetStaticConstructorLabel(methodSymbol.ContainingSymbol.Name);
                     }
                     else if (methodSymbol.MethodKind == MethodKind.Destructor)
                     {
-                        node.Label = CodeQualifiedIdentifierBuilder.SpecialNames.GetFinalizerLabel(
-                            methodSymbol.ContainingSymbol.Name
-                        );
+                        node.Label = CodeQualifiedIdentifierBuilder.SpecialNames
+                            .GetFinalizerLabel(methodSymbol.ContainingSymbol.Name);
                     }
                     else
                     {
@@ -721,10 +719,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var id = await GraphNodeIdCreation.GetIdForNamespaceAsync(
-                    symbol,
-                    solution,
-                    cancellationToken
-                )
+                symbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = graph.Nodes.GetOrCreate(id);
             node.AddCategory(CodeNodeCategories.Namespace);
@@ -740,10 +738,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var id = await GraphNodeIdCreation.GetIdForTypeAsync(
-                    namedType,
-                    solution,
-                    cancellationToken
-                )
+                namedType,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = graph.Nodes.GetOrCreate(id);
             string iconGroupName;
@@ -806,10 +804,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var id = await GraphNodeIdCreation.GetIdForMemberAsync(
-                    method,
-                    solution,
-                    cancellationToken
-                )
+                method,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = graph.Nodes.GetOrCreate(id);
 
@@ -836,10 +834,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var id = await GraphNodeIdCreation.GetIdForMemberAsync(
-                    field,
-                    solution,
-                    cancellationToken
-                )
+                field,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = graph.Nodes.GetOrCreate(id);
 
@@ -871,10 +869,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var id = await GraphNodeIdCreation.GetIdForMemberAsync(
-                    property,
-                    solution,
-                    cancellationToken
-                )
+                property,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = graph.Nodes.GetOrCreate(id);
 
@@ -897,10 +895,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var id = await GraphNodeIdCreation.GetIdForMemberAsync(
-                    eventSymbol,
-                    solution,
-                    cancellationToken
-                )
+                eventSymbol,
+                solution,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var node = graph.Nodes.GetOrCreate(id);
 
@@ -929,11 +927,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             {
                 var id = GraphNodeIdCreation.GetIdForDocument(document);
 
-                var node = _graph.Nodes.GetOrCreate(
-                    id,
-                    Path.GetFileName(document.FilePath),
-                    CodeNodeCategories.ProjectItem
-                );
+                var node = _graph.Nodes
+                    .GetOrCreate(
+                        id,
+                        Path.GetFileName(document.FilePath),
+                        CodeNodeCategories.ProjectItem
+                    );
 
                 _nodeToContextDocumentMap[node] = document;
                 _nodeToContextProjectMap[node] = document.Project;

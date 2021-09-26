@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
 
             var results = await ExecuteRunCodeActionCommandAsync(testLspServer, commandArgument);
 
-            var documentForB = testLspServer.TestWorkspace.CurrentSolution.Projects.Single()
+            var documentForB = testLspServer.TestWorkspace.CurrentSolution.Projects
+                .Single()
                 .Documents.Single(
                     doc => doc.Name.Equals("B.cs", StringComparison.OrdinalIgnoreCase)
                 );

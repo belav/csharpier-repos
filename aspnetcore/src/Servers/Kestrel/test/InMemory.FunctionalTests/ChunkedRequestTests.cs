@@ -66,9 +66,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             await request.Body.CopyToAsync(data);
             var bytes = data.ToArray();
 
-            response.Headers["Content-Length"] = bytes.Length.ToString(
-                CultureInfo.InvariantCulture
-            );
+            response.Headers["Content-Length"] = bytes.Length
+                .ToString(CultureInfo.InvariantCulture);
             await response.Body.WriteAsync(bytes, 0, bytes.Length);
         }
 
@@ -201,11 +200,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.Body.WriteAsync(
-                            Encoding.ASCII.GetBytes("Hello World"),
-                            0,
-                            11
-                        );
+                        await response.Body
+                            .WriteAsync(Encoding.ASCII.GetBytes("Hello World"), 0, 11);
                     },
                     testContext
                 )
@@ -356,32 +352,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.Body.WriteAsync(
-                            Encoding.ASCII.GetBytes("Hello World"),
-                            0,
-                            11
-                        );
+                        await response.Body
+                            .WriteAsync(Encoding.ASCII.GetBytes("Hello World"), 0, 11);
                     },
                     new TestServiceContext(LoggerFactory)
                 )
             )
             {
-                var response = string.Join(
-                    "\r\n",
-                    new string[]
-                    {
-                        "HTTP/1.1 200 OK",
-                        $"Date: {server.Context.DateHeaderValue}",
-                        "Content-Length: 11",
-                        "",
-                        "Hello World"
-                    }
-                );
+                var response = string
+                    .Join(
+                        "\r\n",
+                        new string[]
+                        {
+                            "HTTP/1.1 200 OK",
+                            $"Date: {server.Context.DateHeaderValue}",
+                            "Content-Length: 11",
+                            "",
+                            "Hello World"
+                        }
+                    );
 
-                var expectedFullResponse = string.Join(
-                    "",
-                    Enumerable.Repeat(response, requestCount + 1)
-                );
+                var expectedFullResponse = string
+                    .Join("", Enumerable.Repeat(response, requestCount + 1));
 
                 IEnumerable<string> sendSequence = new string[]
                 {
@@ -536,32 +528,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.Body.WriteAsync(
-                            Encoding.ASCII.GetBytes("Hello World"),
-                            0,
-                            11
-                        );
+                        await response.Body
+                            .WriteAsync(Encoding.ASCII.GetBytes("Hello World"), 0, 11);
                     },
                     new TestServiceContext(LoggerFactory)
                 )
             )
             {
-                var response = string.Join(
-                    "\r\n",
-                    new string[]
-                    {
-                        "HTTP/1.1 200 OK",
-                        $"Date: {server.Context.DateHeaderValue}",
-                        "Content-Length: 11",
-                        "",
-                        "Hello World"
-                    }
-                );
+                var response = string
+                    .Join(
+                        "\r\n",
+                        new string[]
+                        {
+                            "HTTP/1.1 200 OK",
+                            $"Date: {server.Context.DateHeaderValue}",
+                            "Content-Length: 11",
+                            "",
+                            "Hello World"
+                        }
+                    );
 
-                var expectedFullResponse = string.Join(
-                    "",
-                    Enumerable.Repeat(response, requestCount + 1)
-                );
+                var expectedFullResponse = string
+                    .Join("", Enumerable.Repeat(response, requestCount + 1));
 
                 IEnumerable<string> sendSequence = new string[]
                 {
@@ -746,32 +734,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.Body.WriteAsync(
-                            Encoding.ASCII.GetBytes("Hello World"),
-                            0,
-                            11
-                        );
+                        await response.Body
+                            .WriteAsync(Encoding.ASCII.GetBytes("Hello World"), 0, 11);
                     },
                     testContext
                 )
             )
             {
-                var response = string.Join(
-                    "\r\n",
-                    new string[]
-                    {
-                        "HTTP/1.1 200 OK",
-                        $"Date: {testContext.DateHeaderValue}",
-                        "Content-Length: 11",
-                        "",
-                        "Hello World"
-                    }
-                );
+                var response = string
+                    .Join(
+                        "\r\n",
+                        new string[]
+                        {
+                            "HTTP/1.1 200 OK",
+                            $"Date: {testContext.DateHeaderValue}",
+                            "Content-Length: 11",
+                            "",
+                            "Hello World"
+                        }
+                    );
 
-                var expectedFullResponse = string.Join(
-                    "",
-                    Enumerable.Repeat(response, requestCount + 1)
-                );
+                var expectedFullResponse = string
+                    .Join("", Enumerable.Repeat(response, requestCount + 1));
 
                 IEnumerable<string> sendSequence = new string[]
                 {
@@ -838,11 +822,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.Body.WriteAsync(
-                            Encoding.ASCII.GetBytes("Hello World"),
-                            0,
-                            11
-                        );
+                        await response.Body
+                            .WriteAsync(Encoding.ASCII.GetBytes("Hello World"), 0, 11);
                     },
                     testContext
                 )
@@ -890,11 +871,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.Body.WriteAsync(
-                            Encoding.ASCII.GetBytes("Hello World"),
-                            0,
-                            11
-                        );
+                        await response.Body
+                            .WriteAsync(Encoding.ASCII.GetBytes("Hello World"), 0, 11);
                     },
                     testContext
                 )
@@ -1130,9 +1108,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )
@@ -1187,9 +1166,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )
@@ -1317,9 +1297,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                         response.Headers["Content-Length"] = new[] { "11" };
 
-                        await response.BodyWriter.WriteAsync(
-                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                        );
+                        await response.BodyWriter
+                            .WriteAsync(
+                                new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                            );
                     },
                     testContext
                 )

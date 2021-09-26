@@ -64,14 +64,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken)
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             if (root == null)
             {
                 return;
             }
 
-            var model = await context.Document.GetSemanticModelAsync(context.CancellationToken)
+            var model = await context.Document
+                .GetSemanticModelAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             if (model == null)
             {
@@ -146,10 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             {
                 foreach (var diagnostic in diagnostics)
                 {
-                    var node = diagnostic.Location.FindNode(
-                        getInnermostNodeForTie: true,
-                        cancellationToken
-                    );
+                    var node = diagnostic.Location
+                        .FindNode(getInnermostNodeForTie: true, cancellationToken);
                     MakeDeclarationNullable(editor, model, node, alreadyHandled);
                 }
             }
@@ -163,10 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             CancellationToken cancellationToken
         )
         {
-            var node = diagnostic.Location.FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken
-            );
+            var node = diagnostic.Location
+                .FindNode(getInnermostNodeForTie: true, cancellationToken);
             return equivalenceKey == GetEquivalenceKey(node, model);
         }
 
@@ -181,8 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             if (declarationTypeToFix != null && alreadyHandled.Add(declarationTypeToFix))
             {
                 var fixedDeclaration = SyntaxFactory.NullableType(
-                        declarationTypeToFix.WithoutTrivia()
-                    )
+                    declarationTypeToFix.WithoutTrivia()
+                )
                     .WithTriviaFrom(declarationTypeToFix);
                 editor.ReplaceNode(declarationTypeToFix, fixedDeclaration);
             }
@@ -343,7 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
 
                 if (argument.NameColon?.Name is IdentifierNameSyntax { Identifier: var identifier })
                 {
-                    var parameter = method.Parameters.Where(p => p.Name == identifier.Text)
+                    var parameter = method.Parameters
+                        .Where(p => p.Name == identifier.Text)
                         .FirstOrDefault();
                     return TryGetParameterTypeSyntax(parameter);
                 }
@@ -360,10 +359,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
 
             // string x { get; set; } = null;
             if (
-                node.Parent.IsParentKind(
-                    SyntaxKind.PropertyDeclaration,
-                    out PropertyDeclarationSyntax? propertyDeclaration
-                )
+                node.Parent
+                    .IsParentKind(
+                        SyntaxKind.PropertyDeclaration,
+                        out PropertyDeclarationSyntax? propertyDeclaration
+                    )
             )
             {
                 return propertyDeclaration.Type;
@@ -395,10 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
 
             // void M(string x = null) { }
             if (
-                node.Parent.IsParentKind(
-                    SyntaxKind.Parameter,
-                    out ParameterSyntax? optionalParameter
-                )
+                node.Parent
+                    .IsParentKind(SyntaxKind.Parameter, out ParameterSyntax? optionalParameter)
             )
             {
                 var parameterSymbol = model.GetDeclaredSymbol(optionalParameter);
@@ -408,10 +406,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             // static string M() => null;
             if (
                 node.IsParentKind(SyntaxKind.ArrowExpressionClause)
-                && node.Parent.IsParentKind(
-                    SyntaxKind.MethodDeclaration,
-                    out MethodDeclarationSyntax? arrowMethod
-                )
+                && node.Parent
+                    .IsParentKind(
+                        SyntaxKind.MethodDeclaration,
+                        out MethodDeclarationSyntax? arrowMethod
+                    )
             )
             {
                 return arrowMethod.ReturnType;

@@ -84,11 +84,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 }
             };
 
-        private static readonly MemberInfo _ogcGeometryType =
-            typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.OgcGeometryType));
-        private static readonly MemberInfo _srid = typeof(Geometry).GetRequiredRuntimeProperty(
-            nameof(Geometry.SRID)
-        );
+        private static readonly MemberInfo _ogcGeometryType = typeof(Geometry)
+            .GetRequiredRuntimeProperty(nameof(Geometry.OgcGeometryType));
+        private static readonly MemberInfo _srid = typeof(Geometry)
+            .GetRequiredRuntimeProperty(nameof(Geometry.SRID));
 
         private readonly IRelationalTypeMappingSource _typeMappingSource;
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -132,11 +131,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     "Instance must have typeMapping assigned."
                 );
                 var storeType = instance.TypeMapping.StoreType;
-                var isGeography = string.Equals(
-                    storeType,
-                    "geography",
-                    StringComparison.OrdinalIgnoreCase
-                );
+                var isGeography = string
+                    .Equals(storeType, "geography", StringComparison.OrdinalIgnoreCase);
 
                 if (
                     _memberToFunctionName.TryGetValue(member, out var functionName)

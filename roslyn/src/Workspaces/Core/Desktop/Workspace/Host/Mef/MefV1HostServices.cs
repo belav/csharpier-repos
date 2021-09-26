@@ -140,16 +140,18 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 
             public bool Equals(ExportKey other)
             {
-                return string.Compare(
-                        this.ExtensionTypeName,
-                        other.ExtensionTypeName,
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0
-                    && string.Compare(
-                        this.MetadataTypeName,
-                        other.MetadataTypeName,
-                        StringComparison.OrdinalIgnoreCase
-                    ) == 0;
+                return string
+                        .Compare(
+                            this.ExtensionTypeName,
+                            other.ExtensionTypeName,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    && string
+                        .Compare(
+                            this.MetadataTypeName,
+                            other.MetadataTypeName,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0;
             }
 
             public override bool Equals(object obj) =>

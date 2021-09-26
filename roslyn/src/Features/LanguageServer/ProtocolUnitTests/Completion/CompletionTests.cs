@@ -41,14 +41,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
 
             var expected = await CreateCompletionItemAsync(
-                    label: "A",
-                    kind: LSP.CompletionItemKind.Class,
-                    tags: new string[] { "Class", "Internal" },
-                    request: completionParams,
-                    document: document,
-                    commitCharacters: CompletionRules.Default.DefaultCommitCharacters,
-                    insertText: "A"
-                )
+                label: "A",
+                kind: LSP.CompletionItemKind.Class,
+                tags: new string[] { "Class", "Internal" },
+                request: completionParams,
+                document: document,
+                commitCharacters: CompletionRules.Default.DefaultCommitCharacters,
+                insertText: "A"
+            )
                 .ConfigureAwait(false);
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams)
@@ -71,14 +71,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
             var solution = testLspServer.TestWorkspace.CurrentSolution;
 
             // Make sure the unimported types option is on by default.
-            testLspServer.TestWorkspace.SetOptions(
-                testLspServer.TestWorkspace.CurrentSolution.Options.WithChangedOption(
-                        CompletionOptions.ShowItemsFromUnimportedNamespaces,
-                        LanguageNames.CSharp,
-                        true
-                    )
-                    .WithChangedOption(CompletionServiceOptions.IsExpandedCompletion, true)
-            );
+            testLspServer.TestWorkspace
+                .SetOptions(
+                    testLspServer.TestWorkspace.CurrentSolution.Options
+                        .WithChangedOption(
+                            CompletionOptions.ShowItemsFromUnimportedNamespaces,
+                            LanguageNames.CSharp,
+                            true
+                        )
+                        .WithChangedOption(CompletionServiceOptions.IsExpandedCompletion, true)
+                );
 
             var completionParams = CreateCompletionParams(
                 locations["caret"].Single(),
@@ -102,11 +104,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
             using var testLspServer = CreateTestLspServer(markup, out var locations);
             var solution = testLspServer.TestWorkspace.CurrentSolution;
             solution = solution.WithOptions(
-                solution.Options.WithChangedOption(
-                    CompletionOptions.SnippetsBehavior,
-                    LanguageNames.CSharp,
-                    SnippetsRule.AlwaysInclude
-                )
+                solution.Options
+                    .WithChangedOption(
+                        CompletionOptions.SnippetsBehavior,
+                        LanguageNames.CSharp,
+                        SnippetsRule.AlwaysInclude
+                    )
             );
 
             var completionParams = CreateCompletionParams(
@@ -142,15 +145,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
 
             var expected = await CreateCompletionItemAsync(
-                    "A",
-                    LSP.CompletionItemKind.Class,
-                    new string[] { "Class", "Internal" },
-                    completionParams,
-                    document,
-                    preselect: true,
-                    commitCharacters: ImmutableArray.Create(' ', '(', '[', '{', ';', '.'),
-                    insertText: "A"
-                )
+                "A",
+                LSP.CompletionItemKind.Class,
+                new string[] { "Class", "Internal" },
+                completionParams,
+                document,
+                preselect: true,
+                commitCharacters: ImmutableArray.Create(' ', '(', '[', '{', ';', '.'),
+                insertText: "A"
+            )
                 .ConfigureAwait(false);
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams)
@@ -185,9 +188,9 @@ namespace M
             );
 
             var results = (LSP.VSCompletionList)await RunGetCompletionsAsync(
-                    testLspServer,
-                    completionParams
-                )
+                testLspServer,
+                completionParams
+            )
                 .ConfigureAwait(false);
             Assert.True(results.Items.Any());
             Assert.True(results.SuggestionMode);
@@ -216,14 +219,14 @@ class A
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
 
             var expected = await CreateCompletionItemAsync(
-                    label: "d",
-                    kind: LSP.CompletionItemKind.Text,
-                    tags: new string[] { "Text" },
-                    request: completionParams,
-                    document: document,
-                    insertText: "d",
-                    sortText: "0000"
-                )
+                label: "d",
+                kind: LSP.CompletionItemKind.Text,
+                tags: new string[] { "Text" },
+                request: completionParams,
+                document: document,
+                insertText: "d",
+                sortText: "0000"
+            )
                 .ConfigureAwait(false);
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams)
@@ -256,11 +259,12 @@ class A
             var document = solution.Projects.First().Documents.First();
 
             // Set to use prototype completion behavior (i.e. feature flag).
-            var options = solution.Workspace.Options.WithChangedOption(
-                CompletionOptions.ForceRoslynLSPCompletionExperiment,
-                LanguageNames.CSharp,
-                true
-            );
+            var options = solution.Workspace.Options
+                .WithChangedOption(
+                    CompletionOptions.ForceRoslynLSPCompletionExperiment,
+                    LanguageNames.CSharp,
+                    true
+                );
             Assert.True(solution.Workspace.TryApplyChanges(solution.WithOptions(options)));
 
             var textEdit = GenerateTextEdit(
@@ -272,14 +276,14 @@ class A
             );
 
             var expected = await CreateCompletionItemAsync(
-                    label: @"\A",
-                    kind: LSP.CompletionItemKind.Text,
-                    tags: new string[] { "Text" },
-                    request: completionParams,
-                    document: document,
-                    textEdit: textEdit,
-                    sortText: "0000"
-                )
+                label: @"\A",
+                kind: LSP.CompletionItemKind.Text,
+                tags: new string[] { "Text" },
+                request: completionParams,
+                document: document,
+                textEdit: textEdit,
+                sortText: "0000"
+            )
                 .ConfigureAwait(false);
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams)
@@ -312,11 +316,12 @@ class A
             var document = solution.Projects.First().Documents.First();
 
             // Set to use prototype completion behavior (i.e. feature flag).
-            var options = solution.Workspace.Options.WithChangedOption(
-                CompletionOptions.ForceRoslynLSPCompletionExperiment,
-                LanguageNames.CSharp,
-                true
-            );
+            var options = solution.Workspace.Options
+                .WithChangedOption(
+                    CompletionOptions.ForceRoslynLSPCompletionExperiment,
+                    LanguageNames.CSharp,
+                    true
+                );
             Assert.True(solution.Workspace.TryApplyChanges(solution.WithOptions(options)));
 
             var textEdit = GenerateTextEdit(
@@ -328,14 +333,14 @@ class A
             );
 
             var expected = await CreateCompletionItemAsync(
-                    label: @"\A",
-                    kind: LSP.CompletionItemKind.Text,
-                    tags: new string[] { "Text" },
-                    request: completionParams,
-                    document: document,
-                    textEdit: textEdit,
-                    sortText: "0000"
-                )
+                label: @"\A",
+                kind: LSP.CompletionItemKind.Text,
+                tags: new string[] { "Text" },
+                request: completionParams,
+                document: document,
+                textEdit: textEdit,
+                sortText: "0000"
+            )
                 .ConfigureAwait(false);
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams)
@@ -368,11 +373,12 @@ class A
             var document = solution.Projects.First().Documents.First();
 
             // Set to use prototype completion behavior (i.e. feature flag).
-            var options = solution.Workspace.Options.WithChangedOption(
-                CompletionOptions.ForceRoslynLSPCompletionExperiment,
-                LanguageNames.CSharp,
-                true
-            );
+            var options = solution.Workspace.Options
+                .WithChangedOption(
+                    CompletionOptions.ForceRoslynLSPCompletionExperiment,
+                    LanguageNames.CSharp,
+                    true
+                );
             Assert.True(solution.Workspace.TryApplyChanges(solution.WithOptions(options)));
 
             var textEdit = GenerateTextEdit(
@@ -384,14 +390,14 @@ class A
             );
 
             var expected = await CreateCompletionItemAsync(
-                    label: @"\A",
-                    kind: LSP.CompletionItemKind.Text,
-                    tags: new string[] { "Text" },
-                    request: completionParams,
-                    document: document,
-                    textEdit: textEdit,
-                    sortText: "0000"
-                )
+                label: @"\A",
+                kind: LSP.CompletionItemKind.Text,
+                tags: new string[] { "Text" },
+                request: completionParams,
+                document: document,
+                textEdit: textEdit,
+                sortText: "0000"
+            )
                 .ConfigureAwait(false);
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams)
@@ -486,13 +492,13 @@ class A
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
 
             var expected = await CreateCompletionItemAsync(
-                    "A",
-                    LSP.CompletionItemKind.Class,
-                    new string[] { "Class", "Internal" },
-                    completionParams,
-                    document,
-                    commitCharacters: CompletionRules.Default.DefaultCommitCharacters
-                )
+                "A",
+                LSP.CompletionItemKind.Class,
+                new string[] { "Class", "Internal" },
+                completionParams,
+                document,
+                commitCharacters: CompletionRules.Default.DefaultCommitCharacters
+            )
                 .ConfigureAwait(false);
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams)

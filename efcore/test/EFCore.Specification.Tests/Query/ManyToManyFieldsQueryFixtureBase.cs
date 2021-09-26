@@ -51,10 +51,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 { typeof(EntityRoot), e => ((EntityRoot)e)?.Id },
                 { typeof(EntityBranch), e => ((EntityBranch)e)?.Id },
                 { typeof(EntityLeaf), e => ((EntityLeaf)e)?.Id },
-            }.ToDictionary(e => e.Key, e => (object)e.Value);
+            }
+                .ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
-            new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() => new Dictionary<
+                Type,
+                Action<object, object>
+            >
             {
                 {
                     typeof(EntityOne),

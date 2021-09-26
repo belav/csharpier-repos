@@ -89,12 +89,13 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             {
                 int value;
                 if (
-                    int.TryParse(
-                        TokenResponse.ExpiresIn,
-                        NumberStyles.Integer,
-                        CultureInfo.InvariantCulture,
-                        out value
-                    )
+                    int
+                        .TryParse(
+                            TokenResponse.ExpiresIn,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out value
+                        )
                 )
                 {
                     return TimeSpan.FromSeconds(value);

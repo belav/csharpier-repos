@@ -40,11 +40,10 @@ class C
 {
     ~C() { return 1; }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,12): error CS0127: Since 'C.~C()' returns void, a return keyword must not be followed by an object expression
-                    Diagnostic(ErrorCode.ERR_RetNoObjectRequired, "return").WithArguments("C.~C()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,12): error CS0127: Since 'C.~C()' returns void, a return keyword must not be followed by an object expression
+                Diagnostic(ErrorCode.ERR_RetNoObjectRequired, "return").WithArguments("C.~C()")
+            );
         }
 
         [Fact]
@@ -60,11 +59,10 @@ class Q
         ~C() { }
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,10): error CS0111: Type 'Q.C' already defines a member called '~C' with the same parameter types
-                    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C").WithArguments("~C", "Q.C")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,10): error CS0111: Type 'Q.C' already defines a member called '~C' with the same parameter types
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C").WithArguments("~C", "Q.C")
+            );
         }
 
         [Fact]
@@ -81,14 +79,13 @@ interface I
 {
     ~I();
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    //  error CS0575: Only class types can contain destructors
-                    Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "S")
-                        .WithArguments("S.~S()"),
-                    Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "I").WithArguments("I.~I()"),
-                    Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "I")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                //  error CS0575: Only class types can contain destructors
+                Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "S")
+                    .WithArguments("S.~S()"),
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "I").WithArguments("I.~I()"),
+                Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "I")
+            );
         }
 
         [Fact]
@@ -130,24 +127,23 @@ class C7
 {
     extern ~C7();
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,13): error CS0106: The modifier 'public' is not valid for this item
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "C1").WithArguments("public"),
-                    // (9,14): error CS0106: The modifier 'virtual' is not valid for this item
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "C2").WithArguments("virtual"),
-                    // (14,15): error CS0106: The modifier 'override' is not valid for this item
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "C3").WithArguments("override"),
-                    // (19,15): error CS0106: The modifier 'abstract' is not valid for this item
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "C4").WithArguments("abstract"),
-                    // (24,10): error CS0106: The modifier 'new' is not valid for this item
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "C5").WithArguments("new"),
-                    // (29,13): error CS0106: The modifier 'static' is not valid for this item
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "C6").WithArguments("static"),
-                    // (34,13): warning CS0626: Method, operator, or accessor 'C7.~C7()' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
-                    Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "C7")
-                        .WithArguments("C7.~C7()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,13): error CS0106: The modifier 'public' is not valid for this item
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "C1").WithArguments("public"),
+                // (9,14): error CS0106: The modifier 'virtual' is not valid for this item
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "C2").WithArguments("virtual"),
+                // (14,15): error CS0106: The modifier 'override' is not valid for this item
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "C3").WithArguments("override"),
+                // (19,15): error CS0106: The modifier 'abstract' is not valid for this item
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "C4").WithArguments("abstract"),
+                // (24,10): error CS0106: The modifier 'new' is not valid for this item
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "C5").WithArguments("new"),
+                // (29,13): error CS0106: The modifier 'static' is not valid for this item
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "C6").WithArguments("static"),
+                // (34,13): warning CS0626: Method, operator, or accessor 'C7.~C7()' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
+                Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "C7")
+                    .WithArguments("C7.~C7()")
+            );
         }
 
         [WorkItem(528912, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528912")]
@@ -215,23 +211,22 @@ class G : F
         Action a = Finalize;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,17): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (41,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (8,9): error CS0245: Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available.
-                    Diagnostic(ErrorCode.ERR_CallingFinalizeDeprecated, "Finalize()"),
-                    // (17,9): error CS0245: Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available.
-                    Diagnostic(ErrorCode.ERR_CallingFinalizeDeprecated, "this.Finalize()"),
-                    // These occur in Roslyn, but not dev11, because Roslyn makes F.Finalize a runtime finalizer.
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,17): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
+                // (41,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
+                // (8,9): error CS0245: Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available.
+                Diagnostic(ErrorCode.ERR_CallingFinalizeDeprecated, "Finalize()"),
+                // (17,9): error CS0245: Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available.
+                Diagnostic(ErrorCode.ERR_CallingFinalizeDeprecated, "this.Finalize()"),
+                // These occur in Roslyn, but not dev11, because Roslyn makes F.Finalize a runtime finalizer.
 
-                    // (48,9): error CS0245: Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available.
-                    Diagnostic(ErrorCode.ERR_CallingFinalizeDeprecated, "Finalize()"),
-                    // (57,9): error CS0245: Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available.
-                    Diagnostic(ErrorCode.ERR_CallingFinalizeDeprecated, "Finalize()")
-                );
+                // (48,9): error CS0245: Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available.
+                Diagnostic(ErrorCode.ERR_CallingFinalizeDeprecated, "Finalize()"),
+                // (57,9): error CS0245: Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available.
+                Diagnostic(ErrorCode.ERR_CallingFinalizeDeprecated, "Finalize()")
+            );
         }
 
         [WorkItem(528912, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528912")]
@@ -299,23 +294,22 @@ class G : F
         Action a = base.Finalize;
     }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (23,17): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (41,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (8,9): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
-                    Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()"),
-                    // (17,9): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
-                    Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()"),
-                    // (25,9): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
-                    Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()"),
-                    // This is new in Roslyn.  It is reported because F.Finalize is now a runtime finalizer.
+            CreateCompilation(source).VerifyDiagnostics(
+                // (23,17): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
+                // (41,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
+                // (8,9): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
+                Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()"),
+                // (17,9): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
+                Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()"),
+                // (25,9): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
+                Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()"),
+                // This is new in Roslyn.  It is reported because F.Finalize is now a runtime finalizer.
 
-                    // (57,9): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
-                    Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()")
-                );
+                // (57,9): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
+                Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()")
+            );
         }
 
         [Fact]
@@ -343,19 +337,18 @@ class D : C
 {
     protected override void Finalize() { }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (9,29): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (19,29): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // This is new in Roslyn.  It is reported because C.Finalize is now a runtime finalizer.
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
+                // (9,29): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
+                // (19,29): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
+                // This is new in Roslyn.  It is reported because C.Finalize is now a runtime finalizer.
 
-                    // (19,29): error CS0249: Do not override object.Finalize. Instead, provide a destructor.
-                    Diagnostic(ErrorCode.ERR_OverrideFinalizeDeprecated, "Finalize")
-                );
+                // (19,29): error CS0249: Do not override object.Finalize. Instead, provide a destructor.
+                Diagnostic(ErrorCode.ERR_OverrideFinalizeDeprecated, "Finalize")
+            );
         }
 
         [Fact]
@@ -375,17 +368,16 @@ class C : I
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (4,10): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                    //     void Finalize();
-                    Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize").WithLocation(4, 10),
-                    // (7,11): error CS0737: 'C' does not implement interface member 'I.Finalize()'. 'C.~C()' cannot implement an interface member because it is not public.
-                    // class C : I
-                    Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic, "I")
-                        .WithArguments("C", "I.Finalize()", "C.~C()")
-                        .WithLocation(7, 11)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (4,10): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                //     void Finalize();
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize").WithLocation(4, 10),
+                // (7,11): error CS0737: 'C' does not implement interface member 'I.Finalize()'. 'C.~C()' cannot implement an interface member because it is not public.
+                // class C : I
+                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic, "I")
+                    .WithArguments("C", "I.Finalize()", "C.~C()")
+                    .WithLocation(7, 11)
+            );
         }
 
         [WorkItem(528912, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528912")]
@@ -420,7 +412,8 @@ class C
 
             var compilation = (Compilation)CreateCompilation(source);
 
-            var destructor = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var destructor = compilation.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(WellKnownMemberNames.DestructorName);
             Assert.Equal(MethodKind.Destructor, destructor.MethodKind);
             Assert.Equal(WellKnownMemberNames.DestructorName, destructor.Name);
@@ -499,13 +492,12 @@ class Derived : Base
 {
     ~Derived() { }
 }";
-            CreateCompilationWithILAndMscorlib40(source, il)
-                .VerifyDiagnostics(
-                    // (4,6): error CS0239: 'Derived.~Derived()': cannot override inherited member 'Base.~Base()' because it is sealed
-                    //     ~Derived() { }
-                    Diagnostic(ErrorCode.ERR_CantOverrideSealed, "Derived")
-                        .WithArguments("Derived.~Derived()", "Base.~Base()")
-                );
+            CreateCompilationWithILAndMscorlib40(source, il).VerifyDiagnostics(
+                // (4,6): error CS0239: 'Derived.~Derived()': cannot override inherited member 'Base.~Base()' because it is sealed
+                //     ~Derived() { }
+                Diagnostic(ErrorCode.ERR_CantOverrideSealed, "Derived")
+                    .WithArguments("Derived.~Derived()", "Base.~Base()")
+            );
         }
 
         [WorkItem(546830, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546830")]
@@ -542,13 +534,12 @@ class Derived : Base
 
             // BREAK: Dev11 doesn't report this error, but it does generate code that won't run,
             // so this change is reasonable.
-            CreateCompilationWithILAndMscorlib40(source, il)
-                .VerifyDiagnostics(
-                    // (4,6): error CS0239: 'Derived.~Derived()': cannot override inherited member 'Base.Finalize()' because it is sealed
-                    //     ~Derived() { }
-                    Diagnostic(ErrorCode.ERR_CantOverrideSealed, "Derived")
-                        .WithArguments("Derived.~Derived()", "Base.Finalize()")
-                );
+            CreateCompilationWithILAndMscorlib40(source, il).VerifyDiagnostics(
+                // (4,6): error CS0239: 'Derived.~Derived()': cannot override inherited member 'Base.Finalize()' because it is sealed
+                //     ~Derived() { }
+                Diagnostic(ErrorCode.ERR_CantOverrideSealed, "Derived")
+                    .WithArguments("Derived.~Derived()", "Base.Finalize()")
+            );
         }
 
         [WorkItem(528903, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528903")]
@@ -573,13 +564,12 @@ class Derived : Base
 
             // In dev11, compilation succeeded, but the finalizer would fail at runtime when it made
             // a non-virtual call to the abstract method Base.Finalize.
-            CreateCompilation(source, new[] { vbRef })
-                .VerifyDiagnostics(
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'Base.~Base()'
-                    // class Derived : Base
-                    Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
-                        .WithArguments("Derived", "Base.~Base()")
-                );
+            CreateCompilation(source, new[] { vbRef }).VerifyDiagnostics(
+                // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'Base.~Base()'
+                // class Derived : Base
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
+                    .WithArguments("Derived", "Base.~Base()")
+            );
         }
 
         [WorkItem(647933, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/647933")]
@@ -600,13 +590,12 @@ public class Test
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,6): error CS0577: The Conditional attribute is not valid on 'Test.~Test()' because it is a constructor, destructor, operator, or explicit interface implementation
-                    //     [Conditional("Debug")]
-                    Diagnostic(ErrorCode.ERR_ConditionalOnSpecialMethod, @"Conditional(""Debug"")")
-                        .WithArguments("Test.~Test()")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (5,6): error CS0577: The Conditional attribute is not valid on 'Test.~Test()' because it is a constructor, destructor, operator, or explicit interface implementation
+                //     [Conditional("Debug")]
+                Diagnostic(ErrorCode.ERR_ConditionalOnSpecialMethod, @"Conditional(""Debug"")")
+                    .WithArguments("Test.~Test()")
+            );
         }
     }
 }

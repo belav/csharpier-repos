@@ -390,9 +390,8 @@ C<string>.div<bool>(10, 0)
             var script = Temp.CreateFile(extension: ".csx")
                 .WriteAllText("foreach (var arg in Args) Print(arg);");
 
-            var rsp = Temp.CreateFile(extension: ".rsp")
-                .WriteAllText(
-                    $@"
+            var rsp = Temp.CreateFile(extension: ".rsp").WriteAllText(
+                $@"
 /u:System
 /i
 ""{script.Path}""
@@ -400,7 +399,7 @@ C<string>.div<bool>(10, 0)
 /arg2
 -arg3
 --arg4"
-                );
+            );
 
             var runner = CreateRunner(
                 args: new[] { $@"@""{rsp.Path}""", "/arg5", "--", "/arg7" },
@@ -479,9 +478,8 @@ C<string>.div<bool>(10, 0)
             var script = Temp.CreateFile(extension: ".csx")
                 .WriteAllText("foreach (var arg in Args) Print(arg);");
 
-            var rsp = Temp.CreateFile(extension: ".rsp")
-                .WriteAllText(
-                    $@"
+            var rsp = Temp.CreateFile(extension: ".rsp").WriteAllText(
+                $@"
 /u:System
 {script.Path}
 --
@@ -489,7 +487,7 @@ C<string>.div<bool>(10, 0)
 /arg2
 -arg3
 --arg4"
-                );
+            );
 
             var runner = CreateRunner(
                 args: new[] { $"@{rsp.Path}", "/arg5", "--", "/arg7" },
@@ -665,7 +663,7 @@ C<string>.div<bool>(10, 0)
                 $@"{LogoAndHelpPrompt}
 > nameof(Microsoft.Missing)
 «Red»
-(1,8): error CS0234: {string.Format(CSharpResources.ERR_DottedTypeNameNotFoundInNS, "Missing", "Microsoft")}
+(1,8): error CS0234: {string .Format(CSharpResources.ERR_DottedTypeNameNotFoundInNS, "Missing", "Microsoft")}
 «Gray»
 > ",
                 runner.Console.Out.ToString()
@@ -730,15 +728,14 @@ C<string>.div<bool>(10, 0)
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
         public void SourceSearchPaths1()
         {
-            var main = Temp.CreateFile(extension: ".csx")
-                .WriteAllText(
-                    @"
+            var main = Temp.CreateFile(extension: ".csx").WriteAllText(
+                @"
 #load ""1.csx""
 #load ""2.csx""
 #load ""3.csx""
 Print(4);
 "
-                );
+            );
 
             var dir1 = Temp.CreateDirectory();
             dir1.CreateFile("1.csx").WriteAllText(@"Print(1);");
@@ -769,9 +766,8 @@ Print(4);
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/26510")]
         public void ReferenceSearchPaths1()
         {
-            var main = Temp.CreateFile(extension: ".csx")
-                .WriteAllText(
-                    @"
+            var main = Temp.CreateFile(extension: ".csx").WriteAllText(
+                @"
 #r ""1.dll""
 #r ""2.dll""
 #r ""3.dll""
@@ -780,7 +776,7 @@ Print(new C2());
 Print(new C3());
 Print(new C4());
 "
-                );
+            );
 
             var dir1 = Temp.CreateDirectory();
             dir1.CreateFile("1.dll")
@@ -854,7 +850,7 @@ X
 SearchPaths {{ }}
 > #load ""a.csx""
 «Red»
-(1,7): error CS1504: {string.Format(CSharpResources.ERR_NoSourceFile, "a.csx", CSharpResources.CouldNotFindFile)}
+(1,7): error CS1504: {string .Format(CSharpResources.ERR_NoSourceFile, "a.csx", CSharpResources.CouldNotFindFile)}
 «Gray»
 > SourcePaths.Add(@""{dir.Path}"")
 > #load ""a.csx""
@@ -915,9 +911,8 @@ C {{ }}
         [Fact]
         public void ResponseFile()
         {
-            var rsp = Temp.CreateFile()
-                .WriteAllText(
-                    @"
+            var rsp = Temp.CreateFile().WriteAllText(
+                @"
 /r:System
 /r:System.Core
 /r:System.Data
@@ -929,7 +924,7 @@ C {{ }}
 /u:System.Collections.Generic
 /u:System.Linq
 /u:System.Text"
-                );
+            );
 
             var csi = CreateRunner(new[] { "b.csx" }, responseFile: rsp.Path);
             var arguments = ((CSharpInteractiveCompiler)csi.Compiler).Arguments;
@@ -957,12 +952,11 @@ C {{ }}
         [Fact]
         public void InitialScript1()
         {
-            var init = Temp.CreateFile(extension: ".csx")
-                .WriteAllText(
-                    @"
+            var init = Temp.CreateFile(extension: ".csx").WriteAllText(
+                @"
 int X = 1;
 "
-                );
+            );
             var runner = CreateRunner(new[] { "/i", init.Path }, input: @"X");
 
             runner.RunInteractive();
@@ -983,12 +977,11 @@ int X = 1;
             var reference = Temp.CreateFile(extension: ".dll")
                 .WriteAllBytes(TestResources.General.C1);
 
-            var init = Temp.CreateFile(extension: ".csx")
-                .WriteAllText(
-                    @"
+            var init = Temp.CreateFile(extension: ".csx").WriteAllText(
+                @"
 1 1
 "
-                );
+            );
             var runner = CreateRunner(
                 new[] { $@"/r:""{reference.Path}""", "/i", init.Path },
                 input: @"new C()"
@@ -1140,7 +1133,7 @@ var l2 = new Lib2();
 > #r ""{file2.Path}""
 > var l2 = new Lib2();
 «Red»
-{string.Format(ScriptingResources.AssemblyAlreadyLoaded, libBaseName, "0.0.0.0", fileBase1.Path, fileBase2.Path)}
+{string .Format(ScriptingResources.AssemblyAlreadyLoaded, libBaseName, "0.0.0.0", fileBase1.Path, fileBase2.Path)}
 «Gray»
 > ",
                 runner.Console.Out.ToString()

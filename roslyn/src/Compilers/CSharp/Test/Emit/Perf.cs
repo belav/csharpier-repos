@@ -29,12 +29,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
             // as opposed to 'fixing' the test by updating the benchmark code.
 
             //GNAMBOO: Changing this code has implications for perf tests.
-            CompileAndVerify(TestResources.PerfTests.CSPerfTest)
-                .VerifyDiagnostics(
-                    // (2416,9): info CS8019: Unnecessary using directive.
-                    //         using nested;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using nested;")
-                );
+            CompileAndVerify(TestResources.PerfTests.CSPerfTest).VerifyDiagnostics(
+                // (2416,9): info CS8019: Unnecessary using directive.
+                //         using nested;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using nested;")
+            );
         }
     }
 }

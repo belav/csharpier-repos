@@ -45,8 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
                 {
                     foreach (
                         var projectInfo in await remoteProjectInfoProvider.GetRemoteProjectInfosAsync(
-                                cancellationToken
-                            )
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {

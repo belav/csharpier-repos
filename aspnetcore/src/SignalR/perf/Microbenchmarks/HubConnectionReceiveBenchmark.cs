@@ -77,9 +77,8 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 hubProtocol = new MessagePackHubProtocol();
             }
 
-            hubConnectionBuilder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton(typeof(IHubProtocol), hubProtocol)
-            );
+            hubConnectionBuilder.Services
+                .TryAddEnumerable(ServiceDescriptor.Singleton(typeof(IHubProtocol), hubProtocol));
             hubConnectionBuilder.WithUrl("http://doesntmatter");
 
             _invocationMessageBytes = hubProtocol.GetMessageBytes(
@@ -91,16 +90,16 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 {
                     var connection = new DefaultConnectionContext();
                     // prevents keep alive time being activated
-                    connection.Features.Set<IConnectionInherentKeepAliveFeature>(
-                        new TestConnectionInherentKeepAliveFeature()
-                    );
+                    connection.Features
+                        .Set<IConnectionInherentKeepAliveFeature>(
+                            new TestConnectionInherentKeepAliveFeature()
+                        );
                     connection.Transport = _pipe;
                     return new ValueTask<ConnectionContext>(connection);
                 }
             );
-            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(
-                delegateConnectionFactory
-            );
+            hubConnectionBuilder.Services
+                .AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
             _hubConnection = hubConnectionBuilder.Build();
             _hubConnection.On(MethodName, arguments.Select(v => v.GetType()).ToArray(), OnInvoke);

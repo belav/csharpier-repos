@@ -134,8 +134,8 @@ namespace System.Threading.Tasks.Tests
                                         {
                                             if (useFutureFactory)
                                             {
-                                                continuation =
-                                                    Task<int>.Factory.ContinueWhenAny<int>(
+                                                continuation = Task<int>.Factory
+                                                    .ContinueWhenAny<int>(
                                                         (Task<int>[])antecedents,
                                                         t =>
                                                         {
@@ -149,43 +149,43 @@ namespace System.Threading.Tasks.Tests
                                             }
                                             else
                                             {
-                                                continuation = Task.Factory.ContinueWhenAny<
-                                                    int,
-                                                    int
-                                                >(
-                                                    (Task<int>[])antecedents,
-                                                    t =>
-                                                    {
-                                                        tcs.TrySetResult(t.Result);
-                                                        return 10;
-                                                    },
-                                                    ct,
-                                                    tco,
-                                                    ts
-                                                );
+                                                continuation = Task.Factory
+                                                    .ContinueWhenAny<int, int>(
+                                                        (Task<int>[])antecedents,
+                                                        t =>
+                                                        {
+                                                            tcs.TrySetResult(t.Result);
+                                                            return 10;
+                                                        },
+                                                        ct,
+                                                        tco,
+                                                        ts
+                                                    );
                                             }
                                         }
                                         else // antecedents are tasks
                                         {
                                             if (useFutureFactory)
                                             {
-                                                continuation = Task<int>.Factory.ContinueWhenAny(
-                                                    antecedents,
-                                                    _ => 10,
-                                                    ct,
-                                                    tco,
-                                                    ts
-                                                );
+                                                continuation = Task<int>.Factory
+                                                    .ContinueWhenAny(
+                                                        antecedents,
+                                                        _ => 10,
+                                                        ct,
+                                                        tco,
+                                                        ts
+                                                    );
                                             }
                                             else
                                             {
-                                                continuation = Task.Factory.ContinueWhenAny<int>(
-                                                    antecedents,
-                                                    _ => 10,
-                                                    ct,
-                                                    tco,
-                                                    ts
-                                                );
+                                                continuation = Task.Factory
+                                                    .ContinueWhenAny<int>(
+                                                        antecedents,
+                                                        _ => 10,
+                                                        ct,
+                                                        tco,
+                                                        ts
+                                                    );
                                             }
                                         }
                                     }
@@ -193,23 +193,25 @@ namespace System.Threading.Tasks.Tests
                                     {
                                         if (antecedentsAreFutures)
                                         {
-                                            continuation = Task.Factory.ContinueWhenAny<int>(
-                                                (Task<int>[])antecedents,
-                                                t => tcs.TrySetResult(t.Result),
-                                                ct,
-                                                tco,
-                                                ts
-                                            );
+                                            continuation = Task.Factory
+                                                .ContinueWhenAny<int>(
+                                                    (Task<int>[])antecedents,
+                                                    t => tcs.TrySetResult(t.Result),
+                                                    ct,
+                                                    tco,
+                                                    ts
+                                                );
                                         }
                                         else
                                         {
-                                            continuation = Task.Factory.ContinueWhenAny(
-                                                antecedents,
-                                                _ => { },
-                                                ct,
-                                                tco,
-                                                ts
-                                            );
+                                            continuation = Task.Factory
+                                                .ContinueWhenAny(
+                                                    antecedents,
+                                                    _ => { },
+                                                    ct,
+                                                    tco,
+                                                    ts
+                                                );
                                         }
                                     }
 
@@ -269,9 +271,10 @@ namespace System.Threading.Tasks.Tests
                                         {
                                             Assert.True(
                                                 false,
-                                                string.Format(
-                                                    "RunContinueWhenAnyTests: > FAILED!  Expected AE<TCE> from continuation.Wait() (no exception thrown)"
-                                                )
+                                                string
+                                                    .Format(
+                                                        "RunContinueWhenAnyTests: > FAILED!  Expected AE<TCE> from continuation.Wait() (no exception thrown)"
+                                                    )
                                             );
                                             ;
                                         }
@@ -279,9 +282,10 @@ namespace System.Threading.Tasks.Tests
                                         {
                                             Assert.True(
                                                 false,
-                                                string.Format(
-                                                    "RunContinueWhenAnyTests: > FAILED!  Expected AE<TCE> from continuation.Wait() (didn't throw aggregate exception)"
-                                                )
+                                                string
+                                                    .Format(
+                                                        "RunContinueWhenAnyTests: > FAILED!  Expected AE<TCE> from continuation.Wait() (didn't throw aggregate exception)"
+                                                    )
                                             );
                                         }
                                         else if (
@@ -292,11 +296,12 @@ namespace System.Threading.Tasks.Tests
                                             ex = ((AggregateException)ex).InnerException;
                                             Assert.True(
                                                 false,
-                                                string.Format(
-                                                    "RunContinueWhenAnyTests: > FAILED!  Expected AE<TCE> from continuation.Wait() (threw "
-                                                        + ex.GetType().Name
-                                                        + " instead of TaskCanceledException)"
-                                                )
+                                                string
+                                                    .Format(
+                                                        "RunContinueWhenAnyTests: > FAILED!  Expected AE<TCE> from continuation.Wait() (threw "
+                                                            + ex.GetType().Name
+                                                            + " instead of TaskCanceledException)"
+                                                    )
                                             );
                                         }
                                     }
@@ -381,24 +386,26 @@ namespace System.Threading.Tasks.Tests
                     Assert.Throws<ArgumentNullException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny<int>(
-                                (Task<int>[])antecedents,
-                                t => 0,
-                                CancellationToken.None,
-                                TaskContinuationOptions.None,
-                                (TaskScheduler)null
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny<int>(
+                                    (Task<int>[])antecedents,
+                                    t => 0,
+                                    CancellationToken.None,
+                                    TaskContinuationOptions.None,
+                                    (TaskScheduler)null
+                                );
                         }
                     );
 
                     Assert.Throws<ArgumentOutOfRangeException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny<int>(
-                                (Task<int>[])antecedents,
-                                t => 0,
-                                TaskContinuationOptions.NotOnFaulted
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny<int>(
+                                    (Task<int>[])antecedents,
+                                    t => 0,
+                                    TaskContinuationOptions.NotOnFaulted
+                                );
                         }
                     );
 
@@ -409,21 +416,16 @@ namespace System.Threading.Tasks.Tests
                         }
                     );
 
-                    var cFuture = Task.Factory.ContinueWhenAny<int, int>(
-                        (Task<int>[])antecedents,
-                        t => 0,
-                        ct
-                    );
+                    var cFuture = Task.Factory
+                        .ContinueWhenAny<int, int>((Task<int>[])antecedents, t => 0, ct);
                     CheckForCorrectCT(cFuture, ct);
                     antecedents[0] = null;
 
                     Assert.Throws<ArgumentException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny<int>(
-                                (Task<int>[])antecedents,
-                                t => 0
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny<int>((Task<int>[])antecedents, t => 0);
                         }
                     );
 
@@ -438,45 +440,46 @@ namespace System.Threading.Tasks.Tests
                     Assert.Throws<ArgumentNullException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny<int>(
-                                dummyFutures,
-                                (Func<Task<int>, int>)null
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny<int>(dummyFutures, (Func<Task<int>, int>)null);
                         }
                     );
 
                     Assert.Throws<ArgumentNullException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny<int>(
-                                dummyFutures,
-                                (Func<Task<int>, int>)null,
-                                CancellationToken.None
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny<int>(
+                                    dummyFutures,
+                                    (Func<Task<int>, int>)null,
+                                    CancellationToken.None
+                                );
                         }
                     );
 
                     Assert.Throws<ArgumentNullException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny<int>(
-                                dummyFutures,
-                                (Func<Task<int>, int>)null,
-                                TaskContinuationOptions.None
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny<int>(
+                                    dummyFutures,
+                                    (Func<Task<int>, int>)null,
+                                    TaskContinuationOptions.None
+                                );
                         }
                     );
 
                     Assert.Throws<ArgumentNullException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny<int>(
-                                dummyFutures,
-                                (Func<Task<int>, int>)null,
-                                CancellationToken.None,
-                                TaskContinuationOptions.None,
-                                TaskScheduler.Default
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny<int>(
+                                    dummyFutures,
+                                    (Func<Task<int>, int>)null,
+                                    CancellationToken.None,
+                                    TaskContinuationOptions.None,
+                                    TaskScheduler.Default
+                                );
                         }
                     );
                 }
@@ -486,12 +489,13 @@ namespace System.Threading.Tasks.Tests
                     Assert.Throws<ArgumentOutOfRangeException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny(
-                                new Task[] { dummy },
-                                t => 0,
-                                TaskContinuationOptions.LongRunning
-                                    | TaskContinuationOptions.ExecuteSynchronously
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny(
+                                    new Task[] { dummy },
+                                    t => 0,
+                                    TaskContinuationOptions.LongRunning
+                                        | TaskContinuationOptions.ExecuteSynchronously
+                                );
                         }
                     );
                     dummy.Wait();
@@ -499,24 +503,26 @@ namespace System.Threading.Tasks.Tests
                     Assert.Throws<ArgumentNullException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny(
-                                antecedents,
-                                t => 0,
-                                CancellationToken.None,
-                                TaskContinuationOptions.None,
-                                (TaskScheduler)null
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny(
+                                    antecedents,
+                                    t => 0,
+                                    CancellationToken.None,
+                                    TaskContinuationOptions.None,
+                                    (TaskScheduler)null
+                                );
                         }
                     );
 
                     Assert.Throws<ArgumentOutOfRangeException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny(
-                                antecedents,
-                                t => 0,
-                                TaskContinuationOptions.NotOnFaulted
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny(
+                                    antecedents,
+                                    t => 0,
+                                    TaskContinuationOptions.NotOnFaulted
+                                );
                         }
                     );
 
@@ -556,35 +562,38 @@ namespace System.Threading.Tasks.Tests
                     Assert.Throws<ArgumentNullException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny(
-                                dummyTasks,
-                                (Func<Task, int>)null,
-                                CancellationToken.None
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny(
+                                    dummyTasks,
+                                    (Func<Task, int>)null,
+                                    CancellationToken.None
+                                );
                         }
                     );
 
                     Assert.Throws<ArgumentNullException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny(
-                                dummyTasks,
-                                (Func<Task, int>)null,
-                                TaskContinuationOptions.None
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny(
+                                    dummyTasks,
+                                    (Func<Task, int>)null,
+                                    TaskContinuationOptions.None
+                                );
                         }
                     );
 
                     Assert.Throws<ArgumentNullException>(
                         () =>
                         {
-                            Task<int>.Factory.ContinueWhenAny(
-                                dummyTasks,
-                                (Func<Task, int>)null,
-                                CancellationToken.None,
-                                TaskContinuationOptions.None,
-                                TaskScheduler.Default
-                            );
+                            Task<int>.Factory
+                                .ContinueWhenAny(
+                                    dummyTasks,
+                                    (Func<Task, int>)null,
+                                    CancellationToken.None,
+                                    TaskContinuationOptions.None,
+                                    TaskScheduler.Default
+                                );
                         }
                     );
                 }
@@ -599,24 +608,26 @@ namespace System.Threading.Tasks.Tests
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int, int>(
-                                    (Task<int>[])antecedents,
-                                    t => 0,
-                                    CancellationToken.None,
-                                    TaskContinuationOptions.None,
-                                    (TaskScheduler)null
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int, int>(
+                                        (Task<int>[])antecedents,
+                                        t => 0,
+                                        CancellationToken.None,
+                                        TaskContinuationOptions.None,
+                                        (TaskScheduler)null
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentOutOfRangeException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int, int>(
-                                    (Task<int>[])antecedents,
-                                    t => 0,
-                                    TaskContinuationOptions.NotOnFaulted
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int, int>(
+                                        (Task<int>[])antecedents,
+                                        t => 0,
+                                        TaskContinuationOptions.NotOnFaulted
+                                    );
                             }
                         );
 
@@ -627,21 +638,16 @@ namespace System.Threading.Tasks.Tests
                             }
                         );
 
-                        var cTask = Task.Factory.ContinueWhenAny<int, int>(
-                            (Task<int>[])antecedents,
-                            t => 0,
-                            ct
-                        );
+                        var cTask = Task.Factory
+                            .ContinueWhenAny<int, int>((Task<int>[])antecedents, t => 0, ct);
                         CheckForCorrectCT(cTask, ct);
                         antecedents[0] = null;
 
                         Assert.Throws<ArgumentException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int, int>(
-                                    (Task<int>[])antecedents,
-                                    t => 0
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int, int>((Task<int>[])antecedents, t => 0);
                             }
                         );
 
@@ -656,45 +662,49 @@ namespace System.Threading.Tasks.Tests
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int, int>(
-                                    dummyFutures,
-                                    (Func<Task<int>, int>)null
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int, int>(
+                                        dummyFutures,
+                                        (Func<Task<int>, int>)null
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int, int>(
-                                    dummyFutures,
-                                    (Func<Task<int>, int>)null,
-                                    CancellationToken.None
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int, int>(
+                                        dummyFutures,
+                                        (Func<Task<int>, int>)null,
+                                        CancellationToken.None
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int, int>(
-                                    dummyFutures,
-                                    (Func<Task<int>, int>)null,
-                                    TaskContinuationOptions.None
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int, int>(
+                                        dummyFutures,
+                                        (Func<Task<int>, int>)null,
+                                        TaskContinuationOptions.None
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int, int>(
-                                    dummyFutures,
-                                    (Func<Task<int>, int>)null,
-                                    CancellationToken.None,
-                                    TaskContinuationOptions.None,
-                                    TaskScheduler.Default
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int, int>(
+                                        dummyFutures,
+                                        (Func<Task<int>, int>)null,
+                                        CancellationToken.None,
+                                        TaskContinuationOptions.None,
+                                        TaskScheduler.Default
+                                    );
                             }
                         );
                     }
@@ -703,24 +713,26 @@ namespace System.Threading.Tasks.Tests
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    antecedents,
-                                    t => 0,
-                                    CancellationToken.None,
-                                    TaskContinuationOptions.None,
-                                    (TaskScheduler)null
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        antecedents,
+                                        t => 0,
+                                        CancellationToken.None,
+                                        TaskContinuationOptions.None,
+                                        (TaskScheduler)null
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentOutOfRangeException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    antecedents,
-                                    t => 0,
-                                    TaskContinuationOptions.NotOnFaulted
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        antecedents,
+                                        t => 0,
+                                        TaskContinuationOptions.NotOnFaulted
+                                    );
                             }
                         );
 
@@ -731,11 +743,8 @@ namespace System.Threading.Tasks.Tests
                             }
                         );
 
-                        var cTask = Task.Factory.ContinueWhenAny(
-                            antecedents,
-                            delegate(Task t) { },
-                            ct
-                        );
+                        var cTask = Task.Factory
+                            .ContinueWhenAny(antecedents, delegate(Task t) { }, ct);
                         CheckForCorrectCT(cTask, ct);
                         antecedents[0] = null;
 
@@ -757,45 +766,46 @@ namespace System.Threading.Tasks.Tests
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    dummyTasks,
-                                    (Func<Task, int>)null
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(dummyTasks, (Func<Task, int>)null);
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    dummyTasks,
-                                    (Func<Task, int>)null,
-                                    CancellationToken.None
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        dummyTasks,
+                                        (Func<Task, int>)null,
+                                        CancellationToken.None
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    dummyTasks,
-                                    (Func<Task, int>)null,
-                                    TaskContinuationOptions.None
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        dummyTasks,
+                                        (Func<Task, int>)null,
+                                        TaskContinuationOptions.None
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    dummyTasks,
-                                    (Func<Task, int>)null,
-                                    CancellationToken.None,
-                                    TaskContinuationOptions.None,
-                                    TaskScheduler.Default
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        dummyTasks,
+                                        (Func<Task, int>)null,
+                                        CancellationToken.None,
+                                        TaskContinuationOptions.None,
+                                        TaskScheduler.Default
+                                    );
                             }
                         );
                     }
@@ -807,24 +817,26 @@ namespace System.Threading.Tasks.Tests
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    (Task<int>[])antecedents,
-                                    t => { },
-                                    CancellationToken.None,
-                                    TaskContinuationOptions.None,
-                                    (TaskScheduler)null
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        (Task<int>[])antecedents,
+                                        t => { },
+                                        CancellationToken.None,
+                                        TaskContinuationOptions.None,
+                                        (TaskScheduler)null
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentOutOfRangeException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    (Task<int>[])antecedents,
-                                    t => { },
-                                    TaskContinuationOptions.NotOnFaulted
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        (Task<int>[])antecedents,
+                                        t => { },
+                                        TaskContinuationOptions.NotOnFaulted
+                                    );
                             }
                         );
 
@@ -835,21 +847,16 @@ namespace System.Threading.Tasks.Tests
                             }
                         );
 
-                        var cTask = Task.Factory.ContinueWhenAny<int>(
-                            (Task<int>[])antecedents,
-                            t => { },
-                            ct
-                        );
+                        var cTask = Task.Factory
+                            .ContinueWhenAny<int>((Task<int>[])antecedents, t => { }, ct);
                         CheckForCorrectCT(cTask, ct);
                         antecedents[0] = null;
 
                         Assert.Throws<ArgumentException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    (Task<int>[])antecedents,
-                                    t => { }
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>((Task<int>[])antecedents, t => { });
                             }
                         );
 
@@ -864,45 +871,46 @@ namespace System.Threading.Tasks.Tests
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    dummyFutures,
-                                    (Action<Task<int>>)null
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(dummyFutures, (Action<Task<int>>)null);
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    dummyFutures,
-                                    (Action<Task<int>>)null,
-                                    CancellationToken.None
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        dummyFutures,
+                                        (Action<Task<int>>)null,
+                                        CancellationToken.None
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    dummyFutures,
-                                    (Action<Task<int>>)null,
-                                    TaskContinuationOptions.None
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        dummyFutures,
+                                        (Action<Task<int>>)null,
+                                        TaskContinuationOptions.None
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny<int>(
-                                    dummyFutures,
-                                    (Action<Task<int>>)null,
-                                    CancellationToken.None,
-                                    TaskContinuationOptions.None,
-                                    TaskScheduler.Default
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny<int>(
+                                        dummyFutures,
+                                        (Action<Task<int>>)null,
+                                        CancellationToken.None,
+                                        TaskContinuationOptions.None,
+                                        TaskScheduler.Default
+                                    );
                             }
                         );
                     }
@@ -911,24 +919,26 @@ namespace System.Threading.Tasks.Tests
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny(
-                                    antecedents,
-                                    t => { },
-                                    CancellationToken.None,
-                                    TaskContinuationOptions.None,
-                                    (TaskScheduler)null
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny(
+                                        antecedents,
+                                        t => { },
+                                        CancellationToken.None,
+                                        TaskContinuationOptions.None,
+                                        (TaskScheduler)null
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentOutOfRangeException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny(
-                                    antecedents,
-                                    t => { },
-                                    TaskContinuationOptions.NotOnFaulted
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny(
+                                        antecedents,
+                                        t => { },
+                                        TaskContinuationOptions.NotOnFaulted
+                                    );
                             }
                         );
 
@@ -968,35 +978,38 @@ namespace System.Threading.Tasks.Tests
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny(
-                                    dummyTasks,
-                                    (Action<Task>)null,
-                                    CancellationToken.None
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny(
+                                        dummyTasks,
+                                        (Action<Task>)null,
+                                        CancellationToken.None
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny(
-                                    dummyTasks,
-                                    (Action<Task>)null,
-                                    TaskContinuationOptions.None
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny(
+                                        dummyTasks,
+                                        (Action<Task>)null,
+                                        TaskContinuationOptions.None
+                                    );
                             }
                         );
 
                         Assert.Throws<ArgumentNullException>(
                             () =>
                             {
-                                Task.Factory.ContinueWhenAny(
-                                    dummyTasks,
-                                    (Action<Task>)null,
-                                    CancellationToken.None,
-                                    TaskContinuationOptions.None,
-                                    TaskScheduler.Default
-                                );
+                                Task.Factory
+                                    .ContinueWhenAny(
+                                        dummyTasks,
+                                        (Action<Task>)null,
+                                        CancellationToken.None,
+                                        TaskContinuationOptions.None,
+                                        TaskScheduler.Default
+                                    );
                             }
                         );
                     }
@@ -1030,33 +1043,34 @@ namespace System.Threading.Tasks.Tests
             }
             catch (AggregateException ae)
             {
-                ae.Flatten()
-                    .Handle(
-                        e =>
+                ae.Flatten().Handle(
+                    e =>
+                    {
+                        var tce = e as TaskCanceledException;
+                        if (tce == null)
                         {
-                            var tce = e as TaskCanceledException;
-                            if (tce == null)
-                            {
-                                Assert.True(
-                                    false,
-                                    string.Format(
+                            Assert.True(
+                                false,
+                                string
+                                    .Format(
                                         "    > FAILED!  Pre-canceled result threw non-TCE from Wait()"
                                     )
-                                );
-                            }
-                            else if (tce.CancellationToken != correctToken)
-                            {
-                                Assert.True(
-                                    false,
-                                    string.Format(
+                            );
+                        }
+                        else if (tce.CancellationToken != correctToken)
+                        {
+                            Assert.True(
+                                false,
+                                string
+                                    .Format(
                                         "    > FAILED!  Pre-canceled result threw TCE w/ wrong token"
                                     )
-                                );
-                            }
-
-                            return true;
+                            );
                         }
-                    );
+
+                        return true;
+                    }
+                );
             }
         }
         #endregion

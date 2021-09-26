@@ -44,9 +44,10 @@ namespace System.Data
                 if (value is UniqueConstraint)
                 {
                     UniqueConstraint constr = (UniqueConstraint)value;
-                    Reflection.ConstructorInfo ctor = typeof(UniqueConstraint).GetConstructor(
-                        new Type[] { typeof(string), typeof(string[]), typeof(bool) }
-                    )!;
+                    Reflection.ConstructorInfo ctor = typeof(UniqueConstraint)
+                        .GetConstructor(
+                            new Type[] { typeof(string), typeof(string[]), typeof(bool) }
+                        )!;
                     if (ctor != null)
                     {
                         return new InstanceDescriptor(
@@ -63,8 +64,8 @@ namespace System.Data
                 else
                 {
                     ForeignKeyConstraint constr = (ForeignKeyConstraint)value;
-                    System.Reflection.ConstructorInfo ctor =
-                        typeof(ForeignKeyConstraint).GetConstructor(
+                    System.Reflection.ConstructorInfo ctor = typeof(ForeignKeyConstraint)
+                        .GetConstructor(
                             new Type[]
                             {
                                 typeof(string),

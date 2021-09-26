@@ -84,10 +84,8 @@ namespace Newtonsoft.Json.Converters
 #endif
 
             throw new JsonSerializationException(
-                "Unexpected value type when writing binary: {0}".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    value.GetType()
-                )
+                "Unexpected value type when writing binary: {0}"
+                    .FormatWith(CultureInfo.InvariantCulture, value.GetType())
             );
         }
 
@@ -126,10 +124,8 @@ namespace Newtonsoft.Json.Converters
                 {
                     throw JsonSerializationException.Create(
                         reader,
-                        "Cannot convert null value to {0}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            objectType
-                        )
+                        "Cannot convert null value to {0}."
+                            .FormatWith(CultureInfo.InvariantCulture, objectType)
                     );
                 }
 
@@ -153,10 +149,8 @@ namespace Newtonsoft.Json.Converters
             {
                 throw JsonSerializationException.Create(
                     reader,
-                    "Unexpected token parsing binary. Expected String or StartArray, got {0}.".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Unexpected token parsing binary. Expected String or StartArray, got {0}."
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 
@@ -184,10 +178,8 @@ namespace Newtonsoft.Json.Converters
 
             throw JsonSerializationException.Create(
                 reader,
-                "Unexpected object type when writing binary: {0}".FormatWith(
-                    CultureInfo.InvariantCulture,
-                    objectType
-                )
+                "Unexpected object type when writing binary: {0}"
+                    .FormatWith(CultureInfo.InvariantCulture, objectType)
             );
         }
 
@@ -210,10 +202,8 @@ namespace Newtonsoft.Json.Converters
                     default:
                         throw JsonSerializationException.Create(
                             reader,
-                            "Unexpected token when reading bytes: {0}".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                reader.TokenType
-                            )
+                            "Unexpected token when reading bytes: {0}"
+                                .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                         );
                 }
             }

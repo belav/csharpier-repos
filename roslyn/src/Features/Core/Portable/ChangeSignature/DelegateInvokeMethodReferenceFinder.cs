@@ -46,13 +46,11 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         )
         {
             using var _ =
-                ArrayBuilder<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>.GetInstance(
-                    out var result
-                );
+                ArrayBuilder<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>
+                    .GetInstance(out var result);
 
-            var beginInvoke = symbol.ContainingType.GetMembers(
-                    WellKnownMemberNames.DelegateBeginInvokeName
-                )
+            var beginInvoke = symbol.ContainingType
+                .GetMembers(WellKnownMemberNames.DelegateBeginInvokeName)
                 .FirstOrDefault();
             if (beginInvoke != null)
                 result.Add((beginInvoke, cascadeDirection));
@@ -66,10 +64,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         document.GetLanguageService<AbstractChangeSignatureService>();
                     var cascaded =
                         await changeSignatureService.DetermineCascadedSymbolsFromDelegateInvokeAsync(
-                                symbol,
-                                document,
-                                cancellationToken
-                            )
+                            symbol,
+                            document,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     result.AddRange(cascaded.SelectAsArray(s => (s, cascadeDirection)));
                 }
@@ -108,8 +106,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             var nodes = root.DescendantNodes();
 
             var convertedAnonymousFunctions = nodes.Where(
-                    n => syntaxFactsService.IsAnonymousFunction(n)
-                )
+                n => syntaxFactsService.IsAnonymousFunction(n)
+            )
                 .Where(
                     n =>
                     {
@@ -120,10 +118,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         {
                             convertedType =
                                 SymbolFinder.FindSourceDefinitionAsync(
-                                        convertedType,
-                                        document.Project.Solution,
-                                        cancellationToken
-                                    )
+                                    convertedType,
+                                    document.Project.Solution,
+                                    cancellationToken
+                                )
                                     .WaitAndGetResult_CanCallOnBackground(cancellationToken)
                                 ?? convertedType;
                         }

@@ -259,10 +259,10 @@ namespace System.Security.AccessControl
             Assert.Contains(
                 customAuditRuleReadWrite,
                 customObjectSecurity.GetAuditRules(
-                        true,
-                        true,
-                        typeof(System.Security.Principal.NTAccount)
-                    )
+                    true,
+                    true,
+                    typeof(System.Security.Principal.NTAccount)
+                )
                     .Cast<CustomAuditRule>()
             );
 
@@ -270,10 +270,10 @@ namespace System.Security.AccessControl
             Assert.Contains(
                 customAuditRuleReadWrite,
                 customObjectSecurity.GetAuditRules(
-                        true,
-                        true,
-                        typeof(System.Security.Principal.NTAccount)
-                    )
+                    true,
+                    true,
+                    typeof(System.Security.Principal.NTAccount)
+                )
                     .Cast<CustomAuditRule>()
             );
         }
@@ -366,9 +366,8 @@ namespace System.Security.AccessControl
             );
 
             var customAuditRuleRead = new CustomAuditRule(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 ReadAccessMask,
                 true,
                 InheritanceFlags.None,
@@ -382,10 +381,10 @@ namespace System.Security.AccessControl
             customObjectSecurity.SetAuditRule(customAuditRuleRead);
 
             var existingRules = customObjectSecurity.GetAuditRules(
-                    true,
-                    true,
-                    typeof(System.Security.Principal.NTAccount)
-                )
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            )
                 .Cast<CustomAuditRule>()
                 .ToList();
             Assert.DoesNotContain(customAuditRuleReadWrite, existingRules);
@@ -409,9 +408,8 @@ namespace System.Security.AccessControl
             var customObjectSecurity = new CustomDirectoryObjectSecurity(descriptor);
 
             var customAuditRuleRead = new CustomAuditRule(
-                new SecurityIdentifier(WellKnownSidType.NetworkServiceSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.NetworkServiceSid, null)
+                    .Translate(typeof(NTAccount)),
                 ReadAccessMask,
                 true,
                 InheritanceFlags.None,
@@ -422,9 +420,8 @@ namespace System.Security.AccessControl
             );
 
             var customAuditRuleReadAttribute = new CustomAuditRule(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 ReadAttributeAccessMask,
                 true,
                 InheritanceFlags.None,
@@ -619,9 +616,8 @@ namespace System.Security.AccessControl
             );
 
             var customAccessRuleRead = new CustomAccessRule(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 ReadAccessMask,
                 true,
                 InheritanceFlags.None,
@@ -637,10 +633,10 @@ namespace System.Security.AccessControl
             Assert.Contains(
                 customAccessRuleReadWrite,
                 customObjectSecurity.GetAccessRules(
-                        true,
-                        true,
-                        typeof(System.Security.Principal.NTAccount)
-                    )
+                    true,
+                    true,
+                    typeof(System.Security.Principal.NTAccount)
+                )
                     .Cast<CustomAccessRule>()
             );
         }
@@ -822,19 +818,19 @@ namespace System.Security.AccessControl
             Assert.Contains(
                 customAccessRuleReadWrite,
                 customObjectSecurity.GetAccessRules(
-                        true,
-                        true,
-                        typeof(System.Security.Principal.NTAccount)
-                    )
+                    true,
+                    true,
+                    typeof(System.Security.Principal.NTAccount)
+                )
                     .Cast<CustomAccessRule>()
             );
 
             customObjectSecurity.AddAccessRule(customAccessRuleNetworkService);
             List<CustomAccessRule> existingRules = customObjectSecurity.GetAccessRules(
-                    true,
-                    true,
-                    typeof(System.Security.Principal.NTAccount)
-                )
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            )
                 .Cast<CustomAccessRule>()
                 .ToList();
             Assert.Contains(customAccessRuleReadWrite, existingRules);
@@ -842,10 +838,10 @@ namespace System.Security.AccessControl
 
             customObjectSecurity.ResetAccessRule(customAccessRuleRead);
             existingRules = customObjectSecurity.GetAccessRules(
-                    true,
-                    true,
-                    typeof(System.Security.Principal.NTAccount)
-                )
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            )
                 .Cast<CustomAccessRule>()
                 .ToList();
             Assert.DoesNotContain(customAccessRuleReadWrite, existingRules);
@@ -897,19 +893,19 @@ namespace System.Security.AccessControl
             Assert.Contains(
                 customAccessRuleReadWrite,
                 customObjectSecurity.GetAccessRules(
-                        true,
-                        true,
-                        typeof(System.Security.Principal.NTAccount)
-                    )
+                    true,
+                    true,
+                    typeof(System.Security.Principal.NTAccount)
+                )
                     .Cast<CustomAccessRule>()
             );
 
             customObjectSecurity.AddAccessRule(customAccessRuleNetworkService);
             List<CustomAccessRule> existingRules = customObjectSecurity.GetAccessRules(
-                    true,
-                    true,
-                    typeof(System.Security.Principal.NTAccount)
-                )
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            )
                 .Cast<CustomAccessRule>()
                 .ToList();
             Assert.Contains(customAccessRuleReadWrite, existingRules);
@@ -917,10 +913,10 @@ namespace System.Security.AccessControl
 
             customObjectSecurity.ResetAccessRule(customAccessRuleWrite);
             existingRules = customObjectSecurity.GetAccessRules(
-                    true,
-                    true,
-                    typeof(System.Security.Principal.NTAccount)
-                )
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            )
                 .Cast<CustomAccessRule>()
                 .ToList();
             Assert.DoesNotContain(customAccessRuleReadWrite, existingRules);
@@ -957,9 +953,8 @@ namespace System.Security.AccessControl
             );
 
             var customAccessRuleRead = new CustomAccessRule(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 ReadAccessMask,
                 true,
                 InheritanceFlags.None,
@@ -973,10 +968,10 @@ namespace System.Security.AccessControl
             customObjectSecurity.SetAccessRule(customAccessRuleRead);
 
             List<CustomAccessRule> existingRules = customObjectSecurity.GetAccessRules(
-                    true,
-                    true,
-                    typeof(System.Security.Principal.NTAccount)
-                )
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            )
                 .Cast<CustomAccessRule>()
                 .ToList();
 
@@ -1003,9 +998,8 @@ namespace System.Security.AccessControl
             );
 
             var customAccessRuleRead = new CustomAccessRule(
-                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
-                    typeof(NTAccount)
-                ),
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    .Translate(typeof(NTAccount)),
                 ReadAccessMask,
                 true,
                 InheritanceFlags.None,
@@ -1019,19 +1013,19 @@ namespace System.Security.AccessControl
             Assert.Contains(
                 customAccessRuleReadWrite,
                 customObjectSecurity.GetAccessRules(
-                        true,
-                        true,
-                        typeof(System.Security.Principal.NTAccount)
-                    )
+                    true,
+                    true,
+                    typeof(System.Security.Principal.NTAccount)
+                )
                     .Cast<CustomAccessRule>()
             );
 
             customObjectSecurity.SetAccessRule(customAccessRuleRead);
             var existingRules = customObjectSecurity.GetAccessRules(
-                    true,
-                    true,
-                    typeof(System.Security.Principal.NTAccount)
-                )
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            )
                 .Cast<CustomAccessRule>()
                 .ToList();
             Assert.DoesNotContain(customAccessRuleReadWrite, existingRules);

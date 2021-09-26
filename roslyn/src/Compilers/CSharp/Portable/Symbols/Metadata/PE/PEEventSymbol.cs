@@ -394,10 +394,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return _containingType.ContainingPEModule.MetadataLocation.Cast<
-                    MetadataLocation,
-                    Location
-                >();
+                return _containingType.ContainingPEModule.MetadataLocation
+                    .Cast<MetadataLocation, Location>();
             }
         }
 

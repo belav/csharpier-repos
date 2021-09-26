@@ -166,9 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (type.Signature.ParameterCount > 0)
             {
-                var builder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                    type.Signature.ParameterCount
-                );
+                var builder = ArrayBuilder<TypeWithAnnotations>
+                    .GetInstance(type.Signature.ParameterCount);
                 foreach (var param in type.Signature.Parameters)
                 {
                     var transformedParam = TransformTypeWithAnnotations(param.TypeWithAnnotations);

@@ -103,11 +103,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     // Note this does not currently handle prefixes with wildcard subdomains.
                     if (
                         isHttps == prefix.IsHttps
-                        && string.Equals(
-                            host,
-                            prefix.HostAndPort,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        && string
+                            .Equals(host, prefix.HostAndPort, StringComparison.OrdinalIgnoreCase)
                         && originalPathString.StartsWithSegments(
                             new PathString(prefix.PathWithoutTrailingSlash),
                             StringComparison.OrdinalIgnoreCase,

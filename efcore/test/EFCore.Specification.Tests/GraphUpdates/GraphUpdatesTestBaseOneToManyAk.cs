@@ -765,7 +765,8 @@ namespace Microsoft.EntityFrameworkCore
                     var childCollection = firstChild.Children;
                     var childCompositeCollection = firstChild.CompositeChildren;
                     var removed2 = childCollection.OrderByDescending(c => c.Id).First();
-                    var removed1 = root.OptionalChildrenAk.OrderByDescending(c => c.Id)
+                    var removed1 = root.OptionalChildrenAk
+                        .OrderByDescending(c => c.Id)
                         .Skip(1)
                         .First();
                     var removed2c = childCompositeCollection.OrderByDescending(c => c.Id).First();
@@ -965,7 +966,8 @@ namespace Microsoft.EntityFrameworkCore
                             loadedRoot.RequiredChildrenAk.OrderBy(c => c.Id).First().Children
                         );
                         Assert.Single(
-                            loadedRoot.RequiredChildrenAk.OrderBy(c => c.Id)
+                            loadedRoot.RequiredChildrenAk
+                                .OrderBy(c => c.Id)
                                 .First().CompositeChildren
                         );
                     }
@@ -1356,8 +1358,8 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var removed = LoadOptionalAkGraph(context)
-                        .OptionalChildrenAk.OrderBy(c => c.Id)
+                    var removed = LoadOptionalAkGraph(context).OptionalChildrenAk
+                        .OrderBy(c => c.Id)
                         .First();
 
                     removedId = removed.Id;

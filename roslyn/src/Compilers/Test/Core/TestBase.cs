@@ -122,26 +122,26 @@ namespace Roslyn.Test.Utilities
                         .GetReference(display: "Windows");
 
                     var windowsruntime = AssemblyMetadata.CreateFromImage(
-                            ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime
-                        )
+                        ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime
+                    )
                         .GetReference(display: "System.Runtime.WindowsRuntime.dll");
 
                     var runtime = AssemblyMetadata.CreateFromImage(ResourcesNet451.SystemRuntime)
                         .GetReference(display: "System.Runtime.dll");
 
                     var objectModel = AssemblyMetadata.CreateFromImage(
-                            ResourcesNet451.SystemObjectModel
-                        )
+                        ResourcesNet451.SystemObjectModel
+                    )
                         .GetReference(display: "System.ObjectModel.dll");
 
                     var uixaml = AssemblyMetadata.CreateFromImage(
-                            ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime_UI_Xaml
-                        )
+                        ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime_UI_Xaml
+                    )
                         .GetReference(display: "System.Runtime.WindowsRuntime.UI.Xaml.dll");
 
                     var interop = AssemblyMetadata.CreateFromImage(
-                            ResourcesNet451.SystemRuntimeInteropServicesWindowsRuntime
-                        )
+                        ResourcesNet451.SystemRuntimeInteropServicesWindowsRuntime
+                    )
                         .GetReference(display: "System.Runtime.InteropServices.WindowsRuntime.dll");
 
                     //Not mentioned in the adapter doc but pointed to from System.Runtime, so we'll put it here.
@@ -254,8 +254,8 @@ namespace Roslyn.Test.Utilities
             new Lazy<MetadataReference>(
                 () =>
                     AssemblyMetadata.CreateFromImage(
-                            ProprietaryTestResources.v4_0_30319.mscorlib_portable
-                        )
+                        ProprietaryTestResources.v4_0_30319.mscorlib_portable
+                    )
                         .GetReference(display: "mscorlib.v4_0_30319.portable.dll"),
                 LazyThreadSafetyMode.PublicationOnly
             );
@@ -265,9 +265,8 @@ namespace Roslyn.Test.Utilities
             () =>
             {
                 var source = TestResources.NetFX.aacorlib_v15_0_3928.aacorlib_v15_0_3928_cs;
-                var syntaxTree = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseSyntaxTree(
-                    source
-                );
+                var syntaxTree = Microsoft.CodeAnalysis.CSharp.SyntaxFactory
+                    .ParseSyntaxTree(source);
 
                 var compilationOptions = new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary
@@ -318,8 +317,8 @@ namespace Roslyn.Test.Utilities
             new Lazy<MetadataReference>(
                 () =>
                     AssemblyMetadata.CreateFromImage(
-                            ProprietaryTestResources.silverlight_v5_0_5_0.mscorlib_v5_0_5_0_silverlight
-                        )
+                        ProprietaryTestResources.silverlight_v5_0_5_0.mscorlib_v5_0_5_0_silverlight
+                    )
                         .GetReference(display: "mscorlib.v5.0.5.0_silverlight.dll"),
                 LazyThreadSafetyMode.PublicationOnly
             );
@@ -370,8 +369,8 @@ namespace Roslyn.Test.Utilities
             new Lazy<MetadataReference>(
                 () =>
                     AssemblyMetadata.CreateFromImage(
-                            ProprietaryTestResources.netstandard13.System_Dynamic_Runtime
-                        )
+                        ProprietaryTestResources.netstandard13.System_Dynamic_Runtime
+                    )
                         .GetReference(display: "System.Dynamic.Runtime.dll (netstandard 1.3 ref)"),
                 LazyThreadSafetyMode.PublicationOnly
             );
@@ -473,8 +472,8 @@ namespace Roslyn.Test.Utilities
             new Lazy<MetadataReference>(
                 () =>
                     AssemblyMetadata.CreateFromImage(
-                            ProprietaryTestResources.ReferenceAssemblies_PortableProfile7.mscorlib
-                        )
+                        ProprietaryTestResources.ReferenceAssemblies_PortableProfile7.mscorlib
+                    )
                         .GetReference(display: "mscorlib.dll"),
                 LazyThreadSafetyMode.PublicationOnly
             );
@@ -484,8 +483,8 @@ namespace Roslyn.Test.Utilities
             new Lazy<MetadataReference>(
                 () =>
                     AssemblyMetadata.CreateFromImage(
-                            ProprietaryTestResources.ReferenceAssemblies_PortableProfile7.System_Runtime
-                        )
+                        ProprietaryTestResources.ReferenceAssemblies_PortableProfile7.System_Runtime
+                    )
                         .GetReference(display: "System.Runtime.dll"),
                 LazyThreadSafetyMode.PublicationOnly
             );

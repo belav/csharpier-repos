@@ -139,11 +139,12 @@ namespace System.Text.Tests
             {
                 Encoding encoding = Encoding.GetEncoding(mapping.CodePage);
                 Assert.True(
-                    string.Equals(
-                        mapping.WebName,
-                        encoding.WebName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            mapping.WebName,
+                            encoding.WebName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 );
             }
         }

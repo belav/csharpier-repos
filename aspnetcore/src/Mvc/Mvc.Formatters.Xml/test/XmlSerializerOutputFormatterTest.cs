@@ -323,7 +323,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                     byteOrderMark: false,
                     throwOnInvalidBytes: true
                 )
-            ).ReadToEnd();
+            )
+                .ReadToEnd();
             XmlAssert.Equal(expectedOutput, content);
         }
 
@@ -610,9 +611,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 .Charset.ToString();
             request.ContentType = contentType;
             httpContext.Response.Body = new MemoryStream();
-            httpContext.RequestServices = new ServiceCollection().AddSingleton(
-                    Options.Create(new MvcOptions())
-                )
+            httpContext.RequestServices = new ServiceCollection()
+                .AddSingleton(Options.Create(new MvcOptions()))
                 .BuildServiceProvider();
             return httpContext;
         }

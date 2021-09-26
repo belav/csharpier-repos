@@ -21,12 +21,11 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         >(() => GenerateClientBuilder());
 
         private static readonly PropertyInfo CancellationTokenNoneProperty =
-            typeof(CancellationToken).GetProperty(
-                "None",
-                BindingFlags.Public | BindingFlags.Static
-            )!;
+            typeof(CancellationToken)
+                .GetProperty("None", BindingFlags.Public | BindingFlags.Static)!;
 
-        private static readonly ConstructorInfo ObjectConstructor = typeof(object).GetConstructors()
+        private static readonly ConstructorInfo ObjectConstructor = typeof(object)
+            .GetConstructors()
             .Single();
 
         private static readonly Type[] ParameterTypes = new Type[] { typeof(IClientProxy) };
@@ -58,9 +57,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                 nameof(Build),
                 BindingFlags.Public | BindingFlags.Static
             );
-            return (Func<IClientProxy, T>)factoryMethod!.CreateDelegate(
-                typeof(Func<IClientProxy, T>)
-            );
+            return (Func<IClientProxy, T>)factoryMethod!
+                .CreateDelegate(typeof(Func<IClientProxy, T>));
         }
 
         private static Type GenerateInterfaceImplementation(ModuleBuilder moduleBuilder)
@@ -152,13 +150,14 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 
             var methodBuilder = type.DefineMethod(interfaceMethodInfo.Name, methodAttributes);
 
-            var invokeMethod = typeof(IClientProxy).GetMethod(
-                nameof(IClientProxy.SendCoreAsync),
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                null,
-                new[] { typeof(string), typeof(object[]), typeof(CancellationToken) },
-                null
-            )!;
+            var invokeMethod = typeof(IClientProxy)
+                .GetMethod(
+                    nameof(IClientProxy.SendCoreAsync),
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                    null,
+                    new[] { typeof(string), typeof(object[]), typeof(CancellationToken) },
+                    null
+                )!;
 
             methodBuilder.SetReturnType(interfaceMethodInfo.ReturnType);
             methodBuilder.SetParameters(paramTypes);

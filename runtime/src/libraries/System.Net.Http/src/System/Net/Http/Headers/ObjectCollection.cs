@@ -109,7 +109,8 @@ namespace System.Net.Http.Headers
                 if (array is null || _size > array.Length - arrayIndex)
                 {
                     // Use Array.CopyTo to throw the right exceptions.
-                    new T[] { (T)_items! }.CopyTo(array!, arrayIndex);
+                    new T[] { (T)_items! }
+                        .CopyTo(array!, arrayIndex);
                 }
                 else if (_size == 1)
                 {

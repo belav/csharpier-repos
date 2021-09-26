@@ -63,17 +63,16 @@ namespace System.Threading.Tests
                     var sentinel = new object();
 
                     var sem = new SemaphoreSlim(0);
-                    Task continuation = sem.WaitAsync(cts.Token)
-                        .ContinueWith(
-                            prev =>
-                            {
-                                Assert.Equal(TaskStatus.Canceled, prev.Status);
-                                Assert.NotSame(sentinel, tl.Value);
-                            },
-                            CancellationToken.None,
-                            TaskContinuationOptions.ExecuteSynchronously,
-                            TaskScheduler.Default
-                        );
+                    Task continuation = sem.WaitAsync(cts.Token).ContinueWith(
+                        prev =>
+                        {
+                            Assert.Equal(TaskStatus.Canceled, prev.Status);
+                            Assert.NotSame(sentinel, tl.Value);
+                        },
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    );
 
                     Assert.Equal(TaskStatus.WaitingForActivation, continuation.Status);
                     Assert.Equal(0, sem.CurrentCount);

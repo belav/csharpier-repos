@@ -415,12 +415,13 @@ namespace System.Numerics
 
         public string ToString(string? format, IFormatProvider? provider)
         {
-            return string.Format(
-                provider,
-                "({0}, {1})",
-                m_real.ToString(format, provider),
-                m_imaginary.ToString(format, provider)
-            );
+            return string
+                .Format(
+                    provider,
+                    "({0}, {1})",
+                    m_real.ToString(format, provider),
+                    m_imaginary.ToString(format, provider)
+                );
         }
 
         public static Complex Sin(Complex value)

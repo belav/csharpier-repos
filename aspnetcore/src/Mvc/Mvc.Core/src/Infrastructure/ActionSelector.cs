@@ -112,10 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             }
             else
             {
-                var actionNames = string.Join(
-                    Environment.NewLine,
-                    finalMatches.Select(a => a.DisplayName)
-                );
+                var actionNames = string
+                    .Join(Environment.NewLine, finalMatches.Select(a => a.DisplayName));
 
                 _logger.AmbiguousActions(actionNames);
 

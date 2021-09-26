@@ -52,23 +52,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             }
 
             var position = await document.GetPositionFromLinePositionAsync(
-                    ProtocolConversions.PositionToLinePosition(request.Position),
-                    cancellationToken
-                )
+                ProtocolConversions.PositionToLinePosition(request.Position),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
-            var quickInfoService =
-                document.Project.LanguageServices.GetService<IXamlQuickInfoService>();
+            var quickInfoService = document.Project.LanguageServices
+                .GetService<IXamlQuickInfoService>();
             if (quickInfoService == null)
             {
                 return null;
             }
 
             var info = await quickInfoService.GetQuickInfoAsync(
-                    document,
-                    position,
-                    cancellationToken
-                )
+                document,
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (info == null)
             {
@@ -78,7 +78,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             var descriptionBuilder = new List<TaggedText>(info.Description);
             if (info.Symbol != null)
             {
-                var description = await info.Symbol.GetDescriptionAsync(document, cancellationToken)
+                var description = await info.Symbol
+                    .GetDescriptionAsync(document, cancellationToken)
                     .ConfigureAwait(false);
                 if (description.Any())
                 {
@@ -110,11 +111,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             // TODO - This should return correctly formatted markdown from tagged text.
             // https://github.com/dotnet/roslyn/issues/43387
             static string GetMarkdownString(IEnumerable<TaggedText> description) =>
-                string.Join(
-                    "\r\n",
-                    description.Select(section => section.Text)
-                        .Where(text => !string.IsNullOrEmpty(text))
-                );
+                string
+                    .Join(
+                        "\r\n",
+                        description.Select(section => section.Text)
+                            .Where(text => !string.IsNullOrEmpty(text))
+                    );
         }
     }
 }

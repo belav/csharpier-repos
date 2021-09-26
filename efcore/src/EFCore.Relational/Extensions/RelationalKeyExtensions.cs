@@ -50,11 +50,12 @@ namespace Microsoft.EntityFrameworkCore
             var tableName = key.DeclaringEntityType.GetTableName();
             var name = key.IsPrimaryKey()
                 ? "PK_" + tableName
-                : new StringBuilder().Append("AK_")
-                      .Append(tableName)
-                      .Append("_")
-                      .AppendJoin(key.Properties.Select(p => p.GetColumnBaseName()), "_")
-                      .ToString();
+                : new StringBuilder()
+                  .Append("AK_")
+                  .Append(tableName)
+                  .Append("_")
+                  .AppendJoin(key.Properties.Select(p => p.GetColumnBaseName()), "_")
+                  .ToString();
 
             return Uniquifier.Truncate(
                 name,
@@ -85,9 +86,8 @@ namespace Microsoft.EntityFrameworkCore
                     i++
                 )
                 {
-                    var linkingFk = rootKey!.DeclaringEntityType.FindRowInternalForeignKeys(
-                            storeObject
-                        )
+                    var linkingFk = rootKey!.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
                         .FirstOrDefault();
                     if (linkingFk == null)
                     {
@@ -124,9 +124,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     IReadOnlyKey? linkedKey = null;
                     foreach (
-                        var otherKey in rootKey.DeclaringEntityType.FindRowInternalForeignKeys(
-                                storeObject
-                            )
+                        var otherKey in rootKey.DeclaringEntityType
+                            .FindRowInternalForeignKeys(storeObject)
                             .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
                     )
                     {
@@ -154,7 +153,8 @@ namespace Microsoft.EntityFrameworkCore
                     return rootKey.GetName(storeObject);
                 }
 
-                name = new StringBuilder().Append("AK_")
+                name = new StringBuilder()
+                    .Append("AK_")
                     .Append(storeObject.Name)
                     .Append("_")
                     .AppendJoin(columnNames, "_")
@@ -250,9 +250,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 IReadOnlyKey? linkedKey = null;
                 foreach (
-                    var otherKey in rootKey.DeclaringEntityType.FindRowInternalForeignKeys(
-                            storeObject
-                        )
+                    var otherKey in rootKey.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
                 )
                 {

@@ -91,22 +91,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            var result = await base.GetSymbolsAsync(
-                    completionContext,
-                    context,
-                    position,
-                    options,
-                    cancellationToken
-                )
+            var result = await base
+                .GetSymbolsAsync(completionContext, context, position, options, cancellationToken)
                 .ConfigureAwait(false);
             if (result.Any())
             {
                 var type = (ITypeSymbol)result.Single().symbol;
                 var alias = await type.FindApplicableAliasAsync(
-                        position,
-                        context.SemanticModel,
-                        cancellationToken
-                    )
+                    position,
+                    context.SemanticModel,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (alias != null)
                     return ImmutableArray.Create((alias, result.Single().preselect));
@@ -133,10 +128,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 //
                 // We strip the top-level nullability so we don't end up suggesting "new object?" here. Nested nullability would still
                 // be generated.
-                return base.GetDisplayAndSuffixAndInsertionText(
-                    typeSymbol.WithNullableAnnotation(NullableAnnotation.NotAnnotated),
-                    context
-                );
+                return base
+                    .GetDisplayAndSuffixAndInsertionText(
+                        typeSymbol.WithNullableAnnotation(NullableAnnotation.NotAnnotated),
+                        context
+                    );
             }
 
             return base.GetDisplayAndSuffixAndInsertionText(symbol, context);

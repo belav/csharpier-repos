@@ -55,10 +55,8 @@ class NameConfigWithPid
             process.StartInfo.RedirectStandardError = true;
 
             process.StartInfo.Environment.Add("COMPlus_EnableEventPipe", "1");
-            process.StartInfo.Environment.Add(
-                "COMPlus_EventPipeConfig",
-                "Microsoft-Windows-DotNETRuntime:4c14fccbd:4"
-            );
+            process.StartInfo.Environment
+                .Add("COMPlus_EventPipeConfig", "Microsoft-Windows-DotNETRuntime:4c14fccbd:4");
             process.StartInfo.Environment.Add("COMPlus_EventPipeOutputPath", outputPathPattern);
 
             process.Start();

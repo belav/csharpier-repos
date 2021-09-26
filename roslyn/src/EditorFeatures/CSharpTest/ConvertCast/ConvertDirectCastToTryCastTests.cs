@@ -42,7 +42,8 @@ class Program
                 TestCode = InitialMarkup,
                 FixedCode = ExpectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory]
@@ -85,7 +86,8 @@ class Program
                 TestCode = initialMarkup,
                 FixedCode = expectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -106,7 +108,8 @@ class Program
                 FixedCode = InitialMarkup,
                 OffersEmptyRefactoring = false,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -129,7 +132,8 @@ public class C
                 FixedCode = InitialMarkup,
                 OffersEmptyRefactoring = false,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -152,7 +156,8 @@ public class C
                 FixedCode = InitialMarkup,
                 OffersEmptyRefactoring = false,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -185,7 +190,8 @@ public class C
                 TestCode = InitialMarkup,
                 FixedCode = FixedCode,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory]
@@ -228,7 +234,8 @@ public class C
                 FixedCode = shouldBeFixed ? fixedCode : initialMarkup,
                 OffersEmptyRefactoring = false,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -270,7 +277,8 @@ public class C
                 FixedCode = fixedCode,
                 OffersEmptyRefactoring = false,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact]
@@ -339,7 +347,8 @@ class Program
                 TestCode = initialMarkup,
                 FixedCode = expectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Theory]
@@ -391,7 +400,8 @@ class Program
                 TestCode = initialMarkup,
                 FixedCode = expectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.SemanticStructure,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

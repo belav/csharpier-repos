@@ -19,9 +19,8 @@ namespace RedisSample
 
             // Configure
             using (
-                var services = new ServiceCollection().AddLogging(
-                        o => o.AddConsole().SetMinimumLevel(LogLevel.Debug)
-                    )
+                var services = new ServiceCollection()
+                    .AddLogging(o => o.AddConsole().SetMinimumLevel(LogLevel.Debug))
                     .AddDataProtection()
                     .PersistKeysToStackExchangeRedis(redis, "DataProtection-Keys")
                     .Services.BuildServiceProvider()

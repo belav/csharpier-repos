@@ -96,8 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             if (includeNonNullable)
             {
                 format = format.AddMiscellaneousOptions(
-                        SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                    )
+                    SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                )
                     .WithCompilerInternalOptions(SymbolDisplayCompilerInternalOptions.None);
             }
 

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            var existingFeature = builder.Features.OfType<ConfigureParserForCSharpVersionFeature>()
+            var existingFeature = builder.Features
+                .OfType<ConfigureParserForCSharpVersionFeature>()
                 .FirstOrDefault();
             if (existingFeature != null)
             {
@@ -39,9 +40,8 @@ namespace Microsoft.CodeAnalysis.Razor
             // This will convert any "latest", "default" or "LatestMajor" LanguageVersions into their numerical equivalent.
             var effectiveCSharpLanguageVersion =
                 LanguageVersionFacts.MapSpecifiedToEffectiveVersion(csharpLanguageVersion);
-            builder.Features.Add(
-                new ConfigureParserForCSharpVersionFeature(effectiveCSharpLanguageVersion)
-            );
+            builder.Features
+                .Add(new ConfigureParserForCSharpVersionFeature(effectiveCSharpLanguageVersion));
 
             return builder;
         }

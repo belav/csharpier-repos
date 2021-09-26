@@ -128,9 +128,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             };
 
             var options = new HttpConnectionOptions();
-            var properties = typeof(HttpConnectionOptions).GetProperties(
-                BindingFlags.Public | BindingFlags.Instance
-            );
+            var properties = typeof(HttpConnectionOptions)
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var property in properties)
             {

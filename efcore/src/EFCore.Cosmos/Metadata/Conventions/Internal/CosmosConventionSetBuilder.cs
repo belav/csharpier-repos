@@ -35,9 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
         {
             var conventionSet = base.CreateConventionSet();
 
-            conventionSet.ModelInitializedConventions.Add(
-                new ContextContainerConvention(Dependencies)
-            );
+            conventionSet.ModelInitializedConventions
+                .Add(new ContextContainerConvention(Dependencies));
 
             conventionSet.ModelFinalizingConventions.Add(new ETagPropertyConvention());
 
@@ -140,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
 
         private static IServiceScope CreateServiceScope()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkCosmos()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkCosmos()
                 .AddDbContext<DbContext>(
                     (p, o) => o.UseCosmos("localhost", "_", "_").UseInternalServiceProvider(p)
                 )

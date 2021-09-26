@@ -30,9 +30,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             await inputComponent.SetCurrentValueAsStringAsync("notANumber");
 
             // Assert
-            var validationMessages = rootComponent.EditContext.GetValidationMessages(
-                fieldIdentifier
-            );
+            var validationMessages = rootComponent.EditContext
+                .GetValidationMessages(fieldIdentifier);
             Assert.NotEmpty(validationMessages);
             Assert.Contains("The Some number field must be a number.", validationMessages);
         }

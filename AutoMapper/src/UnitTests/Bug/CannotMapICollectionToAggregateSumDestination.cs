@@ -46,7 +46,8 @@ namespace AutoMapper.UnitTests.Bug
             var source = new DummySource() { DummyCollection = new[] { 1, 4, 5 } };
 
             // act
-            var destination = new[] { source }.AsQueryable()
+            var destination = new[] { source }
+                .AsQueryable()
                 .ProjectTo<DummyDestination>(config)
                 .Single();
 

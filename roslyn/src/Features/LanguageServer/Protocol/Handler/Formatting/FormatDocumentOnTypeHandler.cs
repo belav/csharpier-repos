@@ -46,12 +46,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var document = context.Document;
             if (document != null)
             {
-                var formattingService =
-                    document.Project.LanguageServices.GetRequiredService<IEditorFormattingService>();
+                var formattingService = document.Project.LanguageServices
+                    .GetRequiredService<IEditorFormattingService>();
                 var position = await document.GetPositionFromLinePositionAsync(
-                        ProtocolConversions.PositionToLinePosition(request.Position),
-                        cancellationToken
-                    )
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (string.IsNullOrEmpty(request.Character))
@@ -62,34 +62,34 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // We should use the options passed in by LSP instead of the document's options.
                 var documentOptions =
                     await ProtocolConversions.FormattingOptionsToDocumentOptionsAsync(
-                            request.Options,
-                            document,
-                            cancellationToken
-                        )
+                        request.Options,
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 IList<TextChange>? textChanges;
                 if (SyntaxFacts.IsNewLine(request.Character[0]))
                 {
                     textChanges = await GetFormattingChangesOnReturnAsync(
-                            formattingService,
-                            document,
-                            position,
-                            documentOptions,
-                            cancellationToken
-                        )
+                        formattingService,
+                        document,
+                        position,
+                        documentOptions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else
                 {
                     textChanges = await GetFormattingChangesAsync(
-                            formattingService,
-                            document,
-                            request.Character[0],
-                            position,
-                            documentOptions,
-                            cancellationToken
-                        )
+                        formattingService,
+                        document,
+                        request.Character[0],
+                        position,
+                        documentOptions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 

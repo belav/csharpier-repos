@@ -90,10 +90,11 @@ namespace System.Net.Security.Tests
                     {
                         if (responseString == null)
                         {
-                            string requestString = string.Format(
-                                HttpsTestClient.Options.DefaultRequestStringTemplate,
-                                clientOptions.ServerName
-                            );
+                            string requestString = string
+                                .Format(
+                                    HttpsTestClient.Options.DefaultRequestStringTemplate,
+                                    clientOptions.ServerName
+                                );
 
                             return Task.FromResult(requestString);
                         }

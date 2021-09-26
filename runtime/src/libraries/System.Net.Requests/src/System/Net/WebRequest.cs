@@ -121,14 +121,15 @@ namespace System.Net
                 {
                     // It is. See if these match.
                     if (
-                        string.Compare(
-                            Current.Prefix,
-                            0,
-                            LookupUri,
-                            0,
-                            Current.Prefix.Length,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == 0
+                        string
+                            .Compare(
+                                Current.Prefix,
+                                0,
+                                LookupUri,
+                                0,
+                                Current.Prefix.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
                     )
                     {
                         // These match. Remember that we found it and break
@@ -311,9 +312,9 @@ namespace System.Net
                     if (
                         !prefix.EndsWith('/')
                         && tempUri.GetComponents(
-                                UriComponents.PathAndQuery | UriComponents.Fragment,
-                                UriFormat.UriEscaped
-                            )
+                            UriComponents.PathAndQuery | UriComponents.Fragment,
+                            UriFormat.UriEscaped
+                        )
                             .Equals("/")
                     )
                     {
@@ -345,11 +346,8 @@ namespace System.Net
                     {
                         // They're the same length.
                         if (
-                            string.Equals(
-                                Current.Prefix,
-                                prefix,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            string
+                                .Equals(Current.Prefix, prefix, StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             // ...and the strings are identical. This is an error.
@@ -596,12 +594,13 @@ namespace System.Net
             // Unwrap() that it's worth it to just rely on Task.Run and accept the closure/delegate.
             return Task.Run(
                 () =>
-                    Task<Stream>.Factory.FromAsync(
-                        (callback, state) =>
-                            ((WebRequest)state!).BeginGetRequestStream(callback, state),
-                        iar => ((WebRequest)iar.AsyncState!).EndGetRequestStream(iar),
-                        this
-                    )
+                    Task<Stream>.Factory
+                        .FromAsync(
+                            (callback, state) =>
+                                ((WebRequest)state!).BeginGetRequestStream(callback, state),
+                            iar => ((WebRequest)iar.AsyncState!).EndGetRequestStream(iar),
+                            this
+                        )
             );
         }
 
@@ -610,11 +609,13 @@ namespace System.Net
             // See comment in GetRequestStreamAsync().  Same logic applies here.
             return Task.Run(
                 () =>
-                    Task<WebResponse>.Factory.FromAsync(
-                        (callback, state) => ((WebRequest)state!).BeginGetResponse(callback, state),
-                        iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),
-                        this
-                    )
+                    Task<WebResponse>.Factory
+                        .FromAsync(
+                            (callback, state) =>
+                                ((WebRequest)state!).BeginGetResponse(callback, state),
+                            iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),
+                            this
+                        )
             );
         }
 

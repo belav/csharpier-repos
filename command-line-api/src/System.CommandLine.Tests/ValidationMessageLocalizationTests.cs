@@ -36,7 +36,9 @@ namespace System.CommandLine.Tests
 
             var parser = new CommandLineBuilder(
                 new Command("the-command") { new Argument { Arity = ArgumentArity.ExactlyOne } }
-            ).UseValidationMessages(messages).Build();
+            )
+                .UseValidationMessages(messages)
+                .Build();
 
             var result = parser.Parse("the-command");
 

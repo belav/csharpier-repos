@@ -137,11 +137,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                 return;
             }
 
-            var option = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferSimpleUsingStatement,
-                syntaxTree,
-                cancellationToken
-            );
+            var option = context.Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferSimpleUsingStatement,
+                    syntaxTree,
+                    cancellationToken
+                );
             if (!option.Value)
             {
                 return;
@@ -168,9 +169,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         )
         {
             var symbolNameToExistingSymbol = semanticModel.GetExistingSymbols(
-                    parentBlock,
-                    cancellationToken
-                )
+                parentBlock,
+                cancellationToken
+            )
                 .ToLookup(s => s.Name);
 
             for (
@@ -212,9 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         ) =>
             locals.Any(
                 local =>
-                    symbolNameToExistingSymbol[local.Name].Any(
-                        otherLocal => !local.Equals(otherLocal)
-                    )
+                    symbolNameToExistingSymbol[local.Name]
+                        .Any(otherLocal => !local.Equals(otherLocal))
             );
 
         private static bool PreservesSemantics(

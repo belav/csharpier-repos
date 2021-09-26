@@ -185,10 +185,8 @@ namespace System.Text.Json.Serialization.Tests
             };
             JsonSerializer.Serialize(root, s_serializerOptionsPreserve);
 
-            ImmutableArray<List<int>> immutablArraytOfLists = new List<List<int>>
-            {
-                list
-            }.ToImmutableArray();
+            ImmutableArray<List<int>> immutablArraytOfLists = new List<List<int>> { list }
+                .ToImmutableArray();
             JsonSerializer.Serialize(immutablArraytOfLists, s_serializerOptionsPreserve);
 
             List<ImmutableArray<int>> listOfImmutableArrays = new List<ImmutableArray<int>>

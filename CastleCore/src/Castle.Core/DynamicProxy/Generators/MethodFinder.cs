@@ -50,8 +50,8 @@ namespace Castle.DynamicProxy.Generators
                 {
                     // We always load all instance methods into the cache, we will filter them later
                     methodsInCache = type.GetMethods(
-                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                        )
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    )
                         .Distinct(MethodSignatureComparer.Instance)
                         .ToArray();
                     cachedMethodInfosByType.Add(type, methodsInCache);

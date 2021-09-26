@@ -84,13 +84,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             foreach (var diagnostic in diagnostics)
             {
                 var localDeclaration =
-                    (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(
-                        cancellationToken
-                    );
+                    (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0]
+                        .FindNode(cancellationToken);
                 var anonymousFunction =
-                    (AnonymousFunctionExpressionSyntax)diagnostic.AdditionalLocations[1].FindNode(
-                        cancellationToken
-                    );
+                    (AnonymousFunctionExpressionSyntax)diagnostic.AdditionalLocations[1]
+                        .FindNode(cancellationToken);
 
                 var references = new List<ExpressionSyntax>(
                     diagnostic.AdditionalLocations.Count - 2
@@ -99,10 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 for (var i = 2; i < diagnostic.AdditionalLocations.Count; i++)
                 {
                     references.Add(
-                        (ExpressionSyntax)diagnostic.AdditionalLocations[i].FindNode(
-                            getInnermostNodeForTie: true,
-                            cancellationToken
-                        )
+                        (ExpressionSyntax)diagnostic.AdditionalLocations[i]
+                            .FindNode(getInnermostNodeForTie: true, cancellationToken)
                     );
                 }
 
@@ -217,12 +213,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
         )
         {
             var newLocalFunctionStatement = CreateLocalFunctionStatement(
-                    localDeclaration,
-                    anonymousFunction,
-                    delegateMethod,
-                    parameterList,
-                    makeStatic
-                )
+                localDeclaration,
+                anonymousFunction,
+                delegateMethod,
+                parameterList,
+                makeStatic
+            )
                 .WithTriviaFrom(localDeclaration)
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
@@ -261,7 +257,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                         var directInvocation = invocation.Expression
                             is MemberAccessExpressionSyntax memberAccess // it's a .Invoke call
                             ? invocation.WithExpression(memberAccess.Expression)
-                                  .WithTriviaFrom(invocation) // remove it
+                              .WithTriviaFrom(invocation) // remove it
                             : invocation;
 
                         return WithNewParameterNames(
@@ -353,13 +349,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 )
               : SyntaxFactory.ParameterList(
                     SyntaxFactory.SeparatedList(
-                        delegateMethod.Parameters.Select(
-                            parameter =>
-                                PromoteParameter(
-                                    SyntaxFactory.Parameter(parameter.Name.ToIdentifierToken()),
-                                    parameter
-                                )
-                        )
+                        delegateMethod.Parameters
+                            .Select(
+                                parameter =>
+                                    PromoteParameter(
+                                        SyntaxFactory.Parameter(parameter.Name.ToIdentifierToken()),
+                                        parameter
+                                    )
+                            )
                     )
                 );
 
@@ -427,18 +424,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                         return argumentNode;
                     }
 
-                    var newParameter = newParameterList.Parameters.ElementAtOrDefault(
-                        parameterIndex
-                    );
+                    var newParameter = newParameterList.Parameters
+                        .ElementAtOrDefault(parameterIndex);
                     if (newParameter == null || newParameter.Identifier.IsMissing)
                     {
                         return argumentNode;
                     }
 
                     return argumentNode.WithNameColon(
-                        argumentNode.NameColon.WithName(
-                            SyntaxFactory.IdentifierName(newParameter.Identifier)
-                        )
+                        argumentNode.NameColon
+                            .WithName(SyntaxFactory.IdentifierName(newParameter.Identifier))
                     );
                 }
             );

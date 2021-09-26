@@ -476,7 +476,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                     true,
                     "{\"type\":7,\"error\":\"Error!\",\"allowReconnect\":true}"
                 ),
-            }.ToDictionary(t => t.Name);
+            }
+                .ToDictionary(t => t.Name);
 
         public static IEnumerable<object[]> ProtocolTestDataNames =>
             ProtocolTestData.Keys.Select(name => new object[] { name });
@@ -535,7 +536,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                     true,
                     "{ \"item\": \"foo\", \"invocationId\": \"1a\", \"type\":2 }"
                 )
-            }.ToDictionary(t => t.Name);
+            }
+                .ToDictionary(t => t.Name);
 
         public static IEnumerable<object[]> OutOfOrderJsonTestDataNames =>
             OutOfOrderJsonTestData.Keys.Select(name => new object[] { name });
@@ -814,11 +816,12 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         {
             var binder = new TestBinder(new[] { typeof(string) });
             var data = new ReadOnlySequence<byte>(
-                Encoding.UTF8.GetBytes(
-                    Frame(
-                        "{\"type\":1,\"invocationId\":\"42\",\"target\":\"foo\",\"arguments\":[[],{\"target\":\"foo2\"}]}"
+                Encoding.UTF8
+                    .GetBytes(
+                        Frame(
+                            "{\"type\":1,\"invocationId\":\"42\",\"target\":\"foo\",\"arguments\":[[],{\"target\":\"foo2\"}]}"
+                        )
                     )
-                )
             );
             JsonHubProtocol.TryParseMessage(ref data, binder, out var message);
             var bindingFailure = Assert.IsType<InvocationBindingFailureMessage>(message);
@@ -953,7 +956,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                     30
                 ),
                 new MessageSizeTestData("PingMessage", PingMessage.Instance, 11),
-            }.ToDictionary(t => t.Name);
+            }
+                .ToDictionary(t => t.Name);
 
         public static IEnumerable<object[]> MessageSizeDataNames =>
             MessageSizeData.Keys.Select(name => new object[] { name });

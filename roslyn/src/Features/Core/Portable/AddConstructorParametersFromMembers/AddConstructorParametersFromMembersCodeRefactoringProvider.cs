@@ -52,10 +52,10 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             }
 
             var actions = await AddConstructorParametersFromMembersAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                )
+                document,
+                textSpan,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }
@@ -76,20 +76,20 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             )
             {
                 var info = await GetSelectedMemberInfoAsync(
-                        document,
-                        textSpan,
-                        allowPartialSelection: true,
-                        cancellationToken
-                    )
+                    document,
+                    textSpan,
+                    allowPartialSelection: true,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (info != null)
                 {
                     var state = await State.GenerateAsync(
-                            info.SelectedMembers,
-                            document,
-                            cancellationToken
-                        )
+                        info.SelectedMembers,
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (
                         state?.ConstructorCandidates != null && !state.ConstructorCandidates.IsEmpty
@@ -136,12 +136,10 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             else
             {
                 // Create sub menus for suggested actions, one for required parameters and one for optional parameters
-                using var _1 = ArrayBuilder<CodeAction>.GetInstance(
-                    out var requiredParameterCodeActions
-                );
-                using var _2 = ArrayBuilder<CodeAction>.GetInstance(
-                    out var optionalParameterCodeActions
-                );
+                using var _1 = ArrayBuilder<CodeAction>
+                    .GetInstance(out var requiredParameterCodeActions);
+                using var _2 = ArrayBuilder<CodeAction>
+                    .GetInstance(out var optionalParameterCodeActions);
                 foreach (var constructorCandidate in state.ConstructorCandidates)
                 {
                     if (CanHaveRequiredParameters(constructorCandidate.Constructor.Parameters))
@@ -200,8 +198,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 bool useSubMenuName
             )
             {
-                var missingOptionalParameters =
-                    constructorCandidate.MissingParameters.SelectAsArray(
+                var missingOptionalParameters = constructorCandidate.MissingParameters
+                    .SelectAsArray(
                         p =>
                             CodeGenerationSymbolFactory.CreateParameterSymbol(
                                 attributes: default,

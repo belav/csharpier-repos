@@ -1469,14 +1469,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var attributes = ModelAttributes.GetAttributesForProperty(
                 typeof(NullableReferenceTypes),
-                typeof(NullableReferenceTypes).GetProperty(
-                    nameof(NullableReferenceTypes.NonNullableReferenceType)
-                )
+                typeof(NullableReferenceTypes)
+                    .GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceType))
             );
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(NullableReferenceTypes).GetProperty(
-                    nameof(NullableReferenceTypes.NonNullableReferenceType)
-                ),
+                typeof(NullableReferenceTypes)
+                    .GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceType)),
                 typeof(string),
                 typeof(NullableReferenceTypes)
             );
@@ -1502,15 +1500,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var attributes = ModelAttributes.GetAttributesForProperty(
                 typeof(NullableReferenceTypes),
-                typeof(NullableReferenceTypes).GetProperty(
-                    nameof(NullableReferenceTypes.NonNullableReferenceTypeWithRequired)
-                )
+                typeof(NullableReferenceTypes)
+                    .GetProperty(
+                        nameof(NullableReferenceTypes.NonNullableReferenceTypeWithRequired)
+                    )
             );
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(NullableReferenceTypes).GetProperty(
-                    nameof(NullableReferenceTypes.NonNullableReferenceTypeWithRequired)
-                ),
+                typeof(NullableReferenceTypes)
+                    .GetProperty(
+                        nameof(NullableReferenceTypes.NonNullableReferenceTypeWithRequired)
+                    ),
                 typeof(string),
                 typeof(NullableReferenceTypes)
             );
@@ -1542,15 +1542,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var attributes = ModelAttributes.GetAttributesForProperty(
                 typeof(NullableReferenceTypes),
-                typeof(NullableReferenceTypes).GetProperty(
-                    nameof(NullableReferenceTypes.NonNullableReferenceType)
-                )
+                typeof(NullableReferenceTypes)
+                    .GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceType))
             );
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(NullableReferenceTypes).GetProperty(
-                    nameof(NullableReferenceTypes.NonNullableReferenceType)
-                ),
+                typeof(NullableReferenceTypes)
+                    .GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceType)),
                 typeof(string),
                 typeof(NullableReferenceTypes)
             );
@@ -2146,20 +2144,19 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         )
         {
             var stringLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-            stringLocalizer.Setup(loc => loc[It.IsAny<string>()])
-                .Returns<string>(
-                    (
-                        k =>
-                        {
-                            return new LocalizedString(k, $"{k} {CultureInfo.CurrentCulture}");
-                        }
-                    )
-                );
+            stringLocalizer.Setup(loc => loc[It.IsAny<string>()]).Returns<string>(
+                (
+                    k =>
+                    {
+                        return new LocalizedString(k, $"{k} {CultureInfo.CurrentCulture}");
+                    }
+                )
+            );
 
             var stringLocalizerFactory = new Mock<IStringLocalizerFactory>(MockBehavior.Strict);
             stringLocalizerFactory.Setup(
-                    factory => factory.Create(typeof(EnumWithLocalizedDisplayNames))
-                )
+                factory => factory.Create(typeof(EnumWithLocalizedDisplayNames))
+            )
                 .Returns(stringLocalizer.Object);
 
             var localizationOptions = new MvcDataAnnotationsLocalizationOptions();

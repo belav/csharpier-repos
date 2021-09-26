@@ -175,13 +175,15 @@ namespace System.Xml.Tests
                     utils.WriterType == WriterType.UTF8WriterIndent
                     || utils.WriterType == WriterType.UnicodeWriterIndent
                 )
-                    ? string.Format(
+                    ? string
+                      .Format(
                           "<?xml version=\"1.0\" encoding=\"utf-{0}\"?>"
                               + Environment.NewLine
                               + "<a:b xmlns:a=\"c\" />",
                           enc
                       )
-                    : string.Format(
+                    : string
+                      .Format(
                           "<?xml version=\"1.0\" encoding=\"utf-{0}\"?><a:b xmlns:a=\"c\" />",
                           enc
                       );

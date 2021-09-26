@@ -114,11 +114,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateDeconstructMethod
 
             var service = document.GetLanguageService<IGenerateDeconstructMemberService>();
             var codeActions = await service.GenerateDeconstructMethodAsync(
-                    document,
-                    target,
-                    (INamedTypeSymbol)type,
-                    cancellationToken
-                )
+                document,
+                target,
+                (INamedTypeSymbol)type,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             Debug.Assert(!codeActions.IsDefault);

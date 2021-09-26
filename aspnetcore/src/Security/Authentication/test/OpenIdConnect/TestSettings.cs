@@ -175,10 +175,11 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             // Convert query to dictionary
             var queryDict = string.IsNullOrEmpty(redirectUri.Query)
                 ? new Dictionary<string, string>()
-                : redirectUri.Query.TrimStart('?')
-                      .Split('&')
-                      .Select(part => part.Split('='))
-                      .ToDictionary(parts => parts[0], parts => parts[1]);
+                : redirectUri.Query
+                  .TrimStart('?')
+                  .Split('&')
+                  .Select(part => part.Split('='))
+                  .ToDictionary(parts => parts[0], parts => parts[1]);
 
             // Validate the query string parameters
             ValidateParameters(queryDict, parametersToValidate, errors, htmlEncoded: true);
@@ -492,17 +493,17 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             )
             {
                 if (
-                    request.RequestUri.AbsoluteUri.Equals(
-                        "https://login.microsoftonline.com/common/.well-known/openid-configuration"
-                    )
+                    request.RequestUri.AbsoluteUri
+                        .Equals(
+                            "https://login.microsoftonline.com/common/.well-known/openid-configuration"
+                        )
                 )
                 {
                     return await ReturnResource("wellknownconfig.json");
                 }
                 if (
-                    request.RequestUri.AbsoluteUri.Equals(
-                        "https://login.microsoftonline.com/common/discovery/keys"
-                    )
+                    request.RequestUri.AbsoluteUri
+                        .Equals("https://login.microsoftonline.com/common/discovery/keys")
                 )
                 {
                     return await ReturnResource("wellknownkeys.json");
@@ -516,9 +517,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                 var resourceName =
                     "Microsoft.AspNetCore.Authentication.Test.OpenIdConnect." + resource;
                 using (
-                    var stream = typeof(MockBackchannel).Assembly.GetManifestResourceStream(
-                        resourceName
-                    )
+                    var stream = typeof(MockBackchannel).Assembly
+                        .GetManifestResourceStream(resourceName)
                 )
                 using (var reader = new StreamReader(stream))
                 {

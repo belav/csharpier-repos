@@ -485,29 +485,26 @@ namespace System.Collections
 }";
             var compilation2 = CreateEmptyCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics();
-            compilation2.Emit(new System.IO.MemoryStream())
-                .Diagnostics.Verify(
-                    // (5,9): error CS0656: Missing compiler required member 'System.String.get_Length'
-                    //         foreach (var c in s)
-                    Diagnostic(
-                            ErrorCode.ERR_MissingPredefinedMember,
-                            @"foreach (var c in s)
+            compilation2.Emit(new System.IO.MemoryStream()).Diagnostics.Verify(
+                // (5,9): error CS0656: Missing compiler required member 'System.String.get_Length'
+                //         foreach (var c in s)
+                Diagnostic(
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"foreach (var c in s)
         {
             // comment
         }"
-                        )
-                        .WithArguments("System.String", "get_Length"),
-                    // (5,9): error CS0656: Missing compiler required member 'System.String.get_Chars'
-                    //         foreach (var c in s)
-                    Diagnostic(
-                            ErrorCode.ERR_MissingPredefinedMember,
-                            @"foreach (var c in s)
+                ).WithArguments("System.String", "get_Length"),
+                // (5,9): error CS0656: Missing compiler required member 'System.String.get_Chars'
+                //         foreach (var c in s)
+                Diagnostic(
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"foreach (var c in s)
         {
             // comment
         }"
-                        )
-                        .WithArguments("System.String", "get_Chars")
-                );
+                ).WithArguments("System.String", "get_Chars")
+            );
         }
 
         [WorkItem(631443, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/631443")]
@@ -615,10 +612,9 @@ namespace System.Collections
                 .VerifyDiagnostics();
 
             //IMPORTANT: we should NOT load fields of self-containing structs like - "ldfld int int.m_value"
-            CompileAndVerify(comp, verify: Verification.Skipped)
-                .VerifyIL(
-                    "int.CompareTo(int)",
-                    @"
+            CompileAndVerify(comp, verify: Verification.Skipped).VerifyIL(
+                "int.CompareTo(int)",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  2
@@ -638,10 +634,9 @@ namespace System.Collections
   IL_000f:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "int.Equals(object)",
-                    @"
+            ).VerifyIL(
+                "int.Equals(object)",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -658,10 +653,9 @@ namespace System.Collections
   IL_0014:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "int.GetHashCode()",
-                    @"
+            ).VerifyIL(
+                "int.GetHashCode()",
+                @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -670,7 +664,7 @@ namespace System.Collections
   IL_0002:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -758,10 +752,9 @@ namespace System
             //IMPORTANT: we should NOT delegate E1.GetHashCode() to int.GetHashCode()
             //           it is entirely possible that Enum.GetHashCode and int.GetHashCode
             //           have different implementations
-            CompileAndVerify(comp, verify: Verification.Fails)
-                .VerifyIL(
-                    "program.Main()",
-                    @"
+            CompileAndVerify(comp, verify: Verification.Fails).VerifyIL(
+                "program.Main()",
+                @"
 {
   // Code size       62 (0x3e)
   .maxstack  3
@@ -795,7 +788,7 @@ namespace System
   IL_003d:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -887,10 +880,9 @@ namespace System
             //           but see the bug see VSW #396011, JIT needs references when loading
             //           fields of certain clr-ambiguous structs (only possible when building mscorlib)
 
-            CompileAndVerify(comp, verify: Verification.Fails)
-                .VerifyIL(
-                    "System.IntPtr..ctor(int)",
-                    @"
+            CompileAndVerify(comp, verify: Verification.Fails).VerifyIL(
+                "System.IntPtr..ctor(int)",
+                @"
 {
   // Code size       10 (0xa)
   .maxstack  2
@@ -902,10 +894,9 @@ namespace System
   IL_0009:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "System.IntPtr.Equals(object)",
-                    @"
+            ).VerifyIL(
+                "System.IntPtr.Equals(object)",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  2
@@ -923,10 +914,9 @@ namespace System
   IL_001d:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "System.IntPtr.GetHashCode()",
-                    @"
+            ).VerifyIL(
+                "System.IntPtr.GetHashCode()",
+                @"
 {
   // Code size        9 (0x9)
   .maxstack  1
@@ -937,10 +927,9 @@ namespace System
   IL_0008:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "bool System.IntPtr.op_Equality(System.IntPtr, System.IntPtr)",
-                    @"
+            ).VerifyIL(
+                "bool System.IntPtr.op_Equality(System.IntPtr, System.IntPtr)",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -952,10 +941,9 @@ namespace System
   IL_0010:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "bool System.IntPtr.op_Inequality(System.IntPtr, System.IntPtr)",
-                    @"
+            ).VerifyIL(
+                "bool System.IntPtr.op_Inequality(System.IntPtr, System.IntPtr)",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  2
@@ -969,10 +957,9 @@ namespace System
   IL_0013:  ret
 }
 "
-                )
-                .VerifyIL(
-                    "System.IntPtr.Bar(System.IntPtr)",
-                    @"
+            ).VerifyIL(
+                "System.IntPtr.Bar(System.IntPtr)",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -987,7 +974,7 @@ namespace System
   IL_0016:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -1164,10 +1151,9 @@ unsafe internal class program
 
             comp.VerifyDiagnostics();
 
-            CompileAndVerify(comp, verify: Verification.Skipped)
-                .VerifyIL(
-                    "program.Main()",
-                    @"
+            CompileAndVerify(comp, verify: Verification.Skipped).VerifyIL(
+                "program.Main()",
+                @"
 {
   // Code size       83 (0x53)
   .maxstack  2
@@ -1229,7 +1215,7 @@ unsafe internal class program
   IL_0052:  ret
 }
 "
-                );
+            );
         }
     }
 }

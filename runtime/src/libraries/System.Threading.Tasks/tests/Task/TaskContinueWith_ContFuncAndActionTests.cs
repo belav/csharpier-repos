@@ -519,11 +519,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }
@@ -570,11 +571,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }
@@ -632,11 +634,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }
@@ -690,11 +693,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }
@@ -744,11 +748,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue,
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue,
+                                cancel
+                            )
                     );
                 }
             }
@@ -803,11 +808,12 @@ namespace System.Threading.Tasks.Tests
                 {
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
-                            ranValue(),
-                            cancel
-                        )
+                        string
+                            .Format(
+                                "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                                ranValue(),
+                                cancel
+                            )
                     );
                 }
             }

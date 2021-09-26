@@ -130,10 +130,8 @@ namespace System.Web.WebPages
 
             if (
                 document.Root == null
-                || !document.Root.Name.LocalName.Equals(
-                    "precompiledApp",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                || !document.Root.Name.LocalName
+                    .Equals("precompiledApp", StringComparison.OrdinalIgnoreCase)
             )
             {
                 return false;
@@ -163,15 +161,16 @@ namespace System.Web.WebPages
                     Exists = objectFactory != null
                 };
                 // Cache the result with a sliding expiration for a long duration.
-                HttpRuntime.Cache.Add(
-                    key,
-                    buildManagerResult,
-                    null,
-                    Cache.NoAbsoluteExpiration,
-                    _objectFactoryCacheDuration,
-                    CacheItemPriority.Low,
-                    null
-                );
+                HttpRuntime.Cache
+                    .Add(
+                        key,
+                        buildManagerResult,
+                        null,
+                        Cache.NoAbsoluteExpiration,
+                        _objectFactoryCacheDuration,
+                        CacheItemPriority.Low,
+                        null
+                    );
             }
             return buildManagerResult.Exists;
         }
@@ -209,9 +208,8 @@ namespace System.Web.WebPages
         {
             if (_isPrecompiled)
             {
-                var buildManagerResult = (BuildManagerResult)HttpRuntime.Cache.Get(
-                    GetKeyFromVirtualPath(virtualPath)
-                );
+                var buildManagerResult = (BuildManagerResult)HttpRuntime.Cache
+                    .Get(GetKeyFromVirtualPath(virtualPath));
                 // The cache could have evicted our results. In this case, we'll simply fall through to CreateInstanceFromVirtualPath
                 if (buildManagerResult != null)
                 {

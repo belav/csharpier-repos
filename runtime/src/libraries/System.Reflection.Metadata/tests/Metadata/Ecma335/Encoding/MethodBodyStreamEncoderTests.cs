@@ -51,19 +51,16 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        default(InstructionEncoder)
-                    )
+                    new MethodBodyStreamEncoder(streamBuilder)
+                        .AddMethodBody(default(InstructionEncoder))
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(il, -1)
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        il,
-                        ushort.MaxValue + 1
-                    )
+                    new MethodBodyStreamEncoder(streamBuilder)
+                        .AddMethodBody(il, ushort.MaxValue + 1)
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(
@@ -71,31 +68,23 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        codeSize: 1,
-                        maxStack: -1
-                    )
+                    new MethodBodyStreamEncoder(streamBuilder)
+                        .AddMethodBody(codeSize: 1, maxStack: -1)
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        codeSize: 1,
-                        maxStack: ushort.MaxValue + 1
-                    )
+                    new MethodBodyStreamEncoder(streamBuilder)
+                        .AddMethodBody(codeSize: 1, maxStack: ushort.MaxValue + 1)
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        codeSize: 1,
-                        exceptionRegionCount: -1
-                    )
+                    new MethodBodyStreamEncoder(streamBuilder)
+                        .AddMethodBody(codeSize: 1, exceptionRegionCount: -1)
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
-                    new MethodBodyStreamEncoder(streamBuilder).AddMethodBody(
-                        codeSize: 1,
-                        exceptionRegionCount: 699051
-                    )
+                    new MethodBodyStreamEncoder(streamBuilder)
+                        .AddMethodBody(codeSize: 1, exceptionRegionCount: 699051)
             );
         }
 

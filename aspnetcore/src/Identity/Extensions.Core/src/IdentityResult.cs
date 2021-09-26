@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Identity
         {
             return Succeeded
               ? "Succeeded"
-              : string.Format(
+              : string
+                .Format(
                     CultureInfo.InvariantCulture,
                     "{0} : {1}",
                     "Failed",

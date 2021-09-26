@@ -450,14 +450,14 @@ namespace Microsoft.EntityFrameworkCore
             Func<Type, bool>? predicate = null
         )
         {
-            var applyEntityConfigurationMethod = typeof(ModelBuilder).GetMethods()
+            var applyEntityConfigurationMethod = typeof(ModelBuilder)
+                .GetMethods()
                 .Single(
                     e =>
                         e.Name == nameof(ApplyConfiguration)
                         && e.ContainsGenericParameters
-                        && e.GetParameters()
-                            .SingleOrDefault()?.ParameterType.GetGenericTypeDefinition()
-                            == typeof(IEntityTypeConfiguration<>)
+                        && e.GetParameters().SingleOrDefault()?.ParameterType
+                            .GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)
                 );
 
             foreach (var type in assembly.GetConstructibleTypes())

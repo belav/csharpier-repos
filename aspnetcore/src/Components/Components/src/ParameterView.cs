@@ -203,11 +203,12 @@ namespace Microsoft.AspNetCore.Components
                     else
                     {
                         if (
-                            !string.Equals(
-                                oldFrame.AttributeNameField,
-                                newFrame.AttributeNameField,
-                                StringComparison.Ordinal
-                            )
+                            !string
+                                .Equals(
+                                    oldFrame.AttributeNameField,
+                                    newFrame.AttributeNameField,
+                                    StringComparison.Ordinal
+                                )
                         )
                         {
                             return false; // Different names

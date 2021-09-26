@@ -176,10 +176,11 @@ namespace Newtonsoft.Json.Linq
                 if (!(key is int i))
                 {
                     throw new ArgumentException(
-                        "Accessed JConstructor values with invalid key value: {0}. Argument position index expected.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            MiscellaneousUtils.ToString(key)
-                        )
+                        "Accessed JConstructor values with invalid key value: {0}. Argument position index expected."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                MiscellaneousUtils.ToString(key)
+                            )
                     );
                 }
 
@@ -192,10 +193,11 @@ namespace Newtonsoft.Json.Linq
                 if (!(key is int i))
                 {
                     throw new ArgumentException(
-                        "Set JConstructor values with invalid key value: {0}. Argument position index expected.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            MiscellaneousUtils.ToString(key)
-                        )
+                        "Set JConstructor values with invalid key value: {0}. Argument position index expected."
+                            .FormatWith(
+                                CultureInfo.InvariantCulture,
+                                MiscellaneousUtils.ToString(key)
+                            )
                     );
                 }
 
@@ -244,10 +246,8 @@ namespace Newtonsoft.Json.Linq
             {
                 throw JsonReaderException.Create(
                     reader,
-                    "Error reading JConstructor from JsonReader. Current JsonReader item is not a constructor: {0}".FormatWith(
-                        CultureInfo.InvariantCulture,
-                        reader.TokenType
-                    )
+                    "Error reading JConstructor from JsonReader. Current JsonReader item is not a constructor: {0}"
+                        .FormatWith(CultureInfo.InvariantCulture, reader.TokenType)
                 );
             }
 

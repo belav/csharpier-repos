@@ -21,10 +21,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     if (settings?.ErrorWhenNoMatch ?? false)
                     {
                         throw new JsonException(
-                            "Index {0} outside the bounds of JArray.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                index
-                            )
+                            "Index {0} outside the bounds of JArray."
+                                .FormatWith(CultureInfo.InvariantCulture, index)
                         );
                     }
 
@@ -40,10 +38,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     if (settings?.ErrorWhenNoMatch ?? false)
                     {
                         throw new JsonException(
-                            "Index {0} outside the bounds of JConstructor.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                index
-                            )
+                            "Index {0} outside the bounds of JConstructor."
+                                .FormatWith(CultureInfo.InvariantCulture, index)
                         );
                     }
 
@@ -57,11 +53,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 if (settings?.ErrorWhenNoMatch ?? false)
                 {
                     throw new JsonException(
-                        "Index {0} not valid on {1}.".FormatWith(
-                            CultureInfo.InvariantCulture,
-                            index,
-                            t.GetType().Name
-                        )
+                        "Index {0} not valid on {1}."
+                            .FormatWith(CultureInfo.InvariantCulture, index, t.GetType().Name)
                     );
                 }
 

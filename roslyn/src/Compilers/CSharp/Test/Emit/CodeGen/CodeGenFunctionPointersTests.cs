@@ -3045,17 +3045,16 @@ unsafe class C
                 .EmitToImageReference(embedInteropTypes: true);
 
             var intermediate = CreateCompilation(
-                    @"
+                @"
 using System;
 public unsafe class C
 {
     public delegate*<I1> M() => throw null;
 }",
-                    references: new[] { nopiaReference },
-                    parseOptions: TestOptions.Regular9,
-                    options: TestOptions.UnsafeReleaseDll
-                )
-                .EmitToImageReference();
+                references: new[] { nopiaReference },
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.UnsafeReleaseDll
+            ).EmitToImageReference();
 
             CompileAndVerifyFunctionPointers(
                 @"
@@ -3089,28 +3088,26 @@ unsafe class C2
         public void InternalsVisibleToAccessChecks_01()
         {
             var aRef = CreateCompilation(
-                    @"
+                @"
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo(""B"")]
 internal class A {}",
-                    assemblyName: "A"
-                )
-                .EmitToImageReference();
+                assemblyName: "A"
+            ).EmitToImageReference();
 
             var bRef = CreateCompilation(
-                    @"
+                @"
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo(""C"")]
 internal class B
 {
     internal unsafe delegate*<A> M() => throw null;
 }",
-                    references: new[] { aRef },
-                    assemblyName: "B",
-                    parseOptions: TestOptions.Regular9,
-                    options: TestOptions.UnsafeReleaseDll
-                )
-                .EmitToImageReference();
+                references: new[] { aRef },
+                assemblyName: "B",
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.UnsafeReleaseDll
+            ).EmitToImageReference();
 
             var cComp = CreateCompilation(
                 @"
@@ -3130,7 +3127,9 @@ internal class C
             cComp.VerifyDiagnostics(
                 // (6,9): error CS0122: 'B.M()' is inaccessible due to its protection level
                 //         b.M()();
-                Diagnostic(ErrorCode.ERR_BadAccess, "b.M").WithArguments("B.M()").WithLocation(6, 9)
+                Diagnostic(ErrorCode.ERR_BadAccess, "b.M")
+                    .WithArguments("B.M()")
+                    .WithLocation(6, 9)
             );
         }
 
@@ -3138,27 +3137,25 @@ internal class C
         public void InternalsVisibleToAccessChecks_02()
         {
             var aRef = CreateCompilation(
-                    @"
+                @"
 using System.Runtime.CompilerServices;
 public class A {}",
-                    assemblyName: "A"
-                )
-                .EmitToImageReference();
+                assemblyName: "A"
+            ).EmitToImageReference();
 
             var bRef = CreateCompilation(
-                    @"
+                @"
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo(""C"")]
 internal class B
 {
     internal unsafe delegate*<A> M() => throw null;
 }",
-                    references: new[] { aRef },
-                    assemblyName: "B",
-                    parseOptions: TestOptions.Regular9,
-                    options: TestOptions.UnsafeReleaseDll
-                )
-                .EmitToImageReference();
+                references: new[] { aRef },
+                assemblyName: "B",
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.UnsafeReleaseDll
+            ).EmitToImageReference();
 
             var cComp = CreateCompilation(
                 @"
@@ -4586,7 +4583,8 @@ unsafe class C
             comp.VerifyDiagnostics(
                 // (8,41): error CS1944: An expression tree may not contain an unsafe pointer operation
                 //         Expression<Action> a = () => M2(ptr);
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsPointerOp, "ptr").WithLocation(8, 41)
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsPointerOp, "ptr")
+                    .WithLocation(8, 41)
             );
         }
 
@@ -7572,7 +7570,8 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                         separateAssembly
                             ? module.ReferencedAssemblySymbols[1].GlobalNamespace
                             : module.GlobalNamespace
-                    ).GetTypeMember("Base");
+                    )
+                        .GetTypeMember("Base");
                     var baseM1 = @base.GetMethod("M1");
                     var baseM2 = @base.GetMethod("M2");
                     var baseM3 = @base.GetMethod("M3");
@@ -7587,30 +7586,28 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                         var derivedM4 = derived.GetMethod("M4");
 
                         Assert.True(
-                            baseM1.Parameters.Single()
+                            baseM1.Parameters
+                                .Single()
                                 .Type.Equals(
                                     derivedM1.Parameters.Single().Type,
                                     TypeCompareKind.ConsiderEverything
                                 )
                         );
                         Assert.True(
-                            baseM2.ReturnType.Equals(
-                                derivedM2.ReturnType,
-                                TypeCompareKind.ConsiderEverything
-                            )
+                            baseM2.ReturnType
+                                .Equals(derivedM2.ReturnType, TypeCompareKind.ConsiderEverything)
                         );
                         Assert.True(
-                            baseM3.Parameters.Single()
+                            baseM3.Parameters
+                                .Single()
                                 .Type.Equals(
                                     derivedM3.Parameters.Single().Type,
                                     TypeCompareKind.ConsiderEverything
                                 )
                         );
                         Assert.True(
-                            baseM4.ReturnType.Equals(
-                                derivedM4.ReturnType,
-                                TypeCompareKind.ConsiderEverything
-                            )
+                            baseM4.ReturnType
+                                .Equals(derivedM4.ReturnType, TypeCompareKind.ConsiderEverything)
                         );
                     }
                 };
@@ -9740,9 +9737,9 @@ class C
                 // (26,6): error CS8893: 'CallConvTest' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvTest) })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvTest) })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvTest) })"
+                )
                     .WithArguments("CallConvTest")
                     .WithLocation(26, 6)
             );
@@ -9796,9 +9793,9 @@ class C
                 // (31,6): error CS8893: 'CallConvTestA.CallConvTestB' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvTestA.CallConvTestB) })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvTestA.CallConvTestB) })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvTestA.CallConvTestB) })"
+                )
                     .WithArguments("System.Runtime.CompilerServices.CallConvTestA.CallConvTestB")
                     .WithLocation(31, 6)
             );
@@ -9833,9 +9830,9 @@ class C
                 // (12,6): error CS8893: 'CallConvTest' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvTest) })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvTest) })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvTest) })"
+                )
                     .WithArguments("System.Runtime.CompilerServices.CallConvTest")
                     .WithLocation(12, 6)
             );
@@ -9864,9 +9861,9 @@ class C
                 // (6,6): error CS8893: 'ExtensionAttribute' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly(CallConvs = new[] { typeof(System.Runtime.CompilerServices.ExtensionAttribute) })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new[] { typeof(ExtensionAttribute) })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new[] { typeof(ExtensionAttribute) })"
+                )
                     .WithArguments("System.Runtime.CompilerServices.ExtensionAttribute")
                     .WithLocation(6, 6)
             );
@@ -9899,9 +9896,9 @@ class C
                 // (5,6): error CS8893: 'null' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly(CallConvs = new System.Type[] { null })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new System.Type[] { null })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new System.Type[] { null })"
+                )
                     .WithArguments("null")
                     .WithLocation(5, 6)
             );
@@ -9985,9 +9982,9 @@ class C
                 // (5,6): error CS8893: 'null' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly(CallConvs = new System.Type[] { default })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new System.Type[] { default })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new System.Type[] { default })"
+                )
                     .WithArguments("null")
                     .WithLocation(5, 6)
             );
@@ -10046,9 +10043,9 @@ class C
                 // (11,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly]
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(11, 6),
                 // (12,12): error CS8894: Cannot use 'T' as a return type on a method attributed with 'UnmanagedCallersOnly'.
                 //     static T M3<T>() => throw null;
@@ -10058,9 +10055,9 @@ class C
                 // (14,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly]
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(14, 6),
                 // (15,23): error CS8894: Cannot use 'T' as a parameter type on a method attributed with 'UnmanagedCallersOnly'.
                 //     static void M4<T>(T t) {}
@@ -10070,9 +10067,9 @@ class C
                 // (17,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly]
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(17, 6),
                 // (18,12): error CS8894: Cannot use 'T' as a return type on a method attributed with 'UnmanagedCallersOnly'.
                 //     static T M5<T>() where T : struct => throw null;
@@ -10082,9 +10079,9 @@ class C
                 // (20,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly]
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(20, 6),
                 // (21,23): error CS8894: Cannot use 'T' as a parameter type on a method attributed with 'UnmanagedCallersOnly'.
                 //     static void M6<T>(T t) where T : struct {}
@@ -10094,16 +10091,16 @@ class C
                 // (23,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly]
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(23, 6),
                 // (26,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly]
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(26, 6)
             );
         }
@@ -10203,44 +10200,44 @@ class C
                 // (10,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly] // 1
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(10, 6),
                 // (13,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly] // 2
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(13, 6),
                 // (18,10): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //         [UnmanagedCallersOnly] // 3
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(18, 10),
                 // (23,14): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //             [UnmanagedCallersOnly] // 4
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(23, 14),
                 // (29,14): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //             [UnmanagedCallersOnly] // 5
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(29, 14),
                 // (36,10): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //         [UnmanagedCallersOnly] // 6
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(36, 10)
             );
         }
@@ -10336,51 +10333,51 @@ class C<T> where T : unmanaged
                 // (9,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly] // 1
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(9, 6),
                 // (12,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly] // 2
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(12, 6),
                 // (15,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly] // 3
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(15, 6),
                 // (18,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly] // 4
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(18, 6),
                 // (23,10): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //         [UnmanagedCallersOnly] // 5
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(23, 10),
                 // (29,10): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //         [UnmanagedCallersOnly] // 6
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(29, 10),
                 // (36,10): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //         [UnmanagedCallersOnly] // 7
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(36, 10)
             );
         }
@@ -10484,9 +10481,9 @@ class C<T1>
                 // (5,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly]
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
-                        "UnmanagedCallersOnly"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                    "UnmanagedCallersOnly"
+                )
                     .WithLocation(5, 6)
             );
         }
@@ -10575,9 +10572,9 @@ class C
                 // (19,20): error CS8894: Cannot use 'S<S<object>>' as a parameter type on a method attributed with 'UnmanagedCallersOnly'.
                 //     static void M3(S<S<object>> o) {}
                 Diagnostic(
-                        ErrorCode.ERR_CannotUseManagedTypeInUnmanagedCallersOnly,
-                        "S<S<object>> o"
-                    )
+                    ErrorCode.ERR_CannotUseManagedTypeInUnmanagedCallersOnly,
+                    "S<S<object>> o"
+                )
                     .WithArguments("S<S<object>>", "parameter")
                     .WithLocation(19, 20)
             );
@@ -10612,10 +10609,10 @@ public class C
                 // (10,9): error CS8901: 'C.M1()' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         M1();
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "M1()",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "M1()",
+                    isSuppressed: false
+                )
                     .WithArguments("C.M1()")
                     .WithLocation(10, 9),
                 // (11,31): error CS8786: Calling convention of 'C.M1()' is not compatible with 'Default'.
@@ -10659,10 +10656,10 @@ public class D
                 // (8,9): error CS8901: 'D.M1()' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         E.M1();
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "E.M1()",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "E.M1()",
+                    isSuppressed: false
+                )
                     .WithArguments("D.M1()")
                     .WithLocation(8, 9),
                 // (9,31): error CS8786: Calling convention of 'D.M1()' is not compatible with 'Default'.
@@ -10706,10 +10703,10 @@ public class D
                 // (8,9): error CS8901: 'D.M1()' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         M1();
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "M1()",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "M1()",
+                    isSuppressed: false
+                )
                     .WithArguments("D.M1()")
                     .WithLocation(8, 9),
                 // (9,31): error CS8786: Calling convention of 'D.M1()' is not compatible with 'Default'.
@@ -10763,26 +10760,26 @@ class D
                     // (6,9): error CS8901: 'C.M1()' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                     //         C.M1();
                     Diagnostic(
-                            ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                            "C.M1()"
-                        )
+                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                        "C.M1()"
+                    )
                         .WithArguments("C.M1()")
                         .WithLocation(6, 9),
                     // (7,31): error CS8786: Calling convention of 'C.M1()' is not compatible with 'Default'.
                     //         delegate*<void> p1 = &C.M1;
                     Diagnostic(
-                            ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                            "C.M1",
-                            isSuppressed: false
-                        )
+                        ErrorCode.ERR_WrongFuncPtrCallingConvention,
+                        "C.M1",
+                        isSuppressed: false
+                    )
                         .WithArguments("C.M1()", "Default")
                         .WithLocation(7, 31),
                     // (8,19): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
                     //         delegate* unmanaged<void> p2 = &C.M1;
                     Diagnostic(
-                            ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv,
-                            "unmanaged"
-                        )
+                        ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv,
+                        "unmanaged"
+                    )
                         .WithLocation(8, 19)
                 );
             }
@@ -10834,9 +10831,9 @@ class D
                 // (6,9): error CS8901: 'C.M1()' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         C.M1();
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "C.M1()"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "C.M1()"
+                )
                     .WithArguments("C.M1()")
                     .WithLocation(6, 9)
             );
@@ -11491,9 +11488,9 @@ public static class CExt
                 // (7,9): error CS8901: 'CExt.GetEnumerator(S)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         foreach (var i in s) {}
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "foreach"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "foreach"
+                )
                     .WithArguments("CExt.GetEnumerator(S)")
                     .WithLocation(7, 9)
             );
@@ -11610,33 +11607,33 @@ public class C
                 // (11,20): error CS8902: 'C.M1()' is attributed with 'UnmanagedCallersOnly' and cannot be converted to a delegate type. Obtain a function pointer to this method.
                 //         Action a = M1;
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
-                        "M1"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
+                    "M1"
+                )
                     .WithArguments("C.M1()")
                     .WithLocation(11, 20),
                 // (12,13): error CS8902: 'local()' is attributed with 'UnmanagedCallersOnly' and cannot be converted to a delegate type. Obtain a function pointer to this method.
                 //         a = local;
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
-                        "local"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
+                    "local"
+                )
                     .WithArguments("local()")
                     .WithLocation(12, 13),
                 // (13,24): error CS8902: 'C.M1()' is attributed with 'UnmanagedCallersOnly' and cannot be converted to a delegate type. Obtain a function pointer to this method.
                 //         a = new Action(M1);
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
-                        "M1"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
+                    "M1"
+                )
                     .WithArguments("C.M1()")
                     .WithLocation(13, 24),
                 // (14,24): error CS8902: 'local()' is attributed with 'UnmanagedCallersOnly' and cannot be converted to a delegate type. Obtain a function pointer to this method.
                 //         a = new Action(local);
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
-                        "local"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
+                    "local"
+                )
                     .WithArguments("local()")
                     .WithLocation(14, 24)
             );
@@ -11672,9 +11669,9 @@ public class C
                 // (13,25): error CS8902: 'C.M(int)' is attributed with 'UnmanagedCallersOnly' and cannot be converted to a delegate type. Obtain a function pointer to this method.
                 //         Action<int> a = M;
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
-                        "M"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
+                    "M"
+                )
                     .WithArguments("C.M(int)")
                     .WithLocation(13, 25)
             );
@@ -11711,17 +11708,17 @@ static class CExt
                 // (8,9): error CS8901: 'CExt.Extension(S)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         s.Extension();
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "s.Extension()"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "s.Extension()"
+                )
                     .WithArguments("CExt.Extension(S)")
                     .WithLocation(8, 9),
                 // (9,9): error CS8901: 'CExt.Extension(S)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         CExt.Extension(s);
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "CExt.Extension(s)"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "CExt.Extension(s)"
+                )
                     .WithArguments("CExt.Extension(S)")
                     .WithLocation(9, 9)
             );
@@ -11776,9 +11773,9 @@ static class CExt
                 // (12,18): error CS8901: 'CExt.Deconstruct(S, out int, out int)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         _ = s is (int _, int _);
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "(int _, int _)"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "(int _, int _)"
+                )
                     .WithArguments("CExt.Deconstruct(S, out int, out int)")
                     .WithLocation(12, 18)
             );
@@ -11869,9 +11866,9 @@ static class CExt
                 // (8,9): error CS8901: 'CExt.GetAwaiter(S)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         await s;
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "await s"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "await s"
+                )
                     .WithArguments("CExt.GetAwaiter(S)")
                     .WithLocation(8, 9)
             );
@@ -12121,10 +12118,10 @@ class C
                 // (6,24): error CS8899: Application entry points cannot be attributed with 'UnmanagedCallersOnly'.
                 //     public static void Main()
                 Diagnostic(
-                        ErrorCode.ERR_EntryPointCannotBeUnmanagedCallersOnly,
-                        "Main",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_EntryPointCannotBeUnmanagedCallersOnly,
+                    "Main",
+                    isSuppressed: false
+                )
                     .WithLocation(6, 24)
             );
         }
@@ -12158,16 +12155,16 @@ public class C
                 // (9,28): error CS8900: Module initializer cannot be attributed with 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly, ModuleInitializer]
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerCannotBeUnmanagedCallersOnly,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerCannotBeUnmanagedCallersOnly,
+                    "ModuleInitializer"
+                )
                     .WithLocation(9, 28),
                 // (12,6): error CS8900: Module initializer cannot be attributed with 'UnmanagedCallersOnly'.
                 //     [ModuleInitializer, UnmanagedCallersOnly]
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerCannotBeUnmanagedCallersOnly,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerCannotBeUnmanagedCallersOnly,
+                    "ModuleInitializer"
+                )
                     .WithLocation(12, 6)
             );
         }
@@ -12195,9 +12192,9 @@ public class C
                 // (5,6): error CS8893: 'string' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly(CallConvs = new[] { typeof(string) })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new[] { typeof(string) })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new[] { typeof(string) })"
+                )
                     .WithArguments("string")
                     .WithLocation(5, 6),
                 // (6,6): error CS0579: Duplicate 'UnmanagedCallersOnly' attribute
@@ -12258,9 +12255,9 @@ namespace System.Runtime.InteropServices
                 // (7,10): error CS8893: 'UnmanagedCallersOnlyAttribute' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //         [UnmanagedCallersOnly(CallConvs = new[] { typeof(UnmanagedCallersOnlyAttribute) })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new[] { typeof(UnmanagedCallersOnlyAttribute) })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new[] { typeof(UnmanagedCallersOnlyAttribute) })"
+                )
                     .WithArguments("System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute")
                     .WithLocation(7, 10),
                 // (7,10): error CS8896: 'UnmanagedCallersOnly' can only be applied to ordinary static methods or static local functions.
@@ -12292,9 +12289,9 @@ class C
                 // (5,6): error CS8893: 'C' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly(CallConvs = new[] { typeof(C) })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new[] { typeof(C) })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new[] { typeof(C) })"
+                )
                     .WithArguments("C")
                     .WithLocation(5, 6)
             );
@@ -12323,9 +12320,9 @@ class A
                 // (6,6): error CS8893: 'A.B' is not a valid calling convention type for 'UnmanagedCallersOnly'.
                 //     [UnmanagedCallersOnly(CallConvs = new[] { typeof(B) })]
                 Diagnostic(
-                        ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
-                        "UnmanagedCallersOnly(CallConvs = new[] { typeof(B) })"
-                    )
+                    ErrorCode.ERR_InvalidUnmanagedCallersOnlyCallConv,
+                    "UnmanagedCallersOnly(CallConvs = new[] { typeof(B) })"
+                )
                     .WithArguments("A.B")
                     .WithLocation(6, 6)
             );
@@ -12464,10 +12461,10 @@ unsafe class C
                 // (12,11): error CS8901: 'C.F()' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //     [Attr(F())]
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "F()",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "F()",
+                    isSuppressed: false
+                )
                     .WithArguments("C.F()")
                     .WithLocation(12, 11),
                 // (12,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
@@ -12518,10 +12515,10 @@ unsafe class C
                 // (12,11): error CS8901: 'C.F()' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //     [Attr(F())]
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "F()",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "F()",
+                    isSuppressed: false
+                )
                     .WithArguments("C.F()")
                     .WithLocation(12, 11),
                 // (12,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
@@ -12583,10 +12580,10 @@ public unsafe class C
                 // (7,26): error CS8901: 'C.F(int)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //     static int F(int i = F()) => 0;
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                        "F()",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                    "F()",
+                    isSuppressed: false
+                )
                     .WithArguments("C.F(int)")
                     .WithLocation(7, 26),
                 // (7,26): error CS1736: Default parameter value for 'i' must be a compile-time constant
@@ -13033,12 +13030,14 @@ unsafe class D
             );
 
             Assert.True(
-                callConvCdecl!.Equals(
-                    (NamedTypeSymbol)m.GetUnmanagedCallersOnlyAttributeData(
-                        forceComplete: true
-                    )!.CallingConventionTypes.Single(),
-                    TypeCompareKind.ConsiderEverything
-                )
+                callConvCdecl!
+                    .Equals(
+                        (NamedTypeSymbol)m.GetUnmanagedCallersOnlyAttributeData(
+                            forceComplete: true
+                        )!.CallingConventionTypes
+                            .Single(),
+                        TypeCompareKind.ConsiderEverything
+                    )
             );
         }
 
@@ -13149,10 +13148,10 @@ public unsafe class C
                     // (10,39): error CS8786: Calling convention of 'C.M()' is not compatible with 'Default'.
                     //         delegate*<void> ptrManaged = &M;
                     Diagnostic(
-                            ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                            "M",
-                            isSuppressed: false
-                        )
+                        ErrorCode.ERR_WrongFuncPtrCallingConvention,
+                        "M",
+                        isSuppressed: false
+                    )
                         .WithArguments("C.M()", "Default")
                         .WithLocation(10, 39)
                 };
@@ -13163,10 +13162,10 @@ public unsafe class C
                     // (11,25): error CS8786: Calling convention of 'C.M()' is not compatible with 'Unmanaged'.
                     //         ptrUnmanaged = &M;
                     Diagnostic(
-                            ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                            "M",
-                            isSuppressed: false
-                        )
+                        ErrorCode.ERR_WrongFuncPtrCallingConvention,
+                        "M",
+                        isSuppressed: false
+                    )
                         .WithArguments("C.M()", "Unmanaged")
                         .WithLocation(11, 51)
                 );
@@ -13178,10 +13177,10 @@ public unsafe class C
                     // (12,54): error CS8786: Calling convention of 'C.M()' is not compatible with 'CDecl'.
                     //         delegate* unmanaged[Cdecl]<void> ptrCdecl = &M;
                     Diagnostic(
-                            ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                            "M",
-                            isSuppressed: false
-                        )
+                        ErrorCode.ERR_WrongFuncPtrCallingConvention,
+                        "M",
+                        isSuppressed: false
+                    )
                         .WithArguments("C.M()", "CDecl")
                         .WithLocation(12, 54)
                 );
@@ -13193,10 +13192,10 @@ public unsafe class C
                     // (13,60): error CS8786: Calling convention of 'C.M()' is not compatible with 'ThisCall'.
                     //         delegate* unmanaged[Thiscall]<void> ptrThiscall = &M;
                     Diagnostic(
-                            ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                            "M",
-                            isSuppressed: false
-                        )
+                        ErrorCode.ERR_WrongFuncPtrCallingConvention,
+                        "M",
+                        isSuppressed: false
+                    )
                         .WithArguments("C.M()", "ThisCall")
                         .WithLocation(13, 60)
                 );
@@ -13208,10 +13207,10 @@ public unsafe class C
                     // (14,58): error CS8786: Calling convention of 'C.M()' is not compatible with 'Standard'.
                     //         delegate* unmanaged[Stdcall]<void> ptrStdcall = &M;
                     Diagnostic(
-                            ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                            "M",
-                            isSuppressed: false
-                        )
+                        ErrorCode.ERR_WrongFuncPtrCallingConvention,
+                        "M",
+                        isSuppressed: false
+                    )
                         .WithArguments("C.M()", "Standard")
                         .WithLocation(14, 58)
                 );
@@ -13223,10 +13222,10 @@ public unsafe class C
                     // (15,60): error CS8786: Calling convention of 'C.M()' is not compatible with 'FastCall'.
                     //         delegate* unmanaged[Fastcall]<void> ptrFastcall = &M;
                     Diagnostic(
-                            ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                            "M",
-                            isSuppressed: false
-                        )
+                        ErrorCode.ERR_WrongFuncPtrCallingConvention,
+                        "M",
+                        isSuppressed: false
+                    )
                         .WithArguments("C.M()", "FastCall")
                         .WithLocation(15, 60)
                 );
@@ -13238,10 +13237,10 @@ public unsafe class C
                     // (16,72): error CS8786: Calling convention of 'C.M()' is not compatible with 'Unmanaged'.
                     //         delegate* unmanaged[Cdecl, Thiscall]<void> ptrCdeclThiscall = &M;
                     Diagnostic(
-                            ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                            "M",
-                            isSuppressed: false
-                        )
+                        ErrorCode.ERR_WrongFuncPtrCallingConvention,
+                        "M",
+                        isSuppressed: false
+                    )
                         .WithArguments("C.M()", "Unmanaged")
                         .WithLocation(16, 72)
                 );
@@ -13292,28 +13291,28 @@ unsafe class C
                 // (20,11): error CS0655: 'PropUnmanaged' is not a valid named attribute argument because it is not a valid attribute parameter type
                 //     [Attr(PropUnmanaged = &M1)]
                 Diagnostic(
-                        ErrorCode.ERR_BadNamedAttributeArgumentType,
-                        "PropUnmanaged",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_BadNamedAttributeArgumentType,
+                    "PropUnmanaged",
+                    isSuppressed: false
+                )
                     .WithArguments("PropUnmanaged")
                     .WithLocation(20, 11),
                 // (21,11): error CS0655: 'PropManaged' is not a valid named attribute argument because it is not a valid attribute parameter type
                 //     [Attr(PropManaged = &M1)]
                 Diagnostic(
-                        ErrorCode.ERR_BadNamedAttributeArgumentType,
-                        "PropManaged",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_BadNamedAttributeArgumentType,
+                    "PropManaged",
+                    isSuppressed: false
+                )
                     .WithArguments("PropManaged")
                     .WithLocation(21, 11),
                 // (22,11): error CS0655: 'PropCdecl' is not a valid named attribute argument because it is not a valid attribute parameter type
                 //     [Attr(PropCdecl = &M1)]
                 Diagnostic(
-                        ErrorCode.ERR_BadNamedAttributeArgumentType,
-                        "PropCdecl",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_BadNamedAttributeArgumentType,
+                    "PropCdecl",
+                    isSuppressed: false
+                )
                     .WithArguments("PropCdecl")
                     .WithLocation(22, 11)
             );
@@ -13431,10 +13430,10 @@ public unsafe class C
                 // (11,14): error CS0306: The type 'delegate*<int, void>' may not be used as a type argument
                 //         Func<delegate*<int, void>> a1 = () => &M1;
                 Diagnostic(
-                        ErrorCode.ERR_BadTypeArgument,
-                        "delegate*<int, void>",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_BadTypeArgument,
+                    "delegate*<int, void>",
+                    isSuppressed: false
+                )
                     .WithArguments("delegate*<int, void>")
                     .WithLocation(11, 14),
                 // (11,47): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
@@ -13450,10 +13449,10 @@ public unsafe class C
                 // (12,14): error CS0306: The type 'delegate* unmanaged<int, void>' may not be used as a type argument
                 //         Func<delegate* unmanaged<int, void>> a2 = () => &M1;
                 Diagnostic(
-                        ErrorCode.ERR_BadTypeArgument,
-                        "delegate* unmanaged<int, void>",
-                        isSuppressed: false
-                    )
+                    ErrorCode.ERR_BadTypeArgument,
+                    "delegate* unmanaged<int, void>",
+                    isSuppressed: false
+                )
                     .WithArguments("delegate* unmanaged<int, void>")
                     .WithLocation(12, 14)
             );
@@ -13651,7 +13650,8 @@ unsafe
             comp.VerifyDiagnostics(
                 // (8,16): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         => ref ptr(ref i);
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "ptr(ref i)").WithLocation(8, 16)
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "ptr(ref i)")
+                    .WithLocation(8, 16)
             );
         }
 
@@ -14252,23 +14252,23 @@ class C<T> {}
                 // (4,7): error CS8911: Using a function pointer type in a 'typeof' in an attribute is not supported.
                 // [Attr(typeof(delegate*<void>))]
                 Diagnostic(
-                        ErrorCode.ERR_FunctionPointerTypesInAttributeNotSupported,
-                        "typeof(delegate*<void>)"
-                    )
+                    ErrorCode.ERR_FunctionPointerTypesInAttributeNotSupported,
+                    "typeof(delegate*<void>)"
+                )
                     .WithLocation(4, 7),
                 // (5,7): error CS8911: Using a function pointer type in a 'typeof' in an attribute is not supported.
                 // [Attr(typeof(delegate*<void>[]))]
                 Diagnostic(
-                        ErrorCode.ERR_FunctionPointerTypesInAttributeNotSupported,
-                        "typeof(delegate*<void>[])"
-                    )
+                    ErrorCode.ERR_FunctionPointerTypesInAttributeNotSupported,
+                    "typeof(delegate*<void>[])"
+                )
                     .WithLocation(5, 7),
                 // (6,7): error CS8911: Using a function pointer type in a 'typeof' in an attribute is not supported.
                 // [Attr(typeof(C<delegate*<void>[]>))]
                 Diagnostic(
-                        ErrorCode.ERR_FunctionPointerTypesInAttributeNotSupported,
-                        "typeof(C<delegate*<void>[]>)"
-                    )
+                    ErrorCode.ERR_FunctionPointerTypesInAttributeNotSupported,
+                    "typeof(C<delegate*<void>[]>)"
+                )
                     .WithLocation(6, 7)
             );
         }
@@ -14324,7 +14324,8 @@ class C<T> {}
 
             var consoleWriteLineSignature = new BlobBuilder();
 
-            new BlobEncoder(consoleWriteLineSignature).MethodSignature()
+            new BlobEncoder(consoleWriteLineSignature)
+                .MethodSignature()
                 .Parameters(
                     1,
                     returnType => returnType.Void(),
@@ -14339,7 +14340,8 @@ class C<T> {}
 
             var parameterlessCtorSignature = new BlobBuilder();
 
-            new BlobEncoder(parameterlessCtorSignature).MethodSignature(isInstanceMethod: true)
+            new BlobEncoder(parameterlessCtorSignature)
+                .MethodSignature(isInstanceMethod: true)
                 .Parameters(0, returnType => returnType.Void(), parameters => { });
 
             var parameterlessCtorBlobIndex = metadata.GetOrAddBlob(parameterlessCtorSignature);

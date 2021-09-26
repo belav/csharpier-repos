@@ -140,12 +140,13 @@ namespace System.IO
         }
 
         private string GenerateTestFileName(int? index, string memberName, int lineNumber) =>
-            string.Format(
-                index.HasValue ? "{0}_{1}_{2}_{3}" : "{0}_{1}_{3}",
-                memberName ?? "TestBase",
-                lineNumber,
-                index.GetValueOrDefault(),
-                Guid.NewGuid().ToString("N").Substring(0, 8)
-            ); // randomness to avoid collisions between derived test classes using same base method concurrently
+            string
+                .Format(
+                    index.HasValue ? "{0}_{1}_{2}_{3}" : "{0}_{1}_{3}",
+                    memberName ?? "TestBase",
+                    lineNumber,
+                    index.GetValueOrDefault(),
+                    Guid.NewGuid().ToString("N").Substring(0, 8)
+                ); // randomness to avoid collisions between derived test classes using same base method concurrently
     }
 }

@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             TContext
         > CreateActivator()
         {
-            var constructors = typeof(TContext).GetTypeInfo()
+            var constructors = typeof(TContext)
+                .GetTypeInfo()
                 .DeclaredConstructors.Where(c => !c.IsStatic && c.IsPublic)
                 .ToArray();
 
@@ -66,18 +67,18 @@ namespace Microsoft.EntityFrameworkCore.Internal
                         return Expression.Lambda<
                             Func<IServiceProvider, DbContextOptions<TContext>, TContext>
                         >(
-                                Expression.New(
-                                    constructors[0],
-                                    isGeneric
-                                      ? optionsParam
-                                      : (Expression)Expression.Convert(
-                                            optionsParam,
-                                            typeof(DbContextOptions)
-                                        )
-                                ),
-                                providerParam,
-                                optionsParam
-                            )
+                            Expression.New(
+                                constructors[0],
+                                isGeneric
+                                  ? optionsParam
+                                  : (Expression)Expression.Convert(
+                                        optionsParam,
+                                        typeof(DbContextOptions)
+                                    )
+                            ),
+                            providerParam,
+                            optionsParam
+                        )
                             .Compile();
                     }
                 }

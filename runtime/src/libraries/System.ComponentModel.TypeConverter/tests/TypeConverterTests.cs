@@ -76,18 +76,19 @@ namespace System.ComponentModel.Tests
             using (new ThreadCultureChange("fr-FR"))
             {
                 DateTime testDateAndTime = DateTime.UtcNow;
-                ConstructorInfo ctor = typeof(DateTime).GetConstructor(
-                    new Type[]
-                    {
-                        typeof(int),
-                        typeof(int),
-                        typeof(int),
-                        typeof(int),
-                        typeof(int),
-                        typeof(int),
-                        typeof(int)
-                    }
-                );
+                ConstructorInfo ctor = typeof(DateTime)
+                    .GetConstructor(
+                        new Type[]
+                        {
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int)
+                        }
+                    );
 
                 InstanceDescriptor descriptor = new InstanceDescriptor(
                     ctor,

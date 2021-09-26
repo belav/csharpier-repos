@@ -5779,9 +5779,9 @@ namespace Test
                 // (3,1): hidden CS8019: Unnecessary using directive.
                 // using System.Runtime.InteropServices;
                 Diagnostic(
-                        ErrorCode.HDN_UnusedUsingDirective,
-                        "using System.Runtime.InteropServices;"
-                    )
+                    ErrorCode.HDN_UnusedUsingDirective,
+                    "using System.Runtime.InteropServices;"
+                )
                     .WithLocation(3, 1)
             );
         }

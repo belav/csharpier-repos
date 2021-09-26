@@ -117,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         var innerShaper = new ShaperExpressionProcessingExpressionVisitor(
                             null,
                             innerLambda.Parameters[0]
-                        ).Inject(innerLambda.Body);
+                        )
+                            .Inject(innerLambda.Body);
 
                         _expressions.Add(
                             includeExpression.Update(
@@ -158,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         var innerShaper = new ShaperExpressionProcessingExpressionVisitor(
                             null,
                             innerLambda.Parameters[0]
-                        ).Inject(innerLambda.Body);
+                        )
+                            .Inject(innerLambda.Body);
 
                         _expressions.Add(
                             Expression.Assign(
@@ -189,7 +191,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         var innerShaper = new ShaperExpressionProcessingExpressionVisitor(
                             null,
                             innerLambda.Parameters[0]
-                        ).Inject(innerLambda.Body);
+                        )
+                            .Inject(innerLambda.Body);
 
                         _expressions.Add(
                             Expression.Assign(

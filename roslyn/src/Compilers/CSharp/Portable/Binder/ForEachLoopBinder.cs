@@ -434,7 +434,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             _syntax.Expression,
                             collectionEscape,
                             iterationVariableType.Type
-                        ).MakeCompilerGenerated();
+                        )
+                            .MakeCompilerGenerated();
                         DeclarationExpressionSyntax declaration = null;
                         ExpressionSyntax expression = null;
                         BoundDeconstructionAssignmentOperator deconstruction = BindDeconstruction(
@@ -462,7 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             variables,
                             deconstruction,
                             valuePlaceholder
-                        ).MakeCompilerGenerated();
+                        )
+                            .MakeCompilerGenerated();
                     }
                     else
                     {
@@ -475,7 +477,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             iterationErrorExpression = (
                                 (BoundDiscardExpression)iterationErrorExpression
-                            ).FailInference(this, diagnosticsOpt: null);
+                            )
+                                .FailInference(this, diagnosticsOpt: null);
                         }
                         hasErrors = true;
 
@@ -493,7 +496,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         variables,
                         aliasOpt: null,
                         typeWithAnnotations: iterationVariableType
-                    ).MakeCompilerGenerated();
+                    )
+                        .MakeCompilerGenerated();
                     break;
                 }
                 default:
@@ -589,12 +593,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            Conversion elementConversion = this.Conversions.ClassifyConversionFromType(
-                inferredType.Type,
-                iterationVariableType.Type,
-                ref useSiteInfo,
-                forCast: true
-            );
+            Conversion elementConversion = this.Conversions
+                .ClassifyConversionFromType(
+                    inferredType.Type,
+                    iterationVariableType.Type,
+                    ref useSiteInfo,
+                    forCast: true
+                );
 
             if (!elementConversion.IsValid)
             {
@@ -640,22 +645,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Spec (§8.8.4):
             // If the type X of expression is dynamic then there is an implicit conversion from >>expression<< (not the type of the expression)
             // to the System.Collections.IEnumerable interface (§6.1.8).
-            builder.CollectionConversion = this.Conversions.ClassifyConversionFromExpression(
-                collectionExpr,
-                builder.CollectionType,
-                ref useSiteInfo
-            );
-            builder.CurrentConversion = this.Conversions.ClassifyConversionFromType(
-                builder.CurrentPropertyGetter.ReturnType,
-                builder.ElementType,
-                ref useSiteInfo
-            );
+            builder.CollectionConversion = this.Conversions
+                .ClassifyConversionFromExpression(
+                    collectionExpr,
+                    builder.CollectionType,
+                    ref useSiteInfo
+                );
+            builder.CurrentConversion = this.Conversions
+                .ClassifyConversionFromType(
+                    builder.CurrentPropertyGetter.ReturnType,
+                    builder.ElementType,
+                    ref useSiteInfo
+                );
 
             TypeSymbol getEnumeratorType = getEnumeratorMethod.ReturnType;
             // we never convert struct enumerators to object - it is done only for null-checks.
             builder.EnumeratorConversion = getEnumeratorType.IsValueType
                 ? Conversion.Identity
-                : this.Conversions.ClassifyConversionFromType(
+                : this.Conversions
+                  .ClassifyConversionFromType(
                       getEnumeratorType,
                       GetSpecialType(SpecialType.System_Object, diagnostics, _syntax),
                       ref useSiteInfo
@@ -687,7 +695,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     || (
                         builder.ElementType.IsNullableType()
-                        && builder.ElementType.GetMemberTypeArgumentsNoUseSiteDiagnostics()
+                        && builder.ElementType
+                            .GetMemberTypeArgumentsNoUseSiteDiagnostics()
                             .Single()
                             .IsErrorType()
                         && collectionExpr.Type.IsArray()
@@ -1249,12 +1258,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     errorLocationSyntax.Location,
                     unwrappedCollectionExprType,
                     isAsync
-                      ? this.Compilation.GetWellKnownType(
+                      ? this.Compilation
+                        .GetWellKnownType(
                             WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
                         )
-                      : this.Compilation.GetSpecialType(
-                            SpecialType.System_Collections_Generic_IEnumerable_T
-                        )
+                      : this.Compilation
+                        .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T)
                 );
                 return EnumeratorResult.FailedAndReported;
             }
@@ -1334,11 +1343,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (isAsync)
                     {
                         Debug.Assert(
-                            enumeratorType.OriginalDefinition.Equals(
-                                Compilation.GetWellKnownType(
-                                    WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
+                            enumeratorType.OriginalDefinition
+                                .Equals(
+                                    Compilation.GetWellKnownType(
+                                        WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
+                                    )
                                 )
-                            )
                         );
 
                         MethodSymbol moveNextAsync = (MethodSymbol)GetWellKnownTypeMember(
@@ -1472,13 +1482,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             // For async foreach, we don't do the runtime check
             if (
                 (!enumeratorType.IsSealed && !isAsync)
-                || this.Conversions.ClassifyImplicitConversionFromType(
-                    enumeratorType,
-                    isAsync
-                      ? this.Compilation.GetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                      : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
-                    ref useSiteInfo
-                ).IsImplicit
+                || this.Conversions
+                    .ClassifyImplicitConversionFromType(
+                        enumeratorType,
+                        isAsync
+                          ? this.Compilation.GetWellKnownType(WellKnownType.System_IAsyncDisposable)
+                          : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
+                        ref useSiteInfo
+                    ).IsImplicit
             )
             {
                 builder.NeedsDisposal = true;
@@ -1502,9 +1513,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(!disposeMethod.IsExtensionMethod);
                     Debug.Assert(disposeMethod.ParameterRefKinds.IsDefaultOrEmpty);
 
-                    var argsBuilder = ArrayBuilder<BoundExpression>.GetInstance(
-                        disposeMethod.ParameterCount
-                    );
+                    var argsBuilder = ArrayBuilder<BoundExpression>
+                        .GetInstance(disposeMethod.ParameterCount);
                     var argsToParams = default(ImmutableArray<int>);
                     bool expanded = disposeMethod.HasParamsParameter();
 
@@ -1761,14 +1771,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             // We create a dummy receiver of the invocation so MethodInvocationOverloadResolution knows it was invoked from an instance, not a type
             var dummyReceiver = new BoundImplicitReceiver(_syntax.Expression, patternType);
-            this.OverloadResolution.MethodInvocationOverloadResolution(
-                methods: candidateMethods,
-                typeArguments: typeArguments,
-                receiver: dummyReceiver,
-                arguments: analyzedArguments,
-                result: overloadResolutionResult,
-                useSiteInfo: ref useSiteInfo
-            );
+            this.OverloadResolution
+                .MethodInvocationOverloadResolution(
+                    methods: candidateMethods,
+                    typeArguments: typeArguments,
+                    receiver: dummyReceiver,
+                    arguments: analyzedArguments,
+                    result: overloadResolutionResult,
+                    useSiteInfo: ref useSiteInfo
+                );
             diagnostics.Add(_syntax.Expression, useSiteInfo);
 
             MethodSymbol result = null;
@@ -1892,11 +1903,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                     diagnostics
                 );
-                var collectionConversion = this.Conversions.ClassifyConversionFromExpression(
-                    collectionExpr,
-                    result.Parameters[0].Type,
-                    ref useSiteInfo
-                );
+                var collectionConversion = this.Conversions
+                    .ClassifyConversionFromExpression(
+                        collectionExpr,
+                        result.Parameters[0].Type,
+                        ref useSiteInfo
+                    );
                 diagnostics.Add(_syntax, useSiteInfo);
 
                 // Unconditionally convert here, to match what we set the ConvertedExpression to in the main BoundForEachStatement node.
@@ -2051,9 +2063,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 // NOTE: accessor can be inherited from overridden property
-                MethodSymbol currentPropertyGetterCandidate = (
-                    (PropertySymbol)lookupSymbol
-                ).GetOwnOrInheritedGetMethod();
+                MethodSymbol currentPropertyGetterCandidate = ((PropertySymbol)lookupSymbol)
+                    .GetOwnOrInheritedGetMethod();
 
                 if ((object)currentPropertyGetterCandidate == null)
                 {
@@ -2158,11 +2169,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private bool IsIAsyncEnumerable(TypeSymbol type)
         {
-            return type.OriginalDefinition.Equals(
-                Compilation.GetWellKnownType(
-                    WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
-                )
-            );
+            return type.OriginalDefinition
+                .Equals(
+                    Compilation.GetWellKnownType(
+                        WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                    )
+                );
         }
 
         /// <summary>
@@ -2205,16 +2217,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (!isAsync)
                 {
-                    var implementedNonGeneric = this.Compilation.GetSpecialType(
-                        SpecialType.System_Collections_IEnumerable
-                    );
+                    var implementedNonGeneric = this.Compilation
+                        .GetSpecialType(SpecialType.System_Collections_IEnumerable);
                     if ((object)implementedNonGeneric != null)
                     {
-                        var conversion = this.Conversions.ClassifyImplicitConversionFromType(
-                            type,
-                            implementedNonGeneric,
-                            ref useSiteInfo
-                        );
+                        var conversion = this.Conversions
+                            .ClassifyImplicitConversionFromType(
+                                type,
+                                implementedNonGeneric,
+                                ref useSiteInfo
+                            );
                         if (conversion.IsImplicit)
                         {
                             implementedIEnumerable = implementedNonGeneric;

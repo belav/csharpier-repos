@@ -360,7 +360,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private static Matcher CreateMatcher(params RouteEndpoint[] endpoints)
         {
-            var services = new ServiceCollection().AddOptions()
+            var services = new ServiceCollection()
+                .AddOptions()
                 .AddLogging()
                 .AddRouting()
                 .BuildServiceProvider();

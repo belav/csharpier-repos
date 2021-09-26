@@ -160,18 +160,16 @@ namespace Microsoft.EntityFrameworkCore
                     + "Microsoft.Data.SqlClient.SqlException (0x80131904): Bang!";
                 if (realFailure)
                 {
-                    var logEntry = Fixture.TestSqlLoggerFactory.Log.Single(
-                        l => l.Id == CoreEventId.ExecutionStrategyRetrying
-                    );
+                    var logEntry = Fixture.TestSqlLoggerFactory.Log
+                        .Single(l => l.Id == CoreEventId.ExecutionStrategyRetrying);
                     Assert.Contains(retryMessage, logEntry.Message);
                     Assert.Equal(LogLevel.Information, logEntry.Level);
                 }
                 else
                 {
                     Assert.Empty(
-                        Fixture.TestSqlLoggerFactory.Log.Where(
-                            l => l.Id == CoreEventId.ExecutionStrategyRetrying
-                        )
+                        Fixture.TestSqlLoggerFactory.Log
+                            .Where(l => l.Id == CoreEventId.ExecutionStrategyRetrying)
                     );
                 }
 
@@ -338,18 +336,16 @@ namespace Microsoft.EntityFrameworkCore
                     + "Microsoft.Data.SqlClient.SqlException (0x80131904): Bang!";
                 if (realFailure)
                 {
-                    var logEntry = Fixture.TestSqlLoggerFactory.Log.Single(
-                        l => l.Id == CoreEventId.ExecutionStrategyRetrying
-                    );
+                    var logEntry = Fixture.TestSqlLoggerFactory.Log
+                        .Single(l => l.Id == CoreEventId.ExecutionStrategyRetrying);
                     Assert.Contains(retryMessage, logEntry.Message);
                     Assert.Equal(LogLevel.Information, logEntry.Level);
                 }
                 else
                 {
                     Assert.Empty(
-                        Fixture.TestSqlLoggerFactory.Log.Where(
-                            l => l.Id == CoreEventId.ExecutionStrategyRetrying
-                        )
+                        Fixture.TestSqlLoggerFactory.Log
+                            .Where(l => l.Id == CoreEventId.ExecutionStrategyRetrying)
                     );
                 }
 
@@ -387,9 +383,10 @@ namespace Microsoft.EntityFrameworkCore
                     c1 =>
                     {
                         context2.Database.UseTransaction(null);
-                        context2.Database.UseTransaction(
-                            context1.Database.CurrentTransaction.GetDbTransaction()
-                        );
+                        context2.Database
+                            .UseTransaction(
+                                context1.Database.CurrentTransaction.GetDbTransaction()
+                            );
 
                         c1.SaveChanges(false);
 
@@ -451,17 +448,16 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        await new TestSqlServerRetryingExecutionStrategy(
-                            context
-                        ).ExecuteInTransactionAsync(
-                            context,
-                            (c, ct) => c.SaveChangesAsync(false, ct),
-                            (c, _) =>
-                            {
-                                Assert.True(false);
-                                return Task.FromResult(false);
-                            }
-                        );
+                        await new TestSqlServerRetryingExecutionStrategy(context)
+                            .ExecuteInTransactionAsync(
+                                context,
+                                (c, ct) => c.SaveChangesAsync(false, ct),
+                                (c, _) =>
+                                {
+                                    Assert.True(false);
+                                    return Task.FromResult(false);
+                                }
+                            );
 
                         context.ChangeTracker.AcceptAllChanges();
                     }
@@ -553,9 +549,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        list = await new TestSqlServerRetryingExecutionStrategy(
-                            context
-                        ).ExecuteAsync(context, (c, ct) => c.Products.ToListAsync(ct), null);
+                        list = await new TestSqlServerRetryingExecutionStrategy(context)
+                            .ExecuteAsync(context, (c, ct) => c.Products.ToListAsync(ct), null);
                     }
                     else
                     {
@@ -566,11 +561,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        list = new TestSqlServerRetryingExecutionStrategy(context).Execute(
-                            context,
-                            c => c.Products.ToList(),
-                            null
-                        );
+                        list = new TestSqlServerRetryingExecutionStrategy(context)
+                            .Execute(context, c => c.Products.ToList(), null);
                     }
                     else
                     {
@@ -618,54 +610,36 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        list = await new TestSqlServerRetryingExecutionStrategy(
-                            context
-                        ).ExecuteAsync(
-                            context,
-                            (c, ct) =>
-                                c.Set<Product>()
-                                    .FromSqlRaw(
+                        list = await new TestSqlServerRetryingExecutionStrategy(context)
+                            .ExecuteAsync(context, (c, ct) => c.Set<Product>().FromSqlRaw(
                                         @"SELECT [ID], [name]
                               FROM [Products]"
-                                    )
-                                    .ToListAsync(ct),
-                            null
-                        );
+                                    ).ToListAsync(ct), null);
                     }
                     else
                     {
-                        list = await context.Set<Product>()
-                            .FromSqlRaw(
-                                @"SELECT [ID], [name]
+                        list = await context.Set<Product>().FromSqlRaw(
+                            @"SELECT [ID], [name]
                               FROM [Products]"
-                            )
-                            .ToListAsync();
+                        ).ToListAsync();
                     }
                 }
                 else
                 {
                     if (externalStrategy)
                     {
-                        list = new TestSqlServerRetryingExecutionStrategy(context).Execute(
-                            context,
-                            c =>
-                                c.Set<Product>()
-                                    .FromSqlRaw(
+                        list = new TestSqlServerRetryingExecutionStrategy(context)
+                            .Execute(context, c => c.Set<Product>().FromSqlRaw(
                                         @"SELECT [ID], [name]
                               FROM [Products]"
-                                    )
-                                    .ToList(),
-                            null
-                        );
+                                    ).ToList(), null);
                     }
                     else
                     {
-                        list = context.Set<Product>()
-                            .FromSqlRaw(
-                                @"SELECT [ID], [name]
+                        list = context.Set<Product>().FromSqlRaw(
+                            @"SELECT [ID], [name]
                               FROM [Products]"
-                            )
-                            .ToList();
+                        ).ToList();
                     }
                 }
 
@@ -699,10 +673,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 if (externalStrategy)
                 {
-                    await new TestSqlServerRetryingExecutionStrategy(context).ExecuteAsync(
-                        context,
-                        c => c.Database.OpenConnectionAsync()
-                    );
+                    await new TestSqlServerRetryingExecutionStrategy(context)
+                        .ExecuteAsync(context, c => c.Database.OpenConnectionAsync());
                 }
                 else
                 {
@@ -713,10 +685,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 if (externalStrategy)
                 {
-                    new TestSqlServerRetryingExecutionStrategy(context).Execute(
-                        context,
-                        c => c.Database.OpenConnection()
-                    );
+                    new TestSqlServerRetryingExecutionStrategy(context)
+                        .Execute(context, c => c.Database.OpenConnection());
                 }
                 else
                 {
@@ -752,18 +722,15 @@ namespace Microsoft.EntityFrameworkCore
 
             if (async)
             {
-                var transaction = await new TestSqlServerRetryingExecutionStrategy(
-                    context
-                ).ExecuteAsync(context, c => context.Database.BeginTransactionAsync());
+                var transaction = await new TestSqlServerRetryingExecutionStrategy(context)
+                    .ExecuteAsync(context, c => context.Database.BeginTransactionAsync());
 
                 transaction.Dispose();
             }
             else
             {
-                var transaction = new TestSqlServerRetryingExecutionStrategy(context).Execute(
-                    context,
-                    c => context.Database.BeginTransaction()
-                );
+                var transaction = new TestSqlServerRetryingExecutionStrategy(context)
+                    .Execute(context, c => context.Database.BeginTransaction());
 
                 transaction.Dispose();
             }
@@ -792,7 +759,8 @@ namespace Microsoft.EntityFrameworkCore
                         new TestSqlServerRetryingExecutionStrategy(
                             context,
                             TimeSpan.FromMilliseconds(100)
-                        ).ExecuteInTransaction(context, c => c.SaveChanges(false), c => false)
+                        )
+                            .ExecuteInTransaction(context, c => c.SaveChanges(false), c => false)
                 );
                 context.ChangeTracker.AcceptAllChanges();
 
@@ -851,7 +819,8 @@ namespace Microsoft.EntityFrameworkCore
             protected override IServiceCollection AddServices(
                 IServiceCollection serviceCollection
             ) =>
-                base.AddServices(serviceCollection)
+                base
+                    .AddServices(serviceCollection)
                     .AddSingleton<IRelationalTransactionFactory, TestRelationalTransactionFactory>()
                     .AddScoped<ISqlServerConnection, TestSqlServerConnection>()
                     .AddSingleton<

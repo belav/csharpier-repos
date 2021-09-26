@@ -302,12 +302,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 parameterBuilder.Append(
                     $" -applicationBaseUrl {_deploymentParameters.ApplicationBaseUriHint}"
                 );
-                var environmentVariables = string.Join(
-                    "`,",
-                    _deploymentParameters.EnvironmentVariables.Select(
-                        envVariable => $"{envVariable.Key}={envVariable.Value}"
-                    )
-                );
+                var environmentVariables = string
+                    .Join(
+                        "`,",
+                        _deploymentParameters.EnvironmentVariables
+                            .Select(envVariable => $"{envVariable.Key}={envVariable.Value}")
+                    );
                 parameterBuilder.Append($" -environmentVariables \"{environmentVariables}\"");
 
                 var startInfo = new ProcessStartInfo

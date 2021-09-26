@@ -44,15 +44,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier.Compilation.VerifyPdb(
-                expectedPdb,
-                embeddedTexts,
-                debugEntryPoint,
-                format,
-                options,
-                expectedValueSourceLine,
-                expectedValueSourcePath
-            );
+            verifier.Compilation
+                .VerifyPdb(
+                    expectedPdb,
+                    embeddedTexts,
+                    debugEntryPoint,
+                    format,
+                    options,
+                    expectedValueSourceLine,
+                    expectedValueSourcePath
+                );
             return verifier;
         }
 
@@ -67,15 +68,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier.Compilation.VerifyPdb(
-                expectedPdb,
-                embeddedTexts,
-                debugEntryPoint,
-                format,
-                options,
-                expectedValueSourceLine,
-                expectedValueSourcePath
-            );
+            verifier.Compilation
+                .VerifyPdb(
+                    expectedPdb,
+                    embeddedTexts,
+                    debugEntryPoint,
+                    format,
+                    options,
+                    expectedValueSourceLine,
+                    expectedValueSourcePath
+                );
             return verifier;
         }
 
@@ -91,16 +93,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier.Compilation.VerifyPdb(
-                qualifiedMethodName,
-                expectedPdb,
-                embeddedTexts,
-                debugEntryPoint,
-                format,
-                options,
-                expectedValueSourceLine,
-                expectedValueSourcePath
-            );
+            verifier.Compilation
+                .VerifyPdb(
+                    qualifiedMethodName,
+                    expectedPdb,
+                    embeddedTexts,
+                    debugEntryPoint,
+                    format,
+                    options,
+                    expectedValueSourceLine,
+                    expectedValueSourcePath
+                );
             return verifier;
         }
 
@@ -116,16 +119,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier.Compilation.VerifyPdb(
-                qualifiedMethodName,
-                expectedPdb,
-                embeddedTexts,
-                debugEntryPoint,
-                format,
-                options,
-                expectedValueSourceLine,
-                expectedValueSourcePath
-            );
+            verifier.Compilation
+                .VerifyPdb(
+                    qualifiedMethodName,
+                    expectedPdb,
+                    embeddedTexts,
+                    debugEntryPoint,
+                    format,
+                    options,
+                    expectedValueSourceLine,
+                    expectedValueSourcePath
+                );
             return verifier;
         }
 
@@ -408,13 +412,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             peStream.Position = 0;
             pdbStream.Position = 0;
             var actualPdb = XElement.Parse(
-                    PdbToXmlConverter.ToXml(
-                        pdbStream,
-                        peStream,
-                        pdbToXmlOptions,
-                        methodName: qualifiedMethodName
-                    )
+                PdbToXmlConverter.ToXml(
+                    pdbStream,
+                    peStream,
+                    pdbToXmlOptions,
+                    methodName: qualifiedMethodName
                 )
+            )
                 .ToString();
             var (actual, expected) = AdjustToPdbFormat(
                 actualPdb,
@@ -473,13 +477,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             var actualConverted = AdjustForConversionArtifacts(
                 XElement.Parse(
-                        PdbToXmlConverter.ToXml(
-                            pdbStreamConverted,
-                            peStreamOriginal,
-                            pdbToXmlOptions,
-                            methodName: qualifiedMethodName
-                        )
+                    PdbToXmlConverter.ToXml(
+                        pdbStreamConverted,
+                        peStreamOriginal,
+                        pdbToXmlOptions,
+                        methodName: qualifiedMethodName
                     )
+                )
                     .ToString()
             );
             var adjustedExpected = AdjustForConversionArtifacts(expectedPdb);
@@ -711,9 +715,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool portable
         )
         {
-            var emitOptions = EmitOptions.Default.WithDebugInformationFormat(
-                portable ? DebugInformationFormat.PortablePdb : DebugInformationFormat.Pdb
-            );
+            var emitOptions = EmitOptions.Default
+                .WithDebugInformationFormat(
+                    portable ? DebugInformationFormat.PortablePdb : DebugInformationFormat.Pdb
+                );
 
             var result = compilation.Emit(
                 peStream,

@@ -107,14 +107,15 @@ namespace System.IO
             int secondRootLength = GetRootLength(second.AsSpan());
 
             return firstRootLength == secondRootLength
-                && string.Compare(
-                    strA: first,
-                    indexA: 0,
-                    strB: second,
-                    indexB: 0,
-                    length: firstRootLength,
-                    comparisonType: comparisonType
-                ) == 0;
+                && string
+                    .Compare(
+                        strA: first,
+                        indexA: 0,
+                        strB: second,
+                        indexB: 0,
+                        length: firstRootLength,
+                        comparisonType: comparisonType
+                    ) == 0;
         }
 
         /// <summary>

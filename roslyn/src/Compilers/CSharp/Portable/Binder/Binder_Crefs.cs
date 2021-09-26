@@ -841,9 +841,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (symbols.Length > 1)
             {
                 // Size is known, but IndexOfSymbolFromCurrentCompilation expects a builder.
-                ArrayBuilder<Symbol> unwrappedSymbols = ArrayBuilder<Symbol>.GetInstance(
-                    symbols.Length
-                );
+                ArrayBuilder<Symbol> unwrappedSymbols = ArrayBuilder<Symbol>
+                    .GetInstance(symbols.Length);
 
                 foreach (Symbol wrapped in symbols)
                 {
@@ -1109,9 +1108,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(typeArgumentListSyntax is object);
                 SeparatedSyntaxList<TypeSyntax> typeArgumentSyntaxes =
                     typeArgumentListSyntax.Arguments;
-                var typeArgumentsWithAnnotations = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                    arity
-                );
+                var typeArgumentsWithAnnotations = ArrayBuilder<TypeWithAnnotations>
+                    .GetInstance(arity);
 
                 var unusedDiagnostics =
 #if DEBUG
@@ -1130,7 +1128,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Should be in a WithCrefTypeParametersBinder.
                     Debug.Assert(
                         typeArgumentSyntax.ContainsDiagnostics
-                            || !typeArgumentSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics()
+                            || !typeArgumentSyntax.SyntaxTree
+                                .ReportDocumentationCommentDiagnostics()
                             || (
                                 !unusedDiagnostics.HasAnyErrors()
                                 && typeArgument.Type is CrefTypeParameterSymbol
@@ -1146,16 +1145,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (symbol.Kind == SymbolKind.Method)
                 {
-                    symbol = ((MethodSymbol)symbol).Construct(
-                        typeArgumentsWithAnnotations.ToImmutableAndFree()
-                    );
+                    symbol = ((MethodSymbol)symbol)
+                        .Construct(typeArgumentsWithAnnotations.ToImmutableAndFree());
                 }
                 else
                 {
                     Debug.Assert(symbol is NamedTypeSymbol);
-                    symbol = ((NamedTypeSymbol)symbol).Construct(
-                        typeArgumentsWithAnnotations.ToImmutableAndFree()
-                    );
+                    symbol = ((NamedTypeSymbol)symbol)
+                        .Construct(typeArgumentsWithAnnotations.ToImmutableAndFree());
                 }
             }
 
@@ -1167,8 +1164,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            ArrayBuilder<ParameterSymbol> parameterBuilder =
-                ArrayBuilder<ParameterSymbol>.GetInstance(parameterListSyntax.Parameters.Count);
+            ArrayBuilder<ParameterSymbol> parameterBuilder = ArrayBuilder<ParameterSymbol>
+                .GetInstance(parameterListSyntax.Parameters.Count);
 
             foreach (CrefParameterSyntax parameter in parameterListSyntax.Parameters)
             {
@@ -1217,7 +1214,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // As a compromise, we'll assert that the binding locations match in scenarios where we can go through the factory.
             Debug.Assert(
                 !this.Compilation.ContainsSyntaxTree(typeSyntax.SyntaxTree)
-                    || this.Compilation.GetBinderFactory(typeSyntax.SyntaxTree)
+                    || this.Compilation
+                        .GetBinderFactory(typeSyntax.SyntaxTree)
                         .GetBinder(typeSyntax).Flags
                         == (parameterOrReturnTypeBinder.Flags & ~BinderFlags.SemanticModel)
             );

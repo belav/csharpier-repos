@@ -29,12 +29,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             Debug.Assert(UnderlyingNamedType.OriginalDefinition.IsDefinition);
             var result =
-                ((PEModuleBuilder)context.Module).Translate(
-                    this.UnderlyingNamedType.OriginalDefinition,
-                    (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                    context.Diagnostics,
-                    needDeclaration: true
-                ).AsNestedTypeReference;
+                ((PEModuleBuilder)context.Module)
+                    .Translate(
+                        this.UnderlyingNamedType.OriginalDefinition,
+                        (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                        context.Diagnostics,
+                        needDeclaration: true
+                    ).AsNestedTypeReference;
 
             Debug.Assert(result != null);
             return result;
@@ -47,11 +48,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.ITypeReference Cci.ITypeMemberReference.GetContainingType(EmitContext context)
         {
-            return ((PEModuleBuilder)context.Module).Translate(
-                UnderlyingNamedType.ContainingType,
-                (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                context.Diagnostics
-            );
+            return ((PEModuleBuilder)context.Module)
+                .Translate(
+                    UnderlyingNamedType.ContainingType,
+                    (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                    context.Diagnostics
+                );
         }
 
         public override Cci.IGenericTypeInstanceReference AsGenericTypeInstanceReference

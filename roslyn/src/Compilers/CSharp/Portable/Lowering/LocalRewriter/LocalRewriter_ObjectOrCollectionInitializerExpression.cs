@@ -178,15 +178,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             EmbedIfNeedTo(rewrittenReceiver, initializer.ApplicableMethods, initializer.Syntax);
 
             return _dynamicFactory.MakeDynamicMemberInvocation(
-                    WellKnownMemberNames.CollectionInitializerAddMethodName,
-                    rewrittenReceiver,
-                    ImmutableArray<TypeWithAnnotations>.Empty,
-                    rewrittenArguments,
-                    default(ImmutableArray<string>),
-                    default(ImmutableArray<RefKind>),
-                    hasImplicitReceiver: false,
-                    resultDiscarded: true
-                )
+                WellKnownMemberNames.CollectionInitializerAddMethodName,
+                rewrittenReceiver,
+                ImmutableArray<TypeWithAnnotations>.Empty,
+                rewrittenArguments,
+                default(ImmutableArray<string>),
+                default(ImmutableArray<RefKind>),
+                hasImplicitReceiver: false,
+                resultDiscarded: true
+            )
                 .ToExpression();
         }
 
@@ -202,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(addMethod.Name == "Add");
             Debug.Assert(
-                addMethod.Parameters.Skip(addMethod.IsExtensionMethod ? 1 : 0)
+                addMethod.Parameters
+                    .Skip(addMethod.IsExtensionMethod ? 1 : 0)
                     .All(p => p.RefKind == RefKind.None || p.RefKind == RefKind.In)
             );
             Debug.Assert(initializer.Arguments.Any());
@@ -232,10 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // If the Add method is an extension which takes a `ref this` as the first parameter, implicitly add a `ref` to the argument
                 // Initializer element syntax cannot have `ref`, `in`, or `out` keywords.
                 // Arguments to `in` parameters will be converted to have RefKind.In later on.
-                var builder = ArrayBuilder<RefKind>.GetInstance(
-                    addMethod.Parameters.Length,
-                    RefKind.None
-                );
+                var builder = ArrayBuilder<RefKind>
+                    .GetInstance(addMethod.Parameters.Length, RefKind.None);
                 builder[0] = RefKind.Ref;
                 argumentRefKindsOpt = builder.ToImmutableAndFree();
             }
@@ -621,11 +620,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 #if DEBUG
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             Debug.Assert(
-                _compilation.Conversions.ClassifyConversionFromType(
-                    rewrittenReceiver.Type,
-                    memberSymbol.ContainingType,
-                    ref discardedUseSiteInfo
-                ).IsImplicit
+                _compilation.Conversions
+                    .ClassifyConversionFromType(
+                        rewrittenReceiver.Type,
+                        memberSymbol.ContainingType,
+                        ref discardedUseSiteInfo
+                    ).IsImplicit
             );
             // It is possible there are use site diagnostics from the above, but none that we need report as we aren't generating code for the conversion
 #endif

@@ -13,7 +13,8 @@ namespace System.Composition.Hosting.Providers.Lazy
     internal sealed class LazyWithMetadataExportDescriptorProvider : ExportDescriptorProvider
     {
         private static readonly MethodInfo s_getLazyDefinitionsMethod =
-            typeof(LazyWithMetadataExportDescriptorProvider).GetTypeInfo()
+            typeof(LazyWithMetadataExportDescriptorProvider)
+                .GetTypeInfo()
                 .GetDeclaredMethod("GetLazyDefinitions");
 
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
@@ -43,10 +44,10 @@ namespace System.Composition.Hosting.Providers.Lazy
             var metadataProvider = MetadataViewProvider.GetMetadataViewProvider<TMetadata>();
 
             return definitionAccessor.ResolveDependencies(
-                    "value",
-                    lazyContract.ChangeType(typeof(TValue)),
-                    false
-                )
+                "value",
+                lazyContract.ChangeType(typeof(TValue)),
+                false
+            )
                 .Select(
                     d =>
                         new ExportDescriptorPromise(

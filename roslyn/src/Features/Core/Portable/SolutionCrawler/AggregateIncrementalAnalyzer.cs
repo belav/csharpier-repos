@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 if (analyzer.IsValueCreated)
                 {
-                    await analyzer.Value.NewSolutionSnapshotAsync(solution, cancellationToken)
+                    await analyzer.Value
+                        .NewSolutionSnapshotAsync(solution, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -125,11 +126,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             if (TryGetAnalyzer(project, out var analyzer))
             {
                 await analyzer.AnalyzeProjectAsync(
-                        project,
-                        semanticsChanged,
-                        reasons,
-                        cancellationToken
-                    )
+                    project,
+                    semanticsChanged,
+                    reasons,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -158,7 +159,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 if (analyzer.IsValueCreated)
                 {
-                    await analyzer.Value.RemoveDocumentAsync(documentId, cancellationToken)
+                    await analyzer.Value
+                        .RemoveDocumentAsync(documentId, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 if (analyzer.IsValueCreated)
                 {
-                    await analyzer.Value.RemoveProjectAsync(projectId, cancellationToken)
+                    await analyzer.Value
+                        .RemoveProjectAsync(projectId, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -236,10 +239,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             )
             {
                 await analyzer2.AnalyzeNonSourceDocumentAsync(
-                        textDocument,
-                        reasons,
-                        cancellationToken
-                    )
+                    textDocument,
+                    reasons,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }

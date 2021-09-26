@@ -12,10 +12,11 @@ namespace System.Web.Helpers.Claims
     internal sealed class ClaimsIdentityConverter
     {
         private static readonly MethodInfo _claimsIdentityTryConvertOpenMethod =
-            typeof(ClaimsIdentity).GetMethod(
-                "TryConvert",
-                BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
-            );
+            typeof(ClaimsIdentity)
+                .GetMethod(
+                    "TryConvert",
+                    BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+                );
         private static readonly ClaimsIdentityConverter _default = new ClaimsIdentityConverter(
             GetDefaultConverters()
         );

@@ -383,10 +383,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     using (var batch = ModelBuilder.Metadata.DelayConventions())
                     {
-                        var ownership = ownershipCandidates[0].Builder.IsOwnership(
-                            true,
-                            configurationSource
-                        );
+                        var ownership = ownershipCandidates[0].Builder
+                            .IsOwnership(true, configurationSource);
                         if (ownership == null)
                         {
                             return null;
@@ -397,10 +395,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 else
                 {
                     if (
-                        !entityType.Builder.RemoveNonOwnershipRelationships(
-                            null,
-                            configurationSource
-                        )
+                        !entityType.Builder
+                            .RemoveNonOwnershipRelationships(null, configurationSource)
                     )
                     {
                         return null;
@@ -590,10 +586,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 var entityTypeBuilder = entityType.Builder;
                 foreach (var foreignKey in entityType.GetDeclaredReferencingForeignKeys().ToList())
                 {
-                    var removed = foreignKey.DeclaringEntityType.Builder.HasNoRelationship(
-                        foreignKey,
-                        configurationSource
-                    );
+                    var removed = foreignKey.DeclaringEntityType.Builder
+                        .HasNoRelationship(foreignKey, configurationSource);
                     Check.DebugAssert(removed != null, "removed is null");
                 }
 
@@ -602,10 +596,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         .ToList()
                 )
                 {
-                    var removed = skipNavigation.DeclaringEntityType.Builder.HasNoSkipNavigation(
-                        skipNavigation,
-                        configurationSource
-                    );
+                    var removed = skipNavigation.DeclaringEntityType.Builder
+                        .HasNoSkipNavigation(skipNavigation, configurationSource);
                     Check.DebugAssert(removed != null, "removed is null");
                 }
 
@@ -621,10 +613,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 foreach (var directlyDerivedType in entityType.GetDirectlyDerivedTypes().ToList())
                 {
-                    var derivedEntityTypeBuilder = directlyDerivedType.Builder.HasBaseType(
-                        entityType.BaseType,
-                        configurationSource
-                    );
+                    var derivedEntityTypeBuilder = directlyDerivedType.Builder
+                        .HasBaseType(entityType.BaseType, configurationSource);
                     Check.DebugAssert(
                         derivedEntityTypeBuilder != null,
                         "derivedEntityTypeBuilder is null"

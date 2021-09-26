@@ -216,11 +216,8 @@ namespace System.Xml.Xsl.Runtime
 
                     // Always convert "value" to a list of XPathItem using the item* converter
                     _globalValues[idx] =
-                        (IList<XPathItem>)XmlAnyListConverter.ItemList.ChangeType(
-                            value,
-                            typeof(XPathItem[]),
-                            null
-                        );
+                        (IList<XPathItem>)XmlAnyListConverter.ItemList
+                            .ChangeType(value, typeof(XPathItem[]), null);
                     break;
                 }
             }
@@ -321,7 +318,8 @@ namespace System.Xml.Xsl.Runtime
                         -1,
                         _earlyInfo[idx].EarlyBoundType,
                         EarlyBoundFlags
-                    ).CanBind();
+                    )
+                        .CanBind();
             }
 
             return false;
@@ -1025,11 +1023,12 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         public string GenerateId(XPathNavigator navigator)
         {
-            return string.Concat(
-                "ID",
-                _docOrderCmp.GetDocumentIndex(navigator).ToString(CultureInfo.InvariantCulture),
-                navigator.UniqueId
-            );
+            return string
+                .Concat(
+                    "ID",
+                    _docOrderCmp.GetDocumentIndex(navigator).ToString(CultureInfo.InvariantCulture),
+                    navigator.UniqueId
+                );
         }
 
         //-----------------------------------------------

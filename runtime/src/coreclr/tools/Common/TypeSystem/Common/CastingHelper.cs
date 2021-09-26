@@ -177,10 +177,8 @@ namespace Internal.TypeSystem
             switch (thisType.Category)
             {
                 case TypeFlags.GenericParameter:
-                    return ((GenericParameterDesc)thisType).CanCastGenericParameterTo(
-                        otherType,
-                        protect
-                    );
+                    return ((GenericParameterDesc)thisType)
+                        .CanCastGenericParameterTo(otherType, protect);
 
                 case TypeFlags.Array:
                 case TypeFlags.SzArray:
@@ -190,10 +188,8 @@ namespace Internal.TypeSystem
                 case TypeFlags.Pointer:
                     if (otherType.Category == thisType.Category)
                     {
-                        return ((ParameterizedType)thisType).CanCastParamTo(
-                            ((ParameterizedType)otherType).ParameterType,
-                            protect
-                        );
+                        return ((ParameterizedType)thisType)
+                            .CanCastParamTo(((ParameterizedType)otherType).ParameterType, protect);
                     }
                     return false;
 

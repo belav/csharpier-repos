@@ -79,7 +79,8 @@ namespace SingleFileApiTests
                         foreach (
                             var assemblyPath in (
                                 (string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")
-                            ).Split(Path.PathSeparator)
+                            )
+                                .Split(Path.PathSeparator)
                         )
                         {
                             Console.WriteLine(assemblyPath);

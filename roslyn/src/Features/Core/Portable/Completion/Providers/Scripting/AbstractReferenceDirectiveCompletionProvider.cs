@@ -89,9 +89,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     var gacHelper = new GlobalAssemblyCacheCompletionHelper(s_rules);
                     context.AddItems(
                         await gacHelper.GetItemsAsync(
-                                pathThroughLastSlash,
-                                context.CancellationToken
-                            )
+                            pathThroughLastSlash,
+                            context.CancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }

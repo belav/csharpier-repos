@@ -1466,9 +1466,8 @@ partial class Program
 #nullable restore
     object F4 = null;
 }";
-            var options = TestOptions.ReleaseDll.WithNullableContextOptions(
-                NullableContextOptions.Disable
-            );
+            var options = TestOptions.ReleaseDll
+                .WithNullableContextOptions(NullableContextOptions.Disable);
 
             verify(new[] { source1, source2 }, options, new string[0]);
 
@@ -2294,9 +2293,9 @@ _ = x.ToString();
                 // (7,1): error CS8803: Top-level statements must precede namespace and type declarations.
                 // if (x == null) { }
                 Diagnostic(
-                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
-                        "if (x == null) { }"
-                    )
+                    ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                    "if (x == null) { }"
+                )
                     .WithLocation(7, 1)
             );
 
@@ -2318,9 +2317,9 @@ _ = x.ToString();
                 // (8,1): error CS8803: Top-level statements must precede namespace and type declarations.
                 // if (x == null) { }
                 Diagnostic(
-                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
-                        "if (x == null) { }"
-                    )
+                    ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                    "if (x == null) { }"
+                )
                     .WithLocation(8, 1)
             );
 
@@ -3061,7 +3060,8 @@ string";
             CSharpCompilation.NullableData nullableData,
             bool requiredAnalysis = false
         ) =>
-            nullableData.Data.Where(pair => !requiredAnalysis || pair.Value.RequiredAnalysis)
+            nullableData.Data
+                .Where(pair => !requiredAnalysis || pair.Value.RequiredAnalysis)
                 .Select(pair => GetNullableDataKeyAsString(pair.Key))
                 .OrderBy(key => key)
                 .ToArray();
@@ -3072,7 +3072,8 @@ string";
         )
         {
             toString ??= GetNullableDataKeyAsString;
-            return nullableData.Data.Where(
+            return nullableData.Data
+                .Where(
                     pair =>
                         pair.Value.RequiredAnalysis
                         && pair.Key is MethodSymbol method

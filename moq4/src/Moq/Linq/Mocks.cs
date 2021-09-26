@@ -126,10 +126,8 @@ namespace Moq
             } while (true);
         }
 
-        internal static readonly MethodInfo SetupReturnsMethod = typeof(Mocks).GetMethod(
-            nameof(SetupReturns),
-            BindingFlags.NonPublic | BindingFlags.Static
-        );
+        internal static readonly MethodInfo SetupReturnsMethod = typeof(Mocks)
+            .GetMethod(nameof(SetupReturns), BindingFlags.NonPublic | BindingFlags.Static);
 
         internal static bool SetupReturns(Mock mock, LambdaExpression expression, object value)
         {

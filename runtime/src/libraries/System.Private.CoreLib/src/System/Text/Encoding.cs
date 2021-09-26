@@ -272,11 +272,12 @@ namespace System.Text
                     }
                     else
                     {
-                        string moreInfoUrl = string.Format(
-                            CultureInfo.InvariantCulture,
-                            Obsoletions.SharedUrlFormat,
-                            Obsoletions.SystemTextEncodingUTF7DiagId
-                        );
+                        string moreInfoUrl = string
+                            .Format(
+                                CultureInfo.InvariantCulture,
+                                Obsoletions.SharedUrlFormat,
+                                Obsoletions.SystemTextEncodingUTF7DiagId
+                            );
                         string exceptionMessage = SR.Format(SR.Encoding_UTF7_Disabled, moreInfoUrl);
                         throw new NotSupportedException(exceptionMessage); // matches generic "unknown code page" exception type
                     }
@@ -837,7 +838,8 @@ namespace System.Text
                 byteCount = result;
 
             // Copy the data, don't overrun our array!
-            new ReadOnlySpan<byte>(arrByte, 0, byteCount).CopyTo(new Span<byte>(bytes, byteCount));
+            new ReadOnlySpan<byte>(arrByte, 0, byteCount)
+                .CopyTo(new Span<byte>(bytes, byteCount));
 
             return byteCount;
         }
@@ -992,7 +994,8 @@ namespace System.Text
                 charCount = result;
 
             // Copy the data, don't overrun our array!
-            new ReadOnlySpan<char>(arrChar, 0, charCount).CopyTo(new Span<char>(chars, charCount));
+            new ReadOnlySpan<char>(arrChar, 0, charCount)
+                .CopyTo(new Span<char>(chars, charCount));
 
             return charCount;
         }

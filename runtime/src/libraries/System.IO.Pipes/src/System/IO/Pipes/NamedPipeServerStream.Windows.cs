@@ -125,11 +125,8 @@ namespace System.IO.Pipes
 
             // Make sure the pipe name isn't one of our reserved names for anonymous pipes.
             if (
-                string.Equals(
-                    fullPipeName,
-                    @"\\.\pipe\anonymous",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(fullPipeName, @"\\.\pipe\anonymous", StringComparison.OrdinalIgnoreCase)
             )
             {
                 throw new ArgumentOutOfRangeException(
@@ -192,16 +189,17 @@ namespace System.IO.Pipes
                     pipeSecurity,
                     ref pinningHandle
                 );
-                SafePipeHandle handle = Interop.Kernel32.CreateNamedPipe(
-                    fullPipeName,
-                    openMode,
-                    pipeModes,
-                    maxNumberOfServerInstances,
-                    outBufferSize,
-                    inBufferSize,
-                    0,
-                    ref secAttrs
-                );
+                SafePipeHandle handle = Interop.Kernel32
+                    .CreateNamedPipe(
+                        fullPipeName,
+                        openMode,
+                        pipeModes,
+                        maxNumberOfServerInstances,
+                        outBufferSize,
+                        inBufferSize,
+                        0,
+                        ref secAttrs
+                    );
 
                 if (handle.IsInvalid)
                 {
@@ -272,13 +270,14 @@ namespace System.IO.Pipes
 
             if (!IsAsync)
             {
-                return Task.Factory.StartNew(
-                    s => ((NamedPipeServerStream)s!).WaitForConnection(),
-                    this,
-                    cancellationToken,
-                    TaskCreationOptions.DenyChildAttach,
-                    TaskScheduler.Default
-                );
+                return Task.Factory
+                    .StartNew(
+                        s => ((NamedPipeServerStream)s!).WaitForConnection(),
+                        this,
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
             }
 
             return WaitForConnectionCoreAsync(cancellationToken);
@@ -308,15 +307,16 @@ namespace System.IO.Pipes
             char* userName = stackalloc char[(int)UserNameMaxLength]; // ~1K
 
             if (
-                Interop.Kernel32.GetNamedPipeHandleStateW(
-                    InternalHandle!,
-                    null,
-                    null,
-                    null,
-                    null,
-                    userName,
-                    UserNameMaxLength
-                )
+                Interop.Kernel32
+                    .GetNamedPipeHandleStateW(
+                        InternalHandle!,
+                        null,
+                        null,
+                        null,
+                        null,
+                        userName,
+                        UserNameMaxLength
+                    )
             )
             {
                 return new string(userName);

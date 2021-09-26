@@ -25,10 +25,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             );
 
             // Act
-            var result = EndpointMetadataComparer<TestMetadata>.Default.Compare(
-                endpoint1,
-                endpoint2
-            );
+            var result = EndpointMetadataComparer<TestMetadata>.Default
+                .Compare(endpoint1, endpoint2);
 
             // Assert
             Assert.Equal(-1, result);
@@ -50,10 +48,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             );
 
             // Act
-            var result = EndpointMetadataComparer<TestMetadata>.Default.Compare(
-                endpoint1,
-                endpoint2
-            );
+            var result = EndpointMetadataComparer<TestMetadata>.Default
+                .Compare(endpoint1, endpoint2);
 
             // Assert
             Assert.Equal(1, result);
@@ -75,10 +71,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             );
 
             // Act
-            var result = EndpointMetadataComparer<TestMetadata>.Default.Compare(
-                endpoint1,
-                endpoint2
-            );
+            var result = EndpointMetadataComparer<TestMetadata>.Default
+                .Compare(endpoint1, endpoint2);
 
             // Assert
             Assert.Equal(0, result);
@@ -100,10 +94,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             );
 
             // Act
-            var result = EndpointMetadataComparer<TestMetadata>.Default.Compare(
-                endpoint1,
-                endpoint2
-            );
+            var result = EndpointMetadataComparer<TestMetadata>.Default
+                .Compare(endpoint1, endpoint2);
 
             // Assert
             Assert.Equal(0, result);

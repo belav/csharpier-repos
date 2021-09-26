@@ -194,10 +194,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
             )
             {
                 throw new Exception(
-                    string.Format(
-                        WorkspaceMSBuildResources.Failed_to_load_solution_filter_0,
-                        solutionFilePath
-                    )
+                    string
+                        .Format(
+                            WorkspaceMSBuildResources.Failed_to_load_solution_filter_0,
+                            solutionFilePath
+                        )
                 );
             }
 

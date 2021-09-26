@@ -25,7 +25,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _typeDesc = typeDesc;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            ((CompilerTypeSystemContext)typeDesc.Context).EnsureLoadableType(typeDesc);
+            ((CompilerTypeSystemContext)typeDesc.Context)
+                .EnsureLoadableType(typeDesc);
         }
 
         public override int ClassCode => 255607008;
@@ -66,9 +67,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             int pointerSize = type.Context.Target.PointerSize;
             int size = defType.InstanceFieldSize.AsInt;
-            int alignment = Internal.JitInterface.CorInfoImpl.GetClassAlignmentRequirementStatic(
-                defType
-            );
+            int alignment = Internal.JitInterface.CorInfoImpl
+                .GetClassAlignmentRequirementStatic(defType);
             ReadyToRunTypeLayoutFlags flags =
                 ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_Alignment
                 | ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_GCLayout;

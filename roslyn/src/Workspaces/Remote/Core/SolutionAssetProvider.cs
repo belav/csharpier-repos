@@ -129,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 Exception? exception = null;
                 try
                 {
-                    await localPipe.Reader.CopyToAsync(pipeWriter, cancellationToken)
+                    await localPipe.Reader
+                        .CopyToAsync(pipeWriter, cancellationToken)
                         .ConfigureAwait(false);
                 }
                 catch (Exception e)

@@ -28,9 +28,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
 
             public override bool TryGetExport(CompositionContract contract, out object export)
             {
-                var importMany = contract.MetadataConstraints.Contains(
-                    new KeyValuePair<string, object>("IsImportMany", true)
-                );
+                var importMany = contract.MetadataConstraints
+                    .Contains(new KeyValuePair<string, object>("IsImportMany", true));
                 var (contractType, metadataType, isArray) = GetContractType(
                     contract.ContractType,
                     importMany
@@ -46,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
                             method.GetParameters().Length == 1
                             && method.GetParameters()[0].ParameterType == typeof(string)
                         select method
-                    ).Single();
+                    )
+                        .Single();
                     var parameterizedMethod = methodInfo.MakeGenericMethod(
                         contractType,
                         metadataType
@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
                             method.GetParameters().Length == 1
                             && method.GetParameters()[0].ParameterType == typeof(string)
                         select method
-                    ).Single();
+                    )
+                        .Single();
                     var parameterizedMethod = methodInfo.MakeGenericMethod(contractType);
                     export = parameterizedMethod.Invoke(
                         _exportProvider,
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
                         where method.IsGenericMethod && method.GetGenericArguments().Length == 1
                         where method.GetParameters().Length == 0
                         select method
-                    ).Single();
+                    )
+                        .Single();
                     var parameterizedMethod = methodInfo.MakeGenericMethod(contractType);
                     export = parameterizedMethod.Invoke(_exportProvider, null);
                 }

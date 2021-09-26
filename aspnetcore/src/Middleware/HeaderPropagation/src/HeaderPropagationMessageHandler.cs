@@ -71,10 +71,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation
                     !request.Headers.TryGetValues(entry.OutboundHeaderName, out var _)
                     && !(
                         hasContent
-                        && request.Content!.Headers.TryGetValues(
-                            entry.OutboundHeaderName,
-                            out var _
-                        )
+                        && request.Content!.Headers
+                            .TryGetValues(entry.OutboundHeaderName, out var _)
                     )
                 )
                 {
@@ -87,32 +85,26 @@ namespace Microsoft.AspNetCore.HeaderPropagation
                         {
                             var value = (string)stringValues;
                             if (
-                                !request.Headers.TryAddWithoutValidation(
-                                    entry.OutboundHeaderName,
-                                    value
-                                ) && hasContent
+                                !request.Headers
+                                    .TryAddWithoutValidation(entry.OutboundHeaderName, value)
+                                && hasContent
                             )
                             {
-                                request.Content!.Headers.TryAddWithoutValidation(
-                                    entry.OutboundHeaderName,
-                                    value
-                                );
+                                request.Content!.Headers
+                                    .TryAddWithoutValidation(entry.OutboundHeaderName, value);
                             }
                         }
                         else
                         {
                             var values = (string[])stringValues;
                             if (
-                                !request.Headers.TryAddWithoutValidation(
-                                    entry.OutboundHeaderName,
-                                    values
-                                ) && hasContent
+                                !request.Headers
+                                    .TryAddWithoutValidation(entry.OutboundHeaderName, values)
+                                && hasContent
                             )
                             {
-                                request.Content!.Headers.TryAddWithoutValidation(
-                                    entry.OutboundHeaderName,
-                                    values
-                                );
+                                request.Content!.Headers
+                                    .TryAddWithoutValidation(entry.OutboundHeaderName, values);
                             }
                         }
                     }

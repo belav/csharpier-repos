@@ -35,13 +35,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
             CancellationToken cancellationToken
         ) =>
             await _client.RunRemoteAsync<T>(
-                    _serviceName,
-                    targetName,
-                    solution,
-                    arguments,
-                    callbackTarget,
-                    cancellationToken
-                )
+                _serviceName,
+                targetName,
+                solution,
+                arguments,
+                callbackTarget,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
         [Obsolete("Use TryRunRemoteAsync instead")]
@@ -58,10 +58,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
             }
 
             var connection = await _client.CreateConnectionAsync(
-                    _serviceName,
-                    callbackTarget: null,
-                    cancellationToken
-                )
+                _serviceName,
+                callbackTarget: null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             SessionWithSolution? session = null;
@@ -69,10 +69,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
             {
                 // transfer ownership of the connection to the session object:
                 session = await SessionWithSolution.CreateAsync(
-                        connection,
-                        solution,
-                        cancellationToken
-                    )
+                    connection,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -103,12 +103,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 CancellationToken cancellationToken
             )
             {
-                return _inner.KeepAliveSession.RunRemoteAsync(
-                    targetName,
-                    solution: null,
-                    arguments,
-                    cancellationToken
-                );
+                return _inner.KeepAliveSession
+                    .RunRemoteAsync(targetName, solution: null, arguments, cancellationToken);
             }
 
             public Task<T> InvokeAsync<T>(
@@ -117,12 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 CancellationToken cancellationToken
             )
             {
-                return _inner.KeepAliveSession.RunRemoteAsync<T>(
-                    targetName,
-                    solution: null,
-                    arguments,
-                    cancellationToken
-                );
+                return _inner.KeepAliveSession
+                    .RunRemoteAsync<T>(targetName, solution: null, arguments, cancellationToken);
             }
 
             public void Dispose()

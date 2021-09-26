@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
 
             var mockInternalEncryptor = new Mock<IInternalCertificateXmlEncryptor>();
             mockInternalEncryptor.Setup(
-                    o => o.PerformEncryption(It.IsAny<EncryptedXml>(), It.IsAny<XmlElement>())
-                )
+                o => o.PerformEncryption(It.IsAny<EncryptedXml>(), It.IsAny<XmlElement>())
+            )
                 .Returns<EncryptedXml, XmlElement>(
                     (encryptedXml, element) =>
                     {

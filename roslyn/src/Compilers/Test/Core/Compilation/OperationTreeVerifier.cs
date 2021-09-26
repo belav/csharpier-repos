@@ -161,9 +161,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             var text = syntax.ToString().Trim(Environment.NewLine.ToCharArray());
             var lines = text.Split(
-                    new[] { Environment.NewLine, "\r", "\n" },
-                    StringSplitOptions.RemoveEmptyEntries
-                )
+                new[] { Environment.NewLine, "\r", "\n" },
+                StringSplitOptions.RemoveEmptyEntries
+            )
                 .Select(l => l.Trim())
                 .ToArray();
             if (lines.Length <= 1 && text.Length < 25)

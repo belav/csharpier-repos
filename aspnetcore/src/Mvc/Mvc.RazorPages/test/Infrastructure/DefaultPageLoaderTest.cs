@@ -71,8 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             );
 
             provider1.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -84,8 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 .Verifiable();
 
             provider2.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -97,8 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 .Verifiable();
 
             provider1.Setup(
-                    p => p.OnProvidersExecuted(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuted(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -109,8 +109,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 .Verifiable();
 
             provider2.Setup(
-                    p => p.OnProvidersExecuted(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuted(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -152,8 +152,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var transformer = new Mock<RoutePatternTransformer>();
             transformer.Setup(
-                    t => t.SubstituteRequiredValues(It.IsAny<RoutePattern>(), It.IsAny<object>())
-                )
+                t => t.SubstituteRequiredValues(It.IsAny<RoutePattern>(), It.IsAny<object>())
+            )
                 .Returns<RoutePattern, object>((p, v) => p);
 
             var compilerProvider = GetCompilerProvider();
@@ -173,8 +173,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             );
 
             provider.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -220,8 +220,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var sequence = 0;
             provider1.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -236,8 +236,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 .Verifiable();
 
             provider2.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -247,8 +247,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 .Verifiable();
 
             provider1.Setup(
-                    p => p.OnProvidersExecuted(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuted(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -258,8 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 .Verifiable();
 
             provider2.Setup(
-                    p => p.OnProvidersExecuted(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuted(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -300,8 +300,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var transformer = new Mock<RoutePatternTransformer>();
             transformer.Setup(
-                    t => t.SubstituteRequiredValues(It.IsAny<RoutePattern>(), It.IsAny<object>())
-                )
+                t => t.SubstituteRequiredValues(It.IsAny<RoutePattern>(), It.IsAny<object>())
+            )
                 .Returns<RoutePattern, object>((p, v) => p);
 
             var compilerProvider = GetCompilerProvider();
@@ -321,8 +321,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             );
 
             provider.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {
@@ -366,8 +366,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var transformer = new Mock<RoutePatternTransformer>();
             transformer.Setup(
-                    t => t.SubstituteRequiredValues(It.IsAny<RoutePattern>(), It.IsAny<object>())
-                )
+                t => t.SubstituteRequiredValues(It.IsAny<RoutePattern>(), It.IsAny<object>())
+            )
                 .Returns<RoutePattern, object>((p, v) => p);
 
             var compilerProvider = GetCompilerProvider();
@@ -381,8 +381,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var provider = new Mock<IPageApplicationModelProvider>();
 
             provider.Setup(
-                    p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
-                )
+                p => p.OnProvidersExecuting(It.IsAny<PageApplicationModelProviderContext>())
+            )
                 .Callback(
                     (PageApplicationModelProviderContext c) =>
                     {

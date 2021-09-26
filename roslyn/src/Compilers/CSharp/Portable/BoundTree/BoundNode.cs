@@ -398,8 +398,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private class LocalsScanner
             : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
         {
-            public readonly PooledHashSet<LocalSymbol> DeclaredLocals =
-                PooledHashSet<LocalSymbol>.GetInstance();
+            public readonly PooledHashSet<LocalSymbol> DeclaredLocals = PooledHashSet<LocalSymbol>
+                .GetInstance();
 
             private LocalsScanner() { }
 

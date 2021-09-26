@@ -93,7 +93,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var httpContext = new DefaultHttpContext
             {
-                RequestServices = new ServiceCollection().AddSingleton<IComponentRenderer>(renderer)
+                RequestServices = new ServiceCollection()
+                    .AddSingleton<IComponentRenderer>(renderer)
                     .AddSingleton<HtmlRenderer>()
                     .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
                     .AddSingleton<HtmlEncoder>(HtmlEncoder.Default)

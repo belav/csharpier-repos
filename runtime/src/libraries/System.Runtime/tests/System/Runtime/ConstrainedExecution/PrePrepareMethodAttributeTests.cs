@@ -22,7 +22,8 @@ namespace System.Runtime.ConstrainedExecution.Tests
         public void SettableOnMethods()
         {
             Assert.NotNull(
-                typeof(ConstrainedType).GetMethod(nameof(ConstrainedType.SomeMethod))
+                typeof(ConstrainedType)
+                    .GetMethod(nameof(ConstrainedType.SomeMethod))
                     .GetCustomAttribute<PrePrepareMethodAttribute>()
             );
         }
@@ -31,9 +32,8 @@ namespace System.Runtime.ConstrainedExecution.Tests
         public void SettableOnConstructors()
         {
             Assert.NotNull(
-                typeof(ConstrainedType).GetConstructors()[
-                    0
-                ].GetCustomAttribute<PrePrepareMethodAttribute>()
+                typeof(ConstrainedType).GetConstructors()[0]
+                    .GetCustomAttribute<PrePrepareMethodAttribute>()
             );
         }
     }

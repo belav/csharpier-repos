@@ -83,9 +83,8 @@ namespace System.Web.WebPages.Deployment.Test
             var assembly = typeof(WebPagesDeploymentTest).Assembly;
             foreach (var item in _deploymentPaths)
             {
-                new TestFile(TestNamespacePrefix + item.Key, assembly).Save(
-                    Path.Combine(_tempPath, item.Value)
-                );
+                new TestFile(TestNamespacePrefix + item.Key, assembly)
+                    .Save(Path.Combine(_tempPath, item.Value));
             }
         }
 

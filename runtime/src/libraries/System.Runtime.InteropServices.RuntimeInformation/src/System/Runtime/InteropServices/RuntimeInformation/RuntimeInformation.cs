@@ -17,8 +17,8 @@ namespace System.Runtime.InteropServices
             {
                 if (s_frameworkDescription == null)
                 {
-                    string? versionString =
-                        typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                    string? versionString = typeof(object).Assembly
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
 
                     // Strip the git hash if there is one
                     if (versionString != null)

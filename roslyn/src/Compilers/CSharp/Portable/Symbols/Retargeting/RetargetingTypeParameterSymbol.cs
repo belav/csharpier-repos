@@ -54,18 +54,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return this.RetargetingTranslator.Retarget(
-                    _underlyingTypeParameter.ContainingSymbol
-                );
+                return this.RetargetingTranslator
+                    .Retarget(_underlyingTypeParameter.ContainingSymbol);
             }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return this.RetargetingTranslator.GetRetargetedAttributes(
-                _underlyingTypeParameter.GetAttributes(),
-                ref _lazyCustomAttributes
-            );
+            return this.RetargetingTranslator
+                .GetRetargetedAttributes(
+                    _underlyingTypeParameter.GetAttributes(),
+                    ref _lazyCustomAttributes
+                );
         }
 
         public override AssemblySymbol ContainingAssembly
@@ -82,9 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             ConsList<TypeParameterSymbol> inProgress
         )
         {
-            return this.RetargetingTranslator.Retarget(
-                _underlyingTypeParameter.GetConstraintTypes(inProgress)
-            );
+            return this.RetargetingTranslator
+                .Retarget(_underlyingTypeParameter.GetConstraintTypes(inProgress));
         }
 
         internal override bool? IsNotNullable
@@ -96,27 +95,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             ConsList<TypeParameterSymbol> inProgress
         )
         {
-            return this.RetargetingTranslator.Retarget(
-                _underlyingTypeParameter.GetInterfaces(inProgress)
-            );
+            return this.RetargetingTranslator
+                .Retarget(_underlyingTypeParameter.GetInterfaces(inProgress));
         }
 
         internal override NamedTypeSymbol GetEffectiveBaseClass(
             ConsList<TypeParameterSymbol> inProgress
         )
         {
-            return this.RetargetingTranslator.Retarget(
-                _underlyingTypeParameter.GetEffectiveBaseClass(inProgress),
-                RetargetOptions.RetargetPrimitiveTypesByTypeCode
-            );
+            return this.RetargetingTranslator
+                .Retarget(
+                    _underlyingTypeParameter.GetEffectiveBaseClass(inProgress),
+                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                );
         }
 
         internal override TypeSymbol GetDeducedBaseType(ConsList<TypeParameterSymbol> inProgress)
         {
-            return this.RetargetingTranslator.Retarget(
-                _underlyingTypeParameter.GetDeducedBaseType(inProgress),
-                RetargetOptions.RetargetPrimitiveTypesByTypeCode
-            );
+            return this.RetargetingTranslator
+                .Retarget(
+                    _underlyingTypeParameter.GetDeducedBaseType(inProgress),
+                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                );
         }
 
         internal sealed override CSharpCompilation DeclaringCompilation // perf, not correctness

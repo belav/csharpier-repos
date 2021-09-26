@@ -39,12 +39,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
         )
         {
             var actionSets = await GetActionSetsAsync(
-                    document,
-                    codeFixService,
-                    codeRefactoringService,
-                    request.Range,
-                    cancellationToken
-                )
+                document,
+                codeFixService,
+                codeRefactoringService,
+                request.Range,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (!actionSets.HasValue)
             {
@@ -52,11 +52,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             }
 
             await codeActionsCache.UpdateActionSetsAsync(
-                    document,
-                    request.Range,
-                    actionSets.Value,
-                    cancellationToken
-                )
+                document,
+                request.Range,
+                actionSets.Value,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var documentText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
@@ -220,22 +220,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
         )
         {
             var actionSets = await GetActionSetsAsync(
+                document,
+                codeFixService,
+                codeRefactoringService,
+                selection,
+                cancellationToken
+            )
+                .ConfigureAwait(false);
+            if (!actionSets.HasValue)
+            {
+                actionSets = await GetActionSetsAsync(
                     document,
                     codeFixService,
                     codeRefactoringService,
                     selection,
                     cancellationToken
                 )
-                .ConfigureAwait(false);
-            if (!actionSets.HasValue)
-            {
-                actionSets = await GetActionSetsAsync(
-                        document,
-                        codeFixService,
-                        codeRefactoringService,
-                        selection,
-                        cancellationToken
-                    )
                     .ConfigureAwait(false);
 
                 if (!actionSets.HasValue)
@@ -244,11 +244,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 }
 
                 await codeActionsCache.UpdateActionSetsAsync(
-                        document,
-                        selection,
-                        actionSets.Value,
-                        cancellationToken
-                    )
+                    document,
+                    selection,
+                    actionSets.Value,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -315,28 +315,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             var textSpan = ProtocolConversions.RangeToTextSpan(selection, text);
 
             var codeFixes = await UnifiedSuggestedActionsSource.GetFilterAndOrderCodeFixesAsync(
-                    document.Project.Solution.Workspace,
-                    codeFixService,
-                    document,
-                    textSpan,
-                    includeSuppressionFixes: true,
-                    isBlocking: false,
-                    addOperationScope: _ => null,
-                    cancellationToken
-                )
+                document.Project.Solution.Workspace,
+                codeFixService,
+                document,
+                textSpan,
+                includeSuppressionFixes: true,
+                isBlocking: false,
+                addOperationScope: _ => null,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var codeRefactorings =
                 await UnifiedSuggestedActionsSource.GetFilterAndOrderCodeRefactoringsAsync(
-                        document.Project.Solution.Workspace,
-                        codeRefactoringService,
-                        document,
-                        textSpan,
-                        isBlocking: false,
-                        addOperationScope: _ => null,
-                        filterOutsideSelection: false,
-                        cancellationToken
-                    )
+                    document.Project.Solution.Workspace,
+                    codeRefactoringService,
+                    document,
+                    textSpan,
+                    isBlocking: false,
+                    addOperationScope: _ => null,
+                    filterOutsideSelection: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             var actionSets = UnifiedSuggestedActionsSource.FilterAndOrderActionSets(

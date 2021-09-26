@@ -133,9 +133,8 @@ namespace System.Web.Http.Controllers
                 // Initialize the cache entirely in the ctor on a single thread.
                 _controllerDescriptor = controllerDescriptor;
 
-                MethodInfo[] allMethods = _controllerDescriptor.ControllerType.GetMethods(
-                    BindingFlags.Instance | BindingFlags.Public
-                );
+                MethodInfo[] allMethods = _controllerDescriptor.ControllerType
+                    .GetMethods(BindingFlags.Instance | BindingFlags.Public);
                 MethodInfo[] validMethods = Array.FindAll(allMethods, IsValidActionMethod);
 
                 _combinedCandidateActions = new CandidateAction[validMethods.Length];
@@ -153,7 +152,8 @@ namespace System.Web.Http.Controllers
                     // Building an action parameter name mapping to compare against the URI parameters coming from the request. Here we only take into account required parameters that are simple types and come from URI.
                     _actionParameterNames.Add(
                         actionDescriptor,
-                        actionBinding.ParameterBindings.Where(
+                        actionBinding.ParameterBindings
+                            .Where(
                                 binding =>
                                     !binding.Descriptor.IsOptional
                                     && TypeHelper.CanConvertFromString(
@@ -170,8 +170,8 @@ namespace System.Web.Http.Controllers
                 }
 
                 _combinedActionNameMapping = _combinedCandidateActions.Select(
-                        c => c.ActionDescriptor
-                    )
+                    c => c.ActionDescriptor
+                )
                     .ToLookup(
                         actionDesc => actionDesc.ActionName,
                         StringComparer.OrdinalIgnoreCase
@@ -227,12 +227,12 @@ namespace System.Web.Http.Controllers
                     standardActions.StandardCandidateActions = standardCandidateActions.ToArray();
                 }
 
-                standardActions.StandardActionNameMapping =
-                    standardActions.StandardCandidateActions.Select(c => c.ActionDescriptor)
-                        .ToLookup(
-                            actionDesc => actionDesc.ActionName,
-                            StringComparer.OrdinalIgnoreCase
-                        );
+                standardActions.StandardActionNameMapping = standardActions.StandardCandidateActions
+                    .Select(c => c.ActionDescriptor)
+                    .ToLookup(
+                        actionDesc => actionDesc.ActionName,
+                        StringComparer.OrdinalIgnoreCase
+                    );
 
                 // Bucket the action descriptors by common verbs.
                 int len = _cacheListVerbKinds.Length;
@@ -362,13 +362,14 @@ namespace System.Web.Http.Controllers
             )
             {
                 HttpMethod incomingMethod = controllerContext.Request.Method;
-                HttpResponseMessage response = controllerContext.Request.CreateErrorResponse(
-                    HttpStatusCode.MethodNotAllowed,
-                    Error.Format(
-                        SRResources.ApiControllerActionSelector_HttpMethodNotSupported,
-                        incomingMethod
-                    )
-                );
+                HttpResponseMessage response = controllerContext.Request
+                    .CreateErrorResponse(
+                        HttpStatusCode.MethodNotAllowed,
+                        Error.Format(
+                            SRResources.ApiControllerActionSelector_HttpMethodNotSupported,
+                            incomingMethod
+                        )
+                    );
 
                 // 405 must include an Allow content-header with the allowable methods.
                 // See: https://tools.ietf.org/html/rfc2616#section-14.7
@@ -390,17 +391,18 @@ namespace System.Web.Http.Controllers
                 HttpControllerContext controllerContext
             )
             {
-                return controllerContext.Request.CreateErrorResponse(
-                    HttpStatusCode.NotFound,
-                    Error.Format(
-                        SRResources.ResourceNotFound,
-                        controllerContext.Request.RequestUri
-                    ),
-                    Error.Format(
-                        SRResources.ApiControllerActionSelector_ActionNotFound,
-                        _controllerDescriptor.ControllerName
-                    )
-                );
+                return controllerContext.Request
+                    .CreateErrorResponse(
+                        HttpStatusCode.NotFound,
+                        Error.Format(
+                            SRResources.ResourceNotFound,
+                            controllerContext.Request.RequestUri
+                        ),
+                        Error.Format(
+                            SRResources.ApiControllerActionSelector_ActionNotFound,
+                            _controllerDescriptor.ControllerName
+                        )
+                    );
             }
 
             // Create a 404, including the name of the action we were looking for.
@@ -410,18 +412,19 @@ namespace System.Web.Http.Controllers
                 string actionName
             )
             {
-                return controllerContext.Request.CreateErrorResponse(
-                    HttpStatusCode.NotFound,
-                    Error.Format(
-                        SRResources.ResourceNotFound,
-                        controllerContext.Request.RequestUri
-                    ),
-                    Error.Format(
-                        SRResources.ApiControllerActionSelector_ActionNameNotFound,
-                        _controllerDescriptor.ControllerName,
-                        actionName
-                    )
-                );
+                return controllerContext.Request
+                    .CreateErrorResponse(
+                        HttpStatusCode.NotFound,
+                        Error.Format(
+                            SRResources.ResourceNotFound,
+                            controllerContext.Request.RequestUri
+                        ),
+                        Error.Format(
+                            SRResources.ApiControllerActionSelector_ActionNameNotFound,
+                            _controllerDescriptor.ControllerName,
+                            actionName
+                        )
+                    );
             }
 
             // Call for direct routes.
@@ -566,9 +569,9 @@ namespace System.Web.Http.Controllers
             )
             {
                 return candidatesFoundByName.Where(
-                        candidate =>
-                            candidate.ActionDescriptor.SupportedHttpMethods.Contains(incomingMethod)
-                    )
+                    candidate =>
+                        candidate.ActionDescriptor.SupportedHttpMethods.Contains(incomingMethod)
+                )
                     .ToArray();
             }
 
@@ -635,8 +638,8 @@ namespace System.Web.Http.Controllers
                 {
                     // select the results that match the most number of required parameters
                     return candidatesFound.GroupBy(
-                            candidate => _actionParameterNames[candidate.ActionDescriptor].Length
-                        )
+                        candidate => _actionParameterNames[candidate.ActionDescriptor].Length
+                    )
                         .OrderByDescending(g => g.Key)
                         .First()
                         .ToList();

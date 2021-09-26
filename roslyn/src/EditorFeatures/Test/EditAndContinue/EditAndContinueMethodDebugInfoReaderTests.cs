@@ -93,11 +93,12 @@ class C
                 var metadataImportProvider = new DummyMetadataImportProvider();
                 Assert.Equal(
                     0,
-                    new SymBinder().GetReaderFromPdbStream(
-                        metadataImportProvider,
-                        pdbStreamCom,
-                        out var symReader
-                    )
+                    new SymBinder()
+                        .GetReaderFromPdbStream(
+                            metadataImportProvider,
+                            pdbStreamCom,
+                            out var symReader
+                        )
                 );
                 reader = EditAndContinueMethodDebugInfoReader.Create(
                     (ISymUnmanagedReader5)symReader,

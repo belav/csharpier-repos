@@ -50,26 +50,25 @@ namespace Microsoft.VisualBasic.Tests
             var fileName2 = GetTestFilePath();
 
             RemoteExecutor.Invoke(
-                    (fileName1, fileName2) =>
+                (fileName1, fileName2) =>
+                {
+                    putStringNoClose(fileName1, "abc");
+                    putStringNoClose(fileName2, "123");
+
+                    // ProjectData.EndApp() should close all open files.
+                    Microsoft.VisualBasic.CompilerServices.ProjectData.EndApp();
+
+                    static void putStringNoClose(string fileName, string str)
                     {
-                        putStringNoClose(fileName1, "abc");
-                        putStringNoClose(fileName2, "123");
-
-                        // ProjectData.EndApp() should close all open files.
-                        Microsoft.VisualBasic.CompilerServices.ProjectData.EndApp();
-
-                        static void putStringNoClose(string fileName, string str)
-                        {
-                            int fileNumber = FileSystem.FreeFile();
-                            FileSystem.FileOpen(fileNumber, fileName, OpenMode.Random);
-                            FileSystem.FilePut(fileNumber, str);
-                        }
-                    },
-                    fileName1,
-                    fileName2,
-                    new RemoteInvokeOptions() { ExpectedExitCode = 0 }
-                )
-                .Dispose();
+                        int fileNumber = FileSystem.FreeFile();
+                        FileSystem.FileOpen(fileNumber, fileName, OpenMode.Random);
+                        FileSystem.FilePut(fileNumber, str);
+                    }
+                },
+                fileName1,
+                fileName2,
+                new RemoteInvokeOptions() { ExpectedExitCode = 0 }
+            ).Dispose();
 
             // Verify all text was written to the files.
             Assert.Equal("abc", getString(fileName1));
@@ -112,10 +111,11 @@ namespace Microsoft.VisualBasic.Tests
 
             for (int i = 0; i < n; i++)
             {
-                System.IO.File.WriteAllText(
-                    System.IO.Path.Combine(TestDirectory, fileNames[i]),
-                    i.ToString()
-                );
+                System.IO.File
+                    .WriteAllText(
+                        System.IO.Path.Combine(TestDirectory, fileNames[i]),
+                        i.ToString()
+                    );
             }
 
             // Get all files.
@@ -619,32 +619,32 @@ namespace Microsoft.VisualBasic.Tests
             static void remoteWrite(string fileName, string text)
             {
                 RemoteExecutor.Invoke(
-                        (fileName, text) =>
-                        {
-                            using (
-                                var stream = System.IO.File.Open(
+                    (fileName, text) =>
+                    {
+                        using (
+                            var stream = System.IO.File
+                                .Open(
                                     fileName,
                                     System.IO.FileMode.Append,
                                     System.IO.FileAccess.Write,
                                     System.IO.FileShare.ReadWrite
                                 )
-                            )
+                        )
+                        {
+                            try
                             {
-                                try
+                                using (var writer = new System.IO.StreamWriter(stream))
                                 {
-                                    using (var writer = new System.IO.StreamWriter(stream))
-                                    {
-                                        writer.Write(text);
-                                    }
+                                    writer.Write(text);
                                 }
-                                catch (System.IO.IOException) { }
                             }
-                        },
-                        fileName,
-                        text,
-                        new RemoteInvokeOptions() { ExpectedExitCode = 0 }
-                    )
-                    .Dispose();
+                            catch (System.IO.IOException) { }
+                        }
+                    },
+                    fileName,
+                    text,
+                    new RemoteInvokeOptions() { ExpectedExitCode = 0 }
+                ).Dispose();
             }
         }
 

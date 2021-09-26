@@ -103,15 +103,15 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             }
 
             var conditionalExpression = await CreateConditionalExpressionAsync(
-                    document,
-                    ifOperation,
-                    trueStatement,
-                    falseStatement,
-                    trueAssignment?.Value ?? trueStatement,
-                    falseAssignment?.Value ?? falseStatement,
-                    trueAssignment?.IsRef == true,
-                    cancellationToken
-                )
+                document,
+                ifOperation,
+                trueStatement,
+                falseStatement,
+                trueAssignment?.Value ?? trueStatement,
+                falseAssignment?.Value ?? falseStatement,
+                trueAssignment?.IsRef == true,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // See if we're assigning to a variable declared directly above the if statement. If so,
@@ -150,8 +150,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             var generator = editor.Generator;
             var ifStatement = (TIfStatementSyntax)ifOperation.Syntax;
             var expressionStatement = (TStatementSyntax)generator.ExpressionStatement(
-                    generator.AssignmentStatement(assignment.Target.Syntax, conditionalExpression)
-                )
+                generator.AssignmentStatement(assignment.Target.Syntax, conditionalExpression)
+            )
                 .WithTriviaFrom(ifStatement);
 
             editor.ReplaceNode(

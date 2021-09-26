@@ -11,7 +11,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             "304F020103301106092A864886F70D010701A004040230003037301F30070605"
             + "2B0E03021A0414822078BC83E955E314BDA908D76D4C5177CC94EB0414711018"
             + "F2897A44A90E92779CB655EA11814EC598"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         // Extracted from https://github.com/dotnet/runtime/issues/18254
         internal static readonly ReadOnlyMemory<byte> IndefiniteEncodingNoMac = (
@@ -108,7 +109,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             + "987BF98AA45A74C9B3E1313E301706092A864886F70D010914310A1E08006300"
             + "6500720074302306092A864886F70D01091531160414EDF3D122CF623CF0CFC9"
             + "CD226261E8415A83E63000000000000000000000000000000000"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         // orapki wallet create -wallet ewallet.p12
         // mkstore -wrl ewallet.p12 -createUserCredential a b c d
@@ -137,7 +139,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             + "ECE2283B5B97C4A4640DE37905C183FE5D28846859B453BEBF39F4F99E303130"
             + "21300906052B0E03021A050004148B12EE39C54B03EF4C1B0C2D8A3A9624D629"
             + "285A0408E398C69C57E4782102020400"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         internal static readonly ReadOnlyMemory<byte> HighPbeIterationCount3Des = (
             "308209c40201033082098906092a864886f70d010701a082097a04820976"
@@ -224,7 +227,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             + "04149566f15bed2cb2da568ec392507a9abfcb2920003032302130090605"
             + "2b0e03021a05000414c429b968eeca558cc2ec486f89b78c024bdecf2804"
             + "087cbeafa8089685a102030927c1"
-        ).HexToByteArray();
+        )
+            .HexToByteArray();
 
         // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Unit test dummy credentials.")]
         internal const string OracleWalletPassword = "123Wallet";

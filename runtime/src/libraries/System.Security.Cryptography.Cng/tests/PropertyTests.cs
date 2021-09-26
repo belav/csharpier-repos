@@ -118,9 +118,9 @@ namespace System.Security.Cryptography.Cng.Tests
                 key.SetProperty(property);
 
                 byte[] actualValue = key.GetProperty(
-                        propertyName,
-                        CngPropertyOptions.CustomProperty
-                    )
+                    propertyName,
+                    CngPropertyOptions.CustomProperty
+                )
                     .GetValue();
                 Assert.Equal<byte>(propertyValue, actualValue);
             }

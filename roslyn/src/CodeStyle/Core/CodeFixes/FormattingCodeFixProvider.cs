@@ -53,19 +53,19 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         {
             var options = await GetOptionsAsync(context.Document, cancellationToken)
                 .ConfigureAwait(false);
-            var tree = await context.Document.GetSyntaxTreeAsync(cancellationToken)
+            var tree = await context.Document
+                .GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var updatedTree = await FormattingCodeFixHelper.FixOneAsync(
-                    tree,
-                    SyntaxFormattingService,
-                    options,
-                    diagnostic,
-                    cancellationToken
-                )
+                tree,
+                SyntaxFormattingService,
+                options,
+                diagnostic,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
-            return context.Document.WithText(
-                await updatedTree.GetTextAsync(cancellationToken).ConfigureAwait(false)
-            );
+            return context.Document
+                .WithText(await updatedTree.GetTextAsync(cancellationToken).ConfigureAwait(false));
         }
 
         private static async Task<OptionSet> GetOptionsAsync(

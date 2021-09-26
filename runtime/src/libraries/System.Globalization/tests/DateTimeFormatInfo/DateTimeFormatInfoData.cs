@@ -63,11 +63,12 @@ namespace System.Globalization.Tests
         public static Exception GetCultureNotSupportedException(CultureInfo cultureInfo)
         {
             return new NotSupportedException(
-                string.Format(
-                    "The culture '{0}' with calendar '{1}' is not supported.",
-                    cultureInfo.Name,
-                    cultureInfo.Calendar.GetType().Name
-                )
+                string
+                    .Format(
+                        "The culture '{0}' with calendar '{1}' is not supported.",
+                        cultureInfo.Name,
+                        cultureInfo.Calendar.GetType().Name
+                    )
             );
         }
     }

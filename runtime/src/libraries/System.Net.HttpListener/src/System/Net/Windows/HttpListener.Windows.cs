@@ -126,12 +126,8 @@ namespace System.Net
             //
             // Set the url group property using Http Api.
             //
-            statusCode = Interop.HttpApi.HttpSetUrlGroupProperty(
-                _urlGroupId,
-                property,
-                info,
-                infosize
-            );
+            statusCode = Interop.HttpApi
+                .HttpSetUrlGroupProperty(_urlGroupId, property, info, infosize);
 
             if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
             {
@@ -212,11 +208,8 @@ namespace System.Net
 
             try
             {
-                statusCode = Interop.HttpApi.HttpCreateServerSession(
-                    Interop.HttpApi.s_version,
-                    &id,
-                    0
-                );
+                statusCode = Interop.HttpApi
+                    .HttpCreateServerSession(Interop.HttpApi.s_version, &id, 0);
 
                 if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
                 {
@@ -228,11 +221,8 @@ namespace System.Net
                 _serverSessionHandle = new HttpServerSessionHandle(id);
 
                 id = 0;
-                statusCode = Interop.HttpApi.HttpCreateUrlGroup(
-                    _serverSessionHandle.DangerousGetServerSessionId(),
-                    &id,
-                    0
-                );
+                statusCode = Interop.HttpApi
+                    .HttpCreateUrlGroup(_serverSessionHandle.DangerousGetServerSessionId(), &id, 0);
 
                 if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
                 {
@@ -398,12 +388,13 @@ namespace System.Net
 
             IntPtr infoptr = new IntPtr(&info);
 
-            uint statusCode = Interop.HttpApi.HttpSetUrlGroupProperty(
-                _urlGroupId,
-                Interop.HttpApi.HTTP_SERVER_PROPERTY.HttpServerBindingProperty,
-                infoptr,
-                (uint)Marshal.SizeOf(typeof(Interop.HttpApi.HTTP_BINDING_INFO))
-            );
+            uint statusCode = Interop.HttpApi
+                .HttpSetUrlGroupProperty(
+                    _urlGroupId,
+                    Interop.HttpApi.HTTP_SERVER_PROPERTY.HttpServerBindingProperty,
+                    infoptr,
+                    (uint)Marshal.SizeOf(typeof(Interop.HttpApi.HTTP_BINDING_INFO))
+                );
 
             if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
             {
@@ -545,12 +536,8 @@ namespace System.Net
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, "Calling Interop.HttpApi.HttpAddUrl[ToUrlGroup]");
 
-            uint statusCode = Interop.HttpApi.HttpAddUrlToUrlGroup(
-                _urlGroupId,
-                registeredPrefix,
-                0,
-                0
-            );
+            uint statusCode = Interop.HttpApi
+                .HttpAddUrlToUrlGroup(_urlGroupId, registeredPrefix, 0, 0);
             if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
             {
                 if (statusCode == Interop.HttpApi.ERROR_ALREADY_EXISTS)
@@ -600,15 +587,16 @@ namespace System.Net
                                 $"Calling Interop.HttpApi.HttpReceiveHttpRequest RequestId: {requestId}"
                             );
                         uint bytesTransferred = 0;
-                        statusCode = Interop.HttpApi.HttpReceiveHttpRequest(
-                            session.RequestQueueHandle,
-                            requestId,
-                            (uint)Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY,
-                            memoryBlob.RequestBlob,
-                            size,
-                            &bytesTransferred,
-                            null
-                        );
+                        statusCode = Interop.HttpApi
+                            .HttpReceiveHttpRequest(
+                                session.RequestQueueHandle,
+                                requestId,
+                                (uint)Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY,
+                                memoryBlob.RequestBlob,
+                                size,
+                                &bytesTransferred,
+                                null
+                            );
 
                         if (NetEventSource.Log.IsEnabled())
                             NetEventSource.Info(
@@ -809,10 +797,8 @@ namespace System.Net
             stoleBlob = false;
 
             // Some things we need right away.  Lift them out now while it's convenient.
-            string? authorizationHeader = Interop.HttpApi.GetKnownHeader(
-                memoryBlob.RequestBlob,
-                (int)HttpRequestHeader.Authorization
-            );
+            string? authorizationHeader = Interop.HttpApi
+                .GetKnownHeader(memoryBlob.RequestBlob, (int)HttpRequestHeader.Authorization);
             ulong connectionId = memoryBlob.RequestBlob->ConnectionId;
             ulong requestId = memoryBlob.RequestBlob->RequestId;
             bool isSecureConnection = memoryBlob.RequestBlob->pSslInfo != null;
@@ -974,14 +960,15 @@ namespace System.Net
                         if (
                             (authenticationScheme & AuthenticationSchemes.Negotiate)
                                 != AuthenticationSchemes.None
-                            && string.Compare(
-                                authorizationHeader,
-                                0,
-                                AuthenticationTypes.Negotiate,
-                                0,
-                                index,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                            && string
+                                .Compare(
+                                    authorizationHeader,
+                                    0,
+                                    AuthenticationTypes.Negotiate,
+                                    0,
+                                    index,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
                         )
                         {
                             headerScheme = AuthenticationSchemes.Negotiate;
@@ -989,14 +976,15 @@ namespace System.Net
                         else if (
                             (authenticationScheme & AuthenticationSchemes.Ntlm)
                                 != AuthenticationSchemes.None
-                            && string.Compare(
-                                authorizationHeader,
-                                0,
-                                AuthenticationTypes.NTLM,
-                                0,
-                                index,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                            && string
+                                .Compare(
+                                    authorizationHeader,
+                                    0,
+                                    AuthenticationTypes.NTLM,
+                                    0,
+                                    index,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
                         )
                         {
                             headerScheme = AuthenticationSchemes.Ntlm;
@@ -1004,14 +992,15 @@ namespace System.Net
                         else if (
                             (authenticationScheme & AuthenticationSchemes.Basic)
                                 != AuthenticationSchemes.None
-                            && string.Compare(
-                                authorizationHeader,
-                                0,
-                                AuthenticationTypes.Basic,
-                                0,
-                                index,
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                            && string
+                                .Compare(
+                                    authorizationHeader,
+                                    0,
+                                    AuthenticationTypes.Basic,
+                                    0,
+                                    index,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
                         )
                         {
                             headerScheme = AuthenticationSchemes.Basic;
@@ -1966,11 +1955,12 @@ namespace System.Net
 
                 DisconnectAsyncResult result = new DisconnectAsyncResult(session, connectionId);
 
-                uint statusCode = Interop.HttpApi.HttpWaitForDisconnect(
-                    session.RequestQueueHandle,
-                    connectionId,
-                    result.NativeOverlapped
-                );
+                uint statusCode = Interop.HttpApi
+                    .HttpWaitForDisconnect(
+                        session.RequestQueueHandle,
+                        connectionId,
+                        result.NativeOverlapped
+                    );
 
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(
@@ -2079,9 +2069,8 @@ namespace System.Net
 
                             for (int i = 0; i < challengeHandles!.Length; i++)
                             {
-                                byte[] byteChallenge = Encoding.Default.GetBytes(
-                                    (string)challenges![i]!
-                                );
+                                byte[] byteChallenge = Encoding.Default
+                                    .GetBytes((string)challenges![i]!);
                                 challengeHandles[i] = GCHandle.Alloc(
                                     byteChallenge,
                                     GCHandleType.Pinned
@@ -2104,18 +2093,19 @@ namespace System.Net
                                 session.Listener,
                                 "Calling Interop.HttpApi.HttpSendHtthttpResponse"
                             );
-                        statusCode = Interop.HttpApi.HttpSendHttpResponse(
-                            session.RequestQueueHandle,
-                            requestId,
-                            0,
-                            &httpResponse,
-                            null,
-                            &DataWritten,
-                            SafeLocalAllocHandle.Zero,
-                            0,
-                            null,
-                            null
-                        );
+                        statusCode = Interop.HttpApi
+                            .HttpSendHttpResponse(
+                                session.RequestQueueHandle,
+                                requestId,
+                                0,
+                                &httpResponse,
+                                null,
+                                &DataWritten,
+                                SafeLocalAllocHandle.Zero,
+                                0,
+                                null,
+                                null
+                            );
                     }
 
                     finally
@@ -2198,15 +2188,16 @@ namespace System.Net
                 {
                     // Http.sys team: ServiceName will always be null if
                     // HTTP_RECEIVE_SECURE_CHANNEL_TOKEN flag is set.
-                    statusCode = Interop.HttpApi.HttpReceiveClientCertificate(
-                        session.RequestQueueHandle,
-                        connectionId,
-                        (uint)Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_SECURE_CHANNEL_TOKEN,
-                        blobPtr,
-                        (uint)size,
-                        &bytesReceived,
-                        null
-                    );
+                    statusCode = Interop.HttpApi
+                        .HttpReceiveClientCertificate(
+                            session.RequestQueueHandle,
+                            connectionId,
+                            (uint)Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_SECURE_CHANNEL_TOKEN,
+                            blobPtr,
+                            (uint)size,
+                            &bytesReceived,
+                            null
+                        );
 
                     if (statusCode == Interop.HttpApi.ERROR_SUCCESS)
                     {
@@ -2294,11 +2285,8 @@ namespace System.Net
                 _connectionId = connectionId;
 
                 // we can call the Unsafe API here, we won't ever call user code
-                _nativeOverlapped = session.RequestQueueBoundHandle.AllocateNativeOverlapped(
-                    s_IOCallback,
-                    state: this,
-                    pinData: null
-                );
+                _nativeOverlapped = session.RequestQueueBoundHandle
+                    .AllocateNativeOverlapped(s_IOCallback, state: this, pinData: null);
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(
                         $"DisconnectAsyncResult: ThreadPoolBoundHandle.AllocateNativeOverlapped({session.RequestQueueBoundHandle}) -> {_nativeOverlapped->GetHashCode()}"
@@ -2348,9 +2336,8 @@ namespace System.Net
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(null, "_connectionId:" + asyncResult._connectionId);
 
-                asyncResult._listenerSession.RequestQueueBoundHandle.FreeNativeOverlapped(
-                    nativeOverlapped
-                );
+                asyncResult._listenerSession.RequestQueueBoundHandle
+                    .FreeNativeOverlapped(nativeOverlapped);
                 if (Interlocked.Exchange(ref asyncResult._ownershipState, 2) == 0)
                 {
                     asyncResult.HandleDisconnect();

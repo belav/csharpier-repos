@@ -37,12 +37,11 @@ public static class Program
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (13,9): error CS1510: A ref or out value must be an assignable variable
-                    //         5.PrintValue();
-                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "5").WithLocation(13, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (13,9): error CS1510: A ref or out value must be an assignable variable
+                //         5.PrintValue();
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "5").WithLocation(13, 9)
+            );
         }
 
         [Fact]
@@ -216,14 +215,13 @@ public static class Program
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (20,32): error CS1954: The best overloaded method match 'MyStructExtension.Add(ref MyStruct, ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
-                    //         var s = new MyStruct { 1 };
-                    Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1")
-                        .WithArguments("MyStructExtension.Add(ref MyStruct, ref int)")
-                        .WithLocation(20, 32)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (20,32): error CS1954: The best overloaded method match 'MyStructExtension.Add(ref MyStruct, ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
+                //         var s = new MyStruct { 1 };
+                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1")
+                    .WithArguments("MyStructExtension.Add(ref MyStruct, ref int)")
+                    .WithLocation(20, 32)
+            );
         }
 
         [Fact]
@@ -253,14 +251,13 @@ public static class Program
         System.Console.Write(s.i);
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (19,32): error CS1954: The best overloaded method match 'MyStructExtension.Add(in MyStruct, ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
-                    //         var s = new MyStruct { 1 };
-                    Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1")
-                        .WithArguments("MyStructExtension.Add(in MyStruct, ref int)")
-                        .WithLocation(19, 32)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (19,32): error CS1954: The best overloaded method match 'MyStructExtension.Add(in MyStruct, ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
+                //         var s = new MyStruct { 1 };
+                Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1")
+                    .WithArguments("MyStructExtension.Add(in MyStruct, ref int)")
+                    .WithLocation(19, 32)
+            );
         }
 
         [Fact]
@@ -355,14 +352,13 @@ public static class Extensions
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (10,25): error CS0023: Operator '?' cannot be applied to operand of type 'TestType'
-                    //         var value1 = obj?.GetValue();        // This should be an error
-                    Diagnostic(ErrorCode.ERR_BadUnaryOp, "?")
-                        .WithArguments("?", "TestType")
-                        .WithLocation(10, 25)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (10,25): error CS0023: Operator '?' cannot be applied to operand of type 'TestType'
+                //         var value1 = obj?.GetValue();        // This should be an error
+                Diagnostic(ErrorCode.ERR_BadUnaryOp, "?")
+                    .WithArguments("?", "TestType")
+                    .WithLocation(10, 25)
+            );
         }
 
         [Fact]
@@ -383,14 +379,13 @@ public static class Extensions
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (10,25): error CS0023: Operator '?' cannot be applied to operand of type 'TestType'
-                    //         var value1 = obj?.GetValue();        // This should be an error
-                    Diagnostic(ErrorCode.ERR_BadUnaryOp, "?")
-                        .WithArguments("?", "TestType")
-                        .WithLocation(10, 25)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (10,25): error CS0023: Operator '?' cannot be applied to operand of type 'TestType'
+                //         var value1 = obj?.GetValue();        // This should be an error
+                Diagnostic(ErrorCode.ERR_BadUnaryOp, "?")
+                    .WithArguments("?", "TestType")
+                    .WithLocation(10, 25)
+            );
         }
 
         [Fact]
@@ -465,25 +460,24 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
-                    //     public static void PrintValue(ref this string p)
-                    Diagnostic(
-                            ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
-                            "PrintValue"
-                        )
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
+                //     public static void PrintValue(ref this string p)
+                Diagnostic(
+                    ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
+                    "PrintValue"
+                )
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -493,15 +487,14 @@ public static class Program2
         Extensions.PrintValue(ref x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -526,25 +519,24 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
-                    //     public static void PrintValue(ref this System.IComparable p)
-                    Diagnostic(
-                            ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
-                            "PrintValue"
-                        )
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'IComparable' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'IComparable' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("System.IComparable", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
+                //     public static void PrintValue(ref this System.IComparable p)
+                Diagnostic(
+                    ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
+                    "PrintValue"
+                )
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'IComparable' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'IComparable' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("System.IComparable", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -554,15 +546,14 @@ public static class Program2
         Extensions.PrintValue(ref x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'IComparable' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'IComparable' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("System.IComparable", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'IComparable' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'IComparable' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("System.IComparable", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -587,25 +578,24 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
-                    //     public static void PrintValue<T>(ref this T p)
-                    Diagnostic(
-                            ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
-                            "PrintValue"
-                        )
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
+                //     public static void PrintValue<T>(ref this T p)
+                Diagnostic(
+                    ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
+                    "PrintValue"
+                )
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -615,15 +605,14 @@ public static class Program2
         Extensions.PrintValue(ref x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -698,25 +687,24 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
-                    //     public static void PrintValue<T>(ref this T p) where T : class
-                    Diagnostic(
-                            ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
-                            "PrintValue"
-                        )
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
+                //     public static void PrintValue<T>(ref this T p) where T : class
+                Diagnostic(
+                    ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
+                    "PrintValue"
+                )
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -726,15 +714,14 @@ public static class Program2
         Extensions.PrintValue(ref x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -759,25 +746,24 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
-                    //     public static void PrintValue<T>(ref this T p) where T : System.IComparable
-                    Diagnostic(
-                            ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
-                            "PrintValue"
-                        )
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8337: The first parameter of the reference extension method 'PrintValue' must be a value type or a generic type constrained to struct.
+                //     public static void PrintValue<T>(ref this T p) where T : System.IComparable
+                Diagnostic(
+                    ErrorCode.ERR_RefExtensionMustBeValueTypeOrConstrainedToOne,
+                    "PrintValue"
+                )
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -787,15 +773,14 @@ public static class Program2
         Extensions.PrintValue(ref x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -1160,22 +1145,21 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
-                    //     public static void PrintValue(in this string p)
-                    Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
+                //     public static void PrintValue(in this string p)
+                Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -1185,15 +1169,14 @@ public static class Program2
         Extensions.PrintValue(x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -1218,22 +1201,21 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
-                    //     public static void PrintValue(in this System.IComparable p)
-                    Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'IComparable' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'IComparable' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("System.IComparable", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
+                //     public static void PrintValue(in this System.IComparable p)
+                Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'IComparable' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'IComparable' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("System.IComparable", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -1243,15 +1225,14 @@ public static class Program2
         Extensions.PrintValue(x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'IComparable' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'IComparable' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("System.IComparable", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'IComparable' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'IComparable' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("System.IComparable", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -1276,22 +1257,21 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
-                    //     public static void PrintValue<T>(in this T p)
-                    Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
+                //     public static void PrintValue<T>(in this T p)
+                Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -1301,15 +1281,14 @@ public static class Program2
         Extensions.PrintValue(x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -1334,22 +1313,21 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
-                    //     public static void PrintValue<T>(in this T p) where T : struct
-                    Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'int' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'int' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("int", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
+                //     public static void PrintValue<T>(in this T p) where T : struct
+                Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'int' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'int' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("int", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -1359,15 +1337,14 @@ public static class Program2
         Extensions.PrintValue(x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'int' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'int' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("int", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'int' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'int' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("int", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -1392,22 +1369,21 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
-                    //     public static void PrintValue<T>(in this T p) where T : class
-                    Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a concrete (non-generic) value type.
+                //     public static void PrintValue<T>(in this T p) where T : class
+                Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -1417,15 +1393,14 @@ public static class Program2
         Extensions.PrintValue(x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -1450,22 +1425,21 @@ public static class Program
     }
 }";
 
-            var reference = CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a value type.
-                    //     public static void PrintValue<T>(in this T p) where T : System.IComparable
-                    Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
-                        .WithArguments("PrintValue")
-                        .WithLocation(4, 24),
-                    // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(14, 11)
-                );
+            var reference = CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (4,24): error CS8338: The first parameter of the 'in' extension method 'PrintValue' must be a value type.
+                //     public static void PrintValue<T>(in this T p) where T : System.IComparable
+                Diagnostic(ErrorCode.ERR_InExtensionMustBeValueType, "PrintValue")
+                    .WithArguments("PrintValue")
+                    .WithLocation(4, 24),
+                // (14,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(14, 11)
+            );
 
             CreateCompilation(
-                    @"
+                @"
 public static class Program2
 {
     public static void Main()
@@ -1475,15 +1449,14 @@ public static class Program2
         Extensions.PrintValue(x);
     }
 }",
-                    references: new[] { reference.ToMetadataReference() }
-                )
-                .VerifyDiagnostics(
-                    // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
-                    //         x.PrintValue();
-                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
-                        .WithArguments("string", "PrintValue")
-                        .WithLocation(7, 11)
-                );
+                references: new[] { reference.ToMetadataReference() }
+            ).VerifyDiagnostics(
+                // (7,11): error CS1061: 'string' does not contain a definition for 'PrintValue' and no extension method 'PrintValue' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                //         x.PrintValue();
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "PrintValue")
+                    .WithArguments("string", "PrintValue")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -1829,14 +1802,13 @@ public static class Program
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (6,9): error CS8408: Cannot assign to variable 'in int' because it is a readonly variable
-                    //         p++;
-                    Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "p")
-                        .WithArguments("variable", "in int")
-                        .WithLocation(6, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (6,9): error CS8408: Cannot assign to variable 'in int' because it is a readonly variable
+                //         p++;
+                Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "p")
+                    .WithArguments("variable", "in int")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -1987,14 +1959,13 @@ public class Test
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (14,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref long)' requires a receiver of type 'ref long'
-                    //         intValue.Print();       // Should be an error
-                    Diagnostic(ErrorCode.ERR_BadInstanceArgType, "intValue")
-                        .WithArguments("int", "Print", "Extensions.Print(ref long)", "ref long")
-                        .WithLocation(14, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (14,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref long)' requires a receiver of type 'ref long'
+                //         intValue.Print();       // Should be an error
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "intValue")
+                    .WithArguments("int", "Print", "Extensions.Print(ref long)", "ref long")
+                    .WithLocation(14, 9)
+            );
         }
 
         [Fact]
@@ -2021,14 +1992,13 @@ public class Test
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (14,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(in long)' requires a receiver of type 'in long'
-                    //         intValue.Print();       // Should be an error
-                    Diagnostic(ErrorCode.ERR_BadInstanceArgType, "intValue")
-                        .WithArguments("int", "Print", "Extensions.Print(in long)", "in long")
-                        .WithLocation(14, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (14,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(in long)' requires a receiver of type 'in long'
+                //         intValue.Print();       // Should be an error
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "intValue")
+                    .WithArguments("int", "Print", "Extensions.Print(in long)", "in long")
+                    .WithLocation(14, 9)
+            );
         }
 
         [Fact]
@@ -2060,9 +2030,9 @@ public class Test
 }";
 
             CreateCompilationWithMscorlib40AndSystemCore(
-                    code,
-                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
-                )
+                code,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            )
                 .VerifyDiagnostics(
                     // (16,9): error CS1929: '(int intValue1, int intValue2)' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref (long, long))' requires a receiver of type 'ref (long, long)'
                     //         intTuple.Print();                       // Should be an error
@@ -2106,9 +2076,9 @@ public class Test
 }";
 
             CreateCompilationWithMscorlib40AndSystemCore(
-                    code,
-                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
-                )
+                code,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            )
                 .VerifyDiagnostics(
                     // (16,9): error CS1929: '(int intValue1, int intValue2)' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(in (long, long))' requires a receiver of type 'in (long, long)'
                     //         intTuple.Print();                       // Should be an error
@@ -2149,19 +2119,18 @@ public class Test
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (13,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref int?)' requires a receiver of type 'ref int?'
-                    //         0.Print();                  // Should be an error
-                    Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0")
-                        .WithArguments("int", "Print", "Extensions.Print(ref int?)", "ref int?")
-                        .WithLocation(13, 9),
-                    // (16,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref int?)' requires a receiver of type 'ref int?'
-                    //         intValue.Print();           // Should be an error
-                    Diagnostic(ErrorCode.ERR_BadInstanceArgType, "intValue")
-                        .WithArguments("int", "Print", "Extensions.Print(ref int?)", "ref int?")
-                        .WithLocation(16, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (13,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref int?)' requires a receiver of type 'ref int?'
+                //         0.Print();                  // Should be an error
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0")
+                    .WithArguments("int", "Print", "Extensions.Print(ref int?)", "ref int?")
+                    .WithLocation(13, 9),
+                // (16,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref int?)' requires a receiver of type 'ref int?'
+                //         intValue.Print();           // Should be an error
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "intValue")
+                    .WithArguments("int", "Print", "Extensions.Print(ref int?)", "ref int?")
+                    .WithLocation(16, 9)
+            );
         }
 
         [Fact]
@@ -2190,19 +2159,18 @@ public class Test
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (13,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(in int?)' requires a receiver of type 'in int?'
-                    //         0.Print();                  // Should be an error
-                    Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0")
-                        .WithArguments("int", "Print", "Extensions.Print(in int?)", "in int?")
-                        .WithLocation(13, 9),
-                    // (16,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(in int?)' requires a receiver of type 'in int?'
-                    //         intValue.Print();           // Should be an error
-                    Diagnostic(ErrorCode.ERR_BadInstanceArgType, "intValue")
-                        .WithArguments("int", "Print", "Extensions.Print(in int?)", "in int?")
-                        .WithLocation(16, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (13,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(in int?)' requires a receiver of type 'in int?'
+                //         0.Print();                  // Should be an error
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0")
+                    .WithArguments("int", "Print", "Extensions.Print(in int?)", "in int?")
+                    .WithLocation(13, 9),
+                // (16,9): error CS1929: 'int' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(in int?)' requires a receiver of type 'in int?'
+                //         intValue.Print();           // Should be an error
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "intValue")
+                    .WithArguments("int", "Print", "Extensions.Print(in int?)", "in int?")
+                    .WithLocation(16, 9)
+            );
         }
 
         [Fact]
@@ -2231,14 +2199,13 @@ public struct Test
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (16,9): error CS1929: 'string' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref Test)' requires a receiver of type 'ref Test'
-                    //         stringValue.Print();            // Should be an error
-                    Diagnostic(ErrorCode.ERR_BadInstanceArgType, "stringValue")
-                        .WithArguments("string", "Print", "Extensions.Print(ref Test)", "ref Test")
-                        .WithLocation(16, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (16,9): error CS1929: 'string' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref Test)' requires a receiver of type 'ref Test'
+                //         stringValue.Print();            // Should be an error
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "stringValue")
+                    .WithArguments("string", "Print", "Extensions.Print(ref Test)", "ref Test")
+                    .WithLocation(16, 9)
+            );
         }
 
         [Fact]
@@ -2267,14 +2234,13 @@ public struct Test
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (16,9): error CS1929: 'string' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref Test)' requires a receiver of type 'ref Test'
-                    //         stringValue.Print();            // Should be an error
-                    Diagnostic(ErrorCode.ERR_BadInstanceArgType, "stringValue")
-                        .WithArguments("string", "Print", "Extensions.Print(ref Test)", "ref Test")
-                        .WithLocation(16, 9)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (16,9): error CS1929: 'string' does not contain a definition for 'Print' and the best extension method overload 'Extensions.Print(ref Test)' requires a receiver of type 'ref Test'
+                //         stringValue.Print();            // Should be an error
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "stringValue")
+                    .WithArguments("string", "Print", "Extensions.Print(ref Test)", "ref Test")
+                    .WithLocation(16, 9)
+            );
         }
 
         [Fact]
@@ -2489,14 +2455,13 @@ public class Program
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (20,11): error CS0121: The call is ambiguous between the following methods or properties: 'Ext1.Print(ref int)' and 'Ext2.Print(in int)'
-                    //         0.Print();                  // Error
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Print")
-                        .WithArguments("Ext1.Print(ref int)", "Ext2.Print(in int)")
-                        .WithLocation(20, 11)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (20,11): error CS0121: The call is ambiguous between the following methods or properties: 'Ext1.Print(ref int)' and 'Ext2.Print(in int)'
+                //         0.Print();                  // Error
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Print")
+                    .WithArguments("Ext1.Print(ref int)", "Ext2.Print(in int)")
+                    .WithLocation(20, 11)
+            );
         }
 
         [Fact]
@@ -2530,14 +2495,13 @@ public class Program
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (21,15): error CS0121: The call is ambiguous between the following methods or properties: 'Ext1.Print(ref int)' and 'Ext2.Print(in int)'
-                    //         value.Print();              // Error
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "Print")
-                        .WithArguments("Ext1.Print(ref int)", "Ext2.Print(in int)")
-                        .WithLocation(21, 15)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (21,15): error CS0121: The call is ambiguous between the following methods or properties: 'Ext1.Print(ref int)' and 'Ext2.Print(in int)'
+                //         value.Print();              // Error
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Print")
+                    .WithArguments("Ext1.Print(ref int)", "Ext2.Print(in int)")
+                    .WithLocation(21, 15)
+            );
         }
 
         [Fact]
@@ -2557,14 +2521,13 @@ public static class Ext
     }
 }";
 
-            CreateCompilationWithMscorlib40AndSystemCore(code)
-                .VerifyDiagnostics(
-                    // (6,17): error CS8406: Cannot use variable 'in int' as a ref or out value because it is a readonly variable
-                    //         Ref(ref p);     // Should be an error
-                    Diagnostic(ErrorCode.ERR_RefReadonlyNotField, "p")
-                        .WithArguments("variable", "in int")
-                        .WithLocation(6, 17)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(code).VerifyDiagnostics(
+                // (6,17): error CS8406: Cannot use variable 'in int' as a ref or out value because it is a readonly variable
+                //         Ref(ref p);     // Should be an error
+                Diagnostic(ErrorCode.ERR_RefReadonlyNotField, "p")
+                    .WithArguments("variable", "in int")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -2673,46 +2636,44 @@ public static class GenExtensions<X> where X : struct
 }
 ";
 
-            CreateCompilationWithMscorlib40AndSystemCore(test)
-                .GetDeclarationDiagnostics()
-                .Verify(
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
-                    // (3,21): error CS1106: Extension method must be defined in a non-generic static class
-                    // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21)
-                );
+            CreateCompilationWithMscorlib40AndSystemCore(test).GetDeclarationDiagnostics().Verify(
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
+                // (3,21): error CS1106: Extension method must be defined in a non-generic static class
+                // public static class GenExtensions<X> where X : struct
+                Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21)
+            );
         }
 
         [Fact]
@@ -2737,11 +2698,10 @@ public static class Program
 }";
 
             CreateCompilationWithMscorlib40AndSystemCore(
-                    code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    )
-                )
+                code,
+                parseOptions: CSharpParseOptions.Default
+                    .WithLanguageVersion(LanguageVersion.CSharp7_1)
+            )
                 .VerifyDiagnostics(
                     // (4,30): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
                     //     public static void Print(ref this int p)
@@ -2784,12 +2744,11 @@ public static class Program
 }";
 
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source: code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    ),
-                    references: new[] { reference.ToMetadataReference() }
-                )
+                source: code,
+                parseOptions: CSharpParseOptions.Default
+                    .WithLanguageVersion(LanguageVersion.CSharp7_1),
+                references: new[] { reference.ToMetadataReference() }
+            )
                 .VerifyDiagnostics(
                     // (7,9): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
                     //         p.Print();
@@ -2799,12 +2758,11 @@ public static class Program
                 );
 
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source: code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    ),
-                    references: new[] { reference.EmitToImageReference() }
-                )
+                source: code,
+                parseOptions: CSharpParseOptions.Default
+                    .WithLanguageVersion(LanguageVersion.CSharp7_1),
+                references: new[] { reference.EmitToImageReference() }
+            )
                 .VerifyDiagnostics(
                     // (7,9): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
                     //         p.Print();
@@ -2854,11 +2812,10 @@ public static class Program
 }";
 
             CreateCompilationWithMscorlib40AndSystemCore(
-                    code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    )
-                )
+                code,
+                parseOptions: CSharpParseOptions.Default
+                    .WithLanguageVersion(LanguageVersion.CSharp7_1)
+            )
                 .VerifyDiagnostics(
                     // (4,31): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
                     //     public static void Print0(in this int p)
@@ -2941,12 +2898,11 @@ public static class Program
 }";
 
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source: code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    ),
-                    references: new[] { reference.ToMetadataReference() }
-                )
+                source: code,
+                parseOptions: CSharpParseOptions.Default
+                    .WithLanguageVersion(LanguageVersion.CSharp7_1),
+                references: new[] { reference.ToMetadataReference() }
+            )
                 .VerifyDiagnostics(
                     // (7,9): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
                     //         p.Print();
@@ -2956,12 +2912,11 @@ public static class Program
                 );
 
             CreateCompilationWithMscorlib40AndSystemCore(
-                    source: code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    ),
-                    references: new[] { reference.EmitToImageReference() }
-                )
+                source: code,
+                parseOptions: CSharpParseOptions.Default
+                    .WithLanguageVersion(LanguageVersion.CSharp7_1),
+                references: new[] { reference.EmitToImageReference() }
+            )
                 .VerifyDiagnostics(
                     // (7,9): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
                     //         p.Print();

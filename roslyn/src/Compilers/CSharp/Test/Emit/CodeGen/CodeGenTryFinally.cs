@@ -2496,10 +2496,9 @@ class C
         }
     }
 }";
-            CompileAndVerify(src, expectedOutput: "TryCatch228Finally")
-                .VerifyIL(
-                    "C.Test",
-                    @"
+            CompileAndVerify(src, expectedOutput: "TryCatch228Finally").VerifyIL(
+                "C.Test",
+                @"
 {
   // Code size      132 (0x84)
   .maxstack  2
@@ -2580,7 +2579,7 @@ class C
   }
   IL_0083:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3236,12 +3235,11 @@ class Program
     }
 }
 ";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (9,9): warning CS1058: A previous catch clause already catches all exceptions. All non-exceptions thrown will be wrapped in a System.Runtime.CompilerServices.RuntimeWrappedException.
-                    //         catch when (a == 1) { }
-                    Diagnostic(ErrorCode.WRN_UnreachableGeneralCatch, "catch").WithLocation(9, 9)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (9,9): warning CS1058: A previous catch clause already catches all exceptions. All non-exceptions thrown will be wrapped in a System.Runtime.CompilerServices.RuntimeWrappedException.
+                //         catch when (a == 1) { }
+                Diagnostic(ErrorCode.WRN_UnreachableGeneralCatch, "catch").WithLocation(9, 9)
+            );
         }
 
         [Fact]
@@ -3916,10 +3914,9 @@ public class Program
 }";
 
             CompileAndVerify(source, expectedOutput: "", options: TestOptions.DebugExe);
-            CompileAndVerify(source, expectedOutput: "", options: TestOptions.ReleaseExe)
-                .VerifyIL(
-                    "Program.Main",
-                    @"
+            CompileAndVerify(source, expectedOutput: "", options: TestOptions.ReleaseExe).VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  1
@@ -3948,7 +3945,7 @@ public class Program
   IL_0019:  ret
 }
 "
-                );
+            );
         }
     }
 }

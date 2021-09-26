@@ -84,7 +84,8 @@ namespace System.Xml
             // If we are already in fallback, throw, it's probably at the suspect character in charEntity
             if (_charEntityIndex >= 0)
             {
-                (new EncoderExceptionFallback()).CreateFallbackBuffer()
+                (new EncoderExceptionFallback())
+                    .CreateFallbackBuffer()
                     .Fallback(charUnknown, index);
             }
 
@@ -92,19 +93,19 @@ namespace System.Xml
             if (_parent.CanReplaceAt(index))
             {
                 // Create the replacement character entity
-                _charEntity = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "&#x{0:X};",
-                    new object[] { (int)charUnknown }
-                );
+                _charEntity = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "&#x{0:X};",
+                        new object[] { (int)charUnknown }
+                    );
                 _charEntityIndex = 0;
                 return true;
             }
             else
             {
-                EncoderFallbackBuffer errorFallbackBuffer = (
-                    new EncoderExceptionFallback()
-                ).CreateFallbackBuffer();
+                EncoderFallbackBuffer errorFallbackBuffer = (new EncoderExceptionFallback())
+                    .CreateFallbackBuffer();
                 errorFallbackBuffer.Fallback(charUnknown, index);
                 return false;
             }
@@ -124,26 +125,27 @@ namespace System.Xml
             // If we are already in fallback, throw, it's probably at the suspect character in charEntity
             if (_charEntityIndex >= 0)
             {
-                (new EncoderExceptionFallback()).CreateFallbackBuffer()
+                (new EncoderExceptionFallback())
+                    .CreateFallbackBuffer()
                     .Fallback(charUnknownHigh, charUnknownLow, index);
             }
 
             if (_parent.CanReplaceAt(index))
             {
                 // Create the replacement character entity
-                _charEntity = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "&#x{0:X};",
-                    new object[] { SurrogateCharToUtf32(charUnknownHigh, charUnknownLow) }
-                );
+                _charEntity = string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "&#x{0:X};",
+                        new object[] { SurrogateCharToUtf32(charUnknownHigh, charUnknownLow) }
+                    );
                 _charEntityIndex = 0;
                 return true;
             }
             else
             {
-                EncoderFallbackBuffer errorFallbackBuffer = (
-                    new EncoderExceptionFallback()
-                ).CreateFallbackBuffer();
+                EncoderFallbackBuffer errorFallbackBuffer = (new EncoderExceptionFallback())
+                    .CreateFallbackBuffer();
                 errorFallbackBuffer.Fallback(charUnknownHigh, charUnknownLow, index);
                 return false;
             }

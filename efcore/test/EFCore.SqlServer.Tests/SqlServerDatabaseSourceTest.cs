@@ -28,9 +28,8 @@ namespace Microsoft.EntityFrameworkCore
             optionsBuilder.UseSqlServer("Database=Crunchie");
 
             Assert.True(
-                new DatabaseProvider<SqlServerOptionsExtension>(
-                    new DatabaseProviderDependencies()
-                ).IsConfigured(optionsBuilder.Options)
+                new DatabaseProvider<SqlServerOptionsExtension>(new DatabaseProviderDependencies())
+                    .IsConfigured(optionsBuilder.Options)
             );
         }
 
@@ -40,9 +39,8 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
 
             Assert.False(
-                new DatabaseProvider<SqlServerOptionsExtension>(
-                    new DatabaseProviderDependencies()
-                ).IsConfigured(optionsBuilder.Options)
+                new DatabaseProvider<SqlServerOptionsExtension>(new DatabaseProviderDependencies())
+                    .IsConfigured(optionsBuilder.Options)
             );
         }
     }

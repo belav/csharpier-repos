@@ -30,10 +30,10 @@ namespace System.Tests
         public static void CheckExitCode(int expectedExitCode)
         {
             RemoteExecutor.Invoke(
-                    s => int.Parse(s),
-                    expectedExitCode.ToString(),
-                    new RemoteInvokeOptions { ExpectedExitCode = expectedExitCode }
-                )
+                s => int.Parse(s),
+                expectedExitCode.ToString(),
+                new RemoteInvokeOptions { ExpectedExitCode = expectedExitCode }
+            )
                 .Dispose();
         }
 

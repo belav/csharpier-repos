@@ -1177,24 +1177,22 @@ namespace AutoMapper.UnitTests
                 {
                     cfg.CreateMap<Source, Destination>()
                         .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
-                        .ForPath(
-                            d => d.InnerDestination.Description,
-                            o =>
-                            {
-                                o.MapFrom(s => s.Description);
-                                o.Condition(c => true);
-                            }
-                        );
-                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
-                        .ForPath(
-                            d => d.InnerDestination.Title,
-                            o =>
-                            {
-                                o.MapFrom(s => s.Title);
-                                o.Condition(c => true);
-                            }
-                        );
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForPath(
+                        d => d.InnerDestination.Description,
+                        o =>
+                        {
+                            o.MapFrom(s => s.Description);
+                            o.Condition(c => true);
+                        }
+                    );
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForPath(
+                        d => d.InnerDestination.Title,
+                        o =>
+                        {
+                            o.MapFrom(s => s.Title);
+                            o.Condition(c => true);
+                        }
+                    );
                 }
             );
         [Fact]
@@ -1712,11 +1710,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_inherit_configuration() =>
             Mapper.Map<Destination>(
-                    new ParentOfSource
-                    {
-                        InnerSource = new Source { FirstName = "first", LastName = "last" }
-                    }
-                )
+                new ParentOfSource
+                {
+                    InnerSource = new Source { FirstName = "first", LastName = "last" }
+                }
+            )
                 .FullName.ShouldBe("first last");
     }
     public class IncludeMembersWithIncludeDifferentOrder : AutoMapperSpecBase
@@ -1755,11 +1753,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_inherit_configuration() =>
             Mapper.Map<Destination>(
-                    new ParentOfSource
-                    {
-                        InnerSource = new Source { FirstName = "first", LastName = "last" }
-                    }
-                )
+                new ParentOfSource
+                {
+                    InnerSource = new Source { FirstName = "first", LastName = "last" }
+                }
+            )
                 .FullName.ShouldBe("first last");
     }
     public class IncludeMembersWithIncludeBase : AutoMapperSpecBase
@@ -1803,8 +1801,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_inherit_IncludeMembers() =>
             Mapper.Map<CreateCustomerDto>(
-                    new Customer { Address = new Address { Postcode = "Postcode" } }
-                )
+                new Customer { Address = new Address { Postcode = "Postcode" } }
+            )
                 .Postcode.ShouldBe("Postcode");
     }
     public class IncludeMembersWithIncludeBaseOverride : AutoMapperSpecBase
@@ -1852,8 +1850,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_override_IncludeMembers() =>
             Mapper.Map<CreateCustomerDto>(
-                    new Customer { NewAddress = new Address { Postcode = "Postcode" } }
-                )
+                new Customer { NewAddress = new Address { Postcode = "Postcode" } }
+            )
                 .Postcode.ShouldBe("Postcode");
     }
     public class IncludeMembersWithIncludeBaseOverrideMapFrom : AutoMapperSpecBase
@@ -1898,8 +1896,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_override_IncludeMembers() =>
             Mapper.Map<CreateCustomerDto>(
-                    new Customer { Name = "Postcode", Address = new Address() }
-                )
+                new Customer { Name = "Postcode", Address = new Address() }
+            )
                 .Postcode.ShouldBe("Postcode");
     }
     public class IncludeMembersWithIncludeBaseOverrideConvention : AutoMapperSpecBase
@@ -1947,8 +1945,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_override_IncludeMembers() =>
             Mapper.Map<CreateCustomerDto>(
-                    new NewCustomer { Postcode = "Postcode", Address = new Address() }
-                )
+                new NewCustomer { Postcode = "Postcode", Address = new Address() }
+            )
                 .Postcode.ShouldBe("Postcode");
     }
     public class IncludeMembersWithValueTypeValidation : AutoMapperSpecBase
@@ -2119,8 +2117,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_inherit_IncludeMembers() =>
             Mapper.Map<SignedResponse>(
-                    new ExpiredItem { MetaData = new MetaData { Hash = "hash" } }
-                )
+                new ExpiredItem { MetaData = new MetaData { Hash = "hash" } }
+            )
                 .Hash.ShouldBe("hash");
     }
 }

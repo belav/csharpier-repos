@@ -198,16 +198,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var result = context.CompileExpression(expr, out error, testData);
                     Assert.NotNull(result.Assembly);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        3 (0x3)
   .maxstack  1
   IL_0000:  ldc.i4.0
   IL_0001:  conv.i8
   IL_0002:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -272,10 +271,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             );
             Assert.Equal(
                 error,
-                string.Format(
-                    "error CS7013: Name '<{0}>i__Field' exceeds the maximum length allowed in metadata.",
-                    longName
-                )
+                string
+                    .Format(
+                        "error CS7013: Name '<{0}>i__Field' exceeds the maximum length allowed in metadata.",
+                        longName
+                    )
             );
         }
 
@@ -313,9 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             // No local reference.
             testData = new CompilationTestData();
             result = context.CompileExpression("F(x)", out error, testData);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   .locals init (int V_0)
@@ -324,7 +323,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0006:  call       ""object C.F(object)""
   IL_000b:  ret
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -405,10 +404,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
 
             // Get non-empty scopes.
             var scopes = symReader.GetScopes(
-                    methodToken,
-                    methodVersion,
-                    EvaluationContext.IsLocalScopeEndInclusive
-                )
+                methodToken,
+                methodVersion,
+                EvaluationContext.IsLocalScopeEndInclusive
+            )
                 .WhereAsArray(s => s.Locals.Length > 0);
             Assert.True(scopes.Length >= 3);
             var outerScope = scopes.First(s => s.Locals.Contains("x"));
@@ -534,13 +533,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             );
             Assert.NotEqual(context, GetMetadataContext(previous).EvaluationContext);
             Assert.True(
-                GetMetadataContext(previous)
-                    .EvaluationContext.MethodContextReuseConstraints.Value.AreSatisfied(
-                        moduleVersionId,
-                        methodToken,
-                        methodVersion,
-                        endOffset
-                    )
+                GetMetadataContext(previous).EvaluationContext.MethodContextReuseConstraints.Value
+                    .AreSatisfied(moduleVersionId, methodToken, methodVersion, endOffset)
             );
             Assert.NotEqual(context.Compilation, GetMetadataContext(previous).Compilation);
             previous = appDomain.GetMetadataContext();
@@ -568,13 +562,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             );
             Assert.NotEqual(context, GetMetadataContext(previous).EvaluationContext);
             Assert.False(
-                GetMetadataContext(previous)
-                    .EvaluationContext.MethodContextReuseConstraints.Value.AreSatisfied(
-                        moduleVersionId,
-                        methodToken,
-                        methodVersion,
-                        0
-                    )
+                GetMetadataContext(previous).EvaluationContext.MethodContextReuseConstraints.Value
+                    .AreSatisfied(moduleVersionId, methodToken, methodVersion, 0)
             );
             Assert.Equal(context.Compilation, GetMetadataContext(previous).Compilation);
 
@@ -781,9 +770,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var testData = new CompilationTestData();
                     context.CompileExpression("a[0]", out error, testData);
 
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        4 (0x4)
   .maxstack  2
   .locals init (C V_0,
@@ -795,7 +783,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0002:  ldelem.i4
   IL_0003:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -833,9 +821,8 @@ class B : A
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       27 (0x1b)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -852,12 +839,11 @@ class B : A
   IL_0015:  callvirt   ""object B.P.get""
   IL_001a:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     result = context.CompileExpression("F(this.F)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       19 (0x13)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -867,16 +853,15 @@ class B : A
   IL_000d:  call       ""object B.F(System.Func<object>)""
   IL_0012:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     result = context.CompileExpression(
                         "F(new System.Func<object>(this.F))",
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       19 (0x13)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -886,7 +871,7 @@ class B : A
   IL_000d:  call       ""object B.F(System.Func<object>)""
   IL_0012:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -925,9 +910,8 @@ class B : A
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       27 (0x1b)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -944,12 +928,11 @@ class B : A
   IL_0015:  call       ""object A.P.get""
   IL_001a:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     result = context.CompileExpression("F(base.F)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       18 (0x12)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -958,16 +941,15 @@ class B : A
   IL_000c:  call       ""object B.F(System.Func<object>)""
   IL_0011:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     result = context.CompileExpression(
                         "F(new System.Func<object>(base.F))",
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       18 (0x12)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -976,7 +958,7 @@ class B : A
   IL_000c:  call       ""object B.F(System.Func<object>)""
   IL_0011:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1044,9 +1026,8 @@ class B : A
                 methodName: "C.M",
                 expr: "F(y, x)"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldarg.1
@@ -1054,7 +1035,7 @@ class B : A
   IL_0002:  call       ""object C.F(int, int)""
   IL_0007:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1080,9 +1061,8 @@ class B : A
                 atLineNumber: 999,
                 expr: "F(x + y)"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       10 (0xa)
   .maxstack  3
   .locals init (int V_0) //y
@@ -1093,7 +1073,7 @@ class B : A
   IL_0004:  callvirt   ""object C.F(int)""
   IL_0009:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1124,9 +1104,8 @@ class B : A
                 expr: "x + z"
             );
 
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        4 (0x4)
   .maxstack  2
   .locals init (int V_0, //x
@@ -1138,7 +1117,7 @@ class B : A
   IL_0002:  add
   IL_0003:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1167,9 +1146,8 @@ class B : A
                 atLineNumber: 999,
                 expr: "o"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        3 (0x3)
   .maxstack  1
   .locals init (bool V_0,
@@ -1180,7 +1158,7 @@ class B : A
   IL_0000:  ldloc.s    V_4
   IL_0002:  ret
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -1204,9 +1182,8 @@ class B : A
                 methodName: "C.M",
                 expr: "@this.M(this)"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   .locals init (object V_0)
@@ -1215,7 +1192,7 @@ class B : A
   IL_0002:  callvirt   ""object C.M(C)""
   IL_0007:  ret
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -1240,9 +1217,8 @@ class B : A
                 methodName: "C.M",
                 expr: "@this.M(this)"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   .locals init (C V_0, //this
@@ -1252,7 +1228,7 @@ class B : A
   IL_0002:  callvirt   ""object C.M(object)""
   IL_0007:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1318,9 +1294,8 @@ class B : A
             string error;
             var testData = new CompilationTestData();
             context.CompileExpression("c.F", out error, testData);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   .locals init (C V_0) //c
@@ -1328,7 +1303,7 @@ class B : A
   IL_0001:  ldfld      ""object C.F""
   IL_0006:  ret
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -1407,9 +1382,8 @@ class B : A
             string error;
             var testData = new CompilationTestData();
             context.CompileExpression("s", out error, testData);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
@@ -1419,12 +1393,11 @@ class B : A
   IL_0000:  ldloc.0
   IL_0001:  ret
 }"
-                );
+            );
             testData = new CompilationTestData();
             context.CompileAssignment("s", "\"hello\"", out error, testData);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   .locals init (pinned string V_0, //s
@@ -1434,12 +1407,11 @@ class B : A
   IL_0005:  stloc.0
   IL_0006:  ret
 }"
-                );
+            );
             testData = new CompilationTestData();
             context.CompileExpression("f", out error, testData);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
@@ -1449,7 +1421,7 @@ class B : A
   IL_0000:  ldloc.1
   IL_0001:  ret
 }"
-                );
+            );
             testData = new CompilationTestData();
             context.CompileAssignment("f", "1", out error, testData);
             Assert.Equal(
@@ -1459,9 +1431,8 @@ class B : A
 
             testData = new CompilationTestData();
             context.CompileExpression("i", out error, testData);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        3 (0x3)
   .maxstack  1
   .locals init (pinned string V_0, //s
@@ -1471,13 +1442,12 @@ class B : A
   IL_0001:  ldind.i4
   IL_0002:  ret
 }"
-                );
+            );
             testData = new CompilationTestData();
             context.CompileAssignment("i", "1", out error, testData);
             Assert.Null(error);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        4 (0x4)
   .maxstack  2
   .locals init (pinned string V_0, //s
@@ -1488,7 +1458,7 @@ class B : A
   IL_0002:  stind.i4
   IL_0003:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -1528,9 +1498,8 @@ class B : A
                         testData
                     );
 
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       10 (0xa)
   .maxstack  2
   .locals init (char* V_0, //p1
@@ -1550,7 +1519,7 @@ class B : A
   IL_0008:  add
   IL_0009:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1581,9 +1550,8 @@ class B : A
                         error: out error,
                         testData: testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        3 (0x3)
   .maxstack  1
   .locals init (int V_0) //x
@@ -1591,13 +1559,12 @@ class B : A
   IL_0001:  stloc.0
   IL_0002:  ret
 }"
-                        );
+                    );
                     // Assign to a local, as above, but in an expression.
                     testData = new CompilationTestData();
                     context.CompileExpression(expr: "x = 1", error: out error, testData: testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        4 (0x4)
   .maxstack  2
   .locals init (int V_0) //x
@@ -1606,7 +1573,7 @@ class B : A
   IL_0002:  stloc.0
   IL_0003:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -1641,9 +1608,8 @@ class B : A
                         error: out error,
                         testData: testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       22 (0x16)
   .maxstack  4
   .locals init (int V_0) //y
@@ -1658,7 +1624,7 @@ class B : A
   IL_0014:  stelem.ref
   IL_0015:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2198,9 +2164,8 @@ class C
                     string error;
                     var testData = new CompilationTestData();
                     var result = context.CompileExpression("x[y]", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldstr      ""str""
@@ -2208,7 +2173,7 @@ class C
   IL_0006:  call       ""char string.this[int].get""
   IL_000b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2278,9 +2243,8 @@ class C
                         error: out error,
                         testData: testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        4 (0x4)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -2288,7 +2252,7 @@ class C
   IL_0002:  stind.i4
   IL_0003:  ret
 }"
-                        );
+                    );
                     context = CreateMethodContext(runtime, methodName: "C.M2");
                     testData = new CompilationTestData();
                     context.CompileAssignment(
@@ -2297,16 +2261,15 @@ class C
                         error: out error,
                         testData: testData
                     );
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  initobj    ""T""
   IL_0007:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     context.CompileExpression(
                         expr: "F(() => y)",
@@ -2405,9 +2368,8 @@ class C
                     );
                     Assert.Null(error);
                     Assert.Equal(1, testData.GetExplicitlyDeclaredMethods().Length);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       61 (0x3d)
   .maxstack  2
   IL_0000:  ldc.i4     0x123
@@ -2433,7 +2395,7 @@ class C
   IL_0037:  box        ""int""
   IL_003c:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     // Report overflow, even though native EE does not.
                     context.CompileExpression("@0xffff0000ffff0000ffff0000", out error, testData);
@@ -2675,10 +2637,11 @@ class C
                     );
                     Assert.Equal(
                         error,
-                        string.Format(
-                            "error CS7013: Name '<{0}>i__Field' exceeds the maximum length allowed in metadata.",
-                            longName
-                        )
+                        string
+                            .Format(
+                                "error CS7013: Name '<{0}>i__Field' exceeds the maximum length allowed in metadata.",
+                                longName
+                            )
                     );
                 }
             );
@@ -2744,9 +2707,8 @@ class C
                         error: out error,
                         testData: testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        9 (0x9)
   .maxstack  3
   IL_0000:  ldarg.0
@@ -2759,7 +2721,7 @@ class C
   IL_0007:  stind.i4
   IL_0008:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -2910,9 +2872,8 @@ class C
                 methodName: "C.M",
                 expr: "new System.RuntimeArgumentHandle()"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .locals init (System.RuntimeArgumentHandle V_0)
@@ -2921,7 +2882,7 @@ class C
   IL_0008:  ldloc.0
   IL_0009:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -2947,16 +2908,15 @@ class C
                 methodName: "N.M.A.B.F",
                 expr: "F()"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        6 (0x6)
   .maxstack  1
   .locals init (object V_0)
   IL_0000:  call       ""object N.M.A.B.F()""
   IL_0005:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3159,9 +3119,8 @@ class C<T>
                 methodName: "C.M",
                 expr: "((System.Func<object, object, object>)((a, b) => a ?? b))(x, y)"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  3
@@ -3179,7 +3138,7 @@ class C<T>
   IL_0021:  callvirt   ""object System.Func<object, object, object>.Invoke(object, object)""
   IL_0026:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3275,20 +3234,18 @@ class C
                 expr: "y.F(a => y.F(b => x))"
             );
             // Verify display class was included.
-            testData.GetMethodData("<>x.<>c__DisplayClass0_0..ctor")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>c__DisplayClass0_0..ctor").VerifyIL(
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""object..ctor()""
   IL_0006:  ret
 }"
-                );
+            );
             // Verify evaluation method.
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       44 (0x2c)
   .maxstack  3
   .locals init (int V_0, //x
@@ -3310,7 +3267,7 @@ class C
   IL_0026:  callvirt   ""object C.F(D)""
   IL_002b:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3348,9 +3305,8 @@ class B : A
                 DkmClrCompilationResultFlags.PotentialSideEffect
                     | DkmClrCompilationResultFlags.ReadOnlyResult
             );
-            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()").VerifyIL(
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -3358,7 +3314,7 @@ class B : A
   IL_0006:  ldfld      ""object B.G""
   IL_000b:  ret
 }"
-                );
+            );
             testData = Evaluate(
                 source,
                 OutputKind.DynamicallyLinkedLibrary,
@@ -3372,9 +3328,8 @@ class B : A
                 DkmClrCompilationResultFlags.PotentialSideEffect
                     | DkmClrCompilationResultFlags.ReadOnlyResult
             );
-            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()").VerifyIL(
+                @"{
   // Code size       27 (0x1b)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -3388,16 +3343,15 @@ class B : A
   IL_0015:  callvirt   ""object B.P.get""
   IL_001a:  ret
 }"
-                );
+            );
             testData = Evaluate(
                 source,
                 OutputKind.DynamicallyLinkedLibrary,
                 methodName: "B.M",
                 expr: "((System.Func<object>)(() => F(new System.Func<object>(this.F), this.F, this.G)))()"
             );
-            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()").VerifyIL(
+                @"{
   // Code size       53 (0x35)
   .maxstack  3
   IL_0000:  ldarg.0
@@ -3416,7 +3370,7 @@ class B : A
   IL_002f:  call       ""object B.F(System.Func<object>, System.Func<object>, object)""
   IL_0034:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(905986, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/905986")]
@@ -3446,9 +3400,8 @@ class B : A
                 methodName: "B.M",
                 expr: "((System.Func<object>)(() => base.F() ?? base.P))()"
             );
-            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()").VerifyIL(
+                @"{
   // Code size       27 (0x1b)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -3462,16 +3415,15 @@ class B : A
   IL_0015:  call       ""object A.P.get""
   IL_001a:  ret
 }"
-                );
+            );
             testData = Evaluate(
                 source,
                 OutputKind.DynamicallyLinkedLibrary,
                 methodName: "B.M",
                 expr: "((System.Func<object>)(() => F(new System.Func<object>(base.F), base.F, base.G)))()"
             );
-            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0()").VerifyIL(
+                @"{
   // Code size       51 (0x33)
   .maxstack  3
   IL_0000:  ldarg.0
@@ -3488,7 +3440,7 @@ class B : A
   IL_002d:  call       ""object B.F(System.Func<object>, System.Func<object>, object)""
   IL_0032:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3534,9 +3486,8 @@ class B : A
                     // That is expected since we do not rename old locals nor do we
                     // offset numbering of new locals. Having duplicate local names
                     // in the PDB should be harmless though.
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       29 (0x1d)
   .maxstack  3
   .locals init (B.<>c__DisplayClass2_0 V_0) //CS$<>8__locals0
@@ -3549,10 +3500,9 @@ class B : A
   IL_0017:  call       ""void B.F(System.Func<object>)""
   IL_001c:  ret
 }"
-                        );
-                    testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0")
-                        .VerifyIL(
-                            @"{
+                    );
+                    testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0").VerifyIL(
+                        @"{
   // Code size       28 (0x1c)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -3564,12 +3514,11 @@ class B : A
   IL_0016:  callvirt   ""object B.F(object)""
   IL_001b:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     context.CompileExpression("F(() => base.F(y))", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       29 (0x1d)
   .maxstack  3
   .locals init (B.<>c__DisplayClass2_0 V_0) //CS$<>8__locals0
@@ -3582,10 +3531,9 @@ class B : A
   IL_0017:  call       ""void B.F(System.Func<object>)""
   IL_001c:  ret
 }"
-                        );
-                    testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0")
-                        .VerifyIL(
-                            @"{
+                    );
+                    testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0").VerifyIL(
+                        @"{
   // Code size       28 (0x1c)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -3597,7 +3545,7 @@ class B : A
   IL_0016:  call       ""object A.F(object)""
   IL_001b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -3634,9 +3582,8 @@ class C
                     string error;
                     var testData = new CompilationTestData();
                     context.CompileExpression("e.HasValue", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -3649,7 +3596,7 @@ class C
   IL_0006:  call       ""bool E?.HasValue.get""
   IL_000b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -3709,9 +3656,8 @@ class B : A
                     var testData = new CompilationTestData();
                     context.CompileExpression("this.F(y)", out error, testData);
 
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -3728,13 +3674,12 @@ class B : A
   IL_0011:  callvirt   ""object B.F(object)""
   IL_0016:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     context.CompileExpression("base.F(x)", out error, testData);
 
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       18 (0x12)
   .maxstack  2
   .locals init (B.<>c__DisplayClass2_0<T> V_0, //CS$<>8__locals0
@@ -3749,7 +3694,7 @@ class B : A
   IL_000c:  call       ""object A.F(object)""
   IL_0011:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -3812,9 +3757,8 @@ class B : A
                     var testData = new CompilationTestData();
                     context.CompileExpression("this.F(y)", out error, testData);
 
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -3831,13 +3775,12 @@ class B : A
   IL_0011:  callvirt   ""object B.F(object)""
   IL_0016:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     context.CompileExpression("base.F(x)", out error, testData);
 
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"{
   // Code size       18 (0x12)
   .maxstack  2
   .locals init (B.<>c__DisplayClass2_0<T> V_0, //CS$<>8__locals0
@@ -3852,7 +3795,7 @@ class B : A
   IL_000c:  call       ""object A.F(object)""
   IL_0011:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -3888,9 +3831,8 @@ class B : A
                 expr: "y ?? this ?? (object)z"
             );
 
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       32 (0x20)
   .maxstack  2
   .locals init (int V_0, //z
@@ -3910,7 +3852,7 @@ class B : A
   IL_001a:  box        ""int""
   IL_001f:  ret
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -3945,9 +3887,8 @@ class B : A
                 atLineNumber: 999,
                 expr: "F(() => x + y + p + q)"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       43 (0x2b)
   .maxstack  3
   .locals init (C.<>c__DisplayClass1_0 V_0, //CS$<>8__locals0
@@ -3968,7 +3909,7 @@ class B : A
   IL_0025:  call       ""void C.F(System.Func<object>)""
   IL_002a:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -3990,21 +3931,19 @@ class B : A
 
             // Verify anonymous type was generated (find an
             // accessor of one of the generated properties).
-            testData.GetMethodData("<>f__AnonymousType0<<A>j__TPar, <B>j__TPar>.A.get")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>f__AnonymousType0<<A>j__TPar, <B>j__TPar>.A.get").VerifyIL(
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""<A>j__TPar <>f__AnonymousType0<<A>j__TPar, <B>j__TPar>.<A>i__Field""
   IL_0006:  ret
 }"
-                );
+            );
 
             // Verify evaluation method.
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldc.i4.1
@@ -4012,7 +3951,7 @@ class B : A
   IL_0002:  newobj     ""<>f__AnonymousType0<int, int>..ctor(int, int)""
   IL_0007:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -4044,9 +3983,8 @@ class B : A
             Assert.True(methods.ContainsKey("<>f__AnonymousType1..ctor()"));
 
             // Verify evaluation method.
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  2
@@ -4056,7 +3994,7 @@ class B : A
   IL_0006:  newobj     ""<>f__AnonymousType0<int, <empty anonymous type>>..ctor(int, <empty anonymous type>)""
   IL_000b:  ret
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -4082,12 +4020,11 @@ class B : A
                 methodName: "C.M",
                 expr: "o == new { P = 2 }"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
 ...
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -4173,9 +4110,8 @@ class Program
                         out error,
                         testData
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       84 (0x54)
   .maxstack  3
@@ -4205,7 +4141,7 @@ class Program
   IL_004e:  call       ""<anonymous type: string Name, int Salary> System.Linq.Enumerable.First<<anonymous type: string Name, int Salary>>(System.Collections.Generic.IEnumerable<<anonymous type: string Name, int Salary>>)""
   IL_0053:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -4239,9 +4175,8 @@ class C
                     string error;
                     var testData = new CompilationTestData();
                     context.CompileExpression("F(() => o + 1)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size      100 (0x64)
   .maxstack  3
   IL_0000:  newobj     ""<>x.<>c__DisplayClass0_0..ctor()""
@@ -4269,7 +4204,7 @@ class C
   IL_005e:  call       ""object C.F(System.Linq.Expressions.Expression<System.Func<object>>)""
   IL_0063:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -4334,9 +4269,8 @@ class C
                 expr: "this.P = null"
             );
 
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       11 (0xb)
   .maxstack  3
   .locals init (object V_0)
@@ -4348,7 +4282,7 @@ class C
   IL_0009:  ldloc.0
   IL_000a:  ret
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -4430,9 +4364,8 @@ class C
                     var result = context.CompileExpression("E.First(o)", out error, testData);
                     Assert.Null(error);
 
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -4440,7 +4373,7 @@ class C
   IL_0001:  call       ""object System.Linq.Enumerable.First<object>(System.Collections.Generic.IEnumerable<object>)""
   IL_0006:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -4475,16 +4408,15 @@ class C
                     string error;
                     var testData = new CompilationTestData();
                     context.CompileExpression("this", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -4680,16 +4612,15 @@ class C
                     // Expression does not reference ambiguous modules.
                     var testData = new CompilationTestData();
                     context.CompileExpression("w.F2", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       11 (0xb)
   .maxstack  1
   IL_0000:  ldsfld     ""A2 C.w""
   IL_0005:  ldfld      ""int A2.F2""
   IL_000a:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -4739,15 +4670,14 @@ class C
                 methodName: "C.M",
                 expr: "sizeof(S)"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  sizeof     ""S""
   IL_0006:  ret
 }"
-                );
+            );
         }
 
         /// <summary>
@@ -4781,9 +4711,8 @@ class C
                 error: out error
             );
 
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       18 (0x12)
   .maxstack  3
   .locals init (object[] V_0,
@@ -4798,7 +4727,7 @@ class C
   IL_000c:  stfld      ""object C.F""
   IL_0011:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(958448, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/958448")]
@@ -4824,9 +4753,8 @@ class C
                 expr: "F(x + 1)"
             );
 
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       14 (0xe)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -4836,7 +4764,7 @@ class C
   IL_0008:  call       ""void C.F(object)""
   IL_000d:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(958448, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/958448")]
@@ -4870,9 +4798,8 @@ class C : IEnumerable
                 expr: "new C() { 1, 2 }"
             );
 
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       30 (0x1e)
   .maxstack  3
   IL_0000:  newobj     ""C..ctor()""
@@ -4886,7 +4813,7 @@ class C : IEnumerable
   IL_0018:  callvirt   ""void C.Add(object)""
   IL_001d:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -4948,9 +4875,8 @@ class C
                 methodName: "C.M",
                 expr: "G(F)"
             );
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       18 (0x12)
   .maxstack  2
   IL_0000:  ldnull
@@ -4959,7 +4885,7 @@ class C
   IL_000c:  call       ""void C.G(D)""
   IL_0011:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -4983,9 +4909,8 @@ class C
                 expr: "((D)(x => x + x))(1)"
             );
 
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  2
@@ -5002,7 +4927,7 @@ class C
   IL_0020:  callvirt   ""int D.Invoke(int)""
   IL_0025:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(984509, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/984509")]
@@ -5032,9 +4957,8 @@ class C
                 DkmClrCompilationResultFlags.PotentialSideEffect
                     | DkmClrCompilationResultFlags.ReadOnlyResult
             );
-            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0").VerifyIL(
+                @"{
   // Code size       17 (0x11)
   .maxstack  3
   .locals init (int V_0)
@@ -5048,7 +4972,7 @@ class C
   IL_000b:  stfld      ""int <>x.<>c__DisplayClass0_0.i""
   IL_0010:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -5082,9 +5006,8 @@ class C<T>
                     | DkmClrCompilationResultFlags.ReadOnlyResult,
                 resultProperties.Flags
             );
-            testData.GetMethodData("<>x<T, U>.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                @"{
   // Code size       29 (0x1d)
   .maxstack  5
   IL_0000:  ldarg.0
@@ -5097,7 +5020,7 @@ class C<T>
   IL_0017:  callvirt   ""void C<T>.D<U>.M(U, T, System.Type, System.Type)""
   IL_001c:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -5133,9 +5056,8 @@ class C<T>
                 resultProperties.Flags
             );
 
-            testData.GetMethodData("<>x<T, U>.<>m0<V>")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x<T, U>.<>m0<V>").VerifyIL(
+                @"{
   // Code size       40 (0x28)
   .maxstack  7
   IL_0000:  ldarg.0
@@ -5151,7 +5073,7 @@ class C<T>
   IL_0022:  callvirt   ""void C<T>.D<U>.M<V>(V, U, T, System.Type, System.Type, System.Type)""
   IL_0027:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(1000946, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1000946")]
@@ -5206,9 +5128,8 @@ struct S
                 error: out error
             );
             Assert.Null(error);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       17 (0x11)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -5217,7 +5138,7 @@ struct S
   IL_000b:  call       ""string System.ValueType.ToString()""
   IL_0010:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(1010922, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1010922")]
@@ -5252,29 +5173,27 @@ class C
                     context.CompileExpression("unchecked(2147483647 + 1)", out error, testData);
                     Assert.Null(error);
 
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  ldc.i4     0x80000000
   IL_0005:  ret
 }"
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileExpression("2147483647 + 1", out error, testData);
                     Assert.Null(error);
 
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  ldc.i4     0x80000000
   IL_0005:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -5317,9 +5236,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("u = 2147483647 + 1u", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        9 (0x9)
   .maxstack  2
   IL_0000:  ldc.i4     0x80000000
@@ -5327,21 +5245,20 @@ class C
   IL_0006:  starg.s    V_1
   IL_0008:  ret
 }"
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileAssignment("u", "2147483647 + 1u", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  ldc.i4     0x80000000
   IL_0005:  starg.s    V_1
   IL_0007:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -5429,15 +5346,14 @@ class C
             string error;
             var testData = new CompilationTestData();
             context.CompileExpression("D", out error, testData);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  ldsfld     ""System.DateTime C.D""
   IL_0005:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(1015887, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1015887")]
@@ -5467,9 +5383,8 @@ struct S
                 error: out error
             );
             Assert.Null(error);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size       15 (0xf)
   .maxstack  5
   IL_0000:  ldc.i4     0x13a
@@ -5480,7 +5395,7 @@ struct S
   IL_0009:  newobj     ""decimal..ctor(int, int, int, bool, byte)""
   IL_000e:  ret
 }"
-                );
+            );
         }
 
         [WorkItem(1024137, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1024137")]
@@ -5619,15 +5534,14 @@ struct S
             var testData = new CompilationTestData();
             context.CompileExpression("x", out error, testData);
             Assert.Null(error);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"{
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -5660,9 +5574,8 @@ struct S
                     var methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         "int?",
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnTypeWithAnnotations.ToDisplayString()
+                        ((MethodSymbol)methodData.Method).ReturnTypeWithAnnotations
+                            .ToDisplayString()
                     );
                     methodData.VerifyIL(
                         @"{
@@ -5687,9 +5600,8 @@ struct S
                     methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         "int?",
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnTypeWithAnnotations.ToDisplayString()
+                        ((MethodSymbol)methodData.Method).ReturnTypeWithAnnotations
+                            .ToDisplayString()
                     );
 
                     testData = new CompilationTestData();
@@ -5744,9 +5656,8 @@ class C
                     string error;
                     var testData = new CompilationTestData();
                     var result = context.CompileExpression("F()", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       17 (0x11)
   .maxstack  3
   IL_0000:  ldstr      """"
@@ -5755,7 +5666,7 @@ class C
   IL_000b:  call       ""object C.F(string, string, int)""
   IL_0010:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -5958,9 +5869,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        6 (0x6)
   .maxstack  1
@@ -5969,7 +5879,7 @@ class C
   IL_0005:  ret
 }
 "
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     result = context.CompileExpression(
@@ -5978,9 +5888,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        2 (0x2)
   .maxstack  1
@@ -5989,7 +5898,7 @@ class C
   IL_0001:  ret
 }
 "
-                        );
+                    );
                 }
             );
         }
@@ -6016,9 +5925,8 @@ class C
                 {
                     var context = CreateMethodContext(runtime, "C.M");
 
-                    var actionType = context.Compilation.GetWellKnownType(
-                        WellKnownType.System_Action
-                    );
+                    var actionType = context.Compilation
+                        .GetWellKnownType(WellKnownType.System_Action);
 
                     ResultProperties resultProperties;
                     string error;
@@ -6392,15 +6300,14 @@ class C
                     var testData = new CompilationTestData();
                     context.CompileExpression("z", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldarg.1
   IL_0001:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     context.CompileExpression("y", out error, testData);
                     Assert.Equal(
@@ -6435,15 +6342,14 @@ class C
                     context.CompileExpression("z", out resultProperties, out error, testData);
                     Assert.Null(error);
                     Assert.Equal(DkmClrCompilationResultFlags.None, resultProperties.Flags);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldarg.1
   IL_0001:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -6484,9 +6390,8 @@ class C
                             | DkmClrCompilationResultFlags.ReadOnlyResult,
                         resultProperties.Flags
                     );
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldc.i4.1
@@ -6494,7 +6399,7 @@ class C
   IL_0002:  call       ""int System.Math.Min(int, int)""
   IL_0007:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -6524,9 +6429,8 @@ class C
                     var testData = new CompilationTestData();
                     context.CompileExpression("typeof(T)", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0<T>")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0<T>").VerifyIL(
+                        @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -6535,7 +6439,7 @@ class C
   IL_0005:  call       ""System.Type System.Type.GetTypeFromHandle(System.RuntimeTypeHandle)""
   IL_000a:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -6568,9 +6472,8 @@ class C
                     var testData = new CompilationTestData();
                     context.CompileExpression("typeof(T)", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T>.<>m0").VerifyIL(
+                        @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -6579,7 +6482,7 @@ class C
   IL_0005:  call       ""System.Type System.Type.GetTypeFromHandle(System.RuntimeTypeHandle)""
   IL_000a:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -6625,9 +6528,8 @@ class C
                 context.CompileExpression("(new C()).F", out resultProperties, out error, testData);
                 Assert.Null(error);
                 Assert.Equal(DkmClrCompilationResultFlags.None, resultProperties.Flags);
-                testData.GetMethodData("<>x.<>m0")
-                    .VerifyIL(
-                        @"
+                testData.GetMethodData("<>x.<>m0").VerifyIL(
+                    @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -6635,7 +6537,7 @@ class C
   IL_0005:  ldfld      ""int C.F""
   IL_000a:  ret
 }"
-                    );
+                );
             }
         }
 
@@ -6717,9 +6619,8 @@ public class C
         [Fact]
         public void UseSiteWarning()
         {
-            var signedDllOptions = TestOptions.SigningReleaseDll.WithCryptoKeyFile(
-                SigningTestHelpers.KeyPairFile
-            );
+            var signedDllOptions = TestOptions.SigningReleaseDll
+                .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
 
             var libBTemplate =
                 @"
@@ -6728,16 +6629,16 @@ public class B {{ }}
 ";
 
             var libBv1Ref = CreateCompilation(
-                    string.Format(libBTemplate, "1"),
-                    assemblyName: "B",
-                    options: signedDllOptions
-                )
+                string.Format(libBTemplate, "1"),
+                assemblyName: "B",
+                options: signedDllOptions
+            )
                 .EmitToImageReference();
             var libBv2Ref = CreateCompilation(
-                    string.Format(libBTemplate, "2"),
-                    assemblyName: "B",
-                    options: signedDllOptions
-                )
+                string.Format(libBTemplate, "2"),
+                assemblyName: "B",
+                options: signedDllOptions
+            )
                 .EmitToImageReference();
 
             var libASource =
@@ -6750,11 +6651,11 @@ public class A : B
 ";
 
             var libAv1Ref = CreateCompilation(
-                    libASource,
-                    new[] { libBv1Ref },
-                    assemblyName: "A",
-                    options: signedDllOptions
-                )
+                libASource,
+                new[] { libBv1Ref },
+                assemblyName: "A",
+                options: signedDllOptions
+            )
                 .EmitToImageReference();
 
             var source =
@@ -6801,9 +6702,8 @@ public class Source
                     // Even though the method's return type has a use-site warning, we are able to evaluate the expression.
                     Assert.Equal(
                         ErrorCode.WRN_UnifyReferenceMajMin,
-                        (ErrorCode)(
-                            (MethodSymbol)methodData.Method
-                        ).ReturnType.GetUseSiteDiagnostic().Code
+                        (ErrorCode)((MethodSymbol)methodData.Method).ReturnType
+                            .GetUseSiteDiagnostic().Code
                     );
                     methodData.VerifyIL(
                         @"
@@ -6944,9 +6844,8 @@ public class C
             var testData = new CompilationTestData();
             evalContext.CompileExpression("1", out error, testData);
             Assert.Null(error);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
@@ -6954,7 +6853,7 @@ public class C
   IL_0001:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(1108133, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1108133")]
@@ -6980,9 +6879,8 @@ public class C
             var testData = new CompilationTestData();
             evalContext.CompileExpression("1", out error, testData);
             Assert.Null(error);
-            testData.GetMethodData("<>x.<>m0")
-                .VerifyIL(
-                    @"
+            testData.GetMethodData("<>x.<>m0").VerifyIL(
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
@@ -6990,7 +6888,7 @@ public class C
   IL_0001:  ret
 }
 "
-                );
+            );
         }
 
         [WorkItem(1115543, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1115543")]
@@ -7025,9 +6923,8 @@ public class C<T>
                     var testData = new CompilationTestData();
                     context.CompileExpression("typeof(U)", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -7036,7 +6933,7 @@ public class C<T>
   IL_000a:  ret
 }
 "
-                        );
+                    );
                 }
             );
         }
@@ -7238,9 +7135,8 @@ class C
                     var testData = new CompilationTestData();
                     string error;
                     context.CompileExpression("q.Where(c => true)", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       64 (0x40)
   .maxstack  6
   .locals init (System.Linq.IQueryable<C> V_0, //q
@@ -7266,7 +7162,7 @@ class C
   IL_003a:  call       ""System.Linq.IQueryable<C> System.Linq.Queryable.Where<C>(System.Linq.IQueryable<C>, System.Linq.Expressions.Expression<System.Func<C, bool>>)""
   IL_003f:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -7301,9 +7197,8 @@ class C
                     var testData = new CompilationTestData();
                     string error;
                     context.CompileExpression("F(async () => new C())", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       37 (0x25)
   .maxstack  2
   IL_0000:  ldsfld     ""System.Func<System.Threading.Tasks.Task<C>> <>x.<>c.<>9__0_0""
@@ -7318,7 +7213,7 @@ class C
   IL_001f:  call       ""void C.F<C>(System.Func<System.Threading.Tasks.Task<C>>)""
   IL_0024:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -7348,9 +7243,8 @@ class C
                     var testData = new CompilationTestData();
                     context.CompileExpression("M(() => x)", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       32 (0x20)
   .maxstack  3
@@ -7368,7 +7262,7 @@ class C
   IL_001a:  callvirt   ""void C.M(System.Func<int>)""
   IL_001f:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -7454,9 +7348,8 @@ class C
                     string error;
                     var testData = new CompilationTestData();
                     var result = context.CompileExpression("x + y", out error, testData);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        4 (0x4)
   .maxstack  2
   .locals init (int V_0) //y
@@ -7465,7 +7358,7 @@ class C
   IL_0002:  add
   IL_0003:  ret
 }"
-                        );
+                    );
 
                     // Verify the context is re-used for ILOffset == 0.
                     var previous = appDomain.GetMetadataContext();
@@ -7530,9 +7423,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size      140 (0x8c)
   .maxstack  4
   .locals init (int V_0, //useLinq
@@ -7579,7 +7471,7 @@ class C
   IL_0086:  call       ""System.Collections.Generic.IEnumerable<<anonymous type: int x, int y>> System.Linq.Enumerable.Select<<anonymous type: int x, int y>, <anonymous type: int x, int y>>(System.Collections.Generic.IEnumerable<<anonymous type: int x, int y>>, System.Func<<anonymous type: int x, int y>, <anonymous type: int x, int y>>)""
   IL_008b:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -7619,9 +7511,8 @@ class C
                     var testData = new CompilationTestData();
                     context.CompileExpression("c.Where(n => n > 0)", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       43 (0x2b)
   .maxstack  3
   .locals init (int V_0,
@@ -7640,7 +7531,7 @@ class C
   IL_0025:  call       ""System.Collections.Generic.IEnumerable<int> System.Linq.Enumerable.Where<int>(System.Collections.Generic.IEnumerable<int>, System.Func<int, bool>)""
   IL_002a:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -7707,9 +7598,8 @@ class C
                         default(DkmEvaluationResultTypeModifierFlags),
                         resultProperties.ModifierFlags
                     ); // Not Virtual
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -7718,7 +7608,7 @@ class C
   IL_0001:  stloc.0
   IL_0002:  ret
 }"
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileExpression(
@@ -7729,9 +7619,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -7741,7 +7630,7 @@ class C
   IL_0002:  stloc.0
   IL_0003:  ret
 }"
-                        );
+                    );
                     testData = new CompilationTestData();
                     context.CompileExpression(
                         "int b = default;",
@@ -7751,9 +7640,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       43 (0x2b)
   .maxstack  4
@@ -7773,7 +7661,7 @@ class C
   IL_0029:  stind.i4
   IL_002a:  ret
 }"
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileExpression(
@@ -7797,9 +7685,8 @@ class C
                         testData
                     );
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        2 (0x2)
   .maxstack  1
@@ -7807,7 +7694,7 @@ class C
   IL_0000:  ldnull
   IL_0001:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -7825,14 +7712,16 @@ public delegate void D(in int p);"
                 symbolValidator: module =>
                 {
                     Assert.NotNull(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     Assert.NotNull(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.IsReadOnlyAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.IsReadOnlyAttribute.FullName
+                            )
                     );
                 }
             );
@@ -7853,14 +7742,16 @@ public class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.IsReadOnlyAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.IsReadOnlyAttribute.FullName
+                            )
                     );
                 }
             );
@@ -7891,14 +7782,16 @@ public delegate ref readonly int D();"
                 symbolValidator: module =>
                 {
                     Assert.NotNull(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     Assert.NotNull(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.IsReadOnlyAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.IsReadOnlyAttribute.FullName
+                            )
                     );
                 }
             );
@@ -7920,14 +7813,16 @@ public class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.IsReadOnlyAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.IsReadOnlyAttribute.FullName
+                            )
                     );
                 }
             );
@@ -8028,9 +7923,8 @@ class C
                     var testData = new CompilationTestData();
                     context.CompileExpression("F((object? o) => o, null)", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       38 (0x26)
   .maxstack  2
   IL_0000:  ldsfld     ""D<object?> <>x.<>c.<>9__0_0""
@@ -8046,7 +7940,7 @@ class C
   IL_0020:  call       ""object? C.F<object?>(D<object?>, object?)""
   IL_0025:  ret
 }"
-                        );
+                    );
                     var methodsGenerated = testData.GetMethodsByName().Keys;
                     Assert.Contains(
                         AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName + "..ctor()",

@@ -363,19 +363,21 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                 if (allShouldFinish && !ti.Task.IsCompleted)
                     Assert.True(
                         false,
-                        string.Format(
-                            "WaitAll contract is broken -- Task at Index = {0} does not finish",
-                            i
-                        )
+                        string
+                            .Format(
+                                "WaitAll contract is broken -- Task at Index = {0} does not finish",
+                                i
+                            )
                     );
 
                 if (thisShouldFinish == ti.Task && !ti.Task.IsCompleted)
                     Assert.True(
                         false,
-                        string.Format(
-                            "WaitAny contract is broken -- Task at Index = {0} does not finish",
-                            i
-                        )
+                        string
+                            .Format(
+                                "WaitAny contract is broken -- Task at Index = {0} does not finish",
+                                i
+                            )
                     );
 
                 WorkloadType workType = ti.WorkType;
@@ -396,10 +398,11 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                         if (!expCaught)
                             Assert.True(
                                 false,
-                                string.Format(
-                                    "excepted TPLTestException in Task at Index = {0}  NOT caught",
-                                    i
-                                )
+                                string
+                                    .Format(
+                                        "excepted TPLTestException in Task at Index = {0}  NOT caught",
+                                        i
+                                    )
                             );
                     }
                     else // must be API_WaitAllAny.WaitAny
@@ -408,10 +411,11 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                         if (expCaught)
                             Assert.True(
                                 false,
-                                string.Format(
-                                    "Unexpected TPLTestException in Task at Index = {0} caught",
-                                    i
-                                )
+                                string
+                                    .Format(
+                                        "Unexpected TPLTestException in Task at Index = {0} caught",
+                                        i
+                                    )
                             );
 
                         //need to check it eventually to prevent it from crashing the finalizer
@@ -471,10 +475,11 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
                     if (!(tasks.Value.Exception.InnerException is TPLTestException))
                         Assert.True(
                             false,
-                            string.Format(
-                                "Unexpected Exception in Task at Index = {0} caught",
-                                tasks.Key
-                            )
+                            string
+                                .Format(
+                                    "Unexpected Exception in Task at Index = {0} caught",
+                                    tasks.Key
+                                )
                         );
                 }
             }

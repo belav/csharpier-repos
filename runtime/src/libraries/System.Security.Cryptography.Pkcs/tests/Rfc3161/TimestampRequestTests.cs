@@ -136,8 +136,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(content, false);
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates.RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(
@@ -235,7 +235,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 + "7387D504A5BF62427176AD06022A03020501234567890101FFA016300A06042A0304050402050"
                 + "030080602010204020400"
                 + PaddingHex
-            ).HexToByteArray();
+            )
+                .HexToByteArray();
 
             var dataRange = new ReadOnlyMemory<byte>(
                 inputBytes,
@@ -411,8 +412,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             byte[] inputBytes = inputHex.HexToByteArray();
             ReadOnlyMemory<byte>? nonce = null;
             HashAlgorithmName hashAlgorithmName = HashAlgorithmName.SHA256;
-            byte[] hash =
-                "11806C2441295EA697EA96EE4247C0F9C71EE7638863CB8E29CD941A488FCB5A".HexToByteArray();
+            byte[] hash = "11806C2441295EA697EA96EE4247C0F9C71EE7638863CB8E29CD941A488FCB5A"
+                .HexToByteArray();
 
             if (expectedStatus == Rfc3161RequestResponseStatus.NonceMismatch)
             {
@@ -584,8 +585,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             ReadOnlyMemory<byte> nonce = "3230313830313035313730373030".HexToByteArray();
             HashAlgorithmName hashAlgorithmName = HashAlgorithmName.SHA256;
-            byte[] hash =
-                "11806C2441295EA697EA96EE4247C0F9C71EE7638863CB8E29CD941A488FCB5A".HexToByteArray();
+            byte[] hash = "11806C2441295EA697EA96EE4247C0F9C71EE7638863CB8E29CD941A488FCB5A"
+                .HexToByteArray();
 
             if (expectedStatus == Rfc3161RequestResponseStatus.NonceMismatch)
             {
@@ -812,10 +813,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
         static Rfc3161TimestampRequestExtensions()
         {
-            s_tryProcesses = typeof(Rfc3161TimestampRequest).GetMethod(
-                "ProcessResponse",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            s_tryProcesses = typeof(Rfc3161TimestampRequest)
+                .GetMethod("ProcessResponse", BindingFlags.NonPublic | BindingFlags.Instance);
         }
 
         internal static bool TryProcessResponse(

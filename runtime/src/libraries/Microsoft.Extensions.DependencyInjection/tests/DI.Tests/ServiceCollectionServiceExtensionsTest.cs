@@ -574,11 +574,12 @@ namespace Microsoft.Extensions.DependencyInjection
 
             AssertExtensions.ThrowsContains<ArgumentException>(
                 () => collection.TryAddEnumerable(descriptor),
-                string.Format(
-                    @"Implementation type cannot be '{0}' because it is indistinguishable from other services registered for '{1}'.",
-                    implementationType,
-                    serviceType
-                )
+                string
+                    .Format(
+                        @"Implementation type cannot be '{0}' because it is indistinguishable from other services registered for '{1}'.",
+                        implementationType,
+                        serviceType
+                    )
             );
         }
 

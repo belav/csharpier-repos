@@ -100,10 +100,8 @@ namespace Microsoft.AspNetCore.Builder
 
             configureRoutes(routes);
 
-            routes.Routes.Insert(
-                0,
-                AttributeRouting.CreateAttributeMegaRoute(app.ApplicationServices)
-            );
+            routes.Routes
+                .Insert(0, AttributeRouting.CreateAttributeMegaRoute(app.ApplicationServices));
 
             return app.UseRouter(routes.Build());
         }

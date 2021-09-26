@@ -28,10 +28,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                    solution,
-                    context.InputNodes,
-                    cancellationToken
-                )
+                solution,
+                context.InputNodes,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var nodesToProcess = context.InputNodes;
 
@@ -48,9 +48,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         if (namedType.BaseType != null)
                         {
                             var baseTypeNode = await graphBuilder.AddNodeAsync(
-                                    namedType.BaseType,
-                                    relatedNode: node
-                                )
+                                namedType.BaseType,
+                                relatedNode: node
+                            )
                                 .ConfigureAwait(false);
                             newNodes.Add(baseTypeNode);
                             graphBuilder.AddLink(
@@ -65,13 +65,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                         {
                             foreach (
-                                var baseNode in namedType.OriginalDefinition.AllInterfaces.Distinct()
+                                var baseNode in namedType.OriginalDefinition.AllInterfaces
+                                    .Distinct()
                             )
                             {
                                 var baseTypeNode = await graphBuilder.AddNodeAsync(
-                                        baseNode,
-                                        relatedNode: node
-                                    )
+                                    baseNode,
+                                    relatedNode: node
+                                )
                                     .ConfigureAwait(false);
                                 newNodes.Add(baseTypeNode);
                                 graphBuilder.AddLink(

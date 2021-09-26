@@ -117,10 +117,10 @@ namespace System.Linq.Parallel.Tests
         {
             IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
             ParallelQuery<int> query = operation.Item(
-                    DefaultStart * 2,
-                    DefaultSize * 2,
-                    DefaultSource
-                )
+                DefaultStart * 2,
+                DefaultSize * 2,
+                DefaultSource
+            )
                 .Select(x => x / 2)
                 .Distinct();
             foreach (int i in query)
@@ -137,10 +137,10 @@ namespace System.Linq.Parallel.Tests
         {
             IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
             ParallelQuery<int> query = operation.Item(
-                    DefaultStart * 2,
-                    DefaultSize * 2,
-                    DefaultSource
-                )
+                DefaultStart * 2,
+                DefaultSize * 2,
+                DefaultSource
+            )
                 .Select(x => x / 2)
                 .Distinct();
             Assert.All(query.ToList(), x => seen.Add((int)x));
@@ -156,10 +156,10 @@ namespace System.Linq.Parallel.Tests
             {
                 IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
                 ParallelQuery<int> query = left(
-                        DefaultStart,
-                        DefaultSize + DefaultSize / 2,
-                        DefaultSource
-                    )
+                    DefaultStart,
+                    DefaultSize + DefaultSize / 2,
+                    DefaultSource
+                )
                     .Except(right(DefaultStart + DefaultSize, DefaultSize, DefaultSource));
                 foreach (int i in query)
                 {
@@ -180,10 +180,10 @@ namespace System.Linq.Parallel.Tests
             {
                 IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
                 ParallelQuery<int> query = left(
-                        DefaultStart,
-                        DefaultSize + DefaultSize / 2,
-                        DefaultSource
-                    )
+                    DefaultStart,
+                    DefaultSize + DefaultSize / 2,
+                    DefaultSource
+                )
                     .Except(right(DefaultStart + DefaultSize, DefaultSize, DefaultSource));
                 Assert.All(query.ToList(), x => seen.Add((int)x));
                 seen.AssertComplete();
@@ -222,10 +222,10 @@ namespace System.Linq.Parallel.Tests
             );
             foreach (
                 IGrouping<int, int> group in operation.Item(
-                        DefaultStart,
-                        DefaultSize,
-                        DefaultSource
-                    )
+                    DefaultStart,
+                    DefaultSize,
+                    DefaultSource
+                )
                     .GroupBy(x => x / GroupFactor)
             )
             {
@@ -251,10 +251,10 @@ namespace System.Linq.Parallel.Tests
             );
             foreach (
                 IGrouping<int, int> group in operation.Item(
-                        DefaultStart,
-                        DefaultSize,
-                        DefaultSource
-                    )
+                    DefaultStart,
+                    DefaultSize,
+                    DefaultSource
+                )
                     .GroupBy(x => x / GroupFactor)
                     .ToList()
             )
@@ -281,10 +281,10 @@ namespace System.Linq.Parallel.Tests
             );
             foreach (
                 IGrouping<int, int> group in operation.Item(
-                        DefaultStart,
-                        DefaultSize,
-                        DefaultSource
-                    )
+                    DefaultStart,
+                    DefaultSize,
+                    DefaultSource
+                )
                     .GroupBy(x => x / GroupFactor, y => -y)
             )
             {
@@ -312,10 +312,10 @@ namespace System.Linq.Parallel.Tests
             );
             foreach (
                 IGrouping<int, int> group in operation.Item(
-                        DefaultStart,
-                        DefaultSize,
-                        DefaultSource
-                    )
+                    DefaultStart,
+                    DefaultSize,
+                    DefaultSource
+                )
                     .GroupBy(x => x / GroupFactor, y => -y)
                     .ToList()
             )
@@ -344,10 +344,10 @@ namespace System.Linq.Parallel.Tests
                 );
                 foreach (
                     KeyValuePair<int, IEnumerable<int>> group in left(
-                            DefaultStart / GroupFactor,
-                            DefaultSize / GroupFactor,
-                            DefaultSource
-                        )
+                        DefaultStart / GroupFactor,
+                        DefaultSize / GroupFactor,
+                        DefaultSource
+                    )
                         .GroupJoin(
                             right(DefaultStart, DefaultSize, DefaultSource),
                             x => x,
@@ -383,10 +383,10 @@ namespace System.Linq.Parallel.Tests
                 );
                 foreach (
                     KeyValuePair<int, IEnumerable<int>> group in left(
-                            DefaultStart / GroupFactor,
-                            DefaultSize / GroupFactor,
-                            DefaultSource
-                        )
+                        DefaultStart / GroupFactor,
+                        DefaultSize / GroupFactor,
+                        DefaultSource
+                    )
                         .GroupJoin(
                             right(DefaultStart, DefaultSize, DefaultSource),
                             x => x,
@@ -419,10 +419,10 @@ namespace System.Linq.Parallel.Tests
             {
                 IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
                 ParallelQuery<int> query = left(
-                        DefaultStart - DefaultSize / 2,
-                        DefaultSize + DefaultSize / 2,
-                        DefaultSource
-                    )
+                    DefaultStart - DefaultSize / 2,
+                    DefaultSize + DefaultSize / 2,
+                    DefaultSource
+                )
                     .Intersect(right(DefaultStart, DefaultSize + DefaultSize / 2, DefaultSource));
                 foreach (int i in query)
                 {
@@ -443,10 +443,10 @@ namespace System.Linq.Parallel.Tests
             {
                 IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
                 ParallelQuery<int> query = left(
-                        DefaultStart - DefaultSize / 2,
-                        DefaultSize + DefaultSize / 2,
-                        DefaultSource
-                    )
+                    DefaultStart - DefaultSize / 2,
+                    DefaultSize + DefaultSize / 2,
+                    DefaultSource
+                )
                     .Intersect(right(DefaultStart, DefaultSize + DefaultSize / 2, DefaultSource));
                 Assert.All(query.ToList(), x => seen.Add(x));
                 seen.AssertComplete();
@@ -464,10 +464,10 @@ namespace System.Linq.Parallel.Tests
             {
                 IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
                 ParallelQuery<KeyValuePair<int, int>> query = left(
-                        DefaultStart / GroupFactor,
-                        DefaultSize / GroupFactor,
-                        DefaultSource
-                    )
+                    DefaultStart / GroupFactor,
+                    DefaultSize / GroupFactor,
+                    DefaultSource
+                )
                     .Join(
                         right(DefaultStart, DefaultSize, DefaultSource),
                         x => x,
@@ -494,10 +494,10 @@ namespace System.Linq.Parallel.Tests
             {
                 IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
                 ParallelQuery<KeyValuePair<int, int>> query = left(
-                        DefaultStart / GroupFactor,
-                        DefaultSize / GroupFactor,
-                        DefaultSource
-                    )
+                    DefaultStart / GroupFactor,
+                    DefaultSize / GroupFactor,
+                    DefaultSource
+                )
                     .Join(
                         right(DefaultStart, DefaultSize, DefaultSource),
                         x => x,
@@ -587,16 +587,13 @@ namespace System.Linq.Parallel.Tests
                 DefaultSize
             );
             IntegerRangeSet indices = new IntegerRangeSet(0, DefaultSize);
-            foreach (
-                int i in operation.Item(DefaultStart, DefaultSize, DefaultSource)
-                    .Select(
-                        (x, index) =>
-                        {
-                            indices.Add(index);
-                            return -x;
-                        }
-                    )
-            )
+            foreach (int i in operation.Item(DefaultStart, DefaultSize, DefaultSource).Select(
+                    (x, index) =>
+                    {
+                        indices.Add(index);
+                        return -x;
+                    }
+                ))
             {
                 seen.Add(i);
             }
@@ -614,18 +611,13 @@ namespace System.Linq.Parallel.Tests
                 DefaultSize
             );
             IntegerRangeSet indices = new IntegerRangeSet(0, DefaultSize);
-            Assert.All(
-                operation.Item(DefaultStart, DefaultSize, DefaultSource)
-                    .Select(
-                        (x, index) =>
-                        {
-                            indices.Add(index);
-                            return -x;
-                        }
-                    )
-                    .ToList(),
-                x => seen.Add(x)
-            );
+            Assert.All(operation.Item(DefaultStart, DefaultSize, DefaultSource).Select(
+                    (x, index) =>
+                    {
+                        indices.Add(index);
+                        return -x;
+                    }
+                ).ToList(), x => seen.Add(x));
             seen.AssertComplete();
             indices.AssertComplete();
         }
@@ -677,16 +669,13 @@ namespace System.Linq.Parallel.Tests
                 DefaultSize * 2
             );
             IntegerRangeSet indices = new IntegerRangeSet(0, DefaultSize);
-            foreach (
-                int i in operation.Item(0, DefaultSize, DefaultSource)
-                    .SelectMany(
-                        (x, index) =>
-                        {
-                            indices.Add(index);
-                            return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
-                        }
-                    )
-            )
+            foreach (int i in operation.Item(0, DefaultSize, DefaultSource).SelectMany(
+                    (x, index) =>
+                    {
+                        indices.Add(index);
+                        return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
+                    }
+                ))
             {
                 seen.Add(i);
             }
@@ -704,18 +693,13 @@ namespace System.Linq.Parallel.Tests
                 DefaultSize * 2
             );
             IntegerRangeSet indices = new IntegerRangeSet(0, DefaultSize);
-            Assert.All(
-                operation.Item(0, DefaultSize, DefaultSource)
-                    .SelectMany(
-                        (x, index) =>
-                        {
-                            indices.Add(index);
-                            return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
-                        }
-                    )
-                    .ToList(),
-                x => seen.Add(x)
-            );
+            Assert.All(operation.Item(0, DefaultSize, DefaultSource).SelectMany(
+                    (x, index) =>
+                    {
+                        indices.Add(index);
+                        return new[] { 0, -1 }.Select(y => y + -DefaultStart - 2 * x);
+                    }
+                ).ToList(), x => seen.Add(x));
             seen.AssertComplete();
             indices.AssertComplete();
         }
@@ -769,17 +753,14 @@ namespace System.Linq.Parallel.Tests
                 DefaultSize * 2
             );
             IntegerRangeSet indices = new IntegerRangeSet(0, DefaultSize);
-            foreach (
-                int i in operation.Item(0, DefaultSize, DefaultSource)
-                    .SelectMany(
-                        (x, index) =>
-                        {
-                            indices.Add(index);
-                            return new[] { 0, -1 };
-                        },
-                        (x, y) => y + -DefaultStart - 2 * x
-                    )
-            )
+            foreach (int i in operation.Item(0, DefaultSize, DefaultSource).SelectMany(
+                    (x, index) =>
+                    {
+                        indices.Add(index);
+                        return new[] { 0, -1 };
+                    },
+                    (x, y) => y + -DefaultStart - 2 * x
+                ))
             {
                 seen.Add(i);
             }
@@ -799,19 +780,14 @@ namespace System.Linq.Parallel.Tests
                 DefaultSize * 2
             );
             IntegerRangeSet indices = new IntegerRangeSet(0, DefaultSize);
-            Assert.All(
-                operation.Item(0, DefaultSize, DefaultSource)
-                    .SelectMany(
-                        (x, index) =>
-                        {
-                            indices.Add(index);
-                            return new[] { 0, -1 };
-                        },
-                        (x, y) => y + -DefaultStart - 2 * x
-                    )
-                    .ToList(),
-                x => seen.Add(x)
-            );
+            Assert.All(operation.Item(0, DefaultSize, DefaultSource).SelectMany(
+                    (x, index) =>
+                    {
+                        indices.Add(index);
+                        return new[] { 0, -1 };
+                    },
+                    (x, y) => y + -DefaultStart - 2 * x
+                ).ToList(), x => seen.Add(x));
             seen.AssertComplete();
             indices.AssertComplete();
         }

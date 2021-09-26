@@ -185,10 +185,10 @@ class C {
             Assert.Equal(SyntaxKind.TrueLiteralExpression, nodes[0].Kind());
 
             nodes = statement.DescendantNodes(
-                    statement.FullSpan,
-                    n => n is StatementSyntax,
-                    descendIntoTrivia: true
-                )
+                statement.FullSpan,
+                n => n is StatementSyntax,
+                descendIntoTrivia: true
+            )
                 .ToList();
             Assert.Equal(2, nodes.Count);
             Assert.Equal(SyntaxKind.IfDirectiveTrivia, nodes[0].Kind());
@@ -219,9 +219,9 @@ class C {
             Assert.Equal(SyntaxKind.TrueLiteralExpression, nodes[1].Kind());
 
             nodes = statement.DescendantNodesAndSelf(
-                    n => n is StatementSyntax,
-                    descendIntoTrivia: true
-                )
+                n => n is StatementSyntax,
+                descendIntoTrivia: true
+            )
                 .ToList();
             Assert.Equal(3, nodes.Count);
             Assert.Equal(SyntaxKind.ReturnStatement, nodes[0].Kind());
@@ -249,10 +249,10 @@ class C {
             Assert.Equal(SyntaxKind.TrueLiteralExpression, nodes[1].Kind());
 
             nodes = statement.DescendantNodesAndSelf(
-                    statement.FullSpan,
-                    n => n is StatementSyntax,
-                    descendIntoTrivia: true
-                )
+                statement.FullSpan,
+                n => n is StatementSyntax,
+                descendIntoTrivia: true
+            )
                 .ToList();
             Assert.Equal(3, nodes.Count);
             Assert.Equal(SyntaxKind.ReturnStatement, nodes[0].Kind());
@@ -371,9 +371,9 @@ class C {
 
             var directives = expr.GetDirectives();
             var descendantDirectives = expr.DescendantNodesAndSelf(
-                    n => n.ContainsDirectives,
-                    descendIntoTrivia: true
-                )
+                n => n.ContainsDirectives,
+                descendIntoTrivia: true
+            )
                 .OfType<DirectiveTriviaSyntax>()
                 .ToList();
 
@@ -398,8 +398,8 @@ class C {
             );
 
             var nodesWithMyAnnotations = exprWithAnnotations.DescendantNodesAndSelf(
-                    n => n.ContainsAnnotations
-                )
+                n => n.ContainsAnnotations
+            )
                 .Where(n => n.HasAnnotation(myAnnotation))
                 .ToList();
 
@@ -1253,7 +1253,8 @@ using goo.bar;
             List<SyntaxToken> list = new List<SyntaxToken>();
             SyntaxToken token = (
                 (SyntaxToken)((SyntaxTree)syntaxTree).GetCompilationUnitRoot().EndOfFileToken
-            ).GetPreviousToken(includeZeroWidth: true);
+            )
+                .GetPreviousToken(includeZeroWidth: true);
             while (token.RawKind != 0)
             {
                 list.Add(token);
@@ -2041,9 +2042,8 @@ class Test
             // Verify the kind of the CSharpSyntaxNode "int IX.GOO" is MethodDeclaration and NOT FieldDeclaration
             Assert.Equal(
                 SyntaxKind.MethodDeclaration,
-                tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].ChildNodesAndTokens()[
-                    3
-                ].Kind()
+                tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].ChildNodesAndTokens()[3]
+                    .Kind()
             );
         }
 
@@ -3739,13 +3739,14 @@ class Program
             var compilationUnit = tree.GetCompilationUnitRoot();
             var @class = (ClassDeclarationSyntax)compilationUnit.Members.Single();
             var method = (MethodDeclarationSyntax)@class.Members.Single();
-            var newModifiers = method.Modifiers.Add(
-                SyntaxFactory.Token(
-                    default(SyntaxTriviaList),
-                    SyntaxKind.UnsafeKeyword,
-                    SyntaxFactory.TriviaList(SyntaxFactory.Space)
-                )
-            );
+            var newModifiers = method.Modifiers
+                .Add(
+                    SyntaxFactory.Token(
+                        default(SyntaxTriviaList),
+                        SyntaxKind.UnsafeKeyword,
+                        SyntaxFactory.TriviaList(SyntaxFactory.Space)
+                    )
+                );
             Assert.Equal("    static unsafe ", newModifiers.ToFullString());
             Assert.Equal(2, newModifiers.Count);
             Assert.Equal(SyntaxKind.StaticKeyword, newModifiers[0].Kind());
@@ -3925,9 +3926,8 @@ namespace HelloWorld
             var SecondUsingClause = root.Usings[1];
             var ThirdUsingClause = root.Usings[2];
 
-            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree.GetChanges(
-                SecondUsingClause.SyntaxTree
-            );
+            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree
+                .GetChanges(SecondUsingClause.SyntaxTree);
             Assert.Equal(0, ChangesForDifferentTrees.Count);
 
             // Do a transform to Replace and Existing Tree
@@ -3941,9 +3941,8 @@ namespace HelloWorld
             // Replace Node with a different Imports Clause
             root = root.ReplaceNode(ThirdUsingClause, newUsingClause);
 
-            var ChangesFromTransform = ThirdUsingClause.SyntaxTree.GetChanges(
-                newUsingClause.SyntaxTree
-            );
+            var ChangesFromTransform = ThirdUsingClause.SyntaxTree
+                .GetChanges(newUsingClause.SyntaxTree);
             Assert.Equal(2, ChangesFromTransform.Count);
 
             // Using the Common Syntax Changes Method
@@ -3983,9 +3982,8 @@ namespace HelloWorld
             var SecondUsingClause = root.Usings[1];
             var ThirdUsingClause = root.Usings[2];
 
-            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree.GetChanges(
-                SecondUsingClause.SyntaxTree
-            );
+            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree
+                .GetChanges(SecondUsingClause.SyntaxTree);
             Assert.Equal(0, ChangesForDifferentTrees.Count);
 
             // With null tree
@@ -4021,9 +4019,8 @@ namespace HelloWorld
             var SecondUsingClause = root.Usings[1];
             var ThirdUsingClause = root.Usings[2];
 
-            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree.GetChangedSpans(
-                SecondUsingClause.SyntaxTree
-            );
+            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree
+                .GetChangedSpans(SecondUsingClause.SyntaxTree);
             Assert.Equal(0, ChangesForDifferentTrees.Count);
 
             // With null tree

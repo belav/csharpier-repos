@@ -81,16 +81,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             JArray blogPostArray = JArray.Parse(json);
 
             IList<BlogPost> blogPosts = blogPostArray.Select(
-                    p =>
-                        new BlogPost
-                        {
-                            Title = (string)p["Title"],
-                            AuthorName = (string)p["Author"]["Name"],
-                            AuthorTwitter = (string)p["Author"]["Twitter"],
-                            PostedDate = (DateTime)p["Date"],
-                            Body = HttpUtility.HtmlDecode((string)p["BodyHtml"])
-                        }
-                )
+                p =>
+                    new BlogPost
+                    {
+                        Title = (string)p["Title"],
+                        AuthorName = (string)p["Author"]["Name"],
+                        AuthorTwitter = (string)p["Author"]["Twitter"],
+                        PostedDate = (DateTime)p["Date"],
+                        Body = HttpUtility.HtmlDecode((string)p["BodyHtml"])
+                    }
+            )
                 .ToList();
 
             Console.WriteLine(blogPosts[0].Body);

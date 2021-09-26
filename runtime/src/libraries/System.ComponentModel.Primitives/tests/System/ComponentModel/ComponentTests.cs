@@ -201,10 +201,8 @@ namespace System.ComponentModel.Tests
             int callCount = 0;
             component.Disposed += (sender, e) => callCount++;
 
-            MethodInfo method = typeof(Component).GetMethod(
-                "Finalize",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            MethodInfo method = typeof(Component)
+                .GetMethod("Finalize", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.NotNull(method);
             method.Invoke(component, null);
             Assert.Equal(0, callCount);

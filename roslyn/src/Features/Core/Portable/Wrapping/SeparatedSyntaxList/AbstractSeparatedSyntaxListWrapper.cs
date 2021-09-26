@@ -77,10 +77,10 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             }
 
             var containsUnformattableContent = await ContainsUnformattableContentAsync(
-                    document,
-                    listItems.GetWithSeparators(),
-                    cancellationToken
-                )
+                document,
+                listItems.GetWithSeparators(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (containsUnformattableContent)

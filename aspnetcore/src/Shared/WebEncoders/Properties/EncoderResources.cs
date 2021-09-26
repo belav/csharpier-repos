@@ -30,13 +30,14 @@ namespace Microsoft.Extensions.WebEncoders.Sources
             object p2
         )
         {
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                WebEncoders_InvalidCountOffsetOrLength,
-                p0,
-                p1,
-                p2
-            );
+            return string
+                .Format(
+                    CultureInfo.CurrentCulture,
+                    WebEncoders_InvalidCountOffsetOrLength,
+                    p0,
+                    p1,
+                    p2
+                );
         }
 
         /// <summary>

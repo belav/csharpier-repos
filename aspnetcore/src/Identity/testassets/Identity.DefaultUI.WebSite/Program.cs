@@ -19,15 +19,14 @@ namespace Identity.DefaultUI.WebSite
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(
-                    webBuilder =>
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(
+                webBuilder =>
+                {
+                    if (!args.Contains("--use-startup=false"))
                     {
-                        if (!args.Contains("--use-startup=false"))
-                        {
-                            webBuilder.UseStartup<Startup>();
-                        }
+                        webBuilder.UseStartup<Startup>();
                     }
-                );
+                }
+            );
     }
 }

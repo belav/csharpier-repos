@@ -61,10 +61,8 @@ namespace System.ConfigurationTests
             Assert.Same(foo, new SimpleElement().TestGetTransformedAssemblyString(foo));
         }
 
-        private static PropertyInfo LockType = typeof(ConfigurationLockCollection).GetProperty(
-            "LockType",
-            BindingFlags.NonPublic | BindingFlags.Instance
-        );
+        private static PropertyInfo LockType = typeof(ConfigurationLockCollection)
+            .GetProperty("LockType", BindingFlags.NonPublic | BindingFlags.Instance);
 
         [Fact]
         public void LockAttributesCollectionIsCorrectType()

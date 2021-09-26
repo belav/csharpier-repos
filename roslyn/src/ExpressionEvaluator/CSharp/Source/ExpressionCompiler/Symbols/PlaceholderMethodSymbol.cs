@@ -319,9 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(
-                    AdaptedMethodSymbol.RefCustomModifiers
-                );
+                return ImmutableArray<Cci.ICustomModifier>
+                    .CastUp(AdaptedMethodSymbol.RefCustomModifiers);
             }
         }
     }

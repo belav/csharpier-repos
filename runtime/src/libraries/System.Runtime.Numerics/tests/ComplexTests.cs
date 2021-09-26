@@ -447,25 +447,27 @@ namespace System.Numerics.Tests
 
             Assert.True(
                 (abs.Equals(expected) || IsDiffTolerable(abs, expected)),
-                string.Format(
-                    "Abs({0}, {1}) Actual: {2}, Expected: {3}",
-                    real,
-                    imaginary,
-                    abs,
-                    expected
-                )
+                string
+                    .Format(
+                        "Abs({0}, {1}) Actual: {2}, Expected: {3}",
+                        real,
+                        imaginary,
+                        abs,
+                        expected
+                    )
             );
 
             double absNegative = Complex.Abs(-complex);
             Assert.True(
                 absNegative.Equals(abs),
-                string.Format(
-                    "Abs({0}, {1}) = {2} != Abs(-neg)={3}",
-                    real,
-                    imaginary,
-                    abs,
-                    absNegative
-                )
+                string
+                    .Format(
+                        "Abs({0}, {1}) = {2} != Abs(-neg)={3}",
+                        real,
+                        imaginary,
+                        abs,
+                        absNegative
+                    )
             );
         }
 
@@ -1356,79 +1358,87 @@ namespace System.Numerics.Tests
                 Complex complex2 = (Complex)obj;
                 Assert.True(
                     expected == (complex1 == complex2),
-                    string.Format(
-                        "c1:{0} == c2{1} is not '{2}' as expected",
-                        complex1,
-                        complex2,
-                        expected
-                    )
+                    string
+                        .Format(
+                            "c1:{0} == c2{1} is not '{2}' as expected",
+                            complex1,
+                            complex2,
+                            expected
+                        )
                 );
                 Assert.True(
                     expected == (complex2 == complex1),
-                    string.Format(
-                        "c2:{0} == c1{1} is not '{2}' as expected",
-                        complex2,
-                        complex1,
-                        expected
-                    )
+                    string
+                        .Format(
+                            "c2:{0} == c1{1} is not '{2}' as expected",
+                            complex2,
+                            complex1,
+                            expected
+                        )
                 );
 
                 Assert.False(
                     expected == (complex1 != complex2),
-                    string.Format(
-                        "c1:{0} != c2{1} is not '{2}' as expected",
-                        complex1,
-                        complex2,
-                        !expected
-                    )
+                    string
+                        .Format(
+                            "c1:{0} != c2{1} is not '{2}' as expected",
+                            complex1,
+                            complex2,
+                            !expected
+                        )
                 );
                 Assert.False(
                     expected == (complex2 != complex1),
-                    string.Format(
-                        "c2:{0} != c1{1} is not '{2}' as expected",
-                        complex2,
-                        complex1,
-                        !expected
-                    )
+                    string
+                        .Format(
+                            "c2:{0} != c1{1} is not '{2}' as expected",
+                            complex2,
+                            complex1,
+                            !expected
+                        )
                 );
 
                 Assert.True(
                     expectedEquals == complex1.Equals(complex2),
-                    string.Format(
-                        "{0}.Equals({1}) is not '{2}' as expected",
-                        complex1,
-                        complex2,
-                        expectedEquals
-                    )
+                    string
+                        .Format(
+                            "{0}.Equals({1}) is not '{2}' as expected",
+                            complex1,
+                            complex2,
+                            expectedEquals
+                        )
                 );
                 Assert.True(
                     expectedEquals == complex2.Equals(complex1),
-                    string.Format(
-                        "{0}.Equals({1}) is not '{2}' as expected",
-                        complex2,
-                        complex1,
-                        expectedEquals
-                    )
+                    string
+                        .Format(
+                            "{0}.Equals({1}) is not '{2}' as expected",
+                            complex2,
+                            complex1,
+                            expectedEquals
+                        )
                 );
 
                 Assert.True(
                     expectedEquals == complex1.GetHashCode().Equals(complex2.GetHashCode()),
-                    string.Format(
-                        "{0}.GetHashCode().Equals({1}.GetHashCode()) is not '{2}' as expected",
-                        complex1,
-                        complex2,
-                        expectedEquals
-                    )
+                    string
+                        .Format(
+                            "{0}.GetHashCode().Equals({1}.GetHashCode()) is not '{2}' as expected",
+                            complex1,
+                            complex2,
+                            expectedEquals
+                        )
                 );
             }
             Assert.True(
                 expectedEquals == complex1.Equals(obj),
-                string.Format(
-                    "{0}.Equals({1}) is not '{2}' as expected",
-                    complex1,
-                    obj,
-                    expectedEquals
-                )
+                string
+                    .Format(
+                        "{0}.Equals({1}) is not '{2}' as expected",
+                        complex1,
+                        obj,
+                        expectedEquals
+                    )
             );
         }
 
@@ -2930,22 +2940,24 @@ namespace System.Numerics.Tests
         {
             Assert.True(
                 real.Equals(complex.Real) || IsDiffTolerable(complex.Real, real),
-                string.Format(
-                    "Failure at line {0}. Expected real: {1}. Actual real: {2}",
-                    lineNumber,
-                    real,
-                    complex.Real
-                )
+                string
+                    .Format(
+                        "Failure at line {0}. Expected real: {1}. Actual real: {2}",
+                        lineNumber,
+                        real,
+                        complex.Real
+                    )
             );
             Assert.True(
                 imaginary.Equals(complex.Imaginary)
                     || IsDiffTolerable(complex.Imaginary, imaginary),
-                string.Format(
-                    "Failure at line {0}. Expected imaginary: {1}. Actual imaginary: {2}",
-                    lineNumber,
-                    imaginary,
-                    complex.Imaginary
-                )
+                string
+                    .Format(
+                        "Failure at line {0}. Expected imaginary: {1}. Actual imaginary: {2}",
+                        lineNumber,
+                        imaginary,
+                        complex.Imaginary
+                    )
             );
         }
 
@@ -2964,12 +2976,13 @@ namespace System.Numerics.Tests
             Assert.True(
                 expectedMagnitudeSquared.Equals(actualMagnitudeSquared)
                     || IsDiffTolerable(actualMagnitudeSquared, expectedMagnitudeSquared),
-                string.Format(
-                    "Failure at line {0}. Expected magnitude squared: {1}. Actual magnitude squared: {2}",
-                    lineNumber,
-                    expectedMagnitudeSquared,
-                    actualMagnitudeSquared
-                )
+                string
+                    .Format(
+                        "Failure at line {0}. Expected magnitude squared: {1}. Actual magnitude squared: {2}",
+                        lineNumber,
+                        expectedMagnitudeSquared,
+                        actualMagnitudeSquared
+                    )
             );
 
             if (double.IsNaN(magnitude))
@@ -2987,12 +3000,13 @@ namespace System.Numerics.Tests
 
             Assert.True(
                 phase.Equals(complex.Phase) || IsDiffTolerable(complex.Phase, phase),
-                string.Format(
-                    "Failure at line {0}. Expected phase: {1}. Actual phase: {2}",
-                    lineNumber,
-                    phase,
-                    complex.Phase
-                )
+                string
+                    .Format(
+                        "Failure at line {0}. Expected phase: {1}. Actual phase: {2}",
+                        lineNumber,
+                        phase,
+                        complex.Phase
+                    )
             );
         }
 

@@ -69,13 +69,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             _buffer = buffer;
 
             _tagAggregator = tagAggregator;
-            _formatMap = taggerProvider.ClassificationFormatMapService.GetClassificationFormatMap(
-                textView
-            );
-            _hintClassification =
-                taggerProvider.ClassificationTypeRegistryService.GetClassificationType(
-                    InlineHintsTag.TagId
-                );
+            _formatMap = taggerProvider.ClassificationFormatMapService
+                .GetClassificationFormatMap(textView);
+            _hintClassification = taggerProvider.ClassificationTypeRegistryService
+                .GetClassificationType(InlineHintsTag.TagId);
             _formatMap.ClassificationFormatMappingChanged +=
                 this.OnClassificationFormatMappingChanged;
             _tagAggregator.TagsChanged += OnTagAggregatorTagsChanged;
@@ -129,10 +126,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
                 var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 var classify =
-                    document?.Project.Solution.Workspace.Options.GetOption(
-                        InlineHintsOptions.ColorHints,
-                        document?.Project.Language
-                    ) ?? false;
+                    document?.Project.Solution.Workspace.Options
+                        .GetOption(InlineHintsOptions.ColorHints, document?.Project.Language)
+                    ?? false;
 
                 // Calling into the InlineParameterNameHintsDataTaggerProvider which only responds with the current
                 // active view and disregards and requests for tags not in that view

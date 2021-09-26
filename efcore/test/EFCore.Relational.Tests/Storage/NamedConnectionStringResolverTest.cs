@@ -60,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var resolver = new NamedConnectionStringResolver(
                 new FakeOptions(
-                    new ConfigurationBuilder().AddInMemoryCollection(
+                    new ConfigurationBuilder()
+                        .AddInMemoryCollection(
                             new Dictionary<string, string>
                             {
                                 { "MyConnectionString", "Conn1" },
@@ -94,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var resolver = new NamedConnectionStringResolver(
                 new FakeOptions(
-                    new ConfigurationBuilder().AddInMemoryCollection(
+                    new ConfigurationBuilder()
+                        .AddInMemoryCollection(
                             new Dictionary<string, string> { { "Nope", "NoThanks" } }
                         )
                         .Build()

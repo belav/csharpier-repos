@@ -44,7 +44,8 @@ namespace System.Text.RegularExpressions.Tests
             GroupCollection groups = match.Groups;
             IEnumerator<KeyValuePair<string, Group>> enumerator = (
                 (IEnumerable<KeyValuePair<string, Group>>)groups
-            ).GetEnumerator();
+            )
+                .GetEnumerator();
             for (int i = 0; i < 2; i++)
             {
                 int counter = 0;
@@ -89,7 +90,8 @@ namespace System.Text.RegularExpressions.Tests
 
             IEnumerator<KeyValuePair<string, Group>> enumerator = (
                 (IEnumerable<KeyValuePair<string, Group>>)match.Groups
-            ).GetEnumerator();
+            )
+                .GetEnumerator();
 
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 

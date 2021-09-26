@@ -89,58 +89,56 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             HttpClientSlim = new InMemoryHttpClientSlim(this);
 
             var hostBuilder = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseSetting(
-                                WebHostDefaults.ShutdownTimeoutKey,
-                                TestConstants.DefaultTimeout.TotalSeconds.ToString(
-                                    CultureInfo.InvariantCulture
-                                )
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.Run(_app);
-                                }
-                            );
-                    }
-                )
-                .ConfigureServices(
-                    services =>
-                    {
-                        configureServices(services);
-
-                        // Ensure there is at least one multiplexed connection lister factory if none was added to services.
-                        if (
-                            !services.Any(
-                                d => d.ServiceType == typeof(IMultiplexedConnectionListenerFactory)
-                            )
-                        )
-                        {
-                            // Mock multiplexed connection listner is added so Kestrel doesn't error
-                            // when a HTTP/3 endpoint is configured.
-                            services.AddSingleton<IMultiplexedConnectionListenerFactory>(
-                                new MockMultiplexedConnectionListenerFactory()
-                            );
-                        }
-
-                        services.AddSingleton<IStartup>(this);
-                        services.AddSingleton(context.LoggerFactory);
-
-                        services.AddSingleton<IServer>(
-                            sp =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseSetting(
+                        WebHostDefaults.ShutdownTimeoutKey,
+                        TestConstants.DefaultTimeout.TotalSeconds
+                            .ToString(CultureInfo.InvariantCulture)
+                    )
+                        .Configure(
+                            app =>
                             {
-                                context.ServerOptions.ApplicationServices = sp;
-                                configureKestrel(context.ServerOptions);
-                                return new KestrelServerImpl(
-                                    new IConnectionListenerFactory[] { _transportFactory },
-                                    sp.GetServices<IMultiplexedConnectionListenerFactory>(),
-                                    context
-                                );
+                                app.Run(_app);
                             }
                         );
+                }
+            ).ConfigureServices(
+                services =>
+                {
+                    configureServices(services);
+
+                    // Ensure there is at least one multiplexed connection lister factory if none was added to services.
+                    if (
+                        !services.Any(
+                            d => d.ServiceType == typeof(IMultiplexedConnectionListenerFactory)
+                        )
+                    )
+                    {
+                        // Mock multiplexed connection listner is added so Kestrel doesn't error
+                        // when a HTTP/3 endpoint is configured.
+                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(
+                            new MockMultiplexedConnectionListenerFactory()
+                        );
                     }
-                );
+
+                    services.AddSingleton<IStartup>(this);
+                    services.AddSingleton(context.LoggerFactory);
+
+                    services.AddSingleton<IServer>(
+                        sp =>
+                        {
+                            context.ServerOptions.ApplicationServices = sp;
+                            configureKestrel(context.ServerOptions);
+                            return new KestrelServerImpl(
+                                new IConnectionListenerFactory[] { _transportFactory },
+                                sp.GetServices<IMultiplexedConnectionListenerFactory>(),
+                                context
+                            );
+                        }
+                    );
+                }
+            );
 
             _host = hostBuilder.Build();
             _host.Start();

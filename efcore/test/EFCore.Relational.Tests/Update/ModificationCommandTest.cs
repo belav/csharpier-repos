@@ -602,16 +602,17 @@ namespace Microsoft.EntityFrameworkCore.Update
         {
             var model = BuildModel(generateKeyValues, computeNonKeyValue);
 
-            return RelationalTestHelpers.Instance.CreateInternalEntry(
-                model,
-                entityState,
-                new T1
-                {
-                    Id = 1,
-                    Name1 = computeNonKeyValue ? null : "Test",
-                    Name2 = computeNonKeyValue ? null : "Test"
-                }
-            );
+            return RelationalTestHelpers.Instance
+                .CreateInternalEntry(
+                    model,
+                    entityState,
+                    new T1
+                    {
+                        Id = 1,
+                        Name1 = computeNonKeyValue ? null : "Test",
+                        Name2 = computeNonKeyValue ? null : "Test"
+                    }
+                );
         }
     }
 }

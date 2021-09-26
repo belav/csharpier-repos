@@ -47,10 +47,8 @@ namespace Internal.TypeSystem
         /// </summary>
         public int ComputeGenericInstanceHashCode(int genericDefinitionHashCode)
         {
-            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeGenericInstanceHashCode(
-                genericDefinitionHashCode,
-                _genericParameters
-            );
+            return Internal.NativeFormat.TypeHashingAlgorithms
+                .ComputeGenericInstanceHashCode(genericDefinitionHashCode, _genericParameters);
         }
 
         public static readonly Instantiation Empty = new Instantiation(TypeDesc.EmptyTypes);

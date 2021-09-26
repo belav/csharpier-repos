@@ -263,14 +263,15 @@ namespace System.Threading.Tasks
         public Task<TResult> StartNew(Func<TResult> function)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                m_defaultCancellationToken,
-                m_defaultCreationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    m_defaultCancellationToken,
+                    m_defaultCreationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -296,14 +297,15 @@ namespace System.Threading.Tasks
         public Task<TResult> StartNew(Func<TResult> function, CancellationToken cancellationToken)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                cancellationToken,
-                m_defaultCreationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    cancellationToken,
+                    m_defaultCreationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -331,14 +333,15 @@ namespace System.Threading.Tasks
         public Task<TResult> StartNew(Func<TResult> function, TaskCreationOptions creationOptions)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                m_defaultCancellationToken,
-                creationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    m_defaultCancellationToken,
+                    creationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -381,14 +384,15 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler
         )
         {
-            return Task<TResult>.StartNew(
-                Task.InternalCurrentIfAttached(creationOptions),
-                function,
-                cancellationToken,
-                creationOptions,
-                InternalTaskOptions.None,
-                scheduler
-            );
+            return Task<TResult>
+                .StartNew(
+                    Task.InternalCurrentIfAttached(creationOptions),
+                    function,
+                    cancellationToken,
+                    creationOptions,
+                    InternalTaskOptions.None,
+                    scheduler
+                );
         }
 
         /// <summary>
@@ -412,15 +416,16 @@ namespace System.Threading.Tasks
         public Task<TResult> StartNew(Func<object?, TResult> function, object? state)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                state,
-                m_defaultCancellationToken,
-                m_defaultCreationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    state,
+                    m_defaultCancellationToken,
+                    m_defaultCreationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -452,15 +457,16 @@ namespace System.Threading.Tasks
         )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                state,
-                cancellationToken,
-                m_defaultCreationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    state,
+                    cancellationToken,
+                    m_defaultCreationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -494,15 +500,16 @@ namespace System.Threading.Tasks
         )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(
-                currTask,
-                function,
-                state,
-                m_defaultCancellationToken,
-                creationOptions,
-                InternalTaskOptions.None,
-                GetDefaultScheduler(currTask)
-            );
+            return Task<TResult>
+                .StartNew(
+                    currTask,
+                    function,
+                    state,
+                    m_defaultCancellationToken,
+                    creationOptions,
+                    InternalTaskOptions.None,
+                    GetDefaultScheduler(currTask)
+                );
         }
 
         /// <summary>
@@ -548,15 +555,16 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler
         )
         {
-            return Task<TResult>.StartNew(
-                Task.InternalCurrentIfAttached(creationOptions),
-                function,
-                state,
-                cancellationToken,
-                creationOptions,
-                InternalTaskOptions.None,
-                scheduler
-            );
+            return Task<TResult>
+                .StartNew(
+                    Task.InternalCurrentIfAttached(creationOptions),
+                    function,
+                    state,
+                    cancellationToken,
+                    creationOptions,
+                    InternalTaskOptions.None,
+                    scheduler
+                );
         }
 
         //
@@ -613,10 +621,8 @@ namespace System.Threading.Tasks
                 else
                 {
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource.Log.TraceOperationEnd(
-                            promise.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource.Log
+                            .TraceOperationEnd(promise.Id, AsyncCausalityStatus.Completed);
 
                     if (Task.s_asyncDebuggingEnabled)
                         Task.RemoveFromActiveTasks(promise);
@@ -907,11 +913,12 @@ namespace System.Threading.Tasks
             Task<TResult> promise = new Task<TResult>(state, creationOptions);
 
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource.Log.TraceOperationBegin(
-                    promise.Id,
-                    "TaskFactory.FromAsync: " + beginMethod.Method.Name,
-                    0
-                );
+                TplEventSource.Log
+                    .TraceOperationBegin(
+                        promise.Id,
+                        "TaskFactory.FromAsync: " + beginMethod.Method.Name,
+                        0
+                    );
 
             if (Task.s_asyncDebuggingEnabled)
                 Task.AddToActiveTasks(promise);
@@ -1066,11 +1073,12 @@ namespace System.Threading.Tasks
             Task<TResult> promise = new Task<TResult>(state, creationOptions);
 
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource.Log.TraceOperationBegin(
-                    promise.Id,
-                    "TaskFactory.FromAsync: " + beginMethod.Method.Name,
-                    0
-                );
+                TplEventSource.Log
+                    .TraceOperationBegin(
+                        promise.Id,
+                        "TaskFactory.FromAsync: " + beginMethod.Method.Name,
+                        0
+                    );
 
             if (Task.s_asyncDebuggingEnabled)
                 Task.AddToActiveTasks(promise);
@@ -1238,11 +1246,12 @@ namespace System.Threading.Tasks
             Task<TResult> promise = new Task<TResult>(state, creationOptions);
 
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource.Log.TraceOperationBegin(
-                    promise.Id,
-                    "TaskFactory.FromAsync: " + beginMethod.Method.Name,
-                    0
-                );
+                TplEventSource.Log
+                    .TraceOperationBegin(
+                        promise.Id,
+                        "TaskFactory.FromAsync: " + beginMethod.Method.Name,
+                        0
+                    );
 
             if (Task.s_asyncDebuggingEnabled)
                 Task.AddToActiveTasks(promise);
@@ -1432,11 +1441,12 @@ namespace System.Threading.Tasks
             Task<TResult> promise = new Task<TResult>(state, creationOptions);
 
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource.Log.TraceOperationBegin(
-                    promise.Id,
-                    "TaskFactory.FromAsync: " + beginMethod.Method.Name,
-                    0
-                );
+                TplEventSource.Log
+                    .TraceOperationBegin(
+                        promise.Id,
+                        "TaskFactory.FromAsync: " + beginMethod.Method.Name,
+                        0
+                    );
 
             if (Task.s_asyncDebuggingEnabled)
                 Task.AddToActiveTasks(promise);

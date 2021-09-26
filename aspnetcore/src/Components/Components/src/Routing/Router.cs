@@ -261,10 +261,8 @@ namespace Microsoft.AspNetCore.Components.Routing
             var cancellationTcs = new TaskCompletionSource(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
-            navigateContext.CancellationToken.Register(
-                state => ((TaskCompletionSource)state).SetResult(),
-                cancellationTcs
-            );
+            navigateContext.CancellationToken
+                .Register(state => ((TaskCompletionSource)state).SetResult(), cancellationTcs);
 
             try
             {
@@ -289,9 +287,9 @@ namespace Microsoft.AspNetCore.Components.Routing
             if (_renderHandle.IsInitialized && Routes != null)
             {
                 _ = RunOnNavigateAsync(
-                        NavigationManager.ToBaseRelativePath(_locationAbsolute),
-                        args.IsNavigationIntercepted
-                    )
+                    NavigationManager.ToBaseRelativePath(_locationAbsolute),
+                    args.IsNavigationIntercepted
+                )
                     .Preserve();
             }
         }

@@ -199,9 +199,9 @@ namespace Microsoft.CodeAnalysis.Options
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var documentOption = await provider.GetOptionsForDocumentAsync(
-                            document,
-                            cancellationToken
-                        )
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     if (documentOption != null)

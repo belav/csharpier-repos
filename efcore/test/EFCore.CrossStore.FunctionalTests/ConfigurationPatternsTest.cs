@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_register_multiple_context_types()
         {
-            var serviceProvider = new ServiceCollection().AddDbContext<MultipleContext1>()
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<MultipleContext1>()
                 .AddDbContext<MultipleContext2>()
                 .BuildServiceProvider();
 
@@ -102,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_select_appropriate_provider_when_multiple_registered()
         {
-            var serviceProvider = new ServiceCollection().AddScoped<SomeService>()
+            var serviceProvider = new ServiceCollection()
+                .AddScoped<SomeService>()
                 .AddDbContext<MultipleProvidersContext>()
                 .BuildServiceProvider();
 
@@ -115,8 +117,8 @@ namespace Microsoft.EntityFrameworkCore
             )
             {
                 using (
-                    context1 =
-                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                    context1 = serviceScope.ServiceProvider
+                        .GetRequiredService<MultipleProvidersContext>()
                 )
                 {
                     context1.UseSqlServer = true;
@@ -125,8 +127,8 @@ namespace Microsoft.EntityFrameworkCore
                 }
 
                 using (
-                    var context1B =
-                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                    var context1B = serviceScope.ServiceProvider
+                        .GetRequiredService<MultipleProvidersContext>()
                 )
                 {
                     Assert.Same(context1, context1B);
@@ -142,8 +144,8 @@ namespace Microsoft.EntityFrameworkCore
             )
             {
                 using (
-                    context2 =
-                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                    context2 = serviceScope.ServiceProvider
+                        .GetRequiredService<MultipleProvidersContext>()
                 )
                 {
                     context2.UseSqlServer = false;
@@ -152,8 +154,8 @@ namespace Microsoft.EntityFrameworkCore
                 }
 
                 using (
-                    var context2B =
-                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                    var context2B = serviceScope.ServiceProvider
+                        .GetRequiredService<MultipleProvidersContext>()
                 )
                 {
                     Assert.Same(context2, context2B);
@@ -353,9 +355,9 @@ namespace Microsoft.EntityFrameworkCore
 
                 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                     optionsBuilder.UseSqlServer(
-                            SqlServerTestStore.CreateConnectionString(StoreName),
-                            b => b.ApplyConfiguration()
-                        )
+                        SqlServerTestStore.CreateConnectionString(StoreName),
+                        b => b.ApplyConfiguration()
+                    )
                         .UseInternalServiceProvider(_serviceProvider);
             }
         }

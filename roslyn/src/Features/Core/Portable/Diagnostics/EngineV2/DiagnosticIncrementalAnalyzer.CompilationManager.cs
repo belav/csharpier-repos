@@ -43,11 +43,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             // Create driver that holds onto compilation and associated analyzers
             var includeSuppressedDiagnostics = true;
             var newCompilationWithAnalyzers = await CreateCompilationWithAnalyzersAsync(
-                    project,
-                    stateSets,
-                    includeSuppressedDiagnostics,
-                    cancellationToken
-                )
+                project,
+                stateSets,
+                includeSuppressedDiagnostics,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // Add new analyzer driver to the map
@@ -109,9 +109,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             // make sure analyzers are same.
             Contract.ThrowIfFalse(
-                compilation.Analyzers.SetEquals(
-                    stateSets.Select(s => s.Analyzer).Where(a => !a.IsWorkspaceDiagnosticAnalyzer())
-                )
+                compilation.Analyzers
+                    .SetEquals(
+                        stateSets.Select(s => s.Analyzer)
+                            .Where(a => !a.IsWorkspaceDiagnosticAnalyzer())
+                    )
             );
         }
     }

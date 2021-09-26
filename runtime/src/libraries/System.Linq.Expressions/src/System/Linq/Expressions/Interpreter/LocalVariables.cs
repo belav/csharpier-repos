@@ -42,13 +42,14 @@ namespace System.Linq.Expressions.Interpreter
 
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}: {1} {2}",
-                Index,
-                IsBoxed ? "boxed" : null,
-                InClosure ? "in closure" : null
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}: {1} {2}",
+                    Index,
+                    IsBoxed ? "boxed" : null,
+                    InClosure ? "in closure" : null
+                );
         }
     }
 

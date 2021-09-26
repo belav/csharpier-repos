@@ -130,11 +130,13 @@ namespace Microsoft.EntityFrameworkCore
 
                     var pinky = context.Attendees.Single(a => a.UserName == "Pinks");
 
-                    var pinkySessions = context.Sessions.AsNoTracking()
+                    var pinkySessions = context.Sessions
+                        .AsNoTracking()
                         .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                         .ToList();
 
-                    var session = context.Sessions.AsNoTracking()
+                    var session = context.Sessions
+                        .AsNoTracking()
                         .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
                     Assert.Equal(21, pinkySessions.Count);
@@ -156,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         result.Sessions.Select(r => r.Id).OrderBy(i => i).ToList(),
-                        context.Sessions.AsNoTracking()
+                        context.Sessions
+                            .AsNoTracking()
                             .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                             .Select(s => s.Id)
                             .OrderBy(i => i)
@@ -189,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var controller = new AttendeesController(context);
 
-                    var session = context.Sessions.AsNoTracking()
+                    var session = context.Sessions
+                        .AsNoTracking()
                         .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
                     var result = (string)await controller.AddSession("The Stig", session.Id);
@@ -207,7 +211,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var controller = new AttendeesController(context);
 
-                    var beforeRemove = context.Sessions.AsNoTracking()
+                    var beforeRemove = context.Sessions
+                        .AsNoTracking()
                         .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                         .OrderBy(e => e.Id)
                         .Select(e => e.Id)
@@ -220,7 +225,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal("Success", result);
 
-                    var afterRemove = context.Sessions.AsNoTracking()
+                    var afterRemove = context.Sessions
+                        .AsNoTracking()
                         .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                         .OrderBy(e => e.Id)
                         .Select(e => e.Id)
@@ -256,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var controller = new AttendeesController(context);
 
-                    var session = context.Sessions.AsNoTracking()
+                    var session = context.Sessions
+                        .AsNoTracking()
                         .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
                     var result = await controller.RemoveSession("The Stig", session.Id);
@@ -277,7 +284,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<AttendeeResponse> Get(string username)
             {
-                var attendee = await _db.Attendees.Include(a => a.SessionsAttendees)
+                var attendee = await _db.Attendees
+                    .Include(a => a.SessionsAttendees)
                     .ThenInclude(sa => sa.Session)
                     .SingleOrDefaultAsync(a => a.UserName == username);
 
@@ -286,7 +294,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<List<SessionResponse>> GetSessions(string username)
             {
-                return await _db.Sessions.AsNoTracking()
+                return await _db.Sessions
+                    .AsNoTracking()
                     .Include(s => s.Track)
                     .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Speaker)
@@ -297,7 +306,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<AttendeeResponse> Post(Attendee input)
             {
-                var existingAttendee = await _db.Attendees.Where(a => a.UserName == input.UserName)
+                var existingAttendee = await _db.Attendees
+                    .Where(a => a.UserName == input.UserName)
                     .FirstOrDefaultAsync();
 
                 if (existingAttendee != null)
@@ -321,7 +331,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<object> AddSession(string username, int sessionId)
             {
-                var attendee = await _db.Attendees.Include(a => a.SessionsAttendees)
+                var attendee = await _db.Attendees
+                    .Include(a => a.SessionsAttendees)
                     .ThenInclude(sa => sa.Session)
                     .SingleOrDefaultAsync(a => a.UserName == username);
 
@@ -337,9 +348,8 @@ namespace Microsoft.EntityFrameworkCore
                     return "No session";
                 }
 
-                attendee.SessionsAttendees.Add(
-                    new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId }
-                );
+                attendee.SessionsAttendees
+                    .Add(new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId });
 
                 await _db.SaveChangesAsync();
 
@@ -348,7 +358,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<string> RemoveSession(string username, int sessionId)
             {
-                var attendee = await _db.Attendees.Include(a => a.SessionsAttendees)
+                var attendee = await _db.Attendees
+                    .Include(a => a.SessionsAttendees)
                     .SingleOrDefaultAsync(a => a.UserName == username);
 
                 if (attendee == null)
@@ -363,9 +374,8 @@ namespace Microsoft.EntityFrameworkCore
                     return "No session";
                 }
 
-                var sessionAttendee = attendee.SessionsAttendees.FirstOrDefault(
-                    sa => sa.SessionId == sessionId
-                );
+                var sessionAttendee = attendee.SessionsAttendees
+                    .FirstOrDefault(sa => sa.SessionId == sessionId);
                 attendee.SessionsAttendees.Remove(sessionAttendee);
 
                 await _db.SaveChangesAsync();
@@ -425,13 +435,15 @@ namespace Microsoft.EntityFrameworkCore
             public async Task<List<SearchResult>> Search(SearchTerm term)
             {
                 var query = term.Query;
-                var sessionResults = await _db.Sessions.Include(s => s.Track)
+                var sessionResults = await _db.Sessions
+                    .Include(s => s.Track)
                     .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Speaker)
                     .Where(s => s.Title.Contains(query) || s.Track.Name.Contains(query))
                     .ToListAsync();
 
-                var speakerResults = await _db.Speakers.Include(s => s.SessionSpeakers)
+                var speakerResults = await _db.Speakers
+                    .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Session)
                     .Where(
                         s =>
@@ -442,13 +454,13 @@ namespace Microsoft.EntityFrameworkCore
                     .ToListAsync();
 
                 var results = sessionResults.Select(
-                        session =>
-                            new SearchResult
-                            {
-                                Type = SearchResultType.Session,
-                                Session = session.MapSessionResponse()
-                            }
-                    )
+                    session =>
+                        new SearchResult
+                        {
+                            Type = SearchResultType.Session,
+                            Session = session.MapSessionResponse()
+                        }
+                )
                     .Concat(
                         speakerResults.Select(
                             speaker =>
@@ -489,7 +501,8 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var session = context.Sessions.AsNoTracking()
+                    var session = context.Sessions
+                        .AsNoTracking()
                         .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
                     var controller = new SessionsController(context);
@@ -539,7 +552,8 @@ namespace Microsoft.EntityFrameworkCore
                         }
                     );
 
-                    var newSession = context.Sessions.AsNoTracking()
+                    var newSession = context.Sessions
+                        .AsNoTracking()
                         .Single(e => e.Title == "Pandas!");
 
                     Assert.Equal(newSession.Id, result.Id);
@@ -556,7 +570,8 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var session = context.Sessions.AsNoTracking()
+                    var session = context.Sessions
+                        .AsNoTracking()
                         .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
                     var controller = new SessionsController(context);
@@ -576,7 +591,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal("Success", result);
 
-                    var updatedSession = context.Sessions.AsNoTracking()
+                    var updatedSession = context.Sessions
+                        .AsNoTracking()
                         .Single(e => e.Id == session.Id);
 
                     Assert.Equal(session.Id, updatedSession.Id);
@@ -606,7 +622,8 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var session = context.Sessions.AsNoTracking()
+                    var session = context.Sessions
+                        .AsNoTracking()
                         .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
                     var controller = new SessionsController(context);
@@ -650,7 +667,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<List<SessionResponse>> Get()
             {
-                return await _db.Sessions.AsNoTracking()
+                return await _db.Sessions
+                    .AsNoTracking()
                     .Include(s => s.Track)
                     .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Speaker)
@@ -660,7 +678,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<SessionResponse> Get(int id)
             {
-                var session = await _db.Sessions.AsNoTracking()
+                var session = await _db.Sessions
+                    .AsNoTracking()
                     .Include(s => s.Track)
                     .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Speaker)
@@ -747,7 +766,8 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var speaker = context.Speakers.AsNoTracking()
+                    var speaker = context.Speakers
+                        .AsNoTracking()
                         .Single(e => e.Name == "Julie Lerman");
 
                     var controller = new SpeakersController(context);
@@ -786,7 +806,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<List<SpeakerResponse>> GetSpeakers()
             {
-                return await _db.Speakers.AsNoTracking()
+                return await _db.Speakers
+                    .AsNoTracking()
                     .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Session)
                     .Select(s => s.MapSpeakerResponse())
@@ -795,7 +816,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<SpeakerResponse> GetSpeaker(int id)
             {
-                var speaker = await _db.Speakers.AsNoTracking()
+                var speaker = await _db.Speakers
+                    .AsNoTracking()
                     .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Session)
                     .SingleOrDefaultAsync(s => s.Id == id);
@@ -946,8 +968,8 @@ namespace Microsoft.EntityFrameworkCore
                             };
 
                             session.SessionSpeakers = sessionSpeakers.Select(
-                                    s => new SessionSpeaker { Session = session, Speaker = s }
-                                )
+                                s => new SessionSpeaker { Session = session, Speaker = s }
+                            )
                                 .ToList();
 
                             var trackName = track.Name;
@@ -960,8 +982,8 @@ namespace Microsoft.EntityFrameworkCore
                                         : attendees1.Concat(attendees2).Concat(attendees3).ToList();
 
                             session.SessionAttendees = attendees.Select(
-                                    a => new SessionAttendee { Session = session, Attendee = a }
-                                )
+                                a => new SessionAttendee { Session = session, Attendee = a }
+                            )
                                 .ToList();
 
                             track.Sessions.Add(session);

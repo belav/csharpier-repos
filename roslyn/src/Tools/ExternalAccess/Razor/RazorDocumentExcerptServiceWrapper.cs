@@ -38,11 +38,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 _ => throw new InvalidEnumArgumentException($"Unsupported enum type {mode}."),
             };
             var nullableRazorExcerpt = await _razorDocumentExcerptService.TryExcerptAsync(
-                    document,
-                    span,
-                    razorMode,
-                    cancellationToken
-                )
+                document,
+                span,
+                razorMode,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (nullableRazorExcerpt == null)
             {

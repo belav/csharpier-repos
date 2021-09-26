@@ -24,10 +24,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Microbenchmarks
         public void Setup()
         {
             _server = TestServer.Create(
-                    builder => builder.UseMiddleware<PlaintextMiddleware>(),
-                    new LoggerFactory(),
-                    new IISServerOptions()
-                )
+                builder => builder.UseMiddleware<PlaintextMiddleware>(),
+                new LoggerFactory(),
+                new IISServerOptions()
+            )
                 .GetAwaiter()
                 .GetResult();
             // Recreate client, TestServer.Client has additional logging that can hurt performance
@@ -44,9 +44,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Microbenchmarks
         public class PlaintextMiddleware
         {
             private static readonly PathString _path = new PathString("/plaintext");
-            private static readonly byte[] _helloWorldPayload = Encoding.UTF8.GetBytes(
-                "Hello, World!"
-            );
+            private static readonly byte[] _helloWorldPayload = Encoding.UTF8
+                .GetBytes("Hello, World!");
 
             private readonly RequestDelegate _next;
 

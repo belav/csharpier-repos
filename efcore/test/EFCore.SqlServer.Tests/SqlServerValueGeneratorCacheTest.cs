@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore
             var entityType = model.FindEntityType(typeof(Led));
             var property1 = GetProperty1(model);
             var property2 = GetProperty2(model);
-            var cache = SqlServerTestHelpers.Instance.CreateContextServices(model)
+            var cache = SqlServerTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<ISqlServerValueGeneratorCache>();
 
             var generator1 = cache.GetOrAdd(
@@ -59,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore
             var property1 = GetProperty1(model);
             var property2 = GetProperty2(model);
             var property3 = GetProperty3(model);
-            var cache = SqlServerTestHelpers.Instance.CreateContextServices(model)
+            var cache = SqlServerTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<ISqlServerValueGeneratorCache>();
             var connection = CreateConnection();
 
@@ -83,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var model = CreateModel();
             var property1 = GetProperty1(model);
-            var cache = SqlServerTestHelpers.Instance.CreateContextServices(model)
+            var cache = SqlServerTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<ISqlServerValueGeneratorCache>();
             var connection1 = CreateConnection("DbOne");
             var connection2 = CreateConnection("DbTwo");
@@ -103,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var model = CreateModel();
             var property1 = GetProperty1(model);
-            var cache = SqlServerTestHelpers.Instance.CreateContextServices(model)
+            var cache = SqlServerTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<ISqlServerValueGeneratorCache>();
             var connection1 = CreateConnection(serverName: "ServerOne");
             var connection2 = CreateConnection(serverName: "ServerTwo");

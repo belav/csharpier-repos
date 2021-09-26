@@ -22,9 +22,8 @@ namespace AutoMapper.UnitTests.MappingInheritance
             new MapperConfiguration(cfg => cfg.CreateMap<TModel, TInterface>().As<TConcrete>());
         [Fact]
         public void Should_report_missing_map() =>
-            new Action(
-                () => Configuration.CompileMappings()
-            ).ShouldThrow<InvalidOperationException>()
+            new Action(() => Configuration.CompileMappings())
+                .ShouldThrow<InvalidOperationException>()
                 .Message.ShouldBe(
                     "Missing map from AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TModel to AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TConcrete. Create using CreateMap<TModel, TConcrete>."
                 );
@@ -71,14 +70,16 @@ namespace AutoMapper.UnitTests.MappingInheritance
                     new MapperConfiguration(
                         c => c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source))
                     )
-            ).ShouldThrowException<ArgumentOutOfRangeException>(
-                ex =>
-                {
-                    ex.Message.ShouldStartWith(
-                        $"{typeof(Source)} is not derived from {typeof(Destination)}."
-                    );
-                }
-            );
+            )
+                .ShouldThrowException<ArgumentOutOfRangeException>(
+                    ex =>
+                    {
+                        ex.Message
+                            .ShouldStartWith(
+                                $"{typeof(Source)} is not derived from {typeof(Destination)}."
+                            );
+                    }
+                );
         }
     }
 

@@ -62,10 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 AssertIsForeground();
 
                 _asyncListener = asyncListener;
-                _trackingSpan = snapshotSpan.Snapshot.CreateTrackingSpan(
-                    snapshotSpan.Span,
-                    SpanTrackingMode.EdgeInclusive
-                );
+                _trackingSpan = snapshotSpan.Snapshot
+                    .CreateTrackingSpan(snapshotSpan.Span, SpanTrackingMode.EdgeInclusive);
                 _cancellationTokenSource = new CancellationTokenSource();
                 _cancellationToken = _cancellationTokenSource.Token;
 
@@ -77,32 +75,34 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     // tagging.
 
                     _originalName = snapshotSpan.GetText();
-                    _isRenamableIdentifierTask = Task.Factory.SafeStartNewFromAsync(
-                        () => DetermineIfRenamableIdentifierAsync(snapshotSpan, initialCheck: true),
-                        _cancellationToken,
-                        TaskScheduler.Default
-                    );
+                    _isRenamableIdentifierTask = Task.Factory
+                        .SafeStartNewFromAsync(
+                            () =>
+                                DetermineIfRenamableIdentifierAsync(
+                                    snapshotSpan,
+                                    initialCheck: true
+                                ),
+                            _cancellationToken,
+                            TaskScheduler.Default
+                        );
 
                     var asyncToken = _asyncListener.BeginAsyncOperation(
                         GetType().Name + ".UpdateTrackingSessionAfterIsRenamableIdentifierTask"
                     );
 
                     _isRenamableIdentifierTask.SafeContinueWithFromAsync(
-                            async t =>
-                            {
-                                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                    alwaysYield: true,
-                                    _cancellationToken
-                                );
+                        async t =>
+                        {
+                            await ThreadingContext.JoinableTaskFactory
+                                .SwitchToMainThreadAsync(alwaysYield: true, _cancellationToken);
 
-                                stateMachine.UpdateTrackingSessionIfRenamable();
-                            },
-                            _cancellationToken,
-                            TaskContinuationOptions.OnlyOnRanToCompletion
-                                | TaskContinuationOptions.ExecuteSynchronously,
-                            TaskScheduler.Default
-                        )
-                        .CompletesAsyncOperation(asyncToken);
+                            stateMachine.UpdateTrackingSessionIfRenamable();
+                        },
+                        _cancellationToken,
+                        TaskContinuationOptions.OnlyOnRanToCompletion
+                            | TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    ).CompletesAsyncOperation(asyncToken);
 
                     QueueUpdateToStateMachine(stateMachine, _isRenamableIdentifierTask);
                 }
@@ -124,27 +124,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 );
 
                 task.SafeContinueWithFromAsync(
-                        async t =>
-                        {
-                            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                alwaysYield: true,
-                                _cancellationToken
-                            );
+                    async t =>
+                    {
+                        await ThreadingContext.JoinableTaskFactory
+                            .SwitchToMainThreadAsync(alwaysYield: true, _cancellationToken);
 
-                            if (
-                                _isRenamableIdentifierTask.Result
-                                != TriggerIdentifierKind.NotRenamable
-                            )
-                            {
-                                stateMachine.OnTrackingSessionUpdated(this);
-                            }
-                        },
-                        _cancellationToken,
-                        TaskContinuationOptions.OnlyOnRanToCompletion
-                            | TaskContinuationOptions.ExecuteSynchronously,
-                        TaskScheduler.Default
-                    )
-                    .CompletesAsyncOperation(asyncToken);
+                        if (_isRenamableIdentifierTask.Result != TriggerIdentifierKind.NotRenamable)
+                        {
+                            stateMachine.OnTrackingSessionUpdated(this);
+                        }
+                    },
+                    _cancellationToken,
+                    TaskContinuationOptions.OnlyOnRanToCompletion
+                        | TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                ).CompletesAsyncOperation(asyncToken);
             }
 
             internal void CheckNewIdentifier(StateMachine stateMachine, ITextSnapshot snapshot)
@@ -156,9 +150,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                         t.Result != TriggerIdentifierKind.NotRenamable
                         && TriggerIdentifierKind.RenamableReference
                             == await DetermineIfRenamableIdentifierAsync(
-                                    TrackingSpan.GetSpan(snapshot),
-                                    initialCheck: false
-                                )
+                                TrackingSpan.GetSpan(snapshot),
+                                initialCheck: false
+                            )
                                 .ConfigureAwait(false),
                     _cancellationToken,
                     TaskContinuationOptions.OnlyOnRanToCompletion,
@@ -197,10 +191,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     var syntaxTree = await document.GetSyntaxTreeAsync(_cancellationToken)
                         .ConfigureAwait(false);
                     var token = await syntaxTree.GetTouchingWordAsync(
-                            snapshotSpan.Start.Position,
-                            syntaxFactsService,
-                            _cancellationToken
-                        )
+                        snapshotSpan.Start.Position,
+                        syntaxFactsService,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     // The OriginalName is determined with a simple textual check, so for a
@@ -222,9 +216,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     )
                     {
                         var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                                token.Parent,
-                                _cancellationToken
-                            )
+                            token.Parent,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false);
                         var semanticFacts = document.GetLanguageService<ISemanticFactsService>();
 
@@ -245,9 +239,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             _forceRenameOverloads = true;
 
                             return await DetermineIfRenamableSymbolsAsync(
-                                    renameSymbolInfo.Symbols,
-                                    document
-                                )
+                                renameSymbolInfo.Symbols,
+                                document
+                            )
                                 .ConfigureAwait(false);
                         }
                         else
@@ -263,10 +257,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             }
 
                             return await DetermineIfRenamableSymbolAsync(
-                                    renameSymbolInfo.Symbols.Single(),
-                                    document,
-                                    token
-                                )
+                                renameSymbolInfo.Symbols.Single(),
+                                document,
+                                token
+                            )
                                 .ConfigureAwait(false);
                         }
                     }
@@ -285,10 +279,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     // Get the source symbol if possible
                     var sourceSymbol =
                         await SymbolFinder.FindSourceDefinitionAsync(
-                                symbol,
-                                document.Project.Solution,
-                                _cancellationToken
-                            )
+                            symbol,
+                            document.Project.Solution,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false) ?? symbol;
 
                     if (!sourceSymbol.IsFromSource())
@@ -309,10 +303,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 // Get the source symbol if possible
                 var sourceSymbol =
                     await SymbolFinder.FindSourceDefinitionAsync(
-                            symbol,
-                            document.Project.Solution,
-                            _cancellationToken
-                        )
+                        symbol,
+                        document.Project.Solution,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false) ?? symbol;
 
                 if (

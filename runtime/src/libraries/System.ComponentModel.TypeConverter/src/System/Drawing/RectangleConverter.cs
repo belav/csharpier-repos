@@ -102,9 +102,10 @@ namespace System.Drawing
                 }
                 else if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo ctor = typeof(Rectangle).GetConstructor(
-                        new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
-                    );
+                    ConstructorInfo ctor = typeof(Rectangle)
+                        .GetConstructor(
+                            new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
+                        );
 
                     if (ctor != null)
                     {

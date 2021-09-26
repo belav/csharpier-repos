@@ -239,10 +239,10 @@ namespace Microsoft.CodeAnalysis.Scripting
             string entryPointMethodName = entryPoint.MetadataName;
 
             var entryPointType = assembly.GetType(
-                    entryPointTypeName,
-                    throwOnError: true,
-                    ignoreCase: false
-                )
+                entryPointTypeName,
+                throwOnError: true,
+                ignoreCase: false
+            )
                 .GetTypeInfo();
             return entryPointType.GetDeclaredMethod(entryPointMethodName);
         }

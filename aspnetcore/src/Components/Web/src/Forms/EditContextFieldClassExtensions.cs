@@ -37,10 +37,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             in FieldIdentifier fieldIdentifier
         )
         {
-            var provider = editContext.Properties.TryGetValue(
-                FieldCssClassProviderKey,
-                out var customProvider
-            )
+            var provider = editContext.Properties
+            .TryGetValue(FieldCssClassProviderKey, out var customProvider)
                 ? (FieldCssClassProvider)customProvider
                 : FieldCssClassProvider.Instance;
 

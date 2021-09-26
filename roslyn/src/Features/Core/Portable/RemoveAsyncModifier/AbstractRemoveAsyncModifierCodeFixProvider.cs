@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
         {
             var document = context.Document;
             var cancellationToken = context.CancellationToken;
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
 
@@ -235,15 +236,14 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             // Look for all return statements, but if we find a new node that can have the async modifier we stop
             // because that will have its own diagnostic and fix, if applicable
             var returns = node.DescendantNodes(
-                    n => n == node || !IsAsyncSupportingFunctionSyntax(n)
-                )
+                n => n == node || !IsAsyncSupportingFunctionSyntax(n)
+            )
                 .OfType<TReturnStatementSyntax>();
 
             foreach (var returnSyntax in returns)
             {
-                var returnExpression = generator.SyntaxFacts.GetExpressionOfReturnStatement(
-                    returnSyntax
-                );
+                var returnExpression = generator.SyntaxFacts
+                    .GetExpressionOfReturnStatement(returnSyntax);
                 if (returnExpression is null)
                 {
                     // Convert return; into return Task.CompletedTask;

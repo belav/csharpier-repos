@@ -78,11 +78,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         public static DebuggerBrowsableState? GetDebuggerBrowsableState(MemberInfo info)
         {
-            CustomAttributeData? debuggerBrowsableAttribute = info.CustomAttributes.SingleOrDefault(
-                a => a.AttributeType == typeof(DebuggerBrowsableAttribute)
-            );
+            CustomAttributeData? debuggerBrowsableAttribute = info.CustomAttributes
+                .SingleOrDefault(a => a.AttributeType == typeof(DebuggerBrowsableAttribute));
             // Enums in attribute constructors are boxed as ints, so cast to int? first.
-            return (DebuggerBrowsableState?)(int?)debuggerBrowsableAttribute?.ConstructorArguments.Single().Value;
+            return (DebuggerBrowsableState?)(int?)debuggerBrowsableAttribute?.ConstructorArguments
+                .Single().Value;
         }
 
         public static IEnumerable<FieldInfo> GetDebuggerVisibleFields(Type debuggerAttributeType)

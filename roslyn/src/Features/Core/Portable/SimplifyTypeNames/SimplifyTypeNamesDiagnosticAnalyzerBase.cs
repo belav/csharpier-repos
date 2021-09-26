@@ -60,9 +60,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                 helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
                     IDEDiagnosticIds.SimplifyNamesDiagnosticId
                 ),
-                customTags: DiagnosticCustomTags.Unnecessary.Concat(
-                        EnforceOnBuildValues.SimplifyNames.ToCustomTag()
-                    )
+                customTags: DiagnosticCustomTags.Unnecessary
+                    .Concat(EnforceOnBuildValues.SimplifyNames.ToCustomTag())
                     .ToArray()
             );
 
@@ -83,9 +82,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                 helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
                     IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId
                 ),
-                customTags: DiagnosticCustomTags.Unnecessary.Concat(
-                        EnforceOnBuildValues.SimplifyMemberAccess.ToCustomTag()
-                    )
+                customTags: DiagnosticCustomTags.Unnecessary
+                    .Concat(EnforceOnBuildValues.SimplifyMemberAccess.ToCustomTag())
                     .ToArray()
             );
 
@@ -100,9 +98,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                 helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
                     IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId
                 ),
-                customTags: DiagnosticCustomTags.Unnecessary.Concat(
-                        EnforceOnBuildValues.PreferBuiltInOrFrameworkType.ToCustomTag()
-                    )
+                customTags: DiagnosticCustomTags.Unnecessary
+                    .Concat(EnforceOnBuildValues.PreferBuiltInOrFrameworkType.ToCustomTag())
                     .ToArray()
             );
 

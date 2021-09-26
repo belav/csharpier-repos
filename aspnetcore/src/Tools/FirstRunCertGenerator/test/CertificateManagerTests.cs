@@ -200,10 +200,10 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
             ListCertificates();
 
             var httpsCertificate = _manager.ListCertificates(
-                    StoreName.My,
-                    StoreLocation.CurrentUser,
-                    isValid: false
-                )
+                StoreName.My,
+                StoreLocation.CurrentUser,
+                isValid: false
+            )
                 .Single(c => c.Subject == TestCertificateSubject);
             // Act
             var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
@@ -269,10 +269,10 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
             ListCertificates();
 
             var httpsCertificate = _manager.ListCertificates(
-                    StoreName.My,
-                    StoreLocation.CurrentUser,
-                    isValid: false
-                )
+                StoreName.My,
+                StoreLocation.CurrentUser,
+                isValid: false
+            )
                 .Single(c => c.Subject == TestCertificateSubject);
 
             // Act
@@ -301,17 +301,18 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
 
             Assert.Equal(
                 "plaintext",
-                Encoding.ASCII.GetString(
-                    exportedCertificate.GetRSAPrivateKey()
-                        .Decrypt(
-                            exportedCertificate.GetRSAPrivateKey()
-                                .Encrypt(
-                                    Encoding.ASCII.GetBytes(message),
-                                    RSAEncryptionPadding.OaepSHA256
-                                ),
-                            RSAEncryptionPadding.OaepSHA256
-                        )
-                )
+                Encoding.ASCII
+                    .GetString(
+                        exportedCertificate.GetRSAPrivateKey()
+                            .Decrypt(
+                                exportedCertificate.GetRSAPrivateKey()
+                                    .Encrypt(
+                                        Encoding.ASCII.GetBytes(message),
+                                        RSAEncryptionPadding.OaepSHA256
+                                    ),
+                                RSAEncryptionPadding.OaepSHA256
+                            )
+                    )
             );
             Assert.Equal(
                 httpsCertificate.GetCertHashString(),
@@ -353,10 +354,10 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
             ListCertificates();
 
             var httpsCertificate = _manager.ListCertificates(
-                    StoreName.My,
-                    StoreLocation.CurrentUser,
-                    isValid: false
-                )
+                StoreName.My,
+                StoreLocation.CurrentUser,
+                isValid: false
+            )
                 .Single(c => c.Subject == TestCertificateSubject);
 
             // Act
@@ -415,10 +416,10 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
             ListCertificates();
 
             var httpsCertificate = _manager.ListCertificates(
-                    StoreName.My,
-                    StoreLocation.CurrentUser,
-                    isValid: false
-                )
+                StoreName.My,
+                StoreLocation.CurrentUser,
+                isValid: false
+            )
                 .Single(c => c.Subject == TestCertificateSubject);
 
             _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
@@ -483,10 +484,10 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
             ListCertificates();
 
             var httpsCertificate = _manager.ListCertificates(
-                    StoreName.My,
-                    StoreLocation.CurrentUser,
-                    isValid: false
-                )
+                StoreName.My,
+                StoreLocation.CurrentUser,
+                isValid: false
+            )
                 .Single(c => c.Subject == TestCertificateSubject);
 
             _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
@@ -540,10 +541,10 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
             ListCertificates();
 
             var httpsCertificate = _manager.ListCertificates(
-                    StoreName.My,
-                    StoreLocation.CurrentUser,
-                    isValid: false
-                )
+                StoreName.My,
+                StoreLocation.CurrentUser,
+                isValid: false
+            )
                 .Single(c => c.Subject == TestCertificateSubject);
             // Act
             var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
@@ -570,17 +571,18 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
 
             Assert.Equal(
                 "plaintext",
-                Encoding.ASCII.GetString(
-                    exportedCertificate.GetRSAPrivateKey()
-                        .Decrypt(
-                            exportedCertificate.GetRSAPrivateKey()
-                                .Encrypt(
-                                    Encoding.ASCII.GetBytes(message),
-                                    RSAEncryptionPadding.OaepSHA256
-                                ),
-                            RSAEncryptionPadding.OaepSHA256
-                        )
-                )
+                Encoding.ASCII
+                    .GetString(
+                        exportedCertificate.GetRSAPrivateKey()
+                            .Decrypt(
+                                exportedCertificate.GetRSAPrivateKey()
+                                    .Encrypt(
+                                        Encoding.ASCII.GetBytes(message),
+                                        RSAEncryptionPadding.OaepSHA256
+                                    ),
+                                RSAEncryptionPadding.OaepSHA256
+                            )
+                    )
             );
             Assert.Equal(
                 httpsCertificate.GetCertHashString(),

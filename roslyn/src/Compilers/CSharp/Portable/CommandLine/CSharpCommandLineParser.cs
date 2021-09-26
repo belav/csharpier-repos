@@ -1144,12 +1144,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                             int newWarningLevel;
                             if (
                                 string.IsNullOrEmpty(value)
-                                || !int.TryParse(
-                                    value,
-                                    NumberStyles.Integer,
-                                    CultureInfo.InvariantCulture,
-                                    out newWarningLevel
-                                )
+                                || !int
+                                    .TryParse(
+                                        value,
+                                        NumberStyles.Integer,
+                                        CultureInfo.InvariantCulture,
+                                        out newWarningLevel
+                                    )
                             )
                             {
                                 AddDiagnostic(diagnostics, ErrorCode.ERR_SwitchNeedsNumber, name);
@@ -2516,20 +2517,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                         yield return errorCode;
                     }
 
-                    yield return CSharp.MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
-                    );
-                    yield return CSharp.MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
-                    );
+                    yield return CSharp.MessageProvider.Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
+                        );
+                    yield return CSharp.MessageProvider.Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
+                        );
                 }
                 else if (
-                    ushort.TryParse(
-                        id,
-                        NumberStyles.Integer,
-                        CultureInfo.InvariantCulture,
-                        out ushort number
-                    ) && ErrorFacts.IsWarning((ErrorCode)number)
+                    ushort
+                        .TryParse(
+                            id,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out ushort number
+                        ) && ErrorFacts.IsWarning((ErrorCode)number)
                 )
                 {
                     // The id refers to a compiler warning.

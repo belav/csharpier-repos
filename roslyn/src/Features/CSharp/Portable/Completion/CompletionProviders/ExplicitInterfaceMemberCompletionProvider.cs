@@ -105,9 +105,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var name = specifierNode.Name;
 
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        position,
-                        cancellationToken
-                    )
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var symbol =
                     semanticModel.GetSymbolInfo(name, cancellationToken).Symbol as ITypeSymbol;

@@ -260,9 +260,8 @@ namespace System.Text
             );
 
             return GetByteCountWithFallback(
-                chars: new ReadOnlySpan<char>(pCharsOriginal, originalCharCount).Slice(
-                    charsConsumedSoFar
-                ),
+                chars: new ReadOnlySpan<char>(pCharsOriginal, originalCharCount)
+                    .Slice(charsConsumedSoFar),
                 originalCharsLength: originalCharCount,
                 encoder: null
             );
@@ -300,10 +299,8 @@ namespace System.Text
             // First, try draining any data that already exists on the encoder instance. If we can't complete
             // that operation, there's no point to continuing down to the main workhorse methods.
 
-            ReadOnlySpan<char> chars = new ReadOnlySpan<char>(
-                pOriginalChars,
-                originalCharCount
-            ).Slice(charsConsumedSoFar);
+            ReadOnlySpan<char> chars = new ReadOnlySpan<char>(pOriginalChars, originalCharCount)
+                .Slice(charsConsumedSoFar);
 
             int totalByteCount = encoder.DrainLeftoverDataForGetByteCount(
                 chars,
@@ -623,9 +620,8 @@ namespace System.Text
             );
 
             return GetBytesWithFallback(
-                chars: new ReadOnlySpan<char>(pOriginalChars, originalCharCount).Slice(
-                    charsConsumedSoFar
-                ),
+                chars: new ReadOnlySpan<char>(pOriginalChars, originalCharCount)
+                    .Slice(charsConsumedSoFar),
                 originalCharsLength: originalCharCount,
                 bytes: new Span<byte>(pOriginalBytes, originalByteCount).Slice(bytesWrittenSoFar),
                 originalBytesLength: originalByteCount,
@@ -672,13 +668,10 @@ namespace System.Text
             // First, try draining any data that already exists on the encoder instance. If we can't complete
             // that operation, there's no point to continuing down to the main workhorse methods.
 
-            ReadOnlySpan<char> chars = new ReadOnlySpan<char>(
-                pOriginalChars,
-                originalCharCount
-            ).Slice(charsConsumedSoFar);
-            Span<byte> bytes = new Span<byte>(pOriginalBytes, originalByteCount).Slice(
-                bytesWrittenSoFar
-            );
+            ReadOnlySpan<char> chars = new ReadOnlySpan<char>(pOriginalChars, originalCharCount)
+                .Slice(charsConsumedSoFar);
+            Span<byte> bytes = new Span<byte>(pOriginalBytes, originalByteCount)
+                .Slice(bytesWrittenSoFar);
 
             bool drainFinishedSuccessfully = encoder.TryDrainLeftoverDataForGetBytes(
                 chars,
@@ -1047,9 +1040,8 @@ namespace System.Text
             );
 
             return GetCharCountWithFallback(
-                bytes: new ReadOnlySpan<byte>(pBytesOriginal, originalByteCount).Slice(
-                    bytesConsumedSoFar
-                ),
+                bytes: new ReadOnlySpan<byte>(pBytesOriginal, originalByteCount)
+                    .Slice(bytesConsumedSoFar),
                 originalBytesLength: originalByteCount,
                 decoder: null
             );
@@ -1087,10 +1079,8 @@ namespace System.Text
             // First, try draining any data that already exists on the decoder instance. If we can't complete
             // that operation, there's no point to continuing down to the main workhorse methods.
 
-            ReadOnlySpan<byte> bytes = new ReadOnlySpan<byte>(
-                pOriginalBytes,
-                originalByteCount
-            ).Slice(bytesConsumedSoFar);
+            ReadOnlySpan<byte> bytes = new ReadOnlySpan<byte>(pOriginalBytes, originalByteCount)
+                .Slice(bytesConsumedSoFar);
 
             int bytesConsumedJustNow;
             int totalCharCount = 0;
@@ -1409,9 +1399,8 @@ namespace System.Text
             );
 
             return GetCharsWithFallback(
-                bytes: new ReadOnlySpan<byte>(pOriginalBytes, originalByteCount).Slice(
-                    bytesConsumedSoFar
-                ),
+                bytes: new ReadOnlySpan<byte>(pOriginalBytes, originalByteCount)
+                    .Slice(bytesConsumedSoFar),
                 originalBytesLength: originalByteCount,
                 chars: new Span<char>(pOriginalChars, originalCharCount).Slice(charsWrittenSoFar),
                 originalCharsLength: originalCharCount,
@@ -1464,13 +1453,10 @@ namespace System.Text
             // condition as with the chars -> bytes conversion. The drain method will throw if there's not
             // enough space in the destination buffer.
 
-            ReadOnlySpan<byte> bytes = new ReadOnlySpan<byte>(
-                pOriginalBytes,
-                originalByteCount
-            ).Slice(bytesConsumedSoFar);
-            Span<char> chars = new Span<char>(pOriginalChars, originalCharCount).Slice(
-                charsWrittenSoFar
-            );
+            ReadOnlySpan<byte> bytes = new ReadOnlySpan<byte>(pOriginalBytes, originalByteCount)
+                .Slice(bytesConsumedSoFar);
+            Span<char> chars = new Span<char>(pOriginalChars, originalCharCount)
+                .Slice(charsWrittenSoFar);
 
             int bytesConsumedJustNow;
             int charsWrittenJustNow;

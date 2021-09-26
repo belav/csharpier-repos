@@ -26,9 +26,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // Get resource string.
             var itemValue = (string)exceptionType.GetMethod(
-                    "get_Empty",
-                    BindingFlags.Public | BindingFlags.Instance
-                )
+                "get_Empty",
+                BindingFlags.Public | BindingFlags.Instance
+            )
                 .Invoke(exception, new object[0]);
             Assert.NotNull(itemValue);
         }
@@ -84,10 +84,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private static Type GetType(string typeName)
         {
-            return typeof(Binder).Assembly.GetType(
-                "Microsoft.CSharp.RuntimeBinder." + typeName,
-                throwOnError: true
-            );
+            return typeof(Binder).Assembly
+                .GetType("Microsoft.CSharp.RuntimeBinder." + typeName, throwOnError: true);
         }
 
         private static object CreateDebugView(object arg)

@@ -119,14 +119,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             {
                 var asyncToken = _asyncListener.BeginAsyncOperation(nameof(ConnectToWorkspace));
                 Task.Run(
-                        async () =>
-                        {
-                            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    async () =>
+                    {
+                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                            ConnectToNewWorkspace();
-                        }
-                    )
-                    .CompletesAsyncOperation(asyncToken);
+                        ConnectToNewWorkspace();
+                    }
+                ).CompletesAsyncOperation(asyncToken);
             }
 
             return;
@@ -262,8 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         {
             AssertIsForeground();
 
-            var document =
-                _subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = _subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return;
 
@@ -307,15 +306,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             }
 
             projectItems = documents.Select(
-                    d =>
-                        new NavigationBarProjectItem(
-                            d.Project.Name,
-                            d.Project.GetGlyph(),
-                            workspace: d.Project.Solution.Workspace,
-                            documentId: d.Id,
-                            language: d.Project.Language
-                        )
-                )
+                d =>
+                    new NavigationBarProjectItem(
+                        d.Project.Name,
+                        d.Project.GetGlyph(),
+                        workspace: d.Project.Solution.Workspace,
+                        documentId: d.Id,
+                        language: d.Project.Language
+                    )
+            )
                 .OrderBy(projectItem => projectItem.Text)
                 .ToImmutableArray();
 
@@ -434,27 +433,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             {
                 // When navigating, just use the partial semantics workspace.  Navigation doesn't need the fully bound
                 // compilations to be created, and it can save us a lot of costly time building skeleton assemblies.
-                var document = _subjectBuffer.CurrentSnapshot.AsText()
+                var document = _subjectBuffer.CurrentSnapshot
+                    .AsText()
                     .GetDocumentWithFrozenPartialSemantics(cancellationToken);
                 if (document != null)
                 {
                     var navBarService =
                         document.GetRequiredLanguageService<INavigationBarItemService>();
                     var snapshot = _subjectBuffer.CurrentSnapshot;
-                    item.Spans = item.TrackingSpans.SelectAsArray(
-                        ts => ts.GetSpan(snapshot).Span.ToTextSpan()
-                    );
+                    item.Spans = item.TrackingSpans
+                        .SelectAsArray(ts => ts.GetSpan(snapshot).Span.ToTextSpan());
                     var view = _presenter.TryGetCurrentView();
 
                     if (navBarService is INavigationBarItemService2 navBarService2)
                     {
                         // ConfigureAwait(true) as we have to come back to UI thread in order to kick of the refresh task below.
                         await navBarService2.NavigateToItemAsync(
-                                document,
-                                item,
-                                view,
-                                cancellationToken
-                            )
+                            document,
+                            item,
+                            view,
+                            cancellationToken
+                        )
                             .ConfigureAwait(true);
                     }
                     else

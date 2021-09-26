@@ -444,9 +444,9 @@ namespace System.IO.Compression
         {
             byte[] correctUncompressedBytes = File.ReadAllBytes(testFile);
             byte[] compressedBytes = Compress_Stream(
-                    correctUncompressedBytes,
-                    CompressionLevel.Optimal
-                )
+                correctUncompressedBytes,
+                CompressionLevel.Optimal
+            )
                 .ToArray();
             byte[] actualUncompressedBytes = Decompress_Stream(compressedBytes).ToArray();
 

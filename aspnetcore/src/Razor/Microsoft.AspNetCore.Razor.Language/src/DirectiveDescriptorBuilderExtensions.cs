@@ -25,14 +25,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.Member,
-                    optional: false,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.Member,
+                        optional: false,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -55,14 +56,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.Namespace,
-                    optional: false,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.Namespace,
+                        optional: false,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -85,14 +87,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.String,
-                    optional: false,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.String,
+                        optional: false,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -115,14 +118,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.Type,
-                    optional: false,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.Type,
+                        optional: false,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -145,14 +149,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.Attribute,
-                    optional: false,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.Attribute,
+                        optional: false,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -175,14 +180,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.Boolean,
-                    optional: false,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.Boolean,
+                        optional: false,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -205,14 +211,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.Member,
-                    optional: true,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.Member,
+                        optional: true,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -235,14 +242,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.Namespace,
-                    optional: true,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.Namespace,
+                        optional: true,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -265,14 +273,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.String,
-                    optional: true,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.String,
+                        optional: true,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -295,14 +304,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.Type,
-                    optional: true,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.Type,
+                        optional: true,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -325,14 +335,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.Attribute,
-                    optional: true,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.Attribute,
+                        optional: true,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }
@@ -348,14 +359,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Tokens.Add(
-                DirectiveTokenDescriptor.CreateToken(
-                    DirectiveTokenKind.GenericTypeConstraint,
-                    optional: true,
-                    name: name,
-                    description: description
-                )
-            );
+            builder.Tokens
+                .Add(
+                    DirectiveTokenDescriptor.CreateToken(
+                        DirectiveTokenKind.GenericTypeConstraint,
+                        optional: true,
+                        name: name,
+                        description: description
+                    )
+                );
 
             return builder;
         }

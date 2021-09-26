@@ -211,7 +211,8 @@ namespace Microsoft.AspNetCore.Http
         [Fact]
         public async Task RequestServicesAreDisposedOnCompleted()
         {
-            var serviceProvider = new ServiceCollection().AddTransient<DisposableThing>()
+            var serviceProvider = new ServiceCollection()
+                .AddTransient<DisposableThing>()
                 .BuildServiceProvider();
 
             var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
@@ -324,8 +325,8 @@ namespace Microsoft.AspNetCore.Http
             var type = value.GetType();
 
             var properties = type.GetProperties(
-                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
-                )
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+            )
                 .Where(p => p.PropertyType.GetTypeInfo().IsInterface);
 
             TestFeatureProperties(value, features, properties);

@@ -311,9 +311,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [WorkItem(43476, "https://github.com/dotnet/roslyn/issues/43476")]
         public void InitializeSourceRootMappedPathsReturnsSourceMap(bool deterministicSourcePaths)
         {
-            ProjectDir.CreateFile("Project2.csproj")
-                .WriteAllText(
-                    $@"
+            ProjectDir.CreateFile("Project2.csproj").WriteAllText(
+                $@"
 <Project Sdk='Microsoft.NET.Sdk'>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -326,7 +325,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
   </ItemGroup>
 </Project>
 "
-                );
+            );
 
             VerifyValues(
                 customProps: $@"
@@ -392,11 +391,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var editorConfigFile2 = subdir.CreateFile(".editorconfig")
-                .WriteAllText(
-                    @"[*.cs]
+            var editorConfigFile2 = subdir.CreateFile(".editorconfig").WriteAllText(
+                @"[*.cs]
 some_prop = some_val"
-                );
+            );
             VerifyValues(
                 customProps: @"
 <PropertyGroup>
@@ -418,11 +416,10 @@ some_prop = some_val"
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var editorConfigFile2 = subdir.CreateFile(".editorconfig")
-                .WriteAllText(
-                    @"[*.cs]
+            var editorConfigFile2 = subdir.CreateFile(".editorconfig").WriteAllText(
+                @"[*.cs]
 some_prop = some_val"
-                );
+            );
 
             VerifyValues(
                 customProps: @"
@@ -442,18 +439,16 @@ some_prop = some_val"
         public void TestDiscoverGlobalConfigFiles()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile(".globalconfig")
-                .WriteAllText(
-                    @"is_global = true
+            var globalConfigFile = ProjectDir.CreateFile(".globalconfig").WriteAllText(
+                @"is_global = true
 some_prop = some_val"
-                );
+            );
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var globalConfigFile2 = subdir.CreateFile(".globalconfig")
-                .WriteAllText(
-                    @"is_global = true
+            var globalConfigFile2 = subdir.CreateFile(".globalconfig").WriteAllText(
+                @"is_global = true
 some_prop = some_val"
-                );
+            );
 
             VerifyValues(
                 customProps: @"
@@ -479,18 +474,16 @@ some_prop = some_val"
         public void TestDiscoverGlobalConfigFilesCanBeDisabled()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile(".globalconfig")
-                .WriteAllText(
-                    @"is_global = true
+            var globalConfigFile = ProjectDir.CreateFile(".globalconfig").WriteAllText(
+                @"is_global = true
 some_prop = some_val"
-                );
+            );
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var globalConfigFile2 = subdir.CreateFile(".globalconfig")
-                .WriteAllText(
-                    @"is_global = true
+            var globalConfigFile2 = subdir.CreateFile(".globalconfig").WriteAllText(
+                @"is_global = true
 some_prop = some_val"
-                );
+            );
 
             VerifyValues(
                 customProps: @"
@@ -513,18 +506,16 @@ some_prop = some_val"
         public void TestDiscoverGlobalConfigFilesWhenEditorConfigDisabled()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile(".globalconfig")
-                .WriteAllText(
-                    @"is_global = true
+            var globalConfigFile = ProjectDir.CreateFile(".globalconfig").WriteAllText(
+                @"is_global = true
 some_prop = some_val"
-                );
+            );
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var globalConfigFile2 = subdir.CreateFile(".globalconfig")
-                .WriteAllText(
-                    @"is_global = true
+            var globalConfigFile2 = subdir.CreateFile(".globalconfig").WriteAllText(
+                @"is_global = true
 some_prop = some_val"
-                );
+            );
 
             VerifyValues(
                 customProps: @"
@@ -581,17 +572,15 @@ some_prop = some_val"
         public void TestDiscoverEditorAndGlobalConfigFilesCanBeDisabled()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile(".globalconfig")
-                .WriteAllText(
-                    @"is_global = true
+            var globalConfigFile = ProjectDir.CreateFile(".globalconfig").WriteAllText(
+                @"is_global = true
 some_prop = some_val"
-                );
+            );
             var subdir = ProjectDir.CreateDirectory("subdir");
-            var globalConfigFile2 = subdir.CreateFile(".globalconfig")
-                .WriteAllText(
-                    @"is_global = true
+            var globalConfigFile2 = subdir.CreateFile(".globalconfig").WriteAllText(
+                @"is_global = true
 some_prop = some_val"
-                );
+            );
 
             VerifyValues(
                 customProps: @"
@@ -612,11 +601,10 @@ some_prop = some_val"
         public void TestGlobalConfigsCanBeManuallyAdded()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile("mycustom.config")
-                .WriteAllText(
-                    @"is_global = true
+            var globalConfigFile = ProjectDir.CreateFile("mycustom.config").WriteAllText(
+                @"is_global = true
 some_prop = some_val"
-                );
+            );
 
             VerifyValues(
                 customProps: @"

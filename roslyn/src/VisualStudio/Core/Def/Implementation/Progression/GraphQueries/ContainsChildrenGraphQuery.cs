@@ -24,10 +24,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                    solution,
-                    context.InputNodes,
-                    cancellationToken
-                )
+                solution,
+                context.InputNodes,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (var node in context.InputNodes)
@@ -52,9 +52,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         if (document != null)
                         {
                             var childNodes = await SymbolContainment.GetContainedSyntaxNodesAsync(
-                                    document,
-                                    cancellationToken
-                                )
+                                document,
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             graphBuilder.AddDeferredPropertySet(
                                 node,

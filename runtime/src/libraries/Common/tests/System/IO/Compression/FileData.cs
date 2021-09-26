@@ -23,13 +23,14 @@ public class FileData
 
     public static FileData GetFile(string Path) =>
         Files.Where(
-                f =>
-                    string.Equals(
+            f =>
+                string
+                    .Equals(
                         System.IO.Path.Combine(f.OrigFolder, f.FullName),
                         Path,
                         StringComparison.OrdinalIgnoreCase
                     )
-            )
+        )
             .First();
 
     public static List<FileData> InPath(string Path) =>

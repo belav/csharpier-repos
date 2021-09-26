@@ -67,17 +67,18 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         if (settings?.ErrorWhenNoMatch ?? false)
                         {
                             throw new JsonException(
-                                "Array slice of {0} to {1} returned no results.".FormatWith(
-                                    CultureInfo.InvariantCulture,
-                                    Start != null
-                                      ? Start.GetValueOrDefault()
+                                "Array slice of {0} to {1} returned no results."
+                                    .FormatWith(
+                                        CultureInfo.InvariantCulture,
+                                        Start != null
+                                          ? Start.GetValueOrDefault()
                                             .ToString(CultureInfo.InvariantCulture)
-                                      : "*",
-                                    End != null
-                                      ? End.GetValueOrDefault()
+                                          : "*",
+                                        End != null
+                                          ? End.GetValueOrDefault()
                                             .ToString(CultureInfo.InvariantCulture)
-                                      : "*"
-                                )
+                                          : "*"
+                                    )
                             );
                         }
                     }
@@ -87,10 +88,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     if (settings?.ErrorWhenNoMatch ?? false)
                     {
                         throw new JsonException(
-                            "Array slice is not valid on {0}.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                t.GetType().Name
-                            )
+                            "Array slice is not valid on {0}."
+                                .FormatWith(CultureInfo.InvariantCulture, t.GetType().Name)
                         );
                     }
                 }

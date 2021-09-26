@@ -177,7 +177,8 @@ class C
             var c = CreateCompilation(Parse(source, "goo.cs"), options: TestOptions.DebugDll);
 
             var peBlob = c.EmitToArray(
-                EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.Embedded)
+                EmitOptions.Default
+                    .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                     .WithPdbFilePath(@"a/b/c/d.pdb")
                     .WithPdbChecksumAlgorithm(HashAlgorithmName.SHA512)
             );
@@ -214,9 +215,8 @@ class C
                     var mdReader = embeddedMetadataProvider.GetMetadataReader();
                     AssertEx.Equal(
                         new[] { "goo.cs" },
-                        mdReader.Documents.Select(
-                            doc => mdReader.GetString(mdReader.GetDocument(doc).Name)
-                        )
+                        mdReader.Documents
+                            .Select(doc => mdReader.GetString(mdReader.GetDocument(doc).Name))
                     );
 
                     pdbId = new BlobContentId(mdReader.DebugMetadataHeader.Id);
@@ -258,7 +258,8 @@ class C
             );
 
             var peBlob = c.EmitToArray(
-                EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.Embedded)
+                EmitOptions.Default
+                    .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                     .WithPdbChecksumAlgorithm(HashAlgorithmName.SHA384)
                     .WithPdbFilePath(@"a/b/c/d.pdb")
             );
@@ -297,9 +298,8 @@ class C
                     var mdReader = embeddedMetadataProvider.GetMetadataReader();
                     AssertEx.Equal(
                         new[] { "goo.cs" },
-                        mdReader.Documents.Select(
-                            doc => mdReader.GetString(mdReader.GetDocument(doc).Name)
-                        )
+                        mdReader.Documents
+                            .Select(doc => mdReader.GetString(mdReader.GetDocument(doc).Name))
                     );
 
                     pdbId = new BlobContentId(mdReader.DebugMetadataHeader.Id);
@@ -375,7 +375,8 @@ class C
                     let cdi = pdbReader.GetCustomDebugInformation(cdiHandle)
                     where pdbReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
                     select pdbReader.GetBlobBytes(cdi.Value)
-                ).Single();
+                )
+                    .Single();
 
                 AssertEx.Equal(sourceLinkBlob, actualBlob);
             }
@@ -434,7 +435,8 @@ class C
                         let cdi = pdbReader.GetCustomDebugInformation(cdiHandle)
                         where pdbReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
                         select pdbReader.GetBlobBytes(cdi.Value)
-                    ).Single();
+                    )
+                        .Single();
 
                     AssertEx.Equal(sourceLinkBlob, actualBlob);
                 }
@@ -471,9 +473,8 @@ class C
             var result = c.Emit(
                 new MemoryStream(),
                 new MemoryStream(),
-                options: EmitOptions.Default.WithDebugInformationFormat(
-                    DebugInformationFormat.PortablePdb
-                ),
+                options: EmitOptions.Default
+                    .WithDebugInformationFormat(DebugInformationFormat.PortablePdb),
                 sourceLinkStream: sourceLinkStream
             );
             result.Diagnostics.Verify(

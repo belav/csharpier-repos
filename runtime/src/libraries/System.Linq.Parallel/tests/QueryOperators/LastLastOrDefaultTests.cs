@@ -310,25 +310,19 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Last_AggregateException()
         {
+            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Last(
+                        x =>
+                        {
+                            throw new DeliberateTestException();
+                        }
+                    ));
             AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .Last(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources.Default(1)
-                        .LastOrDefault(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                () => UnorderedSources.Default(1).LastOrDefault(
+                        x =>
+                        {
+                            throw new DeliberateTestException();
+                        }
+                    )
             );
         }
 

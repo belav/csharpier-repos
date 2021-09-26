@@ -47,17 +47,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return foldingRanges.ToArrayAndFree();
             }
 
-            var xamlStructureService =
-                document.Project.LanguageServices.GetService<IXamlStructureService>();
+            var xamlStructureService = document.Project.LanguageServices
+                .GetService<IXamlStructureService>();
             if (xamlStructureService == null)
             {
                 return foldingRanges.ToArrayAndFree();
             }
 
             var structureTags = await xamlStructureService.GetStructureTagsAsync(
-                    document,
-                    cancellationToken
-                )
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (structureTags == null)
             {

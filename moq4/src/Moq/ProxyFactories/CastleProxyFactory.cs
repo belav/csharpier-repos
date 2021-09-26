@@ -301,8 +301,8 @@ namespace Moq
                         // remove all less specific overrides from it:
                         candidateMethods.ExceptWith(
                             candidateMethods.Where(
-                                    cm => cm.DeclaringType.IsAssignableFrom(implementedInterface)
-                                )
+                                cm => cm.DeclaringType.IsAssignableFrom(implementedInterface)
+                            )
                                 .ToArray()
                         );
                         candidateMethods.Add(candidateMethod);

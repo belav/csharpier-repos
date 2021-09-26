@@ -548,12 +548,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return method;
                 }
             }
-            F.Diagnostics.Add(
-                ErrorCode.ERR_MissingPredefinedMember,
-                F.Syntax.Location,
-                builderType,
-                methodName
-            );
+            F.Diagnostics
+                .Add(
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    F.Syntax.Location,
+                    builderType,
+                    methodName
+                );
             return null;
         }
 

@@ -54,9 +54,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             get
             {
                 var strongPDivParent = TagHelperDescriptorBuilder.Create(
-                        "StrongTagHelper",
-                        "SomeAssembly"
-                    )
+                    "StrongTagHelper",
+                    "SomeAssembly"
+                )
                     .TagMatchingRuleDescriptor(
                         rule => rule.RequireTagName("strong").RequireParentTag("p")
                     )
@@ -65,9 +65,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                     )
                     .Build();
                 var catchAllPParent = TagHelperDescriptorBuilder.Create(
-                        "CatchAllTagHelper",
-                        "SomeAssembly"
-                    )
+                    "CatchAllTagHelper",
+                    "SomeAssembly"
+                )
                     .TagMatchingRuleDescriptor(
                         rule => rule.RequireTagName("*").RequireParentTag("p")
                     )
@@ -139,9 +139,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             get
             {
                 var divDescriptor = TagHelperDescriptorBuilder.Create(
-                        "DivTagHelper",
-                        "SomeAssembly"
-                    )
+                    "DivTagHelper",
+                    "SomeAssembly"
+                )
                     .TagMatchingRuleDescriptor(
                         rule =>
                             rule.RequireTagName("div")
@@ -149,9 +149,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                     )
                     .Build();
                 var inputDescriptor = TagHelperDescriptorBuilder.Create(
-                        "InputTagHelper",
-                        "SomeAssembly"
-                    )
+                    "InputTagHelper",
+                    "SomeAssembly"
+                )
                     .TagMatchingRuleDescriptor(
                         rule =>
                             rule.RequireTagName("input")
@@ -160,9 +160,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                     )
                     .Build();
                 var inputWildcardPrefixDescriptor = TagHelperDescriptorBuilder.Create(
-                        "InputWildCardAttribute",
-                        "SomeAssembly"
-                    )
+                    "InputWildCardAttribute",
+                    "SomeAssembly"
+                )
                     .TagMatchingRuleDescriptor(
                         rule =>
                             rule.RequireTagName("input")
@@ -176,9 +176,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                     )
                     .Build();
                 var catchAllDescriptor = TagHelperDescriptorBuilder.Create(
-                        "CatchAllTagHelper",
-                        "SomeAssembly"
-                    )
+                    "CatchAllTagHelper",
+                    "SomeAssembly"
+                )
                     .TagMatchingRuleDescriptor(
                         rule =>
                             rule.RequireTagName(TagHelperMatchingConventions.ElementCatchAllName)
@@ -186,9 +186,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                     )
                     .Build();
                 var catchAllDescriptor2 = TagHelperDescriptorBuilder.Create(
-                        "CatchAllTagHelper2",
-                        "SomeAssembly"
-                    )
+                    "CatchAllTagHelper2",
+                    "SomeAssembly"
+                )
                     .TagMatchingRuleDescriptor(
                         rule =>
                             rule.RequireTagName(TagHelperMatchingConventions.ElementCatchAllName)
@@ -197,9 +197,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                     )
                     .Build();
                 var catchAllWildcardPrefixDescriptor = TagHelperDescriptorBuilder.Create(
-                        "CatchAllWildCardAttribute",
-                        "SomeAssembly"
-                    )
+                    "CatchAllWildCardAttribute",
+                    "SomeAssembly"
+                )
                     .TagMatchingRuleDescriptor(
                         rule =>
                             rule.RequireTagName(TagHelperMatchingConventions.ElementCatchAllName)

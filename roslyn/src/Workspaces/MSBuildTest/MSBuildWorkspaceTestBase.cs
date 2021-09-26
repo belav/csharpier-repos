@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         {
             AssertEx.Equal(
                 expectedFailures,
-                workspace.Diagnostics.Where(d => d.Kind == WorkspaceDiagnosticKind.Failure)
+                workspace.Diagnostics
+                    .Where(d => d.Kind == WorkspaceDiagnosticKind.Failure)
                     .Select(d => d.Message)
             );
         }

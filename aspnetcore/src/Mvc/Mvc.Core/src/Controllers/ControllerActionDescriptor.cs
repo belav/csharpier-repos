@@ -47,13 +47,14 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             {
                 if (base.DisplayName == null && ControllerTypeInfo != null && MethodInfo != null)
                 {
-                    base.DisplayName = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}.{1} ({2})",
-                        TypeNameHelper.GetTypeDisplayName(ControllerTypeInfo),
-                        MethodInfo.Name,
-                        ControllerTypeInfo.Assembly.GetName().Name
-                    );
+                    base.DisplayName = string
+                        .Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}.{1} ({2})",
+                            TypeNameHelper.GetTypeDisplayName(ControllerTypeInfo),
+                            MethodInfo.Name,
+                            ControllerTypeInfo.Assembly.GetName().Name
+                        );
                 }
 
                 return base.DisplayName!;

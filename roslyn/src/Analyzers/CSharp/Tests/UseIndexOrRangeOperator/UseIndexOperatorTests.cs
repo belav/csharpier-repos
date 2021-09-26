@@ -38,7 +38,8 @@ class C
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp7,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
@@ -111,7 +112,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -157,7 +159,8 @@ class C
                     AdditionalProjectReferences = { "DependencyProject" },
                 },
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -187,7 +190,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -221,7 +225,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -242,7 +247,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -263,7 +269,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -285,7 +292,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -317,7 +325,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -349,7 +358,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -371,7 +381,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -393,7 +404,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -425,7 +437,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -457,7 +470,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -479,7 +493,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -501,7 +516,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(36909, "https://github.com/dotnet/roslyn/issues/36909")]
@@ -523,7 +539,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp20,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -553,7 +570,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -585,7 +603,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -615,7 +634,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -645,7 +665,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -677,7 +698,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -709,7 +731,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = fixedSource,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
@@ -731,7 +754,8 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
                 TestCode = source,
                 FixedCode = source,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

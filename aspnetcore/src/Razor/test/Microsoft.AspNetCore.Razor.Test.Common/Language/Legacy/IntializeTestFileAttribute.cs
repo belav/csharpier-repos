@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public override void Before(MethodInfo methodUnderTest)
         {
             if (
-                typeof(ParserTestBase).GetTypeInfo()
+                typeof(ParserTestBase)
+                    .GetTypeInfo()
                     .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
             )
             {
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public override void After(MethodInfo methodUnderTest)
         {
             if (
-                typeof(ParserTestBase).GetTypeInfo()
+                typeof(ParserTestBase)
+                    .GetTypeInfo()
                     .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
             )
             {

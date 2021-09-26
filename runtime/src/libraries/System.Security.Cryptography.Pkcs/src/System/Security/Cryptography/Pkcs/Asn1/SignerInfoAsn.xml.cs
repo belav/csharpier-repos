@@ -148,16 +148,10 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System.Security.Cryptography.Pkcs.Asn1.SignerIdentifierAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.Sid
-            );
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.DigestAlgorithm
-            );
+            System.Security.Cryptography.Pkcs.Asn1.SignerIdentifierAsn
+                .Decode(ref sequenceReader, rebind, out decoded.Sid);
+            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn
+                .Decode(ref sequenceReader, rebind, out decoded.DigestAlgorithm);
 
             if (
                 sequenceReader.HasData
@@ -171,11 +165,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                     : tmpSpan.ToArray();
             }
 
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.SignatureAlgorithm
-            );
+            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn
+                .Decode(ref sequenceReader, rebind, out decoded.SignatureAlgorithm);
 
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {
@@ -204,11 +195,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.AttributeAsn.Decode(
-                            ref collectionReader,
-                            rebind,
-                            out tmpItem
-                        );
+                        System.Security.Cryptography.Asn1.AttributeAsn
+                            .Decode(ref collectionReader, rebind, out tmpItem);
                         tmpList.Add(tmpItem);
                     }
 

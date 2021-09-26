@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var graph = PooledDictionary<
                 SourceFieldSymbolWithSyntaxReference,
                 Node<SourceFieldSymbolWithSyntaxReference>
-            >.GetInstance();
+            >
+                .GetInstance();
 
             CreateGraph(graph, field, earlyDecodingWellKnownAttributes);
 
@@ -293,20 +294,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (fieldsInvolvedInCycles is null)
             {
-                fieldsInvolvedInCycles =
-                    ArrayBuilder<SourceFieldSymbolWithSyntaxReference>.GetInstance(graph.Count);
+                fieldsInvolvedInCycles = ArrayBuilder<SourceFieldSymbolWithSyntaxReference>
+                    .GetInstance(graph.Count);
                 // We sort fields that belong to the same compilation by location to process cycles in deterministic order.
                 // Relative order between compilations is not important, cycles do not cross compilation boundaries.
                 fieldsInvolvedInCycles.AddRange(
-                    graph.Keys.GroupBy(static f => f.DeclaringCompilation)
+                    graph.Keys
+                        .GroupBy(static f => f.DeclaringCompilation)
                         .SelectMany(
                             static g =>
                                 g.OrderByDescending(
                                     (f1, f2) =>
-                                        g.Key.CompareSourceLocations(
-                                            f1.ErrorLocation,
-                                            f2.ErrorLocation
-                                        )
+                                        g.Key
+                                            .CompareSourceLocations(
+                                                f1.ErrorLocation,
+                                                f2.ErrorLocation
+                                            )
                                 )
                         )
                 );

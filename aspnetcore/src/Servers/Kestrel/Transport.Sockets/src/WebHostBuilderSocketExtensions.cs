@@ -49,13 +49,12 @@ namespace Microsoft.AspNetCore.Hosting
             Action<SocketTransportOptions> configureOptions
         )
         {
-            return hostBuilder.UseSockets()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.Configure(configureOptions);
-                    }
-                );
+            return hostBuilder.UseSockets().ConfigureServices(
+                services =>
+                {
+                    services.Configure(configureOptions);
+                }
+            );
         }
     }
 }

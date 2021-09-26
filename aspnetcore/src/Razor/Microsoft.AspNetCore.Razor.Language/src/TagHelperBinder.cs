@@ -164,7 +164,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             foreach (var rule in descriptor.TagMatchingRules)
             {
-                var registrationKey = string.Equals(
+                var registrationKey = string
+                .Equals(
                     rule.TagName,
                     TagHelperMatchingConventions.ElementCatchAllName,
                     StringComparison.Ordinal

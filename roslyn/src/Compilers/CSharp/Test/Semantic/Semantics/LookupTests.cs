@@ -617,9 +617,8 @@ class Test
             );
             Assert.Null(useSiteDiagnostics);
             Assert.True(lookupResult.IsMultiViable);
-            var actual_lookupSymbols_as_string = lookupResult.Symbols.Select(
-                    e => e.ToTestDisplayString()
-                )
+            var actual_lookupSymbols_as_string = lookupResult.Symbols
+                .Select(e => e.ToTestDisplayString())
                 .ToArray();
             lookupResult.Free();
 
@@ -1386,8 +1385,8 @@ class Program
 
             // Verify nested namespaces *are not* imported.
             var systemNS = (INamespaceSymbol)actual_lookupSymbols.Where(
-                    (sym) => sym.Name.Equals("System") && sym.Kind == SymbolKind.Namespace
-                )
+                (sym) => sym.Name.Equals("System") && sym.Kind == SymbolKind.Namespace
+            )
                 .Single();
             INamespaceSymbol systemXmlNS = systemNS.GetNestedNamespace("Xml");
             Assert.DoesNotContain(systemXmlNS, actual_lookupSymbols);
@@ -1520,21 +1519,20 @@ class Q : P
         public void TestLookupVerbatimVar()
         {
             var source = "class C { public static void Main() { @var v = 1; } }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (1,39): error CS0246: The type or namespace name 'var' could not be found (are you missing a using directive or an assembly reference?)
-                    // class C { public static void Main() { @var v = 1; } }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "@var")
-                        .WithArguments("var")
-                        .WithLocation(1, 39)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (1,39): error CS0246: The type or namespace name 'var' could not be found (are you missing a using directive or an assembly reference?)
+                // class C { public static void Main() { @var v = 1; } }
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "@var")
+                    .WithArguments("var")
+                    .WithLocation(1, 39)
+            );
         }
 
         private void TestLookupSymbolsNestedNamespaces(List<ISymbol> actual_lookupSymbols)
         {
             var namespaceX = (INamespaceSymbol)actual_lookupSymbols.Where(
-                    (sym) => sym.Name.Equals("X") && sym.Kind == SymbolKind.Namespace
-                )
+                (sym) => sym.Name.Equals("X") && sym.Kind == SymbolKind.Namespace
+            )
                 .Single();
 
             // Verify nested namespaces within namespace X *are not* present in lookup symbols.
@@ -1545,16 +1543,16 @@ class Q : P
 
             // Verify nested types *are not* present in lookup symbols.
             var typeA = (INamedTypeSymbol)actual_lookupSymbols.Where(
-                    (sym) => sym.Name.Equals("A") && sym.Kind == SymbolKind.NamedType
-                )
+                (sym) => sym.Name.Equals("A") && sym.Kind == SymbolKind.NamedType
+            )
                 .Single();
             INamedTypeSymbol typeB = typeA.GetTypeMembers("B").Single();
             Assert.DoesNotContain(typeB, actual_lookupSymbols);
 
             // Verify aliases to nested namespaces within namespace X *are* present in lookup symbols.
             var aliasY = (IAliasSymbol)actual_lookupSymbols.Where(
-                    (sym) => sym.Name.Equals("aliasY") && sym.Kind == SymbolKind.Alias
-                )
+                (sym) => sym.Name.Equals("aliasY") && sym.Kind == SymbolKind.Alias
+            )
                 .Single();
             Assert.Contains(aliasY, actual_lookupSymbols);
         }
@@ -1632,18 +1630,17 @@ class C
         public void GenericNameLookup()
         {
             var source = @"using A = List<int>;";
-            var compilation = CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (1,11): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?)
-                    // using A = List<int>;
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "List<int>")
-                        .WithArguments("List<>")
-                        .WithLocation(1, 11),
-                    // (1,1): hidden CS8019: Unnecessary using directive.
-                    // using A = List<int>;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A = List<int>;")
-                        .WithLocation(1, 1)
-                );
+            var compilation = CreateCompilation(source).VerifyDiagnostics(
+                // (1,11): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?)
+                // using A = List<int>;
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "List<int>")
+                    .WithArguments("List<>")
+                    .WithLocation(1, 11),
+                // (1,1): hidden CS8019: Unnecessary using directive.
+                // using A = List<int>;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A = List<int>;")
+                    .WithLocation(1, 1)
+            );
         }
 
         #endregion tests
@@ -2057,7 +2054,8 @@ class Program
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics();
 
-            var ms = comp.GlobalNamespace.GetTypeMembers("Program")
+            var ms = comp.GlobalNamespace
+                .GetTypeMembers("Program")
                 .Single()
                 .GetMembers("M")
                 .OfType<MethodSymbol>();
@@ -2096,7 +2094,8 @@ class Program
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics();
 
-            var m = comp.GlobalNamespace.GetTypeMembers("Program")
+            var m = comp.GlobalNamespace
+                .GetTypeMembers("Program")
                 .Single()
                 .GetMembers("M")
                 .Single();
@@ -2134,7 +2133,8 @@ class Program
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics();
 
-            var m = comp.GlobalNamespace.GetTypeMembers("Program")
+            var m = comp.GlobalNamespace
+                .GetTypeMembers("Program")
                 .Single()
                 .GetMembers("M")
                 .Single();

@@ -144,7 +144,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             using (var connection = new SqlConnection(ConnectionString))
             using (var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection))
             {
-                upsertCommand.Parameters.AddCacheItemId(key)
+                upsertCommand.Parameters
+                    .AddCacheItemId(key)
                     .AddCacheItemValue(value)
                     .AddSlidingExpirationInSeconds(options.SlidingExpiration)
                     .AddAbsoluteExpiration(absoluteExpiration)
@@ -188,7 +189,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             using (var connection = new SqlConnection(ConnectionString))
             using (var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection))
             {
-                upsertCommand.Parameters.AddCacheItemId(key)
+                upsertCommand.Parameters
+                    .AddCacheItemId(key)
                     .AddCacheItemValue(value)
                     .AddSlidingExpirationInSeconds(options.SlidingExpiration)
                     .AddAbsoluteExpiration(absoluteExpiration)
@@ -233,7 +235,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             using (var connection = new SqlConnection(ConnectionString))
             using (var command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddCacheItemId(key)
+                command.Parameters
+                    .AddCacheItemId(key)
                     .AddWithValue("UtcNow", SqlDbType.DateTimeOffset, utcNow);
 
                 connection.Open();
@@ -289,18 +292,19 @@ namespace Microsoft.Extensions.Caching.SqlServer
             using (var connection = new SqlConnection(ConnectionString))
             using (var command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddCacheItemId(key)
+                command.Parameters
+                    .AddCacheItemId(key)
                     .AddWithValue("UtcNow", SqlDbType.DateTimeOffset, utcNow);
 
                 await connection.OpenAsync(token).ConfigureAwait(false);
 
                 using (
                     var reader = await command.ExecuteReaderAsync(
-                            CommandBehavior.SequentialAccess
-                                | CommandBehavior.SingleRow
-                                | CommandBehavior.SingleResult,
-                            token
-                        )
+                        CommandBehavior.SequentialAccess
+                            | CommandBehavior.SingleRow
+                            | CommandBehavior.SingleResult,
+                        token
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -309,9 +313,9 @@ namespace Microsoft.Extensions.Caching.SqlServer
                         if (includeValue)
                         {
                             value = await reader.GetFieldValueAsync<byte[]>(
-                                    Columns.Indexes.CacheItemValueIndex,
-                                    token
-                                )
+                                Columns.Indexes.CacheItemValueIndex,
+                                token
+                            )
                                 .ConfigureAwait(false);
                         }
                     }

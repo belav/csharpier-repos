@@ -1129,10 +1129,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.DropDownList(
-                    name: "name",
-                    selectList: selectList,
-                    htmlAttributes: new { attribute = text, }
-                )
+                name: "name",
+                selectList: selectList,
+                htmlAttributes: new { attribute = text, }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1157,10 +1157,10 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper.DropDownList(
-                    name: text,
-                    selectList: selectList,
-                    htmlAttributes: new { id = "id", }
-                )
+                name: text,
+                selectList: selectList,
+                htmlAttributes: new { id = "id", }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1213,10 +1213,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper.DropDownList(
-                    name: "name",
-                    selectList: selectList,
-                    optionLabel: text
-                )
+                name: "name",
+                selectList: selectList,
+                optionLabel: text
+            )
                 .ToHtmlString();
 
             // Assert
@@ -1245,10 +1245,10 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper.DropDownList(
-                    name: String.Empty,
-                    selectList: selectList,
-                    htmlAttributes: new { id = "id", }
-                )
+                name: String.Empty,
+                selectList: selectList,
+                htmlAttributes: new { id = "id", }
+            )
                 .ToHtmlString();
 
             // Assert
@@ -4689,12 +4689,13 @@ namespace System.Web.Mvc.Html.Test
             }
 
             foreach (
-                FieldInfo field in typeof(EnumWithDisplay).GetFields(
-                    BindingFlags.DeclaredOnly
-                        | BindingFlags.GetField
-                        | BindingFlags.Public
-                        | BindingFlags.Static
-                )
+                FieldInfo field in typeof(EnumWithDisplay)
+                    .GetFields(
+                        BindingFlags.DeclaredOnly
+                            | BindingFlags.GetField
+                            | BindingFlags.Public
+                            | BindingFlags.Static
+                    )
             )
             {
                 string name = field.Name;

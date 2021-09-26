@@ -19,25 +19,20 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_RewritePathWhenMatching()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader("RewriteRule /hey/(.*) /$1 ")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader("RewriteRule /hey/(.*) /$1 "));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -51,26 +46,21 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_RewritePathTerminatesOnFirstSuccessOfRule()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                    new StringReader("RewriteRule /hey/(.*) /$1 [L]")
-                )
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader("RewriteRule /hey/(.*) /$1 [L]"))
                 .AddApacheModRewrite(new StringReader("RewriteRule /hello /what"));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -84,26 +74,21 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_RewritePathDoesNotTerminateOnFirstSuccessOfRule()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                    new StringReader("RewriteRule /hey/(.*) /$1")
-                )
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader("RewriteRule /hey/(.*) /$1"))
                 .AddApacheModRewrite(new StringReader("RewriteRule /hello /what"));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -117,25 +102,20 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_ShouldIgnoreComments()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader("#RewriteRule ^/hey/(.*) /$1 ")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader("#RewriteRule ^/hey/(.*) /$1 "));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -149,25 +129,20 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_ShouldRewriteHomepage()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader(@"RewriteRule ^/$ /homepage.html")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader(@"RewriteRule ^/$ /homepage.html"));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -181,25 +156,20 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_ShouldIgnorePorts()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader(@"RewriteRule ^/$ /homepage.html")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader(@"RewriteRule ^/$ /homepage.html"));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -213,25 +183,20 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_HandleNegatedRewriteRules()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader(@"RewriteRule !^/$ /homepage.html")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader(@"RewriteRule !^/$ /homepage.html"));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -261,21 +226,17 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         {
             var options = new RewriteOptions().AddApacheModRewrite(new StringReader(rule));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -321,21 +282,17 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         {
             var options = new RewriteOptions().AddApacheModRewrite(new StringReader(rule));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -349,25 +306,22 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_CheckFullUrlWithOnlyPath()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader(@"RewriteRule (.+) http://www.example.com$1/")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(
+                    new StringReader(@"RewriteRule (.+) http://www.example.com$1/")
+                );
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context => context.Response.WriteAsync(context.Request.Path)
-                                    );
-                                }
-                            );
-                    }
-                )
-                .Build();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -382,32 +336,32 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_CheckFullUrlWithUFlag()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader(@"RewriteRule (.+) http://www.example.com$1/")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(
+                    new StringReader(@"RewriteRule (.+) http://www.example.com$1/")
+                );
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Scheme
-                                                    + "://"
-                                                    + context.Request.Host.Host
-                                                    + context.Request.Path
-                                                    + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Scheme
+                                                + "://"
+                                                + context.Request.Host.Host
+                                                + context.Request.Path
+                                                + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -422,32 +376,32 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_CheckModFileConditions()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader(@"RewriteRule (.+) http://www.example.com$1/")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(
+                    new StringReader(@"RewriteRule (.+) http://www.example.com$1/")
+                );
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Scheme
-                                                    + "://"
-                                                    + context.Request.Host.Host
-                                                    + context.Request.Path
-                                                    + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Scheme
+                                                + "://"
+                                                + context.Request.Host.Host
+                                                + context.Request.Path
+                                                + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -463,34 +417,34 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [InlineData("http://www.example.com/foo/")]
         public async Task Invoke_EnsureHttps(string input)
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader(
-                    "RewriteCond %{REQUEST_URI} /foo/  \nRewriteCond %{HTTPS} !on   \nRewriteRule ^(.*)$ https://www.example.com$1 [R=301,L]"
-                )
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(
+                    new StringReader(
+                        "RewriteCond %{REQUEST_URI} /foo/  \nRewriteCond %{HTTPS} !on   \nRewriteRule ^(.*)$ https://www.example.com$1 [R=301,L]"
+                    )
+                );
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Scheme
-                                                    + "://"
-                                                    + context.Request.Host.Host
-                                                    + context.Request.Path
-                                                    + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Scheme
+                                                + "://"
+                                                + context.Request.Host.Host
+                                                + context.Request.Path
+                                                + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -508,32 +462,30 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
             string input
         )
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader("RewriteRule ^(.*)$ $1 [R=301,L]")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader("RewriteRule ^(.*)$ $1 [R=301,L]"));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Scheme
-                                                    + "://"
-                                                    + context.Request.Host.Host
-                                                    + context.Request.Path
-                                                    + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Scheme
+                                                + "://"
+                                                + context.Request.Host.Host
+                                                + context.Request.Path
+                                                + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -549,28 +501,26 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [InlineData("http://www.example.com/")]
         public async Task Invoke_CaptureEmptyStringInRegexAssertRewriteHasForwardSlash(string input)
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader("RewriteRule ^(.*)$ $1 [L]")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader("RewriteRule ^(.*)$ $1 [L]"));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Path + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Path + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -583,28 +533,26 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public async Task Invoke_CaptureEmptyStringInRegexAssertLocationHeaderContainsPathBase()
         {
-            var options = new RewriteOptions().AddApacheModRewrite(
-                new StringReader(@"RewriteRule ^(.*)$ $1 [R=301,L]")
-            );
+            var options = new RewriteOptions()
+                .AddApacheModRewrite(new StringReader(@"RewriteRule ^(.*)$ $1 [R=301,L]"));
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Path + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Path + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 
@@ -627,24 +575,23 @@ RewriteRule (.*) http://localhost:80/home/report/%1 [R=301,L,QSD]"
                 )
             );
             using var host = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer()
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRewriter(options);
-                                    app.Run(
-                                        context =>
-                                            context.Response.WriteAsync(
-                                                context.Request.Path + context.Request.QueryString
-                                            )
-                                    );
-                                }
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().Configure(
+                        app =>
+                        {
+                            app.UseRewriter(options);
+                            app.Run(
+                                context =>
+                                    context.Response
+                                        .WriteAsync(
+                                            context.Request.Path + context.Request.QueryString
+                                        )
                             );
-                    }
-                )
-                .Build();
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
 

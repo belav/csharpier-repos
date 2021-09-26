@@ -23,36 +23,37 @@ namespace CreateDefaultBuilderApp
                 )
                 .ConfigureKestrel(
                     options =>
-                        options.Configure(options.ConfigurationLoader.Configuration)
-                            .Endpoint(
-                                "HTTP",
-                                endpointOptions =>
-                                {
-                                    if (
-                                        responseMessage == null
-                                        && !string.Equals(
+                        options.Configure(options.ConfigurationLoader.Configuration).Endpoint(
+                            "HTTP",
+                            endpointOptions =>
+                            {
+                                if (
+                                    responseMessage == null
+                                    && !string
+                                        .Equals(
                                             "KestrelEndPointSettingValue",
                                             endpointOptions.ConfigSection[
                                                 "KestrelEndPointSettingName"
                                             ]
                                         )
-                                    )
-                                    {
-                                        responseMessage = "Default Kestrel configuration not read.";
-                                    }
+                                )
+                                {
+                                    responseMessage = "Default Kestrel configuration not read.";
                                 }
-                            )
+                            }
+                        )
                 )
                 .Configure(
                     app =>
                         app.Run(
                             context =>
                             {
-                                var hostingEnvironment =
-                                    app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
-                                return context.Response.WriteAsync(
-                                    responseMessage ?? hostingEnvironment.ApplicationName
-                                );
+                                var hostingEnvironment = app.ApplicationServices
+                                    .GetRequiredService<IWebHostEnvironment>();
+                                return context.Response
+                                    .WriteAsync(
+                                        responseMessage ?? hostingEnvironment.ApplicationName
+                                    );
                             }
                         )
                 )
@@ -65,11 +66,12 @@ namespace CreateDefaultBuilderApp
             // Verify ContentRootPath set
             var contentRoot = Environment.GetEnvironmentVariable("ASPNETCORE_CONTENTROOT");
             if (
-                !string.Equals(
-                    contentRoot,
-                    context.HostingEnvironment.ContentRootPath,
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        contentRoot,
+                        context.HostingEnvironment.ContentRootPath,
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return $"ContentRootPath incorrect. Expected: {contentRoot} Actual: {context.HostingEnvironment.ContentRootPath}";
@@ -77,11 +79,12 @@ namespace CreateDefaultBuilderApp
 
             // Verify appsettings.json loaded
             if (
-                !string.Equals(
-                    "settingsValue",
-                    context.Configuration["settingsKey"],
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        "settingsValue",
+                        context.Configuration["settingsKey"],
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return $"appsettings.json not loaded into Configuration.";
@@ -89,11 +92,12 @@ namespace CreateDefaultBuilderApp
 
             // Verify appsettings.environment.json loaded
             if (
-                !string.Equals(
-                    "devSettingsValue",
-                    context.Configuration["devSettingsKey"],
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals(
+                        "devSettingsValue",
+                        context.Configuration["devSettingsKey"],
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return $"appsettings.{context.HostingEnvironment.EnvironmentName}.json not loaded into Configuration.";
@@ -103,11 +107,8 @@ namespace CreateDefaultBuilderApp
 
             // Verify environment variables loaded
             if (
-                !string.Equals(
-                    "envValue",
-                    context.Configuration["envKey"],
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals("envValue", context.Configuration["envKey"], StringComparison.Ordinal)
             )
             {
                 return $"Environment variables not loaded into Configuration.";
@@ -115,11 +116,8 @@ namespace CreateDefaultBuilderApp
 
             // Verify command line arguments loaded
             if (
-                !string.Equals(
-                    "cliValue",
-                    context.Configuration["cliKey"],
-                    StringComparison.Ordinal
-                )
+                !string
+                    .Equals("cliValue", context.Configuration["cliKey"], StringComparison.Ordinal)
             )
             {
                 return $"Command line arguments not loaded into Configuration.";

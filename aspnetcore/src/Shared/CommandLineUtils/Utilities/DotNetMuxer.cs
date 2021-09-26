@@ -47,11 +47,12 @@ namespace Microsoft.Extensions.CommandLineUtils
 
             if (
                 !string.IsNullOrEmpty(mainModule)
-                && string.Equals(
-                    Path.GetFileName(mainModule!),
-                    fileName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                && string
+                    .Equals(
+                        Path.GetFileName(mainModule!),
+                        fileName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return mainModule;

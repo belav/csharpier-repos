@@ -24,13 +24,13 @@ namespace System.Web.Http.ContentNegotiation
 
             Mock<IContentNegotiator> selector = new Mock<IContentNegotiator>();
             selector.Setup(
-                    s =>
-                        s.Negotiate(
-                            It.IsAny<Type>(),
-                            It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>()
-                        )
-                )
+                s =>
+                    s.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+            )
                 .Returns(new ContentNegotiationResult(new XmlMediaTypeFormatter(), null));
 
             Configuration.Services.Replace(typeof(IContentNegotiator), selector.Object);

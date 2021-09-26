@@ -37,10 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             IValueSet IValueSetFactory.Related(BinaryOperatorKind relation, ConstantValue value) =>
                 value.IsBad
                     ? FloatingValueSet<TFloating, TFloatingTC>.AllValues
-                    : FloatingValueSet<TFloating, TFloatingTC>.Related(
-                          relation,
-                          default(TFloatingTC).FromConstantValue(value)
-                      );
+                    : FloatingValueSet<TFloating, TFloatingTC>
+                      .Related(relation, default(TFloatingTC).FromConstantValue(value));
 
             bool IValueSetFactory.Related(
                 BinaryOperatorKind relation,

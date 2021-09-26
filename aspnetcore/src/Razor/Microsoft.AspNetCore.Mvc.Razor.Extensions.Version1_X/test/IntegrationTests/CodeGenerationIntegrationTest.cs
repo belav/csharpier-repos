@@ -11,8 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X.IntegrationTests
 {
     public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
-        private readonly static CSharpCompilation DefaultBaseCompilation =
-            MvcShim.BaseCompilation.WithAssemblyName("AppCode");
+        private readonly static CSharpCompilation DefaultBaseCompilation = MvcShim.BaseCompilation
+            .WithAssemblyName("AppCode");
 
         public CodeGenerationIntegrationTest()
             : base(

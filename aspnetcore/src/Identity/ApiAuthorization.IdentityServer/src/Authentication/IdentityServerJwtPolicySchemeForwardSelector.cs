@@ -24,10 +24,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Authentication
         public string SelectScheme(HttpContext ctx)
         {
             if (
-                ctx.Request.Path.StartsWithSegments(
-                    _identityPath,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                ctx.Request.Path
+                    .StartsWithSegments(_identityPath, StringComparison.OrdinalIgnoreCase)
             )
             {
                 return IdentityConstants.ApplicationScheme;

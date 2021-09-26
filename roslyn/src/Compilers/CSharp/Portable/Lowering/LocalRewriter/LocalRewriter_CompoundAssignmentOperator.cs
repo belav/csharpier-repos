@@ -420,10 +420,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression[] actualArguments = new BoundExpression[parameters.Length]; // The actual arguments that will be passed; one actual argument per formal parameter.
             ArrayBuilder<BoundAssignmentOperator> storesToTemps =
                 ArrayBuilder<BoundAssignmentOperator>.GetInstance(rewrittenArguments.Length);
-            ArrayBuilder<RefKind> refKinds = ArrayBuilder<RefKind>.GetInstance(
-                parameters.Length,
-                RefKind.None
-            );
+            ArrayBuilder<RefKind> refKinds = ArrayBuilder<RefKind>
+                .GetInstance(parameters.Length, RefKind.None);
 
             // Step one: Store everything that is non-trivial into a temporary; record the
             // stores in storesToTemps and make the actual argument a reference to the temp.

@@ -18,89 +18,70 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     /// </summary>
     public class StringMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _containsMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.Contains),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _containsMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.Contains), new[] { typeof(string) });
 
-        private static readonly MethodInfo _startsWithMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.StartsWith),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _startsWithMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.StartsWith), new[] { typeof(string) });
 
-        private static readonly MethodInfo _endsWithMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.EndsWith),
-                new[] { typeof(string) }
-            );
+        private static readonly MethodInfo _endsWithMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.EndsWith), new[] { typeof(string) });
 
-        private static readonly MethodInfo _toLowerMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.ToLower), Array.Empty<Type>());
+        private static readonly MethodInfo _toLowerMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.ToLower), Array.Empty<Type>());
 
-        private static readonly MethodInfo _toUpperMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.ToUpper), Array.Empty<Type>());
+        private static readonly MethodInfo _toUpperMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.ToUpper), Array.Empty<Type>());
 
-        private static readonly MethodInfo _trimStartMethodInfoWithoutArgs =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), Array.Empty<Type>());
+        private static readonly MethodInfo _trimStartMethodInfoWithoutArgs = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.TrimStart), Array.Empty<Type>());
 
-        private static readonly MethodInfo _trimEndMethodInfoWithoutArgs =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), Array.Empty<Type>());
+        private static readonly MethodInfo _trimEndMethodInfoWithoutArgs = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.TrimEnd), Array.Empty<Type>());
 
-        private static readonly MethodInfo _trimMethodInfoWithoutArgs =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), Array.Empty<Type>());
+        private static readonly MethodInfo _trimMethodInfoWithoutArgs = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.Trim), Array.Empty<Type>());
 
-        private static readonly MethodInfo _trimStartMethodInfoWithCharArrayArg =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.TrimStart),
-                new[] { typeof(char[]) }
-            );
+        private static readonly MethodInfo _trimStartMethodInfoWithCharArrayArg = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.TrimStart), new[] { typeof(char[]) });
 
-        private static readonly MethodInfo _trimEndMethodInfoWithCharArrayArg =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.TrimEnd),
-                new[] { typeof(char[]) }
-            );
+        private static readonly MethodInfo _trimEndMethodInfoWithCharArrayArg = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.TrimEnd), new[] { typeof(char[]) });
 
-        private static readonly MethodInfo _trimMethodInfoWithCharArrayArg =
-            typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), new[] { typeof(char[]) });
+        private static readonly MethodInfo _trimMethodInfoWithCharArrayArg = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.Trim), new[] { typeof(char[]) });
 
-        private static readonly MethodInfo _substringMethodInfo =
-            typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.Substring),
-                new[] { typeof(int), typeof(int) }
-            );
+        private static readonly MethodInfo _substringMethodInfo = typeof(string)
+            .GetRequiredRuntimeMethod(nameof(string.Substring), new[] { typeof(int), typeof(int) });
 
-        private static readonly MethodInfo _firstOrDefaultMethodInfoWithoutArgs =
-            typeof(Enumerable).GetRuntimeMethods()
-                .Single(
-                    m =>
-                        m.Name == nameof(Enumerable.FirstOrDefault) && m.GetParameters().Length == 1
-                )
-                .MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo _firstOrDefaultMethodInfoWithoutArgs = typeof(Enumerable)
+            .GetRuntimeMethods()
+            .Single(
+                m => m.Name == nameof(Enumerable.FirstOrDefault) && m.GetParameters().Length == 1
+            )
+            .MakeGenericMethod(typeof(char));
 
-        private static readonly MethodInfo _lastOrDefaultMethodInfoWithoutArgs =
-            typeof(Enumerable).GetRuntimeMethods()
-                .Single(
-                    m => m.Name == nameof(Enumerable.LastOrDefault) && m.GetParameters().Length == 1
-                )
-                .MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo _lastOrDefaultMethodInfoWithoutArgs = typeof(Enumerable)
+            .GetRuntimeMethods()
+            .Single(
+                m => m.Name == nameof(Enumerable.LastOrDefault) && m.GetParameters().Length == 1
+            )
+            .MakeGenericMethod(typeof(char));
 
-        private static readonly MethodInfo _stringConcatWithTwoArguments =
-            typeof(String).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _stringConcatWithTwoArguments = typeof(String)
+            .GetRequiredRuntimeMethod(
                 nameof(string.Concat),
                 new[] { typeof(string), typeof(string) }
             );
 
-        private static readonly MethodInfo _stringConcatWithThreeArguments =
-            typeof(String).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _stringConcatWithThreeArguments = typeof(String)
+            .GetRequiredRuntimeMethod(
                 nameof(string.Concat),
                 new[] { typeof(string), typeof(string), typeof(string) }
             );
 
-        private static readonly MethodInfo _stringConcatWithFourArguments =
-            typeof(String).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _stringConcatWithFourArguments = typeof(String)
+            .GetRequiredRuntimeMethod(
                 nameof(string.Concat),
                 new[] { typeof(string), typeof(string), typeof(string), typeof(string) }
             );

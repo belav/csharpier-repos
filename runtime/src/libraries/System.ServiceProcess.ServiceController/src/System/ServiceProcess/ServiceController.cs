@@ -183,14 +183,15 @@ namespace System.ServiceProcess
                     // figure out how big a buffer we need to get the info
                     int bytesNeeded = 0;
                     int numEnumerated = 0;
-                    bool result = Interop.Advapi32.EnumDependentServices(
-                        serviceHandle,
-                        Interop.Advapi32.ServiceState.SERVICE_STATE_ALL,
-                        IntPtr.Zero,
-                        0,
-                        ref bytesNeeded,
-                        ref numEnumerated
-                    );
+                    bool result = Interop.Advapi32
+                        .EnumDependentServices(
+                            serviceHandle,
+                            Interop.Advapi32.ServiceState.SERVICE_STATE_ALL,
+                            IntPtr.Zero,
+                            0,
+                            ref bytesNeeded,
+                            ref numEnumerated
+                        );
                     if (result)
                     {
                         _dependentServices = Array.Empty<ServiceController>();
@@ -207,14 +208,15 @@ namespace System.ServiceProcess
                     try
                     {
                         // get all the info
-                        result = Interop.Advapi32.EnumDependentServices(
-                            serviceHandle,
-                            Interop.Advapi32.ServiceState.SERVICE_STATE_ALL,
-                            enumBuffer,
-                            bytesNeeded,
-                            ref bytesNeeded,
-                            ref numEnumerated
-                        );
+                        result = Interop.Advapi32
+                            .EnumDependentServices(
+                                serviceHandle,
+                                Interop.Advapi32.ServiceState.SERVICE_STATE_ALL,
+                                enumBuffer,
+                                bytesNeeded,
+                                ref bytesNeeded,
+                                ref numEnumerated
+                            );
                         if (!result)
                             throw new Win32Exception();
 
@@ -315,12 +317,8 @@ namespace System.ServiceProcess
                 using var serviceHandle = GetServiceHandle(
                     Interop.Advapi32.ServiceOptions.SERVICE_QUERY_CONFIG
                 );
-                bool success = Interop.Advapi32.QueryServiceConfig(
-                    serviceHandle,
-                    IntPtr.Zero,
-                    0,
-                    out int bytesNeeded
-                );
+                bool success = Interop.Advapi32
+                    .QueryServiceConfig(serviceHandle, IntPtr.Zero, 0, out int bytesNeeded);
                 if (success)
                 {
                     _servicesDependedOn = Array.Empty<ServiceController>();
@@ -335,12 +333,8 @@ namespace System.ServiceProcess
                 IntPtr bufPtr = Marshal.AllocHGlobal((IntPtr)bytesNeeded);
                 try
                 {
-                    success = Interop.Advapi32.QueryServiceConfig(
-                        serviceHandle,
-                        bufPtr,
-                        bytesNeeded,
-                        out bytesNeeded
-                    );
+                    success = Interop.Advapi32
+                        .QueryServiceConfig(serviceHandle, bufPtr, bytesNeeded, out bytesNeeded);
                     if (!success)
                         throw new Win32Exception(Marshal.GetLastWin32Error());
 
@@ -425,12 +419,8 @@ namespace System.ServiceProcess
                 using var serviceHandle = GetServiceHandle(
                     Interop.Advapi32.ServiceOptions.SERVICE_QUERY_CONFIG
                 );
-                bool success = Interop.Advapi32.QueryServiceConfig(
-                    serviceHandle,
-                    IntPtr.Zero,
-                    0,
-                    out int bytesNeeded
-                );
+                bool success = Interop.Advapi32
+                    .QueryServiceConfig(serviceHandle, IntPtr.Zero, 0, out int bytesNeeded);
 
                 int lastError = Marshal.GetLastWin32Error();
                 if (lastError != Interop.Errors.ERROR_INSUFFICIENT_BUFFER)
@@ -440,12 +430,8 @@ namespace System.ServiceProcess
                 IntPtr bufPtr = Marshal.AllocHGlobal((IntPtr)bytesNeeded);
                 try
                 {
-                    success = Interop.Advapi32.QueryServiceConfig(
-                        serviceHandle,
-                        bufPtr,
-                        bytesNeeded,
-                        out bytesNeeded
-                    );
+                    success = Interop.Advapi32
+                        .QueryServiceConfig(serviceHandle, bufPtr, bytesNeeded, out bytesNeeded);
                     if (!success)
                         throw new Win32Exception(Marshal.GetLastWin32Error());
 
@@ -643,12 +629,8 @@ namespace System.ServiceProcess
                 fixed (char* c = builder)
                 {
                     if (
-                        Interop.Advapi32.GetServiceKeyName(
-                            SCMHandle,
-                            serviceDisplayName,
-                            c,
-                            ref bufLen
-                        )
+                        Interop.Advapi32
+                            .GetServiceKeyName(SCMHandle, serviceDisplayName, c, ref bufLen)
                     )
                         break;
                 }
@@ -687,12 +669,8 @@ namespace System.ServiceProcess
                 fixed (char* c = builder)
                 {
                     if (
-                        Interop.Advapi32.GetServiceDisplayName(
-                            scmHandle,
-                            serviceName,
-                            c,
-                            ref bufLen
-                        )
+                        Interop.Advapi32
+                            .GetServiceDisplayName(scmHandle, serviceName, c, ref bufLen)
                     )
                         break;
                 }
@@ -884,18 +862,19 @@ namespace System.ServiceProcess
                 machineName,
                 Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ENUMERATE_SERVICE
             );
-            Interop.Advapi32.EnumServicesStatusEx(
-                databaseHandle,
-                Interop.Advapi32.ServiceControllerOptions.SC_ENUM_PROCESS_INFO,
-                serviceType,
-                Interop.Advapi32.StatusOptions.STATUS_ALL,
-                IntPtr.Zero,
-                0,
-                out int bytesNeeded,
-                out int servicesReturned,
-                ref resumeHandle,
-                group
-            );
+            Interop.Advapi32
+                .EnumServicesStatusEx(
+                    databaseHandle,
+                    Interop.Advapi32.ServiceControllerOptions.SC_ENUM_PROCESS_INFO,
+                    serviceType,
+                    Interop.Advapi32.StatusOptions.STATUS_ALL,
+                    IntPtr.Zero,
+                    0,
+                    out int bytesNeeded,
+                    out int servicesReturned,
+                    ref resumeHandle,
+                    group
+                );
 
             IntPtr memory = Marshal.AllocHGlobal((IntPtr)bytesNeeded);
             try
@@ -903,18 +882,19 @@ namespace System.ServiceProcess
                 //
                 // Get the set of services
                 //
-                Interop.Advapi32.EnumServicesStatusEx(
-                    databaseHandle,
-                    Interop.Advapi32.ServiceControllerOptions.SC_ENUM_PROCESS_INFO,
-                    serviceType,
-                    Interop.Advapi32.StatusOptions.STATUS_ALL,
-                    memory,
-                    bytesNeeded,
-                    out bytesNeeded,
-                    out servicesReturned,
-                    ref resumeHandle,
-                    group
-                );
+                Interop.Advapi32
+                    .EnumServicesStatusEx(
+                        databaseHandle,
+                        Interop.Advapi32.ServiceControllerOptions.SC_ENUM_PROCESS_INFO,
+                        serviceType,
+                        Interop.Advapi32.StatusOptions.STATUS_ALL,
+                        memory,
+                        bytesNeeded,
+                        out bytesNeeded,
+                        out servicesReturned,
+                        ref resumeHandle,
+                        group
+                    );
 
                 //
                 // Go through the block of memory it returned to us and select the results
@@ -950,11 +930,12 @@ namespace System.ServiceProcess
                 Interop.Advapi32.ServiceOptions.SERVICE_PAUSE_CONTINUE
             );
             Interop.Advapi32.SERVICE_STATUS status = default;
-            bool result = Interop.Advapi32.ControlService(
-                serviceHandle,
-                Interop.Advapi32.ControlOptions.CONTROL_PAUSE,
-                &status
-            );
+            bool result = Interop.Advapi32
+                .ControlService(
+                    serviceHandle,
+                    Interop.Advapi32.ControlOptions.CONTROL_PAUSE,
+                    &status
+                );
 
             if (!result)
             {
@@ -975,11 +956,12 @@ namespace System.ServiceProcess
                 Interop.Advapi32.ServiceOptions.SERVICE_PAUSE_CONTINUE
             );
             Interop.Advapi32.SERVICE_STATUS status = default;
-            bool result = Interop.Advapi32.ControlService(
-                serviceHandle,
-                Interop.Advapi32.ControlOptions.CONTROL_CONTINUE,
-                &status
-            );
+            bool result = Interop.Advapi32
+                .ControlService(
+                    serviceHandle,
+                    Interop.Advapi32.ControlOptions.CONTROL_CONTINUE,
+                    &status
+                );
             if (!result)
             {
                 Exception inner = new Win32Exception(Marshal.GetLastWin32Error());
@@ -1064,11 +1046,8 @@ namespace System.ServiceProcess
             try
             {
                 argPtrsHandle = GCHandle.Alloc(argPtrs, GCHandleType.Pinned);
-                bool result = Interop.Advapi32.StartService(
-                    serviceHandle,
-                    args.Length,
-                    argPtrsHandle.AddrOfPinnedObject()
-                );
+                bool result = Interop.Advapi32
+                    .StartService(serviceHandle, args.Length, argPtrsHandle.AddrOfPinnedObject());
                 if (!result)
                 {
                     Exception inner = new Win32Exception(Marshal.GetLastWin32Error());
@@ -1115,11 +1094,12 @@ namespace System.ServiceProcess
             }
 
             Interop.Advapi32.SERVICE_STATUS status = default;
-            bool result = Interop.Advapi32.ControlService(
-                serviceHandle,
-                Interop.Advapi32.ControlOptions.CONTROL_STOP,
-                &status
-            );
+            bool result = Interop.Advapi32
+                .ControlService(
+                    serviceHandle,
+                    Interop.Advapi32.ControlOptions.CONTROL_STOP,
+                    &status
+                );
             if (!result)
             {
                 Exception inner = new Win32Exception(Marshal.GetLastWin32Error());

@@ -197,9 +197,9 @@ namespace Microsoft.CodeAnalysis.AddDebuggerDisplay
             }
 
             var newAttribute = generator.Attribute(
-                    generator.TypeExpression(debuggerAttributeTypeSymbol),
-                    new[] { attributeArgument }
-                )
+                generator.TypeExpression(debuggerAttributeTypeSymbol),
+                new[] { attributeArgument }
+            )
                 .WithAdditionalAnnotations(Simplifier.Annotation, Simplifier.AddImportsAnnotation);
 
             editor.AddAttribute(type, newAttribute);

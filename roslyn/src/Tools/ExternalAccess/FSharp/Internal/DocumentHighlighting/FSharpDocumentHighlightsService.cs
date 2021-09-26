@@ -81,11 +81,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.DocumentHighligh
         )
         {
             var highlights = await _service.GetDocumentHighlightsAsync(
-                    document,
-                    position,
-                    documentsToSearch,
-                    cancellationToken
-                )
+                document,
+                position,
+                documentsToSearch,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return highlights.SelectAsArray(
                 x => new DocumentHighlights(x.Document, MapHighlightSpans(x.HighlightSpans))

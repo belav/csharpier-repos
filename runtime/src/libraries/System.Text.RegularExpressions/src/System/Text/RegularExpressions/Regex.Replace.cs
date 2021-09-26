@@ -88,13 +88,13 @@ namespace System.Text.RegularExpressions
             // Gets the weakly cached replacement helper or creates one if there isn't one already,
             // then uses it to perform the replace.
             return RegexReplacement.GetOrCreate(
-                    _replref!,
-                    replacement,
-                    caps!,
-                    capsize,
-                    capnames!,
-                    roptions
-                )
+                _replref!,
+                replacement,
+                caps!,
+                capsize,
+                capnames!,
+                roptions
+            )
                 .Replace(this, input, count, startat);
         }
 
@@ -227,9 +227,8 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state.segments.Add(
-                            state.input.AsMemory(state.prevat, match.Index - state.prevat)
-                        );
+                        state.segments
+                            .Add(state.input.AsMemory(state.prevat, match.Index - state.prevat));
                         state.prevat = match.Index + match.Length;
                         state.segments.Add(state.evaluator(match).AsMemory());
                         return --state.count != 0;
@@ -257,12 +256,14 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state.segments.Add(
-                            state.input.AsMemory(
-                                match.Index + match.Length,
-                                state.prevat - match.Index - match.Length
-                            )
-                        );
+                        state.segments
+                            .Add(
+                                state.input
+                                    .AsMemory(
+                                        match.Index + match.Length,
+                                        state.prevat - match.Index - match.Length
+                                    )
+                            );
                         state.prevat = match.Index;
                         state.segments.Add(state.evaluator(match).AsMemory());
                         return --state.count != 0;

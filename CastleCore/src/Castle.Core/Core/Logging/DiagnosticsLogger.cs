@@ -114,26 +114,28 @@ namespace Castle.Core.Logging
 
             if (exception == null)
             {
-                contentToLog = string.Format(
-                    CultureInfo.CurrentCulture,
-                    "[{0}] '{1}' message: {2}",
-                    loggerLevel,
-                    loggerName,
-                    message
-                );
+                contentToLog = string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "[{0}] '{1}' message: {2}",
+                        loggerLevel,
+                        loggerName,
+                        message
+                    );
             }
             else
             {
-                contentToLog = string.Format(
-                    CultureInfo.CurrentCulture,
-                    "[{0}] '{1}' message: {2} exception: {3} {4} {5}",
-                    loggerLevel,
-                    loggerName,
-                    message,
-                    exception.GetType(),
-                    exception.Message,
-                    exception.StackTrace
-                );
+                contentToLog = string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "[{0}] '{1}' message: {2} exception: {3} {4} {5}",
+                        loggerLevel,
+                        loggerName,
+                        message,
+                        exception.GetType(),
+                        exception.Message,
+                        exception.StackTrace
+                    );
             }
 
             eventLog.WriteEntry(contentToLog, type);

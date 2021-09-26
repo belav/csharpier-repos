@@ -74,39 +74,32 @@ namespace Microsoft.AspNetCore.Tests
         [Fact]
         public async Task WebHostConfiguration_EnablesForwardedHeadersFromConfig()
         {
-            using var host = WebHost.CreateDefaultBuilder()
-                .ConfigureAppConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new[]
-                            {
-                                new KeyValuePair<string, string>(
-                                    "FORWARDEDHEADERS_ENABLED",
-                                    "true"
-                                ),
-                            }
-                        );
-                    }
-                )
-                .UseTestServer()
-                .Configure(
-                    app =>
-                    {
-                        Assert.True(
-                            app.Properties.ContainsKey("ForwardedHeadersAdded"),
-                            "Forwarded Headers"
-                        );
-                        app.Run(
-                            context =>
-                            {
-                                Assert.Equal("https", context.Request.Scheme);
-                                return Task.CompletedTask;
-                            }
-                        );
-                    }
-                )
-                .Build();
+            using var host = WebHost.CreateDefaultBuilder().ConfigureAppConfiguration(
+                configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new[]
+                        {
+                            new KeyValuePair<string, string>("FORWARDEDHEADERS_ENABLED", "true"),
+                        }
+                    );
+                }
+            ).UseTestServer().Configure(
+                app =>
+                {
+                    Assert.True(
+                        app.Properties.ContainsKey("ForwardedHeadersAdded"),
+                        "Forwarded Headers"
+                    );
+                    app.Run(
+                        context =>
+                        {
+                            Assert.Equal("https", context.Request.Scheme);
+                            return Task.CompletedTask;
+                        }
+                    );
+                }
+            ).Build();
 
             await host.StartAsync();
             var client = host.GetTestClient();

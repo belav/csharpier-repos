@@ -61,9 +61,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                 new AuthorizeAttribute("2") { AuthenticationSchemes = "dupe" }
             };
             var options = new AuthorizationOptions();
-            options.DefaultPolicy = new AuthorizationPolicyBuilder("default").RequireClaim(
-                    "default"
-                )
+            options.DefaultPolicy = new AuthorizationPolicyBuilder("default")
+                .RequireClaim("default")
                 .Build();
             options.AddPolicy("2", policy => policy.RequireClaim("2"));
 
@@ -100,8 +99,9 @@ namespace Microsoft.AspNetCore.Authorization.Test
 
             // Assert
             Assert.Contains(combined.Requirements, r => r is RolesAuthorizationRequirement);
-            var rolesAuthorizationRequirement =
-                combined.Requirements.OfType<RolesAuthorizationRequirement>().First();
+            var rolesAuthorizationRequirement = combined.Requirements
+                .OfType<RolesAuthorizationRequirement>()
+                .First();
             Assert.Equal(2, rolesAuthorizationRequirement.AllowedRoles.Count());
             Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r1"));
             Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r2"));
@@ -165,8 +165,9 @@ namespace Microsoft.AspNetCore.Authorization.Test
 
             // Assert
             Assert.Contains(combined.Requirements, r => r is RolesAuthorizationRequirement);
-            var rolesAuthorizationRequirement =
-                combined.Requirements.OfType<RolesAuthorizationRequirement>().First();
+            var rolesAuthorizationRequirement = combined.Requirements
+                .OfType<RolesAuthorizationRequirement>()
+                .First();
             Assert.Equal(2, rolesAuthorizationRequirement.AllowedRoles.Count());
             Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r1"));
             Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r2"));

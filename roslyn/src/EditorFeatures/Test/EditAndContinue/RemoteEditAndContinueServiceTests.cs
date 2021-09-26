@@ -53,9 +53,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
         [Theory, CombinatorialData]
         public async Task Proxy(TestHost testHost)
         {
-            var localComposition = EditorTestCompositions.EditorFeatures.WithTestHostParts(
-                testHost
-            );
+            var localComposition = EditorTestCompositions.EditorFeatures
+                .WithTestHostParts(testHost);
             if (testHost == TestHost.InProcess)
             {
                 localComposition = localComposition.AddParts(typeof(MockEncServiceFactory));
@@ -64,14 +63,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             using var localWorkspace = new TestWorkspace(composition: localComposition);
 
             MockEditAndContinueWorkspaceService mockEncService;
-            var clientProvider =
-                (InProcRemoteHostClientProvider?)localWorkspace.Services.GetService<IRemoteHostClientProvider>();
+            var clientProvider = (InProcRemoteHostClientProvider?)localWorkspace.Services
+                .GetService<IRemoteHostClientProvider>();
             if (testHost == TestHost.InProcess)
             {
                 Assert.Null(clientProvider);
 
-                mockEncService =
-                    (MockEditAndContinueWorkspaceService)localWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
+                mockEncService = (MockEditAndContinueWorkspaceService)localWorkspace.Services
+                    .GetRequiredService<IEditAndContinueWorkspaceService>();
             }
             else
             {
@@ -81,12 +80,13 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 var client = await InProcRemoteHostClient.GetTestClientAsync(localWorkspace)
                     .ConfigureAwait(false);
                 var remoteWorkspace = client.TestData.WorkspaceManager.GetWorkspace();
-                mockEncService =
-                    (MockEditAndContinueWorkspaceService)remoteWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
+                mockEncService = (MockEditAndContinueWorkspaceService)remoteWorkspace.Services
+                    .GetRequiredService<IEditAndContinueWorkspaceService>();
             }
 
             localWorkspace.ChangeSolution(
-                localWorkspace.CurrentSolution.AddProject("proj", "proj", LanguageNames.CSharp)
+                localWorkspace.CurrentSolution
+                    .AddProject("proj", "proj", LanguageNames.CSharp)
                     .AddMetadataReferences(
                         TargetFrameworkUtil.GetReferences(TargetFramework.Mscorlib40)
                     )
@@ -177,19 +177,19 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             };
 
             await proxy.StartDebuggingSessionAsync(
-                    localWorkspace.CurrentSolution,
-                    debuggerService: new MockManagedEditAndContinueDebuggerService()
-                    {
-                        IsEditAndContinueAvailable = _ =>
-                            new ManagedEditAndContinueAvailability(
-                                ManagedEditAndContinueAvailabilityStatus.NotAllowedForModule,
-                                "can't do enc"
-                            ),
-                        GetActiveStatementsImpl = () => ImmutableArray.Create(as1)
-                    },
-                    captureMatchingDocuments: false,
-                    CancellationToken.None
-                )
+                localWorkspace.CurrentSolution,
+                debuggerService: new MockManagedEditAndContinueDebuggerService()
+                {
+                    IsEditAndContinueAvailable = _ =>
+                        new ManagedEditAndContinueAvailability(
+                            ManagedEditAndContinueAvailabilityStatus.NotAllowedForModule,
+                            "can't do enc"
+                        ),
+                    GetActiveStatementsImpl = () => ImmutableArray.Create(as1)
+                },
+                captureMatchingDocuments: false,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
 
             Assert.True(called);
@@ -208,19 +208,17 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             VerifyReanalyzeInvocation(ImmutableArray.Create(document.Id));
 
             var activeStatement = (
-                await remoteDebuggeeModuleMetadataProvider!.GetActiveStatementsAsync(
-                        CancellationToken.None
-                    )
+                await remoteDebuggeeModuleMetadataProvider!
+                    .GetActiveStatementsAsync(CancellationToken.None)
                     .ConfigureAwait(false)
-            ).Single();
+            )
+                .Single();
             Assert.Equal(as1.ActiveInstruction, activeStatement.ActiveInstruction);
             Assert.Equal(as1.SourceSpan, activeStatement.SourceSpan);
             Assert.Equal(as1.Flags, activeStatement.Flags);
 
-            var availability = await remoteDebuggeeModuleMetadataProvider!.GetAvailabilityAsync(
-                    moduleId1,
-                    CancellationToken.None
-                )
+            var availability = await remoteDebuggeeModuleMetadataProvider!
+                .GetAvailabilityAsync(moduleId1, CancellationToken.None)
                 .ConfigureAwait(false);
             Assert.Equal(
                 new ManagedEditAndContinueAvailability(
@@ -240,10 +238,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             };
 
             await proxy.EndDebuggingSessionAsync(
-                    diagnosticUpdateSource,
-                    mockDiagnosticService,
-                    CancellationToken.None
-                )
+                diagnosticUpdateSource,
+                mockDiagnosticService,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
             VerifyReanalyzeInvocation(ImmutableArray.Create(document.Id));
             Assert.Equal(1, emitDiagnosticsClearedCount);
@@ -269,11 +267,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
 
             Assert.True(
                 await proxy.HasChangesAsync(
-                        localWorkspace.CurrentSolution,
-                        solutionActiveStatementSpanProvider,
-                        "test.cs",
-                        CancellationToken.None
-                    )
+                    localWorkspace.CurrentSolution,
+                    solutionActiveStatementSpanProvider,
+                    "test.cs",
+                    CancellationToken.None
+                )
                     .ConfigureAwait(false)
             );
 
@@ -316,7 +314,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                     )
                 );
 
-                var syntaxTree = project.Documents.Single()
+                var syntaxTree = project.Documents
+                    .Single()
                     .GetSyntaxTreeSynchronously(CancellationToken.None)!;
 
                 var documentDiagnostic = Diagnostic.Create(
@@ -342,12 +341,12 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             };
 
             var (updates, _, _) = await proxy.EmitSolutionUpdateAsync(
-                    localWorkspace.CurrentSolution,
-                    solutionActiveStatementSpanProvider,
-                    mockDiagnosticService,
-                    diagnosticUpdateSource,
-                    CancellationToken.None
-                )
+                localWorkspace.CurrentSolution,
+                solutionActiveStatementSpanProvider,
+                mockDiagnosticService,
+                diagnosticUpdateSource,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
             VerifyReanalyzeInvocation(ImmutableArray.Create(document1.Id));
 
@@ -366,9 +365,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                     update =>
                     {
                         var d = update.GetPushDiagnostics(
-                                localWorkspace,
-                                InternalDiagnosticsOptions.NormalDiagnosticMode
-                            )
+                            localWorkspace,
+                            InternalDiagnosticsOptions.NormalDiagnosticMode
+                        )
                             .Single();
                         return $"[{d.ProjectId}] {d.Severity} {d.Id}:"
                             + (
@@ -438,11 +437,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             Assert.Equal(
                 span1,
                 await proxy.GetCurrentActiveStatementPositionAsync(
-                        localWorkspace.CurrentSolution,
-                        solutionActiveStatementSpanProvider,
-                        instructionId1,
-                        CancellationToken.None
-                    )
+                    localWorkspace.CurrentSolution,
+                    solutionActiveStatementSpanProvider,
+                    instructionId1,
+                    CancellationToken.None
+                )
                     .ConfigureAwait(false)
             );
 
@@ -456,10 +455,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
 
             Assert.True(
                 await proxy.IsActiveStatementInExceptionRegionAsync(
-                        localWorkspace.CurrentSolution,
-                        instructionId1,
-                        CancellationToken.None
-                    )
+                    localWorkspace.CurrentSolution,
+                    instructionId1,
+                    CancellationToken.None
+                )
                     .ConfigureAwait(false)
             );
 
@@ -480,10 +479,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             };
 
             var baseActiveSpans = await proxy.GetBaseActiveStatementSpansAsync(
-                    localWorkspace.CurrentSolution,
-                    ImmutableArray.Create(document1.Id),
-                    CancellationToken.None
-                )
+                localWorkspace.CurrentSolution,
+                ImmutableArray.Create(document1.Id),
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
             Assert.Equal(
                 (
@@ -514,10 +513,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             };
 
             var documentActiveSpans = await proxy.GetAdjustedActiveStatementSpansAsync(
-                    document1,
-                    documentActiveStatementSpanProvider,
-                    CancellationToken.None
-                )
+                document1,
+                documentActiveStatementSpanProvider,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
             Assert.Equal(
                 (
@@ -532,10 +531,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             mockEncService.GetAdjustedActiveStatementSpansImpl = (document, _) => default;
 
             documentActiveSpans = await proxy.GetAdjustedActiveStatementSpansAsync(
-                    document1,
-                    documentActiveStatementSpanProvider,
-                    CancellationToken.None
-                )
+                document1,
+                documentActiveStatementSpanProvider,
+                CancellationToken.None
+            )
                 .ConfigureAwait(false);
             Assert.True(documentActiveSpans.IsDefault);
 

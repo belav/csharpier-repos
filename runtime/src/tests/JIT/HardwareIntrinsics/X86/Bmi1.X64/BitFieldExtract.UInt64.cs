@@ -119,10 +119,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Bmi1.X64.BitFieldExtract(
-                Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
-                Unsafe.ReadUnaligned<UInt16>(ref Unsafe.As<UInt16, byte>(ref _data2))
-            );
+            var result = Bmi1.X64
+                .BitFieldExtract(
+                    Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
+                    Unsafe.ReadUnaligned<UInt16>(ref Unsafe.As<UInt16, byte>(ref _data2))
+                );
 
             ValidateResult(_data1, _data2, result);
         }
@@ -131,7 +132,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi1.X64).GetMethod(
+            var result = typeof(Bmi1.X64)
+                .GetMethod(
                     nameof(Bmi1.X64.BitFieldExtract),
                     new Type[] { typeof(UInt64), typeof(UInt16) }
                 )
@@ -238,9 +240,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.BitFieldExtract)}<UInt64>(UInt64, UInt16): BitFieldExtract failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.BitFieldExtract)}<UInt64>(UInt64, UInt16): BitFieldExtract failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

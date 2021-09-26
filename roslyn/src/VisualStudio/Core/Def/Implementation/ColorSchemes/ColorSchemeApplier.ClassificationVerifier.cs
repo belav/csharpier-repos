@@ -53,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                     [ClassificationTypeNames.Identifier] = DarkThemeIdentifier,
                     [ClassificationTypeNames.Keyword] = DarkThemeKeyword,
                     [ClassificationTypeNames.Operator] = DarkThemeOperator,
-                }.ToImmutableDictionary();
+                }
+                    .ToImmutableDictionary();
 
             // Light, Blue, or AdditionalContrast Theme Core Classifications
             private static ImmutableDictionary<string, uint> BlueLightThemeForeground =>
@@ -63,7 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                     [ClassificationTypeNames.Identifier] = LightThemeIdentifier,
                     [ClassificationTypeNames.Keyword] = LightThemeKeyword,
                     [ClassificationTypeNames.Operator] = LightThemeOperator,
-                }.ToImmutableDictionary();
+                }
+                    .ToImmutableDictionary();
 
             // The High Contrast theme is not included because we do not want to make changes when the user is in High Contrast mode.
 
@@ -83,25 +85,25 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 _colorSchemes = colorSchemes.ToImmutableDictionary(
                     nameAndScheme => nameAndScheme.Key,
                     nameAndScheme =>
-                        nameAndScheme.Value.Themes.ToImmutableDictionary(
-                            theme => theme.Guid,
-                            theme =>
-                                theme.Category.Colors.Where(color => color.Foreground.HasValue)
-                                    .ToImmutableDictionary(
-                                        color => color.Name,
-                                        color => color.Foreground!.Value
-                                    )
-                        )
+                        nameAndScheme.Value.Themes
+                            .ToImmutableDictionary(
+                                theme => theme.Guid,
+                                theme =>
+                                    theme.Category.Colors
+                                        .Where(color => color.Foreground.HasValue)
+                                        .ToImmutableDictionary(
+                                            color => color.Name,
+                                            color => color.Foreground!.Value
+                                        )
+                            )
                 );
 
                 // Gather all the classifications from the core and scheme dictionaries.
-                var coreClassifications = DarkThemeForeground.Keys.Concat(
-                        BlueLightThemeForeground.Keys
-                    )
+                var coreClassifications = DarkThemeForeground.Keys
+                    .Concat(BlueLightThemeForeground.Keys)
                     .Distinct();
-                var colorSchemeClassifications = _colorSchemes.Values.SelectMany(
-                        scheme => scheme.Values.SelectMany(theme => theme.Keys)
-                    )
+                var colorSchemeClassifications = _colorSchemes.Values
+                    .SelectMany(scheme => scheme.Values.SelectMany(theme => theme.Keys))
                     .Distinct();
                 Classifications = coreClassifications.Concat(colorSchemeClassifications)
                     .ToImmutableArray();

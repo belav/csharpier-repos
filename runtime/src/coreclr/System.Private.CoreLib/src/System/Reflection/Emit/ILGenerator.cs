@@ -161,11 +161,8 @@ namespace System.Reflection.Emit
             bool useMethodDef
         )
         {
-            return ((ModuleBuilder)m_methodBuilder.Module).GetMethodTokenInternal(
-                method,
-                optionalParameterTypes,
-                useMethodDef
-            );
+            return ((ModuleBuilder)m_methodBuilder.Module)
+                .GetMethodTokenInternal(method, optionalParameterTypes, useMethodDef);
         }
 
         internal SignatureHelper GetMemberRefSignature(
@@ -214,15 +211,16 @@ namespace System.Reflection.Emit
             int cGenericParameters
         )
         {
-            return ((ModuleBuilder)m_methodBuilder.Module).GetMemberRefSignature(
-                call,
-                returnType,
-                parameterTypes,
-                requiredCustomModifiers,
-                optionalCustomModifiers,
-                optionalParameterTypes,
-                cGenericParameters
-            );
+            return ((ModuleBuilder)m_methodBuilder.Module)
+                .GetMemberRefSignature(
+                    call,
+                    returnType,
+                    parameterTypes,
+                    requiredCustomModifiers,
+                    optionalCustomModifiers,
+                    optionalParameterTypes,
+                    cGenericParameters
+                );
         }
 
         internal byte[]? BakeByteArray()
@@ -1867,14 +1865,15 @@ namespace System.Reflection.Emit
             int i = FindDocument(document);
 
             Debug.Assert(i < m_DocumentCount, "Bad document look up!");
-            m_Documents[i].AddLineNumberInfo(
-                document,
-                iOffset,
-                iStartLine,
-                iStartColumn,
-                iEndLine,
-                iEndColumn
-            );
+            m_Documents[i]
+                .AddLineNumberInfo(
+                    document,
+                    iOffset,
+                    iStartLine,
+                    iStartColumn,
+                    iEndLine,
+                    iEndColumn
+                );
         }
 
         // Find a REDocument representing document. If we cannot find one, we will add a new entry into

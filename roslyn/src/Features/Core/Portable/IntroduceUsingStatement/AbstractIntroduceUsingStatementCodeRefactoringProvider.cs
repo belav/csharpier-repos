@@ -51,10 +51,10 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
         {
             var (document, span, cancellationToken) = context;
             var declarationSyntax = await FindDisposableLocalDeclarationAsync(
-                    document,
-                    span,
-                    cancellationToken
-                )
+                document,
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             if (declarationSyntax != null)
@@ -81,9 +81,9 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
         )
         {
             var declarationSyntax = await document.TryGetRelevantNodeAsync<TLocalDeclarationSyntax>(
-                    selection,
-                    cancellationToken
-                )
+                selection,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (
                 declarationSyntax is null
@@ -96,9 +96,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var disposableType = semanticModel.Compilation.GetSpecialType(
-                SpecialType.System_IDisposable
-            );
+            var disposableType = semanticModel.Compilation
+                .GetSpecialType(SpecialType.System_IDisposable);
             if (disposableType is null)
             {
                 return null;
@@ -187,10 +186,10 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             );
 
             var usingStatement = CreateUsingStatement(
-                    declarationStatement,
-                    sameLine,
-                    statementsToSurround
-                )
+                declarationStatement,
+                sameLine,
+                statementsToSurround
+            )
                 .WithLeadingTrivia(declarationStatement.GetLeadingTrivia())
                 .WithTrailingTrivia(endOfLine);
 
@@ -298,7 +297,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             // the last variable usage index to include the local's last usage.
 
             // Take all the statements starting with the trigger variable's declaration.
-            var statementsFromDeclarationToEnd = declarationSyntax.Parent.ChildNodesAndTokens()
+            var statementsFromDeclarationToEnd = declarationSyntax.Parent
+                .ChildNodesAndTokens()
                 .Select(nodeOrToken => nodeOrToken.AsNode())
                 .OfType<TStatementSyntax>()
                 .SkipWhile(node => node != declarationSyntax)
@@ -308,12 +308,10 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             using var _0 = ArrayBuilder<ISymbol>.GetInstance(out var localVariables);
 
             // Map a symbol to an index into the statementsFromDeclarationToEnd array.
-            using var _1 = PooledDictionary<ISymbol, int>.GetInstance(
-                out var variableDeclarationIndex
-            );
-            using var _2 = PooledDictionary<ISymbol, int>.GetInstance(
-                out var lastVariableUsageIndex
-            );
+            using var _1 = PooledDictionary<ISymbol, int>
+                .GetInstance(out var variableDeclarationIndex);
+            using var _2 = PooledDictionary<ISymbol, int>
+                .GetInstance(out var lastVariableUsageIndex);
 
             // Loop through the statements from the trigger declaration to the end of the containing body.
             // By starting with the trigger declaration it will add the trigger variable to the list of

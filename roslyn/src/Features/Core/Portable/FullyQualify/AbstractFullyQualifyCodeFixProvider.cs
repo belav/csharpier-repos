@@ -70,18 +70,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
                     .ConfigureAwait(false);
 
                 var matchingTypes = await GetMatchingTypesAsync(
-                        project,
-                        semanticModel,
-                        node,
-                        cancellationToken
-                    )
+                    project,
+                    semanticModel,
+                    node,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var matchingNamespaces = await GetMatchingNamespacesAsync(
-                        project,
-                        semanticModel,
-                        node,
-                        cancellationToken
-                    )
+                    project,
+                    semanticModel,
+                    node,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (matchingTypes.IsEmpty && matchingNamespaces.IsEmpty)
@@ -109,10 +109,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
                     // so as to not clutter the list.
                     context.RegisterCodeFix(
                         new GroupingCodeAction(
-                            string.Format(
-                                FeaturesResources.Fully_qualify_0,
-                                GetNodeName(document, node)
-                            ),
+                            string
+                                .Format(
+                                    FeaturesResources.Fully_qualify_0,
+                                    GetNodeName(document, node)
+                                ),
                             codeActions
                         ),
                         context.Diagnostics
@@ -193,11 +194,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             );
 
             var newRoot = await ReplaceNodeAsync(
-                    node,
-                    containerName,
-                    originalSymbol.IsType,
-                    cancellationToken
-                )
+                node,
+                containerName,
+                originalSymbol.IsType,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return document.WithSyntaxRoot(newRoot);
         }
@@ -217,11 +218,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             var looksGeneric = syntaxFacts.LooksGeneric(node);
 
             var symbols = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                    project,
-                    SearchQuery.Create(name, IgnoreCase),
-                    SymbolFilter.Type,
-                    cancellationToken
-                )
+                project,
+                SearchQuery.Create(name, IgnoreCase),
+                SymbolFilter.Type,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // also lookup type symbols with the "Attribute" suffix.
@@ -230,11 +231,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             {
                 var attributeSymbols =
                     await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                            project,
-                            SearchQuery.Create(name + "Attribute", IgnoreCase),
-                            SymbolFilter.Type,
-                            cancellationToken
-                        )
+                        project,
+                        SearchQuery.Create(name + "Attribute", IgnoreCase),
+                        SymbolFilter.Type,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 symbols = symbols.Concat(attributeSymbols);
             }
@@ -334,11 +335,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             }
 
             var symbols = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                    project,
-                    SearchQuery.Create(name, IgnoreCase),
-                    SymbolFilter.Namespace,
-                    cancellationToken
-                )
+                project,
+                SearchQuery.Create(name, IgnoreCase),
+                SymbolFilter.Namespace,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             // There might be multiple namespaces that this name will resolve successfully in.

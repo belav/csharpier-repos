@@ -85,12 +85,13 @@ namespace System.Net
                     // Loosely validate the port just to make sure it was a port and not something else
                     ushort portValue;
                     if (
-                        !ushort.TryParse(
-                            port,
-                            NumberStyles.Integer,
-                            CultureInfo.InvariantCulture,
-                            out portValue
-                        )
+                        !ushort
+                            .TryParse(
+                                port,
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out portValue
+                            )
                     )
                     {
                         return inputServiceName;

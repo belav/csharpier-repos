@@ -502,10 +502,9 @@ class Test
 }
 ";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(text);
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       95 (0x5f)
   .maxstack  3
@@ -549,7 +548,7 @@ class Test
   IL_005e:  ret
 }
 "
-                );
+            );
         }
 
         [Fact]
@@ -574,10 +573,9 @@ partial class Test
 }
 ";
 
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       36 (0x24)
   .maxstack  2
@@ -606,7 +604,7 @@ partial class Test
   }
   IL_0023:  ret
 }"
-                );
+            );
         }
 
         [Fact]
@@ -687,10 +685,9 @@ public static partial class Extensions
 }
 ";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(text);
-            CompileAndVerify(compilation)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(compilation).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       72 (0x48)
   .maxstack  2
@@ -745,7 +742,7 @@ public static partial class Extensions
   }
   IL_0047:  ret
 }"
-                );
+            );
         }
 
         // Anonymous types can appear in lock statements
@@ -765,10 +762,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -795,7 +791,7 @@ class Test
   }
   IL_001c:  ret
 }"
-                );
+            );
         }
 
         [Fact()]
@@ -814,10 +810,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  2
@@ -845,7 +840,7 @@ class Test
   }
   IL_001e:  ret
 }"
-                );
+            );
         }
 
         [Fact()]
@@ -864,10 +859,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -896,7 +890,7 @@ class Test
   }
   IL_0027:  ret
 }"
-                );
+            );
         }
 
         [Fact()]
@@ -914,10 +908,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -945,7 +938,7 @@ class Test
   }
   IL_0021:  ret
 }"
-                );
+            );
         }
 
         [Fact()]
@@ -964,10 +957,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -995,7 +987,7 @@ class Test
   }
   IL_0021:  ret
 }"
-                );
+            );
         }
 
         [Fact()]
@@ -1016,10 +1008,9 @@ public class Test
 struct S
 { }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  2
@@ -1048,7 +1039,7 @@ struct S
   }
   IL_0026:  ret
 }"
-                );
+            );
         }
 
         [Fact()]
@@ -1066,10 +1057,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -1096,7 +1086,7 @@ class Test
   }
   IL_001c:  ret
 }"
-                );
+            );
         }
 
         [Fact()]
@@ -1118,10 +1108,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       60 (0x3c)
   .maxstack  2
@@ -1169,7 +1158,7 @@ class Test
   }
   IL_003b:  ret
 }"
-                );
+            );
         }
 
         [Fact()]
@@ -1191,10 +1180,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.goo",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.goo",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  2
@@ -1243,7 +1231,7 @@ class Test
   }
   IL_0038:  ret
 }"
-                );
+            );
         }
 
         //	Yield return inside a lock statement
@@ -1269,10 +1257,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Values",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Values",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  3
@@ -1283,7 +1270,7 @@ class Test
   IL_0009:  stfld      ""Test Test.<Values>d__2.<>4__this""
   IL_000e:  ret
 }"
-                );
+            );
         }
 
         [Fact()]
@@ -1326,10 +1313,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -1368,7 +1354,7 @@ class Test
   }
   IL_0030:  ret
 }"
-                );
+            );
         }
 
         // The definite assignment state of v on the control flow transfer to embedded-statement is the same as the state of v at the end of expr
@@ -1389,10 +1375,9 @@ class Test
     }
 }
 ";
-            CompileAndVerify(text)
-                .VerifyIL(
-                    "Test.Main",
-                    @"
+            CompileAndVerify(text).VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       37 (0x25)
   .maxstack  2
@@ -1424,7 +1409,7 @@ class Test
   }
   IL_0024:  ret
 }"
-                );
+            );
         }
 
         #endregion 4.0 codegen
@@ -2076,14 +2061,12 @@ class C1
                 // (6,9): error CS0656: Missing compiler required member 'System.Threading.Monitor.Enter'
                 //         lock (typeof(C1))
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"lock (typeof(C1))
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"lock (typeof(C1))
         {
             System.Console.WriteLine(""Inside lock."");
         }"
-                    )
-                    .WithArguments("System.Threading.Monitor", "Enter")
-                    .WithLocation(6, 9)
+                ).WithArguments("System.Threading.Monitor", "Enter").WithLocation(6, 9)
             );
         }
 
@@ -2110,14 +2093,12 @@ class C1
                 // (6,9): error CS0656: Missing compiler required member 'System.Threading.Monitor.Exit'
                 //         lock (typeof(C1))
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"lock (typeof(C1))
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"lock (typeof(C1))
         {
             System.Console.WriteLine(""Inside lock."");
         }"
-                    )
-                    .WithArguments("System.Threading.Monitor", "Exit")
-                    .WithLocation(6, 9)
+                ).WithArguments("System.Threading.Monitor", "Exit").WithLocation(6, 9)
             );
         }
 
@@ -2146,25 +2127,21 @@ class C1
                 // (6,9): error CS0656: Missing compiler required member 'System.Threading.Monitor.Exit'
                 //         lock (typeof(C1))
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"lock (typeof(C1))
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"lock (typeof(C1))
         {
             System.Console.WriteLine(""Inside lock."");
         }"
-                    )
-                    .WithArguments("System.Threading.Monitor", "Exit")
-                    .WithLocation(6, 9),
+                ).WithArguments("System.Threading.Monitor", "Exit").WithLocation(6, 9),
                 // (6,9): error CS0656: Missing compiler required member 'System.Threading.Monitor.Enter'
                 //         lock (typeof(C1))
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"lock (typeof(C1))
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"lock (typeof(C1))
         {
             System.Console.WriteLine(""Inside lock."");
         }"
-                    )
-                    .WithArguments("System.Threading.Monitor", "Enter")
-                    .WithLocation(6, 9)
+                ).WithArguments("System.Threading.Monitor", "Enter").WithLocation(6, 9)
             );
         }
 
@@ -2191,25 +2168,21 @@ class C1
                 // (6,9): error CS0656: Missing compiler required member 'System.Threading.Monitor.Exit'
                 //         lock (typeof(C1))
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"lock (typeof(C1))
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"lock (typeof(C1))
         {
             System.Console.WriteLine(""Inside lock."");
         }"
-                    )
-                    .WithArguments("System.Threading.Monitor", "Exit")
-                    .WithLocation(6, 9),
+                ).WithArguments("System.Threading.Monitor", "Exit").WithLocation(6, 9),
                 // (6,9): error CS0656: Missing compiler required member 'System.Threading.Monitor.Enter'
                 //         lock (typeof(C1))
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        @"lock (typeof(C1))
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    @"lock (typeof(C1))
         {
             System.Console.WriteLine(""Inside lock."");
         }"
-                    )
-                    .WithArguments("System.Threading.Monitor", "Enter")
-                    .WithLocation(6, 9)
+                ).WithArguments("System.Threading.Monitor", "Enter").WithLocation(6, 9)
             );
         }
     }

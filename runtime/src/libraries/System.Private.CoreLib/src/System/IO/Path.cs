@@ -728,9 +728,8 @@ namespace System.IO
                         new Span<char>((char*)state.First, state.FirstLength).CopyTo(destination);
                         if (destination.Length != (state.FirstLength + state.SecondLength))
                             destination[state.FirstLength] = PathInternal.DirectorySeparatorChar;
-                        new Span<char>((char*)state.Second, state.SecondLength).CopyTo(
-                            destination.Slice(destination.Length - state.SecondLength)
-                        );
+                        new Span<char>((char*)state.Second, state.SecondLength)
+                            .CopyTo(destination.Slice(destination.Length - state.SecondLength));
                     }
                 );
             }
@@ -821,15 +820,15 @@ namespace System.IO
                         new Span<char>(state.First, state.FirstLength).CopyTo(destination);
                         if ((state.Separators & 0b1) != 0)
                             destination[state.FirstLength] = PathInternal.DirectorySeparatorChar;
-                        new Span<char>(state.Second, state.SecondLength).CopyTo(
-                            destination.Slice(state.FirstLength + (state.Separators & 0b1))
-                        );
+                        new Span<char>(state.Second, state.SecondLength)
+                            .CopyTo(
+                                destination.Slice(state.FirstLength + (state.Separators & 0b1))
+                            );
                         if ((state.Separators & 0b10) != 0)
                             destination[destination.Length - state.ThirdLength - 1] =
                                 PathInternal.DirectorySeparatorChar;
-                        new Span<char>(state.Third, state.ThirdLength).CopyTo(
-                            destination.Slice(destination.Length - state.ThirdLength)
-                        );
+                        new Span<char>(state.Third, state.ThirdLength)
+                            .CopyTo(destination.Slice(destination.Length - state.ThirdLength));
                     }
                 );
             }
@@ -939,21 +938,18 @@ namespace System.IO
                         int insertionPoint = state.FirstLength;
                         if ((state.Separators & 0b1) != 0)
                             destination[insertionPoint++] = PathInternal.DirectorySeparatorChar;
-                        new Span<char>(state.Second, state.SecondLength).CopyTo(
-                            destination.Slice(insertionPoint)
-                        );
+                        new Span<char>(state.Second, state.SecondLength)
+                            .CopyTo(destination.Slice(insertionPoint));
                         insertionPoint += state.SecondLength;
                         if ((state.Separators & 0b10) != 0)
                             destination[insertionPoint++] = PathInternal.DirectorySeparatorChar;
-                        new Span<char>(state.Third, state.ThirdLength).CopyTo(
-                            destination.Slice(insertionPoint)
-                        );
+                        new Span<char>(state.Third, state.ThirdLength)
+                            .CopyTo(destination.Slice(insertionPoint));
                         insertionPoint += state.ThirdLength;
                         if ((state.Separators & 0b100) != 0)
                             destination[insertionPoint++] = PathInternal.DirectorySeparatorChar;
-                        new Span<char>(state.Fourth, state.FourthLength).CopyTo(
-                            destination.Slice(insertionPoint)
-                        );
+                        new Span<char>(state.Fourth, state.FourthLength)
+                            .CopyTo(destination.Slice(insertionPoint));
                     }
                 );
             }

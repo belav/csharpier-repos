@@ -116,7 +116,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 );
             }
 
-            var leadingTrivia = openParenToken.LeadingTrivia.Concat(openParenToken.TrailingTrivia)
+            var leadingTrivia = openParenToken.LeadingTrivia
+                .Concat(openParenToken.TrailingTrivia)
                 .Where(t => !syntaxFacts.IsElastic(t))
                 .Concat(operand.GetLeadingTrivia());
 

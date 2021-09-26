@@ -59,9 +59,8 @@ namespace Microsoft.EntityFrameworkCore
         public void IsSqlServer_when_using_constructor()
         {
             using var context = new ProviderContext(
-                new DbContextOptionsBuilder().UseInternalServiceProvider(
-                        SqlServerFixture.DefaultServiceProvider
-                    )
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
                     .UseSqlServer("Database=Maltesers").Options
             );
             Assert.True(context.Database.IsSqlServer());
@@ -71,9 +70,8 @@ namespace Microsoft.EntityFrameworkCore
         public void IsSqlServer_in_OnModelCreating_when_using_constructor()
         {
             using var context = new ProviderOnModelContext(
-                new DbContextOptionsBuilder().UseInternalServiceProvider(
-                        SqlServerFixture.DefaultServiceProvider
-                    )
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
                     .UseSqlServer("Database=Maltesers").Options
             );
             var _ = context.Model; // Trigger context initialization
@@ -84,9 +82,8 @@ namespace Microsoft.EntityFrameworkCore
         public void IsSqlServer_in_constructor_when_using_constructor()
         {
             using var context = new ProviderConstructorContext(
-                new DbContextOptionsBuilder().UseInternalServiceProvider(
-                        SqlServerFixture.DefaultServiceProvider
-                    )
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
                     .UseSqlServer("Database=Maltesers").Options
             );
             var _ = context.Model; // Trigger context initialization
@@ -97,9 +94,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Cannot_use_IsSqlServer_in_OnConfiguring_with_constructor()
         {
             using var context = new ProviderUseInOnConfiguringContext(
-                new DbContextOptionsBuilder().UseInternalServiceProvider(
-                        SqlServerFixture.DefaultServiceProvider
-                    )
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
                     .UseSqlServer("Database=Maltesers").Options
             );
             Assert.Equal(
@@ -117,9 +113,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Not_IsSqlServer_when_using_different_provider()
         {
             using var context = new ProviderContext(
-                new DbContextOptionsBuilder().UseInternalServiceProvider(
-                        InMemoryFixture.DefaultServiceProvider
-                    )
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("Maltesers").Options
             );
             Assert.False(context.Database.IsSqlServer());

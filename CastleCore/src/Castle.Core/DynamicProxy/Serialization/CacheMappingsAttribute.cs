@@ -32,8 +32,8 @@ namespace Castle.DynamicProxy.Serialization
     [CLSCompliant(false)]
     public class CacheMappingsAttribute : Attribute
     {
-        private static readonly ConstructorInfo constructor =
-            typeof(CacheMappingsAttribute).GetConstructor(new[] { typeof(byte[]) });
+        private static readonly ConstructorInfo constructor = typeof(CacheMappingsAttribute)
+            .GetConstructor(new[] { typeof(byte[]) });
 
         private readonly byte[] serializedCacheMappings;
 

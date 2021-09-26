@@ -75,11 +75,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                     .WaitAndGetResult_CanCallOnBackground(cancellationToken);
 
                 var symbol =
-                    _peekableItem._symbolKey.Resolve(
-                        compilation,
-                        ignoreAssemblyKey: true,
-                        cancellationToken: cancellationToken
-                    ).Symbol;
+                    _peekableItem._symbolKey
+                        .Resolve(
+                            compilation,
+                            ignoreAssemblyKey: true,
+                            cancellationToken: cancellationToken
+                        ).Symbol;
                 if (symbol == null)
                 {
                     callback.ReportFailure(
@@ -93,14 +94,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 if (!sourceLocations.Any())
                 {
                     // It's a symbol from metadata, so we want to go produce it from metadata
-                    var declarationFile =
-                        _peekableItem._metadataAsSourceFileService.GetGeneratedFileAsync(
-                                project,
-                                symbol,
-                                allowDecompilation: false,
-                                cancellationToken
-                            )
-                            .WaitAndGetResult_CanCallOnBackground(cancellationToken);
+                    var declarationFile = _peekableItem._metadataAsSourceFileService
+                        .GetGeneratedFileAsync(
+                            project,
+                            symbol,
+                            allowDecompilation: false,
+                            cancellationToken
+                        )
+                        .WaitAndGetResult_CanCallOnBackground(cancellationToken);
                     var peekDisplayInfo = new PeekResultDisplayInfo(
                         declarationFile.DocumentTitle,
                         declarationFile.DocumentTitle,

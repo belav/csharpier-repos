@@ -16,9 +16,8 @@ namespace Microsoft.Win32.SafeHandles
         {
             get
             {
-                return SafeHandleCache<SafeX509ChainHandle>.GetInvalidHandle(
-                    () => new SafeX509ChainHandle()
-                );
+                return SafeHandleCache<SafeX509ChainHandle>
+                    .GetInvalidHandle(() => new SafeX509ChainHandle());
             }
         }
 

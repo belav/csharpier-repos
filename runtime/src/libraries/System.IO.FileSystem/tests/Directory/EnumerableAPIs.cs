@@ -134,10 +134,10 @@ namespace System.IO.Tests
         public override string[] GetEntries(string dirName, string searchPattern)
         {
             return Directory.EnumerateFileSystemEntries(
-                    dirName,
-                    searchPattern,
-                    SearchOption.TopDirectoryOnly
-                )
+                dirName,
+                searchPattern,
+                SearchOption.TopDirectoryOnly
+            )
                 .ToArray();
         }
 
@@ -163,10 +163,10 @@ namespace System.IO.Tests
         public override string[] GetEntries(string dirName, string searchPattern)
         {
             return Directory.EnumerateFileSystemEntries(
-                    dirName,
-                    searchPattern,
-                    SearchOption.AllDirectories
-                )
+                dirName,
+                searchPattern,
+                SearchOption.AllDirectories
+            )
                 .ToArray();
         }
 
@@ -216,10 +216,10 @@ namespace System.IO.Tests
         public override string[] GetEntries(string dirName, string searchPattern)
         {
             return Directory.EnumerateDirectories(
-                    dirName,
-                    searchPattern,
-                    SearchOption.TopDirectoryOnly
-                )
+                dirName,
+                searchPattern,
+                SearchOption.TopDirectoryOnly
+            )
                 .ToArray();
         }
 

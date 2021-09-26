@@ -49,10 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         )
         {
             // We want items in descending order. FindHierarchicalItems returns items in ascending order.
-            var importProjectItems = ProjectEngine.FileSystem.FindHierarchicalItems(
-                    projectItem.FilePath,
-                    ImportsFileName
-                )
+            var importProjectItems = ProjectEngine.FileSystem
+                .FindHierarchicalItems(projectItem.FilePath, ImportsFileName)
                 .Reverse();
             imports.AddRange(importProjectItems);
         }

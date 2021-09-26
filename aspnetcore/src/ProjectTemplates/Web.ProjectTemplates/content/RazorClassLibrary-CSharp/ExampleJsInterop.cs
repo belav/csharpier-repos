@@ -21,9 +21,9 @@ namespace Company.RazorClassLibrary1
                 new(
                     () =>
                         jsRuntime.InvokeAsync<IJSObjectReference>(
-                                "import",
-                                "./_content/Company.RazorClassLibrary1/exampleJsInterop.js"
-                            )
+                            "import",
+                            "./_content/Company.RazorClassLibrary1/exampleJsInterop.js"
+                        )
                             .AsTask()
                 );
         }

@@ -43,12 +43,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                TypeMap = TypeMap.Empty.WithConcatAlphaRename(
-                    containingMethod,
-                    this,
-                    out _typeParameters,
-                    out _constructedFromTypeParameters
-                );
+                TypeMap = TypeMap.Empty
+                    .WithConcatAlphaRename(
+                        containingMethod,
+                        this,
+                        out _typeParameters,
+                        out _constructedFromTypeParameters
+                    );
             }
         }
 
@@ -72,9 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool returnsVoid
         )
         {
-            var typeParameters = ArrayBuilder<TypeParameterSymbol>.GetInstance(
-                parameterCount + (returnsVoid ? 0 : 1)
-            );
+            var typeParameters = ArrayBuilder<TypeParameterSymbol>
+                .GetInstance(parameterCount + (returnsVoid ? 0 : 1));
             for (int i = 0; i < parameterCount; i++)
             {
                 typeParameters.Add(

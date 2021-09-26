@@ -61,12 +61,13 @@ namespace System.Linq.Expressions.Interpreter
                 bool includeDebugCookies = false
             )
             {
-                return InstructionList.DebugView.GetInstructionViews(
-                    _array.Instructions,
-                    _array.Objects,
-                    (index) => _array.Labels[index].Index,
-                    includeDebugCookies ? _array.DebugCookies : null
-                );
+                return InstructionList.DebugView
+                    .GetInstructionViews(
+                        _array.Instructions,
+                        _array.Objects,
+                        (index) => _array.Labels[index].Index,
+                        includeDebugCookies ? _array.DebugCookies : null
+                    );
             }
         }
         #endregion
@@ -134,7 +135,8 @@ namespace System.Linq.Expressions.Interpreter
 
                 IEnumerator<KeyValuePair<int, object?>> cookieEnumerator = (
                     debugCookies ?? Array.Empty<KeyValuePair<int, object?>>()
-                ).GetEnumerator();
+                )
+                    .GetEnumerator();
                 bool hasCookie = cookieEnumerator.MoveNext();
 
                 for (int i = 0, n = instructions.Count; i < n; i++)
@@ -1083,9 +1085,8 @@ namespace System.Linq.Expressions.Interpreter
 
         internal void FixupBranch(int branchIndex, int offset)
         {
-            _instructions[branchIndex] = ((OffsetInstruction)_instructions[branchIndex]).Fixup(
-                offset
-            );
+            _instructions[branchIndex] = ((OffsetInstruction)_instructions[branchIndex])
+                .Fixup(offset);
         }
 
         private int EnsureLabelIndex(BranchLabel label)

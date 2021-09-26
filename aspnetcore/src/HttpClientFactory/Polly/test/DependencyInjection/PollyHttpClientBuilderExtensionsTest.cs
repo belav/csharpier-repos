@@ -46,9 +46,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act1
             serviceCollection.AddHttpClient(
-                    "example.com",
-                    c => c.BaseAddress = new Uri("http://example.com")
-                )
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com")
+            )
                 .AddPolicyHandler(RetryPolicy)
                 .ConfigureHttpMessageHandlerBuilder(
                     b =>
@@ -90,9 +90,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act1
             serviceCollection.AddHttpClient(
-                    "example.com",
-                    c => c.BaseAddress = new Uri("http://example.com")
-                )
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com")
+            )
                 .AddPolicyHandler(
                     (req) => req.RequestUri.AbsolutePath == "/" ? RetryPolicy : NoOpPolicy
                 )
@@ -141,9 +141,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act1
             serviceCollection.AddHttpClient(
-                    "example.com",
-                    c => c.BaseAddress = new Uri("http://example.com")
-                )
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com")
+            )
                 .AddPolicyHandler(
                     (req) => req.RequestUri.AbsolutePath == "/" ? RetryPolicy : NoOpPolicy
                 )
@@ -195,9 +195,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act1
             serviceCollection.AddHttpClient(
-                    "example.com",
-                    c => c.BaseAddress = new Uri("http://example.com")
-                )
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com")
+            )
                 .AddPolicyHandlerFromRegistry("retry")
                 .ConfigureHttpMessageHandlerBuilder(
                     b =>
@@ -244,9 +244,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act1
             serviceCollection.AddHttpClient(
-                    "example.com",
-                    c => c.BaseAddress = new Uri("http://example.com")
-                )
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com")
+            )
                 .AddPolicyHandlerFromRegistry(
                     (reg, req) =>
                     {
@@ -317,9 +317,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act1
             serviceCollection.AddHttpClient(
-                    "example.com",
-                    c => c.BaseAddress = new Uri("http://example.com")
-                )
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com")
+            )
                 .AddTransientHttpErrorPolicy(b => b.RetryAsync(5))
                 .ConfigureHttpMessageHandlerBuilder(
                     b =>
@@ -374,9 +374,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act1
             serviceCollection.AddHttpClient(
-                    "example.com",
-                    c => c.BaseAddress = new Uri("http://example.com")
-                )
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com")
+            )
                 .AddTransientHttpErrorPolicy(b => b.RetryAsync(5))
                 .ConfigureHttpMessageHandlerBuilder(
                     b =>
@@ -417,24 +417,22 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("Service")
-                .AddPolicyHandler(
-                    (sp, req, key) =>
-                    {
-                        return RetryPolicy;
-                    },
-                    (r) =>
-                    {
-                        return r.RequestUri.Host;
-                    }
-                )
-                .ConfigureHttpMessageHandlerBuilder(
-                    b =>
-                    {
-                        b.PrimaryHandler = PrimaryHandler;
-                        builder = b;
-                    }
-                );
+            serviceCollection.AddHttpClient("Service").AddPolicyHandler(
+                (sp, req, key) =>
+                {
+                    return RetryPolicy;
+                },
+                (r) =>
+                {
+                    return r.RequestUri.Host;
+                }
+            ).ConfigureHttpMessageHandlerBuilder(
+                b =>
+                {
+                    b.PrimaryHandler = PrimaryHandler;
+                    builder = b;
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -503,9 +501,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act1
             serviceCollection.AddHttpClient(
-                    "example.com",
-                    c => c.BaseAddress = new Uri("http://example.com")
-                )
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com")
+            )
                 .AddPolicyHandlerFromRegistry(options.PolicyName)
                 .ConfigureHttpMessageHandlerBuilder(
                     b =>

@@ -130,10 +130,11 @@ namespace System.Web.WebPages
             // See Dev10 #906296 and Dev10 #898600 for more information.
 
             if (
-                typeof(HttpResponse).GetProperty(
-                    "DisableCustomHttpEncoder",
-                    BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly
-                ) != null
+                typeof(HttpResponse)
+                    .GetProperty(
+                        "DisableCustomHttpEncoder",
+                        BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                    ) != null
             )
             {
                 // this version suffers from the bug
@@ -165,23 +166,20 @@ namespace System.Web.WebPages
         {
             var virtualPathDependencies = new List<string>();
             virtualPathDependencies.Add(virtualPath);
-            CacheDependency cacheDependency =
-                HostingEnvironment.VirtualPathProvider.GetCacheDependency(
-                    virtualPath,
-                    virtualPathDependencies,
-                    DateTime.UtcNow
-                );
+            CacheDependency cacheDependency = HostingEnvironment.VirtualPathProvider
+                .GetCacheDependency(virtualPath, virtualPathDependencies, DateTime.UtcNow);
             var key = CacheKeyPrefix + virtualPath;
 
-            HttpRuntime.Cache.Insert(
-                key,
-                virtualPath,
-                cacheDependency,
-                Cache.NoAbsoluteExpiration,
-                Cache.NoSlidingExpiration,
-                CacheItemPriority.NotRemovable,
-                new CacheItemRemovedCallback(InitiateShutdown)
-            );
+            HttpRuntime.Cache
+                .Insert(
+                    key,
+                    virtualPath,
+                    cacheDependency,
+                    Cache.NoAbsoluteExpiration,
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.NotRemovable,
+                    new CacheItemRemovedCallback(InitiateShutdown)
+                );
         }
 
         private static void ShutdownCallBack(object state)

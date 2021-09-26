@@ -33,10 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             if (
                 metadata.MetadataKind == ModelMetadataKind.Property
                 && metadata.ContainerMetadata?.BoundConstructor != null
-                && metadata.ContainerMetadata.BoundConstructorPropertyMapping.TryGetValue(
-                    metadata,
-                    out var parameter
-                )
+                && metadata.ContainerMetadata.BoundConstructorPropertyMapping
+                    .TryGetValue(metadata, out var parameter)
             )
             {
                 // "metadata" typically points to properties. When working with record types, we want to read validation details from the

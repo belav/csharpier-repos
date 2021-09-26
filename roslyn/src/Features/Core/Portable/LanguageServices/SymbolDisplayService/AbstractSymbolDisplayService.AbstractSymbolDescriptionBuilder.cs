@@ -178,28 +178,29 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
             private void AddDocumentationContent(ISymbol symbol)
             {
-                var formatter = Workspace.Services.GetLanguageServices(_semanticModel.Language)
+                var formatter = Workspace.Services
+                    .GetLanguageServices(_semanticModel.Language)
                     .GetRequiredService<IDocumentationCommentFormattingService>();
 
                 _documentationMap.Add(
                     SymbolDescriptionGroups.Documentation,
                     symbol.GetDocumentationParts(
-                            _semanticModel,
-                            _position,
-                            formatter,
-                            CancellationToken
-                        )
+                        _semanticModel,
+                        _position,
+                        formatter,
+                        CancellationToken
+                    )
                         .ToImmutableArray()
                 );
 
                 _documentationMap.Add(
                     SymbolDescriptionGroups.RemarksDocumentation,
                     symbol.GetRemarksDocumentationParts(
-                            _semanticModel,
-                            _position,
-                            formatter,
-                            CancellationToken
-                        )
+                        _semanticModel,
+                        _position,
+                        formatter,
+                        CancellationToken
+                    )
                         .ToImmutableArray()
                 );
 
@@ -324,7 +325,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 }
 
                 var analysis = semanticModel.AnalyzeDataFlow(syntax);
-                var captures = analysis.CapturedInside.Except(analysis.VariablesDeclared)
+                var captures = analysis.CapturedInside
+                    .Except(analysis.VariablesDeclared)
                     .ToImmutableArray();
                 if (!captures.IsEmpty)
                 {
@@ -349,9 +351,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             }
 
             private static readonly SymbolDisplayFormat s_formatForCaptures =
-                SymbolDisplayFormat.MinimallyQualifiedFormat.RemoveLocalOptions(
-                        SymbolDisplayLocalOptions.IncludeType
-                    )
+                SymbolDisplayFormat.MinimallyQualifiedFormat
+                    .RemoveLocalOptions(SymbolDisplayLocalOptions.IncludeType)
                     .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeType);
 
             public async Task<ImmutableArray<SymbolDisplayPart>> BuildDescriptionAsync(
@@ -556,11 +557,12 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 )
                 {
                     AddEnumUnderlyingTypeSeparator();
-                    var underlyingTypeDisplayParts = symbol.EnumUnderlyingType.ToDisplayParts(
-                        s_descriptionStyle.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
-                    );
+                    var underlyingTypeDisplayParts = symbol.EnumUnderlyingType
+                        .ToDisplayParts(
+                            s_descriptionStyle.WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
+                        );
                     AddToGroup(SymbolDescriptionGroups.MainDescription, underlyingTypeDisplayParts);
                 }
             }

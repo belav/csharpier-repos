@@ -393,12 +393,12 @@ namespace System.Reflection
                     InitCustomAttributeType((RuntimeType)parameters[i].ParameterType)
                 );
 
-            FieldInfo[] fields = m_ctor.DeclaringType!.GetFields(
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-            );
-            PropertyInfo[] properties = m_ctor.DeclaringType.GetProperties(
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-            );
+            FieldInfo[] fields = m_ctor.DeclaringType!
+                .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            PropertyInfo[] properties = m_ctor.DeclaringType
+                .GetProperties(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
             m_namedParams = new CustomAttributeNamedParameter[properties.Length + fields.Length];
             for (int i = 0; i < fields.Length; i++)
                 m_namedParams[i] = new CustomAttributeNamedParameter(
@@ -488,9 +488,8 @@ namespace System.Reflection
         }
         private void Init(FieldOffsetAttribute fieldOffset)
         {
-            m_ctor = typeof(FieldOffsetAttribute).GetConstructors(
-                BindingFlags.Public | BindingFlags.Instance
-            )[0];
+            m_ctor = typeof(FieldOffsetAttribute)
+                .GetConstructors(BindingFlags.Public | BindingFlags.Instance)[0];
             m_typedCtorArgs = Array.AsReadOnly(
                 new CustomAttributeTypedArgument[]
                 {
@@ -1881,13 +1880,13 @@ namespace System.Reflection
                         caCtorToken,
                         attributeType.GenericTypeArguments,
                         null
-                    )!.MethodHandle.GetMethodInfo();
+                    )!.MethodHandle
+                        .GetMethodInfo();
                 }
                 else
                 {
-                    ctorWithParameters = new ModuleHandle(decoratedModule).ResolveMethodHandle(
-                            caCtorToken
-                        )
+                    ctorWithParameters = new ModuleHandle(decoratedModule)
+                        .ResolveMethodHandle(caCtorToken)
                         .GetMethodInfo();
                 }
             }
@@ -2530,9 +2529,8 @@ namespace System.Reflection
                 out int iidParamIndex
             );
 
-            RuntimeType? safeArrayUserDefinedType = string.IsNullOrEmpty(
-                safeArrayUserDefinedTypeName
-            )
+            RuntimeType? safeArrayUserDefinedType = string
+            .IsNullOrEmpty(safeArrayUserDefinedTypeName)
                 ? null
                 : RuntimeTypeHandle.GetTypeByNameUsingCARules(safeArrayUserDefinedTypeName, scope);
             RuntimeType? marshalTypeRef = null;

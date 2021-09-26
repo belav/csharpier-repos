@@ -14,15 +14,14 @@ namespace IdentitySample.DefaultUI
         public static bool UseStartup { get; set; } = true;
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(
-                    webBuilder =>
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(
+                webBuilder =>
+                {
+                    if (UseStartup)
                     {
-                        if (UseStartup)
-                        {
-                            webBuilder.UseStartup<Startup>();
-                        }
+                        webBuilder.UseStartup<Startup>();
                     }
-                );
+                }
+            );
     }
 }

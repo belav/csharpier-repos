@@ -1085,11 +1085,12 @@ namespace System.Reflection.Emit
             {
                 if (labels![fixups![i].label_idx].addr < 0)
                     throw new ArgumentException(
-                        string.Format(
-                            "Label #{0} is not marked in method `{1}'",
-                            fixups[i].label_idx + 1,
-                            mb.Name
-                        )
+                        string
+                            .Format(
+                                "Label #{0} is not marked in method `{1}'",
+                                fixups[i].label_idx + 1,
+                                mb.Name
+                            )
                     );
                 // Diff is the offset from the end of the jump instruction to the address of the label
                 int diff = labels[fixups[i].label_idx].addr - (fixups[i].pos + fixups[i].offset);

@@ -82,10 +82,8 @@ namespace Castle.DynamicProxy.Internal
                 foreach (var method in methods)
                 {
                     if (
-                        MethodSignatureComparer.Instance.Equals(
-                            method.GetBaseDefinition(),
-                            proxiedMethod
-                        )
+                        MethodSignatureComparer.Instance
+                            .Equals(method.GetBaseDefinition(), proxiedMethod)
                     )
                     {
                         methodOnTarget = method;
@@ -96,11 +94,12 @@ namespace Castle.DynamicProxy.Internal
             if (methodOnTarget == null)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        "Could not find method overriding {0} on type {1}. This is most likely a bug. Please report it.",
-                        proxiedMethod,
-                        type
-                    )
+                    string
+                        .Format(
+                            "Could not find method overriding {0} on type {1}. This is most likely a bug. Please report it.",
+                            proxiedMethod,
+                            type
+                        )
                 );
             }
 

@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
             var addPackageCodeActions = await GetAddPackagesCodeActionsAsync(context, assemblyNames)
                 .ConfigureAwait(false);
             var addReferenceCodeActions = await GetAddReferencesCodeActionsAsync(
-                    context,
-                    uniqueIdentities
-                )
+                context,
+                uniqueIdentities
+            )
                 .ConfigureAwait(false);
 
             context.RegisterFixes(addPackageCodeActions, context.Diagnostics);
@@ -66,10 +66,10 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
             foreach (var identity in uniqueIdentities)
             {
                 var codeAction = await AddMissingReferenceCodeAction.CreateAsync(
-                        context.Document.Project,
-                        identity,
-                        context.CancellationToken
-                    )
+                    context.Document.Project,
+                    identity,
+                    context.CancellationToken
+                )
                     .ConfigureAwait(false);
                 result.Add(codeAction);
             }
@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
         )
         {
             var cancellationToken = context.CancellationToken;
-            var compilation = await context.Document.Project.GetCompilationAsync(cancellationToken)
+            var compilation = await context.Document.Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             var uniqueIdentities = new HashSet<AssemblyIdentity>();

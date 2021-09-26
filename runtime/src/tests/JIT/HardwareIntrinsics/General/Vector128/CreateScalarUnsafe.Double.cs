@@ -58,10 +58,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             Double value = TestLibrary.Generator.GetDouble();
-            object result = typeof(Vector128).GetMethod(
-                    nameof(Vector128.CreateScalarUnsafe),
-                    new Type[] { typeof(Double) }
-                )
+            object result = typeof(Vector128)
+                .GetMethod(nameof(Vector128.CreateScalarUnsafe), new Type[] { typeof(Double) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector128<Double>)(result), value);
@@ -106,13 +104,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128.CreateScalarUnsafe(Double): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector128.CreateScalarUnsafe(Double): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

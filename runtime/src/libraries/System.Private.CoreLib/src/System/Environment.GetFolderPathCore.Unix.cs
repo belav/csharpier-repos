@@ -227,13 +227,14 @@ namespace System
                             bool relativeToHome = false;
                             const string RelativeToHomePrefix = "$HOME/";
                             if (
-                                string.CompareOrdinal(
-                                    line,
-                                    pos,
-                                    RelativeToHomePrefix,
-                                    0,
-                                    RelativeToHomePrefix.Length
-                                ) == 0
+                                string
+                                    .CompareOrdinal(
+                                        line,
+                                        pos,
+                                        RelativeToHomePrefix,
+                                        0,
+                                        RelativeToHomePrefix.Length
+                                    ) == 0
                             )
                             {
                                 relativeToHome = true;

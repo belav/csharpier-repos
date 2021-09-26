@@ -1568,9 +1568,8 @@ ORDER BY CAST(LEN([c].[CustomerID]) AS int), [c].[CustomerID]"
             bool async
         )
         {
-            await base.Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(
-                async
-            );
+            await base
+                .Order_by_length_twice_followed_by_projection_of_naked_collection_navigation(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]

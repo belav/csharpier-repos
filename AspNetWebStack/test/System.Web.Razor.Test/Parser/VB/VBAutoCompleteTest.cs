@@ -122,9 +122,9 @@ namespace System.Web.Razor.Test.Parser.VB
                     Factory.CodeTransition(),
                     Factory.MetaCode("Code").Accepts(AcceptedCharacters.None),
                     Factory.Span(
-                            SpanKind.Code,
-                            new VBSymbol(5, 0, 5, String.Empty, VBSymbolType.Unknown)
-                        )
+                        SpanKind.Code,
+                        new VBSymbol(5, 0, 5, String.Empty, VBSymbolType.Unknown)
+                    )
                         .With(new StatementCodeGenerator())
                         .With(
                             new AutoCompleteEditHandler(

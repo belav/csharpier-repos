@@ -194,10 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
             if (
                 typeToGenerateIn == null
                 || !(
-                    document.SemanticModel.GetTypeInfo(
-                        castExpression.Expression,
-                        cancellationToken
-                    ).Type
+                    document.SemanticModel
+                        .GetTypeInfo(castExpression.Expression, cancellationToken).Type
                     is INamedTypeSymbol parameterSymbol
                 )
                 || typeToGenerateIn.IsErrorType()
@@ -288,10 +286,11 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
                 InvocationExpressionSyntax
             >.State state
         ) =>
-            string.Format(
-                CSharpFeaturesResources.Generate_implicit_conversion_operator_in_0,
-                state.TypeToGenerateIn.Name
-            );
+            string
+                .Format(
+                    CSharpFeaturesResources.Generate_implicit_conversion_operator_in_0,
+                    state.TypeToGenerateIn.Name
+                );
 
         protected override string GetExplicitConversionDisplayText(
             AbstractGenerateParameterizedMemberService<
@@ -301,9 +300,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
                 InvocationExpressionSyntax
             >.State state
         ) =>
-            string.Format(
-                CSharpFeaturesResources.Generate_explicit_conversion_operator_in_0,
-                state.TypeToGenerateIn.Name
-            );
+            string
+                .Format(
+                    CSharpFeaturesResources.Generate_explicit_conversion_operator_in_0,
+                    state.TypeToGenerateIn.Name
+                );
     }
 }

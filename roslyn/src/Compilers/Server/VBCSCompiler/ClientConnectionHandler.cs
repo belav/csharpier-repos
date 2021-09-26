@@ -56,20 +56,21 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 Logger.Log($"Received request {request.RequestId} of type {request.GetType()}");
 
                 if (
-                    !string.Equals(
-                        request.CompilerHash,
-                        BuildProtocolConstants.GetCommitHash(),
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !string
+                        .Equals(
+                            request.CompilerHash,
+                            BuildProtocolConstants.GetCommitHash(),
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     return await WriteBuildResponseAsync(
-                            clientConnection,
-                            request.RequestId,
-                            new IncorrectHashBuildResponse(),
-                            CompletionData.RequestError,
-                            cancellationToken
-                        )
+                        clientConnection,
+                        request.RequestId,
+                        new IncorrectHashBuildResponse(),
+                        CompletionData.RequestError,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -79,47 +80,47 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 )
                 {
                     return await WriteBuildResponseAsync(
-                            clientConnection,
-                            request.RequestId,
-                            new ShutdownBuildResponse(Process.GetCurrentProcess().Id),
-                            new CompletionData(
-                                CompletionReason.RequestCompleted,
-                                shutdownRequested: true
-                            ),
-                            cancellationToken
-                        )
+                        clientConnection,
+                        request.RequestId,
+                        new ShutdownBuildResponse(Process.GetCurrentProcess().Id),
+                        new CompletionData(
+                            CompletionReason.RequestCompleted,
+                            shutdownRequested: true
+                        ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
                 if (!allowCompilationRequests)
                 {
                     return await WriteBuildResponseAsync(
-                            clientConnection,
-                            request.RequestId,
-                            new RejectedBuildResponse("Compilation not allowed at this time"),
-                            CompletionData.RequestCompleted,
-                            cancellationToken
-                        )
+                        clientConnection,
+                        request.RequestId,
+                        new RejectedBuildResponse("Compilation not allowed at this time"),
+                        CompletionData.RequestCompleted,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
                 if (!Environment.Is64BitProcess && !MemoryHelper.IsMemoryAvailable(Logger))
                 {
                     return await WriteBuildResponseAsync(
-                            clientConnection,
-                            request.RequestId,
-                            new RejectedBuildResponse("Not enough resources to accept connection"),
-                            CompletionData.RequestError,
-                            cancellationToken
-                        )
+                        clientConnection,
+                        request.RequestId,
+                        new RejectedBuildResponse("Not enough resources to accept connection"),
+                        CompletionData.RequestError,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
                 return await ProcessCompilationRequestAsync(
-                        clientConnection,
-                        request,
-                        cancellationToken
-                    )
+                    clientConnection,
+                    request,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
         }
@@ -200,12 +201,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     }
 
                     return await WriteBuildResponseAsync(
-                            clientConnection,
-                            request.RequestId,
-                            response,
-                            completionData,
-                            cancellationToken
-                        )
+                        clientConnection,
+                        request.RequestId,
+                        response,
+                        completionData,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else

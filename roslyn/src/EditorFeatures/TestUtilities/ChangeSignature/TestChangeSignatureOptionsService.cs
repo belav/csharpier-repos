@@ -38,12 +38,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             var updateParameters =
                 UpdatedSignature != null
                     ? UpdatedSignature.Select(
-                              item =>
-                                  item.IsExisting
-                                      ? list[item.OldIndex ?? -1]
-                                      : item.GetAddedParameter(document)
-                          )
-                          .ToImmutableArray()
+                          item =>
+                              item.IsExisting
+                                  ? list[item.OldIndex ?? -1]
+                                  : item.GetAddedParameter(document)
+                      )
+                      .ToImmutableArray()
                     : new ImmutableArray<Parameter>();
             return new ChangeSignatureOptionsResult(
                 new SignatureChange(

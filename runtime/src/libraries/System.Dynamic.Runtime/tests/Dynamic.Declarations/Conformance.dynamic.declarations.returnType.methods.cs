@@ -221,7 +221,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
             try
             {
                 //This should not compile if the return type of Foo is not dynamic
-                MyClass<int>.Foo().Bar();
+                MyClass<int>
+                    .Foo()
+                    .Bar();
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {

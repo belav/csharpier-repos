@@ -19,7 +19,8 @@ namespace Benchmarks
 
         public static IHostBuilder GetHostBuilder(string[] args)
         {
-            var config = new ConfigurationBuilder().AddCommandLine(args)
+            var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
                 .AddEnvironmentVariables(prefix: "RoutingBenchmarks_")
                 .Build();
 

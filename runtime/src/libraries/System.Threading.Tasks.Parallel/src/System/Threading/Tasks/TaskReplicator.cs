@@ -164,7 +164,8 @@ namespace System.Threading.Tasks
                 maxConcurrencyLevel,
                 CooperativeMultitaskingTaskTimeout_RootTask,
                 action
-            ).Start();
+            )
+                .Start();
 
             Replica? nextReplica;
             while (replicator._pendingReplicas.TryDequeue(out nextReplica))

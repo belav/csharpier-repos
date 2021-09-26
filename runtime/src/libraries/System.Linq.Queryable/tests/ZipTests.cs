@@ -54,7 +54,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Zip()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .Zip((new int[] { 10, 11, 12 }).AsQueryable(), (n1, n2) => n1 + n2)
                 .Count();
             Assert.Equal(3, count);
@@ -94,7 +95,8 @@ namespace System.Linq.Tests
         [Fact]
         public void Zip2()
         {
-            int count = (new int[] { 0, 1, 2 }).AsQueryable()
+            int count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
                 .Zip((new int[] { 10, 11, 12 }).AsQueryable())
                 .Count();
             Assert.Equal(3, count);

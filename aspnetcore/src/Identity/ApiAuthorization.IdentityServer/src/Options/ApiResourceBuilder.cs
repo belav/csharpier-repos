@@ -23,9 +23,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public static ApiResourceBuilder ApiResource(string name)
         {
             var apiResource = new ApiResource(name);
-            return new ApiResourceBuilder(apiResource).WithApplicationProfile(
-                    ApplicationProfiles.API
-                )
+            return new ApiResourceBuilder(apiResource)
+                .WithApplicationProfile(ApplicationProfiles.API)
                 .WithScopes(name);
         }
 
@@ -37,9 +36,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public static ApiResourceBuilder IdentityServerJwt(string name)
         {
             var apiResource = new ApiResource(name);
-            return new ApiResourceBuilder(apiResource).WithApplicationProfile(
-                ApplicationProfiles.IdentityServerJwt
-            );
+            return new ApiResourceBuilder(apiResource)
+                .WithApplicationProfile(ApplicationProfiles.IdentityServerJwt);
         }
 
         /// <summary>

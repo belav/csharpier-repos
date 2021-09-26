@@ -118,7 +118,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     var asyncToken = _asyncListener.BeginAsyncOperation(
                         "WorkspaceGraphQueryManager.EnqueueUpdate"
                     );
-                    newDelay.Task.SafeContinueWithFromAsync(
+                    newDelay.Task
+                        .SafeContinueWithFromAsync(
                             _ => UpdateAsync(),
                             CancellationToken.None,
                             TaskScheduler.Default
@@ -138,16 +139,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             lock (_gate)
             {
                 liveQueries = _trackedQueries.Select(
-                        t => ValueTuple.Create(t.Item1.GetTarget(), t.Item2)
-                    )
+                    t => ValueTuple.Create(t.Item1.GetTarget(), t.Item2)
+                )
                     .Where(t => t.Item1 != null)
                     .ToList()!;
             }
 
             var solution = _workspace.CurrentSolution;
             var tasks = liveQueries.Select(
-                    t => PopulateContextGraphAsync(solution, t.Item2, t.Item1)
-                )
+                t => PopulateContextGraphAsync(solution, t.Item2, t.Item1)
+            )
                 .ToArray();
             var whenAllTask = Task.WhenAll(tasks);
 
@@ -190,8 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             {
                 var cancellationToken = context.CancelToken;
                 var graphBuilderTasks = graphQueries.Select(
-                        q => q.GetGraphAsync(solution, context, cancellationToken)
-                    )
+                    q => q.GetGraphAsync(solution, context, cancellationToken)
+                )
                     .ToArray();
                 var graphBuilders = await Task.WhenAll(graphBuilderTasks).ConfigureAwait(false);
 

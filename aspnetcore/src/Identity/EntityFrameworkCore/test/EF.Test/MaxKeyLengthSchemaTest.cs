@@ -36,11 +36,13 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             _builder = new ApplicationBuilder(services.BuildServiceProvider());
 
             using (
-                var scope = _builder.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                var scope = _builder.ApplicationServices
+                    .GetRequiredService<IServiceScopeFactory>()
                     .CreateScope()
             )
             {
-                scope.ServiceProvider.GetRequiredService<VerstappenDbContext>()
+                scope.ServiceProvider
+                    .GetRequiredService<VerstappenDbContext>()
                     .Database.EnsureCreated();
             }
         }
@@ -55,7 +57,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         public void EnsureDefaultSchema()
         {
             using (
-                var scope = _builder.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                var scope = _builder.ApplicationServices
+                    .GetRequiredService<IServiceScopeFactory>()
                     .CreateScope()
             )
             {

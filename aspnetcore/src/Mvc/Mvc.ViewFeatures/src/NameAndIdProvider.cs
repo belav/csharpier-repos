@@ -171,11 +171,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (
                 items.TryGetValue(PreviousNameAndIdKey, out previousNameAndIdObject)
                 && (previousNameAndId = (PreviousNameAndId)previousNameAndIdObject) != null
-                && string.Equals(
-                    previousNameAndId.HtmlFieldPrefix,
-                    htmlFieldPrefix,
-                    StringComparison.Ordinal
-                )
+                && string
+                    .Equals(
+                        previousNameAndId.HtmlFieldPrefix,
+                        htmlFieldPrefix,
+                        StringComparison.Ordinal
+                    )
                 && string.Equals(previousNameAndId.Expression, expression, StringComparison.Ordinal)
             )
             {

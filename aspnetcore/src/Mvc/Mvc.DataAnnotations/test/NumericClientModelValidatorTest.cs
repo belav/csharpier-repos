@@ -58,15 +58,16 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var expectedMessage = "Error message about 'DisplayId' from override.";
             var provider = new TestModelMetadataProvider();
             provider.ForProperty(
-                    typeof(TypeWithNumericProperty),
-                    nameof(TypeWithNumericProperty.Id)
-                )
+                typeof(TypeWithNumericProperty),
+                nameof(TypeWithNumericProperty.Id)
+            )
                 .BindingDetails(
                     d =>
                     {
-                        d.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(
-                            name => $"Error message about '{name}' from override."
-                        );
+                        d.ModelBindingMessageProvider
+                            .SetValueMustBeANumberAccessor(
+                                name => $"Error message about '{name}' from override."
+                            );
                     }
                 );
             var metadata = provider.GetMetadataForProperty(
@@ -109,20 +110,19 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var expectedMessage = "Error message about 'number' from override.";
 
-            var method = typeof(TypeWithNumericProperty).GetMethod(
-                nameof(TypeWithNumericProperty.IsLovely)
-            );
+            var method = typeof(TypeWithNumericProperty)
+                .GetMethod(nameof(TypeWithNumericProperty.IsLovely));
             var parameter = method.GetParameters()[0]; // IsLovely(double number)
             var provider = new TestModelMetadataProvider();
-            provider.ForParameter(parameter)
-                .BindingDetails(
-                    d =>
-                    {
-                        d.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(
+            provider.ForParameter(parameter).BindingDetails(
+                d =>
+                {
+                    d.ModelBindingMessageProvider
+                        .SetValueMustBeANumberAccessor(
                             name => $"Error message about '{name}' from override."
                         );
-                    }
-                );
+                }
+            );
             var metadata = provider.GetMetadataForParameter(parameter);
 
             var adapter = new NumericClientModelValidator();
@@ -162,9 +162,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             provider.ForType(typeof(int))
                 .BindingDetails(
                     d =>
-                        d.ModelBindingMessageProvider.SetNonPropertyValueMustBeANumberAccessor(
-                            () => $"Error message from override."
-                        )
+                        d.ModelBindingMessageProvider
+                            .SetNonPropertyValueMustBeANumberAccessor(
+                                () => $"Error message from override."
+                            )
                 );
             var metadata = provider.GetMetadataForType(typeof(int));
 

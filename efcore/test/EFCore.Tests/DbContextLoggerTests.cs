@@ -260,9 +260,8 @@ namespace Microsoft.EntityFrameworkCore
                         eventData =>
                             stream.Write(
                                 "Initialized "
-                                    + (
-                                        (ContextInitializedEventData)eventData
-                                    ).Context.GetType().Name
+                                    + ((ContextInitializedEventData)eventData).Context
+                                        .GetType().Name
                             )
                     )
             );
@@ -537,9 +536,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var options =
                 configureLogging(
-                    new DbContextOptionsBuilder<LoggingContext>().UseInMemoryDatabase(
-                        "DbContextLoggerTests"
-                    )
+                    new DbContextOptionsBuilder<LoggingContext>()
+                        .UseInMemoryDatabase("DbContextLoggerTests")
                 ).Options;
 
             string productVersion;

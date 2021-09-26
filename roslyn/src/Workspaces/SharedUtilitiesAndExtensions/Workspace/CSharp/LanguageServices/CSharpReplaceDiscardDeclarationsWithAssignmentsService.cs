@@ -51,9 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 {
                     case LocalDeclarationStatementSyntax localDeclarationStatement:
                         if (
-                            localDeclarationStatement.Declaration.Variables.Any(
-                                IsDiscardDeclaration
-                            )
+                            localDeclarationStatement.Declaration.Variables
+                                .Any(IsDiscardDeclaration)
                         )
                         {
                             RemoveDiscardHelper.ProcessDeclarationStatement(
@@ -122,9 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                                 kind: SyntaxKind.IsExpression,
                                 left: isPatternExpression.Expression,
                                 operatorToken: isPatternExpression.IsKeyword,
-                                right: declarationPattern.Type.WithTrailingTrivia(
-                                    declarationPattern.GetTrailingTrivia()
-                                )
+                                right: declarationPattern.Type
+                                    .WithTrailingTrivia(declarationPattern.GetTrailingTrivia())
                             );
                             editor.ReplaceNode(isPatternExpression, replacementNode);
                         }
@@ -218,7 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
 
                 // Move the leading trivia from original local declaration statement
                 // to the first statement of the replacement statement list.
-                var leadingTrivia = _localDeclarationStatement.Declaration.Type.GetLeadingTrivia()
+                var leadingTrivia = _localDeclarationStatement.Declaration.Type
+                    .GetLeadingTrivia()
                     .Concat(_localDeclarationStatement.Declaration.Type.GetTrailingTrivia());
                 _statementsBuilder[0] = _statementsBuilder[0].WithLeadingTrivia(leadingTrivia);
 
@@ -226,9 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 // to the last statement of the replacement statement list.
                 var last = _statementsBuilder.Count - 1;
                 var trailingTrivia = _localDeclarationStatement.SemicolonToken.GetAllTrivia();
-                _statementsBuilder[last] = _statementsBuilder[last].WithTrailingTrivia(
-                    trailingTrivia
-                );
+                _statementsBuilder[last] = _statementsBuilder[last]
+                    .WithTrailingTrivia(trailingTrivia);
 
                 // Replace the original local declaration statement with new statement list
                 // from _statementsBuilder.
@@ -263,11 +261,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 if (_currentNonDiscardVariables.Count > 0)
                 {
                     var statement = SyntaxFactory.LocalDeclarationStatement(
-                            SyntaxFactory.VariableDeclaration(
-                                _localDeclarationStatement.Declaration.Type,
-                                _currentNonDiscardVariables
-                            )
+                        SyntaxFactory.VariableDeclaration(
+                            _localDeclarationStatement.Declaration.Type,
+                            _currentNonDiscardVariables
                         )
+                    )
                         .WithAdditionalAnnotations(Formatter.Annotation);
                     _statementsBuilder.Add(statement);
                     _currentNonDiscardVariables =
@@ -285,13 +283,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 {
                     _statementsBuilder.Add(
                         SyntaxFactory.ExpressionStatement(
-                                SyntaxFactory.AssignmentExpression(
-                                    kind: SyntaxKind.SimpleAssignmentExpression,
-                                    left: SyntaxFactory.IdentifierName(variable.Identifier),
-                                    operatorToken: variable.Initializer.EqualsToken,
-                                    right: variable.Initializer.Value
-                                )
+                            SyntaxFactory.AssignmentExpression(
+                                kind: SyntaxKind.SimpleAssignmentExpression,
+                                left: SyntaxFactory.IdentifierName(variable.Identifier),
+                                operatorToken: variable.Initializer.EqualsToken,
+                                right: variable.Initializer.Value
                             )
+                        )
                             .WithAdditionalAnnotations(Formatter.Annotation)
                     );
                 }

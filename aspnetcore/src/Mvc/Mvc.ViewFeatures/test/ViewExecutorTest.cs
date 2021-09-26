@@ -301,13 +301,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var expectedLength = 0;
 
             var view = new Mock<IView>();
-            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback(
-                    (ViewContext v) =>
-                    {
-                        throw new Exception();
-                    }
-                );
+            view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>())).Callback(
+                (ViewContext v) =>
+                {
+                    throw new Exception();
+                }
+            );
 
             var context = new DefaultHttpContext();
             var memoryStream = new MemoryStream();

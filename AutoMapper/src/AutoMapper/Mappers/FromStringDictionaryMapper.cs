@@ -10,8 +10,8 @@ namespace AutoMapper.Internal.Mappers
     using static ExpressionBuilder;
     public class FromStringDictionaryMapper : IObjectMapper
     {
-        private static readonly MethodInfo MapDynamicMehod =
-            typeof(FromStringDictionaryMapper).GetStaticMethod(nameof(MapDynamic));
+        private static readonly MethodInfo MapDynamicMehod = typeof(FromStringDictionaryMapper)
+            .GetStaticMethod(nameof(MapDynamic));
         public bool IsMatch(in TypePair context) =>
             typeof(StringDictionary).IsAssignableFrom(context.SourceType);
         public Expression MapExpression(

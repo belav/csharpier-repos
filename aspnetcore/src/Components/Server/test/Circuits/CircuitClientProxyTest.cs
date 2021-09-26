@@ -19,13 +19,13 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             bool? isCancelled = null;
             var clientProxy = new Mock<IClientProxy>();
             clientProxy.Setup(
-                    c =>
-                        c.SendCoreAsync(
-                            It.IsAny<string>(),
-                            It.IsAny<object[]>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback(
                     (string _, object[] __, CancellationToken token) =>
                     {

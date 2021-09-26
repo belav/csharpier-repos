@@ -23,17 +23,17 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
             var cancellationToken = context.CancellationToken;
             var symbolAndProjectOpt =
                 await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(
-                        document,
-                        position,
-                        cancellationToken
-                    )
+                    document,
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             if (symbolAndProjectOpt == null)
             {
                 await context.ReportMessageAsync(
-                        EditorFeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret
-                    )
+                    EditorFeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret
+                )
                     .ConfigureAwait(false);
                 return;
             }
@@ -45,11 +45,12 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
                 .ConfigureAwait(false);
 
             await context.SetSearchTitleAsync(
-                    string.Format(
+                string
+                    .Format(
                         EditorFeaturesResources._0_bases,
                         FindUsagesHelpers.GetDisplayName(symbol)
                     )
-                )
+            )
                 .ConfigureAwait(false);
 
             var found = false;
@@ -60,20 +61,20 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
             foreach (var baseSymbol in bases)
             {
                 var sourceDefinition = await SymbolFinder.FindSourceDefinitionAsync(
-                        baseSymbol,
-                        solution,
-                        cancellationToken
-                    )
+                    baseSymbol,
+                    solution,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (sourceDefinition != null)
                 {
                     var definitionItem = await sourceDefinition.ToClassifiedDefinitionItemAsync(
-                            solution,
-                            isPrimary: true,
-                            includeHiddenLocations: false,
-                            FindReferencesSearchOptions.Default,
-                            cancellationToken: cancellationToken
-                        )
+                        solution,
+                        isPrimary: true,
+                        includeHiddenLocations: false,
+                        FindReferencesSearchOptions.Default,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     await context.OnDefinitionFoundAsync(definitionItem).ConfigureAwait(false);

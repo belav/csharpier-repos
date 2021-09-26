@@ -34,9 +34,8 @@ namespace Roslyn.Test.Utilities
             var sourceText = file.GetText(context.CancellationToken);
             Contract.ThrowIfNull(sourceText, "Failed to fetch the text of an additional file.");
 
-            var changes = sourceText.Lines.SelectAsArray(
-                l => new TextChange(new TextSpan(l.Start, length: 0), "// ")
-            );
+            var changes = sourceText.Lines
+                .SelectAsArray(l => new TextChange(new TextSpan(l.Start, length: 0), "// "));
             var generatedText = sourceText.WithChanges(changes);
 
             // TODO: remove the generatedText.ToString() when I don't have to specify the encoding

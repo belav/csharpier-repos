@@ -30,10 +30,10 @@ namespace System.IO.Pipes.Tests
             string pipeName = Path.GetRandomFileName();
             uint pairID = (uint)(Math.Abs(new Random(5125123).Next()));
             RemoteExecutor.Invoke(
-                    new Action<string, string>(ServerConnectAsId),
-                    pipeName,
-                    pairID.ToString()
-                )
+                new Action<string, string>(ServerConnectAsId),
+                pipeName,
+                pairID.ToString()
+            )
                 .Dispose();
         }
 

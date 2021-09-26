@@ -73,7 +73,8 @@ class C : System.IAsyncDisposable
             comp.VerifyDiagnostics(
                 // (6,9): error CS4033: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task'.
                 //         await using (var x = new C())
-                Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await").WithLocation(6, 9)
+                Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await")
+                    .WithLocation(6, 9)
             );
         }
 
@@ -167,9 +168,9 @@ class C : System.IAsyncDisposable
                 // (3,11): error CS0738: 'C' does not implement interface member 'IAsyncDisposable.DisposeAsync()'. 'C.DisposeAsync()' cannot implement 'IAsyncDisposable.DisposeAsync()' because it does not have the matching return type of 'ValueTask'.
                 // class C : System.IAsyncDisposable
                 Diagnostic(
-                        ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
-                        "System.IAsyncDisposable"
-                    )
+                    ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
+                    "System.IAsyncDisposable"
+                )
                     .WithArguments(
                         "C",
                         "System.IAsyncDisposable.DisposeAsync()",
@@ -793,9 +794,9 @@ class C : System.IDisposable
                 // (7,9): error CS0656: Missing compiler required member 'System.IDisposable.Dispose'
                 //         using (var x = new C()) { return 1; }
                 Diagnostic(
-                        ErrorCode.ERR_MissingPredefinedMember,
-                        "using (var x = new C()) { return 1; }"
-                    )
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    "using (var x = new C()) { return 1; }"
+                )
                     .WithArguments("System.IDisposable", "Dispose")
                     .WithLocation(7, 9)
             );
@@ -2282,7 +2283,8 @@ public class C
             comp.VerifyDiagnostics(
                 // (6,22): error CS4008: Cannot await 'void'
                 //         await using (var x = new C())
-                Diagnostic(ErrorCode.ERR_BadAwaitArgVoidCall, "var x = new C()").WithLocation(6, 22)
+                Diagnostic(ErrorCode.ERR_BadAwaitArgVoidCall, "var x = new C()")
+                    .WithLocation(6, 22)
             );
         }
 

@@ -11,7 +11,8 @@ namespace System.Dynamic.Utils
 {
     internal static class TypeUtils
     {
-        private static readonly Type[] s_arrayAssignableInterfaces = typeof(int[]).GetInterfaces()
+        private static readonly Type[] s_arrayAssignableInterfaces = typeof(int[])
+            .GetInterfaces()
             .Where(i => i.IsGenericType)
             .Select(i => i.GetGenericTypeDefinition())
             .ToArray();

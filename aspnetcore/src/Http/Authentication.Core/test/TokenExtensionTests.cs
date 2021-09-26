@@ -128,14 +128,13 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         public async Task GetTokenWorksWithDefaultAuthenticateScheme()
         {
             var context = new DefaultHttpContext();
-            var services = new ServiceCollection().AddOptions()
-                .AddAuthenticationCore(
-                    o =>
-                    {
-                        o.DefaultScheme = "simple";
-                        o.AddScheme("simple", s => s.HandlerType = typeof(SimpleAuth));
-                    }
-                );
+            var services = new ServiceCollection().AddOptions().AddAuthenticationCore(
+                o =>
+                {
+                    o.DefaultScheme = "simple";
+                    o.AddScheme("simple", s => s.HandlerType = typeof(SimpleAuth));
+                }
+            );
             context.RequestServices = services.BuildServiceProvider();
 
             Assert.Equal("1", await context.GetTokenAsync("One"));
@@ -147,7 +146,8 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         public async Task GetTokenWorksWithExplicitScheme()
         {
             var context = new DefaultHttpContext();
-            var services = new ServiceCollection().AddOptions()
+            var services = new ServiceCollection()
+                .AddOptions()
                 .AddAuthenticationCore(
                     o => o.AddScheme("simple", s => s.HandlerType = typeof(SimpleAuth))
                 );

@@ -31,10 +31,10 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 context.Database.Log = s => Trace.WriteLine(s);
                 _course = ProjectTo<TrainingCourseDto>(
-                        context.TrainingCourses,
-                        null,
-                        c => c.Content.Select(co => co.Category)
-                    )
+                    context.TrainingCourses,
+                    null,
+                    c => c.Content.Select(co => co.Category)
+                )
                     .FirstOrDefault(n => n.CourseName == "Course 1");
             }
         }

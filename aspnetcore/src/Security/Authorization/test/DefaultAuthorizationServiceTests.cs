@@ -477,7 +477,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task Authorize_CustomRolePolicy()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireRole("Administrator")
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireRole("Administrator")
                 .RequireClaim(ClaimTypes.Role, "User");
             var authorizationService = BuildAuthorizationService();
             var user = new ClaimsPrincipal(
@@ -894,9 +895,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                             options.AddPolicy(
                                 "Passthrough",
                                 policy =>
-                                    policy.Requirements.Add(
-                                        new PassThroughRequirement(shouldSucceed)
-                                    )
+                                    policy.Requirements
+                                        .Add(new PassThroughRequirement(shouldSucceed))
                             );
                         }
                     );
@@ -921,10 +921,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                     services.AddAuthorization(
                         options =>
                         {
-                            var basePolicy = new AuthorizationPolicyBuilder().RequireClaim(
-                                    "Base",
-                                    "Value"
-                                )
+                            var basePolicy = new AuthorizationPolicyBuilder()
+                                .RequireClaim("Base", "Value")
                                 .Build();
                             options.AddPolicy(
                                 "Combined",
@@ -958,10 +956,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                     services.AddAuthorization(
                         options =>
                         {
-                            var basePolicy = new AuthorizationPolicyBuilder().RequireClaim(
-                                    "Base",
-                                    "Value"
-                                )
+                            var basePolicy = new AuthorizationPolicyBuilder()
+                                .RequireClaim("Base", "Value")
                                 .Build();
                             options.AddPolicy(
                                 "Combined",
@@ -992,10 +988,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
                     services.AddAuthorization(
                         options =>
                         {
-                            var basePolicy = new AuthorizationPolicyBuilder().RequireClaim(
-                                    "Base",
-                                    "Value"
-                                )
+                            var basePolicy = new AuthorizationPolicyBuilder()
+                                .RequireClaim("Base", "Value")
                                 .Build();
                             options.AddPolicy(
                                 "Combined",

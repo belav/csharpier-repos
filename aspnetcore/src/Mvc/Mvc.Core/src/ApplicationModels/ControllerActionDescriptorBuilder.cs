@@ -64,9 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             ControllerModel controller
         )
         {
-            actionDescriptor.BoundProperties = controller.ControllerProperties.Where(
-                    p => p.BindingInfo != null
-                )
+            actionDescriptor.BoundProperties = controller.ControllerProperties
+                .Where(p => p.BindingInfo != null)
                 .Select(CreateParameterDescriptor)
                 .ToList();
         }
@@ -188,8 +187,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         )
         {
             actionDescriptor.FilterDescriptors = actionFilters.Select(
-                    f => new FilterDescriptor(f, FilterScope.Action)
-                )
+                f => new FilterDescriptor(f, FilterScope.Action)
+            )
                 .Concat(
                     controllerFilters.Select(f => new FilterDescriptor(f, FilterScope.Controller))
                 )

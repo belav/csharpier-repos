@@ -38,10 +38,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                   <encryption algorithm='AES' keyLength='192' />
                   <masterKey enc:requiresEncryption='true'>{masterKey}</masterKey>
                 </descriptor>";
-            var deserializedDescriptor =
-                new CngGcmAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
-                    XElement.Parse(xml)
-                );
+            var deserializedDescriptor = new CngGcmAuthenticatedEncryptorDescriptorDeserializer()
+                .ImportFromXml(XElement.Parse(xml));
             var test = CreateEncryptorInstanceFromDescriptor(
                 deserializedDescriptor as CngGcmAuthenticatedEncryptorDescriptor
             );

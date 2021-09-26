@@ -90,10 +90,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             }
 
             var transport = await _multiplexedTransportFactory.BindAsync(
-                    endPoint,
-                    features,
-                    cancellationToken
-                )
+                endPoint,
+                features,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             StartAcceptLoop(
                 new GenericMultiplexedConnectionListener(transport),
@@ -135,8 +135,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         )
         {
             var transportsToStop = _transports.Where(
-                    t => t.EndpointConfig != null && endpointsToStop.Contains(t.EndpointConfig)
-                )
+                t => t.EndpointConfig != null && endpointsToStop.Contains(t.EndpointConfig)
+            )
                 .ToList();
             return StopTransportsAsync(transportsToStop, cancellationToken);
         }
@@ -163,16 +163,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             async Task StopTransportConnection(ActiveTransport transport)
             {
                 if (
-                    !await transport.TransportConnectionManager.CloseAllConnectionsAsync(
-                            cancellationToken
-                        )
+                    !await transport.TransportConnectionManager
+                        .CloseAllConnectionsAsync(cancellationToken)
                         .ConfigureAwait(false)
                 )
                 {
                     Trace.NotAllConnectionsClosedGracefully();
 
                     if (
-                        !await transport.TransportConnectionManager.AbortAllConnectionsAsync()
+                        !await transport.TransportConnectionManager
+                            .AbortAllConnectionsAsync()
                             .ConfigureAwait(false)
                     )
                     {

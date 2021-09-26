@@ -328,9 +328,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -342,7 +341,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "ch");
                 }
             );
@@ -385,9 +384,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("x", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -400,14 +398,13 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -419,7 +416,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "ch", "x");
                 }
             );
@@ -429,11 +426,8 @@ class C
         [Fact]
         public void AsyncLambda_Instance_CaptureParameter()
         {
-            var source = string.Format(
-                asyncLambdaSourceTemplate,
-                "/*instance*/",
-                "u.GetHashCode()"
-            );
+            var source = string
+                .Format(asyncLambdaSourceTemplate, "/*instance*/", "u.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -460,9 +454,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("u", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -475,7 +468,7 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("x", out error);
                     Assert.Equal(
@@ -486,9 +479,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -500,7 +492,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "ch", "u");
                 }
             );
@@ -510,11 +502,8 @@ class C
         [Fact]
         public void AsyncLambda_Instance_CaptureLambdaParameter()
         {
-            var source = string.Format(
-                asyncLambdaSourceTemplate,
-                "/*instance*/",
-                "ch.GetHashCode()"
-            );
+            var source = string
+                .Format(asyncLambdaSourceTemplate, "/*instance*/", "ch.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -550,9 +539,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -564,7 +552,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "ch");
                 }
             );
@@ -574,11 +562,8 @@ class C
         [Fact]
         public void AsyncLambda_Instance_CaptureThis()
         {
-            var source = string.Format(
-                asyncLambdaSourceTemplate,
-                "/*instance*/",
-                "t.GetHashCode()"
-            );
+            var source = string
+                .Format(asyncLambdaSourceTemplate, "/*instance*/", "t.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -596,9 +581,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("t", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -611,7 +595,7 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("u", out error);
                     Assert.Equal(
@@ -628,9 +612,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -642,7 +625,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "this", "ch");
                 }
             );
@@ -652,11 +635,8 @@ class C
         [Fact]
         public void AsyncLambda_Instance_CaptureThisAndLocal()
         {
-            var source = string.Format(
-                asyncLambdaSourceTemplate,
-                "/*instance*/",
-                "x + t.GetHashCode()"
-            );
+            var source = string
+                .Format(asyncLambdaSourceTemplate, "/*instance*/", "x + t.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -677,9 +657,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("t", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       17 (0x11)
   .maxstack  1
@@ -693,7 +672,7 @@ class C
   IL_0010:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("u", out error);
                     Assert.Equal(
@@ -704,9 +683,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("x", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -719,14 +697,13 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -738,7 +715,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "this", "ch", "x");
                 }
             );
@@ -784,9 +761,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -798,7 +774,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "ch");
                 }
             );
@@ -841,9 +817,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("x", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -856,14 +831,13 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -875,7 +849,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "ch", "x");
                 }
             );
@@ -912,9 +886,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("u", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -927,7 +900,7 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("x", out error);
                     Assert.Equal(
@@ -938,9 +911,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -952,7 +924,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "ch", "u");
                 }
             );
@@ -998,9 +970,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1012,7 +983,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
                     AssertEx.SetEqual(GetLocalNames(context), "ch");
                 }
             );
@@ -1058,9 +1029,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1072,7 +1042,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);
@@ -1121,9 +1091,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("x", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1136,14 +1105,13 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1155,7 +1123,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);
@@ -1171,11 +1139,8 @@ class C
         [Fact]
         public void GenericAsyncLambda_Instance_CaptureParameter()
         {
-            var source = string.Format(
-                genericAsyncLambdaSourceTemplate,
-                "/*instance*/",
-                "u.GetHashCode()"
-            );
+            var source = string
+                .Format(genericAsyncLambdaSourceTemplate, "/*instance*/", "u.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -1202,9 +1167,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("u", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1217,7 +1181,7 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("x", out error);
                     Assert.Equal(
@@ -1228,9 +1192,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1242,7 +1205,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);
@@ -1258,11 +1221,8 @@ class C
         [Fact]
         public void GenericAsyncLambda_Instance_CaptureLambdaParameter()
         {
-            var source = string.Format(
-                genericAsyncLambdaSourceTemplate,
-                "/*instance*/",
-                "ch.GetHashCode()"
-            );
+            var source = string
+                .Format(genericAsyncLambdaSourceTemplate, "/*instance*/", "ch.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -1298,9 +1258,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1312,7 +1271,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);
@@ -1328,11 +1287,8 @@ class C
         [Fact]
         public void GenericAsyncLambda_Instance_CaptureThis()
         {
-            var source = string.Format(
-                genericAsyncLambdaSourceTemplate,
-                "/*instance*/",
-                "t.GetHashCode()"
-            );
+            var source = string
+                .Format(genericAsyncLambdaSourceTemplate, "/*instance*/", "t.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -1350,9 +1306,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("t", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1365,7 +1320,7 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("u", out error);
                     Assert.Equal(
@@ -1382,9 +1337,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1396,7 +1350,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);
@@ -1412,11 +1366,8 @@ class C
         [Fact]
         public void GenericAsyncLambda_Instance_CaptureThisAndLocal()
         {
-            var source = string.Format(
-                genericAsyncLambdaSourceTemplate,
-                "/*instance*/",
-                "x + t.GetHashCode()"
-            );
+            var source = string
+                .Format(genericAsyncLambdaSourceTemplate, "/*instance*/", "x + t.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -1437,9 +1388,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("t", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size       17 (0x11)
   .maxstack  1
@@ -1453,7 +1403,7 @@ class C
   IL_0010:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("u", out error);
                     Assert.Equal(
@@ -1464,9 +1414,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("x", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1479,14 +1428,13 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1498,7 +1446,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);
@@ -1550,9 +1498,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1564,7 +1511,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);
@@ -1613,9 +1560,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("x", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1628,14 +1574,13 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1647,7 +1592,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);
@@ -1663,11 +1608,8 @@ class C
         [Fact]
         public void GenericAsyncLambda_Static_CaptureParameter()
         {
-            var source = string.Format(
-                genericAsyncLambdaSourceTemplate,
-                "static",
-                "u.GetHashCode()"
-            );
+            var source = string
+                .Format(genericAsyncLambdaSourceTemplate, "static", "u.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -1694,9 +1636,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("u", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1709,7 +1650,7 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("x", out error);
                     Assert.Equal(
@@ -1720,9 +1661,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1734,7 +1674,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);
@@ -1750,11 +1690,8 @@ class C
         [Fact]
         public void GenericAsyncLambda_Static_CaptureLambdaParameter()
         {
-            var source = string.Format(
-                genericAsyncLambdaSourceTemplate,
-                "static",
-                "ch.GetHashCode()"
-            );
+            var source = string
+                .Format(genericAsyncLambdaSourceTemplate, "static", "ch.GetHashCode()");
             var comp = CreateCompilationWithMscorlib45(
                 source,
                 options: TestOptions.DebugDll,
@@ -1790,9 +1727,8 @@ class C
                     testData = new CompilationTestData();
                     context.CompileExpression("ch", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                    testData.GetMethodData("<>x<T, U>.<>m0").VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1804,7 +1740,7 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
                     context.CompileExpression("typeof(T)", out error);
                     Assert.Null(error);

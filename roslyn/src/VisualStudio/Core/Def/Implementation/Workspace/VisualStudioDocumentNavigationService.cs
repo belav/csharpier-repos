@@ -308,20 +308,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             {
                 if (workspace.CurrentSolution.GetDocument(documentId) == null)
                 {
-                    var generatedDocument = workspace.CurrentSolution.GetProject(
-                            documentId.ProjectId
-                        )
+                    var generatedDocument = workspace.CurrentSolution
+                        .GetProject(documentId.ProjectId)
                         .GetSourceGeneratedDocumentAsync(documentId, cancellationToken)
                         .GetAwaiter()
                         .GetResult();
 
                     if (generatedDocument != null)
                     {
-                        _sourceGeneratedFileManager.Value.NavigateToSourceGeneratedFile(
-                            generatedDocument,
-                            getTextSpanForMapping(generatedDocument),
-                            cancellationToken
-                        );
+                        _sourceGeneratedFileManager.Value
+                            .NavigateToSourceGeneratedFile(
+                                generatedDocument,
+                                getTextSpanForMapping(generatedDocument),
+                                cancellationToken
+                            );
                         return true;
                     }
                 }
@@ -341,10 +341,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     {
                         // Check if the mapped file matches one already in the workspace.
                         // If so use the workspace APIs to navigate to it.  Otherwise use VS APIs to navigate to the file path.
-                        var documentIdsForFilePath =
-                            workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                                mappedSpan.Value.FilePath
-                            );
+                        var documentIdsForFilePath = workspace.CurrentSolution
+                            .GetDocumentIdsWithFilePath(mappedSpan.Value.FilePath);
                         if (!documentIdsForFilePath.IsEmpty)
                         {
                             // If the mapped file maps to the same document that was passed in, then re-use the documentId to preserve context.
@@ -460,14 +458,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // Instead, we invoke this in JTF run which will mitigate deadlocks when the ConfigureAwait(true)
             // tries to switch back to the main thread in the LSP client.
             // Link to LSP client bug for ConfigureAwait(true) - https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1216657
-            var results = _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    spanMappingService.MapSpansAsync(
-                        generatedDocument,
-                        SpecializedCollections.SingletonEnumerable(textSpan),
-                        cancellationToken
-                    )
-            );
+            var results = _threadingContext.JoinableTaskFactory
+                .Run(
+                    () =>
+                        spanMappingService.MapSpansAsync(
+                            generatedDocument,
+                            SpecializedCollections.SingletonEnumerable(textSpan),
+                            cancellationToken
+                        )
+                );
 
             if (!results.IsDefaultOrEmpty)
             {

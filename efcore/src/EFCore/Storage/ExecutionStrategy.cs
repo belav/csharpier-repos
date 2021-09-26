@@ -209,11 +209,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         );
                     }
 
-                    Dependencies.Logger.ExecutionStrategyRetrying(
-                        ExceptionsEncountered,
-                        delay.Value,
-                        async: true
-                    );
+                    Dependencies.Logger
+                        .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
 
                     OnRetry();
 
@@ -263,10 +260,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             if (Suspended)
             {
                 return await operation(
-                        Dependencies.CurrentContext.Context,
-                        state,
-                        cancellationToken
-                    )
+                    Dependencies.CurrentContext.Context,
+                    state,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -274,15 +271,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             // In order to avoid infinite recursive generics, wrap operation with ExecutionResult
             var result = await ExecuteImplementationAsync(
-                    async (context, state, cancellationToken) =>
-                        new ExecutionResult<TResult>(
-                            true,
-                            await operation(context, state, cancellationToken).ConfigureAwait(false)
-                        ),
-                    verifySucceeded,
-                    state,
-                    cancellationToken
-                )
+                async (context, state, cancellationToken) =>
+                    new ExecutionResult<TResult>(
+                        true,
+                        await operation(context, state, cancellationToken).ConfigureAwait(false)
+                    ),
+                verifySucceeded,
+                state,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return result.Result;
         }
@@ -307,10 +304,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     Suspended = true;
                     var result = await operation(
-                            Dependencies.CurrentContext.Context,
-                            state,
-                            cancellationToken
-                        )
+                        Dependencies.CurrentContext.Context,
+                        state,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     Suspended = false;
                     return result;
@@ -326,11 +323,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     )
                     {
                         var result = await ExecuteImplementationAsync(
-                                verifySucceeded,
-                                null,
-                                state,
-                                cancellationToken
-                            )
+                            verifySucceeded,
+                            null,
+                            state,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (result.IsSuccessful)
                         {
@@ -354,11 +351,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         );
                     }
 
-                    Dependencies.Logger.ExecutionStrategyRetrying(
-                        ExceptionsEncountered,
-                        delay.Value,
-                        async: true
-                    );
+                    Dependencies.Logger
+                        .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
 
                     OnRetry();
 

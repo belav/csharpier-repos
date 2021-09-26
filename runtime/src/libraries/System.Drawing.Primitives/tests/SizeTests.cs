@@ -179,12 +179,13 @@ namespace System.Drawing.PrimitivesTests
         {
             Size sz = new Size(0, 0);
             Assert.Equal(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "{{Width={0}, Height={1}}}",
-                    sz.Width,
-                    sz.Height
-                ),
+                string
+                    .Format(
+                        CultureInfo.CurrentCulture,
+                        "{{Width={0}, Height={1}}}",
+                        sz.Width,
+                        sz.Height
+                    ),
                 sz.ToString()
             );
         }

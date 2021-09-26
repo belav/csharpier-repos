@@ -176,10 +176,8 @@ namespace System.Drawing
                 encoder = FindEncoderForFormat(RawFormat);
                 if (encoder == null)
                 {
-                    string msg = string.Format(
-                        "No codec available for saving format '{0}'.",
-                        format.Guid
-                    );
+                    string msg = string
+                        .Format("No codec available for saving format '{0}'.", format.Guid);
                     throw new ArgumentException(msg, nameof(format));
                 }
             }

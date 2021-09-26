@@ -40,42 +40,41 @@ namespace JwtSample
                 }
             );
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(
-                    options =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+                options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            LifetimeValidator = (before, expires, token, parameters) =>
-                                expires > DateTime.UtcNow,
-                            ValidateAudience = false,
-                            ValidateIssuer = false,
-                            ValidateActor = false,
-                            ValidateLifetime = true,
-                            IssuerSigningKey = SecurityKey
-                        };
+                        LifetimeValidator = (before, expires, token, parameters) =>
+                            expires > DateTime.UtcNow,
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateActor = false,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = SecurityKey
+                    };
 
-                        options.Events = new JwtBearerEvents
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
                         {
-                            OnMessageReceived = context =>
-                            {
-                                var accessToken = context.Request.Query["access_token"];
+                            var accessToken = context.Request.Query["access_token"];
 
-                                if (
-                                    !string.IsNullOrEmpty(accessToken)
-                                    && (
-                                        context.HttpContext.WebSockets.IsWebSocketRequest
-                                        || context.Request.Headers["Accept"] == "text/event-stream"
-                                    )
+                            if (
+                                !string.IsNullOrEmpty(accessToken)
+                                && (
+                                    context.HttpContext.WebSockets.IsWebSocketRequest
+                                    || context.Request.Headers["Accept"] == "text/event-stream"
                                 )
-                                {
-                                    context.Token = context.Request.Query["access_token"];
-                                }
-                                return Task.CompletedTask;
+                            )
+                            {
+                                context.Token = context.Request.Query["access_token"];
                             }
-                        };
-                    }
-                );
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
         }
 
         public void Configure(IApplicationBuilder app)

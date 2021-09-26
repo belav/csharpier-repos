@@ -189,9 +189,9 @@ namespace System.Data.Common
                     return false;
                 }
                 unquotedString = quotedString.Substring(
-                        prefixLength,
-                        quotedStringLength - (prefixLength + suffixLength)
-                    )
+                    prefixLength,
+                    quotedStringLength - (prefixLength + suffixLength)
+                )
                     .Replace(quoteSuffix + quoteSuffix, quoteSuffix);
             }
             else
@@ -642,11 +642,8 @@ namespace System.Data.Common
 
         internal static bool CompareInsensitiveInvariant(string? strvalue, string? strconst) =>
             0
-            == CultureInfo.InvariantCulture.CompareInfo.Compare(
-                strvalue,
-                strconst,
-                CompareOptions.IgnoreCase
-            );
+            == CultureInfo.InvariantCulture.CompareInfo
+                .Compare(strvalue, strconst, CompareOptions.IgnoreCase);
 
         internal static int DstCompare(string strA, string strB) =>
             CultureInfo.CurrentCulture.CompareInfo.Compare(strA, strB, ADP.DefaultCompareOptions);

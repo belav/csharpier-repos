@@ -35,9 +35,8 @@ namespace Microsoft.AspNetCore.WebSockets.Microbenchmarks
                 async context =>
                 {
                     context.Response.Headers[HeaderNames.CacheControl] = _cacheControl;
-                    await context.Response.BodyWriter.WriteAsync(
-                        new ReadOnlyMemory<byte>(_data, 0, Size)
-                    );
+                    await context.Response.BodyWriter
+                        .WriteAsync(new ReadOnlyMemory<byte>(_data, 0, Size));
                 },
                 Options.Create(
                     new ResponseCachingOptions

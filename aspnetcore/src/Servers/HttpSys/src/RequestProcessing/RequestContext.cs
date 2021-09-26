@@ -54,8 +54,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     }
                     else
                     {
-                        var connectionDisconnectToken =
-                            Server.DisconnectListener.GetTokenForConnection(Request.UConnectionId);
+                        var connectionDisconnectToken = Server.DisconnectListener
+                            .GetTokenForConnection(Request.UConnectionId);
 
                         if (connectionDisconnectToken.CanBeCanceled)
                         {
@@ -325,9 +325,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     PropertyId =
                         HttpApiTypes.HTTP_DELEGATE_REQUEST_PROPERTY_ID.DelegateRequestDelegateUrlProperty,
                     PropertyInfo = (IntPtr)uriPointer,
-                    PropertyInfoLength = (uint)System.Text.Encoding.Unicode.GetByteCount(
-                        destination.UrlPrefix
-                    )
+                    PropertyInfoLength = (uint)System.Text.Encoding.Unicode
+                        .GetByteCount(destination.UrlPrefix)
                 };
 
                 statusCode = HttpApi.HttpDelegateRequestEx(

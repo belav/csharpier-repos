@@ -227,9 +227,8 @@ namespace System.Linq.Expressions.Tests
         public void StaticAddMethodOnType()
         {
             NewExpression newExp = Expression.New(typeof(EnumerableStaticAdd));
-            MethodInfo adder = typeof(EnumerableStaticAdd).GetMethod(
-                nameof(EnumerableStaticAdd.Add)
-            );
+            MethodInfo adder = typeof(EnumerableStaticAdd)
+                .GetMethod(nameof(EnumerableStaticAdd.Add));
 
             // this exception behavior (rather than ArgumentException) is compatible with the .NET Framework
             Assert.Throws<InvalidOperationException>(
@@ -271,7 +270,8 @@ namespace System.Linq.Expressions.Tests
                 "addMethod",
                 () => Expression.ListInit(newExp, adder, Expression.Constant(0))
             );
-            adder = typeof(AnyTypeList).GetMethod(nameof(AnyTypeList.Add))
+            adder = typeof(AnyTypeList)
+                .GetMethod(nameof(AnyTypeList.Add))
                 .MakeGenericMethod(typeof(List<int>));
             AssertExtensions.Throws<ArgumentException>(
                 "arguments[0]",
@@ -282,7 +282,8 @@ namespace System.Linq.Expressions.Tests
                 "addMethod",
                 () => Expression.ListInit(newExp, adder, Expression.Constant(0))
             );
-            adder = typeof(AnyTypeList).GetMethod(nameof(AnyTypeList.AddIntRegardless))
+            adder = typeof(AnyTypeList)
+                .GetMethod(nameof(AnyTypeList.AddIntRegardless))
                 .MakeGenericMethod(typeof(List<>));
             AssertExtensions.Throws<ArgumentException>(
                 "addMethod",
@@ -294,7 +295,8 @@ namespace System.Linq.Expressions.Tests
         public void GenericAddMethod(bool useInterpreter)
         {
             NewExpression newExp = Expression.New(typeof(AnyTypeList));
-            MethodInfo adder = typeof(AnyTypeList).GetMethod(nameof(AnyTypeList.Add))
+            MethodInfo adder = typeof(AnyTypeList)
+                .GetMethod(nameof(AnyTypeList.Add))
                 .MakeGenericMethod(typeof(int));
             Expression<Func<AnyTypeList>> lambda = Expression.Lambda<Func<AnyTypeList>>(
                 Expression.ListInit(

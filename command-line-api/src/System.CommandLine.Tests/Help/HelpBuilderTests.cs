@@ -713,7 +713,8 @@ namespace System.CommandLine.Tests.Help
 
             helpBuilder.Write(command);
 
-            _console.Out.ToString()
+            _console.Out
+                .ToString()
                 .Should()
                 .Contain($"--opt <Read|ReadWrite|Write>{_columnPadding}{description}");
         }
@@ -833,9 +834,8 @@ namespace System.CommandLine.Tests.Help
         public void Options_section_is_not_included_if_no_options_configured()
         {
             var commandLineBuilder =
-                new CommandLineBuilder().AddCommand(
-                    new Command("outer", "description for outer")
-                ).Command;
+                new CommandLineBuilder()
+                    .AddCommand(new Command("outer", "description for outer")).Command;
 
             _helpBuilder.Write(commandLineBuilder);
 
@@ -1078,7 +1078,8 @@ namespace System.CommandLine.Tests.Help
             };
 
             _helpBuilder.Write(command);
-            var help = _console.Out.ToString()
+            var help = _console.Out
+                .ToString()
                 .Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(l => l.Trim());
 
@@ -1370,7 +1371,8 @@ namespace System.CommandLine.Tests.Help
         [Fact]
         public void Help_text_can_be_added_after_default_text_by_inheriting_HelpBuilder()
         {
-            var parser = new CommandLineBuilder().UseDefaults()
+            var parser = new CommandLineBuilder()
+                .UseDefaults()
                 .UseHelpBuilder(
                     context =>
                         new CustomHelpBuilderThatAddsTextAfterDefaultText(

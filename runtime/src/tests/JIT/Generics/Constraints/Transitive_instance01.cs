@@ -49,34 +49,40 @@ public class Test
     public static int Main()
     {
         Eval(
-            new GenClass<FooClass>().TransitiveConstraint()
+            new GenClass<FooClass>()
+                .TransitiveConstraint()
                 .GetType()
                 .Equals(typeof(Transition<FooClass>))
         );
         Eval(
-            new GenClass<FooStruct>().TransitiveConstraint()
+            new GenClass<FooStruct>()
+                .TransitiveConstraint()
                 .GetType()
                 .Equals(typeof(Transition<FooStruct>))
         );
 
         Eval(
-            new GenClass<FooClass>().VirtTransitiveConstraint()
+            new GenClass<FooClass>()
+                .VirtTransitiveConstraint()
                 .GetType()
                 .Equals(typeof(Transition<FooClass>))
         );
         Eval(
-            new GenClass<FooStruct>().VirtTransitiveConstraint()
+            new GenClass<FooStruct>()
+                .VirtTransitiveConstraint()
                 .GetType()
                 .Equals(typeof(Transition<FooStruct>))
         );
 
         Eval(
-            new GenStruct<FooClass>().TransitiveConstraint()
+            new GenStruct<FooClass>()
+                .TransitiveConstraint()
                 .GetType()
                 .Equals(typeof(Transition<FooClass>))
         );
         Eval(
-            new GenStruct<FooStruct>().TransitiveConstraint()
+            new GenStruct<FooStruct>()
+                .TransitiveConstraint()
                 .GetType()
                 .Equals(typeof(Transition<FooStruct>))
         );

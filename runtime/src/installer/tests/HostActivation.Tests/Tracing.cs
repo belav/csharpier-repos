@@ -174,10 +174,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 RepoDirectories = new RepoDirectoriesProvider();
 
                 // Entry point projects
-                PortableAppFixture = new TestProjectFixture(
-                    "PortableApp",
-                    RepoDirectories
-                ).EnsureRestored().PublishProject();
+                PortableAppFixture = new TestProjectFixture("PortableApp", RepoDirectories)
+                    .EnsureRestored()
+                    .PublishProject();
             }
 
             public void Dispose()

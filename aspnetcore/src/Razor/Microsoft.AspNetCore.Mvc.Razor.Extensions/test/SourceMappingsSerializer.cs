@@ -24,11 +24,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             {
                 var sourceMapping = csharpDocument.SourceMappings[i];
                 if (
-                    !string.Equals(
-                        sourceMapping.OriginalSpan.FilePath,
-                        sourceFilePath,
-                        StringComparison.Ordinal
-                    )
+                    !string
+                        .Equals(
+                            sourceMapping.OriginalSpan.FilePath,
+                            sourceFilePath,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     continue;

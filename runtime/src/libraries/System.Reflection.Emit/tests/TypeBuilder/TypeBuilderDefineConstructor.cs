@@ -232,17 +232,17 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
 
             type.DefineConstructor(
-                    MethodAttributes.Public,
-                    CallingConventions.Standard,
-                    new Type[0]
-                )
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[0]
+            )
                 .GetILGenerator()
                 .Emit(OpCodes.Ret);
             type.DefineConstructor(
-                    MethodAttributes.Public,
-                    CallingConventions.Standard,
-                    new Type[0]
-                )
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[0]
+            )
                 .GetILGenerator()
                 .Emit(OpCodes.Ret);
 

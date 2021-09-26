@@ -35,7 +35,8 @@ namespace System.Diagnostics.Tests
                 try
                 {
                     // Find the relevant ProcessThread in this process
-                    ProcessThread targetThread = currentProcess.Threads.Cast<ProcessThread>()
+                    ProcessThread targetThread = currentProcess.Threads
+                        .Cast<ProcessThread>()
                         .Single(pt => pt.Id == targetThreadId);
 
                     // Try setting and getting its priority

@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             var name = new AssemblyIdentity(
                 "goo",
                 version: new Version(0xffff, 0xffff, 0xffff, 0xffff)
-            ).ToAssemblyName();
+            )
+                .ToAssemblyName();
             RoundTrip(name, testFullName: false);
             var obj = FusionAssemblyIdentity.ToAssemblyNameObject(name);
             var display = FusionAssemblyIdentity.GetDisplayName(
@@ -116,26 +117,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             RoundTrip(new AssemblyName("goo") { Version = new Version(1, 2, 3, 4) });
 
             RoundTrip(
-                new AssemblyIdentity(
-                    "goo",
-                    cultureName: CultureInfo.CurrentCulture.Name
-                ).ToAssemblyName()
+                new AssemblyIdentity("goo", cultureName: CultureInfo.CurrentCulture.Name)
+                    .ToAssemblyName()
             );
             RoundTrip(new AssemblyIdentity("goo", cultureName: "").ToAssemblyName());
             RoundTrip(new AssemblyName("goo") { CultureInfo = CultureInfo.InvariantCulture });
 
             RoundTrip(
-                new AssemblyIdentity(
-                    "goo",
-                    version: new Version(1, 2, 3, 4),
-                    cultureName: "en-US"
-                ).ToAssemblyName()
+                new AssemblyIdentity("goo", version: new Version(1, 2, 3, 4), cultureName: "en-US")
+                    .ToAssemblyName()
             );
             RoundTrip(
                 new AssemblyIdentity(
                     "goo",
                     publicKeyOrToken: new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }.AsImmutableOrNull()
-                ).ToAssemblyName()
+                )
+                    .ToAssemblyName()
             );
             RoundTrip(
                 new AssemblyIdentity(
@@ -143,15 +140,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
                     version: new Version(1, 2, 3, 4),
                     cultureName: CultureInfo.CurrentCulture.Name,
                     publicKeyOrToken: new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }.AsImmutableOrNull()
-                ).ToAssemblyName()
+                )
+                    .ToAssemblyName()
             );
 
             RoundTrip(new AssemblyIdentity("goo", isRetargetable: true).ToAssemblyName());
             RoundTrip(
-                new AssemblyIdentity(
-                    "goo",
-                    contentType: AssemblyContentType.WindowsRuntime
-                ).ToAssemblyName()
+                new AssemblyIdentity("goo", contentType: AssemblyContentType.WindowsRuntime)
+                    .ToAssemblyName()
             );
         }
 

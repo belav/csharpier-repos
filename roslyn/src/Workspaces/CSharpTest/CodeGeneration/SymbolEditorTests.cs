@@ -31,15 +31,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
             var pid = ProjectId.CreateNewId();
 
             var docs = sources.Select(
-                    (s, i) =>
-                        DocumentInfo.Create(
-                            DocumentId.CreateNewId(pid),
-                            name: "code" + i,
-                            loader: TextLoader.From(
-                                TextAndVersion.Create(SourceText.From(s), VersionStamp.Default)
-                            )
+                (s, i) =>
+                    DocumentInfo.Create(
+                        DocumentId.CreateNewId(pid),
+                        name: "code" + i,
+                        loader: TextLoader.From(
+                            TextAndVersion.Create(SourceText.From(s), VersionStamp.Default)
                         )
-                )
+                    )
+            )
                 .ToList();
 
             var proj = ProjectInfo.Create(

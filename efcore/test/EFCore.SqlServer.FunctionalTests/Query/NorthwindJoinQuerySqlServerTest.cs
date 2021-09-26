@@ -163,9 +163,8 @@ WHERE [t].[CustomerID] = N'ALFKI'"
             bool async
         )
         {
-            await base.Join_customers_orders_with_subquery_anonymous_property_method_with_take(
-                async
-            );
+            await base
+                .Join_customers_orders_with_subquery_anonymous_property_method_with_take(async);
 
             AssertSql(
                 @"@__p_0='5'

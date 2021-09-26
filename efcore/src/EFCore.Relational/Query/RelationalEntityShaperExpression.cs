@@ -134,16 +134,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                     if (requiredNonPkProperties.Count > 0)
                     {
                         condition = requiredNonPkProperties.Select(
-                                p =>
-                                    NotEqual(
-                                        valueBufferParameter.CreateValueBufferReadValueExpression(
-                                            typeof(object),
-                                            p.GetIndex(),
-                                            p
-                                        ),
-                                        Constant(null)
-                                    )
-                            )
+                            p =>
+                                NotEqual(
+                                    valueBufferParameter.CreateValueBufferReadValueExpression(
+                                        typeof(object),
+                                        p.GetIndex(),
+                                        p
+                                    ),
+                                    Constant(null)
+                                )
+                        )
                             .Aggregate((a, b) => AndAlso(a, b));
                     }
 
@@ -157,16 +157,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         var atLeastOneNonNullValueInNullablePropertyCondition =
                             allNonPrincipalSharedNonPkProperties.Select(
-                                    p =>
-                                        NotEqual(
-                                            valueBufferParameter.CreateValueBufferReadValueExpression(
-                                                typeof(object),
-                                                p.GetIndex(),
-                                                p
-                                            ),
-                                            Constant(null)
-                                        )
-                                )
+                                p =>
+                                    NotEqual(
+                                        valueBufferParameter.CreateValueBufferReadValueExpression(
+                                            typeof(object),
+                                            p.GetIndex(),
+                                            p
+                                        ),
+                                        Constant(null)
+                                    )
+                            )
                                 .Aggregate((a, b) => OrElse(a, b));
 
                         condition =

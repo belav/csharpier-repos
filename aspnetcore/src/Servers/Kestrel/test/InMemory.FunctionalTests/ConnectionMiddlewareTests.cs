@@ -253,9 +253,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [Fact]
         public async Task CanFlushAsyncWithConnectionMiddleware()
         {
-            var listenOptions = new ListenOptions(
-                new IPEndPoint(IPAddress.Loopback, 0)
-            ).UsePassThrough();
+            var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+                .UsePassThrough();
 
             var serviceContext = new TestServiceContext(LoggerFactory);
 
@@ -289,9 +288,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [Fact]
         public async Task CanFlushAsyncWithConnectionMiddlewarePipeWriter()
         {
-            var listenOptions = new ListenOptions(
-                new IPEndPoint(IPAddress.Loopback, 0)
-            ).UsePassThrough();
+            var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+                .UsePassThrough();
 
             var serviceContext = new TestServiceContext(LoggerFactory);
 
@@ -299,13 +297,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 var server = new TestServer(
                     async context =>
                     {
-                        await context.Response.BodyWriter.WriteAsync(
-                            Encoding.ASCII.GetBytes("Hello ")
-                        );
+                        await context.Response.BodyWriter
+                            .WriteAsync(Encoding.ASCII.GetBytes("Hello "));
                         await context.Response.BodyWriter.FlushAsync();
-                        await context.Response.BodyWriter.WriteAsync(
-                            Encoding.ASCII.GetBytes("World!")
-                        );
+                        await context.Response.BodyWriter
+                            .WriteAsync(Encoding.ASCII.GetBytes("World!"));
                     },
                     serviceContext,
                     listenOptions

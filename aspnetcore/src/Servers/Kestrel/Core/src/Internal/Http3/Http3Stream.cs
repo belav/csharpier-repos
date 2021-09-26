@@ -858,11 +858,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             // - For now we'll restrict it to http/s and require it match the transport.
             // - We'll need to find some concrete scenarios to warrant unblocking this.
             if (
-                !string.Equals(
-                    RequestHeaders[HeaderNames.Scheme],
-                    Scheme,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                !string
+                    .Equals(
+                        RequestHeaders[HeaderNames.Scheme],
+                        Scheme,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 var str = CoreStrings.FormatHttp3StreamErrorSchemeMismatch(

@@ -62,12 +62,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             )
             {
                 var enclosingLambdaExpression = parent.GetAncestorsOrThis(
-                        n =>
-                            (
-                                n is SimpleLambdaExpressionSyntax
-                                || n is ParenthesizedLambdaExpressionSyntax
-                            )
-                    )
+                    n =>
+                        (
+                            n is SimpleLambdaExpressionSyntax
+                            || n is ParenthesizedLambdaExpressionSyntax
+                        )
+                )
                     .FirstOrDefault();
                 if (enclosingLambdaExpression != null)
                 {
@@ -91,15 +91,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 }
 
                 var enclosingMethodBlock = parent.GetAncestorsOrThis(
-                        n => n is MethodDeclarationSyntax
-                    )
+                    n => n is MethodDeclarationSyntax
+                )
                     .FirstOrDefault();
 
                 if (
                     enclosingMethodBlock != null
-                    && ((MethodDeclarationSyntax)enclosingMethodBlock).Modifiers.Any(
-                        n => n.Kind() == SyntaxKind.AsyncKeyword
-                    )
+                    && ((MethodDeclarationSyntax)enclosingMethodBlock).Modifiers
+                        .Any(n => n.Kind() == SyntaxKind.AsyncKeyword)
                 )
                 {
                     return token;

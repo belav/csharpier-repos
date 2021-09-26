@@ -56,11 +56,11 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             // Try to compute the referenced symbol and attempt to go to definition for the symbol.
             var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
             var (symbol, _) = symbolService.GetSymbolAndBoundSpanAsync(
-                    document,
-                    position,
-                    includeType: true,
-                    cancellationToken
-                )
+                document,
+                position,
+                includeType: true,
+                cancellationToken
+            )
                 .WaitAndGetResult(cancellationToken);
             if (symbol is null)
                 return false;
@@ -126,31 +126,33 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 return false;
 
             var definitions = interfaceImpls.SelectMany(
-                    i =>
-                        GoToDefinitionHelpers.GetDefinitions(
-                            i,
-                            solution,
-                            thirdPartyNavigationAllowed: false,
-                            cancellationToken
-                        )
-                )
-                .ToImmutableArray();
-
-            var title = string.Format(
-                EditorFeaturesResources._0_implemented_members,
-                FindUsagesHelpers.GetDisplayName(symbol)
-            );
-
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    _streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                        _threadingContext,
-                        solution.Workspace,
-                        title,
-                        definitions,
+                i =>
+                    GoToDefinitionHelpers.GetDefinitions(
+                        i,
+                        solution,
+                        thirdPartyNavigationAllowed: false,
                         cancellationToken
                     )
-            );
+            )
+                .ToImmutableArray();
+
+            var title = string
+                .Format(
+                    EditorFeaturesResources._0_implemented_members,
+                    FindUsagesHelpers.GetDisplayName(symbol)
+                );
+
+            return _threadingContext.JoinableTaskFactory
+                .Run(
+                    () =>
+                        _streamingPresenter.TryNavigateToOrPresentItemsAsync(
+                            _threadingContext,
+                            solution.Workspace,
+                            title,
+                            definitions,
+                            cancellationToken
+                        )
+                );
         }
 
         private static bool IsThirdPartyNavigationAllowed(

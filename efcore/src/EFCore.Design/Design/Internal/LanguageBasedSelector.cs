@@ -53,8 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
 
             var matches = Services.Where(
-                    s => string.Equals(s.Language, language, StringComparison.OrdinalIgnoreCase)
-                )
+                s => string.Equals(s.Language, language, StringComparison.OrdinalIgnoreCase)
+            )
                 .ToList();
             if (matches.Count == 0)
             {

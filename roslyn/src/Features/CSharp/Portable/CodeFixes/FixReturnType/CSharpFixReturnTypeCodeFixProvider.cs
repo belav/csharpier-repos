@@ -56,10 +56,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             var cancellationToken = context.CancellationToken;
 
             var analyzedTypes = await TryGetOldAndNewReturnTypeAsync(
-                    document,
-                    diagnostics,
-                    cancellationToken
-                )
+                document,
+                diagnostics,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (analyzedTypes == default)
             {
@@ -146,10 +146,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
         )
         {
             var (declarationTypeToFix, fixedDeclaration) = await TryGetOldAndNewReturnTypeAsync(
-                    document,
-                    diagnostics,
-                    cancellationToken
-                )
+                document,
+                diagnostics,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             editor.ReplaceNode(declarationTypeToFix, fixedDeclaration);

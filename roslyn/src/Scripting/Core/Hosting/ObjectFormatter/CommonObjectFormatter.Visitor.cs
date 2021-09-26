@@ -79,11 +79,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     var builder = new Builder(_builderOptions, suppressEllipsis: false);
                     string _;
                     return FormatObjectRecursive(
-                            builder,
-                            obj,
-                            isRoot: true,
-                            debuggerDisplayName: out _
-                        )
+                        builder,
+                        obj,
+                        isRoot: true,
+                        debuggerDisplayName: out _
+                    )
                         .ToString();
                 }
                 catch (InsufficientExecutionStackException)
@@ -106,10 +106,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 }
 
                 debuggerDisplayName = null;
-                string primitive = _formatter.PrimitiveFormatter.FormatPrimitive(
-                    obj,
-                    _primitiveOptions
-                );
+                string primitive = _formatter.PrimitiveFormatter
+                    .FormatPrimitive(obj, _primitiveOptions);
                 if (primitive != null)
                 {
                     result.Append(primitive);
@@ -397,9 +395,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     members.AddRange(type.DeclaredFields.Where(f => !f.IsStatic));
                     members.AddRange(
-                        type.DeclaredProperties.Where(
-                            f => f.GetMethod != null && !f.GetMethod.IsStatic
-                        )
+                        type.DeclaredProperties
+                            .Where(f => f.GetMethod != null && !f.GetMethod.IsStatic)
                     );
                     type = type.BaseType?.GetTypeInfo();
                 }
@@ -410,10 +407,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         // Need case-sensitive comparison here so that the order of members is
                         // always well-defined (members can differ by case only). And we don't want to
                         // depend on that order.
-                        int comparisonResult = StringComparer.OrdinalIgnoreCase.Compare(
-                            x.Name,
-                            y.Name
-                        );
+                        int comparisonResult = StringComparer.OrdinalIgnoreCase
+                            .Compare(x.Name, y.Name);
                         if (comparisonResult == 0)
                         {
                             comparisonResult = StringComparer.Ordinal.Compare(x.Name, y.Name);
@@ -433,9 +428,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     bool rootHidden = false,
                         ignoreVisibility = false;
                     var browsable = (DebuggerBrowsableAttribute)member.GetCustomAttributes(
-                            typeof(DebuggerBrowsableAttribute),
-                            false
-                        )
+                        typeof(DebuggerBrowsableAttribute),
+                        false
+                    )
                         .FirstOrDefault();
                     if (browsable != null)
                     {
@@ -560,10 +555,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                     if (!string.IsNullOrEmpty(name))
                                     {
                                         name = FormatWithEmbeddedExpressions(
-                                                MakeMemberBuilder(lengthLimit),
-                                                name,
-                                                item
-                                            )
+                                            MakeMemberBuilder(lengthLimit),
+                                            name,
+                                            item
+                                        )
                                             .ToString();
                                     }
 
@@ -582,10 +577,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                 }
                             }
                             else if (
-                                _formatter.PrimitiveFormatter.FormatPrimitive(
-                                    value,
-                                    _primitiveOptions
-                                ) == null
+                                _formatter.PrimitiveFormatter
+                                    .FormatPrimitive(value, _primitiveOptions) == null
                                 && VisitedObjects.Add(value)
                             )
                             {
@@ -617,10 +610,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         else
                         {
                             name = FormatWithEmbeddedExpressions(
-                                    MakeMemberBuilder(lengthLimit),
-                                    name,
-                                    value
-                                )
+                                MakeMemberBuilder(lengthLimit),
+                                name,
+                                value
+                            )
                                 .ToString();
                         }
 
@@ -669,10 +662,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             {
                 result.Append("!<");
                 result.Append(
-                    _formatter.TypeNameFormatter.FormatTypeName(
-                        exception.GetType(),
-                        _typeNameOptions
-                    )
+                    _formatter.TypeNameFormatter
+                        .FormatTypeName(exception.GetType(), _typeNameOptions)
                 );
                 result.Append('>');
             }
@@ -701,20 +692,15 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 if (collection is Array array)
                 {
                     result.Append(
-                        _formatter.TypeNameFormatter.FormatArrayTypeName(
-                            array.GetType(),
-                            array,
-                            _typeNameOptions
-                        )
+                        _formatter.TypeNameFormatter
+                            .FormatArrayTypeName(array.GetType(), array, _typeNameOptions)
                     );
                     return;
                 }
 
                 result.Append(
-                    _formatter.TypeNameFormatter.FormatTypeName(
-                        collection.GetType(),
-                        _typeNameOptions
-                    )
+                    _formatter.TypeNameFormatter
+                        .FormatTypeName(collection.GetType(), _typeNameOptions)
                 );
                 try
                 {

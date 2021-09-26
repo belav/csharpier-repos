@@ -73,9 +73,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                     context.AddItems(
                         await document.GetUnionItemsFromDocumentAndLinkedDocumentsAsync(
-                                UnionCompletionItemComparer.Instance,
-                                d => GetSnippetsForDocumentAsync(d, position, cancellationToken)
-                            )
+                            UnionCompletionItemComparer.Instance,
+                            d => GetSnippetsForDocumentAsync(d, position, cancellationToken)
+                        )
                             .ConfigureAwait(false)
                     );
                 }
@@ -129,25 +129,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 Contract.ThrowIfNull(directive);
 
                 if (
-                    !directive.DirectiveNameToken.IsKind(
-                        SyntaxKind.IfKeyword,
-                        SyntaxKind.RegionKeyword,
-                        SyntaxKind.ElseKeyword,
-                        SyntaxKind.ElifKeyword,
-                        SyntaxKind.ErrorKeyword,
-                        SyntaxKind.LineKeyword,
-                        SyntaxKind.PragmaKeyword,
-                        SyntaxKind.EndIfKeyword,
-                        SyntaxKind.UndefKeyword,
-                        SyntaxKind.EndRegionKeyword,
-                        SyntaxKind.WarningKeyword
-                    )
+                    !directive.DirectiveNameToken
+                        .IsKind(
+                            SyntaxKind.IfKeyword,
+                            SyntaxKind.RegionKeyword,
+                            SyntaxKind.ElseKeyword,
+                            SyntaxKind.ElifKeyword,
+                            SyntaxKind.ErrorKeyword,
+                            SyntaxKind.LineKeyword,
+                            SyntaxKind.PragmaKeyword,
+                            SyntaxKind.EndIfKeyword,
+                            SyntaxKind.UndefKeyword,
+                            SyntaxKind.EndRegionKeyword,
+                            SyntaxKind.WarningKeyword
+                        )
                 )
                 {
                     var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                            position,
-                            cancellationToken
-                        )
+                        position,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     return GetSnippetCompletionItems(
                         document.Project.Solution.Workspace,
@@ -161,9 +162,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             else
             {
                 var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                        position,
-                        cancellationToken
-                    )
+                    position,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (
@@ -207,8 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return ImmutableArray<CompletionItem>.Empty;
         }
 
-        private static readonly CompletionItemRules s_tupleRules =
-            CompletionItemRules.Default.WithCommitCharacterRule(
+        private static readonly CompletionItemRules s_tupleRules = CompletionItemRules.Default
+            .WithCommitCharacterRule(
                 CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ':')
             );
 
@@ -220,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            var service = workspace.Services.GetLanguageServices(semanticModel.Language)
+            var service = workspace.Services
+                .GetLanguageServices(semanticModel.Language)
                 .GetService<ISnippetInfoService>();
             if (service == null)
                 return ImmutableArray<CompletionItem>.Empty;
@@ -247,9 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                           : snippet.Shortcut,
                         displayTextSuffix: "",
                         sortText: isPreProcessorContext ? snippet.Shortcut[1..] : snippet.Shortcut,
-                        description: (
-                            snippet.Title + Environment.NewLine + snippet.Description
-                        ).ToSymbolDisplayParts(),
+                        description: (snippet.Title + Environment.NewLine + snippet.Description)
+                            .ToSymbolDisplayParts(),
                         glyph: Glyph.Snippet,
                         rules: rules
                     );

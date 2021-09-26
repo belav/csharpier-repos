@@ -1302,24 +1302,20 @@ namespace System.Threading.Tasks.Tests
             Assert.False(new ValueTask().Equals(new ValueTask(Task.CompletedTask)));
             Assert.False(new ValueTask(Task.CompletedTask).Equals(new ValueTask()));
             Assert.False(
-                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0).Equals(
-                    new ValueTask()
-                )
+                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
+                    .Equals(new ValueTask())
             );
             Assert.False(
-                new ValueTask().Equals(
-                    new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
-                )
+                new ValueTask()
+                    .Equals(new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0))
             );
             Assert.False(
-                new ValueTask(Task.CompletedTask).Equals(
-                    new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
-                )
+                new ValueTask(Task.CompletedTask)
+                    .Equals(new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0))
             );
             Assert.False(
-                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0).Equals(
-                    new ValueTask(Task.CompletedTask)
-                )
+                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
+                    .Equals(new ValueTask(Task.CompletedTask))
             );
         }
 
@@ -1340,9 +1336,8 @@ namespace System.Threading.Tasks.Tests
             Assert.False(new ValueTask<int>(42).Equals(new ValueTask<int>(Task.FromResult(42))));
             Assert.False(new ValueTask<int>(Task.FromResult(42)).Equals(new ValueTask<int>(42)));
             Assert.False(
-                new ValueTask<int>(ManualResetValueTaskSourceFactory.Completed(42, null), 0).Equals(
-                    new ValueTask<int>(42)
-                )
+                new ValueTask<int>(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
+                    .Equals(new ValueTask<int>(42))
             );
         }
 
@@ -1354,33 +1349,38 @@ namespace System.Threading.Tasks.Tests
             Assert.False(new ValueTask().Equals((object)new ValueTask(Task.CompletedTask)));
             Assert.False(new ValueTask(Task.CompletedTask).Equals((object)new ValueTask()));
             Assert.False(
-                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0).Equals(
-                    (object)new ValueTask()
-                )
+                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
+                    .Equals((object)new ValueTask())
             );
             Assert.False(
-                new ValueTask().Equals(
-                    (object)new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
-                )
+                new ValueTask()
+                    .Equals(
+                        (object)new ValueTask(
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        )
+                    )
             );
             Assert.False(
-                new ValueTask(Task.CompletedTask).Equals(
-                    (object)new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
-                )
+                new ValueTask(Task.CompletedTask)
+                    .Equals(
+                        (object)new ValueTask(
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        )
+                    )
             );
             Assert.False(
-                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0).Equals(
-                    (object)new ValueTask(Task.CompletedTask)
-                )
+                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
+                    .Equals((object)new ValueTask(Task.CompletedTask))
             );
 
             Assert.False(new ValueTask().Equals(null));
             Assert.False(new ValueTask().Equals("12345"));
             Assert.False(new ValueTask(Task.CompletedTask).Equals("12345"));
             Assert.False(
-                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0).Equals(
-                    "12345"
-                )
+                new ValueTask(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
+                    .Equals("12345")
             );
         }
 
@@ -1392,9 +1392,8 @@ namespace System.Threading.Tasks.Tests
 
             Assert.True(new ValueTask<string>("42").Equals((object)new ValueTask<string>("42")));
             Assert.True(
-                new ValueTask<string>((string)null).Equals(
-                    (object)new ValueTask<string>((string)null)
-                )
+                new ValueTask<string>((string)null)
+                    .Equals((object)new ValueTask<string>((string)null))
             );
 
             Assert.False(
@@ -1411,9 +1410,8 @@ namespace System.Threading.Tasks.Tests
                 new ValueTask<int>(Task.FromResult(42)).Equals((object)new ValueTask<int>(42))
             );
             Assert.False(
-                new ValueTask<int>(ManualResetValueTaskSourceFactory.Completed(42, null), 0).Equals(
-                    (object)new ValueTask<int>(42)
-                )
+                new ValueTask<int>(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
+                    .Equals((object)new ValueTask<int>(42))
             );
 
             Assert.False(new ValueTask<int>(42).Equals((object)null));
@@ -1442,20 +1440,16 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal("Hello", new ValueTask<string>(Task.FromResult("Hello")).ToString());
             Assert.Equal(
                 "Hello",
-                new ValueTask<string>(
-                    ManualResetValueTaskSourceFactory.Completed("Hello", null),
-                    0
-                ).ToString()
+                new ValueTask<string>(ManualResetValueTaskSourceFactory.Completed("Hello", null), 0)
+                    .ToString()
             );
 
             Assert.Equal("42", new ValueTask<int>(42).ToString());
             Assert.Equal("42", new ValueTask<int>(Task.FromResult(42)).ToString());
             Assert.Equal(
                 "42",
-                new ValueTask<int>(
-                    ManualResetValueTaskSourceFactory.Completed(42, null),
-                    0
-                ).ToString()
+                new ValueTask<int>(ManualResetValueTaskSourceFactory.Completed(42, null), 0)
+                    .ToString()
             );
 
             Assert.Same(string.Empty, new ValueTask<string>(string.Empty).ToString());
@@ -1468,20 +1462,19 @@ namespace System.Threading.Tasks.Tests
                 new ValueTask<string>(
                     ManualResetValueTaskSourceFactory.Completed(string.Empty, null),
                     0
-                ).ToString()
+                )
+                    .ToString()
             );
 
             Assert.Same(
                 string.Empty,
-                new ValueTask<string>(
-                    Task.FromException<string>(new InvalidOperationException())
-                ).ToString()
+                new ValueTask<string>(Task.FromException<string>(new InvalidOperationException()))
+                    .ToString()
             );
             Assert.Same(
                 string.Empty,
-                new ValueTask<string>(
-                    Task.FromException<string>(new OperationCanceledException())
-                ).ToString()
+                new ValueTask<string>(Task.FromException<string>(new OperationCanceledException()))
+                    .ToString()
             );
             Assert.Same(
                 string.Empty,
@@ -1491,14 +1484,14 @@ namespace System.Threading.Tasks.Tests
                         new InvalidOperationException()
                     ),
                     0
-                ).ToString()
+                )
+                    .ToString()
             );
 
             Assert.Same(
                 string.Empty,
-                new ValueTask<string>(
-                    Task.FromCanceled<string>(new CancellationToken(true))
-                ).ToString()
+                new ValueTask<string>(Task.FromCanceled<string>(new CancellationToken(true)))
+                    .ToString()
             );
 
             Assert.Equal("0", default(ValueTask<int>).ToString());
@@ -1513,7 +1506,8 @@ namespace System.Threading.Tasks.Tests
                 new ValueTask<string>(
                     ManualResetValueTaskSourceFactory.Completed<string>(null, null),
                     0
-                ).ToString()
+                )
+                    .ToString()
             );
 
             Assert.Same(

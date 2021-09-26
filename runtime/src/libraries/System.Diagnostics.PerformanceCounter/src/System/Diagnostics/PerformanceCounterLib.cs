@@ -571,9 +571,8 @@ namespace System.Diagnostics
                 for (int i = 0; i < creationData.Count; i++)
                 {
                     counters[i] = creationData[i].CounterName;
-                    counterTypes[i] = ((int)creationData[i].CounterType).ToString(
-                        CultureInfo.InvariantCulture
-                    );
+                    counterTypes[i] = ((int)creationData[i].CounterType)
+                        .ToString(CultureInfo.InvariantCulture);
                 }
 
                 linkageKey = serviceParentKey.OpenSubKey(categoryName + "\\Linkage", true);
@@ -726,11 +725,8 @@ namespace System.Diagnostics
                     string keyPath = ServicePath + "\\" + category + "\\Performance";
                     if (
                         _machineName == "."
-                        || string.Equals(
-                            _machineName,
-                            ComputerName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        || string
+                            .Equals(_machineName, ComputerName, StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         key = Registry.LocalMachine.OpenSubKey(keyPath);
@@ -775,15 +771,17 @@ namespace System.Diagnostics
                             systemDllName != null
                             && systemDllName is string
                             && (
-                                string.Equals(
-                                    (string)systemDllName,
-                                    PerformanceCounterLib.PerfShimName,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                                || ((string)systemDllName).EndsWith(
-                                    PerformanceCounterLib.PerfShimFullNameSuffix,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                string
+                                    .Equals(
+                                        (string)systemDllName,
+                                        PerformanceCounterLib.PerfShimName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                || ((string)systemDllName)
+                                    .EndsWith(
+                                        PerformanceCounterLib.PerfShimFullNameSuffix,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                         )
                         {
@@ -1213,12 +1211,13 @@ namespace System.Diagnostics
 
                         int key;
                         if (
-                            !int.TryParse(
-                                names[index * 2],
-                                NumberStyles.Integer,
-                                CultureInfo.InvariantCulture,
-                                out key
-                            )
+                            !int
+                                .TryParse(
+                                    names[index * 2],
+                                    NumberStyles.Integer,
+                                    CultureInfo.InvariantCulture,
+                                    out key
+                                )
                         )
                         {
                             if (isHelp)
@@ -1416,11 +1415,12 @@ namespace System.Diagnostics
             {
                 if (
                     machineName != "."
-                    && !string.Equals(
-                        machineName,
-                        PerformanceCounterLib.ComputerName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !string
+                        .Equals(
+                            machineName,
+                            PerformanceCounterLib.ComputerName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     perfDataKey = PerformanceDataRegistryKey.OpenRemoteBaseKey(machineName);
@@ -1672,9 +1672,9 @@ namespace System.Diagnostics
                         );
 
                     string instanceName = PERF_INSTANCE_DEFINITION.GetName(
-                            in perfInstance,
-                            data.Slice(pos)
-                        )
+                        in perfInstance,
+                        data.Slice(pos)
+                    )
                         .ToString();
                     if (
                         parentInstanceNames != null
@@ -1771,9 +1771,9 @@ namespace System.Diagnostics
                 ref readonly PERF_INSTANCE_DEFINITION perfInstance =
                     ref MemoryMarshal.AsRef<PERF_INSTANCE_DEFINITION>(data.Slice(pos));
                 instanceNames[i] = PERF_INSTANCE_DEFINITION.GetName(
-                        in perfInstance,
-                        data.Slice(pos)
-                    )
+                    in perfInstance,
+                    data.Slice(pos)
+                )
                     .ToString();
                 pos += perfInstance.ByteLength;
 

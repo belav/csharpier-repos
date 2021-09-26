@@ -22,14 +22,14 @@ namespace Microsoft.Web.Helpers.Test
             Assert.ThrowsArgumentGreaterThanOrEqualTo(
                 () =>
                     FileUpload._GetHtml(
-                            GetContext(),
-                            name: null,
-                            initialNumberOfFiles: -2,
-                            allowMoreFilesToBeAdded: false,
-                            includeFormTag: false,
-                            addText: "",
-                            uploadText: ""
-                        )
+                        GetContext(),
+                        name: null,
+                        initialNumberOfFiles: -2,
+                        allowMoreFilesToBeAdded: false,
+                        includeFormTag: false,
+                        addText: "",
+                        uploadText: ""
+                    )
                         .ToString(),
                 "initialNumberOfFiles",
                 "0"

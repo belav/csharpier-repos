@@ -114,7 +114,8 @@ namespace IntelHardwareIntrinsicTest
 
                     // XYZW
                     vf3 =
-                        (Vector128<float>)typeof(Sse).GetMethod(
+                        (Vector128<float>)typeof(Sse)
+                            .GetMethod(
                                 nameof(Sse.Shuffle),
                                 new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
                             )

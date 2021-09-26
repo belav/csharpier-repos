@@ -76,14 +76,11 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
                     continue;
                 }
 
-                var invocation = diagnostic.AdditionalLocations[0].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken: cancellationToken
-                );
+                var invocation = diagnostic.AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken: cancellationToken);
                 var negate = diagnostic.Properties.ContainsKey(UseIsNullConstants.Negated);
-                var isUnconstrainedGeneric = diagnostic.Properties.ContainsKey(
-                    UseIsNullConstants.UnconstrainedGeneric
-                );
+                var isUnconstrainedGeneric = diagnostic.Properties
+                    .ContainsKey(UseIsNullConstants.UnconstrainedGeneric);
 
                 var arguments = syntaxFacts.GetArgumentsOfInvocationExpression(invocation);
                 var argument = syntaxFacts.IsNullLiteralExpression(

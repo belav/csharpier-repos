@@ -297,17 +297,18 @@ namespace System.Diagnostics.Tests
                     () =>
                     {
                         Console.Write(
-                            string.Join(
-                                ItemSeparator,
-                                Environment.GetEnvironmentVariables()
-                                    .Cast<DictionaryEntry>()
-                                    .Select(
-                                        e =>
-                                            Convert.ToBase64String(
-                                                Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
-                                            )
-                                    )
-                            )
+                            string
+                                .Join(
+                                    ItemSeparator,
+                                    Environment.GetEnvironmentVariables()
+                                        .Cast<DictionaryEntry>()
+                                        .Select(
+                                            e =>
+                                                Convert.ToBase64String(
+                                                    Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                                )
+                                        )
+                                )
                         );
                         return RemoteExecutor.SuccessExitCode;
                     }
@@ -330,12 +331,13 @@ namespace System.Diagnostics.Tests
                 );
                 Assert.True(
                     startInfoEnv.SetEquals(actualEnv),
-                    string.Format(
-                        "Expected: {0}{1}Actual: {2}",
-                        string.Join(", ", startInfoEnv.Except(actualEnv)),
-                        Environment.NewLine,
-                        string.Join(", ", actualEnv.Except(startInfoEnv))
-                    )
+                    string
+                        .Format(
+                            "Expected: {0}{1}Actual: {2}",
+                            string.Join(", ", startInfoEnv.Except(actualEnv)),
+                            Environment.NewLine,
+                            string.Join(", ", actualEnv.Except(startInfoEnv))
+                        )
                 );
 
                 // Validate against current process. (Profilers / code coverage tools can add own environment variables
@@ -348,12 +350,13 @@ namespace System.Diagnostics.Tests
                 );
                 Assert.True(
                     envEnv.IsSupersetOf(actualEnv),
-                    string.Format(
-                        "Expected: {0}{1}Actual: {2}",
-                        string.Join(", ", envEnv.Except(actualEnv)),
-                        Environment.NewLine,
-                        string.Join(", ", actualEnv.Except(envEnv))
-                    )
+                    string
+                        .Format(
+                            "Expected: {0}{1}Actual: {2}",
+                            string.Join(", ", envEnv.Except(actualEnv)),
+                            Environment.NewLine,
+                            string.Join(", ", actualEnv.Except(envEnv))
+                        )
                 );
             }
 
@@ -377,17 +380,18 @@ namespace System.Diagnostics.Tests
                 () =>
                 {
                     Console.Write(
-                        string.Join(
-                            ItemSeparator,
-                            Environment.GetEnvironmentVariables()
-                                .Cast<DictionaryEntry>()
-                                .Select(
-                                    e =>
-                                        Convert.ToBase64String(
-                                            Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
-                                        )
-                                )
-                        )
+                        string
+                            .Join(
+                                ItemSeparator,
+                                Environment.GetEnvironmentVariables()
+                                    .Cast<DictionaryEntry>()
+                                    .Select(
+                                        e =>
+                                            Convert.ToBase64String(
+                                                Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                            )
+                                    )
+                            )
                     );
                     return RemoteExecutor.SuccessExitCode;
                 }
@@ -420,15 +424,17 @@ namespace System.Diagnostics.Tests
                 () =>
                 {
                     Console.Write(
-                        string.Join(
-                            ItemSeparator,
-                            new ProcessStartInfo().Environment.Select(
-                                e =>
-                                    Convert.ToBase64String(
-                                        Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                        string
+                            .Join(
+                                ItemSeparator,
+                                new ProcessStartInfo().Environment
+                                    .Select(
+                                        e =>
+                                            Convert.ToBase64String(
+                                                Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                            )
                                     )
                             )
-                        )
                     );
                     return RemoteExecutor.SuccessExitCode;
                 }
@@ -464,16 +470,18 @@ namespace System.Diagnostics.Tests
                 () =>
                 {
                     Console.Write(
-                        string.Join(
-                            ItemSeparator,
-                            new ProcessStartInfo().EnvironmentVariables.Cast<DictionaryEntry>()
-                                .Select(
-                                    e =>
-                                        Convert.ToBase64String(
-                                            Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
-                                        )
-                                )
-                        )
+                        string
+                            .Join(
+                                ItemSeparator,
+                                new ProcessStartInfo().EnvironmentVariables
+                                    .Cast<DictionaryEntry>()
+                                    .Select(
+                                        e =>
+                                            Convert.ToBase64String(
+                                                Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                            )
+                                    )
+                            )
                     );
                     return RemoteExecutor.SuccessExitCode;
                 }
@@ -511,7 +519,8 @@ namespace System.Diagnostics.Tests
             // To mimic this behaviour, we can't use Environment.SetEnvironmentVariable here as it's case-insenstive on Windows.
             // We also can't use p.StartInfo.Environment as it's comparer is set to OrdinalIgnoreCAse.
             // But we can overwrite it using reflection to mimic the CreateProcess behaviour and avoid having this test call CreateProcess directly.
-            p.StartInfo.Environment.GetType()
+            p.StartInfo.Environment
+                .GetType()
                 .GetField(
                     "_contents",
                     Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance
@@ -620,15 +629,14 @@ namespace System.Diagnostics.Tests
             Assert.NotEqual(workingDirectory, Directory.GetCurrentDirectory());
             var psi = new ProcessStartInfo { WorkingDirectory = workingDirectory };
             RemoteExecutor.Invoke(
-                    wd =>
-                    {
-                        Assert.Equal(wd, Directory.GetCurrentDirectory());
-                        return RemoteExecutor.SuccessExitCode;
-                    },
-                    workingDirectory,
-                    new RemoteInvokeOptions { StartInfo = psi }
-                )
-                .Dispose();
+                wd =>
+                {
+                    Assert.Equal(wd, Directory.GetCurrentDirectory());
+                    return RemoteExecutor.SuccessExitCode;
+                },
+                workingDirectory,
+                new RemoteInvokeOptions { StartInfo = psi }
+            ).Dispose();
         }
 
         [ConditionalFact(nameof(IsAdmin_IsNotNano_RemoteExecutorIsSupported))] // Nano has no "netapi32.dll", Admin rights are required
@@ -787,11 +795,11 @@ namespace System.Diagnostics.Tests
             psi.EnvironmentVariables.Add("NewKey2", "NewValue2");
 
             // Environment and EnvironmentVariables should be equal, but have different enumeration types.
-            IEnumerable<KeyValuePair<string, string>> allEnvironment = psi.Environment.OrderBy(
-                k => k.Key
-            );
-            IEnumerable<DictionaryEntry> allDictionary =
-                psi.EnvironmentVariables.Cast<DictionaryEntry>().OrderBy(k => k.Key);
+            IEnumerable<KeyValuePair<string, string>> allEnvironment = psi.Environment
+                .OrderBy(k => k.Key);
+            IEnumerable<DictionaryEntry> allDictionary = psi.EnvironmentVariables
+                .Cast<DictionaryEntry>()
+                .OrderBy(k => k.Key);
             Assert.Equal(
                 allEnvironment.Select(k => new DictionaryEntry(k.Key, k.Value)),
                 allDictionary

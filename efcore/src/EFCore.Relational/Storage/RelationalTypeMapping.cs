@@ -586,11 +586,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     The generated string.
         /// </returns>
         protected virtual string GenerateNonNullSqlLiteral(object value) =>
-            string.Format(
-                CultureInfo.InvariantCulture,
-                SqlLiteralFormatString,
-                Check.NotNull(value, nameof(value))
-            );
+            string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    SqlLiteralFormatString,
+                    Check.NotNull(value, nameof(value))
+                );
 
         /// <summary>
         ///     The method to use when reading values of the given type. The method must be defined

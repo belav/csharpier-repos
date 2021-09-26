@@ -87,10 +87,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
                 if (requestProcessor != null)
                 {
-                    var connectionHeartbeatFeature =
-                        _context.ConnectionFeatures.Get<IConnectionHeartbeatFeature>();
-                    var connectionLifetimeNotificationFeature =
-                        _context.ConnectionFeatures.Get<IConnectionLifetimeNotificationFeature>();
+                    var connectionHeartbeatFeature = _context.ConnectionFeatures
+                        .Get<IConnectionHeartbeatFeature>();
+                    var connectionLifetimeNotificationFeature = _context.ConnectionFeatures
+                        .Get<IConnectionLifetimeNotificationFeature>();
 
                     // These features should never be null in Kestrel itself, if this middleware is ever refactored to run outside of kestrel,
                     // we'll need to handle these missing.
@@ -113,17 +113,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
                     // Register for graceful shutdown of the server
                     using var shutdownRegistration =
-                        connectionLifetimeNotificationFeature?.ConnectionClosedRequested.Register(
-                            state => ((HttpConnection)state!).StopProcessingNextRequest(),
-                            this
-                        );
+                        connectionLifetimeNotificationFeature?.ConnectionClosedRequested
+                            .Register(
+                                state => ((HttpConnection)state!).StopProcessingNextRequest(),
+                                this
+                            );
 
                     // Register for connection close
-                    using var closedRegistration =
-                        _context.ConnectionContext.ConnectionClosed.Register(
-                            state => ((HttpConnection)state!).OnConnectionClosed(),
-                            this
-                        );
+                    using var closedRegistration = _context.ConnectionContext.ConnectionClosed
+                        .Register(state => ((HttpConnection)state!).OnConnectionClosed(), this);
 
                     await requestProcessor.ProcessRequestsAsync(httpApplication);
                 }
@@ -233,7 +231,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         {
             var hasTls = _context.ConnectionFeatures.Get<ITlsConnectionFeature>() != null;
             var applicationProtocol =
-                _context.ConnectionFeatures.Get<ITlsApplicationProtocolFeature>()?.ApplicationProtocol
+                _context.ConnectionFeatures
+                    .Get<ITlsApplicationProtocolFeature>()?.ApplicationProtocol
                 ?? new ReadOnlyMemory<byte>();
             var http1Enabled = (_context.Protocols & HttpProtocols.Http1) == HttpProtocols.Http1;
             var http2Enabled = (_context.Protocols & HttpProtocols.Http2) == HttpProtocols.Http2;

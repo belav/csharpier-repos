@@ -22,12 +22,14 @@ namespace System.Reflection.Tests
                 | BindingFlags.Instance
                 | BindingFlags.Static;
 
-            MemberInfo[] fromBase = typeof(MemberHolderBase<int>).Project()
+            MemberInfo[] fromBase = typeof(MemberHolderBase<int>)
+                .Project()
                 .GetMember("*", mt, bf)
                 .Where(m => m.DeclaringType != typeof(object).Project())
                 .OrderBy(m => m.Name)
                 .ToArray();
-            MemberInfo[] fromDerived = typeof(MemberHolder<int>).Project()
+            MemberInfo[] fromDerived = typeof(MemberHolder<int>)
+                .Project()
                 .GetMember("*", mt, bf)
                 .Where(m => m.DeclaringType != typeof(object).Project())
                 .OrderBy(m => m.Name)
@@ -59,12 +61,14 @@ namespace System.Reflection.Tests
                 | BindingFlags.Instance
                 | BindingFlags.Static;
 
-            MemberInfo[] fromBase = typeof(MemberHolderBase<int>).Project()
+            MemberInfo[] fromBase = typeof(MemberHolderBase<int>)
+                .Project()
                 .GetMember("*", mt, bf)
                 .Where(m => m.DeclaringType != typeof(object).Project())
                 .OrderBy(m => m.Name)
                 .ToArray();
-            MemberInfo[] fromDerived = typeof(MemberHolderBase<long>).Project()
+            MemberInfo[] fromDerived = typeof(MemberHolderBase<long>)
+                .Project()
                 .GetMember("*", mt, bf)
                 .Where(m => m.DeclaringType != typeof(object).Project())
                 .OrderBy(m => m.Name)
@@ -92,12 +96,14 @@ namespace System.Reflection.Tests
                 | BindingFlags.Instance
                 | BindingFlags.Static;
 
-            MemberInfo[] fromBase = typeof(MemberHolderBase<>).Project()
+            MemberInfo[] fromBase = typeof(MemberHolderBase<>)
+                .Project()
                 .GetMember("*", mt, bf | BindingFlags.DeclaredOnly)
                 .Where(m => m.DeclaringType != typeof(object).Project())
                 .OrderBy(m => m.Name)
                 .ToArray();
-            MemberInfo[] fromBaseAgain = typeof(MemberHolderBase<>).Project()
+            MemberInfo[] fromBaseAgain = typeof(MemberHolderBase<>)
+                .Project()
                 .GetMember("*", mt, bf)
                 .Where(m => m.DeclaringType != typeof(object).Project())
                 .OrderBy(m => m.Name)
@@ -156,9 +162,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ParameterEquality1()
         {
-            MethodInfo m1 = typeof(MemberHolderBase<int>).Project()
+            MethodInfo m1 = typeof(MemberHolderBase<int>)
+                .Project()
                 .GetMethod("MyParameterizedMethod1");
-            MethodInfo m2 = typeof(MemberHolderBase<int>).Project()
+            MethodInfo m2 = typeof(MemberHolderBase<int>)
+                .Project()
                 .GetMethod("MyParameterizedMethod1");
 
             ParameterInfo[] pis1 = m1.GetParameters();
@@ -185,9 +193,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ParameterEquality2()
         {
-            MethodInfo m1 = typeof(MemberHolderBase<int>).Project()
+            MethodInfo m1 = typeof(MemberHolderBase<int>)
+                .Project()
                 .GetMethod("MyParameterizedMethod1");
-            MethodInfo m2 = typeof(MemberHolderBase<long>).Project()
+            MethodInfo m2 = typeof(MemberHolderBase<long>)
+                .Project()
                 .GetMethod("MyParameterizedMethod1");
 
             ParameterInfo[] pis1 = m1.GetParameters();
@@ -205,7 +215,8 @@ namespace System.Reflection.Tests
         public static void ParameterEquality3()
         {
             MethodInfo m1 = typeof(MemberHolderBase<int>).GetMethod("MyParameterizedMethod1"); // Intentionally not projected.
-            MethodInfo m2 = typeof(MemberHolderBase<int>).Project()
+            MethodInfo m2 = typeof(MemberHolderBase<int>)
+                .Project()
                 .GetMethod("MyParameterizedMethod1");
 
             if (object.ReferenceEquals(m1, m2))

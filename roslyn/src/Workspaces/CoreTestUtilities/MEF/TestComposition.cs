@@ -42,14 +42,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             )
             {
                 _assemblies = assemblies.OrderBy(
-                        (a, b) => string.CompareOrdinal(a.FullName, b.FullName)
-                    )
+                    (a, b) => string.CompareOrdinal(a.FullName, b.FullName)
+                )
                     .ToImmutableArray();
                 _parts = parts.OrderBy((a, b) => string.CompareOrdinal(a.FullName, b.FullName))
                     .ToImmutableArray();
                 _excludedPartTypes = excludedPartTypes.OrderBy(
-                        (a, b) => string.CompareOrdinal(a.FullName, b.FullName)
-                    )
+                    (a, b) => string.CompareOrdinal(a.FullName, b.FullName)
+                )
                     .ToImmutableArray();
             }
 
@@ -148,9 +148,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private ComposableCatalog GetCatalog() =>
             ExportProviderCache.CreateAssemblyCatalog(
-                    Assemblies,
-                    ExportProviderCache.CreateResolver()
-                )
+                Assemblies,
+                ExportProviderCache.CreateResolver()
+            )
                 .WithoutPartsOfTypes(ExcludedPartTypes)
                 .WithParts(Parts);
 

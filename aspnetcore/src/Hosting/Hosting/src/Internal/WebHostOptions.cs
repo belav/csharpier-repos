@@ -52,12 +52,13 @@ namespace Microsoft.AspNetCore.Hosting
             var timeout = configuration[WebHostDefaults.ShutdownTimeoutKey];
             if (
                 !string.IsNullOrEmpty(timeout)
-                && int.TryParse(
-                    timeout,
-                    NumberStyles.None,
-                    CultureInfo.InvariantCulture,
-                    out var seconds
-                )
+                && int
+                    .TryParse(
+                        timeout,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out var seconds
+                    )
             )
             {
                 ShutdownTimeout = TimeSpan.FromSeconds(seconds);

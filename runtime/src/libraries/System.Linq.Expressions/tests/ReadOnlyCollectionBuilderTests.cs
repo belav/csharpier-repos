@@ -935,7 +935,8 @@ namespace System.Linq.Expressions.Tests
                 Enumerable.Range(1, 3),
                 Enumerable.Range(1, 4),
                 Enumerable.Range(1, 5),
-            }.Select(x => new object[] { x });
+            }
+                .Select(x => new object[] { x });
 
         public static IEnumerable<object[]> Lengths() =>
             Enumerable.Range(0, 10).Select(i => new object[] { i });
@@ -953,6 +954,7 @@ namespace System.Linq.Expressions.Tests
                 e => ((IList)e).Remove(1),
                 e => e.RemoveAt(0),
                 e => e.Reverse(),
-            }.Select((x, i) => new object[] { i, x }); // index used to help identify which item was the cause of a theory failure
+            }
+                .Select((x, i) => new object[] { i, x }); // index used to help identify which item was the cause of a theory failure
     }
 }

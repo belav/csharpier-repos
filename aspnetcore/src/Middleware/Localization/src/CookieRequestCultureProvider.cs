@@ -61,11 +61,12 @@ namespace Microsoft.AspNetCore.Localization
                 throw new ArgumentNullException(nameof(requestCulture));
             }
 
-            return string.Join(
-                _cookieSeparator,
-                $"{_culturePrefix}{requestCulture.Culture.Name}",
-                $"{_uiCulturePrefix}{requestCulture.UICulture.Name}"
-            );
+            return string
+                .Join(
+                    _cookieSeparator,
+                    $"{_culturePrefix}{requestCulture.Culture.Name}",
+                    $"{_uiCulturePrefix}{requestCulture.UICulture.Name}"
+                );
         }
 
         /// <summary>

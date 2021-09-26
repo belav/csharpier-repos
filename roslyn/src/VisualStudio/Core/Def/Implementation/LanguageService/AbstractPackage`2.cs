@@ -72,8 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             await shell.LoadPackageAsync(Guids.RoslynPackageId);
 
-            var miscellaneousFilesWorkspace =
-                this.ComponentModel.GetService<MiscellaneousFilesWorkspace>();
+            var miscellaneousFilesWorkspace = this.ComponentModel
+                .GetService<MiscellaneousFilesWorkspace>();
             RegisterMiscellaneousFilesWorkspaceInformation(miscellaneousFilesWorkspace);
 
             if (!IVsShellExtensions.IsInCommandLineMode)
@@ -161,11 +161,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             {
                 if (!IVsShellExtensions.IsInCommandLineMode)
                 {
-                    ThreadHelper.JoinableTaskFactory.Run(
-                        async () =>
-                            await UnregisterObjectBrowserLibraryManagerAsync(CancellationToken.None)
-                                .ConfigureAwait(true)
-                    );
+                    ThreadHelper.JoinableTaskFactory
+                        .Run(
+                            async () =>
+                                await UnregisterObjectBrowserLibraryManagerAsync(
+                                    CancellationToken.None
+                                )
+                                    .ConfigureAwait(true)
+                        );
                 }
 
                 // If we've created the language service then tell it it's time to clean itself up now.

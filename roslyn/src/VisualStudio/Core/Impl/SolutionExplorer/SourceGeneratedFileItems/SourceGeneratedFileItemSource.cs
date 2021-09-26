@@ -80,12 +80,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
 
             var sourceGeneratedDocuments = await project.GetSourceGeneratedDocumentsAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var sourceGeneratedDocumentsForGeneratorById = sourceGeneratedDocuments.Where(
-                    d => d.SourceGenerator == _parentGeneratorItem.Generator
-                )
+                d => d.SourceGenerator == _parentGeneratorItem.Generator
+            )
                 .ToDictionary(d => d.Id);
 
             // We must update the list on the UI thread, since the WPF elements bound to our list expect that
@@ -149,10 +149,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         var mid = (low + high) / 2;
 
                         if (
-                            StringComparer.OrdinalIgnoreCase.Compare(
-                                document.HintName,
-                                ((SourceGeneratedFileItem)_items[mid]).HintName
-                            ) < 0
+                            StringComparer.OrdinalIgnoreCase
+                                .Compare(
+                                    document.HintName,
+                                    ((SourceGeneratedFileItem)_items[mid]).HintName
+                                ) < 0
                         )
                         {
                             high = mid;
@@ -196,42 +197,41 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 );
 
                 Task.Run(
-                        async () =>
+                    async () =>
+                    {
+                        // Since the user just expanded this, we want to do a single population aggressively,
+                        // where the only reason we'd cancel is if the user collapsed it again.
+                        var solution = _workspace.CurrentSolution;
+                        await UpdateSourceGeneratedFileItemsAsync(solution, cancellationToken)
+                            .ConfigureAwait(false);
+
+                        // Now that we've done it the first time, we'll subscribe for future changes
+                        lock (_gate)
                         {
-                            // Since the user just expanded this, we want to do a single population aggressively,
-                            // where the only reason we'd cancel is if the user collapsed it again.
-                            var solution = _workspace.CurrentSolution;
-                            await UpdateSourceGeneratedFileItemsAsync(solution, cancellationToken)
-                                .ConfigureAwait(false);
+                            // It's important we check for cancellation inside our lock: if the user were to collapse
+                            // right at this point, we don't want to have a case where we cancelled the work, unsubscribed
+                            // in AfterCollapse, and _then_ subscribed here again.
 
-                            // Now that we've done it the first time, we'll subscribe for future changes
-                            lock (_gate)
+                            cancellationToken.ThrowIfCancellationRequested();
+                            _workspace.WorkspaceChanged += OnWorkpaceChanged;
+                            if (_workspace.CurrentSolution != solution)
                             {
-                                // It's important we check for cancellation inside our lock: if the user were to collapse
-                                // right at this point, we don't want to have a case where we cancelled the work, unsubscribed
-                                // in AfterCollapse, and _then_ subscribed here again.
-
-                                cancellationToken.ThrowIfCancellationRequested();
-                                _workspace.WorkspaceChanged += OnWorkpaceChanged;
-                                if (_workspace.CurrentSolution != solution)
-                                {
-                                    // The workspace changed while we were doing our initial population, so
-                                    // refresh it. We'll just call our OnWorkspaceChanged event handler
-                                    // so this looks like any other change.
-                                    OnWorkpaceChanged(
-                                        this,
-                                        new WorkspaceChangeEventArgs(
-                                            WorkspaceChangeKind.SolutionChanged,
-                                            solution,
-                                            _workspace.CurrentSolution
-                                        )
-                                    );
-                                }
+                                // The workspace changed while we were doing our initial population, so
+                                // refresh it. We'll just call our OnWorkspaceChanged event handler
+                                // so this looks like any other change.
+                                OnWorkpaceChanged(
+                                    this,
+                                    new WorkspaceChangeEventArgs(
+                                        WorkspaceChangeKind.SolutionChanged,
+                                        solution,
+                                        _workspace.CurrentSolution
+                                    )
+                                );
                             }
-                        },
-                        cancellationToken
-                    )
-                    .CompletesAsyncOperation(asyncToken);
+                        }
+                    },
+                    cancellationToken
+                ).CompletesAsyncOperation(asyncToken);
             }
         }
 
@@ -290,26 +290,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         _cancellationTokenSource.Token
                     );
                     _resettableDelay.Task.ContinueWith(
-                            _ =>
+                        _ =>
+                        {
+                            lock (_gate)
                             {
-                                lock (_gate)
-                                {
-                                    // We've started off this work, so if another change comes in we need to start a delay all over again
-                                    _resettableDelay = null;
-                                }
+                                // We've started off this work, so if another change comes in we need to start a delay all over again
+                                _resettableDelay = null;
+                            }
 
-                                cancellationToken.ThrowIfCancellationRequested();
+                            cancellationToken.ThrowIfCancellationRequested();
 
-                                return UpdateSourceGeneratedFileItemsAsync(
-                                    _workspace.CurrentSolution,
-                                    cancellationToken
-                                );
-                            },
-                            cancellationToken,
-                            TaskContinuationOptions.OnlyOnRanToCompletion,
-                            TaskScheduler.Default
-                        )
-                        .CompletesAsyncOperation(asyncToken);
+                            return UpdateSourceGeneratedFileItemsAsync(
+                                _workspace.CurrentSolution,
+                                cancellationToken
+                            );
+                        },
+                        cancellationToken,
+                        TaskContinuationOptions.OnlyOnRanToCompletion,
+                        TaskScheduler.Default
+                    ).CompletesAsyncOperation(asyncToken);
                 }
             }
         }

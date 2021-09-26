@@ -1529,14 +1529,14 @@ namespace Microsoft.Extensions.Logging.Console.Test
         )]
         public void ConsoleLoggerOptions_DisableColors_IsReadFromLoggingConfiguration()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[] { new KeyValuePair<string, string>("Console:DisableColors", "true") }
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddConfiguration(configuration).AddConsole()
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole())
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -1567,7 +1567,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         )]
         public void ConsoleLoggerOptions_TimeStampFormat_IsReadFromLoggingConfiguration()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -1578,9 +1579,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddConfiguration(configuration).AddConsole()
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole())
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -1627,7 +1627,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         )]
         public void ConsoleLoggerOptions_LogAsErrorLevel_IsReadFromLoggingConfiguration()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[]
                     {
                         new KeyValuePair<string, string>(
@@ -1638,9 +1639,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddConfiguration(configuration).AddConsole()
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole())
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 
@@ -1687,14 +1687,14 @@ namespace Microsoft.Extensions.Logging.Console.Test
         )]
         public void ConsoleLoggerOptions_IncludeScopes_IsReadFromLoggingConfiguration()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
                     new[] { new KeyValuePair<string, string>("Console:IncludeScopes", "true") }
                 )
                 .Build();
 
-            var loggerProvider = new ServiceCollection().AddLogging(
-                    builder => builder.AddConfiguration(configuration).AddConsole()
-                )
+            var loggerProvider = new ServiceCollection()
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole())
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
 

@@ -91,8 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
             var callbackMock = new Mock<INavigateToSearchCallback>(MockBehavior.Strict);
             callbackMock.Setup(c => c.ReportProgress(It.IsAny<int>(), It.IsAny<int>()));
             callbackMock.Setup(
-                    c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())
-                )
+                c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.CompletedTask);
 
             // Because we returned a result when not fully loaded, we should notify the user that data was not complete.
@@ -141,8 +141,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
             var callbackMock = new Mock<INavigateToSearchCallback>(MockBehavior.Strict);
             callbackMock.Setup(c => c.ReportProgress(It.IsAny<int>(), It.IsAny<int>()));
             callbackMock.Setup(
-                    c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())
-                )
+                c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.CompletedTask);
 
             // Because we did a full search, the accuracy is dependent on it the project system was fully loaded or not.
@@ -231,8 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
             var callbackMock = new Mock<INavigateToSearchCallback>(MockBehavior.Strict);
             callbackMock.Setup(c => c.ReportProgress(It.IsAny<int>(), It.IsAny<int>()));
             callbackMock.Setup(
-                    c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())
-                )
+                c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.CompletedTask);
 
             // Because we did a full search, we should let the user know it was totally accurate.

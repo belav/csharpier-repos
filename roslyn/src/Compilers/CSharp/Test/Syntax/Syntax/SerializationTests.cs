@@ -302,10 +302,11 @@ class C { }"
 public class C
 {
     public string B = "
-                + string.Join(
-                    " + ",
-                    Enumerable.Range(0, 1000).Select(i => "\"" + i.ToString() + "\"").ToArray()
-                )
+                + string
+                    .Join(
+                        " + ",
+                        Enumerable.Range(0, 1000).Select(i => "\"" + i.ToString() + "\"").ToArray()
+                    )
                 + @";
 }";
 

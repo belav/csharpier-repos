@@ -41,10 +41,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             return tagHelper.IsBindTagHelper()
-                && tagHelper.Metadata.TryGetValue(
-                    ComponentMetadata.Bind.FallbackKey,
-                    out var fallback
-                )
+                && tagHelper.Metadata
+                    .TryGetValue(ComponentMetadata.Bind.FallbackKey, out var fallback)
                 && string.Equals(bool.TrueString, fallback);
         }
 
@@ -56,10 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             return IsComponentTagHelper(tagHelper)
-                && tagHelper.Metadata.TryGetValue(
-                    ComponentMetadata.Component.GenericTypedKey,
-                    out var value
-                )
+                && tagHelper.Metadata
+                    .TryGetValue(ComponentMetadata.Component.GenericTypedKey, out var value)
                 && string.Equals(bool.TrueString, value);
         }
 
@@ -115,10 +111,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(tagHelper));
             }
 
-            tagHelper.Metadata.TryGetValue(
-                ComponentMetadata.Bind.ExpressionAttribute,
-                out var result
-            );
+            tagHelper.Metadata
+                .TryGetValue(ComponentMetadata.Bind.ExpressionAttribute, out var result);
             return result;
         }
 
@@ -137,10 +131,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(tagHelper));
             }
 
-            return tagHelper.Metadata.TryGetValue(
-                    ComponentMetadata.Bind.IsInvariantCulture,
-                    out var text
-                )
+            return tagHelper.Metadata
+                    .TryGetValue(ComponentMetadata.Bind.IsInvariantCulture, out var text)
                 && bool.TryParse(text, out var result)
                 && result;
         }
@@ -169,11 +161,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             return tagHelper.Metadata.TryGetValue(ComponentMetadata.SpecialKindKey, out var value)
-                && string.Equals(
-                    value,
-                    ComponentMetadata.ChildContent.TagHelperKind,
-                    StringComparison.Ordinal
-                );
+                && string
+                    .Equals(
+                        value,
+                        ComponentMetadata.ChildContent.TagHelperKind,
+                        StringComparison.Ordinal
+                    );
         }
 
         public static bool IsComponentTagHelper(this TagHelperDescriptor tagHelper)
@@ -242,10 +235,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(tagHelper));
             }
 
-            return tagHelper.Metadata.TryGetValue(
-                    ComponentMetadata.Component.NameMatchKey,
-                    out var matchType
-                ) && string.Equals(ComponentMetadata.Component.FullyQualifiedNameMatch, matchType);
+            return tagHelper.Metadata
+                    .TryGetValue(ComponentMetadata.Component.NameMatchKey, out var matchType)
+                && string.Equals(ComponentMetadata.Component.FullyQualifiedNameMatch, matchType);
         }
 
         public static string GetEventArgsType(this TagHelperDescriptor tagHelper)
@@ -255,10 +247,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(tagHelper));
             }
 
-            tagHelper.Metadata.TryGetValue(
-                ComponentMetadata.EventHandler.EventArgsType,
-                out var result
-            );
+            tagHelper.Metadata
+                .TryGetValue(ComponentMetadata.EventHandler.EventArgsType, out var result);
             return result;
         }
 

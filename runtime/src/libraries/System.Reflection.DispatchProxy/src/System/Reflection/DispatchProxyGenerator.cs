@@ -65,20 +65,12 @@ namespace System.Reflection
             Dictionary<Type, GeneratedTypeInfo>
         >();
         private static readonly ProxyAssembly s_proxyAssembly = new ProxyAssembly();
-        private static readonly MethodInfo s_dispatchProxyInvokeMethod =
-            typeof(DispatchProxy).GetMethod(
-                "Invoke",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            )!;
-        private static readonly MethodInfo s_getTypeFromHandleMethod =
-            typeof(Type).GetRuntimeMethod(
-                "GetTypeFromHandle",
-                new Type[] { typeof(RuntimeTypeHandle) }
-            )!;
-        private static readonly MethodInfo s_makeGenericMethodMethod = typeof(MethodInfo).GetMethod(
-            "MakeGenericMethod",
-            new Type[] { typeof(Type[]) }
-        )!;
+        private static readonly MethodInfo s_dispatchProxyInvokeMethod = typeof(DispatchProxy)
+            .GetMethod("Invoke", BindingFlags.NonPublic | BindingFlags.Instance)!;
+        private static readonly MethodInfo s_getTypeFromHandleMethod = typeof(Type)
+            .GetRuntimeMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) })!;
+        private static readonly MethodInfo s_makeGenericMethodMethod = typeof(MethodInfo)
+            .GetMethod("MakeGenericMethod", new Type[] { typeof(Type[]) })!;
 
         // Returns a new instance of a proxy the derives from 'baseType' and implements 'interfaceType'
         internal static object CreateProxyInstance(
@@ -430,10 +422,8 @@ namespace System.Reflection
                     if (propertyMap.TryGetValue(mi, out PropertyAccessorInfo? associatedProperty))
                     {
                         if (
-                            MethodInfoEqualityComparer.Instance.Equals(
-                                associatedProperty.InterfaceGetMethod,
-                                mi
-                            )
+                            MethodInfoEqualityComparer.Instance
+                                .Equals(associatedProperty.InterfaceGetMethod, mi)
                         )
                             associatedProperty.GetMethodBuilder = mdb;
                         else
@@ -443,17 +433,13 @@ namespace System.Reflection
                     if (eventMap.TryGetValue(mi, out EventAccessorInfo? associatedEvent))
                     {
                         if (
-                            MethodInfoEqualityComparer.Instance.Equals(
-                                associatedEvent.InterfaceAddMethod,
-                                mi
-                            )
+                            MethodInfoEqualityComparer.Instance
+                                .Equals(associatedEvent.InterfaceAddMethod, mi)
                         )
                             associatedEvent.AddMethodBuilder = mdb;
                         else if (
-                            MethodInfoEqualityComparer.Instance.Equals(
-                                associatedEvent.InterfaceRemoveMethod,
-                                mi
-                            )
+                            MethodInfoEqualityComparer.Instance
+                                .Equals(associatedEvent.InterfaceRemoveMethod, mi)
                         )
                             associatedEvent.RemoveMethodBuilder = mdb;
                         else
@@ -545,9 +531,8 @@ namespace System.Reflection
                     );
                     for (int i = 0; i < genericParameters.Length; i++)
                     {
-                        genericParameters[i].SetGenericParameterAttributes(
-                            ts[i].GenericParameterAttributes
-                        );
+                        genericParameters[i]
+                            .SetGenericParameterAttributes(ts[i].GenericParameterAttributes);
                     }
                 }
                 ILGenerator il = mdb.GetILGenerator();

@@ -816,18 +816,18 @@ namespace System.IO
             Assert.Equal(typeof(FileSystemRights), actualSecurity.AccessRightType);
 
             List<FileSystemAccessRule> expectedAccessRules = expectedSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<FileSystemAccessRule>()
                 .ToList();
 
             List<FileSystemAccessRule> actualAccessRules = actualSecurity.GetAccessRules(
-                    includeExplicit: true,
-                    includeInherited: false,
-                    typeof(SecurityIdentifier)
-                )
+                includeExplicit: true,
+                includeInherited: false,
+                typeof(SecurityIdentifier)
+            )
                 .Cast<FileSystemAccessRule>()
                 .ToList();
 

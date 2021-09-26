@@ -199,9 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         e.GetDeclaredProperties()
                             .SelectMany(
                                 p =>
-                                    (
-                                        FindValueConverter(p)?.ProviderClrType ?? p.ClrType
-                                    ).GetNamespaces()
+                                    (FindValueConverter(p)?.ProviderClrType ?? p.ClrType)
+                                        .GetNamespaces()
                             )
                 )
                 .Concat(GetAnnotationNamespaces(GetAnnotatables(model)));
@@ -239,9 +238,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         private IEnumerable<string> GetAnnotationNamespaces(IEnumerable<IAnnotatable> items) =>
             items.SelectMany(
                 i =>
-                    Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(
-                            i.GetAnnotations()
-                        )
+                    Dependencies.AnnotationCodeGenerator
+                        .FilterIgnoredAnnotations(i.GetAnnotations())
                         .Select(a => new { Annotatable = i, Annotation = a })
                         .SelectMany(
                             a =>

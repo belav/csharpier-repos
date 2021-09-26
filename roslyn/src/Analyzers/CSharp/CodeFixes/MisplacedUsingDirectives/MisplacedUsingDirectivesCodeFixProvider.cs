@@ -74,10 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             var compilationUnit = (CompilationUnitSyntax)syntaxRoot;
 
 #if CODE_STYLE
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
-                syntaxRoot.SyntaxTree,
-                cancellationToken
-            );
+            var options = document.Project.AnalyzerOptions
+                .GetAnalyzerOptionSet(syntaxRoot.SyntaxTree, cancellationToken);
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 #endif
@@ -113,10 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             var compilationUnit = (CompilationUnitSyntax)syntaxRoot;
 
 #if CODE_STYLE
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
-                syntaxRoot.SyntaxTree,
-                cancellationToken
-            );
+            var options = document.Project.AnalyzerOptions
+                .GetAnalyzerOptionSet(syntaxRoot.SyntaxTree, cancellationToken);
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 #endif
@@ -128,11 +124,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             }
 
             return await GetTransformedDocumentAsync(
-                    document,
-                    compilationUnit,
-                    placement,
-                    cancellationToken
-                )
+                document,
+                compilationUnit,
+                placement,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -148,10 +144,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             // Expand usings so that they can be properly simplified after they are relocated.
             var compilationUnitWithExpandedUsings =
                 (CompilationUnitSyntax)await ExpandUsingDirectivesAsync(
-                        document,
-                        compilationUnit,
-                        cancellationToken
-                    )
+                    document,
+                    compilationUnit,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
             // Remove the file header from the compilation unit so that we do not lose it when making changes to usings.
@@ -177,11 +173,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             // Simplify usings now that they have been moved and are in the proper context.
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             return await Simplifier.ReduceAsync(
-                    newDocument,
-                    Simplifier.Annotation,
-                    options,
-                    cancellationToken
-                )
+                newDocument,
+                Simplifier.Annotation,
+                options,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -193,8 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         {
             // Get all using directives so they can be expanded at one time.
             var allUsingDirectives = containerNode.DescendantNodes(
-                    node => node.IsKind(SyntaxKind.CompilationUnit, SyntaxKind.NamespaceDeclaration)
-                )
+                node => node.IsKind(SyntaxKind.CompilationUnit, SyntaxKind.NamespaceDeclaration)
+            )
                 .OfType<UsingDirectiveSyntax>();
 
             // Create a map between the original node and the future expanded node.
@@ -208,10 +204,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             await Task.WhenAll(expandUsingDirectiveTasks.Values).ConfigureAwait(false);
 
             // Replace using directives with their expanded version.
-            return ((SyntaxNode)containerNode).ReplaceNodes(
-                expandUsingDirectiveTasks.Keys,
-                (node, _) => expandUsingDirectiveTasks[node].Result
-            );
+            return ((SyntaxNode)containerNode)
+                .ReplaceNodes(
+                    expandUsingDirectiveTasks.Keys,
+                    (node, _) => expandUsingDirectiveTasks[node].Result
+                );
         }
 
         private static async Task<SyntaxNode> ExpandUsingDirectiveAsync(
@@ -222,10 +219,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         {
             var usingDirective = (UsingDirectiveSyntax)node;
             var newName = await Simplifier.ExpandAsync(
-                    usingDirective.Name,
-                    document,
-                    cancellationToken: cancellationToken
-                )
+                usingDirective.Name,
+                document,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             return usingDirective.WithName(newName);
         }
@@ -236,10 +233,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         )
         {
             // Get the compilation unit usings and set them up to format when moved.
-            var usingsToAdd = compilationUnit.Usings.Select(
-                directive =>
-                    directive.WithAdditionalAnnotations(Formatter.Annotation, warningAnnotation)
-            );
+            var usingsToAdd = compilationUnit.Usings
+                .Select(
+                    directive =>
+                        directive.WithAdditionalAnnotations(Formatter.Annotation, warningAnnotation)
+                );
 
             // Remove usings and fix leading trivia for compilation unit.
             var compilationUnitWithoutUsings = compilationUnit.WithUsings(default);
@@ -272,8 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             SyntaxAnnotation warningAnnotation
         )
         {
-            var namespaceDeclarations =
-                compilationUnit.Members.OfType<NamespaceDeclarationSyntax>();
+            var namespaceDeclarations = compilationUnit.Members
+                .OfType<NamespaceDeclarationSyntax>();
             var namespaceDeclarationMap = namespaceDeclarations.ToDictionary(
                 namespaceDeclaration => namespaceDeclaration,
                 namespaceDeclaration => RemoveUsingsFromNamespace(namespaceDeclaration)
@@ -286,9 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             );
 
             // Get the using directives from the namespaces and set them up to format when moved.
-            var usingsToAdd = namespaceDeclarationMap.Values.SelectMany(
-                    result => result.usingsFromNamespace
-                )
+            var usingsToAdd = namespaceDeclarationMap.Values
+                .SelectMany(result => result.usingsFromNamespace)
                 .Select(
                     directive =>
                         directive.WithAdditionalAnnotations(Formatter.Annotation, warningAnnotation)
@@ -300,9 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             );
 
             // Update the compilation unit with the usings from the namespace declaration.
-            var newUsings = compilationUnitWithReplacedNamespaces.Usings.AddRange(
-                deduplicatedUsings
-            );
+            var newUsings = compilationUnitWithReplacedNamespaces.Usings
+                .AddRange(deduplicatedUsings);
             var compilationUnitWithUsings = compilationUnitWithReplacedNamespaces.WithUsings(
                 newUsings
             );
@@ -336,9 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             );
 
             // Get the using directives from the namespaces.
-            var usingsFromNamespaces = namespaceDeclarationMap.Values.SelectMany(
-                result => result.usingsFromNamespace
-            );
+            var usingsFromNamespaces = namespaceDeclarationMap.Values
+                .SelectMany(result => result.usingsFromNamespace);
             var allUsings = usingContainer.Usings.AsEnumerable().Concat(usingsFromNamespaces);
 
             // Replace the namespace declarations in the compilation with the ones without using directives.
@@ -527,8 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         {
             // Find all the NamespaceDeclarations
             var allNamespaces = compilationUnit.DescendantNodes(
-                    node => node.IsKind(SyntaxKind.CompilationUnit, SyntaxKind.NamespaceDeclaration)
-                )
+                node => node.IsKind(SyntaxKind.CompilationUnit, SyntaxKind.NamespaceDeclaration)
+            )
                 .OfType<NamespaceDeclarationSyntax>();
 
             // To determine if there are multiple namespaces we only need to look for at least two.

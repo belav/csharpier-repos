@@ -1129,10 +1129,11 @@ namespace System.Numerics.Tests
                 {
                     Assert.True(
                         0 == roundTrippedByteArray[i],
-                        string.Format(
-                            "Round Tripped ByteArray is larger than the original array and byte is non zero at {0}",
-                            i
-                        )
+                        string
+                            .Format(
+                                "Round Tripped ByteArray is larger than the original array and byte is non zero at {0}",
+                                i
+                            )
                     );
                 }
             }
@@ -1157,10 +1158,11 @@ namespace System.Numerics.Tests
                                 )
                             )
                         ),
-                        string.Format(
-                            "Round Tripped ByteArray is smaller than the original array and byte is non zero at {0}",
-                            i
-                        )
+                        string
+                            .Format(
+                                "Round Tripped ByteArray is smaller than the original array and byte is non zero at {0}",
+                                i
+                            )
                     );
                 }
             }

@@ -15,10 +15,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            attribute.Metadata.TryGetValue(
-                TagHelperMetadata.Common.PropertyName,
-                out var propertyName
-            );
+            attribute.Metadata
+                .TryGetValue(TagHelperMetadata.Common.PropertyName, out var propertyName);
             return propertyName;
         }
 
@@ -29,11 +27,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            return string.Equals(
-                attribute.Kind,
-                TagHelperConventions.DefaultKind,
-                StringComparison.Ordinal
-            );
+            return string
+                .Equals(attribute.Kind, TagHelperConventions.DefaultKind, StringComparison.Ordinal);
         }
 
         internal static bool ExpectsStringValue(
@@ -77,10 +72,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            return attribute.Metadata.TryGetValue(
-                    ComponentMetadata.Common.DirectiveAttribute,
-                    out var value
-                ) && string.Equals(bool.TrueString, value);
+            return attribute.Metadata
+                    .TryGetValue(ComponentMetadata.Common.DirectiveAttribute, out var value)
+                && string.Equals(bool.TrueString, value);
         }
 
         public static bool IsDefaultKind(this BoundAttributeParameterDescriptor parameter)
@@ -90,11 +84,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(parameter));
             }
 
-            return string.Equals(
-                parameter.Kind,
-                TagHelperConventions.DefaultKind,
-                StringComparison.Ordinal
-            );
+            return string
+                .Equals(parameter.Kind, TagHelperConventions.DefaultKind, StringComparison.Ordinal);
         }
 
         public static string GetPropertyName(this BoundAttributeParameterDescriptor parameter)
@@ -104,10 +95,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(parameter));
             }
 
-            parameter.Metadata.TryGetValue(
-                TagHelperMetadata.Common.PropertyName,
-                out var propertyName
-            );
+            parameter.Metadata
+                .TryGetValue(TagHelperMetadata.Common.PropertyName, out var propertyName);
             return propertyName;
         }
     }

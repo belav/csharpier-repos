@@ -52,11 +52,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             if (_searchService != null)
             {
                 var results = await _searchService.SearchDocumentAsync(
-                        document,
-                        searchPattern,
-                        kinds,
-                        cancellationToken
-                    )
+                    document,
+                    searchPattern,
+                    kinds,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 foreach (var result in results)
                     await onResultFound(Convert(result)).ConfigureAwait(false);
@@ -78,12 +78,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             if (_searchService != null)
             {
                 var results = await _searchService.SearchProjectAsync(
-                        project,
-                        priorityDocuments,
-                        searchPattern,
-                        kinds,
-                        cancellationToken
-                    )
+                    project,
+                    priorityDocuments,
+                    searchPattern,
+                    kinds,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 foreach (var result in results)
                     await onResultFound(Convert(result)).ConfigureAwait(false);
@@ -174,9 +174,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             public ImmutableArray<INavigableItem> ChildItems =>
                 _navigableItem.ChildItems.IsDefault
                     ? default
-                    : _navigableItem.ChildItems.SelectAsArray(
-                          i => (INavigableItem)new WrappedNavigableItem(i)
-                      );
+                    : _navigableItem.ChildItems
+                      .SelectAsArray(i => (INavigableItem)new WrappedNavigableItem(i));
         }
     }
 }

@@ -243,13 +243,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static List<string> AddErrorNumbers(IEnumerable<string> namedRoutedErrors)
         {
             return namedRoutedErrors.Select(
-                    (error, i) =>
-                        Resources.FormatAttributeRoute_AggregateErrorMessage_ErrorNumber(
-                            i + 1,
-                            Environment.NewLine,
-                            error
-                        )
-                )
+                (error, i) =>
+                    Resources.FormatAttributeRoute_AggregateErrorMessage_ErrorNumber(
+                        i + 1,
+                        Environment.NewLine,
+                        error
+                    )
+            )
                 .ToList();
         }
 
@@ -359,10 +359,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 var formattedVerbs = string.Empty;
                 if (verbs != null)
                 {
-                    formattedVerbs = string.Join(
-                        ", ",
-                        verbs.OrderBy(v => v, StringComparer.OrdinalIgnoreCase)
-                    );
+                    formattedVerbs = string
+                        .Join(", ", verbs.OrderBy(v => v, StringComparer.OrdinalIgnoreCase));
                 }
 
                 var description =

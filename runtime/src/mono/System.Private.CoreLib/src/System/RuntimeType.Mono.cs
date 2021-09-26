@@ -610,9 +610,8 @@ namespace System
                                 // a null argument type implies a null arg which is always a perfect match
                                 if (
                                     argumentTypes[i] is not null
-                                    && !argumentTypes[i].MatchesParameterTypeExactly(
-                                        parameterInfos[i]
-                                    )
+                                    && !argumentTypes[i]
+                                        .MatchesParameterTypeExactly(parameterInfos[i])
                                 )
                                     return false;
                             }
@@ -1068,10 +1067,9 @@ namespace System
                     }
 
                     // All the methods have the exact same name and sig so return the most derived one.
-                    return System.DefaultBinder.FindMostDerivedNewSlotMeth(
-                            candidates.ToArray(),
-                            candidates.Count
-                        ) as MethodInfo;
+                    return System.DefaultBinder
+                            .FindMostDerivedNewSlotMeth(candidates.ToArray(), candidates.Count)
+                        as MethodInfo;
                 }
             }
 
@@ -1177,12 +1175,8 @@ namespace System
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System.DefaultBinder.ExactPropertyBinding(
-                    candidates.ToArray(),
-                    returnType,
-                    types,
-                    modifiers
-                );
+                return System.DefaultBinder
+                    .ExactPropertyBinding(candidates.ToArray(), returnType, types, modifiers);
 
             if (binder == null)
                 binder = DefaultBinder;
@@ -1757,12 +1751,8 @@ namespace System
                         }
                         else
                         {
-                            server = ((ConstructorInfo)invokeMethod).Invoke(
-                                bindingAttr,
-                                binder,
-                                args,
-                                culture
-                            );
+                            server = ((ConstructorInfo)invokeMethod)
+                                .Invoke(bindingAttr, binder, args, culture);
                             if (state != null)
                                 binder.ReorderArgumentArray(ref args, state);
                         }

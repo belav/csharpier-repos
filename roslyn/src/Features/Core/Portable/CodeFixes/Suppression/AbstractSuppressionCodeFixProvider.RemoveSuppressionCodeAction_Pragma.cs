@@ -78,10 +78,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     CancellationToken cancellationToken
                 ) =>
                     await GetChangedDocumentAsync(
-                            includeStartTokenChange: true,
-                            includeEndTokenChange: true,
-                            cancellationToken: cancellationToken
-                        )
+                        includeStartTokenChange: true,
+                        includeEndTokenChange: true,
+                        cancellationToken: cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 public async Task<Document> GetChangedDocumentAsync(
@@ -116,9 +116,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         // If invalidated, then we just toggle existing pragma enable and disable directives before and start of the line.
                         // If not, then we just remove the existing pragma trivia surrounding the line.
                         toggle = await IsDiagnosticSuppressedBeforeLeadingPragmaAsync(
-                                indexOfLeadingPragmaDisableToRemove,
-                                cancellationToken
-                            )
+                            indexOfLeadingPragmaDisableToRemove,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     else
@@ -158,13 +158,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             : endToken;
 
                     return await PragmaHelpers.GetChangeDocumentWithPragmaAdjustedAsync(
-                            _document,
-                            _diagnostic.Location.SourceSpan,
-                            _suppressionTargetInfo,
-                            getNewStartToken,
-                            getNewEndToken,
-                            cancellationToken
-                        )
+                        _document,
+                        _diagnostic.Location.SourceSpan,
+                        _suppressionTargetInfo,
+                        getNewStartToken,
+                        getNewEndToken,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -349,9 +349,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     var tree = model.SyntaxTree;
 
                     // get the warning state of this diagnostic ID at the start of the pragma
-                    var trivia = _suppressionTargetInfo.StartToken.LeadingTrivia.ElementAt(
-                        indexOfPragma
-                    );
+                    var trivia = _suppressionTargetInfo.StartToken.LeadingTrivia
+                        .ElementAt(indexOfPragma);
                     var spanToCheck = new TextSpan(
                         start: Math.Max(0, trivia.Span.Start - 1),
                         length: 1
@@ -362,9 +361,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         locationToCheck
                     );
                     var effectiveDiagnostic = CompilationWithAnalyzers.GetEffectiveDiagnostics(
-                            new[] { dummyDiagnosticWithLocationToCheck },
-                            model.Compilation
-                        )
+                        new[] { dummyDiagnosticWithLocationToCheck },
+                        model.Compilation
+                    )
                         .FirstOrDefault();
                     return effectiveDiagnostic == null || effectiveDiagnostic.IsSuppressed;
                 }

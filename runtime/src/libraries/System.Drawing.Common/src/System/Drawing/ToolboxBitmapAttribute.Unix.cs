@@ -120,9 +120,8 @@ namespace System.Drawing
             try
             {
                 using (
-                    System.IO.Stream? s = t.Assembly.GetManifestResourceStream(
-                        t.Namespace + "." + imageName
-                    )
+                    System.IO.Stream? s = t.Assembly
+                        .GetManifestResourceStream(t.Namespace + "." + imageName)
                 )
                 {
                     if (s == null)

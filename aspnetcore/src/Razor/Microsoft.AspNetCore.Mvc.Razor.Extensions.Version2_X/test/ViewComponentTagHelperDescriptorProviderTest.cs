@@ -27,9 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         }
 ";
 
-            var compilation = MvcShim.BaseCompilation.AddSyntaxTrees(
-                CSharpSyntaxTree.ParseText(code)
-            );
+            var compilation = MvcShim.BaseCompilation
+                .AddSyntaxTrees(CSharpSyntaxTree.ParseText(code));
 
             var context = TagHelperDescriptorProviderContext.Create();
             context.SetCompilation(compilation);
@@ -40,10 +39,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             };
 
             var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-                    ViewComponentTagHelperConventions.Kind,
-                    "__Generated__StringParameterViewComponentTagHelper",
-                    TestCompilation.AssemblyName
-                )
+                ViewComponentTagHelperConventions.Kind,
+                "__Generated__StringParameterViewComponentTagHelper",
+                TestCompilation.AssemblyName
+            )
                 .TypeName("__Generated__StringParameterViewComponentTagHelper")
                 .DisplayName("StringParameterViewComponentTagHelper")
                 .TagMatchingRuleDescriptor(

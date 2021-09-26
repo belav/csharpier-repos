@@ -47,14 +47,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
             ILoggerFactory loggerFactory = null
         )
         {
-            var serviceCollection = new ServiceCollection().AddLogging()
-                .AddOptions()
-                .AddRouting(
-                    options =>
-                    {
-                        options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
-                    }
-                );
+            var serviceCollection = new ServiceCollection().AddLogging().AddOptions().AddRouting(
+                options =>
+                {
+                    options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
+                }
+            );
 
             if (policies != null)
             {
@@ -448,8 +446,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             var endpointSelector = new Mock<EndpointSelector>();
             endpointSelector.Setup(
-                    s => s.SelectAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>())
-                )
+                s => s.SelectAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>())
+            )
                 .Callback<HttpContext, CandidateSet>(
                     (c, cs) =>
                     {
@@ -498,8 +496,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             var endpointSelector = new Mock<EndpointSelector>();
             endpointSelector.Setup(
-                    s => s.SelectAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>())
-                )
+                s => s.SelectAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>())
+            )
                 .Callback<HttpContext, CandidateSet>(
                     (c, cs) =>
                     {
@@ -549,8 +547,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             var endpointSelector = new Mock<EndpointSelector>();
             endpointSelector.Setup(
-                    s => s.SelectAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>())
-                )
+                s => s.SelectAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>())
+            )
                 .Callback<HttpContext, CandidateSet>(
                     (c, cs) =>
                     {

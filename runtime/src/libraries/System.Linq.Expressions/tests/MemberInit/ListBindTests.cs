@@ -76,12 +76,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void InitializersNull()
         {
-            PropertyInfo property = typeof(ListWrapper<int>).GetProperty(
-                nameof(ListWrapper<int>.ListProperty)
-            );
-            MemberInfo member = typeof(ListWrapper<int>).GetMember(
-                nameof(ListWrapper<int>.ListProperty)
-            )[0];
+            PropertyInfo property = typeof(ListWrapper<int>)
+                .GetProperty(nameof(ListWrapper<int>.ListProperty));
+            MemberInfo member = typeof(ListWrapper<int>)
+                .GetMember(nameof(ListWrapper<int>.ListProperty))[0];
             AssertExtensions.Throws<ArgumentNullException>(
                 "initializers",
                 () => Expression.ListBind(property, default(ElementInit[]))
@@ -103,12 +101,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void MethodForMember()
         {
-            MethodInfo method = typeof(ListWrapper<int>).GetMethod(
-                nameof(ListWrapper<int>.GetList)
-            );
-            MemberInfo member = typeof(ListWrapper<int>).GetMember(
-                nameof(ListWrapper<int>.GetList)
-            )[0];
+            MethodInfo method = typeof(ListWrapper<int>)
+                .GetMethod(nameof(ListWrapper<int>.GetList));
+            MemberInfo member = typeof(ListWrapper<int>)
+                .GetMember(nameof(ListWrapper<int>.GetList))[0];
             ElementInit elInit = Expression.ElementInit(
                 typeof(List<int>).GetMethod("Add"),
                 Expression.Constant(0)
@@ -153,12 +149,10 @@ namespace System.Linq.Expressions.Tests
 
         private static IEnumerable<object> NonAddableListExpressions()
         {
-            PropertyInfo property = typeof(ListWrapper<int>).GetProperty(
-                nameof(ListWrapper<int>.EnumerableProperty)
-            );
-            MemberInfo member = typeof(ListWrapper<int>).GetMember(
-                nameof(ListWrapper<int>.EnumerableProperty)
-            )[0];
+            PropertyInfo property = typeof(ListWrapper<int>)
+                .GetProperty(nameof(ListWrapper<int>.EnumerableProperty));
+            MemberInfo member = typeof(ListWrapper<int>)
+                .GetMember(nameof(ListWrapper<int>.EnumerableProperty))[0];
             yield return new object[] { Expression.ListBind(property) };
             yield return new object[]
             {
@@ -175,8 +169,8 @@ namespace System.Linq.Expressions.Tests
         public void NonAddableListType(MemberListBinding listBinding, bool useInterpreter)
         {
             Func<ListWrapper<int>> func = Expression.Lambda<Func<ListWrapper<int>>>(
-                    Expression.MemberInit(Expression.New(typeof(ListWrapper<int>)), listBinding)
-                )
+                Expression.MemberInit(Expression.New(typeof(ListWrapper<int>)), listBinding)
+            )
                 .Compile(useInterpreter);
             Assert.Empty(func().EnumerableProperty);
         }
@@ -235,15 +229,12 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> ZeroInitializerExpressions()
         {
-            PropertyInfo property = typeof(ListWrapper<int>).GetProperty(
-                nameof(ListWrapper<int>.ListProperty)
-            );
-            MemberInfo member = typeof(ListWrapper<int>).GetMember(
-                nameof(ListWrapper<int>.ListProperty)
-            )[0];
-            MemberInfo fieldMember = typeof(ListWrapper<int>).GetMember(
-                nameof(ListWrapper<int>.ListField)
-            )[0];
+            PropertyInfo property = typeof(ListWrapper<int>)
+                .GetProperty(nameof(ListWrapper<int>.ListProperty));
+            MemberInfo member = typeof(ListWrapper<int>)
+                .GetMember(nameof(ListWrapper<int>.ListProperty))[0];
+            MemberInfo fieldMember = typeof(ListWrapper<int>)
+                .GetMember(nameof(ListWrapper<int>.ListField))[0];
             yield return new object[] { Expression.ListBind(property) };
             yield return new object[]
             {
@@ -266,8 +257,8 @@ namespace System.Linq.Expressions.Tests
         public void ZeroInitializersIsValid(MemberListBinding binding, bool useInterpreter)
         {
             Func<ListWrapper<int>> func = Expression.Lambda<Func<ListWrapper<int>>>(
-                    Expression.MemberInit(Expression.New(typeof(ListWrapper<int>)), binding)
-                )
+                Expression.MemberInit(Expression.New(typeof(ListWrapper<int>)), binding)
+            )
                 .Compile(useInterpreter);
             Assert.Empty(func().ListProperty);
         }
@@ -275,12 +266,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void UnreadableListProperty()
         {
-            PropertyInfo property = typeof(ListWrapper<int>).GetProperty(
-                nameof(ListWrapper<int>.WriteOnlyList)
-            );
-            MemberInfo member = typeof(ListWrapper<int>).GetMember(
-                nameof(ListWrapper<int>.WriteOnlyList)
-            )[0];
+            PropertyInfo property = typeof(ListWrapper<int>)
+                .GetProperty(nameof(ListWrapper<int>.WriteOnlyList));
+            MemberInfo member = typeof(ListWrapper<int>)
+                .GetMember(nameof(ListWrapper<int>.WriteOnlyList))[0];
             AssertExtensions.Throws<ArgumentException>(
                 "member",
                 () => Expression.ListBind(property, new ElementInit[0])
@@ -302,9 +291,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public void StaticListProperty(bool useInterpreter)
         {
-            PropertyInfo property = typeof(ListWrapper<int>).GetProperty(
-                nameof(ListWrapper<int>.StaticListProperty)
-            );
+            PropertyInfo property = typeof(ListWrapper<int>)
+                .GetProperty(nameof(ListWrapper<int>.StaticListProperty));
             Expression<Func<ListWrapper<int>>> exp = Expression.Lambda<Func<ListWrapper<int>>>(
                 Expression.MemberInit(
                     Expression.New(typeof(ListWrapper<int>)),
@@ -324,9 +312,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public void StaticListField(bool useInterpreter)
         {
-            FieldInfo field = typeof(ListWrapper<int>).GetField(
-                nameof(ListWrapper<int>.StaticListField)
-            );
+            FieldInfo field = typeof(ListWrapper<int>)
+                .GetField(nameof(ListWrapper<int>.StaticListField));
             Expression<Func<ListWrapper<int>>> exp = Expression.Lambda<Func<ListWrapper<int>>>(
                 Expression.MemberInit(
                     Expression.New(typeof(ListWrapper<int>)),
@@ -461,12 +448,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void OpenGenericTypesMembers()
         {
-            MemberInfo member = typeof(ListWrapper<>).GetMember(
-                nameof(ListWrapper<int>.ListProperty)
-            )[0];
-            PropertyInfo property = typeof(ListWrapper<>).GetProperty(
-                nameof(ListWrapper<int>.ListProperty)
-            );
+            MemberInfo member = typeof(ListWrapper<>)
+                .GetMember(nameof(ListWrapper<int>.ListProperty))[0];
+            PropertyInfo property = typeof(ListWrapper<>)
+                .GetProperty(nameof(ListWrapper<int>.ListProperty));
             FieldInfo field = typeof(ListWrapper<>).GetField(nameof(ListWrapper<int>.ListField));
             MethodInfo method = property.GetMethod;
             AssertExtensions.Throws<ArgumentException>(
@@ -496,9 +481,9 @@ namespace System.Linq.Expressions.Tests
         public void GlobalMethod()
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("Name"),
-                    AssemblyBuilderAccess.RunAndCollect
-                )
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            )
                 .DefineDynamicModule("Module");
             MethodBuilder globalMethod = module.DefineGlobalMethod(
                 "GlobalMethod",

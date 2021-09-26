@@ -218,94 +218,88 @@ namespace Microsoft.Extensions.Hosting
             );
 
             builder.ConfigureAppConfiguration(
-                    (hostingContext, config) =>
-                    {
-                        IHostEnvironment env = hostingContext.HostingEnvironment;
+                (hostingContext, config) =>
+                {
+                    IHostEnvironment env = hostingContext.HostingEnvironment;
 
-                        bool reloadOnChange = hostingContext.Configuration.GetValue(
-                            "hostBuilder:reloadConfigOnChange",
-                            defaultValue: true
+                    bool reloadOnChange = hostingContext.Configuration
+                        .GetValue("hostBuilder:reloadConfigOnChange", defaultValue: true);
+
+                    config.AddJsonFile(
+                        "appsettings.json",
+                        optional: true,
+                        reloadOnChange: reloadOnChange
+                    )
+                        .AddJsonFile(
+                            $"appsettings.{env.EnvironmentName}.json",
+                            optional: true,
+                            reloadOnChange: reloadOnChange
                         );
 
-                        config.AddJsonFile(
-                                "appsettings.json",
-                                optional: true,
-                                reloadOnChange: reloadOnChange
-                            )
-                            .AddJsonFile(
-                                $"appsettings.{env.EnvironmentName}.json",
+                    if (env.IsDevelopment() && env.ApplicationName is { Length: > 0 })
+                    {
+                        var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
+                        if (appAssembly is not null)
+                        {
+                            config.AddUserSecrets(
+                                appAssembly,
                                 optional: true,
                                 reloadOnChange: reloadOnChange
                             );
-
-                        if (env.IsDevelopment() && env.ApplicationName is { Length: > 0 })
-                        {
-                            var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
-                            if (appAssembly is not null)
-                            {
-                                config.AddUserSecrets(
-                                    appAssembly,
-                                    optional: true,
-                                    reloadOnChange: reloadOnChange
-                                );
-                            }
-                        }
-
-                        config.AddEnvironmentVariables();
-
-                        if (args is { Length: > 0 })
-                        {
-                            config.AddCommandLine(args);
                         }
                     }
-                )
-                .ConfigureLogging(
-                    (hostingContext, logging) =>
+
+                    config.AddEnvironmentVariables();
+
+                    if (args is { Length: > 0 })
                     {
-                        bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+                        config.AddCommandLine(args);
+                    }
+                }
+            ).ConfigureLogging(
+                (hostingContext, logging) =>
+                {
+                    bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-                        // IMPORTANT: This needs to be added *before* configuration is loaded, this lets
-                        // the defaults be overridden by the configuration.
-                        if (isWindows)
-                        {
-                            // Default the EventLogLoggerProvider to warning or above
-                            logging.AddFilter<EventLogLoggerProvider>(
-                                level => level >= LogLevel.Warning
-                            );
-                        }
-
-                        logging.AddConfiguration(
-                            hostingContext.Configuration.GetSection("Logging")
-                        );
-                        logging.AddConsole();
-                        logging.AddDebug();
-                        logging.AddEventSourceLogger();
-
-                        if (isWindows)
-                        {
-                            // Add the EventLogLoggerProvider on windows machines
-                            logging.AddEventLog();
-                        }
-
-                        logging.Configure(
-                            options =>
-                            {
-                                options.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.SpanId
-                                    | ActivityTrackingOptions.TraceId
-                                    | ActivityTrackingOptions.ParentId;
-                            }
+                    // IMPORTANT: This needs to be added *before* configuration is loaded, this lets
+                    // the defaults be overridden by the configuration.
+                    if (isWindows)
+                    {
+                        // Default the EventLogLoggerProvider to warning or above
+                        logging.AddFilter<EventLogLoggerProvider>(
+                            level => level >= LogLevel.Warning
                         );
                     }
-                )
-                .UseDefaultServiceProvider(
-                    (context, options) =>
+
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.AddConsole();
+                    logging.AddDebug();
+                    logging.AddEventSourceLogger();
+
+                    if (isWindows)
                     {
-                        bool isDevelopment = context.HostingEnvironment.IsDevelopment();
-                        options.ValidateScopes = isDevelopment;
-                        options.ValidateOnBuild = isDevelopment;
+                        // Add the EventLogLoggerProvider on windows machines
+                        logging.AddEventLog();
                     }
-                );
+
+                    logging.Configure(
+                        options =>
+                        {
+                            options.ActivityTrackingOptions =
+                                ActivityTrackingOptions.SpanId
+                                | ActivityTrackingOptions.TraceId
+                                | ActivityTrackingOptions.ParentId;
+                        }
+                    );
+                }
+            ).UseDefaultServiceProvider(
+                (context, options) =>
+                {
+                    bool isDevelopment = context.HostingEnvironment.IsDevelopment();
+                    options.ValidateScopes = isDevelopment;
+                    options.ValidateOnBuild = isDevelopment;
+                }
+            );
 
             return builder;
         }

@@ -46,9 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
 
             // extern aliases and usings are outlined in a single region
             var externsAndUsings = Enumerable.Union<SyntaxNode>(
-                    namespaceDeclaration.Externs,
-                    namespaceDeclaration.Usings
-                )
+                namespaceDeclaration.Externs,
+                namespaceDeclaration.Usings
+            )
                 .OrderBy(node => node.SpanStart)
                 .ToList();
 

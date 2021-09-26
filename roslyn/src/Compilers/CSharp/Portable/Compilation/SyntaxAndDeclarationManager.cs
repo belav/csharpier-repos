@@ -64,12 +64,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             var loadDirectiveMapBuilder = PooledDictionary<
                 SyntaxTree,
                 ImmutableArray<LoadDirective>
-            >.GetInstance();
+            >
+                .GetInstance();
             var loadedSyntaxTreeMapBuilder = PooledDictionary<string, SyntaxTree>.GetInstance();
-            var declMapBuilder = PooledDictionary<
-                SyntaxTree,
-                Lazy<RootSingleNamespaceDeclaration>
-            >.GetInstance();
+            var declMapBuilder = PooledDictionary<SyntaxTree, Lazy<RootSingleNamespaceDeclaration>>
+                .GetInstance();
             var declTable = DeclarationTable.Empty;
 
             foreach (var tree in externalSyntaxTrees)

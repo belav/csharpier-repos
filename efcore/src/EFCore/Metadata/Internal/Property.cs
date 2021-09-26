@@ -170,9 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 _isNullableConfigurationSource = null;
                 if (isChanging)
                 {
-                    DeclaringEntityType.Model.ConventionDispatcher.OnPropertyNullableChanged(
-                        Builder
-                    );
+                    DeclaringEntityType.Model.ConventionDispatcher
+                        .OnPropertyNullableChanged(Builder);
                 }
 
                 return nullable;
@@ -207,9 +206,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (isChanging)
             {
-                return DeclaringEntityType.Model.ConventionDispatcher.OnPropertyNullableChanged(
-                    Builder
-                );
+                return DeclaringEntityType.Model.ConventionDispatcher
+                    .OnPropertyNullableChanged(Builder);
             }
 
             return nullable;
@@ -236,11 +234,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             FieldInfo? newFieldInfo,
             FieldInfo? oldFieldInfo
         ) =>
-            DeclaringEntityType.Model.ConventionDispatcher.OnPropertyFieldChanged(
-                Builder,
-                newFieldInfo,
-                oldFieldInfo
-            );
+            DeclaringEntityType.Model.ConventionDispatcher
+                .OnPropertyFieldChanged(Builder, newFieldInfo, oldFieldInfo);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -724,7 +719,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                           ref _typeMapping,
                           (IProperty)this,
                           static property =>
-                              property.DeclaringEntityType.Model.GetModelDependencies()
+                              property.DeclaringEntityType.Model
+                                  .GetModelDependencies()
                                   .TypeMappingSource.FindMapping(property)!
                       )
                     : _typeMapping;
@@ -920,12 +916,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
         ) =>
-            DeclaringType.Model.ConventionDispatcher.OnPropertyAnnotationChanged(
-                Builder,
-                name,
-                annotation,
-                oldAnnotation
-            );
+            DeclaringType.Model.ConventionDispatcher
+                .OnPropertyAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -935,10 +927,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static string Format(IEnumerable<string?> properties) =>
             "{"
-            + string.Join(
-                ", ",
-                properties.Select(p => string.IsNullOrEmpty(p) ? "" : "'" + p + "'")
-            )
+            + string
+                .Join(", ", properties.Select(p => string.IsNullOrEmpty(p) ? "" : "'" + p + "'"))
             + "}";
 
         /// <summary>

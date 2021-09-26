@@ -141,7 +141,8 @@ namespace Roslyn.Test.Utilities
 
                 foreach (var module in EnumerateModules(metadata))
                 {
-                    ImmutableArray<byte> bytes = module.Module.PEReaderOpt.GetEntireImage()
+                    ImmutableArray<byte> bytes = module.Module.PEReaderOpt
+                        .GetEntireImage()
                         .GetContent();
                     ModuleData moduleData;
                     if (isManifestModule)
@@ -278,9 +279,8 @@ namespace Roslyn.Test.Utilities
             EmitOptions emitOptions
         )
         {
-            emitOptions ??= EmitOptions.Default.WithDebugInformationFormat(
-                DebugInformationFormat.Embedded
-            );
+            emitOptions ??= EmitOptions.Default
+                .WithDebugInformationFormat(DebugInformationFormat.Embedded);
 
             using var executableStream = new MemoryStream();
 
@@ -291,9 +291,8 @@ namespace Roslyn.Test.Utilities
                     ? new MemoryStream()
                     : null;
 
-            var embeddedTexts = compilation.SyntaxTrees.Select(
-                    t => (filePath: t.FilePath, text: t.GetText())
-                )
+            var embeddedTexts = compilation.SyntaxTrees
+                .Select(t => (filePath: t.FilePath, text: t.GetText()))
                 .Where(t => t.text.CanBeEmbedded && !string.IsNullOrEmpty(t.filePath))
                 .Select(t => EmbeddedText.FromSource(t.filePath, t.text))
                 .ToImmutableArray();

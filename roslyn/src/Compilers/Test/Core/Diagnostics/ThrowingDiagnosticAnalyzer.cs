@@ -126,26 +126,29 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 Environment.NewLine
                     + "  Exceptions thrown by analyzers in these members were *NOT* handled:"
                     + Environment.NewLine
-                    + string.Join(
-                        Environment.NewLine,
-                        membersHandled.Where(mh => mh.Handled == false).Select(mh => mh.Member)
-                    )
+                    + string
+                        .Join(
+                            Environment.NewLine,
+                            membersHandled.Where(mh => mh.Handled == false).Select(mh => mh.Member)
+                        )
                     + Environment.NewLine
                     + Environment.NewLine
                     + "  Exceptions thrown from these members were handled gracefully:"
                     + Environment.NewLine
-                    + string.Join(
-                        Environment.NewLine,
-                        membersHandled.Where(mh => mh.Handled == true).Select(mh => mh.Member)
-                    )
+                    + string
+                        .Join(
+                            Environment.NewLine,
+                            membersHandled.Where(mh => mh.Handled == true).Select(mh => mh.Member)
+                        )
                     + Environment.NewLine
                     + Environment.NewLine
                     + "  These members were not called/accessed by analyzer engine:"
                     + Environment.NewLine
-                    + string.Join(
-                        Environment.NewLine,
-                        membersHandled.Where(mh => mh.Handled == null).Select(mh => mh.Member)
-                    )
+                    + string
+                        .Join(
+                            Environment.NewLine,
+                            membersHandled.Where(mh => mh.Handled == null).Select(mh => mh.Member)
+                        )
             );
         }
     }

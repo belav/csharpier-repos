@@ -173,9 +173,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             // test with actual random graphs, but with graphs based on pseudo-random sequences using
             // random seeds hardcoded into the tests. That way we are testing on the same graphs each
             // time.
-            successors[possibleSort[0]] = successors[possibleSort[0]].Concat(
-                    new int[] { possibleSort[numberOfNodes - 1] }
-                )
+            successors[possibleSort[0]] = successors[possibleSort[0]]
+                .Concat(new int[] { possibleSort[numberOfNodes - 1] })
                 .ToArray();
 
             wasAcyclic = TopologicalSort.TryIterativeSort<int>(

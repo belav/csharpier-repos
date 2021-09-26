@@ -410,12 +410,13 @@ namespace System.Xml
                             chars++;
                         }
 
-                        bytes += (_encoding ?? s_UTF8Encoding).GetBytes(
-                            charsStart,
-                            (int)(chars - charsStart),
-                            bytes,
-                            (int)(bytesMax - bytes)
-                        );
+                        bytes += (_encoding ?? s_UTF8Encoding)
+                            .GetBytes(
+                                charsStart,
+                                (int)(chars - charsStart),
+                                bytes,
+                                (int)(bytesMax - bytes)
+                            );
 
                         if (chars >= charsMax)
                             break;

@@ -392,11 +392,11 @@ namespace System.Text.Json
                     Debug.Assert(underlyingBuffer.Offset == 0);
                     Debug.Assert(_arrayBufferWriter.WrittenCount == underlyingBuffer.Count);
                     await _stream.WriteAsync(
-                            underlyingBuffer.Array,
-                            underlyingBuffer.Offset,
-                            underlyingBuffer.Count,
-                            cancellationToken
-                        )
+                        underlyingBuffer.Array,
+                        underlyingBuffer.Offset,
+                        underlyingBuffer.Count,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 #endif
 

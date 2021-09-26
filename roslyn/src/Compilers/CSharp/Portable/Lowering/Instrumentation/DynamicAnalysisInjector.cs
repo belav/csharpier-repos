@@ -270,10 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
 #nullable disable
         {
-            BoundStatement previousPrologue = base.CreateBlockPrologue(
-                original,
-                out synthesizedLocal
-            );
+            BoundStatement previousPrologue = base
+                .CreateBlockPrologue(original, out synthesizedLocal);
             if (_methodBody == original)
             {
                 _dynamicAnalysisSpans = _spansBuilder.ToImmutableAndFree();
@@ -338,8 +336,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(synthesizedLocal == null);
                 synthesizedLocal = _methodPayload;
 
-                ArrayBuilder<BoundStatement> prologueStatements =
-                    ArrayBuilder<BoundStatement>.GetInstance(previousPrologue == null ? 3 : 4);
+                ArrayBuilder<BoundStatement> prologueStatements = ArrayBuilder<BoundStatement>
+                    .GetInstance(previousPrologue == null ? 3 : 4);
                 prologueStatements.Add(payloadInitialization);
                 prologueStatements.Add(payloadIf);
                 if (_methodEntryInstrumentation != null)
@@ -465,10 +463,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return AddDynamicAnalysis(
                 original,
-                base.InstrumentForEachStatementDeconstructionVariablesDeclaration(
-                    original,
-                    iterationVarDecl
-                )
+                base
+                    .InstrumentForEachStatementDeconstructionVariablesDeclaration(
+                        original,
+                        iterationVarDecl
+                    )
             );
         }
 
@@ -487,10 +486,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return AddDynamicAnalysis(
                 original,
-                base.InstrumentWhileStatementConditionalGotoStartOrBreak(
-                    original,
-                    ifConditionGotoStart
-                )
+                base
+                    .InstrumentWhileStatementConditionalGotoStartOrBreak(
+                        original,
+                        ifConditionGotoStart
+                    )
             );
         }
 
@@ -575,10 +575,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundStatement ifConditionGotoBody
         )
         {
-            ifConditionGotoBody = base.InstrumentSwitchWhenClauseConditionalGotoBody(
-                original,
-                ifConditionGotoBody
-            );
+            ifConditionGotoBody = base
+                .InstrumentSwitchWhenClauseConditionalGotoBody(original, ifConditionGotoBody);
             WhenClauseSyntax whenClause = original.Syntax.FirstAncestorOrSelf<WhenClauseSyntax>();
             Debug.Assert(whenClause != null);
 

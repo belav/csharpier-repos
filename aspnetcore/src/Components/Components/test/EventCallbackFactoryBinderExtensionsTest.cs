@@ -673,12 +673,8 @@ namespace Microsoft.AspNetCore.Components
             var component = new EventCountingComponent();
             Action<int> setter = (_) => value = _;
 
-            var binder = EventCallback.Factory.CreateBinder(
-                component,
-                setter,
-                value,
-                culture: null
-            );
+            var binder = EventCallback.Factory
+                .CreateBinder(component, setter, value, culture: null);
 
             var expectedValue = 42_000;
 
@@ -697,12 +693,8 @@ namespace Microsoft.AspNetCore.Components
             var component = new EventCountingComponent();
             Action<int> setter = (_) => value = _;
 
-            var binder = EventCallback.Factory.CreateBinder(
-                component,
-                setter,
-                value,
-                CultureInfo.InvariantCulture
-            );
+            var binder = EventCallback.Factory
+                .CreateBinder(component, setter, value, CultureInfo.InvariantCulture);
 
             var expectedValue = 42_000;
 

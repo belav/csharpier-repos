@@ -221,8 +221,8 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.ThrowsAsync<NotSupportedException>(
                     () =>
                         JsonSerializer.DeserializeAsync<Dictionary<TKey, TValue>>(
-                                new MemoryStream(Encoding.UTF8.GetBytes(@"{""foo"":1}"))
-                            )
+                            new MemoryStream(Encoding.UTF8.GetBytes(@"{""foo"":1}"))
+                        )
                             .AsTask()
                 );
 
@@ -241,8 +241,8 @@ namespace System.Text.Json.Serialization.Tests
             [Fact]
             public Task DoesNotThrowIfEmpty_DeserializeAsync() =>
                 JsonSerializer.DeserializeAsync<Dictionary<TKey, TValue>>(
-                        new MemoryStream(Encoding.UTF8.GetBytes("{}"))
-                    )
+                    new MemoryStream(Encoding.UTF8.GetBytes("{}"))
+                )
                     .AsTask();
         }
 

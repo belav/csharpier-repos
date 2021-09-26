@@ -417,9 +417,10 @@ namespace System.Threading.Tasks.Tests
                     fastPath1.Wait();
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunRunTests:    > FAILURE: Expected proxy for already-faulted Task to throw on Wait()"
-                        )
+                        string
+                            .Format(
+                                "RunRunTests:    > FAILURE: Expected proxy for already-faulted Task to throw on Wait()"
+                            )
                     );
                 }
                 catch { }
@@ -434,9 +435,10 @@ namespace System.Threading.Tasks.Tests
                     fastPath1.Wait();
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunRunTests:    > FAILURE: Expected proxy for already-canceled Task to throw on Wait()"
-                        )
+                        string
+                            .Format(
+                                "RunRunTests:    > FAILURE: Expected proxy for already-canceled Task to throw on Wait()"
+                            )
                     );
                 }
                 catch { }
@@ -486,9 +488,10 @@ namespace System.Threading.Tasks.Tests
                     fastPath1.Wait();
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunRunTests:    > FAILURE: Expected proxy for already-faulted future to throw on Wait()"
-                        )
+                        string
+                            .Format(
+                                "RunRunTests:    > FAILURE: Expected proxy for already-faulted future to throw on Wait()"
+                            )
                     );
                 }
                 catch { }
@@ -503,9 +506,10 @@ namespace System.Threading.Tasks.Tests
                     fastPath1.Wait();
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunRunTests:    > FAILURE: Expected proxy for already-canceled future to throw on Wait()"
-                        )
+                        string
+                            .Format(
+                                "RunRunTests:    > FAILURE: Expected proxy for already-canceled future to throw on Wait()"
+                            )
                     );
                 }
                 catch { }
@@ -948,10 +952,8 @@ namespace System.Threading.Tasks.Tests
             var faultedTask = Task.FromException<object>(new InvalidOperationException("uh oh"));
             object holderObject = null;
             FieldInfo isHandledField = null;
-            var contingentPropertiesField = typeof(Task).GetField(
-                "m_contingentProperties",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            var contingentPropertiesField = typeof(Task)
+                .GetField("m_contingentProperties", BindingFlags.NonPublic | BindingFlags.Instance);
             if (contingentPropertiesField != null)
             {
                 var contingentProperties = contingentPropertiesField.GetValue(faultedTask);
@@ -1053,10 +1055,11 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.True(
                     false,
-                    string.Format(
-                        "RunDelayTests:    > FAILED.  Unexpected exception on WaitAll(simple tasks): {0}",
-                        e
-                    )
+                    string
+                        .Format(
+                            "RunDelayTests:    > FAILED.  Unexpected exception on WaitAll(simple tasks): {0}",
+                            e
+                        )
                 );
             }
 
@@ -1206,10 +1209,11 @@ namespace System.Threading.Tasks.Tests
                     mcwTask.Wait();
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunExceptionWrappingTest:    > FAILED.  Wait-on-continuation did not throw for {0}",
-                            scenario
-                        )
+                        string
+                            .Format(
+                                "RunExceptionWrappingTest:    > FAILED.  Wait-on-continuation did not throw for {0}",
+                                scenario
+                            )
                     );
                 }
                 catch (Exception e)
@@ -1219,11 +1223,12 @@ namespace System.Threading.Tasks.Tests
                     {
                         Assert.True(
                             false,
-                            string.Format(
-                                "RunExceptionWrappingTest:    > FAILED.  Exception had {0} levels instead of 2 for {1}.",
-                                levels,
-                                scenario
-                            )
+                            string
+                                .Format(
+                                    "RunExceptionWrappingTest:    > FAILED.  Exception had {0} levels instead of 2 for {1}.",
+                                    levels,
+                                    scenario
+                                )
                         );
                     }
                 }
@@ -1234,38 +1239,36 @@ namespace System.Threading.Tasks.Tests
 
             // Throw in the returned future
             Task<int> mcw1 = t.ContinueWith(
-                    delegate(Task antecedent)
-                    {
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                throw new InvalidOperationException();
-                            }
-                        );
+                delegate(Task antecedent)
+                {
+                    Task<int> inner = Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            throw new InvalidOperationException();
+                        }
+                    );
 
-                        return inner;
-                    }
-                )
-                .Unwrap();
+                    return inner;
+                }
+            ).Unwrap();
 
             mcwExceptionChecker(mcw1, "Task antecedent, throw in ContinuationFunction");
 
             // Throw in the continuationFunction
             Task<int> mcw2 = t.ContinueWith(
-                    delegate(Task antecedent)
-                    {
-                        throwException();
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 0;
-                            }
-                        );
+                delegate(Task antecedent)
+                {
+                    throwException();
+                    Task<int> inner = Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            return 0;
+                        }
+                    );
 
-                        return inner;
-                    }
-                )
-                .Unwrap();
+                    return inner;
+                }
+            ).Unwrap();
 
             mcwExceptionChecker(mcw2, "Task antecedent, throw in returned Future");
 
@@ -1279,38 +1282,36 @@ namespace System.Threading.Tasks.Tests
 
             // Throw in the returned future
             mcw1 = f.ContinueWith(
-                    delegate(Task<int> antecedent)
-                    {
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                throw new InvalidOperationException();
-                            }
-                        );
+                delegate(Task<int> antecedent)
+                {
+                    Task<int> inner = Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            throw new InvalidOperationException();
+                        }
+                    );
 
-                        return inner;
-                    }
-                )
-                .Unwrap();
+                    return inner;
+                }
+            ).Unwrap();
 
             mcwExceptionChecker(mcw1, "Future antecedent, throw in ContinuationFunction");
 
             // Throw in the continuationFunction
             mcw2 = f.ContinueWith(
-                    delegate(Task<int> antecedent)
-                    {
-                        throwException();
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 0;
-                            }
-                        );
+                delegate(Task<int> antecedent)
+                {
+                    throwException();
+                    Task<int> inner = Task<int>.Factory.StartNew(
+                        delegate
+                        {
+                            return 0;
+                        }
+                    );
 
-                        return inner;
-                    }
-                )
-                .Unwrap();
+                    return inner;
+                }
+            ).Unwrap();
 
             mcwExceptionChecker(mcw2, "Future antecedent, throw in returned Future");
 
@@ -1331,10 +1332,11 @@ namespace System.Threading.Tasks.Tests
                     _asyncTask.Wait();
                     Assert.True(
                         false,
-                        string.Format(
-                            "RunExceptionWrappingTest APM-Related Funct:    > FAILED. {0} did not throw exception.",
-                            msg
-                        )
+                        string
+                            .Format(
+                                "RunExceptionWrappingTest APM-Related Funct:    > FAILED. {0} did not throw exception.",
+                                msg
+                            )
                     );
                 }
                 catch (Exception e)
@@ -1344,11 +1346,12 @@ namespace System.Threading.Tasks.Tests
                     {
                         Assert.True(
                             false,
-                            string.Format(
-                                "RunExceptionWrappingTest APM-Related Funct:    > FAILED.  {0} exception had {1} levels instead of 2",
-                                msg,
-                                levels
-                            )
+                            string
+                                .Format(
+                                    "RunExceptionWrappingTest APM-Related Funct:    > FAILED.  {0} exception had {1} levels instead of 2",
+                                    msg,
+                                    levels
+                                )
                         );
                     }
                 }

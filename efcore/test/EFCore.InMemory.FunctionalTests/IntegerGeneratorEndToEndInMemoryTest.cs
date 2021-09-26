@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_use_sequence_end_to_end()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             AddEntities(serviceProvider);
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_sequence_end_to_end_async()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             await AddEntitiesAsync(serviceProvider);
@@ -78,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_sequence_end_to_end_from_multiple_contexts_concurrently_async()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             const int threadCount = 50;

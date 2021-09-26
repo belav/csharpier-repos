@@ -114,9 +114,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
 
                     if (QueryStringAppend)
                     {
-                        request.QueryString = request.QueryString.Add(
-                            QueryString.FromUriComponent(pattern.Substring(split))
-                        );
+                        request.QueryString = request.QueryString
+                            .Add(QueryString.FromUriComponent(pattern.Substring(split)));
                     }
                     else
                     {

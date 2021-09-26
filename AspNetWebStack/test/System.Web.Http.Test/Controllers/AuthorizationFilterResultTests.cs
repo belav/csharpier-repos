@@ -34,14 +34,13 @@ namespace System.Web.Http.Controllers
                 }
             );
             Mock<IHttpActionResult> innerResultMock = new Mock<IHttpActionResult>();
-            innerResultMock.Setup(r => r.ExecuteAsync(It.IsAny<CancellationToken>()))
-                .Returns(
-                    () =>
-                    {
-                        log.Add("innerAction");
-                        return Task.FromResult<HttpResponseMessage>(null);
-                    }
-                );
+            innerResultMock.Setup(r => r.ExecuteAsync(It.IsAny<CancellationToken>())).Returns(
+                () =>
+                {
+                    log.Add("innerAction");
+                    return Task.FromResult<HttpResponseMessage>(null);
+                }
+            );
             IHttpActionResult innerResult = innerResultMock.Object;
             var filters = new IAuthorizationFilter[]
             {
@@ -74,13 +73,13 @@ namespace System.Web.Http.Controllers
         {
             Mock<IAuthorizationFilter> filterMock = new Mock<IAuthorizationFilter>();
             filterMock.Setup(
-                    f =>
-                        f.ExecuteAuthorizationFilterAsync(
-                            It.IsAny<HttpActionContext>(),
-                            CancellationToken.None,
-                            It.IsAny<Func<Task<HttpResponseMessage>>>()
-                        )
-                )
+                f =>
+                    f.ExecuteAuthorizationFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        CancellationToken.None,
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
+            )
                 .Returns(implementation)
                 .Verifiable();
             return filterMock;

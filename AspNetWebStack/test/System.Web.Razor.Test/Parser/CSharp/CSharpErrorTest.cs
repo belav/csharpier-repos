@@ -416,8 +416,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                 "if(foo) { baz(); } else { var foo = bar; if(foo != null) { bar(); } ",
                 new StatementBlock(
                     Factory.Code(
-                            "if(foo) { baz(); } else { var foo = bar; if(foo != null) { bar(); } "
-                        )
+                        "if(foo) { baz(); } else { var foo = bar; if(foo != null) { bar(); } "
+                    )
                         .AsStatement()
                 ),
                 new RazorError(
@@ -439,8 +439,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                 "if(foo) { baz(); } else if { var foo = bar; if(foo != null) { bar(); } ",
                 new StatementBlock(
                     Factory.Code(
-                            "if(foo) { baz(); } else if { var foo = bar; if(foo != null) { bar(); } "
-                        )
+                        "if(foo) { baz(); } else if { var foo = bar; if(foo != null) { bar(); } "
+                    )
                         .AsStatement()
                 ),
                 new RazorError(
@@ -502,8 +502,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                 "try { baz(); } catch(Foo) { var foo = bar; if(foo != null) { bar(); } ",
                 new StatementBlock(
                     Factory.Code(
-                            "try { baz(); } catch(Foo) { var foo = bar; if(foo != null) { bar(); } "
-                        )
+                        "try { baz(); } catch(Foo) { var foo = bar; if(foo != null) { bar(); } "
+                    )
                         .AsStatement()
                 ),
                 new RazorError(
@@ -525,8 +525,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                 "try { baz(); } finally { var foo = bar; if(foo != null) { bar(); } ",
                 new StatementBlock(
                     Factory.Code(
-                            "try { baz(); } finally { var foo = bar; if(foo != null) { bar(); } "
-                        )
+                        "try { baz(); } finally { var foo = bar; if(foo != null) { bar(); } "
+                    )
                         .AsStatement()
                 ),
                 new RazorError(

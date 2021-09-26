@@ -32,15 +32,14 @@
                 new MapperConfiguration(
                     cfg =>
                     {
-                        cfg.CreateMap<Source, Destination>()
-                            .ForMember(
-                                dest => dest.Value,
-                                opt =>
-                                {
-                                    opt.PreCondition(src => src.Value.Count > 1);
-                                    opt.MapFrom(src => src.Value[1].SubValue);
-                                }
-                            );
+                        cfg.CreateMap<Source, Destination>().ForMember(
+                            dest => dest.Value,
+                            opt =>
+                            {
+                                opt.PreCondition(src => src.Value.Count > 1);
+                                opt.MapFrom(src => src.Value[1].SubValue);
+                            }
+                        );
                     }
                 );
 
@@ -79,18 +78,14 @@
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                        cfg.CreateMap<Source, Destination>()
-                            .ForMember(
-                                d => d.Value,
-                                opt =>
-                                {
-                                    opt.PreCondition(src => src.Value.HasValue);
-                                    opt.MapFrom(src => src.Value.Value + 10);
-                                }
-                            )
-                );
+                new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>().ForMember(
+                            d => d.Value,
+                            opt =>
+                            {
+                                opt.PreCondition(src => src.Value.HasValue);
+                                opt.MapFrom(src => src.Value.Value + 10);
+                            }
+                        ));
 
             [Fact]
             public void Should_skip_when_condition_not_met()
@@ -137,18 +132,14 @@
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                        cfg.CreateMap<Source, Destination>()
-                            .ForMember(
-                                itemDTO => itemDTO.BasePrice,
-                                config =>
-                                {
-                                    config.PreCondition(item => item.HasBasePrice);
-                                    config.MapFrom(item => item.BasePrice);
-                                }
-                            )
-                );
+                new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>().ForMember(
+                            itemDTO => itemDTO.BasePrice,
+                            config =>
+                            {
+                                config.PreCondition(item => item.HasBasePrice);
+                                config.MapFrom(item => item.BasePrice);
+                            }
+                        ));
 
             [Fact]
             public void Should_skip_the_mapping_when_the_condition_property_is_false()

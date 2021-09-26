@@ -3166,9 +3166,10 @@ keyword such as type of business.""
             catch (JsonSerializationException ex)
             {
                 Assert.IsTrue(
-                    ex.Message.StartsWith(
-                        "Required property 'FirstName' expects a value but got null. Path ''"
-                    )
+                    ex.Message
+                        .StartsWith(
+                            "Required property 'FirstName' expects a value but got null. Path ''"
+                        )
                 );
             }
         }
@@ -3483,9 +3484,8 @@ keyword such as type of business.""
             catch (JsonSerializationException ex)
             {
                 Assert.IsTrue(
-                    ex.Message.StartsWith(
-                        "Required property 'TestProperty2' not found in JSON. Path ''"
-                    )
+                    ex.Message
+                        .StartsWith("Required property 'TestProperty2' not found in JSON. Path ''")
                 );
             }
         }
@@ -4148,13 +4148,14 @@ Path '', line 1, position 1."
             catch (JsonSerializationException ex)
             {
                 Assert.IsTrue(
-                    ex.Message.StartsWith(
-                        @"Cannot deserialize the current JSON object (e.g. {""name"":""value""}) into type 'System.Collections.Generic.List`1[Newtonsoft.Json.Tests.TestObjects.Organization.Person]' because the type requires a JSON array (e.g. [1,2,3]) to deserialize correctly."
-                            + Environment.NewLine
-                            + @"To fix this error either change the JSON to a JSON array (e.g. [1,2,3]) or change the deserialized type so that it is a normal .NET type (e.g. not a primitive type like integer, not a collection type like an array or List<T>) that can be deserialized from a JSON object. JsonObjectAttribute can also be added to the type to force it to deserialize from a JSON object."
-                            + Environment.NewLine
-                            + @"Path ''"
-                    )
+                    ex.Message
+                        .StartsWith(
+                            @"Cannot deserialize the current JSON object (e.g. {""name"":""value""}) into type 'System.Collections.Generic.List`1[Newtonsoft.Json.Tests.TestObjects.Organization.Person]' because the type requires a JSON array (e.g. [1,2,3]) to deserialize correctly."
+                                + Environment.NewLine
+                                + @"To fix this error either change the JSON to a JSON array (e.g. [1,2,3]) or change the deserialized type so that it is a normal .NET type (e.g. not a primitive type like integer, not a collection type like an array or List<T>) that can be deserialized from a JSON object. JsonObjectAttribute can also be added to the type to force it to deserialize from a JSON object."
+                                + Environment.NewLine
+                                + @"Path ''"
+                        )
                 );
             }
         }
@@ -4430,9 +4431,10 @@ Path '', line 1, position 1."
             catch (JsonSerializationException ex)
             {
                 Assert.IsTrue(
-                    ex.Message.StartsWith(
-                        "Could not convert string 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to dictionary key type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person'. Create a TypeConverter to convert from the string to the key type object. Path '['Newtonsoft.Json.Tests.TestObjects.Organization.Person']'"
-                    )
+                    ex.Message
+                        .StartsWith(
+                            "Could not convert string 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to dictionary key type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person'. Create a TypeConverter to convert from the string to the key type object. Path '['Newtonsoft.Json.Tests.TestObjects.Organization.Person']'"
+                        )
                 );
             }
         }
@@ -5135,80 +5137,82 @@ Path '', line 1, position 1."
             Assert.AreEqual(
                 2,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetField(
-                        "AA_field1",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetField("AA_field1", BindingFlags.Instance | BindingFlags.NonPublic),
                     myA
                 )
             );
             Assert.AreEqual(
                 0,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetField(
-                        "AA_field2",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetField("AA_field2", BindingFlags.Instance | BindingFlags.NonPublic),
                     myA
                 )
             );
             Assert.AreEqual(
                 2,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property1",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property1",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myA
                 )
             );
             Assert.AreEqual(
                 2,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property2",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property2",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myA
                 )
             );
             Assert.AreEqual(
                 2,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property3",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property3",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myA
                 )
             );
             Assert.AreEqual(
                 2,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property4",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property4",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myA
                 )
             );
             Assert.AreEqual(
                 0,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property5",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property5",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myA
                 )
             );
             Assert.AreEqual(
                 0,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property6",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property6",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myA
                 )
             );
@@ -5239,80 +5243,82 @@ Path '', line 1, position 1."
             Assert.AreEqual(
                 3,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetField(
-                        "AA_field1",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetField("AA_field1", BindingFlags.Instance | BindingFlags.NonPublic),
                     myB
                 )
             );
             Assert.AreEqual(
                 0,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetField(
-                        "AA_field2",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetField("AA_field2", BindingFlags.Instance | BindingFlags.NonPublic),
                     myB
                 )
             );
             Assert.AreEqual(
                 2,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property1",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property1",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myB
                 )
             );
             Assert.AreEqual(
                 2,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property2",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property2",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myB
                 )
             );
             Assert.AreEqual(
                 2,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property3",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property3",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myB
                 )
             );
             Assert.AreEqual(
                 2,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property4",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property4",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myB
                 )
             );
             Assert.AreEqual(
                 0,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property5",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property5",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myB
                 )
             );
             Assert.AreEqual(
                 0,
                 ReflectionUtils.GetMemberValue(
-                    typeof(AATestClass).GetProperty(
-                        "AA_property6",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(AATestClass)
+                        .GetProperty(
+                            "AA_property6",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myB
                 )
             );
@@ -5324,20 +5330,19 @@ Path '', line 1, position 1."
             Assert.AreEqual(
                 3,
                 ReflectionUtils.GetMemberValue(
-                    typeof(BBTestClass).GetProperty(
-                        "BB_property3",
-                        BindingFlags.Instance | BindingFlags.Public
-                    ),
+                    typeof(BBTestClass)
+                        .GetProperty("BB_property3", BindingFlags.Instance | BindingFlags.Public),
                     myB
                 )
             );
             Assert.AreEqual(
                 3,
                 ReflectionUtils.GetMemberValue(
-                    typeof(BBTestClass).GetProperty(
-                        "BB_property4",
-                        BindingFlags.Instance | BindingFlags.NonPublic
-                    ),
+                    typeof(BBTestClass)
+                        .GetProperty(
+                            "BB_property4",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
                     myB
                 )
             );
@@ -5345,30 +5350,24 @@ Path '', line 1, position 1."
             Assert.AreEqual(
                 3,
                 ReflectionUtils.GetMemberValue(
-                    typeof(BBTestClass).GetProperty(
-                        "BB_property6",
-                        BindingFlags.Instance | BindingFlags.Public
-                    ),
+                    typeof(BBTestClass)
+                        .GetProperty("BB_property6", BindingFlags.Instance | BindingFlags.Public),
                     myB
                 )
             );
             Assert.AreEqual(
                 3,
                 ReflectionUtils.GetMemberValue(
-                    typeof(BBTestClass).GetProperty(
-                        "BB_property7",
-                        BindingFlags.Instance | BindingFlags.Public
-                    ),
+                    typeof(BBTestClass)
+                        .GetProperty("BB_property7", BindingFlags.Instance | BindingFlags.Public),
                     myB
                 )
             );
             Assert.AreEqual(
                 3,
                 ReflectionUtils.GetMemberValue(
-                    typeof(BBTestClass).GetProperty(
-                        "BB_property8",
-                        BindingFlags.Instance | BindingFlags.Public
-                    ),
+                    typeof(BBTestClass)
+                        .GetProperty("BB_property8", BindingFlags.Instance | BindingFlags.Public),
                     myB
                 )
             );
@@ -7422,22 +7421,21 @@ Path '', line 1, position 1."
             Assert.IsNotNull(o);
             Assert.AreEqual(4, errors.Count);
             Assert.IsTrue(
-                errors[0].StartsWith(
-                    "Required property 'NonAttributeProperty' not found in JSON. Path ''"
-                )
+                errors[0]
+                    .StartsWith(
+                        "Required property 'NonAttributeProperty' not found in JSON. Path ''"
+                    )
             );
             Assert.IsTrue(
                 errors[1].StartsWith("Required property 'UnsetProperty' not found in JSON. Path ''")
             );
             Assert.IsTrue(
-                errors[2].StartsWith(
-                    "Required property 'AllowNullProperty' not found in JSON. Path ''"
-                )
+                errors[2]
+                    .StartsWith("Required property 'AllowNullProperty' not found in JSON. Path ''")
             );
             Assert.IsTrue(
-                errors[3].StartsWith(
-                    "Required property 'AlwaysProperty' not found in JSON. Path ''"
-                )
+                errors[3]
+                    .StartsWith("Required property 'AlwaysProperty' not found in JSON. Path ''")
             );
         }
 
@@ -7462,19 +7460,22 @@ Path '', line 1, position 1."
             Assert.IsNotNull(o);
             Assert.AreEqual(3, errors.Count);
             Assert.IsTrue(
-                errors[0].StartsWith(
-                    "Required property 'NonAttributeProperty' expects a value but got null. Path ''"
-                )
+                errors[0]
+                    .StartsWith(
+                        "Required property 'NonAttributeProperty' expects a value but got null. Path ''"
+                    )
             );
             Assert.IsTrue(
-                errors[1].StartsWith(
-                    "Required property 'UnsetProperty' expects a value but got null. Path ''"
-                )
+                errors[1]
+                    .StartsWith(
+                        "Required property 'UnsetProperty' expects a value but got null. Path ''"
+                    )
             );
             Assert.IsTrue(
-                errors[2].StartsWith(
-                    "Required property 'AlwaysProperty' expects a value but got null. Path ''"
-                )
+                errors[2]
+                    .StartsWith(
+                        "Required property 'AlwaysProperty' expects a value but got null. Path ''"
+                    )
             );
         }
 
@@ -7707,9 +7708,8 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeEmptyJsonString()
         {
-            string s = (string)new JsonSerializer().Deserialize(
-                new JsonTextReader(new StringReader("''"))
-            );
+            string s = (string)new JsonSerializer()
+                .Deserialize(new JsonTextReader(new StringReader("''")));
             Assert.AreEqual("", s);
         }
 
@@ -9472,10 +9472,8 @@ This is just junk, though.";
         [Test]
         public void ChildClassWithProtectedOverridePlusJsonProperty_Serialize()
         {
-            JsonObjectContract c =
-                (JsonObjectContract)DefaultContractResolver.Instance.ResolveContract(
-                    typeof(ChildClassWithProtectedOverridePlusJsonProperty)
-                );
+            JsonObjectContract c = (JsonObjectContract)DefaultContractResolver.Instance
+                .ResolveContract(typeof(ChildClassWithProtectedOverridePlusJsonProperty));
             Assert.AreEqual(1, c.Properties.Count);
 
             var propertyValue = "test";

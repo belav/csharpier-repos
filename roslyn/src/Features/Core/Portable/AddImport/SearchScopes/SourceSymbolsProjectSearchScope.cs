@@ -43,12 +43,12 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SearchQuery searchQuery
             )
             {
-                var service =
-                    _project.Solution.Workspace.Services.GetService<ISymbolTreeInfoCacheService>();
+                var service = _project.Solution.Workspace.Services
+                    .GetService<ISymbolTreeInfoCacheService>();
                 var info = await service.TryGetSourceSymbolTreeInfoAsync(
-                        _project,
-                        CancellationToken
-                    )
+                    _project,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
                 if (info == null)
                 {
@@ -62,11 +62,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                 var lazyAssembly = _projectToAssembly.GetOrAdd(_project, CreateLazyAssembly);
 
                 var declarations = await info.FindAsync(
-                        searchQuery,
-                        lazyAssembly,
-                        filter,
-                        CancellationToken
-                    )
+                    searchQuery,
+                    lazyAssembly,
+                    filter,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return declarations;

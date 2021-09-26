@@ -25,11 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static bool IsComponentImport(string fileKind)
         {
             // fileKind might be null.
-            return string.Equals(
-                fileKind,
-                FileKinds.ComponentImport,
-                StringComparison.OrdinalIgnoreCase
-            );
+            return string
+                .Equals(fileKind, FileKinds.ComponentImport, StringComparison.OrdinalIgnoreCase);
         }
 
         public static string GetComponentFileKindFromFilePath(string filePath)
@@ -40,11 +37,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             if (
-                string.Equals(
-                    ComponentMetadata.ImportsFileName,
-                    Path.GetFileName(filePath),
-                    StringComparison.Ordinal
-                )
+                string
+                    .Equals(
+                        ComponentMetadata.ImportsFileName,
+                        Path.GetFileName(filePath),
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return FileKinds.ComponentImport;
@@ -63,21 +61,23 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             if (
-                string.Equals(
-                    ComponentMetadata.ImportsFileName,
-                    Path.GetFileName(filePath),
-                    StringComparison.Ordinal
-                )
+                string
+                    .Equals(
+                        ComponentMetadata.ImportsFileName,
+                        Path.GetFileName(filePath),
+                        StringComparison.Ordinal
+                    )
             )
             {
                 return FileKinds.ComponentImport;
             }
             else if (
-                string.Equals(
-                    ".razor",
-                    Path.GetExtension(filePath),
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(
+                        ".razor",
+                        Path.GetExtension(filePath),
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 return FileKinds.Component;

@@ -504,9 +504,8 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             var jTokenWriter = new JTokenWriter();
             new JsonSerializer().Serialize(jTokenWriter, rate);
-            var rate2 = new JsonSerializer().Deserialize<Rate>(
-                new JTokenReader(jTokenWriter.Token)
-            );
+            var rate2 = new JsonSerializer()
+                .Deserialize<Rate>(new JTokenReader(jTokenWriter.Token));
 
             Assert.AreEqual(rate.Compoundings, rate2.Compoundings);
         }

@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Tools
                     Arity = ArgumentArity.ZeroOrOne,
                     Description =
                         Resources.A_path_to_a_solution_file_a_project_file_or_a_folder_containing_a_solution_or_project_file_If_a_path_is_not_specified_then_the_current_directory_is_used
-                }.LegalFilePathsOnly(),
+                }
+                    .LegalFilePathsOnly(),
                 new Option(
                     new[] { "--no-restore" },
                     Resources.Doesnt_execute_an_implicit_restore_before_formatting
@@ -74,19 +75,15 @@ namespace Microsoft.CodeAnalysis.Tools
                     new[] { "--fix-style", "-s" },
                     Resources.Run_code_style_analyzers_and_apply_fixes
                 ) {
-                    Argument = new Argument<string?>("severity")
-                    {
-                        Arity = ArgumentArity.ZeroOrOne
-                    }.FromAmong(SeverityLevels)
+                    Argument = new Argument<string?>("severity") { Arity = ArgumentArity.ZeroOrOne }
+                        .FromAmong(SeverityLevels)
                 },
                 new Option(
                     new[] { "--fix-analyzers", "-a" },
                     Resources.Run_3rd_party_analyzers_and_apply_fixes
                 ) {
-                    Argument = new Argument<string?>("severity")
-                    {
-                        Arity = ArgumentArity.ZeroOrOne
-                    }.FromAmong(SeverityLevels)
+                    Argument = new Argument<string?>("severity") { Arity = ArgumentArity.ZeroOrOne }
+                        .FromAmong(SeverityLevels)
                 },
                 new Option(
                     new[] { "--diagnostics" },
@@ -114,19 +111,15 @@ namespace Microsoft.CodeAnalysis.Tools
                     new[] { "--report" },
                     Resources.Accepts_a_file_path_which_if_provided_will_produce_a_format_report_json_file_in_the_given_directory
                 ) {
-                    Argument = new Argument<string?>(() => null)
-                    {
-                        Name = "report-path"
-                    }.LegalFilePathsOnly()
+                    Argument = new Argument<string?>(() => null) { Name = "report-path" }
+                        .LegalFilePathsOnly()
                 },
                 new Option(
                     new[] { "--verbosity", "-v" },
                     Resources.Set_the_verbosity_level_Allowed_values_are_quiet_minimal_normal_detailed_and_diagnostic
                 ) {
-                    Argument = new Argument<string?>()
-                    {
-                        Arity = ArgumentArity.ExactlyOne
-                    }.FromAmong(VerbosityLevels)
+                    Argument = new Argument<string?>() { Arity = ArgumentArity.ExactlyOne }
+                        .FromAmong(VerbosityLevels)
                 },
                 new Option(
                     new[] { "--include-generated" },
@@ -142,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Tools
                     {
                         Name = "binary-log-path",
                         Arity = ArgumentArity.ZeroOrOne
-                    }.LegalFilePathsOnly()
+                    }
+                        .LegalFilePathsOnly()
                 },
             };
 
@@ -197,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Tools
 
         internal static bool WasOptionUsed(this ParseResult result, params string[] aliases)
         {
-            return result.Tokens.Where(token => token.Type == TokenType.Option)
+            return result.Tokens
+                .Where(token => token.Type == TokenType.Option)
                 .Any(token => aliases.Contains(token.Value));
         }
     }

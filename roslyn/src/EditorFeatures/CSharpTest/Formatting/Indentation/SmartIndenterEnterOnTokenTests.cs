@@ -1618,20 +1618,20 @@ class C
         )
         {
             await AssertIndentUsingSmartTokenFormatterAsync(
-                    code,
-                    ch,
-                    indentationLine,
-                    expectedIndentation,
-                    useTabs: false
-                )
+                code,
+                ch,
+                indentationLine,
+                expectedIndentation,
+                useTabs: false
+            )
                 .ConfigureAwait(false);
             await AssertIndentUsingSmartTokenFormatterAsync(
-                    code.Replace("    ", "\t"),
-                    ch,
-                    indentationLine,
-                    expectedIndentation,
-                    useTabs: true
-                )
+                code.Replace("    ", "\t"),
+                ch,
+                indentationLine,
+                expectedIndentation,
+                useTabs: true
+            )
                 .ConfigureAwait(false);
         }
 
@@ -1647,9 +1647,10 @@ class C
             using var workspace = TestWorkspace.CreateCSharp(code);
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
-                )
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options.WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
+                    )
             );
 
             var hostdoc = workspace.Documents.First();
@@ -1693,20 +1694,20 @@ class C
         )
         {
             await AssertIndentNotUsingSmartTokenFormatterButUsingIndenterAsync(
-                    code,
-                    indentationLine,
-                    expectedIndentation,
-                    useTabs: false,
-                    indentStyle
-                )
+                code,
+                indentationLine,
+                expectedIndentation,
+                useTabs: false,
+                indentStyle
+            )
                 .ConfigureAwait(false);
             await AssertIndentNotUsingSmartTokenFormatterButUsingIndenterAsync(
-                    code.Replace("    ", "\t"),
-                    indentationLine,
-                    expectedIndentation,
-                    useTabs: true,
-                    indentStyle
-                )
+                code.Replace("    ", "\t"),
+                indentationLine,
+                expectedIndentation,
+                useTabs: true,
+                indentStyle
+            )
                 .ConfigureAwait(false);
         }
 
@@ -1721,14 +1722,12 @@ class C
             // create tree service
             using var workspace = TestWorkspace.CreateCSharp(code);
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                            SmartIndent,
-                            LanguageNames.CSharp,
-                            indentStyle
-                        )
-                        .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
-                )
+                workspace.CurrentSolution
+                    .WithOptions(
+                        workspace.Options
+                            .WithChangedOption(SmartIndent, LanguageNames.CSharp, indentStyle)
+                            .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
+                    )
             );
             var hostdoc = workspace.Documents.First();
             var buffer = hostdoc.GetTextBuffer();

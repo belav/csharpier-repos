@@ -28,7 +28,8 @@ namespace InteropTestsClient
             Console.WriteLine("Application started.");
 
             var runtimeVersion =
-                typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+                typeof(object).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
                 ?? "Unknown";
             Console.WriteLine($"NetCoreAppVersion: {runtimeVersion}");
 

@@ -71,9 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         context
                     );
                     if (
-                        (
-                            (ConventionContext<IConventionEntityTypeBuilder>)context
-                        ).ShouldStopProcessing()
+                        ((ConventionContext<IConventionEntityTypeBuilder>)context)
+                            .ShouldStopProcessing()
                     )
                     {
                         return;
@@ -324,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionContext<string> context
         )
         {
-            var navigationPropertyInfo = entityTypeBuilder.Metadata.GetRuntimeProperties()
+            var navigationPropertyInfo = entityTypeBuilder.Metadata
+                .GetRuntimeProperties()
                 .Find(name);
             if (navigationPropertyInfo == null)
             {
@@ -358,9 +358,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private Type? FindCandidateNavigationWithAttributePropertyType(PropertyInfo propertyInfo)
         {
-            var targetClrType = Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(
-                propertyInfo
-            );
+            var targetClrType = Dependencies.MemberClassifier
+                .FindCandidateNavigationPropertyType(propertyInfo);
             return
                 targetClrType == null
                 || !Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)

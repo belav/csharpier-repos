@@ -313,7 +313,8 @@ namespace System.Threading
                         throughputErrorEstimate = (
                             GetWaveComponent(_samples, sampleCount, adjacentPeriod1)
                             / averageThroughput
-                        ).Abs();
+                        )
+                            .Abs();
                         if (adjacentPeriod2 <= sampleCount)
                         {
                             throughputErrorEstimate = Math.Max(
@@ -321,7 +322,8 @@ namespace System.Threading
                                 (
                                     GetWaveComponent(_samples, sampleCount, adjacentPeriod2)
                                     / averageThroughput
-                                ).Abs()
+                                )
+                                    .Abs()
                             );
                         }
 
@@ -467,18 +469,19 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadAdjustmentStats(
-                        sampleDurationSeconds,
-                        throughput,
-                        threadWaveComponent.Real,
-                        throughputWaveComponent.Real,
-                        throughputErrorEstimate,
-                        _averageThroughputNoise,
-                        ratio.Real,
-                        confidence,
-                        _currentControlSetting,
-                        (ushort)newThreadWaveMagnitude
-                    );
+                    NativeRuntimeEventSource.Log
+                        .ThreadPoolWorkerThreadAdjustmentStats(
+                            sampleDurationSeconds,
+                            throughput,
+                            threadWaveComponent.Real,
+                            throughputWaveComponent.Real,
+                            throughputErrorEstimate,
+                            _averageThroughputNoise,
+                            ratio.Real,
+                            confidence,
+                            _currentControlSetting,
+                            (ushort)newThreadWaveMagnitude
+                        );
                 }
 
                 //
@@ -550,11 +553,12 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadAdjustmentAdjustment(
-                        throughput,
-                        (uint)newThreadCount,
-                        (NativeRuntimeEventSource.ThreadAdjustmentReasonMap)stateOrTransition
-                    );
+                    NativeRuntimeEventSource.Log
+                        .ThreadPoolWorkerThreadAdjustmentAdjustment(
+                            throughput,
+                            (uint)newThreadCount,
+                            (NativeRuntimeEventSource.ThreadAdjustmentReasonMap)stateOrTransition
+                        );
                 }
             }
 

@@ -166,13 +166,8 @@ namespace System.ComponentModel.DataAnnotations
         {
             SetupConversion();
 
-            return string.Format(
-                CultureInfo.CurrentCulture,
-                ErrorMessageString,
-                name,
-                Minimum,
-                Maximum
-            );
+            return string
+                .Format(CultureInfo.CurrentCulture, ErrorMessageString, name, Minimum, Maximum);
         }
 
         /// <summary>

@@ -215,10 +215,8 @@ namespace System.Net.Primitives.Functional.Tests
 
             if (!isFromSameDomain)
             {
-                FieldInfo domainTableField = typeof(CookieContainer).GetField(
-                    "m_domainTable",
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                );
+                FieldInfo domainTableField = typeof(CookieContainer)
+                    .GetField("m_domainTable", BindingFlags.Instance | BindingFlags.NonPublic);
                 Assert.NotNull(domainTableField);
                 Hashtable domainTable = domainTableField.GetValue(cookieContainer) as Hashtable;
                 Assert.NotNull(domainTable);

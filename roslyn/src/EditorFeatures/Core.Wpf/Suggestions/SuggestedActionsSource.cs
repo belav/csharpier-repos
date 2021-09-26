@@ -202,10 +202,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     )
                     {
                         // This needs to run under threading context otherwise, we can deadlock on VS
-                        ThreadingContext.JoinableTaskFactory.Run(
-                            () =>
-                                _workspaceStatusService.WaitUntilFullyLoadedAsync(cancellationToken)
-                        );
+                        ThreadingContext.JoinableTaskFactory
+                            .Run(
+                                () =>
+                                    _workspaceStatusService.WaitUntilFullyLoadedAsync(
+                                        cancellationToken
+                                    )
+                            );
                     }
                 }
 
@@ -225,18 +228,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     }
 
                     var workspace = document.Project.Solution.Workspace;
-                    var supportsFeatureService =
-                        workspace.Services.GetRequiredService<ITextBufferSupportsFeatureService>();
+                    var supportsFeatureService = workspace.Services
+                        .GetRequiredService<ITextBufferSupportsFeatureService>();
 
                     var selection = TryGetCodeRefactoringSelection(range);
 
                     Func<string, IDisposable?> addOperationScope = description =>
                         operationContext?.AddScope(
                             allowCancellation: true,
-                            string.Format(
-                                EditorFeaturesResources.Gathering_Suggestions_0,
-                                description
-                            )
+                            string
+                                .Format(
+                                    EditorFeaturesResources.Gathering_Suggestions_0,
+                                    description
+                                )
                         );
 
                     // We convert the code fixes and refactorings to UnifiedSuggestedActionSets instead of
@@ -270,7 +274,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                         return null;
                     }
 
-                    return filteredSets.Value.Select(s => ConvertToSuggestedActionSet(s))
+                    return filteredSets.Value
+                        .Select(s => ConvertToSuggestedActionSet(s))
                         .WhereNotNull();
                 }
             }
@@ -346,9 +351,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                               _subjectBuffer,
                               nestedAction.Provider ?? this,
                               nestedAction.OriginalCodeAction,
-                              nestedAction.NestedActionSets.SelectAsArray(
-                                  s => ConvertToSuggestedActionSet(s)
-                              )
+                              nestedAction.NestedActionSets
+                                  .SelectAsArray(s => ConvertToSuggestedActionSet(s))
                           ),
                         _ => throw ExceptionUtilities.Unreachable
                     };
@@ -395,15 +399,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 const bool includeSuppressionFixes = true;
 
                 return UnifiedSuggestedActionsSource.GetFilterAndOrderCodeFixesAsync(
-                        workspace,
-                        _owner._codeFixService,
-                        document,
-                        range.Span.ToTextSpan(),
-                        includeSuppressionFixes,
-                        isBlocking: true,
-                        addOperationScope,
-                        cancellationToken
-                    )
+                    workspace,
+                    _owner._codeFixService,
+                    document,
+                    range.Span.ToTextSpan(),
+                    includeSuppressionFixes,
+                    isBlocking: true,
+                    addOperationScope,
+                    cancellationToken
+                )
                     .WaitAndGetResult(cancellationToken);
             }
 
@@ -457,15 +461,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 );
 
                 return UnifiedSuggestedActionsSource.GetFilterAndOrderCodeRefactoringsAsync(
-                        workspace,
-                        _owner._codeRefactoringService,
-                        document,
-                        selection.Value,
-                        isBlocking: true,
-                        addOperationScope,
-                        filterOutsideSelection,
-                        cancellationToken
-                    )
+                    workspace,
+                    _owner._codeRefactoringService,
+                    document,
+                    selection.Value,
+                    isBlocking: true,
+                    addOperationScope,
+                    filterOutsideSelection,
+                    cancellationToken
+                )
                     .WaitAndGetResult(cancellationToken);
             }
 
@@ -534,20 +538,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 else
                 {
                     await InvokeBelowInputPriorityAsync(
-                            () =>
+                        () =>
+                        {
+                            // Make sure we were not disposed between kicking off this work and getting
+                            // to this point.
+                            if (IsDisposed)
                             {
-                                // Make sure we were not disposed between kicking off this work and getting
-                                // to this point.
-                                if (IsDisposed)
-                                {
-                                    return;
-                                }
+                                return;
+                            }
 
-                                selection = TryGetCodeRefactoringSelection(range);
-                            },
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
+                            selection = TryGetCodeRefactoringSelection(range);
+                        },
+                        cancellationToken
+                    ).ConfigureAwait(false);
                 }
 
                 return selection;
@@ -562,7 +565,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             {
                 if (provider._codeFixService != null && _subjectBuffer.SupportsCodeFixes())
                 {
-                    var result = await provider._codeFixService.GetMostSevereFixableDiagnosticAsync(
+                    var result = await provider._codeFixService
+                        .GetMostSevereFixableDiagnosticAsync(
                             document,
                             range.Span.ToTextSpan(),
                             cancellationToken
@@ -601,19 +605,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 }
 
                 if (
-                    document.Project.Solution.Options.GetOption(
-                        EditorComponentOnOffOptions.CodeRefactorings
-                    )
+                    document.Project.Solution.Options
+                        .GetOption(EditorComponentOnOffOptions.CodeRefactorings)
                     && provider._codeRefactoringService != null
                     && _subjectBuffer.SupportsRefactorings()
                 )
                 {
                     if (
-                        await provider._codeRefactoringService.HasRefactoringsAsync(
-                                document,
-                                selection.Value,
-                                cancellationToken
-                            )
+                        await provider._codeRefactoringService
+                            .HasRefactoringsAsync(document, selection.Value, cancellationToken)
                             .ConfigureAwait(false)
                     )
                     {
@@ -629,13 +629,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 this.AssertIsForeground();
                 Debug.Assert(!this.IsDisposed);
 
-                var selectedSpans = _textView.Selection.SelectedSpans.SelectMany(
+                var selectedSpans = _textView.Selection.SelectedSpans
+                    .SelectMany(
                         ss =>
-                            _textView.BufferGraph.MapDownToBuffer(
-                                ss,
-                                SpanTrackingMode.EdgeExclusive,
-                                _subjectBuffer
-                            )
+                            _textView.BufferGraph
+                                .MapDownToBuffer(ss, SpanTrackingMode.EdgeExclusive, _subjectBuffer)
                     )
                     .Where(ss => !_textView.IsReadOnlyOnSurfaceBuffer(ss))
                     .ToList();
@@ -646,10 +644,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return null;
                 }
 
-                var translatedSpan = selectedSpans[0].TranslateTo(
-                    range.Snapshot,
-                    SpanTrackingMode.EdgeInclusive
-                );
+                var translatedSpan = selectedSpans[0]
+                    .TranslateTo(range.Snapshot, SpanTrackingMode.EdgeInclusive);
 
                 // We only support refactorings when selected span intersects with the span that the light bulb is asking for.
                 if (!translatedSpan.IntersectsWith(range))
@@ -802,9 +798,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return null;
                 }
 
-                using var asyncToken = provider.OperationListener.BeginAsyncOperation(
-                    nameof(GetSuggestedActionCategoriesAsync)
-                );
+                using var asyncToken = provider.OperationListener
+                    .BeginAsyncOperation(nameof(GetSuggestedActionCategoriesAsync));
                 var document = range.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {

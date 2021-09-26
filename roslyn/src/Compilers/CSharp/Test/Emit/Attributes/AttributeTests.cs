@@ -699,29 +699,28 @@ class C
                     @"System.Runtime.CompilerServices.InternalsVisibleToAttribute(""Roslyn.Compilers.CSharp"")",
                     attrs[1].ToString()
                 );
-                attrs[2].VerifyValue(
-                    0,
-                    TypedConstantKind.Primitive,
-                    "Roslyn.Compilers.CSharp.UnitTests"
-                );
+                attrs[2]
+                    .VerifyValue(
+                        0,
+                        TypedConstantKind.Primitive,
+                        "Roslyn.Compilers.CSharp.UnitTests"
+                    );
                 Assert.Equal(
                     @"System.Runtime.CompilerServices.InternalsVisibleToAttribute(""Roslyn.Compilers.CSharp.UnitTests"")",
                     attrs[2].ToString()
                 );
-                attrs[3].VerifyValue(
-                    0,
-                    TypedConstantKind.Primitive,
-                    "Roslyn.Compilers.CSharp.Test.Utilities"
-                );
+                attrs[3]
+                    .VerifyValue(
+                        0,
+                        TypedConstantKind.Primitive,
+                        "Roslyn.Compilers.CSharp.Test.Utilities"
+                    );
                 Assert.Equal(
                     @"System.Runtime.CompilerServices.InternalsVisibleToAttribute(""Roslyn.Compilers.CSharp.Test.Utilities"")",
                     attrs[3].ToString()
                 );
-                attrs[4].VerifyValue(
-                    0,
-                    TypedConstantKind.Primitive,
-                    "Roslyn.Compilers.VisualBasic"
-                );
+                attrs[4]
+                    .VerifyValue(0, TypedConstantKind.Primitive, "Roslyn.Compilers.VisualBasic");
                 Assert.Equal(
                     @"System.Runtime.CompilerServices.InternalsVisibleToAttribute(""Roslyn.Compilers.VisualBasic"")",
                     attrs[4].ToString()
@@ -762,9 +761,9 @@ static class Program
                 // (11,2): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 // [Mark(b: new string[] { "Hello", "World" }, a: true)]
                 Diagnostic(
-                        ErrorCode.ERR_BadAttributeArgument,
-                        @"Mark(b: new string[] { ""Hello"", ""World"" }, a: true)"
-                    )
+                    ErrorCode.ERR_BadAttributeArgument,
+                    @"Mark(b: new string[] { ""Hello"", ""World"" }, a: true)"
+                )
                     .WithLocation(11, 2),
                 // (12,7): error CS8323: Named argument 'b' is used out-of-position but is followed by an unnamed argument
                 // [Mark(b: "Hello", true)]
@@ -1913,9 +1912,9 @@ public struct Test
                 // (4,13): error CS0637: The FieldOffset attribute is not allowed on static or const fields
                 //     [field: System.Runtime.InteropServices.FieldOffset(0)]
                 Diagnostic(
-                        ErrorCode.ERR_StructOffsetOnBadField,
-                        "System.Runtime.InteropServices.FieldOffset"
-                    )
+                    ErrorCode.ERR_StructOffsetOnBadField,
+                    "System.Runtime.InteropServices.FieldOffset"
+                )
                     .WithArguments("System.Runtime.InteropServices.FieldOffset")
                     .WithLocation(4, 13)
             );
@@ -1942,9 +1941,9 @@ public struct Test
                 // (4,13): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
                 //     [field: System.Runtime.InteropServices.FieldOffset(-1)]
                 Diagnostic(
-                        ErrorCode.ERR_StructOffsetOnBadStruct,
-                        "System.Runtime.InteropServices.FieldOffset"
-                    )
+                    ErrorCode.ERR_StructOffsetOnBadStruct,
+                    "System.Runtime.InteropServices.FieldOffset"
+                )
                     .WithLocation(4, 13)
             );
         }
@@ -1967,7 +1966,8 @@ public class Test
             comp.VerifyDiagnostics(
                 // (7,13): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
                 //     [field: FieldOffset(4)]
-                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset").WithLocation(7, 13)
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset")
+                    .WithLocation(7, 13)
             );
         }
 
@@ -1988,7 +1988,8 @@ public struct Test
             comp.VerifyDiagnostics(
                 // (6,13): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
                 //     [field: FieldOffset(4)]
-                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset").WithLocation(6, 13)
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset")
+                    .WithLocation(6, 13)
             );
         }
 
@@ -2031,9 +2032,9 @@ public class Test
                 // (4,13): error CS8362: Do not use 'System.Runtime.CompilerServices.FixedBuffer' attribute on a property
                 //     [field: System.Runtime.CompilerServices.FixedBuffer(typeof(int), 0)]
                 Diagnostic(
-                        ErrorCode.ERR_DoNotUseFixedBufferAttrOnProperty,
-                        "System.Runtime.CompilerServices.FixedBuffer"
-                    )
+                    ErrorCode.ERR_DoNotUseFixedBufferAttrOnProperty,
+                    "System.Runtime.CompilerServices.FixedBuffer"
+                )
                     .WithLocation(4, 13)
             );
         }
@@ -2054,9 +2055,9 @@ public class Test
                 // (4,13): error CS1970: Do not use 'System.Runtime.CompilerServices.DynamicAttribute'. Use the 'dynamic' keyword instead.
                 //     [field: System.Runtime.CompilerServices.DynamicAttribute()]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitDynamicAttr,
-                        "System.Runtime.CompilerServices.DynamicAttribute()"
-                    )
+                    ErrorCode.ERR_ExplicitDynamicAttr,
+                    "System.Runtime.CompilerServices.DynamicAttribute()"
+                )
                     .WithLocation(4, 13)
             );
         }
@@ -2081,9 +2082,9 @@ public class Test
                 // (8,13): error CS8335: Do not use 'System.Runtime.CompilerServices.IsReadOnlyAttribute'. This is reserved for compiler usage.
                 //     [field: System.Runtime.CompilerServices.IsReadOnlyAttribute()]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitReservedAttr,
-                        "System.Runtime.CompilerServices.IsReadOnlyAttribute()"
-                    )
+                    ErrorCode.ERR_ExplicitReservedAttr,
+                    "System.Runtime.CompilerServices.IsReadOnlyAttribute()"
+                )
                     .WithArguments("System.Runtime.CompilerServices.IsReadOnlyAttribute")
                     .WithLocation(8, 13)
             );
@@ -2109,9 +2110,9 @@ public class Test
                 // (8,13): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
                 //     [field: System.Runtime.CompilerServices.IsByRefLikeAttribute()]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitReservedAttr,
-                        "System.Runtime.CompilerServices.IsByRefLikeAttribute()"
-                    )
+                    ErrorCode.ERR_ExplicitReservedAttr,
+                    "System.Runtime.CompilerServices.IsByRefLikeAttribute()"
+                )
                     .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
                     .WithLocation(8, 13)
             );
@@ -2290,9 +2291,9 @@ public class Test
                 // (11,13): error CS8138: Cannot reference 'System.Runtime.CompilerServices.TupleElementNamesAttribute' explicitly. Use the tuple syntax to define tuple names.
                 //     [field: System.Runtime.CompilerServices.TupleElementNamesAttribute(new[] { "hello" })]
                 Diagnostic(
-                        ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
-                        @"System.Runtime.CompilerServices.TupleElementNamesAttribute(new[] { ""hello"" })"
-                    )
+                    ErrorCode.ERR_ExplicitTupleElementNamesAttribute,
+                    @"System.Runtime.CompilerServices.TupleElementNamesAttribute(new[] { ""hello"" })"
+                )
                     .WithLocation(11, 13)
             );
         }
@@ -2838,51 +2839,50 @@ public class Test
     public event System.Action E10 { [return: JJ(0)] add { } remove { } } //on return (after .param[0])
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (15,6): error CS1729: 'AA' does not contain a constructor that takes 1 arguments
-                    //     [AA(0)] //in event decl
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "AA(0)").WithArguments("AA", "1"),
-                    // (17,13): error CS1729: 'BB' does not contain a constructor that takes 1 arguments
-                    //     [event: BB(0)] //in event decl
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "BB(0)").WithArguments("BB", "1"),
-                    // (19,14): error CS1729: 'CC' does not contain a constructor that takes 1 arguments
-                    //     [method: CC(0)] //in both accessors
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "CC(0)").WithArguments("CC", "1"),
-                    // (21,13): error CS1729: 'DD' does not contain a constructor that takes 1 arguments
-                    //     [field: DD(0)] //on field
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "DD(0)").WithArguments("DD", "1"),
-                    // (24,6): error CS1729: 'EE' does not contain a constructor that takes 1 arguments
-                    //     [EE(0)] //in event decl
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "EE(0)").WithArguments("EE", "1"),
-                    // (26,13): error CS1729: 'FF' does not contain a constructor that takes 1 arguments
-                    //     [event: FF(0)] //in event decl
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "FF(0)").WithArguments("FF", "1"),
-                    // (29,38): error CS1729: 'GG' does not contain a constructor that takes 1 arguments
-                    //     public event System.Action E7 { [GG(0)] add { } remove { } } //in accessor
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "GG(0)").WithArguments("GG", "1"),
-                    // (30,46): error CS1729: 'HH' does not contain a constructor that takes 1 arguments
-                    //     public event System.Action E8 { [method: HH(0)] add { } remove { } } //in accessor
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "HH(0)").WithArguments("HH", "1"),
-                    // (31,45): error CS1729: 'II' does not contain a constructor that takes 1 arguments
-                    //     public event System.Action E9 { [param: II(0)] add { } remove { } } //on parameter (after .param[1])
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "II(0)").WithArguments("II", "1"),
-                    // (32,47): error CS1729: 'JJ' does not contain a constructor that takes 1 arguments
-                    //     public event System.Action E10 { [return: JJ(0)] add { } remove { } } //on return (after .param[0])
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "JJ(0)").WithArguments("JJ", "1"),
-                    // (22,32): warning CS0067: The event 'Test.E4' is never used
-                    //     public event System.Action E4;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E4").WithArguments("Test.E4"),
-                    // (18,32): warning CS0067: The event 'Test.E2' is never used
-                    //     public event System.Action E2;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E2").WithArguments("Test.E2"),
-                    // (20,32): warning CS0067: The event 'Test.E3' is never used
-                    //     public event System.Action E3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E3").WithArguments("Test.E3"),
-                    // (16,32): warning CS0067: The event 'Test.E1' is never used
-                    //     public event System.Action E1;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E1").WithArguments("Test.E1")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (15,6): error CS1729: 'AA' does not contain a constructor that takes 1 arguments
+                //     [AA(0)] //in event decl
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "AA(0)").WithArguments("AA", "1"),
+                // (17,13): error CS1729: 'BB' does not contain a constructor that takes 1 arguments
+                //     [event: BB(0)] //in event decl
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "BB(0)").WithArguments("BB", "1"),
+                // (19,14): error CS1729: 'CC' does not contain a constructor that takes 1 arguments
+                //     [method: CC(0)] //in both accessors
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "CC(0)").WithArguments("CC", "1"),
+                // (21,13): error CS1729: 'DD' does not contain a constructor that takes 1 arguments
+                //     [field: DD(0)] //on field
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "DD(0)").WithArguments("DD", "1"),
+                // (24,6): error CS1729: 'EE' does not contain a constructor that takes 1 arguments
+                //     [EE(0)] //in event decl
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "EE(0)").WithArguments("EE", "1"),
+                // (26,13): error CS1729: 'FF' does not contain a constructor that takes 1 arguments
+                //     [event: FF(0)] //in event decl
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "FF(0)").WithArguments("FF", "1"),
+                // (29,38): error CS1729: 'GG' does not contain a constructor that takes 1 arguments
+                //     public event System.Action E7 { [GG(0)] add { } remove { } } //in accessor
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "GG(0)").WithArguments("GG", "1"),
+                // (30,46): error CS1729: 'HH' does not contain a constructor that takes 1 arguments
+                //     public event System.Action E8 { [method: HH(0)] add { } remove { } } //in accessor
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "HH(0)").WithArguments("HH", "1"),
+                // (31,45): error CS1729: 'II' does not contain a constructor that takes 1 arguments
+                //     public event System.Action E9 { [param: II(0)] add { } remove { } } //on parameter (after .param[1])
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "II(0)").WithArguments("II", "1"),
+                // (32,47): error CS1729: 'JJ' does not contain a constructor that takes 1 arguments
+                //     public event System.Action E10 { [return: JJ(0)] add { } remove { } } //on return (after .param[0])
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "JJ(0)").WithArguments("JJ", "1"),
+                // (22,32): warning CS0067: The event 'Test.E4' is never used
+                //     public event System.Action E4;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E4").WithArguments("Test.E4"),
+                // (18,32): warning CS0067: The event 'Test.E2' is never used
+                //     public event System.Action E2;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E2").WithArguments("Test.E2"),
+                // (20,32): warning CS0067: The event 'Test.E3' is never used
+                //     public event System.Action E3;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E3").WithArguments("Test.E3"),
+                // (16,32): warning CS0067: The event 'Test.E1' is never used
+                //     public event System.Action E1;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E1").WithArguments("Test.E1")
+            );
         }
 
         [Fact]
@@ -2910,24 +2910,23 @@ public class Test
     }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (10,22): error CS1729: 'AA' does not contain a constructor that takes 1 arguments
-                    //     public int this[[AA(0)]int x]
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "AA(0)").WithArguments("AA", "1"),
-                    // (13,10): error CS1729: 'CC' does not contain a constructor that takes 1 arguments
-                    //         [CC(0)]
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "CC(0)").WithArguments("CC", "1"),
-                    // (12,18): error CS1729: 'BB' does not contain a constructor that takes 1 arguments
-                    //         [return: BB(0)]
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "BB(0)").WithArguments("BB", "1"),
-                    // (16,17): error CS1729: 'DD' does not contain a constructor that takes 1 arguments
-                    //         [param: DD(0)]
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "DD(0)").WithArguments("DD", "1"),
-                    // (17,10): error CS1729: 'EE' does not contain a constructor that takes 1 arguments
-                    //         [EE(0)]
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "EE(0)").WithArguments("EE", "1")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (10,22): error CS1729: 'AA' does not contain a constructor that takes 1 arguments
+                //     public int this[[AA(0)]int x]
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "AA(0)").WithArguments("AA", "1"),
+                // (13,10): error CS1729: 'CC' does not contain a constructor that takes 1 arguments
+                //         [CC(0)]
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "CC(0)").WithArguments("CC", "1"),
+                // (12,18): error CS1729: 'BB' does not contain a constructor that takes 1 arguments
+                //         [return: BB(0)]
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "BB(0)").WithArguments("BB", "1"),
+                // (16,17): error CS1729: 'DD' does not contain a constructor that takes 1 arguments
+                //         [param: DD(0)]
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "DD(0)").WithArguments("DD", "1"),
+                // (17,10): error CS1729: 'EE' does not contain a constructor that takes 1 arguments
+                //         [EE(0)]
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "EE(0)").WithArguments("EE", "1")
+            );
         }
 
         private static string GetSingleAttributeName(Symbol symbol)
@@ -2969,18 +2968,14 @@ class C
             Action<ModuleSymbol> symbolValidator = moduleSymbol =>
             {
                 var type = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                var typeAttrType = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    "TypeAttribute"
-                );
-                var paramAttrType = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    "ParamAttribute"
-                );
-                var returnTypeAttrType = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    "ReturnTypeAttribute"
-                );
-                var typeParamAttrType = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    "TypeParamAttribute"
-                );
+                var typeAttrType = moduleSymbol.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("TypeAttribute");
+                var paramAttrType = moduleSymbol.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("ParamAttribute");
+                var returnTypeAttrType = moduleSymbol.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("ReturnTypeAttribute");
+                var typeParamAttrType = moduleSymbol.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("TypeParamAttribute");
 
                 // Verify delegate type attribute
                 var delegateType = type.GetTypeMember("Delegate");
@@ -3102,33 +3097,32 @@ class C
 
     public delegate int Delegate2 ([ParamAttribute4(0)]int p1 = 0, [param: ParamAttribute5(0)]params int[] p2);
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (13,6): error CS1729: 'TypeAttribute' does not contain a constructor that takes 1 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "TypeAttribute(0)")
-                        .WithArguments("TypeAttribute", "1"),
-                    // (15,33): error CS1729: 'TypeParamAttribute' does not contain a constructor that takes 1 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "TypeParamAttribute(0)")
-                        .WithArguments("TypeParamAttribute", "1"),
-                    // (15,60): error CS1729: 'ParamAttribute1' does not contain a constructor that takes 1 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute1(0)")
-                        .WithArguments("ParamAttribute1", "1"),
-                    // (15,93): error CS1729: 'ParamAttribute2' does not contain a constructor that takes 1 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute2(0)")
-                        .WithArguments("ParamAttribute2", "1"),
-                    // (15,123): error CS1729: 'ParamAttribute3' does not contain a constructor that takes 1 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute3(0)")
-                        .WithArguments("ParamAttribute3", "1"),
-                    // (14,14): error CS1729: 'ReturnTypeAttribute' does not contain a constructor that takes 1 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ReturnTypeAttribute(0)")
-                        .WithArguments("ReturnTypeAttribute", "1"),
-                    // (17,37): error CS1729: 'ParamAttribute4' does not contain a constructor that takes 1 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute4(0)")
-                        .WithArguments("ParamAttribute4", "1"),
-                    // (17,76): error CS1729: 'ParamAttribute5' does not contain a constructor that takes 1 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute5(0)")
-                        .WithArguments("ParamAttribute5", "1")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (13,6): error CS1729: 'TypeAttribute' does not contain a constructor that takes 1 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "TypeAttribute(0)")
+                    .WithArguments("TypeAttribute", "1"),
+                // (15,33): error CS1729: 'TypeParamAttribute' does not contain a constructor that takes 1 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "TypeParamAttribute(0)")
+                    .WithArguments("TypeParamAttribute", "1"),
+                // (15,60): error CS1729: 'ParamAttribute1' does not contain a constructor that takes 1 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute1(0)")
+                    .WithArguments("ParamAttribute1", "1"),
+                // (15,93): error CS1729: 'ParamAttribute2' does not contain a constructor that takes 1 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute2(0)")
+                    .WithArguments("ParamAttribute2", "1"),
+                // (15,123): error CS1729: 'ParamAttribute3' does not contain a constructor that takes 1 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute3(0)")
+                    .WithArguments("ParamAttribute3", "1"),
+                // (14,14): error CS1729: 'ReturnTypeAttribute' does not contain a constructor that takes 1 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ReturnTypeAttribute(0)")
+                    .WithArguments("ReturnTypeAttribute", "1"),
+                // (17,37): error CS1729: 'ParamAttribute4' does not contain a constructor that takes 1 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute4(0)")
+                    .WithArguments("ParamAttribute4", "1"),
+                // (17,76): error CS1729: 'ParamAttribute5' does not contain a constructor that takes 1 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ParamAttribute5(0)")
+                    .WithArguments("ParamAttribute5", "1")
+            );
         }
 
         [Fact]
@@ -3154,9 +3148,8 @@ class C
                 moduleSymbol =>
                 {
                     var type = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                    var paramAttrType = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "ParamAttribute"
-                    );
+                    var paramAttrType = moduleSymbol.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("ParamAttribute");
 
                     // Verify delegate type attribute
                     var delegateType = type.GetTypeMember("Delegate");
@@ -3277,12 +3270,13 @@ namespace AttributeTest
                 attrs = assembly.GetAttributes();
                 Assert.Equal(2, attrs.Length);
                 Assert.Equal("CustomAttribute.AttrName", attrs[0].AttributeClass.ToDisplayString());
-                attrs[1].VerifyNamedArgumentValue<ushort>(
-                    0,
-                    "UShortField",
-                    TypedConstantKind.Primitive,
-                    1234
-                );
+                attrs[1]
+                    .VerifyNamedArgumentValue<ushort>(
+                        0,
+                        "UShortField",
+                        TypedConstantKind.Primitive,
+                        1234
+                    );
 
                 var ns = (NamespaceSymbol)m.GlobalNamespace.GetMember("AttributeTest");
                 var top = (NamedTypeSymbol)ns.GetMember("Goo");
@@ -3295,17 +3289,19 @@ namespace AttributeTest
                     attrs[0].AttributeClass.ToDisplayString()
                 );
                 attrs[0].VerifyValue(0, TypedConstantKind.Enum, (int)FileMode.Open);
-                attrs[0].VerifyValue(
-                    1,
-                    TypedConstantKind.Enum,
-                    (int)(BindingFlags.DeclaredOnly | BindingFlags.Public)
-                );
-                attrs[0].VerifyNamedArgumentValue<uint>(
-                    0,
-                    "UIntField",
-                    TypedConstantKind.Primitive,
-                    1230
-                );
+                attrs[0]
+                    .VerifyValue(
+                        1,
+                        TypedConstantKind.Enum,
+                        (int)(BindingFlags.DeclaredOnly | BindingFlags.Public)
+                    );
+                attrs[0]
+                    .VerifyNamedArgumentValue<uint>(
+                        0,
+                        "UIntField",
+                        TypedConstantKind.Primitive,
+                        1230
+                    );
 
                 var nenum = top.GetMember<TypeSymbol>("NestedEnum");
                 attrs = nenum.GetAttributes();
@@ -3326,18 +3322,20 @@ namespace AttributeTest
                 attrs[0].VerifyValue<long>(1, TypedConstantKind.Primitive, 256);
                 attrs[0].VerifyValue<float>(2, TypedConstantKind.Primitive, 0);
                 attrs[0].VerifyValue<short>(3, TypedConstantKind.Primitive, -1);
-                attrs[0].VerifyNamedArgumentValue<ulong[]>(
-                    0,
-                    "AryField",
-                    TypedConstantKind.Array,
-                    new ulong[] { 0, 1, 12345657 }
-                );
+                attrs[0]
+                    .VerifyNamedArgumentValue<ulong[]>(
+                        0,
+                        "AryField",
+                        TypedConstantKind.Array,
+                        new ulong[] { 0, 1, 12345657 }
+                    );
 
-                attrs[1].VerifyValue<object>(
-                    0,
-                    TypedConstantKind.Type,
-                    typeof(Dictionary<string, int>)
-                );
+                attrs[1]
+                    .VerifyValue<object>(
+                        0,
+                        TypedConstantKind.Type,
+                        typeof(Dictionary<string, int>)
+                    );
                 attrs[1].VerifyValue<long>(1, TypedConstantKind.Primitive, 265);
                 attrs[1].VerifyValue<float>(2, TypedConstantKind.Primitive, -0.0001f);
                 attrs[1].VerifyValue<short>(3, TypedConstantKind.Primitive, 2);
@@ -5087,26 +5085,26 @@ class Program
         public void AttributeArgumentAsEnumFromMetadata()
         {
             var metadataStream1 = CSharpCompilation.Create(
-                    "bar.dll",
-                    references: new[] { MscorlibRef },
-                    syntaxTrees: new[] { Parse("public enum Bar { Baz }") }
-                )
+                "bar.dll",
+                references: new[] { MscorlibRef },
+                syntaxTrees: new[] { Parse("public enum Bar { Baz }") }
+            )
                 .EmitToStream(options: new EmitOptions(metadataOnly: true));
 
             var ref1 = MetadataReference.CreateFromStream(metadataStream1);
 
             var metadataStream2 = CSharpCompilation.Create(
-                    "goo.dll",
-                    references: new[] { MscorlibRef, ref1 },
-                    syntaxTrees: new[]
-                    {
-                        SyntaxFactory.ParseSyntaxTree(
-                            "public class Ca : System.Attribute { public Ca(object o) { } } "
-                                + "[Ca(Bar.Baz)]"
-                                + "public class Goo { }"
-                        )
-                    }
-                )
+                "goo.dll",
+                references: new[] { MscorlibRef, ref1 },
+                syntaxTrees: new[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(
+                        "public class Ca : System.Attribute { public Ca(object o) { } } "
+                            + "[Ca(Bar.Baz)]"
+                            + "public class Goo { }"
+                    )
+                }
+            )
                 .EmitToStream(options: new EmitOptions(metadataOnly: true));
 
             var ref2 = MetadataReference.CreateFromStream(metadataStream2);
@@ -5184,89 +5182,41 @@ public class A : Attribute
                 Assert.Equal(12, attrs.Count());
                 var enumerator = attrs.GetEnumerator();
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Enum,
-                    (int)new DayOfWeek()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Enum, (int)new DayOfWeek());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new bool()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new bool());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new sbyte()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new sbyte());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new byte()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new byte());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new short()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new short());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new ushort()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new ushort());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new int()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new int());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new uint()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new uint());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new char()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new char());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new float()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new float());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new Single()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new Single());
                 enumerator.MoveNext();
-                enumerator.Current.VerifyNamedArgumentValue(
-                    0,
-                    "X",
-                    TypedConstantKind.Primitive,
-                    new double()
-                );
+                enumerator.Current
+                    .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new double());
             };
 
             string expectedOutput = "";
@@ -5546,7 +5496,8 @@ public class GClass<T> where T : Attribute
             {
                 NamedTypeSymbol attributeType = m.GlobalNamespace.GetTypeMember("TAttribute");
 
-                NamedTypeSymbol GClass = m.GlobalNamespace.GetTypeMember("GClass")
+                NamedTypeSymbol GClass = m.GlobalNamespace
+                    .GetTypeMember("GClass")
                     .AsUnboundGenericType();
                 Assert.Equal(1, GClass.GetAttributes(attributeType).Count());
 
@@ -6195,7 +6146,8 @@ class D : C
             var model = cm.GetSemanticModel(cm.SyntaxTrees[0]);
 
             int index = main.IndexOf("M()", StringComparison.Ordinal);
-            var m = (ExpressionSyntax)cm.SyntaxTrees[0].GetCompilationUnitRoot()
+            var m = (ExpressionSyntax)cm.SyntaxTrees[0]
+                .GetCompilationUnitRoot()
                 .FindToken(index).Parent.Parent;
 
             var info = model.GetSymbolInfo(m);
@@ -6456,8 +6408,10 @@ class A
             );
             compilation.VerifyDiagnostics( // (21,4): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
                 // [X(NotFound = null)]
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
-                    .WithArguments("NotFound"),
+                Diagnostic(
+                    ErrorCode.ERR_SingleTypeNameNotFound,
+                    "NotFound"
+                ).WithArguments("NotFound"),
                 // (22,4): error CS0617: 'F1' is not a valid named attribute argument. Named attribute arguments must be fields which are not readonly, static, or const, or read-write properties which are public and not static.
                 // [X(F1 = null)]
                 Diagnostic(ErrorCode.ERR_BadNamedAttributeArgument, "F1").WithArguments("F1"),
@@ -6802,9 +6756,9 @@ public class Test
                 // (3,2): error CS7036: There is no argument given that corresponds to the required formal parameter 'validOn' of 'AttributeUsageAttribute.AttributeUsageAttribute(AttributeTargets)'
                 // [AttributeUsage(AllowMultiple = true, AllowMultiple = false)]
                 Diagnostic(
-                        ErrorCode.ERR_NoCorrespondingArgument,
-                        "AttributeUsage(AllowMultiple = true, AllowMultiple = false)"
-                    )
+                    ErrorCode.ERR_NoCorrespondingArgument,
+                    "AttributeUsage(AllowMultiple = true, AllowMultiple = false)"
+                )
                     .WithArguments(
                         "validOn",
                         "System.AttributeUsageAttribute.AttributeUsageAttribute(System.AttributeTargets)"
@@ -7111,16 +7065,15 @@ using System;
 [A] class C { }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,2): error CS0592: Attribute 'A' is not valid on this declaration type. It is only valid on 'assembly, module, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
-                    // [A] class C { }
-                    Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "A")
-                        .WithArguments(
-                            "A",
-                            "assembly, module, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter"
-                        )
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,2): error CS0592: Attribute 'A' is not valid on this declaration type. It is only valid on 'assembly, module, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
+                // [A] class C { }
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "A")
+                    .WithArguments(
+                        "A",
+                        "assembly, module, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter"
+                    )
+            );
         }
 
         [Fact]
@@ -8107,13 +8060,12 @@ using AAttribute = A2;
 class A1 : System.Attribute { }
 class A2 : System.Attribute { }
 [A]class C { }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (5,2): error CS1614: 'A' is ambiguous between 'A2' and 'A1'; use either '@A' or 'AAttribute'
-                    Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "A")
-                        .WithArguments("A", "A1", "A2")
-                        .WithLocation(5, 2)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (5,2): error CS1614: 'A' is ambiguous between 'A2' and 'A1'; use either '@A' or 'AAttribute'
+                Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "A")
+                    .WithArguments("A", "A1", "A2")
+                    .WithLocation(5, 2)
+            );
         }
 
         [WorkItem(542279, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542279")]
@@ -8136,15 +8088,14 @@ class C
         return null;
     }
 }";
-            CreateCompilation(text)
-                .VerifyDiagnostics(
-                    // (8,16): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new B()").WithLocation(8, 16),
-                    // (10,12): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new B()").WithLocation(10, 12),
-                    // (11,19): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new B()").WithLocation(11, 19)
-                );
+            CreateCompilation(text).VerifyDiagnostics(
+                // (8,16): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new B()").WithLocation(8, 16),
+                // (10,12): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new B()").WithLocation(10, 12),
+                // (11,19): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new B()").WithLocation(11, 19)
+            );
         }
 
         [Fact]
@@ -8160,16 +8111,14 @@ public class A : Attribute
 [A(new object[] { default(E), default(E) })]
 class C<T, U> { public enum E {} }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,19): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [A(new object[] { default(E), default(E) })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)")
-                        .WithLocation(7, 19),
-                    // (7,31): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [A(new object[] { default(E), default(E) })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 31)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,19): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [A(new object[] { default(E), default(E) })]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 19),
+                // (7,31): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [A(new object[] { default(E), default(E) })]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 31)
+            );
         }
 
         [Fact]
@@ -8185,24 +8134,20 @@ public class A : Attribute
 [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
 class C<T, U> { public enum E {} }";
             // Note that we suppress further errors once we have reported a bad attribute argument.
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,19): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)")
-                        .WithLocation(7, 19),
-                    // (7,31): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)")
-                        .WithLocation(7, 31),
-                    // (7,60): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)")
-                        .WithLocation(7, 60),
-                    // (7,72): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 72)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,19): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 19),
+                // (7,31): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 31),
+                // (7,60): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 60),
+                // (7,72): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 72)
+            );
         }
 
         [Fact]
@@ -8217,13 +8162,11 @@ public class A : Attribute
   const decimal y = new decimal();
 }";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (2,8): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [A(X = new decimal())]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new decimal()")
-                        .WithLocation(2, 8)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (2,8): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [A(X = new decimal())]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new decimal()").WithLocation(2, 8)
+            );
         }
 
         [WorkItem(542533, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542533")]
@@ -8886,13 +8829,12 @@ class A : Attribute
 {
     public A(int x) { }
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,4): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [A((int)(object)"ABC")]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, @"(int)(object)""ABC""")
-                        .WithLocation(3, 4)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,4): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [A((int)(object)"ABC")]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, @"(int)(object)""ABC""")
+                    .WithLocation(3, 4)
+            );
         }
 
         [WorkItem(544348, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544348")]
@@ -8914,23 +8856,19 @@ class B : Attribute
     public B(object[] x) { }
 }
 ";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,4): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [A((object[])(object)( new [] { 1 }))]
-                    Diagnostic(
-                            ErrorCode.ERR_BadAttributeArgument,
-                            "(object[])(object)( new [] { 1 })"
-                        )
-                        .WithLocation(3, 4),
-                    // (9,4): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    // [B((object[])(object)(new string[] { "a", null }))]
-                    Diagnostic(
-                            ErrorCode.ERR_BadAttributeArgument,
-                            @"(object[])(object)(new string[] { ""a"", null })"
-                        )
-                        .WithLocation(9, 4)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,4): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [A((object[])(object)( new [] { 1 }))]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "(object[])(object)( new [] { 1 })")
+                    .WithLocation(3, 4),
+                // (9,4): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // [B((object[])(object)(new string[] { "a", null }))]
+                Diagnostic(
+                    ErrorCode.ERR_BadAttributeArgument,
+                    @"(object[])(object)(new string[] { ""a"", null })"
+                )
+                    .WithLocation(9, 4)
+            );
         }
 
         [WorkItem(529392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529392")]
@@ -9034,14 +8972,13 @@ class X
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (14,9): error CS0655: 'd' is not a valid named attribute argument because it is not a valid attribute parameter type
-                    // [myAttr(d = () => { })]
-                    Diagnostic(ErrorCode.ERR_BadNamedAttributeArgumentType, "d")
-                        .WithArguments("d")
-                        .WithLocation(14, 9)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (14,9): error CS0655: 'd' is not a valid named attribute argument because it is not a valid attribute parameter type
+                // [myAttr(d = () => { })]
+                Diagnostic(ErrorCode.ERR_BadNamedAttributeArgumentType, "d")
+                    .WithArguments("d")
+                    .WithLocation(14, 9)
+            );
         }
 
         [WorkItem(544590, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544590")]
@@ -9068,19 +9005,14 @@ public class Class1 {
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (11,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    //     [field: Goo(((System.Func<int>)(() => 5))())]
-                    Diagnostic(
-                        ErrorCode.ERR_BadAttributeArgument,
-                        "((System.Func<int>)(() => 5))()"
-                    ),
-                    // (12,31): warning CS0067: The event 'Class1.Click' is never used
-                    //     public event EventHandler Click;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Click")
-                        .WithArguments("Class1.Click")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (11,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                //     [field: Goo(((System.Func<int>)(() => 5))())]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "((System.Func<int>)(() => 5))()"),
+                // (12,31): warning CS0067: The event 'Class1.Click' is never used
+                //     public event EventHandler Click;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Click").WithArguments("Class1.Click")
+            );
         }
 
         [WorkItem(545030, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545030")]
@@ -9101,22 +9033,21 @@ namespace System
 }
 ";
 
-            CreateCompilationWithMscorlib40(source)
-                .VerifyDiagnostics(
-                    // (4,6): error CS0616: 'System.Runtime.InteropServices.DllImportAttribute' is not an attribute class
-                    //     [DllImport] // Error
-                    Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "DllImport")
-                        .WithArguments("System.Runtime.InteropServices.DllImportAttribute"),
-                    // (9,6): warning CS0436: The type 'System.Object' in '' conflicts with the imported type 'object' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
-                    //     [Object]   // Warning
-                    Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Object")
-                        .WithArguments(
-                            "",
-                            "System.Object",
-                            "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                            "object"
-                        )
-                );
+            CreateCompilationWithMscorlib40(source).VerifyDiagnostics(
+                // (4,6): error CS0616: 'System.Runtime.InteropServices.DllImportAttribute' is not an attribute class
+                //     [DllImport] // Error
+                Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "DllImport")
+                    .WithArguments("System.Runtime.InteropServices.DllImportAttribute"),
+                // (9,6): warning CS0436: The type 'System.Object' in '' conflicts with the imported type 'object' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
+                //     [Object]   // Warning
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Object")
+                    .WithArguments(
+                        "",
+                        "System.Object",
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        "object"
+                    )
+            );
         }
 
         [WorkItem(545241, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545241")]
@@ -9209,13 +9140,12 @@ class A : Attribute
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (7,24): error CS1503: Argument 1: cannot convert from 'method group' to 'int'
-                    //     delegate void F([A(Equals)] int x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "Equals")
-                        .WithArguments("1", "method group", "int")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (7,24): error CS1503: Argument 1: cannot convert from 'method group' to 'int'
+                //     delegate void F([A(Equals)] int x);
+                Diagnostic(ErrorCode.ERR_BadArgType, "Equals")
+                    .WithArguments("1", "method group", "int")
+            );
         }
 
         [Fact, WorkItem(546234, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546234")]
@@ -9276,12 +9206,11 @@ public class X: Attribute
 ";
             var comp1 = CreateCompilationWithMscorlib40(source2, assemblyName: "Temp0")
                 .ToMetadataReference();
-            CreateCompilationWithMscorlib40(source, references: new[] { comp1 })
-                .VerifyDiagnostics(
-                    // (2,12): error CS0616: 'X' is not an attribute class
-                    // [assembly: X]
-                    Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "X").WithArguments("X")
-                );
+            CreateCompilationWithMscorlib40(source, references: new[] { comp1 }).VerifyDiagnostics(
+                // (2,12): error CS0616: 'X' is not an attribute class
+                // [assembly: X]
+                Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "X").WithArguments("X")
+            );
 
             // Multiple from PE, none from Source
             source2 =
@@ -9511,7 +9440,8 @@ public class IA
                     .WithArguments("IndexerName")
             );
 
-            var indexer = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("IA")
+            var indexer = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("IA")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal("ItemX", indexer.MetadataName); //First one wins.
         }
@@ -9552,7 +9482,8 @@ public class IA
             Assert.Equal(0, assembly.GetAttributes().Length);
             var type = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("E");
             Assert.Equal(0, type.GetAttributes().Length);
-            var method = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("E")
+            var method = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("E")
                 .GetMember<PEMethodSymbol>("M");
             Assert.Equal(0, method.GetAttributes().Length);
             Assert.True(method.TestIsExtensionBitSet);
@@ -9596,7 +9527,8 @@ public class IA
             Assert.Equal(0, assembly.GetAttributes().Length);
             var type = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("E");
             Assert.Equal(0, type.GetAttributes().Length);
-            var method = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("E")
+            var method = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("E")
                 .GetMember<PEMethodSymbol>("M");
             Assert.Equal(0, method.GetAttributes().Length);
             Assert.True(method.TestIsExtensionBitSet);
@@ -9638,14 +9570,16 @@ public class IA
                 // (5,11): error CS1061: 'object' does not contain a definition for 'M' and no extension method 'M' accepting a
                 // first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //         o.M();
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M").WithArguments("object", "M")
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M")
+                    .WithArguments("object", "M")
             );
 
             var assembly = compilation.Assembly;
             Assert.Equal(0, assembly.GetAttributes().Length);
             var type = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("E");
             Assert.Equal(0, type.GetAttributes().Length);
-            var method = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("E")
+            var method = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("E")
                 .GetMember<PEMethodSymbol>("M");
             Assert.Equal(0, method.GetAttributes().Length);
             Assert.True(method.TestIsExtensionBitSet);
@@ -9685,7 +9619,8 @@ public class IA
             var compilation = CreateCompilation(source2, new[] { reference1 });
             compilation.VerifyDiagnostics();
 
-            var method = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+            var method = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("A")
                 .GetMember<PEMethodSymbol>("M");
             Assert.Equal(0, method.GetAttributes().Length);
             var yParam = method.Parameters[1];
@@ -9792,7 +9727,8 @@ public class C<T, U> : Attribute
                 Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "C<>").WithArguments("C<T, U>"),
                 // (11,2): error CS0404: Cannot apply attribute class 'C<T, U>' because it is generic
                 // [C<int>]
-                Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "C<int>").WithArguments("C<T, U>"),
+                Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "C<int>")
+                    .WithArguments("C<T, U>"),
                 // (12,2): error CS0404: Cannot apply attribute class 'C<T, U>' because it is generic
                 // [C<,>]
                 Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "C<,>").WithArguments("C<T, U>"),
@@ -9839,7 +9775,8 @@ public class C<T> : Attribute
                 Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "Alias").WithArguments("C<int>"),
                 // (6,2): error CS0404: Cannot apply attribute class 'C<int>' because it is generic
                 // [Alias<>]
-                Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "Alias<>").WithArguments("C<int>"),
+                Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "Alias<>")
+                    .WithArguments("C<int>"),
                 // (7,2): error CS0404: Cannot apply attribute class 'C<int>' because it is generic
                 // [Alias<int>]
                 Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "Alias<int>")
@@ -9891,7 +9828,8 @@ class Test
                 Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "Alias").WithArguments("C<int>"),
                 // (5,2): error CS0404: Cannot apply attribute class 'C<int>' because it is generic
                 // [Alias<>]
-                Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "Alias<>").WithArguments("C<int>"),
+                Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "Alias<>")
+                    .WithArguments("C<int>"),
                 // (6,2): error CS0404: Cannot apply attribute class 'C<int>' because it is generic
                 // [Alias<int>]
                 Diagnostic(ErrorCode.ERR_AttributeCantBeGeneric, "Alias<int>")
@@ -9960,13 +9898,12 @@ class Program
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,6): error CS1614: 'Action' is ambiguous between 'A.ActionAttribute' and 'A.ActionAttribute'; use either '@Action' or 'ActionAttribute'
-                    //     [Action]
-                    Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "Action")
-                        .WithArguments("Action", "A.ActionAttribute", "A.ActionAttribute")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,6): error CS1614: 'Action' is ambiguous between 'A.ActionAttribute' and 'A.ActionAttribute'; use either '@Action' or 'ActionAttribute'
+                //     [Action]
+                Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "Action")
+                    .WithArguments("Action", "A.ActionAttribute", "A.ActionAttribute")
+            );
         }
 
         [WorkItem(687816, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/687816")]
@@ -9990,13 +9927,12 @@ class Program
 }
 ";
 
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (12,6): error CS1614: 'Action' is ambiguous between 'A.ActionAttribute' and 'A.ActionAttribute'; use either '@Action' or 'ActionAttribute'
-                    //     [Action]
-                    Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "Action")
-                        .WithArguments("Action", "A.ActionAttribute", "A.ActionAttribute")
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (12,6): error CS1614: 'Action' is ambiguous between 'A.ActionAttribute' and 'A.ActionAttribute'; use either '@Action' or 'ActionAttribute'
+                //     [Action]
+                Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "Action")
+                    .WithArguments("Action", "A.ActionAttribute", "A.ActionAttribute")
+            );
         }
 
         [WorkItem(728865, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/728865")]
@@ -10690,15 +10626,13 @@ class Target<T>
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Target");
 
-            var typeInAttribute = (INamedTypeSymbol)type.GetAttributes()[
-                0
-            ].ConstructorArguments.First().Value;
+            var typeInAttribute = (INamedTypeSymbol)type.GetAttributes()[0].ConstructorArguments
+                .First().Value;
             Assert.True(typeInAttribute.IsUnboundGenericType);
             Assert.True(
                 (
-                    (NamedTypeSymbol)type.GetAttributes()[
-                        0
-                    ].ConstructorArguments.First().ValueInternal
+                    (NamedTypeSymbol)type.GetAttributes()[0].ConstructorArguments
+                        .First().ValueInternal
                 ).IsUnboundGenericType
             );
             Assert.Equal("Target<>", typeInAttribute.ToTestDisplayString());
@@ -10708,15 +10642,13 @@ class Target<T>
 
             Assert.IsAssignableFrom<PENamedTypeSymbol>(type);
 
-            typeInAttribute = (INamedTypeSymbol)type.GetAttributes()[
-                0
-            ].ConstructorArguments.First().Value;
+            typeInAttribute = (INamedTypeSymbol)type.GetAttributes()[0].ConstructorArguments
+                .First().Value;
             Assert.True(typeInAttribute.IsUnboundGenericType);
             Assert.True(
                 (
-                    (NamedTypeSymbol)type.GetAttributes()[
-                        0
-                    ].ConstructorArguments.First().ValueInternal
+                    (NamedTypeSymbol)type.GetAttributes()[0].ConstructorArguments
+                        .First().ValueInternal
                 ).IsUnboundGenericType
             );
             Assert.Equal("Target<>", typeInAttribute.ToTestDisplayString());
@@ -10946,14 +10878,13 @@ namespace a
 	}
 }
 ";
-            CreateCompilationWithMscorlib46(code)
-                .VerifyDiagnostics(
-                    // (22,4): error CS0181: Attribute constructor parameter 'Fx' has type 'Class1.CommandAttribute.FxCommand', which is not a valid attribute parameter type
-                    // 		[Command(UserInfo)]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "Command")
-                        .WithArguments("Fx", "a.Class1.CommandAttribute.FxCommand")
-                        .WithLocation(22, 4)
-                );
+            CreateCompilationWithMscorlib46(code).VerifyDiagnostics(
+                // (22,4): error CS0181: Attribute constructor parameter 'Fx' has type 'Class1.CommandAttribute.FxCommand', which is not a valid attribute parameter type
+                // 		[Command(UserInfo)]
+                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "Command")
+                    .WithArguments("Fx", "a.Class1.CommandAttribute.FxCommand")
+                    .WithLocation(22, 4)
+            );
         }
 
         [Fact, WorkItem(33388, "https://github.com/dotnet/roslyn/issues/33388")]
@@ -11087,9 +11018,9 @@ namespace System.Runtime.InteropServices
                 // (8,35): error CS8902: 'C.F()' is attributed with 'UnmanagedCallersOnly' and cannot be converted to a delegate type. Obtain a function pointer to this method.
                 //     unsafe static D M1() => new D(F);
                 Diagnostic(
-                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
-                        "F"
-                    )
+                    ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate,
+                    "F"
+                )
                     .WithArguments("C.F()")
                     .WithLocation(8, 35),
                 // (9,28): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context

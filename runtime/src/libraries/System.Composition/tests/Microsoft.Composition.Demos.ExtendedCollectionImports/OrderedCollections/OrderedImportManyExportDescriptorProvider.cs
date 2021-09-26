@@ -19,7 +19,8 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollectio
         private const string OrderByMetadataImportMetadataConstraintName = "OrderMetadataName";
 
         private static readonly MethodInfo s_getImportManyDefinitionMethod =
-            typeof(OrderedImportManyExportDescriptorProvider).GetTypeInfo()
+            typeof(OrderedImportManyExportDescriptorProvider)
+                .GetTypeInfo()
                 .GetDeclaredMethod("GetImportManyDescriptor");
         private static readonly Type[] s_supportedContractTypes = new[]
         {
@@ -107,19 +108,20 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollectio
         {
             var targets = dependentDescriptors.Select(d => d.Target).ToArray();
             var missing = targets.Where(
-                    t =>
-                        !t.GetDescriptor().Metadata.ContainsKey(keyToOrderBy)
-                        || t.GetDescriptor().Metadata[keyToOrderBy] == null
-                )
+                t =>
+                    !t.GetDescriptor().Metadata.ContainsKey(keyToOrderBy)
+                    || t.GetDescriptor().Metadata[keyToOrderBy] == null
+            )
                 .ToArray();
             if (missing.Length != 0)
             {
                 var origins = Formatters.ReadableQuotedList(missing.Select(m => m.Origin));
-                var message = string.Format(
-                    "The metadata '{0}' cannot be used for ordering because it is missing from exports on part(s) {1}.",
-                    keyToOrderBy,
-                    origins
-                );
+                var message = string
+                    .Format(
+                        "The metadata '{0}' cannot be used for ordering because it is missing from exports on part(s) {1}.",
+                        keyToOrderBy,
+                        origins
+                    );
                 throw new CompositionFailedException(message);
             }
 

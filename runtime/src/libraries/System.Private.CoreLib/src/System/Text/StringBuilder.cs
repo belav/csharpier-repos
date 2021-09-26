@@ -1161,9 +1161,8 @@ namespace System.Text
                     curDestIndex -= chunkCount;
                     count -= chunkCount;
 
-                    new ReadOnlySpan<char>(chunk.m_ChunkChars, chunkStartIndex, chunkCount).CopyTo(
-                        destination.Slice(curDestIndex)
-                    );
+                    new ReadOnlySpan<char>(chunk.m_ChunkChars, chunkStartIndex, chunkCount)
+                        .CopyTo(destination.Slice(curDestIndex));
                 }
                 chunk = chunk.m_ChunkPrevious;
             }
@@ -2332,9 +2331,8 @@ namespace System.Text
             int newIndex = valueCount + m_ChunkLength;
             if (newIndex <= m_ChunkChars.Length)
             {
-                new ReadOnlySpan<char>(value, valueCount).CopyTo(
-                    m_ChunkChars.AsSpan(m_ChunkLength)
-                );
+                new ReadOnlySpan<char>(value, valueCount)
+                    .CopyTo(m_ChunkChars.AsSpan(m_ChunkLength));
                 m_ChunkLength = newIndex;
             }
             else
@@ -2343,9 +2341,8 @@ namespace System.Text
                 int firstLength = m_ChunkChars.Length - m_ChunkLength;
                 if (firstLength > 0)
                 {
-                    new ReadOnlySpan<char>(value, firstLength).CopyTo(
-                        m_ChunkChars.AsSpan(m_ChunkLength)
-                    );
+                    new ReadOnlySpan<char>(value, firstLength)
+                        .CopyTo(m_ChunkChars.AsSpan(m_ChunkLength));
                     m_ChunkLength = m_ChunkChars.Length;
                 }
 
@@ -2355,7 +2352,8 @@ namespace System.Text
                 Debug.Assert(m_ChunkLength == 0, "A new block was not created.");
 
                 // Copy the second chunk
-                new ReadOnlySpan<char>(value + firstLength, restLength).CopyTo(m_ChunkChars);
+                new ReadOnlySpan<char>(value + firstLength, restLength)
+                    .CopyTo(m_ChunkChars);
                 m_ChunkLength = restLength;
             }
             AssertInvariants();
@@ -2564,9 +2562,8 @@ namespace System.Text
                     Debug.Assert(lengthInChunk >= 0, "Index isn't in the chunk.");
 
                     int lengthToCopy = Math.Min(lengthInChunk, count);
-                    new ReadOnlySpan<char>(value, lengthToCopy).CopyTo(
-                        chunk.m_ChunkChars.AsSpan(indexInChunk)
-                    );
+                    new ReadOnlySpan<char>(value, lengthToCopy)
+                        .CopyTo(chunk.m_ChunkChars.AsSpan(indexInChunk));
 
                     // Advance the index.
                     indexInChunk += lengthToCopy;
@@ -2793,17 +2790,15 @@ namespace System.Text
             int copyCount1 = Math.Min(count, indexInChunk);
             if (copyCount1 > 0)
             {
-                new ReadOnlySpan<char>(chunk.m_ChunkChars, 0, copyCount1).CopyTo(
-                    newChunk.m_ChunkChars
-                );
+                new ReadOnlySpan<char>(chunk.m_ChunkChars, 0, copyCount1)
+                    .CopyTo(newChunk.m_ChunkChars);
 
                 // Slide characters over in the current buffer to make room.
                 int copyCount2 = indexInChunk - copyCount1;
                 if (copyCount2 >= 0)
                 {
-                    new ReadOnlySpan<char>(chunk.m_ChunkChars, copyCount1, copyCount2).CopyTo(
-                        chunk.m_ChunkChars
-                    );
+                    new ReadOnlySpan<char>(chunk.m_ChunkChars, copyCount1, copyCount2)
+                        .CopyTo(chunk.m_ChunkChars);
                     indexInChunk = copyCount2;
                 }
             }
@@ -2919,9 +2914,8 @@ namespace System.Text
             // Remove any characters in the end chunk, by sliding the characters down.
             if (copyTargetIndexInChunk != endIndexInChunk) // Sometimes no move is necessary
             {
-                new ReadOnlySpan<char>(endChunk.m_ChunkChars, endIndexInChunk, copyCount).CopyTo(
-                    endChunk.m_ChunkChars.AsSpan(copyTargetIndexInChunk)
-                );
+                new ReadOnlySpan<char>(endChunk.m_ChunkChars, endIndexInChunk, copyCount)
+                    .CopyTo(endChunk.m_ChunkChars.AsSpan(copyTargetIndexInChunk));
             }
 
             Debug.Assert(chunk != null, "We fell off the beginning of the string!");

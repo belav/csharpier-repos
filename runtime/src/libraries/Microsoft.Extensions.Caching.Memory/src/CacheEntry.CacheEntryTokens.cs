@@ -110,13 +110,14 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (_postEvictionCallbacks != null)
                 {
-                    Task.Factory.StartNew(
-                        state => InvokeCallbacks((CacheEntry)state),
-                        cacheEntry,
-                        CancellationToken.None,
-                        TaskCreationOptions.DenyChildAttach,
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            state => InvokeCallbacks((CacheEntry)state),
+                            cacheEntry,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        );
                 }
             }
 

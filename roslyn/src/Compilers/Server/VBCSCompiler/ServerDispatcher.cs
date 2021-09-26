@@ -118,11 +118,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     {
                         // Wait for the task to complete
                         _listenTask.ContinueWith(
-                                _ => { },
-                                CancellationToken.None,
-                                TaskContinuationOptions.ExecuteSynchronously,
-                                TaskScheduler.Default
-                            )
+                            _ => { },
+                            CancellationToken.None,
+                            TaskContinuationOptions.ExecuteSynchronously,
+                            TaskScheduler.Default
+                        )
                             .Wait(CancellationToken.None);
                     }
 
@@ -363,10 +363,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         {
             var clientHandler = new ClientConnectionHandler(compilerServerHost);
             return await clientHandler.ProcessAsync(
-                    clientStreamTask,
-                    allowCompilationRequests,
-                    cancellationToken
-                )
+                clientStreamTask,
+                allowCompilationRequests,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

@@ -46,14 +46,14 @@ namespace System.Linq.Parallel.Tests
                     foreach (object[] left in Sources.Ranges(new[] { leftCount }))
                     {
                         yield return left.Concat(
-                                new object[]
-                                {
-                                    UnorderedSources.Default(rightStart, rightCount),
-                                    rightCount,
-                                    rightStart + rightCount,
-                                    Math.Max(0, leftCount - (rightCount + 1) / 2)
-                                }
-                            )
+                            new object[]
+                            {
+                                UnorderedSources.Default(rightStart, rightCount),
+                                rightCount,
+                                rightStart + rightCount,
+                                Math.Max(0, leftCount - (rightCount + 1) / 2)
+                            }
+                        )
                             .ToArray();
                     }
                 }
@@ -371,9 +371,9 @@ namespace System.Linq.Parallel.Tests
             IntegerRangeSet seen = new IntegerRangeSet(leftCount - expectedCount, expectedCount);
             Assert.All(
                 leftQuery.Except(
-                        rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
-                        new ModularCongruenceComparer(DuplicateFactor * 2)
-                    )
+                    rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
+                    new ModularCongruenceComparer(DuplicateFactor * 2)
+                )
                     .ToList(),
                 x => seen.Add(x % (DuplicateFactor * 2))
             );
@@ -420,9 +420,9 @@ namespace System.Linq.Parallel.Tests
             int seen = expectedCount == 0 ? 0 : leftCount - expectedCount;
             Assert.All(
                 leftQuery.Except(
-                        rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
-                        new ModularCongruenceComparer(DuplicateFactor * 2)
-                    )
+                    rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
+                    new ModularCongruenceComparer(DuplicateFactor * 2)
+                )
                     .ToList(),
                 x => Assert.Equal(seen++, x)
             );
@@ -604,10 +604,8 @@ namespace System.Linq.Parallel.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "first",
                 () =>
-                    ((ParallelQuery<int>)null).Except(
-                        ParallelEnumerable.Range(0, 1),
-                        EqualityComparer<int>.Default
-                    )
+                    ((ParallelQuery<int>)null)
+                        .Except(ParallelEnumerable.Range(0, 1), EqualityComparer<int>.Default)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "second",

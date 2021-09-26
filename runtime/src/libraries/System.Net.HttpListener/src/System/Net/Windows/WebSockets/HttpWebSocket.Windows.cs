@@ -74,10 +74,11 @@ namespace System.Net.WebSockets
                 if (shouldSendSecWebSocketProtocolHeader)
                 {
                     secWebSocketProtocols.Add(outgoingSecWebSocketProtocolString);
-                    response.Headers.Add(
-                        HttpKnownHeaderNames.SecWebSocketProtocol,
-                        outgoingSecWebSocketProtocolString
-                    );
+                    response.Headers
+                        .Add(
+                            HttpKnownHeaderNames.SecWebSocketProtocol,
+                            outgoingSecWebSocketProtocolString
+                        );
                 }
 
                 // negotiate the websocket key return value
@@ -189,13 +190,14 @@ namespace System.Net.WebSockets
             CancellationToken cancellationToken
         )
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "offset: {0}, count: {1}, cancellationToken.CanBeCanceled: {2}",
-                offset,
-                count,
-                cancellationToken.CanBeCanceled
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "offset: {0}, count: {1}, cancellationToken.CanBeCanceled: {2}",
+                    offset,
+                    count,
+                    cancellationToken.CanBeCanceled
+                );
         }
 
         internal static ConfiguredTaskAwaitable SuppressContextFlow(this Task task)

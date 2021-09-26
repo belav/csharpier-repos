@@ -62,7 +62,8 @@ namespace System.Drawing
                         return (Delegate?)driver_type.GetField(
                             "HwndDelegate",
                             BindingFlags.NonPublic | BindingFlags.Static
-                        )!.GetValue(null);
+                        )!
+                            .GetValue(null);
                     }
                 }
             }
@@ -146,9 +147,8 @@ namespace System.Drawing
 
             CGContextSaveGState(context);
 
-            Rectangle[]? clip_rectangles = (Rectangle[]?)hwnd_delegate!.DynamicInvoke(
-                new object[] { handle }
-            );
+            Rectangle[]? clip_rectangles = (Rectangle[]?)hwnd_delegate!
+                .DynamicInvoke(new object[] { handle });
             if (clip_rectangles != null && clip_rectangles.Length > 0)
             {
                 int length = clip_rectangles.Length;

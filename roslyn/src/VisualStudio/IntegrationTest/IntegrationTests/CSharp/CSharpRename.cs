@@ -519,10 +519,8 @@ class y
             );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Escape);
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Rename
-            );
+            VisualStudio.Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Rename);
 
             VisualStudio.Editor.Verify.TextContains(
                 @"
@@ -561,15 +559,13 @@ $$class RenameRocks
             var project1 = new ProjectUtils.Project(ProjectName);
             var project2 = new ProjectUtils.Project("Project2");
 
-            VisualStudio.SolutionExplorer.AddProject(
-                project2,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageName
-            );
-            VisualStudio.SolutionExplorer.AddProjectReference(
-                fromProjectName: project1,
-                toProjectName: new ProjectUtils.ProjectReference("Project2")
-            );
+            VisualStudio.SolutionExplorer
+                .AddProject(project2, WellKnownProjectTemplates.ClassLibrary, LanguageName);
+            VisualStudio.SolutionExplorer
+                .AddProjectReference(
+                    fromProjectName: project1,
+                    toProjectName: new ProjectUtils.ProjectReference("Project2")
+                );
 
             VisualStudio.SolutionExplorer.AddFile(project2, "Class2.cs", @"");
             VisualStudio.SolutionExplorer.OpenFile(project2, "Class2.cs");
@@ -616,10 +612,8 @@ public class y { static void Main(string [] args) { } }"
 public class Class2 { static void Main(string [] args) { } }"
             );
 
-            VisualStudio.SolutionExplorer.OpenFile(
-                new ProjectUtils.Project(ProjectName),
-                "Class1.cs"
-            );
+            VisualStudio.SolutionExplorer
+                .OpenFile(new ProjectUtils.Project(ProjectName), "Class1.cs");
             VisualStudio.Editor.Verify.TextContains(
                 @"
 class RenameRocks 
@@ -690,12 +684,8 @@ class Program
 
             InlineRenameDialog.Invoke();
 
-            VisualStudio.Editor.SendKeys(
-                VirtualKey.Home,
-                VirtualKey.Delete,
-                VirtualKey.P,
-                VirtualKey.Enter
-            );
+            VisualStudio.Editor
+                .SendKeys(VirtualKey.Home, VirtualKey.Delete, VirtualKey.P, VirtualKey.Enter);
 
             VisualStudio.SolutionExplorer.Verify.FileContents(
                 project,

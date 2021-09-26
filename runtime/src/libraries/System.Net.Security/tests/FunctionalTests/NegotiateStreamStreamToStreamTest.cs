@@ -20,9 +20,8 @@ namespace System.Net.Security.Tests
         public static bool IsNtlmInstalled => Capability.IsNtlmInstalled();
 
         private const int PartialBytesToRead = 5;
-        protected static readonly byte[] s_sampleMsg = Encoding.UTF8.GetBytes(
-            "Sample Test Message"
-        );
+        protected static readonly byte[] s_sampleMsg = Encoding.UTF8
+            .GetBytes("Sample Test Message");
 
         private const int MaxWriteDataSize = 63 * 1024; // NegoState.MaxWriteDataSize
         private static string s_longString = new string('A', MaxWriteDataSize) + 'Z';
@@ -262,9 +261,8 @@ namespace System.Net.Security.Tests
 
                 IdentityValidator.AssertHasName(
                     clientIdentity,
-                    new SecurityIdentifier(WellKnownSidType.AnonymousSid, null).Translate(
-                        typeof(NTAccount)
-                    ).Value
+                    new SecurityIdentifier(WellKnownSidType.AnonymousSid, null)
+                        .Translate(typeof(NTAccount)).Value
                 );
             }
         }
@@ -424,20 +422,18 @@ namespace System.Net.Security.Tests
             NetworkCredential credential,
             string targetName
         ) =>
-            Task.Factory.FromAsync(
-                client.BeginAuthenticateAsClient,
-                client.EndAuthenticateAsClient,
-                credential,
-                targetName,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    client.BeginAuthenticateAsClient,
+                    client.EndAuthenticateAsClient,
+                    credential,
+                    targetName,
+                    null
+                );
 
         protected override Task AuthenticateAsServerAsync(NegotiateStream server) =>
-            Task.Factory.FromAsync(
-                server.BeginAuthenticateAsServer,
-                server.EndAuthenticateAsServer,
-                null
-            );
+            Task.Factory
+                .FromAsync(server.BeginAuthenticateAsServer, server.EndAuthenticateAsServer, null);
 
         protected override Task<int> ReadAsync(
             Stream stream,
@@ -465,22 +461,24 @@ namespace System.Net.Security.Tests
             NetworkCredential credential,
             string targetName
         ) =>
-            Task.Factory.FromAsync(
-                client.BeginAuthenticateAsClient,
-                client.EndAuthenticateAsClient,
-                credential,
-                (ChannelBinding)null,
-                targetName,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    client.BeginAuthenticateAsClient,
+                    client.EndAuthenticateAsClient,
+                    credential,
+                    (ChannelBinding)null,
+                    targetName,
+                    null
+                );
 
         protected override Task AuthenticateAsServerAsync(NegotiateStream server) =>
-            Task.Factory.FromAsync(
-                server.BeginAuthenticateAsServer,
-                server.EndAuthenticateAsServer,
-                (ExtendedProtectionPolicy)null,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    server.BeginAuthenticateAsServer,
+                    server.EndAuthenticateAsServer,
+                    (ExtendedProtectionPolicy)null,
+                    null
+                );
     }
 
     public sealed class NegotiateStreamStreamToStreamTest_BeginEnd_TestOverloadProtectionLevel
@@ -491,33 +489,35 @@ namespace System.Net.Security.Tests
             NetworkCredential credential,
             string targetName
         ) =>
-            Task.Factory.FromAsync(
-                (callback, state) =>
-                    client.BeginAuthenticateAsClient(
-                        credential,
-                        targetName,
-                        ProtectionLevel.EncryptAndSign,
-                        TokenImpersonationLevel.Identification,
-                        callback,
-                        state
-                    ),
-                client.EndAuthenticateAsClient,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        client.BeginAuthenticateAsClient(
+                            credential,
+                            targetName,
+                            ProtectionLevel.EncryptAndSign,
+                            TokenImpersonationLevel.Identification,
+                            callback,
+                            state
+                        ),
+                    client.EndAuthenticateAsClient,
+                    null
+                );
 
         protected override Task AuthenticateAsServerAsync(NegotiateStream server) =>
-            Task.Factory.FromAsync(
-                (callback, state) =>
-                    server.BeginAuthenticateAsServer(
-                        (NetworkCredential)CredentialCache.DefaultCredentials,
-                        ProtectionLevel.EncryptAndSign,
-                        TokenImpersonationLevel.Identification,
-                        callback,
-                        state
-                    ),
-                server.EndAuthenticateAsServer,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        server.BeginAuthenticateAsServer(
+                            (NetworkCredential)CredentialCache.DefaultCredentials,
+                            ProtectionLevel.EncryptAndSign,
+                            TokenImpersonationLevel.Identification,
+                            callback,
+                            state
+                        ),
+                    server.EndAuthenticateAsServer,
+                    null
+                );
     }
 
     public class NegotiateStreamStreamToStreamTest_Sync : NegotiateStreamStreamToStreamTest

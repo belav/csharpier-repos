@@ -72,50 +72,52 @@ public class Test
         new Gen().ExceptionTest<Exception>(new GenException<int>());
         new Gen().ExceptionTest<Exception>(new GenException<string>());
         new Gen().ExceptionTest<Exception>(new GenException<Guid>());
-        new Gen().ExceptionTest<Exception>(
-            new GenException<
-                ValX3<
-                    ValX1<int[][,,,]>,
-                    ValX2<object[,,,][][], Guid[][][]>,
+        new Gen()
+            .ExceptionTest<Exception>(
+                new GenException<
                     ValX3<
-                        double[,,,,,,,,,,],
-                        Guid[][][][,,,,][,,,,][][][],
-                        string[][][][][][][][][][][]
+                        ValX1<int[][,,,]>,
+                        ValX2<object[,,,][][], Guid[][][]>,
+                        ValX3<
+                            double[,,,,,,,,,,],
+                            Guid[][][][,,,,][,,,,][][][],
+                            string[][][][][][][][][][][]
+                        >
                     >
-                >
-            >()
-        );
+                >()
+            );
 
         new Gen().ExceptionTest<InvalidOperationException>(new InvalidOperationException());
 
         new Gen().ExceptionTest<GenException<int>>(new GenException<int>());
         new Gen().ExceptionTest<GenException<string>>(new GenException<string>());
         new Gen().ExceptionTest<GenException<Guid>>(new GenException<Guid>());
-        new Gen().ExceptionTest<
-            GenException<
-                ValX3<
-                    ValX1<int[][,,,]>,
-                    ValX2<object[,,,][][], Guid[][][]>,
+        new Gen()
+            .ExceptionTest<
+                GenException<
                     ValX3<
-                        double[,,,,,,,,,,],
-                        Guid[][][][,,,,][,,,,][][][],
-                        string[][][][][][][][][][][]
+                        ValX1<int[][,,,]>,
+                        ValX2<object[,,,][][], Guid[][][]>,
+                        ValX3<
+                            double[,,,,,,,,,,],
+                            Guid[][][][,,,,][,,,,][][][],
+                            string[][][][][][][][][][][]
+                        >
                     >
                 >
-            >
-        >(
-            new GenException<
-                ValX3<
-                    ValX1<int[][,,,]>,
-                    ValX2<object[,,,][][], Guid[][][]>,
+            >(
+                new GenException<
                     ValX3<
-                        double[,,,,,,,,,,],
-                        Guid[][][][,,,,][,,,,][][][],
-                        string[][][][][][][][][][][]
+                        ValX1<int[][,,,]>,
+                        ValX2<object[,,,][][], Guid[][][]>,
+                        ValX3<
+                            double[,,,,,,,,,,],
+                            Guid[][][][,,,,][,,,,][][][],
+                            string[][][][][][][][][][][]
+                        >
                     >
-                >
-            >()
-        );
+                >()
+            );
 
         if (result)
         {

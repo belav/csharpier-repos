@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         ExpressionBodyPreference.Never
                     },
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         private static async Task TestWithUseExpressionBodyIncludingPropertiesAndIndexers(
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         ExpressionBodyPreference.WhenPossible
                     },
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         private static async Task TestWithUseBlockBodyIncludingPropertiesAndIndexers(
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         ExpressionBodyPreference.Never
                     },
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
@@ -493,7 +496,8 @@ class C
                         NotificationOption2.None
                     },
                 }
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(20350, "https://github.com/dotnet/roslyn/issues/20350")]
@@ -591,7 +595,8 @@ class C
                         ExpressionBodyPreference.Never
                     },
                 },
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(20362, "https://github.com/dotnet/roslyn/issues/20362")]

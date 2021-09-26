@@ -1164,9 +1164,8 @@ namespace System.Globalization.Tests
                 );
 
             Assert.Equal(
-                CultureInfo.InvariantCulture.DateTimeFormat.GetEra(
-                    CultureInfo.InvariantCulture.DateTimeFormat.GetEraName(1)
-                ),
+                CultureInfo.InvariantCulture.DateTimeFormat
+                    .GetEra(CultureInfo.InvariantCulture.DateTimeFormat.GetEraName(1)),
                 ci.DateTimeFormat.GetEra(ci.DateTimeFormat.GetEraName(1))
             );
 

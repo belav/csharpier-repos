@@ -8,7 +8,8 @@ namespace Microsoft.CodeAnalysis.Tools
 {
     internal static class ILoggerExtensions
     {
-        private static readonly string s_errorSeverityString = DiagnosticSeverity.Error.ToString()
+        private static readonly string s_errorSeverityString = DiagnosticSeverity.Error
+            .ToString()
             .ToLower();
 
         public static IIssueFormatter IssueFormatter { get; set; } = new MSBuildIssueFormatter();

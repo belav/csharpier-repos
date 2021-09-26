@@ -81,10 +81,10 @@ class Program
 }";
 
             CreateCompilation(
-                    code,
-                    references: new[] { reference.ToMetadataReference() },
-                    assemblyName: "Source"
-                )
+                code,
+                references: new[] { reference.ToMetadataReference() },
+                assemblyName: "Source"
+            )
                 .VerifyDiagnostics(
                     // (6,38): error CS0234: The type or namespace name 'TestType1' does not exist in the namespace 'TestReference' (are you missing an assembly reference?)
                     //         var obj1 = new TestReference.TestType1();
@@ -244,14 +244,13 @@ class Test
     }
 }";
 
-            CreateCompilation(code, assemblyName: "testModule")
-                .VerifyEmitDiagnostics(
-                    // (4,18): error CS8336: The type name 'Microsoft.CodeAnalysis.EmbeddedAttribute' is reserved to be used by the compiler.
-                    //     public class EmbeddedAttribute : System.Attribute { }
-                    Diagnostic(ErrorCode.ERR_TypeReserved, "EmbeddedAttribute")
-                        .WithArguments("Microsoft.CodeAnalysis.EmbeddedAttribute")
-                        .WithLocation(4, 18)
-                );
+            CreateCompilation(code, assemblyName: "testModule").VerifyEmitDiagnostics(
+                // (4,18): error CS8336: The type name 'Microsoft.CodeAnalysis.EmbeddedAttribute' is reserved to be used by the compiler.
+                //     public class EmbeddedAttribute : System.Attribute { }
+                Diagnostic(ErrorCode.ERR_TypeReserved, "EmbeddedAttribute")
+                    .WithArguments("Microsoft.CodeAnalysis.EmbeddedAttribute")
+                    .WithLocation(4, 18)
+            );
         }
 
         [Fact]
@@ -279,30 +278,28 @@ class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { moduleRef })
-                .VerifyEmitDiagnostics(
-                    // error CS8004: Type 'EmbeddedAttribute' exported from module 'testModule.netmodule' conflicts with type declared in primary module of this assembly.
-                    Diagnostic(ErrorCode.ERR_ExportedTypeConflictsWithDeclaration)
-                        .WithArguments(
-                            "Microsoft.CodeAnalysis.EmbeddedAttribute",
-                            "testModule.netmodule"
-                        )
-                        .WithLocation(1, 1)
-                );
+            CreateCompilation(code, references: new[] { moduleRef }).VerifyEmitDiagnostics(
+                // error CS8004: Type 'EmbeddedAttribute' exported from module 'testModule.netmodule' conflicts with type declared in primary module of this assembly.
+                Diagnostic(ErrorCode.ERR_ExportedTypeConflictsWithDeclaration)
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.EmbeddedAttribute",
+                        "testModule.netmodule"
+                    )
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void EmbeddedAttributeForwardedToAnotherAssemblyShouldTriggerAnError()
         {
             var reference = CreateCompilation(
-                    @"
+                @"
 namespace Microsoft.CodeAnalysis
 {
     public class EmbeddedAttribute : System.Attribute { }
 }",
-                    assemblyName: "reference"
-                )
-                .ToMetadataReference();
+                assemblyName: "reference"
+            ).ToMetadataReference();
 
             var code =
                 @"
@@ -315,21 +312,20 @@ class Test
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference })
-                .VerifyEmitDiagnostics(
-                    // error CS8006: Forwarded type 'EmbeddedAttribute' conflicts with type declared in primary module of this assembly.
-                    Diagnostic(ErrorCode.ERR_ForwardedTypeConflictsWithDeclaration)
-                        .WithArguments("Microsoft.CodeAnalysis.EmbeddedAttribute")
-                        .WithLocation(1, 1)
-                );
+            CreateCompilation(code, references: new[] { reference }).VerifyEmitDiagnostics(
+                // error CS8006: Forwarded type 'EmbeddedAttribute' conflicts with type declared in primary module of this assembly.
+                Diagnostic(ErrorCode.ERR_ForwardedTypeConflictsWithDeclaration)
+                    .WithArguments("Microsoft.CodeAnalysis.EmbeddedAttribute")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void CompilerShouldIgnorePublicEmbeddedAttributesInReferencedAssemblies()
         {
             var reference = CreateCompilation(
-                    assemblyName: "testRef",
-                    source: @"
+                assemblyName: "testRef",
+                source: @"
 namespace Microsoft.CodeAnalysis
 {
     public class EmbeddedAttribute : System.Attribute { }
@@ -338,8 +334,7 @@ namespace OtherNamespace
 {
     public class TestReference { }
 }"
-                )
-                .ToMetadataReference();
+            ).ToMetadataReference();
 
             var code =
                 @"
@@ -365,9 +360,8 @@ class Test
                         .GetTypeByMetadataName(attributeName);
                     Assert.NotNull(referenceAttribute);
 
-                    var generatedAttribute = module.ContainingAssembly.GetTypeByMetadataName(
-                        attributeName
-                    );
+                    var generatedAttribute = module.ContainingAssembly
+                        .GetTypeByMetadataName(attributeName);
                     Assert.NotNull(generatedAttribute);
 
                     Assert.False(referenceAttribute.Equals(generatedAttribute));
@@ -390,18 +384,17 @@ public class Test
     public void M(in object x) { } // should trigger synthesizing IsReadOnly
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyEmitDiagnostics(
-                    CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion("v4.0.30319"),
-                    // error CS0518: Predefined type 'System.Attribute' is not defined or imported
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
-                        .WithArguments("System.Attribute")
-                        .WithLocation(1, 1),
-                    // error CS0518: Predefined type 'System.Attribute' is not defined or imported
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
-                        .WithArguments("System.Attribute")
-                        .WithLocation(1, 1)
-                );
+            CreateEmptyCompilation(code).VerifyEmitDiagnostics(
+                CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion("v4.0.30319"),
+                // error CS0518: Predefined type 'System.Attribute' is not defined or imported
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
+                    .WithArguments("System.Attribute")
+                    .WithLocation(1, 1),
+                // error CS0518: Predefined type 'System.Attribute' is not defined or imported
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
+                    .WithArguments("System.Attribute")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
@@ -419,50 +412,49 @@ public class Test
     public object M(in object x) { return x; } // should trigger synthesizing IsReadOnly
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyEmitDiagnostics(
-                    CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion("v4.0.30319"),
-                    // (5,18): error CS0518: Predefined type 'System.Object' is not defined or imported
-                    //     public class Void {}
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Void")
-                        .WithArguments("System.Object")
-                        .WithLocation(5, 18),
-                    // (7,14): error CS0518: Predefined type 'System.Object' is not defined or imported
-                    // public class Test
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Test")
-                        .WithArguments("System.Object")
-                        .WithLocation(7, 14),
-                    // (4,18): error CS0518: Predefined type 'System.Object' is not defined or imported
-                    //     public class Attribute {}
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Attribute")
-                        .WithArguments("System.Object")
-                        .WithLocation(4, 18),
-                    // (9,24): error CS0518: Predefined type 'System.Object' is not defined or imported
-                    //     public object M(in object x) { return x; } // should trigger synthesizing IsReadOnly
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object")
-                        .WithArguments("System.Object")
-                        .WithLocation(9, 24),
-                    // (9,12): error CS0518: Predefined type 'System.Object' is not defined or imported
-                    //     public object M(in object x) { return x; } // should trigger synthesizing IsReadOnly
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object")
-                        .WithArguments("System.Object")
-                        .WithLocation(9, 12),
-                    // (4,18): error CS1729: 'object' does not contain a constructor that takes 0 arguments
-                    //     public class Attribute {}
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "Attribute")
-                        .WithArguments("object", "0")
-                        .WithLocation(4, 18),
-                    // (5,18): error CS1729: 'object' does not contain a constructor that takes 0 arguments
-                    //     public class Void {}
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "Void")
-                        .WithArguments("object", "0")
-                        .WithLocation(5, 18),
-                    // (7,14): error CS1729: 'object' does not contain a constructor that takes 0 arguments
-                    // public class Test
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "Test")
-                        .WithArguments("object", "0")
-                        .WithLocation(7, 14)
-                );
+            CreateEmptyCompilation(code).VerifyEmitDiagnostics(
+                CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion("v4.0.30319"),
+                // (5,18): error CS0518: Predefined type 'System.Object' is not defined or imported
+                //     public class Void {}
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Void")
+                    .WithArguments("System.Object")
+                    .WithLocation(5, 18),
+                // (7,14): error CS0518: Predefined type 'System.Object' is not defined or imported
+                // public class Test
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Test")
+                    .WithArguments("System.Object")
+                    .WithLocation(7, 14),
+                // (4,18): error CS0518: Predefined type 'System.Object' is not defined or imported
+                //     public class Attribute {}
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Attribute")
+                    .WithArguments("System.Object")
+                    .WithLocation(4, 18),
+                // (9,24): error CS0518: Predefined type 'System.Object' is not defined or imported
+                //     public object M(in object x) { return x; } // should trigger synthesizing IsReadOnly
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object")
+                    .WithArguments("System.Object")
+                    .WithLocation(9, 24),
+                // (9,12): error CS0518: Predefined type 'System.Object' is not defined or imported
+                //     public object M(in object x) { return x; } // should trigger synthesizing IsReadOnly
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object")
+                    .WithArguments("System.Object")
+                    .WithLocation(9, 12),
+                // (4,18): error CS1729: 'object' does not contain a constructor that takes 0 arguments
+                //     public class Attribute {}
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "Attribute")
+                    .WithArguments("object", "0")
+                    .WithLocation(4, 18),
+                // (5,18): error CS1729: 'object' does not contain a constructor that takes 0 arguments
+                //     public class Void {}
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "Void")
+                    .WithArguments("object", "0")
+                    .WithLocation(5, 18),
+                // (7,14): error CS1729: 'object' does not contain a constructor that takes 0 arguments
+                // public class Test
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "Test")
+                    .WithArguments("object", "0")
+                    .WithLocation(7, 14)
+            );
         }
 
         [Fact]
@@ -480,28 +472,27 @@ public class Test
     public object M(in object x) { return x; } // should trigger synthesizing IsReadOnly
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyEmitDiagnostics(
-                    CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion("v4.0.30319"),
-                    // (4,18): error CS0518: Predefined type 'System.Void' is not defined or imported
-                    //     public class Attribute {}
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Attribute")
-                        .WithArguments("System.Void")
-                        .WithLocation(4, 18),
-                    // (7,14): error CS0518: Predefined type 'System.Void' is not defined or imported
-                    // public class Test
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Test")
-                        .WithArguments("System.Void")
-                        .WithLocation(7, 14),
-                    // error CS0518: Predefined type 'System.Void' is not defined or imported
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
-                        .WithArguments("System.Void")
-                        .WithLocation(1, 1),
-                    // error CS0518: Predefined type 'System.Void' is not defined or imported
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
-                        .WithArguments("System.Void")
-                        .WithLocation(1, 1)
-                );
+            CreateEmptyCompilation(code).VerifyEmitDiagnostics(
+                CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion("v4.0.30319"),
+                // (4,18): error CS0518: Predefined type 'System.Void' is not defined or imported
+                //     public class Attribute {}
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Attribute")
+                    .WithArguments("System.Void")
+                    .WithLocation(4, 18),
+                // (7,14): error CS0518: Predefined type 'System.Void' is not defined or imported
+                // public class Test
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Test")
+                    .WithArguments("System.Void")
+                    .WithLocation(7, 14),
+                // error CS0518: Predefined type 'System.Void' is not defined or imported
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
+                    .WithArguments("System.Void")
+                    .WithLocation(1, 1),
+                // error CS0518: Predefined type 'System.Void' is not defined or imported
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
+                    .WithArguments("System.Void")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
@@ -523,18 +514,17 @@ public class Test
     public void M(in object x) { } // should trigger synthesizing IsReadOnly
 }";
 
-            CreateEmptyCompilation(code)
-                .VerifyEmitDiagnostics(
-                    CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion("v4.0.30319"),
-                    // error CS1729: 'Attribute' does not contain a constructor that takes 0 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount)
-                        .WithArguments("System.Attribute", "0")
-                        .WithLocation(1, 1),
-                    // error CS1729: 'Attribute' does not contain a constructor that takes 0 arguments
-                    Diagnostic(ErrorCode.ERR_BadCtorArgCount)
-                        .WithArguments("System.Attribute", "0")
-                        .WithLocation(1, 1)
-                );
+            CreateEmptyCompilation(code).VerifyEmitDiagnostics(
+                CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion("v4.0.30319"),
+                // error CS1729: 'Attribute' does not contain a constructor that takes 0 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount)
+                    .WithArguments("System.Attribute", "0")
+                    .WithLocation(1, 1),
+                // error CS1729: 'Attribute' does not contain a constructor that takes 0 arguments
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount)
+                    .WithArguments("System.Attribute", "0")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]

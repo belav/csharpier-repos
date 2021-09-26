@@ -22,9 +22,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
     {
         private static readonly RequestDelegate NullHandler = (c) => Task.CompletedTask;
 
-        private static ObjectPool<UriBuildingContext> Pool = new DefaultObjectPoolProvider().Create(
-            new UriBuilderContextPooledObjectPolicy()
-        );
+        private static ObjectPool<UriBuildingContext> Pool = new DefaultObjectPoolProvider()
+            .Create(new UriBuilderContextPooledObjectPolicy());
 
         [Theory]
         [InlineData("template/5", "template/{parameter:int}")]
@@ -1925,16 +1924,14 @@ namespace Microsoft.AspNetCore.Routing.Tree
             List<IRouter> nestedRouters = null;
 
             var next = new Mock<IRouter>();
-            next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(
-                    c =>
-                    {
-                        nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                        nestedRouters = new List<IRouter>(c.RouteData.Routers);
-                        c.Handler = null; // Not a match
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>())).Callback<RouteContext>(
+                c =>
+                {
+                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                    nestedRouters = new List<IRouter>(c.RouteData.Routers);
+                    c.Handler = null; // Not a match
+                }
+            ).Returns(Task.CompletedTask);
 
             var builder = CreateBuilder();
             MapInboundEntry(builder, "api/Store", handler: next.Object);
@@ -1963,16 +1960,14 @@ namespace Microsoft.AspNetCore.Routing.Tree
             List<IRouter> nestedRouters = null;
 
             var next = new Mock<IRouter>();
-            next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(
-                    c =>
-                    {
-                        nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                        nestedRouters = new List<IRouter>(c.RouteData.Routers);
-                        c.Handler = null; // Not a match
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>())).Callback<RouteContext>(
+                c =>
+                {
+                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                    nestedRouters = new List<IRouter>(c.RouteData.Routers);
+                    c.Handler = null; // Not a match
+                }
+            ).Returns(Task.CompletedTask);
 
             var builder = CreateBuilder();
             MapInboundEntry(builder, "api/Store", handler: next.Object);
@@ -2008,16 +2003,14 @@ namespace Microsoft.AspNetCore.Routing.Tree
             List<IRouter> nestedRouters = null;
 
             var next = new Mock<IRouter>();
-            next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(
-                    c =>
-                    {
-                        nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                        nestedRouters = new List<IRouter>(c.RouteData.Routers);
-                        throw new Exception();
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>())).Callback<RouteContext>(
+                c =>
+                {
+                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                    nestedRouters = new List<IRouter>(c.RouteData.Routers);
+                    throw new Exception();
+                }
+            ).Returns(Task.CompletedTask);
 
             var builder = CreateBuilder();
             MapInboundEntry(builder, "api/Store", handler: next.Object);
@@ -2055,15 +2048,13 @@ namespace Microsoft.AspNetCore.Routing.Tree
             // Arrange
             RouteValueDictionary nestedValues = null;
             var next = new Mock<IRouter>();
-            next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(
-                    c =>
-                    {
-                        nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                        c.Handler = NullHandler;
-                    }
-                )
-                .Returns(Task.CompletedTask);
+            next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>())).Callback<RouteContext>(
+                c =>
+                {
+                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                    c.Handler = NullHandler;
+                }
+            ).Returns(Task.CompletedTask);
 
             var builder = CreateBuilder();
             MapInboundEntry(builder, "cat_{category1}/prod1_{product}"); // Matches on first segment but not on second

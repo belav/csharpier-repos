@@ -325,25 +325,24 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var sp = services.BuildServiceProvider();
             bool doesNotHang = Task.Run(
-                    () =>
-                    {
-                        SingleThreadedSynchronizationContext.Run(
-                            () =>
-                            {
-                                // Act
-                                Assert.Throws<ObjectDisposedException>(
-                                    () =>
-                                    {
-                                        // ctor disposes ServiceProvider
-                                        var service =
-                                            sp.GetRequiredService<DisposeServiceProviderInCtorAsyncDisposable>();
-                                    }
-                                );
-                            }
-                        );
-                    }
-                )
-                .Wait(TimeSpan.FromSeconds(10));
+                () =>
+                {
+                    SingleThreadedSynchronizationContext.Run(
+                        () =>
+                        {
+                            // Act
+                            Assert.Throws<ObjectDisposedException>(
+                                () =>
+                                {
+                                    // ctor disposes ServiceProvider
+                                    var service =
+                                        sp.GetRequiredService<DisposeServiceProviderInCtorAsyncDisposable>();
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Wait(TimeSpan.FromSeconds(10));
 
             Assert.True(doesNotHang);
             Assert.True(asyncDisposableResource.DisposeAsyncCalled);
@@ -361,25 +360,24 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var sp = services.BuildServiceProvider();
             bool doesNotHang = Task.Run(
-                    () =>
-                    {
-                        SingleThreadedSynchronizationContext.Run(
-                            () =>
-                            {
-                                // Act
-                                Assert.Throws<ObjectDisposedException>(
-                                    () =>
-                                    {
-                                        // ctor disposes ServiceProvider
-                                        var service =
-                                            sp.GetRequiredService<DisposeServiceProviderInCtorDisposable>();
-                                    }
-                                );
-                            }
-                        );
-                    }
-                )
-                .Wait(TimeSpan.FromSeconds(10));
+                () =>
+                {
+                    SingleThreadedSynchronizationContext.Run(
+                        () =>
+                        {
+                            // Act
+                            Assert.Throws<ObjectDisposedException>(
+                                () =>
+                                {
+                                    // ctor disposes ServiceProvider
+                                    var service =
+                                        sp.GetRequiredService<DisposeServiceProviderInCtorDisposable>();
+                                }
+                            );
+                        }
+                    );
+                }
+            ).Wait(TimeSpan.FromSeconds(10));
 
             Assert.True(doesNotHang);
             Assert.True(disposableResource.Disposed);
@@ -718,7 +716,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                         sb.Append("2");
                         constrainedThing4Services = sp.GetServices<
                             IFakeOpenGenericService<Thing4>
-                        >().ToList();
+                        >()
+                            .ToList();
                     }
                 );
 
@@ -729,7 +728,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                         using var scope2 = sp.CreateScope();
                         constrainedThing5Services = sp.GetServices<
                             IFakeOpenGenericService<Thing5>
-                        >().ToList();
+                        >()
+                            .ToList();
                     }
                 );
 

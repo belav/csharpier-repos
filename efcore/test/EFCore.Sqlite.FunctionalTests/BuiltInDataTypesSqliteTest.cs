@@ -1020,7 +1020,8 @@ namespace Microsoft.EntityFrameworkCore
             var typeMapper = context.GetService<IRelationalTypeMappingSource>();
 
             foreach (
-                var property in context.Model.GetEntityTypes()
+                var property in context.Model
+                    .GetEntityTypes()
                     .SelectMany(e => e.GetDeclaredProperties())
             )
             {
@@ -1981,7 +1982,8 @@ WHERE ""b"".""Id"" = 13"
                     divide = dt1.TestDecimal / dt2.TestDecimal,
                     negate = -dt1.TestDecimal
                 }
-            ).ToList();
+            )
+                .ToList();
 
             Fixture.TestSqlLoggerFactory.Clear();
 
@@ -1997,7 +1999,8 @@ WHERE ""b"".""Id"" = 13"
                     divide = dt1.TestDecimal / dt2.TestDecimal,
                     negate = -dt1.TestDecimal
                 }
-            ).ToList();
+            )
+                .ToList();
 
             Assert.Equal(expected.Count, actual.Count);
             for (var i = 0; i < expected.Count; i++)

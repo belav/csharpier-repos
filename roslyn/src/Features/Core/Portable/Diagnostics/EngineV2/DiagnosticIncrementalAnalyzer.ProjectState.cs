@@ -59,10 +59,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (lastResult.IsDefault)
                 {
                     return await LoadInitialAnalysisDataAsync(
-                            persistentService,
-                            project,
-                            cancellationToken
-                        )
+                        persistentService,
+                        project,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -105,12 +105,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                     if (
                         !await TryDeserializeDocumentDiagnosticsAsync(
-                                persistentService,
-                                serializer,
-                                document,
-                                builder,
-                                cancellationToken
-                            )
+                            persistentService,
+                            serializer,
+                            document,
+                            builder,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
@@ -123,12 +123,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 if (
                     !await TryDeserializeProjectDiagnosticsAsync(
-                            persistentService,
-                            serializer,
-                            project,
-                            builder,
-                            cancellationToken
-                        )
+                        persistentService,
+                        serializer,
+                        project,
+                        builder,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -156,10 +156,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (lastResult.IsDefault)
                 {
                     return await LoadInitialAnalysisDataAsync(
-                            persistentService,
-                            document,
-                            cancellationToken
-                        )
+                        persistentService,
+                        document,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -188,12 +188,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 if (
                     !await TryDeserializeDocumentDiagnosticsAsync(
-                            persistentService,
-                            serializer,
-                            document,
-                            builder,
-                            cancellationToken
-                        )
+                        persistentService,
+                        serializer,
+                        document,
+                        builder,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -222,10 +222,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (lastResult.IsDefault)
                 {
                     return await LoadInitialProjectAnalysisDataAsync(
-                            persistentService,
-                            project,
-                            cancellationToken
-                        )
+                        persistentService,
+                        project,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -254,12 +254,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 if (
                     !await TryDeserializeProjectDiagnosticsAsync(
-                            persistentService,
-                            serializer,
-                            project,
-                            builder,
-                            cancellationToken
-                        )
+                        persistentService,
+                        serializer,
+                        project,
+                        builder,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -314,46 +314,46 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     }
 
                     await SerializeAsync(
-                            persistentService,
-                            serializer,
-                            project,
-                            document,
-                            document.Id,
-                            _owner.SyntaxStateName,
-                            result.GetDocumentDiagnostics(document.Id, AnalysisKind.Syntax)
-                        )
+                        persistentService,
+                        serializer,
+                        project,
+                        document,
+                        document.Id,
+                        _owner.SyntaxStateName,
+                        result.GetDocumentDiagnostics(document.Id, AnalysisKind.Syntax)
+                    )
                         .ConfigureAwait(false);
                     await SerializeAsync(
-                            persistentService,
-                            serializer,
-                            project,
-                            document,
-                            document.Id,
-                            _owner.SemanticStateName,
-                            result.GetDocumentDiagnostics(document.Id, AnalysisKind.Semantic)
-                        )
+                        persistentService,
+                        serializer,
+                        project,
+                        document,
+                        document.Id,
+                        _owner.SemanticStateName,
+                        result.GetDocumentDiagnostics(document.Id, AnalysisKind.Semantic)
+                    )
                         .ConfigureAwait(false);
                     await SerializeAsync(
-                            persistentService,
-                            serializer,
-                            project,
-                            document,
-                            document.Id,
-                            _owner.NonLocalStateName,
-                            result.GetDocumentDiagnostics(document.Id, AnalysisKind.NonLocal)
-                        )
+                        persistentService,
+                        serializer,
+                        project,
+                        document,
+                        document.Id,
+                        _owner.NonLocalStateName,
+                        result.GetDocumentDiagnostics(document.Id, AnalysisKind.NonLocal)
+                    )
                         .ConfigureAwait(false);
                 }
 
                 await SerializeAsync(
-                        persistentService,
-                        serializer,
-                        project,
-                        document: null,
-                        result.ProjectId,
-                        _owner.NonLocalStateName,
-                        result.GetOtherDiagnostics()
-                    )
+                    persistentService,
+                    serializer,
+                    project,
+                    document: null,
+                    result.ProjectId,
+                    _owner.NonLocalStateName,
+                    result.GetOtherDiagnostics()
+                )
                     .ConfigureAwait(false);
             }
 
@@ -389,9 +389,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 // keep from build flag if full analysis is off
                 var fromBuild = fullAnalysis ? false : lastResult.FromBuild;
 
-                var openFileOnlyAnalyzer = _owner.Analyzer.IsOpenFileOnly(
-                    document.Project.Solution.Options
-                );
+                var openFileOnlyAnalyzer = _owner.Analyzer
+                    .IsOpenFileOnly(document.Project.Solution.Options);
 
                 // if it is allowed to keep project state, check versions and if they are same, bail out.
                 // if full solution analysis is off or we are asked to reset document state, we always merge.
@@ -415,24 +414,24 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 // save active file diagnostics back to project state
                 await SerializeAsync(
-                        persistentService,
-                        serializer,
-                        project,
-                        document,
-                        document.Id,
-                        _owner.SyntaxStateName,
-                        syntax.Items
-                    )
+                    persistentService,
+                    serializer,
+                    project,
+                    document,
+                    document.Id,
+                    _owner.SyntaxStateName,
+                    syntax.Items
+                )
                     .ConfigureAwait(false);
                 await SerializeAsync(
-                        persistentService,
-                        serializer,
-                        project,
-                        document,
-                        document.Id,
-                        _owner.SemanticStateName,
-                        semantic.Items
-                    )
+                    persistentService,
+                    serializer,
+                    project,
+                    document,
+                    document.Id,
+                    _owner.SemanticStateName,
+                    semantic.Items
+                )
                     .ConfigureAwait(false);
 
                 // save last aggregated form of analysis result
@@ -473,12 +472,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                     if (
                         !await TryDeserializeDocumentDiagnosticsAsync(
-                                persistentService,
-                                serializer,
-                                document,
-                                builder,
-                                cancellationToken
-                            )
+                            persistentService,
+                            serializer,
+                            document,
+                            builder,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
                     )
                     {
@@ -488,12 +487,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 if (
                     !await TryDeserializeProjectDiagnosticsAsync(
-                            persistentService,
-                            serializer,
-                            project,
-                            builder,
-                            cancellationToken
-                        )
+                        persistentService,
+                        serializer,
+                        project,
+                        builder,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -519,12 +518,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 if (
                     !await TryDeserializeDocumentDiagnosticsAsync(
-                            persistentService,
-                            serializer,
-                            document,
-                            builder,
-                            cancellationToken
-                        )
+                        persistentService,
+                        serializer,
+                        document,
+                        builder,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -548,12 +547,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 if (
                     !await TryDeserializeProjectDiagnosticsAsync(
-                            persistentService,
-                            serializer,
-                            project,
-                            builder,
-                            cancellationToken
-                        )
+                        persistentService,
+                        serializer,
+                        project,
+                        builder,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -579,13 +578,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (
                     persistentService != null
                     && await serializer.SerializeAsync(
-                            persistentService,
-                            project,
-                            document,
-                            stateKey,
-                            diagnostics,
-                            CancellationToken.None
-                        )
+                        persistentService,
+                        project,
+                        document,
+                        stateKey,
+                        diagnostics,
+                        CancellationToken.None
+                    )
                         .ConfigureAwait(false)
                 )
                 {
@@ -615,14 +614,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 var documentId = document.Id;
 
                 var diagnostics = await DeserializeDiagnosticsAsync(
-                        persistentService,
-                        serializer,
-                        project,
-                        document,
-                        documentId,
-                        _owner.SyntaxStateName,
-                        cancellationToken
-                    )
+                    persistentService,
+                    serializer,
+                    project,
+                    document,
+                    documentId,
+                    _owner.SyntaxStateName,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (!diagnostics.IsDefault)
                 {
@@ -634,14 +633,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 diagnostics = await DeserializeDiagnosticsAsync(
-                        persistentService,
-                        serializer,
-                        project,
-                        document,
-                        documentId,
-                        _owner.SemanticStateName,
-                        cancellationToken
-                    )
+                    persistentService,
+                    serializer,
+                    project,
+                    document,
+                    documentId,
+                    _owner.SemanticStateName,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (!diagnostics.IsDefault)
                 {
@@ -653,14 +652,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 diagnostics = await DeserializeDiagnosticsAsync(
-                        persistentService,
-                        serializer,
-                        project,
-                        document,
-                        documentId,
-                        _owner.NonLocalStateName,
-                        cancellationToken
-                    )
+                    persistentService,
+                    serializer,
+                    project,
+                    document,
+                    documentId,
+                    _owner.NonLocalStateName,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (!diagnostics.IsDefault)
                 {
@@ -683,14 +682,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             )
             {
                 var diagnostics = await DeserializeDiagnosticsAsync(
-                        persistentService,
-                        serializer,
-                        project,
-                        document: null,
-                        project.Id,
-                        _owner.NonLocalStateName,
-                        cancellationToken
-                    )
+                    persistentService,
+                    serializer,
+                    project,
+                    document: null,
+                    project.Id,
+                    _owner.NonLocalStateName,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (!diagnostics.IsDefault)
                 {

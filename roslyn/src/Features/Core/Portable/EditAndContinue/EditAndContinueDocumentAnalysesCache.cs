@@ -45,11 +45,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             try
             {
                 var results = await GetDocumentAnalysisAsync(
-                        baseDocument.Project,
-                        document,
-                        activeStatementSpans,
-                        cancellationToken
-                    )
+                    baseDocument.Project,
+                    document,
+                    activeStatementSpans,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return results.ActiveStatements;
             }
@@ -78,11 +78,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         Task.Run(
                             () =>
                                 GetDocumentAnalysisAsync(
-                                        oldProject,
-                                        info.newDocument,
-                                        info.newActiveStatementSpans,
-                                        cancellationToken
-                                    )
+                                    oldProject,
+                                    info.newDocument,
+                                    info.newActiveStatementSpans,
+                                    cancellationToken
+                                )
                                     .AsTask(),
                             cancellationToken
                         )
@@ -165,30 +165,28 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 {
                     try
                     {
-                        var analyzer =
-                            document.Project.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+                        var analyzer = document.Project.LanguageServices
+                            .GetRequiredService<IEditAndContinueAnalyzer>();
 
                         var baseActiveStatements = await _baseActiveStatements.GetValueAsync(
-                                cancellationToken
-                            )
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (
-                            !baseActiveStatements.DocumentMap.TryGetValue(
-                                document.Id,
-                                out var documentBaseActiveStatements
-                            )
+                            !baseActiveStatements.DocumentMap
+                                .TryGetValue(document.Id, out var documentBaseActiveStatements)
                         )
                         {
                             documentBaseActiveStatements = ImmutableArray<ActiveStatement>.Empty;
                         }
 
                         return await analyzer.AnalyzeDocumentAsync(
-                                baseProject,
-                                documentBaseActiveStatements,
-                                document,
-                                activeStatementSpans,
-                                cancellationToken
-                            )
+                            baseProject,
+                            documentBaseActiveStatements,
+                            document,
+                            activeStatementSpans,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     catch (Exception e)

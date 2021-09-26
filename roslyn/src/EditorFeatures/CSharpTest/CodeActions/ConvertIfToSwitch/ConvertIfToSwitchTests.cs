@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -206,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -251,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -291,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -331,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp9,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -366,7 +372,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -403,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -508,7 +516,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 FixedCode = fixedSource,
                 LanguageVersion = languageVersion,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -575,7 +584,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -612,7 +622,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -770,7 +781,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -859,7 +871,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -897,7 +910,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -933,7 +947,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 FixedCode = fixedSource,
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey = "SwitchExpression",
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -969,7 +984,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 FixedCode = fixedSource,
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey = "SwitchExpression",
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -1008,7 +1024,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -1113,7 +1130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -1152,7 +1170,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -1203,7 +1222,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -1272,7 +1292,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21109, "https://github.com/dotnet/roslyn/issues/21109")]
@@ -1406,7 +1427,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1445,7 +1467,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp8,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1531,7 +1554,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp8,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1617,7 +1641,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp8,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1703,7 +1728,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp8,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1788,7 +1814,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1826,7 +1853,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1864,7 +1892,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1902,7 +1931,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1940,7 +1970,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -1978,7 +2009,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -2016,7 +2048,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -2054,7 +2087,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -2092,7 +2126,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -2130,7 +2165,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -2168,7 +2204,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(21360, "https://github.com/dotnet/roslyn/issues/21360")]
@@ -2206,7 +2243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(37035, "https://github.com/dotnet/roslyn/issues/37035")]
@@ -2269,7 +2307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -2311,7 +2350,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp9,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -2335,7 +2375,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -2372,7 +2413,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp9,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -2446,7 +2488,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp8,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -2534,7 +2577,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
@@ -2572,7 +2616,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
 
         [WorkItem(44278, "https://github.com/dotnet/roslyn/issues/44278")]
@@ -2686,7 +2731,8 @@ class C
                 TestCode = source,
                 FixedCode = fixedSource,
                 CodeActionValidationMode = CodeActionValidationMode.None,
-            }.RunAsync();
+            }
+                .RunAsync();
         }
     }
 }

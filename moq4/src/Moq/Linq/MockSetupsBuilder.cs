@@ -43,11 +43,12 @@ namespace Moq.Linq
                     node.NodeType != ExpressionType.Equal && node.NodeType != ExpressionType.AndAlso
                 )
                     throw new NotSupportedException(
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            Resources.LinqBinaryOperatorNotSupported,
-                            node.ToStringFixed()
-                        )
+                        string
+                            .Format(
+                                CultureInfo.CurrentCulture,
+                                Resources.LinqBinaryOperatorNotSupported,
+                                node.ToStringFixed()
+                            )
                     );
 
                 if (node.NodeType == ExpressionType.Equal)
@@ -94,11 +95,12 @@ namespace Moq.Linq
             if (unsupportedMethods.Contains(node.Method.Name))
             {
                 throw new NotSupportedException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.LinqMethodNotSupported,
-                        node.Method.Name
-                    )
+                    string
+                        .Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.LinqMethodNotSupported,
+                            node.Method.Name
+                        )
                 );
             }
 

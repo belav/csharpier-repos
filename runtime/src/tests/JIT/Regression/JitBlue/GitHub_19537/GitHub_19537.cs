@@ -402,25 +402,26 @@ public class Test
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return string.Format(
-                "{{ {{M11:{0} M12:{1} M13:{2} M14:{3}}} {{M21:{4} M22:{5} M23:{6} M24:{7}}} {{M31:{8} M32:{9} M33:{10} M34:{11}}} {{M41:{12} M42:{13} M43:{14} M44:{15}}} }}",
-                M11,
-                M12,
-                M13,
-                M14,
-                M21,
-                M22,
-                M23,
-                M24,
-                M31,
-                M32,
-                M33,
-                M34,
-                M41,
-                M42,
-                M43,
-                M44
-            );
+            return string
+                .Format(
+                    "{{ {{M11:{0} M12:{1} M13:{2} M14:{3}}} {{M21:{4} M22:{5} M23:{6} M24:{7}}} {{M31:{8} M32:{9} M33:{10} M34:{11}}} {{M41:{12} M42:{13} M43:{14} M44:{15}}} }}",
+                    M11,
+                    M12,
+                    M13,
+                    M14,
+                    M21,
+                    M22,
+                    M23,
+                    M24,
+                    M31,
+                    M32,
+                    M33,
+                    M34,
+                    M41,
+                    M42,
+                    M43,
+                    M44
+                );
         }
 
         public static int Main()

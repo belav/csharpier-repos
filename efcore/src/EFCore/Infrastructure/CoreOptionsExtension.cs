@@ -50,18 +50,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </summary>
         public static readonly TimeSpan DefaultLoggingConfigCacheTime = TimeSpan.FromSeconds(1);
 
-        private WarningsConfiguration _warningsConfiguration =
-            new WarningsConfiguration().TryWithExplicit(
-                    CoreEventId.ManyServiceProvidersCreatedWarning,
-                    WarningBehavior.Throw
-                )
-                .TryWithExplicit(
-                    CoreEventId.LazyLoadOnDisposedContextWarning,
-                    WarningBehavior.Throw
-                )
-                .TryWithExplicit(CoreEventId.DetachedLazyLoadingWarning, WarningBehavior.Throw)
-                .TryWithExplicit(CoreEventId.InvalidIncludePathError, WarningBehavior.Throw)
-                .TryWithExplicit(CoreEventId.NavigationBaseIncludeIgnored, WarningBehavior.Throw);
+        private WarningsConfiguration _warningsConfiguration = new WarningsConfiguration()
+            .TryWithExplicit(CoreEventId.ManyServiceProvidersCreatedWarning, WarningBehavior.Throw)
+            .TryWithExplicit(CoreEventId.LazyLoadOnDisposedContextWarning, WarningBehavior.Throw)
+            .TryWithExplicit(CoreEventId.DetachedLazyLoadingWarning, WarningBehavior.Throw)
+            .TryWithExplicit(CoreEventId.InvalidIncludePathError, WarningBehavior.Throw)
+            .TryWithExplicit(CoreEventId.NavigationBaseIncludeIgnored, WarningBehavior.Throw);
 
         /// <summary>
         ///     Creates a new set of options with everything set to default values.
@@ -585,18 +579,24 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                 debugInfo["Core:" + nameof(DbContextOptionsBuilder.UseMemoryCache)] = (
                     Extension.GetMemoryCache()?.GetHashCode() ?? 0L
-                ).ToString(CultureInfo.InvariantCulture);
+                )
+                    .ToString(CultureInfo.InvariantCulture);
                 debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableSensitiveDataLogging)] =
-                    Extension._sensitiveDataLoggingEnabled.GetHashCode()
+                    Extension._sensitiveDataLoggingEnabled
+                        .GetHashCode()
                         .ToString(CultureInfo.InvariantCulture);
                 debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableDetailedErrors)] =
-                    Extension._detailedErrorsEnabled.GetHashCode()
+                    Extension._detailedErrorsEnabled
+                        .GetHashCode()
                         .ToString(CultureInfo.InvariantCulture);
                 debugInfo["Core:" + nameof(DbContextOptionsBuilder.DisableConcurrencyDetection)] = (
                     !Extension._concurrencyDetectionEnabled
-                ).GetHashCode().ToString(CultureInfo.InvariantCulture);
+                )
+                    .GetHashCode()
+                    .ToString(CultureInfo.InvariantCulture);
                 debugInfo["Core:" + nameof(DbContextOptionsBuilder.ConfigureWarnings)] =
-                    Extension._warningsConfiguration.GetServiceProviderHashCode()
+                    Extension._warningsConfiguration
+                        .GetServiceProviderHashCode()
                         .ToString(CultureInfo.InvariantCulture);
 
                 if (Extension._replacedServices != null)
@@ -615,7 +615,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                         ? ""
                                         : ", " + implementationType.DisplayName()
                                 )
-                        ] = replacedService.Value.GetHashCode()
+                        ] = replacedService.Value
+                            .GetHashCode()
                             .ToString(CultureInfo.InvariantCulture);
                     }
                 }
@@ -637,10 +638,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                     if (Extension._replacedServices != null)
                     {
-                        hashCode = Extension._replacedServices.Aggregate(
-                            hashCode,
-                            (t, e) => (t * 397) ^ e.Value.GetHashCode()
-                        );
+                        hashCode = Extension._replacedServices
+                            .Aggregate(hashCode, (t, e) => (t * 397) ^ e.Value.GetHashCode());
                     }
 
                     _serviceProviderHash = hashCode;

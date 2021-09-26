@@ -373,21 +373,22 @@ namespace System.Net.Http
             if (currentActivity.IdFormat == ActivityIdFormat.W3C)
             {
                 if (
-                    !request.Headers.Contains(
-                        DiagnosticsHandlerLoggingStrings.TraceParentHeaderName
-                    )
+                    !request.Headers
+                        .Contains(DiagnosticsHandlerLoggingStrings.TraceParentHeaderName)
                 )
                 {
-                    request.Headers.TryAddWithoutValidation(
-                        DiagnosticsHandlerLoggingStrings.TraceParentHeaderName,
-                        currentActivity.Id
-                    );
+                    request.Headers
+                        .TryAddWithoutValidation(
+                            DiagnosticsHandlerLoggingStrings.TraceParentHeaderName,
+                            currentActivity.Id
+                        );
                     if (currentActivity.TraceStateString != null)
                     {
-                        request.Headers.TryAddWithoutValidation(
-                            DiagnosticsHandlerLoggingStrings.TraceStateHeaderName,
-                            currentActivity.TraceStateString
-                        );
+                        request.Headers
+                            .TryAddWithoutValidation(
+                                DiagnosticsHandlerLoggingStrings.TraceStateHeaderName,
+                                currentActivity.TraceStateString
+                            );
                     }
                 }
             }
@@ -395,17 +396,18 @@ namespace System.Net.Http
             {
                 if (!request.Headers.Contains(DiagnosticsHandlerLoggingStrings.RequestIdHeaderName))
                 {
-                    request.Headers.TryAddWithoutValidation(
-                        DiagnosticsHandlerLoggingStrings.RequestIdHeaderName,
-                        currentActivity.Id
-                    );
+                    request.Headers
+                        .TryAddWithoutValidation(
+                            DiagnosticsHandlerLoggingStrings.RequestIdHeaderName,
+                            currentActivity.Id
+                        );
                 }
             }
 
             // we expect baggage to be empty or contain a few items
             using (
-                IEnumerator<KeyValuePair<string, string?>> e =
-                    currentActivity.Baggage.GetEnumerator()
+                IEnumerator<KeyValuePair<string, string?>> e = currentActivity.Baggage
+                    .GetEnumerator()
             )
             {
                 if (e.MoveNext())
@@ -418,13 +420,15 @@ namespace System.Net.Http
                             new NameValueHeaderValue(
                                 WebUtility.UrlEncode(item.Key),
                                 WebUtility.UrlEncode(item.Value)
-                            ).ToString()
+                            )
+                                .ToString()
                         );
                     } while (e.MoveNext());
-                    request.Headers.TryAddWithoutValidation(
-                        DiagnosticsHandlerLoggingStrings.CorrelationContextHeaderName,
-                        baggage
-                    );
+                    request.Headers
+                        .TryAddWithoutValidation(
+                            DiagnosticsHandlerLoggingStrings.CorrelationContextHeaderName,
+                            baggage
+                        );
                 }
             }
         }

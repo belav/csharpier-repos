@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     seenDefaultValues
                         ? remainingReorderableParameters
                         : parametersWithoutDefaultValues
-                ).Add(param);
+                )
+                    .Add(param);
             }
 
             return new ParameterConfiguration(

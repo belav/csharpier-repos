@@ -243,26 +243,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             var positions = ArrayBuilder<int>.GetInstance();
             var states = ArrayBuilder<InternalSyntax.DirectiveStack>.GetInstance();
 
-            foreach (
-                DirectiveTriviaSyntax directive in this.GetRoot()
-                    .GetDirectives(
-                        d =>
+            foreach (DirectiveTriviaSyntax directive in this.GetRoot().GetDirectives(
+                    d =>
+                    {
+                        switch (d.Kind())
                         {
-                            switch (d.Kind())
-                            {
-                                case SyntaxKind.IfDirectiveTrivia:
-                                case SyntaxKind.ElifDirectiveTrivia:
-                                case SyntaxKind.ElseDirectiveTrivia:
-                                case SyntaxKind.EndIfDirectiveTrivia:
-                                case SyntaxKind.DefineDirectiveTrivia:
-                                case SyntaxKind.UndefDirectiveTrivia:
-                                    return true;
-                                default:
-                                    return false;
-                            }
+                            case SyntaxKind.IfDirectiveTrivia:
+                            case SyntaxKind.ElifDirectiveTrivia:
+                            case SyntaxKind.ElseDirectiveTrivia:
+                            case SyntaxKind.EndIfDirectiveTrivia:
+                            case SyntaxKind.DefineDirectiveTrivia:
+                            case SyntaxKind.UndefDirectiveTrivia:
+                                return true;
+                            default:
+                                return false;
                         }
-                    )
-            )
+                    }
+                ))
             {
                 currentState = directive.ApplyDirectives(currentState);
 

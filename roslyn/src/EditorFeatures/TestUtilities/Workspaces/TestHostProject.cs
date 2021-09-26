@@ -224,11 +224,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             _compilationOptions =
                 compilationOptions
-                ?? this.LanguageServiceProvider.GetService<ICompilationFactoryService>()
+                ?? this.LanguageServiceProvider
+                    .GetService<ICompilationFactoryService>()
                     .GetDefaultCompilationOptions();
             _parseOptions =
                 parseOptions
-                ?? this.LanguageServiceProvider.GetService<ISyntaxTreeFactoryService>()
+                ?? this.LanguageServiceProvider
+                    .GetService<ISyntaxTreeFactoryService>()
                     .GetDefaultParseOptions();
             this.Documents =
                 documents ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
@@ -308,9 +310,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         internal void AddAdditionalDocument(TestHostDocument document)
         {
-            this.AdditionalDocuments = this.AdditionalDocuments.Concat(
-                new TestHostDocument[] { document }
-            );
+            this.AdditionalDocuments = this.AdditionalDocuments
+                .Concat(new TestHostDocument[] { document });
             document.SetProject(this);
         }
 
@@ -319,9 +320,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         internal void AddAnalyzerConfigDocument(TestHostDocument document)
         {
-            this.AnalyzerConfigDocuments = this.AnalyzerConfigDocuments.Concat(
-                new TestHostDocument[] { document }
-            );
+            this.AnalyzerConfigDocuments = this.AnalyzerConfigDocuments
+                .Concat(new TestHostDocument[] { document });
             document.SetProject(this);
         }
 
@@ -341,23 +341,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         public ProjectInfo ToProjectInfo()
         {
             return ProjectInfo.Create(
-                    Id,
-                    Version,
-                    Name,
-                    AssemblyName,
-                    Language,
-                    FilePath,
-                    OutputFilePath,
-                    CompilationOptions,
-                    ParseOptions,
-                    Documents.Where(d => !d.IsSourceGenerated).Select(d => d.ToDocumentInfo()),
-                    ProjectReferences,
-                    MetadataReferences,
-                    AnalyzerReferences,
-                    AdditionalDocuments.Select(d => d.ToDocumentInfo()),
-                    IsSubmission,
-                    HostObjectType
-                )
+                Id,
+                Version,
+                Name,
+                AssemblyName,
+                Language,
+                FilePath,
+                OutputFilePath,
+                CompilationOptions,
+                ParseOptions,
+                Documents.Where(d => !d.IsSourceGenerated).Select(d => d.ToDocumentInfo()),
+                ProjectReferences,
+                MetadataReferences,
+                AnalyzerReferences,
+                AdditionalDocuments.Select(d => d.ToDocumentInfo()),
+                IsSubmission,
+                HostObjectType
+            )
                 .WithAnalyzerConfigDocuments(
                     AnalyzerConfigDocuments.Select(d => d.ToDocumentInfo())
                 )

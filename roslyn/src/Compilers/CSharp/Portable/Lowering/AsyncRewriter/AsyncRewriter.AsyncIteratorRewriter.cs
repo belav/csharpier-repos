@@ -212,8 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Add a field: ManualResetValueTaskSourceLogic<bool> promiseOfValueOrEnd
                 _promiseOfValueOrEndField = F.StateMachineField(
                     F.WellKnownType(
-                            WellKnownType.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T
-                        )
+                        WellKnownType.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T
+                    )
                         .Construct(boolType),
                     GeneratedNames.MakeAsyncIteratorPromiseOfValueOrEndFieldName(),
                     isPublic: true
@@ -236,9 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (
                     _isEnumerable
-                    && this.method.Parameters.Any(
-                        p => p.IsSourceParameterWithEnumeratorCancellationAttribute()
-                    )
+                    && this.method.Parameters
+                        .Any(p => p.IsSourceParameterWithEnumeratorCancellationAttribute())
                 )
                 {
                     // Add a field: CancellationTokenSource combinedTokens
@@ -330,12 +329,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     _combinedTokensField is object
                     && parameter.IsSourceParameterWithEnumeratorCancellationAttribute()
-                    && parameter.Type.Equals(
-                        F.Compilation.GetWellKnownType(
-                            WellKnownType.System_Threading_CancellationToken
-                        ),
-                        TypeCompareKind.ConsiderEverything
-                    )
+                    && parameter.Type
+                        .Equals(
+                            F.Compilation
+                                .GetWellKnownType(WellKnownType.System_Threading_CancellationToken),
+                            TypeCompareKind.ConsiderEverything
+                        )
                 )
                 {
                     // For a parameter of type CancellationToken with [EnumeratorCancellation]
@@ -454,38 +453,38 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //  return new ValueTask<bool>(this, version);
 
                 NamedTypeSymbol IAsyncEnumeratorOfElementType = F.WellKnownType(
-                        WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
-                    )
+                    WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
+                )
                     .Construct(_currentField.Type);
 
                 MethodSymbol IAsyncEnumerableOfElementType_MoveNextAsync = F.WellKnownMethod(
-                        WellKnownMember.System_Collections_Generic_IAsyncEnumerator_T__MoveNextAsync
-                    )
+                    WellKnownMember.System_Collections_Generic_IAsyncEnumerator_T__MoveNextAsync
+                )
                     .AsMember(IAsyncEnumeratorOfElementType);
 
                 var promiseType = (NamedTypeSymbol)_promiseOfValueOrEndField.Type;
 
                 MethodSymbol promise_GetStatus = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetStatus
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetStatus
+                )
                     .AsMember(promiseType);
 
                 MethodSymbol promise_GetResult = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetResult
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetResult
+                )
                     .AsMember(promiseType);
 
                 var moveNextAsyncReturnType =
                     (NamedTypeSymbol)IAsyncEnumerableOfElementType_MoveNextAsync.ReturnType;
 
                 MethodSymbol valueTaskT_ctorValue = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_ValueTask_T__ctorValue
-                    )
+                    WellKnownMember.System_Threading_Tasks_ValueTask_T__ctorValue
+                )
                     .AsMember(moveNextAsyncReturnType);
 
                 MethodSymbol valueTaskT_ctor = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_ValueTask_T__ctorSourceAndToken
-                    )
+                    WellKnownMember.System_Threading_Tasks_ValueTask_T__ctorSourceAndToken
+                )
                     .AsMember(moveNextAsyncReturnType);
 
                 // The implementation doesn't depend on the method body of the iterator method.
@@ -582,18 +581,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // _promiseOfValueOrEnd.Reset();
                 BoundFieldAccess promiseField = F.InstanceField(_promiseOfValueOrEndField);
                 var resetMethod = (MethodSymbol)F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__Reset,
-                        isOptional: true
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__Reset,
+                    isOptional: true
+                )
                     .SymbolAsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
 
                 callReset = F.ExpressionStatement(F.Call(promiseField, resetMethod));
 
                 // _builder.Start(ref inst);
                 Debug.Assert(!_asyncMethodBuilderMemberCollection.CheckGenericMethodConstraints);
-                MethodSymbol startMethod = _asyncMethodBuilderMemberCollection.Start.Construct(
-                    this.stateMachineType
-                );
+                MethodSymbol startMethod = _asyncMethodBuilderMemberCollection.Start
+                    .Construct(this.stateMachineType);
                 instSymbol = F.SynthesizedLocal(this.stateMachineType);
 
                 // var inst = this;
@@ -611,8 +609,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 //  _valueOrEndPromise.Version
                 promise_get_Version = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__get_Version
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__get_Version
+                )
                     .AsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
             }
 
@@ -685,8 +683,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 MethodSymbol valueTask_ctor = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_ValueTask__ctor
-                    )
+                    WellKnownMember.System_Threading_Tasks_ValueTask__ctor
+                )
                     .AsMember((NamedTypeSymbol)IAsyncDisposable_DisposeAsync.ReturnType);
 
                 // return new ValueTask(this, _valueOrEndPromise.Version);
@@ -721,13 +719,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // return _current;
 
                 NamedTypeSymbol IAsyncEnumeratorOfElementType = F.WellKnownType(
-                        WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
-                    )
+                    WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
+                )
                     .Construct(_currentField.Type);
 
                 MethodSymbol IAsyncEnumerableOfElementType_get_Current = F.WellKnownMethod(
-                        WellKnownMember.System_Collections_Generic_IAsyncEnumerator_T__get_Current
-                    )
+                    WellKnownMember.System_Collections_Generic_IAsyncEnumerator_T__get_Current
+                )
                     .AsMember(IAsyncEnumeratorOfElementType);
 
                 OpenPropertyImplementation(IAsyncEnumerableOfElementType_get_Current);
@@ -741,18 +739,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // return _valueOrEndPromise.GetResult(token);
 
                 NamedTypeSymbol IValueTaskSourceOfBool = F.WellKnownType(
-                        WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T
-                    )
+                    WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T
+                )
                     .Construct(F.SpecialType(SpecialType.System_Boolean));
 
                 MethodSymbol IValueTaskSourceOfBool_GetResult = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_IValueTaskSource_T__GetResult
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_IValueTaskSource_T__GetResult
+                )
                     .AsMember(IValueTaskSourceOfBool);
 
                 MethodSymbol promise_GetResult = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetResult
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetResult
+                )
                     .AsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
 
                 // The implementation doesn't depend on the method body of the iterator method.
@@ -779,18 +777,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // return this._valueOrEndPromise.GetStatus(token);
 
                 NamedTypeSymbol IValueTaskSourceOfBool = F.WellKnownType(
-                        WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T
-                    )
+                    WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T
+                )
                     .Construct(F.SpecialType(SpecialType.System_Boolean));
 
                 MethodSymbol IValueTaskSourceOfBool_GetStatus = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_IValueTaskSource_T__GetStatus
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_IValueTaskSource_T__GetStatus
+                )
                     .AsMember(IValueTaskSourceOfBool);
 
                 MethodSymbol promise_GetStatus = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetStatus
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetStatus
+                )
                     .AsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
 
                 // The implementation doesn't depend on the method body of the iterator method.
@@ -818,18 +816,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // return;
 
                 NamedTypeSymbol IValueTaskSourceOfBool = F.WellKnownType(
-                        WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T
-                    )
+                    WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T
+                )
                     .Construct(F.SpecialType(SpecialType.System_Boolean));
 
                 MethodSymbol IValueTaskSourceOfBool_OnCompleted = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_IValueTaskSource_T__OnCompleted
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_IValueTaskSource_T__OnCompleted
+                )
                     .AsMember(IValueTaskSourceOfBool);
 
                 MethodSymbol promise_OnCompleted = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__OnCompleted
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__OnCompleted
+                )
                     .AsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
 
                 // The implementation doesn't depend on the method body of the iterator method.
@@ -867,8 +865,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 MethodSymbol promise_GetResult = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetResult
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetResult
+                )
                     .AsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
 
                 // The implementation doesn't depend on the method body of the iterator method.
@@ -905,8 +903,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 MethodSymbol promise_GetStatus = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetStatus
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__GetStatus
+                )
                     .AsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
 
                 // The implementation doesn't depend on the method body of the iterator method.
@@ -940,8 +938,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 MethodSymbol promise_OnCompleted = F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__OnCompleted
-                    )
+                    WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__OnCompleted
+                )
                     .AsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
 
                 // The implementation doesn't depend on the method body of the iterator method.
@@ -974,13 +972,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             private void GenerateIAsyncEnumerableImplementation_GetAsyncEnumerator()
             {
                 NamedTypeSymbol IAsyncEnumerableOfElementType = F.WellKnownType(
-                        WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
-                    )
+                    WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                )
                     .Construct(_currentField.Type);
 
                 MethodSymbol IAsyncEnumerableOfElementType_GetEnumerator = F.WellKnownMethod(
-                        WellKnownMember.System_Collections_Generic_IAsyncEnumerable_T__GetAsyncEnumerator
-                    )
+                    WellKnownMember.System_Collections_Generic_IAsyncEnumerable_T__GetAsyncEnumerator
+                )
                     .AsMember(IAsyncEnumerableOfElementType);
 
                 BoundExpression managedThreadId = null;

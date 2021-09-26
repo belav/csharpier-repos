@@ -175,7 +175,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task HasEndpointWithAuth_AnonymousUser_ChallengePerScheme()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
                 .AddAuthenticationSchemes("schema1", "schema2")
                 .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
@@ -240,7 +241,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task Invoke_ValidClaimShouldNotFail()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireClaim("Permission", "CanViewPage")
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireClaim("Permission", "CanViewPage")
                 .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
@@ -335,11 +337,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task Invoke_SingleValidClaimShouldSucceed()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireClaim(
-                    "Permission",
-                    "CanViewComment",
-                    "CanViewPage"
-                )
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireClaim("Permission", "CanViewComment", "CanViewPage")
                 .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
@@ -361,13 +360,12 @@ namespace Microsoft.AspNetCore.Authorization.Test
             // Arrange
             HttpContext resource = null;
             var policy = new AuthorizationPolicyBuilder().RequireAssertion(
-                    c =>
-                    {
-                        resource = c.Resource as HttpContext;
-                        return true;
-                    }
-                )
-                .Build();
+                c =>
+                {
+                    resource = c.Resource as HttpContext;
+                    return true;
+                }
+            ).Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
             var next = new TestRequestDelegate();
@@ -396,13 +394,12 @@ namespace Microsoft.AspNetCore.Authorization.Test
             // Arrange
             object resource = null;
             var policy = new AuthorizationPolicyBuilder().RequireAssertion(
-                    c =>
-                    {
-                        resource = c.Resource;
-                        return true;
-                    }
-                )
-                .Build();
+                c =>
+                {
+                    resource = c.Resource;
+                    return true;
+                }
+            ).Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
             var next = new TestRequestDelegate();
@@ -447,7 +444,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task Invoke_RequireUnknownRole_ForbidPerScheme()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireRole("Wut")
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireRole("Wut")
                 .AddAuthenticationSchemes("Basic", "Bearer")
                 .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
@@ -473,10 +471,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task Invoke_InvalidClaimShouldForbid()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireClaim(
-                    "Permission",
-                    "CanViewComment"
-                )
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireClaim("Permission", "CanViewComment")
                 .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);

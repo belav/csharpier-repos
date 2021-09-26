@@ -24,101 +24,112 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             new()
             {
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddYears),
-                        new[] { typeof(int) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(nameof(DateTime.AddYears), new[] { typeof(int) }),
                     "year"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddMonths),
-                        new[] { typeof(int) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddMonths),
+                            new[] { typeof(int) }
+                        ),
                     "month"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddDays),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddDays),
+                            new[] { typeof(double) }
+                        ),
                     "day"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddHours),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddHours),
+                            new[] { typeof(double) }
+                        ),
                     "hour"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddMinutes),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddMinutes),
+                            new[] { typeof(double) }
+                        ),
                     "minute"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddSeconds),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddSeconds),
+                            new[] { typeof(double) }
+                        ),
                     "second"
                 },
                 {
-                    typeof(DateTime).GetRequiredRuntimeMethod(
-                        nameof(DateTime.AddMilliseconds),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTime)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTime.AddMilliseconds),
+                            new[] { typeof(double) }
+                        ),
                     "millisecond"
                 },
                 {
-                    typeof(DateTimeOffset).GetRequiredRuntimeMethod(
-                        nameof(DateTimeOffset.AddYears),
-                        new[] { typeof(int) }
-                    ),
+                    typeof(DateTimeOffset)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTimeOffset.AddYears),
+                            new[] { typeof(int) }
+                        ),
                     "year"
                 },
                 {
-                    typeof(DateTimeOffset).GetRequiredRuntimeMethod(
-                        nameof(DateTimeOffset.AddMonths),
-                        new[] { typeof(int) }
-                    ),
+                    typeof(DateTimeOffset)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTimeOffset.AddMonths),
+                            new[] { typeof(int) }
+                        ),
                     "month"
                 },
                 {
-                    typeof(DateTimeOffset).GetRequiredRuntimeMethod(
-                        nameof(DateTimeOffset.AddDays),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTimeOffset)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTimeOffset.AddDays),
+                            new[] { typeof(double) }
+                        ),
                     "day"
                 },
                 {
-                    typeof(DateTimeOffset).GetRequiredRuntimeMethod(
-                        nameof(DateTimeOffset.AddHours),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTimeOffset)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTimeOffset.AddHours),
+                            new[] { typeof(double) }
+                        ),
                     "hour"
                 },
                 {
-                    typeof(DateTimeOffset).GetRequiredRuntimeMethod(
-                        nameof(DateTimeOffset.AddMinutes),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTimeOffset)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTimeOffset.AddMinutes),
+                            new[] { typeof(double) }
+                        ),
                     "minute"
                 },
                 {
-                    typeof(DateTimeOffset).GetRequiredRuntimeMethod(
-                        nameof(DateTimeOffset.AddSeconds),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTimeOffset)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTimeOffset.AddSeconds),
+                            new[] { typeof(double) }
+                        ),
                     "second"
                 },
                 {
-                    typeof(DateTimeOffset).GetRequiredRuntimeMethod(
-                        nameof(DateTimeOffset.AddMilliseconds),
-                        new[] { typeof(double) }
-                    ),
+                    typeof(DateTimeOffset)
+                        .GetRequiredRuntimeMethod(
+                            nameof(DateTimeOffset.AddMilliseconds),
+                            new[] { typeof(double) }
+                        ),
                     "millisecond"
                 }
             };

@@ -163,9 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // Compare fields
                 if (anonymousType.Properties.Length > 0)
                 {
-                    var fields = ArrayBuilder<FieldSymbol>.GetInstance(
-                        anonymousType.Properties.Length
-                    );
+                    var fields = ArrayBuilder<FieldSymbol>
+                        .GetInstance(anonymousType.Properties.Length);
                     foreach (var prop in anonymousType.Properties)
                     {
                         fields.Add(prop.BackingField);
@@ -327,11 +326,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         AnonymousTypePropertySymbol property = anonymousType.Properties[i];
 
                         // build format string
-                        formatString.Builder.AppendFormat(
-                            i == 0 ? "{{{{ {0} = {{{1}}}" : ", {0} = {{{1}}}",
-                            property.Name,
-                            i
-                        );
+                        formatString.Builder
+                            .AppendFormat(
+                                i == 0 ? "{{{{ {0} = {{{1}}}" : ", {0} = {{{1}}}",
+                                property.Name,
+                                i
+                            );
 
                         // build argument
                         arguments[i] = F.Convert(

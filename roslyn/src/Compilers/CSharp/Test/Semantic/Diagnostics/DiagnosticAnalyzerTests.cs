@@ -59,11 +59,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 if (id.Identifier.ValueText.StartsWith("x", StringComparison.Ordinal))
                 {
                     context.ReportDiagnostic(
-                        CodeAnalysis.Diagnostic.Create(
-                            s_CA9999_UseOfVariableThatStartsWithX,
-                            id.Location,
-                            id.Identifier.ValueText
-                        )
+                        CodeAnalysis.Diagnostic
+                            .Create(
+                                s_CA9999_UseOfVariableThatStartsWithX,
+                                id.Location,
+                                id.Identifier.ValueText
+                            )
                     );
                 }
             }
@@ -82,27 +83,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         return x3 + 1;
     }
 }";
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (1,18): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
-                    // public class C : NotFound
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
-                        .WithArguments("NotFound")
-                )
-                .VerifyAnalyzerDiagnostics(
-                    new DiagnosticAnalyzer[] { new ComplainAboutX() },
-                    null,
-                    null,
-                    // (5,18): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x1'
-                    //         int x3 = x1(x2);
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x1").WithArguments("x1"),
-                    // (5,21): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x2'
-                    //         int x3 = x1(x2);
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x2").WithArguments("x2"),
-                    // (6,16): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x3'
-                    //         return x3 + 1;
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x3").WithArguments("x3")
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (1,18): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
+                // public class C : NotFound
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
+                    .WithArguments("NotFound")
+            ).VerifyAnalyzerDiagnostics(
+                new DiagnosticAnalyzer[] { new ComplainAboutX() },
+                null,
+                null,
+                // (5,18): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x1'
+                //         int x3 = x1(x2);
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x1").WithArguments("x1"),
+                // (5,21): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x2'
+                //         int x3 = x1(x2);
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x2").WithArguments("x2"),
+                // (6,16): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x3'
+                //         return x3 + 1;
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x3").WithArguments("x3")
+            );
         }
 
         [WorkItem(892467, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/892467")]
@@ -119,30 +118,28 @@ public class C : NotFound
     D d1 = (out int x4) => (x4 = 1) + @x4;
 }";
             // TODO: Compilation create doesn't accept analyzers anymore.
-            CreateCompilationWithMscorlib45(source)
-                .VerifyDiagnostics(
-                    // (2,18): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
-                    // public class C : NotFound
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
-                        .WithArguments("NotFound")
-                )
-                .VerifyAnalyzerDiagnostics(
-                    new DiagnosticAnalyzer[] { new ComplainAboutX() },
-                    null,
-                    null,
-                    // (6,14): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x1'
-                    //     int x3 = x1 + x2;
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x1").WithArguments("x1"),
-                    // (6,19): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x2'
-                    //     int x3 = x1 + x2;
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x2").WithArguments("x2"),
-                    // (7,29): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x4'
-                    //     D d1 = (out int x4) => (x4 = 1) + @x4;
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x4").WithArguments("x4"),
-                    // (7,39): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x4'
-                    //     D d1 = (out int x4) => (x4 = 1) + @x4;
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "@x4").WithArguments("x4")
-                );
+            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
+                // (2,18): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
+                // public class C : NotFound
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
+                    .WithArguments("NotFound")
+            ).VerifyAnalyzerDiagnostics(
+                new DiagnosticAnalyzer[] { new ComplainAboutX() },
+                null,
+                null,
+                // (6,14): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x1'
+                //     int x3 = x1 + x2;
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x1").WithArguments("x1"),
+                // (6,19): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x2'
+                //     int x3 = x1 + x2;
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x2").WithArguments("x2"),
+                // (7,29): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x4'
+                //     D d1 = (out int x4) => (x4 = 1) + @x4;
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x4").WithArguments("x4"),
+                // (7,39): warning CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x4'
+                //     D d1 = (out int x4) => (x4 = 1) + @x4;
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "@x4").WithArguments("x4")
+            );
         }
 
         [WorkItem(892467, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/892467")]
@@ -160,20 +157,21 @@ public class C : NotFound
     }
 }";
             // TODO: Compilation create doesn't accept analyzers anymore.
-            var options = TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "CA9999_UseOfVariableThatStartsWithX",
-                        ReportDiagnostic.Suppress
-                    )
-                }
-            );
+            var options = TestOptions.ReleaseDll
+                .WithSpecificDiagnosticOptions(
+                    new[]
+                    {
+                        KeyValuePairUtil.Create(
+                            "CA9999_UseOfVariableThatStartsWithX",
+                            ReportDiagnostic.Suppress
+                        )
+                    }
+                );
 
             CreateCompilationWithMscorlib45(
-                    source,
-                    options: options /*, analyzers: new IDiagnosticAnalyzerFactory[] { new ComplainAboutX() }*/
-                )
+                source,
+                options: options /*, analyzers: new IDiagnosticAnalyzerFactory[] { new ComplainAboutX() }*/
+            )
                 .VerifyDiagnostics(
                     // (2,18): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
                     // public class C : NotFound
@@ -197,43 +195,42 @@ public class C : NotFound
     }
 }";
             // TODO: Compilation create doesn't accept analyzers anymore.
-            var options = TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "CA9999_UseOfVariableThatStartsWithX",
-                        ReportDiagnostic.Error
-                    )
-                }
-            );
-
-            CreateCompilationWithMscorlib45(source, options: options)
-                .VerifyDiagnostics(
-                    // (2,18): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
-                    // public class C : NotFound
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
-                        .WithArguments("NotFound")
-                )
-                .VerifyAnalyzerDiagnostics(
-                    new DiagnosticAnalyzer[] { new ComplainAboutX() },
-                    null,
-                    null,
-                    // (6,18): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x1'
-                    //         int x3 = x1(x2);
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x1")
-                        .WithArguments("x1")
-                        .WithWarningAsError(true),
-                    // (6,21): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x2'
-                    //         int x3 = x1(x2);
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x2")
-                        .WithArguments("x2")
-                        .WithWarningAsError(true),
-                    // (7,16): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x3'
-                    //         return x3 + 1;
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x3")
-                        .WithArguments("x3")
-                        .WithWarningAsError(true)
+            var options = TestOptions.ReleaseDll
+                .WithSpecificDiagnosticOptions(
+                    new[]
+                    {
+                        KeyValuePairUtil.Create(
+                            "CA9999_UseOfVariableThatStartsWithX",
+                            ReportDiagnostic.Error
+                        )
+                    }
                 );
+
+            CreateCompilationWithMscorlib45(source, options: options).VerifyDiagnostics(
+                // (2,18): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
+                // public class C : NotFound
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
+                    .WithArguments("NotFound")
+            ).VerifyAnalyzerDiagnostics(
+                new DiagnosticAnalyzer[] { new ComplainAboutX() },
+                null,
+                null,
+                // (6,18): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x1'
+                //         int x3 = x1(x2);
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x1")
+                    .WithArguments("x1")
+                    .WithWarningAsError(true),
+                // (6,21): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x2'
+                //         int x3 = x1(x2);
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x2")
+                    .WithArguments("x2")
+                    .WithWarningAsError(true),
+                // (7,16): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x3'
+                //         return x3 + 1;
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x3")
+                    .WithArguments("x3")
+                    .WithWarningAsError(true)
+            );
         }
 
         [WorkItem(892467, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/892467")]
@@ -250,37 +247,34 @@ public class C : NotFound
         return x3 + 1;
     }
 }";
-            var options = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Error
-            );
+            var options = TestOptions.ReleaseDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Error);
 
-            CreateCompilationWithMscorlib45(source, options: options)
-                .VerifyDiagnostics(
-                    // (2,18): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
-                    // public class C : NotFound
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
-                        .WithArguments("NotFound")
-                )
-                .VerifyAnalyzerDiagnostics(
-                    new DiagnosticAnalyzer[] { new ComplainAboutX() },
-                    null,
-                    null,
-                    // (6,18): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x1'
-                    //         int x3 = x1(x2);
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x1")
-                        .WithArguments("x1")
-                        .WithWarningAsError(true),
-                    // (6,21): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x2'
-                    //         int x3 = x1(x2);
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x2")
-                        .WithArguments("x2")
-                        .WithWarningAsError(true),
-                    // (7,16): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x3'
-                    //         return x3 + 1;
-                    Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x3")
-                        .WithArguments("x3")
-                        .WithWarningAsError(true)
-                );
+            CreateCompilationWithMscorlib45(source, options: options).VerifyDiagnostics(
+                // (2,18): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
+                // public class C : NotFound
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
+                    .WithArguments("NotFound")
+            ).VerifyAnalyzerDiagnostics(
+                new DiagnosticAnalyzer[] { new ComplainAboutX() },
+                null,
+                null,
+                // (6,18): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x1'
+                //         int x3 = x1(x2);
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x1")
+                    .WithArguments("x1")
+                    .WithWarningAsError(true),
+                // (6,21): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x2'
+                //         int x3 = x1(x2);
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x2")
+                    .WithArguments("x2")
+                    .WithWarningAsError(true),
+                // (7,16): error CA9999_UseOfVariableThatStartsWithX: Use of variable whose name starts with 'x': 'x3'
+                //         return x3 + 1;
+                Diagnostic("CA9999_UseOfVariableThatStartsWithX", "x3")
+                    .WithArguments("x3")
+                    .WithWarningAsError(true)
+            );
         }
 
         [Fact, WorkItem(1038025, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1038025")]
@@ -330,29 +324,20 @@ public class C
                 switch (context.Node.Kind())
                 {
                     case SyntaxKind.Attribute:
-                        var diag1 = CodeAnalysis.Diagnostic.Create(
-                            s_descriptor,
-                            context.Node.GetLocation(),
-                            "Attribute"
-                        );
+                        var diag1 = CodeAnalysis.Diagnostic
+                            .Create(s_descriptor, context.Node.GetLocation(), "Attribute");
                         context.ReportDiagnostic(diag1);
                         break;
 
                     case SyntaxKind.ClassDeclaration:
-                        var diag2 = CodeAnalysis.Diagnostic.Create(
-                            s_descriptor,
-                            context.Node.GetLocation(),
-                            "ClassDeclaration"
-                        );
+                        var diag2 = CodeAnalysis.Diagnostic
+                            .Create(s_descriptor, context.Node.GetLocation(), "ClassDeclaration");
                         context.ReportDiagnostic(diag2);
                         break;
 
                     case SyntaxKind.UsingDirective:
-                        var diag3 = CodeAnalysis.Diagnostic.Create(
-                            s_descriptor,
-                            context.Node.GetLocation(),
-                            "UsingDirective"
-                        );
+                        var diag3 = CodeAnalysis.Diagnostic
+                            .Create(s_descriptor, context.Node.GetLocation(), "UsingDirective");
                         context.ReportDiagnostic(diag3);
                         break;
                 }
@@ -360,11 +345,8 @@ public class C
 
             private void AnalyzeSymbol(SymbolAnalysisContext context)
             {
-                var diag1 = CodeAnalysis.Diagnostic.Create(
-                    s_descriptor,
-                    context.Symbol.Locations[0],
-                    "NamedType"
-                );
+                var diag1 = CodeAnalysis.Diagnostic
+                    .Create(s_descriptor, context.Symbol.Locations[0], "NamedType");
                 context.ReportDiagnostic(diag1);
             }
         }
@@ -379,9 +361,8 @@ using System;
 
 [Obsolete]
 public class C { }";
-            var options = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Error
-            );
+            var options = TestOptions.ReleaseDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Error);
 
             CreateCompilationWithMscorlib45(source, options: options)
                 .VerifyDiagnostics()
@@ -399,12 +380,10 @@ public class C { }";
                         .WithArguments("Attribute")
                         .WithWarningAsError(true), // attribute syntax
                     Diagnostic(
-                            "XX0001",
-                            @"[Obsolete]
+                        "XX0001",
+                        @"[Obsolete]
 public class C { }"
-                        )
-                        .WithArguments("ClassDeclaration")
-                        .WithWarningAsError(true)
+                    ).WithArguments("ClassDeclaration").WithWarningAsError(true)
                 ); // class declaration
         }
 
@@ -556,28 +535,19 @@ public class C { }"
                 isEnabledByDefault: true
             );
 
-            var noneDiag = Microsoft.CodeAnalysis.Diagnostic.Create(
-                noneDiagDescriptor,
-                Location.None
-            );
-            var infoDiag = Microsoft.CodeAnalysis.Diagnostic.Create(
-                infoDiagDescriptor,
-                Location.None
-            );
-            var warningDiag = Microsoft.CodeAnalysis.Diagnostic.Create(
-                warningDiagDescriptor,
-                Location.None
-            );
-            var errorDiag = Microsoft.CodeAnalysis.Diagnostic.Create(
-                errorDiagDescriptor,
-                Location.None
-            );
+            var noneDiag = Microsoft.CodeAnalysis.Diagnostic
+                .Create(noneDiagDescriptor, Location.None);
+            var infoDiag = Microsoft.CodeAnalysis.Diagnostic
+                .Create(infoDiagDescriptor, Location.None);
+            var warningDiag = Microsoft.CodeAnalysis.Diagnostic
+                .Create(warningDiagDescriptor, Location.None);
+            var errorDiag = Microsoft.CodeAnalysis.Diagnostic
+                .Create(errorDiagDescriptor, Location.None);
 
             var diags = new[] { noneDiag, infoDiag, warningDiag, errorDiag };
 
-            var options = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Default
-            );
+            var options = TestOptions.ReleaseDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Default);
             var comp = CreateCompilationWithMscorlib45("", options: options);
             var effectiveDiags = comp.GetEffectiveDiagnostics(diags).ToArray();
             Assert.Equal(4, effectiveDiags.Length);
@@ -637,10 +607,8 @@ public class C { }"
                 isEnabledByDefault: true
             );
 
-            var disabledDiag = CodeAnalysis.Diagnostic.Create(
-                disabledDiagDescriptor,
-                Location.None
-            );
+            var disabledDiag = CodeAnalysis.Diagnostic
+                .Create(disabledDiagDescriptor, Location.None);
             var enabledDiag = CodeAnalysis.Diagnostic.Create(enabledDiagDescriptor, Location.None);
 
             var diags = new[] { disabledDiag, enabledDiag };
@@ -960,10 +928,8 @@ public class B
             private static void AnalyzeFieldDeclaration(SyntaxNodeAnalysisContext context)
             {
                 var fieldDeclaration = (FieldDeclarationSyntax)context.Node;
-                var diagnostic = CodeAnalysis.Diagnostic.Create(
-                    Rule,
-                    fieldDeclaration.GetLocation()
-                );
+                var diagnostic = CodeAnalysis.Diagnostic
+                    .Create(Rule, fieldDeclaration.GetLocation());
                 context.ReportDiagnostic(diagnostic);
             }
         }
@@ -1040,12 +1006,13 @@ public class B
                 {
                     var id = Int32.Parse(descriptor.Id.Substring(2));
                     var missingResource = Enum.GetName(typeof(ErrorCode), id) + "_Title";
-                    var message = string.Format(
-                        "Add resource string named '{0}' for Title of '{1}' to '{2}'",
-                        missingResource,
-                        descriptor.Id,
-                        nameof(CSharpResources)
-                    );
+                    var message = string
+                        .Format(
+                            "Add resource string named '{0}' for Title of '{1}' to '{2}'",
+                            missingResource,
+                            descriptor.Id,
+                            nameof(CSharpResources)
+                        );
 
                     // This assert will fire if you are adding a new compiler diagnostic (non-error severity),
                     // but did not add a title resource string for the diagnostic.
@@ -1055,10 +1022,8 @@ public class B
                 var category = descriptor.Category;
                 if (string.IsNullOrEmpty(title))
                 {
-                    var message = string.Format(
-                        "'{0}' must have a non-null non-empty 'Category'",
-                        descriptor.Id
-                    );
+                    var message = string
+                        .Format("'{0}' must have a non-null non-empty 'Category'", descriptor.Id);
                     Assert.True(false, message);
                 }
             }
@@ -1217,11 +1182,8 @@ public class B
                     {
                         var method = ((IMethodSymbol)ctxt.Symbol);
                         ctxt.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                Descriptor1,
-                                method.Locations[0],
-                                method.ToDisplayString()
-                            )
+                            CodeAnalysis.Diagnostic
+                                .Create(Descriptor1, method.Locations[0], method.ToDisplayString())
                         );
                     },
                     SymbolKind.Method
@@ -1243,10 +1205,11 @@ public class B
             var analyzers = new DiagnosticAnalyzer[] { analyzer };
             string message =
                 new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.UnsupportedDiagnosticReported,
-                        AnalyzerReportingUnsupportedDiagnostic.UnsupportedDescriptor.Id
-                    ),
+                    string
+                        .Format(
+                            CodeAnalysisResources.UnsupportedDiagnosticReported,
+                            AnalyzerReportingUnsupportedDiagnostic.UnsupportedDescriptor.Id
+                        ),
                     "diagnostic"
                 ).Message;
             IFormattable context =
@@ -1333,10 +1296,11 @@ public class B
             var analyzers = new DiagnosticAnalyzer[] { new AnalyzerWithInvalidDiagnosticId() };
             string message =
                 new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.InvalidDiagnosticIdReported,
-                        AnalyzerWithInvalidDiagnosticId.Descriptor.Id
-                    ),
+                    string
+                        .Format(
+                            CodeAnalysisResources.InvalidDiagnosticIdReported,
+                            AnalyzerWithInvalidDiagnosticId.Descriptor.Id
+                        ),
                     "diagnostic"
                 ).Message;
             Exception analyzerException = null;
@@ -1391,10 +1355,11 @@ public class B
                 "Microsoft.CodeAnalysis.CommonDiagnosticAnalyzers+AnalyzerWithNullDescriptor";
             string message =
                 new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.SupportedDiagnosticsHasNullDescriptor,
-                        analyzerFullName
-                    ),
+                    string
+                        .Format(
+                            CodeAnalysisResources.SupportedDiagnosticsHasNullDescriptor,
+                            analyzerFullName
+                        ),
                     "SupportedDiagnostics"
                 ).Message;
             Exception analyzerException = null;
@@ -1489,11 +1454,12 @@ public class B
 
             string message =
                 new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.InvalidDiagnosticLocationReported,
-                        AnalyzerWithInvalidDiagnosticLocation.Descriptor.Id,
-                        treeInAnotherCompilation.FilePath
-                    ),
+                    string
+                        .Format(
+                            CodeAnalysisResources.InvalidDiagnosticLocationReported,
+                            AnalyzerWithInvalidDiagnosticLocation.Descriptor.Id,
+                            treeInAnotherCompilation.FilePath
+                        ),
                     "diagnostic"
                 ).Message;
 
@@ -1605,12 +1571,13 @@ SyntaxTree: ";
             var analyzer = new AnalyzerWithInvalidDiagnosticSpan(badSpan);
             string message =
                 new ArgumentException(
-                    string.Format(
-                        CodeAnalysisResources.InvalidDiagnosticSpanReported,
-                        AnalyzerWithInvalidDiagnosticSpan.Descriptor.Id,
-                        badSpan,
-                        treeInAnotherCompilation.FilePath
-                    ),
+                    string
+                        .Format(
+                            CodeAnalysisResources.InvalidDiagnosticSpanReported,
+                            AnalyzerWithInvalidDiagnosticSpan.Descriptor.Id,
+                            badSpan,
+                            treeInAnotherCompilation.FilePath
+                        ),
                     "diagnostic"
                 ).Message;
             IFormattable context =
@@ -1800,9 +1767,9 @@ namespace Goo.Bar.GooBar { }
                     null,
                     null,
                     Diagnostic(
-                            CSharpNamespaceDeclarationAnalyzer.DiagnosticId,
-                            @"namespace Goo.Bar.GooBar { }"
-                        )
+                        CSharpNamespaceDeclarationAnalyzer.DiagnosticId,
+                        @"namespace Goo.Bar.GooBar { }"
+                    )
                         .WithLocation(2, 1)
                 );
         }
@@ -2000,9 +1967,9 @@ class D
                     expected: new[]
                     {
                         Diagnostic(
-                                CSharpCodeBlockObjectCreationAnalyzer.DiagnosticDescriptor.Id,
-                                "new C()"
-                            )
+                            CSharpCodeBlockObjectCreationAnalyzer.DiagnosticDescriptor.Id,
+                            "new C()"
+                        )
                             .WithLocation(5, 18)
                     }
                 );
@@ -2428,10 +2395,8 @@ class TypeInGeneratedFile { }
                         )
                         {
                             nodeContext.ReportDiagnostic(
-                                CodeAnalysis.Diagnostic.Create(
-                                    ExpressionDescriptor,
-                                    nodeContext.Node.GetLocation()
-                                )
+                                CodeAnalysis.Diagnostic
+                                    .Create(ExpressionDescriptor, nodeContext.Node.GetLocation())
                             );
                         }
                     },
@@ -3429,11 +3394,8 @@ public class Class
                     endContext =>
                     {
                         // Summary diagnostic about received callbacks.
-                        var diagnostic = CodeAnalysis.Diagnostic.Create(
-                            Summary,
-                            Location.None,
-                            sortedCallbackEntityNames.Join(",")
-                        );
+                        var diagnostic = CodeAnalysis.Diagnostic
+                            .Create(Summary, Location.None, sortedCallbackEntityNames.Join(","));
                         endContext.ReportDiagnostic(diagnostic);
                     }
                 );
@@ -3464,11 +3426,8 @@ public class Class
             )
             {
                 // warning diagnostic
-                var diagnostic = CodeAnalysis.Diagnostic.Create(
-                    Warning,
-                    location,
-                    messageArguments
-                );
+                var diagnostic = CodeAnalysis.Diagnostic
+                    .Create(Warning, location, messageArguments);
                 addDiagnostic(diagnostic);
             }
         }
@@ -3885,9 +3844,9 @@ internal class A
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public int M() { return 0; } => 0;
                 Diagnostic(
-                        ErrorCode.ERR_BlockBodyAndExpressionBody,
-                        "public int M() { return 0; } => 0;"
-                    )
+                    ErrorCode.ERR_BlockBodyAndExpressionBody,
+                    "public int M() { return 0; } => 0;"
+                )
                     .WithLocation(4, 5)
             );
 
@@ -4834,7 +4793,8 @@ class C
                     CancellationToken.None
                 );
             Assert.Equal(2, analyzer1.SymbolsStarted.Count);
-            var sortedSymbolNames = analyzer1.SymbolsStarted.Select(s => s.Name)
+            var sortedSymbolNames = analyzer1.SymbolsStarted
+                .Select(s => s.Name)
                 .ToImmutableSortedSet();
             Assert.Equal("_field1", sortedSymbolNames[0]);
             Assert.Equal("_field2", sortedSymbolNames[1]);
@@ -4866,12 +4826,13 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify suppressed analyzer diagnostic and callback with suppression on second file.
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    tree2,
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
-                )
-            );
+            var options = TestOptions.DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        tree2,
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -4931,12 +4892,13 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify same callbacks even with suppression on second file when using GeneratedCodeAnalysisFlags.Analyze.
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    tree2,
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
-                )
-            );
+            var options = TestOptions.DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        tree2,
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -5011,12 +4973,13 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify same diagnostics and callbacks even with suppression on second file when using GeneratedCodeAnalysisFlags.Analyze.
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    tree2,
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
-                )
-            );
+            var options = TestOptions.DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        tree2,
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -5089,11 +5052,12 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify suppressed analyzer diagnostic for both files when specified globally
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
-                )
-            );
+            var options = TestOptions.DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -5121,12 +5085,13 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify analyzer diagnostics and callbacks for a single file when suppressed globally and un-suppressed for a single file
-            options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress),
-                    (tree1, new[] { (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Default) })
-                )
-            );
+            options = TestOptions.DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress),
+                        (tree1, new[] { (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Default) })
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -5534,10 +5499,8 @@ class C
                         var applicableDiagnostics = diagnostics.WhereAsArray(
                             d =>
                                 d.Id == analyzer.Descriptor.Id
-                                && PathUtilities.Comparer.Equals(
-                                    d.Location.GetLineSpan().Path,
-                                    additionalFile.Path
-                                )
+                                && PathUtilities.Comparer
+                                    .Equals(d.Location.GetLineSpan().Path, additionalFile.Path)
                         );
                         if (additionalFile.Path == null)
                         {
@@ -5617,10 +5580,9 @@ class C
                 )
                 {
                     if (
-                        analysisResult.AdditionalFileDiagnostics.TryGetValue(
-                            additionalFile,
-                            out var diagnosticsMap
-                        ) && diagnosticsMap.TryGetValue(analyzer, out var diagnostics)
+                        analysisResult.AdditionalFileDiagnostics
+                            .TryGetValue(additionalFile, out var diagnosticsMap)
+                        && diagnosticsMap.TryGetValue(analyzer, out var diagnostics)
                     )
                     {
                         return diagnostics;
@@ -5645,10 +5607,8 @@ class C
             semanticModelProvider.VerifyCachedModel(tree, model);
 
             // Verify semantic model provider is used by CSharpCompilation.GetSemanticModel API
-            model = ((CSharpCompilation)compilation).GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            model = ((CSharpCompilation)compilation)
+                .GetSemanticModel(tree, ignoreAccessibility: false);
             semanticModelProvider.VerifyCachedModel(tree, model);
         }
 

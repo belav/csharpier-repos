@@ -80,9 +80,10 @@ namespace test45929
             static MethodInfo GetMethod(string methodName)
             {
                 foreach (
-                    MethodInfo method in typeof(TestCore).GetMethods(
-                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
-                    )
+                    MethodInfo method in typeof(TestCore)
+                        .GetMethods(
+                            BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                        )
                 )
                 {
                     if (methodName == method.Name)

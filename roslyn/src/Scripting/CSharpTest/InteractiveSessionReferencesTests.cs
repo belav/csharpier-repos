@@ -35,10 +35,10 @@ public class C
 }
 ";
             var libImage = CreateCSharpCompilation(
-                    libSource,
-                    TargetFrameworkUtil.NetStandard20References,
-                    "lib"
-                )
+                libSource,
+                TargetFrameworkUtil.NetStandard20References,
+                "lib"
+            )
                 .EmitToArray();
 
             var dir = Temp.CreateDirectory();
@@ -99,27 +99,27 @@ public class D
             var dir2 = dir.CreateDirectory("2");
 
             var libDImage = CreateCSharpCompilation(
-                    libDSource,
-                    TargetFrameworkUtil.NetStandard20References,
-                    "libD"
-                )
+                libDSource,
+                TargetFrameworkUtil.NetStandard20References,
+                "libD"
+            )
                 .EmitToArray();
             var libDFile = dir2.CreateFile("libD.dll").WriteAllBytes(libDImage);
             var libDRef = MetadataReference.CreateFromFile(libDFile.Path);
 
             var libAImage = CreateCSharpCompilation(
-                    libASource,
-                    TargetFrameworkUtil.NetStandard20References.Concat(libDRef),
-                    "libA"
-                )
+                libASource,
+                TargetFrameworkUtil.NetStandard20References.Concat(libDRef),
+                "libA"
+            )
                 .EmitToArray();
             var libAFile = dir1.CreateFile("libA.dll").WriteAllBytes(libAImage);
 
             var libBImage = CreateCSharpCompilation(
-                    libBSource,
-                    TargetFrameworkUtil.NetStandard20References.Concat(libDRef),
-                    "libB"
-                )
+                libBSource,
+                TargetFrameworkUtil.NetStandard20References.Concat(libDRef),
+                "libB"
+            )
                 .EmitToArray();
             var libBFile = dir2.CreateFile("libB.dll").WriteAllBytes(libBImage);
 
@@ -161,10 +161,10 @@ public class D
 
             var dir = Temp.CreateDirectory();
             var libBImage = CreateCSharpCompilation(
-                    libBSource,
-                    TargetFrameworkUtil.NetStandard20References,
-                    "libB"
-                )
+                libBSource,
+                TargetFrameworkUtil.NetStandard20References,
+                "libB"
+            )
                 .EmitToArray();
 
             // store the reference under a different file name, so that it is not found by the resolver:
@@ -172,10 +172,10 @@ public class D
             var libBRef = MetadataReference.CreateFromFile(libBFile.Path);
 
             var libAImage = CreateCSharpCompilation(
-                    libASource,
-                    TargetFrameworkUtil.NetStandard20References.Concat(libBRef),
-                    "libA"
-                )
+                libASource,
+                TargetFrameworkUtil.NetStandard20References.Concat(libBRef),
+                "libA"
+            )
                 .EmitToArray();
             var libAFile = dir.CreateFile("libA.dll").WriteAllBytes(libAImage);
 
@@ -200,7 +200,8 @@ F(new C())
 
             var m = s1.GetCompilation().Assembly.Modules.Single();
             Assert.False(m.ReferencedAssemblies.Any(a => a.Name == "libB"));
-            var missingB = m.ReferencedAssemblySymbols.Single(a => a.Name == "libA")
+            var missingB = m.ReferencedAssemblySymbols
+                .Single(a => a.Name == "libA")
                 .Modules.Single()
                 .ReferencedAssemblySymbols.Single(a => a.Name == "libB");
             Assert.IsType<MissingAssemblySymbol>(missingB.GetSymbol());

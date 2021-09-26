@@ -354,7 +354,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
 
         private static string FindClaimValue(Transaction transaction, string claimType)
         {
-            var claim = transaction.ResponseElement.Elements("claim")
+            var claim = transaction.ResponseElement
+                .Elements("claim")
                 .SingleOrDefault(elt => elt.Attribute("type").Value == claimType);
             if (claim == null)
             {
@@ -385,193 +386,162 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             bool testCore = false
         )
         {
-            var host = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                        builder.Configure(
-                                app =>
+            var host = new HostBuilder().ConfigureWebHost(builder => builder.Configure(
+                        app =>
+                        {
+                            app.UseAuthentication();
+                            app.Use(
+                                async (context, next) =>
                                 {
-                                    app.UseAuthentication();
-                                    app.Use(
-                                        async (context, next) =>
-                                        {
-                                            var req = context.Request;
-                                            var res = context.Response;
-                                            var userManager =
-                                                context.RequestServices.GetRequiredService<
-                                                    UserManager<PocoUser>
-                                                >();
-                                            var roleManager =
-                                                context.RequestServices.GetRequiredService<
-                                                    RoleManager<PocoRole>
-                                                >();
-                                            var signInManager =
-                                                context.RequestServices.GetRequiredService<
-                                                    SignInManager<PocoUser>
-                                                >();
-                                            PathString remainder;
-                                            if (req.Path == new PathString("/normal"))
-                                            {
-                                                res.StatusCode = 200;
-                                            }
-                                            else if (req.Path == new PathString("/createMe"))
-                                            {
-                                                var user = new PocoUser("hao");
-                                                var result = await userManager.CreateAsync(
-                                                    user,
-                                                    TestPassword
-                                                );
-                                                if (result.Succeeded)
-                                                {
-                                                    result = await roleManager.CreateAsync(
-                                                        new PocoRole("role")
-                                                    );
-                                                }
-                                                if (result.Succeeded)
-                                                {
-                                                    result = await userManager.AddToRoleAsync(
-                                                        user,
-                                                        "role"
-                                                    );
-                                                }
-                                                res.StatusCode = result.Succeeded ? 200 : 500;
-                                            }
-                                            else if (req.Path == new PathString("/createSimple"))
-                                            {
-                                                var result = await userManager.CreateAsync(
-                                                    new PocoUser("simple"),
-                                                    "aaaaaa"
-                                                );
-                                                res.StatusCode = result.Succeeded ? 200 : 500;
-                                            }
-                                            else if (
-                                                req.Path == new PathString("/signoutEverywhere")
-                                            )
-                                            {
-                                                var user = await userManager.FindByNameAsync("hao");
-                                                var result =
-                                                    await userManager.UpdateSecurityStampAsync(
-                                                        user
-                                                    );
-                                                res.StatusCode = result.Succeeded ? 200 : 500;
-                                            }
-                                            else if (
-                                                req.Path.StartsWithSegments(
-                                                    new PathString("/pwdLogin"),
-                                                    out remainder
-                                                )
-                                            )
-                                            {
-                                                var isPersistent = bool.Parse(
-                                                    remainder.Value.Substring(1)
-                                                );
-                                                var result =
-                                                    await signInManager.PasswordSignInAsync(
-                                                        "hao",
-                                                        TestPassword,
-                                                        isPersistent,
-                                                        false
-                                                    );
-                                                res.StatusCode = result.Succeeded ? 200 : 500;
-                                            }
-                                            else if (
-                                                req.Path == new PathString("/twofactorRememeber")
-                                            )
-                                            {
-                                                var user = await userManager.FindByNameAsync("hao");
-                                                await signInManager.RememberTwoFactorClientAsync(
-                                                    user
-                                                );
-                                                res.StatusCode = 200;
-                                            }
-                                            else if (
-                                                req.Path
-                                                == new PathString("/isTwoFactorRememebered")
-                                            )
-                                            {
-                                                var user = await userManager.FindByNameAsync("hao");
-                                                var result =
-                                                    await signInManager.IsTwoFactorClientRememberedAsync(
-                                                        user
-                                                    );
-                                                res.StatusCode = result ? 200 : 500;
-                                            }
-                                            else if (
-                                                req.Path == new PathString("/hasTwoFactorUserId")
-                                            )
-                                            {
-                                                var result = await context.AuthenticateAsync(
-                                                    IdentityConstants.TwoFactorUserIdScheme
-                                                );
-                                                res.StatusCode = result.Succeeded ? 200 : 500;
-                                            }
-                                            else if (req.Path == new PathString("/me"))
-                                            {
-                                                await DescribeAsync(
-                                                    res,
-                                                    AuthenticateResult.Success(
-                                                        new AuthenticationTicket(
-                                                            context.User,
-                                                            null,
-                                                            "Application"
-                                                        )
-                                                    )
-                                                );
-                                            }
-                                            else if (
-                                                req.Path.StartsWithSegments(
-                                                    new PathString("/me"),
-                                                    out remainder
-                                                )
-                                            )
-                                            {
-                                                var auth = await context.AuthenticateAsync(
-                                                    remainder.Value.Substring(1)
-                                                );
-                                                await DescribeAsync(res, auth);
-                                            }
-                                            else if (
-                                                req.Path == new PathString("/testpath")
-                                                && testpath != null
-                                            )
-                                            {
-                                                await testpath(context);
-                                            }
-                                            else
-                                            {
-                                                await next();
-                                            }
-                                        }
-                                    );
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    if (testCore)
+                                    var req = context.Request;
+                                    var res = context.Response;
+                                    var userManager = context.RequestServices
+                                        .GetRequiredService<UserManager<PocoUser>>();
+                                    var roleManager = context.RequestServices
+                                        .GetRequiredService<RoleManager<PocoRole>>();
+                                    var signInManager = context.RequestServices
+                                        .GetRequiredService<SignInManager<PocoUser>>();
+                                    PathString remainder;
+                                    if (req.Path == new PathString("/normal"))
                                     {
-                                        services.AddIdentityCore<PocoUser>()
-                                            .AddRoles<PocoRole>()
-                                            .AddSignInManager()
-                                            .AddDefaultTokenProviders();
-                                        services.AddAuthentication(
-                                                IdentityConstants.ApplicationScheme
+                                        res.StatusCode = 200;
+                                    }
+                                    else if (req.Path == new PathString("/createMe"))
+                                    {
+                                        var user = new PocoUser("hao");
+                                        var result = await userManager.CreateAsync(
+                                            user,
+                                            TestPassword
+                                        );
+                                        if (result.Succeeded)
+                                        {
+                                            result = await roleManager.CreateAsync(
+                                                new PocoRole("role")
+                                            );
+                                        }
+                                        if (result.Succeeded)
+                                        {
+                                            result = await userManager.AddToRoleAsync(user, "role");
+                                        }
+                                        res.StatusCode = result.Succeeded ? 200 : 500;
+                                    }
+                                    else if (req.Path == new PathString("/createSimple"))
+                                    {
+                                        var result = await userManager.CreateAsync(
+                                            new PocoUser("simple"),
+                                            "aaaaaa"
+                                        );
+                                        res.StatusCode = result.Succeeded ? 200 : 500;
+                                    }
+                                    else if (req.Path == new PathString("/signoutEverywhere"))
+                                    {
+                                        var user = await userManager.FindByNameAsync("hao");
+                                        var result = await userManager.UpdateSecurityStampAsync(
+                                            user
+                                        );
+                                        res.StatusCode = result.Succeeded ? 200 : 500;
+                                    }
+                                    else if (
+                                        req.Path
+                                            .StartsWithSegments(
+                                                new PathString("/pwdLogin"),
+                                                out remainder
                                             )
-                                            .AddIdentityCookies();
+                                    )
+                                    {
+                                        var isPersistent = bool.Parse(remainder.Value.Substring(1));
+                                        var result = await signInManager.PasswordSignInAsync(
+                                            "hao",
+                                            TestPassword,
+                                            isPersistent,
+                                            false
+                                        );
+                                        res.StatusCode = result.Succeeded ? 200 : 500;
+                                    }
+                                    else if (req.Path == new PathString("/twofactorRememeber"))
+                                    {
+                                        var user = await userManager.FindByNameAsync("hao");
+                                        await signInManager.RememberTwoFactorClientAsync(user);
+                                        res.StatusCode = 200;
+                                    }
+                                    else if (req.Path == new PathString("/isTwoFactorRememebered"))
+                                    {
+                                        var user = await userManager.FindByNameAsync("hao");
+                                        var result =
+                                            await signInManager.IsTwoFactorClientRememberedAsync(
+                                                user
+                                            );
+                                        res.StatusCode = result ? 200 : 500;
+                                    }
+                                    else if (req.Path == new PathString("/hasTwoFactorUserId"))
+                                    {
+                                        var result = await context.AuthenticateAsync(
+                                            IdentityConstants.TwoFactorUserIdScheme
+                                        );
+                                        res.StatusCode = result.Succeeded ? 200 : 500;
+                                    }
+                                    else if (req.Path == new PathString("/me"))
+                                    {
+                                        await DescribeAsync(
+                                            res,
+                                            AuthenticateResult.Success(
+                                                new AuthenticationTicket(
+                                                    context.User,
+                                                    null,
+                                                    "Application"
+                                                )
+                                            )
+                                        );
+                                    }
+                                    else if (
+                                        req.Path
+                                            .StartsWithSegments(
+                                                new PathString("/me"),
+                                                out remainder
+                                            )
+                                    )
+                                    {
+                                        var auth = await context.AuthenticateAsync(
+                                            remainder.Value.Substring(1)
+                                        );
+                                        await DescribeAsync(res, auth);
+                                    }
+                                    else if (
+                                        req.Path == new PathString("/testpath") && testpath != null
+                                    )
+                                    {
+                                        await testpath(context);
                                     }
                                     else
                                     {
-                                        services.AddIdentity<PocoUser, PocoRole>()
-                                            .AddDefaultTokenProviders();
+                                        await next();
                                     }
-                                    var store = new InMemoryStore<PocoUser, PocoRole>();
-                                    services.AddSingleton<IUserStore<PocoUser>>(store);
-                                    services.AddSingleton<IRoleStore<PocoRole>>(store);
-                                    configureServices?.Invoke(services);
                                 }
-                            )
-                            .UseTestServer()
-                )
-                .Build();
+                            );
+                        }
+                    ).ConfigureServices(
+                        services =>
+                        {
+                            if (testCore)
+                            {
+                                services.AddIdentityCore<PocoUser>()
+                                    .AddRoles<PocoRole>()
+                                    .AddSignInManager()
+                                    .AddDefaultTokenProviders();
+                                services.AddAuthentication(IdentityConstants.ApplicationScheme)
+                                    .AddIdentityCookies();
+                            }
+                            else
+                            {
+                                services.AddIdentity<PocoUser, PocoRole>()
+                                    .AddDefaultTokenProviders();
+                            }
+                            var store = new InMemoryStore<PocoUser, PocoRole>();
+                            services.AddSingleton<IUserStore<PocoUser>>(store);
+                            services.AddSingleton<IRoleStore<PocoRole>>(store);
+                            configureServices?.Invoke(services);
+                        }
+                    ).UseTestServer()).Build();
             await host.StartAsync();
             var server = host.GetTestServer();
             server.BaseAddress = baseAddress;
@@ -586,27 +556,29 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             if (result != null && result.Principal != null)
             {
                 xml.Add(
-                    result.Principal.Claims.Select(
-                        claim =>
-                            new XElement(
-                                "claim",
-                                new XAttribute("type", claim.Type),
-                                new XAttribute("value", claim.Value)
-                            )
-                    )
+                    result.Principal.Claims
+                        .Select(
+                            claim =>
+                                new XElement(
+                                    "claim",
+                                    new XAttribute("type", claim.Type),
+                                    new XAttribute("value", claim.Value)
+                                )
+                        )
                 );
             }
             if (result != null && result.Properties != null)
             {
                 xml.Add(
-                    result.Properties.Items.Select(
-                        extra =>
-                            new XElement(
-                                "extra",
-                                new XAttribute("type", extra.Key),
-                                new XAttribute("value", extra.Value)
-                            )
-                    )
+                    result.Properties.Items
+                        .Select(
+                            extra =>
+                                new XElement(
+                                    "extra",
+                                    new XAttribute("type", extra.Key),
+                                    new XAttribute("value", extra.Value)
+                                )
+                        )
                 );
             }
             using (var memory = new MemoryStream())
@@ -647,7 +619,8 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             };
             if (transaction.Response.Headers.Contains("Set-Cookie"))
             {
-                transaction.SetCookie = transaction.Response.Headers.GetValues("Set-Cookie")
+                transaction.SetCookie = transaction.Response.Headers
+                    .GetValues("Set-Cookie")
                     .FirstOrDefault();
             }
             if (!string.IsNullOrEmpty(transaction.SetCookie))

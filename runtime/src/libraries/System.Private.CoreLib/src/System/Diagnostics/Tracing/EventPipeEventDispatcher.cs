@@ -172,12 +172,13 @@ namespace System.Diagnostics.Tracing
                     false
                 );
 
-                m_dispatchTask = Task.Factory.StartNew(
-                    DispatchEventsToEventListeners,
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                );
+                m_dispatchTask = Task.Factory
+                    .StartNew(
+                        DispatchEventsToEventListeners,
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
             }
         }
 
@@ -220,14 +221,15 @@ namespace System.Diagnostics.Tracing
                             (int)instanceData.PayloadLength
                         );
                         DateTime dateTimeStamp = TimeStampToDateTime(instanceData.TimeStamp);
-                        NativeRuntimeEventSource.Log.ProcessEvent(
-                            instanceData.EventID,
-                            instanceData.ThreadID,
-                            dateTimeStamp,
-                            instanceData.ActivityId,
-                            instanceData.ChildActivityId,
-                            payload
-                        );
+                        NativeRuntimeEventSource.Log
+                            .ProcessEvent(
+                                instanceData.EventID,
+                                instanceData.ThreadID,
+                                dateTimeStamp,
+                                instanceData.ActivityId,
+                                instanceData.ChildActivityId,
+                                payload
+                            );
                     }
                 }
 

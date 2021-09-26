@@ -16,7 +16,8 @@ namespace RoutingWebSite
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
+            new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<StartupForFallback>()
                 .UseKestrel()
                 .UseIISIntegration();

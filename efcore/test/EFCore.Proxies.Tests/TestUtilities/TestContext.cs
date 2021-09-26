@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             ChangeTrackingStrategy? changeTrackingStrategy = null
         )
         {
-            _internalServiceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            _internalServiceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .AddEntityFrameworkProxies()
                 .BuildServiceProvider();
 

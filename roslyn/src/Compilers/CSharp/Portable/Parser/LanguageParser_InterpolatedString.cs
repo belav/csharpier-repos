@@ -120,7 +120,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Debug.Assert(closeQuoteMissing || originalText[closeQuoteIndex] == '"');
             var closeQuote = closeQuoteMissing
                 ? SyntaxFactory.MissingToken(SyntaxKind.InterpolatedStringEndToken)
-                      .TokenWithTrailingTrivia(originalToken.GetTrailingTrivia())
+                  .TokenWithTrailingTrivia(originalToken.GetTrailingTrivia())
                 : SyntaxFactory.Token(
                       null,
                       SyntaxKind.InterpolatedStringEndToken,

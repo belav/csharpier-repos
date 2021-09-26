@@ -24,7 +24,8 @@ namespace System.CommandLine.Tests
         {
             var commandLine = "one two\tthree   four ";
 
-            CommandLineStringSplitter.Instance.Split(commandLine)
+            CommandLineStringSplitter.Instance
+                .Split(commandLine)
                 .Should()
                 .BeEquivalentSequenceTo("one", "two", "three", "four");
         }
@@ -34,7 +35,8 @@ namespace System.CommandLine.Tests
         {
             var commandLine = @"rm -r ""c:\temp files\""";
 
-            CommandLineStringSplitter.Instance.Split(commandLine)
+            CommandLineStringSplitter.Instance
+                .Split(commandLine)
                 .Should()
                 .BeEquivalentSequenceTo("rm", "-r", @"c:\temp files\");
         }
@@ -55,7 +57,8 @@ namespace System.CommandLine.Tests
 
             var commandLine = $"the-command {optionAndArgument}";
 
-            CommandLineStringSplitter.Instance.Split(commandLine)
+            CommandLineStringSplitter.Instance
+                .Split(commandLine)
                 .Should()
                 .BeEquivalentSequenceTo("the-command", optionAndArgument.Replace("\"", ""));
         }

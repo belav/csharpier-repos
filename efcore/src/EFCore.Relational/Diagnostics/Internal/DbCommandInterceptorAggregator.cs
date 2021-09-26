@@ -111,12 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].ReaderExecutingAsync(
-                            command,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .ReaderExecutingAsync(command, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -132,12 +128,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].ScalarExecutingAsync(
-                            command,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .ScalarExecutingAsync(command, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -153,12 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].NonQueryExecutingAsync(
-                            command,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .NonQueryExecutingAsync(command, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -216,12 +204,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].ReaderExecutedAsync(
-                            command,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .ReaderExecutedAsync(command, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -237,12 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].ScalarExecutedAsync(
-                            command,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .ScalarExecutedAsync(command, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -258,12 +238,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].NonQueryExecutedAsync(
-                            command,
-                            eventData,
-                            result,
-                            cancellationToken
-                        )
+                    result = await _interceptors[i]
+                        .NonQueryExecutedAsync(command, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -286,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].CommandFailedAsync(command, eventData, cancellationToken)
+                    await _interceptors[i]
+                        .CommandFailedAsync(command, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }

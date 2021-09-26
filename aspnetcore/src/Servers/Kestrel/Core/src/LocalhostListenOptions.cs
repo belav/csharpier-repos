@@ -45,13 +45,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             }
             catch (Exception ex) when (!(ex is IOException or OperationCanceledException))
             {
-                context.Logger.LogInformation(
-                    0,
-                    CoreStrings.NetworkInterfaceBindingFailed,
-                    GetDisplayName(),
-                    "IPv4 loopback",
-                    ex.Message
-                );
+                context.Logger
+                    .LogInformation(
+                        0,
+                        CoreStrings.NetworkInterfaceBindingFailed,
+                        GetDisplayName(),
+                        "IPv4 loopback",
+                        ex.Message
+                    );
                 exceptions.Add(ex);
             }
 
@@ -63,13 +64,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             }
             catch (Exception ex) when (!(ex is IOException or OperationCanceledException))
             {
-                context.Logger.LogInformation(
-                    0,
-                    CoreStrings.NetworkInterfaceBindingFailed,
-                    GetDisplayName(),
-                    "IPv6 loopback",
-                    ex.Message
-                );
+                context.Logger
+                    .LogInformation(
+                        0,
+                        CoreStrings.NetworkInterfaceBindingFailed,
+                        GetDisplayName(),
+                        "IPv6 loopback",
+                        ex.Message
+                    );
                 exceptions.Add(ex);
             }
 

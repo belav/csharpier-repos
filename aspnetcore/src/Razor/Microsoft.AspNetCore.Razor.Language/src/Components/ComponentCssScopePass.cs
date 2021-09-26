@@ -38,14 +38,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private void ProcessElement(MarkupElementIntermediateNode node, string cssScope)
         {
             // Add a minimized attribute whose name is simply the CSS scope
-            node.Children.Add(
-                new HtmlAttributeIntermediateNode
-                {
-                    AttributeName = cssScope,
-                    Prefix = cssScope,
-                    Suffix = string.Empty,
-                }
-            );
+            node.Children
+                .Add(
+                    new HtmlAttributeIntermediateNode
+                    {
+                        AttributeName = cssScope,
+                        Prefix = cssScope,
+                        Suffix = string.Empty,
+                    }
+                );
         }
     }
 }

@@ -94,14 +94,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             object? value
         ) =>
             BindModelAsync(
-                    actionContext,
-                    modelBinder,
-                    valueProvider,
-                    parameter,
-                    metadata,
-                    value,
-                    container: null
-                )
+                actionContext,
+                modelBinder,
+                valueProvider,
+                parameter,
+                metadata,
+                value,
+                container: null
+            )
                 .AsTask();
 
         /// <summary>
@@ -242,9 +242,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             {
                 // Enforce BindingBehavior.Required (e.g., [BindRequired])
                 var modelName = modelBindingContext.FieldName;
-                var message = metadata.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
-                    modelName
-                );
+                var message = metadata.ModelBindingMessageProvider
+                    .MissingBindRequiredValueAccessor(modelName);
                 actionContext.ModelState.TryAddModelError(modelName, message);
             }
             else if (modelBindingResult.IsModelSet)

@@ -1088,16 +1088,16 @@ namespace System.Web.Helpers.Test
             // Act
             var watermarkedWithImageArgument = image.AddImageWatermark(watermark).GetBytes();
             var watermarkedWithFilePathArgument = image.AddImageWatermark(
-                    context,
-                    (name) => _JpgImageBytes,
-                    @"x:\jpegimage.jpg",
-                    width: 0,
-                    height: 0,
-                    horizontalAlign: "Right",
-                    verticalAlign: "Bottom",
-                    opacity: 100,
-                    padding: 5
-                )
+                context,
+                (name) => _JpgImageBytes,
+                @"x:\jpegimage.jpg",
+                width: 0,
+                height: 0,
+                horizontalAlign: "Right",
+                verticalAlign: "Bottom",
+                opacity: 100,
+                padding: 5
+            )
                 .GetBytes();
 
             Assert.Equal(watermarkedWithImageArgument, watermarkedWithFilePathArgument);

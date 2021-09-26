@@ -32,13 +32,12 @@ namespace Microsoft.AspNetCore.Hosting
             Action<QuicTransportOptions> configureOptions
         )
         {
-            return hostBuilder.UseQuic()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.Configure(configureOptions);
-                    }
-                );
+            return hostBuilder.UseQuic().ConfigureServices(
+                services =>
+                {
+                    services.Configure(configureOptions);
+                }
+            );
         }
     }
 }

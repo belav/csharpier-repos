@@ -76,9 +76,8 @@ namespace System.Reflection.TypeLoading.Ecma
                 case HandleKind.MemberReference:
                 {
                     TypeContext typeContext = default;
-                    MemberReference mr = ((MemberReferenceHandle)ctorHandle).GetMemberReference(
-                        Reader
-                    );
+                    MemberReference mr = ((MemberReferenceHandle)ctorHandle)
+                        .GetMemberReference(Reader);
                     MethodSignature<RoType> sig = mr.DecodeMethodSignature(_module, typeContext);
                     Type[] parameterTypes = sig.ParameterTypes.ToArray();
                     Type declaringType = mr.Parent.ResolveTypeDefRefOrSpec(_module, typeContext);

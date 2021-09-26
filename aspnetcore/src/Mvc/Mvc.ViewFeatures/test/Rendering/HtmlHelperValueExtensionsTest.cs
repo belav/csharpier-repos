@@ -70,11 +70,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
             public override string ToString()
             {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{{ SomeProperty = {0} }}",
-                    SomeProperty ?? "(null)"
-                );
+                return string
+                    .Format(
+                        CultureInfo.InvariantCulture,
+                        "{{ SomeProperty = {0} }}",
+                        SomeProperty ?? "(null)"
+                    );
             }
         }
     }

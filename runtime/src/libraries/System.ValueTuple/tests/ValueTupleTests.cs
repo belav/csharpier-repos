@@ -361,10 +361,8 @@ namespace System.Tests
                 Assert.Equal(expectedResult, ((IComparable)valueTuple).CompareTo(other.valueTuple));
                 Assert.Equal(
                     expectedStructuralResult,
-                    ((IStructuralComparable)valueTuple).CompareTo(
-                        other.valueTuple,
-                        DummyTestComparer.Instance
-                    )
+                    ((IStructuralComparable)valueTuple)
+                        .CompareTo(other.valueTuple, DummyTestComparer.Instance)
                 );
                 Assert.Equal(1, ((IComparable)valueTuple).CompareTo(null));
 
@@ -2982,30 +2980,30 @@ namespace System.Tests
             Assert.Equal(
                 "(1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, )",
                 CreateLong(
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create())
-                    )
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create())
+                )
                     .ToString()
             );
 
             Assert.Equal(
                 "(1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 1)",
                 CreateLong(
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(1))
-                    )
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    CreateLong(1, 2, 3, 4, 5, 6, 7, ValueTuple.Create(1))
+                )
                     .ToString()
             );
 
@@ -3261,9 +3259,8 @@ namespace System.Tests
             // GetHashCode only tries to hash the first 7 elements when rest is not ITupleInternal
             Assert.Equal(ValueTuple.Create(1, 0, 0, 0, 0, 0, 0).GetHashCode(), d.GetHashCode());
             Assert.Equal(
-                ((IStructuralEquatable)ValueTuple.Create(1, 0, 0, 0, 0, 0, 0)).GetHashCode(
-                    TestEqualityComparer.Instance
-                ),
+                ((IStructuralEquatable)ValueTuple.Create(1, 0, 0, 0, 0, 0, 0))
+                    .GetHashCode(TestEqualityComparer.Instance),
                 ((IStructuralEquatable)d).GetHashCode(TestEqualityComparer.Instance)
             );
 

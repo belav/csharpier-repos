@@ -270,20 +270,22 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         {
             var testAssembly = GetTestAssemblies();
             var metadataAttributes = testAssembly.SelectMany(
-                    a => a.GetCustomAttributes<WebApplicationFactoryContentRootAttribute>()
-                )
+                a => a.GetCustomAttributes<WebApplicationFactoryContentRootAttribute>()
+            )
                 .Where(
                     a =>
-                        string.Equals(
-                            a.Key,
-                            tEntryPointAssemblyFullName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        || string.Equals(
-                            a.Key,
-                            tEntryPointAssemblyName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                a.Key,
+                                tEntryPointAssemblyFullName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        || string
+                            .Equals(
+                                a.Key,
+                                tEntryPointAssemblyName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                 )
                 .OrderBy(a => a.Priority)
                 .ToArray();
@@ -310,11 +312,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                     return new[] { Assembly.Load(AppDomain.CurrentDomain.FriendlyName) };
                 }
 
-                var runtimeProjectLibraries = context.RuntimeLibraries.ToDictionary(
-                    r => r.Name,
-                    r => r,
-                    StringComparer.Ordinal
-                );
+                var runtimeProjectLibraries = context.RuntimeLibraries
+                    .ToDictionary(r => r.Name, r => r, StringComparer.Ordinal);
 
                 // Find the list of projects
                 var projects = context.CompileLibraries.Where(l => l.Type == "project");
@@ -322,17 +321,20 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                 var entryPointAssemblyName = typeof(TEntryPoint).Assembly.GetName().Name;
 
                 // Find the list of projects referencing TEntryPoint.
-                var candidates = context.CompileLibraries.Where(
-                    library =>
-                        library.Dependencies.Any(
-                            d =>
-                                string.Equals(
-                                    d.Name,
-                                    entryPointAssemblyName,
-                                    StringComparison.Ordinal
+                var candidates = context.CompileLibraries
+                    .Where(
+                        library =>
+                            library.Dependencies
+                                .Any(
+                                    d =>
+                                        string
+                                            .Equals(
+                                                d.Name,
+                                                entryPointAssemblyName,
+                                                StringComparison.Ordinal
+                                            )
                                 )
-                        )
-                );
+                    );
 
                 var testAssemblies = new List<Assembly>();
                 foreach (var candidate in candidates)

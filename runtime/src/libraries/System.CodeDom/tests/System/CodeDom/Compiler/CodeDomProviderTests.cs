@@ -431,11 +431,12 @@ namespace System.CodeDom.Compiler.Tests
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "3",
                 () =>
-                    new CustomProvider().GenerateCodeFromCompileUnit(
-                        new CodeCompileUnit(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new CustomProvider()
+                        .GenerateCodeFromCompileUnit(
+                            new CodeCompileUnit(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -444,11 +445,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<NotImplementedException>(
                 () =>
-                    new NullProvider().GenerateCodeFromCompileUnit(
-                        new CodeCompileUnit(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new NullProvider()
+                        .GenerateCodeFromCompileUnit(
+                            new CodeCompileUnit(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -457,11 +459,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<ArithmeticException>(
                 () =>
-                    new CustomProvider().GenerateCodeFromExpression(
-                        new CodeExpression(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new CustomProvider()
+                        .GenerateCodeFromExpression(
+                            new CodeExpression(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -470,11 +473,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<NotImplementedException>(
                 () =>
-                    new NullProvider().GenerateCodeFromExpression(
-                        new CodeExpression(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new NullProvider()
+                        .GenerateCodeFromExpression(
+                            new CodeExpression(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -483,11 +487,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<ArrayTypeMismatchException>(
                 () =>
-                    new CustomProvider().GenerateCodeFromNamespace(
-                        new CodeNamespace(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new CustomProvider()
+                        .GenerateCodeFromNamespace(
+                            new CodeNamespace(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -496,11 +501,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<NotImplementedException>(
                 () =>
-                    new NullProvider().GenerateCodeFromNamespace(
-                        new CodeNamespace(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new NullProvider()
+                        .GenerateCodeFromNamespace(
+                            new CodeNamespace(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -509,11 +515,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<BadImageFormatException>(
                 () =>
-                    new CustomProvider().GenerateCodeFromStatement(
-                        new CodeStatement(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new CustomProvider()
+                        .GenerateCodeFromStatement(
+                            new CodeStatement(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -522,11 +529,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<NotImplementedException>(
                 () =>
-                    new NullProvider().GenerateCodeFromStatement(
-                        new CodeStatement(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new NullProvider()
+                        .GenerateCodeFromStatement(
+                            new CodeStatement(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -535,11 +543,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<CannotUnloadAppDomainException>(
                 () =>
-                    new CustomProvider().GenerateCodeFromType(
-                        new CodeTypeDeclaration(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new CustomProvider()
+                        .GenerateCodeFromType(
+                            new CodeTypeDeclaration(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -548,11 +557,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<NotImplementedException>(
                 () =>
-                    new NullProvider().GenerateCodeFromType(
-                        new CodeTypeDeclaration(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new NullProvider()
+                        .GenerateCodeFromType(
+                            new CodeTypeDeclaration(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 
@@ -609,11 +619,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Throws<NotImplementedException>(
                 () =>
-                    new NullProvider().GenerateCodeFromMember(
-                        new CodeTypeMember(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+                    new NullProvider()
+                        .GenerateCodeFromMember(
+                            new CodeTypeMember(),
+                            new StringWriter(),
+                            new CodeGeneratorOptions()
+                        )
             );
         }
 

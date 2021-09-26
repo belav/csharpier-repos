@@ -142,12 +142,10 @@ namespace Moq.Tests.Regressions
         {
             public void TestMethod(IIssue78Interface intOne)
             {
-                Task<Issue78TypeOne> getTypeOneTask = Task<Issue78TypeOne>.Factory.StartNew(
-                    () => intOne.GetTypeOne()
-                );
-                Task<Issue78TypeTwo> getTypeTwoTask = Task<Issue78TypeTwo>.Factory.StartNew(
-                    () => intOne.GetTypeTwo()
-                );
+                Task<Issue78TypeOne> getTypeOneTask = Task<Issue78TypeOne>.Factory
+                    .StartNew(() => intOne.GetTypeOne());
+                Task<Issue78TypeTwo> getTypeTwoTask = Task<Issue78TypeTwo>.Factory
+                    .StartNew(() => intOne.GetTypeTwo());
 
                 Issue78TypeOne objOne = getTypeOneTask.Result;
                 Issue78TypeTwo objTwo = getTypeTwoTask.Result;
@@ -310,7 +308,8 @@ namespace Moq.Tests.Regressions
                 var actualTypeMethod = typeof(ConcreteClass).GetMethod("Method");
                 Assert.True(actualTypeMethod.IsVirtual && actualTypeMethod.IsFinal);
 
-                var mockedTypeMethod = new Mock<ConcreteClass>().Object.GetType()
+                var mockedTypeMethod = new Mock<ConcreteClass>().Object
+                    .GetType()
                     .GetMethod("Method");
                 Assert.True(mockedTypeMethod.IsVirtual && mockedTypeMethod.IsFinal);
             }
@@ -1034,13 +1033,12 @@ namespace Moq.Tests.Regressions
                 var infiniteLoopTimeout = TimeSpan.FromSeconds(5);
 
                 var timedOut = !Task.Run(
-                        () =>
-                        {
-                            var fn = Mock.Of<Func<int>>(f => f() == 42);
-                            Assert.Equal(42, fn());
-                        }
-                    )
-                    .Wait(infiniteLoopTimeout);
+                    () =>
+                    {
+                        var fn = Mock.Of<Func<int>>(f => f() == 42);
+                        Assert.Equal(42, fn());
+                    }
+                ).Wait(infiniteLoopTimeout);
 
                 Assert.False(timedOut);
             }
@@ -2450,16 +2448,15 @@ namespace Moq.Tests.Regressions
                 int result = default(int);
 
                 var mock = new Mock<IFoo>();
-                mock.SetupSet(f => f[It.IsAny<int>()] = 8)
-                    .Callback(
-                        new Action<int, int>(
-                            (x_, result_) =>
-                            {
-                                x = x_;
-                                result = result_;
-                            }
-                        )
-                    );
+                mock.SetupSet(f => f[It.IsAny<int>()] = 8).Callback(
+                    new Action<int, int>(
+                        (x_, result_) =>
+                        {
+                            x = x_;
+                            result = result_;
+                        }
+                    )
+                );
 
                 mock.Object[10] = 8;
                 mock.Object[0] = 17;
@@ -2507,8 +2504,8 @@ namespace Moq.Tests.Regressions
 
                 var mock = new Mock<ISomeDependency>() { DefaultValue = defaultValue };
                 mock.Setup(x => x.DoMoreStuffAsync())
-                    //  .Returns(Task.CompletedTask)
-                    .Callback(() => { });
+                //  .Returns(Task.CompletedTask)
+                .Callback(() => { });
                 await mock.Object.DoMoreStuffAsync();
             }
         }
@@ -2759,9 +2756,8 @@ namespace Moq.Tests.Regressions
             public void SetupSequencePhraseConvertsExpressionToDescriptiveString()
             {
                 var setupSequence = new Mock<IFoo>().SetupSequence(x => x.DoThings(null));
-                var setupGenericSequence = new Mock<IFoo>().SetupSequence(
-                    x => x.DoThings<object>(null)
-                );
+                var setupGenericSequence = new Mock<IFoo>()
+                    .SetupSequence(x => x.DoThings<object>(null));
 
                 Assert.Equal("x => x.DoThings(null)", setupSequence.ToString());
                 Assert.Equal("x => x.DoThings<object>(null)", setupGenericSequence.ToString());
@@ -3222,15 +3218,15 @@ namespace Moq.Tests.Regressions
             {
                 var loggerMock = new Mock<ILogger>();
                 loggerMock.Setup(
-                        m =>
-                            m.Log<object>(
-                                It.IsAny<LogLevel>(),
-                                It.IsAny<EventId>(),
-                                It.IsAny<object>(),
-                                It.IsAny<Exception>(),
-                                It.IsAny<Func<object, Exception, string>>()
-                            )
-                    )
+                    m =>
+                        m.Log<object>(
+                            It.IsAny<LogLevel>(),
+                            It.IsAny<EventId>(),
+                            It.IsAny<object>(),
+                            It.IsAny<Exception>(),
+                            It.IsAny<Func<object, Exception, string>>()
+                        )
+                )
                     .Verifiable();
 
                 var logger = loggerMock.Object;
@@ -3250,15 +3246,15 @@ namespace Moq.Tests.Regressions
             {
                 var loggerMock = new Mock<ILogger>();
                 loggerMock.Setup(
-                        m =>
-                            m.Log<It.IsAnyType>(
-                                It.IsAny<LogLevel>(),
-                                It.IsAny<EventId>(),
-                                It.IsAny<It.IsAnyType>(),
-                                It.IsAny<Exception>(),
-                                It.IsAny<Func<It.IsAnyType, Exception, string>>()
-                            )
-                    )
+                    m =>
+                        m.Log<It.IsAnyType>(
+                            It.IsAny<LogLevel>(),
+                            It.IsAny<EventId>(),
+                            It.IsAny<It.IsAnyType>(),
+                            It.IsAny<Exception>(),
+                            It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                        )
+                )
                     .Verifiable();
 
                 var logger = loggerMock.Object;
@@ -3374,7 +3370,8 @@ namespace Moq.Tests.Regressions
                     x => x.QueryOverExpression<IItem>(item => item.Id == originalItemId).List()
                 );
 
-                _ = session.Object.QueryOverExpression<IItem>(item => item.Id == originalItemId)
+                _ = session.Object
+                    .QueryOverExpression<IItem>(item => item.Id == originalItemId)
                     .List();
             }
 
@@ -3388,7 +3385,8 @@ namespace Moq.Tests.Regressions
                 );
 
                 var copiedItemId = originalItemId;
-                _ = session.Object.QueryOverExpression<IItem>(item => item.Id == copiedItemId)
+                _ = session.Object
+                    .QueryOverExpression<IItem>(item => item.Id == copiedItemId)
                     .List();
                 //                                                               ^^^^^^^^^^^^
                 // This call should still match the above setup, even when a different variable is used;

@@ -1411,12 +1411,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var errors = token.Errors();
             decimal d;
             if (
-                decimal.TryParse(
-                    "0E1",
-                    System.Globalization.NumberStyles.AllowExponent,
-                    null,
-                    out d
-                )
+                decimal
+                    .TryParse("0E1", System.Globalization.NumberStyles.AllowExponent, null, out d)
             )
             {
                 Assert.Equal(0, errors.Length);
@@ -3403,10 +3399,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private static string ToHexString(decimal d)
         {
-            return string.Join(
-                "",
-                decimal.GetBits(d).Select(word => string.Format("{0:x8}", word))
-            );
+            return string
+                .Join("", decimal.GetBits(d).Select(word => string.Format("{0:x8}", word)));
         }
 
         [Fact]

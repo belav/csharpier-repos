@@ -228,7 +228,8 @@ namespace Microsoft.EntityFrameworkCore
             if (state != EntityState.Unchanged)
             {
                 foreach (
-                    var child in left.TwoSkip.Cast<object>()
+                    var child in left.TwoSkip
+                        .Cast<object>()
                         .Concat(left.TwoSkipShared)
                         .Concat(left.SelfSkipPayloadLeft)
                         .Concat(left.SelfSkipPayloadRight)
@@ -1016,8 +1017,8 @@ namespace Microsoft.EntityFrameworkCore
                       .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
                       .ToListAsync()
                 : collectionEntry.Query()
-                      .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
-                      .ToList();
+                  .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
+                  .ToList();
 
             Assert.False(collectionEntry.IsLoaded);
             foreach (var entityTwo in left.TwoSkipShared)
@@ -1177,9 +1178,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = Fixture.CreateContext();
 
-            var queryable = context.EntityOnes.Include(
-                e => e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2)
-            );
+            var queryable = context.EntityOnes
+                .Include(e => e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2));
             var left = async
                 ? await queryable.SingleAsync(e => e.Id == 1)
                 : queryable.Single(e => e.Id == 1);

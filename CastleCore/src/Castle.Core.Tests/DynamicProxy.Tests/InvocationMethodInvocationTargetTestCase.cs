@@ -34,10 +34,8 @@ namespace Castle.DynamicProxy.Tests
             var interceptor = new KeepDataInterceptor();
             var proxy = generator.CreateClassProxy<ServiceClass>(interceptor);
             proxy.Sum(2, 2);
-            var methodOnClass = typeof(ServiceClass).GetMethod(
-                "Sum",
-                new[] { typeof(int), typeof(int) }
-            );
+            var methodOnClass = typeof(ServiceClass)
+                .GetMethod("Sum", new[] { typeof(int), typeof(int) });
             Assert.AreSame(methodOnClass, interceptor.Invocation.MethodInvocationTarget);
         }
 

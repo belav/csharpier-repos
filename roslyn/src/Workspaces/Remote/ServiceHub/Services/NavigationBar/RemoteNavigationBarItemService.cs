@@ -41,10 +41,10 @@ namespace Microsoft.CodeAnalysis.Remote
                     var navigationBarService =
                         document.GetRequiredLanguageService<INavigationBarItemService>();
                     var result = await navigationBarService.GetItemsAsync(
-                            document,
-                            supportsCodeGeneration,
-                            cancellationToken
-                        )
+                        document,
+                        supportsCodeGeneration,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                     return SerializableNavigationBarItem.Dehydrate(result);

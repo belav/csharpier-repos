@@ -45,18 +45,15 @@ public class Repro
     public static int CompiledMemberBinding()
     {
         var getfoo = Expression.Lambda<Func<Foo>>(
-                Expression.MemberInit(
-                    Expression.New(typeof(Foo)),
-                    Expression.MemberBind(
-                        typeof(Foo).GetProperty("Gazoo"),
-                        Expression.Bind(
-                            typeof(Gazonk).GetField("Tzap"),
-                            Expression.Constant("tzap")
-                        ),
-                        Expression.Bind(typeof(Gazonk).GetField("Klang"), Expression.Constant(42))
-                    )
+            Expression.MemberInit(
+                Expression.New(typeof(Foo)),
+                Expression.MemberBind(
+                    typeof(Foo).GetProperty("Gazoo"),
+                    Expression.Bind(typeof(Gazonk).GetField("Tzap"), Expression.Constant("tzap")),
+                    Expression.Bind(typeof(Gazonk).GetField("Klang"), Expression.Constant(42))
                 )
             )
+        )
             .Compile();
 
         var foo = getfoo();

@@ -131,7 +131,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi2).GetMethod(
+            var result = typeof(Bmi2)
+                .GetMethod(
                     nameof(Bmi2.ParallelBitDeposit),
                     new Type[] { typeof(UInt32), typeof(UInt32) }
                 )
@@ -258,9 +259,10 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi2)}.{nameof(Bmi2.ParallelBitDeposit)}<UInt32>(UInt32, UInt32): ParallelBitDeposit failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi2)}.{nameof(Bmi2.ParallelBitDeposit)}<UInt32>(UInt32, UInt32): ParallelBitDeposit failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

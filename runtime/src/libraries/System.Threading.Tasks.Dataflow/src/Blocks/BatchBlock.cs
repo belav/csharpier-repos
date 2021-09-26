@@ -82,11 +82,12 @@ namespace System.Threading.Tasks.Dataflow
                 this,
                 dataflowBlockOptions,
                 owningSource =>
-                    ((BatchBlock<T>)owningSource)._target.Complete(
-                        exception: null,
-                        dropPendingMessages: true,
-                        releaseReservedMessages: false
-                    ),
+                    ((BatchBlock<T>)owningSource)._target
+                        .Complete(
+                            exception: null,
+                            dropPendingMessages: true,
+                            releaseReservedMessages: false
+                        ),
                 onItemsRemoved,
                 itemCountingFunc
             );
@@ -135,11 +136,12 @@ namespace System.Threading.Tasks.Dataflow
                 dataflowBlockOptions.CancellationToken,
                 _source.Completion,
                 state =>
-                    ((BatchBlockTargetCore)state!).Complete(
-                        exception: null,
-                        dropPendingMessages: true,
-                        releaseReservedMessages: false
-                    ),
+                    ((BatchBlockTargetCore)state!)
+                        .Complete(
+                            exception: null,
+                            dropPendingMessages: true,
+                            releaseReservedMessages: false
+                        ),
                 _target
             );
 #if FEATURE_TRACING
@@ -932,19 +934,20 @@ namespace System.Threading.Tasks.Dataflow
                 if (exception != null)
                 {
                     // Get out from under currently held locks. Complete re-acquires the locks it needs.
-                    Task.Factory.StartNew(
-                        exc =>
-                            Complete(
-                                exception: (Exception)exc!,
-                                dropPendingMessages: true,
-                                releaseReservedMessages: true,
-                                revertProcessingState: true
-                            ),
-                        exception,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            exc =>
+                                Complete(
+                                    exception: (Exception)exc!,
+                                    dropPendingMessages: true,
+                                    releaseReservedMessages: true,
+                                    revertProcessingState: true
+                                ),
+                            exception,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
 
@@ -1403,11 +1406,8 @@ namespace System.Threading.Tasks.Dataflow
                         KeyValuePair<DataflowMessageHeader, T>
                     >); // in case of exception from ConsumeMessage
                     bool consumed;
-                    T? consumedValue = sourceAndMessage.Key.ConsumeMessage(
-                        sourceAndMessage.Value.Key,
-                        _owningBatch,
-                        out consumed
-                    );
+                    T? consumedValue = sourceAndMessage.Key
+                        .ConsumeMessage(sourceAndMessage.Value.Key, _owningBatch, out consumed);
                     if (!consumed)
                     {
                         // The protocol broke down, so throw an exception, as this is fatal.  Before doing so, though,
@@ -1494,11 +1494,8 @@ namespace System.Threading.Tasks.Dataflow
                         KeyValuePair<DataflowMessageHeader, T>
                     >); // in case of exception from ConsumeMessage
                     bool consumed;
-                    T? consumedValue = sourceAndMessage.Key.ConsumeMessage(
-                        sourceAndMessage.Value.Key,
-                        _owningBatch,
-                        out consumed
-                    );
+                    T? consumedValue = sourceAndMessage.Key
+                        .ConsumeMessage(sourceAndMessage.Value.Key, _owningBatch, out consumed);
                     if (consumed)
                     {
                         var consumedMessage = new KeyValuePair<DataflowMessageHeader, T>(

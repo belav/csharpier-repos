@@ -152,10 +152,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 return defaultFlags;
             }
 
-            var flagsList = key.StorageFlags.Split(
-                new[] { ' ' },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            var flagsList = key.StorageFlags
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             if (flagsList.Length == 0)
             {
                 return defaultFlags;

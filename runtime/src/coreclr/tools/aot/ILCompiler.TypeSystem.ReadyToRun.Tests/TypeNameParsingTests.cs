@@ -395,16 +395,14 @@ namespace TypeSystemTests
                 _simpleType,
                 _context.GetWellKnownType(WellKnownType.Int32)
             );
-            yield return (
-                (MetadataType)_context.GetWellKnownType(WellKnownType.Nullable)
-            ).MakeInstantiatedType(_structType);
+            yield return ((MetadataType)_context.GetWellKnownType(WellKnownType.Nullable))
+                .MakeInstantiatedType(_structType);
             yield return _genericType.MakeInstantiatedType(
                 _structType.MakePointerType().MakeArrayType()
             );
             yield return _nestedGenericType.MakeInstantiatedType(
-                (
-                    (MetadataType)_context.GetWellKnownType(WellKnownType.Nullable)
-                ).MakeInstantiatedType(_context.GetWellKnownType(WellKnownType.Int32)),
+                ((MetadataType)_context.GetWellKnownType(WellKnownType.Nullable))
+                    .MakeInstantiatedType(_context.GetWellKnownType(WellKnownType.Int32)),
                 _nestedType.MakeArrayType()
             );
         }

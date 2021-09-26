@@ -33,12 +33,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     return typeSyntax;
                 }
 
-                var typeStyle = CSharpUseImplicitTypeHelper.Instance.AnalyzeTypeName(
-                    typeSyntax,
-                    this.SemanticModel,
-                    this.OptionSet,
-                    this.CancellationToken
-                );
+                var typeStyle = CSharpUseImplicitTypeHelper.Instance
+                    .AnalyzeTypeName(
+                        typeSyntax,
+                        this.SemanticModel,
+                        this.OptionSet,
+                        this.CancellationToken
+                    );
 
                 if (!typeStyle.IsStylePreferred || !typeStyle.CanConvert())
                 {

@@ -255,8 +255,8 @@ namespace System.IO.Packaging.Tests
                 ms.Write(ba, 0, ba.Length);
                 Package package = Package.Open(ms, FileMode.Open);
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
                 if (docPackageRelationship != null)
                 {
@@ -285,8 +285,8 @@ namespace System.IO.Packaging.Tests
                 ms.Write(ba, 0, ba.Length);
                 Package package = Package.Open(ms, FileMode.Open);
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
                 if (docPackageRelationship != null)
                 {
@@ -342,8 +342,8 @@ namespace System.IO.Packaging.Tests
                 ms.Write(ba, 0, ba.Length);
                 Package package = Package.Open(ms, FileMode.Open);
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
                 if (docPackageRelationship != null)
                 {
@@ -414,8 +414,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
                     if (docPackageRelationship != null)
                     {
@@ -444,8 +444,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     if (docPackageRelationship != null)
@@ -1134,8 +1134,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 if (docPackageRelationship != null)
@@ -1180,8 +1180,8 @@ namespace System.IO.Packaging.Tests
                     Assert.Equal("/_rels/.rels", rootRelationshipPartUri.ToString());
 
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     if (docPackageRelationship != null)
@@ -1217,8 +1217,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     if (docPackageRelationship != null)
@@ -1291,8 +1291,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     if (docPackageRelationship != null)
@@ -1416,8 +1416,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     Assert.Equal(docPackageRelationship.Package, package);
@@ -1462,14 +1462,14 @@ namespace System.IO.Packaging.Tests
                     //var cnt = relationships.Count();
 
                     PackageRelationship docPackageRelationship4 = package.GetRelationshipsByType(
-                            "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
-                        )
+                        "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
+                    )
                         .FirstOrDefault();
 
                     if (docPackageRelationship4 == null)
                         docPackageRelationship4 = package.GetRelationshipsByType(
-                                "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
-                            )
+                            "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
+                        )
                             .FirstOrDefault();
 
                     Uri documentUri = PackUriHelper.ResolvePartUri(
@@ -1530,8 +1530,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open, FileAccess.ReadWrite))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     var relationshipsBefore = package.GetRelationships().Count();
@@ -1573,8 +1573,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     var relationshipsBefore = package.GetRelationships().Count();
@@ -1783,8 +1783,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     if (docPackageRelationship != null)
@@ -1797,8 +1797,8 @@ namespace System.IO.Packaging.Tests
 
                         //  Find the styles part. There will only be one.
                         PackageRelationship styleRelation = documentPart.GetRelationshipsByType(
-                                StylesRelationshipType
-                            )
+                            StylesRelationshipType
+                        )
                             .FirstOrDefault();
 
                         Assert.NotNull(styleRelation);
@@ -1829,8 +1829,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship4 = package.GetRelationshipsByType(
-                            "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
-                        )
+                        "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
+                    )
                         .FirstOrDefault();
 
                     Uri documentUri = PackUriHelper.ResolvePartUri(
@@ -1843,7 +1843,8 @@ namespace System.IO.Packaging.Tests
                     using (var partStream = mainDocumentPart.GetStream(FileMode.Open))
                     {
                         xdMain = XDocument.Load(partStream);
-                        var lastPara = xdMain.Root.Elements(W + "body")
+                        var lastPara = xdMain.Root
+                            .Elements(W + "body")
                             .Elements(W + "p")
                             .LastOrDefault();
                         lastPara.AddAfterSelf(
@@ -1883,8 +1884,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     if (docPackageRelationship != null)
@@ -1897,8 +1898,8 @@ namespace System.IO.Packaging.Tests
 
                         //  Find the styles part. There will only be one.
                         PackageRelationship styleRelation = documentPart.GetRelationshipsByType(
-                                StylesRelationshipType
-                            )
+                            StylesRelationshipType
+                        )
                             .FirstOrDefault();
 
                         int partsBefore = package.GetParts().Count();
@@ -1910,8 +1911,8 @@ namespace System.IO.Packaging.Tests
                                     != "application/vnd.openxmlformats-package.relationships+xml"
                             );
                         int relationshipsBefore = nonRelationshipParts.Select(
-                                p => p.GetRelationships().Count()
-                            )
+                            p => p.GetRelationships().Count()
+                        )
                             .Sum();
 
                         Assert.True(documentPart.RelationshipExists(styleRelation.Id));
@@ -1920,8 +1921,8 @@ namespace System.IO.Packaging.Tests
 
                         int partsAfter = package.GetParts().Count();
                         int relationshipsAfter = nonRelationshipParts.Select(
-                                p => p.GetRelationships().Count()
-                            )
+                            p => p.GetRelationships().Count()
+                        )
                             .Sum();
 
                         Assert.Equal(partsBefore, partsAfter);
@@ -1945,8 +1946,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     if (docPackageRelationship != null)
@@ -1985,8 +1986,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     Assert.True(package.RelationshipExists(docPackageRelationship.Id));
@@ -2019,8 +2020,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     StringBuilder sb = new StringBuilder();
@@ -2193,8 +2194,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open, FileAccess.ReadWrite))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
                     Assert.NotNull(docPackageRelationship);
 
@@ -2218,8 +2219,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open, FileAccess.ReadWrite))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
                     Assert.NotNull(docPackageRelationship);
 
@@ -2249,8 +2250,8 @@ namespace System.IO.Packaging.Tests
                 using (Package package = Package.Open(ms, FileMode.Open, FileAccess.ReadWrite))
                 {
                     PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                            DocumentRelationshipType
-                        )
+                        DocumentRelationshipType
+                    )
                         .FirstOrDefault();
 
                     Assert.NotNull(docPackageRelationship);
@@ -2265,8 +2266,8 @@ namespace System.IO.Packaging.Tests
 
                     //  Find the styles part. There will only be one.
                     PackageRelationship styleRelation = documentPart.GetRelationshipsByType(
-                            StylesRelationshipType
-                        )
+                        StylesRelationshipType
+                    )
                         .FirstOrDefault();
                     Assert.NotNull(styleRelation);
 
@@ -2859,8 +2860,8 @@ namespace System.IO.Packaging.Tests
             using (Package package = Package.Open(fiGuidName.FullName, FileMode.Open))
             {
                 PackageRelationship docPackageRelationship4 = package.GetRelationshipsByType(
-                        "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
-                    )
+                    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
+                )
                     .FirstOrDefault();
 
                 Uri documentUri = PackUriHelper.ResolvePartUri(
@@ -2873,7 +2874,8 @@ namespace System.IO.Packaging.Tests
                 using (var partStream = mainDocumentPart.GetStream())
                 {
                     xdMain = XDocument.Load(partStream);
-                    var lastPara = xdMain.Root.Elements(W + "body")
+                    var lastPara = xdMain.Root
+                        .Elements(W + "body")
                         .Elements(W + "p")
                         .LastOrDefault();
                     lastPara.AddAfterSelf(
@@ -3002,8 +3004,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3072,8 +3074,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3121,8 +3123,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3173,8 +3175,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3218,8 +3220,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3304,8 +3306,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3368,8 +3370,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3439,8 +3441,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3509,8 +3511,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3572,8 +3574,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3617,8 +3619,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3666,8 +3668,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);
@@ -3711,8 +3713,8 @@ namespace System.IO.Packaging.Tests
             )
             {
                 PackageRelationship docPackageRelationship = package.GetRelationshipsByType(
-                        DocumentRelationshipType
-                    )
+                    DocumentRelationshipType
+                )
                     .FirstOrDefault();
 
                 Assert.NotNull(docPackageRelationship);

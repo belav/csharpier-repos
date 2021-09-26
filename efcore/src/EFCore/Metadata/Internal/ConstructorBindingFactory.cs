@@ -120,7 +120,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var bindingFailures = new List<IEnumerable<ParameterInfo>>();
 
             foreach (
-                var constructor in entityType.ClrType.GetTypeInfo()
+                var constructor in entityType.ClrType
+                    .GetTypeInfo()
                     .DeclaredConstructors.Where(c => !c.IsStatic)
             )
             {
@@ -136,8 +137,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     )
                 )
                 {
-                    var serviceParamCount =
-                        binding.ParameterBindings.OfType<ServiceParameterBinding>().Count();
+                    var serviceParamCount = binding.ParameterBindings
+                        .OfType<ServiceParameterBinding>()
+                        .Count();
                     var propertyParamCount = binding.ParameterBindings.Count - serviceParamCount;
 
                     if (propertyParamCount == 0)
@@ -195,16 +197,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 string.Join("', '", x.Select(f => f.Name)),
                                 entityType.DisplayName()
                                     + "("
-                                    + string.Join(
-                                        ", ",
-                                        x.Key.GetParameters()
-                                            .Select(
-                                                y =>
-                                                    y.ParameterType.ShortDisplayName()
-                                                    + " "
-                                                    + y.Name
-                                            )
-                                    )
+                                    + string
+                                        .Join(
+                                            ", ",
+                                            x.Key
+                                                .GetParameters()
+                                                .Select(
+                                                    y =>
+                                                        y.ParameterType.ShortDisplayName()
+                                                        + " "
+                                                        + y.Name
+                                                )
+                                        )
                                     + ")"
                             )
                     );
@@ -338,10 +342,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) =>
             entityType.ClrType.ShortDisplayName()
             + "("
-            + string.Join(
-                ", ",
-                binding.ParameterBindings.Select(b => b.ParameterType.ShortDisplayName())
-            )
+            + string
+                .Join(
+                    ", ",
+                    binding.ParameterBindings.Select(b => b.ParameterType.ShortDisplayName())
+                )
             + ")";
     }
 }

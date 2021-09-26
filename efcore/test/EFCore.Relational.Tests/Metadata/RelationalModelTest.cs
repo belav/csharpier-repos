@@ -171,9 +171,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 specialCustomerTable.Columns.Count()
             );
 
-            var specialityColumn = specialCustomerTable.Columns.Single(
-                c => c.Name == nameof(SpecialCustomer.Speciality)
-            );
+            var specialityColumn = specialCustomerTable.Columns
+                .Single(c => c.Name == nameof(SpecialCustomer.Speciality));
             Assert.Equal(
                 specialCustomerType.FindDiscriminatorProperty() != null,
                 specialityColumn.IsNullable
@@ -295,14 +294,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 Assert.Equal(5, specialCustomerView.Columns.Count());
 
                 Assert.True(
-                    specialCustomerView.EntityTypeMappings.Single(
-                        m => m.EntityType == specialCustomerType
-                    ).IsSharedTablePrincipal
+                    specialCustomerView.EntityTypeMappings
+                        .Single(m => m.EntityType == specialCustomerType).IsSharedTablePrincipal
                 );
 
-                var specialityColumn = specialCustomerView.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Speciality)
-                );
+                var specialityColumn = specialCustomerView.Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Speciality));
                 Assert.False(specialityColumn.IsNullable);
 
                 Assert.Null(customerType.FindDiscriminatorProperty());
@@ -323,9 +320,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 Assert.True(specialCustomerView.EntityTypeMappings.First().IsSharedTablePrincipal);
                 Assert.False(specialCustomerView.EntityTypeMappings.Last().IsSharedTablePrincipal);
 
-                var specialityColumn = specialCustomerView.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Speciality)
-                );
+                var specialityColumn = specialCustomerView.Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Speciality));
                 Assert.True(specialityColumn.IsNullable);
             }
         }
@@ -601,21 +597,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 Assert.Equal(5, specialCustomerTable.Columns.Count());
 
                 Assert.True(
-                    specialCustomerTable.EntityTypeMappings.Single(
-                        m => m.EntityType == specialCustomerType
-                    ).IsSharedTablePrincipal
+                    specialCustomerTable.EntityTypeMappings
+                        .Single(m => m.EntityType == specialCustomerType).IsSharedTablePrincipal
                 );
 
-                var specialityColumn = specialCustomerTable.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Speciality)
-                );
+                var specialityColumn = specialCustomerTable.Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Speciality));
                 Assert.False(specialityColumn.IsNullable);
 
-                var addressColumn = specialCustomerTable.Columns.Single(
-                    c =>
-                        c.Name
-                        == nameof(SpecialCustomer.Details) + "_" + nameof(CustomerDetails.Address)
-                );
+                var addressColumn = specialCustomerTable.Columns
+                    .Single(
+                        c =>
+                            c.Name
+                            == nameof(SpecialCustomer.Details)
+                                + "_"
+                                + nameof(CustomerDetails.Address)
+                    );
                 Assert.False(addressColumn.IsNullable);
                 var specialityProperty = specialityColumn.PropertyMappings.First().Property;
 
@@ -646,9 +643,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                 Assert.Empty(customerTable.ForeignKeyConstraints);
 
-                var specialCustomerUniqueConstraint = customerTable.UniqueConstraints.Single(
-                    c => !c.GetIsPrimaryKey()
-                );
+                var specialCustomerUniqueConstraint = customerTable.UniqueConstraints
+                    .Single(c => !c.GetIsPrimaryKey());
                 Assert.Equal("AK_Customer_SpecialityAk", specialCustomerUniqueConstraint.Name);
                 Assert.NotNull(specialCustomerUniqueConstraint.MappedKeys.Single());
 
@@ -712,16 +708,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 Assert.True(specialCustomerTable.EntityTypeMappings.First().IsSharedTablePrincipal);
                 Assert.False(specialCustomerTable.EntityTypeMappings.Last().IsSharedTablePrincipal);
 
-                var specialityColumn = specialCustomerTable.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Speciality)
-                );
+                var specialityColumn = specialCustomerTable.Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Speciality));
                 Assert.True(specialityColumn.IsNullable);
 
-                var addressColumn = specialCustomerTable.Columns.Single(
-                    c =>
-                        c.Name
-                        == nameof(SpecialCustomer.Details) + "_" + nameof(CustomerDetails.Address)
-                );
+                var addressColumn = specialCustomerTable.Columns
+                    .Single(
+                        c =>
+                            c.Name
+                            == nameof(SpecialCustomer.Details)
+                                + "_"
+                                + nameof(CustomerDetails.Address)
+                    );
                 Assert.True(addressColumn.IsNullable);
 
                 var specialCustomerPkConstraint = specialCustomerTable.PrimaryKey;
@@ -731,9 +729,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 var idProperty = customerPk.Properties.Single();
                 Assert.Equal(3, idProperty.GetTableColumnMappings().Count());
 
-                var specialCustomerUniqueConstraint = specialCustomerTable.UniqueConstraints.Single(
-                    c => !c.GetIsPrimaryKey()
-                );
+                var specialCustomerUniqueConstraint = specialCustomerTable.UniqueConstraints
+                    .Single(c => !c.GetIsPrimaryKey());
                 Assert.Equal("AK_Customer_SpecialityAk", specialCustomerUniqueConstraint.Name);
                 Assert.NotNull(specialCustomerUniqueConstraint.MappedKeys.Single());
 
@@ -744,8 +741,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 );
                 Assert.NotNull(specialCustomerFkConstraint.MappedForeignKeys.Single());
 
-                var anotherSpecialCustomerFkConstraint =
-                    specialCustomerTable.ForeignKeyConstraints.First();
+                var anotherSpecialCustomerFkConstraint = specialCustomerTable.ForeignKeyConstraints
+                    .First();
                 Assert.Equal(
                     "FK_Customer_Customer_AnotherRelatedCustomerId",
                     anotherSpecialCustomerFkConstraint.Name
@@ -949,9 +946,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.True(specialCustomerView.EntityTypeMappings.First().IsSharedTablePrincipal);
             Assert.False(specialCustomerView.EntityTypeMappings.Last().IsSharedTablePrincipal);
 
-            var specialityColumn = specialCustomerView.Columns.Single(
-                c => c.Name == nameof(SpecialCustomer.Speciality)
-            );
+            var specialityColumn = specialCustomerView.Columns
+                .Single(c => c.Name == nameof(SpecialCustomer.Speciality));
             Assert.True(specialityColumn.IsNullable);
         }
 
@@ -1069,10 +1065,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             );
 
             modelBuilder.HasDbFunction(
-                typeof(RelationalModelTest).GetMethod(
-                    nameof(GetOrdersForCustomer),
-                    BindingFlags.NonPublic | BindingFlags.Static
-                )
+                typeof(RelationalModelTest)
+                    .GetMethod(
+                        nameof(GetOrdersForCustomer),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )
             );
 
             var model = Finalize(modelBuilder);

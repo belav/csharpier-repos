@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.Http
         public async Task SendAsync_StaticPolicy_PolicyTriggers_CanReexecuteSendAsync()
         {
             // Arrange
-            var policy = Policy<HttpResponseMessage>.Handle<HttpRequestException>()
+            var policy = Policy<HttpResponseMessage>
+                .Handle<HttpRequestException>()
                 .RetryAsync(retryCount: 5);
 
             var handler = new TestPolicyHttpMessageHandler(policy);
@@ -59,7 +60,8 @@ namespace Microsoft.Extensions.Http
         public async Task SendAsync_DynamicPolicy_PolicyTriggers_CanReexecuteSendAsync()
         {
             // Arrange
-            var policy = Policy<HttpResponseMessage>.Handle<HttpRequestException>()
+            var policy = Policy<HttpResponseMessage>
+                .Handle<HttpRequestException>()
                 .RetryAsync(retryCount: 5);
 
             var expectedRequest = new HttpRequestMessage();
@@ -134,7 +136,8 @@ namespace Microsoft.Extensions.Http
         public async Task SendAsync_PolicyCancellation_CanTriggerRequestCancellation()
         {
             // Arrange
-            var policy = Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>() // Handle timeouts by retrying
+            var policy = Policy<HttpResponseMessage>
+                .Handle<TimeoutRejectedException>() // Handle timeouts by retrying
                 .RetryAsync(retryCount: 5)
                 .WrapAsync(
                     Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(50)) // Apply a 50ms timeout

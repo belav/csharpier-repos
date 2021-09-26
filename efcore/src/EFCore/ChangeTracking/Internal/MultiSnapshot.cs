@@ -27,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             _snapshots = snapshots;
         }
 
-        internal static readonly ConstructorInfo Constructor =
-            typeof(MultiSnapshot).GetDeclaredConstructor(new[] { typeof(ISnapshot[]) });
+        internal static readonly ConstructorInfo Constructor = typeof(MultiSnapshot)
+            .GetDeclaredConstructor(new[] { typeof(ISnapshot[]) });
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,9 +37,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public T GetValue<T>(int index) =>
-            _snapshots[index / Snapshot.MaxGenericTypes].GetValue<T>(
-                index % Snapshot.MaxGenericTypes
-            );
+            _snapshots[index / Snapshot.MaxGenericTypes]
+                .GetValue<T>(index % Snapshot.MaxGenericTypes);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

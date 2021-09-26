@@ -359,10 +359,11 @@ namespace Microsoft.CodeAnalysis
                     int exponentMagnitude = 0;
 
                     if (
-                        int.TryParse(
-                            source.Substring(firstExponent, lastExponent - firstExponent),
-                            out exponentMagnitude
-                        )
+                        int
+                            .TryParse(
+                                source.Substring(firstExponent, lastExponent - firstExponent),
+                                out exponentMagnitude
+                            )
                         && exponentMagnitude <= MAX_EXP
                     )
                     {
@@ -678,10 +679,11 @@ namespace Microsoft.CodeAnalysis
         {
             if (integer_first_index == integer_last_index)
                 return s_bigZero;
-            var valueString = data.Mantissa.Substring(
-                (int)integer_first_index,
-                (int)(integer_last_index - integer_first_index)
-            );
+            var valueString = data.Mantissa
+                .Substring(
+                    (int)integer_first_index,
+                    (int)(integer_last_index - integer_first_index)
+                );
             return BigInteger.Parse(valueString);
         }
 

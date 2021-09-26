@@ -359,7 +359,8 @@ namespace Internal.TypeSystem
 
         private void ComputeValueTypeShapeCharacteristics()
         {
-            _valueTypeShapeCharacteristics = this.Context.GetLayoutAlgorithmForType(this)
+            _valueTypeShapeCharacteristics = this.Context
+                .GetLayoutAlgorithmForType(this)
                 .ComputeValueTypeShapeCharacteristics(this);
             _fieldLayoutFlags.AddFlags(FieldLayoutFlags.ComputedValueTypeShapeCharacteristics);
         }
@@ -403,7 +404,8 @@ namespace Internal.TypeSystem
             )
                 return;
 
-            var computedLayout = this.Context.GetLayoutAlgorithmForType(this)
+            var computedLayout = this.Context
+                .GetLayoutAlgorithmForType(this)
                 .ComputeInstanceLayout(this, layoutKind);
 
             _instanceFieldSize = computedLayout.FieldSize;
@@ -438,7 +440,8 @@ namespace Internal.TypeSystem
             )
                 return;
 
-            var computedStaticLayout = this.Context.GetLayoutAlgorithmForType(this)
+            var computedStaticLayout = this.Context
+                .GetLayoutAlgorithmForType(this)
                 .ComputeStaticFieldLayout(this, layoutKind);
 
             if (

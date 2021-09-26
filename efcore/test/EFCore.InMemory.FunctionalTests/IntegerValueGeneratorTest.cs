@@ -176,10 +176,12 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Generators_are_associated_with_database_root()
         {
-            var serviceProvider1 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider1 = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
-            var serviceProvider2 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider2 = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             var root = new InMemoryDatabaseRoot();

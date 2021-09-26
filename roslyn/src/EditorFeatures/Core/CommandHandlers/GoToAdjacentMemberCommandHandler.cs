@@ -65,8 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 return CommandState.Unspecified;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document?.SupportsSyntaxTree != true)
             {
                 return CommandState.Unspecified;
@@ -88,8 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 return false;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document?.SupportsSyntaxTree != true)
             {
                 return false;
@@ -98,10 +98,11 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             int? targetPosition = null;
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    description: EditorFeaturesResources.Navigating
-                )
+                context.OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        description: EditorFeaturesResources.Navigating
+                    )
             )
             {
                 var task = GetTargetPositionAsync(
@@ -117,10 +118,11 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 
             if (targetPosition != null)
             {
-                args.TextView.TryMoveCaretToAndEnsureVisible(
-                    new SnapshotPoint(subjectBuffer.CurrentSnapshot, targetPosition.Value),
-                    _outliningManagerService
-                );
+                args.TextView
+                    .TryMoveCaretToAndEnsureVisible(
+                        new SnapshotPoint(subjectBuffer.CurrentSnapshot, targetPosition.Value),
+                        _outliningManagerService
+                    );
             }
 
             return true;

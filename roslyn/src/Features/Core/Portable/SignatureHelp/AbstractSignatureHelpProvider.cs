@@ -20,16 +20,18 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
     internal abstract partial class AbstractSignatureHelpProvider : ISignatureHelpProvider
     {
         protected static readonly SymbolDisplayFormat MinimallyQualifiedWithoutParametersFormat =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.WithMemberOptions(
-                SymbolDisplayFormat.MinimallyQualifiedFormat.MemberOptions
-                    & ~SymbolDisplayMemberOptions.IncludeParameters
-            );
+            SymbolDisplayFormat.MinimallyQualifiedFormat
+                .WithMemberOptions(
+                    SymbolDisplayFormat.MinimallyQualifiedFormat.MemberOptions
+                        & ~SymbolDisplayMemberOptions.IncludeParameters
+                );
 
         protected static readonly SymbolDisplayFormat MinimallyQualifiedWithoutTypeParametersFormat =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.WithGenericsOptions(
-                SymbolDisplayFormat.MinimallyQualifiedFormat.GenericsOptions
-                    & ~SymbolDisplayGenericsOptions.IncludeTypeParameters
-            );
+            SymbolDisplayFormat.MinimallyQualifiedFormat
+                .WithGenericsOptions(
+                    SymbolDisplayFormat.MinimallyQualifiedFormat.GenericsOptions
+                        & ~SymbolDisplayGenericsOptions.IncludeTypeParameters
+                );
 
         protected AbstractSignatureHelpProvider() { }
 
@@ -263,14 +265,14 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                 position
             );
             parameters = parameters.Select(
-                    p =>
-                        InlineDelegateAnonymousTypes(
-                            p,
-                            semanticModel,
-                            position,
-                            anonymousTypeDisplayService
-                        )
-                )
+                p =>
+                    InlineDelegateAnonymousTypes(
+                        p,
+                        semanticModel,
+                        position,
+                        anonymousTypeDisplayService
+                    )
+            )
                 .ToList();
             descriptionParts =
                 descriptionParts == null
@@ -384,11 +386,11 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         )
         {
             var itemsForCurrentDocument = await GetItemsWorkerAsync(
-                    document,
-                    position,
-                    triggerInfo,
-                    cancellationToken
-                )
+                document,
+                position,
+                triggerInfo,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (itemsForCurrentDocument == null)
             {
@@ -396,10 +398,10 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             }
 
             var relatedDocuments = await FindActiveRelatedDocumentsAsync(
-                    position,
-                    document,
-                    cancellationToken
-                )
+                position,
+                document,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (relatedDocuments.IsEmpty)
             {
@@ -410,9 +412,9 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                 .Concat(document.Project.Id);
 
             var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
-                    position,
-                    cancellationToken
-                )
+                position,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var compilation = semanticModel.Compilation;
 
@@ -455,9 +457,9 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                     // unresolvable key means the symbol is unavailable in the corresponding project.
                     var relatedSemanticModel =
                         await relatedDocument.ReuseExistingSpeculativeModelAsync(
-                                position,
-                                cancellationToken
-                            )
+                            position,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     if (
                         symbolKey.Resolve(

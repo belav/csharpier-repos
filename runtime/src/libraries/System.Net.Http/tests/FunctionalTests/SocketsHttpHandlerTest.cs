@@ -142,14 +142,10 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using (HttpClient client = CreateHttpClient())
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "Accept-Language",
-                            "en-US,en;q=0.5"
-                        ); // validation would add spaces
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "From",
-                            "invalidemail"
-                        ); // would fail to parse if validated
+                        client.DefaultRequestHeaders
+                            .TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5"); // validation would add spaces
+                        client.DefaultRequestHeaders
+                            .TryAddWithoutValidation("From", "invalidemail"); // would fail to parse if validated
 
                         var m = new HttpRequestMessage(HttpMethod.Get, uri)
                         {
@@ -482,9 +478,8 @@ namespace System.Net.Http.Functional.Tests
                         ValidateResponseHeaders(response1, totalSize, mode);
 
                         // Read part but not all of response
-                        Stream responseStream = await response1.Content.ReadAsStreamAsync(
-                            TestAsync
-                        );
+                        Stream responseStream = await response1.Content
+                            .ReadAsStreamAsync(TestAsync);
                         await ReadToByteCount(responseStream, readSize);
 
                         response1.Dispose();
@@ -976,10 +971,8 @@ namespace System.Net.Http.Functional.Tests
                             response.TrailingHeaders.GetValues("MyCoolTrailerHeader")
                         );
                         Assert.False(
-                            response.TrailingHeaders.TryGetValues(
-                                name,
-                                out IEnumerable<string> values
-                            )
+                            response.TrailingHeaders
+                                .TryGetValues(name, out IEnumerable<string> values)
                         );
                         Assert.Contains("Loopback", response.TrailingHeaders.GetValues("Server"));
                     }
@@ -1490,9 +1483,8 @@ namespace System.Net.Http.Functional.Tests
                                 );
 
                                 using (
-                                    Stream clientStream = await (
-                                        await getResponseTask
-                                    ).Content.ReadAsStreamAsync(TestAsync)
+                                    Stream clientStream = await (await getResponseTask).Content
+                                        .ReadAsStreamAsync(TestAsync)
                                 )
                                 {
                                     // Boolean properties returning correct values
@@ -1677,33 +1669,35 @@ namespace System.Net.Http.Functional.Tests
                                     );
                                     Assert.Equal("and", await connection.ReadLineAsync());
 
-                                    await Task.Factory.FromAsync(
-                                        clientStream.BeginWrite,
-                                        clientStream.EndWrite,
-                                        new byte[]
-                                        {
-                                            (byte)'b',
-                                            (byte)'e',
-                                            (byte)'y',
-                                            (byte)'o',
-                                            (byte)'n',
-                                            (byte)'d',
-                                            (byte)'\r',
-                                            (byte)'\n'
-                                        },
-                                        0,
-                                        8,
-                                        null
-                                    );
+                                    await Task.Factory
+                                        .FromAsync(
+                                            clientStream.BeginWrite,
+                                            clientStream.EndWrite,
+                                            new byte[]
+                                            {
+                                                (byte)'b',
+                                                (byte)'e',
+                                                (byte)'y',
+                                                (byte)'o',
+                                                (byte)'n',
+                                                (byte)'d',
+                                                (byte)'\r',
+                                                (byte)'\n'
+                                            },
+                                            0,
+                                            8,
+                                            null
+                                        );
                                     Assert.Equal("beyond", await connection.ReadLineAsync());
 
                                     clientStream.Flush();
                                     await clientStream.FlushAsync();
 
                                     // Validate reading APIs on clientStream
-                                    await connection.Stream.WriteAsync(
-                                        Encoding.ASCII.GetBytes("abcdefghijklmnopqrstuvwxyz")
-                                    );
+                                    await connection.Stream
+                                        .WriteAsync(
+                                            Encoding.ASCII.GetBytes("abcdefghijklmnopqrstuvwxyz")
+                                        );
                                     var buffer = new byte[1];
 
                                     Assert.Equal('a', clientStream.ReadByte());
@@ -1728,27 +1722,30 @@ namespace System.Net.Http.Functional.Tests
 
                                     Assert.Equal(
                                         1,
-                                        await Task.Factory.FromAsync(
-                                            clientStream.BeginRead,
-                                            clientStream.EndRead,
-                                            buffer,
-                                            0,
-                                            1,
-                                            null
-                                        )
+                                        await Task.Factory
+                                            .FromAsync(
+                                                clientStream.BeginRead,
+                                                clientStream.EndRead,
+                                                buffer,
+                                                0,
+                                                1,
+                                                null
+                                            )
                                     );
                                     Assert.Equal((byte)'f', buffer[0]);
 
                                     var ms = new MemoryStream();
                                     Task copyTask = clientStream.CopyToAsync(ms);
 
-                                    string bigString = string.Concat(
-                                        Enumerable.Repeat("abcdefghijklmnopqrstuvwxyz", 1000)
-                                    );
-                                    Task lotsOfDataSent = connection.Socket.SendAsync(
-                                        Encoding.ASCII.GetBytes(bigString),
-                                        SocketFlags.None
-                                    );
+                                    string bigString = string
+                                        .Concat(
+                                            Enumerable.Repeat("abcdefghijklmnopqrstuvwxyz", 1000)
+                                        );
+                                    Task lotsOfDataSent = connection.Socket
+                                        .SendAsync(
+                                            Encoding.ASCII.GetBytes(bigString),
+                                            SocketFlags.None
+                                        );
                                     connection.Socket.Shutdown(SocketShutdown.Send);
                                     await copyTask;
                                     await lotsOfDataSent;
@@ -1884,11 +1881,8 @@ namespace System.Net.Http.Functional.Tests
                         Task serverTask2 = server.AcceptConnectionSendCustomResponseAndCloseAsync(
                             LoopbackServer.GetHttpResponse(connectionClose: true)
                         );
-                        await new[]
-                        {
-                            client.GetStringAsync(uri),
-                            serverTask2
-                        }.WhenAllOrAnyFailed();
+                        await new[] { client.GetStringAsync(uri), serverTask2 }
+                            .WhenAllOrAnyFailed();
 
                         releaseServer.SetResult();
                         await serverTask1;
@@ -2057,60 +2051,56 @@ namespace System.Net.Http.Functional.Tests
         public void ConnectionsPooledThenDisposed_NoUnobservedTaskExceptions(bool secure)
         {
             RemoteExecutor.Invoke(
-                    async (secureString, useVersionString) =>
-                    {
-                        var releaseServer = new TaskCompletionSource();
-                        await LoopbackServer.CreateClientAndServerAsync(
-                            async uri =>
+                async (secureString, useVersionString) =>
+                {
+                    var releaseServer = new TaskCompletionSource();
+                    await LoopbackServer.CreateClientAndServerAsync(
+                        async uri =>
+                        {
+                            using (var handler = new SocketsHttpHandler())
+                            using (HttpClient client = CreateHttpClient(handler, useVersionString))
                             {
-                                using (var handler = new SocketsHttpHandler())
-                                using (
-                                    HttpClient client = CreateHttpClient(handler, useVersionString)
-                                )
+                                handler.SslOptions.RemoteCertificateValidationCallback = delegate
                                 {
-                                    handler.SslOptions.RemoteCertificateValidationCallback =
-                                        delegate
-                                        {
-                                            return true;
-                                        };
-                                    handler.PooledConnectionLifetime = TimeSpan.FromMilliseconds(1);
+                                    return true;
+                                };
+                                handler.PooledConnectionLifetime = TimeSpan.FromMilliseconds(1);
 
-                                    var exceptions = new List<Exception>();
-                                    TaskScheduler.UnobservedTaskException += (s, e) =>
-                                        exceptions.Add(e.Exception);
+                                var exceptions = new List<Exception>();
+                                TaskScheduler.UnobservedTaskException += (s, e) =>
+                                    exceptions.Add(e.Exception);
 
-                                    await client.GetStringAsync(uri);
-                                    await Task.Delay(10); // any value >= the lifetime
-                                    Task ignored = client.GetStringAsync(uri); // force the pool to look for the previous connection and find it's too old
-                                    await Task.Delay(100); // give some time for the connection close to fail pending reads
+                                await client.GetStringAsync(uri);
+                                await Task.Delay(10); // any value >= the lifetime
+                                Task ignored = client.GetStringAsync(uri); // force the pool to look for the previous connection and find it's too old
+                                await Task.Delay(100); // give some time for the connection close to fail pending reads
 
-                                    GC.Collect();
-                                    GC.WaitForPendingFinalizers();
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
 
-                                    // Note that there are race conditions here such that we may not catch every failure,
-                                    // and thus could have some false negatives, but there won't be any false positives.
-                                    Assert.True(exceptions.Count == 0, string.Concat(exceptions));
+                                // Note that there are race conditions here such that we may not catch every failure,
+                                // and thus could have some false negatives, but there won't be any false positives.
+                                Assert.True(exceptions.Count == 0, string.Concat(exceptions));
 
-                                    releaseServer.SetResult();
+                                releaseServer.SetResult();
+                            }
+                        },
+                        server =>
+                            server.AcceptConnectionAsync(
+                                async connection =>
+                                {
+                                    await connection.ReadRequestHeaderAndSendResponseAsync(
+                                        content: "hello world"
+                                    );
+                                    await releaseServer.Task;
                                 }
-                            },
-                            server =>
-                                server.AcceptConnectionAsync(
-                                    async connection =>
-                                    {
-                                        await connection.ReadRequestHeaderAndSendResponseAsync(
-                                            content: "hello world"
-                                        );
-                                        await releaseServer.Task;
-                                    }
-                                ),
-                            new LoopbackServer.Options { UseSsl = bool.Parse(secureString) }
-                        );
-                    },
-                    secure.ToString(),
-                    UseVersion.ToString()
-                )
-                .Dispose();
+                            ),
+                        new LoopbackServer.Options { UseSsl = bool.Parse(secureString) }
+                    );
+                },
+                secure.ToString(),
+                UseVersion.ToString()
+            ).Dispose();
         }
 
         [OuterLoop]
@@ -2150,7 +2140,8 @@ namespace System.Net.Http.Functional.Tests
                                 .GetStringAsync(url),
                         server => server.AcceptConnectionSendResponseAndCloseAsync()
                     )
-                ).ToArray()
+                )
+                    .ToArray()
             );
         }
 
@@ -2197,13 +2188,13 @@ namespace System.Net.Http.Functional.Tests
                                 {
                                     // Get first request, no body for GET.
                                     await connection.ReadRequestHeaderAndSendCustomResponseAsync(
-                                            responseBody
-                                        )
+                                        responseBody
+                                    )
                                         .ConfigureAwait(false);
                                     // Client should send another request after being rejected with 407.
                                     await connection.ReadRequestHeaderAndSendResponseAsync(
-                                            content: "OK"
-                                        )
+                                        content: "OK"
+                                    )
                                         .ConfigureAwait(false);
                                 }
                             );
@@ -2705,16 +2696,16 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandlerTest_LocationHeader
     {
-        private static readonly byte[] s_redirectResponseBefore = Encoding.ASCII.GetBytes(
-            "HTTP/1.1 301 Moved Permanently\r\n"
-                + "Connection: close\r\n"
-                + "Transfer-Encoding: chunked\r\n"
-                + "Location: "
-        );
+        private static readonly byte[] s_redirectResponseBefore = Encoding.ASCII
+            .GetBytes(
+                "HTTP/1.1 301 Moved Permanently\r\n"
+                    + "Connection: close\r\n"
+                    + "Transfer-Encoding: chunked\r\n"
+                    + "Location: "
+            );
 
-        private static readonly byte[] s_redirectResponseAfter = Encoding.ASCII.GetBytes(
-            "\r\n" + "Server: Loopback\r\n" + "\r\n" + "0\r\n\r\n"
-        );
+        private static readonly byte[] s_redirectResponseAfter = Encoding.ASCII
+            .GetBytes("\r\n" + "Server: Loopback\r\n" + "\r\n" + "0\r\n\r\n");
 
         [Theory]
         // US-ASCII only
@@ -2936,10 +2927,10 @@ namespace System.Net.Http.Functional.Tests
                 for (int i = 0; i < 3; i++)
                 {
                     Http2LoopbackConnection connection = await PrepareConnection(
-                            server,
-                            client,
-                            MaxConcurrentStreams
-                        )
+                        server,
+                        client,
+                        MaxConcurrentStreams
+                    )
                         .ConfigureAwait(false);
                     AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
                     connections.Add(connection);
@@ -2987,10 +2978,10 @@ namespace System.Net.Http.Functional.Tests
                 server.AllowMultipleConnections = true;
                 List<Task<HttpResponseMessage>> sendTasks = new List<Task<HttpResponseMessage>>();
                 Http2LoopbackConnection connection0 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams
+                )
                     .ConfigureAwait(false);
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
 
@@ -3000,10 +2991,10 @@ namespace System.Net.Http.Functional.Tests
                 Assert.Equal(MaxConcurrentStreams, blockedStreamIds.Count);
 
                 Http2LoopbackConnection connection1 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams
+                )
                     .ConfigureAwait(false);
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
 
@@ -3039,24 +3030,24 @@ namespace System.Net.Http.Functional.Tests
                 server.AllowMultipleConnections = true;
                 List<Task<HttpResponseMessage>> sendTasks = new List<Task<HttpResponseMessage>>();
                 Http2LoopbackConnection connection0 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams
+                )
                     .ConfigureAwait(false);
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
                 Http2LoopbackConnection connection1 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams
+                )
                     .ConfigureAwait(false);
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
                 Http2LoopbackConnection connection2 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams
+                )
                     .ConfigureAwait(false);
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
 
@@ -3076,29 +3067,29 @@ namespace System.Net.Http.Functional.Tests
                 Assert.Equal(handleRequestTasks[2].Result.Count, MaxConcurrentStreams);
 
                 await connection0.ShutdownIgnoringErrorsAsync(
-                        handleRequestTasks[0].Result.LastStreamId
-                    )
+                    handleRequestTasks[0].Result.LastStreamId
+                )
                     .ConfigureAwait(false);
                 await connection2.ShutdownIgnoringErrorsAsync(
-                        handleRequestTasks[2].Result.LastStreamId
-                    )
+                    handleRequestTasks[2].Result.LastStreamId
+                )
                     .ConfigureAwait(false);
 
                 //Fill all connection1's stream slots
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
 
                 Http2LoopbackConnection connection3 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams
+                )
                     .ConfigureAwait(false);
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
                 Http2LoopbackConnection connection4 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams
+                )
                     .ConfigureAwait(false);
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
 
@@ -3138,16 +3129,16 @@ namespace System.Net.Http.Functional.Tests
                 server.AllowMultipleConnections = true;
                 List<Task<HttpResponseMessage>> sendTasks = new List<Task<HttpResponseMessage>>();
                 Http2LoopbackConnection connection0 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams
+                )
                     .ConfigureAwait(false);
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
                 List<int> acceptedStreamIds = await AcceptRequests(
-                        connection0,
-                        MaxConcurrentStreams
-                    )
+                    connection0,
+                    MaxConcurrentStreams
+                )
                     .ConfigureAwait(false);
                 Assert.Equal(MaxConcurrentStreams, acceptedStreamIds.Count);
 
@@ -3155,11 +3146,11 @@ namespace System.Net.Http.Functional.Tests
                     Task<HttpResponseMessage>
                 >();
                 Http2LoopbackConnection connection1 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams,
-                        readTimeout: 30
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams,
+                    readTimeout: 30
+                )
                     .ConfigureAwait(false);
                 AcquireAllStreamSlots(server, client, connection1SendTasks, MaxConcurrentStreams);
                 int handledRequests1 =
@@ -3197,12 +3188,12 @@ namespace System.Net.Http.Functional.Tests
                 Assert.False(connection0.IsInvalid);
 
                 Http2LoopbackConnection connection2 = await PrepareConnection(
-                        server,
-                        client,
-                        MaxConcurrentStreams,
-                        readTimeout: 15,
-                        expectedWarmUpTasks: 2
-                    )
+                    server,
+                    client,
+                    MaxConcurrentStreams,
+                    readTimeout: 15,
+                    expectedWarmUpTasks: 2
+                )
                     .ConfigureAwait(false);
 
                 AcquireAllStreamSlots(server, client, sendTasks, MaxConcurrentStreams);
@@ -3261,10 +3252,10 @@ namespace System.Net.Http.Functional.Tests
         {
             Task<HttpResponseMessage> warmUpTask = client.GetAsync(server.Address);
             Http2LoopbackConnection connection = await GetConnection(
-                    server,
-                    maxConcurrentStreams,
-                    readTimeout
-                )
+                server,
+                maxConcurrentStreams,
+                readTimeout
+            )
                 .WaitAsync(TestHelper.PassingTestTimeout * 2)
                 .ConfigureAwait(false);
             // Wait until the client confirms MaxConcurrentStreams setting took into effect.
@@ -3306,14 +3297,14 @@ namespace System.Net.Http.Functional.Tests
             int readTimeout
         ) =>
             await server.EstablishConnectionAsync(
-                    TimeSpan.FromSeconds(readTimeout),
-                    TimeSpan.FromSeconds(10),
-                    new SettingsEntry
-                    {
-                        SettingId = SettingId.MaxConcurrentStreams,
-                        Value = maxConcurrentStreams
-                    }
-                )
+                TimeSpan.FromSeconds(readTimeout),
+                TimeSpan.FromSeconds(10),
+                new SettingsEntry
+                {
+                    SettingId = SettingId.MaxConcurrentStreams,
+                    Value = maxConcurrentStreams
+                }
+            )
                 .ConfigureAwait(false);
 
         private async Task<(int Count, int LastStreamId)> HandleAllPendingRequests(
@@ -3942,7 +3933,8 @@ namespace System.Net.Http.Functional.Tests
 
                         using (
                             X509Certificate2 cert =
-                                System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
+                                System.Net.Test.Common.Configuration.Certificates
+                                    .GetServerCertificate()
                         )
                         {
                             SslServerAuthenticationOptions options =
@@ -3957,9 +3949,9 @@ namespace System.Net.Http.Functional.Tests
                             options.ServerCertificate = cert;
 
                             await sslStream.AuthenticateAsServerAsync(
-                                    options,
-                                    CancellationToken.None
-                                )
+                                options,
+                                CancellationToken.None
+                            )
                                 .ConfigureAwait(false);
                         }
 
@@ -4110,9 +4102,8 @@ namespace System.Net.Http.Functional.Tests
 
                         MemoryStream memoryStream = new MemoryStream();
                         memoryStream.Write(
-                            Encoding.UTF8.GetBytes(
-                                "HTTP/1.1 200 OK\r\nContent-Length: 3\r\n\r\nfoo"
-                            )
+                            Encoding.UTF8
+                                .GetBytes("HTTP/1.1 200 OK\r\nContent-Length: 3\r\n\r\nfoo")
                         );
                         memoryStream.Seek(0, SeekOrigin.Begin);
 
@@ -4152,10 +4143,11 @@ namespace System.Net.Http.Functional.Tests
         public async Task PlaintextStreamFilter_Logging_Success(bool useSsl)
         {
             bool log =
-                int.TryParse(
-                    Environment.GetEnvironmentVariable("DOTNET_TEST_SOCKETSHTTPHANDLERLOG"),
-                    out int value
-                )
+                int
+                    .TryParse(
+                        Environment.GetEnvironmentVariable("DOTNET_TEST_SOCKETSHTTPHANDLERLOG"),
+                        out int value
+                    )
                 && value == 1;
 
             GenericLoopbackOptions options = new GenericLoopbackOptions() { UseSsl = useSsl };

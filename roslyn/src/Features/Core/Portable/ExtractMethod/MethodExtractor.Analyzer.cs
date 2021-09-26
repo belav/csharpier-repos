@@ -119,19 +119,18 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     Contract.ThrowIfFalse(unused.Count == 0);
                 }
 
-                var thisParameterBeingRead =
-                    (IParameterSymbol?)dataFlowAnalysisData.ReadInside.FirstOrDefault(
-                        s => IsThisParameter(s)
-                    );
-                var isThisParameterWritten = dataFlowAnalysisData.WrittenInside.Any(
-                    s => IsThisParameter(s)
-                );
+                var thisParameterBeingRead = (IParameterSymbol?)dataFlowAnalysisData.ReadInside
+                    .FirstOrDefault(s => IsThisParameter(s));
+                var isThisParameterWritten = dataFlowAnalysisData.WrittenInside
+                    .Any(s => IsThisParameter(s));
 
-                var localFunctionCallsNotWithinSpan = symbolMap.Keys.Where(
-                    s =>
-                        s.IsLocalFunction()
-                        && !s.Locations.Any(l => SelectionResult.FinalSpan.Contains(l.SourceSpan))
-                );
+                var localFunctionCallsNotWithinSpan = symbolMap.Keys
+                    .Where(
+                        s =>
+                            s.IsLocalFunction()
+                            && !s.Locations
+                                .Any(l => SelectionResult.FinalSpan.Contains(l.SourceSpan))
+                    );
 
                 // Checks to see if selection includes a local function call + if the given local function declaration is not included in the selection.
                 var containsAnyLocalFunctionCallNotWithinSpan =
@@ -172,10 +171,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
                 // create new document
                 var newDocument = await CreateDocumentWithAnnotationsAsync(
-                        _semanticDocument,
-                        parameters,
-                        CancellationToken
-                    )
+                    _semanticDocument,
+                    parameters,
+                    CancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // collect method type variable used in selected code
@@ -389,8 +388,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var readonlyFieldStatus = CheckReadOnlyFields(model, symbolMap);
 
                 var namesWithAnonymousTypes = parameters.Where(
-                        v => v.OriginalTypeHadAnonymousTypeOrDelegate
-                    )
+                    v => v.OriginalTypeHadAnonymousTypeOrDelegate
+                )
                     .Select(v => v.Name ?? string.Empty);
                 if (returnTypeHasAnonymousType)
                 {
@@ -401,10 +400,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     ? OperationStatus.Succeeded
                     : new OperationStatus(
                           OperationStatusFlag.BestEffort,
-                          string.Format(
-                              FeaturesResources.Parameters_type_or_return_type_cannot_be_an_anonymous_type_colon_bracket_0_bracket,
-                              string.Join(", ", namesWithAnonymousTypes)
-                          )
+                          string
+                              .Format(
+                                  FeaturesResources.Parameters_type_or_return_type_cannot_be_an_anonymous_type_colon_bracket_0_bracket,
+                                  string.Join(", ", namesWithAnonymousTypes)
+                              )
                       );
 
                 var unsafeAddressStatus = unsafeAddressTakenUsed
@@ -418,10 +418,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         ? OperationStatus.Succeeded
                         : new OperationStatus(
                               OperationStatusFlag.BestEffort,
-                              string.Format(
-                                  FeaturesResources.Failed_to_analyze_data_flow_for_0,
-                                  string.Join(", ", failedVariables.Select(v => v.Name))
-                              )
+                              string
+                                  .Format(
+                                      FeaturesResources.Failed_to_analyze_data_flow_for_0,
+                                      string.Join(", ", failedVariables.Select(v => v.Name))
+                                  )
                           );
 
                 var localFunctionStatus =
@@ -441,23 +442,24 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 if (SelectionResult.ShouldPutAsyncModifier())
                 {
                     var names = parameters.Where(
-                            v =>
-                                !v.UseAsReturnValue
-                                && (
-                                    v.ParameterModifier == ParameterBehavior.Out
-                                    || v.ParameterModifier == ParameterBehavior.Ref
-                                )
-                        )
+                        v =>
+                            !v.UseAsReturnValue
+                            && (
+                                v.ParameterModifier == ParameterBehavior.Out
+                                || v.ParameterModifier == ParameterBehavior.Ref
+                            )
+                    )
                         .Select(p => p.Name ?? string.Empty);
 
                     if (names.Any())
                     {
                         return new OperationStatus(
                             OperationStatusFlag.BestEffort,
-                            string.Format(
-                                FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket,
-                                string.Join(", ", names)
-                            )
+                            string
+                                .Format(
+                                    FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket,
+                                    string.Join(", ", names)
+                                )
                         );
                     }
                 }
@@ -489,8 +491,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             private Dictionary<ISymbol, List<SyntaxToken>> GetSymbolMap(SemanticModel model)
             {
-                var syntaxFactsService =
-                    _semanticDocument.Document.Project.LanguageServices.GetService<ISyntaxFactsService>();
+                var syntaxFactsService = _semanticDocument.Document.Project.LanguageServices
+                    .GetService<ISyntaxFactsService>();
                 var context = SelectionResult.GetContainingScope();
                 var symbolMap = SymbolMapBuilder.Build(
                     syntaxFactsService,
@@ -553,10 +555,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 ICollection<VariableInfo> variableInfo
             )
             {
-                using var _ = ArrayBuilder<VariableInfo>.GetInstance(
-                    variableInfo.Count,
-                    out var list
-                );
+                using var _ = ArrayBuilder<VariableInfo>
+                    .GetInstance(variableInfo.Count, out var list);
                 list.AddRange(variableInfo);
 
                 VariableInfo.SortVariables(_semanticDocument.SemanticModel.Compilation, list);
@@ -811,8 +811,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 // we probably need to move the API to syntaxFact service not semanticFact.
                 //
                 // if one wants to get result that also considers semantic, he should use data control flow analysis API.
-                var semanticFacts =
-                    _semanticDocument.Document.Project.LanguageServices.GetRequiredService<ISemanticFactsService>();
+                var semanticFacts = _semanticDocument.Document.Project.LanguageServices
+                    .GetRequiredService<ISemanticFactsService>();
                 return tokens.Any(
                     t => semanticFacts.IsWrittenTo(model, t.Parent, CancellationToken.None)
                 );
@@ -1191,8 +1191,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 }
 
                 List<string>? names = null;
-                var semanticFacts =
-                    _semanticDocument.Document.Project.LanguageServices.GetRequiredService<ISemanticFactsService>();
+                var semanticFacts = _semanticDocument.Document.Project.LanguageServices
+                    .GetRequiredService<ISemanticFactsService>();
                 foreach (var pair in symbolMap.Where(p => p.Key.Kind == SymbolKind.Field))
                 {
                     var field = (IFieldSymbol)pair.Key;
@@ -1224,10 +1224,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 {
                     return new OperationStatus(
                         OperationStatusFlag.BestEffort,
-                        string.Format(
-                            FeaturesResources.Assigning_to_readonly_fields_must_be_done_in_a_constructor_colon_bracket_0_bracket,
-                            string.Join(", ", names)
-                        )
+                        string
+                            .Format(
+                                FeaturesResources.Assigning_to_readonly_fields_must_be_done_in_a_constructor_colon_bracket_0_bracket,
+                                string.Join(", ", names)
+                            )
                     );
                 }
 

@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             kind: SourceCodeKind.Regular,
             documentationMode: DocumentationMode.None,
             languageVersion: LanguageVersion.Preview
-        ).WithFeatures(s_experimentalFeatures);
+        )
+            .WithFeatures(s_experimentalFeatures);
 
         // Enable pattern-switch translation even for switches that use no new syntax. This is used
         // to help ensure compatibility of the semantics of the new switch binder with the old switch
@@ -152,24 +153,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         public static readonly CSharpCompilationOptions SigningDebugDll =
             DebugDll.WithStrongNameProvider(SigningTestHelpers.DefaultDesktopStrongNameProvider);
 
-        public static readonly EmitOptions NativePdbEmit =
-            EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.Pdb);
+        public static readonly EmitOptions NativePdbEmit = EmitOptions.Default
+            .WithDebugInformationFormat(DebugInformationFormat.Pdb);
 
         public static CSharpParseOptions WithStrictFeature(this CSharpParseOptions options)
         {
             return options.WithFeatures(
-                options.Features.Concat(
-                    new[] { new KeyValuePair<string, string>("strict", "true") }
-                )
+                options.Features
+                    .Concat(new[] { new KeyValuePair<string, string>("strict", "true") })
             );
         }
 
         public static CSharpParseOptions WithPEVerifyCompatFeature(this CSharpParseOptions options)
         {
             return options.WithFeatures(
-                options.Features.Concat(
-                    new[] { new KeyValuePair<string, string>("peverify-compat", "true") }
-                )
+                options.Features
+                    .Concat(new[] { new KeyValuePair<string, string>("peverify-compat", "true") })
             );
         }
 
@@ -249,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         )
         {
             return options.WithSpecificDiagnosticOptions(
-                ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(key1, value)
+                ImmutableDictionary<string, ReportDiagnostic>.Empty
+                    .Add(key1, value)
                     .Add(key2, value)
             );
         }

@@ -921,7 +921,8 @@ namespace System.Web.Http.ModelBinding
                       <FirstName>testFirstName</FirstName>
                       <Id>7</Id>
                       <LastName>testLastName</LastName>
-                  </ActionValueItem>".Replace('\'', '"');
+                  </ActionValueItem>"
+                    .Replace('\'', '"');
 
             StringContent stringContent = new StringContent(xmlSource);
             stringContent.Headers.ContentType = mediaType;

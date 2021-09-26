@@ -29,9 +29,8 @@ namespace Microsoft.EntityFrameworkCore
             optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 
             Assert.True(
-                new DatabaseProvider<InMemoryOptionsExtension>(
-                    new DatabaseProviderDependencies()
-                ).IsConfigured(optionsBuilder.Options)
+                new DatabaseProvider<InMemoryOptionsExtension>(new DatabaseProviderDependencies())
+                    .IsConfigured(optionsBuilder.Options)
             );
         }
 
@@ -41,9 +40,8 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
 
             Assert.False(
-                new DatabaseProvider<InMemoryOptionsExtension>(
-                    new DatabaseProviderDependencies()
-                ).IsConfigured(optionsBuilder.Options)
+                new DatabaseProvider<InMemoryOptionsExtension>(new DatabaseProviderDependencies())
+                    .IsConfigured(optionsBuilder.Options)
             );
         }
     }

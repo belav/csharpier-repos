@@ -52,9 +52,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             RunTest(
                 p =>
                     p.WithNativeLibraryGroup(
-                            "win",
-                            g => g.WithAsset("win/WindowsNativeLibrary.dll")
-                        )
+                        "win",
+                        g => g.WithAsset("win/WindowsNativeLibrary.dll")
+                    )
                         .WithNativeLibraryGroup(
                             "linux",
                             g => g.WithAsset("linux/LinuxNativeLibrary.so")
@@ -162,43 +162,37 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 assetsCustomizer: null,
                 appCustomizer: b =>
                     b.WithPackage(
-                            "ridSpecificLib",
-                            "1.0.0",
-                            p =>
-                                p.WithAssemblyGroup(null, g => g.WithAsset("DependencyLib.dll"))
-                                    .WithAssemblyGroup(
-                                        "win",
-                                        g => g.WithAsset("win/ManagedWin.dll")
-                                    )
-                                    .WithAssemblyGroup(
-                                        "win",
-                                        g => g.WithAsset("win/AnotherWin.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win10-x64",
-                                        g => g.WithAsset("native/win10-x64/n1.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win10-x64",
-                                        g => g.WithAsset("native/win10-x64/n2.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win10-x64",
-                                        g => g.WithAsset("native/win10-x64-2/n3.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win-x86",
-                                        g => g.WithAsset("native/win-x86/n1.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win-x86",
-                                        g => g.WithAsset("native/win-x86/n2.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "linux",
-                                        g => g.WithAsset("native/linux/n.so")
-                                    )
-                        )
+                        "ridSpecificLib",
+                        "1.0.0",
+                        p =>
+                            p.WithAssemblyGroup(null, g => g.WithAsset("DependencyLib.dll"))
+                                .WithAssemblyGroup("win", g => g.WithAsset("win/ManagedWin.dll"))
+                                .WithAssemblyGroup("win", g => g.WithAsset("win/AnotherWin.dll"))
+                                .WithNativeLibraryGroup(
+                                    "win10-x64",
+                                    g => g.WithAsset("native/win10-x64/n1.dll")
+                                )
+                                .WithNativeLibraryGroup(
+                                    "win10-x64",
+                                    g => g.WithAsset("native/win10-x64/n2.dll")
+                                )
+                                .WithNativeLibraryGroup(
+                                    "win10-x64",
+                                    g => g.WithAsset("native/win10-x64-2/n3.dll")
+                                )
+                                .WithNativeLibraryGroup(
+                                    "win-x86",
+                                    g => g.WithAsset("native/win-x86/n1.dll")
+                                )
+                                .WithNativeLibraryGroup(
+                                    "win-x86",
+                                    g => g.WithAsset("native/win-x86/n2.dll")
+                                )
+                                .WithNativeLibraryGroup(
+                                    "linux",
+                                    g => g.WithAsset("native/linux/n.so")
+                                )
+                    )
                         .WithPackage(
                             "ridAgnosticLib",
                             "2.0.0",
@@ -244,8 +238,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         {
             using (
                 TestApp app = NetCoreAppBuilder.PortableForNETCoreApp(
-                        SharedState.FrameworkReferenceApp
-                    )
+                    SharedState.FrameworkReferenceApp
+                )
                     .WithProject(
                         p =>
                         {
@@ -257,7 +251,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     .Build()
             )
             {
-                SharedState.DotNetWithNetCoreApp.Exec(app.AppDll)
+                SharedState.DotNetWithNetCoreApp
+                    .Exec(app.AppDll)
                     .EnableTracingAndCaptureOutputs()
                     .RuntimeId(rid)
                     .Execute()
@@ -365,11 +360,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             // Self-contained apps don't have any RID fallback graph, so currently there's no way to resolve native dependencies
             // from portable components - as we have no way of knowing how to follow RID fallback logic.
             SharedState.RunComponentResolutionTest(
-                    component.AppDll,
-                    ComponentSharedState.HostApp,
-                    ComponentSharedState.HostApp.Location,
-                    command => command.RuntimeId(rid)
-                )
+                component.AppDll,
+                ComponentSharedState.HostApp,
+                ComponentSharedState.HostApp.Location,
+                command => command.RuntimeId(rid)
+            )
                 .Should()
                 .Pass()
                 .And.HaveSuccessfullyResolvedComponentDependencies()
@@ -427,11 +422,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             );
 
             SharedState.RunComponentResolutionTest(
-                    component.AppDll,
-                    ComponentSharedState.HostApp,
-                    ComponentSharedState.HostApp.Location,
-                    command => command.RuntimeId(rid)
-                )
+                component.AppDll,
+                ComponentSharedState.HostApp,
+                ComponentSharedState.HostApp.Location,
+                command => command.RuntimeId(rid)
+            )
                 .Should()
                 .Pass()
                 .And.HaveSuccessfullyResolvedComponentDependencies()

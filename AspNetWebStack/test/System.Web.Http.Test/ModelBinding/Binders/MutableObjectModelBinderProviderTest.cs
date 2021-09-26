@@ -15,10 +15,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => 42,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => 42, typeof(int)),
                 ModelName = "foo",
                 ValueProvider = new SimpleHttpValueProvider()
             };
@@ -39,10 +37,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => new MutableTestType(),
-                    typeof(MutableTestType)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => new MutableTestType(), typeof(MutableTestType)),
                 ModelName = "foo",
                 ValueProvider = new SimpleHttpValueProvider { { "foo.bar", "someValue" } }
             };
@@ -64,10 +60,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    () => 42,
-                    typeof(int)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(() => 42, typeof(int)),
                 ModelName = "foo",
                 ValueProvider = new SimpleHttpValueProvider { { "foo.bar", "someValue" } }
             };
@@ -88,10 +82,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
-                    null,
-                    typeof(ComplexModelDto)
-                ),
+                ModelMetadata = new EmptyModelMetadataProvider()
+                    .GetMetadataForType(null, typeof(ComplexModelDto)),
                 ModelName = "foo",
                 ValueProvider = new SimpleHttpValueProvider { { "foo.bar", "someValue" } }
             };

@@ -95,8 +95,8 @@ class C
             var typeSymbol = compilation.GetTypeByMetadataName("C");
             var implicitSymbols = typeSymbol.GetMembers("op_Implicit").Cast<MethodSymbol>();
             var inSymbol = implicitSymbols.Where(
-                    sym => sym.ReturnType.SpecialType == SpecialType.System_Int32
-                )
+                sym => sym.ReturnType.SpecialType == SpecialType.System_Int32
+            )
                 .Single();
             var outSymbol = implicitSymbols.Where(sym => sym != inSymbol).Single();
             var inConversion = new Conversion(ConversionKind.ImplicitUserDefined, inSymbol, false);

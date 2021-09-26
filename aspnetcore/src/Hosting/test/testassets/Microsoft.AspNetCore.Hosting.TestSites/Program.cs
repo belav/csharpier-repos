@@ -17,11 +17,13 @@ namespace ServerComparison.TestSites
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder().AddCommandLine(args)
+            var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
                 .AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .Build();
 
-            var builder = new WebHostBuilder().UseServer(new NoopServer())
+            var builder = new WebHostBuilder()
+                .UseServer(new NoopServer())
                 .UseConfiguration(config)
                 .SuppressStatusMessages(true)
                 .ConfigureLogging(

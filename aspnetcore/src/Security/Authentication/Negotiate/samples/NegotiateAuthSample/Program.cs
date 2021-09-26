@@ -16,29 +16,28 @@ namespace NegotiateAuthSample
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(
-                    webBuilder =>
-                    {
-                        if (
-                            string.Equals(
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(
+                webBuilder =>
+                {
+                    if (
+                        string
+                            .Equals(
                                 "HttpSys",
                                 webBuilder.GetSetting("server"),
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        )
-                        {
-                            webBuilder.UseHttpSys(
-                                options =>
-                                {
-                                    options.Authentication.AllowAnonymous = true;
-                                    options.Authentication.Schemes =
-                                        AuthenticationSchemes.Negotiate;
-                                }
-                            );
-                        }
-                        webBuilder.UseStartup<Startup>();
+                    )
+                    {
+                        webBuilder.UseHttpSys(
+                            options =>
+                            {
+                                options.Authentication.AllowAnonymous = true;
+                                options.Authentication.Schemes = AuthenticationSchemes.Negotiate;
+                            }
+                        );
                     }
-                );
+                    webBuilder.UseStartup<Startup>();
+                }
+            );
     }
 }

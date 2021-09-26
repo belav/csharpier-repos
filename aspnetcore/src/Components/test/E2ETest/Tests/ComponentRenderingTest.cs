@@ -630,10 +630,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         [Fact]
         public async Task CanAcceptSimultaneousRenderRequests()
         {
-            var expectedOutput = string.Join(
-                string.Empty,
-                Enumerable.Range(0, 100).Select(_ => "😊")
-            );
+            var expectedOutput = string
+                .Join(string.Empty, Enumerable.Range(0, 100).Select(_ => "😊"));
 
             var appElement = Browser.MountTestComponent<ConcurrentRenderParent>();
 

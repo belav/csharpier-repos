@@ -18,9 +18,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             Name = entityType.Name;
             TableName = entityType.GetTableName();
-            PrimaryKey = entityType.FindPrimaryKey()!.ToDebugString(
-                MetadataDebugStringOptions.SingleLineDefault
-            );
+            PrimaryKey = entityType.FindPrimaryKey()!
+                .ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
             Properties.AddRange(
                 entityType.GetProperties()

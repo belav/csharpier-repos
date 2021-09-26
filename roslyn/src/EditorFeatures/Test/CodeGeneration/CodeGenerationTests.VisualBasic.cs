@@ -1798,12 +1798,13 @@ End Class";
                 var newModifiers = new[]
                 {
                     VB.SyntaxFactory.Token(VB.SyntaxKind.FriendKeyword).WithLeadingTrivia(eol)
-                }.Concat(
-                    CreateModifierTokens(
-                        new DeclarationModifiers(isSealed: true, isPartial: true),
-                        LanguageNames.VisualBasic
-                    )
-                );
+                }
+                    .Concat(
+                        CreateModifierTokens(
+                            new DeclarationModifiers(isSealed: true, isPartial: true),
+                            LanguageNames.VisualBasic
+                        )
+                    );
 
                 await TestUpdateDeclarationAsync<ClassStatementSyntax>(
                     input,

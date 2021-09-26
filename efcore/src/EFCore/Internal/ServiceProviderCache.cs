@@ -68,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 return BuildServiceProvider().ServiceProvider;
             }
 
-            var key = options.Extensions.OrderBy(e => e.GetType().Name)
+            var key = options.Extensions
+                .OrderBy(e => e.GetType().Name)
                 .Aggregate(
                     0L,
                     (t, e) =>
@@ -111,13 +112,14 @@ namespace Microsoft.EntityFrameworkCore.Internal
                             )
                         )
                         {
-                            ((IList<ServiceDescriptor>)updatedServices).Add(
-                                new ServiceDescriptor(
-                                    descriptor.ServiceType,
-                                    replacementType,
-                                    descriptor.Lifetime
-                                )
-                            );
+                            ((IList<ServiceDescriptor>)updatedServices)
+                                .Add(
+                                    new ServiceDescriptor(
+                                        descriptor.ServiceType,
+                                        replacementType,
+                                        descriptor.Lifetime
+                                    )
+                                );
                         }
                         else if (
                             replacedServices.TryGetValue(
@@ -126,13 +128,14 @@ namespace Microsoft.EntityFrameworkCore.Internal
                             )
                         )
                         {
-                            ((IList<ServiceDescriptor>)updatedServices).Add(
-                                new ServiceDescriptor(
-                                    descriptor.ServiceType,
-                                    replacementType,
-                                    descriptor.Lifetime
-                                )
-                            );
+                            ((IList<ServiceDescriptor>)updatedServices)
+                                .Add(
+                                    new ServiceDescriptor(
+                                        descriptor.ServiceType,
+                                        replacementType,
+                                        descriptor.Lifetime
+                                    )
+                                );
                         }
                         else
                         {

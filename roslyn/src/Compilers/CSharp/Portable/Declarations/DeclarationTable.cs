@@ -155,9 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 var oldRootDeclarations = oldRoot.Declarations;
-                var builder = ArrayBuilder<SingleNamespaceDeclaration>.GetInstance(
-                    oldRootDeclarations.Length + 1
-                );
+                var builder = ArrayBuilder<SingleNamespaceDeclaration>
+                    .GetInstance(oldRootDeclarations.Length + 1);
                 builder.AddRange(oldRootDeclarations);
                 builder.Add(_latestLazyRootDeclaration.Value);
                 // Sort the root namespace declarations to match the order of SyntaxTrees.
@@ -200,10 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                return UnionCollection<string>.Create(
-                    cachedTypeNames,
-                    GetTypeNames(_latestLazyRootDeclaration.Value)
-                );
+                return UnionCollection<string>
+                    .Create(cachedTypeNames, GetTypeNames(_latestLazyRootDeclaration.Value));
             }
         }
 
@@ -217,10 +214,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                return UnionCollection<string>.Create(
-                    cachedNamespaceNames,
-                    GetNamespaceNames(_latestLazyRootDeclaration.Value)
-                );
+                return UnionCollection<string>
+                    .Create(
+                        cachedNamespaceNames,
+                        GetNamespaceNames(_latestLazyRootDeclaration.Value)
+                    );
             }
         }
 
@@ -234,10 +232,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                return UnionCollection<ReferenceDirective>.Create(
-                    cachedReferenceDirectives,
-                    _latestLazyRootDeclaration.Value.ReferenceDirectives
-                );
+                return UnionCollection<ReferenceDirective>
+                    .Create(
+                        cachedReferenceDirectives,
+                        _latestLazyRootDeclaration.Value.ReferenceDirectives
+                    );
             }
         }
 

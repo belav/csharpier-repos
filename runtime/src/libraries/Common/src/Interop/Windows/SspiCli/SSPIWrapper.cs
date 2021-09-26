@@ -46,9 +46,8 @@ namespace System.Net
                                     i
                                 );
                                 if (NetEventSource.Log.IsEnabled())
-                                    NetEventSource.Log.EnumerateSecurityPackages(
-                                        securityPackages[i].Name
-                                    );
+                                    NetEventSource.Log
+                                        .EnumerateSecurityPackages(securityPackages[i].Name);
                             }
 
                             secModule.SecurityPackages = securityPackages;
@@ -79,11 +78,12 @@ namespace System.Net
                 for (int i = 0; i < supportedSecurityPackages.Length; i++)
                 {
                     if (
-                        string.Equals(
-                            supportedSecurityPackages[i].Name,
-                            packageName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        string
+                            .Equals(
+                                supportedSecurityPackages[i].Name,
+                                packageName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         return supportedSecurityPackages[i];
@@ -240,12 +240,8 @@ namespace System.Net
         )
         {
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource.Log.InitializeSecurityContext(
-                    credential,
-                    context,
-                    targetName,
-                    inFlags
-                );
+                NetEventSource.Log
+                    .InitializeSecurityContext(credential, context, targetName, inFlags);
 
             int errorCode = secModule.InitializeSecurityContext(
                 ref credential,
@@ -259,12 +255,13 @@ namespace System.Net
             );
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource.Log.SecurityContextInputBuffers(
-                    nameof(InitializeSecurityContext),
-                    inputBuffers.Count,
-                    outputBuffer.size,
-                    (Interop.SECURITY_STATUS)errorCode
-                );
+                NetEventSource.Log
+                    .SecurityContextInputBuffers(
+                        nameof(InitializeSecurityContext),
+                        inputBuffers.Count,
+                        outputBuffer.size,
+                        (Interop.SECURITY_STATUS)errorCode
+                    );
 
             return errorCode;
         }
@@ -294,12 +291,13 @@ namespace System.Net
             );
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource.Log.SecurityContextInputBuffers(
-                    nameof(AcceptSecurityContext),
-                    inputBuffers.Count,
-                    outputBuffer.size,
-                    (Interop.SECURITY_STATUS)errorCode
-                );
+                NetEventSource.Log
+                    .SecurityContextInputBuffers(
+                        nameof(AcceptSecurityContext),
+                        inputBuffers.Count,
+                        outputBuffer.size,
+                        (Interop.SECURITY_STATUS)errorCode
+                    );
 
             return errorCode;
         }
@@ -313,10 +311,11 @@ namespace System.Net
             int errorCode = secModule.CompleteAuthToken(ref context, in inputBuffer);
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource.Log.OperationReturnedSomething(
-                    nameof(CompleteAuthToken),
-                    (Interop.SECURITY_STATUS)errorCode
-                );
+                NetEventSource.Log
+                    .OperationReturnedSomething(
+                        nameof(CompleteAuthToken),
+                        (Interop.SECURITY_STATUS)errorCode
+                    );
 
             return errorCode;
         }
@@ -330,10 +329,11 @@ namespace System.Net
             int errorCode = secModule.ApplyControlToken(ref context, in inputBuffer);
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource.Log.OperationReturnedSomething(
-                    nameof(ApplyControlToken),
-                    (Interop.SECURITY_STATUS)errorCode
-                );
+                NetEventSource.Log
+                    .OperationReturnedSomething(
+                        nameof(ApplyControlToken),
+                        (Interop.SECURITY_STATUS)errorCode
+                    );
 
             return errorCode;
         }
@@ -443,9 +443,9 @@ namespace System.Net
 
                 ThreeByteArrays byteArrayStruct = default;
                 Span<byte[]> buffers = MemoryMarshal.CreateSpan(
-                        ref byteArrayStruct._item0!,
-                        ThreeByteArrays.NumItems
-                    )
+                    ref byteArrayStruct._item0!,
+                    ThreeByteArrays.NumItems
+                )
                     .Slice(0, input.Length);
 
                 for (int i = 0; i < input.Length; i++)

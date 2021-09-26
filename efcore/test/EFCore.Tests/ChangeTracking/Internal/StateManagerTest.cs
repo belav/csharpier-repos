@@ -617,30 +617,31 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
             stateManager.StartTracking(
-                    stateManager.GetOrCreateEntry(new Category { Id = 77, PrincipalId = 777 })
-                )
+                stateManager.GetOrCreateEntry(new Category { Id = 77, PrincipalId = 777 })
+            )
                 .SetEntityState(EntityState.Unchanged);
 
             stateManager.StartTracking(
-                    stateManager.GetOrCreateEntry(new Category { Id = 78, PrincipalId = 778 })
-                )
+                stateManager.GetOrCreateEntry(new Category { Id = 78, PrincipalId = 778 })
+            )
                 .SetEntityState(EntityState.Unchanged);
 
             stateManager.StartTracking(
-                    stateManager.GetOrCreateEntry(new Product { Id = productId1 })
-                )
+                stateManager.GetOrCreateEntry(new Product { Id = productId1 })
+            )
                 .SetEntityState(EntityState.Unchanged);
 
             stateManager.StartTracking(
-                    stateManager.GetOrCreateEntry(new Product { Id = productId2 })
-                )
+                stateManager.GetOrCreateEntry(new Product { Id = productId2 })
+            )
                 .SetEntityState(EntityState.Unchanged);
 
             Assert.Equal(4, stateManager.Entries.Count());
 
             Assert.Equal(
                 new[] { 77, 78 },
-                stateManager.Entries.Select(e => e.Entity)
+                stateManager.Entries
+                    .Select(e => e.Entity)
                     .OfType<Category>()
                     .Select(e => e.Id)
                     .OrderBy(k => k)
@@ -649,7 +650,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             Assert.Equal(
                 new[] { productId2, productId1 },
-                stateManager.Entries.Select(e => e.Entity)
+                stateManager.Entries
+                    .Select(e => e.Entity)
                     .OfType<Product>()
                     .Select(e => e.Id)
                     .OrderBy(k => k)
@@ -847,7 +849,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         }
 
         private static IStateManager CreateStateManager(IModel model) =>
-            InMemoryTestHelpers.Instance.CreateContextServices(model)
+            InMemoryTestHelpers.Instance
+                .CreateContextServices(model)
                 .GetRequiredService<IStateManager>();
 
         public class Widget

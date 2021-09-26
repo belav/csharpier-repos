@@ -42,10 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
         }
 
         private static string ToArguments(IReadOnlyList<string> args) =>
-            (string)typeof(Exe).GetMethod(
-                    "ToArguments",
-                    BindingFlags.Static | BindingFlags.NonPublic
-                )
+            (string)typeof(Exe)
+                .GetMethod("ToArguments", BindingFlags.Static | BindingFlags.NonPublic)
                 .Invoke(null, new object[] { args });
     }
 }

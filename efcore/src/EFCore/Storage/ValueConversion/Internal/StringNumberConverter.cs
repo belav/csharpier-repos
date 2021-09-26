@@ -132,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
             return v =>
                 v == null
                     ? null!
-                    : string.Format(
+                    : string
+                      .Format(
                           CultureInfo.InvariantCulture,
                           type == typeof(float) || type == typeof(double) ? "{0:R}" : "{0}",
                           v

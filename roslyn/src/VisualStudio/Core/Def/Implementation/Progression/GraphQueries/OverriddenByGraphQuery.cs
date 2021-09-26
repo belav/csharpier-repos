@@ -22,10 +22,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         )
         {
             var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
-                    solution,
-                    context.InputNodes,
-                    cancellationToken
-                )
+                solution,
+                context.InputNodes,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             foreach (var node in context.InputNodes)
@@ -37,9 +37,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     if (overriddenMember != null)
                     {
                         var symbolNode = await graphBuilder.AddNodeAsync(
-                                overriddenMember,
-                                relatedNode: node
-                            )
+                            overriddenMember,
+                            relatedNode: node
+                        )
                             .ConfigureAwait(false);
                         graphBuilder.AddLink(node, RoslynGraphCategories.Overrides, symbolNode);
                     }

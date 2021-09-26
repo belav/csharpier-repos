@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
     /// </summary>
     public class DbSetSource : IDbSetSource
     {
-        private static readonly MethodInfo _genericCreateSet = typeof(DbSetSource).GetTypeInfo()
+        private static readonly MethodInfo _genericCreateSet = typeof(DbSetSource)
+            .GetTypeInfo()
             .GetRequiredDeclaredMethod(nameof(CreateSetFactory));
 
         private readonly ConcurrentDictionary<

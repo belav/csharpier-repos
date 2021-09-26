@@ -181,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             TryDetectChanges();
 
-            return StateManager.Entries.Where(e => e.Entity is TEntity)
+            return StateManager.Entries
+                .Where(e => e.Entity is TEntity)
                 .Select(e => new EntityEntry<TEntity>(e));
         }
 

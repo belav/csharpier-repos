@@ -344,17 +344,16 @@ namespace R2RTest
                 foreach (CompilerRunner compilerRunner in compilerRunners)
                 {
                     HashSet<string> jittedMethodsPerModule;
-                    perCompilerStatistics[(int)compilerRunner.Index].TryGetValue(
-                        moduleName,
-                        out jittedMethodsPerModule
-                    );
+                    perCompilerStatistics[(int)compilerRunner.Index]
+                        .TryGetValue(moduleName, out jittedMethodsPerModule);
                     writer.Write(
-                        string.Format(
-                            "{0,9} |",
-                            jittedMethodsPerModule != null
-                              ? jittedMethodsPerModule.Count.ToString()
-                              : ""
-                        )
+                        string
+                            .Format(
+                                "{0,9} |",
+                                jittedMethodsPerModule != null
+                                  ? jittedMethodsPerModule.Count.ToString()
+                                  : ""
+                            )
                     );
                 }
                 writer.Write(' ');

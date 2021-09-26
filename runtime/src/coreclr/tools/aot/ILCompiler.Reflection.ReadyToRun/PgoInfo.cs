@@ -61,9 +61,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 }
                 else
                 {
-                    return _r2rReader.ImportSections[tableIndex].Entries[
-                        fixupIndex
-                    ].Signature.ToString(_formatOptions);
+                    return _r2rReader.ImportSections[tableIndex].Entries[fixupIndex].Signature
+                        .ToString(_formatOptions);
                 }
             }
         }
@@ -87,10 +86,10 @@ namespace ILCompiler.Reflection.ReadyToRun
                     SignatureFormattingOptions formattingOptions = new SignatureFormattingOptions();
 
                     _pgoData = PgoProcessor.ParsePgoData<string>(
-                            new PgoDataLoader(_r2rReader, formattingOptions),
-                            compressedIntParser,
-                            true
-                        )
+                        new PgoDataLoader(_r2rReader, formattingOptions),
+                        compressedIntParser,
+                        true
+                    )
                         .ToArray();
                     _size = compressedIntParser.Offset - Offset;
                 }

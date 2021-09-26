@@ -146,10 +146,8 @@ namespace System.Data.ProviderBase
                         // don't dispose if still holding reference in _enlistedTransaction
                         if (
                             null != previousTransactionClone
-                            && !object.ReferenceEquals(
-                                previousTransactionClone,
-                                _enlistedTransaction
-                            )
+                            && !object
+                                .ReferenceEquals(previousTransactionClone, _enlistedTransaction)
                         )
                         {
                             previousTransactionClone.Dispose();

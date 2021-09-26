@@ -14,7 +14,8 @@ class C
             HandleException
         );
         var args = new object[] { C.Iterations * C.StepSize };
-        typeof(C).GetMethod("InvokeChain", BindingFlags.NonPublic | BindingFlags.Instance)
+        typeof(C)
+            .GetMethod("InvokeChain", BindingFlags.NonPublic | BindingFlags.Instance)
             .Invoke(new C(), args);
     }
 
@@ -76,7 +77,8 @@ class C
         else if (depth % C.StepSize == 0)
         {
             //Console.WriteLine ("InvokeChain {0} indirect", depth);
-            typeof(C).GetMethod("InvokeChain", BindingFlags.NonPublic | BindingFlags.Instance)
+            typeof(C)
+                .GetMethod("InvokeChain", BindingFlags.NonPublic | BindingFlags.Instance)
                 .Invoke(this, new object[] { depth - 1 });
         }
         else

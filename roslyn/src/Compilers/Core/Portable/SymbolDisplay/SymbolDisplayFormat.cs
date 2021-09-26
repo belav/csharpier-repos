@@ -185,8 +185,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal static readonly SymbolDisplayFormat TestFormatWithConstraints =
             TestFormat.WithGenericsOptions(
-                    TestFormat.GenericsOptions | SymbolDisplayGenericsOptions.IncludeTypeConstraints
-                )
+                TestFormat.GenericsOptions | SymbolDisplayGenericsOptions.IncludeTypeConstraints
+            )
                 .AddMiscellaneousOptions(
                     SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
                 )

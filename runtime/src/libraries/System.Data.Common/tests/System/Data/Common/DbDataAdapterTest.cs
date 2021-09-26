@@ -171,11 +171,8 @@ namespace System.Data.Tests.Common
                 out Exception error
             )
             {
-                return base.GetBatchedRecordsAffected(
-                    commandIdentifier,
-                    out recordsAffected,
-                    out error
-                );
+                return base
+                    .GetBatchedRecordsAffected(commandIdentifier, out recordsAffected, out error);
             }
 
             public new void InitializeBatching()

@@ -34,8 +34,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetResult_BeforeAccessTask_ValueTaskContainsValue()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
 
             b.SetResult(42);
 
@@ -62,8 +62,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetResult_AfterAccessTask_ValueTaskContainsValue()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
 
             ValueTask<int> vt = b.Task;
             Assert.NotEqual(default, vt);
@@ -93,8 +93,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetException_BeforeAccessTask_FaultsTask()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
 
             var e = new FormatException();
             b.SetException(e);
@@ -124,8 +124,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetException_AfterAccessTask_FaultsTask()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
 
             ValueTask<int> vt = b.Task;
             Assert.Equal(vt, b.Task);
@@ -160,8 +160,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetException_OperationCanceledException_CancelsTask()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
 
             ValueTask<int> vt = b.Task;
             Assert.Equal(vt, b.Task);
@@ -187,8 +187,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetExceptionWithNullException_Throws()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
             AssertExtensions.Throws<ArgumentNullException>("exception", () => b.SetException(null));
         }
 
@@ -207,8 +207,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_Start_InvokesMoveNext()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
 
             int invokes = 0;
             var dsm = new DelegateStateMachine { MoveNextDelegate = () => invokes++ };
@@ -256,8 +256,8 @@ namespace System.Threading.Tasks.Tests
         [InlineData(2, true)]
         public void Generic_AwaitOnCompleted_ForcesTaskCreation(int numAwaits, bool awaitUnsafe)
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
 
             var dsm = new DelegateStateMachine();
             TaskAwaiter<int> t = new TaskCompletionSource<int>().Task.GetAwaiter();
@@ -296,8 +296,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetStateMachine_InvalidArgument_ThrowsException()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
             AssertExtensions.Throws<ArgumentNullException>(
                 "stateMachine",
                 () => b.SetStateMachine(null)
@@ -360,8 +360,8 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal(2, al.Value);
             Assert.Equal(2, calls);
 
-            PoolingAsyncValueTaskMethodBuilder<int> b =
-                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>
+                .Create();
             b.Start(ref dsm);
             Assert.Equal(2, al.Value); // change should not be visible
             Assert.Equal(3, calls);
@@ -628,51 +628,43 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public async Task NonGeneric_ConcurrentBuilders_WorkCorrectly()
         {
-            await Task.WhenAll(
-                Enumerable.Range(0, Environment.ProcessorCount)
-                    .Select(
-                        async _ =>
+            await Task.WhenAll(Enumerable.Range(0, Environment.ProcessorCount).Select(
+                    async _ =>
+                    {
+                        for (int i = 0; i < 10; i++)
                         {
-                            for (int i = 0; i < 10; i++)
-                            {
-                                await ValueTaskAsync();
+                            await ValueTaskAsync();
 
-                                [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder))]
-                                static async ValueTask ValueTaskAsync()
-                                {
-                                    await Task.Delay(1);
-                                }
+                            [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder))]
+                            static async ValueTask ValueTaskAsync()
+                            {
+                                await Task.Delay(1);
                             }
                         }
-                    )
-            );
+                    }
+                ));
         }
 
         [ActiveIssue("https://github.com/dotnet/roslyn/issues/51999")]
         [Fact]
         public async Task Generic_ConcurrentBuilders_WorkCorrectly()
         {
-            await Task.WhenAll(
-                Enumerable.Range(0, Environment.ProcessorCount)
-                    .Select(
-                        async _ =>
+            await Task.WhenAll(Enumerable.Range(0, Environment.ProcessorCount).Select(
+                    async _ =>
+                    {
+                        for (int i = 0; i < 10; i++)
                         {
-                            for (int i = 0; i < 10; i++)
-                            {
-                                Assert.Equal(42 + i, await ValueTaskAsync(i));
+                            Assert.Equal(42 + i, await ValueTaskAsync(i));
 
-                                [AsyncMethodBuilder(
-                                    typeof(PoolingAsyncValueTaskMethodBuilder<int>)
-                                )]
-                                static async ValueTask<int> ValueTaskAsync(int i)
-                                {
-                                    await Task.Delay(1);
-                                    return 42 + i;
-                                }
+                            [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<int>))]
+                            static async ValueTask<int> ValueTaskAsync(int i)
+                            {
+                                await Task.Delay(1);
+                                return 42 + i;
                             }
                         }
-                    )
-            );
+                    }
+                ));
         }
 
         [ActiveIssue("https://github.com/dotnet/roslyn/issues/51999")]
@@ -686,41 +678,38 @@ namespace System.Threading.Tasks.Tests
             var psi = new ProcessStartInfo();
             if (limitEnvVar != null)
             {
-                psi.Environment.Add(
-                    "DOTNET_SYSTEM_THREADING_POOLINGASYNCVALUETASKSCACHESIZE",
-                    limitEnvVar
-                );
+                psi.Environment
+                    .Add("DOTNET_SYSTEM_THREADING_POOLINGASYNCVALUETASKSCACHESIZE", limitEnvVar);
             }
 
             RemoteExecutor.Invoke(
-                    async () =>
+                async () =>
+                {
+                    var boxes = new ConcurrentQueue<object>();
+                    var valueTasks = new ValueTask<int>[10];
+                    int total = 0;
+
+                    // Invoke a bunch of ValueTask methods, some in parallel,
+                    // and track a) their results and b) what boxing object is used.
+                    for (int rep = 0; rep < 3; rep++)
                     {
-                        var boxes = new ConcurrentQueue<object>();
-                        var valueTasks = new ValueTask<int>[10];
-                        int total = 0;
-
-                        // Invoke a bunch of ValueTask methods, some in parallel,
-                        // and track a) their results and b) what boxing object is used.
-                        for (int rep = 0; rep < 3; rep++)
+                        for (int i = 0; i < valueTasks.Length; i++)
                         {
-                            for (int i = 0; i < valueTasks.Length; i++)
-                            {
-                                valueTasks[i] = ComputeAsync(i + 1, boxes);
-                            }
-                            foreach (ValueTask<int> vt in valueTasks)
-                            {
-                                total += await vt;
-                            }
+                            valueTasks[i] = ComputeAsync(i + 1, boxes);
                         }
+                        foreach (ValueTask<int> vt in valueTasks)
+                        {
+                            total += await vt;
+                        }
+                    }
 
-                        // Make sure we got the right total, and that if we expected pooling,
-                        // we at least pooled one object.
-                        Assert.Equal(330, total);
-                        Assert.InRange(boxes.Distinct().Count(), 1, boxes.Count - 1);
-                    },
-                    new RemoteInvokeOptions() { StartInfo = psi }
-                )
-                .Dispose();
+                    // Make sure we got the right total, and that if we expected pooling,
+                    // we at least pooled one object.
+                    Assert.Equal(330, total);
+                    Assert.InRange(boxes.Distinct().Count(), 1, boxes.Count - 1);
+                },
+                new RemoteInvokeOptions() { StartInfo = psi }
+            ).Dispose();
 
             [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<int>))]
             static async ValueTask<int> ComputeAsync(int input, ConcurrentQueue<object> boxes)

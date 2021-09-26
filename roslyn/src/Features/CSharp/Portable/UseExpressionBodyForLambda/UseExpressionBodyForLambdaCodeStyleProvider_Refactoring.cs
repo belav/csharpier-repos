@@ -36,11 +36,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 // the reverse of this is that we want to offer the refactoring to convert a
                 // block-body to an expression-body whenever possible.
                 return await ComputeRefactoringsAsync(
-                        document,
-                        span,
-                        ExpressionBodyPreference.WhenPossible,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    ExpressionBodyPreference.WhenPossible,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else if (option == ExpressionBodyPreference.WhenPossible)
@@ -49,11 +49,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 // trying to enforce that.  So the reverse of this is that we want to offer the
                 // refactoring to convert an expression-body to a block-body whenever possible.
                 return await ComputeRefactoringsAsync(
-                        document,
-                        span,
-                        ExpressionBodyPreference.Never,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    ExpressionBodyPreference.Never,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             else if (option == ExpressionBodyPreference.WhenOnSingleLine)
@@ -69,19 +69,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 // Always offer to convert an expression to a block since the analyzer will never
                 // offer that. For this option setting.
                 var useBlockRefactorings = await ComputeRefactoringsAsync(
-                        document,
-                        span,
-                        ExpressionBodyPreference.Never,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    ExpressionBodyPreference.Never,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var whenOnSingleLineRefactorings = await ComputeRefactoringsAsync(
-                        document,
-                        span,
-                        ExpressionBodyPreference.WhenOnSingleLine,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    ExpressionBodyPreference.WhenOnSingleLine,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (whenOnSingleLineRefactorings.Length > 0)
                 {
@@ -94,11 +94,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 // not offer to convert it to an expression body.  So we should can offer that
                 // as a refactoring if possible.
                 var whenPossibleRefactorings = await ComputeRefactoringsAsync(
-                        document,
-                        span,
-                        ExpressionBodyPreference.WhenPossible,
-                        cancellationToken
-                    )
+                    document,
+                    span,
+                    ExpressionBodyPreference.WhenPossible,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 return useBlockRefactorings.AddRange(whenPossibleRefactorings);
             }
@@ -121,19 +121,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             // vice-versa if applicable.
 
             var toExpressionBodyRefactorings = await ComputeRefactoringsAsync(
-                    document,
-                    span,
-                    ExpressionBodyPreference.WhenPossible,
-                    cancellationToken
-                )
+                document,
+                span,
+                ExpressionBodyPreference.WhenPossible,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var toBlockBodyRefactorings = await ComputeRefactoringsAsync(
-                    document,
-                    span,
-                    ExpressionBodyPreference.Never,
-                    cancellationToken
-                )
+                document,
+                span,
+                ExpressionBodyPreference.Never,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             return toExpressionBodyRefactorings.AddRange(toBlockBodyRefactorings);
@@ -147,9 +147,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
         )
         {
             var lambdaNode = await document.TryGetRelevantNodeAsync<LambdaExpressionSyntax>(
-                    span,
-                    cancellationToken
-                )
+                span,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             if (lambdaNode == null)
             {

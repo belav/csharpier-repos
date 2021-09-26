@@ -80,7 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         public void EnumWithPrivateLiterals()
         {
             CreateCompilationWithILAndMscorlib40(
-                    @"class C
+                @"class C
 {
     static void F(E e) { }
     static void Main()
@@ -90,22 +90,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         F(E.C);
     }
 }",
-                    @".class public E extends [mscorlib]System.Enum
+                @".class public E extends [mscorlib]System.Enum
 {
     .field public specialname rtspecialname int16 _val
 	.field public static literal valuetype E A = int16(0)
 	.field private static literal valuetype E B = int16(1)
 	.field assembly static literal valuetype E C = int16(2)
 }"
-                )
-                .VerifyDiagnostics(
-                    // (7,13): error CS0117: 'E' does not contain a definition for 'B'
-                    //         F(E.B);
-                    Diagnostic(ErrorCode.ERR_NoSuchMember, "B").WithArguments("E", "B"),
-                    // (8,13): error CS0117: 'E' does not contain a definition for 'C'
-                    //         F(E.C);
-                    Diagnostic(ErrorCode.ERR_NoSuchMember, "C").WithArguments("E", "C")
-                );
+            ).VerifyDiagnostics(
+                // (7,13): error CS0117: 'E' does not contain a definition for 'B'
+                //         F(E.B);
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "B").WithArguments("E", "B"),
+                // (8,13): error CS0117: 'E' does not contain a definition for 'C'
+                //         F(E.C);
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "C").WithArguments("E", "C")
+            );
         }
 
         [Fact]
@@ -142,21 +141,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 
         private void EnumWithBogusUnderlyingType(string ilSource)
         {
-            CreateCompilationWithILAndMscorlib40(ExampleSource, ilSource)
-                .VerifyDiagnostics(
-                    // (6,15): error CS0570: 'E.A' is not supported by the language
-                    //         E e = E.A; // Dev10: 'E.A' is not supported by the language
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "E.A").WithArguments("E.A"),
-                    // (8,11): error CS0570: 'E.B' is not supported by the language
-                    //         F(E.B); // Dev10: 'E.B' is not supported by the language
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "E.B").WithArguments("E.B"),
-                    // (10,13): error CS0019: Operator '+' cannot be applied to operands of type 'E' and 'int'
-                    //         e = e + 1; // Dev10: operator '+' cannot be applied to operands of type 'E' and 'int'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "e + 1").WithArguments("+", "E", "int"),
-                    // (11,13): error CS0023: Operator '~' cannot be applied to operand of type 'E'
-                    //         e = ~e; // Dev10: operator '~' cannot be applied to operand of type 'E'
-                    Diagnostic(ErrorCode.ERR_BadUnaryOp, "~e").WithArguments("~", "E")
-                );
+            CreateCompilationWithILAndMscorlib40(ExampleSource, ilSource).VerifyDiagnostics(
+                // (6,15): error CS0570: 'E.A' is not supported by the language
+                //         E e = E.A; // Dev10: 'E.A' is not supported by the language
+                Diagnostic(ErrorCode.ERR_BindToBogus, "E.A").WithArguments("E.A"),
+                // (8,11): error CS0570: 'E.B' is not supported by the language
+                //         F(E.B); // Dev10: 'E.B' is not supported by the language
+                Diagnostic(ErrorCode.ERR_BindToBogus, "E.B").WithArguments("E.B"),
+                // (10,13): error CS0019: Operator '+' cannot be applied to operands of type 'E' and 'int'
+                //         e = e + 1; // Dev10: operator '+' cannot be applied to operands of type 'E' and 'int'
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "e + 1").WithArguments("+", "E", "int"),
+                // (11,13): error CS0023: Operator '~' cannot be applied to operand of type 'E'
+                //         e = ~e; // Dev10: operator '~' cannot be applied to operand of type 'E'
+                Diagnostic(ErrorCode.ERR_BadUnaryOp, "~e").WithArguments("~", "E")
+            );
         }
 
         [Fact]
@@ -167,14 +165,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 {
     A = A,
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
-                    //     A = A,
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "A")
-                        .WithArguments("E.A")
-                        .WithLocation(3, 5)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                //     A = A,
+                Diagnostic(ErrorCode.ERR_CircConstValue, "A")
+                    .WithArguments("E.A")
+                    .WithLocation(3, 5)
+            );
         }
 
         [Fact]
@@ -186,14 +183,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
     A = B + 1,
     B = A + 1,
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
-                    //     A = B + 1,
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "A")
-                        .WithArguments("E.A")
-                        .WithLocation(3, 5)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                //     A = B + 1,
+                Diagnostic(ErrorCode.ERR_CircConstValue, "A")
+                    .WithArguments("E.A")
+                    .WithLocation(3, 5)
+            );
         }
 
         [Fact]
@@ -206,14 +202,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
     B = A + 1,
     C = A + 2,
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
-                    //     A = B | C,
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "A")
-                        .WithArguments("E.A")
-                        .WithLocation(3, 5)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                //     A = B | C,
+                Diagnostic(ErrorCode.ERR_CircConstValue, "A")
+                    .WithArguments("E.A")
+                    .WithLocation(3, 5)
+            );
         }
 
         [Fact]
@@ -227,19 +222,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
     C = D,
     D = D
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
-                    //     A = A | B,
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "A")
-                        .WithArguments("E.A")
-                        .WithLocation(3, 5),
-                    // (6,5): error CS0110: The evaluation of the constant value for 'E.D' involves a circular definition
-                    //     D = D
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "D")
-                        .WithArguments("E.D")
-                        .WithLocation(6, 5)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                //     A = A | B,
+                Diagnostic(ErrorCode.ERR_CircConstValue, "A")
+                    .WithArguments("E.A")
+                    .WithLocation(3, 5),
+                // (6,5): error CS0110: The evaluation of the constant value for 'E.D' involves a circular definition
+                //     D = D
+                Diagnostic(ErrorCode.ERR_CircConstValue, "D")
+                    .WithArguments("E.D")
+                    .WithLocation(6, 5)
+            );
         }
 
         [Fact]
@@ -273,19 +267,18 @@ enum F
     A = E.B + 1,
     B = A + 1,
 }";
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
-                    //     A = B + F.B,
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "A")
-                        .WithArguments("E.A")
-                        .WithLocation(3, 5),
-                    // (4,5): error CS0110: The evaluation of the constant value for 'E.B' involves a circular definition
-                    //     B = A + F.A,
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "B")
-                        .WithArguments("E.B")
-                        .WithLocation(4, 5)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                //     A = B + F.B,
+                Diagnostic(ErrorCode.ERR_CircConstValue, "A")
+                    .WithArguments("E.A")
+                    .WithLocation(3, 5),
+                // (4,5): error CS0110: The evaluation of the constant value for 'E.B' involves a circular definition
+                //     B = A + F.A,
+                Diagnostic(ErrorCode.ERR_CircConstValue, "B")
+                    .WithArguments("E.B")
+                    .WithLocation(4, 5)
+            );
         }
 
         [Fact]
@@ -297,14 +290,13 @@ enum F
                 10000,
                 (i, n) => (i == 0) ? string.Format("M{0} + 1", n - 1) : ""
             );
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.M0' involves a circular definition
-                    //     M0 = M5999 + 1,
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "M0")
-                        .WithArguments("E.M0")
-                        .WithLocation(3, 5)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,5): error CS0110: The evaluation of the constant value for 'E.M0' involves a circular definition
+                //     M0 = M5999 + 1,
+                Diagnostic(ErrorCode.ERR_CircConstValue, "M0")
+                    .WithArguments("E.M0")
+                    .WithLocation(3, 5)
+            );
         }
 
         [WorkItem(843037, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/843037")]
@@ -317,14 +309,13 @@ enum F
                 10000,
                 (i, n) => string.Format("M{0} + 1", (i == 0) ? (n - 1) : (i - 1))
             );
-            CreateCompilation(source)
-                .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.M0' involves a circular definition
-                    //     M0 = M1999 + 1,
-                    Diagnostic(ErrorCode.ERR_CircConstValue, "M0")
-                        .WithArguments("E.M0")
-                        .WithLocation(3, 5)
-                );
+            CreateCompilation(source).VerifyDiagnostics(
+                // (3,5): error CS0110: The evaluation of the constant value for 'E.M0' involves a circular definition
+                //     M0 = M1999 + 1,
+                Diagnostic(ErrorCode.ERR_CircConstValue, "M0")
+                    .WithArguments("E.M0")
+                    .WithLocation(3, 5)
+            );
         }
 
         [WorkItem(843037, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/843037")]

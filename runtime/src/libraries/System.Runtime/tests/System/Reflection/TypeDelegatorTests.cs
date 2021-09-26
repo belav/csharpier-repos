@@ -99,10 +99,10 @@ namespace System.Reflection.Tests
                 yield return new object[]
                 {
                     Array.CreateInstance(
-                            typeof(Outside<int>.Inside<string>),
-                            new[] { 2 },
-                            new[] { -1 }
-                        )
+                        typeof(Outside<int>.Inside<string>),
+                        new[] { 2 },
+                        new[] { -1 }
+                    )
                         .GetType(),
                     false
                 };

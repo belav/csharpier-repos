@@ -308,11 +308,8 @@ namespace System.Diagnostics.Tests
                     }
                     else
                     {
-                        string expectedMessage = string.Format(
-                            CultureInfo.InvariantCulture,
-                            format,
-                            parameters
-                        );
+                        string expectedMessage = string
+                            .Format(CultureInfo.InvariantCulture, format, parameters);
                         ValidateLastEntryMessage(listener, expectedMessage, source);
                     }
                 }

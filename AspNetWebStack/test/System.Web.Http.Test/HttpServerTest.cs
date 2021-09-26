@@ -23,10 +23,11 @@ namespace System.Web.Http
         [Fact]
         public void IsCorrectType()
         {
-            Assert.Type.HasProperties<HttpServer, DelegatingHandler>(
-                TypeAssert.TypeProperties.IsPublicVisibleClass
-                    | TypeAssert.TypeProperties.IsDisposable
-            );
+            Assert.Type
+                .HasProperties<HttpServer, DelegatingHandler>(
+                    TypeAssert.TypeProperties.IsPublicVisibleClass
+                        | TypeAssert.TypeProperties.IsDisposable
+                );
         }
 
         [Fact]
@@ -551,12 +552,12 @@ namespace System.Web.Http
                 MockBehavior.Strict
             );
             exceptionHandlerMock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Callback<ExceptionHandlerContext, CancellationToken>((c, i) => c.Result = null)
                 .Returns(Task.FromResult(0));
             IExceptionHandler exceptionHandler = exceptionHandlerMock.Object;
@@ -599,12 +600,12 @@ namespace System.Web.Http
                     MockBehavior.Strict
                 );
                 exceptionHandlerMock.Setup(
-                        h =>
-                            h.HandleAsync(
-                                It.IsAny<ExceptionHandlerContext>(),
-                                It.IsAny<CancellationToken>()
-                            )
-                    )
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                     .Callback<ExceptionHandlerContext, CancellationToken>(
                         (c, i) => c.Result = new ResponseMessageResult(expectedResponse)
                     )
@@ -783,12 +784,12 @@ namespace System.Web.Http
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             mock.Setup(
-                    h =>
-                        h.HandleAsync(
-                            It.IsAny<ExceptionHandlerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
                 .Returns(Task.FromResult(0));
             return mock;
         }
@@ -802,12 +803,8 @@ namespace System.Web.Http
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
             mock.Setup(
-                    l =>
-                        l.LogAsync(
-                            It.IsAny<ExceptionLoggerContext>(),
-                            It.IsAny<CancellationToken>()
-                        )
-                )
+                l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+            )
                 .Returns(Task.FromResult(0));
             return mock;
         }

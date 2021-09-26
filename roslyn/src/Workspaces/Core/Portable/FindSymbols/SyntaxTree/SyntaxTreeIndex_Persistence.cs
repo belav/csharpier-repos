@@ -44,24 +44,25 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             try
             {
                 var persistentStorageService =
-                    (IChecksummedPersistentStorageService)workspace.Services.GetRequiredService<IPersistentStorageService>();
+                    (IChecksummedPersistentStorageService)workspace.Services
+                        .GetRequiredService<IPersistentStorageService>();
 
                 var storage = await persistentStorageService.GetStorageAsync(
-                        workspace,
-                        documentKey.Project.Solution,
-                        checkBranchId: false,
-                        cancellationToken
-                    )
+                    workspace,
+                    documentKey.Project.Solution,
+                    checkBranchId: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await using var _ = storage.ConfigureAwait(false);
 
                 // attempt to load from persisted state
                 using var stream = await storage.ReadStreamAsync(
-                        documentKey,
-                        PersistenceName,
-                        checksum,
-                        cancellationToken
-                    )
+                    documentKey,
+                    PersistenceName,
+                    checksum,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 using var reader = ObjectReader.TryGetReader(
                     stream,
@@ -93,9 +94,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var project = document.Project;
             var parseOptionsChecksum = project.State.GetParseOptionsChecksum();
 
-            var documentChecksumState = await document.State.GetStateChecksumsAsync(
-                    cancellationToken
-                )
+            var documentChecksumState = await document.State
+                .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
             var textChecksum = documentChecksumState.Text;
 
@@ -109,15 +109,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             var solution = document.Project.Solution;
             var persistentStorageService =
-                (IChecksummedPersistentStorageService)solution.Workspace.Services.GetRequiredService<IPersistentStorageService>();
+                (IChecksummedPersistentStorageService)solution.Workspace.Services
+                    .GetRequiredService<IPersistentStorageService>();
 
             try
             {
                 var storage = await persistentStorageService.GetStorageAsync(
-                        solution,
-                        checkBranchId: false,
-                        cancellationToken
-                    )
+                    solution,
+                    checkBranchId: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await using var _ = storage.ConfigureAwait(false);
                 using var stream = SerializableBytes.CreateWritableStream();
@@ -129,12 +130,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 stream.Position = 0;
                 return await storage.WriteStreamAsync(
-                        document,
-                        PersistenceName,
-                        stream,
-                        this.Checksum,
-                        cancellationToken
-                    )
+                    document,
+                    PersistenceName,
+                    stream,
+                    this.Checksum,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (IOUtilities.IsNormalIOException(e))
@@ -153,16 +154,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             var solution = document.Project.Solution;
             var persistentStorageService =
-                (IChecksummedPersistentStorageService)solution.Workspace.Services.GetRequiredService<IPersistentStorageService>();
+                (IChecksummedPersistentStorageService)solution.Workspace.Services
+                    .GetRequiredService<IPersistentStorageService>();
 
             // check whether we already have info for this document
             try
             {
                 var storage = await persistentStorageService.GetStorageAsync(
-                        solution,
-                        checkBranchId: false,
-                        cancellationToken
-                    )
+                    solution,
+                    checkBranchId: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await using var _ = storage.ConfigureAwait(false);
                 // Check if we've already stored a checksum and it matches the checksum we
@@ -170,11 +172,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // this index.  Otherwise if we don't have a checksum, or the checksums don't
                 // match, go ahead and recompute it.
                 return await storage.ChecksumMatchesAsync(
-                        document,
-                        PersistenceName,
-                        checksum,
-                        cancellationToken
-                    )
+                    document,
+                    PersistenceName,
+                    checksum,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
             catch (Exception e) when (IOUtilities.IsNormalIOException(e))

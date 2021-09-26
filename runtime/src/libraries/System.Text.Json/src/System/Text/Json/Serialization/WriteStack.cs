@@ -294,10 +294,10 @@ namespace System.Text.Json
             Exception? exception = null;
 
             exception = await DisposeFrame(
-                    Current.CollectionEnumerator,
-                    Current.AsyncEnumerator,
-                    exception
-                )
+                Current.CollectionEnumerator,
+                Current.AsyncEnumerator,
+                exception
+            )
                 .ConfigureAwait(false);
 
             int stackSize = Math.Max(_count, _continuationCount);
@@ -306,10 +306,10 @@ namespace System.Text.Json
                 for (int i = 0; i < stackSize - 1; i++)
                 {
                     exception = await DisposeFrame(
-                            _previous[i].CollectionEnumerator,
-                            _previous[i].AsyncEnumerator,
-                            exception
-                        )
+                        _previous[i].CollectionEnumerator,
+                        _previous[i].AsyncEnumerator,
+                        exception
+                    )
                         .ConfigureAwait(false);
                 }
             }

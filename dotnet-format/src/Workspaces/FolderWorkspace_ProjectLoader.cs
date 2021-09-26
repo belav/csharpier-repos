@@ -37,14 +37,14 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                 var projectId = ProjectId.CreateNewId(debugName: folderPath);
 
                 return ProjectInfo.Create(
-                        projectId,
-                        version: default,
-                        name: ProjectName,
-                        assemblyName: folderPath,
-                        Language,
-                        filePath: folderPath,
-                        documents: LoadDocuments(projectId, projectFilePaths.ToImmutable())
-                    )
+                    projectId,
+                    version: default,
+                    name: ProjectName,
+                    assemblyName: folderPath,
+                    Language,
+                    filePath: folderPath,
+                    documents: LoadDocuments(projectId, projectFilePaths.ToImmutable())
+                )
                     .WithAnalyzerConfigDocuments(LoadDocuments(projectId, editorConfigPaths));
 
                 static IEnumerable<DocumentInfo> LoadDocuments(

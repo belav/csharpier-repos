@@ -2588,10 +2588,8 @@ namespace System
         }
 
         private static Span<T> UnsafeArrayAsSpan<T>(Array array, int adjustedIndex, int length) =>
-            new Span<T>(ref Unsafe.As<byte, T>(ref array.GetRawArrayData()), array.Length).Slice(
-                adjustedIndex,
-                length
-            );
+            new Span<T>(ref Unsafe.As<byte, T>(ref array.GetRawArrayData()), array.Length)
+                .Slice(adjustedIndex, length);
 
 #if !CORERT
         public IEnumerator GetEnumerator()

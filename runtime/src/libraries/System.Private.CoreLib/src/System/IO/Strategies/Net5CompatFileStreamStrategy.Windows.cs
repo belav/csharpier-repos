@@ -438,8 +438,8 @@ namespace System.IO.Strategies
         private int FillReadBufferForReadByte() =>
             _useAsyncIO
                 ? ReadNativeAsync(new Memory<byte>(_buffer), 0, CancellationToken.None)
-                      .GetAwaiter()
-                      .GetResult()
+                  .GetAwaiter()
+                  .GetResult()
                 : ReadNative(_buffer);
 
         private unsafe int ReadNative(Span<byte> buffer)
@@ -1300,9 +1300,9 @@ namespace System.IO.Strategies
                 if (bufferedBytes > 0)
                 {
                     await destination.WriteAsync(
-                            new ReadOnlyMemory<byte>(GetBuffer(), _readPos, bufferedBytes),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<byte>(GetBuffer(), _readPos, bufferedBytes),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     _readPos = _readLength = 0;
                 }
@@ -1317,14 +1317,14 @@ namespace System.IO.Strategies
             try
             {
                 await FileStreamHelpers.AsyncModeCopyToAsync(
-                        _fileHandle,
-                        _path,
-                        canSeek,
-                        _filePosition,
-                        destination,
-                        bufferSize,
-                        cancellationToken
-                    )
+                    _fileHandle,
+                    _path,
+                    canSeek,
+                    _filePosition,
+                    destination,
+                    bufferSize,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 

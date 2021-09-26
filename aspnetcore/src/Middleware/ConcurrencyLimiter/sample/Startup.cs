@@ -40,13 +40,11 @@ namespace ConcurrencyLimiterSample
         public static Task Main(string[] args)
         {
             return new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel().UseStartup<Startup>();
-                    }
-                )
-                .Build()
-                .RunAsync();
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().UseStartup<Startup>();
+                }
+            ).Build().RunAsync();
         }
     }
 }

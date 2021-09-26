@@ -51,9 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Throws<NotSupportedException>(
                 () =>
-                    default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator).Equals(
-                        default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator)
-                    )
+                    default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator)
+                        .Equals(default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator))
             );
         }
 

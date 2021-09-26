@@ -1066,9 +1066,9 @@ namespace System.IO
             CheckAsyncTaskInProgress();
 
             Task<int> task = ReadAsyncInternal(
-                    new Memory<char>(buffer, index, count),
-                    CancellationToken.None
-                )
+                new Memory<char>(buffer, index, count),
+                CancellationToken.None
+            )
                 .AsTask();
             _asyncReadTask = task;
 
@@ -1152,13 +1152,13 @@ namespace System.IO
                             );
                             int tmpBytePos = _bytePos;
                             int len = await tmpStream.ReadAsync(
-                                    new Memory<byte>(
-                                        tmpByteBuffer,
-                                        tmpBytePos,
-                                        tmpByteBuffer.Length - tmpBytePos
-                                    ),
-                                    cancellationToken
-                                )
+                                new Memory<byte>(
+                                    tmpByteBuffer,
+                                    tmpBytePos,
+                                    tmpByteBuffer.Length - tmpBytePos
+                                ),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                             Debug.Assert(
                                 len >= 0,
@@ -1212,9 +1212,9 @@ namespace System.IO
                             );
 
                             _byteLen = await tmpStream.ReadAsync(
-                                    new Memory<byte>(tmpByteBuffer),
-                                    cancellationToken
-                                )
+                                new Memory<byte>(tmpByteBuffer),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
                             Debug.Assert(
@@ -1400,13 +1400,13 @@ namespace System.IO
                     );
                     int tmpBytePos = _bytePos;
                     int len = await tmpStream.ReadAsync(
-                            new Memory<byte>(
-                                tmpByteBuffer,
-                                tmpBytePos,
-                                tmpByteBuffer.Length - tmpBytePos
-                            ),
-                            cancellationToken
-                        )
+                        new Memory<byte>(
+                            tmpByteBuffer,
+                            tmpBytePos,
+                            tmpByteBuffer.Length - tmpBytePos
+                        ),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     Debug.Assert(
                         len >= 0,
@@ -1443,9 +1443,9 @@ namespace System.IO
                         "_bytePos can be non zero only when we are trying to _checkPreamble. Are two threads using this StreamReader at the same time?"
                     );
                     _byteLen = await tmpStream.ReadAsync(
-                            new Memory<byte>(tmpByteBuffer),
-                            cancellationToken
-                        )
+                        new Memory<byte>(tmpByteBuffer),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     Debug.Assert(
                         _byteLen >= 0,

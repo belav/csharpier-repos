@@ -76,11 +76,12 @@ namespace System.Net.WebSockets
             {
                 string currentRequestProtocol = requestProtocols[i];
                 if (
-                    string.Equals(
-                        acceptProtocol,
-                        currentRequestProtocol,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    string
+                        .Equals(
+                            acceptProtocol,
+                            currentRequestProtocol,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     return true;
@@ -210,11 +211,12 @@ namespace System.Net.WebSockets
             }
 
             if (
-                !string.Equals(
-                    secWebSocketVersion,
-                    SupportedVersion,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                !string
+                    .Equals(
+                        secWebSocketVersion,
+                        SupportedVersion,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 throw new WebSocketException(

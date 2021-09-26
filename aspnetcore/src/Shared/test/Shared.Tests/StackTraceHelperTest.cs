@@ -202,8 +202,8 @@ namespace Microsoft.Extensions.Internal
             // Act
             var stackFrames = StackTraceHelper.GetFrames(exception, out _);
             var methodNames = stackFrames.Select(
-                    stackFrame => stackFrame.MethodDisplayInfo.ToString()
-                )
+                stackFrame => stackFrame.MethodDisplayInfo.ToString()
+            )
                 .ToArray();
 
             // Assert
@@ -284,8 +284,8 @@ namespace Microsoft.Extensions.Internal
         {
             // Arrange
             var action = (Action)Expression.Lambda(
-                    Expression.Throw(Expression.New(typeof(Exception)))
-                )
+                Expression.Throw(Expression.New(typeof(Exception)))
+            )
                 .Compile();
             var exception = Record.Exception(action);
 

@@ -285,17 +285,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     .TagMatchingRuleDescriptor(
                         rule =>
                         {
-                            rule.RequireTagName("*")
-                                .RequireAttributeDescriptor(
-                                    b =>
-                                    {
-                                        b.Name = "@onclick";
-                                        b.Metadata.Add(
+                            rule.RequireTagName("*").RequireAttributeDescriptor(
+                                b =>
+                                {
+                                    b.Name = "@onclick";
+                                    b.Metadata
+                                        .Add(
                                             ComponentMetadata.Common.DirectiveAttribute,
                                             bool.TrueString
                                         );
-                                    }
-                                );
+                                }
+                            );
                         }
                     )
                     .AddMetadata(
@@ -319,17 +319,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     .TagMatchingRuleDescriptor(
                         rule =>
                         {
-                            rule.RequireTagName("*")
-                                .RequireAttributeDescriptor(
-                                    b =>
-                                    {
-                                        b.Name = "@onclick";
-                                        b.Metadata.Add(
+                            rule.RequireTagName("*").RequireAttributeDescriptor(
+                                b =>
+                                {
+                                    b.Name = "@onclick";
+                                    b.Metadata
+                                        .Add(
                                             ComponentMetadata.Common.DirectiveAttribute,
                                             bool.TrueString
                                         );
-                                    }
-                                );
+                                }
+                            );
                         }
                     )
                     .AddMetadata(
@@ -712,11 +712,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var dateTimeNowString = "@DateTime.Now";
             var currentFormattedString = "<p class=\"{0}\" style='{0}'></p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                dateTimeNowString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, dateTimeNowString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -728,11 +725,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var doWhileString = "@do { var foo = bar; <text>Foo</text> foo++; } while (foo<bar>);";
             var currentFormattedString = "<p class=\"{0}\" style='{0}'></p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                doWhileString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, doWhileString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -744,11 +738,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var dateTimeNowString = "@DateTime.Now";
             var currentFormattedString = "<p class=\"{0}\" style='{0}'>Hello World</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                dateTimeNowString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, dateTimeNowString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -760,11 +751,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var doWhileString = "@do { var foo = bar; <text>Foo</text> foo++; } while (foo<bar>);";
             var currentFormattedString = "<p class=\"{0}\" style='{0}'>Hello World</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                doWhileString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, doWhileString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -776,11 +764,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var dateTimeNowString = "@DateTime.Now";
             var currentFormattedString = "<p class=\"{0}\">Hello</p> <p style='{0}'>World</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                dateTimeNowString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, dateTimeNowString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -792,11 +777,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var doWhileString = "@do { var foo = bar; <text>Foo</text> foo++; } while (foo<bar>);";
             var currentFormattedString = "<p class=\"{0}\">Hello</p> <p style='{0}'>World</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                doWhileString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, doWhileString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -809,11 +791,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var dateTimeNowString = "@DateTime.Now";
             var currentFormattedString =
                 "<p class=\"{0}\" style='{0}'>Hello World <strong class=\"{0}\">inside of strong tag</strong></p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                dateTimeNowString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, dateTimeNowString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -825,11 +804,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var dateTimeNowString = "@DateTime.Now";
             var currentFormattedString = "<p>{0}</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                dateTimeNowString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, dateTimeNowString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -841,11 +817,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var doWhileString = "@do { var foo = bar; <p>Foo</p> foo++; } while (foo<bar>);";
             var currentFormattedString = "<p>{0}</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                doWhileString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, doWhileString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -857,11 +830,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var dateTimeNowString = "@DateTime.Now";
             var currentFormattedString = "<p>Hello World {0}</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                dateTimeNowString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, dateTimeNowString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -873,11 +843,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var doWhileString = "@do { var foo = bar; <p>Foo</p> foo++; } while (foo<bar>);";
             var currentFormattedString = "<p>Hello World {0}</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                doWhileString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, doWhileString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -889,11 +856,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var dateTimeNowString = "@DateTime.Now";
             var currentFormattedString = "<p>{0}</p> <p>{0}</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                dateTimeNowString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, dateTimeNowString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -905,11 +869,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var doWhileString = "@do { var foo = bar; <p>Foo</p> foo++; } while (foo<bar>);";
             var currentFormattedString = "<p>{0}</p> <p>{0}</p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                doWhileString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, doWhileString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -922,11 +883,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var dateTimeNowString = "@DateTime.Now";
             var currentFormattedString =
                 "<p>Hello {0}<strong>inside of {0} strong tag</strong></p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                dateTimeNowString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, dateTimeNowString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -939,11 +897,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var doWhileString = "@do { var foo = bar; <p>Foo</p> foo++; } while (foo<bar>);";
             var currentFormattedString =
                 "<p>Hello {0}<strong>inside of {0} strong tag</strong></p>";
-            var document = string.Format(
-                CultureInfo.InvariantCulture,
-                currentFormattedString,
-                doWhileString
-            );
+            var document = string
+                .Format(CultureInfo.InvariantCulture, currentFormattedString, doWhileString);
 
             // Act & Assert
             RunParseTreeRewriterTest(document, "p");
@@ -2506,10 +2461,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var descriptors = new TagHelperDescriptor[]
             {
                 TagHelperDescriptorBuilder.Create(
-                        ComponentMetadata.Bind.TagHelperKind,
-                        "Bind",
-                        ComponentsApi.AssemblyName
-                    )
+                    ComponentMetadata.Bind.TagHelperKind,
+                    "Bind",
+                    ComponentsApi.AssemblyName
+                )
                     .AddMetadata(
                         ComponentMetadata.SpecialKindKey,
                         ComponentMetadata.Bind.TagHelperKind
@@ -2519,20 +2474,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     .TypeName("Microsoft.AspNetCore.Components.Bind")
                     .AddMetadata(ComponentMetadata.Bind.FallbackKey, bool.TrueString)
                     .TagMatchingRuleDescriptor(
-                        rule =>
-                            rule.RequireTagName("*")
-                                .RequireAttributeDescriptor(
-                                    r =>
-                                    {
-                                        r.Name = "@bind-";
-                                        r.NameComparisonMode =
-                                            RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
-                                        r.Metadata.Add(
+                        rule => rule.RequireTagName("*").RequireAttributeDescriptor(
+                                r =>
+                                {
+                                    r.Name = "@bind-";
+                                    r.NameComparisonMode =
+                                        RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
+                                    r.Metadata
+                                        .Add(
                                             ComponentMetadata.Common.DirectiveAttribute,
                                             bool.TrueString
                                         );
-                                    }
-                                )
+                                }
+                            )
                     )
                     .BoundAttributeDescriptor(
                         attribute =>
@@ -2572,10 +2526,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var descriptors = new TagHelperDescriptor[]
             {
                 TagHelperDescriptorBuilder.Create(
-                        ComponentMetadata.Bind.TagHelperKind,
-                        "Bind",
-                        ComponentsApi.AssemblyName
-                    )
+                    ComponentMetadata.Bind.TagHelperKind,
+                    "Bind",
+                    ComponentsApi.AssemblyName
+                )
                     .AddMetadata(
                         ComponentMetadata.SpecialKindKey,
                         ComponentMetadata.Bind.TagHelperKind
@@ -2585,20 +2539,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     .TypeName("Microsoft.AspNetCore.Components.Bind")
                     .AddMetadata(ComponentMetadata.Bind.FallbackKey, bool.TrueString)
                     .TagMatchingRuleDescriptor(
-                        rule =>
-                            rule.RequireTagName("*")
-                                .RequireAttributeDescriptor(
-                                    r =>
-                                    {
-                                        r.Name = "@bind-";
-                                        r.NameComparisonMode =
-                                            RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
-                                        r.Metadata.Add(
+                        rule => rule.RequireTagName("*").RequireAttributeDescriptor(
+                                r =>
+                                {
+                                    r.Name = "@bind-";
+                                    r.NameComparisonMode =
+                                        RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
+                                    r.Metadata
+                                        .Add(
                                             ComponentMetadata.Common.DirectiveAttribute,
                                             bool.TrueString
                                         );
-                                    }
-                                )
+                                }
+                            )
                     )
                     .BoundAttributeDescriptor(
                         attribute =>

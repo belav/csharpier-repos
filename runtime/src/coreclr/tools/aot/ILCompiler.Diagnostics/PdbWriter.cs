@@ -102,7 +102,8 @@ namespace ILCompiler.Diagnostics
             IntPtr libraryHandle = IntPtr.Zero;
             if (libraryName == DiaSymReaderLibrary)
             {
-                string archSuffix = RuntimeInformation.ProcessArchitecture.ToString()
+                string archSuffix = RuntimeInformation.ProcessArchitecture
+                    .ToString()
                     .ToLowerInvariant();
                 if (archSuffix == "x64")
                 {

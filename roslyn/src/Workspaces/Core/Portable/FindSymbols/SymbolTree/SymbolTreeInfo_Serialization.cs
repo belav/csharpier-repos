@@ -79,14 +79,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 // Ok, we can use persistence.  First try to load from the persistence service.
                 var persistentStorageService =
-                    (IChecksummedPersistentStorageService)workspace.Services.GetService<IPersistentStorageService>();
+                    (IChecksummedPersistentStorageService)workspace.Services
+                        .GetService<IPersistentStorageService>();
 
                 var storage = await persistentStorageService.GetStorageAsync(
-                        workspace,
-                        solutionKey,
-                        checkBranchId: false,
-                        cancellationToken
-                    )
+                    workspace,
+                    solutionKey,
+                    checkBranchId: false,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 await using var _ = storage.ConfigureAwait(false);
 

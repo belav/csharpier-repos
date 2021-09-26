@@ -195,9 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     string error;
                     context.CompileExpression("this.F(1)", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       13 (0xd)
   .maxstack  2
   .locals init (int V_0)
@@ -207,7 +206,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0007:  callvirt   ""void C.F(int)""
   IL_000c:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -277,9 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     string error;
                     context.CompileExpression("x + y", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       14 (0xe)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -289,7 +287,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_000c:  add
   IL_000d:  ret
 }"
-                        );
+                    );
                 }
             );
         }
@@ -347,9 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     string error;
                     context.CompileExpression("value", out error, testData);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size        7 (0x7)
   .maxstack  1
   .locals init (int V_0)
@@ -357,7 +354,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0001:  ldfld      ""int C.<>c__DisplayClass0_0.value""
   IL_0006:  ret
 }"
-                        );
+                    );
                 }
             );
         }

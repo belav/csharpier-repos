@@ -33,9 +33,8 @@ internal static class TestConfigHelper
 
     public static TestCase GetTest(string name)
     {
-        return s_currentTest = s_allTests.TestCases.Where(
-                tc => tc.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-            )
+        return s_currentTest = s_allTests.TestCases
+            .Where(tc => tc.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
             .FirstOrDefault();
     }
 }

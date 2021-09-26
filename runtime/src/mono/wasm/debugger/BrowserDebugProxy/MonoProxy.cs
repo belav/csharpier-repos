@@ -509,9 +509,10 @@ namespace Microsoft.WebAssembly.Diagnostics
                         // Maybe this is an async method, in which case the debug info is attached
                         // to the async method implementation, in class named:
                         //      `{type_name}/<method_name>::MoveNext`
-                        methodInfo = assembly.TypesByName.Values.SingleOrDefault(
-                            t => t.FullName.StartsWith($"{typeName}/<{methodName}>")
-                        )?.Methods.FirstOrDefault(mi => mi.Name == "MoveNext");
+                        methodInfo = assembly.TypesByName.Values
+                            .SingleOrDefault(
+                                t => t.FullName.StartsWith($"{typeName}/<{methodName}>")
+                            )?.Methods.FirstOrDefault(mi => mi.Name == "MoveNext");
                     }
 
                     if (methodInfo == null)
@@ -525,9 +526,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     }
 
                     string src_url =
-                        methodInfo.Assembly.Sources.Single(
-                            sf => sf.SourceId == methodInfo.SourceId
-                        ).Url;
+                        methodInfo.Assembly.Sources
+                            .Single(sf => sf.SourceId == methodInfo.SourceId).Url;
                     SendResponse(
                         id,
                         Result.OkFromObject(
@@ -751,7 +751,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 return false;
             }
 
-            Breakpoint bp = context.BreakpointRequests.Values.SelectMany(v => v.Locations)
+            Breakpoint bp = context.BreakpointRequests.Values
+                .SelectMany(v => v.Locations)
                 .FirstOrDefault(b => b.RemoteId == bp_id.Value);
 
             var callFrames = new List<object>();
@@ -1312,7 +1313,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 }
 
                 await foreach (
-                    SourceFile source in context.store.Load(sessionId, loaded_files, token)
+                    SourceFile source in context.store
+                        .Load(sessionId, loaded_files, token)
                         .WithCancellation(token)
                 )
                 {
@@ -1364,10 +1366,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             ExecutionContext context = GetContext(msg_id);
             if (
-                !context.BreakpointRequests.TryGetValue(
-                    bpid,
-                    out BreakpointRequest breakpointRequest
-                )
+                !context.BreakpointRequests
+                    .TryGetValue(bpid, out BreakpointRequest breakpointRequest)
             )
                 return;
 
@@ -1462,10 +1462,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             CancellationToken token
         )
         {
-            List<SourceLocation> bps = (await RuntimeReady(msg, token)).FindPossibleBreakpoints(
-                start,
-                end
-            );
+            List<SourceLocation> bps = (await RuntimeReady(msg, token))
+                .FindPossibleBreakpoints(start, end);
 
             if (bps == null)
                 return false;

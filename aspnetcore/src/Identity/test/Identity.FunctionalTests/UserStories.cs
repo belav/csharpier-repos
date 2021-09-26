@@ -257,7 +257,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             return await ConfirmEmail.Create(
                 link,
                 client,
-                new DefaultUIContext().WithAuthenticatedUser()
+                new DefaultUIContext()
+                    .WithAuthenticatedUser()
                     .WithExistingUser()
                     .WithConfirmedEmail()
             );

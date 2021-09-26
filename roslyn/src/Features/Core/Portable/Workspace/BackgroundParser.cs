@@ -40,8 +40,8 @@ namespace Microsoft.CodeAnalysis.Host
         {
             _workspace = workspace;
 
-            var listenerProvider =
-                workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider = workspace.Services
+                .GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
             _taskQueue = new TaskQueue(listenerProvider.GetListener(), TaskScheduler.Default);
 
             _documentTrackingService = workspace.Services.GetService<IDocumentTrackingService>();

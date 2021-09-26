@@ -36,18 +36,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact]
         public void ForStatement()
         {
-            VisualStudio.InteractiveWindow.SubmitText(
-                "for (int i = 0; i < 10; i++) Console.WriteLine(i * i);"
-            );
+            VisualStudio.InteractiveWindow
+                .SubmitText("for (int i = 0; i < 10; i++) Console.WriteLine(i * i);");
             VisualStudio.InteractiveWindow.WaitForLastReplOutputContains($"{81}");
         }
 
         [WpfFact]
         public void ForEachStatement()
         {
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"foreach (var f in System.IO.Directory.GetFiles(@""c:\windows"")) Console.WriteLine($""{f}"".ToLower());"
-            );
+            VisualStudio.InteractiveWindow
+                .SubmitText(
+                    @"foreach (var f in System.IO.Directory.GetFiles(@""c:\windows"")) Console.WriteLine($""{f}"".ToLower());"
+                );
             VisualStudio.InteractiveWindow.WaitForLastReplOutputContains(@"c:\windows\win.ini");
         }
 

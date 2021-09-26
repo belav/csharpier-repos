@@ -42,11 +42,8 @@ namespace System.Runtime.CompilerServices
         )
             where TAwaiter : INotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitOnCompleted(
-                ref awaiter,
-                ref stateMachine,
-                ref m_task
-            );
+            AsyncTaskMethodBuilder<VoidTaskResult>
+                .AwaitOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
         /// <typeparam name="TAwaiter">The type of the awaiter.</typeparam>
@@ -59,11 +56,8 @@ namespace System.Runtime.CompilerServices
         )
             where TAwaiter : ICriticalNotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitUnsafeOnCompleted(
-                ref awaiter,
-                ref stateMachine,
-                ref m_task
-            );
+            AsyncTaskMethodBuilder<VoidTaskResult>
+                .AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         /// <summary>Marks iteration as being completed, whether successfully or otherwise.</summary>
         public void Complete()

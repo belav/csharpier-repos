@@ -96,12 +96,12 @@ namespace System.Net.Http.Json
                     if (async)
                     {
                         await JsonSerializer.SerializeAsync(
-                                transcodingStream,
-                                Value,
-                                ObjectType,
-                                _jsonSerializerOptions,
-                                cancellationToken
-                            )
+                            transcodingStream,
+                            Value,
+                            ObjectType,
+                            _jsonSerializerOptions,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     else
@@ -137,12 +137,12 @@ namespace System.Net.Http.Json
                 )
                 {
                     await JsonSerializer.SerializeAsync(
-                            transcodingStream,
-                            Value,
-                            ObjectType,
-                            _jsonSerializerOptions,
-                            cancellationToken
-                        )
+                        transcodingStream,
+                        Value,
+                        ObjectType,
+                        _jsonSerializerOptions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     // The transcoding streams use Encoders and Decoders that have internal buffers. We need to flush these
                     // when there is no more data to be written. Stream.FlushAsync isn't suitable since it's
@@ -157,12 +157,12 @@ namespace System.Net.Http.Json
                 if (async)
                 {
                     await JsonSerializer.SerializeAsync(
-                            targetStream,
-                            Value,
-                            ObjectType,
-                            _jsonSerializerOptions,
-                            cancellationToken
-                        )
+                        targetStream,
+                        Value,
+                        ObjectType,
+                        _jsonSerializerOptions,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
                 else

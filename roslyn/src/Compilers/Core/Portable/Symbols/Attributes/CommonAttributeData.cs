@@ -283,9 +283,8 @@ namespace Microsoft.CodeAnalysis
 
         internal ConstantValue DecodeDateTimeConstantValue()
         {
-            long value = this.CommonConstructorArguments[0].DecodeValue<long>(
-                SpecialType.System_Int64
-            );
+            long value = this.CommonConstructorArguments[0]
+                .DecodeValue<long>(SpecialType.System_Int64);
 
             // if value is outside this range, DateTime would throw when constructed
             if (value < DateTime.MinValue.Ticks || value > DateTime.MaxValue.Ticks)
@@ -455,15 +454,13 @@ namespace Microsoft.CodeAnalysis
                     == SpecialType.System_Int16
                 )
                 {
-                    options = (MethodImplOptions)attribute.CommonConstructorArguments[
-                        0
-                    ].DecodeValue<short>(SpecialType.System_Int16);
+                    options = (MethodImplOptions)attribute.CommonConstructorArguments[0]
+                        .DecodeValue<short>(SpecialType.System_Int16);
                 }
                 else
                 {
-                    options = attribute.CommonConstructorArguments[
-                        0
-                    ].DecodeValue<MethodImplOptions>(SpecialType.System_Enum);
+                    options = attribute.CommonConstructorArguments[0]
+                        .DecodeValue<MethodImplOptions>(SpecialType.System_Enum);
                 }
 
                 // low two bits should only be set via MethodCodeType property
@@ -489,9 +486,8 @@ namespace Microsoft.CodeAnalysis
             {
                 if (namedArg.Key == "MethodCodeType")
                 {
-                    var value = (MethodImplAttributes)namedArg.Value.DecodeValue<int>(
-                        SpecialType.System_Enum
-                    );
+                    var value = (MethodImplAttributes)namedArg.Value
+                        .DecodeValue<int>(SpecialType.System_Enum);
                     if (value < 0 || value > MethodImplAttributes.Runtime)
                     {
                         Debug.Assert(attribute.AttributeClass is object);
@@ -546,9 +542,8 @@ namespace Microsoft.CodeAnalysis
             int? alignment = null;
             bool hasErrors = false;
 
-            LayoutKind kind = attribute.CommonConstructorArguments[0].DecodeValue<LayoutKind>(
-                SpecialType.System_Enum
-            );
+            LayoutKind kind = attribute.CommonConstructorArguments[0]
+                .DecodeValue<LayoutKind>(SpecialType.System_Enum);
             switch (kind)
             {
                 case LayoutKind.Auto:
@@ -616,9 +611,8 @@ namespace Microsoft.CodeAnalysis
                         break;
 
                     case "Size":
-                        size = namedArg.Value.DecodeValue<int>(
-                            Microsoft.CodeAnalysis.SpecialType.System_Int32
-                        );
+                        size = namedArg.Value
+                            .DecodeValue<int>(Microsoft.CodeAnalysis.SpecialType.System_Int32);
                         if (size < 0)
                         {
                             messageProvider.ReportInvalidNamedArgument(

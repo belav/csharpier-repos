@@ -114,15 +114,15 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         .ConfigureAwait(false)
                 );
                 var callSiteDocument = await SemanticDocument.WithSyntaxRootAsync(
-                        root,
-                        cancellationToken
-                    )
+                    root,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var newCallSiteRoot = callSiteDocument.Root;
 
-                var codeGenerationService =
-                    SemanticDocument.Document.GetLanguageService<ICodeGenerationService>();
+                var codeGenerationService = SemanticDocument.Document
+                    .GetLanguageService<ICodeGenerationService>();
                 var result = GenerateMethodDefinition(LocalFunction, cancellationToken);
 
                 SyntaxNode destination,
@@ -135,10 +135,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     if (destination == null)
                     {
                         return await CreateGeneratedCodeAsync(
-                                OperationStatus.NoValidLocationToInsertMethodCall,
-                                callSiteDocument,
-                                cancellationToken
-                            )
+                            OperationStatus.NoValidLocationToInsertMethodCall,
+                            callSiteDocument,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -179,17 +179,17 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var newSyntaxRoot = newCallSiteRoot.ReplaceNode(destination, newContainer);
                 var newDocument = callSiteDocument.Document.WithSyntaxRoot(newSyntaxRoot);
                 newDocument = await Simplifier.ReduceAsync(
-                        newDocument,
-                        Simplifier.Annotation,
-                        null,
-                        cancellationToken
-                    )
+                    newDocument,
+                    Simplifier.Annotation,
+                    null,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var generatedDocument = await SemanticDocument.CreateAsync(
-                        newDocument,
-                        cancellationToken
-                    )
+                    newDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 // For nullable reference types, we can provide a better experience by reducing use
@@ -204,51 +204,47 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 // on flow analysis of the final resulting code than to try and predict from the analyzer what
                 // will happen in the generator.
                 var finalDocument = await UpdateMethodAfterGenerationAsync(
-                        generatedDocument,
-                        result,
-                        cancellationToken
-                    )
+                    generatedDocument,
+                    result,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var finalRoot = finalDocument.Root;
 
                 var methodDefinition = finalRoot.GetAnnotatedNodesAndTokens(
-                        MethodDefinitionAnnotation
-                    )
+                    MethodDefinitionAnnotation
+                )
                     .FirstOrDefault();
                 if (!methodDefinition.IsNode || methodDefinition.AsNode() == null)
                 {
                     return await CreateGeneratedCodeAsync(
-                            result.Status.With(OperationStatus.FailedWithUnknownReason),
-                            finalDocument,
-                            cancellationToken
-                        )
+                        result.Status.With(OperationStatus.FailedWithUnknownReason),
+                        finalDocument,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
                 if (
-                    methodDefinition.SyntaxTree.IsHiddenPosition(
-                        methodDefinition.AsNode().SpanStart,
-                        cancellationToken
-                    )
-                    || methodDefinition.SyntaxTree.IsHiddenPosition(
-                        methodDefinition.AsNode().Span.End,
-                        cancellationToken
-                    )
+                    methodDefinition.SyntaxTree
+                        .IsHiddenPosition(methodDefinition.AsNode().SpanStart, cancellationToken)
+                    || methodDefinition.SyntaxTree
+                        .IsHiddenPosition(methodDefinition.AsNode().Span.End, cancellationToken)
                 )
                 {
                     return await CreateGeneratedCodeAsync(
-                            result.Status.With(OperationStatus.OverlapsHiddenPosition),
-                            finalDocument,
-                            cancellationToken
-                        )
+                        result.Status.With(OperationStatus.OverlapsHiddenPosition),
+                        finalDocument,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
                 return await CreateGeneratedCodeAsync(
-                        result.Status,
-                        finalDocument,
-                        cancellationToken
-                    )
+                    result.Status,
+                    finalDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -332,8 +328,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 // add invocation expression
                 return statements.Concat(
                     (TStatement)(SyntaxNode)await GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
-                            cancellationToken
-                        )
+                        cancellationToken
+                    )
                         .ConfigureAwait(false)
                 );
             }
@@ -372,9 +368,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 Contract.ThrowIfFalse(variable.ReturnBehavior == ReturnBehavior.Assignment);
                 return statements.Concat(
                     CreateAssignmentExpressionStatement(
-                            CreateIdentifier(variable.Name),
-                            CreateCallSignature()
-                        )
+                        CreateIdentifier(variable.Name),
+                        CreateCallSignature()
+                    )
                         .WithAdditionalAnnotations(CallSiteAnnotation)
                 );
             }

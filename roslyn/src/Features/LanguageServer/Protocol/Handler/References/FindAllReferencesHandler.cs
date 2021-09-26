@@ -60,9 +60,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var findUsagesService = document.GetRequiredLanguageService<IFindUsagesLSPService>();
             var position = await document.GetPositionFromLinePositionAsync(
-                    ProtocolConversions.PositionToLinePosition(referenceParams.Position),
-                    cancellationToken
-                )
+                ProtocolConversions.PositionToLinePosition(referenceParams.Position),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
 
             var findUsagesContext = new FindUsagesLSPContext(

@@ -31,8 +31,8 @@ namespace System.Net.WebSockets.Tests
         };
 
         public static object[][] UnrelatedErrorData = ErrorData.SelectMany(
-                wse => NativeErrorData.Select(ne => new object[] { wse[0], ne[0], ne[2] })
-            )
+            wse => NativeErrorData.Select(ne => new object[] { wse[0], ne[0], ne[2] })
+        )
             .ToArray();
 
         [Fact]

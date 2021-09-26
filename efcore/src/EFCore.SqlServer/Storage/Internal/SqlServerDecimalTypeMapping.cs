@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                     storeType,
                     storeTypePostfix,
                     dbType
-                ).WithPrecisionAndScale(precision, scale)
+                )
+                    .WithPrecisionAndScale(precision, scale)
             ) { }
 
         /// <summary>

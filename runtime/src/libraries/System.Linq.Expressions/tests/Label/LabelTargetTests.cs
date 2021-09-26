@@ -150,12 +150,12 @@ namespace System.Linq.Expressions.Tests
                 "1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff"
             );
             Expression.Lambda<Action>(
-                    Expression.Block(
-                        Expression.Goto(target),
-                        Expression.Throw(Expression.Constant(new CustomException())),
-                        Expression.Label(target)
-                    )
+                Expression.Block(
+                    Expression.Goto(target),
+                    Expression.Throw(Expression.Constant(new CustomException())),
+                    Expression.Label(target)
                 )
+            )
                 .Compile(useInterpreter)();
         }
 
@@ -168,12 +168,12 @@ namespace System.Linq.Expressions.Tests
                 "1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff"
             );
             Func<int> func = Expression.Lambda<Func<int>>(
-                    Expression.Block(
-                        Expression.Return(target, Expression.Constant(42)),
-                        Expression.Throw(Expression.Constant(new CustomException())),
-                        Expression.Label(target, Expression.Default(typeof(int)))
-                    )
+                Expression.Block(
+                    Expression.Return(target, Expression.Constant(42)),
+                    Expression.Throw(Expression.Constant(new CustomException())),
+                    Expression.Label(target, Expression.Default(typeof(int)))
                 )
+            )
                 .Compile(useInterpreter);
             Assert.Equal(42, func());
         }

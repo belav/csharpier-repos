@@ -240,7 +240,8 @@ namespace System.Buffers.Text.Tests
             unsafe
             {
                 // We're aiming for the Precision field but we don't know where it is so nuke 'em all.
-                new Span<byte>(&format, sizeof(StandardFormat)).Fill(BadPrecision);
+                new Span<byte>(&format, sizeof(StandardFormat))
+                    .Fill(BadPrecision);
             }
 
             string s = format.ToString();

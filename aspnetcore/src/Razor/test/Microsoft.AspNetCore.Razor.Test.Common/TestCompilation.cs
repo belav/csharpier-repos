@@ -24,9 +24,8 @@ namespace Microsoft.CodeAnalysis
         {
             var dependencyContext = DependencyContext.Load(assembly);
 
-            var metadataReferences = dependencyContext.CompileLibraries.SelectMany(
-                    l => ResolvePaths(l)
-                )
+            var metadataReferences = dependencyContext.CompileLibraries
+                .SelectMany(l => ResolvePaths(l))
                 .Select(assemblyPath => MetadataReference.CreateFromFile(assemblyPath))
                 .ToArray();
 
@@ -94,13 +93,15 @@ namespace Microsoft.CodeAnalysis
             using (var stream = new MemoryStream())
             {
                 var emitResult = compilation.WithOptions(
-                        new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
-                    )
+                    new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                )
                     .Emit(stream);
-                var diagnostics = string.Join(
-                    Environment.NewLine,
-                    emitResult.Diagnostics.Select(d => CSharpDiagnosticFormatter.Instance.Format(d))
-                );
+                var diagnostics = string
+                    .Join(
+                        Environment.NewLine,
+                        emitResult.Diagnostics
+                            .Select(d => CSharpDiagnosticFormatter.Instance.Format(d))
+                    );
                 Assert.True(
                     emitResult.Success,
                     $"Compilation is invalid : {Environment.NewLine}{diagnostics}"

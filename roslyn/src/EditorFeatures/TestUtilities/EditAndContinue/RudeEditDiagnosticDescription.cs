@@ -56,13 +56,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         public override string ToString()
         {
-            var arguments = string.Join(
-                ", ",
-                new[]
-                {
-                    (_squiggle != null) ? "\"" + _squiggle.Replace("\r\n", "\\r\\n") + "\"" : "null"
-                }.Concat(_arguments.Select(a => "\"" + a + "\""))
-            );
+            var arguments = string
+                .Join(
+                    ", ",
+                    new[]
+                    {
+                        (_squiggle != null)
+                            ? "\"" + _squiggle.Replace("\r\n", "\\r\\n") + "\""
+                            : "null"
+                    }
+                        .Concat(_arguments.Select(a => "\"" + a + "\""))
+                );
             var withLine = (_firstLine != null) ? $".WithFirstLine(\"{_firstLine}\")" : null;
 
             return $"Diagnostic(RudeEditKind.{_rudeEditKind}, {arguments}){withLine}";

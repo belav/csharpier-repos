@@ -57,11 +57,12 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
                 _logger.LogInformation(
                     "Now launching Autobahn Test Suite. This will take a while."
                 );
-                var exitCode = await Wstest.Default.ExecAsync(
-                    "-m fuzzingclient -s " + specFile,
-                    cancellationToken,
-                    _loggerFactory.CreateLogger("wstest")
-                );
+                var exitCode = await Wstest.Default
+                    .ExecAsync(
+                        "-m fuzzingclient -s " + specFile,
+                        cancellationToken,
+                        _loggerFactory.CreateLogger("wstest")
+                    );
                 if (exitCode != 0)
                 {
                     throw new Exception("wstest failed");
@@ -234,7 +235,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
             cancellationToken.ThrowIfCancellationRequested();
 
             // Add to the current spec
-            var wsUrl = result.ApplicationBaseUri.Replace("https://", "wss://")
+            var wsUrl = result.ApplicationBaseUri
+                .Replace("https://", "wss://")
                 .Replace("http://", "ws://");
             Spec.WithServer(name, wsUrl);
 

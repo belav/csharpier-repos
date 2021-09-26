@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_use_sequence_end_to_end()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -31,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore
 
             // Use a different service provider so a different generator is used but with
             // the same server sequence.
-            serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             AddEntities(serviceProvider, TestStore.Name);
@@ -64,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore
         [SqlServerCondition(SqlServerCondition.IsNotCI)]
         public void Can_use_sequence_end_to_end_on_multiple_databases()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             var dbOne = TestStore.Name + "1";
@@ -83,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore
 
             // Use a different service provider so a different generator is used but with
             // the same server sequence.
-            serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             AddEntitiesToMultipleContexts(serviceProvider, dbOne, dbTwo);
@@ -128,7 +132,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_sequence_end_to_end_async()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -141,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore
 
             // Use a different service provider so a different generator is used but with
             // the same server sequence.
-            serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             await AddEntitiesAsync(serviceProvider, TestStore.Name);
@@ -176,7 +182,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_sequence_end_to_end_from_multiple_contexts_concurrently_async()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -215,7 +222,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_use_explicit_values()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -228,7 +236,8 @@ namespace Microsoft.EntityFrameworkCore
 
             // Use a different service provider so a different generator is used but with
             // the same server sequence.
-            serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             AddEntitiesWithIds(serviceProvider, 4, TestStore.Name);
@@ -311,7 +320,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #478
         public void Can_use_sequence_with_nullable_key_end_to_end()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using (var context = new NullableBronieContext(serviceProvider, TestStore.Name, true))
@@ -338,7 +348,8 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact] // Issue #478
         public void Can_use_identity_with_nullable_key_end_to_end()
         {
-            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using (var context = new NullableBronieContext(serviceProvider, TestStore.Name, false))

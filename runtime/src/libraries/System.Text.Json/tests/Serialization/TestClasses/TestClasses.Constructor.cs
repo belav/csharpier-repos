@@ -1490,7 +1490,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Assert.Equal(
                     i,
-                    (int)typeof(Class_With_Ctor_With_64_Params).GetProperty($"Int{i}")
+                    (int)typeof(Class_With_Ctor_With_64_Params)
+                        .GetProperty($"Int{i}")
                         .GetValue(this)
                 );
             }
@@ -2864,14 +2865,14 @@ namespace System.Text.Json.Serialization.Tests
             TimeZone = TimeZoneInfo.Utc.DisplayName,
             VolunteerCount = 15,
             Tasks = Enumerable.Repeat(
-                    new MyEventsListerItemTask
-                    {
-                        StartDate = DateTime.UtcNow,
-                        EndDate = DateTime.UtcNow.AddDays(1),
-                        Name = "A very nice task to have"
-                    },
-                    4
-                )
+                new MyEventsListerItemTask
+                {
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(1),
+                    Name = "A very nice task to have"
+                },
+                4
+            )
                 .ToList()
         };
     }

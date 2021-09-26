@@ -47,13 +47,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             foreach (var controllerModel in context.Result.Controllers)
             {
-                var controllerModelAuthData = controllerModel.Attributes.OfType<IAuthorizeData>()
+                var controllerModelAuthData = controllerModel.Attributes
+                    .OfType<IAuthorizeData>()
                     .ToArray();
                 if (controllerModelAuthData.Length > 0)
                 {
-                    controllerModel.Filters.Add(
-                        GetFilter(_policyProvider, controllerModelAuthData)
-                    );
+                    controllerModel.Filters
+                        .Add(GetFilter(_policyProvider, controllerModelAuthData));
                 }
                 foreach (var attribute in controllerModel.Attributes.OfType<IAllowAnonymous>())
                 {
@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
                 foreach (var actionModel in controllerModel.Actions)
                 {
-                    var actionModelAuthData = actionModel.Attributes.OfType<IAuthorizeData>()
+                    var actionModelAuthData = actionModel.Attributes
+                        .OfType<IAuthorizeData>()
                         .ToArray();
                     if (actionModelAuthData.Length > 0)
                     {

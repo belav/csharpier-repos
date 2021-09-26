@@ -59,10 +59,8 @@ namespace System.Net.Http.Functional.Tests
 
         protected static object GetUnderlyingSocketsHttpHandler(HttpClientHandler handler)
         {
-            FieldInfo field = typeof(HttpClientHandler).GetField(
-                "_underlyingHandler",
-                BindingFlags.Instance | BindingFlags.NonPublic
-            );
+            FieldInfo field = typeof(HttpClientHandler)
+                .GetField("_underlyingHandler", BindingFlags.Instance | BindingFlags.NonPublic);
             return field?.GetValue(handler);
         }
 

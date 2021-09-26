@@ -58,10 +58,8 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             Double value = TestLibrary.Generator.GetDouble();
-            object result = typeof(Vector64).GetMethod(
-                    nameof(Vector64.CreateScalar),
-                    new Type[] { typeof(Double) }
-                )
+            object result = typeof(Vector64)
+                .GetMethod(nameof(Vector64.CreateScalar), new Type[] { typeof(Double) })
                 .Invoke(null, new object[] { value });
 
             ValidateResult((Vector64<Double>)(result), value);
@@ -104,13 +102,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64.CreateScalar(Double): {method} failed:"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"Vector64.CreateScalar(Double): {method} failed:");
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary.TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -280,7 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 TestLoggingDefinitions
             >();
 
-            var validatePropertyMappingMethod = typeof(ModelValidator).GetRuntimeMethods()
+            var validatePropertyMappingMethod = typeof(ModelValidator)
+                .GetRuntimeMethods()
                 .Single(e => e.Name == "ValidatePropertyMapping");
 
             var modelRuntimeInitializer = TestHelpers.CreateContextServices()

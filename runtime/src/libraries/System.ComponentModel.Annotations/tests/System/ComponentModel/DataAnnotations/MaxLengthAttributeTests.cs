@@ -182,10 +182,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             Assert.Throws<InvalidCastException>(
                 () =>
-                    new MaxLengthAttribute().GetValidationResult(
-                        new Random(),
-                        new ValidationContext(new object())
-                    )
+                    new MaxLengthAttribute()
+                        .GetValidationResult(new Random(), new ValidationContext(new object()))
             );
         }
 
@@ -194,10 +192,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             Assert.Throws<InvalidCastException>(
                 () =>
-                    new MaxLengthAttribute().GetValidationResult(
-                        new GenericIEnumerableClass(),
-                        new ValidationContext(new object())
-                    )
+                    new MaxLengthAttribute()
+                        .GetValidationResult(
+                            new GenericIEnumerableClass(),
+                            new ValidationContext(new object())
+                        )
             );
         }
     }

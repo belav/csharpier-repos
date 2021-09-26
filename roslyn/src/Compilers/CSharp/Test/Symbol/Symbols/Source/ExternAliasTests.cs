@@ -434,22 +434,20 @@ class A : Bar::NS.Goo {}
                 assemblyName: "A3.dll"
             );
 
-            var targets = comp3.SyntaxTrees.AsParallel()
-                .Select(
-                    tree =>
-                    {
-                        var model = comp3.GetSemanticModel(tree);
+            var targets = comp3.SyntaxTrees.AsParallel().Select(
+                tree =>
+                {
+                    var model = comp3.GetSemanticModel(tree);
 
-                        var aliasSyntax = tree.GetCompilationUnitRoot()
-                            .DescendantNodes()
-                            .OfType<ExternAliasDirectiveSyntax>()
-                            .Single();
+                    var aliasSyntax = tree.GetCompilationUnitRoot()
+                        .DescendantNodes()
+                        .OfType<ExternAliasDirectiveSyntax>()
+                        .Single();
 
-                        var aliasSymbol = model.GetDeclaredSymbol(aliasSyntax);
-                        return (INamespaceSymbol)aliasSymbol.Target;
-                    }
-                )
-                .ToArray(); //force evaluation
+                    var aliasSymbol = model.GetDeclaredSymbol(aliasSyntax);
+                    return (INamespaceSymbol)aliasSymbol.Target;
+                }
+            ).ToArray(); //force evaluation
 
             var firstTarget = targets.First();
             Assert.NotNull(firstTarget);
@@ -470,22 +468,20 @@ class A : Bar::NS.Goo {}
                 assemblyName: "A3.dll"
             );
 
-            var targets = comp3.SyntaxTrees.AsParallel()
-                .Select(
-                    tree =>
-                    {
-                        var model = comp3.GetSemanticModel(tree);
+            var targets = comp3.SyntaxTrees.AsParallel().Select(
+                tree =>
+                {
+                    var model = comp3.GetSemanticModel(tree);
 
-                        var aliasSyntax = tree.GetCompilationUnitRoot()
-                            .DescendantNodes()
-                            .OfType<ExternAliasDirectiveSyntax>()
-                            .Single();
+                    var aliasSyntax = tree.GetCompilationUnitRoot()
+                        .DescendantNodes()
+                        .OfType<ExternAliasDirectiveSyntax>()
+                        .Single();
 
-                        var aliasSymbol = model.GetDeclaredSymbol(aliasSyntax);
-                        return (INamespaceSymbol)aliasSymbol.Target;
-                    }
-                )
-                .ToArray(); //force evaluation
+                    var aliasSymbol = model.GetDeclaredSymbol(aliasSyntax);
+                    return (INamespaceSymbol)aliasSymbol.Target;
+                }
+            ).ToArray(); //force evaluation
 
             var firstTarget = targets.First();
             Assert.NotNull(firstTarget);

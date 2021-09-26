@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var testConnectionFactory = default(ReconnectingConnectionFactory);
                     var startCallCount = 0;
@@ -176,9 +177,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     Assert.Same(originalConnectionId, hubConnection.ConnectionId);
 
                     var firstException = new Exception();
-                    (
-                        await testConnectionFactory.GetNextOrCurrentTestConnection()
-                    ).CompleteFromTransport(firstException);
+                    (await testConnectionFactory.GetNextOrCurrentTestConnection())
+                        .CompleteFromTransport(firstException);
 
                     Assert.Same(firstException, await reconnectingErrorTcs.Task.DefaultTimeout());
                     Assert.Single(retryContexts);
@@ -226,7 +226,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var startCallCount = 0;
 
@@ -294,9 +295,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     var firstException = new Exception();
-                    (
-                        await testConnectionFactory.GetNextOrCurrentTestConnection()
-                    ).CompleteFromTransport(firstException);
+                    (await testConnectionFactory.GetNextOrCurrentTestConnection())
+                        .CompleteFromTransport(firstException);
 
                     Assert.Same(firstException, await reconnectingErrorTcs.Task.DefaultTimeout());
                     Assert.Single(retryContexts);
@@ -334,7 +334,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var testConnectionFactory = new ReconnectingConnectionFactory();
                     builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
@@ -387,9 +388,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     var firstException = new Exception();
-                    (
-                        await testConnectionFactory.GetNextOrCurrentTestConnection()
-                    ).CompleteFromTransport(firstException);
+                    (await testConnectionFactory.GetNextOrCurrentTestConnection())
+                        .CompleteFromTransport(firstException);
 
                     Assert.Same(firstException, await reconnectingErrorTcs.Task.DefaultTimeout());
                     Assert.Single(retryContexts);
@@ -411,9 +411,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     );
 
                     var secondException = new Exception();
-                    (
-                        await testConnectionFactory.GetNextOrCurrentTestConnection()
-                    ).CompleteFromTransport(secondException);
+                    (await testConnectionFactory.GetNextOrCurrentTestConnection())
+                        .CompleteFromTransport(secondException);
 
                     Assert.Same(secondException, await reconnectingErrorTcs.Task.DefaultTimeout());
                     Assert.Equal(2, retryContexts.Count);
@@ -450,7 +449,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var testConnectionFactory = default(ReconnectingConnectionFactory);
 
@@ -552,7 +552,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var testConnectionFactory = default(ReconnectingConnectionFactory);
 
@@ -623,7 +624,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var testConnectionFactory = new ReconnectingConnectionFactory();
                     builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
@@ -661,9 +663,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     var firstException = new Exception();
-                    (
-                        await testConnectionFactory.GetNextOrCurrentTestConnection()
-                    ).CompleteFromTransport(firstException);
+                    (await testConnectionFactory.GetNextOrCurrentTestConnection())
+                        .CompleteFromTransport(firstException);
 
                     await closedErrorTcs.Task.DefaultTimeout();
 
@@ -686,7 +687,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var testConnectionFactory = new ReconnectingConnectionFactory(
                         () => new TestConnection(autoHandshake: false)
@@ -724,9 +726,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     var startTask = hubConnection.StartAsync().DefaultTimeout();
 
                     var firstException = new Exception();
-                    (
-                        await testConnectionFactory.GetNextOrCurrentTestConnection()
-                    ).CompleteFromTransport(firstException);
+                    (await testConnectionFactory.GetNextOrCurrentTestConnection())
+                        .CompleteFromTransport(firstException);
 
                     Assert.Same(
                         firstException,
@@ -755,7 +756,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var testConnectionFactory = new ReconnectingConnectionFactory(
                         () => new TestConnection(autoHandshake: false)
@@ -836,9 +838,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     Assert.Equal(TimeSpan.Zero, retryContexts[0].ElapsedTime);
 
                     var secondException = new Exception();
-                    (
-                        await testConnectionFactory.GetNextOrCurrentTestConnection()
-                    ).CompleteFromTransport(secondException);
+                    (await testConnectionFactory.GetNextOrCurrentTestConnection())
+                        .CompleteFromTransport(secondException);
 
                     await secondRetryDelayTcs.Task.DefaultTimeout();
 
@@ -884,7 +885,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var testConnectionFactory = new ReconnectingConnectionFactory(
                         () => new TestConnection(autoHandshake: false)
@@ -976,7 +978,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             new HandshakeResponseMessage("Error!"),
                             output
                         );
-                        await currentTestConnection.Application.Output.WriteAsync(output.ToArray())
+                        await currentTestConnection.Application.Output
+                            .WriteAsync(output.ToArray())
                             .DefaultTimeout();
                     }
 
@@ -1029,7 +1032,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var connectionStartTcs = new TaskCompletionSource(
                         TaskCreationOptions.RunContinuationsAsynchronously
@@ -1101,9 +1105,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     var firstException = new Exception();
-                    (
-                        await testConnectionFactory.GetNextOrCurrentTestConnection()
-                    ).CompleteFromTransport(firstException);
+                    (await testConnectionFactory.GetNextOrCurrentTestConnection())
+                        .CompleteFromTransport(firstException);
 
                     Assert.Same(firstException, await reconnectingErrorTcs.Task.DefaultTimeout());
                     Assert.Single(retryContexts);
@@ -1141,7 +1144,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 using (StartVerifiableLog(ExpectedErrors))
                 {
-                    var builder = new HubConnectionBuilder().WithLoggerFactory(LoggerFactory)
+                    var builder = new HubConnectionBuilder()
+                        .WithLoggerFactory(LoggerFactory)
                         .WithUrl("http://example.com");
                     var testConnectionFactory = new ReconnectingConnectionFactory();
                     builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
@@ -1192,9 +1196,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await hubConnection.StartAsync().DefaultTimeout();
 
                     var firstException = new Exception();
-                    (
-                        await testConnectionFactory.GetNextOrCurrentTestConnection()
-                    ).CompleteFromTransport(firstException);
+                    (await testConnectionFactory.GetNextOrCurrentTestConnection())
+                        .CompleteFromTransport(firstException);
 
                     Assert.Same(firstException, await reconnectingErrorTcs.Task.DefaultTimeout());
                     Assert.Single(retryContexts);

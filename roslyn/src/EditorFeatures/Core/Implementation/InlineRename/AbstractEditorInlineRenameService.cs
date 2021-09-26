@@ -41,11 +41,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
 
             return await GetRenameInfoAsync(
-                    _refactorNotifyServices,
-                    document,
-                    triggerToken,
-                    cancellationToken
-                )
+                _refactorNotifyServices,
+                document,
+                triggerToken,
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 }
             }
 
-            var symbol = await RenameLocations.ReferenceProcessing.TryGetRenamableSymbolAsync(
+            var symbol = await RenameLocations.ReferenceProcessing
+                .TryGetRenamableSymbolAsync(
                     document,
                     triggerToken.SpanStart,
                     cancellationToken: cancellationToken
@@ -156,11 +157,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             )
             {
                 var originalSymbol = await SymbolFinder.FindSymbolAtPositionAsync(
-                        semanticModel,
-                        triggerToken.SpanStart,
-                        workspace,
-                        cancellationToken: cancellationToken
-                    )
+                    semanticModel,
+                    triggerToken.SpanStart,
+                    workspace,
+                    cancellationToken: cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 if (originalSymbol != null && originalSymbol.IsConstructor())
@@ -256,13 +257,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         var projectIdOfLocation = sourceDocument.Project.Id;
 
                         if (
-                            solution.Projects.Any(
-                                p =>
-                                    p.IsSubmission
-                                    && p.ProjectReferences.Any(
-                                        r => r.ProjectId == projectIdOfLocation
-                                    )
-                            )
+                            solution.Projects
+                                .Any(
+                                    p =>
+                                        p.IsSubmission
+                                        && p.ProjectReferences
+                                            .Any(r => r.ProjectId == projectIdOfLocation)
+                                )
                         )
                         {
                             return new FailureInlineRenameInfo(
@@ -309,11 +310,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var token = await syntaxTree.GetTouchingWordAsync(
-                    position,
-                    syntaxFacts,
-                    cancellationToken,
-                    findInsideTrivia: true
-                )
+                position,
+                syntaxFacts,
+                cancellationToken,
+                findInsideTrivia: true
+            )
                 .ConfigureAwait(false);
             return token;
         }

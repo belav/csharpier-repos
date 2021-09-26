@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             internal string GetDebuggerDisplay() =>
                 (MessageFormat == null)
                     ? ""
-                    : string.Format(
+                    : string
+                      .Format(
                           MessageFormat,
                           ArgsOpt?.Select(a => (object)a).ToArray() ?? Array.Empty<object>()
                       );

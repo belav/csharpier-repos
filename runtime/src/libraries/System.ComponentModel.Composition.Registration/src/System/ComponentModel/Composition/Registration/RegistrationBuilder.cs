@@ -276,10 +276,8 @@ namespace System.ComponentModel.Composition.Registration
             IEnumerable<object> declaredAttributes
         )
         {
-            IEnumerable<object> attributes = base.GetCustomAttributes(
-                parameter,
-                declaredAttributes
-            );
+            IEnumerable<object> attributes = base
+                .GetCustomAttributes(parameter, declaredAttributes);
             List<Attribute> cachedAttributes = ReadParameterCustomAttributes(parameter);
 
             return cachedAttributes == null ? attributes : attributes.Concat(cachedAttributes);

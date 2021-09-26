@@ -99,9 +99,9 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                         {
                             using var reader = new JsonTextReader(File.OpenText(projectAssetsFile));
                             var projectAssets = JToken.ReadFrom(reader);
-                            var packageFolders = projectAssets[
-                                "packageFolders"
-                            ].Children<JProperty>().Select(p => p.Name);
+                            var packageFolders = projectAssets["packageFolders"]
+                                .Children<JProperty>()
+                                .Select(p => p.Name);
 
                             foreach (var packageFolder in packageFolders)
                             {
@@ -121,8 +121,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                         }
                         else
                         {
-                            var runtimeFrameworkVersion =
-                                _projectOptions.RuntimeFrameworkVersion.Value();
+                            var runtimeFrameworkVersion = _projectOptions.RuntimeFrameworkVersion
+                                .Value();
                             if (!string.IsNullOrEmpty(runtimeFrameworkVersion))
                             {
                                 args.Add("--fx-version");

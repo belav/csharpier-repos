@@ -44,12 +44,12 @@ namespace System.ComponentModel.Tests
             DateTime date = new DateTime(1998, 12, 5);
             yield return ConvertTest.Valid(date, date.ToString(formatInfo.ShortDatePattern));
             yield return ConvertTest.Valid(
-                    date,
-                    date.ToString(
-                        polandCulture.DateTimeFormat.ShortDatePattern,
-                        polandCulture.DateTimeFormat
-                    )
+                date,
+                date.ToString(
+                    polandCulture.DateTimeFormat.ShortDatePattern,
+                    polandCulture.DateTimeFormat
                 )
+            )
                 .WithRemoteInvokeCulture(polandCulture);
             yield return ConvertTest.Valid(date, "1998-12-05", CultureInfo.InvariantCulture)
                 .WithRemoteInvokeCulture(polandCulture);
@@ -62,20 +62,20 @@ namespace System.ComponentModel.Tests
                 )
             );
             yield return ConvertTest.Valid(
-                    dateWithTime,
-                    dateWithTime.ToString(
-                        polandCulture.DateTimeFormat.ShortDatePattern
-                            + " "
-                            + polandCulture.DateTimeFormat.ShortTimePattern,
-                        polandCulture.DateTimeFormat
-                    )
+                dateWithTime,
+                dateWithTime.ToString(
+                    polandCulture.DateTimeFormat.ShortDatePattern
+                        + " "
+                        + polandCulture.DateTimeFormat.ShortTimePattern,
+                    polandCulture.DateTimeFormat
                 )
+            )
                 .WithRemoteInvokeCulture(polandCulture);
             yield return ConvertTest.Valid(
-                    dateWithTime,
-                    "12/05/1998 22:30:30",
-                    CultureInfo.InvariantCulture
-                )
+                dateWithTime,
+                "12/05/1998 22:30:30",
+                CultureInfo.InvariantCulture
+            )
                 .WithRemoteInvokeCulture(polandCulture);
 
             yield return ConvertTest.Valid(DateTime.MinValue, string.Empty);
@@ -90,54 +90,57 @@ namespace System.ComponentModel.Tests
             yield return ConvertTest.Valid(
                 date,
                 new InstanceDescriptor(
-                    typeof(DateTime).GetConstructor(
-                        new Type[]
-                        {
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int)
-                        }
-                    ),
+                    typeof(DateTime)
+                        .GetConstructor(
+                            new Type[]
+                            {
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int)
+                            }
+                        ),
                     new object[] { 1998, 12, 5, 0, 0, 0, 0 }
                 )
             );
             yield return ConvertTest.Valid(
                 dateWithTime,
                 new InstanceDescriptor(
-                    typeof(DateTime).GetConstructor(
-                        new Type[]
-                        {
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int)
-                        }
-                    ),
+                    typeof(DateTime)
+                        .GetConstructor(
+                            new Type[]
+                            {
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int)
+                            }
+                        ),
                     new object[] { 1998, 12, 5, 22, 30, 30, 0 }
                 )
             );
             yield return ConvertTest.Valid(
                 dateWithTime,
                 new InstanceDescriptor(
-                    typeof(DateTime).GetConstructor(
-                        new Type[]
-                        {
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int)
-                        }
-                    ),
+                    typeof(DateTime)
+                        .GetConstructor(
+                            new Type[]
+                            {
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(int)
+                            }
+                        ),
                     new object[] { 1998, 12, 5, 22, 30, 30, 0 }
                 ),
                 CultureInfo.InvariantCulture

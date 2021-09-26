@@ -177,8 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 );
 
                 var statementsToInsert = await CreateStatementsOrInitializerToInsertAtCallSiteAsync(
-                        cancellationToken
-                    )
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 var callSiteGenerator = new CallSiteContainerRewriter(
@@ -211,8 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     var statement =
                         await GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
-                                cancellationToken
-                            )
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     return ImmutableArray.Create(statement);
                 }
@@ -538,9 +538,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                     declarationStatement.Declaration.Type,
                                     SyntaxFactory.SeparatedList(list)
                                 ),
-                                declarationStatement.SemicolonToken.WithPrependedLeadingTrivia(
-                                    triviaList
-                                )
+                                declarationStatement.SemicolonToken
+                                    .WithPrependedLeadingTrivia(triviaList)
                             )
                         );
                         triviaList.Clear();
@@ -785,7 +784,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (CSharpSelectionResult.ShouldCallConfigureAwaitFalse())
                 {
                     if (
-                        AnalyzerResult.ReturnType.GetMembers()
+                        AnalyzerResult.ReturnType
+                            .GetMembers()
                             .Any(
                                 x =>
                                     x
@@ -843,8 +843,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     SyntaxFactory.VariableDeclaration(typeNode)
                         .AddVariables(
                             SyntaxFactory.VariableDeclarator(
-                                    SyntaxFactory.Identifier(variable.Name)
-                                )
+                                SyntaxFactory.Identifier(variable.Name)
+                            )
                                 .WithInitializer(equalsValueClause)
                         )
                 );
@@ -863,8 +863,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     // indentation of inserted statements (from users code) with user code style preserved
                     var root = newDocument.Root;
                     var methodDefinition = root.GetAnnotatedNodes<SyntaxNode>(
-                            MethodDefinitionAnnotation
-                        )
+                        MethodDefinitionAnnotation
+                    )
                         .First();
 
 #pragma warning disable IDE0007 // Use implicit type (False positive: https://github.com/dotnet/roslyn/issues/44507)
@@ -881,13 +881,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     };
 
                     newDocument = await newDocument.WithSyntaxRootAsync(
-                            root.ReplaceNode(methodDefinition, newMethodDefinition),
-                            cancellationToken
-                        )
+                        root.ReplaceNode(methodDefinition, newMethodDefinition),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 
-                return await base.CreateGeneratedCodeAsync(status, newDocument, cancellationToken)
+                return await base
+                    .CreateGeneratedCodeAsync(status, newDocument, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -909,22 +910,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     return method.ReplaceToken(
                         body.OpenBraceToken,
-                        body.OpenBraceToken.WithAppendedTrailingTrivia(
-                            SpecializedCollections.SingletonEnumerable(
-                                SyntaxFactory.ElasticCarriageReturnLineFeed
+                        body.OpenBraceToken
+                            .WithAppendedTrailingTrivia(
+                                SpecializedCollections.SingletonEnumerable(
+                                    SyntaxFactory.ElasticCarriageReturnLineFeed
+                                )
                             )
-                        )
                     );
                 }
                 else if (expressionBody != null)
                 {
                     return method.ReplaceToken(
                         expressionBody.ArrowToken,
-                        expressionBody.ArrowToken.WithPrependedLeadingTrivia(
-                            SpecializedCollections.SingletonEnumerable(
-                                SyntaxFactory.ElasticCarriageReturnLineFeed
+                        expressionBody.ArrowToken
+                            .WithPrependedLeadingTrivia(
+                                SpecializedCollections.SingletonEnumerable(
+                                    SyntaxFactory.ElasticCarriageReturnLineFeed
+                                )
                             )
-                        )
                     );
                 }
                 else
@@ -958,7 +961,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     != NullableAnnotation.Annotated
                 )
                 {
-                    return await base.UpdateMethodAfterGenerationAsync(
+                    return await base
+                        .UpdateMethodAfterGenerationAsync(
                             originalDocument,
                             methodSymbolResult,
                             cancellationToken
@@ -966,9 +970,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         .ConfigureAwait(false);
                 }
 
-                var syntaxNode = originalDocument.Root.GetAnnotatedNodesAndTokens(
-                        MethodDefinitionAnnotation
-                    )
+                var syntaxNode = originalDocument.Root
+                    .GetAnnotatedNodesAndTokens(MethodDefinitionAnnotation)
                     .FirstOrDefault()
                     .AsNode();
                 var nodeIsMethodOrLocalFunction =
@@ -976,7 +979,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     || syntaxNode is LocalFunctionStatementSyntax;
                 if (!nodeIsMethodOrLocalFunction)
                 {
-                    return await base.UpdateMethodAfterGenerationAsync(
+                    return await base
+                        .UpdateMethodAfterGenerationAsync(
                             originalDocument,
                             methodSymbolResult,
                             cancellationToken
@@ -985,11 +989,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 }
 
                 var nullableReturnOperations = await CheckReturnOperations(
-                        syntaxNode,
-                        methodSymbolResult,
-                        originalDocument,
-                        cancellationToken
-                    )
+                    syntaxNode,
+                    methodSymbolResult,
+                    originalDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (nullableReturnOperations is object)
                 {
@@ -1000,11 +1004,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     ? method.ReturnType
                     : ((LocalFunctionStatementSyntax)syntaxNode).ReturnType;
                 var newDocument = await GenerateNewDocument(
-                        methodSymbolResult,
-                        returnType,
-                        originalDocument,
-                        cancellationToken
-                    )
+                    methodSymbolResult,
+                    returnType,
+                    originalDocument,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 return await SemanticDocument.CreateAsync(newDocument, cancellationToken)
@@ -1062,7 +1066,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         if (returnTypeInfo.Nullability.FlowState == NullableFlowState.MaybeNull)
                         {
                             // Flow state shows that return is correctly nullable
-                            return await base.UpdateMethodAfterGenerationAsync(
+                            return await base
+                                .UpdateMethodAfterGenerationAsync(
                                     originalDocument,
                                     methodSymbolResult,
                                     cancellationToken
@@ -1082,13 +1087,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 )
                 {
                     // Return type can be updated to not be null
-                    var newType = methodSymbolResult.Data.ReturnType.WithNullableAnnotation(
-                        NullableAnnotation.NotAnnotated
-                    );
+                    var newType = methodSymbolResult.Data.ReturnType
+                        .WithNullableAnnotation(NullableAnnotation.NotAnnotated);
 
-                    var oldRoot = await originalDocument.Document.GetSyntaxRootAsync(
-                            cancellationToken
-                        )
+                    var oldRoot = await originalDocument.Document
+                        .GetSyntaxRootAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var newRoot = oldRoot.ReplaceNode(returnType, newType.GenerateTypeSyntax());
 
@@ -1129,14 +1132,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     NamingStyleOptions.NamingPreferences,
                     LanguageNames.CSharp
                 );
-                var localFunctionPreferences = namingPreferences.SymbolSpecifications.Where(
-                    symbol =>
-                        symbol.AppliesTo(
-                            new SymbolKindOrTypeKind(MethodKind.LocalFunction),
-                            CreateMethodModifiers(),
-                            null
-                        )
-                );
+                var localFunctionPreferences = namingPreferences.SymbolSpecifications
+                    .Where(
+                        symbol =>
+                            symbol.AppliesTo(
+                                new SymbolKindOrTypeKind(MethodKind.LocalFunction),
+                                CreateMethodModifiers(),
+                                null
+                            )
+                    );
 
                 var namingRules = namingPreferences.Rules.NamingRules;
                 var localFunctionKind = new SymbolKindOrTypeKind(MethodKind.LocalFunction);
@@ -1145,14 +1149,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (
                         namingRules.Any(
                             rule =>
-                                rule.NamingStyle.CapitalizationScheme.Equals(
-                                    Capitalization.CamelCase
-                                )
-                                && rule.SymbolSpecification.AppliesTo(
-                                    localFunctionKind,
-                                    CreateMethodModifiers(),
-                                    null
-                                )
+                                rule.NamingStyle.CapitalizationScheme
+                                    .Equals(Capitalization.CamelCase)
+                                && rule.SymbolSpecification
+                                    .AppliesTo(localFunctionKind, CreateMethodModifiers(), null)
                         )
                     )
                     {

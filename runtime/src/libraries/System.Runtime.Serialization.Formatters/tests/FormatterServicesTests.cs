@@ -310,7 +310,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     (ObjectWithStaticConstructor)FormatterServices.GetUninitializedObject(
                         typeof(ObjectWithStaticConstructor)
                     )
-                ).GetValue()
+                )
+                    .GetValue()
             );
         }
 
@@ -335,7 +336,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     (ObjectWithStaticField)FormatterServices.GetUninitializedObject(
                         typeof(ObjectWithStaticField)
                     )
-                ).GetValue()
+                )
+                    .GetValue()
             );
         }
 

@@ -95,17 +95,18 @@ internal static class Utils
                 int from = Max(currentIndex - 10, 0);
                 int errPosition = currentIndex - from;
                 int to = Min(currentIndex + 20, commonLength);
-                string message = string.Format(
-                    "strings differ at index {0}\n{3}\u2193\n[expected]:{1}\n[actual  ]:{2}\n{3}\u2191\n[Expected (with length={4})]:\n{5}\n[Actual (with length={6})]:\n{7}",
-                    currentIndex,
-                    expected.Substring(from, to - from),
-                    actual.Substring(from, to - from),
-                    new string(' ', errPosition + " expected :".Length),
-                    expected.Length,
-                    expected,
-                    actual.Length,
-                    actual
-                );
+                string message = string
+                    .Format(
+                        "strings differ at index {0}\n{3}\u2193\n[expected]:{1}\n[actual  ]:{2}\n{3}\u2191\n[Expected (with length={4})]:\n{5}\n[Actual (with length={6})]:\n{7}",
+                        currentIndex,
+                        expected.Substring(from, to - from),
+                        actual.Substring(from, to - from),
+                        new string(' ', errPosition + " expected :".Length),
+                        expected.Length,
+                        expected,
+                        actual.Length,
+                        actual
+                    );
                 return new CompareResult { ErrorMessage = message };
             }
         }
@@ -223,10 +224,11 @@ internal static class Utils
                     // Check whether the substring before this matches
                     if (
                         0
-                        == string.Compare(
-                            baselineXElement.Name.LocalName.Substring(0, deskIdx),
-                            actualXElement.Name.LocalName.Substring(0, coreCLRIdx)
-                        )
+                        == string
+                            .Compare(
+                                baselineXElement.Name.LocalName.Substring(0, deskIdx),
+                                actualXElement.Name.LocalName.Substring(0, coreCLRIdx)
+                            )
                     )
                     {
                         // Check if the namespace matched.
@@ -235,12 +237,13 @@ internal static class Utils
                     }
                 }
             }
-            string message = string.Format(
-                "Namespace difference \n[expected]:{0}\n[actual  ]:{1}\n Padding expected elements is {2}",
-                baselineXElement.Name.Namespace,
-                actualXElement.Name.Namespace,
-                actualXElement.Name.LocalName
-            );
+            string message = string
+                .Format(
+                    "Namespace difference \n[expected]:{0}\n[actual  ]:{1}\n Padding expected elements is {2}",
+                    baselineXElement.Name.Namespace,
+                    actualXElement.Name.Namespace,
+                    actualXElement.Name.LocalName
+                );
             Debug.WriteLine(
                 "Either padding is different or namespace is not matching.\n" + message
             );
@@ -279,10 +282,8 @@ internal static class Utils
             {
                 if (
                     0
-                    != string.Compare(
-                        deskAtrs[i].Name.NamespaceName,
-                        coreCLRAtrs[i].Name.NamespaceName
-                    )
+                    != string
+                        .Compare(deskAtrs[i].Name.NamespaceName, coreCLRAtrs[i].Name.NamespaceName)
                 )
                 {
                     Debug.WriteLine(
@@ -409,10 +410,11 @@ internal static class Utils
                             // Also we check that the rest of the strings match.
                             if (
                                 0
-                                == string.Compare(
-                                    deskElemValue.Substring(deskPrefix.Length),
-                                    coreCLRElemValue.Substring(coreCLRPrefix.Length)
-                                )
+                                == string
+                                    .Compare(
+                                        deskElemValue.Substring(deskPrefix.Length),
+                                        coreCLRElemValue.Substring(coreCLRPrefix.Length)
+                                    )
                             )
                                 return true;
                         }

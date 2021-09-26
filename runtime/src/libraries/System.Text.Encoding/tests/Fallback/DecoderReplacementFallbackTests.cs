@@ -124,9 +124,8 @@ namespace System.Text.Tests
             bool expected
         )
         {
-            DecoderFallbackBuffer buffer = new DecoderReplacementFallback(
-                replacement
-            ).CreateFallbackBuffer();
+            DecoderFallbackBuffer buffer = new DecoderReplacementFallback(replacement)
+                .CreateFallbackBuffer();
             Assert.Equal(expected, buffer.Fallback(bytesUnknown, 0));
         }
 
@@ -137,9 +136,8 @@ namespace System.Text.Tests
             string replacement
         )
         {
-            DecoderFallbackBuffer buffer = new DecoderReplacementFallback(
-                replacement
-            ).CreateFallbackBuffer();
+            DecoderFallbackBuffer buffer = new DecoderReplacementFallback(replacement)
+                .CreateFallbackBuffer();
             buffer.Fallback(new byte[] { 1 }, 0);
 
             AssertExtensions.Throws<ArgumentException>(

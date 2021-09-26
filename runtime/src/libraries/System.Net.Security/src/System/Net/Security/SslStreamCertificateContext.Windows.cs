@@ -99,9 +99,8 @@ namespace System.Net.Security
                                 {
                                     if (
                                         status.Status.HasFlag(X509ChainStatusFlags.PartialChain)
-                                        || status.Status.HasFlag(
-                                            X509ChainStatusFlags.NotSignatureValid
-                                        )
+                                        || status.Status
+                                            .HasFlag(X509ChainStatusFlags.NotSignatureValid)
                                     )
                                     {
                                         osCanBuildChain = false;

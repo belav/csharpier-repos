@@ -128,9 +128,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                 var startOfLineCount = start + startStr.Length;
                 var endOfLineCount = src.IndexOf(']', startOfLineCount);
-                var lineCount = int.Parse(
-                    src.Substring(startOfLineCount, endOfLineCount - startOfLineCount)
-                );
+                var lineCount = int
+                    .Parse(src.Substring(startOfLineCount, endOfLineCount - startOfLineCount));
 
                 var end = src.IndexOf(endStr, endOfLineCount) + endStr.Length;
 

@@ -152,11 +152,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             {
                 if (
                     reference.ForProvider != null
-                    && !string.Equals(
-                        reference.ForProvider,
-                        provider,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !string
+                        .Equals(reference.ForProvider, provider, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     continue;

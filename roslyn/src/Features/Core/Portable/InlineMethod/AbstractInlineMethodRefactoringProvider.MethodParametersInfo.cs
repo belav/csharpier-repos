@@ -179,13 +179,12 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         )
         {
             var callerSemanticModel = await document.GetRequiredSemanticModelAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             var allArgumentOperations = invocationOperation.Arguments;
-            var calleeDocument = document.Project.Solution.GetRequiredDocument(
-                calleeMethodNode.SyntaxTree
-            );
+            var calleeDocument = document.Project.Solution
+                .GetRequiredDocument(calleeMethodNode.SyntaxTree);
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
             if (statementContainingInvocation != null)
             {
@@ -315,8 +314,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 //     DoSomething(a, b);
                 // }
                 var operationsToGenerateFreshVariablesFor = allArgumentOperations.RemoveRange(
-                        operationsWithIdentifierArgument
-                    )
+                    operationsWithIdentifierArgument
+                )
                     .RemoveRange(operationsWithVariableDeclarationArgument)
                     .RemoveRange(operationsWithLiteralArgument)
                     .RemoveRange(operationsWithDefaultValue)
@@ -344,11 +343,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // Note: this change might change the order of evaluation. Strictly keep the semantics will make the
                 // code becomes strange so it is by design.
                 var operationsReadOnlyOnce = await GetArgumentsReadOnlyOnceAsync(
-                        calleeDocument,
-                        operationsToGenerateFreshVariablesFor,
-                        calleeMethodNode,
-                        cancellationToken
-                    )
+                    calleeDocument,
+                    operationsToGenerateFreshVariablesFor,
+                    calleeMethodNode,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 operationsToGenerateFreshVariablesFor =
                     operationsToGenerateFreshVariablesFor.RemoveRange(operationsReadOnlyOnce);
@@ -360,8 +359,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 );
 
                 var parameterToReplaceMap = operationsWithLiteralArgument.Concat(
-                        operationsWithIdentifierArgument
-                    )
+                    operationsWithIdentifierArgument
+                )
                     .Concat(operationsReadOnlyOnce)
                     .Concat(operationsWithDefaultValue)
                     .ToImmutableDictionary(
@@ -391,27 +390,27 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // 'y' might becomes the first declaration if using dictionary instead of array.
                 var parametersWithVariableDeclarationArgument =
                     operationsWithVariableDeclarationArgument.Select(
-                            argument =>
-                                (
-                                    argument.Parameter,
-                                    callerSemanticModel.GetSymbolInfo(
-                                            argument.Value.Syntax,
-                                            cancellationToken
-                                        )
-                                        .GetAnySymbol()?.Name
+                        argument =>
+                            (
+                                argument.Parameter,
+                                callerSemanticModel.GetSymbolInfo(
+                                    argument.Value.Syntax,
+                                    cancellationToken
                                 )
-                        )
+                                    .GetAnySymbol()?.Name
+                            )
+                    )
                         .Where(parameterAndArgumentName => parameterAndArgumentName.Name != null)
                         .ToImmutableArray();
 
                 var mergeInlineContentAndVariableDeclarationArgument =
                     await ShouldMergeInlineContentAndVariableDeclarationArgumentAsync(
-                            calleeDocument,
-                            calleeInvocationNode,
-                            parametersWithVariableDeclarationArgument!,
-                            rawInlineExpression,
-                            cancellationToken
-                        )
+                        calleeDocument,
+                        calleeInvocationNode,
+                        parametersWithVariableDeclarationArgument!,
+                        rawInlineExpression,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 return new MethodParametersInfo(
@@ -428,10 +427,10 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // This such case, just use the argument expression to parameter.
                 // Note: this might also cause semantics changes but is acceptable for a refactoring
                 var parameterToReplaceMap = allArgumentOperations.Where(
-                        argument =>
-                            argument.Value.Syntax is TExpressionSyntax
-                            && !_syntaxFacts.IsDeclarationExpression(argument.Value.Syntax)
-                    )
+                    argument =>
+                        argument.Value.Syntax is TExpressionSyntax
+                        && !_syntaxFacts.IsDeclarationExpression(argument.Value.Syntax)
+                )
                     .ToImmutableDictionary(
                         // We excluded arglist callees, so Parameter will always be non null
                         keySelector: argument => argument.Parameter!,
@@ -495,11 +494,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             {
                 var parameterSymbol = argument.Parameter;
                 var allReferences = await SymbolFinder.FindReferencesAsync(
-                        parameterSymbol,
-                        document.Project.Solution,
-                        ImmutableHashSet<Document>.Empty.Add(document),
-                        cancellationToken
-                    )
+                    parameterSymbol,
+                    document.Project.Solution,
+                    ImmutableHashSet<Document>.Empty.Add(document),
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 // Need to check if the node is in CalleeMethodNode, because for this case
                 // void Caller() { Callee(i: 10); }
@@ -510,10 +509,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                         location =>
                             !location.IsImplicit
                             && calleeMethodNode.Contains(
-                                location.Location.FindNode(
-                                    getInnermostNodeForTie: true,
-                                    cancellationToken
-                                )
+                                location.Location
+                                    .FindNode(getInnermostNodeForTie: true, cancellationToken)
                             )
                     )
                     .ToImmutableArray();
@@ -557,8 +554,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         )
         {
             var semanticModel = await calleeDocument.GetRequiredSemanticModelAsync(
-                    cancellationToken
-                )
+                cancellationToken
+            )
                 .ConfigureAwait(false);
             return parametersWithVariableDeclarationArgument.Length == 1
                 && _syntaxFacts.IsExpressionStatement(calleInvocationNode.Parent)
@@ -566,9 +563,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     is ISimpleAssignmentOperation simpleAssignmentOperation
                 && simpleAssignmentOperation.Target
                     is IParameterReferenceOperation parameterOperation
-                && parameterOperation.Parameter.Equals(
-                    parametersWithVariableDeclarationArgument[0].parameterSymbol
-                );
+                && parameterOperation.Parameter
+                    .Equals(parametersWithVariableDeclarationArgument[0].parameterSymbol);
         }
 
         private TExpressionSyntax GenerateArgumentExpression(

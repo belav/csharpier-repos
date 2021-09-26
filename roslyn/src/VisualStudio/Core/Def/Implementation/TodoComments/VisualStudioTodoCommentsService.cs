@@ -136,17 +136,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             // Now kick off scanning in the OOP process.
             // If the call fails an error has already been reported and there is nothing more to do.
             _ = await _lazyConnection.TryInvokeAsync(
-                    (service, callbackId, cancellationToken) =>
-                        service.ComputeTodoCommentsAsync(callbackId, cancellationToken),
-                    cancellationToken
-                )
+                (service, callbackId, cancellationToken) =>
+                    service.ComputeTodoCommentsAsync(callbackId, cancellationToken),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 
         private void ComputeTodoCommentsInCurrentProcess(CancellationToken cancellationToken)
         {
-            var registrationService =
-                _workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registrationService = _workspace.Services
+                .GetRequiredService<ISolutionCrawlerRegistrationService>();
             var analyzerProvider = new InProcTodoCommentsIncrementalAnalyzerProvider(this);
 
             registrationService.AddAnalyzerProvider(
@@ -276,10 +276,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
                 .ConfigureAwait(false);
 
             await ReportTodoCommentDataAsync(
-                    document.Id,
-                    converted.ToImmutable(),
-                    cancellationToken
-                )
+                document.Id,
+                converted.ToImmutable(),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
     }

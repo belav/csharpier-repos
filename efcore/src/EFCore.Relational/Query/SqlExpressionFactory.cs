@@ -599,7 +599,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ?? whenClauses.Select(wc => wc.Test.TypeMapping).FirstOrDefault(t => t != null)
                 // Since we never look at type of Operand/Test after this place,
                 // we need to find actual typeMapping based on non-object type.
-                ?? new[] { operand.Type }.Concat(whenClauses.Select(wc => wc.Test.Type))
+                ?? new[] { operand.Type }
+                    .Concat(whenClauses.Select(wc => wc.Test.Type))
                     .Where(t => t != typeof(object))
                     .Select(t => _typeMappingSource.FindMapping(t))
                     .FirstOrDefault();
@@ -1094,9 +1095,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var outerEntityProjection = GetMappedEntityProjectionExpression(selectExpression);
-            var outerIsPrincipal = foreignKey.PrincipalEntityType.IsAssignableFrom(
-                outerEntityProjection.EntityType
-            );
+            var outerIsPrincipal = foreignKey.PrincipalEntityType
+                .IsAssignableFrom(outerEntityProjection.EntityType);
 
             var innerSelect = outerIsPrincipal
                 ? new SelectExpression(foreignKey.DeclaringEntityType, this)
@@ -1115,10 +1115,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var outerKey = (
                 outerIsPrincipal ? foreignKey.PrincipalKey.Properties : foreignKey.Properties
-            ).Select(p => outerEntityProjection.BindProperty(p));
+            )
+                .Select(p => outerEntityProjection.BindProperty(p));
             var innerKey = (
                 outerIsPrincipal ? foreignKey.Properties : foreignKey.PrincipalKey.Properties
-            ).Select(p => innerEntityProjection.BindProperty(p));
+            )
+                .Select(p => innerEntityProjection.BindProperty(p));
 
             var joinPredicate = outerKey.Zip(innerKey, Equal).Aggregate(AndAlso);
 
@@ -1185,8 +1187,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (requiredNonPkProperties.Count > 0)
             {
                 predicate = requiredNonPkProperties.Select(
-                        e => IsNotNull(e, entityProjectionExpression)
-                    )
+                    e => IsNotNull(e, entityProjectionExpression)
+                )
                     .Aggregate((l, r) => AndAlso(l, r));
             }
 
@@ -1201,8 +1203,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 var atLeastOneNonNullValueInNullablePropertyCondition =
                     allNonSharedNonPkProperties.Select(
-                            e => IsNotNull(e, entityProjectionExpression)
-                        )
+                        e => IsNotNull(e, entityProjectionExpression)
+                    )
                         .Aggregate((a, b) => OrElse(a, b));
 
                 predicate =

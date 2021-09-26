@@ -113,9 +113,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         )
         {
             return _pipeWriter.WriteAsync(
-                    new ReadOnlyMemory<byte>(buffer, offset, count),
-                    cancellationToken
-                )
+                new ReadOnlyMemory<byte>(buffer, offset, count),
+                cancellationToken
+            )
                 .GetAsTask();
         }
 

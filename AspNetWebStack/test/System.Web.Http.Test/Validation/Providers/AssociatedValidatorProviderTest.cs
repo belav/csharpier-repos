@@ -31,10 +31,8 @@ namespace System.Web.Http.Validation.Providers
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () =>
-                    provider.Object.GetValidators(
-                        metadata: null,
-                        validatorProviders: _noValidatorProviders
-                    ),
+                    provider.Object
+                        .GetValidators(metadata: null, validatorProviders: _noValidatorProviders),
                 "metadata"
             );
             Assert.ThrowsArgumentNull(
@@ -56,13 +54,13 @@ namespace System.Web.Http.Validation.Providers
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
             provider.Setup(
-                    p =>
-                        p.AbstractGetValidators(
-                            metadata,
-                            _noValidatorProviders,
-                            It.IsAny<IEnumerable<Attribute>>()
-                        )
-                )
+                p =>
+                    p.AbstractGetValidators(
+                        metadata,
+                        _noValidatorProviders,
+                        It.IsAny<IEnumerable<Attribute>>()
+                    )
+            )
                 .Callback<
                     ModelMetadata,
                     IEnumerable<ModelValidatorProvider>,
@@ -92,13 +90,13 @@ namespace System.Web.Http.Validation.Providers
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
             provider.Setup(
-                    p =>
-                        p.AbstractGetValidators(
-                            metadata,
-                            _noValidatorProviders,
-                            It.IsAny<IEnumerable<Attribute>>()
-                        )
-                )
+                p =>
+                    p.AbstractGetValidators(
+                        metadata,
+                        _noValidatorProviders,
+                        It.IsAny<IEnumerable<Attribute>>()
+                    )
+            )
                 .Callback<
                     ModelMetadata,
                     IEnumerable<ModelValidatorProvider>,
@@ -128,13 +126,13 @@ namespace System.Web.Http.Validation.Providers
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
             provider.Setup(
-                    p =>
-                        p.AbstractGetValidators(
-                            metadata,
-                            _noValidatorProviders,
-                            It.IsAny<IEnumerable<Attribute>>()
-                        )
-                )
+                p =>
+                    p.AbstractGetValidators(
+                        metadata,
+                        _noValidatorProviders,
+                        It.IsAny<IEnumerable<Attribute>>()
+                    )
+            )
                 .Callback<
                     ModelMetadata,
                     IEnumerable<ModelValidatorProvider>,

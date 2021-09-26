@@ -728,9 +728,9 @@ class C
                 // (15,25): error CS8302: Feature 'ref conditional expression' is not available in C# 7.1. Please use language version 7.2 or greater.
                 //         ref int r = ref b? ref local1: ref local2;
                 Diagnostic(
-                        ErrorCode.ERR_FeatureNotAvailableInVersion7_1,
-                        "b? ref local1: ref local2"
-                    )
+                    ErrorCode.ERR_FeatureNotAvailableInVersion7_1,
+                    "b? ref local1: ref local2"
+                )
                     .WithArguments("ref conditional expression", "7.2")
                     .WithLocation(15, 25)
             );

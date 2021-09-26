@@ -121,11 +121,7 @@ namespace CSharpSyntaxGenerator
         protected string CommaJoin(params object[] values) => Join(", ", values);
 
         protected string Join(string separator, params object[] values) =>
-            string.Join(
-                separator,
-                values.SelectMany(
-                    v =>
-                        (
+            string.Join(separator, values.SelectMany(v => (
                             v switch
                             {
                                 string s => new[] { s },
@@ -135,9 +131,7 @@ namespace CSharpSyntaxGenerator
                                       "Join must be passed strings or collections of strings"
                                   )
                             }
-                        ).Where(s => s != "")
-                )
-            );
+                        ).Where(s => s != "")));
 
         protected void OpenBlock()
         {

@@ -53,11 +53,12 @@ namespace System
                         }
                         else
                         {
-                            result = int.Parse(
-                                str,
-                                NumberStyles.AllowLeadingSign,
-                                NumberFormatInfo.InvariantInfo
-                            );
+                            result = int
+                                .Parse(
+                                    str,
+                                    NumberStyles.AllowLeadingSign,
+                                    NumberFormatInfo.InvariantInfo
+                                );
                         }
                         break;
                     case IConvertible convertible:
@@ -108,11 +109,12 @@ namespace System
                         }
                         else
                         {
-                            result = short.Parse(
-                                str,
-                                NumberStyles.AllowLeadingSign,
-                                NumberFormatInfo.InvariantInfo
-                            );
+                            result = short
+                                .Parse(
+                                    str,
+                                    NumberStyles.AllowLeadingSign,
+                                    NumberFormatInfo.InvariantInfo
+                                );
                         }
                         break;
                     case IConvertible convertible:

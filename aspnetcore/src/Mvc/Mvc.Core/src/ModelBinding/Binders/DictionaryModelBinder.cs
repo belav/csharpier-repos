@@ -244,16 +244,17 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 }
             }
 
-            bindingContext.ValidationState.Add(
-                model,
-                new ValidationStateEntry()
-                {
-                    Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(
-                        keyMappings,
-                        valueMetadata
-                    ),
-                }
-            );
+            bindingContext.ValidationState
+                .Add(
+                    model,
+                    new ValidationStateEntry()
+                    {
+                        Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(
+                            keyMappings,
+                            valueMetadata
+                        ),
+                    }
+                );
         }
 
         /// <inheritdoc />

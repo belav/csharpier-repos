@@ -50,10 +50,8 @@ namespace System.Globalization.Tests
         public void CurrentUICulture()
         {
             var newUICulture = new CultureInfo(
-                CultureInfo.CurrentUICulture.Name.Equals(
-                    "ja-JP",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                CultureInfo.CurrentUICulture.Name
+                .Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
                   ? "ar-SA"
                   : "ja-JP"
             );
@@ -77,60 +75,54 @@ namespace System.Globalization.Tests
         public void DefaultThreadCurrentCulture()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        CultureInfo newCulture = new CultureInfo(
-                            CultureInfo.DefaultThreadCurrentCulture == null
-                                || CultureInfo.DefaultThreadCurrentCulture.Name.Equals(
-                                    "ja-JP",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                              ? "ar-SA"
-                              : "ja-JP"
-                        );
-                        CultureInfo.DefaultThreadCurrentCulture = newCulture;
+                () =>
+                {
+                    CultureInfo newCulture = new CultureInfo(
+                        CultureInfo.DefaultThreadCurrentCulture == null
+                            || CultureInfo.DefaultThreadCurrentCulture.Name
+                                .Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
+                          ? "ar-SA"
+                          : "ja-JP"
+                    );
+                    CultureInfo.DefaultThreadCurrentCulture = newCulture;
 
-                        Task task = Task.Run(
-                            () =>
-                            {
-                                Assert.Equal(CultureInfo.CurrentCulture, newCulture);
-                            }
-                        );
-                        ((IAsyncResult)task).AsyncWaitHandle.WaitOne();
-                        task.Wait();
-                    }
-                )
-                .Dispose();
+                    Task task = Task.Run(
+                        () =>
+                        {
+                            Assert.Equal(CultureInfo.CurrentCulture, newCulture);
+                        }
+                    );
+                    ((IAsyncResult)task).AsyncWaitHandle.WaitOne();
+                    task.Wait();
+                }
+            ).Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void DefaultThreadCurrentUICulture()
         {
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        CultureInfo newUICulture = new CultureInfo(
-                            CultureInfo.DefaultThreadCurrentUICulture == null
-                                || CultureInfo.DefaultThreadCurrentUICulture.Name.Equals(
-                                    "ja-JP",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                              ? "ar-SA"
-                              : "ja-JP"
-                        );
-                        CultureInfo.DefaultThreadCurrentUICulture = newUICulture;
+                () =>
+                {
+                    CultureInfo newUICulture = new CultureInfo(
+                        CultureInfo.DefaultThreadCurrentUICulture == null
+                            || CultureInfo.DefaultThreadCurrentUICulture.Name
+                                .Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
+                          ? "ar-SA"
+                          : "ja-JP"
+                    );
+                    CultureInfo.DefaultThreadCurrentUICulture = newUICulture;
 
-                        Task task = Task.Run(
-                            () =>
-                            {
-                                Assert.Equal(CultureInfo.CurrentUICulture, newUICulture);
-                            }
-                        );
-                        ((IAsyncResult)task).AsyncWaitHandle.WaitOne();
-                        task.Wait();
-                    }
-                )
-                .Dispose();
+                    Task task = Task.Run(
+                        () =>
+                        {
+                            Assert.Equal(CultureInfo.CurrentUICulture, newUICulture);
+                        }
+                    );
+                    ((IAsyncResult)task).AsyncWaitHandle.WaitOne();
+                    task.Wait();
+                }
+            ).Dispose();
         }
 
         [Fact]
@@ -159,18 +151,17 @@ namespace System.Globalization.Tests
             psi.Environment["LANG"] = langEnvVar;
 
             RemoteExecutor.Invoke(
-                    expected =>
-                    {
-                        Assert.NotNull(CultureInfo.CurrentCulture);
-                        Assert.NotNull(CultureInfo.CurrentUICulture);
+                expected =>
+                {
+                    Assert.NotNull(CultureInfo.CurrentCulture);
+                    Assert.NotNull(CultureInfo.CurrentUICulture);
 
-                        Assert.Equal(expected, CultureInfo.CurrentCulture.Name);
-                        Assert.Equal(expected, CultureInfo.CurrentUICulture.Name);
-                    },
-                    expectedCultureName,
-                    new RemoteInvokeOptions { StartInfo = psi }
-                )
-                .Dispose();
+                    Assert.Equal(expected, CultureInfo.CurrentCulture.Name);
+                    Assert.Equal(expected, CultureInfo.CurrentUICulture.Name);
+                },
+                expectedCultureName,
+                new RemoteInvokeOptions { StartInfo = psi }
+            ).Dispose();
         }
 
         [PlatformSpecific(TestPlatforms.AnyUnix)] // When LANG is empty or unset, should default to the invariant culture on Unix.
@@ -190,17 +181,16 @@ namespace System.Globalization.Tests
             }
 
             RemoteExecutor.Invoke(
-                    () =>
-                    {
-                        Assert.NotNull(CultureInfo.CurrentCulture);
-                        Assert.NotNull(CultureInfo.CurrentUICulture);
+                () =>
+                {
+                    Assert.NotNull(CultureInfo.CurrentCulture);
+                    Assert.NotNull(CultureInfo.CurrentUICulture);
 
-                        Assert.Equal("", CultureInfo.CurrentCulture.Name);
-                        Assert.Equal("", CultureInfo.CurrentUICulture.Name);
-                    },
-                    new RemoteInvokeOptions { StartInfo = psi }
-                )
-                .Dispose();
+                    Assert.Equal("", CultureInfo.CurrentCulture.Name);
+                    Assert.Equal("", CultureInfo.CurrentUICulture.Name);
+                },
+                new RemoteInvokeOptions { StartInfo = psi }
+            ).Dispose();
         }
 
         private static void CopyEssentialTestEnvironment(IDictionary<string, string> environment)

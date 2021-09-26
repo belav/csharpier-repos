@@ -118,9 +118,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     CancellationToken
                 );
 
-                var baseLine = newSourceText.Lines.GetLineFromPosition(
-                    desiredIndentation.BasePosition
-                );
+                var baseLine = newSourceText.Lines
+                    .GetLineFromPosition(desiredIndentation.BasePosition);
                 var baseOffsetInLine = desiredIndentation.BasePosition - baseLine.Start;
 
                 var indent = baseOffsetInLine + desiredIndentation.Offset;
@@ -197,10 +196,10 @@ namespace Microsoft.CodeAnalysis.Wrapping
             {
                 var newDocument = OriginalDocument.WithSyntaxRoot(rewrittenRoot);
                 var formattedDocument = await Formatter.FormatAsync(
-                        newDocument,
-                        spanToFormat,
-                        cancellationToken: CancellationToken
-                    )
+                    newDocument,
+                    spanToFormat,
+                    cancellationToken: CancellationToken
+                )
                     .ConfigureAwait(false);
                 return formattedDocument;
             }
@@ -209,12 +208,10 @@ namespace Microsoft.CodeAnalysis.Wrapping
                 ImmutableArray<Edit> edits
             )
             {
-                using var _1 = PooledDictionary<SyntaxToken, SyntaxTriviaList>.GetInstance(
-                    out var leftTokenToTrailingTrivia
-                );
-                using var _2 = PooledDictionary<SyntaxToken, SyntaxTriviaList>.GetInstance(
-                    out var rightTokenToLeadingTrivia
-                );
+                using var _1 = PooledDictionary<SyntaxToken, SyntaxTriviaList>
+                    .GetInstance(out var leftTokenToTrailingTrivia);
+                using var _2 = PooledDictionary<SyntaxToken, SyntaxTriviaList>
+                    .GetInstance(out var rightTokenToLeadingTrivia);
 
                 foreach (var edit in edits)
                 {
@@ -266,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             {
                 var root = await OriginalDocument.GetSyntaxRootAsync(CancellationToken)
                     .ConfigureAwait(false);
-                var tokens = leftTokenToTrailingTrivia.Keys.Concat(rightTokenToLeadingTrivia.Keys)
+                var tokens = leftTokenToTrailingTrivia.Keys
+                    .Concat(rightTokenToLeadingTrivia.Keys)
                     .Distinct()
                     .ToImmutableArray();
 
@@ -288,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     nodes: new[] { nodeToFormat },
                     computeReplacementNode: (oldNode, newNode) =>
                         newNode.WithAdditionalAnnotations(s_toFormatAnnotation),
-                    tokens: leftTokenToTrailingTrivia.Keys.Concat(rightTokenToLeadingTrivia.Keys)
+                    tokens: leftTokenToTrailingTrivia.Keys
+                        .Concat(rightTokenToLeadingTrivia.Keys)
                         .Distinct(),
                     computeReplacementToken: (oldToken, newToken) =>
                     {

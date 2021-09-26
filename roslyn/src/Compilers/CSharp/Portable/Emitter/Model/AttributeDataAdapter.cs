@@ -48,11 +48,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (reportDiagnostics)
                 {
-                    context.Diagnostics.Add(
-                        ErrorCode.ERR_NotAnAttributeClass,
-                        context.SyntaxNodeOpt?.Location ?? NoLocation.Singleton,
-                        this.AttributeClass
-                    );
+                    context.Diagnostics
+                        .Add(
+                            ErrorCode.ERR_NotAnAttributeClass,
+                            context.SyntaxNodeOpt?.Location ?? NoLocation.Singleton,
+                            this.AttributeClass
+                        );
                 }
 
                 return null;
@@ -142,9 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(!argument.Values.IsDefault);
             var values = argument.Values;
-            var arrayType = ((PEModuleBuilder)context.Module).Translate(
-                (ArrayTypeSymbol)argument.TypeInternal
-            );
+            var arrayType = ((PEModuleBuilder)context.Module)
+                .Translate((ArrayTypeSymbol)argument.TypeInternal);
 
             if (values.Length == 0)
             {

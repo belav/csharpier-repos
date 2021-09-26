@@ -76,7 +76,8 @@ namespace TestServer
             testAppInfo.Scenarios = createIndividualHosts.ToDictionary(
                 kvp => kvp.Key,
                 kvp =>
-                    kvp.Value.host.Services.GetRequiredService<IServer>()
+                    kvp.Value.host.Services
+                        .GetRequiredService<IServer>()
                         .Features.Get<IServerAddressesFeature>()
                         .Addresses.FirstOrDefault()
                         .Replace("127.0.0.1", "localhost") + kvp.Value.basePath
@@ -88,22 +89,23 @@ namespace TestServer
         private static (IHost host, string basePath) CreateDevServerHost(string[] args)
         {
             var contentRoot =
-                typeof(Program).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                typeof(Program).Assembly
+                    .GetCustomAttributes<AssemblyMetadataAttribute>()
                     .Single(
                         a => a.Key == "Microsoft.AspNetCore.Testing.BasicTestApp.ContentRoot"
                     ).Value;
 
             var finalArgs = args.Concat(
-                    new[]
-                    {
-                        "--contentroot",
-                        contentRoot,
-                        "--pathbase",
-                        "/subdir",
-                        "--applicationpath",
-                        typeof(BasicTestApp.Program).Assembly.Location,
-                    }
-                )
+                new[]
+                {
+                    "--contentroot",
+                    contentRoot,
+                    "--pathbase",
+                    "/subdir",
+                    "--applicationpath",
+                    typeof(BasicTestApp.Program).Assembly.Location,
+                }
+            )
                 .ToArray();
             var host = DevServerProgram.BuildWebHost(finalArgs);
             return (host, "/subdir");
@@ -115,25 +117,22 @@ namespace TestServer
         public static IHost BuildWebHost(string[] args) => BuildWebHost<Startup>(args);
 
         public static IHost BuildWebHost<TStartup>(string[] args) where TStartup : class =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureLogging(
-                    (ctx, lb) =>
-                    {
-                        TestSink sink = new TestSink();
-                        lb.AddProvider(new TestLoggerProvider(sink));
-                        lb.Services.Add(ServiceDescriptor.Singleton(sink));
-                    }
-                )
-                .ConfigureWebHostDefaults(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseStartup<TStartup>();
+            Host.CreateDefaultBuilder(args).ConfigureLogging(
+                (ctx, lb) =>
+                {
+                    TestSink sink = new TestSink();
+                    lb.AddProvider(new TestLoggerProvider(sink));
+                    lb.Services.Add(ServiceDescriptor.Singleton(sink));
+                }
+            ).ConfigureWebHostDefaults(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseStartup<TStartup>();
 
-                        // We require this line because we run in Production environment
-                        // and static web assets are only on by default during development.
-                        webHostBuilder.UseStaticWebAssets();
-                    }
-                )
-                .Build();
+                    // We require this line because we run in Production environment
+                    // and static web assets are only on by default during development.
+                    webHostBuilder.UseStaticWebAssets();
+                }
+            ).Build();
     }
 }

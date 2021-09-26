@@ -253,8 +253,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                             var routeData = new RouteData(candidate.Values!);
 
-                            var dataTokens =
-                                candidate.Endpoint.Metadata.GetMetadata<IDataTokensMetadata>()?.DataTokens;
+                            var dataTokens = candidate.Endpoint.Metadata
+                                .GetMetadata<IDataTokensMetadata>()?.DataTokens;
 
                             if (dataTokens != null)
                             {

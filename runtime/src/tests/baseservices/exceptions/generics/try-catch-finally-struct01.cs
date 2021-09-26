@@ -119,7 +119,8 @@ public class Test
                 RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>,
                 RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>
             >
-        >().ExceptionTest(true);
+        >()
+            .ExceptionTest(true);
         new Gen<
             RefX3<
                 RefX1<int[][,,,]>,
@@ -130,7 +131,8 @@ public class Test
                     string[][][][][][][][][][][]
                 >
             >
-        >().ExceptionTest(true);
+        >()
+            .ExceptionTest(true);
 
         new Gen<ValX1<int>>().ExceptionTest(true);
         new Gen<ValX1<RefX1<int>>>().ExceptionTest(true);
@@ -147,7 +149,8 @@ public class Test
                 ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>,
                 ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>
             >
-        >().ExceptionTest(true);
+        >()
+            .ExceptionTest(true);
         new Gen<
             ValX3<
                 ValX1<int[][,,,]>,
@@ -158,7 +161,8 @@ public class Test
                     string[][][][][][][][][][][]
                 >
             >
-        >().ExceptionTest(true);
+        >()
+            .ExceptionTest(true);
 
         if (result)
         {

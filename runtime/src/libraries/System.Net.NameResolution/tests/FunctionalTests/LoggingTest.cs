@@ -19,11 +19,8 @@ namespace System.Net.NameResolution.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(Dns).Assembly.GetType(
-                "System.Net.NetEventSource",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type esType = typeof(Dns).Assembly
+                .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 
             Assert.Equal(
@@ -96,31 +93,30 @@ namespace System.Net.NameResolution.Tests
                 var events = new ConcurrentQueue<EventWrittenEventArgs>();
 
                 await listener.RunWithCallbackAsync(
-                        ev => events.Enqueue(ev),
-                        async () =>
+                    ev => events.Enqueue(ev),
+                    async () =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                await Dns.GetHostEntryAsync(Configuration.Sockets.InvalidHost)
-                                    .ConfigureAwait(false);
-                                throw new SkipTestException(
-                                    "GetHostEntryAsync should fail but it did not."
-                                );
-                            }
-                            catch (SocketException e)
-                                when (e.SocketErrorCode == SocketError.HostNotFound)
-                            {
-                                await WaitForErrorEventAsync(events);
-                            }
-                            catch (Exception e)
-                            {
-                                throw new SkipTestException(
-                                    $"GetHostEntryAsync failed unexpectedly: {e.Message}"
-                                );
-                            }
+                            await Dns.GetHostEntryAsync(Configuration.Sockets.InvalidHost)
+                                .ConfigureAwait(false);
+                            throw new SkipTestException(
+                                "GetHostEntryAsync should fail but it did not."
+                            );
                         }
-                    )
-                    .ConfigureAwait(false);
+                        catch (SocketException e)
+                            when (e.SocketErrorCode == SocketError.HostNotFound)
+                        {
+                            await WaitForErrorEventAsync(events);
+                        }
+                        catch (Exception e)
+                        {
+                            throw new SkipTestException(
+                                $"GetHostEntryAsync failed unexpectedly: {e.Message}"
+                            );
+                        }
+                    }
+                ).ConfigureAwait(false);
 
                 Assert.True(events.Count > 0, "events.Count should be > 0");
                 foreach (EventWrittenEventArgs ev in events)

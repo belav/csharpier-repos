@@ -283,11 +283,8 @@ namespace Microsoft.CodeAnalysis.Host
                         );
 
                         // we pass in encoding we got from original source text even if it is null.
-                        return _service._textFactory.CreateText(
-                            reader,
-                            _encoding,
-                            cancellationToken
-                        );
+                        return _service._textFactory
+                            .CreateText(reader, _encoding, cancellationToken);
                     }
                 }
 
@@ -303,12 +300,13 @@ namespace Microsoft.CodeAnalysis.Host
                     // of a page fault. Therefore, if we're going to be blocking a thread, we should
                     // just block one thread and do the whole thing at once vs. a fake "async"
                     // implementation which will continue to requeue work back to the thread pool.
-                    return Task.Factory.StartNew(
-                        () => ReadText(cancellationToken),
-                        cancellationToken,
-                        TaskCreationOptions.None,
-                        TaskScheduler.Default
-                    );
+                    return Task.Factory
+                        .StartNew(
+                            () => ReadText(cancellationToken),
+                            cancellationToken,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        );
                 }
 
                 public void WriteText(SourceText text, CancellationToken cancellationToken)
@@ -346,12 +344,13 @@ namespace Microsoft.CodeAnalysis.Host
                 )
                 {
                     // See commentary in ReadTextAsync for why this is implemented this way.
-                    return Task.Factory.StartNew(
-                        () => WriteText(text, cancellationToken),
-                        cancellationToken,
-                        TaskCreationOptions.None,
-                        TaskScheduler.Default
-                    );
+                    return Task.Factory
+                        .StartNew(
+                            () => WriteText(text, cancellationToken),
+                            cancellationToken,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        );
                 }
 
                 private static unsafe TextReader CreateTextReaderFromTemporaryStorage(
@@ -431,12 +430,13 @@ namespace Microsoft.CodeAnalysis.Host
                 public Task<Stream> ReadStreamAsync(CancellationToken cancellationToken = default)
                 {
                     // See commentary in ReadTextAsync for why this is implemented this way.
-                    return Task.Factory.StartNew(
-                        () => ReadStream(cancellationToken),
-                        cancellationToken,
-                        TaskCreationOptions.None,
-                        TaskScheduler.Default
-                    );
+                    return Task.Factory
+                        .StartNew(
+                            () => ReadStream(cancellationToken),
+                            cancellationToken,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        );
                 }
 
                 public void WriteStream(
@@ -447,10 +447,10 @@ namespace Microsoft.CodeAnalysis.Host
                     // The Wait() here will not actually block, since with useAsync: false, the
                     // entire operation will already be done when WaitStreamMaybeAsync completes.
                     WriteStreamMaybeAsync(
-                            stream,
-                            useAsync: false,
-                            cancellationToken: cancellationToken
-                        )
+                        stream,
+                        useAsync: false,
+                        cancellationToken: cancellationToken
+                    )
                         .GetAwaiter()
                         .GetResult();
                 }
@@ -498,11 +498,11 @@ namespace Microsoft.CodeAnalysis.Host
                                 if (useAsync)
                                 {
                                     count = await stream.ReadAsync(
-                                            buffer,
-                                            0,
-                                            buffer.Length,
-                                            cancellationToken
-                                        )
+                                        buffer,
+                                        0,
+                                        buffer.Length,
+                                        cancellationToken
+                                    )
                                         .ConfigureAwait(false);
                                 }
                                 else

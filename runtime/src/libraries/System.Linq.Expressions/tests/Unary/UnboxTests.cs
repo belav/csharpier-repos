@@ -180,8 +180,8 @@ namespace System.Linq.Expressions.Tests
         {
             UnaryExpression unbox = Expression.Unbox(Expression.Default(typeof(object)), type);
             Func<bool> isNull = Expression.Lambda<Func<bool>>(
-                    Expression.Equal(Expression.Default(type), unbox)
-                )
+                Expression.Equal(Expression.Default(type), unbox)
+            )
                 .Compile(useInterpreter);
             Assert.True(isNull());
         }

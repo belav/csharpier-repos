@@ -140,9 +140,8 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 if (_genericMethods == null)
                 {
-                    Type runtimePropertyClass = typeof(GenericMethodHolder<>).MakeGenericType(
-                        new Type[] { Type }
-                    )!;
+                    Type runtimePropertyClass = typeof(GenericMethodHolder<>)
+                        .MakeGenericType(new Type[] { Type })!;
                     _genericMethods = (GenericMethodHolder)Activator.CreateInstance(
                         runtimePropertyClass
                     )!;
@@ -351,9 +350,8 @@ namespace System.Text.Json.Serialization.Metadata
 
                     {
                         ElementType = converter.ElementType;
-                        CreateObject = Options.MemberAccessorStrategy.CreateConstructor(
-                            runtimeType
-                        );
+                        CreateObject = Options.MemberAccessorStrategy
+                            .CreateConstructor(runtimeType);
                     }
                     break;
                 case ConverterStrategy.Dictionary:
@@ -361,9 +359,8 @@ namespace System.Text.Json.Serialization.Metadata
                     {
                         KeyType = converter.KeyType;
                         ElementType = converter.ElementType;
-                        CreateObject = Options.MemberAccessorStrategy.CreateConstructor(
-                            runtimeType
-                        );
+                        CreateObject = Options.MemberAccessorStrategy
+                            .CreateConstructor(runtimeType);
                     }
                     break;
                 case ConverterStrategy.Value:
@@ -440,10 +437,8 @@ namespace System.Text.Json.Serialization.Metadata
 
             if (jsonPropertyInfo.IsIgnored)
             {
-                (ignoredMembers ??= new Dictionary<string, MemberInfo>()).Add(
-                    memberName,
-                    memberInfo
-                );
+                (ignoredMembers ??= new Dictionary<string, MemberInfo>())
+                    .Add(memberName, memberInfo);
             }
         }
 
@@ -631,9 +626,8 @@ namespace System.Text.Json.Serialization.Metadata
                 Type declaredPropertyType = jsonPropertyInfo.DeclaredPropertyType;
                 if (
                     typeof(IDictionary<string, object>).IsAssignableFrom(declaredPropertyType)
-                    || typeof(IDictionary<string, JsonElement>).IsAssignableFrom(
-                        declaredPropertyType
-                    )
+                    || typeof(IDictionary<string, JsonElement>)
+                        .IsAssignableFrom(declaredPropertyType)
                 )
                 {
                     JsonConverter converter = Options.GetConverter(declaredPropertyType);
@@ -665,9 +659,8 @@ namespace System.Text.Json.Serialization.Metadata
             foreach (JsonPropertyInfo jsonPropertyInfo in cache.Values)
             {
                 Debug.Assert(jsonPropertyInfo.MemberInfo != null);
-                Attribute? attribute = jsonPropertyInfo.MemberInfo.GetCustomAttribute(
-                    attributeType
-                );
+                Attribute? attribute = jsonPropertyInfo.MemberInfo
+                    .GetCustomAttribute(attributeType);
                 if (attribute != null)
                 {
                     if (property != null)

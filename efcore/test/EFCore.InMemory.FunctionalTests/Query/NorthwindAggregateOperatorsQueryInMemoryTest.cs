@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 "Sequence contains no elements",
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        context.Customers.Select(
+                        context.Customers
+                            .Select(
                                 c => c.Orders.Where(o => o.OrderID == -1).Average(o => o.OrderID)
                             )
                             .ToList()
@@ -52,9 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 "Sequence contains no elements",
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        context.Customers.Select(
-                                c => c.Orders.Where(o => o.OrderID == -1).Max(o => o.OrderID)
-                            )
+                        context.Customers
+                            .Select(c => c.Orders.Where(o => o.OrderID == -1).Max(o => o.OrderID))
                             .ToList()
                 ).Message
             );
@@ -68,9 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 "Sequence contains no elements",
                 Assert.Throws<InvalidOperationException>(
                     () =>
-                        context.Customers.Select(
-                                c => c.Orders.Where(o => o.OrderID == -1).Min(o => o.OrderID)
-                            )
+                        context.Customers
+                            .Select(c => c.Orders.Where(o => o.OrderID == -1).Min(o => o.OrderID))
                             .ToList()
                 ).Message
             );

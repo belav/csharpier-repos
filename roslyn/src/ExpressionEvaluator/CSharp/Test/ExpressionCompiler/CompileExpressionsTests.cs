@@ -592,9 +592,8 @@ class C
                     var result = context.CompileExpression("z ?? x", out error, testData);
                     Assert.NotNull(result.Assembly);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       22 (0x16)
   .maxstack  2
   .locals init (int V_0,
@@ -612,7 +611,7 @@ class C
   IL_0010:  ldfld      ""object C.<>c__DisplayClass3_0.x""
   IL_0015:  ret
 }"
-                        );
+                    );
                 }
             );
             // Release build.
@@ -628,8 +627,8 @@ class C
                 var testData = new CompilationTestData();
                 comp.EmitToArray(testData: testData);
                 testData.GetMethodData(
-                        "C.<M>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()"
-                    )
+                    "C.<M>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()"
+                )
                     .VerifyIL(
                         @"{
   // Code size      293 (0x125)
@@ -775,9 +774,8 @@ class C
                     var result = context.CompileExpression("z ?? x", out error, testData);
                     Assert.NotNull(result.Assembly);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                    testData.GetMethodData("<>x.<>m0").VerifyIL(
+                        @"{
   // Code size       12 (0xc)
   .maxstack  2
   .locals init (int V_0,
@@ -795,7 +793,7 @@ class C
   IL_0006:  ldfld      ""object C.<M>d__3.x""
   IL_000b:  ret
 }"
-                        );
+                    );
                 }
             );
         }

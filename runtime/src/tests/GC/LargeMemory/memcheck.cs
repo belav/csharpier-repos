@@ -70,13 +70,14 @@ public static class MemCheck
     }
 
     private static uint ParseUint(string s) =>
-        uint.Parse(
-            s,
-            NumberStyles.AllowLeadingWhite
-                | NumberStyles.AllowTrailingWhite
-                | NumberStyles.AllowThousands,
-            CultureInfo.InvariantCulture
-        );
+        uint
+            .Parse(
+                s,
+                NumberStyles.AllowLeadingWhite
+                    | NumberStyles.AllowTrailingWhite
+                    | NumberStyles.AllowThousands,
+                CultureInfo.InvariantCulture
+            );
 
     private static uint KBToMB(uint kb) => kb / 1024;
 

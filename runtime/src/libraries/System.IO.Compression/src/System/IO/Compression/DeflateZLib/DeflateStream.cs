@@ -215,9 +215,9 @@ namespace System.IO.Compression
                         if (flushSuccessful)
                         {
                             await _stream.WriteAsync(
-                                    new ReadOnlyMemory<byte>(_buffer, 0, compressedBytes),
-                                    cancellationToken
-                                )
+                                new ReadOnlyMemory<byte>(_buffer, 0, compressedBytes),
+                                cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         }
                         Debug.Assert(flushSuccessful == (compressedBytes > 0));
@@ -650,8 +650,8 @@ namespace System.IO.Compression
 
                     if (compressedBytes > 0)
                         await _stream.WriteAsync(
-                                new ReadOnlyMemory<byte>(_buffer, 0, compressedBytes)
-                            )
+                            new ReadOnlyMemory<byte>(_buffer, 0, compressedBytes)
+                        )
                             .ConfigureAwait(false);
                 } while (!finished);
             }
@@ -802,9 +802,9 @@ namespace System.IO.Compression
         {
             ValidateBufferArguments(buffer, offset, count);
             return WriteAsyncMemory(
-                    new ReadOnlyMemory<byte>(buffer, offset, count),
-                    cancellationToken
-                )
+                new ReadOnlyMemory<byte>(buffer, offset, count),
+                cancellationToken
+            )
                 .AsTask();
         }
 
@@ -873,9 +873,9 @@ namespace System.IO.Compression
                 if (compressedBytes > 0)
                 {
                     await _stream.WriteAsync(
-                            new ReadOnlyMemory<byte>(_buffer, 0, compressedBytes),
-                            cancellationToken
-                        )
+                        new ReadOnlyMemory<byte>(_buffer, 0, compressedBytes),
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
             }
@@ -912,12 +912,8 @@ namespace System.IO.Compression
             }
 
             // Do the copy
-            return new CopyToStream(
-                this,
-                destination,
-                bufferSize,
-                cancellationToken
-            ).CopyFromSourceToDestinationAsync();
+            return new CopyToStream(this, destination, bufferSize, cancellationToken)
+                .CopyFromSourceToDestinationAsync();
         }
 
         private sealed class CopyToStream : Stream
@@ -956,17 +952,14 @@ namespace System.IO.Compression
                     // Flush any existing data in the inflater to the destination stream.
                     while (!_deflateStream._inflater.Finished())
                     {
-                        int bytesRead = _deflateStream._inflater.Inflate(
-                            _arrayPoolBuffer,
-                            0,
-                            _arrayPoolBuffer.Length
-                        );
+                        int bytesRead = _deflateStream._inflater
+                            .Inflate(_arrayPoolBuffer, 0, _arrayPoolBuffer.Length);
                         if (bytesRead > 0)
                         {
                             await _destination.WriteAsync(
-                                    new ReadOnlyMemory<byte>(_arrayPoolBuffer, 0, bytesRead),
-                                    _cancellationToken
-                                )
+                                new ReadOnlyMemory<byte>(_arrayPoolBuffer, 0, bytesRead),
+                                _cancellationToken
+                            )
                                 .ConfigureAwait(false);
                         }
                         else if (_deflateStream._inflater.NeedsInput())
@@ -977,11 +970,8 @@ namespace System.IO.Compression
                     }
 
                     // Now, use the source stream's CopyToAsync to push directly to our inflater via this helper stream
-                    await _deflateStream._stream.CopyToAsync(
-                            this,
-                            _arrayPoolBuffer.Length,
-                            _cancellationToken
-                        )
+                    await _deflateStream._stream
+                        .CopyToAsync(this, _arrayPoolBuffer.Length, _cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -1002,11 +992,8 @@ namespace System.IO.Compression
                     // Flush any existing data in the inflater to the destination stream.
                     while (!_deflateStream._inflater.Finished())
                     {
-                        int bytesRead = _deflateStream._inflater.Inflate(
-                            _arrayPoolBuffer,
-                            0,
-                            _arrayPoolBuffer.Length
-                        );
+                        int bytesRead = _deflateStream._inflater
+                            .Inflate(_arrayPoolBuffer, 0, _arrayPoolBuffer.Length);
                         if (bytesRead > 0)
                         {
                             _destination.Write(_arrayPoolBuffer, 0, bytesRead);
@@ -1076,15 +1063,14 @@ namespace System.IO.Compression
                 // While there's more decompressed data available, forward it to the buffer stream.
                 while (!_deflateStream._inflater.Finished())
                 {
-                    int bytesRead = _deflateStream._inflater.Inflate(
-                        new Span<byte>(_arrayPoolBuffer)
-                    );
+                    int bytesRead = _deflateStream._inflater
+                        .Inflate(new Span<byte>(_arrayPoolBuffer));
                     if (bytesRead > 0)
                     {
                         await _destination.WriteAsync(
-                                new ReadOnlyMemory<byte>(_arrayPoolBuffer, 0, bytesRead),
-                                cancellationToken
-                            )
+                            new ReadOnlyMemory<byte>(_arrayPoolBuffer, 0, bytesRead),
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                     }
                     else if (_deflateStream._inflater.NeedsInput())
@@ -1119,9 +1105,8 @@ namespace System.IO.Compression
                 // While there's more decompressed data available, forward it to the buffer stream.
                 while (!_deflateStream._inflater.Finished())
                 {
-                    int bytesRead = _deflateStream._inflater.Inflate(
-                        new Span<byte>(_arrayPoolBuffer)
-                    );
+                    int bytesRead = _deflateStream._inflater
+                        .Inflate(new Span<byte>(_arrayPoolBuffer));
                     if (bytesRead > 0)
                     {
                         _destination.Write(_arrayPoolBuffer, 0, bytesRead);

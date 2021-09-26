@@ -19,28 +19,24 @@ namespace RazorWebSite
             services.AddSingleton<ITagHelperComponent, TestHeadTagHelperComponent>();
             services.AddSingleton<ITagHelperComponent, TestBodyTagHelperComponent>();
 
-            services.AddMvc()
-                .AddRazorOptions(
-                    options =>
-                    {
-                        options.ViewLocationExpanders.Add(new NonMainPageViewLocationExpander());
-                        options.ViewLocationExpanders.Add(new BackSlashExpander());
-                    }
-                )
-                .AddViewOptions(
-                    options =>
-                    {
-                        options.HtmlHelperOptions.ClientValidationEnabled = false;
-                        options.HtmlHelperOptions.Html5DateRenderingMode =
-                            Microsoft.AspNetCore.Mvc.Rendering.Html5DateRenderingMode.Rfc3339;
-                        options.HtmlHelperOptions.IdAttributeDotReplacement = "!";
-                        options.HtmlHelperOptions.ValidationMessageElement =
-                            "validationMessageElement";
-                        options.HtmlHelperOptions.ValidationSummaryMessageElement =
-                            "validationSummaryElement";
-                    }
-                )
-                .AddMvcLocalization(LanguageViewLocationExpanderFormat.SubFolder);
+            services.AddMvc().AddRazorOptions(
+                options =>
+                {
+                    options.ViewLocationExpanders.Add(new NonMainPageViewLocationExpander());
+                    options.ViewLocationExpanders.Add(new BackSlashExpander());
+                }
+            ).AddViewOptions(
+                options =>
+                {
+                    options.HtmlHelperOptions.ClientValidationEnabled = false;
+                    options.HtmlHelperOptions.Html5DateRenderingMode =
+                        Microsoft.AspNetCore.Mvc.Rendering.Html5DateRenderingMode.Rfc3339;
+                    options.HtmlHelperOptions.IdAttributeDotReplacement = "!";
+                    options.HtmlHelperOptions.ValidationMessageElement = "validationMessageElement";
+                    options.HtmlHelperOptions.ValidationSummaryMessageElement =
+                        "validationSummaryElement";
+                }
+            ).AddMvcLocalization(LanguageViewLocationExpanderFormat.SubFolder);
 
             services.AddTransient<InjectedHelper>();
             services.AddTransient<TaskReturningService>();

@@ -22,12 +22,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             ActiveStatementsDescription description
         )
         {
-            new CSharpEditAndContinueTestHelpers().VerifyUnchangedDocument(
-                ActiveStatementsDescription.ClearTags(source),
-                description.OldStatements,
-                description.NewSpans,
-                description.NewRegions
-            );
+            new CSharpEditAndContinueTestHelpers()
+                .VerifyUnchangedDocument(
+                    ActiveStatementsDescription.ClearTags(source),
+                    description.OldStatements,
+                    description.NewSpans,
+                    description.NewRegions
+                );
         }
 
         internal static void VerifyRudeDiagnostics(
@@ -58,12 +59,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             params RudeEditDiagnosticDescription[] expectedDiagnostics
         )
         {
-            new CSharpEditAndContinueTestHelpers().VerifyLineEdits(
-                editScript,
-                expectedLineEdits,
-                expectedNodeUpdates,
-                expectedDiagnostics
-            );
+            new CSharpEditAndContinueTestHelpers()
+                .VerifyLineEdits(
+                    editScript,
+                    expectedLineEdits,
+                    expectedNodeUpdates,
+                    expectedDiagnostics
+                );
         }
 
         internal static void VerifySemanticDiagnostics(
@@ -145,11 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                     ?? new[] { TargetFramework.NetStandard20, TargetFramework.NetCoreApp }
             )
             {
-                new CSharpEditAndContinueTestHelpers().VerifySemantics(
-                    editScripts,
-                    targetFramework,
-                    expected
-                );
+                new CSharpEditAndContinueTestHelpers()
+                    .VerifySemantics(editScripts, targetFramework, expected);
             }
         }
     }

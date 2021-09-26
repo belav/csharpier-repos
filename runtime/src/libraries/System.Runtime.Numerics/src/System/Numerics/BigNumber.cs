@@ -713,12 +713,8 @@ namespace System.Numerics
 
                 if (targetSpan)
                 {
-                    spanSuccess = value._sign.TryFormat(
-                        destination,
-                        out charsWritten,
-                        formatSpan,
-                        info
-                    );
+                    spanSuccess = value._sign
+                        .TryFormat(destination, out charsWritten, formatSpan, info);
                     return null;
                 }
                 else

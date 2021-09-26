@@ -33,19 +33,18 @@ namespace System.IO.Tests
         public void SetToValidOtherDirectory()
         {
             RemoteExecutor.Invoke(
-                    () =>
+                () =>
+                {
+                    Directory.SetCurrentDirectory(TestDirectory);
+                    // On OSX, the temp directory /tmp/ is a symlink to /private/tmp, so setting the current
+                    // directory to a symlinked path will result in GetCurrentDirectory returning the absolute
+                    // path that followed the symlink.
+                    if (!OperatingSystem.IsMacOS())
                     {
-                        Directory.SetCurrentDirectory(TestDirectory);
-                        // On OSX, the temp directory /tmp/ is a symlink to /private/tmp, so setting the current
-                        // directory to a symlinked path will result in GetCurrentDirectory returning the absolute
-                        // path that followed the symlink.
-                        if (!OperatingSystem.IsMacOS())
-                        {
-                            Assert.Equal(TestDirectory, Directory.GetCurrentDirectory());
-                        }
+                        Assert.Equal(TestDirectory, Directory.GetCurrentDirectory());
                     }
-                )
-                .Dispose();
+                }
+            ).Dispose();
         }
 
         public sealed class Directory_SetCurrentDirectory_SymLink : FileSystemTest
@@ -57,37 +56,36 @@ namespace System.IO.Tests
             public void SetToPathContainingSymLink()
             {
                 RemoteExecutor.Invoke(
-                        () =>
+                    () =>
+                    {
+                        var path = GetTestFilePath();
+                        var linkPath = GetTestFilePath();
+
+                        Directory.CreateDirectory(path);
+                        Assert.True(
+                            MountHelper.CreateSymbolicLink(linkPath, path, isDirectory: true)
+                        );
+
+                        // Both the symlink and the target exist
+                        Assert.True(Directory.Exists(path), "path should exist");
+                        Assert.True(Directory.Exists(linkPath), "linkPath should exist");
+
+                        // Set Current Directory to symlink
+                        Directory.SetCurrentDirectory(linkPath);
+                        if (OperatingSystem.IsWindows())
                         {
-                            var path = GetTestFilePath();
-                            var linkPath = GetTestFilePath();
-
-                            Directory.CreateDirectory(path);
-                            Assert.True(
-                                MountHelper.CreateSymbolicLink(linkPath, path, isDirectory: true)
-                            );
-
-                            // Both the symlink and the target exist
-                            Assert.True(Directory.Exists(path), "path should exist");
-                            Assert.True(Directory.Exists(linkPath), "linkPath should exist");
-
-                            // Set Current Directory to symlink
-                            Directory.SetCurrentDirectory(linkPath);
-                            if (OperatingSystem.IsWindows())
-                            {
-                                Assert.Equal(linkPath, Directory.GetCurrentDirectory());
-                            }
-                            else if (OperatingSystem.IsMacOS())
-                            {
-                                Assert.Equal("/private" + path, Directory.GetCurrentDirectory());
-                            }
-                            else
-                            {
-                                Assert.Equal(path, Directory.GetCurrentDirectory());
-                            }
+                            Assert.Equal(linkPath, Directory.GetCurrentDirectory());
                         }
-                    )
-                    .Dispose();
+                        else if (OperatingSystem.IsMacOS())
+                        {
+                            Assert.Equal("/private" + path, Directory.GetCurrentDirectory());
+                        }
+                        else
+                        {
+                            Assert.Equal(path, Directory.GetCurrentDirectory());
+                        }
+                    }
+                ).Dispose();
             }
         }
     }

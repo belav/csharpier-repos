@@ -45,12 +45,12 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             rules.AddRange(Formatter.GetDefaultFormattingRules(document));
 
             var formattedDocument = await Formatter.FormatAsync(
-                    document,
-                    s_specializedFormattingAnnotation,
-                    options: null,
-                    rules: rules,
-                    cancellationToken: cancellationToken
-                )
+                document,
+                s_specializedFormattingAnnotation,
+                options: null,
+                rules: rules,
+                cancellationToken: cancellationToken
+            )
                 .ConfigureAwait(false);
             return formattedDocument;
         }
@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             return document.GetLanguageService<SyntaxGenerator>()
@@ -103,7 +104,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var generator = document.GetLanguageService<SyntaxGenerator>();
@@ -118,13 +120,12 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     var localName = containingType.GetLocalName();
 
                     expressions.Add(
-                        generator.SyntaxGeneratorInternal.IsPatternExpression(
-                            objName,
-                            generator.SyntaxGeneratorInternal.DeclarationPattern(
-                                containingType,
-                                localName
+                        generator.SyntaxGeneratorInternal
+                            .IsPatternExpression(
+                                objName,
+                                generator.SyntaxGeneratorInternal
+                                    .DeclarationPattern(containingType, localName)
                             )
-                        )
                     );
                     expressions.Add(
                         generator.InvocationExpression(
@@ -179,7 +180,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var factory = document.GetLanguageService<SyntaxGenerator>();
             return CreateGetHashCodeMethod(factory, compilation, namedType, members);

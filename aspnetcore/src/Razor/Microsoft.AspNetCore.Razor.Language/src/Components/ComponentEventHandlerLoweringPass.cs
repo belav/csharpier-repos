@@ -128,41 +128,44 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             // If we still have duplicates at this point then they are genuine conflicts.
-            var duplicates = parent.Children.OfType<TagHelperDirectiveAttributeIntermediateNode>()
+            var duplicates = parent.Children
+                .OfType<TagHelperDirectiveAttributeIntermediateNode>()
                 .Where(p => p.TagHelper?.IsEventHandlerTagHelper() ?? false)
                 .GroupBy(p => p.AttributeName)
                 .Where(g => g.Count() > 1);
 
             foreach (var duplicate in duplicates)
             {
-                parent.Diagnostics.Add(
-                    ComponentDiagnosticFactory.CreateEventHandler_Duplicates(
-                        parent.Source,
-                        duplicate.Key,
-                        duplicate.ToArray()
-                    )
-                );
+                parent.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.CreateEventHandler_Duplicates(
+                            parent.Source,
+                            duplicate.Key,
+                            duplicate.ToArray()
+                        )
+                    );
                 foreach (var property in duplicate)
                 {
                     parent.Children.Remove(property);
                 }
             }
 
-            var parameterDuplicates =
-                parent.Children.OfType<TagHelperDirectiveAttributeParameterIntermediateNode>()
-                    .Where(p => p.TagHelper?.IsEventHandlerTagHelper() ?? false)
-                    .GroupBy(p => p.AttributeName)
-                    .Where(g => g.Count() > 1);
+            var parameterDuplicates = parent.Children
+                .OfType<TagHelperDirectiveAttributeParameterIntermediateNode>()
+                .Where(p => p.TagHelper?.IsEventHandlerTagHelper() ?? false)
+                .GroupBy(p => p.AttributeName)
+                .Where(g => g.Count() > 1);
 
             foreach (var duplicate in parameterDuplicates)
             {
-                parent.Diagnostics.Add(
-                    ComponentDiagnosticFactory.CreateEventHandlerParameter_Duplicates(
-                        parent.Source,
-                        duplicate.Key,
-                        duplicate.ToArray()
-                    )
-                );
+                parent.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.CreateEventHandlerParameter_Duplicates(
+                            parent.Source,
+                            duplicate.Key,
+                            duplicate.ToArray()
+                        )
+                    );
                 foreach (var property in duplicate)
                 {
                     parent.Children.Remove(property);
@@ -264,9 +267,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             if (template != null)
             {
                 // See comments in TemplateDiagnosticPass
-                node.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_TemplateInvalidLocation(template.Source)
-                );
+                node.Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_TemplateInvalidLocation(template.Source)
+                    );
                 return new[]
                 {
                     new IntermediateToken() { Kind = TokenKind.CSharp, Content = string.Empty, },

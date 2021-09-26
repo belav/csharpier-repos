@@ -27,16 +27,16 @@ namespace ILCompiler.Win32Resources
             Func<object, object, ushort, bool> resourceFilter = null
         )
         {
-            System.Collections.Immutable.ImmutableArray<byte> ecmaData =
-                ecmaModule.PEReader.GetEntireImage().GetContent();
+            System.Collections.Immutable.ImmutableArray<byte> ecmaData = ecmaModule.PEReader
+                .GetEntireImage()
+                .GetContent();
             PEReader peFile = ecmaModule.PEReader;
 
             DirectoryEntry resourceDirectory = peFile.PEHeaders.PEHeader.ResourceTableDirectory;
             if (resourceDirectory.Size != 0)
             {
-                BlobReader resourceDataBlob = ecmaModule.PEReader.GetSectionData(
-                        resourceDirectory.RelativeVirtualAddress
-                    )
+                BlobReader resourceDataBlob = ecmaModule.PEReader
+                    .GetSectionData(resourceDirectory.RelativeVirtualAddress)
                     .GetReader(0, resourceDirectory.Size);
                 ReadResourceData(resourceDataBlob, peFile, resourceFilter);
             }

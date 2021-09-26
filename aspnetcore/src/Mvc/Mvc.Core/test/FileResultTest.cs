@@ -85,9 +85,8 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ExecuteResultAsync_DoesNotSetContentDisposition_IfNotSpecified()
         {
             // Arrange
-            var provider = new ServiceCollection().AddSingleton<ILoggerFactory>(
-                    NullLoggerFactory.Instance
-                )
+            var provider = new ServiceCollection()
+                .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
                 .AddSingleton<EmptyFileResultExecutor>()
                 .BuildServiceProvider();
 
@@ -545,8 +544,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             public override Task ExecuteResultAsync(ActionContext context)
             {
-                var executor =
-                    context.HttpContext.RequestServices.GetRequiredService<EmptyFileResultExecutor>();
+                var executor = context.HttpContext.RequestServices
+                    .GetRequiredService<EmptyFileResultExecutor>();
                 return executor.ExecuteAsync(context, this);
             }
         }

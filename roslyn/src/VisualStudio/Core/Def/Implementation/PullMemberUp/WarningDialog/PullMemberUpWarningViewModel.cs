@@ -26,17 +26,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Wa
 
             if (
                 !options.Destination.IsAbstract
-                && options.MemberAnalysisResults.Any(
-                    result => result.ChangeDestinationTypeToAbstract
-                )
+                && options.MemberAnalysisResults
+                    .Any(result => result.ChangeDestinationTypeToAbstract)
             )
             {
                 Logger.Log(FunctionId.PullMembersUpWarning_ChangeTargetToAbstract);
                 warningMessagesBuilder.Add(
-                    string.Format(
-                        ServicesVSResources._0_will_be_changed_to_abstract,
-                        options.Destination.Name
-                    )
+                    string
+                        .Format(
+                            ServicesVSResources._0_will_be_changed_to_abstract,
+                            options.Destination.Name
+                        )
                 );
             }
 
@@ -46,10 +46,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Wa
                 {
                     Logger.Log(FunctionId.PullMembersUpWarning_ChangeOriginToPublic);
                     warningMessagesBuilder.Add(
-                        string.Format(
-                            ServicesVSResources._0_will_be_changed_to_public,
-                            result.Member.Name
-                        )
+                        string
+                            .Format(
+                                ServicesVSResources._0_will_be_changed_to_public,
+                                result.Member.Name
+                            )
                     );
                 }
 
@@ -57,10 +58,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Wa
                 {
                     Logger.Log(FunctionId.PullMembersUpWarning_ChangeOriginToNonStatic);
                     warningMessagesBuilder.Add(
-                        string.Format(
-                            ServicesVSResources._0_will_be_changed_to_non_static,
-                            result.Member.Name
-                        )
+                        string
+                            .Format(
+                                ServicesVSResources._0_will_be_changed_to_non_static,
+                                result.Member.Name
+                            )
                     );
                 }
             }

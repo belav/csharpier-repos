@@ -633,7 +633,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var service = new Mock<IExampleService>();
             service.Setup(x => x.DoSomething()).Verifiable();
 
-            var provider = new ServiceCollection().AddSingleton(service.Object)
+            var provider = new ServiceCollection()
+                .AddSingleton(service.Object)
                 .BuildServiceProvider();
 
             var httpContext = new Mock<HttpContext>();
@@ -647,16 +648,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var validator = CreateValidator();
 
             var model = new Mock<IValidatableObject>();
-            model.Setup(x => x.Validate(It.IsAny<ValidationContext>()))
-                .Callback(
-                    (ValidationContext context) =>
-                    {
-                        var receivedService = context.GetService<IExampleService>();
-                        Assert.Equal(service.Object, receivedService);
-                        receivedService.DoSomething();
-                    }
-                )
-                .Returns(new List<ValidationResult>());
+            model.Setup(x => x.Validate(It.IsAny<ValidationContext>())).Callback(
+                (ValidationContext context) =>
+                {
+                    var receivedService = context.GetService<IExampleService>();
+                    Assert.Equal(service.Object, receivedService);
+                    receivedService.DoSomething();
+                }
+            ).Returns(new List<ValidationResult>());
 
             // Act
             validator.Validate(actionContext, validationState, prefix: null, model: model.Object);

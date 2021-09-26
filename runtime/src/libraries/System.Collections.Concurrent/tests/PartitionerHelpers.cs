@@ -70,11 +70,12 @@ namespace System.Collections.Concurrent.Tests
                 {
                     Assert.True(
                         key.Equals(pairEnumerator.Current.Key - 1),
-                        string.Format(
-                            "Keys are not normalized {0} {1}",
-                            key,
-                            pairEnumerator.Current.Key
-                        )
+                        string
+                            .Format(
+                                "Keys are not normalized {0} {1}",
+                                key,
+                                pairEnumerator.Current.Key
+                            )
                     );
                 }
                 key = pairEnumerator.Current.Key;
@@ -104,11 +105,12 @@ namespace System.Collections.Concurrent.Tests
                 {
                     Assert.True(
                         key.Equals(pairEnumerator.Current.Key - 1),
-                        string.Format(
-                            "Keys are not normalized {0} {1}",
-                            key,
-                            pairEnumerator.Current.Key
-                        )
+                        string
+                            .Format(
+                                "Keys are not normalized {0} {1}",
+                                key,
+                                pairEnumerator.Current.Key
+                            )
                     );
                 }
                 key = pairEnumerator.Current.Key;
@@ -224,11 +226,12 @@ namespace System.Collections.Concurrent.Tests
                 {
                     Assert.True(
                         key.Equals(pairEnumerator.Current.Key - 1),
-                        string.Format(
-                            "Keys are not normalized {0} {1}",
-                            key,
-                            pairEnumerator.Current.Key
-                        )
+                        string
+                            .Format(
+                                "Keys are not normalized {0} {1}",
+                                key,
+                                pairEnumerator.Current.Key
+                            )
                     );
                 }
                 key = pairEnumerator.Current.Key;
@@ -258,11 +261,12 @@ namespace System.Collections.Concurrent.Tests
                 {
                     Assert.True(
                         key.Equals(pairEnumerator.Current.Key - 1),
-                        string.Format(
-                            "Keys are not normalized {0} {1}",
-                            key,
-                            pairEnumerator.Current.Key
-                        )
+                        string
+                            .Format(
+                                "Keys are not normalized {0} {1}",
+                                key,
+                                pairEnumerator.Current.Key
+                            )
                     );
                 }
                 key = pairEnumerator.Current.Key;

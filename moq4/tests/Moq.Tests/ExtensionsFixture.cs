@@ -77,9 +77,8 @@ namespace Moq.Tests
         [Fact]
         public void IsExtensionMethod_recognizes_extension_method_as_such()
         {
-            var isExtensionMethodMethod = typeof(Moq.Extensions).GetMethod(
-                nameof(Moq.Extensions.IsExtensionMethod)
-            );
+            var isExtensionMethodMethod = typeof(Moq.Extensions)
+                .GetMethod(nameof(Moq.Extensions.IsExtensionMethod));
 
             Assert.True(isExtensionMethodMethod.IsExtensionMethod());
         }

@@ -67,22 +67,22 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
 
                 if (
                     await CanBeMergedUpAsync(
-                            document,
-                            ifOrElseIf,
-                            cancellationToken,
-                            out var upperIfOrElseIf
-                        )
+                        document,
+                        ifOrElseIf,
+                        cancellationToken,
+                        out var upperIfOrElseIf
+                    )
                         .ConfigureAwait(false)
                 )
                     RegisterRefactoring(MergeDirection.Up, upperIfOrElseIf.Span, ifOrElseIf.Span);
 
                 if (
                     await CanBeMergedDownAsync(
-                            document,
-                            ifOrElseIf,
-                            cancellationToken,
-                            out var lowerIfOrElseIf
-                        )
+                        document,
+                        ifOrElseIf,
+                        cancellationToken,
+                        out var lowerIfOrElseIf
+                    )
                         .ConfigureAwait(false)
                 )
                     RegisterRefactoring(MergeDirection.Down, ifOrElseIf.Span, lowerIfOrElseIf.Span);

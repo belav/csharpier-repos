@@ -420,14 +420,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                         cancellationToken
                     );
                     if (
-                        document.Project.Solution.Workspace.TryApplyChanges(
-                            document.WithSyntaxRoot(newRoot).Project.Solution
-                        )
+                        document.Project.Solution.Workspace
+                            .TryApplyChanges(document.WithSyntaxRoot(newRoot).Project.Solution)
                     )
                     {
-                        args.TextView.TryMoveCaretToAndEnsureVisible(
-                            new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, nextCaretPosition)
-                        );
+                        args.TextView
+                            .TryMoveCaretToAndEnsureVisible(
+                                new SnapshotPoint(
+                                    args.SubjectBuffer.CurrentSnapshot,
+                                    nextCaretPosition
+                                )
+                            );
                     }
                 }
                 else
@@ -469,14 +472,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 );
 
                 if (
-                    document.Project.Solution.Workspace.TryApplyChanges(
-                        document.WithSyntaxRoot(newRoot).Project.Solution
-                    )
+                    document.Project.Solution.Workspace
+                        .TryApplyChanges(document.WithSyntaxRoot(newRoot).Project.Solution)
                 )
                 {
-                    args.TextView.TryMoveCaretToAndEnsureVisible(
-                        new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, nextCaretPosition)
-                    );
+                    args.TextView
+                        .TryMoveCaretToAndEnsureVisible(
+                            new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, nextCaretPosition)
+                        );
                 }
             }
         }
@@ -718,11 +721,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             };
 
         private static string GetBracePairString(IEditorOptions editorOptions) =>
-            string.Concat(
-                SyntaxFacts.GetText(SyntaxKind.OpenBraceToken),
-                editorOptions.GetNewLineCharacter(),
-                SyntaxFacts.GetText(SyntaxKind.CloseBraceToken)
-            );
+            string
+                .Concat(
+                    SyntaxFacts.GetText(SyntaxKind.OpenBraceToken),
+                    editorOptions.GetNewLineCharacter(),
+                    SyntaxFacts.GetText(SyntaxKind.CloseBraceToken)
+                );
 
         private void InsertBraceAndMoveCaret(
             ITextView textView,

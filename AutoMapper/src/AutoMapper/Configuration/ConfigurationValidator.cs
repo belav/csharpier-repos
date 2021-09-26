@@ -36,9 +36,8 @@ namespace AutoMapper.Configuration
         {
             if (!_expression.AllowAdditiveTypeMapCreation)
             {
-                var duplicateTypeMapConfigs = _expression.Profiles.Concat(
-                        new[] { (Profile)_expression }
-                    )
+                var duplicateTypeMapConfigs = _expression.Profiles
+                    .Concat(new[] { (Profile)_expression })
                     .SelectMany(
                         p => p.TypeMapConfigs,
                         (profile, typeMap) => new { profile, typeMap }
@@ -83,7 +82,8 @@ namespace AutoMapper.Configuration
                     unmappedPropertyNames,
                     canConstruct
                 )
-            ).ToArray();
+            )
+                .ToArray();
 
             if (badTypeMaps.Any())
             {

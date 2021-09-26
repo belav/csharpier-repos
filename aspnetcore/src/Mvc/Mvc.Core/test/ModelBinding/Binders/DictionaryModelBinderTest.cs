@@ -345,7 +345,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 {
                     new KeyValuePair<string, int>("prefix[23]", 23),
                     new KeyValuePair<string, int>("prefix[27]", 27),
-                }.OrderBy(kvp => kvp.Key),
+                }
+                    .OrderBy(kvp => kvp.Key),
                 strategy.KeyMappings.OrderBy(kvp => kvp.Key)
             );
         }
@@ -419,7 +420,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             bindingContext.ModelName = "modelName";
 
             var metadataProvider = new TestModelMetadataProvider();
-            var parameter = typeof(DictionaryModelBinderTest).GetMethod(
+            var parameter = typeof(DictionaryModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithDictionaryParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -456,7 +458,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             bindingContext.ModelName = "modelName";
 
             var metadataProvider = new TestModelMetadataProvider();
-            var parameter = typeof(DictionaryModelBinderTest).GetMethod(
+            var parameter = typeof(DictionaryModelBinderTest)
+                .GetMethod(
                     nameof(ActionWithDictionaryParameter),
                     BindingFlags.Instance | BindingFlags.NonPublic
                 )
@@ -511,9 +514,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty(
-                    typeof(ModelWithDictionaryProperties),
-                    nameof(ModelWithDictionaryProperties.DictionaryProperty)
-                )
+                typeof(ModelWithDictionaryProperties),
+                nameof(ModelWithDictionaryProperties.DictionaryProperty)
+            )
                 .BindingDetails(b => b.IsBindingRequired = isBindingRequired);
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithDictionaryProperties),
@@ -621,8 +624,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty<ModelWithIDictionaryProperty>(
-                    nameof(ModelWithIDictionaryProperty.DictionaryProperty)
-                )
+                nameof(ModelWithIDictionaryProperty.DictionaryProperty)
+            )
                 .BindingDetails(bd => bd.IsReadOnly = isReadOnly);
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithIDictionaryProperty),

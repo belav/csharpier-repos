@@ -107,11 +107,8 @@ namespace System.Linq
             {
                 if (e.MoveNext())
                 {
-                    Lookup<TKey, TInner> lookup = Lookup<TKey, TInner>.CreateForJoin(
-                        inner,
-                        innerKeySelector,
-                        comparer
-                    );
+                    Lookup<TKey, TInner> lookup = Lookup<TKey, TInner>
+                        .CreateForJoin(inner, innerKeySelector, comparer);
                     do
                     {
                         TOuter item = e.Current;

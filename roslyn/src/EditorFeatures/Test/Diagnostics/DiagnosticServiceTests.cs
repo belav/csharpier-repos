@@ -41,11 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
             var mutex = new ManualResetEvent(false);
-            var document = workspace.CurrentSolution.AddProject(
-                    "TestProject",
-                    "TestProject",
-                    LanguageNames.CSharp
-                )
+            var document = workspace.CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
 
             var source = new TestDiagnosticUpdateSource(false, null);
@@ -117,11 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
             var mutex = new ManualResetEvent(false);
-            var document = workspace.CurrentSolution.AddProject(
-                    "TestProject",
-                    "TestProject",
-                    LanguageNames.CSharp
-                )
+            var document = workspace.CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
             var document2 = document.Project.AddDocument("TestDocument2", string.Empty);
 
@@ -214,11 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
             var mutex = new ManualResetEvent(false);
-            var document = workspace.CurrentSolution.AddProject(
-                    "TestProject",
-                    "TestProject",
-                    LanguageNames.CSharp
-                )
+            var document = workspace.CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
             var document2 = document.Project.AddDocument("TestDocument2", string.Empty);
 
@@ -384,9 +375,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             public TestDiagnosticUpdateSource(bool support, DiagnosticData[] diagnosticData)
             {
                 _support = support;
-                _diagnosticData = (
-                    diagnosticData ?? Array.Empty<DiagnosticData>()
-                ).ToImmutableArray();
+                _diagnosticData = (diagnosticData ?? Array.Empty<DiagnosticData>())
+                    .ToImmutableArray();
             }
 
             public bool SupportGetDiagnostics

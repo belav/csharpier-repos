@@ -574,16 +574,14 @@ namespace Newtonsoft.Json.Tests.Documentation
             // Lambton Quay
             // Willis Street
 
-            IList<string> firstProductNames = o["Manufacturers"].Select(
-                    m => (string)m.SelectToken("Products[1].Name")
-                )
+            IList<string> firstProductNames = o["Manufacturers"]
+                .Select(m => (string)m.SelectToken("Products[1].Name"))
                 .ToList();
             // null
             // Headlight Fluid
 
-            decimal totalPrice = o["Manufacturers"].Sum(
-                m => (decimal)m.SelectToken("Products[0].Price")
-            );
+            decimal totalPrice = o["Manufacturers"]
+                .Sum(m => (decimal)m.SelectToken("Products[0].Price"));
             // 149.95
             #endregion
 

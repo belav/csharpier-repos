@@ -249,11 +249,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                 for (var i = 0; i < tagHelpers.Count; i++)
                 {
                     if (
-                        string.Equals(
-                            tagHelpers[i].AssemblyName,
-                            assemblyName,
-                            StringComparison.Ordinal
-                        )
+                        string
+                            .Equals(
+                                tagHelpers[i].AssemblyName,
+                                assemblyName,
+                                StringComparison.Ordinal
+                            )
                     )
                     {
                         return true;
@@ -280,8 +281,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 // We don't want to consider non-component tag helpers in a component document.
                 _tagHelpers = tagHelpers.Where(
-                        t => t.IsAnyComponentDocumentTagHelper() && !IsTagHelperFromMangledClass(t)
-                    )
+                    t => t.IsAnyComponentDocumentTagHelper() && !IsTagHelperFromMangledClass(t)
+                )
                     .ToList();
 
                 for (var i = 0; i < _tagHelpers.Count; i++)
@@ -344,11 +345,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                         // Make sure this node exists in the file we're parsing and not in its imports.
                         if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                         {
-                            addTagHelper.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
-                                    node.GetSourceSpan(_source)
-                                )
-                            );
+                            addTagHelper.Diagnostics
+                                .Add(
+                                    ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
+                                        node.GetSourceSpan(_source)
+                                    )
+                                );
                         }
                     }
                     else if (
@@ -358,11 +360,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                         // Make sure this node exists in the file we're parsing and not in its imports.
                         if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                         {
-                            removeTagHelper.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
-                                    node.GetSourceSpan(_source)
-                                )
-                            );
+                            removeTagHelper.Diagnostics
+                                .Add(
+                                    ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
+                                        node.GetSourceSpan(_source)
+                                    )
+                                );
                         }
                     }
                     else if (
@@ -373,11 +376,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                         // Make sure this node exists in the file we're parsing and not in its imports.
                         if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                         {
-                            tagHelperPrefix.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
-                                    node.GetSourceSpan(_source)
-                                )
-                            );
+                            tagHelperPrefix.Diagnostics
+                                .Add(
+                                    ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
+                                        node.GetSourceSpan(_source)
+                                    )
+                                );
                         }
                     }
                     else if (
@@ -437,13 +441,14 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 return @namespace.Length == namespaceTextSpan.Length
                     && 0
-                        == string.CompareOrdinal(
-                            typeName,
-                            namespaceTextSpan.Start,
-                            @namespace,
-                            0,
-                            @namespace.Length
-                        );
+                        == string
+                            .CompareOrdinal(
+                                typeName,
+                                namespaceTextSpan.Start,
+                                @namespace,
+                                0,
+                                @namespace.Length
+                            );
             }
 
             // Check if the given type is already in scope given the namespace of the current document.
@@ -479,10 +484,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 for (var i = 0; i < typeNamespaceSegments.Length; i++)
                 {
                     if (
-                        !typeNamespaceSegments[i].Equals(
-                            currentNamespaceSegments[i],
-                            StringComparison.Ordinal
-                        )
+                        !typeNamespaceSegments[i]
+                            .Equals(currentNamespaceSegments[i], StringComparison.Ordinal)
                     )
                     {
                         return false;

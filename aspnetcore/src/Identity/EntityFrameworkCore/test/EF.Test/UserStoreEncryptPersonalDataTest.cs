@@ -22,19 +22,16 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         protected override void SetupAddIdentity(IServiceCollection services)
         {
             services.AddIdentity<IdentityUser, IdentityRole>(
-                    options =>
-                    {
-                        options.Stores.ProtectPersonalData = true;
-                        options.Password.RequireDigit = false;
-                        options.Password.RequireLowercase = false;
-                        options.Password.RequireNonAlphanumeric = false;
-                        options.Password.RequireUppercase = false;
-                        options.User.AllowedUserNameCharacters = null;
-                    }
-                )
-                .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<TestDbContext>()
-                .AddPersonalDataProtection<SillyEncryptor, DefaultKeyRing>();
+                options =>
+                {
+                    options.Stores.ProtectPersonalData = true;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.User.AllowedUserNameCharacters = null;
+                }
+            ).AddDefaultTokenProviders().AddEntityFrameworkStores<TestDbContext>().AddPersonalDataProtection<SillyEncryptor, DefaultKeyRing>();
         }
 
         public class DefaultKeyRing : ILookupProtectorKeyRing
@@ -196,13 +193,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             {
                 var services = new ServiceCollection().AddLogging();
                 services.AddIdentity<CustomUser, IdentityRole>(
-                        options =>
-                        {
-                            options.Stores.ProtectPersonalData = protect;
-                        }
-                    )
-                    .AddEntityFrameworkStores<TContext>()
-                    .AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
+                    options =>
+                    {
+                        options.Stores.ProtectPersonalData = protect;
+                    }
+                ).AddEntityFrameworkStores<TContext>().AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
 
                 services.AddDbContext<TContext>(b => b.UseSqlite(connection));
 
@@ -299,15 +294,14 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             {
                 var services = new ServiceCollection().AddLogging();
                 services.AddIdentity<CustomUser, IdentityRole>(
-                        options =>
-                        {
-                            options.Stores.ProtectPersonalData = true;
-                        }
-                    )
-                    .AddEntityFrameworkStores<IdentityDbContext<CustomUser>>()
-                    .AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
+                    options =>
+                    {
+                        options.Stores.ProtectPersonalData = true;
+                    }
+                ).AddEntityFrameworkStores<IdentityDbContext<CustomUser>>().AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
                 var dbOptions =
-                    new DbContextOptionsBuilder().UseSqlite(scratch.Connection)
+                    new DbContextOptionsBuilder()
+                        .UseSqlite(scratch.Connection)
                         .UseApplicationServiceProvider(services.BuildServiceProvider()).Options;
                 var dbContext = new IdentityDbContext<InvalidUser>(dbOptions);
                 var e = Assert.Throws<InvalidOperationException>(

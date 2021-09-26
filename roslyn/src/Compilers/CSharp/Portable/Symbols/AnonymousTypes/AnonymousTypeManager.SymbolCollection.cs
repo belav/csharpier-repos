@@ -215,9 +215,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return this.Compilation.GetSpecialTypeMember(
-                        SpecialMember.System_Object__GetHashCode
-                    ) as MethodSymbol;
+                return this.Compilation
+                        .GetSpecialTypeMember(SpecialMember.System_Object__GetHashCode)
+                    as MethodSymbol;
             }
         }
 
@@ -225,9 +225,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return this.Compilation.GetWellKnownTypeMember(
-                        WellKnownMember.System_Collections_Generic_EqualityComparer_T__Equals
-                    ) as MethodSymbol;
+                return this.Compilation
+                        .GetWellKnownTypeMember(
+                            WellKnownMember.System_Collections_Generic_EqualityComparer_T__Equals
+                        ) as MethodSymbol;
             }
         }
 
@@ -235,9 +236,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return this.Compilation.GetWellKnownTypeMember(
-                        WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode
-                    ) as MethodSymbol;
+                return this.Compilation
+                        .GetWellKnownTypeMember(
+                            WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode
+                        ) as MethodSymbol;
             }
         }
 
@@ -245,9 +247,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return this.Compilation.GetWellKnownTypeMember(
-                        WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default
-                    ) as MethodSymbol;
+                return this.Compilation
+                        .GetWellKnownTypeMember(
+                            WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default
+                        ) as MethodSymbol;
             }
         }
 
@@ -255,9 +258,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return this.Compilation.GetWellKnownTypeMember(
-                        WellKnownMember.System_String__Format_IFormatProvider
-                    ) as MethodSymbol;
+                return this.Compilation
+                        .GetWellKnownTypeMember(
+                            WellKnownMember.System_String__Format_IFormatProvider
+                        ) as MethodSymbol;
             }
         }
         #endregion

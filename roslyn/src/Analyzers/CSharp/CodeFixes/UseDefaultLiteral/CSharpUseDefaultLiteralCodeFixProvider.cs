@@ -72,11 +72,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
             var parseOptions = (CSharpParseOptions)document.Project.ParseOptions;
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var preferSimpleDefaultExpression =
-                document.Project.AnalyzerOptions.GetOption(
-                    CSharpCodeStyleOptions.PreferSimpleDefaultExpression,
-                    tree,
-                    cancellationToken
-                ).Value;
+                document.Project.AnalyzerOptions
+                    .GetOption(
+                        CSharpCodeStyleOptions.PreferSimpleDefaultExpression,
+                        tree,
+                        cancellationToken
+                    ).Value;
 
             var workspace = document.Project.Solution.Workspace;
             var originalRoot = editor.OriginalRoot;
@@ -90,23 +91,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
             );
 
             await editor.ApplyExpressionLevelSemanticEditsAsync(
-                    document,
-                    originalNodes,
-                    (semanticModel, defaultExpression) =>
-                        defaultExpression.CanReplaceWithDefaultLiteral(
-                            parseOptions,
-                            preferSimpleDefaultExpression,
-                            semanticModel,
-                            cancellationToken
-                        ),
-                    (_, currentRoot, defaultExpression) =>
-                        currentRoot.ReplaceNode(
-                            defaultExpression,
-                            SyntaxFactory.LiteralExpression(SyntaxKind.DefaultLiteralExpression)
-                                .WithTriviaFrom(defaultExpression)
-                        ),
-                    cancellationToken
-                )
+                document,
+                originalNodes,
+                (semanticModel, defaultExpression) =>
+                    defaultExpression.CanReplaceWithDefaultLiteral(
+                        parseOptions,
+                        preferSimpleDefaultExpression,
+                        semanticModel,
+                        cancellationToken
+                    ),
+                (_, currentRoot, defaultExpression) =>
+                    currentRoot.ReplaceNode(
+                        defaultExpression,
+                        SyntaxFactory.LiteralExpression(SyntaxKind.DefaultLiteralExpression)
+                            .WithTriviaFrom(defaultExpression)
+                    ),
+                cancellationToken
+            )
                 .ConfigureAwait(false);
         }
 

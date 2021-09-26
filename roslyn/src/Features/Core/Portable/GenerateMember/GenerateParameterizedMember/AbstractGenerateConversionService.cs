@@ -71,16 +71,16 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             )
             {
                 var semanticDocument = await SemanticDocument.CreateAsync(
-                        document,
-                        cancellationToken
-                    )
+                    document,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 var state = await State.GenerateConversionStateAsync(
-                        (TService)this,
-                        semanticDocument,
-                        node,
-                        cancellationToken
-                    )
+                    (TService)this,
+                    semanticDocument,
+                    node,
+                    cancellationToken
+                )
                     .ConfigureAwait(false);
                 if (state == null)
                 {

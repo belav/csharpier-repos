@@ -1452,11 +1452,8 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             Debug.Assert(
-                string.Equals(
-                    suggestedWinNTProperty,
-                    "UserFlags",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(suggestedWinNTProperty, "UserFlags", StringComparison.OrdinalIgnoreCase)
             );
 
             SDSUtils.AccountControlFromDirectoryEntry(
@@ -1671,11 +1668,8 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             Debug.Assert(
-                string.Equals(
-                    suggestedWinNTProperty,
-                    "UserFlags",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                string
+                    .Equals(suggestedWinNTProperty, "UserFlags", StringComparison.OrdinalIgnoreCase)
             );
 
             SDSUtils.AccountControlToDirectoryEntry(

@@ -68,18 +68,19 @@ namespace Microsoft.Web.WebPages.OAuth.Test
             var client = new Mock<IAuthenticationClient>();
             client.Setup(c => c.ProviderName).Returns("windowslive");
             client.Setup(
-                    c =>
-                        c.RequestAuthentication(
-                            context.Object,
-                            It.Is<Uri>(
-                                u =>
-                                    u.AbsoluteUri.StartsWith(
+                c =>
+                    c.RequestAuthentication(
+                        context.Object,
+                        It.Is<Uri>(
+                            u =>
+                                u.AbsoluteUri
+                                    .StartsWith(
                                         "http://live.com/login.aspx?__provider__=windowslive",
                                         StringComparison.OrdinalIgnoreCase
                                     )
-                            )
                         )
-                )
+                    )
+            )
                 .Verifiable();
 
             OAuthWebSecurity.RegisterClient(client.Object);
@@ -107,18 +108,19 @@ namespace Microsoft.Web.WebPages.OAuth.Test
             var client = new Mock<IAuthenticationClient>();
             client.Setup(c => c.ProviderName).Returns("yahoo");
             client.Setup(
-                    c =>
-                        c.RequestAuthentication(
-                            context.Object,
-                            It.Is<Uri>(
-                                u =>
-                                    u.AbsoluteUri.StartsWith(
+                c =>
+                    c.RequestAuthentication(
+                        context.Object,
+                        It.Is<Uri>(
+                            u =>
+                                u.AbsoluteUri
+                                    .StartsWith(
                                         "http://yahoo.com/?__provider__=yahoo",
                                         StringComparison.OrdinalIgnoreCase
                                     )
-                            )
                         )
-                )
+                    )
+            )
                 .Verifiable();
 
             OAuthWebSecurity.RegisterClient(client.Object);

@@ -325,21 +325,12 @@ namespace System.Diagnostics
                         if (
                             logName.Length == 8
                             && (
-                                string.Equals(
-                                    logName,
-                                    "AppEvent",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                                || string.Equals(
-                                    logName,
-                                    "SecEvent",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                                || string.Equals(
-                                    logName,
-                                    "SysEvent",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                string
+                                    .Equals(logName, "AppEvent", StringComparison.OrdinalIgnoreCase)
+                                || string
+                                    .Equals(logName, "SecEvent", StringComparison.OrdinalIgnoreCase)
+                                || string
+                                    .Equals(logName, "SysEvent", StringComparison.OrdinalIgnoreCase)
                             )
                         )
                             throw new ArgumentException(
@@ -531,14 +522,15 @@ namespace System.Diagnostics
                     string keyname = key.Name;
                     int index = keyname.LastIndexOf('\\');
                     if (
-                        string.Compare(
-                            keyname,
-                            index + 1,
-                            source,
-                            0,
-                            keyname.Length - index,
-                            StringComparison.Ordinal
-                        ) == 0
+                        string
+                            .Compare(
+                                keyname,
+                                index + 1,
+                                source,
+                                0,
+                                keyname.Length - index,
+                                StringComparison.Ordinal
+                            ) == 0
                     )
                         throw new InvalidOperationException(
                             SR.Format(SR.CannotDeleteEqualSource, source)
@@ -762,10 +754,8 @@ namespace System.Diagnostics
             for (int i = 0; i < logNames.Length; i++)
             {
                 EventLog log = new EventLog(logNames[i], machineName);
-                SafeEventLogReadHandle handle = Interop.Advapi32.OpenEventLog(
-                    machineName,
-                    logNames[i]
-                );
+                SafeEventLogReadHandle handle = Interop.Advapi32
+                    .OpenEventLog(machineName, logNames[i]);
 
                 if (!handle.IsInvalid)
                 {
@@ -1008,12 +998,13 @@ namespace System.Diagnostics
                         {
                             int num = -1;
                             if (
-                                int.TryParse(
-                                    sb.ToString(),
-                                    NumberStyles.None,
-                                    CultureInfo.InvariantCulture,
-                                    out num
-                                )
+                                int
+                                    .TryParse(
+                                        sb.ToString(),
+                                        NumberStyles.None,
+                                        CultureInfo.InvariantCulture,
+                                        out num
+                                    )
                             )
                             {
                                 largestNumber = Math.Max(largestNumber, num);
@@ -1074,15 +1065,8 @@ namespace System.Diagnostics
                 int lastError = Interop.Errors.ERROR_INSUFFICIENT_BUFFER;
                 while (msgLen == 0 && lastError == Interop.Errors.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    msgLen = Interop.Kernel32.FormatMessage(
-                        flags,
-                        hModule,
-                        messageNum,
-                        0,
-                        buf,
-                        buf.Length,
-                        addresses
-                    );
+                    msgLen = Interop.Kernel32
+                        .FormatMessage(flags, hModule, messageNum, 0, buf, buf.Length, addresses);
 
                     if (msgLen == 0)
                     {

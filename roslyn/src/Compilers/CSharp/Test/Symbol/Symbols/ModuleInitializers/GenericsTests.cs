@@ -35,9 +35,9 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 // (6,6): error CS8798: Module initializer method 'M' must not be generic and must not be contained in a generic type
                 //     [ModuleInitializer]
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M")
                     .WithLocation(6, 6)
             );
@@ -63,9 +63,9 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 // (6,6): error CS8798: Module initializer method 'M' must not be generic and must not be contained in a generic type
                 //     [ModuleInitializer]
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M")
                     .WithLocation(6, 6)
             );
@@ -91,9 +91,9 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 // (6,6): error CS8816: Module initializer method 'M' must not be generic and must not be contained in a generic type
                 //     [ModuleInitializer]
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M")
                     .WithLocation(6, 6)
             );
@@ -122,9 +122,9 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 // (8,10): error CS8798: Module initializer method 'M' must not be generic and must not be contained in a generic type
                 //         [ModuleInitializer]
                 Diagnostic(
-                        ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
-                        "ModuleInitializer"
-                    )
+                    ErrorCode.ERR_ModuleInitializerMethodAndContainingTypesMustNotBeGeneric,
+                    "ModuleInitializer"
+                )
                     .WithArguments("M")
                     .WithLocation(8, 10)
             );

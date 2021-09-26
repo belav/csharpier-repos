@@ -76,10 +76,10 @@ namespace Microsoft.CodeAnalysis.Interactive
                 try
                 {
                     var remoteService = await TryStartProcessAsync(
-                            Options.HostPath,
-                            Options.Culture,
-                            cancellationToken
-                        )
+                        Options.HostPath,
+                        Options.Culture,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (remoteService == null)
                     {
@@ -128,11 +128,11 @@ namespace Microsoft.CodeAnalysis.Interactive
                     // try to execute initialization script:
                     var isRestarting = InstanceId > 1;
                     result = await ExecuteRemoteAsync(
-                            remoteService,
-                            nameof(Service.InitializeContextAsync),
-                            Options.InitializationFilePath,
-                            isRestarting
-                        )
+                        remoteService,
+                        nameof(Service.InitializeContextAsync),
+                        Options.InitializationFilePath,
+                        isRestarting
+                    )
                         .ConfigureAwait(false);
 
                     initializing = false;
@@ -200,10 +200,11 @@ namespace Microsoft.CodeAnalysis.Interactive
                 {
                     Host.WriteOutputInBackground(
                         isError: true,
-                        string.Format(
-                            InteractiveHostResources.Failed_to_create_a_remote_process_for_interactive_code_execution,
-                            hostPath
-                        ),
+                        string
+                            .Format(
+                                InteractiveHostResources.Failed_to_create_a_remote_process_for_interactive_code_execution,
+                                hostPath
+                            ),
                         e.Message
                     );
 
@@ -264,16 +265,17 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     platformInfo = (
                         await jsonRpc.InvokeWithCancellationAsync<InteractiveHostPlatformInfo.Data>(
-                                nameof(Service.InitializeAsync),
-                                new object[]
-                                {
-                                    Host._replServiceProviderType.AssemblyQualifiedName,
-                                    culture.Name
-                                },
-                                cancellationToken
-                            )
+                            nameof(Service.InitializeAsync),
+                            new object[]
+                            {
+                                Host._replServiceProviderType.AssemblyQualifiedName,
+                                culture.Name
+                            },
+                            cancellationToken
+                        )
                             .ConfigureAwait(false)
-                    ).Deserialize();
+                    )
+                        .Deserialize();
                 }
                 catch (Exception e)
                 {
@@ -314,11 +316,12 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     Host.WriteOutputInBackground(
                         isError: true,
-                        string.Format(
-                            InteractiveHostResources.Failed_to_launch_0_process_exit_code_colon_1_with_output_colon,
-                            hostPath,
-                            process.ExitCode
-                        ),
+                        string
+                            .Format(
+                                InteractiveHostResources.Failed_to_launch_0_process_exit_code_colon_1_with_output_colon,
+                                hostPath,
+                                process.ExitCode
+                            ),
                         errorString
                     );
                 }

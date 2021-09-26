@@ -26,9 +26,9 @@ namespace AppHost.Bundle.Tests
             var singleFile = BundleSelfContainedApp(fixture);
 
             Command.Create(
-                    singleFile,
-                    "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory"
-                )
+                singleFile,
+                "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory"
+            )
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
@@ -55,9 +55,9 @@ namespace AppHost.Bundle.Tests
             var extractionBaseDir = BundleHelper.GetExtractionRootDir(fixture);
 
             Command.Create(
-                    singleFile,
-                    "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory"
-                )
+                singleFile,
+                "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory"
+            )
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .EnvironmentVariable(

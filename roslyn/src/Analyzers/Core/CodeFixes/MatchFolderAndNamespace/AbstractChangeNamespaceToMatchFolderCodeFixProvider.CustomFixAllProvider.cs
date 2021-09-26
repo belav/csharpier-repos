@@ -64,8 +64,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
                     foreach (var project in fixAllContext.Solution.Projects)
                     {
                         var projectDiagnostics = await fixAllContext.GetAllDiagnosticsAsync(
-                                fixAllContext.Project
-                            )
+                            fixAllContext.Project
+                        )
                             .ConfigureAwait(false);
                         diagnostics.AddRange(projectDiagnostics);
                     }
@@ -88,8 +88,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
                 // across this mutation, but lookup via SyntaxTree directly will not work because
                 // the tree won't be the same.
                 var documentIdToDiagnosticsMap = diagnostics.GroupBy(
-                        diagnostic => diagnostic.Location.SourceTree
-                    )
+                    diagnostic => diagnostic.Location.SourceTree
+                )
                     .Where(group => group.Key is not null)
                     .ToImmutableDictionary(
                         group => solution.GetRequiredDocument(group.Key!).Id,
@@ -106,10 +106,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
                     using var _ = progressTracker.ItemCompletedScope(document.Name);
 
                     newSolution = await FixAllInDocumentAsync(
-                            document,
-                            diagnosticsInTree,
-                            cancellationToken
-                        )
+                        document,
+                        diagnosticsInTree,
+                        cancellationToken
+                    )
                         .ConfigureAwait(false);
                 }
 

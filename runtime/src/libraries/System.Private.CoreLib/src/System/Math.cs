@@ -278,10 +278,10 @@ namespace System
             if (Sse2.IsSupported || AdvSimd.IsSupported)
             {
                 return VectorMath.ConditionalSelectBitwise(
-                        Vector128.CreateScalarUnsafe(-0.0),
-                        Vector128.CreateScalarUnsafe(y),
-                        Vector128.CreateScalarUnsafe(x)
-                    )
+                    Vector128.CreateScalarUnsafe(-0.0),
+                    Vector128.CreateScalarUnsafe(y),
+                    Vector128.CreateScalarUnsafe(x)
+                )
                     .ToScalar();
             }
             else
@@ -1153,7 +1153,8 @@ namespace System
 
             if (AdvSimd.Arm64.IsSupported)
             {
-                return AdvSimd.Arm64.ReciprocalSquareRootEstimateScalar(Vector64.CreateScalar(d))
+                return AdvSimd.Arm64
+                    .ReciprocalSquareRootEstimateScalar(Vector64.CreateScalar(d))
                     .ToScalar();
             }
             else

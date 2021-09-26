@@ -180,20 +180,16 @@ namespace ILCompiler
                 )
                     _targetArchitecture = TargetArchitecture.ARM;
                 else if (
-                    _commandLineOptions.TargetArch.Equals(
-                        "armel",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    _commandLineOptions.TargetArch
+                        .Equals("armel", StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     _targetArchitecture = TargetArchitecture.ARM;
                     _armelAbi = true;
                 }
                 else if (
-                    _commandLineOptions.TargetArch.Equals(
-                        "arm64",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    _commandLineOptions.TargetArch
+                        .Equals("arm64", StringComparison.OrdinalIgnoreCase)
                 )
                     _targetArchitecture = TargetArchitecture.ARM64;
                 else
@@ -202,10 +198,8 @@ namespace ILCompiler
             if (_commandLineOptions.TargetOS != null)
             {
                 if (
-                    _commandLineOptions.TargetOS.Equals(
-                        "windows",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    _commandLineOptions.TargetOS
+                        .Equals("windows", StringComparison.OrdinalIgnoreCase)
                 )
                     _targetOS = TargetOS.Windows;
                 else if (
@@ -534,9 +528,8 @@ namespace ILCompiler
 
                         if (!_commandLineOptions.Composite && !inputModuleMvid.HasValue)
                         {
-                            inputModuleMvid = module.MetadataReader.GetGuid(
-                                module.MetadataReader.GetModuleDefinition().Mvid
-                            );
+                            inputModuleMvid = module.MetadataReader
+                                .GetGuid(module.MetadataReader.GetModuleDefinition().Mvid);
                         }
 
                         if (!_commandLineOptions.CompositeOrInputBubble)
@@ -614,10 +607,11 @@ namespace ILCompiler
                     if (!_commandLineOptions.Composite && inputModules.Count != 1)
                     {
                         throw new Exception(
-                            string.Format(
-                                SR.ErrorMultipleInputFilesCompositeModeOnly,
-                                string.Join("; ", inputModules)
-                            )
+                            string
+                                .Format(
+                                    SR.ErrorMultipleInputFilesCompositeModeOnly,
+                                    string.Join("; ", inputModules)
+                                )
                         );
                     }
 
@@ -723,9 +717,8 @@ namespace ILCompiler
                     )
                     {
                         System.Diagnostics.Debug.Assert(inputModules.Count == 1);
-                        _optimizationMode = (
-                            (EcmaAssembly)inputModules[0].Assembly
-                        ).HasOptimizationsDisabled()
+                        _optimizationMode = ((EcmaAssembly)inputModules[0].Assembly)
+                        .HasOptimizationsDisabled()
                             ? OptimizationMode.None
                             : OptimizationMode.Blended;
                     }
@@ -903,11 +896,12 @@ namespace ILCompiler
 
             if (method == null)
                 throw new CommandLineException(
-                    string.Format(
-                        SR.MethodNotFoundOnType,
-                        _commandLineOptions.SingleMethodName,
-                        _commandLineOptions.SingleMethodTypeName
-                    )
+                    string
+                        .Format(
+                            SR.MethodNotFoundOnType,
+                            _commandLineOptions.SingleMethodName,
+                            _commandLineOptions.SingleMethodTypeName
+                        )
                 );
 
             if (
@@ -922,12 +916,13 @@ namespace ILCompiler
             )
             {
                 throw new CommandLineException(
-                    string.Format(
-                        SR.GenericArgCountMismatch,
-                        method.Instantiation.Length,
-                        _commandLineOptions.SingleMethodName,
-                        _commandLineOptions.SingleMethodTypeName
-                    )
+                    string
+                        .Format(
+                            SR.GenericArgCountMismatch,
+                            method.Instantiation.Length,
+                            _commandLineOptions.SingleMethodName,
+                            _commandLineOptions.SingleMethodTypeName
+                        )
                 );
             }
 

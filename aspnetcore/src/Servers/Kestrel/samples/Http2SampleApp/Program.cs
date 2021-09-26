@@ -16,80 +16,76 @@ namespace Http2SampleApp
         public static void Main(string[] args)
         {
             var hostBuilder = new HostBuilder().ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseKestrel()
-                            .ConfigureKestrel(
-                                (context, options) =>
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().ConfigureKestrel(
+                        (context, options) =>
+                        {
+                            var basePort =
+                                context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
+
+                            // Http/1.1 endpoint for comparison
+                            options.ListenAnyIP(
+                                basePort,
+                                listenOptions =>
                                 {
-                                    var basePort =
-                                        context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
+                                    listenOptions.Protocols = HttpProtocols.Http1;
+                                }
+                            );
 
-                                    // Http/1.1 endpoint for comparison
-                                    options.ListenAnyIP(
-                                        basePort,
-                                        listenOptions =>
+                            // TLS Http/1.1 or HTTP/2 endpoint negotiated via ALPN
+                            options.ListenAnyIP(
+                                basePort + 1,
+                                listenOptions =>
+                                {
+                                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                                    listenOptions.UseHttps();
+                                    listenOptions.Use(
+                                        (context, next) =>
                                         {
-                                            listenOptions.Protocols = HttpProtocols.Http1;
-                                        }
-                                    );
+                                            // https://tools.ietf.org/html/rfc7540#appendix-A
+                                            // Allows filtering TLS handshakes on a per connection basis
 
-                                    // TLS Http/1.1 or HTTP/2 endpoint negotiated via ALPN
-                                    options.ListenAnyIP(
-                                        basePort + 1,
-                                        listenOptions =>
-                                        {
-                                            listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                                            listenOptions.UseHttps();
-                                            listenOptions.Use(
-                                                (context, next) =>
-                                                {
-                                                    // https://tools.ietf.org/html/rfc7540#appendix-A
-                                                    // Allows filtering TLS handshakes on a per connection basis
+                                            var tlsFeature = context.Features
+                                                .Get<ITlsHandshakeFeature>();
 
-                                                    var tlsFeature =
-                                                        context.Features.Get<ITlsHandshakeFeature>();
+                                            if (
+                                                tlsFeature.CipherAlgorithm
+                                                == CipherAlgorithmType.Null
+                                            )
+                                            {
+                                                throw new NotSupportedException(
+                                                    "Prohibited cipher: "
+                                                        + tlsFeature.CipherAlgorithm
+                                                );
+                                            }
 
-                                                    if (
-                                                        tlsFeature.CipherAlgorithm
-                                                        == CipherAlgorithmType.Null
-                                                    )
-                                                    {
-                                                        throw new NotSupportedException(
-                                                            "Prohibited cipher: "
-                                                                + tlsFeature.CipherAlgorithm
-                                                        );
-                                                    }
-
-                                                    return next();
-                                                }
-                                            );
-                                        }
-                                    );
-
-                                    // Prior knowledge, no TLS handshake. WARNING: Not supported by browsers
-                                    // but useful for the h2spec tests
-                                    options.ListenAnyIP(
-                                        basePort + 5,
-                                        listenOptions =>
-                                        {
-                                            listenOptions.Protocols = HttpProtocols.Http2;
+                                            return next();
                                         }
                                     );
                                 }
-                            )
-                            .UseContentRoot(Directory.GetCurrentDirectory())
-                            .UseStartup<Startup>();
-                    }
-                )
-                .ConfigureLogging(
-                    (_, factory) =>
-                    {
-                        // Set logging to the MAX.
-                        factory.SetMinimumLevel(LogLevel.Trace);
-                        factory.AddConsole();
-                    }
-                );
+                            );
+
+                            // Prior knowledge, no TLS handshake. WARNING: Not supported by browsers
+                            // but useful for the h2spec tests
+                            options.ListenAnyIP(
+                                basePort + 5,
+                                listenOptions =>
+                                {
+                                    listenOptions.Protocols = HttpProtocols.Http2;
+                                }
+                            );
+                        }
+                    ).UseContentRoot(Directory.GetCurrentDirectory()).UseStartup<Startup>();
+                }
+            ).ConfigureLogging(
+                (_, factory) =>
+                {
+                    // Set logging to the MAX.
+                    factory.SetMinimumLevel(LogLevel.Trace);
+                    factory.AddConsole();
+                }
+            );
 
             hostBuilder.Build().Run();
         }

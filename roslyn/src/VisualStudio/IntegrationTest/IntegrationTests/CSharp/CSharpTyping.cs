@@ -59,18 +59,20 @@ public partial class Test
         int val1x = this.val1, val2x = this.val2;
     }
 }";
-            VisualStudio.SolutionExplorer.AddFile(
-                new ProjectUtils.Project(ProjectName),
-                "PartialType2.cs",
-                secondPartialDecl,
-                open: false
-            );
-            VisualStudio.SolutionExplorer.AddFile(
-                new ProjectUtils.Project(ProjectName),
-                "PartialType3.cs",
-                thirdPartialDecl,
-                open: false
-            );
+            VisualStudio.SolutionExplorer
+                .AddFile(
+                    new ProjectUtils.Project(ProjectName),
+                    "PartialType2.cs",
+                    secondPartialDecl,
+                    open: false
+                );
+            VisualStudio.SolutionExplorer
+                .AddFile(
+                    new ProjectUtils.Project(ProjectName),
+                    "PartialType3.cs",
+                    thirdPartialDecl,
+                    open: false
+                );
 
             // Typing intermixed with explicit Wait operations to ensure that
             // we trigger multiple open file analyses along with cancellations.

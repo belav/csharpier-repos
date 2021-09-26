@@ -47,9 +47,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             // From the artifacts dir, it's possible to find where the sharedFrameworkPublish folder is. We need
             // to locate it because we'll copy its contents into other folders
-            string artifactsDir = new RepoDirectoriesProvider().GetTestContextVariable(
-                "TEST_ARTIFACTS"
-            );
+            string artifactsDir = new RepoDirectoriesProvider()
+                .GetTestContextVariable("TEST_ARTIFACTS");
             _builtDotnet = Path.Combine(artifactsDir, "sharedFrameworkPublish");
 
             // The dotnetMultilevelSharedFxLookup dir will contain some folders and files that will be
@@ -125,7 +124,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             SharedFxLookupPortableAppFixture = new TestProjectFixture(
                 "SharedFxLookupPortableApp",
                 RepoDirectories
-            ).EnsureRestored().BuildProject();
+            )
+                .EnsureRestored()
+                .BuildProject();
             var fixture = SharedFxLookupPortableAppFixture;
 
             // The actual framework version can be obtained from the built fixture. We'll use it to

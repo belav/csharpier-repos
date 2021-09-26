@@ -20,10 +20,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Prelink_RuntimeSuppliedMethod_Success()
         {
-            MethodInfo method = typeof(Math).GetMethod(
-                nameof(Math.Abs),
-                new Type[] { typeof(double) }
-            );
+            MethodInfo method = typeof(Math)
+                .GetMethod(nameof(Math.Abs), new Type[] { typeof(double) });
             Marshal.Prelink(method);
             Marshal.Prelink(method);
         }

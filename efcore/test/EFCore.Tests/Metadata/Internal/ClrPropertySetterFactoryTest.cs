@@ -130,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var customer = new Customer { Id = 7 };
 
-            new ClrPropertySetterFactory().Create(typeof(Customer).GetAnyProperty("Id"))
+            new ClrPropertySetterFactory()
+                .Create(typeof(Customer).GetAnyProperty("Id"))
                 .SetClrValue(customer, 77);
 
             Assert.Equal(77, customer.Id);
@@ -157,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var customer = new Customer { Id = 7 };
 
-            new ClrPropertySetterFactory().Create((IProperty)idProperty)
+            new ClrPropertySetterFactory()
+                .Create((IProperty)idProperty)
                 .SetClrValue(customer, "MyString");
 
             Assert.Equal("MyString", customer.Content);
@@ -184,7 +186,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var customer = new Customer { Id = 7 };
 
-            new ClrPropertySetterFactory().Create((IProperty)idProperty)
+            new ClrPropertySetterFactory()
+                .Create((IProperty)idProperty)
                 .SetClrValue(customer, null);
 
             Assert.Null(customer.OptionalInt);
@@ -198,7 +201,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var customer = new Customer { Id = 7 };
 
-            new ClrPropertySetterFactory().Create((IProperty)idProperty)
+            new ClrPropertySetterFactory()
+                .Create((IProperty)idProperty)
                 .SetClrValue(customer, Flag.One);
 
             Assert.Equal(Flag.One, customer.Flag);
@@ -212,7 +216,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var customer = new Customer { Id = 7 };
 
-            new ClrPropertySetterFactory().Create((IProperty)idProperty)
+            new ClrPropertySetterFactory()
+                .Create((IProperty)idProperty)
                 .SetClrValue(customer, Flag.Two);
 
             Assert.Equal(Flag.Two, customer.OptionalFlag);
@@ -223,9 +228,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var entityType = CreateModel().AddEntityType(typeof(ConcreteEntity1));
             var property = entityType.AddProperty(
-                typeof(ConcreteEntity1).GetProperty(
-                    nameof(ConcreteEntity1.VirtualPrivateProperty_Override)
-                )
+                typeof(ConcreteEntity1)
+                    .GetProperty(nameof(ConcreteEntity1.VirtualPrivateProperty_Override))
             );
             var entity = new ConcreteEntity1();
 
@@ -238,9 +242,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var entityType = CreateModel().AddEntityType(typeof(ConcreteEntity2));
             var property = entityType.AddProperty(
-                typeof(ConcreteEntity2).GetProperty(
-                    nameof(ConcreteEntity2.VirtualPrivateProperty_Override)
-                )
+                typeof(ConcreteEntity2)
+                    .GetProperty(nameof(ConcreteEntity2.VirtualPrivateProperty_Override))
             );
             var entity = new ConcreteEntity2();
 
@@ -253,9 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var entityType = CreateModel().AddEntityType(typeof(ConcreteEntity1));
             var property = entityType.AddProperty(
-                typeof(ConcreteEntity1).GetProperty(
-                    nameof(ConcreteEntity1.VirtualPrivateProperty_NoOverride)
-                )
+                typeof(ConcreteEntity1)
+                    .GetProperty(nameof(ConcreteEntity1.VirtualPrivateProperty_NoOverride))
             );
             var entity = new ConcreteEntity1();
 
@@ -268,9 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var entityType = CreateModel().AddEntityType(typeof(ConcreteEntity2));
             var property = entityType.AddProperty(
-                typeof(ConcreteEntity2).GetProperty(
-                    nameof(ConcreteEntity2.VirtualPrivateProperty_NoOverride)
-                )
+                typeof(ConcreteEntity2)
+                    .GetProperty(nameof(ConcreteEntity2.VirtualPrivateProperty_NoOverride))
             );
             var entity = new ConcreteEntity2();
 
@@ -338,9 +339,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal("ValueA", indexedClass["PropertyA"]);
             Assert.Equal(123, indexedClass["PropertyB"]);
 
-            new ClrPropertySetterFactory().Create((IProperty)propertyA)
+            new ClrPropertySetterFactory()
+                .Create((IProperty)propertyA)
                 .SetClrValue(indexedClass, "UpdatedValue");
-            new ClrPropertySetterFactory().Create((IProperty)propertyB)
+            new ClrPropertySetterFactory()
+                .Create((IProperty)propertyB)
                 .SetClrValue(indexedClass, 42);
 
             Assert.Equal("UpdatedValue", indexedClass["PropertyA"]);
@@ -359,21 +362,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class Customer
         {
-            public static readonly PropertyInfo IdProperty = typeof(Customer).GetProperty(
-                nameof(Id)
-            );
-            public static readonly PropertyInfo OptionalIntProperty = typeof(Customer).GetProperty(
-                nameof(OptionalInt)
-            );
-            public static readonly PropertyInfo ContentProperty = typeof(Customer).GetProperty(
-                nameof(Content)
-            );
-            public static readonly PropertyInfo FlagProperty = typeof(Customer).GetProperty(
-                nameof(Flag)
-            );
-            public static readonly PropertyInfo OptionalFlagProperty = typeof(Customer).GetProperty(
-                nameof(OptionalFlag)
-            );
+            public static readonly PropertyInfo IdProperty = typeof(Customer)
+                .GetProperty(nameof(Id));
+            public static readonly PropertyInfo OptionalIntProperty = typeof(Customer)
+                .GetProperty(nameof(OptionalInt));
+            public static readonly PropertyInfo ContentProperty = typeof(Customer)
+                .GetProperty(nameof(Content));
+            public static readonly PropertyInfo FlagProperty = typeof(Customer)
+                .GetProperty(nameof(Flag));
+            public static readonly PropertyInfo OptionalFlagProperty = typeof(Customer)
+                .GetProperty(nameof(OptionalFlag));
 
             public int Id { get; set; }
             public string Content { get; set; }

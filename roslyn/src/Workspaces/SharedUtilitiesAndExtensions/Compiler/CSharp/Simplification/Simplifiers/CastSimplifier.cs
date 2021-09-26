@@ -244,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 // FormattableString or some interface of FormattableString.
 
                 return castType.Equals(castTypeInfo.ConvertedType)
-                    || ImmutableArray<ITypeSymbol?>.CastUp(castType.AllInterfaces)
+                    || ImmutableArray<ITypeSymbol?>
+                        .CastUp(castType.AllInterfaces)
                         .Contains(castTypeInfo.ConvertedType);
             }
 
@@ -1291,10 +1292,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     return false;
             }
             else if (
-                castNode.Parent.IsKind(
-                    SyntaxKind.ArrayInitializerExpression,
-                    out InitializerExpressionSyntax? arrayInitializer
-                )
+                castNode.Parent
+                    .IsKind(
+                        SyntaxKind.ArrayInitializerExpression,
+                        out InitializerExpressionSyntax? arrayInitializer
+                    )
             )
             {
                 // Identity fp conversion is safe if this is in an array initializer.
@@ -1387,10 +1389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 castExpression.WalkUpParentheses()
                     .IsParentKind(SyntaxKind.Argument, out ArgumentSyntax? argument)
                 && argument.Parent.IsKind(SyntaxKind.ArgumentList, SyntaxKind.BracketedArgumentList)
-                && argument.Parent.Parent.IsKind(
-                    SyntaxKind.InvocationExpression,
-                    SyntaxKind.ElementAccessExpression
-                )
+                && argument.Parent.Parent
+                    .IsKind(SyntaxKind.InvocationExpression, SyntaxKind.ElementAccessExpression)
             )
             {
                 var typeInfo = semanticModel.GetTypeInfo(argument.Parent.Parent, cancellationToken);
@@ -1610,14 +1610,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             CancellationToken cancellationToken
         )
         {
-            var typeInfo = speculationAnalyzer.SpeculativeSemanticModel.GetTypeInfo(
-                speculatedExpression,
-                cancellationToken
-            );
-            var conversion = speculationAnalyzer.SpeculativeSemanticModel.GetConversion(
-                speculatedExpression,
-                cancellationToken
-            );
+            var typeInfo = speculationAnalyzer.SpeculativeSemanticModel
+                .GetTypeInfo(speculatedExpression, cancellationToken);
+            var conversion = speculationAnalyzer.SpeculativeSemanticModel
+                .GetConversion(speculatedExpression, cancellationToken);
 
             if (!conversion.IsIdentity)
             {
@@ -1635,10 +1631,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return default;
             }
 
-            return speculationAnalyzer.SpeculativeSemanticModel.ClassifyConversion(
-                speculatedExpression,
-                speculatedExpressionOuterType
-            );
+            return speculationAnalyzer.SpeculativeSemanticModel
+                .ClassifyConversion(speculatedExpression, speculatedExpressionOuterType);
         }
 
         private static bool UserDefinedConversionIsAllowed(ExpressionSyntax expression)
@@ -1742,19 +1736,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     return true;
                 }
 
-                var conversion = semanticModel.Compilation.ClassifyConversion(
-                    castType,
-                    parameterType
-                );
+                var conversion = semanticModel.Compilation
+                    .ClassifyConversion(castType, parameterType);
                 if (conversion.Exists && conversion.IsImplicit)
                 {
                     return false;
                 }
 
-                var conversionElementType = semanticModel.Compilation.ClassifyConversion(
-                    castType,
-                    parameterType.ElementType
-                );
+                var conversionElementType = semanticModel.Compilation
+                    .ClassifyConversion(castType, parameterType.ElementType);
                 if (conversionElementType.Exists && conversionElementType.IsImplicit)
                 {
                     return true;

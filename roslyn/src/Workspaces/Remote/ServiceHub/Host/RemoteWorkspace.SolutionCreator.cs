@@ -50,15 +50,15 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 var newSolutionChecksums =
                     await _assetProvider.GetAssetAsync<SolutionStateChecksums>(
-                            newSolutionChecksum,
-                            _cancellationToken
-                        )
+                        newSolutionChecksum,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
                 var newSolutionInfo =
                     await _assetProvider.GetAssetAsync<SolutionInfo.SolutionAttributes>(
-                            newSolutionChecksums.Attributes,
-                            _cancellationToken
-                        )
+                        newSolutionChecksums.Attributes,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 // if either solution id or file path changed, then we consider it as new solution
@@ -72,24 +72,23 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     var solution = _baseSolution;
 
-                    var oldSolutionChecksums = await solution.State.GetStateChecksumsAsync(
-                            _cancellationToken
-                        )
+                    var oldSolutionChecksums = await solution.State
+                        .GetStateChecksumsAsync(_cancellationToken)
                         .ConfigureAwait(false);
                     var newSolutionChecksums =
                         await _assetProvider.GetAssetAsync<SolutionStateChecksums>(
-                                newSolutionChecksum,
-                                _cancellationToken
-                            )
+                            newSolutionChecksum,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false);
 
                     if (oldSolutionChecksums.Attributes != newSolutionChecksums.Attributes)
                     {
                         var newSolutionInfo =
                             await _assetProvider.GetAssetAsync<SolutionInfo.SolutionAttributes>(
-                                    newSolutionChecksums.Attributes,
-                                    _cancellationToken
-                                )
+                                newSolutionChecksums.Attributes,
+                                _cancellationToken
+                            )
                                 .ConfigureAwait(false);
 
                         // if either id or file path has changed, then this is not update
@@ -102,9 +101,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     if (oldSolutionChecksums.Options != newSolutionChecksums.Options)
                     {
                         var newOptions = await _assetProvider.GetAssetAsync<SerializableOptionSet>(
-                                newSolutionChecksums.Options,
-                                _cancellationToken
-                            )
+                            newSolutionChecksums.Options,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false);
                         solution = solution.WithOptions(newOptions);
                     }
@@ -115,10 +114,10 @@ namespace Microsoft.CodeAnalysis.Remote
                     )
                     {
                         solution = await UpdateProjectsAsync(
-                                solution,
-                                oldSolutionChecksums.Projects,
-                                newSolutionChecksums.Projects
-                            )
+                            solution,
+                            oldSolutionChecksums.Projects,
+                            newSolutionChecksums.Projects
+                        )
                             .ConfigureAwait(false);
                     }
 
@@ -129,9 +128,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     {
                         solution = solution.WithAnalyzerReferences(
                             await _assetProvider.CreateCollectionAsync<AnalyzerReference>(
-                                    newSolutionChecksums.AnalyzerReferences,
-                                    _cancellationToken
-                                )
+                                newSolutionChecksums.AnalyzerReferences,
+                                _cancellationToken
+                            )
                                 .ConfigureAwait(false)
                         );
                     }
@@ -189,9 +188,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     if (!oldMap.ContainsKey(projectId))
                     {
                         var projectInfo = await _assetProvider.CreateProjectInfoAsync(
-                                newProjectChecksums.Checksum,
-                                _cancellationToken
-                            )
+                            newProjectChecksums.Checksum,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false);
                         if (projectInfo == null)
                         {
@@ -217,10 +216,10 @@ namespace Microsoft.CodeAnalysis.Remote
                     );
 
                     solution = await UpdateProjectAsync(
-                            solution.GetProject(projectId)!,
-                            oldProjectChecksums,
-                            newProjectChecksums
-                        )
+                        solution.GetProject(projectId)!,
+                        oldProjectChecksums,
+                        newProjectChecksums
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -256,9 +255,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
 
                 await _assetProvider.SynchronizeProjectAssetsAsync(
-                        pooledObject.Object,
-                        _cancellationToken
-                    )
+                    pooledObject.Object,
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
             }
 
@@ -281,13 +280,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 )
                 {
                     project = project.WithCompilationOptions(
-                        project.State.ProjectInfo.Attributes.FixUpCompilationOptions(
-                            await _assetProvider.GetAssetAsync<CompilationOptions>(
+                        project.State.ProjectInfo.Attributes
+                            .FixUpCompilationOptions(
+                                await _assetProvider.GetAssetAsync<CompilationOptions>(
                                     newProjectChecksums.CompilationOptions,
                                     _cancellationToken
                                 )
-                                .ConfigureAwait(false)
-                        )
+                                    .ConfigureAwait(false)
+                            )
                     );
                 }
 
@@ -296,9 +296,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     project = project.WithParseOptions(
                         await _assetProvider.GetAssetAsync<ParseOptions>(
-                                newProjectChecksums.ParseOptions,
-                                _cancellationToken
-                            )
+                            newProjectChecksums.ParseOptions,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }
@@ -311,9 +311,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     project = project.WithProjectReferences(
                         await _assetProvider.CreateCollectionAsync<ProjectReference>(
-                                newProjectChecksums.ProjectReferences,
-                                _cancellationToken
-                            )
+                            newProjectChecksums.ProjectReferences,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }
@@ -326,9 +326,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     project = project.WithMetadataReferences(
                         await _assetProvider.CreateCollectionAsync<MetadataReference>(
-                                newProjectChecksums.MetadataReferences,
-                                _cancellationToken
-                            )
+                            newProjectChecksums.MetadataReferences,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }
@@ -341,9 +341,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     project = project.WithAnalyzerReferences(
                         await _assetProvider.CreateCollectionAsync<AnalyzerReference>(
-                                newProjectChecksums.AnalyzerReferences,
-                                _cancellationToken
-                            )
+                            newProjectChecksums.AnalyzerReferences,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false)
                     );
                 }
@@ -354,13 +354,13 @@ namespace Microsoft.CodeAnalysis.Remote
                 )
                 {
                     project = await UpdateDocumentsAsync(
-                            project,
-                            project.State.DocumentStates.States,
-                            oldProjectChecksums.Documents,
-                            newProjectChecksums.Documents,
-                            (solution, documents) => solution.AddDocuments(documents),
-                            (solution, documentId) => solution.RemoveDocument(documentId)
-                        )
+                        project,
+                        project.State.DocumentStates.States,
+                        oldProjectChecksums.Documents,
+                        newProjectChecksums.Documents,
+                        (solution, documents) => solution.AddDocuments(documents),
+                        (solution, documentId) => solution.RemoveDocument(documentId)
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -371,13 +371,13 @@ namespace Microsoft.CodeAnalysis.Remote
                 )
                 {
                     project = await UpdateDocumentsAsync(
-                            project,
-                            project.State.AdditionalDocumentStates.States,
-                            oldProjectChecksums.AdditionalDocuments,
-                            newProjectChecksums.AdditionalDocuments,
-                            (solution, documents) => solution.AddAdditionalDocuments(documents),
-                            (solution, documentId) => solution.RemoveAdditionalDocument(documentId)
-                        )
+                        project,
+                        project.State.AdditionalDocumentStates.States,
+                        oldProjectChecksums.AdditionalDocuments,
+                        newProjectChecksums.AdditionalDocuments,
+                        (solution, documents) => solution.AddAdditionalDocuments(documents),
+                        (solution, documentId) => solution.RemoveAdditionalDocument(documentId)
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -388,14 +388,13 @@ namespace Microsoft.CodeAnalysis.Remote
                 )
                 {
                     project = await UpdateDocumentsAsync(
-                            project,
-                            project.State.AnalyzerConfigDocumentStates.States,
-                            oldProjectChecksums.AnalyzerConfigDocuments,
-                            newProjectChecksums.AnalyzerConfigDocuments,
-                            (solution, documents) => solution.AddAnalyzerConfigDocuments(documents),
-                            (solution, documentId) =>
-                                solution.RemoveAnalyzerConfigDocument(documentId)
-                        )
+                        project,
+                        project.State.AnalyzerConfigDocumentStates.States,
+                        oldProjectChecksums.AnalyzerConfigDocuments,
+                        newProjectChecksums.AnalyzerConfigDocuments,
+                        (solution, documents) => solution.AddAnalyzerConfigDocuments(documents),
+                        (solution, documentId) => solution.RemoveAnalyzerConfigDocument(documentId)
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -409,9 +408,9 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 var newProjectAttributes =
                     await _assetProvider.GetAssetAsync<ProjectInfo.ProjectAttributes>(
-                            infoChecksum,
-                            _cancellationToken
-                        )
+                        infoChecksum,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 // there is no API to change these once project is created
@@ -430,7 +429,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 if (project.State.ProjectInfo.Attributes.Name != newProjectAttributes.Name)
                 {
-                    project = project.Solution.WithProjectName(projectId, newProjectAttributes.Name)
+                    project = project.Solution
+                        .WithProjectName(projectId, newProjectAttributes.Name)
                         .GetProject(projectId)!;
                 }
 
@@ -439,19 +439,15 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.AssemblyName
                 )
                 {
-                    project = project.Solution.WithProjectAssemblyName(
-                            projectId,
-                            newProjectAttributes.AssemblyName
-                        )
+                    project = project.Solution
+                        .WithProjectAssemblyName(projectId, newProjectAttributes.AssemblyName)
                         .GetProject(projectId)!;
                 }
 
                 if (project.State.ProjectInfo.Attributes.FilePath != newProjectAttributes.FilePath)
                 {
-                    project = project.Solution.WithProjectFilePath(
-                            projectId,
-                            newProjectAttributes.FilePath
-                        )
+                    project = project.Solution
+                        .WithProjectFilePath(projectId, newProjectAttributes.FilePath)
                         .GetProject(projectId)!;
                 }
 
@@ -460,10 +456,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.OutputFilePath
                 )
                 {
-                    project = project.Solution.WithProjectOutputFilePath(
-                            projectId,
-                            newProjectAttributes.OutputFilePath
-                        )
+                    project = project.Solution
+                        .WithProjectOutputFilePath(projectId, newProjectAttributes.OutputFilePath)
                         .GetProject(projectId)!;
                 }
 
@@ -472,7 +466,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.OutputRefFilePath
                 )
                 {
-                    project = project.Solution.WithProjectOutputRefFilePath(
+                    project = project.Solution
+                        .WithProjectOutputRefFilePath(
                             projectId,
                             newProjectAttributes.OutputRefFilePath
                         )
@@ -484,7 +479,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.CompilationOutputInfo
                 )
                 {
-                    project = project.Solution.WithProjectCompilationOutputInfo(
+                    project = project.Solution
+                        .WithProjectCompilationOutputInfo(
                             project.Id,
                             newProjectAttributes.CompilationOutputInfo
                         )
@@ -496,7 +492,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.DefaultNamespace
                 )
                 {
-                    project = project.Solution.WithProjectDefaultNamespace(
+                    project = project.Solution
+                        .WithProjectDefaultNamespace(
                             projectId,
                             newProjectAttributes.DefaultNamespace
                         )
@@ -508,10 +505,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.HasAllInformation
                 )
                 {
-                    project = project.Solution.WithHasAllInformation(
-                            projectId,
-                            newProjectAttributes.HasAllInformation
-                        )
+                    project = project.Solution
+                        .WithHasAllInformation(projectId, newProjectAttributes.HasAllInformation)
                         .GetProject(projectId)!;
                 }
 
@@ -520,10 +515,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.RunAnalyzers
                 )
                 {
-                    project = project.Solution.WithRunAnalyzers(
-                            projectId,
-                            newProjectAttributes.RunAnalyzers
-                        )
+                    project = project.Solution
+                        .WithRunAnalyzers(projectId, newProjectAttributes.RunAnalyzers)
                         .GetProject(projectId)!;
                 }
 
@@ -564,9 +557,9 @@ namespace Microsoft.CodeAnalysis.Remote
 
                         // we have new document added
                         var documentInfo = await _assetProvider.CreateDocumentInfoAsync(
-                                newDocumentChecksums.Checksum,
-                                _cancellationToken
-                            )
+                            newDocumentChecksums.Checksum,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false);
                         lazyDocumentsToAdd.Add(documentInfo);
                     }
@@ -597,10 +590,10 @@ namespace Microsoft.CodeAnalysis.Remote
                     Contract.ThrowIfNull(document);
 
                     project = await UpdateDocumentAsync(
-                            document,
-                            oldDocumentChecksums,
-                            newDocumentChecksums
-                        )
+                        document,
+                        oldDocumentChecksums,
+                        newDocumentChecksums
+                    )
                         .ConfigureAwait(false);
                 }
 
@@ -636,9 +629,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     var serializableSourceText =
                         await _assetProvider.GetAssetAsync<SerializableSourceText>(
-                                newDocumentChecksums.Text,
-                                _cancellationToken
-                            )
+                            newDocumentChecksums.Text,
+                            _cancellationToken
+                        )
                             .ConfigureAwait(false);
                     var sourceText = await serializableSourceText.GetTextAsync(_cancellationToken)
                         .ConfigureAwait(false);
@@ -646,19 +639,16 @@ namespace Microsoft.CodeAnalysis.Remote
                     document = document.Kind switch
                     {
                         TextDocumentKind.Document
-                          => document.Project.Solution.WithDocumentText(document.Id, sourceText)
+                          => document.Project.Solution
+                              .WithDocumentText(document.Id, sourceText)
                               .GetDocument(document.Id)!,
                         TextDocumentKind.AnalyzerConfigDocument
-                          => document.Project.Solution.WithAnalyzerConfigDocumentText(
-                                  document.Id,
-                                  sourceText
-                              )
+                          => document.Project.Solution
+                              .WithAnalyzerConfigDocumentText(document.Id, sourceText)
                               .GetAnalyzerConfigDocument(document.Id)!,
                         TextDocumentKind.AdditionalDocument
-                          => document.Project.Solution.WithAdditionalDocumentText(
-                                  document.Id,
-                                  sourceText
-                              )
+                          => document.Project.Solution
+                              .WithAdditionalDocumentText(document.Id, sourceText)
                               .GetAdditionalDocument(document.Id)!,
                         _ => throw ExceptionUtilities.UnexpectedValue(document.Kind),
                     };
@@ -674,9 +664,9 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 var newDocumentInfo =
                     await _assetProvider.GetAssetAsync<DocumentInfo.DocumentAttributes>(
-                            infoChecksum,
-                            _cancellationToken
-                        )
+                        infoChecksum,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
 
                 // there is no api to change these once document is created
@@ -696,10 +686,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     // additional document can't change folder once created
                     Contract.ThrowIfFalse(document is Document);
-                    document = document.Project.Solution.WithDocumentFolders(
-                            document.Id,
-                            newDocumentInfo.Folders
-                        )
+                    document = document.Project.Solution
+                        .WithDocumentFolders(document.Id, newDocumentInfo.Folders)
                         .GetDocument(document.Id)!;
                 }
 
@@ -707,10 +695,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     // additional document can't change sourcecode kind once created
                     Contract.ThrowIfFalse(document is Document);
-                    document = document.Project.Solution.WithDocumentSourceCodeKind(
-                            document.Id,
-                            newDocumentInfo.SourceCodeKind
-                        )
+                    document = document.Project.Solution
+                        .WithDocumentSourceCodeKind(document.Id, newDocumentInfo.SourceCodeKind)
                         .GetDocument(document.Id)!;
                 }
 
@@ -725,22 +711,22 @@ namespace Microsoft.CodeAnalysis.Remote
                 var map = new Dictionary<DocumentId, DocumentStateChecksums>();
 
                 var documentChecksums = await assetProvider.GetAssetsAsync<DocumentStateChecksums>(
-                        documents,
-                        _cancellationToken
-                    )
+                    documents,
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
                 var infos = await assetProvider.GetAssetsAsync<DocumentInfo.DocumentAttributes>(
-                        documentChecksums.Select(p => p.Item2.Info),
-                        _cancellationToken
-                    )
+                    documentChecksums.Select(p => p.Item2.Info),
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var kv in documentChecksums)
                 {
                     var info = await assetProvider.GetAssetAsync<DocumentInfo.DocumentAttributes>(
-                            kv.Item2.Info,
-                            _cancellationToken
-                        )
+                        kv.Item2.Info,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
                     map.Add(info.Id, kv.Item2);
                 }
@@ -776,22 +762,22 @@ namespace Microsoft.CodeAnalysis.Remote
                 var map = new Dictionary<ProjectId, ProjectStateChecksums>();
 
                 var projectChecksums = await assetProvider.GetAssetsAsync<ProjectStateChecksums>(
-                        projects,
-                        _cancellationToken
-                    )
+                    projects,
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
                 var infos = await assetProvider.GetAssetsAsync<ProjectInfo.ProjectAttributes>(
-                        projectChecksums.Select(p => p.Item2.Info),
-                        _cancellationToken
-                    )
+                    projectChecksums.Select(p => p.Item2.Info),
+                    _cancellationToken
+                )
                     .ConfigureAwait(false);
 
                 foreach (var kv in projectChecksums)
                 {
                     var info = await assetProvider.GetAssetAsync<ProjectInfo.ProjectAttributes>(
-                            kv.Item2.Info,
-                            _cancellationToken
-                        )
+                        kv.Item2.Info,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
                     map.Add(info.Id, kv.Item2);
                 }
@@ -809,8 +795,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 foreach (var (projectId, projectState) in solution.State.ProjectStates)
                 {
                     var projectChecksums = await projectState.GetStateChecksumsAsync(
-                            _cancellationToken
-                        )
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
                     if (projects.Contains(projectChecksums.Checksum))
                     {
@@ -827,9 +813,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 Solution incrementalSolutionBuilt
             )
             {
-                var currentSolutionChecksum = await incrementalSolutionBuilt.State.GetChecksumAsync(
-                        CancellationToken.None
-                    )
+                var currentSolutionChecksum = await incrementalSolutionBuilt.State
+                    .GetChecksumAsync(CancellationToken.None)
                     .ConfigureAwait(false);
                 if (checksumFromRequest == currentSolutionChecksum)
                 {
@@ -838,9 +823,9 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 var (solutionInfo, options) =
                     await _assetProvider.CreateSolutionInfoAndOptionsAsync(
-                            checksumFromRequest,
-                            _cancellationToken
-                        )
+                        checksumFromRequest,
+                        _cancellationToken
+                    )
                         .ConfigureAwait(false);
                 var workspace = new TemporaryWorkspace(
                     _hostServices,
@@ -850,11 +835,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 );
 
                 await TestUtils.AssertChecksumsAsync(
-                        _assetProvider,
-                        checksumFromRequest,
-                        workspace.CurrentSolution,
-                        incrementalSolutionBuilt
-                    )
+                    _assetProvider,
+                    checksumFromRequest,
+                    workspace.CurrentSolution,
+                    incrementalSolutionBuilt
+                )
                     .ConfigureAwait(false);
             }
 #endif

@@ -137,10 +137,10 @@ namespace System.Text.Json
                     do
                     {
                         bufferState = await ReadFromStreamAsync(
-                                utf8Json,
-                                bufferState,
-                                cancellationToken
-                            )
+                            utf8Json,
+                            bufferState,
+                            cancellationToken
+                        )
                             .ConfigureAwait(false);
                         ContinueDeserialize<Queue<TValue>>(
                             ref bufferState,
@@ -222,15 +222,14 @@ namespace System.Text.Json
             {
                 int bytesRead = await utf8Json.ReadAsync(
 #if BUILDING_INBOX_LIBRARY
-                        bufferState.Buffer.AsMemory(bufferState.BytesInBuffer),
+                    bufferState.Buffer.AsMemory(bufferState.BytesInBuffer),
 #else
-                        bufferState.Buffer,
-                        bufferState.BytesInBuffer,
-                        bufferState.Buffer.Length - bufferState.BytesInBuffer,
+                    bufferState.Buffer,
+                    bufferState.BytesInBuffer,
+                    bufferState.Buffer.Length - bufferState.BytesInBuffer,
 #endif
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                    cancellationToken
+                ).ConfigureAwait(false);
 
                 if (bytesRead == 0)
                 {
@@ -302,11 +301,12 @@ namespace System.Text.Json
                     // We have less than half the buffer available, double the buffer size.
                     byte[] oldBuffer = bufferState.Buffer;
                     int oldClearMax = bufferState.ClearMax;
-                    byte[] newBuffer = ArrayPool<byte>.Shared.Rent(
-                        (bufferState.Buffer.Length < (int.MaxValue / 2))
-                          ? bufferState.Buffer.Length * 2
-                          : int.MaxValue
-                    );
+                    byte[] newBuffer = ArrayPool<byte>.Shared
+                        .Rent(
+                            (bufferState.Buffer.Length < (int.MaxValue / 2))
+                              ? bufferState.Buffer.Length * 2
+                              : int.MaxValue
+                        );
 
                     // Copy the unprocessed data to the new buffer while shifting the processed bytes.
                     Buffer.BlockCopy(
@@ -320,7 +320,8 @@ namespace System.Text.Json
                     bufferState.ClearMax = bufferState.BytesInBuffer;
 
                     // Clear and return the old buffer
-                    new Span<byte>(oldBuffer, 0, oldClearMax).Clear();
+                    new Span<byte>(oldBuffer, 0, oldClearMax)
+                        .Clear();
                     ArrayPool<byte>.Shared.Return(oldBuffer);
                 }
                 else if (bufferState.BytesInBuffer != 0)

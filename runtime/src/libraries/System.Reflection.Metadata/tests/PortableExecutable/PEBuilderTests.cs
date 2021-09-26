@@ -115,9 +115,8 @@ namespace System.Reflection.PortableExecutable.Tests
 
         public static IEnumerable<object[]> AllMachineTypes()
         {
-            return ((Machine[])Enum.GetValues(typeof(Machine))).Select(
-                m => new object[] { (object)m }
-            );
+            return ((Machine[])Enum.GetValues(typeof(Machine)))
+                .Select(m => new object[] { (object)m });
         }
 
         #endregion
@@ -376,7 +375,8 @@ namespace System.Reflection.PortableExecutable.Tests
 
             var consoleWriteLineSignature = new BlobBuilder();
 
-            new BlobEncoder(consoleWriteLineSignature).MethodSignature()
+            new BlobEncoder(consoleWriteLineSignature)
+                .MethodSignature()
                 .Parameters(
                     1,
                     returnType => returnType.Void(),
@@ -391,7 +391,8 @@ namespace System.Reflection.PortableExecutable.Tests
 
             var parameterlessCtorSignature = new BlobBuilder();
 
-            new BlobEncoder(parameterlessCtorSignature).MethodSignature(isInstanceMethod: true)
+            new BlobEncoder(parameterlessCtorSignature)
+                .MethodSignature(isInstanceMethod: true)
                 .Parameters(0, returnType => returnType.Void(), parameters => { });
 
             var parameterlessCtorBlobIndex = metadata.GetOrAddBlob(parameterlessCtorSignature);
@@ -404,7 +405,8 @@ namespace System.Reflection.PortableExecutable.Tests
 
             var mainSignature = new BlobBuilder();
 
-            new BlobEncoder(mainSignature).MethodSignature()
+            new BlobEncoder(mainSignature)
+                .MethodSignature()
                 .Parameters(0, returnType => returnType.Void(), parameters => { });
 
             var methodBodyStream = new MethodBodyStreamEncoder(ilBuilder);
@@ -1036,7 +1038,8 @@ namespace System.Reflection.PortableExecutable.Tests
             if (privateKeyOpt != null)
             {
                 // signature is calculated with checksum zeroed:
-                new BlobWriter(checksumBlob).WriteUInt32(0);
+                new BlobWriter(checksumBlob)
+                    .WriteUInt32(0);
 
                 int snOffset;
                 Assert.True(

@@ -33,10 +33,8 @@ namespace Internal.Cryptography.Pal
                     pbData = (byte*)&keyUsagesAsShort,
                     cUnusedBits = 0,
                 };
-                return Interop.crypt32.EncodeObject(
-                    CryptDecodeObjectStructType.X509_KEY_USAGE,
-                    &blob
-                );
+                return Interop.crypt32
+                    .EncodeObject(CryptDecodeObjectStructType.X509_KEY_USAGE, &blob);
             }
         }
 
@@ -270,15 +268,16 @@ namespace Internal.Cryptography.Pal
                             int cb = 20;
                             byte[] buffer = new byte[cb];
                             if (
-                                !Interop.crypt32.CryptHashPublicKeyInfo(
-                                    IntPtr.Zero,
-                                    AlgId.CALG_SHA1,
-                                    0,
-                                    CertEncodingType.All,
-                                    ref publicKeyInfo,
-                                    buffer,
-                                    ref cb
-                                )
+                                !Interop.crypt32
+                                    .CryptHashPublicKeyInfo(
+                                        IntPtr.Zero,
+                                        AlgId.CALG_SHA1,
+                                        0,
+                                        CertEncodingType.All,
+                                        ref publicKeyInfo,
+                                        buffer,
+                                        ref cb
+                                    )
                             )
                                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
                             if (cb < buffer.Length)

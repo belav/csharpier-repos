@@ -59,9 +59,8 @@ namespace System.ComponentModel.Composition.Hosting
                 IEnumerable<ExportDefinition> changedExports
             )
             {
-                return part.ImportDefinitions.Where(
-                    import => IsAffectedImport(import, changedExports)
-                );
+                return part.ImportDefinitions
+                    .Where(import => IsAffectedImport(import, changedExports));
             }
 
             private static bool IsAffectedImport(

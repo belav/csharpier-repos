@@ -25,7 +25,8 @@ namespace System.CommandLine.Binding
 
         protected override IEnumerable<ParameterDescriptor> InitializeParameterDescriptors()
         {
-            return _handlerDelegate.Method.GetParameters()
+            return _handlerDelegate.Method
+                .GetParameters()
                 .Select(p => new ParameterDescriptor(p, this));
         }
     }

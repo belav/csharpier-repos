@@ -31,9 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 Check.NotNull(falseValue, nameof(falseValue)),
                 Check.NotNull(trueValue, nameof(trueValue)),
                 FromProvider(trueValue),
-                new ConverterMappingHints(size: Math.Max(falseValue.Length, trueValue.Length)).With(
-                    mappingHints
-                )
+                new ConverterMappingHints(size: Math.Max(falseValue.Length, trueValue.Length))
+                    .With(mappingHints)
             ) { }
 
         /// <summary>

@@ -47,10 +47,8 @@ namespace AutoMapper.Internal.Mappers
     /// <typeparam name="TDestination">type of the destination</typeparam>
     public abstract class ObjectMapper<TSource, TDestination> : IObjectMapper
     {
-        private static readonly MethodInfo MapMethod = typeof(ObjectMapper<
-            TSource,
-            TDestination
-        >).GetMethod("Map");
+        private static readonly MethodInfo MapMethod = typeof(ObjectMapper<TSource, TDestination>)
+            .GetMethod("Map");
 
         /// <summary>
         /// When true, the mapping engine will use this mapper as the strategy

@@ -21,9 +21,8 @@ namespace Microsoft.AspNetCore.Rewrite
         {
             foreach (var pattern in PatternSegments)
             {
-                context.Builder.Append(
-                    pattern.Evaluate(context, ruleBackReferences, conditionBackReferences)
-                );
+                context.Builder
+                    .Append(pattern.Evaluate(context, ruleBackReferences, conditionBackReferences));
             }
             var retVal = context.Builder.ToString();
             context.Builder.Clear();

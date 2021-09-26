@@ -48,12 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
         private EnvDTE.CodeElement CreateCodeOptionsStatement(SyntaxNode node)
         {
-            this.CodeModelService.GetOptionNameAndOrdinal(
-                _parentNode,
-                node,
-                out var name,
-                out var ordinal
-            );
+            this.CodeModelService
+                .GetOptionNameAndOrdinal(_parentNode, node, out var name, out var ordinal);
 
             return CodeOptionsStatement.Create(_state, this.FileCodeModel, name, ordinal);
         }
@@ -67,12 +63,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
         private EnvDTE.CodeElement CreateCodeAttribute(SyntaxNode node)
         {
-            this.CodeModelService.GetAttributeNameAndOrdinal(
-                _parentNode,
-                node,
-                out var name,
-                out var ordinal
-            );
+            this.CodeModelService
+                .GetAttributeNameAndOrdinal(_parentNode, node, out var name, out var ordinal);
 
             return (EnvDTE.CodeElement)CodeAttribute.Create(
                 _state,

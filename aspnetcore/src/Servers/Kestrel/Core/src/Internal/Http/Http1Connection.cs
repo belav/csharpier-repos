@@ -203,10 +203,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             bool TrimAndTakeStartLine(ref SequenceReader<byte> reader)
             {
-                var trimmedBuffer = reader.Sequence.Slice(
-                    reader.Position,
-                    ServerOptions.Limits.MaxRequestLineSize
-                );
+                var trimmedBuffer = reader.Sequence
+                    .Slice(reader.Position, ServerOptions.Limits.MaxRequestLineSize);
                 var trimmedReader = new SequenceReader<byte>(trimmedBuffer);
 
                 if (!_parser.ParseRequestLine(new Http1ParsingHandler(this), ref trimmedReader))
@@ -252,10 +250,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             bool TrimAndTakeMessageHeaders(ref SequenceReader<byte> reader, bool trailers)
             {
-                var trimmedBuffer = reader.Sequence.Slice(
-                    reader.Position,
-                    _remainingRequestHeadersBytesAllowed
-                );
+                var trimmedBuffer = reader.Sequence
+                    .Slice(reader.Position, _remainingRequestHeadersBytesAllowed);
                 var trimmedReader = new SequenceReader<byte>(trimmedBuffer);
                 try
                 {
@@ -324,9 +320,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             Method = method;
             if (method == HttpMethod.Custom)
             {
-                _methodText = startLine[
-                    ..versionAndMethod.MethodEnd
-                ].GetAsciiStringNonNullCharacters();
+                _methodText = startLine[..versionAndMethod.MethodEnd]
+                    .GetAsciiStringNonNullCharacters();
             }
 
             _httpVersion = versionAndMethod.Version;

@@ -84,12 +84,13 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<OpenIdConnectOptions> configureOptions
         )
         {
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IPostConfigureOptions<OpenIdConnectOptions>,
-                    OpenIdConnectPostConfigureOptions
-                >()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<
+                        IPostConfigureOptions<OpenIdConnectOptions>,
+                        OpenIdConnectPostConfigureOptions
+                    >()
+                );
             return builder.AddRemoteScheme<OpenIdConnectOptions, OpenIdConnectHandler>(
                 authenticationScheme,
                 displayName,

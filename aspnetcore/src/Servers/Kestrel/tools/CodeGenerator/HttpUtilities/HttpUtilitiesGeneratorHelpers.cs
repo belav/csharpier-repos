@@ -213,11 +213,12 @@ namespace CodeGenerator.HttpUtilities
             var maskSizeInBIts = Math.Log(mask, 2);
             var hexMaskSize = (byte)Math.Ceiling(maskSizeInBIts / 4);
 
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "0x{0:X" + (hexMaskSize == 0 ? 1 : hexMaskSize) + "}",
-                mask
-            );
+            return string
+                .Format(
+                    CultureInfo.InvariantCulture,
+                    "0x{0:X" + (hexMaskSize == 0 ? 1 : hexMaskSize) + "}",
+                    mask
+                );
         }
     }
 }

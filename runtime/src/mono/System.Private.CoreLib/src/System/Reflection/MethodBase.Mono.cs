@@ -22,11 +22,12 @@ namespace System.Reflection
             Type? declaringType = m.DeclaringType;
             if (declaringType != null && declaringType.IsGenericType)
                 throw new ArgumentException(
-                    string.Format(
-                        SR.Argument_MethodDeclaringTypeGeneric,
-                        m,
-                        declaringType.GetGenericTypeDefinition()
-                    )
+                    string
+                        .Format(
+                            SR.Argument_MethodDeclaringTypeGeneric,
+                            m,
+                            declaringType.GetGenericTypeDefinition()
+                        )
                 );
 
             return m;

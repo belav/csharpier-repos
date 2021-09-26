@@ -102,12 +102,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var loader = new Mock<PageLoader>();
             loader.Setup(
-                    l =>
-                        l.LoadAsync(
-                            It.IsAny<PageActionDescriptor>(),
-                            It.IsAny<EndpointMetadataCollection>()
-                        )
-                )
+                l =>
+                    l.LoadAsync(
+                        It.IsAny<PageActionDescriptor>(),
+                        It.IsAny<EndpointMetadataCollection>()
+                    )
+            )
                 .Returns(
                     (PageActionDescriptor descriptor, EndpointMetadataCollection endpoint) =>
                         Task.FromResult(
@@ -328,9 +328,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var httpContext = new DefaultHttpContext()
             {
-                RequestServices = new ServiceCollection().AddScoped(
-                        sp => new CustomTransformer() { State = "Invalid" }
-                    )
+                RequestServices = new ServiceCollection()
+                    .AddScoped(sp => new CustomTransformer() { State = "Invalid" })
                     .BuildServiceProvider()
             };
 

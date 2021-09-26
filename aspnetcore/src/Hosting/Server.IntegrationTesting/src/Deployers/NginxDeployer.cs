@@ -164,7 +164,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     "nginx.access.log"
                 );
                 DeploymentParameters.ServerConfigTemplateContent =
-                    DeploymentParameters.ServerConfigTemplateContent.Replace("[user]", userName)
+                    DeploymentParameters.ServerConfigTemplateContent
+                        .Replace("[user]", userName)
                         .Replace("[errorlog]", errorLog)
                         .Replace("[accesslog]", accessLog)
                         .Replace(

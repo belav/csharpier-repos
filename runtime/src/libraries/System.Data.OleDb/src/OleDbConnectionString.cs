@@ -98,11 +98,8 @@ namespace System.Data.OleDb
                     !ADP.IsEmpty(prompt)
                     && (
                         0
-                        != string.Compare(
-                            prompt,
-                            VALUES.NoPrompt,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        != string
+                            .Compare(prompt, VALUES.NoPrompt, StringComparison.OrdinalIgnoreCase)
                     )
                 ) || !ADP.IsEmpty(this[KEY.WindowHandle])
             );
@@ -366,11 +363,8 @@ namespace System.Data.OleDb
                         { // please verify header before allocating memory block for connection string
                             bytes = new byte[length - hdrlength];
                             count = fstream.Read(bytes, 0, bytes.Length);
-                            connectionString = System.Text.Encoding.Unicode.GetString(
-                                bytes,
-                                0,
-                                count
-                            );
+                            connectionString = System.Text.Encoding.Unicode
+                                .GetString(bytes, 0, count);
                         }
                     }
                 }

@@ -49,9 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             var metadataAsSourceFile = await context.GenerateSourceAsync(navigationSymbol);
             var document = context.GetDocument(metadataAsSourceFile);
             var text = await document.GetTextAsync();
-            var line = text.Lines.GetLineFromPosition(
-                metadataAsSourceFile.IdentifierLocation.SourceSpan.Start
-            );
+            var line = text.Lines
+                .GetLineFromPosition(metadataAsSourceFile.IdentifierLocation.SourceSpan.Start);
             var lineText = line.ToString().Trim();
 
             Assert.Equal(expected, lineText);
@@ -67,12 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
             using var context = TestContext.Create(projectLanguage);
             var projectId = ProjectId.CreateNewId();
-            var metadataProject = context.CurrentSolution.AddProject(
-                    projectId,
-                    "Metadata",
-                    "Metadata",
-                    LanguageNames.CSharp
-                )
+            var metadataProject = context.CurrentSolution
+                .AddProject(projectId, "Metadata", "Metadata", LanguageNames.CSharp)
                 .GetProject(projectId)
                 .AddMetadataReference(TestMetadata.Net451.mscorlib)
                 .WithCompilationOptions(

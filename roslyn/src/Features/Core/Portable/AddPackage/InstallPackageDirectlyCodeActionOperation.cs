@@ -51,10 +51,10 @@ namespace Microsoft.CodeAnalysis.AddPackage
             {
                 const int projectsToShow = 5;
                 var otherProjects = installerService.GetProjectsWithInstalledPackage(
-                        _document.Project.Solution,
-                        packageName,
-                        versionOpt
-                    )
+                    _document.Project.Solution,
+                    packageName,
+                    versionOpt
+                )
                     .ToList();
                 _projectsWithMatchingVersion = otherProjects.Take(projectsToShow)
                     .Select(p => p.Name)
@@ -68,12 +68,11 @@ namespace Microsoft.CodeAnalysis.AddPackage
 
         public override string Title =>
             _versionOpt == null
-                ? string.Format(
-                      FeaturesResources.Find_and_install_latest_version_of_0,
-                      _packageName
-                  )
+                ? string
+                  .Format(FeaturesResources.Find_and_install_latest_version_of_0, _packageName)
                 : _isLocal
-                    ? string.Format(
+                    ? string
+                      .Format(
                           FeaturesResources.Use_locally_installed_0_version_1_This_version_used_in_colon_2,
                           _packageName,
                           _versionOpt,

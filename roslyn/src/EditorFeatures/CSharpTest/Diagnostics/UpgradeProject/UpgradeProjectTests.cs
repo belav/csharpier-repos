@@ -526,14 +526,16 @@ class C
 </Workspace>",
                 new[]
                 {
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
-                        "7.0"
-                    ),
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_all_csharp_projects_to_language_version_0,
-                        "7.0"
-                    )
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
+                            "7.0"
+                        ),
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_all_csharp_projects_to_language_version_0,
+                            "7.0"
+                        )
                 }
             );
         }
@@ -561,14 +563,16 @@ class C
 </Workspace>",
                 new[]
                 {
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
-                        "8.0"
-                    ),
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_all_csharp_projects_to_language_version_0,
-                        "8.0"
-                    )
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
+                            "8.0"
+                        ),
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_all_csharp_projects_to_language_version_0,
+                            "8.0"
+                        )
                 }
             );
         }
@@ -594,10 +598,11 @@ class C
 </Workspace>",
                 new[]
                 {
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
-                        "7.0"
-                    )
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
+                            "7.0"
+                        )
                 }
             );
         }
@@ -625,10 +630,11 @@ class C
 </Workspace>",
                 new[]
                 {
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
-                        "7.0"
-                    )
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
+                            "7.0"
+                        )
                 }
             );
         }
@@ -636,7 +642,8 @@ class C
         [Fact]
         public async Task OnlyOfferFixAllProjectsFromCSharp6ToDefaultWhenApplicable()
         {
-            var defaultVersion = LanguageVersion.Default.MapSpecifiedToEffectiveVersion()
+            var defaultVersion = LanguageVersion.Default
+                .MapSpecifiedToEffectiveVersion()
                 .ToDisplayString();
             await TestExactActionSetOfferedAsync(
                 $@"<Workspace>
@@ -658,14 +665,16 @@ class C
 </Workspace>",
                 new[]
                 {
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
-                        defaultVersion
-                    ),
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_all_csharp_projects_to_language_version_0,
-                        defaultVersion
-                    )
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
+                            defaultVersion
+                        ),
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_all_csharp_projects_to_language_version_0,
+                            defaultVersion
+                        )
                 }
             );
         }
@@ -690,10 +699,11 @@ class C
 </Workspace>",
                 new[]
                 {
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
-                        "8.0"
-                    ),
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
+                            "8.0"
+                        ),
                 }
             );
         }
@@ -701,7 +711,8 @@ class C
         [Fact]
         public async Task OnlyOfferFixAllProjectsToDefaultWhenApplicable()
         {
-            var defaultEffectiveVersion = LanguageVersion.Default.MapSpecifiedToEffectiveVersion()
+            var defaultEffectiveVersion = LanguageVersion.Default
+                .MapSpecifiedToEffectiveVersion()
                 .ToDisplayString();
             await TestExactActionSetOfferedAsync(
                 $@"<Workspace>
@@ -723,14 +734,16 @@ class C
 </Workspace>",
                 new[]
                 {
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
-                        defaultEffectiveVersion
-                    ),
-                    string.Format(
-                        CSharpFeaturesResources.Upgrade_all_csharp_projects_to_language_version_0,
-                        defaultEffectiveVersion
-                    )
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_this_project_to_csharp_language_version_0,
+                            defaultEffectiveVersion
+                        ),
+                    string
+                        .Format(
+                            CSharpFeaturesResources.Upgrade_all_csharp_projects_to_language_version_0,
+                            defaultEffectiveVersion
+                        )
                 }
             );
         }

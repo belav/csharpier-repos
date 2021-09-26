@@ -537,25 +537,24 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static bool HasAwaitOperations(SyntaxNode node)
         {
             // Do not descend into functions
-            return node.DescendantNodesAndSelf(child => !IsNestedFunction(child))
-                .Any(
-                    node =>
+            return node.DescendantNodesAndSelf(child => !IsNestedFunction(child)).Any(
+                node =>
+                {
+                    switch (node)
                     {
-                        switch (node)
-                        {
-                            case AwaitExpressionSyntax _:
-                            case LocalDeclarationStatementSyntax local
-                                  when local.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
-                            case CommonForEachStatementSyntax @foreach
-                                  when @foreach.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
-                            case UsingStatementSyntax @using
-                                  when @using.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
-                                return true;
-                            default:
-                                return false;
-                        }
+                        case AwaitExpressionSyntax _:
+                        case LocalDeclarationStatementSyntax local
+                              when local.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
+                        case CommonForEachStatementSyntax @foreach
+                              when @foreach.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
+                        case UsingStatementSyntax @using
+                              when @using.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
+                            return true;
+                        default:
+                            return false;
                     }
-                );
+                }
+            );
         }
 
         internal static bool IsNestedFunction(SyntaxNode child)
@@ -575,19 +574,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static bool HasYieldOperations(SyntaxNode? node)
         {
             // Do not descend into functions and expressions
-            return node is object
-                && node.DescendantNodesAndSelf(
-                        child =>
-                        {
-                            Debug.Assert(
-                                ReferenceEquals(node, child)
-                                    || child
-                                        is not (MemberDeclarationSyntax or TypeDeclarationSyntax)
-                            );
-                            return !IsNestedFunction(child) && !(node is ExpressionSyntax);
-                        }
-                    )
-                    .Any(n => n is YieldStatementSyntax);
+            return node is object && node.DescendantNodesAndSelf(
+                    child =>
+                    {
+                        Debug.Assert(
+                            ReferenceEquals(node, child)
+                                || child is not (MemberDeclarationSyntax or TypeDeclarationSyntax)
+                        );
+                        return !IsNestedFunction(child) && !(node is ExpressionSyntax);
+                    }
+                ).Any(n => n is YieldStatementSyntax);
         }
 
         internal static bool HasReturnWithExpression(SyntaxNode? node)
@@ -595,8 +591,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Do not descend into functions and expressions
             return node is object
                 && node.DescendantNodesAndSelf(
-                        child => !IsNestedFunction(child) && !(node is ExpressionSyntax)
-                    )
+                    child => !IsNestedFunction(child) && !(node is ExpressionSyntax)
+                )
                     .Any(n => n is ReturnStatementSyntax { Expression: { } });
         }
     }

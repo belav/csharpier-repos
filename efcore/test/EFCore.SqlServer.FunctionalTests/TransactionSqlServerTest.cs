@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore
         ) =>
             new SqlConnectionStringBuilder(TestStore.ConnectionString).MultipleActiveResultSets
                 ? Task.CompletedTask
-                : base.SaveChanges_uses_explicit_transaction_with_failure_behavior(
+                : base
+                  .SaveChanges_uses_explicit_transaction_with_failure_behavior(
                       async,
                       autoTransaction
                   );
@@ -85,13 +86,14 @@ namespace Microsoft.EntityFrameworkCore
         protected DbContext CreateContextWithConnectionString(string connectionString)
         {
             var options = Fixture.AddOptions(
-                    new DbContextOptionsBuilder().UseSqlServer(
+                new DbContextOptionsBuilder()
+                    .UseSqlServer(
                         connectionString ?? TestStore.ConnectionString,
                         b =>
                             b.ApplyConfiguration()
                                 .ExecutionStrategy(c => new SqlServerExecutionStrategy(c))
                     )
-                )
+            )
                 .ConfigureWarnings(b => b.Log(SqlServerEventId.SavepointsDisabledBecauseOfMARS))
                 .UseInternalServiceProvider(Fixture.ServiceProvider);
 
@@ -107,12 +109,14 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.Seed(context);
 
-                context.Database.ExecuteSqlRaw(
-                    "ALTER DATABASE [" + StoreName + "] SET ALLOW_SNAPSHOT_ISOLATION ON"
-                );
-                context.Database.ExecuteSqlRaw(
-                    "ALTER DATABASE [" + StoreName + "] SET READ_COMMITTED_SNAPSHOT ON"
-                );
+                context.Database
+                    .ExecuteSqlRaw(
+                        "ALTER DATABASE [" + StoreName + "] SET ALLOW_SNAPSHOT_ISOLATION ON"
+                    );
+                context.Database
+                    .ExecuteSqlRaw(
+                        "ALTER DATABASE [" + StoreName + "] SET READ_COMMITTED_SNAPSHOT ON"
+                    );
             }
 
             public override void Reseed()
@@ -127,9 +131,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
             {
-                new SqlServerDbContextOptionsBuilder(base.AddOptions(builder)).ExecutionStrategy(
-                    c => new SqlServerExecutionStrategy(c)
-                );
+                new SqlServerDbContextOptionsBuilder(base.AddOptions(builder))
+                    .ExecutionStrategy(c => new SqlServerExecutionStrategy(c));
                 builder.ConfigureWarnings(
                     b => b.Log(SqlServerEventId.SavepointsDisabledBecauseOfMARS)
                 );

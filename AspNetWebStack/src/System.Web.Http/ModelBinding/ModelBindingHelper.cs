@@ -149,9 +149,8 @@ namespace System.Web.Http.ModelBinding
             else if (typeof(IModelBinder).IsAssignableFrom(modelBinderAttribute.BinderType))
             {
                 Type closedBinderType = modelBinderAttribute.BinderType.IsGenericTypeDefinition
-                    ? modelBinderAttribute.BinderType.MakeGenericType(
-                          modelType.GetGenericArguments()
-                      )
+                    ? modelBinderAttribute.BinderType
+                      .MakeGenericType(modelType.GetGenericArguments())
                     : modelBinderAttribute.BinderType;
 
                 IModelBinder binderInstance = (IModelBinder)Activator.CreateInstance(

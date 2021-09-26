@@ -542,7 +542,8 @@ undefined
                 from p in o.Properties()
                 where p.Value is JValue
                 select ((JValue)p.Value).Value
-            ).ToList();
+            )
+                .ToList();
 
             Assert.AreEqual(1, parameterValues.Count);
             Assert.AreEqual("Intel", parameterValues[0]);
@@ -915,15 +916,15 @@ keyword such as type of business.""
             // JSON Serializer Basics
 
             IList<JToken> since2012 = posts.Where(
-                    p => (DateTime)p["Date"] > new DateTime(2012, 1, 1)
-                )
+                p => (DateTime)p["Date"] > new DateTime(2012, 1, 1)
+            )
                 .ToList();
             // JSON Serializer Basics
             // Querying LINQ to JSON
 
             IList<JToken> linqToJson = posts.Where(
-                    p => p["Categories"].Any(c => (string)c == "LINQ to JSON")
-                )
+                p => p["Categories"].Any(c => (string)c == "LINQ to JSON")
+            )
                 .ToList();
             // Querying LINQ to JSON
 

@@ -123,9 +123,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 workspace.CurrentSolution
             );
 
-            var solutionChecksum = await workspace.CurrentSolution.State.GetChecksumAsync(
-                CancellationToken.None
-            );
+            var solutionChecksum = await workspace.CurrentSolution.State
+                .GetChecksumAsync(CancellationToken.None);
             var solution = await remoteWorkspace.GetSolutionAsync(
                 assetProvider,
                 solutionChecksum,
@@ -177,9 +176,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 workspace.CurrentSolution
             );
 
-            var solutionChecksum = await workspace.CurrentSolution.State.GetChecksumAsync(
-                CancellationToken.None
-            );
+            var solutionChecksum = await workspace.CurrentSolution.State
+                .GetChecksumAsync(CancellationToken.None);
             var solution = await remoteWorkspace.GetSolutionAsync(
                 assetProvider,
                 solutionChecksum,
@@ -292,11 +290,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             );
 
             await VerifySolutionUpdate(
-                    workspace,
-                    newSolutionGetter: s => SetProjectProperties(s, version: 1),
-                    oldSolutionValidator: s => ValidateProperties(s, version: 0),
-                    newSolutionValidator: s => ValidateProperties(s, version: 1)
-                )
+                workspace,
+                newSolutionGetter: s => SetProjectProperties(s, version: 1),
+                oldSolutionValidator: s => ValidateProperties(s, version: 0),
+                newSolutionValidator: s => ValidateProperties(s, version: 1)
+            )
                 .ConfigureAwait(false);
         }
 
@@ -637,9 +635,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             )
             {
                 // set up initial solution
-                var solutionChecksum = await solution.State.GetChecksumAsync(
-                    CancellationToken.None
-                );
+                var solutionChecksum = await solution.State
+                    .GetChecksumAsync(CancellationToken.None);
                 await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(
                     assetProvider,
                     solutionChecksum,
@@ -725,7 +722,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 ? FormattingOptions2.NewLine.DefaultValue
                 : FormattingOptions2.NewLine.DefaultValue + FormattingOptions2.NewLine.DefaultValue;
             solution = solution.WithOptions(
-                solution.Options.WithChangedOption(
+                solution.Options
+                    .WithChangedOption(
                         FormattingOptions2.NewLine,
                         LanguageNames.CSharp,
                         newOptionValue
@@ -808,9 +806,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // get new solution
             var newSolution = newSolutionGetter(solution);
-            var newSolutionChecksum = await newSolution.State.GetChecksumAsync(
-                CancellationToken.None
-            );
+            var newSolutionChecksum = await newSolution.State
+                .GetChecksumAsync(CancellationToken.None);
             await newSolution.AppendAssetMapAsync(map, CancellationToken.None);
 
             // get solution without updating primary workspace

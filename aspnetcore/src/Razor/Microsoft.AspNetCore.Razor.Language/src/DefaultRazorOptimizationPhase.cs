@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected override void OnIntialized()
         {
-            Passes = Engine.Features.OfType<IRazorOptimizationPass>()
+            Passes = Engine.Features
+                .OfType<IRazorOptimizationPass>()
                 .OrderBy(p => p.Order)
                 .ToArray();
         }

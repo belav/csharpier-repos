@@ -101,8 +101,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         )
         {
             return assertion.HaveStdErrContaining(
-                    $"Initialized secondary context for config: {path}"
-                )
+                $"Initialized secondary context for config: {path}"
+            )
                 .And.HaveStdOutContaining(
                     $"hostfxr_initialize_for_runtime_config succeeded: 0x{statusCode.ToString("x")}"
                 );
@@ -173,8 +173,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         )
         {
             return assertion.HaveStdOutContaining(
-                    $"{prefix}hostfxr_get_runtime_properties succeeded"
-                )
+                $"{prefix}hostfxr_get_runtime_properties succeeded"
+            )
                 .And.HaveStdOutContaining(
                     $"{prefix}hostfxr_get_runtime_properties: {name}={value}"
                 );
@@ -187,8 +187,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         )
         {
             return assertion.HaveStdOutContaining(
-                    $"{prefix}hostfxr_get_runtime_properties succeeded"
-                )
+                $"{prefix}hostfxr_get_runtime_properties succeeded"
+            )
                 .And.NotHaveStdOutContaining($"{prefix}hostfxr_get_runtime_properties: {name}");
         }
 

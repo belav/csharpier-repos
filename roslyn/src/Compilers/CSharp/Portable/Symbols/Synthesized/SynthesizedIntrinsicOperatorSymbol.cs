@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     new SynthesizedOperatorParameterSymbol(this, leftType, 0, "left"),
                     new SynthesizedOperatorParameterSymbol(this, rightType, 1, "right")
                 }
-            ).AsImmutableOrNull();
+            )
+                .AsImmutableOrNull();
             _isCheckedBuiltin = isCheckedBuiltin;
         }
 
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     new SynthesizedOperatorParameterSymbol(this, container, 0, "value")
                 }
-            ).AsImmutableOrNull();
+            )
+                .AsImmutableOrNull();
             _isCheckedBuiltin = isCheckedBuiltin;
         }
 

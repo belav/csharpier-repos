@@ -207,7 +207,8 @@ namespace System.Linq.Parallel
                 IComparer<ConcatKey<TLeftKey, TRightKey>> compoundKeyComparer = ConcatKey<
                     TLeftKey,
                     TRightKey
-                >.MakeComparer(leftHashStream.KeyComparer, rightHashStream.KeyComparer);
+                >
+                    .MakeComparer(leftHashStream.KeyComparer, rightHashStream.KeyComparer);
 
                 PartitionedStream<TInputOutput, ConcatKey<TLeftKey, TRightKey>> outputStream =
                     new PartitionedStream<TInputOutput, ConcatKey<TLeftKey, TRightKey>>(
@@ -520,10 +521,8 @@ namespace System.Linq.Parallel
                         if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                             _cancellationToken.ThrowIfCancellationRequested();
 
-                        ConcatKey<TLeftKey, TRightKey> key = ConcatKey<
-                            TLeftKey,
-                            TRightKey
-                        >.MakeLeft(_leftOrdered ? leftKey : default);
+                        ConcatKey<TLeftKey, TRightKey> key = ConcatKey<TLeftKey, TRightKey>
+                            .MakeLeft(_leftOrdered ? leftKey : default);
                         Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>> oldEntry;
                         Wrapper<TInputOutput> wrappedElem = new Wrapper<TInputOutput>(elem.First);
 
@@ -545,10 +544,8 @@ namespace System.Linq.Parallel
                         if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                             _cancellationToken.ThrowIfCancellationRequested();
 
-                        ConcatKey<TLeftKey, TRightKey> key = ConcatKey<
-                            TLeftKey,
-                            TRightKey
-                        >.MakeRight(_rightOrdered ? rightKey : default);
+                        ConcatKey<TLeftKey, TRightKey> key = ConcatKey<TLeftKey, TRightKey>
+                            .MakeRight(_rightOrdered ? rightKey : default);
                         Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>> oldEntry;
                         Wrapper<TInputOutput> wrappedElem = new Wrapper<TInputOutput>(elem.First);
 
