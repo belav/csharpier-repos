@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class SqlServerSqlTranslatingExpressionVisitorFactory : IRelationalSqlTranslatingExpressionVisitorFactory
+    public class SqlServerSqlTranslatingExpressionVisitorFactory
+        : IRelationalSqlTranslatingExpressionVisitorFactory
     {
         private readonly RelationalSqlTranslatingExpressionVisitorDependencies _dependencies;
 
@@ -22,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public SqlServerSqlTranslatingExpressionVisitorFactory(
-            RelationalSqlTranslatingExpressionVisitorDependencies dependencies)
+            RelationalSqlTranslatingExpressionVisitorDependencies dependencies
+        )
         {
             _dependencies = dependencies;
         }
@@ -35,10 +37,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public virtual RelationalSqlTranslatingExpressionVisitor Create(
             QueryCompilationContext queryCompilationContext,
-            QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor)
-            => new SqlServerSqlTranslatingExpressionVisitor(
+            QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
+        ) =>
+            new SqlServerSqlTranslatingExpressionVisitor(
                 _dependencies,
                 queryCompilationContext,
-                queryableMethodTranslatingExpressionVisitor);
+                queryableMethodTranslatingExpressionVisitor
+            );
     }
 }

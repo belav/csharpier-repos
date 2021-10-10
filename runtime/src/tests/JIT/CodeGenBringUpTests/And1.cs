@@ -11,12 +11,17 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static int And1(int x) { return x & 1; }
+    public static int And1(int x)
+    {
+        return x & 1;
+    }
 
     public static int Main()
     {
         int y = And1(17);
-        if (y == 1) return Pass;
-        else return Fail;
+        if (y == 1)
+            return Pass;
+        else
+            return Fail;
     }
 }

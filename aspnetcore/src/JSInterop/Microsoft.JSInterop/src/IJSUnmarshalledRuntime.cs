@@ -53,6 +53,11 @@ namespace Microsoft.JSInterop
         /// <param name="arg1">The second argument.</param>
         /// <param name="arg2">The third argument.</param>
         /// <returns>The result of the function invocation.</returns>
-        TResult InvokeUnmarshalled<T0, T1, T2, TResult>(string identifier, T0 arg0, T1 arg1, T2 arg2);
+        TResult InvokeUnmarshalled<T0, T1, T2, TResult>(
+            string identifier,
+            T0 arg0,
+            T1 arg1,
+            T2 arg2
+        );
     }
 }

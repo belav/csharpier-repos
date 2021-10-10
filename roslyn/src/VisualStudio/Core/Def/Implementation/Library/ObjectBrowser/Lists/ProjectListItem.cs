@@ -14,8 +14,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
     {
         private readonly string _displayText;
 
-        public ProjectListItem(Project project)
-            : base(project.Id, GetProjectGlyph(project))
+        public ProjectListItem(Project project) : base(project.Id, GetProjectGlyph(project))
         {
             _displayText = project.GetProjectDisplayName();
         }
@@ -29,7 +28,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 case LanguageNames.VisualBasic:
                     return StandardGlyphGroup.GlyphVBProject;
                 default:
-                    throw new InvalidOperationException("Unsupported language: " + project.Language);
+                    throw new InvalidOperationException(
+                        "Unsupported language: " + project.Language
+                    );
             }
         }
 

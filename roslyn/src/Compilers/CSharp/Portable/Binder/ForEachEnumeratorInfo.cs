@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly MethodSymbol CurrentPropertyGetter;
         public readonly MethodArgumentInfo MoveNextInfo;
 
-        // True if the enumerator needs disposal once used. 
+        // True if the enumerator needs disposal once used.
         // Will be either IDisposable/IAsyncDisposable, or use DisposeMethod below if set
         // Computed during initial binding so that we can expose it in the semantic model.
         public readonly bool NeedsDisposal;
@@ -58,13 +58,26 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion collectionConversion,
             Conversion currentConversion,
             Conversion enumeratorConversion,
-            BinderFlags location)
+            BinderFlags location
+        )
         {
-            Debug.Assert((object)collectionType != null, $"Field '{nameof(collectionType)}' cannot be null");
+            Debug.Assert(
+                (object)collectionType != null,
+                $"Field '{nameof(collectionType)}' cannot be null"
+            );
             Debug.Assert(elementType.HasType, $"Field '{nameof(elementType)}' cannot be null");
-            Debug.Assert((object)getEnumeratorInfo != null, $"Field '{nameof(getEnumeratorInfo)}' cannot be null");
-            Debug.Assert((object)currentPropertyGetter != null, $"Field '{nameof(currentPropertyGetter)}' cannot be null");
-            Debug.Assert((object)moveNextInfo != null, $"Field '{nameof(moveNextInfo)}' cannot be null");
+            Debug.Assert(
+                (object)getEnumeratorInfo != null,
+                $"Field '{nameof(getEnumeratorInfo)}' cannot be null"
+            );
+            Debug.Assert(
+                (object)currentPropertyGetter != null,
+                $"Field '{nameof(currentPropertyGetter)}' cannot be null"
+            );
+            Debug.Assert(
+                (object)moveNextInfo != null,
+                $"Field '{nameof(moveNextInfo)}' cannot be null"
+            );
             Debug.Assert(patternDisposeInfo == null || needsDisposal);
 
             this.CollectionType = collectionType;
@@ -104,9 +117,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public ForEachEnumeratorInfo Build(BinderFlags location)
             {
-                Debug.Assert((object)CollectionType != null, $"'{nameof(CollectionType)}' cannot be null");
-                Debug.Assert((object)ElementType != null, $"'{nameof(ElementType)}' cannot be null");
-                Debug.Assert(GetEnumeratorInfo != null, $"'{nameof(GetEnumeratorInfo)}' cannot be null");
+                Debug.Assert(
+                    (object)CollectionType != null,
+                    $"'{nameof(CollectionType)}' cannot be null"
+                );
+                Debug.Assert(
+                    (object)ElementType != null,
+                    $"'{nameof(ElementType)}' cannot be null"
+                );
+                Debug.Assert(
+                    GetEnumeratorInfo != null,
+                    $"'{nameof(GetEnumeratorInfo)}' cannot be null"
+                );
 
                 Debug.Assert(MoveNextInfo != null);
                 Debug.Assert(CurrentPropertyGetter != null);
@@ -124,11 +146,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     CollectionConversion,
                     CurrentConversion,
                     EnumeratorConversion,
-                    location);
+                    location
+                );
             }
 
-            public bool IsIncomplete
-                => GetEnumeratorInfo is null || MoveNextInfo is null || CurrentPropertyGetter is null;
+            public bool IsIncomplete =>
+                GetEnumeratorInfo is null || MoveNextInfo is null || CurrentPropertyGetter is null;
         }
     }
 }

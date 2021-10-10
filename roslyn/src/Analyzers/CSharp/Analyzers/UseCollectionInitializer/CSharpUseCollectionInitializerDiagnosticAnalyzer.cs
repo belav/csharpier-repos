@@ -11,19 +11,23 @@ using Microsoft.CodeAnalysis.UseCollectionInitializer;
 namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseCollectionInitializerDiagnosticAnalyzer :
-        AbstractUseCollectionInitializerDiagnosticAnalyzer<
-            SyntaxKind,
-            ExpressionSyntax,
-            StatementSyntax,
-            ObjectCreationExpressionSyntax,
-            MemberAccessExpressionSyntax,
-            InvocationExpressionSyntax,
-            ExpressionStatementSyntax,
-            VariableDeclaratorSyntax>
+    internal class CSharpUseCollectionInitializerDiagnosticAnalyzer
+        : AbstractUseCollectionInitializerDiagnosticAnalyzer<
+              SyntaxKind,
+              ExpressionSyntax,
+              StatementSyntax,
+              ObjectCreationExpressionSyntax,
+              MemberAccessExpressionSyntax,
+              InvocationExpressionSyntax,
+              ExpressionStatementSyntax,
+              VariableDeclaratorSyntax
+          >
     {
-        protected override bool AreCollectionInitializersSupported(SyntaxNodeAnalysisContext context)
-            => ((CSharpParseOptions)context.Node.SyntaxTree.Options).LanguageVersion >= LanguageVersion.CSharp3;
+        protected override bool AreCollectionInitializersSupported(
+            SyntaxNodeAnalysisContext context
+        ) =>
+            ((CSharpParseOptions)context.Node.SyntaxTree.Options).LanguageVersion
+            >= LanguageVersion.CSharp3;
 
         protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
     }

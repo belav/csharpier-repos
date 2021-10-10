@@ -11,13 +11,17 @@ class CtorTest
         // Check args
         if (args.Length < 2)
         {
-            Console.WriteLine("USAGE: SemaphoreCtor3 /iCount:<int> /mCount:<int> " + 
-                "[/semName:<string>] [/iRandom:<int>]");
+            Console.WriteLine(
+                "USAGE: SemaphoreCtor3 /iCount:<int> /mCount:<int> "
+                    + "[/semName:<string>] [/iRandom:<int>]"
+            );
             return -1;
         }
 
         // Get the args
-        int iCount = -1, mCount = -1, iRandom = -1;
+        int iCount = -1,
+            mCount = -1,
+            iRandom = -1;
         string semName = "DefaultString";
 
         for (int i = 0; i < args.Length; i++)
@@ -61,19 +65,22 @@ class CtorTest
         CtorTest ct = new CtorTest();
         return ct.Run(iCount, mCount, semName, iRandom);
     }
-           
+
     private int Run(int iCount, int mCount, string semName, int iRandom)
     {
         // Testing overlap of long strings
         int iRet = -1;
-        Semaphore sem1 = null, sem2 = null, sem3 = null, 
-            sem4 = null, sem6 = null;
+        Semaphore sem1 = null,
+            sem2 = null,
+            sem3 = null,
+            sem4 = null,
+            sem6 = null;
         if (iRandom > 0)
-	{
-	    //TestFramework.GlobalData intl = new TestFramework.GlobalData();
+        {
+            //TestFramework.GlobalData intl = new TestFramework.GlobalData();
             //semName = intl.GetString(iRandom, iRandom).Replace(@"\", "");
             Console.WriteLine("WARNING: No random name generation is ocurring");
-	}
+        }
         string semNewName = semName.Remove(semName.Length - 2, 1);
         try
         {
@@ -82,7 +89,7 @@ class CtorTest
             {
                 sem2 = new Semaphore(iCount, mCount, semNewName);
                 //  Make sure we can open it
-                using(sem3 = Semaphore.OpenExisting(semName))
+                using (sem3 = Semaphore.OpenExisting(semName))
                 {
                     sem4 = Semaphore.OpenExisting(semNewName);
                 }

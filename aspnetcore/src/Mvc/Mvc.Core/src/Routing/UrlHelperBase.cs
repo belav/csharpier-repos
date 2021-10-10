@@ -133,13 +133,15 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         /// <inheritdoc />
         public virtual string? Link(string? routeName, object? values)
         {
-            return RouteUrl(new UrlRouteContext()
-            {
-                RouteName = routeName,
-                Values = values,
-                Protocol = ActionContext.HttpContext.Request.Scheme,
-                Host = ActionContext.HttpContext.Request.Host.ToUriComponent()
-            });
+            return RouteUrl(
+                new UrlRouteContext()
+                {
+                    RouteName = routeName,
+                    Values = values,
+                    Protocol = ActionContext.HttpContext.Request.Scheme,
+                    Host = ActionContext.HttpContext.Request.Host.ToUriComponent()
+                }
+            );
         }
 
         /// <inheritdoc />
@@ -190,7 +192,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         /// <param name="virtualPath">The virtual path.</param>
         /// <param name="fragment">The fragment.</param>
         /// <returns>The generated url</returns>
-        protected string? GenerateUrl(string? protocol, string? host, string? virtualPath, string? fragment)
+        protected string? GenerateUrl(
+            string? protocol,
+            string? host,
+            string? virtualPath,
+            string? fragment
+        )
         {
             if (virtualPath == null)
             {
@@ -226,7 +233,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                     builder.Append(Uri.SchemeDelimiter);
 
-                    host = string.IsNullOrEmpty(host) ? ActionContext.HttpContext.Request.Host.Value : host;
+                    host = string.IsNullOrEmpty(host)
+                        ? ActionContext.HttpContext.Request.Host.Value
+                        : host;
                     builder.Append(host);
                     AppendPathAndFragment(builder, pathBase, virtualPath, fragment);
                 }
@@ -234,6 +243,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 var path = builder.ToString();
                 return path;
             }
+
             finally
             {
                 // Clear the StringBuilder so that it can reused for the next call.
@@ -288,13 +298,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                     builder.Append(Uri.SchemeDelimiter);
 
-                    host = string.IsNullOrEmpty(host) ? ActionContext.HttpContext.Request.Host.Value : host;
+                    host = string.IsNullOrEmpty(host)
+                        ? ActionContext.HttpContext.Request.Host.Value
+                        : host;
                     builder.Append(host);
                     AppendPathAndFragment(builder, pathBase: null, path, fragment: null);
                 }
 
                 return builder.ToString();
             }
+
             finally
             {
                 // Clear the StringBuilder so that it can reused for the next call.
@@ -306,13 +319,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string? action,
             string? controller,
             RouteValueDictionary values,
-            RouteValueDictionary? ambientValues)
+            RouteValueDictionary? ambientValues
+        )
         {
             object? obj = null;
             if (action == null)
             {
-                if (!values.ContainsKey("action") &&
-                    (ambientValues?.TryGetValue("action", out obj) ?? false))
+                if (
+                    !values.ContainsKey("action")
+                    && (ambientValues?.TryGetValue("action", out obj) ?? false)
+                )
                 {
                     values["action"] = obj;
                 }
@@ -324,8 +340,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             if (controller == null)
             {
-                if (!values.ContainsKey("controller") &&
-                    (ambientValues?.TryGetValue("controller", out obj) ?? false))
+                if (
+                    !values.ContainsKey("controller")
+                    && (ambientValues?.TryGetValue("controller", out obj) ?? false)
+                )
                 {
                     values["controller"] = obj;
                 }
@@ -341,13 +359,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string? page,
             string? handler,
             RouteValueDictionary values,
-            RouteValueDictionary? ambientValues)
+            RouteValueDictionary? ambientValues
+        )
         {
             object? value = null;
             if (string.IsNullOrEmpty(page))
             {
-                if (!values.ContainsKey("page") &&
-                    (ambientValues?.TryGetValue("page", out value) ?? false))
+                if (
+                    !values.ContainsKey("page")
+                    && (ambientValues?.TryGetValue("page", out value) ?? false)
+                )
                 {
                     values["page"] = value;
                 }
@@ -359,8 +380,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             if (string.IsNullOrEmpty(handler))
             {
-                if (!values.ContainsKey("handler") &&
-                    (ambientValues?.ContainsKey("handler") ?? false))
+                if (
+                    !values.ContainsKey("handler")
+                    && (ambientValues?.ContainsKey("handler") ?? false)
+                )
                 {
                     // Clear out form action unless it's explicitly specified in the routeValues.
                     values["handler"] = null;
@@ -372,7 +395,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             }
         }
 
-        private static object CalculatePageName(ActionContext? context, RouteValueDictionary? ambientValues, string pageName)
+        private static object CalculatePageName(
+            ActionContext? context,
+            RouteValueDictionary? ambientValues,
+            string pageName
+        )
         {
             Debug.Assert(pageName.Length > 0);
             // Paths not qualified with a leading slash are treated as relative to the current page.
@@ -386,7 +413,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 }
                 else if (ambientValues != null)
                 {
-                    currentPagePath = Convert.ToString(ambientValues["page"], CultureInfo.InvariantCulture);
+                    currentPagePath = Convert.ToString(
+                        ambientValues["page"],
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 else
                 {
@@ -399,10 +429,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     // OR - this is a call from LinkGenerator where the HttpContext was not specified.
                     //
                     // We can't use a relative path in either case, because we don't know the base path.
-                    throw new InvalidOperationException(Resources.FormatUrlHelper_RelativePagePathIsNotSupported(
-                        pageName,
-                        nameof(LinkGenerator),
-                        nameof(HttpContext)));
+                    throw new InvalidOperationException(
+                        Resources.FormatUrlHelper_RelativePagePathIsNotSupported(
+                            pageName,
+                            nameof(LinkGenerator),
+                            nameof(HttpContext)
+                        )
+                    );
                 }
 
                 return ViewEnginePath.CombinePath(currentPagePath, pageName);
@@ -412,7 +445,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         }
 
         // for unit testing
-        internal static void AppendPathAndFragment(StringBuilder builder, PathString pathBase, string virtualPath, string? fragment)
+        internal static void AppendPathAndFragment(
+            StringBuilder builder,
+            PathString pathBase,
+            string virtualPath,
+            string? fragment
+        )
         {
             if (!pathBase.HasValue)
             {
@@ -465,15 +503,18 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string? host,
             string virtualPath,
             string? fragment,
-            [NotNullWhen(true)] out string? url)
+            [NotNullWhen(true)] out string? url
+        )
         {
             var pathBase = ActionContext.HttpContext.Request.PathBase;
             url = null;
 
-            if (string.IsNullOrEmpty(protocol)
+            if (
+                string.IsNullOrEmpty(protocol)
                 && string.IsNullOrEmpty(host)
                 && string.IsNullOrEmpty(fragment)
-                && !pathBase.HasValue)
+                && !pathBase.HasValue
+            )
             {
                 if (virtualPath.Length == 0)
                 {

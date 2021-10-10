@@ -19,7 +19,13 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles
         public BCryptHashHandle DuplicateHash()
         {
             BCryptHashHandle duplicateHandle;
-            int ntstatus = UnsafeNativeMethods.BCryptDuplicateHash(this, out duplicateHandle, IntPtr.Zero, 0, 0);
+            int ntstatus = UnsafeNativeMethods.BCryptDuplicateHash(
+                this,
+                out duplicateHandle,
+                IntPtr.Zero,
+                0,
+                0
+            );
             UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
             CryptoUtil.AssertSafeHandleIsValid(duplicateHandle);
 
@@ -39,7 +45,8 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles
                     hHash: this,
                     pbInput: pbInput,
                     cbInput: cbInput,
-                    dwFlags: 0);
+                    dwFlags: 0
+                );
                 UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
             }
 
@@ -47,7 +54,8 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles
                 hHash: this,
                 pbOutput: pbHashDigest,
                 cbOutput: cbHashDigest,
-                dwFlags: 0);
+                dwFlags: 0
+            );
             UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
         }
 

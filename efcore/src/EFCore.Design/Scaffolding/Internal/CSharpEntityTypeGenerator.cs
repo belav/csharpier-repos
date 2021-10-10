@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         public CSharpEntityTypeGenerator(
             IAnnotationCodeGenerator annotationCodeGenerator,
-            ICSharpHelper cSharpHelper)
+            ICSharpHelper cSharpHelper
+        )
         {
             Check.NotNull(cSharpHelper, nameof(cSharpHelper));
 
@@ -51,7 +52,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual string WriteCode(IEntityType entityType, string? @namespace, bool useDataAnnotations)
+        public virtual string WriteCode(
+            IEntityType entityType,
+            string? @namespace,
+            bool useDataAnnotations
+        )
         {
             Check.NotNull(entityType, nameof(entityType));
 
@@ -68,11 +73,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _sb.AppendLine("using Microsoft.EntityFrameworkCore;"); // For attributes coming out of Abstractions
             }
 
-            foreach (var ns in entityType.GetProperties()
-                .SelectMany(p => p.ClrType.GetNamespaces())
-                .Where(ns => ns != "System" && ns != "System.Collections.Generic")
-                .Distinct()
-                .OrderBy(x => x, new NamespaceComparer()))
+            foreach (
+                var ns in entityType.GetProperties()
+                    .SelectMany(p => p.ClrType.GetNamespaces())
+                    .Where(ns => ns != "System" && ns != "System.Collections.Generic")
+                    .Distinct()
+                    .OrderBy(x => x, new NamespaceComparer())
+            )
             {
                 _sb.AppendLine($"using {ns};");
             }
@@ -145,12 +152,18 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             GenerateTableAttribute(entityType);
             GenerateIndexAttributes(entityType);
 
-            var annotations = _annotationCodeGenerator
-                .FilterIgnoredAnnotations(entityType.GetAnnotations())
+            var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
+                    entityType.GetAnnotations()
+                )
                 .ToDictionary(a => a.Name, a => a);
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(entityType, annotations);
 
-            foreach (var attribute in _annotationCodeGenerator.GenerateDataAnnotationAttributes(entityType, annotations))
+            foreach (
+                var attribute in _annotationCodeGenerator.GenerateDataAnnotationAttributes(
+                    entityType,
+                    annotations
+                )
+            )
             {
                 var attributeWriter = new AttributeWriter(attribute.Type.Name);
                 foreach (var argument in attribute.Arguments)
@@ -176,7 +189,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             var schemaParameterNeeded = schema != null && schema != defaultSchema;
             var isView = entityType.GetViewName() != null;
-            var tableAttributeNeeded = !isView && (schemaParameterNeeded || tableName != null && tableName != entityType.GetDbSetName());
+            var tableAttributeNeeded =
+                !isView
+                && (
+                    schemaParameterNeeded
+                    || tableName != null && tableName != entityType.GetDbSetName()
+                );
             if (tableAttributeNeeded)
             {
                 var tableAttribute = new AttributeWriter(nameof(TableAttribute));
@@ -185,7 +203,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                 if (schemaParameterNeeded)
                 {
-                    tableAttribute.AddParameter($"{nameof(TableAttribute.Schema)} = {_code.Literal(schema!)}");
+                    tableAttribute.AddParameter(
+                        $"{nameof(TableAttribute.Schema)} = {_code.Literal(schema!)}"
+                    );
                 }
 
                 _sb.AppendLine(tableAttribute.ToString());
@@ -196,12 +216,19 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             // Do not generate IndexAttributes for indexes which
             // would be generated anyway by convention.
-            foreach (var index in entityType.GetIndexes().Where(
-                i => ConfigurationSource.Convention != ((IConventionIndex)i).GetConfigurationSource()))
+            foreach (
+                var index in entityType.GetIndexes()
+                    .Where(
+                        i =>
+                            ConfigurationSource.Convention
+                            != ((IConventionIndex)i).GetConfigurationSource()
+                    )
+            )
             {
                 // If there are annotations that cannot be represented using an IndexAttribute then use fluent API instead.
-                var annotations = _annotationCodeGenerator
-                    .FilterIgnoredAnnotations(index.GetAnnotations())
+                var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
+                        index.GetAnnotations()
+                    )
                     .ToDictionary(a => a.Name, a => a);
                 _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(index, annotations);
 
@@ -215,12 +242,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                     if (index.Name != null)
                     {
-                        indexAttribute.AddParameter($"{nameof(IndexAttribute.Name)} = {_code.Literal(index.Name)}");
+                        indexAttribute.AddParameter(
+                            $"{nameof(IndexAttribute.Name)} = {_code.Literal(index.Name)}"
+                        );
                     }
 
                     if (index.IsUnique)
                     {
-                        indexAttribute.AddParameter($"{nameof(IndexAttribute.IsUnique)} = {_code.Literal(index.IsUnique)}");
+                        indexAttribute.AddParameter(
+                            $"{nameof(IndexAttribute.IsUnique)} = {_code.Literal(index.IsUnique)}"
+                        );
                     }
 
                     _sb.AppendLine(indexAttribute.ToString());
@@ -238,7 +269,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             Check.NotNull(entityType, nameof(entityType));
 
-            var collectionNavigations = entityType.GetNavigations().Where(n => n.IsCollection).ToList();
+            var collectionNavigations = entityType.GetNavigations()
+                .Where(n => n.IsCollection)
+                .ToList();
 
             if (collectionNavigations.Count > 0)
             {
@@ -249,7 +282,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 {
                     foreach (var navigation in collectionNavigations)
                     {
-                        _sb.AppendLine($"{navigation.Name} = new HashSet<{navigation.TargetEntityType.Name}>();");
+                        _sb.AppendLine(
+                            $"{navigation.Name} = new HashSet<{navigation.TargetEntityType.Name}>();"
+                        );
                     }
                 }
 
@@ -277,7 +312,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     GeneratePropertyDataAnnotations(property);
                 }
 
-                _sb.AppendLine($"public {_code.Reference(property.ClrType)} {property.Name} {{ get; set; }}");
+                _sb.AppendLine(
+                    $"public {_code.Reference(property.ClrType)} {property.Name} {{ get; set; }}"
+                );
             }
         }
 
@@ -298,12 +335,18 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             GenerateUnicodeAttribute(property);
             GeneratePrecisionAttribute(property);
 
-            var annotations = _annotationCodeGenerator
-                .FilterIgnoredAnnotations(property.GetAnnotations())
+            var annotations = _annotationCodeGenerator.FilterIgnoredAnnotations(
+                    property.GetAnnotations()
+                )
                 .ToDictionary(a => a.Name, a => a);
             _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(property, annotations);
 
-            foreach (var attribute in _annotationCodeGenerator.GenerateDataAnnotationAttributes(property, annotations))
+            foreach (
+                var attribute in _annotationCodeGenerator.GenerateDataAnnotationAttributes(
+                    property,
+                    annotations
+                )
+            )
             {
                 var attributeWriter = new AttributeWriter(attribute.Type.Name);
                 foreach (var argument in attribute.Arguments)
@@ -327,7 +370,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             var columnName = property.GetColumnBaseName();
             var columnType = property.GetConfiguredColumnType();
 
-            var delimitedColumnName = columnName != null && columnName != property.Name ? _code.Literal(columnName) : null;
+            var delimitedColumnName =
+                columnName != null && columnName != property.Name
+                    ? _code.Literal(columnName)
+                    : null;
             var delimitedColumnType = columnType != null ? _code.Literal(columnType) : null;
 
             if ((delimitedColumnName ?? delimitedColumnType) != null)
@@ -341,7 +387,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                 if (delimitedColumnType != null)
                 {
-                    columnAttribute.AddParameter($"{nameof(ColumnAttribute.TypeName)} = {delimitedColumnType}");
+                    columnAttribute.AddParameter(
+                        $"{nameof(ColumnAttribute.TypeName)} = {delimitedColumnType}"
+                    );
                 }
 
                 _sb.AppendLine(columnAttribute.ToString());
@@ -350,9 +398,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
         private void GenerateRequiredAttribute(IProperty property)
         {
-            if (!property.IsNullable
+            if (
+                !property.IsNullable
                 && property.ClrType.IsNullableType()
-                && !property.IsPrimaryKey())
+                && !property.IsPrimaryKey()
+            )
             {
                 _sb.AppendLine(new AttributeWriter(nameof(RequiredAttribute)).ToString());
             }
@@ -366,8 +416,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             {
                 var lengthAttribute = new AttributeWriter(
                     property.ClrType == typeof(string)
-                        ? nameof(StringLengthAttribute)
-                        : nameof(MaxLengthAttribute));
+                      ? nameof(StringLengthAttribute)
+                      : nameof(MaxLengthAttribute)
+                );
 
                 lengthAttribute.AddParameter(_code.Literal(maxLength.Value));
 
@@ -439,8 +490,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     }
 
                     var referencedTypeName = navigation.TargetEntityType.Name;
-                    var navigationType = navigation.IsCollection ? $"ICollection<{referencedTypeName}>" : referencedTypeName;
-                    _sb.AppendLine($"public virtual {navigationType} {navigation.Name} {{ get; set; }}");
+                    var navigationType = navigation.IsCollection
+                        ? $"ICollection<{referencedTypeName}>"
+                        : referencedTypeName;
+                    _sb.AppendLine(
+                        $"public virtual {navigationType} {navigation.Name} {{ get; set; }}"
+                    );
                 }
             }
         }
@@ -463,11 +518,18 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     {
                         foreignKeyAttribute.AddParameter(
                             _code.Literal(
-                                string.Join(",", navigation.ForeignKey.Properties.Select(p => p.Name))));
+                                string.Join(
+                                    ",",
+                                    navigation.ForeignKey.Properties.Select(p => p.Name)
+                                )
+                            )
+                        );
                     }
                     else
                     {
-                        foreignKeyAttribute.AddParameter($"nameof({navigation.ForeignKey.Properties.First().Name})");
+                        foreignKeyAttribute.AddParameter(
+                            $"nameof({navigation.ForeignKey.Properties.First().Name})"
+                        );
                     }
 
                     _sb.AppendLine(foreignKeyAttribute.ToString());
@@ -483,13 +545,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                 if (inverseNavigation != null)
                 {
-                    var inversePropertyAttribute = new AttributeWriter(nameof(InversePropertyAttribute));
+                    var inversePropertyAttribute = new AttributeWriter(
+                        nameof(InversePropertyAttribute)
+                    );
 
                     inversePropertyAttribute.AddParameter(
-                        !navigation.DeclaringEntityType.GetPropertiesAndNavigations().Any(
-                            m => m.Name == inverseNavigation.DeclaringEntityType.Name)
-                            ? $"nameof({inverseNavigation.DeclaringEntityType.Name}.{inverseNavigation.Name})"
-                            : _code.Literal(inverseNavigation.Name));
+                        !navigation.DeclaringEntityType.GetPropertiesAndNavigations()
+                            .Any(m => m.Name == inverseNavigation.DeclaringEntityType.Name)
+                          ? $"nameof({inverseNavigation.DeclaringEntityType.Name}.{inverseNavigation.Name})"
+                          : _code.Literal(inverseNavigation.Name)
+                    );
 
                     _sb.AppendLine(inversePropertyAttribute.ToString());
                 }
@@ -502,7 +567,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             {
                 _sb.AppendLine("/// <summary>");
 
-                foreach (var line in comment.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None))
+                foreach (
+                    var line in comment.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
+                )
                 {
                     _sb.AppendLine($"/// {System.Security.SecurityElement.Escape(line)}");
                 }
@@ -530,15 +597,20 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _parameters.Add(parameter);
             }
 
-            public override string ToString()
-                => "["
-                    + (_parameters.Count == 0
+            public override string ToString() =>
+                "["
+                + (
+                    _parameters.Count == 0
                         ? StripAttribute(_attributeName)
-                        : StripAttribute(_attributeName) + "(" + string.Join(", ", _parameters) + ")")
-                    + "]";
+                        : StripAttribute(_attributeName)
+                          + "("
+                          + string.Join(", ", _parameters)
+                          + ")"
+                )
+                + "]";
 
-            private static string StripAttribute(string attributeName)
-                => attributeName.EndsWith("Attribute", StringComparison.Ordinal)
+            private static string StripAttribute(string attributeName) =>
+                attributeName.EndsWith("Attribute", StringComparison.Ordinal)
                     ? attributeName[..^9]
                     : attributeName;
         }

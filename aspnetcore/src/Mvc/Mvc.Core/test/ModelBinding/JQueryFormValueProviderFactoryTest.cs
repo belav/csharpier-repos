@@ -18,7 +18,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
 {
     public class JQueryFormValueProviderFactoryTest
     {
-        private static readonly Dictionary<string, StringValues> _backingStore = new Dictionary<string, StringValues>
+        private static readonly Dictionary<string, StringValues> _backingStore = new Dictionary<
+            string,
+            StringValues
+        >
         {
             { "[]", new[] { "found" } },
             { "[]property1", new[] { "found" } },
@@ -60,8 +63,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
         [InlineData("application/x-www-form-urlencoded")]
         [InlineData("application/x-www-form-urlencoded;charset=utf-8")]
         [InlineData("multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq")]
-        [InlineData("multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq; charset=utf-8")]
-        public async Task CreateValueProviderAsync_ReturnsValueProvider_WithCurrentCulture(string contentType)
+        [InlineData(
+            "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq; charset=utf-8"
+        )]
+        public async Task CreateValueProviderAsync_ReturnsValueProvider_WithCurrentCulture(
+            string contentType
+        )
         {
             // Arrange
             var context = CreateContext(contentType, formValues: null);
@@ -71,7 +78,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
             await factory.CreateValueProviderAsync(context);
 
             // Assert
-            var valueProvider = Assert.IsType<JQueryFormValueProvider>(Assert.Single(context.ValueProviders));
+            var valueProvider = Assert.IsType<JQueryFormValueProvider>(
+                Assert.Single(context.ValueProviders)
+            );
             Assert.Equal(CultureInfo.CurrentCulture, valueProvider.Culture);
         }
 
@@ -108,7 +117,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
         public async Task GetValueProvider_ReturnsValueProvider_ContainingExpectedKeys(string key)
         {
             // Arrange
-            var context = CreateContext("application/x-www-form-urlencoded", formValues: _backingStore);
+            var context = CreateContext(
+                "application/x-www-form-urlencoded",
+                formValues: _backingStore
+            );
             var factory = new JQueryFormValueProviderFactory();
 
             // Act
@@ -124,7 +136,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
         public async Task CreatesValueProvider_WithCurrentCulture()
         {
             // Arrange
-            var context = CreateContext("application/x-www-form-urlencoded", formValues: _backingStore);
+            var context = CreateContext(
+                "application/x-www-form-urlencoded",
+                formValues: _backingStore
+            );
             var factory = new JQueryFormValueProviderFactory();
 
             // Act
@@ -146,7 +161,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
             var factory = new JQueryFormValueProviderFactory();
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<ValueProviderException>(() => factory.CreateValueProviderAsync(valueProviderContext));
+            var ex = await Assert.ThrowsAsync<ValueProviderException>(
+                () => factory.CreateValueProviderAsync(valueProviderContext)
+            );
             Assert.Same(exception, ex.InnerException);
         }
 
@@ -160,7 +177,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
             var factory = new JQueryFormValueProviderFactory();
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<ValueProviderException>(() => factory.CreateValueProviderAsync(valueProviderContext));
+            var ex = await Assert.ThrowsAsync<ValueProviderException>(
+                () => factory.CreateValueProviderAsync(valueProviderContext)
+            );
             Assert.Same(exception, ex.InnerException);
         }
 
@@ -174,7 +193,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
             var factory = new JQueryFormValueProviderFactory();
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() => factory.CreateValueProviderAsync(valueProviderContext));
+            var ex = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+                () => factory.CreateValueProviderAsync(valueProviderContext)
+            );
             Assert.Same(exception, ex);
         }
 
@@ -183,20 +204,30 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
             var context = new Mock<HttpContext>();
             context.Setup(c => c.Request.ContentType).Returns("application/x-www-form-urlencoded");
             context.Setup(c => c.Request.HasFormContentType).Returns(true);
-            context.Setup(c => c.Request.ReadFormAsync(It.IsAny<CancellationToken>())).ThrowsAsync(exception);
-            var actionContext = new ActionContext(context.Object, new RouteData(), new ActionDescriptor());
+            context.Setup(c => c.Request.ReadFormAsync(It.IsAny<CancellationToken>()))
+                .ThrowsAsync(exception);
+            var actionContext = new ActionContext(
+                context.Object,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var valueProviderContext = new ValueProviderFactoryContext(actionContext);
             return valueProviderContext;
         }
 
-        private static ValueProviderFactoryContext CreateContext(string contentType, Dictionary<string, StringValues> formValues)
+        private static ValueProviderFactoryContext CreateContext(
+            string contentType,
+            Dictionary<string, StringValues> formValues
+        )
         {
             var context = new DefaultHttpContext();
             context.Request.ContentType = contentType;
 
             if (context.Request.HasFormContentType)
             {
-                context.Request.Form = new FormCollection(formValues ?? new Dictionary<string, StringValues>());
+                context.Request.Form = new FormCollection(
+                    formValues ?? new Dictionary<string, StringValues>()
+                );
             }
 
             var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());

@@ -45,7 +45,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public void Reset()
         {
-            EditHandler = SpanEditHandler.CreateDefault((content) => Enumerable.Empty<SyntaxToken>());
+            EditHandler = SpanEditHandler.CreateDefault(
+                (content) => Enumerable.Empty<SyntaxToken>()
+            );
             ChunkGenerator = SpanChunkGenerator.Null;
         }
     }

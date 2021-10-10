@@ -25,58 +25,83 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static ImmutableArray<ParameterName> GenerateParameterNames(
             this SemanticModel semanticModel,
             ArgumentListSyntax argumentList,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GenerateParameterNames(
-                argumentList.Arguments, reservedNames: null, cancellationToken: cancellationToken);
+                argumentList.Arguments,
+                reservedNames: null,
+                cancellationToken: cancellationToken
+            );
         }
 
         public static ImmutableArray<ParameterName> GenerateParameterNames(
             this SemanticModel semanticModel,
             AttributeArgumentListSyntax argumentList,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GenerateParameterNames(
-                argumentList.Arguments, reservedNames: null, cancellationToken: cancellationToken);
+                argumentList.Arguments,
+                reservedNames: null,
+                cancellationToken: cancellationToken
+            );
         }
 
         public static ImmutableArray<ParameterName> GenerateParameterNames(
             this SemanticModel semanticModel,
             IEnumerable<ArgumentSyntax> arguments,
             IList<string> reservedNames,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             reservedNames ??= SpecializedCollections.EmptyList<string>();
 
             // We can't change the names of named parameters.  Any other names we're flexible on.
-            var isFixed = reservedNames.Select(s => true).Concat(
-                arguments.Select(a => a.NameColon != null)).ToImmutableArray();
+            var isFixed = reservedNames.Select(s => true)
+                .Concat(arguments.Select(a => a.NameColon != null))
+                .ToImmutableArray();
 
             var parameterNames = reservedNames.Concat(
-                arguments.Select(a => semanticModel.GenerateNameForArgument(a, cancellationToken))).ToImmutableArray();
+                    arguments.Select(
+                        a => semanticModel.GenerateNameForArgument(a, cancellationToken)
+                    )
+                )
+                .ToImmutableArray();
 
             return GenerateNames(reservedNames, isFixed, parameterNames);
         }
 
-        public static ImmutableArray<ParameterName> GenerateNames(IList<string> reservedNames, ImmutableArray<bool> isFixed, ImmutableArray<string> parameterNames)
-            => NameGenerator.EnsureUniqueness(parameterNames, isFixed)
+        public static ImmutableArray<ParameterName> GenerateNames(
+            IList<string> reservedNames,
+            ImmutableArray<bool> isFixed,
+            ImmutableArray<string> parameterNames
+        ) =>
+            NameGenerator.EnsureUniqueness(parameterNames, isFixed)
                 .Select((name, index) => new ParameterName(name, isFixed[index]))
-                .Skip(reservedNames.Count).ToImmutableArray();
+                .Skip(reservedNames.Count)
+                .ToImmutableArray();
 
         public static ImmutableArray<ParameterName> GenerateParameterNames(
             this SemanticModel semanticModel,
             IEnumerable<AttributeArgumentSyntax> arguments,
             IList<string> reservedNames,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             reservedNames ??= SpecializedCollections.EmptyList<string>();
 
             // We can't change the names of named parameters.  Any other names we're flexible on.
-            var isFixed = reservedNames.Select(s => true).Concat(
-                arguments.Select(a => a.NameEquals != null)).ToImmutableArray();
+            var isFixed = reservedNames.Select(s => true)
+                .Concat(arguments.Select(a => a.NameEquals != null))
+                .ToImmutableArray();
 
             var parameterNames = reservedNames.Concat(
-                arguments.Select(a => semanticModel.GenerateNameForArgument(a, cancellationToken))).ToImmutableArray();
+                    arguments.Select(
+                        a => semanticModel.GenerateNameForArgument(a, cancellationToken)
+                    )
+                )
+                .ToImmutableArray();
 
             return GenerateNames(reservedNames, isFixed, parameterNames);
         }
@@ -86,7 +111,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// argument.
         /// </summary>
         public static string GenerateNameForArgument(
-            this SemanticModel semanticModel, ArgumentSyntax argument, CancellationToken cancellationToken)
+            this SemanticModel semanticModel,
+            ArgumentSyntax argument,
+            CancellationToken cancellationToken
+        )
         {
             // If it named argument then we use the name provided.
             if (argument.NameColon != null)
@@ -95,11 +123,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             return semanticModel.GenerateNameForExpression(
-                argument.Expression, capitalize: false, cancellationToken: cancellationToken);
+                argument.Expression,
+                capitalize: false,
+                cancellationToken: cancellationToken
+            );
         }
 
         public static string GenerateNameForArgument(
-            this SemanticModel semanticModel, AttributeArgumentSyntax argument, CancellationToken cancellationToken)
+            this SemanticModel semanticModel,
+            AttributeArgumentSyntax argument,
+            CancellationToken cancellationToken
+        )
         {
             // If it named argument then we use the name provided.
             if (argument.NameEquals != null)
@@ -108,7 +142,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             return semanticModel.GenerateNameForExpression(
-                argument.Expression, capitalize: false, cancellationToken: cancellationToken);
+                argument.Expression,
+                capitalize: false,
+                cancellationToken: cancellationToken
+            );
         }
 
         /// <summary>
@@ -116,8 +153,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// that expression. 
         /// </summary>
         public static string GenerateNameForExpression(
-            this SemanticModel semanticModel, ExpressionSyntax expression,
-            bool capitalize, CancellationToken cancellationToken)
+            this SemanticModel semanticModel,
+            ExpressionSyntax expression,
+            bool capitalize,
+            CancellationToken cancellationToken
+        )
         {
             // Try to find a usable name node that we can use to name the
             // parameter.  If we have an expression that has a name as part of it
@@ -156,8 +196,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
                     return name.Identifier.ValueText.ToCamelCase();
                 }
-                else if (current.Parent is ForEachStatementSyntax foreachStatement &&
-                         foreachStatement.Expression == expression)
+                else if (
+                    current.Parent is ForEachStatementSyntax foreachStatement
+                    && foreachStatement.Expression == expression
+                )
                 {
                     return foreachStatement.Identifier.ValueText.ToCamelCase().Pluralize();
                 }
@@ -170,7 +212,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // there was nothing in the expression to signify a name.  If we're in an argument
             // location, then try to choose a name based on the argument name.
             var argumentName = TryGenerateNameForArgumentExpression(
-                semanticModel, expression, cancellationToken);
+                semanticModel,
+                expression,
+                cancellationToken
+            );
             if (argumentName != null)
             {
                 return capitalize ? argumentName.ToPascalCase() : argumentName.ToCamelCase();
@@ -184,11 +229,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return CodeAnalysis.Shared.Extensions.ITypeSymbolExtensions.DefaultParameterName;
             }
 
-            return semanticModel.GenerateNameFromType(info.Type, CSharpSyntaxFacts.Instance, capitalize);
+            return semanticModel.GenerateNameFromType(
+                info.Type,
+                CSharpSyntaxFacts.Instance,
+                capitalize
+            );
         }
 
         private static string TryGenerateNameForArgumentExpression(
-            SemanticModel semanticModel, ExpressionSyntax expression, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            ExpressionSyntax expression,
+            CancellationToken cancellationToken
+        )
         {
             var topExpression = expression.WalkUpParentheses();
             if (topExpression.IsParentKind(SyntaxKind.Argument, out ArgumentSyntax argument))
@@ -201,7 +253,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (argument.Parent is BaseArgumentListSyntax argumentList)
                 {
                     var index = argumentList.Arguments.IndexOf(argument);
-                    if (semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken).Symbol is IMethodSymbol member && index < member.Parameters.Length)
+                    if (
+                        semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken).Symbol
+                            is IMethodSymbol member
+                        && index < member.Parameters.Length
+                    )
                     {
                         var parameter = member.Parameters[index];
                         if (parameter.Type.OriginalDefinition.TypeKind != TypeKind.TypeParameter)

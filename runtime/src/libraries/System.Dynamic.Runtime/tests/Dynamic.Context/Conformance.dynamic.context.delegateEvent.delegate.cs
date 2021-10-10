@@ -35,14 +35,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         public delegate void D102(ref DynClass01 c, dynamic d1, ref object d2);
         namespace DynNamespace02
         {
-            public delegate void D201(ref dynamic d1, DynClass01 c, out dynamic[] d2, DynStruct01 st);
+            public delegate void D201(
+                ref dynamic d1,
+                DynClass01 c,
+                out dynamic[] d2,
+                DynStruct01 st
+            );
             public delegate dynamic D202(DynStruct01 st, params object[] d2);
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate001.dlgate001
 {
@@ -176,34 +179,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 // Ex: Null ref
                 // retval -= (int)d003(ref so, d, out d);
                 s_retval -= (int)d003(ref s_so, s_so, out s_so);
-                dynamic[] dary = new object[]
-                {
-                }
-
-                ;
+                dynamic[] dary = new object[] {  };
                 int ret = 0;
                 D004 del004 = new D004(Foo.M0C);
-                del004(ref ret, new object[]
-                {
-                }
-
-                , dary);
+                del004(ref ret, new object[] {  }, dary);
                 s_retval -= ret;
                 del004 = new D004(foo.M0D);
                 ret = 0;
-                del004(ref ret, new dynamic[]
-                {
-                }
-
-                , dary);
+                del004(ref ret, new dynamic[] {  }, dary);
                 s_retval -= ret;
                 return s_retval;
             }
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate002.dlgate002
 {
@@ -219,42 +208,71 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         public class Foo
         {
             // DynNamespace01: public delegate dynamic D101(dynamic d, DynInterface01 i);
-            public static dynamic M01(dynamic v1, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynInterface01 v2)
+            public static dynamic M01(
+                dynamic v1,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynInterface01 v2
+            )
             {
                 return 0x01;
             }
 
-            public dynamic M02(object v1, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynInterface01 v2)
+            public dynamic M02(
+                object v1,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynInterface01 v2
+            )
             {
                 return 0x01;
             }
 
             // DynNamespace01: public delegate void D102(DynClass01 c, ref dynamic d1, ref object d2)
-            public static void M03(ref ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v1, dynamic v2, ref object v3)
+            public static void M03(
+                ref ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v1,
+                dynamic v2,
+                ref object v3
+            )
             {
                 v1.n = 3;
             }
 
-            public void M04(ref ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v1, object v2, ref dynamic v3)
+            public void M04(
+                ref ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v1,
+                object v2,
+                ref dynamic v3
+            )
             {
                 v1.n = 4;
             }
 
             // DynNamespace01:
             //  public delegate void D201(ref dynamic d1, DynClass01[] c, out dynamic d2, DynStruct01 st)
-            public void M05(ref dynamic v1, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v2, out dynamic[] v3, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v4)
+            public void M05(
+                ref dynamic v1,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v2,
+                out dynamic[] v3,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v4
+            )
             {
                 v1 = 5;
                 v3 = null;
             }
 
-            public static void M06(ref object v1, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v2, out dynamic[] v3, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v4)
+            public static void M06(
+                ref object v1,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v2,
+                out dynamic[] v3,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v4
+            )
             {
                 v1 = 6;
                 v3 = null;
             }
 
-            public void M07(ref object v1, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v2, out object[] v3, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v4)
+            public void M07(
+                ref object v1,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynClass01 v2,
+                out object[] v3,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v4
+            )
             {
                 v1 = 7;
                 v3 = null;
@@ -262,20 +280,24 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 
             // DynNamespace01:
             //   public delegate dynamic D202(DynStruct01 st, params object[] d2)
-            public static dynamic M08(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v1, params object[] v2)
+            public static dynamic M08(
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v1,
+                params object[] v2
+            )
             {
                 return 0x08;
             }
 
-            public object M09(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v1, params dynamic[] v2)
+            public object M09(
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01.DynNamespace01.DynStruct01 v1,
+                params dynamic[] v2
+            )
             {
                 return 0x09;
             }
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02
 {
@@ -312,8 +334,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate003.dlgate003
 {
     // <Area> Dynamic type in delegates </Area>
@@ -329,36 +349,60 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         {
             // DynNamespace01.DynClass:
             //  public delegate string D001(object v1, dynamic v2, ref DynEnum v3)
-            public static string M01(object v1, object v2, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v3)
+            public static string M01(
+                object v1,
+                object v2,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v3
+            )
             {
                 return v3.ToString();
             }
 
-            public string M11(object v1, object v2, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v3)
+            public string M11(
+                object v1,
+                object v2,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v3
+            )
             {
                 return v3.ToString();
             }
 
-            public string M21(object v1, object v2, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v3)
+            public string M21(
+                object v1,
+                object v2,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v3
+            )
             {
                 return v3.ToString();
             }
 
-            public static string M02(dynamic v1, dynamic v2, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v3)
+            public static string M02(
+                dynamic v1,
+                dynamic v2,
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v3
+            )
             {
                 return v3.ToString();
             }
 
             // DynNamespace01.DynClass.DynStruct:
             //  public delegate string D101(ref DynEnum v1, ref object v2, params dynamic[] v3);
-            public string M03(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v1, ref object v2, params dynamic[] v3)
+            public string M03(
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v1,
+                ref object v2,
+                params dynamic[] v3
+            )
             {
                 return v1.ToString();
             }
 
             // DynNamespace01.DynClass.DynStruct:
             //  blic delegate string D101(ref DynEnum v1, ref dynamic v2, params object[] v3)
-            public string M04(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v1, ref dynamic v2, params object[] v3)
+            public string M04(
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum v1,
+                ref dynamic v2,
+                params object[] v3
+            )
             {
                 return v1.ToString();
             }
@@ -367,7 +411,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         public class start
         {
             // field
-            private static ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001[] s_d001 = new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001[3];
+            private static ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001[] s_d001 =
+                new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001[
+                    3
+                ];
             private static dynamic s_sd = null;
             private static object s_so = new object();
             [Fact]
@@ -382,14 +429,30 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 Foo foo = new Foo();
                 dynamic d = new object();
                 object o = null;
-                s_d001[0] = new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(foo.M11);
-                s_d001[1] = new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(foo.M21);
-                s_d001[2] = new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(Foo.M01);
+                s_d001[0] =
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(
+                        foo.M11
+                    );
+                s_d001[1] =
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(
+                        foo.M21
+                    );
+                s_d001[2] =
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(
+                        Foo.M01
+                    );
                 ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001[] ary101 =
                 {
-                new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(Foo.M01), new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(foo.M21), new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(foo.M11)}
-
-                ;
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(
+                        Foo.M01
+                    ),
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(
+                        foo.M21
+                    ),
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(
+                        foo.M11
+                    )
+                };
                 if (s_d001[0] != ary101[2])
                 {
                     ret = false;
@@ -405,65 +468,129 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                     ret = false;
                 }
 
-                ary101[0] = new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(Foo.M02);
-                string st1 = ary101[0](s_so, s_sd, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1);
-                if (ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1.ToString() != s_d001[0](s_so, d, ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1))
+                ary101[0] =
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.D001(
+                        Foo.M02
+                    );
+                string st1 = ary101[0](
+                    s_so,
+                    s_sd,
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1
+                );
+                if (
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1.ToString()
+                    != s_d001[0](
+                        s_so,
+                        d,
+                        ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1
+                    )
+                )
                 {
                     ret = false;
                 }
 
-                if (ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1.ToString() != st1)
+                if (
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1.ToString()
+                    != st1
+                )
                 {
                     ret = false;
                 }
 
-                dynamic[] dary = new object[]
-                {
-                }
-
-                ;
-                object[] oary = new object[]
-                {
-                }
-
-                ;
-                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D101 d101 = null;
-                d101 = new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D101(foo.M03);
-                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D101 d111 = new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D101(foo.M04);
-                st1 = d101(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item2, ref d, dary);
-                if (ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item2.ToString() != st1)
-                {
-                    ret = false;
-                }
-
-                st1 = d101(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3, ref o, oary);
-                if (ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3.ToString() != st1)
-                {
-                    ret = false;
-                }
-
-                st1 = d111(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3, ref o, oary);
-                if (ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3.ToString() != st1)
+                dynamic[] dary = new object[] {  };
+                object[] oary = new object[] {  };
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D101 d101 =
+                    null;
+                d101 =
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D101(
+                        foo.M03
+                    );
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D101 d111 =
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D101(
+                        foo.M04
+                    );
+                st1 = d101(
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item2,
+                    ref d,
+                    dary
+                );
+                if (
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item2.ToString()
+                    != st1
+                )
                 {
                     ret = false;
                 }
 
-                st1 = d111(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item4, ref s_so, dary);
-                if (ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item4.ToString() != st1)
+                st1 = d101(
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3,
+                    ref o,
+                    oary
+                );
+                if (
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3.ToString()
+                    != st1
+                )
                 {
                     ret = false;
                 }
 
-                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D102 d102 = new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D102(foo.M04);
-                st1 = d102(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item5, ref d, dary);
-                if (ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item5.ToString() != st1)
+                st1 = d111(
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3,
+                    ref o,
+                    oary
+                );
+                if (
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3.ToString()
+                    != st1
+                )
                 {
                     ret = false;
                 }
 
-                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D102 d122 = new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D102(foo.M03);
-                st1 = d122(ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item6, ref s_so, oary);
-                if (ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item6.ToString() != st1)
+                st1 = d111(
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item4,
+                    ref s_so,
+                    dary
+                );
+                if (
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item4.ToString()
+                    != st1
+                )
+                {
+                    ret = false;
+                }
+
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D102 d102 =
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D102(
+                        foo.M04
+                    );
+                st1 = d102(
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item5,
+                    ref d,
+                    dary
+                );
+                if (
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item5.ToString()
+                    != st1
+                )
+                {
+                    ret = false;
+                }
+
+                ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D102 d122 =
+                    new ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D102(
+                        foo.M03
+                    );
+                st1 = d122(
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item6,
+                    ref s_so,
+                    oary
+                );
+                if (
+                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item6.ToString()
+                    != st1
+                )
                 {
                     ret = false;
                 }
@@ -473,8 +600,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib03.dlgatedeclarelib03
 {
@@ -497,14 +622,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         {
             private new delegate void PublicDel(dynamic v, ref int n);
             // protected: can not access if in dll
-            public delegate long InternalDel(sbyte v1, dynamic v2, short v3, dynamic v4, int v5, dynamic v6, long v7, dynamic v8, dynamic v9);
+            public delegate long InternalDel(
+                sbyte v1,
+                dynamic v2,
+                short v3,
+                dynamic v4,
+                int v5,
+                dynamic v6,
+                long v7,
+                dynamic v8,
+                dynamic v9
+            );
             protected delegate void ProtectedDel(dynamic d);
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate004.dlgate004
 {
@@ -544,17 +677,47 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 
             // DynNamespace31.DynClassDrived:
             // internal delegate long InternalDel(sbyte v1, dynamic v2, short v3, dynamic v4, int v5, dynamic v6, long v7, dynamic v8, dynamic v9)
-            public static long M11(sbyte v1, dynamic v2, short v3, dynamic v4, int v5, dynamic v6, long v7, dynamic v8, dynamic v9)
+            public static long M11(
+                sbyte v1,
+                dynamic v2,
+                short v3,
+                dynamic v4,
+                int v5,
+                dynamic v6,
+                long v7,
+                dynamic v8,
+                dynamic v9
+            )
             {
                 return v1 + (int)v2 + v3 + (int)v4 + v5 + (int)v6 + v7 + (int)v8 + (int)v9;
             }
 
-            internal static long M12(sbyte v1, dynamic v2, short v3, dynamic v4, int v5, dynamic v6, long v7, dynamic v8, object v9)
+            internal static long M12(
+                sbyte v1,
+                dynamic v2,
+                short v3,
+                dynamic v4,
+                int v5,
+                dynamic v6,
+                long v7,
+                dynamic v8,
+                object v9
+            )
             {
                 return v1 + v3 + v5 + v7 + (int)v9;
             }
 
-            public static long M13(sbyte v1, dynamic v2, short v3, object v4, int v5, dynamic v6, long v7, dynamic v8, object v9)
+            public static long M13(
+                sbyte v1,
+                dynamic v2,
+                short v3,
+                object v4,
+                int v5,
+                dynamic v6,
+                long v7,
+                dynamic v8,
+                object v9
+            )
             {
                 return (int)v2 + (int)v4 + (int)v6 + (int)v8;
             }
@@ -586,7 +749,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         {
             // field
             private static DynClassDrived.InternalDel s_interDel;
-
 
             public static void DynamicCSharpRunTest()
             {
@@ -663,8 +825,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib04.dlgatedeclarelib04
 {
     // <Area> Dynamic type in delegates </Area>
@@ -689,13 +849,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         {
             public delegate R D021<T, R>(out dynamic d, out T t);
             // internal: can not access if in dll
-            public delegate dynamic D022<T1, T2, T3>(T1 t1, ref T2 t2, out T3 t3, params dynamic[] d);
+            public delegate dynamic D022<T1, T2, T3>(
+                T1 t1,
+                ref T2 t2,
+                out T3 t3,
+                params dynamic[] d
+            );
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib05.dlgatedeclarelib05
 {
@@ -707,7 +870,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     // <Code>
 
     public delegate void D001(dynamic d = null); // not allow init with values other than null:(
-    public delegate void D002(dynamic v1, object v2 = null, dynamic v3 = null /*DynNamespace51.DynClass.strDyn*/);
+    public delegate void D002(
+        dynamic v1,
+        object v2 = null,
+        dynamic v3 = null /*DynNamespace51.DynClass.strDyn*/
+    );
     namespace DynNamespace51
     {
         public delegate void D011(dynamic d1 = null, params dynamic[] d2);
@@ -719,7 +886,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
             public delegate void D022(DynStruct01 v1, dynamic v2 = null, int v3 = -1);
             public struct DynStruct
             {
-                public delegate dynamic D031(DynClass01 v1, DynStruct01 v2 = new DynStruct01(), dynamic[] v3 = null);
+                public delegate dynamic D031(
+                    DynClass01 v1,
+                    DynStruct01 v2 = new DynStruct01(),
+                    dynamic[] v3 = null
+                );
             }
         }
 
@@ -733,8 +904,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate006.dlgate006
 {
@@ -792,7 +961,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
             }
 
             // public delegate dynamic D031(DynClass01 v1, DynStruct01 v2 = new DynStruct01(), dynamic[] v3 = null);
-            public static dynamic M51(DynClass01 v1, DynStruct01 v2 = new DynStruct01(), dynamic[] v3 = null)
+            public static dynamic M51(
+                DynClass01 v1,
+                DynStruct01 v2 = new DynStruct01(),
+                dynamic[] v3 = null
+            )
             {
                 return 51;
             }
@@ -924,8 +1097,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate007bug.dlgate007bug
 {
     // <Area> Dynamic type in delegates </Area>
@@ -962,7 +1133,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 
         public class start
         {
-
             public static void DynamicCSharpRunTest()
             {
                 Assert.Equal(0, MainMethod());
@@ -1005,8 +1175,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate008bug.dlgate008bug
 {
     // <Area> Dynamic type in delegates </Area>
@@ -1020,24 +1188,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         public delegate void Del(dynamic v1);
         public struct Foo
         {
-            public void MinStruct(dynamic v1)
-            {
-            }
+            public void MinStruct(dynamic v1) { }
 
-            public static void SMinStruct(dynamic v1)
-            {
-            }
+            public static void SMinStruct(dynamic v1) { }
         }
 
         public class Bar
         {
-            public void MinClass(dynamic v1)
-            {
-            }
+            public void MinClass(dynamic v1) { }
 
-            public static void SMinClass(dynamic v1)
-            {
-            }
+            public static void SMinClass(dynamic v1) { }
         }
 
         public class start
@@ -1054,14 +1214,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 Bar bar = new Bar();
                 Del[] ary01 =
                 {
-                new Del(Foo.SMinStruct), new Del(bar.MinClass), new Del(Bar.SMinClass)}
-
-                ;
+                    new Del(Foo.SMinStruct),
+                    new Del(bar.MinClass),
+                    new Del(Bar.SMinClass)
+                };
                 Del[] ary02 =
                 {
-                new Del(Foo.SMinStruct), new Del(bar.MinClass), new Del(Bar.SMinClass)}
-
-                ;
+                    new Del(Foo.SMinStruct),
+                    new Del(bar.MinClass),
+                    new Del(Bar.SMinClass)
+                };
                 int idx = 0;
                 foreach (Del d in ary01)
                 {
@@ -1079,8 +1241,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate009bug.dlgate009bug
 {
     // <Area> Dynamic type in delegates </Area>
@@ -1097,13 +1257,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         internal delegate void DOptDyn(params dynamic[] ary);
         public class Foo
         {
-            public void M01(params dynamic[] d)
-            {
-            }
+            public void M01(params dynamic[] d) { }
 
-            public void M02(params object[] d)
-            {
-            }
+            public void M02(params object[] d) { }
         }
 
         public class TestClass
@@ -1139,8 +1295,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.generic001.generic001
 {
@@ -1185,8 +1339,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.generic002.generic002
 {
@@ -1239,8 +1391,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.generic003.generic003
 {
@@ -1297,8 +1447,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.generic004.generic004
 {
     // <Title>+= on a generic event does work</Title>
@@ -1349,8 +1497,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.generic005.generic005
 {
@@ -1410,8 +1556,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.generic006.generic006
 {

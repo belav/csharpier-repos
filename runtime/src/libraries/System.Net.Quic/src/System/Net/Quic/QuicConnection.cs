@@ -19,28 +19,47 @@ namespace System.Net.Quic
         /// <param name="remoteEndPoint">The remote endpoint to connect to.</param>
         /// <param name="sslClientAuthenticationOptions">TLS options</param>
         /// <param name="localEndPoint">The local endpoint to connect from.</param>
-        public QuicConnection(EndPoint remoteEndPoint, SslClientAuthenticationOptions? sslClientAuthenticationOptions, IPEndPoint? localEndPoint = null)
-            : this(QuicImplementationProviders.Default, remoteEndPoint, sslClientAuthenticationOptions, localEndPoint)
-        {
-        }
+        public QuicConnection(
+            EndPoint remoteEndPoint,
+            SslClientAuthenticationOptions? sslClientAuthenticationOptions,
+            IPEndPoint? localEndPoint = null
+        )
+            : this(
+                QuicImplementationProviders.Default,
+                remoteEndPoint,
+                sslClientAuthenticationOptions,
+                localEndPoint
+            ) { }
 
         /// <summary>
         /// Create an outbound QUIC connection.
         /// </summary>
         /// <param name="options">The connection options.</param>
         public QuicConnection(QuicClientConnectionOptions options)
-            : this(QuicImplementationProviders.Default, options)
-        {
-        }
+            : this(QuicImplementationProviders.Default, options) { }
 
         // !!! TEMPORARY: Remove or make internal before shipping
-        public QuicConnection(QuicImplementationProvider implementationProvider, EndPoint remoteEndPoint, SslClientAuthenticationOptions? sslClientAuthenticationOptions, IPEndPoint? localEndPoint = null)
-            : this(implementationProvider, new QuicClientConnectionOptions() { RemoteEndPoint = remoteEndPoint, ClientAuthenticationOptions = sslClientAuthenticationOptions, LocalEndPoint = localEndPoint })
-        {
-        }
+        public QuicConnection(
+            QuicImplementationProvider implementationProvider,
+            EndPoint remoteEndPoint,
+            SslClientAuthenticationOptions? sslClientAuthenticationOptions,
+            IPEndPoint? localEndPoint = null
+        )
+            : this(
+                implementationProvider,
+                new QuicClientConnectionOptions()
+                {
+                    RemoteEndPoint = remoteEndPoint,
+                    ClientAuthenticationOptions = sslClientAuthenticationOptions,
+                    LocalEndPoint = localEndPoint
+                }
+            ) { }
 
         // !!! TEMPORARY: Remove or make internal before shipping
-        public QuicConnection(QuicImplementationProvider implementationProvider, QuicClientConnectionOptions options)
+        public QuicConnection(
+            QuicImplementationProvider implementationProvider,
+            QuicClientConnectionOptions options
+        )
         {
             _provider = implementationProvider.CreateConnection(options);
         }
@@ -59,48 +78,62 @@ namespace System.Net.Quic
 
         public EndPoint RemoteEndPoint => _provider.RemoteEndPoint;
 
-        public SslApplicationProtocol NegotiatedApplicationProtocol => _provider.NegotiatedApplicationProtocol;
+        public SslApplicationProtocol NegotiatedApplicationProtocol =>
+            _provider.NegotiatedApplicationProtocol;
 
         /// <summary>
         /// Connect to the remote endpoint.
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ValueTask ConnectAsync(CancellationToken cancellationToken = default) => _provider.ConnectAsync(cancellationToken);
+        public ValueTask ConnectAsync(CancellationToken cancellationToken = default) =>
+            _provider.ConnectAsync(cancellationToken);
 
         /// <summary>
         /// Create an outbound unidirectional stream.
         /// </summary>
         /// <returns></returns>
-        public QuicStream OpenUnidirectionalStream() => new QuicStream(_provider.OpenUnidirectionalStream());
+        public QuicStream OpenUnidirectionalStream() =>
+            new QuicStream(_provider.OpenUnidirectionalStream());
 
         /// <summary>
         /// Create an outbound bidirectional stream.
         /// </summary>
         /// <returns></returns>
-        public QuicStream OpenBidirectionalStream() => new QuicStream(_provider.OpenBidirectionalStream());
+        public QuicStream OpenBidirectionalStream() =>
+            new QuicStream(_provider.OpenBidirectionalStream());
 
         /// <summary>
         /// Accept an incoming stream.
         /// </summary>
         /// <returns></returns>
-        public async ValueTask<QuicStream> AcceptStreamAsync(CancellationToken cancellationToken = default) => new QuicStream(await _provider.AcceptStreamAsync(cancellationToken).ConfigureAwait(false));
+        public async ValueTask<QuicStream> AcceptStreamAsync(
+            CancellationToken cancellationToken = default
+        ) =>
+            new QuicStream(
+                await _provider.AcceptStreamAsync(cancellationToken).ConfigureAwait(false)
+            );
 
         /// <summary>
         /// Close the connection and terminate any active streams.
         /// </summary>
-        public ValueTask CloseAsync(long errorCode, CancellationToken cancellationToken = default) => _provider.CloseAsync(errorCode, cancellationToken);
+        public ValueTask CloseAsync(
+            long errorCode,
+            CancellationToken cancellationToken = default
+        ) => _provider.CloseAsync(errorCode, cancellationToken);
 
         public void Dispose() => _provider.Dispose();
 
         /// <summary>
         /// Gets the maximum number of bidirectional streams that can be made to the peer.
         /// </summary>
-        public long GetRemoteAvailableUnidirectionalStreamCount() => _provider.GetRemoteAvailableUnidirectionalStreamCount();
+        public long GetRemoteAvailableUnidirectionalStreamCount() =>
+            _provider.GetRemoteAvailableUnidirectionalStreamCount();
 
         /// <summary>
         /// Gets the maximum number of unidirectional streams that can be made to the peer.
         /// </summary>
-        public long GetRemoteAvailableBidirectionalStreamCount() => _provider.GetRemoteAvailableBidirectionalStreamCount();
+        public long GetRemoteAvailableBidirectionalStreamCount() =>
+            _provider.GetRemoteAvailableBidirectionalStreamCount();
     }
 }

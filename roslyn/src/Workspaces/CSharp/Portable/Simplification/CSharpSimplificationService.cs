@@ -21,7 +21,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     [ExportLanguageService(typeof(ISimplificationService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpSimplificationService : AbstractSimplificationService<ExpressionSyntax, StatementSyntax, CrefSyntax>
+    internal partial class CSharpSimplificationService
+        : AbstractSimplificationService<ExpressionSyntax, StatementSyntax, CrefSyntax>
     {
         // 1. the cast simplifier should run earlier then everything else to minimize the type expressions
         // 2. Extension method reducer may insert parentheses.  So run it before the parentheses remover.
@@ -37,47 +38,84 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 new CSharpEscapingReducer(),
                 new CSharpMiscellaneousReducer(),
                 new CSharpInferredMemberNameReducer(),
-                new CSharpDefaultExpressionReducer());
+                new CSharpDefaultExpressionReducer()
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSimplificationService() : base(s_reducers)
-        {
-        }
+        public CSharpSimplificationService() : base(s_reducers) { }
 
-        public override SyntaxNode Expand(SyntaxNode node, SemanticModel semanticModel, SyntaxAnnotation annotationForReplacedAliasIdentifier, Func<SyntaxNode, bool> expandInsideNode, bool expandParameter, CancellationToken cancellationToken)
+        public override SyntaxNode Expand(
+            SyntaxNode node,
+            SemanticModel semanticModel,
+            SyntaxAnnotation annotationForReplacedAliasIdentifier,
+            Func<SyntaxNode, bool> expandInsideNode,
+            bool expandParameter,
+            CancellationToken cancellationToken
+        )
         {
             using (Logger.LogBlock(FunctionId.Simplifier_ExpandNode, cancellationToken))
             {
-                if (node is AttributeSyntax ||
-                    node is AttributeArgumentSyntax ||
-                    node is ConstructorInitializerSyntax ||
-                    node is ExpressionSyntax ||
-                    node is FieldDeclarationSyntax ||
-                    node is StatementSyntax ||
-                    node is CrefSyntax ||
-                    node is XmlNameAttributeSyntax ||
-                    node is TypeConstraintSyntax ||
-                    node is BaseTypeSyntax)
+                if (
+                    node is AttributeSyntax
+                    || node is AttributeArgumentSyntax
+                    || node is ConstructorInitializerSyntax
+                    || node is ExpressionSyntax
+                    || node is FieldDeclarationSyntax
+                    || node is StatementSyntax
+                    || node is CrefSyntax
+                    || node is XmlNameAttributeSyntax
+                    || node is TypeConstraintSyntax
+                    || node is BaseTypeSyntax
+                )
                 {
-                    var rewriter = new Expander(semanticModel, expandInsideNode, expandParameter, cancellationToken, annotationForReplacedAliasIdentifier);
+                    var rewriter = new Expander(
+                        semanticModel,
+                        expandInsideNode,
+                        expandParameter,
+                        cancellationToken,
+                        annotationForReplacedAliasIdentifier
+                    );
                     return rewriter.Visit(node);
                 }
                 else
                 {
-                    throw new ArgumentException(CSharpWorkspaceResources.Only_attributes_constructor_initializers_expressions_or_statements_can_be_made_explicit, nameof(node));
+                    throw new ArgumentException(
+                        CSharpWorkspaceResources.Only_attributes_constructor_initializers_expressions_or_statements_can_be_made_explicit,
+                        nameof(node)
+                    );
                 }
             }
         }
 
-        public override SyntaxToken Expand(SyntaxToken token, SemanticModel semanticModel, Func<SyntaxNode, bool> expandInsideNode, CancellationToken cancellationToken)
+        public override SyntaxToken Expand(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            Func<SyntaxNode, bool> expandInsideNode,
+            CancellationToken cancellationToken
+        )
         {
             using (Logger.LogBlock(FunctionId.Simplifier_ExpandToken, cancellationToken))
             {
-                var rewriter = new Expander(semanticModel, expandInsideNode, false, cancellationToken);
+                var rewriter = new Expander(
+                    semanticModel,
+                    expandInsideNode,
+                    false,
+                    cancellationToken
+                );
 
-                var rewrittenToken = TryEscapeIdentifierToken(rewriter.VisitToken(token), token.Parent).WithAdditionalAnnotations(Simplifier.Annotation);
-                if (TryAddLeadingElasticTriviaIfNecessary(rewrittenToken, token, out var rewrittenTokenWithElasticTrivia))
+                var rewrittenToken = TryEscapeIdentifierToken(
+                        rewriter.VisitToken(token),
+                        token.Parent
+                    )
+                    .WithAdditionalAnnotations(Simplifier.Annotation);
+                if (
+                    TryAddLeadingElasticTriviaIfNecessary(
+                        rewrittenToken,
+                        token,
+                        out var rewrittenTokenWithElasticTrivia
+                    )
+                )
                 {
                     return rewrittenTokenWithElasticTrivia;
                 }
@@ -86,7 +124,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             }
         }
 
-        public static SyntaxToken TryEscapeIdentifierToken(SyntaxToken syntaxToken, SyntaxNode parentOfToken)
+        public static SyntaxToken TryEscapeIdentifierToken(
+            SyntaxToken syntaxToken,
+            SyntaxNode parentOfToken
+        )
         {
             // do not escape an already escaped identifier
             if (syntaxToken.IsVerbatimIdentifier())
@@ -94,12 +135,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 return syntaxToken;
             }
 
-            if (SyntaxFacts.GetKeywordKind(syntaxToken.ValueText) == SyntaxKind.None && SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText) == SyntaxKind.None)
+            if (
+                SyntaxFacts.GetKeywordKind(syntaxToken.ValueText) == SyntaxKind.None
+                && SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText) == SyntaxKind.None
+            )
             {
                 return syntaxToken;
             }
 
-            if (SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText) == SyntaxKind.UnderscoreToken)
+            if (
+                SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText)
+                == SyntaxKind.UnderscoreToken
+            )
             {
                 return syntaxToken;
             }
@@ -112,35 +159,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             }
 
             // do not escape global in a namespace qualified name
-            if (parent.Kind() == SyntaxKind.AliasQualifiedName &&
-                syntaxToken.ValueText == "global")
+            if (parent.Kind() == SyntaxKind.AliasQualifiedName && syntaxToken.ValueText == "global")
             {
                 return syntaxToken;
             }
 
             // safe to escape identifier
             return syntaxToken.CopyAnnotationsTo(
-                SyntaxFactory.VerbatimIdentifier(
-                    syntaxToken.LeadingTrivia,
-                    syntaxToken.ToString(),
-                    syntaxToken.ValueText,
-                    syntaxToken.TrailingTrivia))
-                        .WithAdditionalAnnotations(Simplifier.Annotation);
+                    SyntaxFactory.VerbatimIdentifier(
+                        syntaxToken.LeadingTrivia,
+                        syntaxToken.ToString(),
+                        syntaxToken.ValueText,
+                        syntaxToken.TrailingTrivia
+                    )
+                )
+                .WithAdditionalAnnotations(Simplifier.Annotation);
         }
 
-        public static T AppendElasticTriviaIfNecessary<T>(T rewrittenNode, T originalNode) where T : SyntaxNode
+        public static T AppendElasticTriviaIfNecessary<T>(T rewrittenNode, T originalNode)
+            where T : SyntaxNode
         {
             var firstRewrittenToken = rewrittenNode.GetFirstToken(true, false, true, true);
             var firstOriginalToken = originalNode.GetFirstToken(true, false, true, true);
-            if (TryAddLeadingElasticTriviaIfNecessary(firstRewrittenToken, firstOriginalToken, out var rewrittenTokenWithLeadingElasticTrivia))
+            if (
+                TryAddLeadingElasticTriviaIfNecessary(
+                    firstRewrittenToken,
+                    firstOriginalToken,
+                    out var rewrittenTokenWithLeadingElasticTrivia
+                )
+            )
             {
-                return rewrittenNode.ReplaceToken(firstRewrittenToken, rewrittenTokenWithLeadingElasticTrivia);
+                return rewrittenNode.ReplaceToken(
+                    firstRewrittenToken,
+                    rewrittenTokenWithLeadingElasticTrivia
+                );
             }
 
             return rewrittenNode;
         }
 
-        private static bool TryAddLeadingElasticTriviaIfNecessary(SyntaxToken token, SyntaxToken originalToken, out SyntaxToken tokenWithLeadingWhitespace)
+        private static bool TryAddLeadingElasticTriviaIfNecessary(
+            SyntaxToken token,
+            SyntaxToken originalToken,
+            out SyntaxToken tokenWithLeadingWhitespace
+        )
         {
             tokenWithLeadingWhitespace = default;
 
@@ -156,27 +218,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 return false;
             }
 
-            tokenWithLeadingWhitespace = token.WithLeadingTrivia(SyntaxFactory.ElasticMarker).WithAdditionalAnnotations(Formatter.Annotation);
+            tokenWithLeadingWhitespace = token.WithLeadingTrivia(SyntaxFactory.ElasticMarker)
+                .WithAdditionalAnnotations(Formatter.Annotation);
             return true;
         }
 
-        protected override SemanticModel GetSpeculativeSemanticModel(ref SyntaxNode nodeToSpeculate, SemanticModel originalSemanticModel, SyntaxNode originalNode)
+        protected override SemanticModel GetSpeculativeSemanticModel(
+            ref SyntaxNode nodeToSpeculate,
+            SemanticModel originalSemanticModel,
+            SyntaxNode originalNode
+        )
         {
             var syntaxNodeToSpeculate = nodeToSpeculate;
             Contract.ThrowIfNull(syntaxNodeToSpeculate);
             Contract.ThrowIfFalse(SpeculationAnalyzer.CanSpeculateOnNode(nodeToSpeculate));
-            return SpeculationAnalyzer.CreateSpeculativeSemanticModelForNode(originalNode, syntaxNodeToSpeculate, originalSemanticModel);
+            return SpeculationAnalyzer.CreateSpeculativeSemanticModelForNode(
+                originalNode,
+                syntaxNodeToSpeculate,
+                originalSemanticModel
+            );
         }
 
-        protected override ImmutableArray<NodeOrTokenToReduce> GetNodesAndTokensToReduce(SyntaxNode root, Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans)
-            => NodesAndTokensToReduceComputer.Compute(root, isNodeOrTokenOutsideSimplifySpans);
+        protected override ImmutableArray<NodeOrTokenToReduce> GetNodesAndTokensToReduce(
+            SyntaxNode root,
+            Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans
+        ) => NodesAndTokensToReduceComputer.Compute(root, isNodeOrTokenOutsideSimplifySpans);
 
-        protected override bool CanNodeBeSimplifiedWithoutSpeculation(SyntaxNode node)
-            => false;
+        protected override bool CanNodeBeSimplifiedWithoutSpeculation(SyntaxNode node) => false;
 
         private const string s_CS8019_UnusedUsingDirective = "CS8019";
 
-        protected override void GetUnusedNamespaceImports(SemanticModel model, HashSet<SyntaxNode> namespaceImports, CancellationToken cancellationToken)
+        protected override void GetUnusedNamespaceImports(
+            SemanticModel model,
+            HashSet<SyntaxNode> namespaceImports,
+            CancellationToken cancellationToken
+        )
         {
             var root = model.SyntaxTree.GetRoot(cancellationToken);
             var diagnostics = model.GetDiagnostics(cancellationToken: cancellationToken);
@@ -218,8 +294,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 }
 
                 currentTuple = grandParent;
-            }
-            while (true);
+            } while (true);
         }
     }
 }

@@ -16,15 +16,15 @@ namespace Microsoft.AspNetCore.JsonPatch
             var patchDocument = new JsonPatchDocument();
 
             // Act
-            var exception = Assert.Throws<JsonPatchException>(() =>
-            {
-                patchDocument.Add("//NewInt", 1);
-            });
+            var exception = Assert.Throws<JsonPatchException>(
+                () =>
+                {
+                    patchDocument.Add("//NewInt", 1);
+                }
+            );
 
             // Assert
-            Assert.Equal(
-               "The provided string '//NewInt' is an invalid path.",
-                exception.Message);
+            Assert.Equal("The provided string '//NewInt' is an invalid path.", exception.Message);
         }
 
         [Fact]
@@ -34,15 +34,15 @@ namespace Microsoft.AspNetCore.JsonPatch
             var patchDocument = new JsonPatchDocument();
 
             // Act
-            var exception = Assert.Throws<JsonPatchException>(() =>
-            {
-                patchDocument.Add("NewInt//", 1);
-            });
+            var exception = Assert.Throws<JsonPatchException>(
+                () =>
+                {
+                    patchDocument.Add("NewInt//", 1);
+                }
+            );
 
             // Assert
-            Assert.Equal(
-               "The provided string 'NewInt//' is an invalid path.",
-                exception.Message);
+            Assert.Equal("The provided string 'NewInt//' is an invalid path.", exception.Message);
         }
 
         [Fact]
@@ -59,7 +59,9 @@ namespace Microsoft.AspNetCore.JsonPatch
             patchDocument.Copy("StringProperty", "AnotherStringProperty");
 
             var serialized = JsonConvert.SerializeObject(patchDocument);
-            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObject>>(serialized);
+            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObject>>(
+                serialized
+            );
 
             // Act
             deserialized.ApplyTo(targetObject);
@@ -119,7 +121,9 @@ namespace Microsoft.AspNetCore.JsonPatch
             var serialized = JsonConvert.SerializeObject(patchDocument);
 
             // Act
-            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObject>>(serialized);
+            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObject>>(
+                serialized
+            );
 
             // Assert
             Assert.IsType<JsonPatchDocument<SimpleObject>>(deserialized);
@@ -129,34 +133,46 @@ namespace Microsoft.AspNetCore.JsonPatch
         public void Deserialization_Fails_ForInvalidJsonPatchDocument()
         {
             // Arrange
-            var serialized = "{\"Operations\": [{ \"op\": \"replace\", \"path\": \"/title\", \"value\": \"New Title\"}]}";
+            var serialized =
+                "{\"Operations\": [{ \"op\": \"replace\", \"path\": \"/title\", \"value\": \"New Title\"}]}";
 
             // Act
-            var exception = Assert.Throws<JsonSerializationException>(() =>
-            {
-                var deserialized
-                    = JsonConvert.DeserializeObject<JsonPatchDocument>(serialized);
-            });
+            var exception = Assert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument>(serialized);
+                }
+            );
 
             // Assert
-            Assert.Equal("The JSON patch document was malformed and could not be parsed.", exception.Message);
+            Assert.Equal(
+                "The JSON patch document was malformed and could not be parsed.",
+                exception.Message
+            );
         }
 
         [Fact]
         public void Deserialization_Fails_ForInvalidTypedJsonPatchDocument()
         {
             // Arrange
-            var serialized = "{\"Operations\": [{ \"op\": \"replace\", \"path\": \"/title\", \"value\": \"New Title\"}]}";
+            var serialized =
+                "{\"Operations\": [{ \"op\": \"replace\", \"path\": \"/title\", \"value\": \"New Title\"}]}";
 
             // Act
-            var exception = Assert.Throws<JsonSerializationException>(() =>
-            {
-                var deserialized
-                    = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObject>>(serialized);
-            });
+            var exception = Assert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    var deserialized = JsonConvert.DeserializeObject<
+                        JsonPatchDocument<SimpleObject>
+                    >(serialized);
+                }
+            );
 
             // Assert
-            Assert.Equal("The JSON patch document was malformed and could not be parsed.", exception.Message);
+            Assert.Equal(
+                "The JSON patch document was malformed and could not be parsed.",
+                exception.Message
+            );
         }
     }
 }

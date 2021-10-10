@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid connectionId,
             bool async,
             bool logParameterValues,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime
+        )
             : base(
                 eventDefinition,
                 messageGenerator,
@@ -48,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 commandId,
                 connectionId,
                 async,
-                startTime)
+                startTime
+            )
         {
             Command = command;
             LogParameterValues = logParameterValues;

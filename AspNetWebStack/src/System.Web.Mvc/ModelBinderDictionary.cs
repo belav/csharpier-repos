@@ -10,14 +10,14 @@ namespace System.Web.Mvc
 {
     public class ModelBinderDictionary : IDictionary<Type, IModelBinder>
     {
-        private readonly Dictionary<Type, IModelBinder> _innerDictionary = new Dictionary<Type, IModelBinder>();
+        private readonly Dictionary<Type, IModelBinder> _innerDictionary = new Dictionary<
+            Type,
+            IModelBinder
+        >();
         private IModelBinder _defaultBinder;
         private ModelBinderProviderCollection _modelBinderProviders;
 
-        public ModelBinderDictionary()
-            : this(ModelBinderProviders.BinderProviders)
-        {
-        }
+        public ModelBinderDictionary() : this(ModelBinderProviders.BinderProviders) { }
 
         internal ModelBinderDictionary(ModelBinderProviderCollection modelBinderProviders)
         {
@@ -100,7 +100,10 @@ namespace System.Web.Mvc
 
         public IModelBinder GetBinder(Type modelType)
         {
-            return GetBinder(modelType, true /* fallbackToDefault */);
+            return GetBinder(
+                modelType,
+                true /* fallbackToDefault */
+            );
         }
 
         public virtual IModelBinder GetBinder(Type modelType, bool fallbackToDefault)
@@ -133,11 +136,19 @@ namespace System.Web.Mvc
             }
 
             // Function is called frequently, so ensure the error delegate is stateless
-            binder = ModelBinders.GetBinderFromAttributes(modelType, (Type errorModel) =>
+            binder = ModelBinders.GetBinderFromAttributes(
+                modelType,
+                (Type errorModel) =>
                 {
                     throw new InvalidOperationException(
-                        String.Format(CultureInfo.CurrentCulture, MvcResources.ModelBinderDictionary_MultipleAttributes, errorModel.FullName));
-                });
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.ModelBinderDictionary_MultipleAttributes,
+                            errorModel.FullName
+                        )
+                    );
+                }
+            );
 
             return binder ?? fallbackBinder;
         }
@@ -168,7 +179,6 @@ namespace System.Web.Mvc
         {
             return ((IEnumerable)_innerDictionary).GetEnumerator();
         }
-
         #endregion
     }
 }

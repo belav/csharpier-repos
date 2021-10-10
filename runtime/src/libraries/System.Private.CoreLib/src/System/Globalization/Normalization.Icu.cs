@@ -10,7 +10,10 @@ namespace System.Globalization
 {
     internal static partial class Normalization
     {
-        private static unsafe bool IcuIsNormalized(string strInput, NormalizationForm normalizationForm)
+        private static unsafe bool IcuIsNormalized(
+            string strInput,
+            NormalizationForm normalizationForm
+        )
         {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
@@ -20,18 +23,28 @@ namespace System.Globalization
             int ret;
             fixed (char* pInput = strInput)
             {
-                ret = Interop.Globalization.IsNormalized(normalizationForm, pInput, strInput.Length);
+                ret = Interop.Globalization.IsNormalized(
+                    normalizationForm,
+                    pInput,
+                    strInput.Length
+                );
             }
 
             if (ret == -1)
             {
-                throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex, nameof(strInput));
+                throw new ArgumentException(
+                    SR.Argument_InvalidCharSequenceNoIndex,
+                    nameof(strInput)
+                );
             }
 
             return ret == 1;
         }
 
-        private static unsafe string IcuNormalize(string strInput, NormalizationForm normalizationForm)
+        private static unsafe string IcuNormalize(
+            string strInput,
+            NormalizationForm normalizationForm
+        )
         {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
@@ -43,9 +56,10 @@ namespace System.Globalization
             {
                 const int StackallocThreshold = 512;
 
-                Span<char> buffer = strInput.Length <= StackallocThreshold
-                    ? stackalloc char[StackallocThreshold]
-                    : (toReturn = ArrayPool<char>.Shared.Rent(strInput.Length));
+                Span<char> buffer =
+                    strInput.Length <= StackallocThreshold
+                        ? stackalloc char[StackallocThreshold]
+                        : (toReturn = ArrayPool<char>.Shared.Rent(strInput.Length));
 
                 for (int attempt = 0; attempt < 2; attempt++)
                 {
@@ -53,20 +67,27 @@ namespace System.Globalization
                     fixed (char* pInput = strInput)
                     fixed (char* pDest = &MemoryMarshal.GetReference(buffer))
                     {
-                        realLen = Interop.Globalization.NormalizeString(normalizationForm, pInput, strInput.Length, pDest, buffer.Length);
+                        realLen = Interop.Globalization.NormalizeString(
+                            normalizationForm,
+                            pInput,
+                            strInput.Length,
+                            pDest,
+                            buffer.Length
+                        );
                     }
 
                     if (realLen == -1)
                     {
-                        throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex, nameof(strInput));
+                        throw new ArgumentException(
+                            SR.Argument_InvalidCharSequenceNoIndex,
+                            nameof(strInput)
+                        );
                     }
 
                     if (realLen <= buffer.Length)
                     {
                         ReadOnlySpan<char> result = buffer.Slice(0, realLen);
-                        return result.SequenceEqual(strInput)
-                            ? strInput
-                            : new string(result);
+                        return result.SequenceEqual(strInput) ? strInput : new string(result);
                     }
 
                     Debug.Assert(realLen > StackallocThreshold);
@@ -85,8 +106,12 @@ namespace System.Globalization
                     }
                 }
 
-                throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex, nameof(strInput));
+                throw new ArgumentException(
+                    SR.Argument_InvalidCharSequenceNoIndex,
+                    nameof(strInput)
+                );
             }
+
             finally
             {
                 if (toReturn != null)
@@ -100,22 +125,37 @@ namespace System.Globalization
         {
             Debug.Assert(strInput != null);
 
-
-            if (OperatingSystem.IsBrowser() && (normalizationForm == NormalizationForm.FormKC || normalizationForm == NormalizationForm.FormKD))
+            if (
+                OperatingSystem.IsBrowser()
+                && (
+                    normalizationForm == NormalizationForm.FormKC
+                    || normalizationForm == NormalizationForm.FormKD
+                )
+            )
             {
                 // Browser's ICU doesn't contain data needed for FormKC and FormKD
                 throw new PlatformNotSupportedException();
             }
 
-            if (normalizationForm != NormalizationForm.FormC && normalizationForm != NormalizationForm.FormD &&
-                normalizationForm != NormalizationForm.FormKC && normalizationForm != NormalizationForm.FormKD)
+            if (
+                normalizationForm != NormalizationForm.FormC
+                && normalizationForm != NormalizationForm.FormD
+                && normalizationForm != NormalizationForm.FormKC
+                && normalizationForm != NormalizationForm.FormKD
+            )
             {
-                throw new ArgumentException(SR.Argument_InvalidNormalizationForm, nameof(normalizationForm));
+                throw new ArgumentException(
+                    SR.Argument_InvalidNormalizationForm,
+                    nameof(normalizationForm)
+                );
             }
 
             if (HasInvalidUnicodeSequence(strInput))
             {
-                throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex, nameof(strInput));
+                throw new ArgumentException(
+                    SR.Argument_InvalidCharSequenceNoIndex,
+                    nameof(strInput)
+                );
             }
         }
 

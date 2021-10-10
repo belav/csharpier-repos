@@ -11,7 +11,9 @@ using Xunit;
 
 namespace AppHost.Bundle.Tests
 {
-    public class BundleLocalizedApp : BundleTestBase, IClassFixture<BundleLocalizedApp.SharedTestState>
+    public class BundleLocalizedApp
+        : BundleTestBase,
+          IClassFixture<BundleLocalizedApp.SharedTestState>
     {
         private SharedTestState sharedTestState;
 
@@ -38,8 +40,7 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("ನಮಸ್ಕಾರ! வணக்கம்! Hello!");
+                .And.HaveStdOutContaining("ನಮಸ್ಕಾರ! வணக்கம்! Hello!");
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable

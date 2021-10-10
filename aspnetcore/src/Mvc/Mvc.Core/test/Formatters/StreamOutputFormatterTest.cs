@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 type,
-                new MemoryStream())
-            {
+                new MemoryStream()
+            ) {
                 ContentType = contentTypeHeader,
             };
 
@@ -39,18 +39,22 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [Theory]
         [InlineData(typeof(SimplePOCO), "text/plain")]
         [InlineData(typeof(SimplePOCO), null)]
-        public void CanWriteResult_OnlyActsOnStreams_IgnoringContentType(Type type, string contentType)
+        public void CanWriteResult_OnlyActsOnStreams_IgnoringContentType(
+            Type type,
+            string contentType
+        )
         {
             // Arrange
             var formatter = new StreamOutputFormatter();
-            var contentTypeHeader = contentType == null ? new StringSegment() : new StringSegment(contentType);
+            var contentTypeHeader =
+                contentType == null ? new StringSegment() : new StringSegment(contentType);
 
             var context = new OutputFormatterWriteContext(
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 type,
-                new SimplePOCO())
-            {
+                new SimplePOCO()
+            ) {
                 ContentType = contentTypeHeader,
             };
 
@@ -75,7 +79,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 type,
-                @object);
+                @object
+            );
 
             // Act
             var result = formatter.CanWriteResult(context);

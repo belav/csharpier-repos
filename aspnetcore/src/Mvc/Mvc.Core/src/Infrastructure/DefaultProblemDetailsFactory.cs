@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             string? title = null,
             string? type = null,
             string? detail = null,
-            string? instance = null)
+            string? instance = null
+        )
         {
             statusCode ??= 500;
 
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             string? title = null,
             string? type = null,
             string? detail = null,
-            string? instance = null)
+            string? instance = null
+        )
         {
             if (modelStateDictionary == null)
             {
@@ -79,7 +81,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             return problemDetails;
         }
 
-        private void ApplyProblemDetailsDefaults(HttpContext httpContext, ProblemDetails problemDetails, int statusCode)
+        private void ApplyProblemDetailsDefaults(
+            HttpContext httpContext,
+            ProblemDetails problemDetails,
+            int statusCode
+        )
         {
             problemDetails.Status ??= statusCode;
 

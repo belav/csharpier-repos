@@ -34,7 +34,9 @@ namespace Microsoft.DotNet.Build.Tasks
             var sharedFxDir = new DirectoryInfo(SharedFrameworkDirectory);
             if (!sharedFxDir.Exists)
             {
-                Log.LogError($"{nameof(SharedFrameworkDirectory)} '{SharedFrameworkDirectory}' does not exist.");
+                Log.LogError(
+                    $"{nameof(SharedFrameworkDirectory)} '{SharedFrameworkDirectory}' does not exist."
+                );
                 return false;
             }
 
@@ -60,15 +62,28 @@ namespace Microsoft.DotNet.Build.Tasks
             var runtimeLibraries = new[]
             {
                 new RuntimeLibrary(
-                    type:"package",
+                    type: "package",
                     name: sharedFxName,
                     version: sharedFxVersion,
                     hash: "hash",
-                    runtimeAssemblyGroups: new[] { new RuntimeAssetGroup(string.Empty, managedFileNames.Select(f => $"runtimes/{rid}/lib/{tfm}/{f}")) },
-                    nativeLibraryGroups: new[] { new RuntimeAssetGroup(string.Empty, nativeFileNames.Select(f => $"runtimes/{rid}/native/{f}")) },
+                    runtimeAssemblyGroups: new[]
+                    {
+                        new RuntimeAssetGroup(
+                            string.Empty,
+                            managedFileNames.Select(f => $"runtimes/{rid}/lib/{tfm}/{f}")
+                        )
+                    },
+                    nativeLibraryGroups: new[]
+                    {
+                        new RuntimeAssetGroup(
+                            string.Empty,
+                            nativeFileNames.Select(f => $"runtimes/{rid}/native/{f}")
+                        )
+                    },
                     resourceAssemblies: Enumerable.Empty<ResourceAssembly>(),
                     dependencies: Enumerable.Empty<Dependency>(),
-                    serviceable: true)
+                    serviceable: true
+                )
             };
 
             var targetInfo = new TargetInfo(fullTfm, rid, "runtimeSignature", isPortable: false);
@@ -80,9 +95,14 @@ namespace Microsoft.DotNet.Build.Tasks
                 CompilationOptions.Default,
                 Enumerable.Empty<CompilationLibrary>(),
                 runtimeLibraries,
-                runtimeFallbacks);
+                runtimeFallbacks
+            );
 
-            using (var depsFileStream = File.Create(Path.Combine(SharedFrameworkDirectory, $"{sharedFxName}.deps.json")))
+            using (
+                var depsFileStream = File.Create(
+                    Path.Combine(SharedFrameworkDirectory, $"{sharedFxName}.deps.json")
+                )
+            )
             {
                 new DependencyContextWriter().Write(dependencyContext, depsFileStream);
             }
@@ -100,19 +120,24 @@ namespace Microsoft.DotNet.Build.Tasks
                     result = peReader.HasMetadata && peReader.GetMetadataReader().IsAssembly;
                 }
             }
-            catch (BadImageFormatException)
-            { }
+            catch (BadImageFormatException) { }
 
             return result;
         }
 
-        private static IEnumerable<RuntimeFallbacks> GetRuntimeFallbacks(string[] runtimeGraphFiles, string runtime)
+        private static IEnumerable<RuntimeFallbacks> GetRuntimeFallbacks(
+            string[] runtimeGraphFiles,
+            string runtime
+        )
         {
             RuntimeGraph runtimeGraph = RuntimeGraph.Empty;
 
             foreach (string runtimeGraphFile in runtimeGraphFiles)
             {
-                runtimeGraph = RuntimeGraph.Merge(runtimeGraph, JsonRuntimeFormat.ReadRuntimeGraph(runtimeGraphFile));
+                runtimeGraph = RuntimeGraph.Merge(
+                    runtimeGraph,
+                    JsonRuntimeFormat.ReadRuntimeGraph(runtimeGraphFile)
+                );
             }
 
             foreach (string rid in runtimeGraph.Runtimes.Select(p => p.Key))
@@ -126,6 +151,5 @@ namespace Microsoft.DotNet.Build.Tasks
                 }
             }
         }
-
     }
 }

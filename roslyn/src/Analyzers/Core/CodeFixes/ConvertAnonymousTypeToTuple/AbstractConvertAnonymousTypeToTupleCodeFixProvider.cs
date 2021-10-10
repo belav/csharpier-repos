@@ -23,13 +23,15 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
     internal abstract class AbstractConvertAnonymousTypeToTupleCodeFixProvider<
         TExpressionSyntax,
         TTupleExpressionSyntax,
-        TAnonymousObjectCreationExpressionSyntax>
-        : SyntaxEditorBasedCodeFixProvider
+        TAnonymousObjectCreationExpressionSyntax
+    > : SyntaxEditorBasedCodeFixProvider
         where TExpressionSyntax : SyntaxNode
         where TTupleExpressionSyntax : TExpressionSyntax
         where TAnonymousObjectCreationExpressionSyntax : TExpressionSyntax
     {
-        protected abstract TTupleExpressionSyntax ConvertToTuple(TAnonymousObjectCreationExpressionSyntax anonCreation);
+        protected abstract TTupleExpressionSyntax ConvertToTuple(
+            TAnonymousObjectCreationExpressionSyntax anonCreation
+        );
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.ConvertAnonymousTypeToTupleDiagnosticId);
@@ -39,16 +41,32 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             context.RegisterCodeFix(
-                new MyCodeAction(c => FixAllWithEditorAsync(context.Document,
-                    e => FixInCurrentMemberAsync(context.Document, e, context.Diagnostics[0], c), c)),
-                context.Diagnostics);
+                new MyCodeAction(
+                    c =>
+                        FixAllWithEditorAsync(
+                            context.Document,
+                            e =>
+                                FixInCurrentMemberAsync(
+                                    context.Document,
+                                    e,
+                                    context.Diagnostics[0],
+                                    c
+                                ),
+                            c
+                        )
+                ),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         private async Task FixInCurrentMemberAsync(
-            Document document, SyntaxEditor editor,
-            Diagnostic diagnostic, CancellationToken cancellationToken)
+            Document document,
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             // For the standard invocation of the code-fix, we want to fixup all creations of the
             // "same" anonymous type within the containing method.  We define same-ness as meaning
@@ -62,29 +80,40 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
             var creationNode = TryGetCreationNode(diagnostic, cancellationToken);
             if (creationNode == null)
             {
-                Debug.Fail("We should always be able to find the anonymous creation we were invoked from.");
+                Debug.Fail(
+                    "We should always be able to find the anonymous creation we were invoked from."
+                );
                 return;
             }
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var anonymousType = semanticModel.GetTypeInfo(creationNode, cancellationToken).Type;
             if (anonymousType == null)
             {
-                Debug.Fail("We should always be able to get an anonymous type for any anonymous creation node.");
+                Debug.Fail(
+                    "We should always be able to get an anonymous type for any anonymous creation node."
+                );
                 return;
             }
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
-            var containingMember = creationNode.FirstAncestorOrSelf<SyntaxNode, ISyntaxFactsService>((node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node), syntaxFacts) ?? creationNode;
+            var containingMember =
+                creationNode.FirstAncestorOrSelf<SyntaxNode, ISyntaxFactsService>(
+                    (node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node),
+                    syntaxFacts
+                ) ?? creationNode;
 
             var childCreationNodes = containingMember.DescendantNodesAndSelf()
-                                                     .OfType<TAnonymousObjectCreationExpressionSyntax>();
+                .OfType<TAnonymousObjectCreationExpressionSyntax>();
             foreach (var childCreation in childCreationNodes)
             {
                 var childType = semanticModel.GetTypeInfo(childCreation, cancellationToken).Type;
                 if (childType == null)
                 {
-                    Debug.Fail("We should always be able to get an anonymous type for any anonymous creation node.");
+                    Debug.Fail(
+                        "We should always be able to get an anonymous type for any anonymous creation node."
+                    );
                     continue;
                 }
 
@@ -96,8 +125,11 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -107,7 +139,9 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
                 var node = TryGetCreationNode(diagnostic, cancellationToken);
                 if (node == null)
                 {
-                    Debug.Fail("We should always be able to find the anonymous creation we were invoked from.");
+                    Debug.Fail(
+                        "We should always be able to find the anonymous creation we were invoked from."
+                    );
                     continue;
                 }
 
@@ -117,9 +151,13 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
             return Task.CompletedTask;
         }
 
-        private void ReplaceWithTuple(SyntaxEditor editor, TAnonymousObjectCreationExpressionSyntax node)
-            => editor.ReplaceNode(
-                node, (current, _) =>
+        private void ReplaceWithTuple(
+            SyntaxEditor editor,
+            TAnonymousObjectCreationExpressionSyntax node
+        ) =>
+            editor.ReplaceNode(
+                node,
+                (current, _) =>
                 {
                     // Use the callback form as anonymous types may be nested, and we want to
                     // properly replace them even in that case.
@@ -128,18 +166,26 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
                         return current;
                     }
 
-                    return ConvertToTuple(anonCreation).WithAdditionalAnnotations(Formatter.Annotation);
-                });
+                    return ConvertToTuple(anonCreation)
+                        .WithAdditionalAnnotations(Formatter.Annotation);
+                }
+            );
 
-        private static TAnonymousObjectCreationExpressionSyntax TryGetCreationNode(Diagnostic diagnostic, CancellationToken cancellationToken)
-            => diagnostic.Location.FindToken(cancellationToken).Parent as TAnonymousObjectCreationExpressionSyntax;
+        private static TAnonymousObjectCreationExpressionSyntax TryGetCreationNode(
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        ) =>
+            diagnostic.Location.FindToken(cancellationToken).Parent
+            as TAnonymousObjectCreationExpressionSyntax;
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Convert_to_tuple, createChangedDocument, AnalyzersResources.Convert_to_tuple)
-            {
-            }
+                : base(
+                    AnalyzersResources.Convert_to_tuple,
+                    createChangedDocument,
+                    AnalyzersResources.Convert_to_tuple
+                ) { }
         }
     }
 }

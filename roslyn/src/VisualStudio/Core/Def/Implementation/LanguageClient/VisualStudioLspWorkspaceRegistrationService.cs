@@ -21,9 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioLspWorkspaceRegistrationService()
-        {
-        }
+        public VisualStudioLspWorkspaceRegistrationService() { }
 
         public ImmutableArray<Workspace> GetAllRegistrations() => _registrations;
 
@@ -31,13 +29,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         {
             lock (_gate)
             {
-                Logger.Log(FunctionId.RegisterWorkspace, KeyValueLogMessage.Create(LogType.Trace, m =>
-                {
-                    m["WorkspaceKind"] = workspace.Kind;
-                    m["WorkspaceCanOpenDocuments"] = workspace.CanOpenDocuments;
-                    m["WorkspaceCanChangeActiveContextDocument"] = workspace.CanChangeActiveContextDocument;
-                    m["WorkspacePartialSemanticsEnabled"] = workspace.PartialSemanticsEnabled;
-                }));
+                Logger.Log(
+                    FunctionId.RegisterWorkspace,
+                    KeyValueLogMessage.Create(
+                        LogType.Trace,
+                        m =>
+                        {
+                            m["WorkspaceKind"] = workspace.Kind;
+                            m["WorkspaceCanOpenDocuments"] = workspace.CanOpenDocuments;
+                            m["WorkspaceCanChangeActiveContextDocument"] =
+                                workspace.CanChangeActiveContextDocument;
+                            m["WorkspacePartialSemanticsEnabled"] =
+                                workspace.PartialSemanticsEnabled;
+                        }
+                    )
+                );
 
                 _registrations = _registrations.Add(workspace);
             }

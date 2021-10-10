@@ -19,14 +19,17 @@ namespace Microsoft.AspNetCore.DataProtection
     /// A type which allows reading policy from the system registry.
     /// </summary>
     [SupportedOSPlatform("windows")]
-    internal sealed class RegistryPolicyResolver: IRegistryPolicyResolver
+    internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
     {
         private readonly Func<RegistryKey?> _getPolicyRegKey;
         private readonly IActivator _activator;
 
         public RegistryPolicyResolver(IActivator activator)
         {
-            _getPolicyRegKey = () => Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\DotNetPackages\Microsoft.AspNetCore.DataProtection");
+            _getPolicyRegKey = () =>
+                Registry.LocalMachine.OpenSubKey(
+                    @"SOFTWARE\Microsoft\DotNetPackages\Microsoft.AspNetCore.DataProtection"
+                );
             _activator = activator;
         }
 
@@ -48,15 +51,30 @@ namespace Microsoft.AspNetCore.DataProtection
                     {
                         if (propInfo.PropertyType == typeof(string))
                         {
-                            propInfo.SetValue(options, Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture));
+                            propInfo.SetValue(
+                                options,
+                                Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)
+                            );
                         }
                         else if (propInfo.PropertyType == typeof(int))
                         {
-                            propInfo.SetValue(options, Convert.ToInt32(valueFromRegistry, CultureInfo.InvariantCulture));
+                            propInfo.SetValue(
+                                options,
+                                Convert.ToInt32(valueFromRegistry, CultureInfo.InvariantCulture)
+                            );
                         }
                         else if (propInfo.PropertyType == typeof(Type))
                         {
-                            propInfo.SetValue(options, Type.GetType(Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!, throwOnError: true));
+                            propInfo.SetValue(
+                                options,
+                                Type.GetType(
+                                    Convert.ToString(
+                                        valueFromRegistry,
+                                        CultureInfo.InvariantCulture
+                                    )!,
+                                    throwOnError: true
+                                )
+                            );
                         }
                         else
                         {
@@ -81,7 +99,9 @@ namespace Microsoft.AspNetCore.DataProtection
                     var candidate = sinkFromRegistry.Trim();
                     if (!String.IsNullOrEmpty(candidate))
                     {
-                        typeof(IKeyEscrowSink).AssertIsAssignableFrom(Type.GetType(candidate, throwOnError: true)!);
+                        typeof(IKeyEscrowSink).AssertIsAssignableFrom(
+                            Type.GetType(candidate, throwOnError: true)!
+                        );
                         sinks.Add(candidate);
                     }
                 }
@@ -134,7 +154,8 @@ namespace Microsoft.AspNetCore.DataProtection
 
             var defaultKeyLifetime = (int?)policyRegKey.GetValue("DefaultKeyLifetime");
 
-            var keyEscrowSinks = ReadKeyEscrowSinks(policyRegKey).Select(item => _activator.CreateInstance<IKeyEscrowSink>(item));
+            var keyEscrowSinks = ReadKeyEscrowSinks(policyRegKey)
+                .Select(item => _activator.CreateInstance<IKeyEscrowSink>(item));
 
             return new RegistryPolicy(configuration, keyEscrowSinks, defaultKeyLifetime);
         }

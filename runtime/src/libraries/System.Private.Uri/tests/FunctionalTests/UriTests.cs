@@ -16,24 +16,86 @@ namespace System.PrivateUri.Tests
             {
                 if (PlatformDetection.IsWindows)
                 {
-                    yield return new object[] { @"file:///path1\path2/path3\path4", @"/path1/path2/path3/path4", @"/path1/path2/path3/path4", @"file:///path1/path2/path3/path4", "" };
-                    yield return new object[] { @"file:///path1%5Cpath2\path3", @"/path1/path2/path3", @"/path1/path2/path3", @"file:///path1/path2/path3", ""};
-                    yield return new object[] { @"file://localhost/path1\path2/path3\path4\", @"/path1/path2/path3/path4/", @"\\localhost\path1\path2\path3\path4\", @"file://localhost/path1/path2/path3/path4/", "localhost"};
-                    yield return new object[] { @"file://randomhost/path1%5Cpath2\path3", @"/path1/path2/path3", @"\\randomhost\path1\path2\path3", @"file://randomhost/path1/path2/path3", "randomhost"};
+                    yield return new object[]
+                    {
+                        @"file:///path1\path2/path3\path4",
+                        @"/path1/path2/path3/path4",
+                        @"/path1/path2/path3/path4",
+                        @"file:///path1/path2/path3/path4",
+                        ""
+                    };
+                    yield return new object[]
+                    {
+                        @"file:///path1%5Cpath2\path3",
+                        @"/path1/path2/path3",
+                        @"/path1/path2/path3",
+                        @"file:///path1/path2/path3",
+                        ""
+                    };
+                    yield return new object[]
+                    {
+                        @"file://localhost/path1\path2/path3\path4\",
+                        @"/path1/path2/path3/path4/",
+                        @"\\localhost\path1\path2\path3\path4\",
+                        @"file://localhost/path1/path2/path3/path4/",
+                        "localhost"
+                    };
+                    yield return new object[]
+                    {
+                        @"file://randomhost/path1%5Cpath2\path3",
+                        @"/path1/path2/path3",
+                        @"\\randomhost\path1\path2\path3",
+                        @"file://randomhost/path1/path2/path3",
+                        "randomhost"
+                    };
                 }
                 else
                 {
-                    yield return new object[] { @"file:///path1\path2/path3\path4", @"/path1%5Cpath2/path3%5Cpath4", @"/path1\path2/path3\path4", @"file:///path1%5Cpath2/path3%5Cpath4", "" };
-                    yield return new object[] { @"file:///path1%5Cpath2\path3", @"/path1%5Cpath2%5Cpath3", @"/path1\path2\path3", @"file:///path1%5Cpath2%5Cpath3", ""};
-                    yield return new object[] { @"file://localhost/path1\path2/path3\path4\", @"/path1%5Cpath2/path3%5Cpath4%5C", @"\\localhost\path1\path2\path3\path4\", @"file://localhost/path1%5Cpath2/path3%5Cpath4%5C", "localhost"};
-                    yield return new object[] { @"file://randomhost/path1%5Cpath2\path3", @"/path1%5Cpath2%5Cpath3", @"\\randomhost\path1\path2\path3", @"file://randomhost/path1%5Cpath2%5Cpath3", "randomhost"};
+                    yield return new object[]
+                    {
+                        @"file:///path1\path2/path3\path4",
+                        @"/path1%5Cpath2/path3%5Cpath4",
+                        @"/path1\path2/path3\path4",
+                        @"file:///path1%5Cpath2/path3%5Cpath4",
+                        ""
+                    };
+                    yield return new object[]
+                    {
+                        @"file:///path1%5Cpath2\path3",
+                        @"/path1%5Cpath2%5Cpath3",
+                        @"/path1\path2\path3",
+                        @"file:///path1%5Cpath2%5Cpath3",
+                        ""
+                    };
+                    yield return new object[]
+                    {
+                        @"file://localhost/path1\path2/path3\path4\",
+                        @"/path1%5Cpath2/path3%5Cpath4%5C",
+                        @"\\localhost\path1\path2\path3\path4\",
+                        @"file://localhost/path1%5Cpath2/path3%5Cpath4%5C",
+                        "localhost"
+                    };
+                    yield return new object[]
+                    {
+                        @"file://randomhost/path1%5Cpath2\path3",
+                        @"/path1%5Cpath2%5Cpath3",
+                        @"\\randomhost\path1\path2\path3",
+                        @"file://randomhost/path1%5Cpath2%5Cpath3",
+                        "randomhost"
+                    };
                 }
             }
         }
 
         [Theory]
         [MemberData(nameof(Uri_TestData))]
-        public static void TestCtor_BackwardSlashInPath(string uri, string expectedAbsolutePath, string expectedLocalPath, string expectedAbsoluteUri, string expectedHost)
+        public static void TestCtor_BackwardSlashInPath(
+            string uri,
+            string expectedAbsolutePath,
+            string expectedLocalPath,
+            string expectedAbsoluteUri,
+            string expectedHost
+        )
         {
             Uri actualUri = new Uri(uri);
             Assert.Equal(expectedAbsolutePath, actualUri.AbsolutePath);
@@ -130,7 +192,10 @@ namespace System.PrivateUri.Tests
 
             Assert.Equal(@"/catalog/shownew.htm", uri.LocalPath);
 
-            Assert.Equal(@"http://www.contoso.com/catalog/shownew.htm?date=today", uri.OriginalString);
+            Assert.Equal(
+                @"http://www.contoso.com/catalog/shownew.htm?date=today",
+                uri.OriginalString
+            );
 
             Assert.Equal(@"/catalog/shownew.htm?date=today", uri.PathAndQuery);
 
@@ -238,7 +303,10 @@ namespace System.PrivateUri.Tests
 
             Assert.Equal(@"/catalog/shownew.htm", uri.LocalPath);
 
-            Assert.Equal(@"http://www.contoso.com/catalog/shownew.htm?date=today", uri.OriginalString);
+            Assert.Equal(
+                @"http://www.contoso.com/catalog/shownew.htm?date=today",
+                uri.OriginalString
+            );
 
             Assert.Equal(@"/catalog/shownew.htm?date=today", uri.PathAndQuery);
 
@@ -262,7 +330,13 @@ namespace System.PrivateUri.Tests
         [Fact]
         public static void TestTryCreate_String_UriKind()
         {
-            Assert.True(Uri.TryCreate("http://www.contoso.com/catalog/shownew.htm?date=today", UriKind.Absolute, out Uri uri));
+            Assert.True(
+                Uri.TryCreate(
+                    "http://www.contoso.com/catalog/shownew.htm?date=today",
+                    UriKind.Absolute,
+                    out Uri uri
+                )
+            );
 
             Assert.Equal(@"http://www.contoso.com/catalog/shownew.htm?date=today", uri.ToString());
 
@@ -292,7 +366,10 @@ namespace System.PrivateUri.Tests
 
             Assert.Equal(@"/catalog/shownew.htm", uri.LocalPath);
 
-            Assert.Equal(@"http://www.contoso.com/catalog/shownew.htm?date=today", uri.OriginalString);
+            Assert.Equal(
+                @"http://www.contoso.com/catalog/shownew.htm?date=today",
+                uri.OriginalString
+            );
 
             Assert.Equal(@"/catalog/shownew.htm?date=today", uri.PathAndQuery);
 
@@ -348,7 +425,10 @@ namespace System.PrivateUri.Tests
 
             Assert.Equal(@"/catalog/shownew.htm", uri.LocalPath);
 
-            Assert.Equal(@"http://www.contoso.com/catalog/shownew.htm?date=today", uri.OriginalString);
+            Assert.Equal(
+                @"http://www.contoso.com/catalog/shownew.htm?date=today",
+                uri.OriginalString
+            );
 
             Assert.Equal(@"/catalog/shownew.htm?date=today", uri.PathAndQuery);
 
@@ -405,7 +485,10 @@ namespace System.PrivateUri.Tests
 
             Assert.Equal(@"/catalog/shownew.htm", uri.LocalPath);
 
-            Assert.Equal(@"http://www.contoso.com/catalog/shownew.htm?date=today", uri.OriginalString);
+            Assert.Equal(
+                @"http://www.contoso.com/catalog/shownew.htm?date=today",
+                uri.OriginalString
+            );
 
             Assert.Equal(@"/catalog/shownew.htm?date=today", uri.PathAndQuery);
 
@@ -545,13 +628,31 @@ namespace System.PrivateUri.Tests
 
             int i;
 
-            i = Uri.Compare(uri1, uri2, UriComponents.AbsoluteUri, UriFormat.UriEscaped, StringComparison.CurrentCulture);
+            i = Uri.Compare(
+                uri1,
+                uri2,
+                UriComponents.AbsoluteUri,
+                UriFormat.UriEscaped,
+                StringComparison.CurrentCulture
+            );
             Assert.Equal(i, -1);
 
-            i = Uri.Compare(uri1, uri2, UriComponents.Query, UriFormat.UriEscaped, StringComparison.CurrentCulture);
+            i = Uri.Compare(
+                uri1,
+                uri2,
+                UriComponents.Query,
+                UriFormat.UriEscaped,
+                StringComparison.CurrentCulture
+            );
             Assert.Equal(0, i);
 
-            i = Uri.Compare(uri1, uri2, UriComponents.Query | UriComponents.Fragment, UriFormat.UriEscaped, StringComparison.CurrentCulture);
+            i = Uri.Compare(
+                uri1,
+                uri2,
+                UriComponents.Query | UriComponents.Fragment,
+                UriFormat.UriEscaped,
+                StringComparison.CurrentCulture
+            );
             Assert.Equal(i, -1);
 
             Assert.False(uri1.Equals(uri2));
@@ -609,7 +710,10 @@ namespace System.PrivateUri.Tests
         [Fact]
         public static void TestCasingWhenCombiningAbsoluteAndRelativeUris()
         {
-            Uri u = new Uri(new Uri("http://example.com/", UriKind.Absolute), new Uri("C(B:G", UriKind.Relative));
+            Uri u = new Uri(
+                new Uri("http://example.com/", UriKind.Absolute),
+                new Uri("C(B:G", UriKind.Relative)
+            );
             Assert.Equal("http://example.com/C(B:G", u.ToString());
         }
 
@@ -697,7 +801,9 @@ namespace System.PrivateUri.Tests
         [InlineData("10000000000")]
         public static void Uri_InvalidPort_ThrowsUriFormatException(string portString)
         {
-            Assert.Throws<UriFormatException>(() => new Uri($"http://www.contoso.com:{portString}"));
+            Assert.Throws<UriFormatException>(
+                () => new Uri($"http://www.contoso.com:{portString}")
+            );
         }
 
         [Fact]
@@ -715,7 +821,11 @@ namespace System.PrivateUri.Tests
             // Tests that internal Uri fields were properly reset during a Combine operation
             // Otherwise, the wrong Uri string would be used if the relative Uri contains non-ascii characters
             // This will only affect parsers without the IriParsing flag - only custom parsers
-            UriParser.Register(new GenericUriParser(GenericUriParserOptions.GenericAuthority), "combine-scheme", -1);
+            UriParser.Register(
+                new GenericUriParser(GenericUriParserOptions.GenericAuthority),
+                "combine-scheme",
+                -1
+            );
 
             const string BaseUriString = "combine-scheme://foo";
             const string RelativeUriString = "/relative/uri/with/non/ascii/\u00FC";
@@ -761,14 +871,17 @@ namespace System.PrivateUri.Tests
             var enteredLockMre = new ManualResetEvent(false);
             var finishedParsingMre = new ManualResetEvent(false);
 
-            Task.Factory.StartNew(() =>
-            {
-                lock (uriString)
+            Task.Factory.StartNew(
+                () =>
                 {
-                    enteredLockMre.Set();
-                    timedOut = !finishedParsingMre.WaitOne(TimeSpan.FromSeconds(10));
-                }
-            }, TaskCreationOptions.LongRunning);
+                    lock (uriString)
+                    {
+                        enteredLockMre.Set();
+                        timedOut = !finishedParsingMre.WaitOne(TimeSpan.FromSeconds(10));
+                    }
+                },
+                TaskCreationOptions.LongRunning
+            );
 
             enteredLockMre.WaitOne();
             int port = new Uri(uriString).Port;
@@ -784,45 +897,177 @@ namespace System.PrivateUri.Tests
             if (PlatformDetection.IsNotWindows)
             {
                 // Unix absolute file path
-                yield return new object[] { "/\u00FCri/", "file:///\u00FCri/", "/%C3%BCri/", "file:///%C3%BCri/", "/\u00FCri/" };
-                yield return new object[] { "/a/b\uD83D\uDE1F/Foo.cs", "file:///a/b\uD83D\uDE1F/Foo.cs", "/a/b%F0%9F%98%9F/Foo.cs", "file:///a/b%F0%9F%98%9F/Foo.cs", "/a/b\uD83D\uDE1F/Foo.cs" };
+                yield return new object[]
+                {
+                    "/\u00FCri/",
+                    "file:///\u00FCri/",
+                    "/%C3%BCri/",
+                    "file:///%C3%BCri/",
+                    "/\u00FCri/"
+                };
+                yield return new object[]
+                {
+                    "/a/b\uD83D\uDE1F/Foo.cs",
+                    "file:///a/b\uD83D\uDE1F/Foo.cs",
+                    "/a/b%F0%9F%98%9F/Foo.cs",
+                    "file:///a/b%F0%9F%98%9F/Foo.cs",
+                    "/a/b\uD83D\uDE1F/Foo.cs"
+                };
             }
 
             // Absolute fie path
-            yield return new object[] { "file:///\u00FCri/", "file:///\u00FCri/", "/%C3%BCri/", "file:///%C3%BCri/", "/\u00FCri/" };
-            yield return new object[] { "file:///a/b\uD83D\uDE1F/Foo.cs", "file:///a/b\uD83D\uDE1F/Foo.cs", "/a/b%F0%9F%98%9F/Foo.cs", "file:///a/b%F0%9F%98%9F/Foo.cs", "/a/b\uD83D\uDE1F/Foo.cs" };
+            yield return new object[]
+            {
+                "file:///\u00FCri/",
+                "file:///\u00FCri/",
+                "/%C3%BCri/",
+                "file:///%C3%BCri/",
+                "/\u00FCri/"
+            };
+            yield return new object[]
+            {
+                "file:///a/b\uD83D\uDE1F/Foo.cs",
+                "file:///a/b\uD83D\uDE1F/Foo.cs",
+                "/a/b%F0%9F%98%9F/Foo.cs",
+                "file:///a/b%F0%9F%98%9F/Foo.cs",
+                "/a/b\uD83D\uDE1F/Foo.cs"
+            };
 
             // DOS
-            yield return new object[] { "file://C:/\u00FCri/", "file:///C:/\u00FCri/", "C:/%C3%BCri/", "file:///C:/%C3%BCri/", "C:\\\u00FCri\\" };
-            yield return new object[] { "file:///C:/\u00FCri/", "file:///C:/\u00FCri/", "C:/%C3%BCri/", "file:///C:/%C3%BCri/", "C:\\\u00FCri\\" };
-            yield return new object[] { "C:/\u00FCri/", "file:///C:/\u00FCri/", "C:/%C3%BCri/", "file:///C:/%C3%BCri/", "C:\\\u00FCri\\" };
+            yield return new object[]
+            {
+                "file://C:/\u00FCri/",
+                "file:///C:/\u00FCri/",
+                "C:/%C3%BCri/",
+                "file:///C:/%C3%BCri/",
+                "C:\\\u00FCri\\"
+            };
+            yield return new object[]
+            {
+                "file:///C:/\u00FCri/",
+                "file:///C:/\u00FCri/",
+                "C:/%C3%BCri/",
+                "file:///C:/%C3%BCri/",
+                "C:\\\u00FCri\\"
+            };
+            yield return new object[]
+            {
+                "C:/\u00FCri/",
+                "file:///C:/\u00FCri/",
+                "C:/%C3%BCri/",
+                "file:///C:/%C3%BCri/",
+                "C:\\\u00FCri\\"
+            };
 
             // UNC
-            yield return new object[] { "\\\\\u00FCri/", "file://\u00FCri/", "/", "file://\u00FCri/", "\\\\\u00FCri\\" };
-            yield return new object[] { "file://\u00FCri/", "file://\u00FCri/", "/", "file://\u00FCri/", "\\\\\u00FCri\\" };
+            yield return new object[]
+            {
+                "\\\\\u00FCri/",
+                "file://\u00FCri/",
+                "/",
+                "file://\u00FCri/",
+                "\\\\\u00FCri\\"
+            };
+            yield return new object[]
+            {
+                "file://\u00FCri/",
+                "file://\u00FCri/",
+                "/",
+                "file://\u00FCri/",
+                "\\\\\u00FCri\\"
+            };
 
             // ? and # handling
             if (PlatformDetection.IsWindows)
             {
-                yield return new object[] { "file:///a/?b/c\u00FC/", "file:///a/?b/c\u00FC/", "/a/", "file:///a/?b/c%C3%BC/", "/a/" };
-                yield return new object[] { "file:///a/#b/c\u00FC/", "file:///a/#b/c\u00FC/", "/a/", "file:///a/#b/c%C3%BC/", "/a/" };
-                yield return new object[] { "file:///a/?b/#c/d\u00FC/", "file:///a/?b/#c/d\u00FC/", "/a/", "file:///a/?b/#c/d%C3%BC/", "/a/" };
+                yield return new object[]
+                {
+                    "file:///a/?b/c\u00FC/",
+                    "file:///a/?b/c\u00FC/",
+                    "/a/",
+                    "file:///a/?b/c%C3%BC/",
+                    "/a/"
+                };
+                yield return new object[]
+                {
+                    "file:///a/#b/c\u00FC/",
+                    "file:///a/#b/c\u00FC/",
+                    "/a/",
+                    "file:///a/#b/c%C3%BC/",
+                    "/a/"
+                };
+                yield return new object[]
+                {
+                    "file:///a/?b/#c/d\u00FC/",
+                    "file:///a/?b/#c/d\u00FC/",
+                    "/a/",
+                    "file:///a/?b/#c/d%C3%BC/",
+                    "/a/"
+                };
             }
             else
             {
-                yield return new object[] { "/a/?b/c\u00FC/", "file:///a/%3Fb/c\u00FC/", "/a/%3Fb/c%C3%BC/", "file:///a/%3Fb/c%C3%BC/", "/a/?b/c\u00FC/" };
-                yield return new object[] { "/a/#b/c\u00FC/", "file:///a/%23b/c\u00FC/", "/a/%23b/c%C3%BC/", "file:///a/%23b/c%C3%BC/", "/a/#b/c\u00FC/" };
-                yield return new object[] { "/a/?b/#c/d\u00FC/", "file:///a/%3Fb/%23c/d\u00FC/", "/a/%3Fb/%23c/d%C3%BC/", "file:///a/%3Fb/%23c/d%C3%BC/", "/a/?b/#c/d\u00FC/" };
+                yield return new object[]
+                {
+                    "/a/?b/c\u00FC/",
+                    "file:///a/%3Fb/c\u00FC/",
+                    "/a/%3Fb/c%C3%BC/",
+                    "file:///a/%3Fb/c%C3%BC/",
+                    "/a/?b/c\u00FC/"
+                };
+                yield return new object[]
+                {
+                    "/a/#b/c\u00FC/",
+                    "file:///a/%23b/c\u00FC/",
+                    "/a/%23b/c%C3%BC/",
+                    "file:///a/%23b/c%C3%BC/",
+                    "/a/#b/c\u00FC/"
+                };
+                yield return new object[]
+                {
+                    "/a/?b/#c/d\u00FC/",
+                    "file:///a/%3Fb/%23c/d\u00FC/",
+                    "/a/%3Fb/%23c/d%C3%BC/",
+                    "file:///a/%3Fb/%23c/d%C3%BC/",
+                    "/a/?b/#c/d\u00FC/"
+                };
 
-                yield return new object[] { "file:///a/?b/c\u00FC/", "file:///a/?b/c\u00FC/", "/a/", "file:///a/?b/c%C3%BC/", "/a/" };
-                yield return new object[] { "file:///a/#b/c\u00FC/", "file:///a/#b/c\u00FC/", "/a/", "file:///a/#b/c%C3%BC/", "/a/" };
-                yield return new object[] { "file:///a/?b/#c/d\u00FC/", "file:///a/?b/#c/d\u00FC/", "/a/", "file:///a/?b/#c/d%C3%BC/", "/a/" };
+                yield return new object[]
+                {
+                    "file:///a/?b/c\u00FC/",
+                    "file:///a/?b/c\u00FC/",
+                    "/a/",
+                    "file:///a/?b/c%C3%BC/",
+                    "/a/"
+                };
+                yield return new object[]
+                {
+                    "file:///a/#b/c\u00FC/",
+                    "file:///a/#b/c\u00FC/",
+                    "/a/",
+                    "file:///a/#b/c%C3%BC/",
+                    "/a/"
+                };
+                yield return new object[]
+                {
+                    "file:///a/?b/#c/d\u00FC/",
+                    "file:///a/?b/#c/d\u00FC/",
+                    "/a/",
+                    "file:///a/?b/#c/d%C3%BC/",
+                    "/a/"
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(FilePathHandlesNonAscii_TestData))]
-        public static void FilePathHandlesNonAscii(string uriString, string toString, string absolutePath, string absoluteUri, string localPath)
+        public static void FilePathHandlesNonAscii(
+            string uriString,
+            string toString,
+            string absolutePath,
+            string absoluteUri,
+            string localPath
+        )
         {
             var uri = new Uri(uriString);
 
@@ -849,7 +1094,11 @@ namespace System.PrivateUri.Tests
 
         [Theory]
         [MemberData(nameof(ZeroPortIsParsedForBothKnownAndUnknownSchemes_TestData))]
-        public static void ZeroPortIsParsedForBothKnownAndUnknownSchemes(string uriString, int port, bool isDefaultPort)
+        public static void ZeroPortIsParsedForBothKnownAndUnknownSchemes(
+            string uriString,
+            int port,
+            bool isDefaultPort
+        )
         {
             Uri.TryCreate(uriString, UriKind.Absolute, out var uri);
             Assert.Equal(port, uri.Port);

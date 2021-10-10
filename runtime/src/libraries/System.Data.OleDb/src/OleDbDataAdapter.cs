@@ -8,14 +8,21 @@ using System.Runtime.InteropServices;
 
 namespace System.Data.OleDb
 {
-    [Designer("Microsoft.VSDesigner.Data.VS.OleDbDataAdapterDesigner, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [ToolboxItem("Microsoft.VSDesigner.Data.VS.OleDbDataAdapterToolboxItem, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Designer(
+        "Microsoft.VSDesigner.Data.VS.OleDbDataAdapterDesigner, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
+    [ToolboxItem(
+        "Microsoft.VSDesigner.Data.VS.OleDbDataAdapterToolboxItem, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public sealed class OleDbDataAdapter : DbDataAdapter, IDbDataAdapter, ICloneable
     {
         private static readonly object EventRowUpdated = new object();
         private static readonly object EventRowUpdating = new object();
 
-        private OleDbCommand? _deleteCommand, _insertCommand, _selectCommand, _updateCommand;
+        private OleDbCommand? _deleteCommand,
+            _insertCommand,
+            _selectCommand,
+            _updateCommand;
 
         public OleDbDataAdapter() : base()
         {
@@ -33,7 +40,8 @@ namespace System.Data.OleDb
             SelectCommand = new OleDbCommand(selectCommandText, connection);
         }
 
-        public OleDbDataAdapter(string? selectCommandText, OleDbConnection? selectConnection) : this()
+        public OleDbDataAdapter(string? selectCommandText, OleDbConnection? selectConnection)
+            : this()
         {
             SelectCommand = new OleDbCommand(selectCommandText, selectConnection);
         }
@@ -44,8 +52,10 @@ namespace System.Data.OleDb
         }
 
         [DefaultValue(null)]
-        [Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public new OleDbCommand? DeleteCommand
         {
             get { return _deleteCommand; }
@@ -59,8 +69,10 @@ namespace System.Data.OleDb
         }
 
         [DefaultValue(null)]
-        [Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public new OleDbCommand? InsertCommand
         {
             get { return _insertCommand; }
@@ -74,8 +86,10 @@ namespace System.Data.OleDb
         }
 
         [DefaultValue(null)]
-        [Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public new OleDbCommand? SelectCommand
         {
             get { return _selectCommand; }
@@ -89,8 +103,10 @@ namespace System.Data.OleDb
         }
 
         [DefaultValue(null)]
-        [Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public new OleDbCommand? UpdateCommand
         {
             get { return _updateCommand; }
@@ -113,13 +129,16 @@ namespace System.Data.OleDb
         {
             add
             {
-                OleDbRowUpdatingEventHandler? handler = (OleDbRowUpdatingEventHandler?)Events[EventRowUpdating];
+                OleDbRowUpdatingEventHandler? handler = (OleDbRowUpdatingEventHandler?)Events[
+                    EventRowUpdating
+                ];
 
                 // prevent someone from registering two different command builders on the adapter by
                 // silently removing the old one
                 if ((null != handler) && (value.Target is DbCommandBuilder))
                 {
-                    OleDbRowUpdatingEventHandler? d = (OleDbRowUpdatingEventHandler?)ADP.FindBuilder(handler);
+                    OleDbRowUpdatingEventHandler? d =
+                        (OleDbRowUpdatingEventHandler?)ADP.FindBuilder(handler);
                     if (null != d)
                     {
                         Events.RemoveHandler(EventRowUpdating, d);
@@ -135,17 +154,30 @@ namespace System.Data.OleDb
             return new OleDbDataAdapter(this);
         }
 
-        protected override RowUpdatedEventArgs CreateRowUpdatedEvent(DataRow dataRow, IDbCommand? command, StatementType statementType, DataTableMapping tableMapping)
+        protected override RowUpdatedEventArgs CreateRowUpdatedEvent(
+            DataRow dataRow,
+            IDbCommand? command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
         {
             return new OleDbRowUpdatedEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-        protected override RowUpdatingEventArgs CreateRowUpdatingEvent(DataRow dataRow, IDbCommand? command, StatementType statementType, DataTableMapping tableMapping)
+        protected override RowUpdatingEventArgs CreateRowUpdatingEvent(
+            DataRow dataRow,
+            IDbCommand? command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
         {
             return new OleDbRowUpdatingEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-        internal static void FillDataTable(OleDbDataReader dataReader, params DataTable[] dataTables)
+        internal static void FillDataTable(
+            OleDbDataReader dataReader,
+            params DataTable[] dataTables
+        )
         {
             OleDbDataAdapter adapter = new OleDbDataAdapter();
             adapter.Fill(dataTables, dataReader, 0, 0);
@@ -202,7 +234,9 @@ namespace System.Data.OleDb
             */
 
             bool closeRecordset = multipleResults;
-            UnsafeNativeMethods.ADORecordsetConstruction? recordset = (adodb as UnsafeNativeMethods.ADORecordsetConstruction);
+            UnsafeNativeMethods.ADORecordsetConstruction? recordset = (
+                adodb as UnsafeNativeMethods.ADORecordsetConstruction
+            );
             UnsafeNativeMethods.ADORecordConstruction? record = null;
 
             if (null != recordset)
@@ -211,7 +245,9 @@ namespace System.Data.OleDb
                 {
                     // The NextRecordset method is not available on a disconnected Recordset object, where ActiveConnection has been set to NULL
                     object activeConnection;
-                    activeConnection = ((UnsafeNativeMethods.Recordset15)adodb).get_ActiveConnection();
+                    activeConnection = (
+                        (UnsafeNativeMethods.Recordset15)adodb
+                    ).get_ActiveConnection();
 
                     if (null == activeConnection)
                     {
@@ -252,7 +288,10 @@ namespace System.Data.OleDb
 
                         object recordsAffected;
                         object nextresult;
-                        OleDbHResult hr = ((UnsafeNativeMethods.Recordset15)adodb).NextRecordset(out recordsAffected, out nextresult);
+                        OleDbHResult hr = ((UnsafeNativeMethods.Recordset15)adodb).NextRecordset(
+                            out recordsAffected,
+                            out nextresult
+                        );
 
                         if (0 > hr)
                         {
@@ -306,7 +345,12 @@ namespace System.Data.OleDb
         //    return base.Fill(dataTable, dataReader);
         //}
 
-        private int FillFromRecordset(object data, UnsafeNativeMethods.ADORecordsetConstruction recordset, string? srcTable, out bool incrementResultCount)
+        private int FillFromRecordset(
+            object data,
+            UnsafeNativeMethods.ADORecordsetConstruction recordset,
+            string? srcTable,
+            out bool incrementResultCount
+        )
         {
             incrementResultCount = false;
 
@@ -330,7 +374,10 @@ namespace System.Data.OleDb
 
             if (null != result)
             {
-                CommandBehavior behavior = (MissingSchemaAction.AddWithKey != MissingSchemaAction) ? 0 : CommandBehavior.KeyInfo;
+                CommandBehavior behavior =
+                    (MissingSchemaAction.AddWithKey != MissingSchemaAction)
+                        ? 0
+                        : CommandBehavior.KeyInfo;
                 behavior |= CommandBehavior.SequentialAccess;
 
                 OleDbDataReader? dataReader = null;
@@ -356,6 +403,7 @@ namespace System.Data.OleDb
                         }
                     }
                 }
+
                 finally
                 {
                     if (null != dataReader)
@@ -367,7 +415,11 @@ namespace System.Data.OleDb
             return 0;
         }
 
-        private int FillFromRecord(object data, UnsafeNativeMethods.ADORecordConstruction record, string srcTable)
+        private int FillFromRecord(
+            object data,
+            UnsafeNativeMethods.ADORecordConstruction record,
+            string srcTable
+        )
         {
             object? result = null;
             try
@@ -387,7 +439,10 @@ namespace System.Data.OleDb
 
             if (null != result)
             {
-                CommandBehavior behavior = (MissingSchemaAction.AddWithKey != MissingSchemaAction) ? 0 : CommandBehavior.KeyInfo;
+                CommandBehavior behavior =
+                    (MissingSchemaAction.AddWithKey != MissingSchemaAction)
+                        ? 0
+                        : CommandBehavior.KeyInfo;
                 behavior |= CommandBehavior.SequentialAccess | CommandBehavior.SingleRow;
 
                 OleDbDataReader? dataReader = null;
@@ -406,6 +461,7 @@ namespace System.Data.OleDb
                         return base.Fill((DataSet)data, srcTable, dataReader, 0, 0);
                     }
                 }
+
                 finally
                 {
                     if (null != dataReader)
@@ -439,7 +495,9 @@ namespace System.Data.OleDb
 
         protected override void OnRowUpdated(RowUpdatedEventArgs value)
         {
-            OleDbRowUpdatedEventHandler? handler = (OleDbRowUpdatedEventHandler?)Events[EventRowUpdated];
+            OleDbRowUpdatedEventHandler? handler = (OleDbRowUpdatedEventHandler?)Events[
+                EventRowUpdated
+            ];
             if ((null != handler) && (value is OleDbRowUpdatedEventArgs))
             {
                 handler(this, (OleDbRowUpdatedEventArgs)value);
@@ -449,7 +507,9 @@ namespace System.Data.OleDb
 
         protected override void OnRowUpdating(RowUpdatingEventArgs value)
         {
-            OleDbRowUpdatingEventHandler? handler = (OleDbRowUpdatingEventHandler?)Events[EventRowUpdating];
+            OleDbRowUpdatingEventHandler? handler = (OleDbRowUpdatingEventHandler?)Events[
+                EventRowUpdating
+            ];
             if ((null != handler) && (value is OleDbRowUpdatingEventArgs))
             {
                 handler(this, (OleDbRowUpdatingEventArgs)value);

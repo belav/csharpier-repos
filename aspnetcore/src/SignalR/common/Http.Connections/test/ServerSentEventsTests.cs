@@ -21,11 +21,22 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         {
             using (StartVerifiableLog())
             {
-                var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-                var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
+                var pair = DuplexPipe.CreateConnectionPair(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var connection = new DefaultConnectionContext(
+                    "foo",
+                    pair.Transport,
+                    pair.Application
+                );
                 var context = new DefaultHttpContext();
 
-                var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: string.Empty, LoggerFactory);
+                var sse = new ServerSentEventsServerTransport(
+                    connection.Application.Input,
+                    connectionId: string.Empty,
+                    LoggerFactory
+                );
 
                 connection.Transport.Output.Complete();
 
@@ -42,13 +53,24 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         {
             using (StartVerifiableLog())
             {
-                var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-                var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
+                var pair = DuplexPipe.CreateConnectionPair(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var connection = new DefaultConnectionContext(
+                    "foo",
+                    pair.Transport,
+                    pair.Application
+                );
                 var context = new DefaultHttpContext();
 
                 var feature = new HttpBufferingFeature(new MemoryStream());
                 context.Features.Set<IHttpResponseBodyFeature>(feature);
-                var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: connection.ConnectionId, LoggerFactory);
+                var sse = new ServerSentEventsServerTransport(
+                    connection.Application.Input,
+                    connectionId: connection.ConnectionId,
+                    LoggerFactory
+                );
 
                 connection.Transport.Output.Complete();
 
@@ -63,13 +85,24 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         {
             using (StartVerifiableLog())
             {
-                var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, new PipeOptions(readerScheduler: PipeScheduler.Inline));
-                var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
+                var pair = DuplexPipe.CreateConnectionPair(
+                    PipeOptions.Default,
+                    new PipeOptions(readerScheduler: PipeScheduler.Inline)
+                );
+                var connection = new DefaultConnectionContext(
+                    "foo",
+                    pair.Transport,
+                    pair.Application
+                );
                 var context = new DefaultHttpContext();
 
                 var ms = new MemoryStream();
                 context.Response.Body = ms;
-                var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: string.Empty, LoggerFactory);
+                var sse = new ServerSentEventsServerTransport(
+                    connection.Application.Input,
+                    connectionId: string.Empty,
+                    LoggerFactory
+                );
 
                 var task = sse.ProcessRequestAsync(context, context.RequestAborted);
 
@@ -85,23 +118,39 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         {
             using (StartVerifiableLog())
             {
-                var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, new PipeOptions(readerScheduler: PipeScheduler.Inline));
-                var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
+                var pair = DuplexPipe.CreateConnectionPair(
+                    PipeOptions.Default,
+                    new PipeOptions(readerScheduler: PipeScheduler.Inline)
+                );
+                var connection = new DefaultConnectionContext(
+                    "foo",
+                    pair.Transport,
+                    pair.Application
+                );
                 var context = new DefaultHttpContext();
 
                 var ms = new MemoryStream();
                 context.Response.Body = ms;
-                var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: string.Empty, LoggerFactory);
+                var sse = new ServerSentEventsServerTransport(
+                    connection.Application.Input,
+                    connectionId: string.Empty,
+                    LoggerFactory
+                );
 
                 var task = sse.ProcessRequestAsync(context, context.RequestAborted);
 
                 string hText = new string('H', 60000);
                 string wText = new string('W', 60000);
 
-                await connection.Transport.Output.WriteAsync(Encoding.ASCII.GetBytes(hText + wText));
+                await connection.Transport.Output.WriteAsync(
+                    Encoding.ASCII.GetBytes(hText + wText)
+                );
                 connection.Transport.Output.Complete();
                 await task.DefaultTimeout();
-                Assert.Equal(":\r\ndata: " + hText + wText + "\r\n\r\n", Encoding.ASCII.GetString(ms.ToArray()));
+                Assert.Equal(
+                    ":\r\ndata: " + hText + wText + "\r\n\r\n",
+                    Encoding.ASCII.GetString(ms.ToArray())
+                );
             }
         }
 
@@ -113,11 +162,22 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
         {
             using (StartVerifiableLog())
             {
-                var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-                var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
+                var pair = DuplexPipe.CreateConnectionPair(
+                    PipeOptions.Default,
+                    PipeOptions.Default
+                );
+                var connection = new DefaultConnectionContext(
+                    "foo",
+                    pair.Transport,
+                    pair.Application
+                );
                 var context = new DefaultHttpContext();
 
-                var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: string.Empty, LoggerFactory);
+                var sse = new ServerSentEventsServerTransport(
+                    connection.Application.Input,
+                    connectionId: string.Empty,
+                    LoggerFactory
+                );
                 var ms = new MemoryStream();
                 context.Response.Body = ms;
 

@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
 {
     public abstract class ServerFixture : IDisposable
     {
-        private static readonly Lazy<Dictionary<string, string>> _projects = new Lazy<Dictionary<string, string>>(FindProjects);
+        private static readonly Lazy<Dictionary<string, string>> _projects = new Lazy<
+            Dictionary<string, string>
+        >(FindProjects);
 
         public Uri RootUri => _rootUriInitializer.Value;
 
@@ -22,16 +24,23 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
 
         public ServerFixture()
         {
-            _rootUriInitializer = new Lazy<Uri>(() =>
-            {
-                var uri = new Uri(StartAndGetRootUri());
-                if (E2ETestOptions.Instance.SauceTest)
+            _rootUriInitializer = new Lazy<Uri>(
+                () =>
                 {
-                    uri = new UriBuilder(uri.Scheme, E2ETestOptions.Instance.Sauce.HostName, uri.Port).Uri;
-                }
+                    var uri = new Uri(StartAndGetRootUri());
+                    if (E2ETestOptions.Instance.SauceTest)
+                    {
+                        uri =
+                            new UriBuilder(
+                                uri.Scheme,
+                                E2ETestOptions.Instance.Sauce.HostName,
+                                uri.Port
+                            ).Uri;
+                    }
 
-                return uri;
-            });
+                    return uri;
+                }
+            );
         }
 
         public abstract void Dispose();
@@ -42,9 +51,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
         {
             return typeof(ServerFixture).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
                 .Where(m => m.Key.StartsWith("TestAssemblyApplication[", StringComparison.Ordinal))
-                .ToDictionary(m =>
-                    m.Key.Replace("TestAssemblyApplication", "").TrimStart('[').TrimEnd(']'),
-                    m => m.Value);
+                .ToDictionary(
+                    m => m.Key.Replace("TestAssemblyApplication", "").TrimStart('[').TrimEnd(']'),
+                    m => m.Value
+                );
         }
 
         public static string FindSampleOrTestSitePath(string projectName)
@@ -55,7 +65,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
                 return dir;
             }
 
-            throw new ArgumentException($"Cannot find a sample or test site with name '{projectName}'.");
+            throw new ArgumentException(
+                $"Cannot find a sample or test site with name '{projectName}'."
+            );
         }
 
         protected static void RunInBackgroundThread(Action action)
@@ -63,19 +75,21 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
             var isDone = new ManualResetEvent(false);
 
             ExceptionDispatchInfo edi = null;
-            new Thread(() =>
-            {
-                try
+            new Thread(
+                () =>
                 {
-                    action();
-                }
-                catch (Exception ex)
-                {
-                    edi = ExceptionDispatchInfo.Capture(ex);
-                }
+                    try
+                    {
+                        action();
+                    }
+                    catch (Exception ex)
+                    {
+                        edi = ExceptionDispatchInfo.Capture(ex);
+                    }
 
-                isDone.Set();
-            }).Start();
+                    isDone.Set();
+                }
+            ).Start();
 
             if (!isDone.WaitOne(TimeSpan.FromSeconds(10)))
             {

@@ -16,15 +16,16 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public void GetApiResources_ReadsApisFromConfiguration()
         {
             // Arrange
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["MyAPI:Profile"] = "API"
-            }).Build();
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+                    new Dictionary<string, string> { ["MyAPI:Profile"] = "API" }
+                )
+                .Build();
             var localApiDescriptor = new TestLocalApiDescriptor();
             var configurationLoader = new ConfigureApiResources(
                 configuration,
                 localApiDescriptor,
-                new TestLogger<ConfigureApiResources>());
+                new TestLogger<ConfigureApiResources>()
+            );
 
             // Act
             var resources = configurationLoader.GetApiResources();
@@ -41,16 +42,20 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         {
             // Arrange
             var expectedScopes = new[] { "First", "Second", "Third" };
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["MyAPI:Profile"] = "API",
-                ["MyAPI:Scopes"] = "First Second Third"
-            }).Build();
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+                    new Dictionary<string, string>
+                    {
+                        ["MyAPI:Profile"] = "API",
+                        ["MyAPI:Scopes"] = "First Second Third"
+                    }
+                )
+                .Build();
             var localApiDescriptor = new TestLocalApiDescriptor();
             var configurationLoader = new ConfigureApiResources(
                 configuration,
                 localApiDescriptor,
-                new TestLogger<ConfigureApiResources>());
+                new TestLogger<ConfigureApiResources>()
+            );
             // Act
             var resources = configurationLoader.GetApiResources();
 
@@ -67,14 +72,20 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         {
             // Arrange
             var configuration = new ConfigurationBuilder().Build();
-            var localApiDescriptor = new TestLocalApiDescriptor(new Dictionary<string, ResourceDefinition>
-            {
-                ["MyAPI"] = new ResourceDefinition { Profile = ApplicationProfiles.IdentityServerJwt }
-            });
+            var localApiDescriptor = new TestLocalApiDescriptor(
+                new Dictionary<string, ResourceDefinition>
+                {
+                    ["MyAPI"] = new ResourceDefinition
+                    {
+                        Profile = ApplicationProfiles.IdentityServerJwt
+                    }
+                }
+            );
             var configurationLoader = new ConfigureApiResources(
                 configuration,
                 localApiDescriptor,
-                new TestLogger<ConfigureApiResources>());
+                new TestLogger<ConfigureApiResources>()
+            );
 
             // Act
             var resources = configurationLoader.GetApiResources();
@@ -90,15 +101,16 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public void Configure_AddsResourcesToExistingResourceList()
         {
             // Arrange
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["MyAPI:Profile"] = "API"
-            }).Build();
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+                    new Dictionary<string, string> { ["MyAPI:Profile"] = "API" }
+                )
+                .Build();
             var localApiDescriptor = new TestLocalApiDescriptor();
             var configurationLoader = new ConfigureApiResources(
                 configuration,
                 localApiDescriptor,
-                new TestLogger<ConfigureApiResources>());
+                new TestLogger<ConfigureApiResources>()
+            );
 
             var options = new ApiAuthorizationOptions();
 
@@ -116,10 +128,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         {
             private readonly IDictionary<string, ResourceDefinition> _definitions;
 
-            public TestLocalApiDescriptor()
-                : this(new Dictionary<string, ResourceDefinition>())
-            {
-            }
+            public TestLocalApiDescriptor() : this(new Dictionary<string, ResourceDefinition>()) { }
 
             public TestLocalApiDescriptor(IDictionary<string, ResourceDefinition> definitions)
             {

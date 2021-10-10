@@ -82,14 +82,28 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingModule.GetFields(bindingFlags);
         }
 
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             if (types == null)
             {
                 return UnderlyingModule.GetMethod(name);
             }
 
-            return UnderlyingModule.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
+            return UnderlyingModule.GetMethod(
+                name,
+                bindingAttr,
+                binder,
+                callConvention,
+                types,
+                modifiers
+            );
         }
 
         public override MethodInfo[] GetMethods(BindingFlags bindingFlags)
@@ -97,7 +111,10 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingModule.GetMethods(bindingFlags);
         }
 
-        public override void GetPEKind(out PortableExecutableKinds peKind, out ImageFileMachine machine)
+        public override void GetPEKind(
+            out PortableExecutableKinds peKind,
+            out ImageFileMachine machine
+        )
         {
             UnderlyingModule.GetPEKind(out peKind, out machine);
         }
@@ -127,19 +144,43 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingModule.IsResource();
         }
 
-        public override FieldInfo ResolveField(int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments)
+        public override FieldInfo ResolveField(
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        )
         {
-            return UnderlyingModule.ResolveField(metadataToken, genericTypeArguments, genericMethodArguments);
+            return UnderlyingModule.ResolveField(
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
-        public override MemberInfo ResolveMember(int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments)
+        public override MemberInfo ResolveMember(
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        )
         {
-            return UnderlyingModule.ResolveMember(metadataToken, genericTypeArguments, genericMethodArguments);
+            return UnderlyingModule.ResolveMember(
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
-        public override MethodBase ResolveMethod(int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments)
+        public override MethodBase ResolveMethod(
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        )
         {
-            return UnderlyingModule.ResolveMethod(metadataToken, genericTypeArguments, genericMethodArguments);
+            return UnderlyingModule.ResolveMethod(
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
         public override byte[] ResolveSignature(int metadataToken)
@@ -152,9 +193,17 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingModule.ResolveString(metadataToken);
         }
 
-        public override Type ResolveType(int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments)
+        public override Type ResolveType(
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        )
         {
-            return UnderlyingModule.ResolveType(metadataToken, genericTypeArguments, genericMethodArguments);
+            return UnderlyingModule.ResolveType(
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
         public override string ToString()

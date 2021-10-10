@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             LibuvThread thread,
             UvStreamHandle socket,
             string connectionId,
-            ILibuvTrace log)
+            ILibuvTrace log
+        )
         {
             _pipe = pipe;
             _thread = thread;
@@ -69,6 +70,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                                 throw writeResult.Error;
                             }
                         }
+
                         finally
                         {
                             // Make sure we return the writeReq to the pool
@@ -86,6 +88,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                         break;
                     }
                 }
+
                 finally
                 {
                     _pipe.AdvanceTo(consumed);

@@ -19,9 +19,10 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
 
         public DataModel()
         {
-            var functions = from f in typeof(FunctionId).GetFields()
-                            where !f.IsSpecialName
-                            select f;
+            var functions =
+                from f in typeof(FunctionId).GetFields()
+                where !f.IsSpecialName
+                select f;
 
             var count = functions.Count();
             _activities = new ActivityLevel[count];

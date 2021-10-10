@@ -75,9 +75,7 @@ namespace Microsoft.Extensions.Primitives
         {
             public static readonly NullDisposable Instance = new NullDisposable();
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

@@ -19,12 +19,25 @@ namespace Microsoft.CodeAnalysis.Structure
     /// </summary>
     internal abstract class AbstractBlockStructureProvider : BlockStructureProvider
     {
-        private readonly ImmutableDictionary<Type, ImmutableArray<AbstractSyntaxStructureProvider>> _nodeProviderMap;
-        private readonly ImmutableDictionary<int, ImmutableArray<AbstractSyntaxStructureProvider>> _triviaProviderMap;
+        private readonly ImmutableDictionary<
+            Type,
+            ImmutableArray<AbstractSyntaxStructureProvider>
+        > _nodeProviderMap;
+        private readonly ImmutableDictionary<
+            int,
+            ImmutableArray<AbstractSyntaxStructureProvider>
+        > _triviaProviderMap;
 
         protected AbstractBlockStructureProvider(
-            ImmutableDictionary<Type, ImmutableArray<AbstractSyntaxStructureProvider>> defaultNodeOutlinerMap,
-            ImmutableDictionary<int, ImmutableArray<AbstractSyntaxStructureProvider>> defaultTriviaOutlinerMap)
+            ImmutableDictionary<
+                Type,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            > defaultNodeOutlinerMap,
+            ImmutableDictionary<
+                int,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            > defaultTriviaOutlinerMap
+        )
         {
             _nodeProviderMap = defaultNodeOutlinerMap;
             _triviaProviderMap = defaultTriviaOutlinerMap;
@@ -54,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Structure
         {
             try
             {
-                var syntaxRoot = await context.SyntaxTree.GetRootAsync(context.CancellationToken).ConfigureAwait(false);
+                var syntaxRoot = await context.SyntaxTree.GetRootAsync(context.CancellationToken)
+                    .ConfigureAwait(false);
 
                 ProvideBlockStructureWorker(context, syntaxRoot);
             }
@@ -65,11 +79,19 @@ namespace Microsoft.CodeAnalysis.Structure
         }
 
         private void ProvideBlockStructureWorker(
-            BlockStructureContext context, SyntaxNode syntaxRoot)
+            BlockStructureContext context,
+            SyntaxNode syntaxRoot
+        )
         {
             using var spans = TemporaryArray<BlockSpan>.Empty;
             BlockSpanCollector.CollectBlockSpans(
-                syntaxRoot, context.OptionProvider, _nodeProviderMap, _triviaProviderMap, ref spans.AsRef(), context.CancellationToken);
+                syntaxRoot,
+                context.OptionProvider,
+                _nodeProviderMap,
+                _triviaProviderMap,
+                ref spans.AsRef(),
+                context.CancellationToken
+            );
 
             foreach (var span in spans)
             {

@@ -15,39 +15,43 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that finds base and derived entity types that are already part of the model based on the associated
     ///     CLR type hierarchy.
     /// </summary>
-    public class BaseTypeDiscoveryConvention :
+    public class BaseTypeDiscoveryConvention
+        :
 #pragma warning disable CS0612 // Type or member is obsolete
-        InheritanceDiscoveryConventionBase,
+          InheritanceDiscoveryConventionBase,
 #pragma warning restore CS0612 // Type or member is obsolete
-        IEntityTypeAddedConvention,
-        IForeignKeyOwnershipChangedConvention
+          IEntityTypeAddedConvention,
+          IForeignKeyOwnershipChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="BaseTypeDiscoveryConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         public BaseTypeDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <inheritdoc />
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             var entityType = entityTypeBuilder.Metadata;
             var clrType = entityType.ClrType;
-            if (clrType == null
+            if (
+                clrType == null
                 || entityType.HasSharedClrType
                 || entityType.Model.IsOwned(clrType)
-                || entityType.FindDeclaredOwnership() != null)
+                || entityType.FindDeclaredOwnership() != null
+            )
             {
                 return;
             }
 
             var model = entityType.Model;
-            var derivedTypesMap = (Dictionary<Type, List<IConventionEntityType>>?)model[CoreAnnotationNames.DerivedTypes];
+            var derivedTypesMap = (Dictionary<Type, List<IConventionEntityType>>?)model[
+                CoreAnnotationNames.DerivedTypes
+            ];
             if (derivedTypesMap == null)
             {
                 derivedTypesMap = new Dictionary<Type, List<IConventionEntityType>>();
@@ -82,9 +86,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
 
             IConventionEntityType? baseEntityType = null;
-            while (baseEntityType == null
-                && baseType != typeof(object)
-                && baseType != null)
+            while (baseEntityType == null && baseType != typeof(object) && baseType != null)
             {
                 baseEntityType = model.FindEntityType(baseType);
                 if (baseEntityType == null)
@@ -100,10 +102,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return;
             }
 
-            if (!baseEntityType.HasSharedClrType
-                && baseEntityType.FindOwnership() == null)
+            if (!baseEntityType.HasSharedClrType && baseEntityType.FindOwnership() == null)
             {
-                if (entityTypeBuilder.HasBaseType(baseEntityType) is IConventionEntityTypeBuilder newEntityTypeBuilder)
+                if (
+                    entityTypeBuilder.HasBaseType(baseEntityType)
+                    is IConventionEntityTypeBuilder newEntityTypeBuilder
+                )
                 {
                     context.StopProcessingIfChanged(newEntityTypeBuilder);
                 }
@@ -113,13 +117,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             var foreignKey = relationshipBuilder.Metadata;
-            if (foreignKey.IsOwnership
-                && foreignKey.DeclaringEntityType.GetDirectlyDerivedTypes().Any())
+            if (
+                foreignKey.IsOwnership
+                && foreignKey.DeclaringEntityType.GetDirectlyDerivedTypes().Any()
+            )
             {
-                foreach (var derivedType in foreignKey.DeclaringEntityType.GetDirectlyDerivedTypes().ToList())
+                foreach (
+                    var derivedType in foreignKey.DeclaringEntityType.GetDirectlyDerivedTypes()
+                        .ToList()
+                )
                 {
                     derivedType.Builder.HasBaseType(null);
                 }

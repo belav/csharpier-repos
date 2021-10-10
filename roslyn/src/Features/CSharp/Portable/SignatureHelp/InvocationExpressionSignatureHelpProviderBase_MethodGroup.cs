@@ -23,11 +23,23 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             InvocationExpressionSyntax invocationExpression,
             SemanticModel semanticModel,
             SymbolInfo currentSymbol,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return Task.FromResult(
-                (accessibleMethods.SelectAsArray(m => ConvertMethodGroupMethod(document, m, invocationExpression.SpanStart, semanticModel)),
-                 TryGetSelectedIndex(accessibleMethods, currentSymbol.Symbol)));
+                (
+                    accessibleMethods.SelectAsArray(
+                        m =>
+                            ConvertMethodGroupMethod(
+                                document,
+                                m,
+                                invocationExpression.SpanStart,
+                                semanticModel
+                            )
+                    ),
+                    TryGetSelectedIndex(accessibleMethods, currentSymbol.Symbol)
+                )
+            );
         }
 
         private static ImmutableArray<IMethodSymbol> GetAccessibleMethods(
@@ -35,13 +47,18 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             SemanticModel semanticModel,
             ISymbol within,
             IEnumerable<IMethodSymbol> methodGroup,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             ITypeSymbol? throughType = null;
             if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccess)
             {
                 var throughExpression = memberAccess.Expression;
-                var throughSymbol = semanticModel.GetSymbolInfo(throughExpression, cancellationToken).GetAnySymbol();
+                var throughSymbol = semanticModel.GetSymbolInfo(
+                        throughExpression,
+                        cancellationToken
+                    )
+                    .GetAnySymbol();
 
                 // if it is via a base expression "base.", we know the "throughType" is the base class but
                 // we need to be able to tell between "base.M()" and "new Base().M()".
@@ -49,38 +66,71 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 // so handle "base." primary-expression here by nulling out "throughType"
                 if (!(throughExpression is BaseExpressionSyntax))
                 {
-                    throughType = semanticModel.GetTypeInfo(throughExpression, cancellationToken).Type;
+                    throughType =
+                        semanticModel.GetTypeInfo(throughExpression, cancellationToken).Type;
                 }
 
-                var includeInstance = !throughExpression.IsKind(SyntaxKind.IdentifierName) ||
-                    semanticModel.LookupSymbols(throughExpression.SpanStart, name: throughSymbol?.Name).Any(s => !(s is INamedTypeSymbol)) ||
-                    (!(throughSymbol is INamespaceOrTypeSymbol) && semanticModel.LookupSymbols(throughExpression.SpanStart, container: throughSymbol?.ContainingType).Any(s => !(s is INamedTypeSymbol)));
+                var includeInstance =
+                    !throughExpression.IsKind(SyntaxKind.IdentifierName)
+                    || semanticModel.LookupSymbols(
+                            throughExpression.SpanStart,
+                            name: throughSymbol?.Name
+                        )
+                        .Any(s => !(s is INamedTypeSymbol))
+                    || (
+                        !(throughSymbol is INamespaceOrTypeSymbol)
+                        && semanticModel.LookupSymbols(
+                                throughExpression.SpanStart,
+                                container: throughSymbol?.ContainingType
+                            )
+                            .Any(s => !(s is INamedTypeSymbol))
+                    );
 
-                var includeStatic = throughSymbol is INamedTypeSymbol ||
-                    (throughExpression.IsKind(SyntaxKind.IdentifierName) &&
-                    semanticModel.LookupNamespacesAndTypes(throughExpression.SpanStart, name: throughSymbol?.Name).Any(t => Equals(t.GetSymbolType(), throughType)));
+                var includeStatic =
+                    throughSymbol is INamedTypeSymbol
+                    || (
+                        throughExpression.IsKind(SyntaxKind.IdentifierName)
+                        && semanticModel.LookupNamespacesAndTypes(
+                                throughExpression.SpanStart,
+                                name: throughSymbol?.Name
+                            )
+                            .Any(t => Equals(t.GetSymbolType(), throughType))
+                    );
 
                 Contract.ThrowIfFalse(includeInstance || includeStatic);
-                methodGroup = methodGroup.Where(m => (m.IsStatic && includeStatic) || (!m.IsStatic && includeInstance));
+                methodGroup = methodGroup.Where(
+                    m => (m.IsStatic && includeStatic) || (!m.IsStatic && includeInstance)
+                );
             }
-            else if (invocationExpression.Expression is SimpleNameSyntax &&
-                invocationExpression.IsInStaticContext())
+            else if (
+                invocationExpression.Expression is SimpleNameSyntax
+                && invocationExpression.IsInStaticContext()
+            )
             {
                 // We always need to include local functions regardless of whether they are static.
-                methodGroup = methodGroup.Where(m => m.IsStatic || m is IMethodSymbol { MethodKind: MethodKind.LocalFunction });
+                methodGroup = methodGroup.Where(
+                    m => m.IsStatic || m is IMethodSymbol { MethodKind: MethodKind.LocalFunction }
+                );
             }
 
-            var accessibleMethods = methodGroup.Where(m => m.IsAccessibleWithin(within, throughType: throughType)).ToImmutableArrayOrEmpty();
+            var accessibleMethods = methodGroup.Where(
+                    m => m.IsAccessibleWithin(within, throughType: throughType)
+                )
+                .ToImmutableArrayOrEmpty();
             if (accessibleMethods.Length == 0)
             {
                 return accessibleMethods;
             }
 
             var methodSet = accessibleMethods.ToSet();
-            return accessibleMethods.Where(m => !IsHiddenByOtherMethod(m, methodSet)).ToImmutableArrayOrEmpty();
+            return accessibleMethods.Where(m => !IsHiddenByOtherMethod(m, methodSet))
+                .ToImmutableArrayOrEmpty();
         }
 
-        private static bool IsHiddenByOtherMethod(IMethodSymbol method, ISet<IMethodSymbol> methodSet)
+        private static bool IsHiddenByOtherMethod(
+            IMethodSymbol method,
+            ISet<IMethodSymbol> methodSet
+        )
         {
             foreach (var m in methodSet)
             {
@@ -98,7 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
         private static bool IsHiddenBy(IMethodSymbol method1, IMethodSymbol method2)
         {
-            // If they have the same parameter types and the same parameter names, then the 
+            // If they have the same parameter types and the same parameter names, then the
             // constructed method is hidden by the unconstructed one.
             return method2.IsMoreSpecificThan(method1) == true;
         }

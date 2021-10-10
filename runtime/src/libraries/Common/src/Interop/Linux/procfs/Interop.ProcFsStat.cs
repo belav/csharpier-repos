@@ -98,7 +98,9 @@ internal static partial class Interop
 
         internal static string GetFileDescriptorDirectoryPathForProcess(int pid)
         {
-            return RootPath + pid.ToString(CultureInfo.InvariantCulture) + FileDescriptorDirectoryName;
+            return RootPath
+                + pid.ToString(CultureInfo.InvariantCulture)
+                + FileDescriptorDirectoryName;
         }
 
         private static string GetStatFilePathForThread(int pid, int tid)
@@ -109,20 +111,28 @@ internal static partial class Interop
             // This results in allocating not only the params array but also a defensive copy inside of Concat,
             // which means allocating two five-element arrays.  This two-string approach will result not only in fewer
             // allocations, but also typically in less memory allocated, and it's a bit more maintainable.
-            return GetTaskDirectoryPathForProcess(pid) + tid.ToString(CultureInfo.InvariantCulture) + StatFileName;
+            return GetTaskDirectoryPathForProcess(pid)
+                + tid.ToString(CultureInfo.InvariantCulture)
+                + StatFileName;
         }
 
         internal static bool TryReadStatFile(int pid, out ParsedStat result)
         {
             bool b = TryParseStatFile(GetStatFilePathForProcess(pid), out result);
-            Debug.Assert(!b || result.pid == pid, "Expected process ID from stat file to match supplied pid");
+            Debug.Assert(
+                !b || result.pid == pid,
+                "Expected process ID from stat file to match supplied pid"
+            );
             return b;
         }
 
         internal static bool TryReadStatFile(int pid, int tid, out ParsedStat result)
         {
             bool b = TryParseStatFile(GetStatFilePathForThread(pid, tid), out result);
-            Debug.Assert(!b || result.pid == tid, "Expected thread ID from stat file to match supplied tid");
+            Debug.Assert(
+                !b || result.pid == tid,
+                "Expected thread ID from stat file to match supplied tid"
+            );
             return b;
         }
 

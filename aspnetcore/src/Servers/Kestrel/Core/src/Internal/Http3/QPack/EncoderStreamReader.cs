@@ -32,7 +32,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
         private const byte DynamicTableCapacityPrefixMask = 0x1F;
         private const int DynamicTableCapacityPrefix = 5;
 
-
         //0   1   2   3   4   5   6   7
         //+---+---+---+---+---+---+---+---+
         //| 1 | S |    Name Index(6+)    |
@@ -121,7 +120,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                     if ((b & DynamicTableCapacityMask) == DynamicTableCapacityRepresentation)
                     {
                         prefixInt = DynamicTableCapacityPrefixMask & b;
-                        if (_integerDecoder.BeginTryDecode((byte)prefixInt, DynamicTableCapacityPrefix, out intResult))
+                        if (
+                            _integerDecoder.BeginTryDecode(
+                                (byte)prefixInt,
+                                DynamicTableCapacityPrefix,
+                                out intResult
+                            )
+                        )
                         {
                             OnDynamicTableCapacity(intResult);
                         }
@@ -130,12 +135,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                             _state = State.DynamicTableCapcity;
                         }
                     }
-                    else if ((b & InsertWithNameReferenceMask) == InsertWithNameReferenceRepresentation)
+                    else if (
+                        (b & InsertWithNameReferenceMask) == InsertWithNameReferenceRepresentation
+                    )
                     {
                         prefixInt = InsertWithNameReferencePrefixMask & b;
-                        _s = (InsertWithNameReferenceStaticMask & b) == InsertWithNameReferenceStaticMask;
+                        _s =
+                            (InsertWithNameReferenceStaticMask & b)
+                            == InsertWithNameReferenceStaticMask;
 
-                        if (_integerDecoder.BeginTryDecode((byte)prefixInt, InsertWithNameReferencePrefix, out intResult))
+                        if (
+                            _integerDecoder.BeginTryDecode(
+                                (byte)prefixInt,
+                                InsertWithNameReferencePrefix,
+                                out intResult
+                            )
+                        )
                         {
                             OnNameIndex(intResult);
                         }
@@ -144,12 +159,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                             _state = State.NameIndex;
                         }
                     }
-                    else if ((b & InsertWithoutNameReferenceMask) == InsertWithoutNameReferenceRepresentation)
+                    else if (
+                        (b & InsertWithoutNameReferenceMask)
+                        == InsertWithoutNameReferenceRepresentation
+                    )
                     {
                         prefixInt = InsertWithoutNameReferencePrefixMask & b;
-                        _huffman = (InsertWithoutNameReferenceHuffmanMask & b) == InsertWithoutNameReferenceHuffmanMask;
+                        _huffman =
+                            (InsertWithoutNameReferenceHuffmanMask & b)
+                            == InsertWithoutNameReferenceHuffmanMask;
 
-                        if (_integerDecoder.BeginTryDecode((byte)prefixInt, InsertWithoutNameReferencePrefix, out intResult))
+                        if (
+                            _integerDecoder.BeginTryDecode(
+                                (byte)prefixInt,
+                                InsertWithoutNameReferencePrefix,
+                                out intResult
+                            )
+                        )
                         {
                             OnStringLength(intResult, State.Name);
                         }
@@ -161,7 +187,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                     else if ((b & DuplicateMask) == DuplicateRepresentation)
                     {
                         prefixInt = DuplicatePrefixMask & b;
-                        if (_integerDecoder.BeginTryDecode((byte)prefixInt, DuplicatePrefix, out intResult))
+                        if (
+                            _integerDecoder.BeginTryDecode(
+                                (byte)prefixInt,
+                                DuplicatePrefix,
+                                out intResult
+                            )
+                        )
                         {
                             OnDuplicate(intResult);
                         }
@@ -196,13 +228,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
                     {
                         OnString(nextState: State.ValueLength);
                     }
-
                     break;
                 case State.ValueLength:
                     _huffman = (b & HuffmanMask) != 0;
 
                     // TODO confirm this.
-                    if (_integerDecoder.BeginTryDecode((byte)(b & ~HuffmanMask), StringLengthPrefix, out intResult))
+                    if (
+                        _integerDecoder.BeginTryDecode(
+                            (byte)(b & ~HuffmanMask),
+                            StringLengthPrefix,
+                            out intResult
+                        )
+                    )
                     {
                         OnStringLength(intResult, nextState: State.Value);
                         if (intResult == 0)
@@ -241,12 +278,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
             }
         }
 
-
         private void OnStringLength(int length, State nextState)
         {
             if (length > _stringOctets.Length)
             {
-                throw new QPackDecodingException(/*CoreStrings.FormatQPackStringLengthTooLarge(length, _stringOctets.Length)*/);
+                throw new QPackDecodingException( /*CoreStrings.FormatQPackStringLengthTooLarge(length, _stringOctets.Length)*/
+                );
             }
 
             _stringLength = length;
@@ -268,7 +305,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
             {
                 if (_huffman)
                 {
-                    return Huffman.Decode(new ReadOnlySpan<byte>(_stringOctets, 0, _stringLength), ref dst);
+                    return Huffman.Decode(
+                        new ReadOnlySpan<byte>(_stringOctets, 0, _stringLength),
+                        ref dst
+                    );
                 }
                 else
                 {
@@ -291,7 +331,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
             }
             catch (HuffmanDecodingException ex)
             {
-                throw new QPackDecodingException(""/*CoreStrings.QPackHuffmanError*/, ex);
+                throw new QPackDecodingException(
+                    "" /*CoreStrings.QPackHuffmanError*/
+                    ,
+                    ex
+                );
             }
 
             _state = nextState;
@@ -326,7 +370,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
             }
             catch (IndexOutOfRangeException ex)
             {
-                throw new QPackDecodingException( "" /*CoreStrings.FormatQPackErrorIndexOutOfRange(index)*/, ex);
+                throw new QPackDecodingException(
+                    "" /*CoreStrings.FormatQPackErrorIndexOutOfRange(index)*/
+                    ,
+                    ex
+                );
             }
         }
     }

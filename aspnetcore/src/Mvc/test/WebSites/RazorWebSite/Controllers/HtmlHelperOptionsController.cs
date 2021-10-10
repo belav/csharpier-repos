@@ -13,14 +13,15 @@ namespace RazorWebSite.Controllers
             var model = new DateModel
             {
                 MyDate = new DateTimeOffset(
-                year: 2000,
-                month: 1,
-                day: 2,
-                hour: 3,
-                minute: 4,
-                second: 5,
-                millisecond: 60,
-                offset: TimeSpan.FromHours(0))
+                    year: 2000,
+                    month: 1,
+                    day: 2,
+                    hour: 3,
+                    minute: 4,
+                    second: 5,
+                    millisecond: 60,
+                    offset: TimeSpan.FromHours(0)
+                )
             };
 
             ModelState.AddModelError(string.Empty, "A model error occurred.");
@@ -33,14 +34,15 @@ namespace RazorWebSite.Controllers
             var model = new DateModel
             {
                 MyDate = new DateTimeOffset(
-                year: 2000,
-                month: 1,
-                day: 2,
-                hour: 3,
-                minute: 4,
-                second: 5,
-                millisecond: 60,
-                offset: TimeSpan.FromHours(0))
+                    year: 2000,
+                    month: 1,
+                    day: 2,
+                    hour: 3,
+                    minute: 4,
+                    second: 5,
+                    millisecond: 60,
+                    offset: TimeSpan.FromHours(0)
+                )
             };
 
             ModelState.AddModelError(string.Empty, "A model error occurred.");

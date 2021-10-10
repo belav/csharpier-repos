@@ -12,10 +12,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
     {
         public static IEnumerable<SelectorModel> FlattenSelectors(ActionModel actionModel)
         {
-            // Loop through all attribute routes defined on the controller. 
+            // Loop through all attribute routes defined on the controller.
             // These perform a cross-product with all of the action-level attribute routes.
-            var controllerSelectors = actionModel.Controller.Selectors
-                .Where(sm => sm.AttributeRouteModel != null)
+            var controllerSelectors = actionModel.Controller.Selectors.Where(
+                    sm => sm.AttributeRouteModel != null
+                )
                 .ToList();
 
             // We also include metadata and action constraints from the controller
@@ -24,9 +25,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             if (actionModel.Controller.Selectors.Count > 0)
             {
                 // This logic seems arbitrary but there's a good reason for it.
-                // 
+                //
                 // When we build the controller level selectors, any metadata or action constraints
-                // that aren't IRouteTemplateProvider will be included in all selectors. So we 
+                // that aren't IRouteTemplateProvider will be included in all selectors. So we
                 // pick any selector and then grab all of the stuff that isn't IRouteTemplateProvider
                 // then we've found all of the items that aren't routes.
                 //
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
                     selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(
                         left: null,
-                        right: actionRouteModel);
+                        right: actionRouteModel
+                    );
 
                     AddActionConstraints(selector, additionalSelector?.ActionConstraints);
                     AddEndpointMetadata(selector, additionalSelector?.EndpointMetadata);
@@ -85,9 +87,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                         // We're using the attribute routes from the controller
                         var selector = new SelectorModel(actionSelector);
 
-                        selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(
-                            controllerSelector.AttributeRouteModel,
-                            actionRouteModel);
+                        selector.AttributeRouteModel =
+                            AttributeRouteModel.CombineAttributeRouteModel(
+                                controllerSelector.AttributeRouteModel,
+                                actionRouteModel
+                            );
 
                         AddActionConstraints(selector, controllerSelector.ActionConstraints);
                         AddEndpointMetadata(selector, controllerSelector.EndpointMetadata);
@@ -106,7 +110,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
                     selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(
                         left: null,
-                        right: actionRouteModel);
+                        right: actionRouteModel
+                    );
 
                     AddActionConstraints(selector, additionalSelector?.ActionConstraints);
                     AddEndpointMetadata(selector, additionalSelector?.EndpointMetadata);
@@ -116,18 +121,24 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             }
         }
 
-        private static void AddActionConstraints(SelectorModel selector, IList<IActionConstraintMetadata>? actionConstraints)
+        private static void AddActionConstraints(
+            SelectorModel selector,
+            IList<IActionConstraintMetadata>? actionConstraints
+        )
         {
             if (actionConstraints != null)
             {
-                for (var i = 0; i < actionConstraints.Count;i++)
+                for (var i = 0; i < actionConstraints.Count; i++)
                 {
                     selector.ActionConstraints.Add(actionConstraints[i]);
                 }
             }
         }
 
-        private static void AddEndpointMetadata(SelectorModel selector, IList<object>? controllerMetadata)
+        private static void AddEndpointMetadata(
+            SelectorModel selector,
+            IList<object>? controllerMetadata
+        )
         {
             if (controllerMetadata != null)
             {
@@ -141,10 +152,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             }
         }
 
-        public static IEnumerable<(AttributeRouteModel? route, SelectorModel actionSelector, SelectorModel? controllerSelector)> GetAttributeRoutes(ActionModel actionModel)
+        public static IEnumerable<(AttributeRouteModel? route, SelectorModel actionSelector, SelectorModel? controllerSelector)> GetAttributeRoutes(
+            ActionModel actionModel
+        )
         {
-            var controllerAttributeRoutes = actionModel.Controller.Selectors
-                .Where(sm => sm.AttributeRouteModel != null)
+            var controllerAttributeRoutes = actionModel.Controller.Selectors.Where(
+                    sm => sm.AttributeRouteModel != null
+                )
                 .Select(sm => sm.AttributeRouteModel)
                 .ToList();
 
@@ -159,7 +173,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 {
                     var route = AttributeRouteModel.CombineAttributeRouteModel(
                         left: null,
-                        right: actionRouteModel);
+                        right: actionRouteModel
+                    );
 
                     yield return (route, actionSelectorModel, null);
                 }
@@ -172,17 +187,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
                         var route = AttributeRouteModel.CombineAttributeRouteModel(
                             controllerSelector.AttributeRouteModel,
-                            actionRouteModel);
+                            actionRouteModel
+                        );
 
                         yield return (route, actionSelectorModel, controllerSelector);
                     }
                 }
-
                 else
                 {
                     var route = AttributeRouteModel.CombineAttributeRouteModel(
                         left: null,
-                        right: actionRouteModel);
+                        right: actionRouteModel
+                    );
 
                     yield return (route, actionSelectorModel, null);
                 }

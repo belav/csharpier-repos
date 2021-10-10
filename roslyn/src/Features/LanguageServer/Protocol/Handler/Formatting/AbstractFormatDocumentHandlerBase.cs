@@ -14,7 +14,8 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
-    internal abstract class AbstractFormatDocumentHandlerBase<RequestType, ResponseType> : AbstractStatelessRequestHandler<RequestType, ResponseType>
+    internal abstract class AbstractFormatDocumentHandlerBase<RequestType, ResponseType>
+        : AbstractStatelessRequestHandler<RequestType, ResponseType>
     {
         public override bool MutatesSolutionState => false;
         public override bool RequiresLSPSolution => true;
@@ -23,14 +24,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             RequestContext context,
             LSP.FormattingOptions options,
             CancellationToken cancellationToken,
-            LSP.Range? range = null)
+            LSP.Range? range = null
+        )
         {
             var edits = new ArrayBuilder<LSP.TextEdit>();
             var document = context.Document;
 
             if (document != null)
             {
-                var formattingService = document.Project.LanguageServices.GetRequiredService<IEditorFormattingService>();
+                var formattingService =
+                    document.Project.LanguageServices.GetRequiredService<IEditorFormattingService>();
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
                 TextSpan? textSpan = null;
                 if (range != null)
@@ -39,11 +42,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 }
 
                 // We should use the options passed in by LSP instead of the document's options.
-                var documentOptions = await ProtocolConversions.FormattingOptionsToDocumentOptionsAsync(
-                    options, document, cancellationToken).ConfigureAwait(false);
+                var documentOptions =
+                    await ProtocolConversions.FormattingOptionsToDocumentOptionsAsync(
+                            options,
+                            document,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                var textChanges = await GetFormattingChangesAsync(formattingService, document, textSpan, documentOptions, cancellationToken).ConfigureAwait(false);
-                edits.AddRange(textChanges.Select(change => ProtocolConversions.TextChangeToTextEdit(change, text)));
+                var textChanges = await GetFormattingChangesAsync(
+                        formattingService,
+                        document,
+                        textSpan,
+                        documentOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                edits.AddRange(
+                    textChanges.Select(
+                        change => ProtocolConversions.TextChangeToTextEdit(change, text)
+                    )
+                );
             }
 
             return edits.ToArrayAndFree();
@@ -54,7 +73,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             Document document,
             TextSpan? textSpan,
             DocumentOptionSet documentOptions,
-            CancellationToken cancellationToken)
-            => formattingService.GetFormattingChangesAsync(document, textSpan, documentOptions, cancellationToken);
+            CancellationToken cancellationToken
+        ) =>
+            formattingService.GetFormattingChangesAsync(
+                document,
+                textSpan,
+                documentOptions,
+                cancellationToken
+            );
     }
 }

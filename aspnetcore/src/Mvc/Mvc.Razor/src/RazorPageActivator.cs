@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             IJsonHelper jsonHelper,
             DiagnosticSource diagnosticSource,
             HtmlEncoder htmlEncoder,
-            IModelExpressionProvider modelExpressionProvider)
+            IModelExpressionProvider modelExpressionProvider
+        )
         {
             _activationInfo = new ConcurrentDictionary<CacheKey, RazorPagePropertyActivator>();
             _metadataProvider = metadataProvider;
@@ -94,7 +95,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     pageType,
                     modelType,
                     _metadataProvider,
-                    _propertyAccessors);
+                    _propertyAccessors
+                );
 
                 propertyActivator = _activationInfo.GetOrAdd(cacheKey, propertyActivator);
             }
@@ -116,8 +118,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             public bool Equals(CacheKey other)
             {
-                return PageType == other.PageType &&
-                    ProvidedModelType == other.ProvidedModelType;
+                return PageType == other.PageType && ProvidedModelType == other.ProvidedModelType;
             }
 
             public override int GetHashCode()

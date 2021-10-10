@@ -38,10 +38,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 return Secret == null;
             }
 
-            return
-                CryptographicOperations.FixedTimeEquals(
-                    MemoryMarshal.AsBytes(Secret.AsSpan()),
-                    MemoryMarshal.AsBytes(other.Secret.AsSpan()));
+            return CryptographicOperations.FixedTimeEquals(
+                MemoryMarshal.AsBytes(Secret.AsSpan()),
+                MemoryMarshal.AsBytes(other.Secret.AsSpan())
+            );
         }
 
         public override bool Equals(object obj)

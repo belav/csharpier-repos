@@ -28,8 +28,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string name,
             IMethodSymbol? addMethod,
             IMethodSymbol? removeMethod,
-            IMethodSymbol? raiseMethod)
-            : base(containingType?.ContainingAssembly, containingType, attributes, declaredAccessibility, modifiers, name)
+            IMethodSymbol? raiseMethod
+        )
+            : base(
+                containingType?.ContainingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name
+            )
         {
             this.Type = type;
             this.ExplicitInterfaceImplementations = explicitInterfaceImplementations.NullToEmpty();
@@ -41,19 +49,25 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         protected override CodeGenerationSymbol Clone()
         {
             return new CodeGenerationEventSymbol(
-                this.ContainingType, this.GetAttributes(), this.DeclaredAccessibility,
-                this.Modifiers, this.Type, this.ExplicitInterfaceImplementations,
-                this.Name, this.AddMethod, this.RemoveMethod, this.RaiseMethod);
+                this.ContainingType,
+                this.GetAttributes(),
+                this.DeclaredAccessibility,
+                this.Modifiers,
+                this.Type,
+                this.ExplicitInterfaceImplementations,
+                this.Name,
+                this.AddMethod,
+                this.RemoveMethod,
+                this.RaiseMethod
+            );
         }
 
         public override SymbolKind Kind => SymbolKind.Event;
 
-        public override void Accept(SymbolVisitor visitor)
-            => visitor.VisitEvent(this);
+        public override void Accept(SymbolVisitor visitor) => visitor.VisitEvent(this);
 
         public override TResult? Accept<TResult>(SymbolVisitor<TResult> visitor)
-            where TResult : default
-            => visitor.VisitEvent(this);
+            where TResult : default => visitor.VisitEvent(this);
 
         public new IEventSymbol OriginalDefinition => this;
 
@@ -61,6 +75,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public IEventSymbol? OverriddenEvent => null;
 
-        public static ImmutableArray<CustomModifier> TypeCustomModifiers => ImmutableArray.Create<CustomModifier>();
+        public static ImmutableArray<CustomModifier> TypeCustomModifiers =>
+            ImmutableArray.Create<CustomModifier>();
     }
 }

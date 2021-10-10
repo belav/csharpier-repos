@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Guid transactionId,
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
             bool transactionOwned,
-            ISqlGenerationHelper sqlGenerationHelper)
+            ISqlGenerationHelper sqlGenerationHelper
+        )
         {
             Check.NotNull(connection, nameof(connection));
             Check.NotNull(transaction, nameof(transaction));
@@ -56,7 +57,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             if (connection.DbConnection != transaction.Connection)
             {
-                throw new InvalidOperationException(RelationalStrings.TransactionAssociatedWithDifferentConnection);
+                throw new InvalidOperationException(
+                    RelationalStrings.TransactionAssociatedWithDifferentConnection
+                );
             }
 
             Connection = connection;
@@ -93,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    startTime);
+                    startTime
+                );
 
                 if (!interceptionResult.IsSuppressed)
                 {
@@ -105,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     _dbTransaction,
                     TransactionId,
                     startTime,
-                    stopwatch.Elapsed);
+                    stopwatch.Elapsed
+                );
             }
             catch (Exception e)
             {
@@ -116,7 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "Commit",
                     e,
                     startTime,
-                    stopwatch.Elapsed);
+                    stopwatch.Elapsed
+                );
 
                 throw;
             }
@@ -136,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    startTime);
+                    startTime
+                );
 
                 if (!interceptionResult.IsSuppressed)
                 {
@@ -148,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     _dbTransaction,
                     TransactionId,
                     startTime,
-                    stopwatch.Elapsed);
+                    stopwatch.Elapsed
+                );
             }
             catch (Exception e)
             {
@@ -159,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "Rollback",
                     e,
                     startTime,
-                    stopwatch.Elapsed);
+                    stopwatch.Elapsed
+                );
 
                 throw;
             }
@@ -180,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         _dbTransaction,
                         TransactionId,
                         startTime,
-                        cancellationToken)
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
@@ -194,7 +204,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         TransactionId,
                         startTime,
                         stopwatch.Elapsed,
-                        cancellationToken)
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
             }
             catch (Exception e)
@@ -207,7 +218,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         e,
                         startTime,
                         stopwatch.Elapsed,
-                        cancellationToken)
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
 
                 throw;
@@ -229,7 +241,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         _dbTransaction,
                         TransactionId,
                         startTime,
-                        cancellationToken)
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
@@ -243,7 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         TransactionId,
                         startTime,
                         stopwatch.Elapsed,
-                        cancellationToken)
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
             }
             catch (Exception e)
@@ -256,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         e,
                         startTime,
                         stopwatch.Elapsed,
-                        cancellationToken)
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
 
                 throw;
@@ -277,13 +292,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    startTime);
+                    startTime
+                );
 
                 if (!interceptionResult.IsSuppressed)
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateCreateSavepointStatement(name);
+                    command.CommandText = _sqlGenerationHelper.GenerateCreateSavepointStatement(
+                        name
+                    );
                     command.ExecuteNonQuery();
                 }
 
@@ -291,7 +309,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    startTime);
+                    startTime
+                );
             }
             catch (Exception e)
             {
@@ -302,14 +321,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "CreateSavepoint",
                     e,
                     startTime,
-                    stopwatch.Elapsed);
+                    stopwatch.Elapsed
+                );
 
                 throw;
             }
         }
 
         /// <inheritdoc />
-        public virtual async Task CreateSavepointAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task CreateSavepointAsync(
+            string name,
+            CancellationToken cancellationToken = default
+        )
         {
             var startTime = DateTimeOffset.UtcNow;
             var stopwatch = Stopwatch.StartNew();
@@ -317,38 +340,46 @@ namespace Microsoft.EntityFrameworkCore.Storage
             try
             {
                 var interceptionResult = await Logger.CreatingTransactionSavepointAsync(
-                    Connection,
-                    _dbTransaction,
-                    TransactionId,
-                    startTime,
-                    cancellationToken).ConfigureAwait(false);
+                        Connection,
+                        _dbTransaction,
+                        TransactionId,
+                        startTime,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateCreateSavepointStatement(name);
+                    command.CommandText = _sqlGenerationHelper.GenerateCreateSavepointStatement(
+                        name
+                    );
                     await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
                 }
 
                 await Logger.CreatedTransactionSavepointAsync(
-                    Connection,
-                    _dbTransaction,
-                    TransactionId,
-                    startTime,
-                    cancellationToken).ConfigureAwait(false);
+                        Connection,
+                        _dbTransaction,
+                        TransactionId,
+                        startTime,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 await Logger.TransactionErrorAsync(
-                    Connection,
-                    _dbTransaction,
-                    TransactionId,
-                    "CreateSavepoint",
-                    e,
-                    startTime,
-                    stopwatch.Elapsed,
-                    cancellationToken).ConfigureAwait(false);
+                        Connection,
+                        _dbTransaction,
+                        TransactionId,
+                        "CreateSavepoint",
+                        e,
+                        startTime,
+                        stopwatch.Elapsed,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 throw;
             }
@@ -366,13 +397,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    startTime);
+                    startTime
+                );
 
                 if (!interceptionResult.IsSuppressed)
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(name);
+                    command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(
+                        name
+                    );
                     command.ExecuteNonQuery();
                 }
 
@@ -380,7 +414,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    startTime);
+                    startTime
+                );
             }
             catch (Exception e)
             {
@@ -391,14 +426,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "RollbackToSavepoint",
                     e,
                     startTime,
-                    stopwatch.Elapsed);
+                    stopwatch.Elapsed
+                );
 
                 throw;
             }
         }
 
         /// <inheritdoc />
-        public virtual async Task RollbackToSavepointAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task RollbackToSavepointAsync(
+            string name,
+            CancellationToken cancellationToken = default
+        )
         {
             var startTime = DateTimeOffset.UtcNow;
             var stopwatch = Stopwatch.StartNew();
@@ -406,38 +445,46 @@ namespace Microsoft.EntityFrameworkCore.Storage
             try
             {
                 var interceptionResult = await Logger.RollingBackToTransactionSavepointAsync(
-                    Connection,
-                    _dbTransaction,
-                    TransactionId,
-                    startTime,
-                    cancellationToken).ConfigureAwait(false);
+                        Connection,
+                        _dbTransaction,
+                        TransactionId,
+                        startTime,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(name);
+                    command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(
+                        name
+                    );
                     await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
                 }
 
                 await Logger.RolledBackToTransactionSavepointAsync(
-                    Connection,
-                    _dbTransaction,
-                    TransactionId,
-                    startTime,
-                    cancellationToken).ConfigureAwait(false);
+                        Connection,
+                        _dbTransaction,
+                        TransactionId,
+                        startTime,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 await Logger.TransactionErrorAsync(
-                    Connection,
-                    _dbTransaction,
-                    TransactionId,
-                    "RollbackToSavepoint",
-                    e,
-                    startTime,
-                    stopwatch.Elapsed,
-                    cancellationToken).ConfigureAwait(false);
+                        Connection,
+                        _dbTransaction,
+                        TransactionId,
+                        "RollbackToSavepoint",
+                        e,
+                        startTime,
+                        stopwatch.Elapsed,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 throw;
             }
@@ -455,13 +502,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    startTime);
+                    startTime
+                );
 
                 if (!interceptionResult.IsSuppressed)
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateReleaseSavepointStatement(name);
+                    command.CommandText = _sqlGenerationHelper.GenerateReleaseSavepointStatement(
+                        name
+                    );
                     command.ExecuteNonQuery();
                 }
 
@@ -469,7 +519,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    startTime);
+                    startTime
+                );
             }
             catch (Exception e)
             {
@@ -480,14 +531,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "ReleaseSavepoint",
                     e,
                     startTime,
-                    stopwatch.Elapsed);
+                    stopwatch.Elapsed
+                );
 
                 throw;
             }
         }
 
         /// <inheritdoc />
-        public virtual async Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task ReleaseSavepointAsync(
+            string name,
+            CancellationToken cancellationToken = default
+        )
         {
             var startTime = DateTimeOffset.UtcNow;
             var stopwatch = Stopwatch.StartNew();
@@ -495,46 +550,53 @@ namespace Microsoft.EntityFrameworkCore.Storage
             try
             {
                 var interceptionResult = await Logger.ReleasingTransactionSavepointAsync(
-                    Connection,
-                    _dbTransaction,
-                    TransactionId,
-                    startTime,
-                    cancellationToken).ConfigureAwait(false);
+                        Connection,
+                        _dbTransaction,
+                        TransactionId,
+                        startTime,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateReleaseSavepointStatement(name);
+                    command.CommandText = _sqlGenerationHelper.GenerateReleaseSavepointStatement(
+                        name
+                    );
                     await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
                 }
 
                 await Logger.ReleasedTransactionSavepointAsync(
-                    Connection,
-                    _dbTransaction,
-                    TransactionId,
-                    startTime,
-                    cancellationToken).ConfigureAwait(false);
+                        Connection,
+                        _dbTransaction,
+                        TransactionId,
+                        startTime,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 await Logger.TransactionErrorAsync(
-                    Connection,
-                    _dbTransaction,
-                    TransactionId,
-                    "ReleaseSavepoint",
-                    e,
-                    startTime,
-                    stopwatch.Elapsed,
-                    cancellationToken).ConfigureAwait(false);
+                        Connection,
+                        _dbTransaction,
+                        TransactionId,
+                        "ReleaseSavepoint",
+                        e,
+                        startTime,
+                        stopwatch.Elapsed,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 throw;
             }
         }
 
         /// <inheritdoc />
-        public virtual bool SupportsSavepoints
-            => true;
+        public virtual bool SupportsSavepoints => true;
 
         /// <inheritdoc />
         public virtual void Dispose()
@@ -551,7 +613,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         Connection,
                         _dbTransaction,
                         TransactionId,
-                        DateTimeOffset.UtcNow);
+                        DateTimeOffset.UtcNow
+                    );
                 }
 
                 ClearTransaction();
@@ -573,7 +636,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         Connection,
                         _dbTransaction,
                         TransactionId,
-                        DateTimeOffset.UtcNow);
+                        DateTimeOffset.UtcNow
+                    );
                 }
 
                 await ClearTransactionAsync().ConfigureAwait(false);
@@ -587,7 +651,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             Check.DebugAssert(
                 Connection.CurrentTransaction == null || Connection.CurrentTransaction == this,
-                "Connection.CurrentTransaction is unexpected instance");
+                "Connection.CurrentTransaction is unexpected instance"
+            );
 
             Connection.UseTransaction(null);
 
@@ -602,11 +667,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Remove the underlying transaction from the connection
         /// </summary>
-        protected virtual async Task ClearTransactionAsync(CancellationToken cancellationToken = default)
+        protected virtual async Task ClearTransactionAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             Check.DebugAssert(
                 Connection.CurrentTransaction == null || Connection.CurrentTransaction == this,
-                "Connection.CurrentTransaction is unexpected instance");
+                "Connection.CurrentTransaction is unexpected instance"
+            );
 
             await Connection.UseTransactionAsync(null, cancellationToken).ConfigureAwait(false);
 
@@ -618,7 +686,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
         }
 
-        DbTransaction IInfrastructure<DbTransaction>.Instance
-            => _dbTransaction;
+        DbTransaction IInfrastructure<DbTransaction>.Instance => _dbTransaction;
     }
 }

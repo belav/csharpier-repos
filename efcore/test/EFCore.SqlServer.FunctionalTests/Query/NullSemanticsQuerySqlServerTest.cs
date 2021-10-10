@@ -8,11 +8,14 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NullSemanticsQuerySqlServerTest : NullSemanticsQueryTestBase<NullSemanticsQuerySqlServerFixture>
+    public class NullSemanticsQuerySqlServerTest
+        : NullSemanticsQueryTestBase<NullSemanticsQuerySqlServerFixture>
     {
         // ReSharper disable once UnusedParameter.Local
-        public NullSemanticsQuerySqlServerTest(NullSemanticsQuerySqlServerFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public NullSemanticsQuerySqlServerTest(
+            NullSemanticsQuerySqlServerFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -37,7 +40,8 @@ WHERE [e].[NullableBoolA] = [e].[BoolB]",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE ([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task Compare_negated_bool_with_bool_equal(bool async)
@@ -59,7 +63,8 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) AND [e].[NullableBoolA] IS NOT NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task Compare_bool_with_negated_bool_equal(bool async)
@@ -81,7 +86,8 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) AND [e].[NullableBoolA] IS NOT NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task Compare_negated_bool_with_negated_bool_equal(bool async)
@@ -103,7 +109,8 @@ WHERE ([e].[NullableBoolA] = [e].[BoolB]) AND [e].[NullableBoolA] IS NOT NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task Compare_bool_with_bool_equal_negated(bool async)
@@ -125,7 +132,8 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_negated_bool_with_bool_equal_negated(bool async)
@@ -147,7 +155,8 @@ WHERE ([e].[NullableBoolA] = [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_bool_with_negated_bool_equal_negated(bool async)
@@ -169,7 +178,8 @@ WHERE ([e].[NullableBoolA] = [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_negated_bool_with_negated_bool_equal_negated(bool async)
@@ -191,7 +201,8 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_bool_with_bool_not_equal(bool async)
@@ -213,7 +224,8 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_negated_bool_with_bool_not_equal(bool async)
@@ -235,7 +247,8 @@ WHERE ([e].[NullableBoolA] = [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_bool_with_negated_bool_not_equal(bool async)
@@ -257,7 +270,8 @@ WHERE ([e].[NullableBoolA] = [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_negated_bool_with_negated_bool_not_equal(bool async)
@@ -279,7 +293,8 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_bool_with_bool_not_equal_negated(bool async)
@@ -301,7 +316,8 @@ WHERE ([e].[NullableBoolA] = [e].[BoolB]) AND [e].[NullableBoolA] IS NOT NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task Compare_negated_bool_with_bool_not_equal_negated(bool async)
@@ -323,7 +339,8 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) AND [e].[NullableBoolA] IS NOT NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task Compare_bool_with_negated_bool_not_equal_negated(bool async)
@@ -345,10 +362,13 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) AND [e].[NullableBoolA] IS NOT NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
-        public override async Task Compare_negated_bool_with_negated_bool_not_equal_negated(bool async)
+        public override async Task Compare_negated_bool_with_negated_bool_not_equal_negated(
+            bool async
+        )
         {
             await base.Compare_negated_bool_with_negated_bool_not_equal_negated(async);
 
@@ -367,7 +387,8 @@ WHERE ([e].[NullableBoolA] = [e].[BoolB]) AND [e].[NullableBoolA] IS NOT NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE (([e].[NullableBoolA] = [e].[NullableBoolB]) AND ([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL)) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task Compare_equals_method(bool async)
@@ -389,7 +410,8 @@ WHERE [e].[NullableBoolA] = [e].[BoolB]",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE ([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task Compare_equals_method_static(bool async)
@@ -411,7 +433,8 @@ WHERE [e].[NullableBoolA] = [e].[BoolB]",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)");
+WHERE ([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL AND [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task Compare_equals_method_negated(bool async)
@@ -433,7 +456,8 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_equals_method_negated_static(bool async)
@@ -455,7 +479,8 @@ WHERE ([e].[NullableBoolA] <> [e].[BoolB]) OR [e].[NullableBoolA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] <> [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Compare_complex_equal_equal_equal(bool async)
@@ -491,7 +516,8 @@ WHERE CASE
 END = CASE
     WHEN (([e].[NullableIntA] = [e].[NullableIntB]) AND ([e].[NullableIntA] IS NOT NULL AND [e].[NullableIntB] IS NOT NULL)) OR ([e].[NullableIntA] IS NULL AND [e].[NullableIntB] IS NULL) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END");
+END"
+            );
         }
 
         public override async Task Compare_complex_equal_not_equal_equal(bool async)
@@ -527,7 +553,8 @@ WHERE CASE
 END <> CASE
     WHEN (([e].[NullableIntA] = [e].[NullableIntB]) AND ([e].[NullableIntA] IS NOT NULL AND [e].[NullableIntB] IS NOT NULL)) OR ([e].[NullableIntA] IS NULL AND [e].[NullableIntB] IS NULL) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END");
+END"
+            );
         }
 
         public override async Task Compare_complex_not_equal_equal_equal(bool async)
@@ -563,7 +590,8 @@ WHERE CASE
 END = CASE
     WHEN (([e].[NullableIntA] = [e].[NullableIntB]) AND ([e].[NullableIntA] IS NOT NULL AND [e].[NullableIntB] IS NOT NULL)) OR ([e].[NullableIntA] IS NULL AND [e].[NullableIntB] IS NULL) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END");
+END"
+            );
         }
 
         public override async Task Compare_complex_not_equal_not_equal_equal(bool async)
@@ -599,7 +627,8 @@ WHERE CASE
 END <> CASE
     WHEN (([e].[NullableIntA] = [e].[NullableIntB]) AND ([e].[NullableIntA] IS NOT NULL AND [e].[NullableIntB] IS NOT NULL)) OR ([e].[NullableIntA] IS NULL AND [e].[NullableIntB] IS NULL) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END");
+END"
+            );
         }
 
         public override async Task Compare_complex_not_equal_equal_not_equal(bool async)
@@ -635,7 +664,8 @@ WHERE CASE
 END = CASE
     WHEN (([e].[NullableIntA] <> [e].[NullableIntB]) OR ([e].[NullableIntA] IS NULL OR [e].[NullableIntB] IS NULL)) AND ([e].[NullableIntA] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END");
+END"
+            );
         }
 
         public override async Task Compare_complex_not_equal_not_equal_not_equal(bool async)
@@ -671,7 +701,8 @@ WHERE CASE
 END <> CASE
     WHEN (([e].[NullableIntA] <> [e].[NullableIntB]) OR ([e].[NullableIntA] IS NULL OR [e].[NullableIntB] IS NULL)) AND ([e].[NullableIntA] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END");
+END"
+            );
         }
 
         public override async Task Compare_nullable_with_null_parameter_equal(bool async)
@@ -681,7 +712,8 @@ END");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] IS NULL");
+WHERE [e].[NullableStringA] IS NULL"
+            );
         }
 
         public override async Task Compare_nullable_with_non_null_parameter_not_equal(bool async)
@@ -693,7 +725,8 @@ WHERE [e].[NullableStringA] IS NULL");
 
 SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] = @__prm_0");
+WHERE [e].[NullableStringA] = @__prm_0"
+            );
         }
 
         public override async Task Join_uses_database_semantics(bool async)
@@ -703,7 +736,8 @@ WHERE [e].[NullableStringA] = @__prm_0");
             AssertSql(
                 @"SELECT [e].[Id] AS [Id1], [e0].[Id] AS [Id2], [e].[NullableIntA], [e0].[NullableIntB]
 FROM [Entities1] AS [e]
-INNER JOIN [Entities2] AS [e0] ON [e].[NullableIntA] = [e0].[NullableIntB]");
+INNER JOIN [Entities2] AS [e0] ON [e].[NullableIntA] = [e0].[NullableIntB]"
+            );
         }
 
         public override async Task Contains_with_local_array_closure_with_null(bool async)
@@ -713,7 +747,8 @@ INNER JOIN [Entities2] AS [e0] ON [e].[NullableIntA] = [e0].[NullableIntB]");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL");
+WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL"
+            );
         }
 
         public override async Task Contains_with_local_array_closure_false_with_null(bool async)
@@ -723,7 +758,8 @@ WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableStringA] <> N'Foo') AND [e].[NullableStringA] IS NOT NULL");
+WHERE ([e].[NullableStringA] <> N'Foo') AND [e].[NullableStringA] IS NOT NULL"
+            );
         }
 
         public override async Task Contains_with_local_nullable_array_closure_negated(bool async)
@@ -733,7 +769,8 @@ WHERE ([e].[NullableStringA] <> N'Foo') AND [e].[NullableStringA] IS NOT NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL");
+WHERE ([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL"
+            );
         }
 
         public override async Task Contains_with_local_array_closure_with_multiple_nulls(bool async)
@@ -743,7 +780,8 @@ WHERE ([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL");
+WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL"
+            );
         }
 
         public override async Task Where_multiple_ors_with_null(bool async)
@@ -753,7 +791,8 @@ WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] IN (N'Foo', N'Blah') OR [e].[NullableStringA] IS NULL");
+WHERE [e].[NullableStringA] IN (N'Foo', N'Blah') OR [e].[NullableStringA] IS NULL"
+            );
         }
 
         public override async Task Where_multiple_ands_with_null(bool async)
@@ -763,7 +802,8 @@ WHERE [e].[NullableStringA] IN (N'Foo', N'Blah') OR [e].[NullableStringA] IS NUL
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] NOT IN (N'Foo', N'Blah') AND [e].[NullableStringA] IS NOT NULL");
+WHERE [e].[NullableStringA] NOT IN (N'Foo', N'Blah') AND [e].[NullableStringA] IS NOT NULL"
+            );
         }
 
         public override async Task Where_multiple_ors_with_nullable_parameter(bool async)
@@ -773,10 +813,13 @@ WHERE [e].[NullableStringA] NOT IN (N'Foo', N'Blah') AND [e].[NullableStringA] I
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL");
+WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL"
+            );
         }
 
-        public override async Task Where_multiple_ands_with_nullable_parameter_and_constant(bool async)
+        public override async Task Where_multiple_ands_with_nullable_parameter_and_constant(
+            bool async
+        )
         {
             await base.Where_multiple_ands_with_nullable_parameter_and_constant(async);
 
@@ -785,19 +828,25 @@ WHERE ([e].[NullableStringA] = N'Foo') OR [e].[NullableStringA] IS NULL");
 
 SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ((([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL) AND [e].[NullableStringA] IS NOT NULL) AND ([e].[NullableStringA] <> @__prm3_2)");
+WHERE ((([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL) AND [e].[NullableStringA] IS NOT NULL) AND ([e].[NullableStringA] <> @__prm3_2)"
+            );
         }
 
-        public override async Task Where_multiple_ands_with_nullable_parameter_and_constant_not_optimized(bool async)
+        public override async Task Where_multiple_ands_with_nullable_parameter_and_constant_not_optimized(
+            bool async
+        )
         {
-            await base.Where_multiple_ands_with_nullable_parameter_and_constant_not_optimized(async);
+            await base.Where_multiple_ands_with_nullable_parameter_and_constant_not_optimized(
+                async
+            );
 
             AssertSql(
                 @"@__prm3_2='Blah' (Size = 4000)
 
 SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableStringB] IS NOT NULL AND (([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL)) AND [e].[NullableStringA] IS NOT NULL) AND ([e].[NullableStringA] <> @__prm3_2)");
+WHERE (([e].[NullableStringB] IS NOT NULL AND (([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL)) AND [e].[NullableStringA] IS NOT NULL) AND ([e].[NullableStringA] <> @__prm3_2)"
+            );
         }
 
         public override async Task Where_coalesce(bool async)
@@ -807,7 +856,8 @@ WHERE (([e].[NullableStringB] IS NOT NULL AND (([e].[NullableStringA] <> N'Foo')
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE COALESCE([e].[NullableBoolA], CAST(1 AS bit)) = CAST(1 AS bit)");
+WHERE COALESCE([e].[NullableBoolA], CAST(1 AS bit)) = CAST(1 AS bit)"
+            );
         }
 
         public override async Task Where_equal_nullable_with_null_value_parameter(bool async)
@@ -817,7 +867,8 @@ WHERE COALESCE([e].[NullableBoolA], CAST(1 AS bit)) = CAST(1 AS bit)");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] IS NULL");
+WHERE [e].[NullableStringA] IS NULL"
+            );
         }
 
         public override async Task Where_not_equal_nullable_with_null_value_parameter(bool async)
@@ -827,7 +878,8 @@ WHERE [e].[NullableStringA] IS NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] IS NOT NULL");
+WHERE [e].[NullableStringA] IS NOT NULL"
+            );
         }
 
         public override async Task Where_equal_with_coalesce(bool async)
@@ -837,7 +889,8 @@ WHERE [e].[NullableStringA] IS NOT NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (COALESCE([e].[NullableStringA], [e].[NullableStringB]) = [e].[NullableStringC]) OR (([e].[NullableStringA] IS NULL AND [e].[NullableStringB] IS NULL) AND [e].[NullableStringC] IS NULL)");
+WHERE (COALESCE([e].[NullableStringA], [e].[NullableStringB]) = [e].[NullableStringC]) OR (([e].[NullableStringA] IS NULL AND [e].[NullableStringB] IS NULL) AND [e].[NullableStringC] IS NULL)"
+            );
         }
 
         public override async Task Where_not_equal_with_coalesce(bool async)
@@ -847,7 +900,8 @@ WHERE (COALESCE([e].[NullableStringA], [e].[NullableStringB]) = [e].[NullableStr
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ((COALESCE([e].[NullableStringA], [e].[NullableStringB]) <> [e].[NullableStringC]) OR (([e].[NullableStringA] IS NULL AND [e].[NullableStringB] IS NULL) OR [e].[NullableStringC] IS NULL)) AND (([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL) OR [e].[NullableStringC] IS NOT NULL)");
+WHERE ((COALESCE([e].[NullableStringA], [e].[NullableStringB]) <> [e].[NullableStringC]) OR (([e].[NullableStringA] IS NULL AND [e].[NullableStringB] IS NULL) OR [e].[NullableStringC] IS NULL)) AND (([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL) OR [e].[NullableStringC] IS NOT NULL)"
+            );
         }
 
         public override async Task Where_equal_with_coalesce_both_sides(bool async)
@@ -857,7 +911,8 @@ WHERE ((COALESCE([e].[NullableStringA], [e].[NullableStringB]) <> [e].[NullableS
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE COALESCE([e].[NullableStringA], [e].[NullableStringB]) = COALESCE([e].[StringA], [e].[StringB])");
+WHERE COALESCE([e].[NullableStringA], [e].[NullableStringB]) = COALESCE([e].[StringA], [e].[StringB])"
+            );
         }
 
         public override async Task Where_not_equal_with_coalesce_both_sides(bool async)
@@ -867,7 +922,8 @@ WHERE COALESCE([e].[NullableStringA], [e].[NullableStringB]) = COALESCE([e].[Str
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ((COALESCE([e].[NullableIntA], [e].[NullableIntB]) <> COALESCE([e].[NullableIntC], [e].[NullableIntB])) OR (([e].[NullableIntA] IS NULL AND [e].[NullableIntB] IS NULL) OR ([e].[NullableIntC] IS NULL AND [e].[NullableIntB] IS NULL))) AND (([e].[NullableIntA] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL) OR ([e].[NullableIntC] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL))");
+WHERE ((COALESCE([e].[NullableIntA], [e].[NullableIntB]) <> COALESCE([e].[NullableIntC], [e].[NullableIntB])) OR (([e].[NullableIntA] IS NULL AND [e].[NullableIntB] IS NULL) OR ([e].[NullableIntC] IS NULL AND [e].[NullableIntB] IS NULL))) AND (([e].[NullableIntA] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL) OR ([e].[NullableIntC] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL))"
+            );
         }
 
         public override async Task Where_equal_with_conditional(bool async)
@@ -883,7 +939,8 @@ WHERE (CASE
 END = [e].[NullableStringC]) OR (CASE
     WHEN ([e].[NullableStringA] = [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL AND [e].[NullableStringB] IS NULL) THEN [e].[NullableStringA]
     ELSE [e].[NullableStringB]
-END IS NULL AND [e].[NullableStringC] IS NULL)");
+END IS NULL AND [e].[NullableStringC] IS NULL)"
+            );
         }
 
         public override async Task Where_not_equal_with_conditional(bool async)
@@ -902,7 +959,8 @@ END) OR ([e].[NullableStringC] IS NULL OR CASE
 END IS NULL)) AND ([e].[NullableStringC] IS NOT NULL OR CASE
     WHEN ([e].[NullableStringA] = [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL AND [e].[NullableStringB] IS NULL) THEN [e].[NullableStringA]
     ELSE [e].[NullableStringB]
-END IS NOT NULL)");
+END IS NOT NULL)"
+            );
         }
 
         public override async Task Where_equal_with_conditional_non_nullable(bool async)
@@ -915,7 +973,8 @@ FROM [Entities1] AS [e]
 WHERE ([e].[NullableStringC] <> CASE
     WHEN ([e].[NullableStringA] = [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL AND [e].[NullableStringB] IS NULL) THEN [e].[StringA]
     ELSE [e].[StringB]
-END) OR [e].[NullableStringC] IS NULL");
+END) OR [e].[NullableStringC] IS NULL"
+            );
         }
 
         public override async Task Where_equal_with_and_and_contains(bool async)
@@ -925,7 +984,8 @@ END) OR [e].[NullableStringC] IS NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableStringB] LIKE N'') OR (CHARINDEX([e].[NullableStringB], [e].[NullableStringA]) > 0)) AND ([e].[BoolA] = CAST(1 AS bit))");
+WHERE (([e].[NullableStringB] LIKE N'') OR (CHARINDEX([e].[NullableStringB], [e].[NullableStringA]) > 0)) AND ([e].[BoolA] = CAST(1 AS bit))"
+            );
         }
 
         public override async Task Null_comparison_in_selector_with_relational_nulls(bool async)
@@ -937,7 +997,8 @@ WHERE (([e].[NullableStringB] LIKE N'') OR (CHARINDEX([e].[NullableStringB], [e]
     WHEN ([e].[NullableStringA] <> N'Foo') OR [e].[NullableStringA] IS NULL THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END
-FROM [Entities1] AS [e]");
+FROM [Entities1] AS [e]"
+            );
         }
 
         public override async Task Null_comparison_in_order_by_with_relational_nulls(bool async)
@@ -953,7 +1014,8 @@ ORDER BY CASE
 END, CASE
     WHEN ([e].[NullableIntB] <> 10) OR [e].[NullableIntB] IS NULL THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END");
+END"
+            );
         }
 
         public override async Task Null_comparison_in_join_key_with_relational_nulls(bool async)
@@ -969,7 +1031,8 @@ INNER JOIN [Entities2] AS [e2] ON CASE
 END = CASE
     WHEN [e2].[NullableBoolB] <> CAST(1 AS bit)
     THEN CAST(1 AS bit) ELSE CAST(0 AS bit)
-END");
+END"
+            );
         }
 
         public override async Task Where_conditional_search_condition_in_result(bool async)
@@ -983,7 +1046,8 @@ WHERE [e].[StringA] IN (N'Foo', N'Bar')",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[StringA] LIKE N'A%'");
+WHERE [e].[StringA] LIKE N'A%'"
+            );
         }
 
         public override async Task Where_nested_conditional_search_condition_in_result(bool async)
@@ -992,7 +1056,8 @@ WHERE [e].[StringA] LIKE N'A%'");
 
             AssertSql(
                 @"SELECT [e].[Id]
-FROM [Entities1] AS [e]");
+FROM [Entities1] AS [e]"
+            );
         }
 
         public override void Where_equal_using_relational_null_semantics()
@@ -1002,7 +1067,8 @@ FROM [Entities1] AS [e]");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] = [e].[NullableBoolB]");
+WHERE [e].[NullableBoolA] = [e].[NullableBoolB]"
+            );
         }
 
         public override void Where_contains_on_parameter_array_with_relational_null_semantics()
@@ -1012,7 +1078,8 @@ WHERE [e].[NullableBoolA] = [e].[NullableBoolB]");
             AssertSql(
                 @"SELECT [e].[NullableStringA]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] IN (N'Foo', N'Bar')");
+WHERE [e].[NullableStringA] IN (N'Foo', N'Bar')"
+            );
         }
 
         public override void Where_contains_on_parameter_empty_array_with_relational_null_semantics()
@@ -1022,7 +1089,8 @@ WHERE [e].[NullableStringA] IN (N'Foo', N'Bar')");
             AssertSql(
                 @"SELECT [e].[NullableStringA]
 FROM [Entities1] AS [e]
-WHERE 0 = 1");
+WHERE 0 = 1"
+            );
         }
 
         public override void Where_contains_on_parameter_array_with_just_null_with_relational_null_semantics()
@@ -1032,7 +1100,8 @@ WHERE 0 = 1");
             AssertSql(
                 @"SELECT [e].[NullableStringA]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] = NULL");
+WHERE [e].[NullableStringA] = NULL"
+            );
         }
 
         public override async Task Where_nullable_bool(bool async)
@@ -1042,7 +1111,8 @@ WHERE [e].[NullableStringA] = NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] = CAST(1 AS bit)");
+WHERE [e].[NullableBoolA] = CAST(1 AS bit)"
+            );
         }
 
         public override async Task Where_nullable_bool_equal_with_constant(bool async)
@@ -1052,7 +1122,8 @@ WHERE [e].[NullableBoolA] = CAST(1 AS bit)");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] = CAST(1 AS bit)");
+WHERE [e].[NullableBoolA] = CAST(1 AS bit)"
+            );
         }
 
         public override async Task Where_nullable_bool_with_null_check(bool async)
@@ -1062,7 +1133,8 @@ WHERE [e].[NullableBoolA] = CAST(1 AS bit)");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] IS NOT NULL AND ([e].[NullableBoolA] = CAST(1 AS bit))");
+WHERE [e].[NullableBoolA] IS NOT NULL AND ([e].[NullableBoolA] = CAST(1 AS bit))"
+            );
         }
 
         public override void Where_equal_using_relational_null_semantics_with_parameter()
@@ -1072,7 +1144,8 @@ WHERE [e].[NullableBoolA] IS NOT NULL AND ([e].[NullableBoolA] = CAST(1 AS bit))
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] IS NULL");
+WHERE [e].[NullableBoolA] IS NULL"
+            );
         }
 
         public override void Where_equal_using_relational_null_semantics_complex_with_parameter()
@@ -1082,7 +1155,8 @@ WHERE [e].[NullableBoolA] IS NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] = [e].[NullableBoolB]");
+WHERE [e].[NullableBoolA] = [e].[NullableBoolB]"
+            );
         }
 
         public override void Where_not_equal_using_relational_null_semantics()
@@ -1092,7 +1166,8 @@ WHERE [e].[NullableBoolA] = [e].[NullableBoolB]");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] <> [e].[NullableBoolB]");
+WHERE [e].[NullableBoolA] <> [e].[NullableBoolB]"
+            );
         }
 
         public override void Where_not_equal_using_relational_null_semantics_with_parameter()
@@ -1102,7 +1177,8 @@ WHERE [e].[NullableBoolA] <> [e].[NullableBoolB]");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] IS NOT NULL");
+WHERE [e].[NullableBoolA] IS NOT NULL"
+            );
         }
 
         public override void Where_not_equal_using_relational_null_semantics_complex_with_parameter()
@@ -1112,7 +1188,8 @@ WHERE [e].[NullableBoolA] IS NOT NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] <> [e].[NullableBoolB]");
+WHERE [e].[NullableBoolA] <> [e].[NullableBoolB]"
+            );
         }
 
         public override async Task Where_comparison_null_constant_and_null_parameter(bool async)
@@ -1130,7 +1207,8 @@ WHERE @__p_0 = CAST(1 AS bit)",
 
 SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE @__p_0 = CAST(1 AS bit)");
+WHERE @__p_0 = CAST(1 AS bit)"
+            );
         }
 
         public override async Task Where_comparison_null_constant_and_nonnull_parameter(bool async)
@@ -1148,7 +1226,8 @@ WHERE @__p_0 = CAST(1 AS bit)",
 
 SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE @__p_0 = CAST(1 AS bit)");
+WHERE @__p_0 = CAST(1 AS bit)"
+            );
         }
 
         public override async Task Where_comparison_nonnull_constant_and_null_parameter(bool async)
@@ -1166,17 +1245,23 @@ WHERE @__p_0 = CAST(1 AS bit)",
 
 SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE @__p_0 = CAST(1 AS bit)");
+WHERE @__p_0 = CAST(1 AS bit)"
+            );
         }
 
-        public override async Task Where_comparison_null_semantics_optimization_works_with_complex_predicates(bool async)
+        public override async Task Where_comparison_null_semantics_optimization_works_with_complex_predicates(
+            bool async
+        )
         {
-            await base.Where_comparison_null_semantics_optimization_works_with_complex_predicates(async);
+            await base.Where_comparison_null_semantics_optimization_works_with_complex_predicates(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] IS NULL");
+WHERE [e].[NullableStringA] IS NULL"
+            );
         }
 
         public override void Switching_null_semantics_produces_different_cache_entry()
@@ -1190,7 +1275,8 @@ WHERE ([e].[NullableBoolA] = [e].[NullableBoolB]) OR ([e].[NullableBoolA] IS NUL
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableBoolA] = [e].[NullableBoolB]");
+WHERE [e].[NullableBoolA] = [e].[NullableBoolB]"
+            );
         }
 
         public override void Switching_parameter_value_to_null_produces_different_cache_entry()
@@ -1208,7 +1294,8 @@ WHERE @__p_0 = CAST(1 AS bit)",
 
 SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE @__p_0 = CAST(1 AS bit)");
+WHERE @__p_0 = CAST(1 AS bit)"
+            );
         }
 
         public override void From_sql_composed_with_relational_null_comparison()
@@ -1220,7 +1307,8 @@ WHERE @__p_0 = CAST(1 AS bit)");
 FROM (
     SELECT * FROM ""Entities1""
 ) AS [n]
-WHERE [n].[StringA] = [n].[StringB]");
+WHERE [n].[StringA] = [n].[StringB]"
+            );
         }
 
         public override async Task Projecting_nullable_bool_with_coalesce(bool async)
@@ -1229,7 +1317,8 @@ WHERE [n].[StringA] = [n].[StringB]");
 
             AssertSql(
                 @"SELECT [e].[Id], COALESCE([e].[NullableBoolA], CAST(0 AS bit)) AS [Coalesce]
-FROM [Entities1] AS [e]");
+FROM [Entities1] AS [e]"
+            );
         }
 
         public override async Task Projecting_nullable_bool_with_coalesce_nested(bool async)
@@ -1238,12 +1327,17 @@ FROM [Entities1] AS [e]");
 
             AssertSql(
                 @"SELECT [e].[Id], COALESCE([e].[NullableBoolA], COALESCE([e].[NullableBoolB], CAST(0 AS bit))) AS [Coalesce]
-FROM [Entities1] AS [e]");
+FROM [Entities1] AS [e]"
+            );
         }
 
-        public override async Task Null_semantics_applied_when_comparing_function_with_nullable_argument_to_a_nullable_column(bool async)
+        public override async Task Null_semantics_applied_when_comparing_function_with_nullable_argument_to_a_nullable_column(
+            bool async
+        )
         {
-            await base.Null_semantics_applied_when_comparing_function_with_nullable_argument_to_a_nullable_column(async);
+            await base.Null_semantics_applied_when_comparing_function_with_nullable_argument_to_a_nullable_column(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1277,7 +1371,8 @@ END <> [e].[NullableIntB]) OR (CASE
 END IS NULL OR [e].[NullableIntB] IS NULL)) AND (CASE
     WHEN N'oo' = N'' THEN 0
     ELSE CAST(CHARINDEX(N'oo', [e].[NullableStringA]) AS int) - 1
-END IS NOT NULL OR [e].[NullableIntB] IS NOT NULL)");
+END IS NOT NULL OR [e].[NullableIntB] IS NOT NULL)"
+            );
             // issue #18773
             //            AssertSql(
             //                @"SELECT [e].[Id]
@@ -1297,8 +1392,7 @@ END IS NOT NULL OR [e].[NullableIntB] IS NOT NULL)");
         {
             await base.Where_IndexOf_empty(async);
 
-            AssertSql(
-                @"");
+            AssertSql(@"");
         }
 
         public override async Task Select_IndexOf(bool async)
@@ -1311,12 +1405,17 @@ END IS NOT NULL OR [e].[NullableIntB] IS NOT NULL)");
     ELSE CAST(CHARINDEX(N'oo', [e].[NullableStringA]) AS int) - 1
 END
 FROM [Entities1] AS [e]
-ORDER BY [e].[Id]");
+ORDER BY [e].[Id]"
+            );
         }
 
-        public override async Task Null_semantics_applied_when_comparing_two_functions_with_nullable_arguments(bool async)
+        public override async Task Null_semantics_applied_when_comparing_two_functions_with_nullable_arguments(
+            bool async
+        )
         {
-            await base.Null_semantics_applied_when_comparing_two_functions_with_nullable_arguments(async);
+            await base.Null_semantics_applied_when_comparing_two_functions_with_nullable_arguments(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1377,7 +1476,8 @@ END IS NULL)) AND (CASE
 END IS NOT NULL OR CASE
     WHEN N'ar' = N'' THEN 0
     ELSE CAST(CHARINDEX(N'ar', [e].[NullableStringA]) AS int) - 1
-END IS NOT NULL)");
+END IS NOT NULL)"
+            );
             // issue #18773
             //            AssertSql(
             //                @"SELECT [e].[Id]
@@ -1393,9 +1493,13 @@ END IS NOT NULL)");
             //WHERE (((CHARINDEX(N'oo', [e].[NullableStringA]) - 1) <> (CHARINDEX(N'ar', [e].[NullableStringA]) - 1)) OR [e].[NullableStringA] IS NULL) AND [e].[NullableStringA] IS NOT NULL");
         }
 
-        public override async Task Null_semantics_applied_when_comparing_two_functions_with_multiple_nullable_arguments(bool async)
+        public override async Task Null_semantics_applied_when_comparing_two_functions_with_multiple_nullable_arguments(
+            bool async
+        )
         {
-            await base.Null_semantics_applied_when_comparing_two_functions_with_multiple_nullable_arguments(async);
+            await base.Null_semantics_applied_when_comparing_two_functions_with_multiple_nullable_arguments(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1404,7 +1508,8 @@ WHERE (REPLACE([e].[NullableStringA], [e].[NullableStringB], [e].[NullableString
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ((REPLACE([e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC]) <> [e].[NullableStringA]) OR ((([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL) OR [e].[NullableStringC] IS NULL) OR [e].[NullableStringA] IS NULL)) AND ((([e].[NullableStringA] IS NOT NULL AND [e].[NullableStringB] IS NOT NULL) AND [e].[NullableStringC] IS NOT NULL) OR [e].[NullableStringA] IS NOT NULL)");
+WHERE ((REPLACE([e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC]) <> [e].[NullableStringA]) OR ((([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL) OR [e].[NullableStringC] IS NULL) OR [e].[NullableStringA] IS NULL)) AND ((([e].[NullableStringA] IS NOT NULL AND [e].[NullableStringB] IS NOT NULL) AND [e].[NullableStringC] IS NOT NULL) OR [e].[NullableStringA] IS NOT NULL)"
+            );
         }
 
         public override async Task Null_semantics_coalesce(bool async)
@@ -1426,7 +1531,8 @@ WHERE (COALESCE([e].[NullableBoolB], [e].[BoolC]) <> [e].[NullableBoolA]) OR [e]
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ((COALESCE([e].[NullableBoolB], [e].[NullableBoolC]) <> [e].[NullableBoolA]) OR (([e].[NullableBoolB] IS NULL AND [e].[NullableBoolC] IS NULL) OR [e].[NullableBoolA] IS NULL)) AND (([e].[NullableBoolB] IS NOT NULL OR [e].[NullableBoolC] IS NOT NULL) OR [e].[NullableBoolA] IS NOT NULL)");
+WHERE ((COALESCE([e].[NullableBoolB], [e].[NullableBoolC]) <> [e].[NullableBoolA]) OR (([e].[NullableBoolB] IS NULL AND [e].[NullableBoolC] IS NULL) OR [e].[NullableBoolA] IS NULL)) AND (([e].[NullableBoolB] IS NOT NULL OR [e].[NullableBoolC] IS NOT NULL) OR [e].[NullableBoolA] IS NOT NULL)"
+            );
         }
 
         public override async Task Null_semantics_conditional(bool async)
@@ -1462,7 +1568,8 @@ WHERE CASE
         WHEN (([e].[NullableBoolB] = [e].[NullableBoolC]) AND ([e].[NullableBoolB] IS NOT NULL AND [e].[NullableBoolC] IS NOT NULL)) OR ([e].[NullableBoolB] IS NULL AND [e].[NullableBoolC] IS NULL) THEN CAST(1 AS bit)
         ELSE CAST(0 AS bit)
     END
-END = CAST(1 AS bit)");
+END = CAST(1 AS bit)"
+            );
         }
 
         public override async Task Null_semantics_function(bool async)
@@ -1472,7 +1579,8 @@ END = CAST(1 AS bit)");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ((SUBSTRING([e].[NullableStringA], 0 + 1, [e].[IntA]) <> [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL)) AND ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL)");
+WHERE ((SUBSTRING([e].[NullableStringA], 0 + 1, [e].[IntA]) <> [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL)) AND ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL)"
+            );
         }
 
         public override async Task Null_semantics_join_with_composite_key(bool async)
@@ -1485,7 +1593,8 @@ FROM [Entities1] AS [e]
 INNER JOIN [Entities2] AS [e0] ON (([e].[NullableStringA] = [e0].[NullableStringB]) OR ([e].[NullableStringA] IS NULL AND [e0].[NullableStringB] IS NULL)) AND (CASE
     WHEN (([e].[NullableStringB] <> [e].[NullableStringC]) OR ([e].[NullableStringB] IS NULL OR [e].[NullableStringC] IS NULL)) AND ([e].[NullableStringB] IS NOT NULL OR [e].[NullableStringC] IS NOT NULL) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END = COALESCE([e0].[NullableBoolA], [e0].[BoolC]))");
+END = COALESCE([e0].[NullableBoolA], [e0].[BoolC]))"
+            );
         }
 
         public override async Task Null_semantics_contains(bool async)
@@ -1523,7 +1632,8 @@ WHERE [e].[NullableIntA] IN (1, 2) OR [e].[NullableIntA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] NOT IN (1, 2) AND [e].[NullableIntA] IS NOT NULL");
+WHERE [e].[NullableIntA] NOT IN (1, 2) AND [e].[NullableIntA] IS NOT NULL"
+            );
         }
 
         public override async Task Null_semantics_contains_array_with_no_values(bool async)
@@ -1559,7 +1669,8 @@ WHERE [e].[NullableIntA] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] IS NOT NULL");
+WHERE [e].[NullableIntA] IS NOT NULL"
+            );
         }
 
         public override async Task Null_semantics_contains_non_nullable_argument(bool async)
@@ -1595,7 +1706,8 @@ FROM [Entities1] AS [e]
 WHERE 0 = 1",
                 //
                 @"SELECT [e].[Id]
-FROM [Entities1] AS [e]");
+FROM [Entities1] AS [e]"
+            );
         }
 
         public override async Task Null_semantics_with_null_check_simple(bool async)
@@ -1621,7 +1733,8 @@ WHERE ([e].[NullableIntA] IS NOT NULL AND [e].[NullableIntB] IS NOT NULL) AND ([
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableIntA] IS NOT NULL AND [e].[NullableIntB] IS NOT NULL) AND ([e].[NullableIntA] <> [e].[NullableIntB])");
+WHERE ([e].[NullableIntA] IS NOT NULL AND [e].[NullableIntB] IS NOT NULL) AND ([e].[NullableIntA] <> [e].[NullableIntB])"
+            );
         }
 
         public override async Task Null_semantics_with_null_check_complex(bool async)
@@ -1639,7 +1752,8 @@ WHERE [e].[NullableIntA] IS NOT NULL AND ((([e].[NullableIntC] <> [e].[NullableI
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableIntA] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL) AND (([e].[NullableIntA] = [e].[NullableIntC]) OR ([e].[NullableIntA] IS NULL AND [e].[NullableIntC] IS NULL))");
+WHERE ([e].[NullableIntA] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL) AND (([e].[NullableIntA] = [e].[NullableIntC]) OR ([e].[NullableIntA] IS NULL AND [e].[NullableIntC] IS NULL))"
+            );
         }
 
         public override async Task Null_semantics_with_null_check_complex2(bool async)
@@ -1653,7 +1767,8 @@ WHERE ((([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL) AN
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ((([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL) AND (([e].[NullableBoolB] <> [e].[NullableBoolA]) OR [e].[NullableBoolC] IS NOT NULL)) AND (([e].[NullableBoolC] <> [e].[NullableBoolB]) OR [e].[NullableBoolC] IS NULL)) OR (([e].[NullableBoolB] <> [e].[BoolB]) OR [e].[NullableBoolB] IS NULL)");
+WHERE ((([e].[NullableBoolA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL) AND (([e].[NullableBoolB] <> [e].[NullableBoolA]) OR [e].[NullableBoolC] IS NOT NULL)) AND (([e].[NullableBoolC] <> [e].[NullableBoolB]) OR [e].[NullableBoolC] IS NULL)) OR (([e].[NullableBoolB] <> [e].[BoolB]) OR [e].[NullableBoolB] IS NULL)"
+            );
         }
 
         public override async Task IsNull_on_complex_expression(bool async)
@@ -1675,7 +1790,8 @@ WHERE [e].[NullableIntA] IS NULL AND [e].[NullableIntB] IS NULL",
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL");
+WHERE [e].[NullableIntA] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL"
+            );
         }
 
         public override async Task Coalesce_not_equal(bool async)
@@ -1685,10 +1801,13 @@ WHERE [e].[NullableIntA] IS NOT NULL OR [e].[NullableIntB] IS NOT NULL");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE COALESCE([e].[NullableIntA], 0) <> 0");
+WHERE COALESCE([e].[NullableIntA], 0) <> 0"
+            );
         }
 
-        public override async Task Negated_order_comparison_on_non_nullable_arguments_gets_optimized(bool async)
+        public override async Task Negated_order_comparison_on_non_nullable_arguments_gets_optimized(
+            bool async
+        )
         {
             await base.Negated_order_comparison_on_non_nullable_arguments_gets_optimized(async);
 
@@ -1715,15 +1834,17 @@ WHERE [e].[IntA] >= @__i_0",
 
 SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE [e].[IntA] > @__i_0");
+WHERE [e].[IntA] > @__i_0"
+            );
         }
 
-        public override async Task Negated_order_comparison_on_nullable_arguments_doesnt_get_optimized(bool async)
+        public override async Task Negated_order_comparison_on_nullable_arguments_doesnt_get_optimized(
+            bool async
+        )
         {
             await base.Negated_order_comparison_on_nullable_arguments_doesnt_get_optimized(async);
 
-            AssertSql(
-                @"");
+            AssertSql(@"");
         }
 
         public override async Task Nullable_column_info_propagates_inside_binary_AndAlso(bool async)
@@ -1733,22 +1854,30 @@ WHERE [e].[IntA] > @__i_0");
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableStringA] IS NOT NULL AND [e].[NullableStringB] IS NOT NULL) AND ([e].[NullableStringA] <> [e].[NullableStringB])");
+WHERE ([e].[NullableStringA] IS NOT NULL AND [e].[NullableStringB] IS NOT NULL) AND ([e].[NullableStringA] <> [e].[NullableStringB])"
+            );
         }
 
-        public override async Task Nullable_column_info_doesnt_propagate_inside_binary_OrElse(bool async)
+        public override async Task Nullable_column_info_doesnt_propagate_inside_binary_OrElse(
+            bool async
+        )
         {
             await base.Nullable_column_info_doesnt_propagate_inside_binary_OrElse(async);
 
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL) AND ((([e].[NullableStringA] <> [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL)) AND ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL))");
+WHERE ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL) AND ((([e].[NullableStringA] <> [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL)) AND ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL))"
+            );
         }
 
-        public override async Task Nullable_column_info_propagates_inside_binary_OrElse_when_info_is_duplicated(bool async)
+        public override async Task Nullable_column_info_propagates_inside_binary_OrElse_when_info_is_duplicated(
+            bool async
+        )
         {
-            await base.Nullable_column_info_propagates_inside_binary_OrElse_when_info_is_duplicated(async);
+            await base.Nullable_column_info_propagates_inside_binary_OrElse_when_info_is_duplicated(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id]
@@ -1757,7 +1886,8 @@ WHERE (([e].[NullableStringA] IS NOT NULL AND [e].[NullableStringB] IS NOT NULL)
                 //
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableStringA] IS NOT NULL AND [e].[NullableStringB] IS NOT NULL) OR ([e].[NullableStringB] IS NOT NULL AND [e].[NullableStringA] IS NOT NULL)) AND ([e].[NullableStringA] <> [e].[NullableStringB])");
+WHERE (([e].[NullableStringA] IS NOT NULL AND [e].[NullableStringB] IS NOT NULL) OR ([e].[NullableStringB] IS NOT NULL AND [e].[NullableStringA] IS NOT NULL)) AND ([e].[NullableStringA] <> [e].[NullableStringB])"
+            );
         }
 
         public override async Task Nullable_column_info_propagates_inside_conditional(bool async)
@@ -1772,10 +1902,13 @@ WHERE (([e].[NullableStringA] IS NOT NULL AND [e].[NullableStringB] IS NOT NULL)
     END
     ELSE [e].[BoolA]
 END
-FROM [Entities1] AS [e]");
+FROM [Entities1] AS [e]"
+            );
         }
 
-        public override async Task Nullable_column_info_doesnt_propagate_between_projections(bool async)
+        public override async Task Nullable_column_info_doesnt_propagate_between_projections(
+            bool async
+        )
         {
             await base.Nullable_column_info_doesnt_propagate_between_projections(async);
 
@@ -1787,18 +1920,24 @@ END AS [Foo], CASE
     WHEN ([e].[NullableStringA] <> [e].[StringA]) OR [e].[NullableStringA] IS NULL THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END AS [Bar]
-FROM [Entities1] AS [e]");
+FROM [Entities1] AS [e]"
+            );
         }
 
-        public override async Task Nullable_column_info_doesnt_propagate_between_different_parts_of_select(bool async)
+        public override async Task Nullable_column_info_doesnt_propagate_between_different_parts_of_select(
+            bool async
+        )
         {
-            await base.Nullable_column_info_doesnt_propagate_between_different_parts_of_select(async);
+            await base.Nullable_column_info_doesnt_propagate_between_different_parts_of_select(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
 INNER JOIN [Entities1] AS [e0] ON [e].[NullableBoolA] IS NULL
-WHERE (([e].[NullableBoolA] <> [e0].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e0].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e0].[NullableBoolB] IS NOT NULL)");
+WHERE (([e].[NullableBoolA] <> [e0].[NullableBoolB]) OR ([e].[NullableBoolA] IS NULL OR [e0].[NullableBoolB] IS NULL)) AND ([e].[NullableBoolA] IS NOT NULL OR [e0].[NullableBoolB] IS NOT NULL)"
+            );
         }
 
         public override async Task Nullable_column_info_propagation_complex(bool async)
@@ -1808,7 +1947,8 @@ WHERE (([e].[NullableBoolA] <> [e0].[NullableBoolB]) OR ([e].[NullableBoolA] IS 
             AssertSql(
                 @"SELECT [e].[Id]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableStringA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL) AND [e].[NullableStringC] IS NOT NULL) AND (([e].[NullableBoolB] <> [e].[NullableBoolC]) OR [e].[NullableBoolC] IS NULL)");
+WHERE (([e].[NullableStringA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL) AND [e].[NullableStringC] IS NOT NULL) AND (([e].[NullableBoolB] <> [e].[NullableBoolC]) OR [e].[NullableBoolC] IS NULL)"
+            );
         }
 
         public override async Task Empty_subquery_with_contains_returns_false(bool async)
@@ -1818,7 +1958,8 @@ WHERE (([e].[NullableStringA] IS NOT NULL AND [e].[NullableBoolB] IS NOT NULL) A
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE 0 = 1");
+WHERE 0 = 1"
+            );
         }
 
         public override async Task Empty_subquery_with_contains_negated_returns_true(bool async)
@@ -1827,17 +1968,23 @@ WHERE 0 = 1");
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
-FROM [Entities1] AS [e]");
+FROM [Entities1] AS [e]"
+            );
         }
 
-        public override async Task Nullable_string_FirstOrDefault_compared_to_nullable_string_LastOrDefault(bool async)
+        public override async Task Nullable_string_FirstOrDefault_compared_to_nullable_string_LastOrDefault(
+            bool async
+        )
         {
-            await base.Nullable_string_FirstOrDefault_compared_to_nullable_string_LastOrDefault(async);
+            await base.Nullable_string_FirstOrDefault_compared_to_nullable_string_LastOrDefault(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE (SUBSTRING([e].[NullableStringA], 1, 1) = SUBSTRING([e].[NullableStringB], LEN([e].[NullableStringB]), 1)) OR ([e].[NullableStringA] IS NULL AND [e].[NullableStringB] IS NULL)");
+WHERE (SUBSTRING([e].[NullableStringA], 1, 1) = SUBSTRING([e].[NullableStringB], LEN([e].[NullableStringB]), 1)) OR ([e].[NullableStringA] IS NULL AND [e].[NullableStringB] IS NULL)"
+            );
         }
 
         public override async Task Null_semantics_applied_to_CompareTo_equality(bool async)
@@ -1859,7 +2006,8 @@ WHERE (([e].[NullableStringA] <> [e].[NullableStringB]) OR ([e].[NullableStringA
                 //
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableStringA] <> [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL)) AND ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL)");
+WHERE (([e].[NullableStringA] <> [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL)) AND ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL)"
+            );
         }
 
         public override async Task Nested_CompareTo_optimized(bool async)
@@ -1881,7 +2029,8 @@ WHERE (([e].[NullableStringA] <> [e].[NullableStringB]) OR ([e].[NullableStringA
                 //
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE (([e].[NullableStringA] <> [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL)) AND ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL)");
+WHERE (([e].[NullableStringA] <> [e].[NullableStringB]) OR ([e].[NullableStringA] IS NULL OR [e].[NullableStringB] IS NULL)) AND ([e].[NullableStringA] IS NOT NULL OR [e].[NullableStringB] IS NOT NULL)"
+            );
         }
 
         public override async Task False_compared_to_negated_is_null(bool async)
@@ -1891,101 +2040,145 @@ WHERE (([e].[NullableStringA] <> [e].[NullableStringB]) OR ([e].[NullableStringA
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableStringA] IS NULL");
+WHERE [e].[NullableStringA] IS NULL"
+            );
         }
 
-        public override async Task Multiple_non_equality_comparisons_with_null_in_the_middle(bool async)
+        public override async Task Multiple_non_equality_comparisons_with_null_in_the_middle(
+            bool async
+        )
         {
             await base.Multiple_non_equality_comparisons_with_null_in_the_middle(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] NOT IN (1, 2) AND [e].[NullableIntA] IS NOT NULL");
+WHERE [e].[NullableIntA] NOT IN (1, 2) AND [e].[NullableIntA] IS NOT NULL"
+            );
         }
 
-        public override async Task Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(bool async)
+        public override async Task Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
+            bool async
+        )
         {
-            await base.Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(async);
+            await base.Multiple_non_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableIntA] <> 1) AND [e].[NullableIntA] IS NOT NULL");
+WHERE ([e].[NullableIntA] <> 1) AND [e].[NullableIntA] IS NOT NULL"
+            );
         }
 
-        public override async Task Multiple_non_equality_comparisons_without_null_comparison_work_for_relational_null_semantics(bool async)
+        public override async Task Multiple_non_equality_comparisons_without_null_comparison_work_for_relational_null_semantics(
+            bool async
+        )
         {
-            await base.Multiple_non_equality_comparisons_without_null_comparison_work_for_relational_null_semantics(async);
+            await base.Multiple_non_equality_comparisons_without_null_comparison_work_for_relational_null_semantics(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] NOT IN (1, 2)");
+WHERE [e].[NullableIntA] NOT IN (1, 2)"
+            );
         }
 
-        public override async Task Multiple_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(bool async)
+        public override async Task Multiple_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
+            bool async
+        )
         {
-            await base.Multiple_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(async);
+            await base.Multiple_equality_comparisons_including_null_comparison_work_for_relational_null_semantics(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE ([e].[NullableIntA] = 1) OR [e].[NullableIntA] IS NULL");
+WHERE ([e].[NullableIntA] = 1) OR [e].[NullableIntA] IS NULL"
+            );
         }
 
-        public override async Task Multiple_contains_calls_get_combined_into_one_for_relational_null_semantics(bool async)
+        public override async Task Multiple_contains_calls_get_combined_into_one_for_relational_null_semantics(
+            bool async
+        )
         {
-            await base.Multiple_contains_calls_get_combined_into_one_for_relational_null_semantics(async);
+            await base.Multiple_contains_calls_get_combined_into_one_for_relational_null_semantics(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] IN (1, NULL, 2, 3)");
+WHERE [e].[NullableIntA] IN (1, NULL, 2, 3)"
+            );
         }
 
-        public override async Task Multiple_negated_contains_calls_get_combined_into_one_for_relational_null_semantics(bool async)
+        public override async Task Multiple_negated_contains_calls_get_combined_into_one_for_relational_null_semantics(
+            bool async
+        )
         {
-            await base.Multiple_negated_contains_calls_get_combined_into_one_for_relational_null_semantics(async);
+            await base.Multiple_negated_contains_calls_get_combined_into_one_for_relational_null_semantics(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] NOT IN (1, NULL, 2, 3)");
+WHERE [e].[NullableIntA] NOT IN (1, NULL, 2, 3)"
+            );
         }
 
-        public override async Task Contains_with_comparison_dont_get_combined_for_relational_null_semantics(bool async)
+        public override async Task Contains_with_comparison_dont_get_combined_for_relational_null_semantics(
+            bool async
+        )
         {
-            await base.Contains_with_comparison_dont_get_combined_for_relational_null_semantics(async);
+            await base.Contains_with_comparison_dont_get_combined_for_relational_null_semantics(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] IN (1, 2) OR [e].[NullableIntA] IS NULL");
+WHERE [e].[NullableIntA] IN (1, 2) OR [e].[NullableIntA] IS NULL"
+            );
         }
 
-        public override async Task Negated_contains_with_comparison_dont_get_combined_for_relational_null_semantics(bool async)
+        public override async Task Negated_contains_with_comparison_dont_get_combined_for_relational_null_semantics(
+            bool async
+        )
         {
-            await base.Negated_contains_with_comparison_dont_get_combined_for_relational_null_semantics(async);
+            await base.Negated_contains_with_comparison_dont_get_combined_for_relational_null_semantics(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] IS NOT NULL AND [e].[NullableIntA] NOT IN (1, 2)");
+WHERE [e].[NullableIntA] IS NOT NULL AND [e].[NullableIntA] NOT IN (1, 2)"
+            );
         }
 
-        public override async Task Negated_contains_with_comparison_without_null_get_combined_for_relational_null_semantics(bool async)
+        public override async Task Negated_contains_with_comparison_without_null_get_combined_for_relational_null_semantics(
+            bool async
+        )
         {
-            await base.Negated_contains_with_comparison_without_null_get_combined_for_relational_null_semantics(async);
+            await base.Negated_contains_with_comparison_without_null_get_combined_for_relational_null_semantics(
+                async
+            );
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[BoolA], [e].[BoolB], [e].[BoolC], [e].[IntA], [e].[IntB], [e].[IntC], [e].[NullableBoolA], [e].[NullableBoolB], [e].[NullableBoolC], [e].[NullableIntA], [e].[NullableIntB], [e].[NullableIntC], [e].[NullableStringA], [e].[NullableStringB], [e].[NullableStringC], [e].[StringA], [e].[StringB], [e].[StringC]
 FROM [Entities1] AS [e]
-WHERE [e].[NullableIntA] NOT IN (1, 2, 3)");
+WHERE [e].[NullableIntA] NOT IN (1, 2, 3)"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
         protected override NullSemanticsContext CreateContext(bool useRelationalNulls = false)
         {
@@ -2002,7 +2195,6 @@ WHERE [e].[NullableIntA] NOT IN (1, 2, 3)");
             return context;
         }
 
-        protected override void ClearLog()
-            => Fixture.TestSqlLoggerFactory.Clear();
+        protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
     }
 }

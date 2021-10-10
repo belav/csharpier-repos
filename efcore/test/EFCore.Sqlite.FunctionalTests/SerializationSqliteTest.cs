@@ -5,9 +5,6 @@ namespace Microsoft.EntityFrameworkCore
 {
     public class SerializationSqliteTest : SerializationTestBase<F1SqliteFixture>
     {
-        public SerializationSqliteTest(F1SqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public SerializationSqliteTest(F1SqliteFixture fixture) : base(fixture) { }
     }
 }

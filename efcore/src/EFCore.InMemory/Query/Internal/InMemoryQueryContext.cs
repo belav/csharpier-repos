@@ -18,8 +18,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
     /// </summary>
     public class InMemoryQueryContext : QueryContext
     {
-        private readonly IDictionary<IEntityType, IEnumerable<ValueBuffer>> _valueBuffersCache
-            = new Dictionary<IEntityType, IEnumerable<ValueBuffer>>();
+        private readonly IDictionary<IEntityType, IEnumerable<ValueBuffer>> _valueBuffersCache =
+            new Dictionary<IEntityType, IEnumerable<ValueBuffer>>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,8 +31,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         {
             if (!_valueBuffersCache.TryGetValue(entityType, out var valueBuffers))
             {
-                valueBuffers = Store
-                    .GetTables(entityType)
+                valueBuffers = Store.GetTables(entityType)
                     .SelectMany(t => t.Rows.Select(vs => new ValueBuffer(vs)))
                     .ToList();
 
@@ -48,11 +47,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public InMemoryQueryContext(
-            QueryContextDependencies dependencies,
-            IInMemoryStore store)
-            : base(dependencies)
-            => Store = store;
+        public InMemoryQueryContext(QueryContextDependencies dependencies, IInMemoryStore store)
+            : base(dependencies) => Store = store;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

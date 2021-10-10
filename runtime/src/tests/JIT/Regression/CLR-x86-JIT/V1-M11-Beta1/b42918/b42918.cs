@@ -16,6 +16,7 @@ namespace Test
                 {
                     // blah blah blah ...
                 }
+
                 finally
                 {
                     int[] an = new int[2];

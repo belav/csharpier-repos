@@ -23,7 +23,11 @@ namespace System.IO.Ports
             Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
 #endif
 
-            using (RegistryKey serialKey = Registry.LocalMachine.OpenSubKey(@"HARDWARE\DEVICEMAP\SERIALCOMM"))
+            using (
+                RegistryKey serialKey = Registry.LocalMachine.OpenSubKey(
+                    @"HARDWARE\DEVICEMAP\SERIALCOMM"
+                )
+            )
             {
                 if (serialKey != null)
                 {

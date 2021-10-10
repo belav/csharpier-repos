@@ -15,7 +15,12 @@ namespace System.Reflection.Emit
         #region Constructor
         internal LocalBuilder(int localIndex, Type localType, MethodInfo methodBuilder)
             : this(localIndex, localType, methodBuilder, false) { }
-        internal LocalBuilder(int localIndex, Type localType, MethodInfo methodBuilder, bool isPinned)
+        internal LocalBuilder(
+            int localIndex,
+            Type localType,
+            MethodInfo methodBuilder,
+            bool isPinned
+        )
         {
             m_isPinned = isPinned;
             m_localIndex = localIndex;
@@ -90,20 +95,23 @@ namespace System.Reflection.Emit
             {
                 // top level scope information is kept with methodBuilder
                 methodBuilder.m_localSymInfo!.AddLocalSymInfo(
-                     name,
-                     mungedSig,
-                     m_localIndex,
-                     startOffset,
-                     endOffset);
+                    name,
+                    mungedSig,
+                    m_localIndex,
+                    startOffset,
+                    endOffset
+                );
             }
             else
             {
-                methodBuilder.GetILGenerator().m_ScopeTree.AddLocalSymInfoToCurrentScope(
-                     name,
-                     mungedSig,
-                     m_localIndex,
-                     startOffset,
-                     endOffset);
+                methodBuilder.GetILGenerator()
+                    .m_ScopeTree.AddLocalSymInfoToCurrentScope(
+                        name,
+                        mungedSig,
+                        m_localIndex,
+                        startOffset,
+                        endOffset
+                    );
             }
         }
         #endregion

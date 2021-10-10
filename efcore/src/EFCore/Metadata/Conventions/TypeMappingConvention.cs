@@ -31,11 +31,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
-            foreach (var property in modelBuilder.Metadata.GetEntityTypes().SelectMany(e => e.GetDeclaredProperties()))
+            foreach (
+                var property in modelBuilder.Metadata.GetEntityTypes()
+                    .SelectMany(e => e.GetDeclaredProperties())
+            )
             {
-                property.Builder.HasTypeMapping(Dependencies.TypeMappingSource.FindMapping((IProperty)property));
+                property.Builder.HasTypeMapping(
+                    Dependencies.TypeMappingSource.FindMapping((IProperty)property)
+                );
             }
         }
     }

@@ -32,9 +32,11 @@ namespace Microsoft.CodeAnalysis.Remote
             TraceSource logger,
             object? callbackTarget,
             Stream serviceStream,
-            IPooledConnectionReclamation? poolReclamation)
+            IPooledConnectionReclamation? poolReclamation
+        )
         {
-            _solutionAssetStorage = services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
+            _solutionAssetStorage =
+                services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
             _services = services;
 
             _serviceEndPoint = new RemoteEndPoint(serviceStream, logger, callbackTarget);
@@ -52,12 +54,14 @@ namespace Microsoft.CodeAnalysis.Remote
 
         ~JsonRpcConnection()
         {
-            // this can happen if someone kills OOP. 
+            // this can happen if someone kills OOP.
             // when that happen, we don't want to crash VS, so this is debug only check
             if (!Environment.HasShutdownStarted)
             {
-                Debug.Assert(false,
-                    $"Unless OOP process (RoslynCodeAnalysisService) is explicitly killed, this should have been disposed!\r\n {_creationCallStack}");
+                Debug.Assert(
+                    false,
+                    $"Unless OOP process (RoslynCodeAnalysisService) is explicitly killed, this should have been disposed!\r\n {_creationCallStack}"
+                );
             }
         }
 #endif
@@ -67,7 +71,11 @@ namespace Microsoft.CodeAnalysis.Remote
             Contract.ThrowIfNull(poolReclamation);
 
             // Atomically transition from null to not-null, and verify that it was successful.
-            var previousPoolReclamation = Interlocked.CompareExchange(ref _poolReclamation, poolReclamation, null);
+            var previousPoolReclamation = Interlocked.CompareExchange(
+                ref _poolReclamation,
+                poolReclamation,
+                null
+            );
             Contract.ThrowIfFalse(previousPoolReclamation is null);
         }
 
@@ -93,59 +101,109 @@ namespace Microsoft.CodeAnalysis.Remote
             // dispose service and snapshot channels
             _serviceEndPoint.UnexpectedExceptionThrown -= UnexpectedExceptionThrown;
             _serviceEndPoint.Dispose();
-
 #if DEBUG
             GC.SuppressFinalize(this);
 #endif
         }
 
-        private void UnexpectedExceptionThrown(Exception exception)
-            => _services.GetService<IErrorReportingService>()?.ShowRemoteHostCrashedErrorInfo(exception);
+        private void UnexpectedExceptionThrown(Exception exception) =>
+            _services.GetService<IErrorReportingService>()?.ShowRemoteHostCrashedErrorInfo(
+                exception
+            );
 
-        public override async Task RunRemoteAsync(string targetName, Solution? solution, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
+        public override async Task RunRemoteAsync(
+            string targetName,
+            Solution? solution,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        )
         {
             if (solution != null)
             {
-                using var scope = await _solutionAssetStorage.StoreAssetsAsync(solution, cancellationToken).ConfigureAwait(false);
-                using var _ = ArrayBuilder<object?>.GetInstance(arguments.Count + 1, out var argumentsBuilder);
+                using var scope = await _solutionAssetStorage.StoreAssetsAsync(
+                        solution,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                using var _ = ArrayBuilder<object?>.GetInstance(
+                    arguments.Count + 1,
+                    out var argumentsBuilder
+                );
 
                 argumentsBuilder.Add(scope.SolutionInfo);
                 argumentsBuilder.AddRange(arguments);
 
-                await _serviceEndPoint.InvokeAsync(targetName, argumentsBuilder, cancellationToken).ConfigureAwait(false);
+                await _serviceEndPoint.InvokeAsync(targetName, argumentsBuilder, cancellationToken)
+                    .ConfigureAwait(false);
             }
             else
             {
-                await _serviceEndPoint.InvokeAsync(targetName, arguments, cancellationToken).ConfigureAwait(false);
+                await _serviceEndPoint.InvokeAsync(targetName, arguments, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        public override async Task<T> RunRemoteAsync<T>(string targetName, Solution? solution, IReadOnlyList<object?> arguments, Func<Stream, CancellationToken, Task<T>>? dataReader, CancellationToken cancellationToken)
+        public override async Task<T> RunRemoteAsync<T>(
+            string targetName,
+            Solution? solution,
+            IReadOnlyList<object?> arguments,
+            Func<Stream, CancellationToken, Task<T>>? dataReader,
+            CancellationToken cancellationToken
+        )
         {
             if (solution != null)
             {
-                using var scope = await _solutionAssetStorage.StoreAssetsAsync(solution, cancellationToken).ConfigureAwait(false);
-                using var _ = ArrayBuilder<object?>.GetInstance(arguments.Count + 1, out var argumentsBuilder);
+                using var scope = await _solutionAssetStorage.StoreAssetsAsync(
+                        solution,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                using var _ = ArrayBuilder<object?>.GetInstance(
+                    arguments.Count + 1,
+                    out var argumentsBuilder
+                );
 
                 argumentsBuilder.Add(scope.SolutionInfo);
                 argumentsBuilder.AddRange(arguments);
 
                 if (dataReader != null)
                 {
-                    return await _serviceEndPoint.InvokeAsync(targetName, argumentsBuilder, dataReader, cancellationToken).ConfigureAwait(false);
+                    return await _serviceEndPoint.InvokeAsync(
+                            targetName,
+                            argumentsBuilder,
+                            dataReader,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    return await _serviceEndPoint.InvokeAsync<T>(targetName, argumentsBuilder, cancellationToken).ConfigureAwait(false);
+                    return await _serviceEndPoint.InvokeAsync<T>(
+                            targetName,
+                            argumentsBuilder,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
             else if (dataReader != null)
             {
-                return await _serviceEndPoint.InvokeAsync(targetName, arguments, dataReader, cancellationToken).ConfigureAwait(false);
+                return await _serviceEndPoint.InvokeAsync(
+                        targetName,
+                        arguments,
+                        dataReader,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else
             {
-                return await _serviceEndPoint.InvokeAsync<T>(targetName, arguments, cancellationToken).ConfigureAwait(false);
+                return await _serviceEndPoint.InvokeAsync<T>(
+                        targetName,
+                        arguments,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
     }

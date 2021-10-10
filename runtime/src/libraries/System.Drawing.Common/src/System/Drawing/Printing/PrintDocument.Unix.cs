@@ -63,14 +63,8 @@ namespace System.Drawing.Printing
         [SRDescription("The settings for the current page.")]
         public PageSettings DefaultPageSettings
         {
-            get
-            {
-                return defaultpagesettings;
-            }
-            set
-            {
-                defaultpagesettings = value;
-            }
+            get { return defaultpagesettings; }
+            set { defaultpagesettings = value; }
         }
 
         // Name of the document, not the file!
@@ -78,14 +72,8 @@ namespace System.Drawing.Printing
         [SRDescription("The name of the document.")]
         public string DocumentName
         {
-            get
-            {
-                return documentname;
-            }
-            set
-            {
-                documentname = value;
-            }
+            get { return documentname; }
+            set { documentname = value; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -93,14 +81,8 @@ namespace System.Drawing.Printing
         [SRDescription("The print controller object.")]
         public PrintController PrintController
         {
-            get
-            {
-                return printcontroller;
-            }
-            set
-            {
-                printcontroller = value;
-            }
+            get { return printcontroller; }
+            set { printcontroller = value; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -108,28 +90,16 @@ namespace System.Drawing.Printing
         [SRDescription("The current settings for the active printer.")]
         public PrinterSettings PrinterSettings
         {
-            get
-            {
-                return printersettings;
-            }
-            set
-            {
-                printersettings = value == null ? new PrinterSettings() : value;
-            }
+            get { return printersettings; }
+            set { printersettings = value == null ? new PrinterSettings() : value; }
         }
 
         [DefaultValue(false)]
         [SRDescription("Determines if the origin is set at the specified margins.")]
         public bool OriginAtMargins
         {
-            get
-            {
-                return originAtMargins;
-            }
-            set
-            {
-                originAtMargins = value;
-            }
+            get { return originAtMargins; }
+            set { originAtMargins = value; }
         }
 
         // methods
@@ -156,15 +126,22 @@ namespace System.Drawing.Printing
             do
             {
                 QueryPageSettingsEventArgs queryPageSettingsArgs = new QueryPageSettingsEventArgs(
-                        (DefaultPageSettings.Clone() as PageSettings)!);
+                    (DefaultPageSettings.Clone() as PageSettings)!
+                );
                 OnQueryPageSettings(queryPageSettingsArgs);
 
                 PageSettings pageSettings = queryPageSettingsArgs.PageSettings;
                 printPageArgs = new PrintPageEventArgs(
-                        g,
-                        pageSettings.Bounds,
-                        new Rectangle(0, 0, pageSettings.PaperSize.Width, pageSettings.PaperSize.Height),
-                        pageSettings);
+                    g,
+                    pageSettings.Bounds,
+                    new Rectangle(
+                        0,
+                        0,
+                        pageSettings.PaperSize.Width,
+                        pageSettings.PaperSize.Height
+                    ),
+                    pageSettings
+                );
 
                 // TODO: We should create a graphics context for each page since they can have diferent paper
                 // size, orientation, etc. We use a single graphic for now to keep Cairo using a single PDF file.

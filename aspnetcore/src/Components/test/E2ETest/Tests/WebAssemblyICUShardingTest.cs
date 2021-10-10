@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -16,15 +16,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 {
     // Blazor WebAssembly loads ICU (globalization) data for subset of cultures by default.
     // This app covers testing this along with verifying the behavior for fallback culture for localized resources.
-    public class WebAssemblyICUShardingTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
+    public class WebAssemblyICUShardingTest
+        : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
     {
         public WebAssemblyICUShardingTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         [Fact]
         public void LoadingApp_FrenchLanguage_Works()
@@ -109,10 +108,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var errorUi = Browser.Exists(By.Id("blazor-error-ui"));
             Browser.Equal("block", () => errorUi.GetCssValue("display"));
 
-            var expected = "Blazor detected a change in the application's culture that is not supported with the current project configuration.";
+            var expected =
+                "Blazor detected a change in the application's culture that is not supported with the current project configuration.";
             var logs = Browser.GetBrowserLogs(LogLevel.Severe).Select(l => l.Message);
-            Assert.True(logs.Any(l => l.Contains(expected)),
-                $"Expected to see globalization error message in the browser logs: {string.Join(Environment.NewLine, logs)}.");
+            Assert.True(
+                logs.Any(l => l.Contains(expected)),
+                $"Expected to see globalization error message in the browser logs: {string.Join(Environment.NewLine, logs)}."
+            );
         }
 
         private void Initialize(CultureInfo culture)

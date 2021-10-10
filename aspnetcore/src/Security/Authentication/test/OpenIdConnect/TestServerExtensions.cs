@@ -16,12 +16,20 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
             return SendAsync(server, url, cookieHeader: null);
         }
 
-        public static Task<TestTransaction> SendAsync(this TestServer server, string url, string cookieHeader)
+        public static Task<TestTransaction> SendAsync(
+            this TestServer server,
+            string url,
+            string cookieHeader
+        )
         {
             return SendAsync(server, new HttpRequestMessage(HttpMethod.Get, url), cookieHeader);
         }
 
-        public static async Task<TestTransaction> SendAsync(this TestServer server, HttpRequestMessage request, string cookieHeader)
+        public static async Task<TestTransaction> SendAsync(
+            this TestServer server,
+            HttpRequestMessage request,
+            string cookieHeader
+        )
         {
             if (!string.IsNullOrEmpty(cookieHeader))
             {
@@ -36,13 +44,16 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
 
             if (transaction.Response.Headers.Contains("Set-Cookie"))
             {
-                transaction.SetCookie = transaction.Response.Headers.GetValues("Set-Cookie").ToList();
+                transaction.SetCookie = transaction.Response.Headers.GetValues("Set-Cookie")
+                    .ToList();
             }
 
             transaction.ResponseText = await transaction.Response.Content.ReadAsStringAsync();
-            if (transaction.Response.Content != null &&
-                transaction.Response.Content.Headers.ContentType != null &&
-                transaction.Response.Content.Headers.ContentType.MediaType == "text/xml")
+            if (
+                transaction.Response.Content != null
+                && transaction.Response.Content.Headers.ContentType != null
+                && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
+            )
             {
                 transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
             }

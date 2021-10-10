@@ -62,7 +62,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         /// <param name="httpContext">The <see cref="HttpContext" /> associated with the current request.</param>
         /// <param name="values">The route values associated with the current match. Implementations should not modify <paramref name="values"/>.</param>
         /// <returns>A task which asynchronously returns a set of route values.</returns>
-        public abstract ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values);
+        public abstract ValueTask<RouteValueDictionary> TransformAsync(
+            HttpContext httpContext,
+            RouteValueDictionary values
+        );
 
         /// <summary>
         /// Filters the set of endpoints that were chosen as a result of lookup based on the route values returned by
@@ -86,7 +89,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         /// where zero endpoints were matched based on route values.
         /// </para>
         /// </remarks>
-        public virtual ValueTask<IReadOnlyList<Endpoint>> FilterAsync(HttpContext httpContext, RouteValueDictionary values, IReadOnlyList<Endpoint> endpoints)
+        public virtual ValueTask<IReadOnlyList<Endpoint>> FilterAsync(
+            HttpContext httpContext,
+            RouteValueDictionary values,
+            IReadOnlyList<Endpoint> endpoints
+        )
         {
             return new ValueTask<IReadOnlyList<Endpoint>>(endpoints);
         }

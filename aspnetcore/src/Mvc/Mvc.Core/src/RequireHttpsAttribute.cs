@@ -12,7 +12,11 @@ namespace Microsoft.AspNetCore.Mvc
     /// <summary>
     /// An authorization filter that confirms requests are received over HTTPS.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public class RequireHttpsAttribute : Attribute, IAuthorizationFilter, IOrderedFilter
     {
         private bool? _permanent;
@@ -73,7 +77,9 @@ namespace Microsoft.AspNetCore.Mvc
             }
             else
             {
-                var optionsAccessor = filterContext.HttpContext.RequestServices.GetRequiredService<IOptions<MvcOptions>>();
+                var optionsAccessor = filterContext.HttpContext.RequestServices.GetRequiredService<
+                    IOptions<MvcOptions>
+                >();
 
                 var request = filterContext.HttpContext.Request;
 
@@ -96,7 +102,8 @@ namespace Microsoft.AspNetCore.Mvc
                     host.ToUriComponent(),
                     request.PathBase.ToUriComponent(),
                     request.Path.ToUriComponent(),
-                    request.QueryString.ToUriComponent());
+                    request.QueryString.ToUriComponent()
+                );
 
                 // redirect to HTTPS version of page
                 filterContext.Result = new RedirectResult(newUrl, permanentValue);

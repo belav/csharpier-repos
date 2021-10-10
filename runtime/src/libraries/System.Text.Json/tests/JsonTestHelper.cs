@@ -25,11 +25,14 @@ namespace System.Text.Json
         public const string SingleFormatString = "G9";
 #endif
 
-        private const string CompiledNewline = @"
+        private const string CompiledNewline =
+            @"
 ";
 
-        private static readonly bool s_replaceNewlines =
-            !StringComparer.Ordinal.Equals(CompiledNewline, Environment.NewLine);
+        private static readonly bool s_replaceNewlines = !StringComparer.Ordinal.Equals(
+            CompiledNewline,
+            Environment.NewLine
+        );
 
         public static string NewtonsoftReturnStringHelper(TextReader reader)
         {
@@ -131,17 +134,31 @@ namespace System.Text.Json
             return textWriter.ToString();
         }
 
-        public static byte[] ReturnBytesHelper(byte[] data, out int length, JsonCommentHandling commentHandling = JsonCommentHandling.Disallow, int maxDepth = 64)
+        public static byte[] ReturnBytesHelper(
+            byte[] data,
+            out int length,
+            JsonCommentHandling commentHandling = JsonCommentHandling.Disallow,
+            int maxDepth = 64
+        )
         {
-            var state = new JsonReaderState(new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth });
+            var state = new JsonReaderState(
+                new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+            );
             var reader = new Utf8JsonReader(data, true, state);
             return ReaderLoop(data.Length, out length, ref reader);
         }
 
-        public static byte[] SequenceReturnBytesHelper(byte[] data, out int length, JsonCommentHandling commentHandling = JsonCommentHandling.Disallow, int maxDepth = 64)
+        public static byte[] SequenceReturnBytesHelper(
+            byte[] data,
+            out int length,
+            JsonCommentHandling commentHandling = JsonCommentHandling.Disallow,
+            int maxDepth = 64
+        )
         {
             ReadOnlySequence<byte> sequence = CreateSegments(data);
-            var state = new JsonReaderState(new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth });
+            var state = new JsonReaderState(
+                new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+            );
             var reader = new Utf8JsonReader(sequence, true, state);
             return ReaderLoop(data.Length, out length, ref reader);
         }
@@ -170,9 +187,15 @@ namespace System.Text.Json
             return new ReadOnlySequence<byte>(firstSegment, 0, secondSegment, secondMem.Length);
         }
 
-        public static ReadOnlySequence<byte> CreateSegments(byte[] data, int firstSplit, int secondSplit)
+        public static ReadOnlySequence<byte> CreateSegments(
+            byte[] data,
+            int firstSplit,
+            int secondSplit
+        )
         {
-            Debug.Assert(firstSplit <= data.Length && secondSplit <= data.Length && firstSplit <= secondSplit);
+            Debug.Assert(
+                firstSplit <= data.Length && secondSplit <= data.Length && firstSplit <= secondSplit
+            );
 
             ReadOnlyMemory<byte> dataMemory = data;
 
@@ -199,7 +222,13 @@ namespace System.Text.Json
 
             int remaining = dataUtf8.Length % segmentSize;
             buffers[numberOfSegments - 1] = new byte[remaining];
-            Array.Copy(dataUtf8, dataUtf8.Length - remaining, buffers[numberOfSegments - 1], 0, remaining);
+            Array.Copy(
+                dataUtf8,
+                dataUtf8.Length - remaining,
+                buffers[numberOfSegments - 1],
+                0,
+                remaining
+            );
 
             return BufferFactory.Create(buffers);
         }
@@ -216,13 +245,21 @@ namespace System.Text.Json
                 var firstSegment = new BufferSegment<byte>(dataMemory.Slice(0, i));
                 ReadOnlyMemory<byte> secondMem = dataMemory.Slice(i);
                 BufferSegment<byte> secondSegment = firstSegment.Append(secondMem);
-                var sequence = new ReadOnlySequence<byte>(firstSegment, 0, secondSegment, secondMem.Length);
+                var sequence = new ReadOnlySequence<byte>(
+                    firstSegment,
+                    0,
+                    secondSegment,
+                    secondMem.Length
+                );
                 sequences.Add(sequence);
             }
             return sequences;
         }
 
-        internal static ReadOnlySequence<byte> SegmentInto(ReadOnlyMemory<byte> data, int segmentCount)
+        internal static ReadOnlySequence<byte> SegmentInto(
+            ReadOnlyMemory<byte> data,
+            int segmentCount
+        )
         {
             if (segmentCount < 2)
                 throw new ArgumentOutOfRangeException(nameof(segmentCount));
@@ -256,9 +293,14 @@ namespace System.Text.Json
             return new ReadOnlySequence<byte>(first, 0, last, data.Length);
         }
 
-        public static object ReturnObjectHelper(byte[] data, JsonCommentHandling commentHandling = JsonCommentHandling.Disallow)
+        public static object ReturnObjectHelper(
+            byte[] data,
+            JsonCommentHandling commentHandling = JsonCommentHandling.Disallow
+        )
         {
-            var state = new JsonReaderState(options: new JsonReaderOptions { CommentHandling = commentHandling });
+            var state = new JsonReaderState(
+                options: new JsonReaderOptions { CommentHandling = commentHandling }
+            );
             var reader = new Utf8JsonReader(data, true, state);
             return ReaderLoop(ref reader);
         }
@@ -279,11 +321,18 @@ namespace System.Text.Json
             foreach (KeyValuePair<string, object> entry in dictionary)
             {
                 if (entry.Value is Dictionary<string, object> nestedDictionary)
-                    builder.AppendFormat(CultureInfo.InvariantCulture, "{0}, ", entry.Key).Append(DictionaryToString(nestedDictionary));
+                    builder.AppendFormat(CultureInfo.InvariantCulture, "{0}, ", entry.Key)
+                        .Append(DictionaryToString(nestedDictionary));
                 else if (entry.Value is List<object> nestedList)
-                    builder.AppendFormat(CultureInfo.InvariantCulture, "{0}, ", entry.Key).Append(ListToString(nestedList));
+                    builder.AppendFormat(CultureInfo.InvariantCulture, "{0}, ", entry.Key)
+                        .Append(ListToString(nestedList));
                 else
-                    builder.AppendFormat(CultureInfo.InvariantCulture, "{0}, {1}, ", entry.Key, entry.Value);
+                    builder.AppendFormat(
+                        CultureInfo.InvariantCulture,
+                        "{0}, {1}, ",
+                        entry.Key,
+                        entry.Value
+                    );
             }
             return builder.ToString();
         }
@@ -395,11 +444,19 @@ namespace System.Text.Json
             while (json.Read())
             {
                 JsonTokenType tokenType = json.TokenType;
-                ReadOnlySpan<byte> valueSpan = json.HasValueSequence ? json.ValueSequence.ToArray() : json.ValueSpan;
+                ReadOnlySpan<byte> valueSpan = json.HasValueSequence
+                    ? json.ValueSequence.ToArray()
+                    : json.ValueSpan;
                 if (json.HasValueSequence)
                 {
                     Assert.True(json.ValueSpan == default);
-                    if ((tokenType != JsonTokenType.String && tokenType != JsonTokenType.PropertyName) || json.GetString().Length != 0)
+                    if (
+                        (
+                            tokenType != JsonTokenType.String
+                            && tokenType != JsonTokenType.PropertyName
+                        )
+                        || json.GetString().Length != 0
+                    )
                     {
                         // Empty strings could still make this true, i.e. ""
                         Assert.False(json.ValueSequence.IsEmpty);
@@ -408,7 +465,13 @@ namespace System.Text.Json
                 else
                 {
                     Assert.True(json.ValueSequence.IsEmpty);
-                    if ((tokenType != JsonTokenType.String && tokenType != JsonTokenType.PropertyName) || json.GetString().Length != 0)
+                    if (
+                        (
+                            tokenType != JsonTokenType.String
+                            && tokenType != JsonTokenType.PropertyName
+                        )
+                        || json.GetString().Length != 0
+                    )
                     {
                         // Empty strings could still make this true, i.e. ""
                         Assert.False(json.ValueSpan == default);
@@ -708,51 +771,80 @@ namespace System.Text.Json
             }
         }
 
-        public static void AssertContents(string expectedValue, ArrayBufferWriter<byte> buffer, bool skipSpecialRules = false)
+        public static void AssertContents(
+            string expectedValue,
+            ArrayBufferWriter<byte> buffer,
+            bool skipSpecialRules = false
+        )
         {
             string value = Encoding.UTF8.GetString(
-                    buffer.WrittenSpan
+                buffer.WrittenSpan
 #if NETFRAMEWORK
-                        .ToArray()
+                .ToArray()
 #endif
-                    );
+            );
 
             AssertContentsAgainstJsonNet(expectedValue, value, skipSpecialRules);
         }
 
-        public static void AssertContents(string expectedValue, MemoryStream stream, bool skipSpecialRules = false)
+        public static void AssertContents(
+            string expectedValue,
+            MemoryStream stream,
+            bool skipSpecialRules = false
+        )
         {
             string value = Encoding.UTF8.GetString(stream.ToArray());
 
             AssertContentsAgainstJsonNet(expectedValue, value, skipSpecialRules);
         }
 
-        public static void AssertContentsNotEqual(string expectedValue, ArrayBufferWriter<byte> buffer, bool skipSpecialRules = false)
+        public static void AssertContentsNotEqual(
+            string expectedValue,
+            ArrayBufferWriter<byte> buffer,
+            bool skipSpecialRules = false
+        )
         {
             string value = Encoding.UTF8.GetString(
-                    buffer.WrittenSpan
+                buffer.WrittenSpan
 #if NETFRAMEWORK
-                        .ToArray()
+                .ToArray()
 #endif
-                    );
+            );
 
             AssertContentsNotEqualAgainstJsonNet(expectedValue, value, skipSpecialRules);
         }
 
-        public static void AssertContentsAgainstJsonNet(string expectedValue, string value, bool skipSpecialRules)
+        public static void AssertContentsAgainstJsonNet(
+            string expectedValue,
+            string value,
+            bool skipSpecialRules
+        )
         {
-            Assert.Equal(expectedValue.NormalizeToJsonNetFormat(skipSpecialRules), value.NormalizeToJsonNetFormat(skipSpecialRules));
+            Assert.Equal(
+                expectedValue.NormalizeToJsonNetFormat(skipSpecialRules),
+                value.NormalizeToJsonNetFormat(skipSpecialRules)
+            );
         }
 
-        public static void AssertContentsNotEqualAgainstJsonNet(string expectedValue, string value, bool skipSpecialRules)
+        public static void AssertContentsNotEqualAgainstJsonNet(
+            string expectedValue,
+            string value,
+            bool skipSpecialRules
+        )
         {
-            Assert.NotEqual(expectedValue.NormalizeToJsonNetFormat(skipSpecialRules), value.NormalizeToJsonNetFormat(skipSpecialRules));
+            Assert.NotEqual(
+                expectedValue.NormalizeToJsonNetFormat(skipSpecialRules),
+                value.NormalizeToJsonNetFormat(skipSpecialRules)
+            );
         }
 
         public delegate void AssertThrowsActionUtf8JsonReader(Utf8JsonReader json);
 
         // Cannot use standard Assert.Throws() when testing Utf8JsonReader - ref structs and closures don't get along.
-        public static void AssertThrows<E>(Utf8JsonReader json, AssertThrowsActionUtf8JsonReader action) where E : Exception
+        public static void AssertThrows<E>(
+            Utf8JsonReader json,
+            AssertThrowsActionUtf8JsonReader action
+        ) where E : Exception
         {
             Exception ex;
 
@@ -781,8 +873,8 @@ namespace System.Text.Json
 
         public static void AssertThrows<E>(
             ref Utf8JsonWriter writer,
-            AssertThrowsActionUtf8JsonWriter action)
-            where E : Exception
+            AssertThrowsActionUtf8JsonWriter action
+        ) where E : Exception
         {
             Exception ex;
 
@@ -809,15 +901,13 @@ namespace System.Text.Json
 
         private static readonly Regex s_stripWhitespace = new Regex(@"\s+", RegexOptions.Compiled);
 
-        public static string StripWhitespace(this string value)
-            => s_stripWhitespace.Replace(value, string.Empty);
+        public static string StripWhitespace(this string value) =>
+            s_stripWhitespace.Replace(value, string.Empty);
 
         // Should be called only on compile-time strings
         // This is needed due to the fact that git might normalize line endings when checking-out files
-        public static string NormalizeLineEndings(this string value)
-            => s_replaceNewlines ?
-            value.Replace(CompiledNewline, Environment.NewLine) :
-            value;
+        public static string NormalizeLineEndings(this string value) =>
+            s_replaceNewlines ? value.Replace(CompiledNewline, Environment.NewLine) : value;
 
         public static void AssertJsonEqual(string expected, string actual)
         {

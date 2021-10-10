@@ -7,8 +7,12 @@ namespace Internal.CommandLine
 {
     public sealed class ArgumentList<T> : Argument
     {
-        internal ArgumentList(ArgumentCommand command, IEnumerable<string> names, IReadOnlyList<T> defaultValue, bool isRequired)
-            : base(command, names, true, isRequired)
+        internal ArgumentList(
+            ArgumentCommand command,
+            IEnumerable<string> names,
+            IReadOnlyList<T> defaultValue,
+            bool isRequired
+        ) : base(command, names, true, isRequired)
         {
             Value = defaultValue;
             DefaultValue = defaultValue;

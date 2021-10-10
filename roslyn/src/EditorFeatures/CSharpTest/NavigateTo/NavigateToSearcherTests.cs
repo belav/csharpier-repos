@@ -27,35 +27,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
             Mock<INavigateToSearchService> searchService,
             string pattern,
             bool isFullyLoaded,
-            INavigateToSearchResult? result)
+            INavigateToSearchResult? result
+        )
         {
-            var searchServiceSetup = searchService.Setup(ss => ss.SearchProjectAsync(
-                It.IsAny<Project>(),
-                It.IsAny<ImmutableArray<Document>>(),
-                pattern,
-                ImmutableHashSet<string>.Empty,
-                It.IsAny<Func<INavigateToSearchResult, Task>>(),
-                isFullyLoaded,
-                It.IsAny<CancellationToken>()));
+            var searchServiceSetup = searchService.Setup(
+                ss =>
+                    ss.SearchProjectAsync(
+                        It.IsAny<Project>(),
+                        It.IsAny<ImmutableArray<Document>>(),
+                        pattern,
+                        ImmutableHashSet<string>.Empty,
+                        It.IsAny<Func<INavigateToSearchResult, Task>>(),
+                        isFullyLoaded,
+                        It.IsAny<CancellationToken>()
+                    )
+            );
 
             var searchServiceCallback = searchServiceSetup.Callback(
-                (Project project,
-                 ImmutableArray<Document> priorityDocuments,
-                 string pattern2,
-                 IImmutableSet<string> kinds,
-                 Func<INavigateToSearchResult, Task> onResultFound2,
-                 bool isFullyLoaded2,
-                 CancellationToken cancellationToken) =>
+                (
+                    Project project,
+                    ImmutableArray<Document> priorityDocuments,
+                    string pattern2,
+                    IImmutableSet<string> kinds,
+                    Func<INavigateToSearchResult, Task> onResultFound2,
+                    bool isFullyLoaded2,
+                    CancellationToken cancellationToken
+                ) =>
                 {
                     if (result != null)
                         onResultFound2(result);
-                });
+                }
+            );
 
-            return searchServiceCallback.ReturnsAsync(isFullyLoaded ? NavigateToSearchLocation.Latest : NavigateToSearchLocation.Cache);
+            return searchServiceCallback.ReturnsAsync(
+                isFullyLoaded ? NavigateToSearchLocation.Latest : NavigateToSearchLocation.Cache
+            );
         }
 
-        private static ValueTask<(bool projectSystem, bool remoteHost)> IsFullyLoadedAsync(bool projectSystem, bool remoteHost)
-            => new((projectSystem, remoteHost));
+        private static ValueTask<(bool projectSystem, bool remoteHost)> IsFullyLoadedAsync(
+            bool projectSystem,
+            bool remoteHost
+        ) => new((projectSystem, remoteHost));
 
         [Fact]
         public async Task NotFullyLoadedOnlyMakesOneSearchProjectCallIfValueReturned()
@@ -71,12 +83,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
 
             // Simulate a host that says the solution isn't fully loaded.
             var hostMock = new Mock<INavigateToSearcherHost>(MockBehavior.Strict);
-            hostMock.Setup(h => h.IsFullyLoadedAsync(It.IsAny<CancellationToken>())).Returns(IsFullyLoadedAsync(projectSystem: false, remoteHost: false));
-            hostMock.Setup(h => h.GetNavigateToSearchService(It.IsAny<Project>())).Returns(searchService.Object);
+            hostMock.Setup(h => h.IsFullyLoadedAsync(It.IsAny<CancellationToken>()))
+                .Returns(IsFullyLoadedAsync(projectSystem: false, remoteHost: false));
+            hostMock.Setup(h => h.GetNavigateToSearchService(It.IsAny<Project>()))
+                .Returns(searchService.Object);
 
             var callbackMock = new Mock<INavigateToSearchCallback>(MockBehavior.Strict);
             callbackMock.Setup(c => c.ReportProgress(It.IsAny<int>(), It.IsAny<int>()));
-            callbackMock.Setup(c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+            callbackMock.Setup(
+                    c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())
+                )
+                .Returns(Task.CompletedTask);
 
             // Because we returned a result when not fully loaded, we should notify the user that data was not complete.
             callbackMock.Setup(c => c.Done(false));
@@ -89,14 +106,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 searchCurrentDocument: false,
                 kinds: ImmutableHashSet<string>.Empty,
                 CancellationToken.None,
-                hostMock.Object);
+                hostMock.Object
+            );
 
             await searcher.SearchAsync(CancellationToken.None);
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task NotFullyLoadedMakesTwoSearchProjectCallIfValueNotReturned(bool projectSystemFullyLoaded)
+        public async Task NotFullyLoadedMakesTwoSearchProjectCallIfValueNotReturned(
+            bool projectSystemFullyLoaded
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp("");
 
@@ -113,13 +133,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
 
             // Simulate a host that says the solution isn't fully loaded.
             var hostMock = new Mock<INavigateToSearcherHost>(MockBehavior.Strict);
-            hostMock.Setup(h => h.IsFullyLoadedAsync(It.IsAny<CancellationToken>())).Returns(IsFullyLoadedAsync(projectSystemFullyLoaded, remoteHost: false));
-            hostMock.Setup(h => h.GetNavigateToSearchService(It.IsAny<Project>())).Returns(searchService.Object);
+            hostMock.Setup(h => h.IsFullyLoadedAsync(It.IsAny<CancellationToken>()))
+                .Returns(IsFullyLoadedAsync(projectSystemFullyLoaded, remoteHost: false));
+            hostMock.Setup(h => h.GetNavigateToSearchService(It.IsAny<Project>()))
+                .Returns(searchService.Object);
 
             var callbackMock = new Mock<INavigateToSearchCallback>(MockBehavior.Strict);
             callbackMock.Setup(c => c.ReportProgress(It.IsAny<int>(), It.IsAny<int>()));
-            callbackMock.Setup(c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>()))
-                        .Returns(Task.CompletedTask);
+            callbackMock.Setup(
+                    c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())
+                )
+                .Returns(Task.CompletedTask);
 
             // Because we did a full search, the accuracy is dependent on it the project system was fully loaded or not.
             callbackMock.Setup(c => c.Done(projectSystemFullyLoaded));
@@ -132,14 +156,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 searchCurrentDocument: false,
                 kinds: ImmutableHashSet<string>.Empty,
                 CancellationToken.None,
-                hostMock.Object);
+                hostMock.Object
+            );
 
             await searcher.SearchAsync(CancellationToken.None);
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task NotFullyLoadedStillReportsAsFullyCompletedIfSecondCallReturnsNothing(bool projectIsFullyLoaded)
+        public async Task NotFullyLoadedStillReportsAsFullyCompletedIfSecondCallReturnsNothing(
+            bool projectIsFullyLoaded
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp("");
 
@@ -155,8 +182,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
 
             // Simulate a host that says the solution isn't fully loaded.
             var hostMock = new Mock<INavigateToSearcherHost>(MockBehavior.Strict);
-            hostMock.Setup(h => h.IsFullyLoadedAsync(It.IsAny<CancellationToken>())).Returns(IsFullyLoadedAsync(projectIsFullyLoaded, remoteHost: false));
-            hostMock.Setup(h => h.GetNavigateToSearchService(It.IsAny<Project>())).Returns(searchService.Object);
+            hostMock.Setup(h => h.IsFullyLoadedAsync(It.IsAny<CancellationToken>()))
+                .Returns(IsFullyLoadedAsync(projectIsFullyLoaded, remoteHost: false));
+            hostMock.Setup(h => h.GetNavigateToSearchService(It.IsAny<Project>()))
+                .Returns(searchService.Object);
 
             var callbackMock = new Mock<INavigateToSearchCallback>(MockBehavior.Strict);
             callbackMock.Setup(c => c.ReportProgress(It.IsAny<int>(), It.IsAny<int>()));
@@ -172,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 searchCurrentDocument: false,
                 kinds: ImmutableHashSet<string>.Empty,
                 CancellationToken.None,
-                hostMock.Object);
+                hostMock.Object
+            );
 
             await searcher.SearchAsync(CancellationToken.None);
         }
@@ -193,13 +223,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
 
             // Simulate a host that says the solution is fully loaded.
             var hostMock = new Mock<INavigateToSearcherHost>(MockBehavior.Strict);
-            hostMock.Setup(h => h.IsFullyLoadedAsync(It.IsAny<CancellationToken>())).Returns(IsFullyLoadedAsync(projectSystem: true, remoteHost: true));
-            hostMock.Setup(h => h.GetNavigateToSearchService(It.IsAny<Project>())).Returns(searchService.Object);
+            hostMock.Setup(h => h.IsFullyLoadedAsync(It.IsAny<CancellationToken>()))
+                .Returns(IsFullyLoadedAsync(projectSystem: true, remoteHost: true));
+            hostMock.Setup(h => h.GetNavigateToSearchService(It.IsAny<Project>()))
+                .Returns(searchService.Object);
 
             var callbackMock = new Mock<INavigateToSearchCallback>(MockBehavior.Strict);
             callbackMock.Setup(c => c.ReportProgress(It.IsAny<int>(), It.IsAny<int>()));
-            callbackMock.Setup(c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>()))
-                        .Returns(Task.CompletedTask);
+            callbackMock.Setup(
+                    c => c.AddItemAsync(It.IsAny<Project>(), result, It.IsAny<CancellationToken>())
+                )
+                .Returns(Task.CompletedTask);
 
             // Because we did a full search, we should let the user know it was totally accurate.
             callbackMock.Setup(c => c.Done(true));
@@ -212,7 +246,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 searchCurrentDocument: false,
                 kinds: ImmutableHashSet<string>.Empty,
                 CancellationToken.None,
-                hostMock.Object);
+                hostMock.Object
+            );
 
             await searcher.SearchAsync(CancellationToken.None);
         }
@@ -228,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 _sourceSpan = sourceSpan;
             }
 
-            public Document Document => _workspace.CurrentSolution.Projects.Single().Documents.Single();
+            public Document Document =>
+                _workspace.CurrentSolution.Projects.Single().Documents.Single();
             public TextSpan SourceSpan => _sourceSpan;
 
             public string AdditionalInformation => throw new NotImplementedException();
@@ -241,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
             public string Summary => throw new NotImplementedException();
             public INavigableItem NavigableItem => this;
             public Glyph Glyph => throw new NotImplementedException();
-            public ImmutableArray<TaggedText> DisplayTaggedParts => throw new NotImplementedException();
+            public ImmutableArray<TaggedText> DisplayTaggedParts =>
+                throw new NotImplementedException();
             public bool DisplayFileLocation => throw new NotImplementedException();
             public bool IsImplicitlyDeclared => throw new NotImplementedException();
             public bool IsStale => throw new NotImplementedException();

@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -25,14 +25,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             using (var memoryPool = PinnedBlockMemoryPoolFactory.Create())
             {
-                var options = new PipeOptions(memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+                var options = new PipeOptions(
+                    memoryPool,
+                    readerScheduler: PipeScheduler.Inline,
+                    writerScheduler: PipeScheduler.Inline,
+                    useSynchronizationContext: false
+                );
                 var pair = DuplexPipe.CreateConnectionPair(options, options);
                 var http1ConnectionContext = TestContextFactory.CreateHttpConnectionContext(
                     serviceContext: new TestServiceContext(),
                     connectionContext: Mock.Of<ConnectionContext>(),
                     transport: pair.Transport,
                     memoryPool: memoryPool,
-                    connectionFeatures: new FeatureCollection());
+                    connectionFeatures: new FeatureCollection()
+                );
 
                 var http1Connection = new Http1Connection(http1ConnectionContext);
 
@@ -101,32 +107,44 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             var responseHeaders = new HttpResponseHeaders();
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                ((IHeaderDictionary)responseHeaders)[key] = value;
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    ((IHeaderDictionary)responseHeaders)[key] = value;
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                ((IHeaderDictionary)responseHeaders)[key] = new StringValues(new[] { "valid", value });
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    ((IHeaderDictionary)responseHeaders)[key] = new StringValues(
+                        new[] { "valid", value }
+                    );
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                ((IDictionary<string, StringValues>)responseHeaders)[key] = value;
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    ((IDictionary<string, StringValues>)responseHeaders)[key] = value;
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                var kvp = new KeyValuePair<string, StringValues>(key, value);
-                ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var kvp = new KeyValuePair<string, StringValues>(key, value);
+                    ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                var kvp = new KeyValuePair<string, StringValues>(key, value);
-                ((IDictionary<string, StringValues>)responseHeaders).Add(key, value);
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var kvp = new KeyValuePair<string, StringValues>(key, value);
+                    ((IDictionary<string, StringValues>)responseHeaders).Add(key, value);
+                }
+            );
         }
 
         [Fact]
@@ -135,7 +153,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var headers = new HttpResponseHeaders();
             headers.SetReadOnly();
 
-            Assert.Throws<InvalidOperationException>(() => ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" })
+            );
         }
 
         [Fact]
@@ -187,8 +208,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var headers = new HttpResponseHeaders();
             var dictionary = (IDictionary<string, StringValues>)headers;
 
-            var exception = Assert.Throws<InvalidOperationException>(() => dictionary.Add("Content-Length", new[] { contentLength }));
-            Assert.Equal(CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength), exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => dictionary.Add("Content-Length", new[] { contentLength })
+            );
+            Assert.Equal(
+                CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
+                exception.Message
+            );
         }
 
         [Theory]
@@ -198,8 +224,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var headers = new HttpResponseHeaders();
             var dictionary = (IDictionary<string, StringValues>)headers;
 
-            var exception = Assert.Throws<InvalidOperationException>(() => ((IHeaderDictionary)headers)["Content-Length"] = contentLength);
-            Assert.Equal(CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength), exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => ((IHeaderDictionary)headers)["Content-Length"] = contentLength
+            );
+            Assert.Equal(
+                CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
+                exception.Message
+            );
         }
 
         [Theory]
@@ -208,8 +239,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             var headers = new HttpResponseHeaders();
 
-            var exception = Assert.Throws<InvalidOperationException>(() => headers.HeaderContentLength = contentLength);
-            Assert.Equal(CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength), exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => headers.HeaderContentLength = contentLength
+            );
+            Assert.Equal(
+                CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
+                exception.Message
+            );
         }
 
         [Theory]
@@ -270,30 +306,36 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         private static long ParseLong(string value)
         {
-            return long.Parse(value, NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite, CultureInfo.InvariantCulture);
+            return long.Parse(
+                value,
+                NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
+                CultureInfo.InvariantCulture
+            );
         }
 
-        public static TheoryData<string> GoodContentLengths => new TheoryData<string>
-        {
-            "0",
-            "00",
-            "042",
-            "42",
-            long.MaxValue.ToString(CultureInfo.InvariantCulture)
-        };
+        public static TheoryData<string> GoodContentLengths =>
+            new TheoryData<string>
+            {
+                "0",
+                "00",
+                "042",
+                "42",
+                long.MaxValue.ToString(CultureInfo.InvariantCulture)
+            };
 
-        public static TheoryData<string> BadContentLengths => new TheoryData<string>
-        {
-            "",
-            " ",
-            " 42",
-            "42 ",
-            "bad",
-            "!",
-            "!42",
-            "42!",
-            "42,000",
-            "42.000",
-        };
+        public static TheoryData<string> BadContentLengths =>
+            new TheoryData<string>
+            {
+                "",
+                " ",
+                " 42",
+                "42 ",
+                "bad",
+                "!",
+                "!42",
+                "42!",
+                "42,000",
+                "42.000",
+            };
     }
 }

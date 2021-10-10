@@ -13,7 +13,11 @@ namespace Internal.CommandLine
     internal class Helpers
     {
         // Helper to create a collection of paths unique in their simple names.
-        public static void AppendExpandedPaths(Dictionary<string, string> dictionary, string pattern, bool strict)
+        public static void AppendExpandedPaths(
+            Dictionary<string, string> dictionary,
+            string pattern,
+            bool strict
+        )
         {
             bool empty = true;
 
@@ -35,8 +39,12 @@ namespace Internal.CommandLine
                     {
                         if (strict)
                         {
-                            throw new CommandLineException("Multiple input files matching same simple name " +
-                                fullFileName + " " + dictionary[simpleName]);
+                            throw new CommandLineException(
+                                "Multiple input files matching same simple name "
+                                    + fullFileName
+                                    + " "
+                                    + dictionary[simpleName]
+                            );
                         }
                     }
                     else

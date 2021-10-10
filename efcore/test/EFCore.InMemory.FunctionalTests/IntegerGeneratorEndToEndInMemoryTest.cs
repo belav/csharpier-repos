@@ -14,8 +14,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_use_sequence_end_to_end()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             AddEntities(serviceProvider);
@@ -37,10 +36,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new BronieContext(serviceProvider);
             for (var i = 0; i < 50; i++)
             {
-                context.Add(
-                    new Pegasus { Name = "Rainbow Dash " + i });
-                context.Add(
-                    new Pegasus { Name = "Fluttershy " + i });
+                context.Add(new Pegasus { Name = "Rainbow Dash " + i });
+                context.Add(new Pegasus { Name = "Fluttershy " + i });
             }
 
             context.SaveChanges();
@@ -49,8 +46,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_sequence_end_to_end_async()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             await AddEntitiesAsync(serviceProvider);
@@ -72,10 +68,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new BronieContext(serviceProvider);
             for (var i = 0; i < 50; i++)
             {
-                context.Add(
-                    new Pegasus { Name = "Rainbow Dash " + i });
-                context.Add(
-                    new Pegasus { Name = "Fluttershy " + i });
+                context.Add(new Pegasus { Name = "Rainbow Dash " + i });
+                context.Add(new Pegasus { Name = "Fluttershy " + i });
             }
 
             await context.SaveChangesAsync();
@@ -84,8 +78,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_sequence_end_to_end_from_multiple_contexts_concurrently_async()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             const int threadCount = 50;
@@ -124,9 +117,8 @@ namespace Microsoft.EntityFrameworkCore
                 _serviceProvider = serviceProvider;
             }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInMemoryDatabase(nameof(BronieContext))
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseInMemoryDatabase(nameof(BronieContext))
                     .UseInternalServiceProvider(_serviceProvider);
 
             public DbSet<Pegasus> Pegasuses { get; set; }

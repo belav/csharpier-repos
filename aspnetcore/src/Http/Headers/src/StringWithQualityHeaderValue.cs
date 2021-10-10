@@ -15,10 +15,13 @@ namespace Microsoft.Net.Http.Headers
     /// </summary>
     public class StringWithQualityHeaderValue
     {
-        private static readonly HttpHeaderParser<StringWithQualityHeaderValue> SingleValueParser
-            = new GenericHeaderParser<StringWithQualityHeaderValue>(false, GetStringWithQualityLength);
-        private static readonly HttpHeaderParser<StringWithQualityHeaderValue> MultipleValueParser
-            = new GenericHeaderParser<StringWithQualityHeaderValue>(true, GetStringWithQualityLength);
+        private static readonly HttpHeaderParser<StringWithQualityHeaderValue> SingleValueParser =
+            new GenericHeaderParser<StringWithQualityHeaderValue>(
+                false,
+                GetStringWithQualityLength
+            );
+        private static readonly HttpHeaderParser<StringWithQualityHeaderValue> MultipleValueParser =
+            new GenericHeaderParser<StringWithQualityHeaderValue>(true, GetStringWithQualityLength);
 
         private StringSegment _value;
         private double? _quality;
@@ -72,7 +75,10 @@ namespace Microsoft.Net.Http.Headers
         {
             if (_quality.HasValue)
             {
-                return _value + "; q=" + _quality.GetValueOrDefault().ToString("0.0##", NumberFormatInfo.InvariantInfo);
+                return _value
+                    + "; q="
+                    + _quality.GetValueOrDefault()
+                        .ToString("0.0##", NumberFormatInfo.InvariantInfo);
             }
 
             return _value.ToString();
@@ -98,7 +104,8 @@ namespace Microsoft.Net.Http.Headers
                 // Note that we don't consider double.Epsilon here. We really consider two values equal if they're
                 // actually equal. This makes sure that we also get the same hashcode for two values considered equal
                 // by Equals().
-                return other._quality.HasValue && (_quality.GetValueOrDefault() == other._quality.Value);
+                return other._quality.HasValue
+                    && (_quality.GetValueOrDefault() == other._quality.Value);
             }
 
             // If we don't have a quality value, then 'other' must also have no quality assigned in order to be
@@ -136,7 +143,10 @@ namespace Microsoft.Net.Http.Headers
         /// <param name="input">The value to parse.</param>
         /// <param name="parsedValue">The parsed value.</param>
         /// <returns><see langword="true"/> if input is a valid <see cref="StringWithQualityHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-        public static bool TryParse(StringSegment input, [NotNullWhen(true)] out StringWithQualityHeaderValue parsedValue)
+        public static bool TryParse(
+            StringSegment input,
+            [NotNullWhen(true)] out StringWithQualityHeaderValue parsedValue
+        )
         {
             var index = 0;
             return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
@@ -168,7 +178,10 @@ namespace Microsoft.Net.Http.Headers
         /// <param name="input">The values to parse.</param>
         /// <param name="parsedValues">The parsed values.</param>
         /// <returns><see langword="true"/> if all inputs are valid <see cref="StringWithQualityHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-        public static bool TryParseList(IList<string>? input, [NotNullWhen(true)] out IList<StringWithQualityHeaderValue>? parsedValues)
+        public static bool TryParseList(
+            IList<string>? input,
+            [NotNullWhen(true)] out IList<StringWithQualityHeaderValue>? parsedValues
+        )
         {
             return MultipleValueParser.TryParseValues(input, out parsedValues);
         }
@@ -179,12 +192,19 @@ namespace Microsoft.Net.Http.Headers
         /// <param name="input">The values to parse.</param>
         /// <param name="parsedValues">The parsed values.</param>
         /// <returns><see langword="true"/> if all inputs are valid <see cref="StringWithQualityHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-        public static bool TryParseStrictList(IList<string>? input, [NotNullWhen(true)] out IList<StringWithQualityHeaderValue>? parsedValues)
+        public static bool TryParseStrictList(
+            IList<string>? input,
+            [NotNullWhen(true)] out IList<StringWithQualityHeaderValue>? parsedValues
+        )
         {
             return MultipleValueParser.TryParseStrictValues(input, out parsedValues);
         }
 
-        private static int GetStringWithQualityLength(StringSegment input, int startIndex, out StringWithQualityHeaderValue? parsedValue)
+        private static int GetStringWithQualityLength(
+            StringSegment input,
+            int startIndex,
+            out StringWithQualityHeaderValue? parsedValue
+        )
         {
             Contract.Requires(startIndex >= 0);
 
@@ -227,7 +247,11 @@ namespace Microsoft.Net.Http.Headers
             return current - startIndex;
         }
 
-        private static bool TryReadQuality(StringSegment input, StringWithQualityHeaderValue result, ref int index)
+        private static bool TryReadQuality(
+            StringSegment input,
+            StringWithQualityHeaderValue result,
+            ref int index
+        )
         {
             var current = index;
 
@@ -254,7 +278,14 @@ namespace Microsoft.Net.Http.Headers
                 return false;
             }
 
-            if (!HeaderUtilities.TryParseQualityDouble(input, current, out var quality, out var qualityLength))
+            if (
+                !HeaderUtilities.TryParseQualityDouble(
+                    input,
+                    current,
+                    out var quality,
+                    out var qualityLength
+                )
+            )
             {
                 return false;
             }

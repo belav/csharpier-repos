@@ -63,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
                     // Not validating framework error message.
                     Assert.Single(kvp.Value.Errors);
-                });
+                }
+            );
         }
 
 #nullable enable
@@ -150,13 +151,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
                     var error = Assert.Single(kvp.Value.Errors);
                     Assert.Equal("Test", error.ErrorMessage);
-                });
+                }
+            );
         }
 
 #nullable enable
-        private void NonNullableParameter(string param1)
-        {
-        }
+        private void NonNullableParameter(string param1) { }
 #nullable restore
 
         [Fact]
@@ -171,7 +171,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(string)
             };
 
-            var method = GetType().GetMethod(nameof(NonNullableParameter), BindingFlags.NonPublic | BindingFlags.Instance);
+            var method = GetType()
+                .GetMethod(
+                    nameof(NonNullableParameter),
+                    BindingFlags.NonPublic | BindingFlags.Instance
+                );
             var parameterInfo = method.GetParameters().Single();
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var modelMetadata = modelMetadataProvider.GetMetadataForParameter(parameterInfo);
@@ -184,7 +188,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 parameter,
                 testContext,
                 modelMetadataProvider,
-                modelMetadata);
+                modelMetadata
+            );
 
             // Assert
 
@@ -205,7 +210,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
                     // Not validating framework error message.
                     Assert.Single(kvp.Value.Errors);
-                });
+                }
+            );
         }
     }
 }

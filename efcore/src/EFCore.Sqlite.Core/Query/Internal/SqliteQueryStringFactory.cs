@@ -47,20 +47,18 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             foreach (DbParameter parameter in command.Parameters)
             {
                 var value = parameter.Value;
-                builder
-                    .Append(".param set ")
+                builder.Append(".param set ")
                     .Append(parameter.ParameterName)
                     .Append(' ')
                     .AppendLine(
                         value == null || value == DBNull.Value
-                            ? "NULL"
-                            : _typeMapper.FindMapping(value.GetType())?.GenerateSqlLiteral(value)
-                            ?? value.ToString());
+                          ? "NULL"
+                          : _typeMapper.FindMapping(value.GetType())?.GenerateSqlLiteral(value)
+                                ?? value.ToString()
+                    );
             }
 
-            return builder
-                .AppendLine()
-                .Append(command.CommandText).ToString();
+            return builder.AppendLine().Append(command.CommandText).ToString();
         }
     }
 }

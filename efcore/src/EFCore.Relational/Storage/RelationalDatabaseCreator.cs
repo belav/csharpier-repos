@@ -122,8 +122,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Creates all tables for the current model in the database. No attempt is made
         ///     to incrementally update the schema. It is assumed that none of the tables exist in the database.
         /// </summary>
-        public virtual void CreateTables()
-            => Dependencies.MigrationCommandExecutor.ExecuteNonQuery(GetCreateTablesCommands(), Dependencies.Connection);
+        public virtual void CreateTables() =>
+            Dependencies.MigrationCommandExecutor.ExecuteNonQuery(
+                GetCreateTablesCommands(),
+                Dependencies.Connection
+            );
 
         /// <summary>
         ///     Asynchronously creates all tables for the current model in the database. No attempt is made
@@ -134,9 +137,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     A task that represents the asynchronous operation.
         /// </returns>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
-        public virtual Task CreateTablesAsync(CancellationToken cancellationToken = default)
-            => Dependencies.MigrationCommandExecutor.ExecuteNonQueryAsync(
-                GetCreateTablesCommands(), Dependencies.Connection, cancellationToken);
+        public virtual Task CreateTablesAsync(CancellationToken cancellationToken = default) =>
+            Dependencies.MigrationCommandExecutor.ExecuteNonQueryAsync(
+                GetCreateTablesCommands(),
+                Dependencies.Connection,
+                cancellationToken
+            );
 
         /// <summary>
         ///     Gets the commands that will create all tables from the model.
@@ -144,13 +150,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="options"> The options to use when generating commands. </param>
         /// <returns> The generated commands. </returns>
         protected virtual IReadOnlyList<MigrationCommand> GetCreateTablesCommands(
-            MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default)
+            MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
+        )
         {
             var model = Dependencies.CurrentContext.Context.GetService<IDesignTimeModel>().Model;
             return Dependencies.MigrationsSqlGenerator.Generate(
                 Dependencies.ModelDiffer.GetDifferences(null, model.GetRelationalModel()),
                 model,
-                options);
+                options
+            );
         }
 
         /// <summary>
@@ -217,7 +225,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     if the database is deleted, <see langword="false" /> if it did not exist.
         /// </returns>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
-        public virtual async Task<bool> EnsureDeletedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<bool> EnsureDeletedAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             if (await ExistsAsync(cancellationToken).ConfigureAwait(false))
             {
@@ -239,7 +249,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </returns>
         public virtual bool EnsureCreated()
         {
-            using (new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled))
+            using (
+                new TransactionScope(
+                    TransactionScopeOption.Suppress,
+                    TransactionScopeAsyncFlowOption.Enabled
+                )
+            )
             {
                 if (!Exists())
                 {
@@ -269,9 +284,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     if the database is created, <see langword="false" /> if it already existed.
         /// </returns>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
-        public virtual async Task<bool> EnsureCreatedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<bool> EnsureCreatedAsync(
+            CancellationToken cancellationToken = default
+        )
         {
-            var transactionScope = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
+            var transactionScope = new TransactionScope(
+                TransactionScopeOption.Suppress,
+                TransactionScopeAsyncFlowOption.Enabled
+            );
             try
             {
                 if (!await ExistsAsync(cancellationToken).ConfigureAwait(false))
@@ -289,6 +309,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     return true;
                 }
             }
+
             finally
             {
                 await transactionScope.DisposeAsyncIfAvailable().ConfigureAwait(false);
@@ -309,8 +330,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var builder = new StringBuilder();
             foreach (var command in commands)
             {
-                builder
-                    .Append(command.CommandText)
+                builder.Append(command.CommandText)
                     .AppendLine(Dependencies.SqlGenerationHelper.BatchTerminator);
             }
 
@@ -365,7 +385,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns> <see langword="true" /> if the database is available; <see langword="false" /> otherwise. </returns>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
-        public virtual async Task<bool> CanConnectAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<bool> CanConnectAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             try
             {

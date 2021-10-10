@@ -28,26 +28,41 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     /// </summary>
     public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<object>
     {
-        private static readonly MethodInfo _doubleEqualsMethodInfo
-            = typeof(double).GetRequiredRuntimeMethod(nameof(double.Equals), new[] { typeof(double) });
+        private static readonly MethodInfo _doubleEqualsMethodInfo =
+            typeof(double).GetRequiredRuntimeMethod(
+                nameof(double.Equals),
+                new[] { typeof(double) }
+            );
 
-        private static readonly MethodInfo _floatEqualsMethodInfo
-            = typeof(float).GetRequiredRuntimeMethod(nameof(float.Equals), new[] { typeof(float) });
+        private static readonly MethodInfo _floatEqualsMethodInfo =
+            typeof(float).GetRequiredRuntimeMethod(nameof(float.Equals), new[] { typeof(float) });
 
-        internal static readonly MethodInfo ArrayCopyMethod
-            = typeof(Array).GetRequiredRuntimeMethod(nameof(Array.Copy), new[] { typeof(Array), typeof(Array), typeof(int) });
+        internal static readonly MethodInfo ArrayCopyMethod =
+            typeof(Array).GetRequiredRuntimeMethod(
+                nameof(Array.Copy),
+                new[] { typeof(Array), typeof(Array), typeof(int) }
+            );
 
-        internal static readonly MethodInfo EqualityComparerHashCodeMethod
-            = typeof(IEqualityComparer).GetRequiredRuntimeMethod(nameof(IEqualityComparer.GetHashCode), new[] { typeof(object) });
+        internal static readonly MethodInfo EqualityComparerHashCodeMethod =
+            typeof(IEqualityComparer).GetRequiredRuntimeMethod(
+                nameof(IEqualityComparer.GetHashCode),
+                new[] { typeof(object) }
+            );
 
-        internal static readonly MethodInfo EqualityComparerEqualsMethod
-            = typeof(IEqualityComparer).GetRequiredRuntimeMethod(nameof(IEqualityComparer.Equals), new[] { typeof(object), typeof(object) });
+        internal static readonly MethodInfo EqualityComparerEqualsMethod =
+            typeof(IEqualityComparer).GetRequiredRuntimeMethod(
+                nameof(IEqualityComparer.Equals),
+                new[] { typeof(object), typeof(object) }
+            );
 
-        internal static readonly MethodInfo ObjectEqualsMethod
-            = typeof(object).GetRequiredRuntimeMethod(nameof(object.Equals), new[] { typeof(object), typeof(object) });
+        internal static readonly MethodInfo ObjectEqualsMethod =
+            typeof(object).GetRequiredRuntimeMethod(
+                nameof(object.Equals),
+                new[] { typeof(object), typeof(object) }
+            );
 
-        internal static readonly MethodInfo ObjectGetHashCodeMethod
-            = typeof(object).GetRequiredRuntimeMethod(nameof(object.GetHashCode), Type.EmptyTypes);
+        internal static readonly MethodInfo ObjectGetHashCodeMethod =
+            typeof(object).GetRequiredRuntimeMethod(nameof(object.GetHashCode), Type.EmptyTypes);
 
         /// <summary>
         ///     Creates a new <see cref="ValueComparer" /> with the given comparison and
@@ -59,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         protected ValueComparer(
             LambdaExpression equalsExpression,
             LambdaExpression hashCodeExpression,
-            LambdaExpression snapshotExpression)
+            LambdaExpression snapshotExpression
+        )
         {
             Check.NotNull(equalsExpression, nameof(equalsExpression));
             Check.NotNull(hashCodeExpression, nameof(hashCodeExpression));
@@ -137,7 +153,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <returns> The body of the lambda with left and right parameters replaced.</returns>
         public virtual Expression ExtractEqualsBody(
             Expression leftExpression,
-            Expression rightExpression)
+            Expression rightExpression
+        )
         {
             Check.NotNull(leftExpression, nameof(leftExpression));
             Check.NotNull(rightExpression, nameof(rightExpression));
@@ -146,8 +163,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var original2 = EqualsExpression.Parameters[1];
 
             return new ReplacingExpressionVisitor(
-                    new Expression[] { original1, original2 }, new[] { leftExpression, rightExpression })
-                .Visit(EqualsExpression.Body);
+                new Expression[] { original1, original2 },
+                new[] { leftExpression, rightExpression }
+            ).Visit(EqualsExpression.Body);
         }
 
         /// <summary>
@@ -163,7 +181,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             return ReplacingExpressionVisitor.Replace(
                 HashCodeExpression.Parameters[0],
                 expression,
-                HashCodeExpression.Body);
+                HashCodeExpression.Body
+            );
         }
 
         /// <summary>
@@ -179,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             return ReplacingExpressionVisitor.Replace(
                 SnapshotExpression.Parameters[0],
                 expression,
-                SnapshotExpression.Body);
+                SnapshotExpression.Body
+            );
         }
 
         /// <summary>
@@ -211,7 +231,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 return new DefaultDateTimeOffsetValueComparer(favorStructuralComparisons);
             }
 
-            var comparerType = nonNullabletype.IsInteger()
+            var comparerType =
+                nonNullabletype.IsInteger()
                 || nonNullabletype == typeof(decimal)
                 || nonNullabletype == typeof(bool)
                 || nonNullabletype == typeof(string)
@@ -223,76 +244,82 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             return (ValueComparer)Activator.CreateInstance(
                 comparerType.MakeGenericType(type),
-                new object[] { favorStructuralComparisons })!;
+                new object[] { favorStructuralComparisons }
+            )!;
         }
 
         internal class DefaultValueComparer<T> : ValueComparer<T>
         {
             public DefaultValueComparer(bool favorStructuralComparisons)
-                : base(favorStructuralComparisons)
-            {
-            }
+                : base(favorStructuralComparisons) { }
 
-            public DefaultValueComparer(Expression<Func<T?, T?, bool>> equalsExpression, bool favorStructuralComparisons)
+            public DefaultValueComparer(
+                Expression<Func<T?, T?, bool>> equalsExpression,
+                bool favorStructuralComparisons
+            )
                 : base(
                     equalsExpression,
                     CreateDefaultHashCodeExpression(favorStructuralComparisons),
-                    CreateDefaultSnapshotExpression(favorStructuralComparisons))
-            {
-            }
+                    CreateDefaultSnapshotExpression(favorStructuralComparisons)
+                ) { }
 
-            public override Expression ExtractEqualsBody(Expression leftExpression, Expression rightExpression)
-                => Expression.Equal(leftExpression, rightExpression);
+            public override Expression ExtractEqualsBody(
+                Expression leftExpression,
+                Expression rightExpression
+            ) => Expression.Equal(leftExpression, rightExpression);
 
-            public override Expression ExtractSnapshotBody(Expression expression)
-                => expression;
+            public override Expression ExtractSnapshotBody(Expression expression) => expression;
 
-            public override object? Snapshot(object? instance)
-                => instance;
+            public override object? Snapshot(object? instance) => instance;
 
-            public override T? Snapshot(T? instance)
-                => instance;
+            public override T? Snapshot(T? instance) => instance;
         }
 
         internal sealed class DefaultDoubleValueComparer : DefaultValueComparer<double>
         {
             public DefaultDoubleValueComparer(bool favorStructuralComparisons)
-                : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons)
-            {
-            }
+                : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons) { }
 
-            public override Expression ExtractEqualsBody(Expression leftExpression, Expression rightExpression)
-                => Expression.Call(leftExpression, _doubleEqualsMethodInfo, rightExpression);
+            public override Expression ExtractEqualsBody(
+                Expression leftExpression,
+                Expression rightExpression
+            ) => Expression.Call(leftExpression, _doubleEqualsMethodInfo, rightExpression);
         }
 
         internal sealed class DefaultFloatValueComparer : DefaultValueComparer<float>
         {
             public DefaultFloatValueComparer(bool favorStructuralComparisons)
-                : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons)
-            {
-            }
+                : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons) { }
 
-            public override Expression ExtractEqualsBody(Expression leftExpression, Expression rightExpression)
-                => Expression.Call(leftExpression, _floatEqualsMethodInfo, rightExpression);
+            public override Expression ExtractEqualsBody(
+                Expression leftExpression,
+                Expression rightExpression
+            ) => Expression.Call(leftExpression, _floatEqualsMethodInfo, rightExpression);
         }
 
-        internal sealed class DefaultDateTimeOffsetValueComparer : DefaultValueComparer<DateTimeOffset>
+        internal sealed class DefaultDateTimeOffsetValueComparer
+            : DefaultValueComparer<DateTimeOffset>
         {
-            private static readonly PropertyInfo _offsetPropertyInfo = typeof(DateTimeOffset).GetProperty(nameof(DateTimeOffset.Offset))!;
+            private static readonly PropertyInfo _offsetPropertyInfo =
+                typeof(DateTimeOffset).GetProperty(nameof(DateTimeOffset.Offset))!;
 
             // In .NET, two DateTimeOffset instances are considered equal if they represent the same point in time but with different
             // time zone offsets. This comparer considers such DateTimeOffset as non-equal.
             public DefaultDateTimeOffsetValueComparer(bool favorStructuralComparisons)
                 : base((v1, v2) => v1 == v2 && v1.Offset == v2.Offset, favorStructuralComparisons)
-            {
-            }
+            { }
 
-            public override Expression ExtractEqualsBody(Expression leftExpression, Expression rightExpression)
-                => Expression.And(
+            public override Expression ExtractEqualsBody(
+                Expression leftExpression,
+                Expression rightExpression
+            ) =>
+                Expression.And(
                     Expression.Equal(leftExpression, rightExpression),
                     Expression.Equal(
                         Expression.Property(leftExpression, _offsetPropertyInfo),
-                        Expression.Property(rightExpression, _offsetPropertyInfo)));
+                        Expression.Property(rightExpression, _offsetPropertyInfo)
+                    )
+                );
         }
     }
 }

@@ -22,15 +22,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     ///The 'Equals' method called by the '==' operator is the 'Equals(R? other)' (<see cref="SynthesizedRecordEquals"/>).
     ///The '!=' operator delegates to the '==' operator. It is an error if the operators are declared explicitly.
     /// </summary>
-    internal abstract class SynthesizedRecordEqualityOperatorBase : SourceUserDefinedOperatorSymbolBase
+    internal abstract class SynthesizedRecordEqualityOperatorBase
+        : SourceUserDefinedOperatorSymbolBase
     {
         private readonly int _memberOffset;
 
-        protected SynthesizedRecordEqualityOperatorBase(SourceMemberContainerTypeSymbol containingType, string name, int memberOffset, BindingDiagnosticBag diagnostics)
-            : base(MethodKind.UserDefinedOperator, name, containingType, containingType.Locations[0], (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
-                   DeclarationModifiers.Public | DeclarationModifiers.Static, hasBody: true, isExpressionBodied: false, isIterator: false, isNullableAnalysisEnabled: false, diagnostics)
+        protected SynthesizedRecordEqualityOperatorBase(
+            SourceMemberContainerTypeSymbol containingType,
+            string name,
+            int memberOffset,
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                MethodKind.UserDefinedOperator,
+                name,
+                containingType,
+                containingType.Locations[0],
+                (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
+                DeclarationModifiers.Public | DeclarationModifiers.Static,
+                hasBody: true,
+                isExpressionBodied: false,
+                isIterator: false,
+                isNullableAnalysisEnabled: false,
+                diagnostics
+            )
         {
-            Debug.Assert(name == WellKnownMemberNames.EqualityOperatorName || name == WellKnownMemberNames.InequalityOperatorName);
+            Debug.Assert(
+                name == WellKnownMemberNames.EqualityOperatorName
+                    || name == WellKnownMemberNames.InequalityOperatorName
+            );
             _memberOffset = memberOffset;
         }
 
@@ -38,30 +58,61 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected sealed override Location ReturnTypeLocation => Locations[0];
 
-        internal sealed override LexicalSortKey GetLexicalSortKey() => LexicalSortKey.GetSynthesizedMemberKey(_memberOffset);
+        internal sealed override LexicalSortKey GetLexicalSortKey() =>
+            LexicalSortKey.GetSynthesizedMemberKey(_memberOffset);
 
         protected sealed override SourceMemberMethodSymbol? BoundAttributesSource => null;
 
-        internal sealed override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations() => OneOrMany.Create(default(SyntaxList<AttributeListSyntax>));
+        internal sealed override OneOrMany<
+            SyntaxList<AttributeListSyntax>
+        > GetAttributeDeclarations() => OneOrMany.Create(default(SyntaxList<AttributeListSyntax>));
 
-        public sealed override string? GetDocumentationCommentXml(CultureInfo? preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default) => null;
+        public sealed override string? GetDocumentationCommentXml(
+            CultureInfo? preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default
+        ) => null;
 
         internal sealed override bool GenerateDebugInfo => false;
 
         internal sealed override bool SynthesizesLoweredBoundBody => true;
 
-        protected sealed override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        protected sealed override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(
+            BindingDiagnosticBag diagnostics
+        )
         {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_Boolean, location, diagnostics)),
-                    Parameters: ImmutableArray.Create<ParameterSymbol>(
-                                    new SourceSimpleParameterSymbol(owner: this,
-                                                                    TypeWithAnnotations.Create(ContainingType, NullableAnnotation.Annotated),
-                                                                    ordinal: 0, RefKind.None, "left", isDiscard: false, Locations),
-                                    new SourceSimpleParameterSymbol(owner: this,
-                                                                    TypeWithAnnotations.Create(ContainingType, NullableAnnotation.Annotated),
-                                                                    ordinal: 1, RefKind.None, "right", isDiscard: false, Locations)));
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Boolean,
+                        location,
+                        diagnostics
+                    )
+                ),
+                Parameters: ImmutableArray.Create<ParameterSymbol>(
+                    new SourceSimpleParameterSymbol(
+                        owner: this,
+                        TypeWithAnnotations.Create(ContainingType, NullableAnnotation.Annotated),
+                        ordinal: 0,
+                        RefKind.None,
+                        "left",
+                        isDiscard: false,
+                        Locations
+                    ),
+                    new SourceSimpleParameterSymbol(
+                        owner: this,
+                        TypeWithAnnotations.Create(ContainingType, NullableAnnotation.Annotated),
+                        ordinal: 1,
+                        RefKind.None,
+                        "right",
+                        isDiscard: false,
+                        Locations
+                    )
+                )
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => 2;

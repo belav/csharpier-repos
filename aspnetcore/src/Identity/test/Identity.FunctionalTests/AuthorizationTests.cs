@@ -11,7 +11,8 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests
 {
-    public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<ServerFactory<TStartup, TContext>>
+    public abstract class AuthorizationTests<TStartup, TContext>
+        : IClassFixture<ServerFactory<TStartup, TContext>>
         where TStartup : class
         where TContext : DbContext
     {
@@ -45,8 +46,7 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         public async Task AnonymousUserCantAccessAuthorizedPages(string url)
         {
             // Arrange
-            var client = ServerFactory
-                .CreateClient();
+            var client = ServerFactory.CreateClient();
 
             // Act
             var response = await client.GetAsync(url);
@@ -82,8 +82,7 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         public async Task AuthenticatedUserCanAccessAuthorizedPages(string url)
         {
             // Arrange
-            var client = ServerFactory
-                .CreateClient();
+            var client = ServerFactory.CreateClient();
 
             await UserStories.RegisterNewUserAsync(client);
 
@@ -117,8 +116,7 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         public async Task AnonymousUserCanAccessNotAuthorizedPages(string url)
         {
             // Arrange
-            var client = ServerFactory
-                .CreateClient();
+            var client = ServerFactory.CreateClient();
 
             // Act
             var response = await client.GetAsync(url);
@@ -128,24 +126,28 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         }
 
         public static TheoryData<string> UnauthorizedPagesAllowAnonymous =>
-        new TheoryData<string>
-        {
-             "/Identity/Error",
-             "/Identity/Account/Register",
-             "/Identity/Account/Login",
-             "/Identity/Account/ForgotPassword",
-             "/Identity/Account/Logout"
-        };
+            new TheoryData<string>
+            {
+                "/Identity/Error",
+                "/Identity/Account/Register",
+                "/Identity/Account/Login",
+                "/Identity/Account/ForgotPassword",
+                "/Identity/Account/Logout"
+            };
 
         [Theory]
         [MemberData(nameof(UnauthorizedPagesAllowAnonymous))]
-        public async Task AnonymousUserAllowedAccessToPages_WithGlobalAuthorizationFilter(string url)
+        public async Task AnonymousUserAllowedAccessToPages_WithGlobalAuthorizationFilter(
+            string url
+        )
         {
             // Arrange
             void TestServicesConfiguration(IServiceCollection services) =>
                 services.SetupGlobalAuthorizeFilter();
 
-            var client = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(TestServicesConfiguration))
+            var client = ServerFactory.WithWebHostBuilder(
+                    whb => whb.ConfigureServices(TestServicesConfiguration)
+                )
                 .CreateClient();
 
             // Act

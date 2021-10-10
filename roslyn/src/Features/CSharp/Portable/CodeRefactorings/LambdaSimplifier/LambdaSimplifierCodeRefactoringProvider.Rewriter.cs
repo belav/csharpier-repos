@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             public Rewriter(
                 SemanticDocument document,
                 Func<SyntaxNode, bool> predicate,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 _document = document;
                 _predicate = predicate;
@@ -39,22 +40,33 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
                 var expression = invocation.Expression;
                 if (expression is MemberAccessExpressionSyntax memberAccess)
                 {
-                    var symbolMap = SemanticMap.From(_document.SemanticModel, memberAccess.Expression, _cancellationToken);
-                    var anySideEffects = symbolMap.AllReferencedSymbols.Any(s =>
-                        s.Kind == SymbolKind.Method || s.Kind == SymbolKind.Property);
+                    var symbolMap = SemanticMap.From(
+                        _document.SemanticModel,
+                        memberAccess.Expression,
+                        _cancellationToken
+                    );
+                    var anySideEffects = symbolMap.AllReferencedSymbols.Any(
+                        s => s.Kind == SymbolKind.Method || s.Kind == SymbolKind.Property
+                    );
 
                     if (anySideEffects)
                     {
-                        var annotation = WarningAnnotation.Create("Warning: Expression may have side effects. Code meaning may change.");
-                        expression = expression.ReplaceNode(memberAccess.Expression, memberAccess.Expression.WithAdditionalAnnotations(annotation));
+                        var annotation = WarningAnnotation.Create(
+                            "Warning: Expression may have side effects. Code meaning may change."
+                        );
+                        expression = expression.ReplaceNode(
+                            memberAccess.Expression,
+                            memberAccess.Expression.WithAdditionalAnnotations(annotation)
+                        );
                     }
                 }
 
-                return expression.Parenthesize()
-                    .WithAdditionalAnnotations(Formatter.Annotation);
+                return expression.Parenthesize().WithAdditionalAnnotations(Formatter.Annotation);
             }
 
-            public override SyntaxNode VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
+            public override SyntaxNode VisitSimpleLambdaExpression(
+                SimpleLambdaExpressionSyntax node
+            )
             {
                 if (_predicate(node) && CanSimplify(_document, node, _cancellationToken))
                 {
@@ -68,7 +80,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
                 return base.VisitSimpleLambdaExpression(node);
             }
 
-            public override SyntaxNode VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
+            public override SyntaxNode VisitParenthesizedLambdaExpression(
+                ParenthesizedLambdaExpressionSyntax node
+            )
             {
                 if (_predicate(node) && CanSimplify(_document, node, _cancellationToken))
                 {

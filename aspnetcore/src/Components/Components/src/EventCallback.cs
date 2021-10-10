@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Components
         // This is a hint to the runtime that Receiver is a different object than what
         // Delegate.Target points to. This allows us to avoid boxing the command object
         // when building the render tree. See logic where this is used.
-        internal bool RequiresExplicitReceiver => Receiver != null && !object.ReferenceEquals(Receiver, Delegate?.Target);
+        internal bool RequiresExplicitReceiver =>
+            Receiver != null && !object.ReferenceEquals(Receiver, Delegate?.Target);
 
         /// <summary>
         /// Invokes the delegate associated with this binding and dispatches an event notification to the

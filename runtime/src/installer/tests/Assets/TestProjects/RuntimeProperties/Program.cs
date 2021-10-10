@@ -14,7 +14,9 @@ namespace RuntimeProperties
 
             foreach (string propertyName in args)
             {
-                Console.WriteLine($"AppContext.GetData({propertyName}) = {System.AppContext.GetData(propertyName)}");
+                Console.WriteLine(
+                    $"AppContext.GetData({propertyName}) = {System.AppContext.GetData(propertyName)}"
+                );
             }
         }
     }

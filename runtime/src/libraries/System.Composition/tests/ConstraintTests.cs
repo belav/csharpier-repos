@@ -18,24 +18,22 @@ namespace System.Composition.UnitTests
         public interface IHandler<T> where T : IThing { }
 
         [Export(typeof(IHandler<>))]
-        public class ThingHandler<T> : IHandler<T>
-            where T : IThing
+        public class ThingHandler<T> : IHandler<T> where T : IThing
         {
         }
 
         [Export(typeof(IHandler<>))]
-        public class BookHandler<T> : IHandler<T>
-            where T : IBook
+        public class BookHandler<T> : IHandler<T> where T : IBook
         {
         }
 
-        [Export(typeof(IInheritedThings<,>))]
+        [Export(typeof(IInheritedThings<, >))]
         public class InheritedThings<TC, TP> : ObservableCollection<TC>, IInheritedThings<TC, TP>
             where TC : TP
         {
         }
 
-        [Export(typeof(IUnrelatedThings<,>))]
+        [Export(typeof(IUnrelatedThings<, >))]
         public class UnrelatedThings<TC, TP> : ObservableCollection<TC>, IUnrelatedThings<TC, TP>
         {
         }
@@ -66,7 +64,7 @@ namespace System.Composition.UnitTests
         [Fact]
         public void GetExport_ComplexConstraint_ExportSuccessful()
         {
-            CompositionContext container = CreateContainer(typeof(UnrelatedThings<,>));
+            CompositionContext container = CreateContainer(typeof(UnrelatedThings<, >));
             var exports = container.GetExports<IUnrelatedThings<IBook, ICar>>();
             var types = exports.Select(h => h.GetType());
 
@@ -78,7 +76,7 @@ namespace System.Composition.UnitTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/23356")]
         public void GetExport_WhereClause_ExportSuccessful()
         {
-            CompositionContext container = CreateContainer(typeof(InheritedThings<,>));
+            CompositionContext container = CreateContainer(typeof(InheritedThings<, >));
             var exports = container.GetExports<IInheritedThings<IBook, IThing>>();
             var types = exports.Select(h => h.GetType());
 

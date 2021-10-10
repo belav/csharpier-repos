@@ -17,14 +17,19 @@ using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassificationCache
 {
-    [ExportIncrementalAnalyzerProvider(nameof(SemanticClassificationCacheIncrementalAnalyzerProvider), new[] { WorkspaceKind.Host }), Shared]
-    internal class SemanticClassificationCacheIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider
+    [
+        ExportIncrementalAnalyzerProvider(
+            nameof(SemanticClassificationCacheIncrementalAnalyzerProvider),
+            new[] { WorkspaceKind.Host }
+        ),
+        Shared
+    ]
+    internal class SemanticClassificationCacheIncrementalAnalyzerProvider
+        : IIncrementalAnalyzerProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SemanticClassificationCacheIncrementalAnalyzerProvider()
-        {
-        }
+        public SemanticClassificationCacheIncrementalAnalyzerProvider() { }
 
         public IIncrementalAnalyzer? CreateIncrementalAnalyzer(Workspace workspace)
         {
@@ -36,10 +41,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
 
         private class SemanticClassificationCacheIncrementalAnalyzer : IncrementalAnalyzerBase
         {
-            public override async Task AnalyzeDocumentAsync(Document document, SyntaxNode bodyOpt, InvocationReasons reasons, CancellationToken cancellationToken)
+            public override async Task AnalyzeDocumentAsync(
+                Document document,
+                SyntaxNode bodyOpt,
+                InvocationReasons reasons,
+                CancellationToken cancellationToken
+            )
             {
                 // only process C# and VB.  OOP does not contain files for other languages.
-                if (document.Project.Language is not (LanguageNames.CSharp or LanguageNames.VisualBasic))
+                if (
+                    document.Project.Language
+                    is not (LanguageNames.CSharp or LanguageNames.VisualBasic)
+                )
                     return;
 
                 // Only cache classifications for open files.  This keeps our CPU/memory usage low, but hits the common
@@ -49,7 +62,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
                     return;
 
                 var solution = document.Project.Solution;
-                var client = await RemoteHostClient.TryGetClientAsync(solution.Workspace, cancellationToken).ConfigureAwait(false);
+                var client = await RemoteHostClient.TryGetClientAsync(
+                        solution.Workspace,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (client == null)
                 {
                     // We don't do anything if we fail to get the external process.  That's the case when something has gone
@@ -58,18 +75,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
                     return;
                 }
 
-                var statusService = document.Project.Solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                var statusService =
+                    document.Project.Solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
 
                 // If we're not fully loaded, then we don't want to cache classifications.  The classifications we have
                 // will likely not be accurate.  And, if we shutdown after that, we'll have cached incomplete classifications.
-                var isFullyLoaded = await statusService.IsFullyLoadedAsync(cancellationToken).ConfigureAwait(false);
+                var isFullyLoaded = await statusService.IsFullyLoadedAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (!isFullyLoaded)
                     return;
 
                 await client.TryInvokeAsync<IRemoteSemanticClassificationCacheService>(
-                    document.Project.Solution,
-                    (service, solutionInfo, cancellationToken) => service.CacheSemanticClassificationsAsync(solutionInfo, document.Id, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                        document.Project.Solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.CacheSemanticClassificationsAsync(
+                                solutionInfo,
+                                document.Id,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
     }

@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected override string DocumentKind => "default";
 
-        protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override bool IsMatch(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             return true;
         }
@@ -21,9 +24,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             RazorCodeDocument codeDocument,
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
-            MethodDeclarationIntermediateNode method)
+            MethodDeclarationIntermediateNode method
+        )
         {
-            var configuration = Engine.Features.OfType<DefaultDocumentClassifierPassFeature>().FirstOrDefault();
+            var configuration = Engine.Features.OfType<DefaultDocumentClassifierPassFeature>()
+                .FirstOrDefault();
             if (configuration != null)
             {
                 for (var i = 0; i < configuration.ConfigureClass.Count; i++)

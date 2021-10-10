@@ -81,24 +81,39 @@ namespace Microsoft.Win32
             }
         }
 
-        private unsafe RegistryKey CreateSubKeyInternalCore(string subkey, RegistryKeyPermissionCheck permissionCheck, RegistryOptions registryOptions)
+        private unsafe RegistryKey CreateSubKeyInternalCore(
+            string subkey,
+            RegistryKeyPermissionCheck permissionCheck,
+            RegistryOptions registryOptions
+        )
         {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = default;
 
             // By default, the new key will be writable.
-            int ret = Interop.Advapi32.RegCreateKeyEx(_hkey,
+            int ret = Interop.Advapi32.RegCreateKeyEx(
+                _hkey,
                 subkey,
                 0,
                 null,
-                (int)registryOptions /* specifies if the key is volatile */,
-                GetRegistryKeyAccess(permissionCheck != RegistryKeyPermissionCheck.ReadSubTree) | (int)_regView,
+                (int)registryOptions /* specifies if the key is volatile */
+                ,
+                GetRegistryKeyAccess(permissionCheck != RegistryKeyPermissionCheck.ReadSubTree)
+                    | (int)_regView,
                 ref secAttrs,
                 out SafeRegistryHandle result,
-                out int _);
+                out int _
+            );
 
             if (ret == 0 && !result.IsInvalid)
             {
-                RegistryKey key = new RegistryKey(result, (permissionCheck != RegistryKeyPermissionCheck.ReadSubTree), false, _remoteKey, false, _regView);
+                RegistryKey key = new RegistryKey(
+                    result,
+                    (permissionCheck != RegistryKeyPermissionCheck.ReadSubTree),
+                    false,
+                    _remoteKey,
+                    false,
+                    _regView
+                );
                 key._checkMode = permissionCheck;
 
                 if (subkey.Length == 0)
@@ -113,7 +128,7 @@ namespace Microsoft.Win32
             }
             else if (ret != 0) // syscall failed, ret is an error code.
             {
-                Win32Error(ret, _keyName + "\\" + subkey);  // Access denied?
+                Win32Error(ret, _keyName + "\\" + subkey); // Access denied?
             }
 
             Debug.Fail("Unexpected code path in RegistryKey::CreateSubKey");
@@ -157,8 +172,10 @@ namespace Microsoft.Win32
             // From windows 2003 server, if the name is too long we will get error code ERROR_FILENAME_EXCED_RANGE
             // This still means the name doesn't exist. We need to be consistent with previous OS.
             //
-            if (errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND ||
-                errorCode == Interop.Errors.ERROR_FILENAME_EXCED_RANGE)
+            if (
+                errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
+                || errorCode == Interop.Errors.ERROR_FILENAME_EXCED_RANGE
+            )
             {
                 if (throwOnMissingValue)
                 {
@@ -173,7 +190,10 @@ namespace Microsoft.Win32
             }
             // We really should throw an exception here if errorCode was bad,
             // but we can't for compatibility reasons.
-            Debug.Assert(errorCode == 0, "RegDeleteValue failed.  Here's your error code: " + errorCode);
+            Debug.Assert(
+                errorCode == 0,
+                "RegDeleteValue failed.  Here's your error code: " + errorCode
+            );
         }
 
         /// <summary>
@@ -208,7 +228,11 @@ namespace Microsoft.Win32
             return key;
         }
 
-        private static RegistryKey OpenRemoteBaseKeyCore(RegistryHive hKey, string machineName, RegistryView view)
+        private static RegistryKey OpenRemoteBaseKeyCore(
+            RegistryHive hKey,
+            string machineName,
+            RegistryView view
+        )
         {
             int index = (int)hKey & 0x0FFFFFFF;
             if (index < 0 || index >= s_hkeyNames.Length || ((int)hKey & 0xFFFFFFF0) != 0x80000000)
@@ -217,7 +241,11 @@ namespace Microsoft.Win32
             }
 
             // connect to the specified remote registry
-            int ret = Interop.Advapi32.RegConnectRegistry(machineName, new SafeRegistryHandle(new IntPtr((int)hKey), false), out SafeRegistryHandle foreignHKey);
+            int ret = Interop.Advapi32.RegConnectRegistry(
+                machineName,
+                new SafeRegistryHandle(new IntPtr((int)hKey), false),
+                out SafeRegistryHandle foreignHKey
+            );
 
             if (ret == Interop.Errors.ERROR_DLL_INIT_FAILED)
             {
@@ -236,24 +264,51 @@ namespace Microsoft.Win32
                 throw new ArgumentException(SR.Format(SR.Arg_RegKeyNoRemoteConnect, machineName));
             }
 
-            RegistryKey key = new RegistryKey(foreignHKey, true, false, true, ((IntPtr)hKey) == HKEY_PERFORMANCE_DATA, view);
+            RegistryKey key = new RegistryKey(
+                foreignHKey,
+                true,
+                false,
+                true,
+                ((IntPtr)hKey) == HKEY_PERFORMANCE_DATA,
+                view
+            );
             key._checkMode = RegistryKeyPermissionCheck.Default;
             key._keyName = s_hkeyNames[index];
             return key;
         }
 
-        private RegistryKey? InternalOpenSubKeyCore(string name, RegistryKeyPermissionCheck permissionCheck, int rights)
+        private RegistryKey? InternalOpenSubKeyCore(
+            string name,
+            RegistryKeyPermissionCheck permissionCheck,
+            int rights
+        )
         {
-            int ret = Interop.Advapi32.RegOpenKeyEx(_hkey, name, 0, (rights | (int)_regView), out SafeRegistryHandle result);
+            int ret = Interop.Advapi32.RegOpenKeyEx(
+                _hkey,
+                name,
+                0,
+                (rights | (int)_regView),
+                out SafeRegistryHandle result
+            );
             if (ret == 0 && !result.IsInvalid)
             {
-                RegistryKey key = new RegistryKey(result, (permissionCheck == RegistryKeyPermissionCheck.ReadWriteSubTree), false, _remoteKey, false, _regView);
+                RegistryKey key = new RegistryKey(
+                    result,
+                    (permissionCheck == RegistryKeyPermissionCheck.ReadWriteSubTree),
+                    false,
+                    _remoteKey,
+                    false,
+                    _regView
+                );
                 key._keyName = _keyName + "\\" + name;
                 key._checkMode = permissionCheck;
                 return key;
             }
 
-            if (ret == Interop.Errors.ERROR_ACCESS_DENIED || ret == Interop.Errors.ERROR_BAD_IMPERSONATION_LEVEL)
+            if (
+                ret == Interop.Errors.ERROR_ACCESS_DENIED
+                || ret == Interop.Errors.ERROR_BAD_IMPERSONATION_LEVEL
+            )
             {
                 // We need to throw SecurityException here for compatibility reason,
                 // although UnauthorizedAccessException will make more sense.
@@ -266,16 +321,32 @@ namespace Microsoft.Win32
 
         private RegistryKey? InternalOpenSubKeyCore(string name, bool writable)
         {
-            int ret = Interop.Advapi32.RegOpenKeyEx(_hkey, name, 0, (GetRegistryKeyAccess(writable) | (int)_regView), out SafeRegistryHandle result);
+            int ret = Interop.Advapi32.RegOpenKeyEx(
+                _hkey,
+                name,
+                0,
+                (GetRegistryKeyAccess(writable) | (int)_regView),
+                out SafeRegistryHandle result
+            );
             if (ret == 0 && !result.IsInvalid)
             {
-                RegistryKey key = new RegistryKey(result, writable, false, _remoteKey, false, _regView);
+                RegistryKey key = new RegistryKey(
+                    result,
+                    writable,
+                    false,
+                    _remoteKey,
+                    false,
+                    _regView
+                );
                 key._checkMode = GetSubKeyPermissionCheck(writable);
                 key._keyName = _keyName + "\\" + name;
                 return key;
             }
 
-            if (ret == Interop.Errors.ERROR_ACCESS_DENIED || ret == Interop.Errors.ERROR_BAD_IMPERSONATION_LEVEL)
+            if (
+                ret == Interop.Errors.ERROR_ACCESS_DENIED
+                || ret == Interop.Errors.ERROR_BAD_IMPERSONATION_LEVEL
+            )
             {
                 // We need to throw SecurityException here for compatibility reasons,
                 // although UnauthorizedAccessException will make more sense.
@@ -286,12 +357,28 @@ namespace Microsoft.Win32
             return null;
         }
 
-        internal RegistryKey? InternalOpenSubKeyWithoutSecurityChecksCore(string name, bool writable)
+        internal RegistryKey? InternalOpenSubKeyWithoutSecurityChecksCore(
+            string name,
+            bool writable
+        )
         {
-            int ret = Interop.Advapi32.RegOpenKeyEx(_hkey, name, 0, (GetRegistryKeyAccess(writable) | (int)_regView), out SafeRegistryHandle result);
+            int ret = Interop.Advapi32.RegOpenKeyEx(
+                _hkey,
+                name,
+                0,
+                (GetRegistryKeyAccess(writable) | (int)_regView),
+                out SafeRegistryHandle result
+            );
             if (ret == 0 && !result.IsInvalid)
             {
-                RegistryKey key = new RegistryKey(result, writable, false, _remoteKey, false, _regView);
+                RegistryKey key = new RegistryKey(
+                    result,
+                    writable,
+                    false,
+                    _remoteKey,
+                    false,
+                    _regView
+                );
                 key._keyName = _keyName + "\\" + name;
                 return key;
             }
@@ -333,11 +420,13 @@ namespace Microsoft.Win32
                 }
 
                 // open the base key so that RegistryKey.Handle will return a valid handle
-                ret = Interop.Advapi32.RegOpenKeyEx(baseKey,
+                ret = Interop.Advapi32.RegOpenKeyEx(
+                    baseKey,
                     null,
                     0,
                     GetRegistryKeyAccess(IsWritable()) | (int)_regView,
-                    out SafeRegistryHandle result);
+                    out SafeRegistryHandle result
+                );
 
                 if (ret == 0 && !result.IsInvalid)
                 {
@@ -355,18 +444,20 @@ namespace Microsoft.Win32
         {
             int subkeys = 0;
             int junk = 0;
-            int ret = Interop.Advapi32.RegQueryInfoKey(_hkey,
-                                      null,
-                                      null,
-                                      IntPtr.Zero,
-                                      ref subkeys,  // subkeys
-                                      null,
-                                      null,
-                                      ref junk,     // values
-                                      null,
-                                      null,
-                                      null,
-                                      null);
+            int ret = Interop.Advapi32.RegQueryInfoKey(
+                _hkey,
+                null,
+                null,
+                IntPtr.Zero,
+                ref subkeys, // subkeys
+                null,
+                null,
+                ref junk, // values
+                null,
+                null,
+                null,
+                null
+            );
 
             if (ret != 0)
             {
@@ -386,15 +477,20 @@ namespace Microsoft.Win32
                 int result;
                 int nameLength = name.Length;
 
-                while ((result = Interop.Advapi32.RegEnumKeyEx(
-                    _hkey,
-                    names.Count,
-                    name,
-                    ref nameLength,
-                    null,
-                    null,
-                    null,
-                    null)) != Interop.Errors.ERROR_NO_MORE_ITEMS)
+                while (
+                    (
+                        result = Interop.Advapi32.RegEnumKeyEx(
+                            _hkey,
+                            names.Count,
+                            name,
+                            ref nameLength,
+                            null,
+                            null,
+                            null,
+                            null
+                        )
+                    ) != Interop.Errors.ERROR_NO_MORE_ITEMS
+                )
                 {
                     switch (result)
                     {
@@ -409,6 +505,7 @@ namespace Microsoft.Win32
                     }
                 }
             }
+
             finally
             {
                 ArrayPool<char>.Shared.Return(name);
@@ -421,18 +518,20 @@ namespace Microsoft.Win32
         {
             int values = 0;
             int junk = 0;
-            int ret = Interop.Advapi32.RegQueryInfoKey(_hkey,
-                                      null,
-                                      null,
-                                      IntPtr.Zero,
-                                      ref junk,     // subkeys
-                                      null,
-                                      null,
-                                      ref values,   // values
-                                      null,
-                                      null,
-                                      null,
-                                      null);
+            int ret = Interop.Advapi32.RegQueryInfoKey(
+                _hkey,
+                null,
+                null,
+                IntPtr.Zero,
+                ref junk, // subkeys
+                null,
+                null,
+                ref values, // values
+                null,
+                null,
+                null,
+                null
+            );
             if (ret != 0)
             {
                 Win32Error(ret, null);
@@ -462,15 +561,20 @@ namespace Microsoft.Win32
                 int result;
                 int nameLength = name.Length;
 
-                while ((result = Interop.Advapi32.RegEnumValue(
-                    _hkey,
-                    names.Count,
-                    name,
-                    ref nameLength,
-                    IntPtr.Zero,
-                    null,
-                    null,
-                    null)) != Interop.Errors.ERROR_NO_MORE_ITEMS)
+                while (
+                    (
+                        result = Interop.Advapi32.RegEnumValue(
+                            _hkey,
+                            names.Count,
+                            name,
+                            ref nameLength,
+                            IntPtr.Zero,
+                            null,
+                            null,
+                            null
+                        )
+                    ) != Interop.Errors.ERROR_NO_MORE_ITEMS
+                )
                 {
                     switch (result)
                     {
@@ -511,6 +615,7 @@ namespace Microsoft.Win32
                     nameLength = name.Length;
                 }
             }
+
             finally
             {
                 if (name != null)
@@ -526,7 +631,14 @@ namespace Microsoft.Win32
             int type = 0;
             int datasize = 0;
 
-            int ret = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, ref type, (byte[]?)null, ref datasize);
+            int ret = Interop.Advapi32.RegQueryValueEx(
+                _hkey,
+                name,
+                null,
+                ref type,
+                (byte[]?)null,
+                ref datasize
+            );
 
             if (ret != 0)
             {
@@ -537,7 +649,19 @@ namespace Microsoft.Win32
 
                     int r;
                     byte[] blob = new byte[size];
-                    while (Interop.Errors.ERROR_MORE_DATA == (r = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, ref type, blob, ref sizeInput)))
+                    while (
+                        Interop.Errors.ERROR_MORE_DATA
+                        == (
+                            r = Interop.Advapi32.RegQueryValueEx(
+                                _hkey,
+                                name,
+                                null,
+                                ref type,
+                                blob,
+                                ref sizeInput
+                            )
+                        )
+                    )
                     {
                         if (size == int.MaxValue)
                         {
@@ -577,7 +701,9 @@ namespace Microsoft.Win32
             if (datasize < 0)
             {
                 // unexpected code path
-                Debug.Fail("[InternalGetValue] RegQueryValue returned ERROR_SUCCESS but gave a negative datasize");
+                Debug.Fail(
+                    "[InternalGetValue] RegQueryValue returned ERROR_SUCCESS but gave a negative datasize"
+                );
                 datasize = 0;
             }
 
@@ -586,14 +712,23 @@ namespace Microsoft.Win32
                 case Interop.Advapi32.RegistryValues.REG_NONE:
                 case Interop.Advapi32.RegistryValues.REG_DWORD_BIG_ENDIAN:
                 case Interop.Advapi32.RegistryValues.REG_BINARY:
+
                     {
                         byte[] blob = new byte[datasize];
-                        ret = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, ref type, blob, ref datasize);
+                        ret = Interop.Advapi32.RegQueryValueEx(
+                            _hkey,
+                            name,
+                            null,
+                            ref type,
+                            blob,
+                            ref datasize
+                        );
                         data = blob;
                     }
                     break;
                 case Interop.Advapi32.RegistryValues.REG_QWORD:
-                    {    // also REG_QWORD_LITTLE_ENDIAN
+
+                    { // also REG_QWORD_LITTLE_ENDIAN
                         if (datasize > 8)
                         {
                             // prevent an AV in the edge case that datasize is larger than sizeof(long)
@@ -602,13 +737,21 @@ namespace Microsoft.Win32
                         long blob = 0;
                         Debug.Assert(datasize == 8, "datasize==8");
                         // Here, datasize must be 8 when calling this
-                        ret = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, ref type, ref blob, ref datasize);
+                        ret = Interop.Advapi32.RegQueryValueEx(
+                            _hkey,
+                            name,
+                            null,
+                            ref type,
+                            ref blob,
+                            ref datasize
+                        );
 
                         data = blob;
                     }
                     break;
                 case Interop.Advapi32.RegistryValues.REG_DWORD:
-                    {    // also REG_DWORD_LITTLE_ENDIAN
+
+                    { // also REG_DWORD_LITTLE_ENDIAN
                         if (datasize > 4)
                         {
                             // prevent an AV in the edge case that datasize is larger than sizeof(int)
@@ -617,13 +760,21 @@ namespace Microsoft.Win32
                         int blob = 0;
                         Debug.Assert(datasize == 4, "datasize==4");
                         // Here, datasize must be four when calling this
-                        ret = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, ref type, ref blob, ref datasize);
+                        ret = Interop.Advapi32.RegQueryValueEx(
+                            _hkey,
+                            name,
+                            null,
+                            ref type,
+                            ref blob,
+                            ref datasize
+                        );
 
                         data = blob;
                     }
                     break;
 
                 case Interop.Advapi32.RegistryValues.REG_SZ:
+
                     {
                         if (datasize % 2 == 1)
                         {
@@ -639,7 +790,14 @@ namespace Microsoft.Win32
                         }
                         char[] blob = new char[datasize / 2];
 
-                        ret = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, ref type, blob, ref datasize);
+                        ret = Interop.Advapi32.RegQueryValueEx(
+                            _hkey,
+                            name,
+                            null,
+                            ref type,
+                            blob,
+                            ref datasize
+                        );
                         if (blob.Length > 0 && blob[blob.Length - 1] == (char)0)
                         {
                             data = new string(blob, 0, blob.Length - 1);
@@ -654,6 +812,7 @@ namespace Microsoft.Win32
                     break;
 
                 case Interop.Advapi32.RegistryValues.REG_EXPAND_SZ:
+
                     {
                         if (datasize % 2 == 1)
                         {
@@ -669,7 +828,14 @@ namespace Microsoft.Win32
                         }
                         char[] blob = new char[datasize / 2];
 
-                        ret = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, ref type, blob, ref datasize);
+                        ret = Interop.Advapi32.RegQueryValueEx(
+                            _hkey,
+                            name,
+                            null,
+                            ref type,
+                            blob,
+                            ref datasize
+                        );
 
                         if (blob.Length > 0 && blob[blob.Length - 1] == (char)0)
                         {
@@ -689,6 +855,7 @@ namespace Microsoft.Win32
                     }
                     break;
                 case Interop.Advapi32.RegistryValues.REG_MULTI_SZ:
+
                     {
                         if (datasize % 2 == 1)
                         {
@@ -704,7 +871,14 @@ namespace Microsoft.Win32
                         }
                         char[] blob = new char[datasize / 2];
 
-                        ret = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, ref type, blob, ref datasize);
+                        ret = Interop.Advapi32.RegQueryValueEx(
+                            _hkey,
+                            name,
+                            null,
+                            ref type,
+                            blob,
+                            ref datasize
+                        );
 
                         // make sure the string is null terminated before processing the data
                         if (blob.Length > 0 && blob[blob.Length - 1] != (char)0)
@@ -729,7 +903,10 @@ namespace Microsoft.Win32
                             string? toAdd = null;
                             if (nextNull < len)
                             {
-                                Debug.Assert(blob[nextNull] == (char)0, "blob[nextNull] should be 0");
+                                Debug.Assert(
+                                    blob[nextNull] == (char)0,
+                                    "blob[nextNull] should be 0"
+                                );
                                 if (nextNull - cur > 0)
                                 {
                                     toAdd = new string(blob, cur, nextNull - cur);
@@ -754,7 +931,10 @@ namespace Microsoft.Win32
                             {
                                 if (strings.Length == stringsCount)
                                 {
-                                    Array.Resize(ref strings, stringsCount > 0 ? stringsCount * 2 : 4);
+                                    Array.Resize(
+                                        ref strings,
+                                        stringsCount > 0 ? stringsCount * 2 : 4
+                                    );
                                 }
                                 strings[stringsCount++] = toAdd;
                             }
@@ -776,16 +956,24 @@ namespace Microsoft.Win32
         {
             int type = 0;
             int datasize = 0;
-            int ret = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, ref type, (byte[]?)null, ref datasize);
+            int ret = Interop.Advapi32.RegQueryValueEx(
+                _hkey,
+                name,
+                null,
+                ref type,
+                (byte[]?)null,
+                ref datasize
+            );
             if (ret != 0)
             {
                 Win32Error(ret, null);
             }
 
-            return
-                type == Interop.Advapi32.RegistryValues.REG_NONE ? RegistryValueKind.None :
-                !Enum.IsDefined(typeof(RegistryValueKind), type) ? RegistryValueKind.Unknown :
-                (RegistryValueKind)type;
+            return type == Interop.Advapi32.RegistryValues.REG_NONE
+              ? RegistryValueKind.None
+              : !Enum.IsDefined(typeof(RegistryValueKind), type)
+                  ? RegistryValueKind.Unknown
+                  : (RegistryValueKind)type;
         }
 
         private unsafe void SetValueCore(string? name, object value, RegistryValueKind valueKind)
@@ -797,101 +985,125 @@ namespace Microsoft.Win32
                 {
                     case RegistryValueKind.ExpandString:
                     case RegistryValueKind.String:
-                        {
-                            string data = value.ToString()!;
-                            ret = Interop.Advapi32.RegSetValueEx(_hkey,
-                                name,
-                                0,
-                                (int)valueKind,
-                                data,
-                                checked(data.Length * 2 + 2));
-                            break;
-                        }
+                    {
+                        string data = value.ToString()!;
+                        ret = Interop.Advapi32.RegSetValueEx(
+                            _hkey,
+                            name,
+                            0,
+                            (int)valueKind,
+                            data,
+                            checked(data.Length * 2 + 2)
+                        );
+                        break;
+                    }
 
                     case RegistryValueKind.MultiString:
+                    {
+                        // Other thread might modify the input array after we calculate the buffer length.
+                        // Make a copy of the input array to be safe.
+                        string[] dataStrings = (string[])(((string[])value).Clone());
+
+                        // First determine the size of the array
+                        //
+                        // Format is null terminator between strings and final null terminator at the end.
+                        //    e.g. str1\0str2\0str3\0\0
+                        //
+                        int sizeInChars = 1; // no matter what, we have the final null terminator.
+                        for (int i = 0; i < dataStrings.Length; i++)
                         {
-                            // Other thread might modify the input array after we calculate the buffer length.
-                            // Make a copy of the input array to be safe.
-                            string[] dataStrings = (string[])(((string[])value).Clone());
-
-                            // First determine the size of the array
-                            //
-                            // Format is null terminator between strings and final null terminator at the end.
-                            //    e.g. str1\0str2\0str3\0\0
-                            //
-                            int sizeInChars = 1; // no matter what, we have the final null terminator.
-                            for (int i = 0; i < dataStrings.Length; i++)
+                            if (dataStrings[i] == null)
                             {
-                                if (dataStrings[i] == null)
-                                {
-                                    throw new ArgumentException(SR.Arg_RegSetStrArrNull);
-                                }
-                                sizeInChars = checked(sizeInChars + (dataStrings[i].Length + 1));
+                                throw new ArgumentException(SR.Arg_RegSetStrArrNull);
                             }
-                            int sizeInBytes = checked(sizeInChars * sizeof(char));
-
-                            // Write out the strings...
-                            //
-                            char[] dataChars = new char[sizeInChars];
-                            int destinationIndex = 0;
-                            for (int i = 0; i < dataStrings.Length; i++)
-                            {
-                                int length = dataStrings[i].Length;
-                                dataStrings[i].CopyTo(0, dataChars, destinationIndex, length);
-                                destinationIndex += (length + 1); // +1 for null terminator, which is already zero-initialized in new array.
-                            }
-
-                            ret = Interop.Advapi32.RegSetValueEx(_hkey,
-                                name,
-                                0,
-                                Interop.Advapi32.RegistryValues.REG_MULTI_SZ,
-                                dataChars,
-                                sizeInBytes);
-
-                            break;
+                            sizeInChars = checked(sizeInChars + (dataStrings[i].Length + 1));
                         }
+                        int sizeInBytes = checked(sizeInChars * sizeof(char));
+
+                        // Write out the strings...
+                        //
+                        char[] dataChars = new char[sizeInChars];
+                        int destinationIndex = 0;
+                        for (int i = 0; i < dataStrings.Length; i++)
+                        {
+                            int length = dataStrings[i].Length;
+                            dataStrings[i].CopyTo(0, dataChars, destinationIndex, length);
+                            destinationIndex += (length + 1); // +1 for null terminator, which is already zero-initialized in new array.
+                        }
+
+                        ret = Interop.Advapi32.RegSetValueEx(
+                            _hkey,
+                            name,
+                            0,
+                            Interop.Advapi32.RegistryValues.REG_MULTI_SZ,
+                            dataChars,
+                            sizeInBytes
+                        );
+                        break;
+                    }
 
                     case RegistryValueKind.None:
                     case RegistryValueKind.Binary:
                         byte[] dataBytes = (byte[])value;
-                        ret = Interop.Advapi32.RegSetValueEx(_hkey,
+                        ret = Interop.Advapi32.RegSetValueEx(
+                            _hkey,
                             name,
                             0,
-                            (valueKind == RegistryValueKind.None ? Interop.Advapi32.RegistryValues.REG_NONE : Interop.Advapi32.RegistryValues.REG_BINARY),
+                            (
+                                valueKind == RegistryValueKind.None
+                                    ? Interop.Advapi32.RegistryValues.REG_NONE
+                                    : Interop.Advapi32.RegistryValues.REG_BINARY
+                            ),
                             dataBytes,
-                            dataBytes.Length);
+                            dataBytes.Length
+                        );
                         break;
 
                     case RegistryValueKind.DWord:
-                        {
-                            // We need to use Convert here because we could have a boxed type cannot be
-                            // unboxed and cast at the same time.  I.e. ((int)(object)(short) 5) will fail.
-                            int data = Convert.ToInt32(value, System.Globalization.CultureInfo.InvariantCulture);
+                    {
+                        // We need to use Convert here because we could have a boxed type cannot be
+                        // unboxed and cast at the same time.  I.e. ((int)(object)(short) 5) will fail.
+                        int data = Convert.ToInt32(
+                            value,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
 
-                            ret = Interop.Advapi32.RegSetValueEx(_hkey,
-                                name,
-                                0,
-                                Interop.Advapi32.RegistryValues.REG_DWORD,
-                                ref data,
-                                4);
-                            break;
-                        }
+                        ret = Interop.Advapi32.RegSetValueEx(
+                            _hkey,
+                            name,
+                            0,
+                            Interop.Advapi32.RegistryValues.REG_DWORD,
+                            ref data,
+                            4
+                        );
+                        break;
+                    }
 
                     case RegistryValueKind.QWord:
-                        {
-                            long data = Convert.ToInt64(value, System.Globalization.CultureInfo.InvariantCulture);
+                    {
+                        long data = Convert.ToInt64(
+                            value,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
 
-                            ret = Interop.Advapi32.RegSetValueEx(_hkey,
-                                name,
-                                0,
-                                Interop.Advapi32.RegistryValues.REG_QWORD,
-                                ref data,
-                                8);
-                            break;
-                        }
+                        ret = Interop.Advapi32.RegSetValueEx(
+                            _hkey,
+                            name,
+                            0,
+                            Interop.Advapi32.RegistryValues.REG_QWORD,
+                            ref data,
+                            8
+                        );
+                        break;
+                    }
                 }
             }
-            catch (Exception exc) when (exc is OverflowException || exc is InvalidOperationException || exc is FormatException || exc is InvalidCastException)
+            catch (Exception exc)
+                when (exc is OverflowException
+                    || exc is InvalidOperationException
+                    || exc is FormatException
+                    || exc is InvalidCastException
+                )
             {
                 throw new ArgumentException(SR.Arg_RegSetMismatchedKind);
             }
@@ -918,9 +1130,11 @@ namespace Microsoft.Win32
             switch (errorCode)
             {
                 case Interop.Errors.ERROR_ACCESS_DENIED:
-                    throw str != null ?
-                        new UnauthorizedAccessException(SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)) :
-                        new UnauthorizedAccessException();
+                    throw str != null
+                        ? new UnauthorizedAccessException(
+                              SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
+                          )
+                        : new UnauthorizedAccessException();
 
                 case Interop.Errors.ERROR_INVALID_HANDLE:
                     // For normal RegistryKey instances we dispose the SafeRegHandle and throw IOException.
@@ -951,9 +1165,12 @@ namespace Microsoft.Win32
         private static void Win32ErrorStatic(int errorCode, string? str) =>
             throw errorCode switch
             {
-                Interop.Errors.ERROR_ACCESS_DENIED => str != null ?
-                       new UnauthorizedAccessException(SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)) :
-                       new UnauthorizedAccessException(),
+                Interop.Errors.ERROR_ACCESS_DENIED
+                  => str != null
+                      ? new UnauthorizedAccessException(
+                            SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
+                        )
+                      : new UnauthorizedAccessException(),
 
                 _ => new IOException(Interop.Kernel32.GetMessage(errorCode), errorCode),
             };
@@ -967,7 +1184,9 @@ namespace Microsoft.Win32
             }
             else
             {
-                winAccess = Interop.Advapi32.RegistryOperations.KEY_READ | Interop.Advapi32.RegistryOperations.KEY_WRITE;
+                winAccess =
+                    Interop.Advapi32.RegistryOperations.KEY_READ
+                    | Interop.Advapi32.RegistryOperations.KEY_WRITE;
             }
 
             return winAccess;
@@ -984,7 +1203,9 @@ namespace Microsoft.Win32
                     break;
 
                 case RegistryKeyPermissionCheck.ReadWriteSubTree:
-                    winAccess = Interop.Advapi32.RegistryOperations.KEY_READ | Interop.Advapi32.RegistryOperations.KEY_WRITE;
+                    winAccess =
+                        Interop.Advapi32.RegistryOperations.KEY_READ
+                        | Interop.Advapi32.RegistryOperations.KEY_WRITE;
                     break;
 
                 default:

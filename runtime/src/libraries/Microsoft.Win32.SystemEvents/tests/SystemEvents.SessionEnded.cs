@@ -14,15 +14,30 @@ namespace Microsoft.Win32.SystemEventsTests
             return SendMessage(User32.WM_ENDSESSION, ended ? (IntPtr)1 : (IntPtr)0, (IntPtr)lParam);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         [InlineData(User32.ENDSESSION_LOGOFF, SessionEndReasons.Logoff)]
-        [InlineData(User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CRITICAL, SessionEndReasons.Logoff)]
-        [InlineData(User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CLOSEAPP, SessionEndReasons.Logoff)]
-        [InlineData(User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CRITICAL | User32.ENDSESSION_CLOSEAPP, SessionEndReasons.Logoff)]
+        [InlineData(
+            User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CRITICAL,
+            SessionEndReasons.Logoff
+        )]
+        [InlineData(
+            User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CLOSEAPP,
+            SessionEndReasons.Logoff
+        )]
+        [InlineData(
+            User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CRITICAL | User32.ENDSESSION_CLOSEAPP,
+            SessionEndReasons.Logoff
+        )]
         [InlineData(0, SessionEndReasons.SystemShutdown)]
         [InlineData(User32.ENDSESSION_CRITICAL, SessionEndReasons.SystemShutdown)]
         [InlineData(User32.ENDSESSION_CLOSEAPP, SessionEndReasons.SystemShutdown)]
-        [InlineData(User32.ENDSESSION_CRITICAL | User32.ENDSESSION_CLOSEAPP, SessionEndReasons.SystemShutdown)]
+        [InlineData(
+            User32.ENDSESSION_CRITICAL | User32.ENDSESSION_CLOSEAPP,
+            SessionEndReasons.SystemShutdown
+        )]
         public void SignalsSessionEnded(int lParam, SessionEndReasons reason)
         {
             bool signaled = false;
@@ -42,13 +57,17 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotNull(args);
                 Assert.Equal(reason, args.Reason);
             }
+
             finally
             {
                 SystemEvents.SessionEnded -= endedHandler;
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         public void DoesNotSignalSessionEnded()
         {
             bool signaled = false;
@@ -64,6 +83,7 @@ namespace Microsoft.Win32.SystemEventsTests
                 SendMessage(false, 0);
                 Assert.False(signaled);
             }
+
             finally
             {
                 SystemEvents.SessionEnded -= endedHandler;

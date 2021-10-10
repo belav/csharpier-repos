@@ -25,7 +25,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
         {
             if (string.IsNullOrEmpty(assemblyFileName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(assemblyFileName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(assemblyFileName)
+                );
             }
 
             AssemblyFileName = assemblyFileName;
@@ -42,22 +45,32 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
         /// <param name="assembly">The assembly containing <see cref="RelatedAssemblyAttribute"/> instances.</param>
         /// <param name="throwOnError">Determines if the method throws if a related assembly could not be located.</param>
         /// <returns>Related <see cref="Assembly"/> instances.</returns>
-        public static IReadOnlyList<Assembly> GetRelatedAssemblies(Assembly assembly, bool throwOnError)
+        public static IReadOnlyList<Assembly> GetRelatedAssemblies(
+            Assembly assembly,
+            bool throwOnError
+        )
         {
             if (assembly == null)
             {
                 throw new ArgumentNullException(nameof(assembly));
             }
 
-            var loadContext = AssemblyLoadContext.GetLoadContext(assembly) ?? AssemblyLoadContext.Default;
-            return GetRelatedAssemblies(assembly, throwOnError, File.Exists, new AssemblyLoadContextWrapper(loadContext));
+            var loadContext =
+                AssemblyLoadContext.GetLoadContext(assembly) ?? AssemblyLoadContext.Default;
+            return GetRelatedAssemblies(
+                assembly,
+                throwOnError,
+                File.Exists,
+                new AssemblyLoadContextWrapper(loadContext)
+            );
         }
 
         internal static IReadOnlyList<Assembly> GetRelatedAssemblies(
             Assembly assembly,
             bool throwOnError,
             Func<string, bool> fileExists,
-            AssemblyLoadContextWrapper assemblyLoadContext)
+            AssemblyLoadContextWrapper assemblyLoadContext
+        )
         {
             if (assembly == null)
             {
@@ -79,9 +92,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
 
             var assemblyName = assembly.GetName().Name;
             // Assembly.Location may be null for a single-file exe. In this case, attempt to look for related parts in the app's base directory
-            var assemblyDirectory = string.IsNullOrEmpty(assembly.Location) ?
-                AppContext.BaseDirectory :
-                Path.GetDirectoryName(assembly.Location);
+            var assemblyDirectory = string.IsNullOrEmpty(assembly.Location)
+                ? AppContext.BaseDirectory
+                : Path.GetDirectoryName(assembly.Location);
 
             if (string.IsNullOrEmpty(assemblyDirectory))
             {
@@ -92,24 +105,41 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             for (var i = 0; i < attributes.Length; i++)
             {
                 var attribute = attributes[i];
-                if (string.Equals(assemblyName, attribute.AssemblyFileName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        assemblyName,
+                        attribute.AssemblyFileName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     throw new InvalidOperationException(
-                        Resources.FormatRelatedAssemblyAttribute_AssemblyCannotReferenceSelf(nameof(RelatedAssemblyAttribute), assemblyName));
+                        Resources.FormatRelatedAssemblyAttribute_AssemblyCannotReferenceSelf(
+                            nameof(RelatedAssemblyAttribute),
+                            assemblyName
+                        )
+                    );
                 }
 
                 Assembly relatedAssembly;
-                var relatedAssemblyLocation = Path.Combine(assemblyDirectory, attribute.AssemblyFileName + ".dll");
+                var relatedAssemblyLocation = Path.Combine(
+                    assemblyDirectory,
+                    attribute.AssemblyFileName + ".dll"
+                );
                 if (fileExists(relatedAssemblyLocation))
                 {
-                    relatedAssembly = assemblyLoadContext.LoadFromAssemblyPath(relatedAssemblyLocation);
+                    relatedAssembly = assemblyLoadContext.LoadFromAssemblyPath(
+                        relatedAssemblyLocation
+                    );
                 }
                 else
                 {
                     try
                     {
                         var relatedAssemblyName = new AssemblyName(attribute.AssemblyFileName);
-                        relatedAssembly = assemblyLoadContext.LoadFromAssemblyName(relatedAssemblyName);
+                        relatedAssembly = assemblyLoadContext.LoadFromAssemblyName(
+                            relatedAssemblyName
+                        );
                     }
                     catch when (!throwOnError)
                     {
@@ -133,11 +163,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
                 _loadContext = loadContext;
             }
 
-            public virtual Assembly LoadFromAssemblyName(AssemblyName assemblyName)
-                => _loadContext.LoadFromAssemblyName(assemblyName);
+            public virtual Assembly LoadFromAssemblyName(AssemblyName assemblyName) =>
+                _loadContext.LoadFromAssemblyName(assemblyName);
 
-            public virtual Assembly LoadFromAssemblyPath(string assemblyPath)
-                => _loadContext.LoadFromAssemblyPath(assemblyPath);
+            public virtual Assembly LoadFromAssemblyPath(string assemblyPath) =>
+                _loadContext.LoadFromAssemblyPath(assemblyPath);
         }
     }
 }

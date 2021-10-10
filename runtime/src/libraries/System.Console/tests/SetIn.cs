@@ -19,6 +19,7 @@ public class SetIn
         {
             Assert.Throws<ArgumentNullException>(() => Console.SetIn(null));
         }
+
         finally
         {
             Console.SetIn(savedIn);
@@ -59,6 +60,7 @@ public class SetIn
                 }
             }
         }
+
         finally
         {
             Console.SetIn(oldInToRestore);

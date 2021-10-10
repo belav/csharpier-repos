@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
     [BracePair(DoubleQuote.OpenCharacter, DoubleQuote.CloseCharacter)]
     [BracePair(Parenthesis.OpenCharacter, Parenthesis.CloseCharacter)]
     [BracePair(LessAndGreaterThan.OpenCharacter, LessAndGreaterThan.CloseCharacter)]
-    internal partial class BraceCompletionSessionProvider : ForegroundThreadAffinitizedObject, IBraceCompletionSessionProvider
+    internal partial class BraceCompletionSessionProvider
+        : ForegroundThreadAffinitizedObject,
+          IBraceCompletionSessionProvider
     {
         private readonly ITextBufferUndoManagerProvider _undoManager;
         private readonly IEditorOperationsFactoryService _editorOperationsFactoryService;
@@ -39,34 +41,57 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
         public BraceCompletionSessionProvider(
             IThreadingContext threadingContext,
             ITextBufferUndoManagerProvider undoManager,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
-            : base(threadingContext)
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        ) : base(threadingContext)
         {
             _undoManager = undoManager;
             _editorOperationsFactoryService = editorOperationsFactoryService;
         }
 
-        public bool TryCreateSession(ITextView textView, SnapshotPoint openingPoint, char openingBrace, char closingBrace, out IBraceCompletionSession session)
+        public bool TryCreateSession(
+            ITextView textView,
+            SnapshotPoint openingPoint,
+            char openingBrace,
+            char closingBrace,
+            out IBraceCompletionSession session
+        )
         {
             this.AssertIsForeground();
             var textSnapshot = openingPoint.Snapshot;
             var document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document != null)
             {
-                var editorSessionFactory = document.GetLanguageService<IBraceCompletionServiceFactory>();
+                var editorSessionFactory =
+                    document.GetLanguageService<IBraceCompletionServiceFactory>();
                 if (editorSessionFactory != null)
                 {
                     // Brace completion is (currently) not cancellable.
                     var cancellationToken = CancellationToken.None;
 
-                    var editorSession = editorSessionFactory.TryGetServiceAsync(document, openingPoint, openingBrace, cancellationToken).WaitAndGetResult(cancellationToken);
+                    var editorSession = editorSessionFactory.TryGetServiceAsync(
+                            document,
+                            openingPoint,
+                            openingBrace,
+                            cancellationToken
+                        )
+                        .WaitAndGetResult(cancellationToken);
                     if (editorSession != null)
                     {
-                        var undoHistory = _undoManager.GetTextBufferUndoManager(textView.TextBuffer).TextBufferUndoHistory;
+                        var undoHistory =
+                            _undoManager.GetTextBufferUndoManager(
+                                textView.TextBuffer
+                            ).TextBufferUndoHistory;
                         session = new BraceCompletionSession(
-                            textView, openingPoint.Snapshot.TextBuffer, openingPoint, openingBrace, closingBrace,
-                            undoHistory, _editorOperationsFactoryService,
-                            editorSession, ThreadingContext);
+                            textView,
+                            openingPoint.Snapshot.TextBuffer,
+                            openingPoint,
+                            openingBrace,
+                            closingBrace,
+                            undoHistory,
+                            _editorOperationsFactoryService,
+                            editorSession,
+                            ThreadingContext
+                        );
                         return true;
                     }
                 }

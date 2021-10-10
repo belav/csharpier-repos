@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public RelationalDatabaseDependencies(
             ICommandBatchPreparer batchPreparer,
             IBatchExecutor batchExecutor,
-            IRelationalConnection connection)
+            IRelationalConnection connection
+        )
         {
             Check.NotNull(batchPreparer, nameof(batchPreparer));
             Check.NotNull(batchExecutor, nameof(batchExecutor));

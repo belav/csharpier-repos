@@ -32,12 +32,12 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
 
         private bool IsBindableMessage(HubMessage arg)
         {
-            return arg is CompletionMessage ||
-                arg is InvocationMessage ||
-                arg is StreamItemMessage ||
-                arg is StreamInvocationMessage;
+            return arg is CompletionMessage
+                || arg is InvocationMessage
+                || arg is StreamItemMessage
+                || arg is StreamInvocationMessage;
         }
-        
+
         public Type GetStreamItemType(string streamId)
         {
             throw new NotImplementedException();

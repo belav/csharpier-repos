@@ -20,46 +20,72 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
 {
     using static SimplifyBooleanExpressionConstants;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.SimplifyConditionalExpression), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.SimplifyConditionalExpression
+        ),
+        Shared
+    ]
     internal sealed class SimplifyConditionalCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public SimplifyConditionalCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public SimplifyConditionalCodeFixProvider() { }
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.SimplifyConditionalExpressionDiagnosticId);
 
-        internal sealed override CodeFixCategory CodeFixCategory
-            => CodeFixCategory.CodeQuality;
+        internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeQuality;
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected sealed override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var diagnostic in diagnostics)
             {
-                var expr = diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken);
-                syntaxFacts.GetPartsOfConditionalExpression(expr, out var condition, out var whenTrue, out var whenFalse);
+                var expr = diagnostic.Location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken
+                );
+                syntaxFacts.GetPartsOfConditionalExpression(
+                    expr,
+                    out var condition,
+                    out var whenTrue,
+                    out var whenFalse
+                );
 
                 if (diagnostic.Properties.ContainsKey(Negate))
-                    condition = generator.Negate(generatorInternal, condition, semanticModel, cancellationToken);
+                    condition = generator.Negate(
+                        generatorInternal,
+                        condition,
+                        semanticModel,
+                        cancellationToken
+                    );
 
                 var replacement = condition;
                 if (diagnostic.Properties.ContainsKey(Or))
@@ -74,16 +100,20 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
                 }
 
                 editor.ReplaceNode(
-                    expr, generatorInternal.AddParentheses(replacement.WithTriviaFrom(expr)));
+                    expr,
+                    generatorInternal.AddParentheses(replacement.WithTriviaFrom(expr))
+                );
             }
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Simplify_conditional_expression, createChangedDocument, AnalyzersResources.Simplify_conditional_expression)
-            {
-            }
+                : base(
+                    AnalyzersResources.Simplify_conditional_expression,
+                    createChangedDocument,
+                    AnalyzersResources.Simplify_conditional_expression
+                ) { }
         }
     }
 }

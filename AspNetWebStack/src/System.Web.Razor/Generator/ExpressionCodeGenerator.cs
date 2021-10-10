@@ -10,40 +10,54 @@ namespace System.Web.Razor.Generator
     {
         public override void GenerateStartBlockCode(Block target, CodeGeneratorContext context)
         {
-            if (context.Host.EnableInstrumentation && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+            if (
+                context.Host.EnableInstrumentation
+                && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
+            )
             {
-                Span contentSpan = target.Children
-                    .OfType<Span>()
+                Span contentSpan = target.Children.OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();
 
                 if (contentSpan != null)
                 {
-                    context.AddContextCall(contentSpan, context.Host.GeneratedClassContext.BeginContextMethodName, false);
+                    context.AddContextCall(
+                        contentSpan,
+                        context.Host.GeneratedClassContext.BeginContextMethodName,
+                        false
+                    );
                 }
             }
 
-            string writeInvocation = context.BuildCodeString(cw =>
-            {
-                if (context.Host.DesignTimeMode)
+            string writeInvocation = context.BuildCodeString(
+                cw =>
                 {
-                    context.EnsureExpressionHelperVariable();
-                    cw.WriteStartAssignment("__o");
-                }
-                else if (context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
-                {
-                    if (!String.IsNullOrEmpty(context.TargetWriterName))
+                    if (context.Host.DesignTimeMode)
                     {
-                        cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteToMethodName);
-                        cw.WriteSnippet(context.TargetWriterName);
-                        cw.WriteParameterSeparator();
+                        context.EnsureExpressionHelperVariable();
+                        cw.WriteStartAssignment("__o");
                     }
-                    else
+                    else if (
+                        context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
+                    )
                     {
-                        cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteMethodName);
+                        if (!String.IsNullOrEmpty(context.TargetWriterName))
+                        {
+                            cw.WriteStartMethodInvoke(
+                                context.Host.GeneratedClassContext.WriteToMethodName
+                            );
+                            cw.WriteSnippet(context.TargetWriterName);
+                            cw.WriteParameterSeparator();
+                        }
+                        else
+                        {
+                            cw.WriteStartMethodInvoke(
+                                context.Host.GeneratedClassContext.WriteMethodName
+                            );
+                        }
                     }
                 }
-            });
+            );
 
             context.BufferStatementFragment(writeInvocation);
             context.MarkStartOfGeneratedCode();
@@ -51,36 +65,44 @@ namespace System.Web.Razor.Generator
 
         public override void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
         {
-            string endBlock = context.BuildCodeString(cw =>
-            {
-                if (context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+            string endBlock = context.BuildCodeString(
+                cw =>
                 {
-                    if (!context.Host.DesignTimeMode)
+                    if (context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
                     {
-                        cw.WriteEndMethodInvoke();
+                        if (!context.Host.DesignTimeMode)
+                        {
+                            cw.WriteEndMethodInvoke();
+                        }
+                        cw.WriteEndStatement();
                     }
-                    cw.WriteEndStatement();
+                    else
+                    {
+                        cw.WriteLineContinuation();
+                    }
                 }
-                else
-                {
-                    cw.WriteLineContinuation();
-                }
-            });
+            );
 
             context.MarkEndOfGeneratedCode();
             context.BufferStatementFragment(endBlock);
             context.FlushBufferedStatement();
 
-            if (context.Host.EnableInstrumentation && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+            if (
+                context.Host.EnableInstrumentation
+                && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
+            )
             {
-                Span contentSpan = target.Children
-                    .OfType<Span>()
+                Span contentSpan = target.Children.OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();
 
                 if (contentSpan != null)
                 {
-                    context.AddContextCall(contentSpan, context.Host.GeneratedClassContext.EndContextMethodName, false);
+                    context.AddContextCall(
+                        contentSpan,
+                        context.Host.GeneratedClassContext.EndContextMethodName,
+                        false
+                    );
                 }
             }
         }
@@ -88,7 +110,10 @@ namespace System.Web.Razor.Generator
         public override void GenerateCode(Span target, CodeGeneratorContext context)
         {
             Span sourceSpan = null;
-            if (context.CreateCodeWriter().SupportsMidStatementLinePragmas || context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+            if (
+                context.CreateCodeWriter().SupportsMidStatementLinePragmas
+                || context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
+            )
             {
                 sourceSpan = target;
             }

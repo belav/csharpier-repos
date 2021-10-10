@@ -11,7 +11,6 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         ActiveFile,
         OpenFilesAndProjects,
         FullSolution,
-
         Minimal = ActiveFile,
         Default = OpenFilesAndProjects,
     }

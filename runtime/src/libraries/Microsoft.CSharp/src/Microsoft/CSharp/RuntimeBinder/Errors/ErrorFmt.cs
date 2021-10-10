@@ -29,8 +29,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
     internal enum ErrArgFlags
     {
         None = 0x0000,
-        NoStr = 0x0002,  // The arg should NOT be included in the error message, just the location
-        Unique = 0x0004,  // The string should be distinct from other args marked with Unique
+        NoStr = 0x0002, // The arg should NOT be included in the error message, just the location
+        Unique = 0x0004, // The string should be distinct from other args marked with Unique
         UseGetErrorInfo = 0x0008,
     }
 
@@ -60,9 +60,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
         internal MethPropWithInstMemo mpwiMemo;
         internal SymWithTypeMemo swtMemo;
 
-        public ErrArg()
-        {
-        }
+        public ErrArg() { }
 
         public ErrArg(int n)
         {
@@ -85,10 +83,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.psz = psz;
         }
 
-        public ErrArg(CType pType)
-            : this(pType, ErrArgFlags.None)
-        {
-        }
+        public ErrArg(CType pType) : this(pType, ErrArgFlags.None) { }
 
         public ErrArg(CType pType, ErrArgFlags eaf)
         {
@@ -97,10 +92,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.pType = pType;
         }
 
-        public ErrArg(Symbol pSym)
-            : this(pSym, ErrArgFlags.None)
-        {
-        }
+        public ErrArg(Symbol pSym) : this(pSym, ErrArgFlags.None) { }
 
         private ErrArg(Symbol pSym, ErrArgFlags eaf)
         {
@@ -157,8 +149,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
 
     internal sealed class ErrArgRefOnly : ErrArg
     {
-        public ErrArgRefOnly(Symbol sym)
-            : base(sym)
+        public ErrArgRefOnly(Symbol sym) : base(sym)
         {
             eaf = ErrArgFlags.NoStr;
         }

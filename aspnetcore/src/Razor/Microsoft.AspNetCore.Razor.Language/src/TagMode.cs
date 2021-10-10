@@ -12,12 +12,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         /// Include both start and end tags.
         /// </summary>
         StartTagAndEndTag,
-
         /// <summary>
         /// A self-closed tag.
         /// </summary>
         SelfClosing,
-
         /// <summary>
         /// Only a start tag.
         /// </summary>

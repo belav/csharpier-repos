@@ -31,14 +31,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             inputSet = this;
         }
 
-        public bool CheckInputFileTimes(System.Runtime.InteropServices.ComTypes.FILETIME output)
-            => throw new NotImplementedException();
+        public bool CheckInputFileTimes(System.Runtime.InteropServices.ComTypes.FILETIME output) =>
+            throw new NotImplementedException();
 
-        public void BuildProject(object progress)
-            => throw new NotImplementedException();
+        public void BuildProject(object progress) => throw new NotImplementedException();
 
-        public void Unused()
-            => throw new NotImplementedException();
+        public void Unused() => throw new NotImplementedException();
 
         public void OnSourceFileAdded(string filename)
         {
@@ -49,14 +47,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             AddFile(filename, SourceCodeKind.Regular);
         }
 
-        public void OnSourceFileRemoved(string filename)
-            => RemoveFile(filename);
+        public void OnSourceFileRemoved(string filename) => RemoveFile(filename);
 
-        public int OnResourceFileAdded(string filename, string resourceName, bool embedded)
-            => VSConstants.S_OK;
+        public int OnResourceFileAdded(string filename, string resourceName, bool embedded) =>
+            VSConstants.S_OK;
 
-        public int OnResourceFileRemoved(string filename)
-            => VSConstants.S_OK;
+        public int OnResourceFileRemoved(string filename) => VSConstants.S_OK;
 
         public int OnImportAdded(string filename, string project)
         {
@@ -67,13 +63,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 
         public int OnImportAddedEx(string filename, string project, CompilerOptions optionID)
         {
-            if (optionID != CompilerOptions.OPTID_IMPORTS && optionID != CompilerOptions.OPTID_IMPORTSUSINGNOPIA)
+            if (
+                optionID != CompilerOptions.OPTID_IMPORTS
+                && optionID != CompilerOptions.OPTID_IMPORTSUSINGNOPIA
+            )
             {
                 throw new ArgumentException("optionID was an unexpected value.", nameof(optionID));
             }
 
             var embedInteropTypes = optionID == CompilerOptions.OPTID_IMPORTSUSINGNOPIA;
-            VisualStudioProject.AddMetadataReference(filename, new MetadataReferenceProperties(embedInteropTypes: embedInteropTypes));
+            VisualStudioProject.AddMetadataReference(
+                filename,
+                new MetadataReferenceProperties(embedInteropTypes: embedInteropTypes)
+            );
 
             return VSConstants.S_OK;
         }
@@ -82,7 +84,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
         {
             filename = FileUtilities.NormalizeAbsolutePath(filename);
 
-            VisualStudioProject.RemoveMetadataReference(filename, VisualStudioProject.GetPropertiesForMetadataReference(filename).Single());
+            VisualStudioProject.RemoveMetadataReference(
+                filename,
+                VisualStudioProject.GetPropertiesForMetadataReference(filename).Single()
+            );
         }
 
         public void OnOutputFileChanged(string filename)
@@ -107,26 +112,31 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             return VSConstants.S_OK;
         }
 
-        public int CreateFileCodeModel(string fileName, object parent, out EnvDTE.FileCodeModel ppFileCodeModel)
+        public int CreateFileCodeModel(
+            string fileName,
+            object parent,
+            out EnvDTE.FileCodeModel ppFileCodeModel
+        )
         {
             ppFileCodeModel = ProjectCodeModel.GetOrCreateFileCodeModel(fileName, parent);
             return VSConstants.S_OK;
         }
 
-        public void OnModuleAdded(string filename)
-            => throw new NotImplementedException();
+        public void OnModuleAdded(string filename) => throw new NotImplementedException();
 
-        public void OnModuleRemoved(string filename)
-            => throw new NotImplementedException();
+        public void OnModuleRemoved(string filename) => throw new NotImplementedException();
 
         public int GetValidStartupClasses(IntPtr[] classNames, ref int count)
         {
             // If classNames is NULL, then we need to populate the number of valid startup
             // classes only
             var project = Workspace.CurrentSolution.GetProject(VisualStudioProject.Id);
-            var compilation = project.GetCompilationAsync(CancellationToken.None).WaitAndGetResult(CancellationToken.None);
+            var compilation = project.GetCompilationAsync(CancellationToken.None)
+                .WaitAndGetResult(CancellationToken.None);
 
-            var entryPoints = EntryPointFinder.FindEntryPoints(compilation.Assembly.GlobalNamespace);
+            var entryPoints = EntryPointFinder.FindEntryPoints(
+                compilation.Assembly.GlobalNamespace
+            );
 
             if (classNames == null)
             {
@@ -136,7 +146,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             else
             {
                 // We return S_FALSE if we have more entrypoints than places in the array.
-                var entryPointNames = entryPoints.Select(e => e.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted))).ToArray();
+                var entryPointNames = entryPoints.Select(
+                        e =>
+                            e.ToDisplayString(
+                                SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
+                                    SymbolDisplayGlobalNamespaceStyle.Omitted
+                                )
+                            )
+                    )
+                    .ToArray();
 
                 if (entryPointNames.Length > classNames.Length)
                 {
@@ -144,9 +162,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
 
                 // The old language service stored startup class names in its string table,
-                // so the property page never freed them. To avoid leaking memory, we're 
+                // so the property page never freed them. To avoid leaking memory, we're
                 // going to allocate our strings on the native heap and keep the pointers to them.
-                // Subsequent calls to this function will free the old strings and allocate the 
+                // Subsequent calls to this function will free the old strings and allocate the
                 // new ones. The last set of marshalled strings is freed in the destructor.
                 if (_startupClasses != null)
                 {
@@ -164,13 +182,24 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             }
         }
 
-        public void OnAliasesChanged(string file, string project, int previousAliasesCount, string[] previousAliases, int currentAliasesCount, string[] currentAliases)
+        public void OnAliasesChanged(
+            string file,
+            string project,
+            int previousAliasesCount,
+            string[] previousAliases,
+            int currentAliasesCount,
+            string[] currentAliases
+        )
         {
             using (VisualStudioProject.CreateBatchScope())
             {
-                var existingProperties = VisualStudioProject.GetPropertiesForMetadataReference(file).Single();
+                var existingProperties = VisualStudioProject.GetPropertiesForMetadataReference(file)
+                    .Single();
                 VisualStudioProject.RemoveMetadataReference(file, existingProperties);
-                VisualStudioProject.AddMetadataReference(file, existingProperties.WithAliases(currentAliases));
+                VisualStudioProject.AddMetadataReference(
+                    file,
+                    existingProperties.WithAliases(currentAliases)
+                );
             }
         }
     }

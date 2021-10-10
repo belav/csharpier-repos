@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Moq.Protected
 {
-	/// <summary>
+    /// <summary>
 	/// Allows the specification of a matching condition for an 
 	/// argument in a protected member setup, rather than a specific 
 	/// argument value. "ItExpr" refers to the argument being matched.
@@ -19,29 +19,29 @@ namespace Moq.Protected
 	/// with an arbitrary value, with a value in a specified range, or 
 	/// even one that matches a given predicate, or null.
 	/// </remarks>
-	public static class ItExpr
-	{
-		/// <summary>
+    public static class ItExpr
+    {
+        /// <summary>
 		/// Contains matchers for <see langword="ref"/> (C#) / <see langword="ByRef"/> (VB.NET) parameters of type <typeparamref name="TValue"/>.
 		/// </summary>
 		/// <typeparam name="TValue">The parameter type.</typeparam>
-		public static class Ref<TValue>
-		{
-			/// <summary>
+        public static class Ref<TValue>
+        {
+            /// <summary>
 			/// Matches any value that is assignment-compatible with type <typeparamref name="TValue"/>.
 			/// </summary>
 			/// <returns></returns>
-			public static Expression IsAny
-			{
-				get
-				{
-					Expression<Func<TValue>> expr = () => It.Ref<TValue>.IsAny;
-					return expr.Body;
-				}
-			}
-		}
+            public static Expression IsAny
+            {
+                get
+                {
+                    Expression<Func<TValue>> expr = () => It.Ref<TValue>.IsAny;
+                    return expr.Body;
+                }
+            }
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Matches a null value of the given <typeparamref name="TValue"/> type.
 		/// </summary>
 		/// <remarks>
@@ -57,14 +57,15 @@ namespace Moq.Protected
 		/// </code>
 		/// </example>
 		/// <typeparam name="TValue">Type of the value.</typeparam>
-		public static Expression IsNull<TValue>()
-		{
-			Expression<Func<TValue>> expr = () => It.Is<TValue>(v => Object.Equals(v, default(TValue)));
+        public static Expression IsNull<TValue>()
+        {
+            Expression<Func<TValue>> expr = () =>
+                It.Is<TValue>(v => Object.Equals(v, default(TValue)));
 
-			return expr.Body;
-		}
+            return expr.Body;
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Matches any value of the given <typeparamref name="TValue"/> type.
 		/// </summary>
 		/// <remarks>
@@ -80,13 +81,13 @@ namespace Moq.Protected
 		/// </code>
 		/// </example>
 		/// <typeparam name="TValue">Type of the value.</typeparam>
-		public static Expression IsAny<TValue>()
-		{
-			Expression<Func<TValue>> expr = () => It.IsAny<TValue>();
-			return expr.Body;
-		}
+        public static Expression IsAny<TValue>()
+        {
+            Expression<Func<TValue>> expr = () => It.IsAny<TValue>();
+            return expr.Body;
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Matches any value that satisfies the given predicate.
 		/// </summary>
 		/// <typeparam name="TValue">Type of the argument to check.</typeparam>
@@ -111,13 +112,13 @@ namespace Moq.Protected
 		///     .Throws(new ArgumentException());
 		/// </code>
 		/// </example>
-		public static Expression Is<TValue>(Expression<Func<TValue, bool>> match)
-		{
-			Expression<Func<TValue>> expr = () => It.Is((Expression<Func<TValue, bool>>)null);
-			return Expression.Call(((MethodCallExpression)expr.Body).Method, match);
-		}
+        public static Expression Is<TValue>(Expression<Func<TValue, bool>> match)
+        {
+            Expression<Func<TValue>> expr = () => It.Is((Expression<Func<TValue, bool>>)null);
+            return Expression.Call(((MethodCallExpression)expr.Body).Method, match);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Matches any value that is in the range specified.
 		/// </summary>
 		/// <typeparam name="TValue">Type of the argument to check.</typeparam>
@@ -135,15 +136,15 @@ namespace Moq.Protected
 		///     .Returns(false);
 		/// </code>
 		/// </example>
-		public static Expression IsInRange<TValue>(TValue from, TValue to, Range rangeKind)
-			where TValue : IComparable
-		{
-			Expression<Func<TValue>> expr = () => It.IsInRange<TValue>(from, to, rangeKind);
+        public static Expression IsInRange<TValue>(TValue from, TValue to, Range rangeKind)
+            where TValue : IComparable
+        {
+            Expression<Func<TValue>> expr = () => It.IsInRange<TValue>(from, to, rangeKind);
 
-			return expr.Body;
-		}
+            return expr.Body;
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Matches a string argument if it matches the given regular expression pattern.
 		/// </summary>
 		/// <param name="regex">The pattern to use to match the string argument value.</param>
@@ -156,14 +157,14 @@ namespace Moq.Protected
 		///     .Returns(1);
 		/// </code>
 		/// </example>
-		public static Expression IsRegex(string regex)
-		{
-			Expression<Func<string>> expr = () => It.IsRegex(regex);
+        public static Expression IsRegex(string regex)
+        {
+            Expression<Func<string>> expr = () => It.IsRegex(regex);
 
-			return expr.Body;
-		}
+            return expr.Body;
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Matches a string argument if it matches the given regular expression pattern.
 		/// </summary>
 		/// <param name="regex">The pattern to use to match the string argument value.</param>
@@ -177,11 +178,11 @@ namespace Moq.Protected
 		///     .Returns(1);
 		/// </code>
 		/// </example>
-		public static Expression IsRegex(string regex, RegexOptions options)
-		{
-			Expression<Func<string>> expr = () => It.IsRegex(regex, options);
+        public static Expression IsRegex(string regex, RegexOptions options)
+        {
+            Expression<Func<string>> expr = () => It.IsRegex(regex, options);
 
-			return expr.Body;
-		}
-	}
+            return expr.Body;
+        }
+    }
 }

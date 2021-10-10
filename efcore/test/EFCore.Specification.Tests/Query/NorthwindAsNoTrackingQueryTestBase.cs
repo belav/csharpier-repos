@@ -14,8 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Query
     public abstract class NorthwindAsNoTrackingQueryTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
     {
-        protected NorthwindAsNoTrackingQueryTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected NorthwindAsNoTrackingQueryTestBase(TFixture fixture) => Fixture = fixture;
 
         protected TFixture Fixture { get; }
 
@@ -37,13 +36,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Applied_to_body_clause()
         {
             using var context = CreateContext();
-            var customers
-                = (from c in context.Set<Customer>()
-                   join o in context.Set<Order>().AsNoTracking()
-                       on c.CustomerID equals o.CustomerID
-                   where c.CustomerID == "ALFKI"
-                   select o)
-                .ToList();
+            var customers = (
+                from c in context.Set<Customer>()
+                join o in context.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
+                where c.CustomerID == "ALFKI"
+                select o
+            ).ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -53,12 +51,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Applied_to_multiple_body_clauses()
         {
             using var context = CreateContext();
-            var customers
-                = (from c in context.Set<Customer>().AsNoTracking()
-                   from o in context.Set<Order>().AsNoTracking()
-                   where c.CustomerID == o.CustomerID
-                   select new { c, o })
-                .ToList();
+            var customers = (
+                from c in context.Set<Customer>().AsNoTracking()
+                from o in context.Set<Order>().AsNoTracking()
+                where c.CustomerID == o.CustomerID
+                select new { c, o }
+            ).ToList();
 
             Assert.Equal(830, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -68,19 +66,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Applied_to_body_clause_with_projection()
         {
             using var context = CreateContext();
-            var customers
-                = (from c in context.Set<Customer>()
-                   join o in context.Set<Order>().AsNoTracking()
-                       on c.CustomerID equals o.CustomerID
-                   where c.CustomerID == "ALFKI"
-                   select new
-                   {
-                       c.CustomerID,
-                       c,
-                       ocid = o.CustomerID,
-                       o
-                   })
-                .ToList();
+            var customers = (
+                from c in context.Set<Customer>()
+                join o in context.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
+                where c.CustomerID == "ALFKI"
+                select new { c.CustomerID, c, ocid = o.CustomerID, o }
+            ).ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -90,14 +81,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Applied_to_projection()
         {
             using var context = CreateContext();
-            var customers
-                = (from c in context.Set<Customer>()
-                   join o in context.Set<Order>().AsNoTracking()
-                       on c.CustomerID equals o.CustomerID
-                   where c.CustomerID == "ALFKI"
-                   select new { c, o })
-                .AsNoTracking()
-                .ToList();
+            var customers = (
+                from c in context.Set<Customer>()
+                join o in context.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
+                where c.CustomerID == "ALFKI"
+                select new { c, o }
+            ).AsNoTracking().ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -120,12 +109,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Include_reference_and_collection()
         {
             using var context = CreateContext();
-            var orders
-                = context.Set<Order>()
-                    .Include(o => o.Customer)
-                    .Include(o => o.OrderDetails)
-                    .AsNoTracking()
-                    .ToList();
+            var orders = context.Set<Order>()
+                .Include(o => o.Customer)
+                .Include(o => o.OrderDetails)
+                .AsNoTracking()
+                .ToList();
 
             Assert.Equal(830, orders.Count);
         }
@@ -134,7 +122,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Applied_after_navigation_expansion()
         {
             using var context = CreateContext();
-            var orders = context.Set<Order>().Where(o => o.Customer.City != "London").AsNoTracking().ToList();
+            var orders = context.Set<Order>()
+                .Where(o => o.Customer.City != "London")
+                .AsNoTracking()
+                .ToList();
 
             Assert.Equal(784, orders.Count);
         }
@@ -143,11 +134,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Where_simple_shadow()
         {
             using var context = CreateContext();
-            var employees
-                = context.Set<Employee>()
-                    .Where(e => EF.Property<string>(e, "Title") == "Sales Representative")
-                    .AsNoTracking()
-                    .ToList();
+            var employees = context.Set<Employee>()
+                .Where(e => EF.Property<string>(e, "Title") == "Sales Representative")
+                .AsNoTracking()
+                .ToList();
 
             Assert.Equal(6, employees.Count);
         }
@@ -156,10 +146,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Query_fast_path_when_ctor_binding()
         {
             using var context = CreateContext();
-            var employees
-                = context.Set<Customer>()
-                    .AsNoTracking()
-                    .ToList();
+            var employees = context.Set<Customer>().AsNoTracking().ToList();
 
             Assert.Equal(91, employees.Count);
         }
@@ -168,10 +155,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Query_fast_path_when_ctor_binding_async()
         {
             using var context = CreateContext();
-            var employees
-                = await context.Set<Customer>()
-                    .AsNoTracking()
-                    .ToListAsync();
+            var employees = await context.Set<Customer>().AsNoTracking().ToListAsync();
 
             Assert.Equal(91, employees.Count);
         }
@@ -180,17 +164,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void SelectMany_simple()
         {
             using var context = CreateContext();
-            var results
-                = (from e in context.Set<Employee>()
-                   from c in context.Set<Customer>()
-                   select new { c, e })
-                .AsNoTracking()
-                .ToList();
+            var results = (
+                from e in context.Set<Employee>()
+                from c in context.Set<Customer>()
+                select new { c, e }
+            ).AsNoTracking().ToList();
 
             Assert.Equal(819, results.Count);
         }
 
-        protected NorthwindContext CreateContext()
-            => Fixture.CreateContext();
+        protected NorthwindContext CreateContext() => Fixture.CreateContext();
     }
 }

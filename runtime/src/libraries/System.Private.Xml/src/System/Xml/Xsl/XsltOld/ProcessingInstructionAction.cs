@@ -93,7 +93,15 @@ namespace System.Xml.Xsl.XsltOld
 
                 case NameReady:
                     Debug.Assert(frame.StoredOutput != null);
-                    if (processor.BeginEvent(XPathNodeType.ProcessingInstruction, string.Empty, frame.StoredOutput, string.Empty, false) == false)
+                    if (
+                        processor.BeginEvent(
+                            XPathNodeType.ProcessingInstruction,
+                            string.Empty,
+                            frame.StoredOutput,
+                            string.Empty,
+                            false
+                        ) == false
+                    )
                     {
                         // Come back later
                         frame.State = NameReady;
@@ -101,7 +109,7 @@ namespace System.Xml.Xsl.XsltOld
                     }
                     processor.PushActionFrame(frame);
                     frame.State = ProcessingChildren;
-                    break;                              // Allow children to run
+                    break; // Allow children to run
 
                 case ProcessingChildren:
                     if (processor.EndEvent(XPathNodeType.ProcessingInstruction) == false)
@@ -117,7 +125,6 @@ namespace System.Xml.Xsl.XsltOld
                     break;
             }
         }
-
 
         internal static bool IsProcessingInstructionName(string? name)
         {
@@ -156,10 +163,11 @@ namespace System.Xml.Xsl.XsltOld
                 return false;
             }
 
-            if (nameLength == 3 &&
-                (name[0] == CharX || name[0] == Charx) &&
-                (name[1] == CharM || name[1] == Charm) &&
-                (name[2] == CharL || name[2] == Charl)
+            if (
+                nameLength == 3
+                && (name[0] == CharX || name[0] == Charx)
+                && (name[1] == CharM || name[1] == Charm)
+                && (name[2] == CharL || name[2] == Charl)
             )
             {
                 return false;

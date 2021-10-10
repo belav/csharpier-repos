@@ -20,6 +20,7 @@ namespace System.Runtime.InteropServices.Tests
                 string result = Marshal.PtrToStringUTF8(ptr, len);
                 Assert.Equal(s.Substring(0, len), result);
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);

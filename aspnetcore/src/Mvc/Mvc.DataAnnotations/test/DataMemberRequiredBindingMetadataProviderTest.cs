@@ -18,16 +18,19 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var provider = new DataMemberRequiredBindingMetadataProvider();
 
-            var attributes = new object[]
-            {
-                new DataMemberAttribute() { IsRequired = true, }
-            };
+            var attributes = new object[] { new DataMemberAttribute() { IsRequired = true, } };
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(ClassWithDataMemberIsRequiredTrue).GetProperty(nameof(ClassWithDataMemberIsRequiredTrue.StringProperty)),
+                typeof(ClassWithDataMemberIsRequiredTrue).GetProperty(
+                    nameof(ClassWithDataMemberIsRequiredTrue.StringProperty)
+                ),
                 typeof(string),
-                typeof(ClassWithDataMemberIsRequiredTrue));
-            var context = new BindingMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+                typeof(ClassWithDataMemberIsRequiredTrue)
+            );
+            var context = new BindingMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
 
             // Act
             provider.CreateBindingMetadata(context);
@@ -44,16 +47,19 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var provider = new DataMemberRequiredBindingMetadataProvider();
 
-            var attributes = new object[]
-            {
-                new DataMemberAttribute() { IsRequired = false, }
-            };
+            var attributes = new object[] { new DataMemberAttribute() { IsRequired = false, } };
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(ClassWithDataMemberIsRequiredFalse).GetProperty(nameof(ClassWithDataMemberIsRequiredFalse.StringProperty)),
+                typeof(ClassWithDataMemberIsRequiredFalse).GetProperty(
+                    nameof(ClassWithDataMemberIsRequiredFalse.StringProperty)
+                ),
                 typeof(string),
-                typeof(ClassWithDataMemberIsRequiredFalse));
-            var context = new BindingMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+                typeof(ClassWithDataMemberIsRequiredFalse)
+            );
+            var context = new BindingMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
 
             context.BindingMetadata.IsBindingRequired = initialValue;
 
@@ -72,13 +78,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var provider = new DataMemberRequiredBindingMetadataProvider();
 
-            var attributes = new object[]
-            {
-                new DataMemberAttribute() { IsRequired = true, }
-            };
+            var attributes = new object[] { new DataMemberAttribute() { IsRequired = true, } };
 
             var key = ModelMetadataIdentity.ForType(typeof(ClassWithDataMemberIsRequiredTrue));
-            var context = new BindingMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+            var context = new BindingMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
 
             context.BindingMetadata.IsBindingRequired = initialValue;
 
@@ -98,10 +104,16 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = new DataMemberRequiredBindingMetadataProvider();
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(ClassWithoutAttributes).GetProperty(nameof(ClassWithoutAttributes.StringProperty)),
+                typeof(ClassWithoutAttributes).GetProperty(
+                    nameof(ClassWithoutAttributes.StringProperty)
+                ),
                 typeof(string),
-                typeof(ClassWithoutAttributes));
-            var context = new BindingMetadataProviderContext(key, GetModelAttributes(new object[0], new object[0]));
+                typeof(ClassWithoutAttributes)
+            );
+            var context = new BindingMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], new object[0])
+            );
 
             context.BindingMetadata.IsBindingRequired = initialValue;
 
@@ -120,16 +132,19 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var provider = new DataMemberRequiredBindingMetadataProvider();
 
-            var attributes = new object[]
-            {
-                new DataMemberAttribute() { IsRequired = true, }
-            };
+            var attributes = new object[] { new DataMemberAttribute() { IsRequired = true, } };
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract).GetProperty(nameof(ClassWithDataMemberIsRequiredTrueWithoutDataContract.StringProperty)),
+                typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract).GetProperty(
+                    nameof(ClassWithDataMemberIsRequiredTrueWithoutDataContract.StringProperty)
+                ),
                 typeof(string),
-                typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract));
-            var context = new BindingMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+                typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract)
+            );
+            var context = new BindingMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
 
             context.BindingMetadata.IsBindingRequired = initialValue;
 
@@ -142,8 +157,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
         private ModelAttributes GetModelAttributes(
             IEnumerable<object> typeAttributes,
-            IEnumerable<object> propertyAttributes) 
-            => new ModelAttributes(typeAttributes, propertyAttributes, Array.Empty<object>());
+            IEnumerable<object> propertyAttributes
+        ) => new ModelAttributes(typeAttributes, propertyAttributes, Array.Empty<object>());
 
         [DataContract]
         private class ClassWithDataMemberIsRequiredTrue

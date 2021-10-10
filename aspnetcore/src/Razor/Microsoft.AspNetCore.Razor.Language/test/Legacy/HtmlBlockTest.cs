@@ -12,32 +12,31 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void HandlesUnbalancedTripleDashHTMLComments()
         {
             ParseDocumentTest(
-@"@{
+                @"@{
     <!-- Hello, I'm a comment that shouldn't break razor --->
-}");
+}"
+            );
         }
 
         [Fact]
         public void HandlesOpenAngleAtEof()
         {
-            ParseDocumentTest("@{" + Environment.NewLine
-                            + "<");
+            ParseDocumentTest("@{" + Environment.NewLine + "<");
         }
 
         [Fact]
         public void HandlesOpenAngleWithProperTagFollowingIt()
         {
-            ParseDocumentTest("@{" + Environment.NewLine
-                            + "<" + Environment.NewLine
-                            + "</html>",
-                            designTime: true);
+            ParseDocumentTest(
+                "@{" + Environment.NewLine + "<" + Environment.NewLine + "</html>",
+                designTime: true
+            );
         }
 
         [Fact]
         public void TagWithoutCloseAngleDoesNotTerminateBlock()
         {
-            ParseDocumentTest("@{<                      " + Environment.NewLine
-                         + "   ");
+            ParseDocumentTest("@{<                      " + Environment.NewLine + "   ");
         }
 
         [Fact]
@@ -49,8 +48,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void ReadsToEndOfLineIfFirstCharacterAfterTransitionIsColon()
         {
-            ParseDocumentTest("@{@:<li>Foo Bar Baz" + Environment.NewLine
-                         + "bork}");
+            ParseDocumentTest("@{@:<li>Foo Bar Baz" + Environment.NewLine + "bork}");
         }
 
         [Fact]
@@ -147,11 +145,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void HtmlCommentSupportsMultipleDashes()
         {
             ParseDocumentTest(
-@"<div><!--- Hello World ---></div>
+                @"<div><!--- Hello World ---></div>
 <div><!---- Hello World ----></div>
 <div><!----- Hello World -----></div>
 <div><!----- Hello < --- > World </div> -----></div>
-");
+"
+            );
         }
 
         [Fact]
@@ -183,7 +182,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             ParseDocumentTest("@{<foo></!-- bar --></foo>}");
         }
-
 
         [Fact]
         public void ParsesSGMLDeclarationAsEmptyTag()

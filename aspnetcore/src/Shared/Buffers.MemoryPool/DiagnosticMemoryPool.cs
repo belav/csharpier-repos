@@ -33,14 +33,20 @@ namespace System.Buffers
         /// </summary>
         private const int AnySize = -1;
 
-        public DiagnosticMemoryPool(MemoryPool<byte> pool, bool allowLateReturn = false, bool rentTracking = false)
+        public DiagnosticMemoryPool(
+            MemoryPool<byte> pool,
+            bool allowLateReturn = false,
+            bool rentTracking = false
+        )
         {
             _pool = pool;
             _allowLateReturn = allowLateReturn;
             _rentTracking = rentTracking;
             _blocks = new HashSet<DiagnosticPoolBlock>();
             _syncObj = new object();
-            _allBlocksReturned = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            _allBlocksReturned = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             _blockAccessExceptions = new List<Exception>();
         }
 
@@ -52,7 +58,9 @@ namespace System.Buffers
             {
                 if (IsDisposed)
                 {
-                    MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPool);
+                    MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                        MemoryPoolThrowHelper.ExceptionArgument.MemoryPool
+                    );
                 }
 
                 var diagnosticPoolBlock = new DiagnosticPoolBlock(this, _pool.Rent(size));
@@ -81,7 +89,9 @@ namespace System.Buffers
             {
                 if (!_allowLateReturn)
                 {
-                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockReturnedToDisposedPool(block);
+                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockReturnedToDisposedPool(
+                        block
+                    );
                 }
 
                 if (returnedAllBlocks)
@@ -89,7 +99,6 @@ namespace System.Buffers
                     SetAllBlocksReturned();
                 }
             }
-
         }
 
         internal void ReportException(Exception exception)
@@ -116,7 +125,11 @@ namespace System.Buffers
                     allBlocksReturned = _blocks.Count == 0;
                     if (!allBlocksReturned && !_allowLateReturn)
                     {
-                        MemoryPoolThrowHelper.ThrowInvalidOperationException_DisposingPoolWithActiveBlocks(_totalBlocks - _blocks.Count, _totalBlocks, _blocks.ToArray());
+                        MemoryPoolThrowHelper.ThrowInvalidOperationException_DisposingPoolWithActiveBlocks(
+                            _totalBlocks - _blocks.Count,
+                            _totalBlocks,
+                            _blocks.ToArray()
+                        );
                     }
 
                     if (_blockAccessExceptions.Count > 0)
@@ -125,6 +138,7 @@ namespace System.Buffers
                     }
                 }
             }
+
             finally
             {
                 if (allBlocksReturned)
@@ -150,7 +164,10 @@ namespace System.Buffers
 
         private AggregateException CreateAccessExceptions()
         {
-            return new AggregateException("Exceptions occurred while accessing blocks", _blockAccessExceptions.ToArray());
+            return new AggregateException(
+                "Exceptions occurred while accessing blocks",
+                _blockAccessExceptions.ToArray()
+            );
         }
 
         public async Task WhenAllBlocksReturnedAsync(TimeSpan timeout)
@@ -158,7 +175,11 @@ namespace System.Buffers
             var task = await Task.WhenAny(_allBlocksReturned.Task, Task.Delay(timeout));
             if (task != _allBlocksReturned.Task)
             {
-                MemoryPoolThrowHelper.ThrowInvalidOperationException_BlocksWereNotReturnedInTime(_totalBlocks - _blocks.Count, _totalBlocks, _blocks.ToArray());
+                MemoryPoolThrowHelper.ThrowInvalidOperationException_BlocksWereNotReturnedInTime(
+                    _totalBlocks - _blocks.Count,
+                    _totalBlocks,
+                    _blocks.ToArray()
+                );
             }
 
             await task;

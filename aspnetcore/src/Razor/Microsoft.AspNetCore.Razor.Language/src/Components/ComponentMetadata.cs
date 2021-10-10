@@ -60,7 +60,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             public readonly static string ChangeAttribute = "Components.Bind.ChangeAttribute";
 
-            public readonly static string ExpressionAttribute = "Components.Bind.ExpressionAttribute";
+            public readonly static string ExpressionAttribute =
+                "Components.Bind.ExpressionAttribute";
 
             public readonly static string IsInvariantCulture = "Components.Bind.IsInvariantCulture";
 
@@ -73,7 +74,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             public static readonly string TagHelperKind = "Components.ChildContent";
 
-            public static readonly string ParameterNameBoundAttributeKind = "Components.ChildContentParameterName";
+            public static readonly string ParameterNameBoundAttributeKind =
+                "Components.ChildContentParameterName";
 
             /// <summary>
             /// The name of the synthesized attribute used to set a child content parameter.
@@ -90,7 +92,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         {
             public static readonly string ChildContentKey = "Components.ChildContent";
 
-            public static readonly string ChildContentParameterNameKey = "Components.ChildContentParameterName";
+            public static readonly string ChildContentParameterNameKey =
+                "Components.ChildContentParameterName";
 
             public static readonly string DelegateSignatureKey = "Components.DelegateSignature";
 
@@ -106,11 +109,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             public readonly static string TypeParameterKey = "Components.TypeParameter";
 
-            public readonly static string TypeParameterIsCascadingKey = "Components.TypeParameterIsCascading";
+            public readonly static string TypeParameterIsCascadingKey =
+                "Components.TypeParameterIsCascading";
 
             public readonly static string NameMatchKey = "Components.NameMatch";
 
-            public readonly static string FullyQualifiedNameMatch = "Components.FullyQualifiedNameMatch";
+            public readonly static string FullyQualifiedNameMatch =
+                "Components.FullyQualifiedNameMatch";
         }
 
         public static class EventHandler

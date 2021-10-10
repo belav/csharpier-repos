@@ -13,7 +13,6 @@ delegate void NoArg();
 
 class SmallRepro
 {
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Throws1()
     {
@@ -25,7 +24,6 @@ class SmallRepro
     {
         throw new Exception2();
     }
-
 
     static void Rethrows1()
     {
@@ -62,6 +60,7 @@ class SmallRepro
             Rethrows1();
             Console.WriteLine("Unreached");
         }
+
         finally
         {
             Console.WriteLine("In Finally funclet (1), Exception1 should be in-flight");
@@ -116,7 +115,8 @@ class SmallRepro
                 bPassed = false;
             }
         }
-        if (bPassed) return 100;
+        if (bPassed)
+            return 100;
         return 1;
     }
 }

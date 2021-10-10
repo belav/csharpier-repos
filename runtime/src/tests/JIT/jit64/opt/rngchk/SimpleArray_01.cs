@@ -13,12 +13,15 @@ namespace SimpleArray_01
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                        new RngTest(Test.Test2),
-                        new RngTest(Test.Test3),
-                        new RngTest(Test.Test4),
-                        new RngTest(Test.Test5),
-                        new RngTest(Test.Test6)};
+            RngTest[] Tests =
+            {
+                new RngTest(Test.Test1),
+                new RngTest(Test.Test2),
+                new RngTest(Test.Test3),
+                new RngTest(Test.Test4),
+                new RngTest(Test.Test5),
+                new RngTest(Test.Test6)
+            };
             foreach (RngTest test in Tests)
             {
                 testNum++;

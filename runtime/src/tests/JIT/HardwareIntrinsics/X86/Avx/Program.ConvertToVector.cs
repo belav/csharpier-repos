@@ -10,15 +10,18 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["ConvertToVector128Int32.Double"] = ConvertToVector128Int32Double,
                 ["ConvertToVector128Single.Double"] = ConvertToVector128SingleDouble,
                 ["ConvertToVector256Int32.Single"] = ConvertToVector256Int32Single,
                 ["ConvertToVector256Single.Int32"] = ConvertToVector256SingleInt32,
                 ["ConvertToVector256Double.Single"] = ConvertToVector256DoubleSingle,
                 ["ConvertToVector256Double.Int32"] = ConvertToVector256DoubleInt32,
-                ["ConvertToVector128Int32WithTruncation.Double"] = ConvertToVector128Int32WithTruncationDouble,
-                ["ConvertToVector256Int32WithTruncation.Single"] = ConvertToVector256Int32WithTruncationSingle,
+                ["ConvertToVector128Int32WithTruncation.Double"] =
+                    ConvertToVector128Int32WithTruncationDouble,
+                ["ConvertToVector256Int32WithTruncation.Single"] =
+                    ConvertToVector256Int32WithTruncationSingle,
             };
         }
     }

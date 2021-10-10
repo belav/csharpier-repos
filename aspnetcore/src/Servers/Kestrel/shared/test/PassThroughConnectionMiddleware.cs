@@ -49,11 +49,15 @@ namespace Microsoft.AspNetCore.Testing
 
                 public override void CancelPendingFlush() => _output.CancelPendingFlush();
 
-                public override void Complete(Exception exception = null) => _output.Complete(exception);
+                public override void Complete(Exception exception = null) =>
+                    _output.Complete(exception);
 
-                public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default) => _output.FlushAsync(cancellationToken);
+                public override ValueTask<FlushResult> FlushAsync(
+                    CancellationToken cancellationToken = default
+                ) => _output.FlushAsync(cancellationToken);
 
-                public override Memory<byte> GetMemory(int sizeHint = 0) => _output.GetMemory(sizeHint);
+                public override Memory<byte> GetMemory(int sizeHint = 0) =>
+                    _output.GetMemory(sizeHint);
 
                 public override Span<byte> GetSpan(int sizeHint = 0) => _output.GetSpan(sizeHint);
             }
@@ -67,15 +71,22 @@ namespace Microsoft.AspNetCore.Testing
                     _input = input;
                 }
 
-                public override void AdvanceTo(SequencePosition consumed) => _input.AdvanceTo(consumed);
+                public override void AdvanceTo(SequencePosition consumed) =>
+                    _input.AdvanceTo(consumed);
 
-                public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) => _input.AdvanceTo(consumed, examined);
+                public override void AdvanceTo(
+                    SequencePosition consumed,
+                    SequencePosition examined
+                ) => _input.AdvanceTo(consumed, examined);
 
                 public override void CancelPendingRead() => _input.CancelPendingRead();
 
-                public override void Complete(Exception exception = null) => _input.Complete(exception);
+                public override void Complete(Exception exception = null) =>
+                    _input.Complete(exception);
 
-                public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default) => _input.ReadAsync(cancellationToken);
+                public override ValueTask<ReadResult> ReadAsync(
+                    CancellationToken cancellationToken = default
+                ) => _input.ReadAsync(cancellationToken);
 
                 public override bool TryRead(out ReadResult result) => _input.TryRead(out result);
             }
@@ -84,7 +95,8 @@ namespace Microsoft.AspNetCore.Testing
 
     public static class PassThroughConnectionMiddlewareExtensions
     {
-        public static TBuilder UsePassThrough<TBuilder>(this TBuilder builder) where TBuilder : IConnectionBuilder
+        public static TBuilder UsePassThrough<TBuilder>(this TBuilder builder)
+            where TBuilder : IConnectionBuilder
         {
             builder.Use(next => new PassThroughConnectionMiddleware(next).OnConnectionAsync);
             return builder;

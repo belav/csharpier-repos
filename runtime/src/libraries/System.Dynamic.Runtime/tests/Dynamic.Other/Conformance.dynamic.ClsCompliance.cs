@@ -85,8 +85,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.integereg
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.mixedmode02.mixedmode02
 {
     // <Title> CLS Compliance for Dynamic </Title>
@@ -152,17 +150,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.mixedmode
         }
 
         [property: System.CLSCompliant(false)]
-        public dynamic Prop
-        {
-            get;
-            set;
-        }
+        public dynamic Prop { get; set; }
 
-        public dynamic prop
-        {
-            get;
-            set;
-        }
+        public dynamic prop { get; set; }
 
         [field: System.CLSCompliant(false)]
         public dynamic field;
@@ -184,17 +174,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.mixedmode
         event MyDelegate01<T> Myevent;
     }
 
-    public delegate void MyDelegate01<T>(ref T t, [param: System.CLSCompliant(false)]
-    dynamic d, int n);
-    public delegate void myDelegate01<T>(ref T t, [param: System.CLSCompliant(true)]
-    dynamic d, int n);
+    public delegate void MyDelegate01<T>(
+        ref T t,
+        [param: System.CLSCompliant(false)] dynamic d,
+        int n
+    );
+    public delegate void myDelegate01<T>(
+        ref T t,
+        [param: System.CLSCompliant(true)] dynamic d,
+        int n
+    );
     [System.CLSCompliantAttribute(false)]
     public delegate V MyDelegate02<U, V>(U u, params dynamic[] ary);
     public delegate V myDelegate02<U, V>(U u, params dynamic[] ary);
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr02.namingchr02
 {
@@ -263,8 +257,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
     public delegate V myDelegate02<U, V>(U u, params dynamic[] ary);
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr03.namingchr03
 {
@@ -363,8 +355,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr04.namingchr04
 {
     // <Title> CLS Compliance for Dynamic </Title>
@@ -456,8 +446,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingkeyword01.namingkeyword01
 {
     // <Title> CLS Compliance for Dynamic </Title>
@@ -539,8 +527,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingkey
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.typegeneral01.typegeneral01
 {
     // <Title> CLS Compliance for Dynamic </Title>
@@ -568,7 +554,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.typegener
             {
                 return default(T);
             }
-
 
             public static void DynamicCSharpRunTest()
             {
@@ -613,8 +598,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.typegener
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.bug89385_a.bug89385_a
 {
     // <Title> regression test</Title>
@@ -631,20 +614,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.bug89385_
                 Test.Result++;
         }
 
-        public string Prop
-        {
-            get;
-            set;
-        }
+        public string Prop { get; set; }
     }
 
     public class Test
     {
-        public Foo Foo
-        {
-            get;
-            set;
-        }
+        public Foo Foo { get; set; }
 
         public static void DoExample(dynamic d)
         {
@@ -662,12 +637,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.bug89385_
         {
             try
             {
-                DoExample(new Foo()
-                {
-                    Prop = "abc"
-                }
-
-                );
+                DoExample(new Foo() { Prop = "abc" });
             }
             catch (System.Exception)
             {

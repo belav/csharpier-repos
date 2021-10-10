@@ -28,7 +28,10 @@ namespace Microsoft.Extensions.Primitives
             throw new InvalidOperationException(GetResourceText(resource));
         }
 
-        internal static void ThrowInvalidOperationException(ExceptionResource resource, params object[] args)
+        internal static void ThrowInvalidOperationException(
+            ExceptionResource resource,
+            params object[] args
+        )
         {
             string message = string.Format(GetResourceText(resource), args);
 
@@ -40,7 +43,9 @@ namespace Microsoft.Extensions.Primitives
             return new ArgumentNullException(GetArgumentName(argument));
         }
 
-        internal static ArgumentOutOfRangeException GetArgumentOutOfRangeException(ExceptionArgument argument)
+        internal static ArgumentOutOfRangeException GetArgumentOutOfRangeException(
+            ExceptionArgument argument
+        )
         {
             return new ArgumentOutOfRangeException(GetArgumentName(argument));
         }
@@ -57,16 +62,20 @@ namespace Microsoft.Extensions.Primitives
 
         private static string GetArgumentName(ExceptionArgument argument)
         {
-            Debug.Assert(Enum.IsDefined(typeof(ExceptionArgument), argument),
-                "The enum value is not defined, please check the ExceptionArgument Enum.");
+            Debug.Assert(
+                Enum.IsDefined(typeof(ExceptionArgument), argument),
+                "The enum value is not defined, please check the ExceptionArgument Enum."
+            );
 
             return argument.ToString();
         }
 
         private static string GetResourceName(ExceptionResource resource)
         {
-            Debug.Assert(Enum.IsDefined(typeof(ExceptionResource), resource),
-                "The enum value is not defined, please check the ExceptionResource Enum.");
+            Debug.Assert(
+                Enum.IsDefined(typeof(ExceptionResource), resource),
+                "The enum value is not defined, please check the ExceptionResource Enum."
+            );
 
             return resource.ToString();
         }

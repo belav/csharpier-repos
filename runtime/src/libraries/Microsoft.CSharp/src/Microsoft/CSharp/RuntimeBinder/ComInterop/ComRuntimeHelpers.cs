@@ -16,7 +16,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     internal static class ComRuntimeHelpers
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static void CheckThrowException(int hresult, ref ExcepInfo excepInfo, uint argErr, string message)
+        public static void CheckThrowException(
+            int hresult,
+            ref ExcepInfo excepInfo,
+            uint argErr,
+            string message
+        )
         {
             if (ComHresults.IsSuccess(hresult))
             {
@@ -79,7 +84,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Marshal.ThrowExceptionForHR(hresult);
         }
 
-        internal static void GetInfoFromType(ComTypes.ITypeInfo typeInfo, out string name, out string documentation)
+        internal static void GetInfoFromType(
+            ComTypes.ITypeInfo typeInfo,
+            out string name,
+            out string documentation
+        )
         {
             typeInfo.GetDocumentation(-1, out name, out documentation, out int _, out string _);
         }
@@ -157,6 +166,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 typeInfo = Marshal.GetObjectForIUnknown(typeInfoPtr) as ComTypes.ITypeInfo;
             }
+
             finally
             {
                 Marshal.Release(typeInfoPtr);
@@ -180,6 +190,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 return (ComTypes.TYPEATTR)Marshal.PtrToStructure(pAttrs, typeof(ComTypes.TYPEATTR));
             }
+
             finally
             {
                 typeInfo.ReleaseTypeAttr(pAttrs);
@@ -199,8 +210,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             try
             {
-                return (ComTypes.TYPELIBATTR)Marshal.PtrToStructure(pAttrs, typeof(ComTypes.TYPELIBATTR));
+                return (ComTypes.TYPELIBATTR)Marshal.PtrToStructure(
+                    pAttrs,
+                    typeof(ComTypes.TYPELIBATTR)
+                );
             }
+
             finally
             {
                 typeLib.ReleaseTLibAttr(pAttrs);
@@ -213,7 +228,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return new BoundDispEvent(rcw, sourceIid, dispid);
         }
 
-        public static DispCallable CreateDispCallable(IDispatchComObject dispatch, ComMethodDesc method)
+        public static DispCallable CreateDispCallable(
+            IDispatchComObject dispatch,
+            ComMethodDesc method
+        )
         {
             return new DispCallable(dispatch, method.Name, method.DispId);
         }
@@ -229,8 +247,14 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         #region public members
 
-        public static unsafe IntPtr ConvertInt32ByrefToPtr(ref int value) { return (IntPtr)System.Runtime.CompilerServices.Unsafe.AsPointer(ref value); }
-        public static unsafe IntPtr ConvertVariantByrefToPtr(ref Variant value) { return (IntPtr)System.Runtime.CompilerServices.Unsafe.AsPointer(ref value); }
+        public static unsafe IntPtr ConvertInt32ByrefToPtr(ref int value)
+        {
+            return (IntPtr)System.Runtime.CompilerServices.Unsafe.AsPointer(ref value);
+        }
+        public static unsafe IntPtr ConvertVariantByrefToPtr(ref Variant value)
+        {
+            return (IntPtr)System.Runtime.CompilerServices.Unsafe.AsPointer(ref value);
+        }
 
         internal static Variant GetVariantForObject(object obj)
         {
@@ -269,7 +293,13 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         // This method is intended for use through reflection and should only be used directly by IUnknownReleaseNotZero
         public static unsafe int IUnknownRelease(IntPtr interfacePointer)
         {
-            return ((delegate* unmanaged<IntPtr, int>)(*(*(void***)interfacePointer + 2 /* IUnknown.Release slot */)))(interfacePointer);
+            return (
+                (delegate* unmanaged<IntPtr, int>)(
+                    *(
+                        *(void***)interfacePointer + 2 /* IUnknown.Release slot */
+                    )
+                )
+            )(interfacePointer);
         }
 
         // This method is intended for use through reflection and should not be used directly
@@ -289,7 +319,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             ref ComTypes.DISPPARAMS dispParams,
             out Variant result,
             out ExcepInfo excepInfo,
-            out uint argErr)
+            out uint argErr
+        )
         {
             Guid IID_NULL = default;
 
@@ -298,19 +329,58 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             fixed (ExcepInfo* pExcepInfo = &excepInfo)
             fixed (uint* pArgErr = &argErr)
             {
-                var pfnIDispatchInvoke = (delegate* unmanaged<IntPtr, int, Guid*, int, ushort, ComTypes.DISPPARAMS*, Variant*, ExcepInfo*, uint*, int>)
-                    (*(*(void***)dispatchPointer + 6 /* IDispatch.Invoke slot */));
+                var pfnIDispatchInvoke = (delegate* unmanaged<
+                    IntPtr,
+                    int,
+                    Guid*,
+                    int,
+                    ushort,
+                    ComTypes.DISPPARAMS*,
+                    Variant*,
+                    ExcepInfo*,
+                    uint*,
+                    int>)(
+                    *(
+                        *(void***)dispatchPointer + 6 /* IDispatch.Invoke slot */
+                    )
+                );
 
-                int hresult = pfnIDispatchInvoke(dispatchPointer,
-                    memberDispId, &IID_NULL, 0, (ushort)flags, pDispParams, pResult, pExcepInfo, pArgErr);
+                int hresult = pfnIDispatchInvoke(
+                    dispatchPointer,
+                    memberDispId,
+                    &IID_NULL,
+                    0,
+                    (ushort)flags,
+                    pDispParams,
+                    pResult,
+                    pExcepInfo,
+                    pArgErr
+                );
 
-                if (hresult == ComHresults.DISP_E_MEMBERNOTFOUND
+                if (
+                    hresult == ComHresults.DISP_E_MEMBERNOTFOUND
                     && (flags & ComTypes.INVOKEKIND.INVOKE_FUNC) != 0
-                    && (flags & (ComTypes.INVOKEKIND.INVOKE_PROPERTYPUT | ComTypes.INVOKEKIND.INVOKE_PROPERTYPUTREF)) == 0)
+                    && (
+                        flags
+                        & (
+                            ComTypes.INVOKEKIND.INVOKE_PROPERTYPUT
+                            | ComTypes.INVOKEKIND.INVOKE_PROPERTYPUTREF
+                        )
+                    ) == 0
+                )
                 {
                     // Re-invoke with no result argument to accomodate Word
-                    hresult = pfnIDispatchInvoke(dispatchPointer,
-                        memberDispId, &IID_NULL, 0, (ushort)ComTypes.INVOKEKIND.INVOKE_FUNC, pDispParams, null, pExcepInfo, pArgErr);
+                    hresult = pfnIDispatchInvoke(
+                        dispatchPointer,
+                        memberDispId,
+                        &IID_NULL,
+                        0,
+                        (ushort)ComTypes.INVOKEKIND.INVOKE_FUNC,
+                        pDispParams,
+                        null,
+                        pExcepInfo,
+                        pArgErr
+                    );
                 }
 
                 return hresult;
@@ -318,12 +388,23 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         // This method is intended for use through reflection and should not be used directly
-        public static IntPtr GetIdsOfNamedParameters(IDispatch dispatch, string[] names, int methodDispId, out GCHandle pinningHandle)
+        public static IntPtr GetIdsOfNamedParameters(
+            IDispatch dispatch,
+            string[] names,
+            int methodDispId,
+            out GCHandle pinningHandle
+        )
         {
             pinningHandle = GCHandle.Alloc(null, GCHandleType.Pinned);
             int[] dispIds = new int[names.Length];
             Guid empty = Guid.Empty;
-            int hresult = dispatch.TryGetIDsOfNames(ref empty, names, (uint)names.Length, 0, dispIds);
+            int hresult = dispatch.TryGetIDsOfNames(
+                ref empty,
+                names,
+                (uint)names.Length,
+                0,
+                dispIds
+            );
             if (hresult < 0)
             {
                 Marshal.ThrowExceptionForHR(hresult);
@@ -360,14 +441,16 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     if (s_dynamicModule == null)
                     {
                         string name = typeof(VariantArray).Namespace + ".DynamicAssembly";
-                        var assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(name), AssemblyBuilderAccess.Run);
+                        var assembly = AssemblyBuilder.DefineDynamicAssembly(
+                            new AssemblyName(name),
+                            AssemblyBuilderAccess.Run
+                        );
                         s_dynamicModule = assembly.DefineDynamicModule(name);
                     }
                     return s_dynamicModule;
                 }
             }
         }
-
         #endregion
     }
 }

@@ -27,7 +27,9 @@ namespace System.Threading
             Debug.Assert(timeoutMs >= -1);
 
             int waitResult = WaitNative(_semaphore!.SafeWaitHandle, timeoutMs);
-            Debug.Assert(waitResult == WaitHandle.WaitSuccess || waitResult == WaitHandle.WaitTimeout);
+            Debug.Assert(
+                waitResult == WaitHandle.WaitSuccess || waitResult == WaitHandle.WaitTimeout
+            );
             return waitResult == WaitHandle.WaitSuccess;
         }
 

@@ -32,7 +32,12 @@ namespace Microsoft.AspNetCore.StaticFiles
         /// <param name="hostingEnv">The <see cref="IWebHostEnvironment"/> used by this middleware.</param>
         /// <param name="options">The configuration options.</param>
         /// <param name="loggerFactory">An <see cref="ILoggerFactory"/> instance used to create loggers.</param>
-        public StaticFileMiddleware(RequestDelegate next, IWebHostEnvironment hostingEnv, IOptions<StaticFileOptions> options, ILoggerFactory loggerFactory)
+        public StaticFileMiddleware(
+            RequestDelegate next,
+            IWebHostEnvironment hostingEnv,
+            IOptions<StaticFileOptions> options,
+            ILoggerFactory loggerFactory
+        )
         {
             if (next == null)
             {
@@ -56,7 +61,8 @@ namespace Microsoft.AspNetCore.StaticFiles
 
             _next = next;
             _options = options.Value;
-            _contentTypeProvider = _options.ContentTypeProvider ?? new FileExtensionContentTypeProvider();
+            _contentTypeProvider =
+                _options.ContentTypeProvider ?? new FileExtensionContentTypeProvider();
             _fileProvider = _options.FileProvider ?? Helpers.ResolveFileProvider(hostingEnv);
             _matchUrl = _options.RequestPath;
             _logger = loggerFactory.CreateLogger<StaticFileMiddleware>();
@@ -81,7 +87,9 @@ namespace Microsoft.AspNetCore.StaticFiles
             {
                 _logger.PathMismatch(subPath);
             }
-            else if (!LookupContentType(_contentTypeProvider, _options, subPath, out var contentType))
+            else if (
+                !LookupContentType(_contentTypeProvider, _options, subPath, out var contentType)
+            )
             {
                 _logger.FileTypeNotSupported(subPath);
             }
@@ -95,16 +103,26 @@ namespace Microsoft.AspNetCore.StaticFiles
         }
 
         // Return true because we only want to run if there is no endpoint.
-        private static bool ValidateNoEndpoint(HttpContext context) => context.GetEndpoint() == null;
+        private static bool ValidateNoEndpoint(HttpContext context) =>
+            context.GetEndpoint() == null;
 
         private static bool ValidateMethod(HttpContext context)
         {
             return Helpers.IsGetOrHeadMethod(context.Request.Method);
         }
 
-        internal static bool ValidatePath(HttpContext context, PathString matchUrl, out PathString subPath) => Helpers.TryMatchPath(context, matchUrl, forDirectory: false, out subPath);
+        internal static bool ValidatePath(
+            HttpContext context,
+            PathString matchUrl,
+            out PathString subPath
+        ) => Helpers.TryMatchPath(context, matchUrl, forDirectory: false, out subPath);
 
-        internal static bool LookupContentType(IContentTypeProvider contentTypeProvider, StaticFileOptions options, PathString subPath, out string? contentType)
+        internal static bool LookupContentType(
+            IContentTypeProvider contentTypeProvider,
+            StaticFileOptions options,
+            PathString subPath,
+            out string? contentType
+        )
         {
             if (contentTypeProvider.TryGetContentType(subPath.Value!, out contentType))
             {
@@ -120,9 +138,20 @@ namespace Microsoft.AspNetCore.StaticFiles
             return false;
         }
 
-        private Task TryServeStaticFile(HttpContext context, string? contentType, PathString subPath)
+        private Task TryServeStaticFile(
+            HttpContext context,
+            string? contentType,
+            PathString subPath
+        )
         {
-            var fileContext = new StaticFileContext(context, _options, _logger, _fileProvider, contentType, subPath);
+            var fileContext = new StaticFileContext(
+                context,
+                _options,
+                _logger,
+                _fileProvider,
+                contentType,
+                subPath
+            );
 
             if (!fileContext.LookupFileInfo())
             {

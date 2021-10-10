@@ -43,7 +43,12 @@ namespace System.Xml
 
         // Writes out the DOCTYPE declaration with the specified name and optional attributes.
 
-        public virtual Task WriteDocTypeAsync(string name, string? pubid, string? sysid, string? subset)
+        public virtual Task WriteDocTypeAsync(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        )
         {
             throw new NotImplementedException();
         }
@@ -70,12 +75,18 @@ namespace System.Xml
         }
 
         // Writes out the attribute with the specified prefix, LocalName, NamespaceURI and value.
-        public Task WriteAttributeStringAsync(string? prefix, string localName, string? ns, string? value)
+        public Task WriteAttributeStringAsync(
+            string? prefix,
+            string localName,
+            string? ns,
+            string? value
+        )
         {
             Task task = WriteStartAttributeAsync(prefix, localName, ns);
             if (task.IsSuccess())
             {
-                return WriteStringAsync(value).CallTaskFuncWhenFinishAsync(thisRef => thisRef.WriteEndAttributeAsync(), this);
+                return WriteStringAsync(value)
+                    .CallTaskFuncWhenFinishAsync(thisRef => thisRef.WriteEndAttributeAsync(), this);
             }
             else
             {
@@ -92,7 +103,11 @@ namespace System.Xml
 
         // Writes the start of an attribute.
 
-        protected internal virtual Task WriteStartAttributeAsync(string? prefix, string localName, string? ns)
+        protected internal virtual Task WriteStartAttributeAsync(
+            string? prefix,
+            string localName,
+            string? ns
+        )
         {
             throw new NotImplementedException();
         }
@@ -211,7 +226,9 @@ namespace System.Xml
             {
                 throw new ArgumentException(SR.Xml_EmptyName);
             }
-            return WriteStringAsync(XmlConvert.VerifyNMTOKEN(name, ExceptionType.ArgumentException));
+            return WriteStringAsync(
+                XmlConvert.VerifyNMTOKEN(name, ExceptionType.ArgumentException)
+            );
         }
 
         // Writes out the specified name, ensuring it is a valid Name according to the XML specification
@@ -247,7 +264,10 @@ namespace System.Xml
                 throw new ArgumentNullException(nameof(reader));
             }
 
-            if (reader.NodeType == XmlNodeType.Element || reader.NodeType == XmlNodeType.XmlDeclaration)
+            if (
+                reader.NodeType == XmlNodeType.Element
+                || reader.NodeType == XmlNodeType.XmlDeclaration
+            )
             {
                 if (reader.MoveToFirstAttribute())
                 {
@@ -267,7 +287,12 @@ namespace System.Xml
                     // If either of these is true and defattr=false, we should not write the attribute out
                     if (defattr || !reader.IsDefaultInternal)
                     {
-                        await WriteStartAttributeAsync(reader.Prefix, reader.LocalName, reader.NamespaceURI).ConfigureAwait(false);
+                        await WriteStartAttributeAsync(
+                                reader.Prefix,
+                                reader.LocalName,
+                                reader.NamespaceURI
+                            )
+                            .ConfigureAwait(false);
                         while (reader.ReadAttributeValue())
                         {
                             if (reader.NodeType == XmlNodeType.EntityReference)
@@ -281,8 +306,7 @@ namespace System.Xml
                         }
                         await WriteEndAttributeAsync().ConfigureAwait(false);
                     }
-                }
-                while (reader.MoveToNextAttribute());
+                } while (reader.MoveToNextAttribute());
             }
         }
 
@@ -305,7 +329,6 @@ namespace System.Xml
             }
         }
 
-
         // Copies the current node from the given reader to the writer (including child nodes), and if called on an element moves the XmlReader
         // to the corresponding end element.
         //use sync methods on the reader
@@ -318,7 +341,12 @@ namespace System.Xml
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        await WriteStartElementAsync(reader.Prefix, reader.LocalName, reader.NamespaceURI).ConfigureAwait(false);
+                        await WriteStartElementAsync(
+                                reader.Prefix,
+                                reader.LocalName,
+                                reader.NamespaceURI
+                            )
+                            .ConfigureAwait(false);
                         await WriteAttributesAsync(reader, defattr).ConfigureAwait(false);
                         if (reader.IsEmptyElement)
                         {
@@ -334,9 +362,18 @@ namespace System.Xml
                                 _writeNodeBuffer = new char[WriteNodeBufferSize];
                             }
                             int read;
-                            while ((read = reader.ReadValueChunk(_writeNodeBuffer, 0, WriteNodeBufferSize)) > 0)
+                            while (
+                                (
+                                    read = reader.ReadValueChunk(
+                                        _writeNodeBuffer,
+                                        0,
+                                        WriteNodeBufferSize
+                                    )
+                                ) > 0
+                            )
                             {
-                                await this.WriteCharsAsync(_writeNodeBuffer, 0, read).ConfigureAwait(false);
+                                await this.WriteCharsAsync(_writeNodeBuffer, 0, read)
+                                    .ConfigureAwait(false);
                             }
                         }
                         else
@@ -356,10 +393,17 @@ namespace System.Xml
                         break;
                     case XmlNodeType.XmlDeclaration:
                     case XmlNodeType.ProcessingInstruction:
-                        await WriteProcessingInstructionAsync(reader.Name, reader.Value).ConfigureAwait(false);
+                        await WriteProcessingInstructionAsync(reader.Name, reader.Value)
+                            .ConfigureAwait(false);
                         break;
                     case XmlNodeType.DocumentType:
-                        await WriteDocTypeAsync(reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"), reader.Value).ConfigureAwait(false);
+                        await WriteDocTypeAsync(
+                                reader.Name,
+                                reader.GetAttribute("PUBLIC"),
+                                reader.GetAttribute("SYSTEM"),
+                                reader.Value
+                            )
+                            .ConfigureAwait(false);
                         break;
 
                     case XmlNodeType.Comment:
@@ -369,7 +413,13 @@ namespace System.Xml
                         await WriteFullEndElementAsync().ConfigureAwait(false);
                         break;
                 }
-            } while (reader.Read() && (d < reader.Depth || (d == reader.Depth && reader.NodeType == XmlNodeType.EndElement)));
+            } while (
+                reader.Read()
+                && (
+                    d < reader.Depth
+                    || (d == reader.Depth && reader.NodeType == XmlNodeType.EndElement)
+                )
+            );
         }
 
         // Copies the current node from the given reader to the writer (including child nodes), and if called on an element moves the XmlReader
@@ -384,7 +434,12 @@ namespace System.Xml
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        await WriteStartElementAsync(reader.Prefix, reader.LocalName, reader.NamespaceURI).ConfigureAwait(false);
+                        await WriteStartElementAsync(
+                                reader.Prefix,
+                                reader.LocalName,
+                                reader.NamespaceURI
+                            )
+                            .ConfigureAwait(false);
                         await WriteAttributesAsync(reader, defattr).ConfigureAwait(false);
                         if (reader.IsEmptyElement)
                         {
@@ -400,20 +455,36 @@ namespace System.Xml
                                 _writeNodeBuffer = new char[WriteNodeBufferSize];
                             }
                             int read;
-                            while ((read = await reader.ReadValueChunkAsync(_writeNodeBuffer, 0, WriteNodeBufferSize).ConfigureAwait(false)) > 0)
+                            while (
+                                (
+                                    read = await reader.ReadValueChunkAsync(
+                                            _writeNodeBuffer,
+                                            0,
+                                            WriteNodeBufferSize
+                                        )
+                                        .ConfigureAwait(false)
+                                ) > 0
+                            )
                             {
-                                await this.WriteCharsAsync(_writeNodeBuffer, 0, read).ConfigureAwait(false);
+                                await this.WriteCharsAsync(_writeNodeBuffer, 0, read)
+                                    .ConfigureAwait(false);
                             }
                         }
                         else
                         {
                             //reader.Value may block on Text or WhiteSpace node, use GetValueAsync
-                            await WriteStringAsync(await reader.GetValueAsync().ConfigureAwait(false)).ConfigureAwait(false);
+                            await WriteStringAsync(
+                                    await reader.GetValueAsync().ConfigureAwait(false)
+                                )
+                                .ConfigureAwait(false);
                         }
                         break;
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
-                        await WriteWhitespaceAsync(await reader.GetValueAsync().ConfigureAwait(false)).ConfigureAwait(false);
+                        await WriteWhitespaceAsync(
+                                await reader.GetValueAsync().ConfigureAwait(false)
+                            )
+                            .ConfigureAwait(false);
                         break;
                     case XmlNodeType.CDATA:
                         await WriteCDataAsync(reader.Value).ConfigureAwait(false);
@@ -423,10 +494,17 @@ namespace System.Xml
                         break;
                     case XmlNodeType.XmlDeclaration:
                     case XmlNodeType.ProcessingInstruction:
-                        await WriteProcessingInstructionAsync(reader.Name, reader.Value).ConfigureAwait(false);
+                        await WriteProcessingInstructionAsync(reader.Name, reader.Value)
+                            .ConfigureAwait(false);
                         break;
                     case XmlNodeType.DocumentType:
-                        await WriteDocTypeAsync(reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"), reader.Value).ConfigureAwait(false);
+                        await WriteDocTypeAsync(
+                                reader.Name,
+                                reader.GetAttribute("PUBLIC"),
+                                reader.GetAttribute("SYSTEM"),
+                                reader.Value
+                            )
+                            .ConfigureAwait(false);
                         break;
 
                     case XmlNodeType.Comment:
@@ -436,7 +514,13 @@ namespace System.Xml
                         await WriteFullEndElementAsync().ConfigureAwait(false);
                         break;
                 }
-            } while (await reader.ReadAsync().ConfigureAwait(false) && (d < reader.Depth || (d == reader.Depth && reader.NodeType == XmlNodeType.EndElement)));
+            } while (
+                await reader.ReadAsync().ConfigureAwait(false)
+                && (
+                    d < reader.Depth
+                    || (d == reader.Depth && reader.NodeType == XmlNodeType.EndElement)
+                )
+            );
         }
 
         // Copies the current node from the given XPathNavigator to the writer (including child nodes).
@@ -458,7 +542,12 @@ namespace System.Xml
                 switch (nodeType)
                 {
                     case XPathNodeType.Element:
-                        await WriteStartElementAsync(navigator.Prefix, navigator.LocalName, navigator.NamespaceURI).ConfigureAwait(false);
+                        await WriteStartElementAsync(
+                                navigator.Prefix,
+                                navigator.LocalName,
+                                navigator.NamespaceURI
+                            )
+                            .ConfigureAwait(false);
 
                         // Copy attributes
                         if (navigator.MoveToFirstAttribute())
@@ -468,7 +557,12 @@ namespace System.Xml
                                 IXmlSchemaInfo? schemaInfo = navigator.SchemaInfo;
                                 if (defattr || (schemaInfo == null || !schemaInfo.IsDefault))
                                 {
-                                    await WriteStartAttributeAsync(navigator.Prefix, navigator.LocalName, navigator.NamespaceURI).ConfigureAwait(false);
+                                    await WriteStartAttributeAsync(
+                                            navigator.Prefix,
+                                            navigator.LocalName,
+                                            navigator.NamespaceURI
+                                        )
+                                        .ConfigureAwait(false);
                                     // copy string value to writer
                                     await WriteStringAsync(navigator.Value).ConfigureAwait(false);
                                     await WriteEndAttributeAsync().ConfigureAwait(false);
@@ -502,7 +596,8 @@ namespace System.Xml
                         await WriteCommentAsync(navigator.Value).ConfigureAwait(false);
                         break;
                     case XPathNodeType.ProcessingInstruction:
-                        await WriteProcessingInstructionAsync(navigator.LocalName, navigator.Value).ConfigureAwait(false);
+                        await WriteProcessingInstructionAsync(navigator.LocalName, navigator.Value)
+                            .ConfigureAwait(false);
                         break;
                     case XPathNodeType.Namespace:
                         // do nothing on root level namespace
@@ -566,7 +661,12 @@ namespace System.Xml
         // Element Helper Methods
 
         // Writes out an attribute with the specified name, namespace URI, and string value.
-        public async Task WriteElementStringAsync(string? prefix, string localName, string? ns, string value)
+        public async Task WriteElementStringAsync(
+            string? prefix,
+            string localName,
+            string? ns,
+            string value
+        )
         {
             await WriteStartElementAsync(prefix, localName, ns).ConfigureAwait(false);
             if (null != value && 0 != value.Length)
@@ -590,11 +690,13 @@ namespace System.Xml
 
             if (prefix.Length == 0)
             {
-                await WriteAttributeStringAsync(string.Empty, "xmlns", XmlReservedNs.NsXmlNs, ns).ConfigureAwait(false);
+                await WriteAttributeStringAsync(string.Empty, "xmlns", XmlReservedNs.NsXmlNs, ns)
+                    .ConfigureAwait(false);
             }
             else
             {
-                await WriteAttributeStringAsync("xmlns", prefix, XmlReservedNs.NsXmlNs, ns).ConfigureAwait(false);
+                await WriteAttributeStringAsync("xmlns", prefix, XmlReservedNs.NsXmlNs, ns)
+                    .ConfigureAwait(false);
             }
         }
 

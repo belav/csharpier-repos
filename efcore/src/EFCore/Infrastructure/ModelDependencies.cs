@@ -53,8 +53,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public ModelDependencies(
-            IDiagnosticsLogger<DbLoggerCategory.Model> logger)
+        public ModelDependencies(IDiagnosticsLogger<DbLoggerCategory.Model> logger)
         {
             Check.NotNull(logger, nameof(logger));
 

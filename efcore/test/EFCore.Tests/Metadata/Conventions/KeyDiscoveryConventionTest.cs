@@ -39,7 +39,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Primary_key_is_set_when_shadow_property_not_defined_by_convention_matches()
         {
             var entityBuilder = CreateInternalEntityBuilder<EntityWithNoId>();
-            var propertyBuilder = entityBuilder.Property(typeof(int), "Id", ConfigurationSource.DataAnnotation);
+            var propertyBuilder = entityBuilder.Property(
+                typeof(int),
+                "Id",
+                ConfigurationSource.DataAnnotation
+            );
 
             RunConvention(propertyBuilder);
 
@@ -52,7 +56,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Primary_key_is_not_set_when_shadow_property_defined_by_convention_matches()
         {
             var entityBuilder = CreateInternalEntityBuilder<EntityWithNoId>();
-            var propertyBuilder = entityBuilder.Property(typeof(int), "Id", ConfigurationSource.Convention);
+            var propertyBuilder = entityBuilder.Property(
+                typeof(int),
+                "Id",
+                ConfigurationSource.Convention
+            );
 
             RunConvention(propertyBuilder);
 
@@ -131,17 +139,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var logEntry = ListLoggerFactory.Log.Single();
             Assert.Equal(LogLevel.Debug, logEntry.Level);
             Assert.Equal(
-                CoreResources.LogMultiplePrimaryKeyCandidates(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-                    nameof(EntityWithMultipleIds.ID), nameof(EntityWithMultipleIds.Id), nameof(EntityWithMultipleIds)), logEntry.Message);
+                CoreResources.LogMultiplePrimaryKeyCandidates(
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
+                    .GenerateMessage(
+                        nameof(EntityWithMultipleIds.ID),
+                        nameof(EntityWithMultipleIds.Id),
+                        nameof(EntityWithMultipleIds)
+                    ),
+                logEntry.Message
+            );
         }
 
-        public ListLoggerFactory ListLoggerFactory { get; }
-            = new(l => l == DbLoggerCategory.Model.Name);
+        public ListLoggerFactory ListLoggerFactory { get; } =
+            new(l => l == DbLoggerCategory.Model.Name);
 
         private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
         {
             var context = new ConventionContext<IConventionEntityTypeBuilder>(
-                entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+                entityTypeBuilder.Metadata.Model.ConventionDispatcher
+            );
 
             CreateKeyDiscoveryConvention().ProcessEntityTypeAdded(entityTypeBuilder, context);
         }
@@ -149,29 +166,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void RunConvention(InternalPropertyBuilder propertyBuilder)
         {
             var context = new ConventionContext<IConventionPropertyBuilder>(
-                propertyBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher);
+                propertyBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
+            );
 
             CreateKeyDiscoveryConvention().ProcessPropertyAdded(propertyBuilder, context);
         }
 
-        private KeyDiscoveryConvention CreateKeyDiscoveryConvention()
-            => new(CreateDependencies());
+        private KeyDiscoveryConvention CreateKeyDiscoveryConvention() => new(CreateDependencies());
 
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>()
-                with { Logger = CreateLogger()};
+        private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            InMemoryTestHelpers.Instance.CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
+            {
+                Logger = CreateLogger()
+            };
 
         private DiagnosticsLogger<DbLoggerCategory.Model> CreateLogger()
         {
             ListLoggerFactory.Clear();
             var options = new LoggingOptions();
-            options.Initialize(new DbContextOptionsBuilder().EnableSensitiveDataLogging(false).Options);
+            options.Initialize(
+                new DbContextOptionsBuilder().EnableSensitiveDataLogging(false).Options
+            );
             var modelLogger = new DiagnosticsLogger<DbLoggerCategory.Model>(
                 ListLoggerFactory,
                 options,
                 new DiagnosticListener("Fake"),
                 new TestLoggingDefinitions(),
-                new NullDbContextLogger());
+                new NullDbContextLogger()
+            );
             return modelLogger;
         }
 
@@ -180,9 +203,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = new InternalModelBuilder(new Model());
             var entityBuilder = modelBuilder.Entity(typeof(T), ConfigurationSource.Convention);
 
-            var context = new ConventionContext<IConventionEntityTypeBuilder>(modelBuilder.Metadata.ConventionDispatcher);
-            new PropertyDiscoveryConvention(CreateDependencies())
-                .ProcessEntityTypeAdded(entityBuilder, context);
+            var context = new ConventionContext<IConventionEntityTypeBuilder>(
+                modelBuilder.Metadata.ConventionDispatcher
+            );
+            new PropertyDiscoveryConvention(CreateDependencies()).ProcessEntityTypeAdded(
+                entityBuilder,
+                context
+            );
 
             return entityBuilder;
         }

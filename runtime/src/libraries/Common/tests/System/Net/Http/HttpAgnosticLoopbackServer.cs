@@ -36,12 +36,19 @@ namespace System.Net.Test.Common
         private HttpAgnosticLoopbackServer(HttpAgnosticOptions options)
         {
             _options = options;
-            _listenSocket = new Socket(_options.Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            _listenSocket = new Socket(
+                _options.Address.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             _listenSocket.Bind(new IPEndPoint(_options.Address, 0));
             _listenSocket.Listen(_options.ListenBacklog);
 
             var localEndPoint = (IPEndPoint)_listenSocket.LocalEndPoint;
-            var host = _options.Address.AddressFamily == AddressFamily.InterNetworkV6 ? $"[{localEndPoint.Address}]" : localEndPoint.Address.ToString();
+            var host =
+                _options.Address.AddressFamily == AddressFamily.InterNetworkV6
+                    ? $"[{localEndPoint.Address}]"
+                    : localEndPoint.Address.ToString();
             var scheme = _options.UseSsl ? "https" : "http";
             _uri = new Uri($"{scheme}://{host}:{localEndPoint.Port}/");
         }
@@ -74,77 +81,134 @@ namespace System.Net.Test.Common
             {
                 if (_options.UseSsl)
                 {
-                    var sslStream = new SslStream(stream, false, delegate { return true; });
+                    var sslStream = new SslStream(
+                        stream,
+                        false,
+                        delegate
+                        {
+                            return true;
+                        }
+                    );
 
-                    using (X509Certificate2 cert = Configuration.Certificates.GetServerCertificate())
+                    using (
+                        X509Certificate2 cert = Configuration.Certificates.GetServerCertificate()
+                    )
                     {
-                        SslServerAuthenticationOptions sslOptions = new SslServerAuthenticationOptions();
+                        SslServerAuthenticationOptions sslOptions =
+                            new SslServerAuthenticationOptions();
 
                         sslOptions.EnabledSslProtocols = _options.SslProtocols;
                         sslOptions.ApplicationProtocols = _options.SslApplicationProtocols;
                         sslOptions.ServerCertificate = cert;
 
-                        await sslStream.AuthenticateAsServerAsync(sslOptions, CancellationToken.None).ConfigureAwait(false);
+                        await sslStream.AuthenticateAsServerAsync(
+                                sslOptions,
+                                CancellationToken.None
+                            )
+                            .ConfigureAwait(false);
                     }
 
                     stream = sslStream;
                     if (sslStream.NegotiatedApplicationProtocol == SslApplicationProtocol.Http2)
                     {
                         // Do not pass original options so the CreateConnectionAsync won't try to do ALPN again.
-                        return connection = await Http2LoopbackServerFactory.Singleton.CreateConnectionAsync(socket, stream, options).ConfigureAwait(false);
+                        return connection =
+                            await Http2LoopbackServerFactory.Singleton.CreateConnectionAsync(
+                                    socket,
+                                    stream,
+                                    options
+                                )
+                                .ConfigureAwait(false);
                     }
-                    if (sslStream.NegotiatedApplicationProtocol == SslApplicationProtocol.Http11 ||
-                        sslStream.NegotiatedApplicationProtocol == default)
+                    if (
+                        sslStream.NegotiatedApplicationProtocol == SslApplicationProtocol.Http11
+                        || sslStream.NegotiatedApplicationProtocol == default
+                    )
                     {
                         // Do not pass original options so the CreateConnectionAsync won't try to do ALPN again.
-                        return connection = await Http11LoopbackServerFactory.Singleton.CreateConnectionAsync(socket, stream, options).ConfigureAwait(false);
+                        return connection =
+                            await Http11LoopbackServerFactory.Singleton.CreateConnectionAsync(
+                                    socket,
+                                    stream,
+                                    options
+                                )
+                                .ConfigureAwait(false);
                     }
                     else
                     {
-                        throw new Exception($"Unsupported negotiated protocol {sslStream.NegotiatedApplicationProtocol}");
+                        throw new Exception(
+                            $"Unsupported negotiated protocol {sslStream.NegotiatedApplicationProtocol}"
+                        );
                     }
                 }
 
                 if (_options.ClearTextVersion is null)
                 {
-                    throw new Exception($"HTTP server does not accept clear text connections, either set '{nameof(HttpAgnosticOptions.UseSsl)}' or set up '{nameof(HttpAgnosticOptions.ClearTextVersion)}' in server options.");
+                    throw new Exception(
+                        $"HTTP server does not accept clear text connections, either set '{nameof(HttpAgnosticOptions.UseSsl)}' or set up '{nameof(HttpAgnosticOptions.ClearTextVersion)}' in server options."
+                    );
                 }
 
                 var buffer = new byte[24];
                 var position = 0;
                 while (position < buffer.Length)
                 {
-                    var readBytes = await stream.ReadAsync(buffer, position, buffer.Length - position).ConfigureAwait(false);
+                    var readBytes = await stream.ReadAsync(
+                            buffer,
+                            position,
+                            buffer.Length - position
+                        )
+                        .ConfigureAwait(false);
                     if (readBytes == 0)
                     {
                         break;
                     }
                     position += readBytes;
                 }
-                
+
                 var memory = new Memory<byte>(buffer, 0, position);
                 stream = new ReturnBufferStream(stream, memory);
 
                 var prefix = Text.Encoding.ASCII.GetString(memory.Span);
                 if (prefix == Http2LoopbackConnection.Http2Prefix)
                 {
-                    if (_options.ClearTextVersion == HttpVersion.Version20 || _options.ClearTextVersion == HttpVersion.Unknown)
+                    if (
+                        _options.ClearTextVersion == HttpVersion.Version20
+                        || _options.ClearTextVersion == HttpVersion.Unknown
+                    )
                     {
-                        return connection = await Http2LoopbackServerFactory.Singleton.CreateConnectionAsync(socket, stream, options).ConfigureAwait(false);
+                        return connection =
+                            await Http2LoopbackServerFactory.Singleton.CreateConnectionAsync(
+                                    socket,
+                                    stream,
+                                    options
+                                )
+                                .ConfigureAwait(false);
                     }
                 }
                 else
                 {
-                    if (_options.ClearTextVersion == HttpVersion.Version11 || _options.ClearTextVersion == HttpVersion.Unknown)
+                    if (
+                        _options.ClearTextVersion == HttpVersion.Version11
+                        || _options.ClearTextVersion == HttpVersion.Unknown
+                    )
                     {
-                        return connection = await Http11LoopbackServerFactory.Singleton.CreateConnectionAsync(socket, stream, options).ConfigureAwait(false);
+                        return connection =
+                            await Http11LoopbackServerFactory.Singleton.CreateConnectionAsync(
+                                    socket,
+                                    stream,
+                                    options
+                                )
+                                .ConfigureAwait(false);
                     }
                 }
 
-                throw new Exception($"HTTP/{_options.ClearTextVersion} server cannot establish connection due to unexpected data: '{prefix}'");
+                throw new Exception(
+                    $"HTTP/{_options.ClearTextVersion} server cannot establish connection due to unexpected data: '{prefix}'"
+                );
             }
             catch
-            {            
+            {
                 connection?.Dispose();
                 connection = null;
                 stream.Dispose();
@@ -159,35 +223,62 @@ namespace System.Net.Test.Common
             }
         }
 
-        public override async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
+        public override async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = ""
+        )
         {
-            using (GenericLoopbackConnection connection = await EstablishGenericConnectionAsync().ConfigureAwait(false))
+            using (
+                GenericLoopbackConnection connection = await EstablishGenericConnectionAsync()
+                    .ConfigureAwait(false)
+            )
             {
-                return await connection.HandleRequestAsync(statusCode, headers, content).ConfigureAwait(false);
+                return await connection.HandleRequestAsync(statusCode, headers, content)
+                    .ConfigureAwait(false);
             }
         }
 
-        public override async Task AcceptConnectionAsync(Func<GenericLoopbackConnection, Task> funcAsync)
+        public override async Task AcceptConnectionAsync(
+            Func<GenericLoopbackConnection, Task> funcAsync
+        )
         {
-            using (GenericLoopbackConnection connection = await EstablishGenericConnectionAsync().ConfigureAwait(false))
+            using (
+                GenericLoopbackConnection connection = await EstablishGenericConnectionAsync()
+                    .ConfigureAwait(false)
+            )
             {
                 await funcAsync(connection).ConfigureAwait(false);
             }
         }
 
-        public static Task CreateClientAndServerAsync(Func<Uri, Task> clientFunc, Func<GenericLoopbackServer, Task> serverFunc, int timeout = 60_000)
+        public static Task CreateClientAndServerAsync(
+            Func<Uri, Task> clientFunc,
+            Func<GenericLoopbackServer, Task> serverFunc,
+            int timeout = 60_000
+        )
         {
             return CreateClientAndServerAsync(clientFunc, serverFunc, null, timeout);
         }
 
-        public static async Task CreateClientAndServerAsync(Func<Uri, Task> clientFunc, Func<GenericLoopbackServer, Task> serverFunc, HttpAgnosticOptions httpOptions, int timeout = 60_000)
+        public static async Task CreateClientAndServerAsync(
+            Func<Uri, Task> clientFunc,
+            Func<GenericLoopbackServer, Task> serverFunc,
+            HttpAgnosticOptions httpOptions,
+            int timeout = 60_000
+        )
         {
-            using (var server = HttpAgnosticLoopbackServer.CreateServer(httpOptions ?? new HttpAgnosticOptions()))
+            using (
+                var server = HttpAgnosticLoopbackServer.CreateServer(
+                    httpOptions ?? new HttpAgnosticOptions()
+                )
+            )
             {
                 Task clientTask = clientFunc(server.Address);
                 Task serverTask = serverFunc(server);
 
-                await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed(timeout).ConfigureAwait(false);
+                await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed(timeout)
+                    .ConfigureAwait(false);
             }
         }
     }
@@ -202,13 +293,18 @@ namespace System.Net.Test.Common
 
     public sealed class HttpAgnosticLoopbackServerFactory : LoopbackServerFactory
     {
-        public static readonly HttpAgnosticLoopbackServerFactory Singleton = new HttpAgnosticLoopbackServerFactory();
+        public static readonly HttpAgnosticLoopbackServerFactory Singleton =
+            new HttpAgnosticLoopbackServerFactory();
 
-        public static async Task CreateServerAsync(Func<HttpAgnosticLoopbackServer, Uri, Task> funcAsync, int millisecondsTimeout = 60_000)
+        public static async Task CreateServerAsync(
+            Func<HttpAgnosticLoopbackServer, Uri, Task> funcAsync,
+            int millisecondsTimeout = 60_000
+        )
         {
             using (var server = HttpAgnosticLoopbackServer.CreateServer())
             {
-                await funcAsync(server, server.Address).WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
+                await funcAsync(server, server.Address)
+                    .WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
             }
         }
 
@@ -217,10 +313,16 @@ namespace System.Net.Test.Common
             return HttpAgnosticLoopbackServer.CreateServer(CreateOptions(options));
         }
 
-        public override Task<GenericLoopbackConnection> CreateConnectionAsync(Socket socket, Stream stream, GenericLoopbackOptions options = null)
+        public override Task<GenericLoopbackConnection> CreateConnectionAsync(
+            Socket socket,
+            Stream stream,
+            GenericLoopbackOptions options = null
+        )
         {
             // This method is always unacceptable to call for an agnostic server.
-            throw new NotImplementedException("HttpAgnosticLoopbackServerFactory cannot create connection.");
+            throw new NotImplementedException(
+                "HttpAgnosticLoopbackServerFactory cannot create connection."
+            );
         }
 
         private static HttpAgnosticOptions CreateOptions(GenericLoopbackOptions options)
@@ -236,11 +338,16 @@ namespace System.Net.Test.Common
             return httpOptions;
         }
 
-        public override async Task CreateServerAsync(Func<GenericLoopbackServer, Uri, Task> funcAsync, int millisecondsTimeout = 60_000, GenericLoopbackOptions options = null)
+        public override async Task CreateServerAsync(
+            Func<GenericLoopbackServer, Uri, Task> funcAsync,
+            int millisecondsTimeout = 60_000,
+            GenericLoopbackOptions options = null
+        )
         {
             using (var server = CreateServer(options))
             {
-                await funcAsync(server, server.Address).WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
+                await funcAsync(server, server.Address)
+                    .WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
             }
         }
 
@@ -283,11 +390,16 @@ namespace System.Net.Test.Common
         public override bool CanSeek => _stream.CanSeek;
         public override bool CanWrite => _stream.CanWrite;
         public override long Length => _stream.Length;
-        public override long Position { get => _stream.Position; set => _stream.Position = value; }
+        public override long Position
+        {
+            get => _stream.Position;
+            set => _stream.Position = value;
+        }
         public override void Flush() => _stream.Flush();
         public override long Seek(long offset, SeekOrigin origin) => _stream.Seek(offset, origin);
         public override void SetLength(long value) => _stream.SetLength(value);
-        public override void Write(byte[] buffer, int offset, int count) => _stream.Write(buffer, offset, count);
+        public override void Write(byte[] buffer, int offset, int count) =>
+            _stream.Write(buffer, offset, count);
 
         protected override void Dispose(bool disposing)
         {

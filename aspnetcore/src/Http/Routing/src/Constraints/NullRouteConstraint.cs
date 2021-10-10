@@ -9,11 +9,15 @@ namespace Microsoft.AspNetCore.Routing.Constraints
     {
         public static readonly NullRouteConstraint Instance = new NullRouteConstraint();
 
-        private NullRouteConstraint()
-        {
-        }
+        private NullRouteConstraint() { }
 
-        public bool Match(HttpContext? httpContext, IRouter? route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
+        public bool Match(
+            HttpContext? httpContext,
+            IRouter? route,
+            string routeKey,
+            RouteValueDictionary values,
+            RouteDirection routeDirection
+        )
         {
             return true;
         }

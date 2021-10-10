@@ -39,7 +39,10 @@ namespace Microsoft.AspNetCore.Components.Forms
 
         private sealed class DataAnnotationsEventSubscriptions : IDisposable
         {
-            private static readonly ConcurrentDictionary<(Type ModelType, string FieldName), PropertyInfo?> _propertyInfoCache = new();
+            private static readonly ConcurrentDictionary<
+                (Type ModelType, string FieldName),
+                PropertyInfo?
+            > _propertyInfoCache = new();
 
             private readonly EditContext _editContext;
             private readonly ValidationMessageStore _messages;
@@ -79,7 +82,12 @@ namespace Microsoft.AspNetCore.Components.Forms
             {
                 var validationContext = new ValidationContext(_editContext.Model);
                 var validationResults = new List<ValidationResult>();
-                Validator.TryValidateObject(_editContext.Model, validationContext, validationResults, true);
+                Validator.TryValidateObject(
+                    _editContext.Model,
+                    validationContext,
+                    validationResults,
+                    true
+                );
 
                 // Transfer results to the ValidationMessageStore
                 _messages.Clear();
@@ -92,13 +100,19 @@ namespace Microsoft.AspNetCore.Components.Forms
 
                     if (!validationResult.MemberNames.Any())
                     {
-                        _messages.Add(new FieldIdentifier(_editContext.Model, fieldName: string.Empty), validationResult.ErrorMessage!);
+                        _messages.Add(
+                            new FieldIdentifier(_editContext.Model, fieldName: string.Empty),
+                            validationResult.ErrorMessage!
+                        );
                         continue;
                     }
 
                     foreach (var memberName in validationResult.MemberNames)
                     {
-                        _messages.Add(_editContext.Field(memberName), validationResult.ErrorMessage!);
+                        _messages.Add(
+                            _editContext.Field(memberName),
+                            validationResult.ErrorMessage!
+                        );
                     }
                 }
 
@@ -113,9 +127,15 @@ namespace Microsoft.AspNetCore.Components.Forms
                 _editContext.NotifyValidationStateChanged();
             }
 
-            private static bool TryGetValidatableProperty(in FieldIdentifier fieldIdentifier, [NotNullWhen(true)] out PropertyInfo? propertyInfo)
+            private static bool TryGetValidatableProperty(
+                in FieldIdentifier fieldIdentifier,
+                [NotNullWhen(true)] out PropertyInfo? propertyInfo
+            )
             {
-                var cacheKey = (ModelType: fieldIdentifier.Model.GetType(), fieldIdentifier.FieldName);
+                var cacheKey = (
+                    ModelType: fieldIdentifier.Model.GetType(),
+                    fieldIdentifier.FieldName
+                );
                 if (!_propertyInfoCache.TryGetValue(cacheKey, out propertyInfo))
                 {
                     // DataAnnotations only validates public properties, so that's all we'll look for

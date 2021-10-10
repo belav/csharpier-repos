@@ -21,17 +21,15 @@ namespace Microsoft.CodeAnalysis.CSharp.FileHeaders
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFileHeaderCodeFixProvider()
-        {
-        }
+        public CSharpFileHeaderCodeFixProvider() { }
 
-        protected override AbstractFileHeaderHelper FileHeaderHelper => CSharpFileHeaderHelper.Instance;
+        protected override AbstractFileHeaderHelper FileHeaderHelper =>
+            CSharpFileHeaderHelper.Instance;
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 
         protected override ISyntaxKinds SyntaxKinds => CSharpSyntaxKinds.Instance;
 
-        protected override SyntaxTrivia EndOfLine(string text)
-            => SyntaxFactory.EndOfLine(text);
+        protected override SyntaxTrivia EndOfLine(string text) => SyntaxFactory.EndOfLine(text);
     }
 }

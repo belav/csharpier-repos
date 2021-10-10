@@ -23,10 +23,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         private readonly int _waitTime = (int)TimeSpan.FromSeconds(30).TotalMilliseconds;
         private Socket _portSelector;
 
-        public NginxDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-            : base(deploymentParameters, loggerFactory)
-        {
-        }
+        public NginxDeployer(
+            DeploymentParameters deploymentParameters,
+            ILoggerFactory loggerFactory
+        ) : base(deploymentParameters, loggerFactory) { }
 
         public override async Task<DeploymentResult> DeployAsync()
         {
@@ -34,9 +34,9 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             {
                 _configFile = Path.GetTempFileName();
 
-                var uri = string.IsNullOrEmpty(DeploymentParameters.ApplicationBaseUriHint) ?
-                    new Uri("http://localhost:0") :
-                    new Uri(DeploymentParameters.ApplicationBaseUriHint);
+                var uri = string.IsNullOrEmpty(DeploymentParameters.ApplicationBaseUriHint)
+                    ? new Uri("http://localhost:0")
+                    : new Uri(DeploymentParameters.ApplicationBaseUriHint);
 
                 if (uri.Port == 0)
                 {
@@ -45,7 +45,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     {
                         // This works with nginx 1.9.1 and later using the reuseport flag, available on Ubuntu 16.04.
                         // Keep it open so nobody else claims the port
-                        _portSelector = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                        _portSelector = new Socket(
+                            AddressFamily.InterNetwork,
+                            SocketType.Stream,
+                            ProtocolType.Tcp
+                        );
                         _portSelector.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                         builder.Port = ((IPEndPoint)_portSelector.LocalEndPoint).Port;
                     }
@@ -58,8 +62,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
                 var redirectUri = TestUriHelper.BuildTestUri(ServerType.Nginx);
 
-                if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
-                        && DeploymentParameters.ApplicationType == ApplicationType.Standalone)
+                if (
+                    DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
+                    && DeploymentParameters.ApplicationType == ApplicationType.Standalone
+                )
                 {
                     // Publish is required to get the correct files in the output directory
                     DeploymentParameters.PublishApplicationBeforeDeployment = true;
@@ -80,10 +86,14 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 // Target actual address to avoid going through Nginx proxy
                 using (var httpClient = new HttpClient())
                 {
-                    var response = await RetryHelper.RetryRequest(() =>
-                    {
-                        return httpClient.GetAsync(redirectUri);
-                    }, Logger, exitToken);
+                    var response = await RetryHelper.RetryRequest(
+                        () =>
+                        {
+                            return httpClient.GetAsync(redirectUri);
+                        },
+                        Logger,
+                        exitToken
+                    );
 
                     if (!response.IsSuccessStatusCode)
                     {
@@ -96,13 +106,15 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     DeploymentParameters,
                     applicationBaseUri: uri.ToString(),
                     contentRoot: DeploymentParameters.ApplicationPath,
-                    hostShutdownToken: exitToken);
+                    hostShutdownToken: exitToken
+                );
             }
         }
 
         private string GetUserName()
         {
-            var retVal = Environment.GetEnvironmentVariable("LOGNAME")
+            var retVal =
+                Environment.GetEnvironmentVariable("LOGNAME")
                 ?? Environment.GetEnvironmentVariable("USER")
                 ?? Environment.GetEnvironmentVariable("USERNAME");
 
@@ -113,14 +125,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
             if (!OperatingSystem.IsWindows())
             {
-                using (var process = new Process
-                {
-                    StartInfo =
+                using (
+                    var process = new Process
                     {
-                        FileName = "whoami",
-                        RedirectStandardOutput = true,
+                        StartInfo = { FileName = "whoami", RedirectStandardOutput = true, }
                     }
-                })
+                )
                 {
                     process.Start();
                     process.WaitForExit(10_000);
@@ -135,24 +145,44 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         {
             using (Logger.BeginScope("SetupNginx"))
             {
-                var userName = GetUserName() ?? throw new InvalidOperationException("Could not identify the current username");
+                var userName =
+                    GetUserName()
+                    ?? throw new InvalidOperationException(
+                        "Could not identify the current username"
+                    );
                 // copy nginx.conf template and replace pertinent information
-                var pidFile = Path.Combine(DeploymentParameters.ApplicationPath, $"{Guid.NewGuid()}.nginx.pid");
-                var errorLog = Path.Combine(DeploymentParameters.ApplicationPath, "nginx.error.log");
-                var accessLog = Path.Combine(DeploymentParameters.ApplicationPath, "nginx.access.log");
-                DeploymentParameters.ServerConfigTemplateContent = DeploymentParameters.ServerConfigTemplateContent
-                    .Replace("[user]", userName)
-                    .Replace("[errorlog]", errorLog)
-                    .Replace("[accesslog]", accessLog)
-                    .Replace("[listenPort]", originalUri.Port.ToString(CultureInfo.InvariantCulture) + (_portSelector != null ? " reuseport" : ""))
-                    .Replace("[redirectUri]", redirectUri)
-                    .Replace("[pidFile]", pidFile);
+                var pidFile = Path.Combine(
+                    DeploymentParameters.ApplicationPath,
+                    $"{Guid.NewGuid()}.nginx.pid"
+                );
+                var errorLog = Path.Combine(
+                    DeploymentParameters.ApplicationPath,
+                    "nginx.error.log"
+                );
+                var accessLog = Path.Combine(
+                    DeploymentParameters.ApplicationPath,
+                    "nginx.access.log"
+                );
+                DeploymentParameters.ServerConfigTemplateContent =
+                    DeploymentParameters.ServerConfigTemplateContent.Replace("[user]", userName)
+                        .Replace("[errorlog]", errorLog)
+                        .Replace("[accesslog]", accessLog)
+                        .Replace(
+                            "[listenPort]",
+                            originalUri.Port.ToString(CultureInfo.InvariantCulture)
+                                + (_portSelector != null ? " reuseport" : "")
+                        )
+                        .Replace("[redirectUri]", redirectUri)
+                        .Replace("[pidFile]", pidFile);
                 Logger.LogDebug("Using PID file: {pidFile}", pidFile);
                 Logger.LogDebug("Using Error Log file: {errorLog}", pidFile);
                 Logger.LogDebug("Using Access Log file: {accessLog}", pidFile);
                 if (Logger.IsEnabled(LogLevel.Trace))
                 {
-                    Logger.LogTrace($"Config File Content:{Environment.NewLine}===START CONFIG==={Environment.NewLine}{{configContent}}{Environment.NewLine}===END CONFIG===", DeploymentParameters.ServerConfigTemplateContent);
+                    Logger.LogTrace(
+                        $"Config File Content:{Environment.NewLine}===START CONFIG==={Environment.NewLine}{{configContent}}{Environment.NewLine}===END CONFIG===",
+                        DeploymentParameters.ServerConfigTemplateContent
+                    );
                 }
                 File.WriteAllText(_configFile, DeploymentParameters.ServerConfigTemplateContent);
 

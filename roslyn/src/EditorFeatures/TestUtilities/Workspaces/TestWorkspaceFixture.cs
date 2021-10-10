@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         private TestWorkspace _workspace;
         private TestHostDocument _currentDocument;
 
-        public TestHostDocument CurrentDocument => _currentDocument ?? _workspace.Documents.Single();
+        public TestHostDocument CurrentDocument =>
+            _currentDocument ?? _workspace.Documents.Single();
 
         public TestWorkspace GetWorkspace(ExportProvider exportProvider = null)
         {
@@ -31,7 +32,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             return _workspace;
         }
 
-        public TestWorkspace GetWorkspace(string markup, ExportProvider exportProvider = null, string workspaceKind = null)
+        public TestWorkspace GetWorkspace(
+            string markup,
+            ExportProvider exportProvider = null,
+            string workspaceKind = null
+        )
         {
             // If it looks like XML, we'll treat it as XML; any parse error would be rejected and will throw.
             // We'll do a case insensitive search here so if somebody has a lowercase W it'll be tried (and
@@ -41,7 +46,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 CloseTextView();
                 _workspace?.Dispose();
 
-                _workspace = TestWorkspace.CreateWorkspace(XElement.Parse(markup), exportProvider: exportProvider, workspaceKind: workspaceKind);
+                _workspace = TestWorkspace.CreateWorkspace(
+                    XElement.Parse(markup),
+                    exportProvider: exportProvider,
+                    workspaceKind: workspaceKind
+                );
                 _currentDocument = _workspace.Documents.First(d => d.CursorPosition.HasValue);
                 Position = _currentDocument.CursorPosition.Value;
                 Code = _currentDocument.GetTextBuffer().CurrentSnapshot.GetText();
@@ -71,13 +80,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 Position = 0;
                 _workspace?.Dispose();
             }
+
             finally
             {
                 _workspace = null;
             }
         }
 
-        public Document UpdateDocument(string text, SourceCodeKind sourceCodeKind, bool cleanBeforeUpdate = true)
+        public Document UpdateDocument(
+            string text,
+            SourceCodeKind sourceCodeKind,
+            bool cleanBeforeUpdate = true
+        )
         {
             var hostDocument = _currentDocument ?? (GetWorkspace()).Documents.Single();
 
@@ -119,9 +133,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             // The editor caches TextFormattingRunProperties instances for better perf, but since things like
             // Brushes are DispatcherObjects, they are tied to the thread they are created on. Since we're going
             // to be run on a different thread, clear out their collection.
-            var textFormattingRunPropertiesType = typeof(VisualStudio.Text.Formatting.TextFormattingRunProperties);
-            var existingPropertiesField = textFormattingRunPropertiesType.GetField("ExistingProperties", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-            var existingProperties = (List<VisualStudio.Text.Formatting.TextFormattingRunProperties>)existingPropertiesField.GetValue(null);
+            var textFormattingRunPropertiesType =
+                typeof(VisualStudio.Text.Formatting.TextFormattingRunProperties);
+            var existingPropertiesField = textFormattingRunPropertiesType.GetField(
+                "ExistingProperties",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static
+            );
+            var existingProperties =
+                (List<VisualStudio.Text.Formatting.TextFormattingRunProperties>)existingPropertiesField.GetValue(
+                    null
+                );
             existingProperties.Clear();
         }
     }

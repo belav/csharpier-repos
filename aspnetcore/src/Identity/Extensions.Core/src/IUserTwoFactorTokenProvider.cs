@@ -45,7 +45,12 @@ namespace Microsoft.AspNetCore.Identity
         /// of validating the <paramref name="token"> for the specified </paramref><paramref name="user"/> and <paramref name="purpose"/>.
         /// The task will return true if the token is valid, otherwise false.
         /// </returns>
-        Task<bool> ValidateAsync(string purpose, string token, UserManager<TUser> manager, TUser user);
+        Task<bool> ValidateAsync(
+            string purpose,
+            string token,
+            UserManager<TUser> manager,
+            TUser user
+        );
 
         /// <summary>
         /// Returns a flag indicating whether the token provider can generate a token suitable for two-factor authentication token for

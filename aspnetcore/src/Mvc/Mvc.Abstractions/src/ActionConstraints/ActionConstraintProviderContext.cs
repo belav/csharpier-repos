@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints
         public ActionConstraintProviderContext(
             HttpContext context,
             ActionDescriptor action,
-            IList<ActionConstraintItem> items)
+            IList<ActionConstraintItem> items
+        )
         {
             if (context == null)
             {

@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Routing
         {
             get
             {
-                Debug.Assert(_endpointDataSources != null, "Endpoint data sources should have been set in DI.");
+                Debug.Assert(
+                    _endpointDataSources != null,
+                    "Endpoint data sources should have been set in DI."
+                );
                 return _endpointDataSources;
             }
             set => _endpointDataSources = value;
@@ -72,10 +75,7 @@ namespace Microsoft.AspNetCore.Routing
         /// </summary>
         public IDictionary<string, Type> ConstraintMap
         {
-            get
-            {
-                return _constraintTypeMap;
-            }
+            get { return _constraintTypeMap; }
             set
             {
                 if (value == null)
@@ -125,7 +125,10 @@ namespace Microsoft.AspNetCore.Routing
         }
 
         // This API could be exposed on RouteOptions
-        private static void AddConstraint<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]TConstraint>(Dictionary<string, Type> constraintMap, string text) where TConstraint : IRouteConstraint
+        private static void AddConstraint<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                TConstraint
+        >(Dictionary<string, Type> constraintMap, string text) where TConstraint : IRouteConstraint
         {
             constraintMap[text] = typeof(TConstraint);
         }

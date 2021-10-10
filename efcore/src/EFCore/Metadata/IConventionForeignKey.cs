@@ -77,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IReadOnlyList<IConventionProperty> SetProperties(
             IReadOnlyList<IConventionProperty> properties,
             IConventionKey principalKey,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyForeignKey.Properties" />.
@@ -166,7 +167,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The configured behavior. </returns>
-        DeleteBehavior? SetDeleteBehavior(DeleteBehavior? deleteBehavior, bool fromDataAnnotation = false);
+        DeleteBehavior? SetDeleteBehavior(
+            DeleteBehavior? deleteBehavior,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyForeignKey.DeleteBehavior" />.
@@ -183,7 +187,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The newly created navigation property. </returns>
-        IConventionNavigation? SetDependentToPrincipal(string? name, bool fromDataAnnotation = false);
+        IConventionNavigation? SetDependentToPrincipal(
+            string? name,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets the navigation property on the dependent entity type that points to the principal entity.
@@ -194,7 +201,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The newly created navigation property. </returns>
-        IConventionNavigation? SetDependentToPrincipal(MemberInfo? property, bool fromDataAnnotation = false);
+        IConventionNavigation? SetDependentToPrincipal(
+            MemberInfo? property,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets the navigation property on the dependent entity type that points to the principal entity.
@@ -206,8 +216,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The newly created navigation property. </returns>
         [Obsolete("Use SetDependentToPrincipal")]
-        IConventionNavigation? HasDependentToPrincipal(string? name, bool fromDataAnnotation = false)
-            => SetDependentToPrincipal(name, fromDataAnnotation);
+        IConventionNavigation? HasDependentToPrincipal(
+            string? name,
+            bool fromDataAnnotation = false
+        ) => SetDependentToPrincipal(name, fromDataAnnotation);
 
         /// <summary>
         ///     Sets the navigation property on the dependent entity type that points to the principal entity.
@@ -219,8 +231,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The newly created navigation property. </returns>
         [Obsolete("Use SetDependentToPrincipal")]
-        IConventionNavigation? HasDependentToPrincipal(MemberInfo? property, bool fromDataAnnotation = false)
-            => SetDependentToPrincipal(property, fromDataAnnotation);
+        IConventionNavigation? HasDependentToPrincipal(
+            MemberInfo? property,
+            bool fromDataAnnotation = false
+        ) => SetDependentToPrincipal(property, fromDataAnnotation);
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyForeignKey.DependentToPrincipal" />.
@@ -237,7 +251,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The newly created navigation property. </returns>
-        IConventionNavigation? SetPrincipalToDependent(string? name, bool fromDataAnnotation = false);
+        IConventionNavigation? SetPrincipalToDependent(
+            string? name,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets the navigation property on the principal entity type that points to the dependent entity.
@@ -248,7 +265,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The newly created navigation property. </returns>
-        IConventionNavigation? SetPrincipalToDependent(MemberInfo? property, bool fromDataAnnotation = false);
+        IConventionNavigation? SetPrincipalToDependent(
+            MemberInfo? property,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets the navigation property on the principal entity type that points to the dependent entity.
@@ -260,8 +280,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The newly created navigation property. </returns>
         [Obsolete("Use SetPrincipalToDependent")]
-        IConventionNavigation? HasPrincipalToDependent(string? name, bool fromDataAnnotation = false)
-            => SetPrincipalToDependent(name, fromDataAnnotation);
+        IConventionNavigation? HasPrincipalToDependent(
+            string? name,
+            bool fromDataAnnotation = false
+        ) => SetPrincipalToDependent(name, fromDataAnnotation);
 
         /// <summary>
         ///     Sets the navigation property on the principal entity type that points to the dependent entity.
@@ -273,8 +295,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The newly created navigation property. </returns>
         [Obsolete("Use SetPrincipalToDependent")]
-        IConventionNavigation? HasPrincipalToDependent(MemberInfo? property, bool fromDataAnnotation = false)
-            => SetPrincipalToDependent(property, fromDataAnnotation);
+        IConventionNavigation? HasPrincipalToDependent(
+            MemberInfo? property,
+            bool fromDataAnnotation = false
+        ) => SetPrincipalToDependent(property, fromDataAnnotation);
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyForeignKey.PrincipalToDependent" />.
@@ -286,16 +310,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Gets all skip navigations using this foreign key.
         /// </summary>
         /// <returns> The skip navigations using this foreign key. </returns>
-        new IEnumerable<IConventionSkipNavigation> GetReferencingSkipNavigations()
-            => ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations().Cast<IConventionSkipNavigation>();
+        new IEnumerable<IConventionSkipNavigation> GetReferencingSkipNavigations() =>
+            ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations()
+                .Cast<IConventionSkipNavigation>();
 
         /// <summary>
         ///     Gets the entity type related to the given one.
         /// </summary>
         /// <param name="entityType"> One of the entity types related by the foreign key. </param>
         /// <returns> The entity type related to the given one. </returns>
-        new IConventionEntityType GetRelatedEntityType(IReadOnlyEntityType entityType)
-            => (IConventionEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
+        new IConventionEntityType GetRelatedEntityType(IReadOnlyEntityType entityType) =>
+            (IConventionEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
 
         /// <summary>
         ///     Returns a navigation associated with this foreign key.
@@ -306,7 +331,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     A navigation associated with this foreign key or <see langword="null" />.
         /// </returns>
-        new IConventionNavigation? GetNavigation(bool pointsToPrincipal)
-            => pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
+        new IConventionNavigation? GetNavigation(bool pointsToPrincipal) =>
+            pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
     }
 }

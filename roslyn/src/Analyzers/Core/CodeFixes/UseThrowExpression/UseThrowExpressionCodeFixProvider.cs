@@ -19,37 +19,48 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.UseThrowExpression
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp,
-        Name = PredefinedCodeFixProviderNames.UseThrowExpression), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseThrowExpression
+        ),
+        Shared
+    ]
     internal partial class UseThrowExpressionCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public UseThrowExpressionCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public UseThrowExpressionCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseThrowExpressionDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseThrowExpressionDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
-        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => !diagnostic.Descriptor.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary);
+        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+            !diagnostic.Descriptor.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(context.Document, diagnostic, c)),
-                diagnostic);
+                diagnostic
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             var generator = editor.Generator;
             var root = editor.OriginalRoot;
@@ -57,16 +68,22 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
             foreach (var diagnostic in diagnostics)
             {
                 var ifStatement = root.FindNode(diagnostic.AdditionalLocations[0].SourceSpan);
-                var throwStatementExpression = root.FindNode(diagnostic.AdditionalLocations[1].SourceSpan);
+                var throwStatementExpression = root.FindNode(
+                    diagnostic.AdditionalLocations[1].SourceSpan
+                );
                 var assignmentValue = root.FindNode(diagnostic.AdditionalLocations[2].SourceSpan);
 
                 // First, remote the if-statement entirely.
                 editor.RemoveNode(ifStatement);
 
                 // Now, update the assignment value to go from 'a' to 'a ?? throw ...'.
-                editor.ReplaceNode(assignmentValue,
-                    generator.CoalesceExpression(assignmentValue,
-                    generator.ThrowExpression(throwStatementExpression)));
+                editor.ReplaceNode(
+                    assignmentValue,
+                    generator.CoalesceExpression(
+                        assignmentValue,
+                        generator.ThrowExpression(throwStatementExpression)
+                    )
+                );
             }
 
             return Task.CompletedTask;
@@ -74,11 +91,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(
-                Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Use_throw_expression, createChangedDocument)
-            {
-            }
+            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
+                : base(AnalyzersResources.Use_throw_expression, createChangedDocument) { }
         }
     }
 }

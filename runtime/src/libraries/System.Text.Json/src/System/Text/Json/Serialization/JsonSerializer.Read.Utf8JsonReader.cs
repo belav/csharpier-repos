@@ -52,7 +52,9 @@ namespace System.Text.Json
         ///     Hence, <see cref="JsonReaderOptions.AllowTrailingCommas"/>, <see cref="JsonReaderOptions.MaxDepth"/>, <see cref="JsonReaderOptions.CommentHandling"/> are used while reading.
         ///   </para>
         /// </remarks>
-        public static TValue? Deserialize<[DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] TValue>(ref Utf8JsonReader reader, JsonSerializerOptions? options = null)
+        public static TValue? Deserialize<
+            [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] TValue
+        >(ref Utf8JsonReader reader, JsonSerializerOptions? options = null)
         {
             if (options == null)
             {
@@ -110,7 +112,11 @@ namespace System.Text.Json
         ///     Hence, <see cref="JsonReaderOptions.AllowTrailingCommas"/>, <see cref="JsonReaderOptions.MaxDepth"/>, <see cref="JsonReaderOptions.CommentHandling"/> are used while reading.
         ///   </para>
         /// </remarks>
-        public static object? Deserialize(ref Utf8JsonReader reader, [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType, JsonSerializerOptions? options = null)
+        public static object? Deserialize(
+            ref Utf8JsonReader reader,
+            [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType,
+            JsonSerializerOptions? options = null
+        )
         {
             if (returnType == null)
             {
@@ -136,7 +142,11 @@ namespace System.Text.Json
             }
         }
 
-        private static TValue? ReadValueCore<TValue>(JsonSerializerOptions options, ref Utf8JsonReader reader, ref ReadStack state)
+        private static TValue? ReadValueCore<TValue>(
+            JsonSerializerOptions options,
+            ref Utf8JsonReader reader,
+            ref ReadStack state
+        )
         {
             JsonReaderState readerState = reader.CurrentState;
             CheckSupportedOptions(readerState.Options, nameof(reader));
@@ -158,13 +168,16 @@ namespace System.Text.Json
                     // Using a reader loop the caller has identified a property they wish to
                     // hydrate into a JsonDocument. Move to the value first.
                     case JsonTokenType.PropertyName:
+                    {
+                        if (!reader.Read())
                         {
-                            if (!reader.Read())
-                            {
-                                ThrowHelper.ThrowJsonReaderException(ref reader, ExceptionResource.ExpectedOneCompleteToken);
-                            }
-                            break;
+                            ThrowHelper.ThrowJsonReaderException(
+                                ref reader,
+                                ExceptionResource.ExpectedOneCompleteToken
+                            );
                         }
+                        break;
+                    }
                 }
 
                 switch (reader.TokenType)
@@ -172,121 +185,131 @@ namespace System.Text.Json
                     // Any of the "value start" states are acceptable.
                     case JsonTokenType.StartObject:
                     case JsonTokenType.StartArray:
+                    {
+                        long startingOffset = reader.TokenStartIndex;
+
+                        if (!reader.TrySkip())
                         {
-                            long startingOffset = reader.TokenStartIndex;
-
-                            if (!reader.TrySkip())
-                            {
-                                ThrowHelper.ThrowJsonReaderException(ref reader, ExceptionResource.NotEnoughData);
-                            }
-
-                            long totalLength = reader.BytesConsumed - startingOffset;
-                            ReadOnlySequence<byte> sequence = reader.OriginalSequence;
-
-                            if (sequence.IsEmpty)
-                            {
-                                valueSpan = reader.OriginalSpan.Slice(
-                                    checked((int)startingOffset),
-                                    checked((int)totalLength));
-                            }
-                            else
-                            {
-                                valueSequence = sequence.Slice(startingOffset, totalLength);
-                            }
-
-                            Debug.Assert(
-                                reader.TokenType == JsonTokenType.EndObject ||
-                                reader.TokenType == JsonTokenType.EndArray);
-
-                            break;
+                            ThrowHelper.ThrowJsonReaderException(
+                                ref reader,
+                                ExceptionResource.NotEnoughData
+                            );
                         }
+
+                        long totalLength = reader.BytesConsumed - startingOffset;
+                        ReadOnlySequence<byte> sequence = reader.OriginalSequence;
+
+                        if (sequence.IsEmpty)
+                        {
+                            valueSpan = reader.OriginalSpan.Slice(
+                                checked((int)startingOffset),
+                                checked((int)totalLength)
+                            );
+                        }
+                        else
+                        {
+                            valueSequence = sequence.Slice(startingOffset, totalLength);
+                        }
+
+                        Debug.Assert(
+                            reader.TokenType == JsonTokenType.EndObject
+                                || reader.TokenType == JsonTokenType.EndArray
+                        );
+                        break;
+                    }
 
                     // Single-token values
                     case JsonTokenType.Number:
                     case JsonTokenType.True:
                     case JsonTokenType.False:
                     case JsonTokenType.Null:
+                    {
+                        if (reader.HasValueSequence)
                         {
-                            if (reader.HasValueSequence)
-                            {
-                                valueSequence = reader.ValueSequence;
-                            }
-                            else
-                            {
-                                valueSpan = reader.ValueSpan;
-                            }
-
-                            break;
+                            valueSequence = reader.ValueSequence;
                         }
+                        else
+                        {
+                            valueSpan = reader.ValueSpan;
+                        }
+                        break;
+                    }
                     // String's ValueSequence/ValueSpan omits the quotes, we need them back.
                     case JsonTokenType.String:
+                    {
+                        ReadOnlySequence<byte> sequence = reader.OriginalSequence;
+
+                        if (sequence.IsEmpty)
                         {
-                            ReadOnlySequence<byte> sequence = reader.OriginalSequence;
+                            // Since the quoted string fit in a ReadOnlySpan originally
+                            // the contents length plus the two quotes can't overflow.
+                            int payloadLength = reader.ValueSpan.Length + 2;
+                            Debug.Assert(payloadLength > 1);
 
-                            if (sequence.IsEmpty)
-                            {
-                                // Since the quoted string fit in a ReadOnlySpan originally
-                                // the contents length plus the two quotes can't overflow.
-                                int payloadLength = reader.ValueSpan.Length + 2;
-                                Debug.Assert(payloadLength > 1);
+                            ReadOnlySpan<byte> readerSpan = reader.OriginalSpan;
 
-                                ReadOnlySpan<byte> readerSpan = reader.OriginalSpan;
+                            Debug.Assert(
+                                readerSpan[(int)reader.TokenStartIndex] == (byte)'"',
+                                $"Calculated span starts with {readerSpan[(int)reader.TokenStartIndex]}"
+                            );
 
-                                Debug.Assert(
-                                    readerSpan[(int)reader.TokenStartIndex] == (byte)'"',
-                                    $"Calculated span starts with {readerSpan[(int)reader.TokenStartIndex]}");
+                            Debug.Assert(
+                                readerSpan[(int)reader.TokenStartIndex + payloadLength - 1]
+                                    == (byte)'"',
+                                $"Calculated span ends with {readerSpan[(int)reader.TokenStartIndex + payloadLength - 1]}"
+                            );
 
-                                Debug.Assert(
-                                    readerSpan[(int)reader.TokenStartIndex + payloadLength - 1] == (byte)'"',
-                                    $"Calculated span ends with {readerSpan[(int)reader.TokenStartIndex + payloadLength - 1]}");
-
-                                valueSpan = readerSpan.Slice((int)reader.TokenStartIndex, payloadLength);
-                            }
-                            else
-                            {
-                                long payloadLength = 2;
-
-                                if (reader.HasValueSequence)
-                                {
-                                    payloadLength += reader.ValueSequence.Length;
-                                }
-                                else
-                                {
-                                    payloadLength += reader.ValueSpan.Length;
-                                }
-
-                                valueSequence = sequence.Slice(reader.TokenStartIndex, payloadLength);
-                                Debug.Assert(
-                                    valueSequence.First.Span[0] == (byte)'"',
-                                    $"Calculated sequence starts with {valueSequence.First.Span[0]}");
-
-                                Debug.Assert(
-                                    valueSequence.ToArray()[payloadLength - 1] == (byte)'"',
-                                    $"Calculated sequence ends with {valueSequence.ToArray()[payloadLength - 1]}");
-                            }
-
-                            break;
+                            valueSpan = readerSpan.Slice(
+                                (int)reader.TokenStartIndex,
+                                payloadLength
+                            );
                         }
-                    default:
+                        else
                         {
-                            byte displayByte;
+                            long payloadLength = 2;
 
                             if (reader.HasValueSequence)
                             {
-                                displayByte = reader.ValueSequence.First.Span[0];
+                                payloadLength += reader.ValueSequence.Length;
                             }
                             else
                             {
-                                displayByte = reader.ValueSpan[0];
+                                payloadLength += reader.ValueSpan.Length;
                             }
 
-                            ThrowHelper.ThrowJsonReaderException(
-                                ref reader,
-                                ExceptionResource.ExpectedStartOfValueNotFound,
-                                displayByte);
+                            valueSequence = sequence.Slice(reader.TokenStartIndex, payloadLength);
+                            Debug.Assert(
+                                valueSequence.First.Span[0] == (byte)'"',
+                                $"Calculated sequence starts with {valueSequence.First.Span[0]}"
+                            );
 
-                            break;
+                            Debug.Assert(
+                                valueSequence.ToArray()[payloadLength - 1] == (byte)'"',
+                                $"Calculated sequence ends with {valueSequence.ToArray()[payloadLength - 1]}"
+                            );
                         }
+                        break;
+                    }
+                    default:
+                    {
+                        byte displayByte;
+
+                        if (reader.HasValueSequence)
+                        {
+                            displayByte = reader.ValueSequence.First.Span[0];
+                        }
+                        else
+                        {
+                            displayByte = reader.ValueSpan[0];
+                        }
+
+                        ThrowHelper.ThrowJsonReaderException(
+                            ref reader,
+                            ExceptionResource.ExpectedStartOfValueNotFound,
+                            displayByte
+                        );
+                        break;
+                    }
                 }
             }
             catch (JsonReaderException ex)

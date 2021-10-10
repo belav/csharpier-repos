@@ -147,11 +147,7 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GetValueRefOrNullRefValueType()
         {
-            var dict = new Dictionary<int, Struct>
-            {
-                {  1, default },
-                {  2, default }
-            };
+            var dict = new Dictionary<int, Struct> { { 1, default }, { 2, default } };
 
             Assert.Equal(2, dict.Count);
 
@@ -195,7 +191,9 @@ namespace System.Runtime.InteropServices.Tests
             // Check for null refs
 
             Assert.True(Unsafe.IsNullRef(ref CollectionsMarshal.GetValueRefOrNullRef(dict, 3)));
-            Assert.Throws<NullReferenceException>(() => CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9);
+            Assert.Throws<NullReferenceException>(
+                () => CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9
+            );
 
             Assert.Equal(2, dict.Count);
         }
@@ -203,11 +201,7 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GetValueRefOrNullRefClass()
         {
-            var dict = new Dictionary<int, IntAsObject>
-            {
-                {  1, new() },
-                {  2, new() }
-            };
+            var dict = new Dictionary<int, IntAsObject> { { 1, new() }, { 2, new() } };
 
             Assert.Equal(2, dict.Count);
 
@@ -251,7 +245,9 @@ namespace System.Runtime.InteropServices.Tests
             // Check for null refs
 
             Assert.True(Unsafe.IsNullRef(ref CollectionsMarshal.GetValueRefOrNullRef(dict, 3)));
-            Assert.Throws<NullReferenceException>(() => CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9);
+            Assert.Throws<NullReferenceException>(
+                () => CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9
+            );
 
             Assert.Equal(2, dict.Count);
         }
@@ -259,10 +255,7 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GetValueRefOrNullRefLinkBreaksOnResize()
         {
-            var dict = new Dictionary<int, Struct>
-            {
-                {  1, new() }
-            };
+            var dict = new Dictionary<int, Struct> { { 1, new() } };
 
             Assert.Equal(1, dict.Count);
 

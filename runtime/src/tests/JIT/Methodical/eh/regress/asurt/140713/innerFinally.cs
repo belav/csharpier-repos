@@ -5,10 +5,8 @@ using System;
 
 namespace test
 {
-
     class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -31,7 +29,9 @@ namespace test
         }
         static int Main(string[] args)
         {
-            int x = 7, y = 0, z;
+            int x = 7,
+                y = 0,
+                z;
             //Start recording
             testLog.StartRecording();
 
@@ -42,6 +42,7 @@ namespace test
                 {
                     Console.WriteLine("\t try 1.1");
                 }
+
                 finally
                 {
                     Console.WriteLine("\t finally 1.1");
@@ -51,6 +52,7 @@ namespace test
                         Console.WriteLine("\t\t Throwing an exception here!");
                         z = x / y;
                     }
+
                     finally
                     {
                         Console.WriteLine("\t\t finally 1.1.1");

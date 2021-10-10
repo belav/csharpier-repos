@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             string tagName,
             TagHelperAttributeList allAttributes,
             IDictionary<object, object> items,
-            string uniqueId) : this(allAttributes, items, uniqueId)
+            string uniqueId
+        ) : this(allAttributes, items, uniqueId)
         {
             if (tagName == null)
             {
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public TagHelperContext(
             TagHelperAttributeList allAttributes,
             IDictionary<object, object> items,
-            string uniqueId)
+            string uniqueId
+        )
         {
             if (items == null)
             {

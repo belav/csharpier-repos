@@ -32,10 +32,21 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 TextSpan textSpan,
                 INamedTypeSymbol containingType,
                 ImmutableArray<ISymbol> selectedMembers,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var state = new State();
-                if (!await state.TryInitializeAsync(service, document, textSpan, containingType, selectedMembers, cancellationToken).ConfigureAwait(false))
+                if (
+                    !await state.TryInitializeAsync(
+                            service,
+                            document,
+                            textSpan,
+                            containingType,
+                            selectedMembers,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
                     return null;
                 }
@@ -49,7 +60,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 TextSpan textSpan,
                 INamedTypeSymbol containingType,
                 ImmutableArray<ISymbol> selectedMembers,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (!selectedMembers.All(IsWritableInstanceFieldOrProperty))
                 {
@@ -64,39 +76,61 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     return false;
                 }
 
-                IsContainedInUnsafeType = service.ContainingTypesOrSelfHasUnsafeKeyword(containingType);
+                IsContainedInUnsafeType = service.ContainingTypesOrSelfHasUnsafeKeyword(
+                    containingType
+                );
 
-                var rules = await document.GetNamingRulesAsync(cancellationToken).ConfigureAwait(false);
+                var rules = await document.GetNamingRulesAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 Parameters = DetermineParameters(selectedMembers, rules);
-                MatchingConstructor = GetMatchingConstructorBasedOnParameterTypes(ContainingType, Parameters);
+                MatchingConstructor = GetMatchingConstructorBasedOnParameterTypes(
+                    ContainingType,
+                    Parameters
+                );
                 // We are going to create a new contructor and pass part of the parameters into DelegatedConstructor,
                 // so parameters should be compared based on types since we don't want get a type mismatch error after the new constructor is genreated.
-                DelegatedConstructor = GetDelegatedConstructorBasedOnParameterTypes(ContainingType, Parameters);
+                DelegatedConstructor = GetDelegatedConstructorBasedOnParameterTypes(
+                    ContainingType,
+                    Parameters
+                );
                 return true;
             }
 
             private static IMethodSymbol GetDelegatedConstructorBasedOnParameterTypes(
                 INamedTypeSymbol containingType,
-                ImmutableArray<IParameterSymbol> parameters)
+                ImmutableArray<IParameterSymbol> parameters
+            )
             {
                 var q =
                     from c in containingType.InstanceConstructors
                     orderby c.Parameters.Length descending
                     where c.Parameters.Length > 0 && c.Parameters.Length < parameters.Length
-                    where c.Parameters.All(p => p.RefKind == RefKind.None) && !c.Parameters.Any(p => p.IsParams)
+                    where
+                        c.Parameters.All(p => p.RefKind == RefKind.None)
+                        && !c.Parameters.Any(p => p.IsParams)
                     let constructorTypes = c.Parameters.Select(p => p.Type)
                     let symbolTypes = parameters.Take(c.Parameters.Length).Select(p => p.Type)
-                    where constructorTypes.SequenceEqual(symbolTypes, SymbolEqualityComparer.Default)
+                    where
+                        constructorTypes.SequenceEqual(symbolTypes, SymbolEqualityComparer.Default)
                     select c;
 
                 return q.FirstOrDefault();
             }
 
-            private static IMethodSymbol GetMatchingConstructorBasedOnParameterTypes(INamedTypeSymbol containingType, ImmutableArray<IParameterSymbol> parameters)
-                => containingType.InstanceConstructors.FirstOrDefault(c => MatchesConstructorBasedOnParameterTypes(c, parameters));
+            private static IMethodSymbol GetMatchingConstructorBasedOnParameterTypes(
+                INamedTypeSymbol containingType,
+                ImmutableArray<IParameterSymbol> parameters
+            ) =>
+                containingType.InstanceConstructors.FirstOrDefault(
+                    c => MatchesConstructorBasedOnParameterTypes(c, parameters)
+                );
 
-            private static bool MatchesConstructorBasedOnParameterTypes(IMethodSymbol constructor, ImmutableArray<IParameterSymbol> parameters)
-                => parameters.Select(p => p.Type).SequenceEqual(constructor.Parameters.Select(p => p.Type));
+            private static bool MatchesConstructorBasedOnParameterTypes(
+                IMethodSymbol constructor,
+                ImmutableArray<IParameterSymbol> parameters
+            ) =>
+                parameters.Select(p => p.Type)
+                    .SequenceEqual(constructor.Parameters.Select(p => p.Type));
         }
     }
 }

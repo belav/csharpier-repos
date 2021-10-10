@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
             string packageName,
             string versionOpt,
             bool includePrerelease,
-            bool isLocal)
+            bool isLocal
+        )
         {
             _installerService = installerService;
             _document = document;
@@ -50,8 +51,14 @@ namespace Microsoft.CodeAnalysis.AddPackage
             {
                 const int projectsToShow = 5;
                 var otherProjects = installerService.GetProjectsWithInstalledPackage(
-                    _document.Project.Solution, packageName, versionOpt).ToList();
-                _projectsWithMatchingVersion = otherProjects.Take(projectsToShow).Select(p => p.Name).ToList();
+                        _document.Project.Solution,
+                        packageName,
+                        versionOpt
+                    )
+                    .ToList();
+                _projectsWithMatchingVersion = otherProjects.Take(projectsToShow)
+                    .Select(p => p.Name)
+                    .ToList();
                 if (otherProjects.Count > projectsToShow)
                 {
                     _projectsWithMatchingVersion.Add("...");
@@ -59,20 +66,38 @@ namespace Microsoft.CodeAnalysis.AddPackage
             }
         }
 
-        public override string Title => _versionOpt == null
-            ? string.Format(FeaturesResources.Find_and_install_latest_version_of_0, _packageName)
-            : _isLocal
-                ? string.Format(FeaturesResources.Use_locally_installed_0_version_1_This_version_used_in_colon_2, _packageName, _versionOpt, string.Join(", ", _projectsWithMatchingVersion))
-                : string.Format(FeaturesResources.Install_0_1, _packageName, _versionOpt);
+        public override string Title =>
+            _versionOpt == null
+                ? string.Format(
+                      FeaturesResources.Find_and_install_latest_version_of_0,
+                      _packageName
+                  )
+                : _isLocal
+                    ? string.Format(
+                          FeaturesResources.Use_locally_installed_0_version_1_This_version_used_in_colon_2,
+                          _packageName,
+                          _versionOpt,
+                          string.Join(", ", _projectsWithMatchingVersion)
+                      )
+                    : string.Format(FeaturesResources.Install_0_1, _packageName, _versionOpt);
 
         internal override bool ApplyDuringTests => true;
 
         internal override bool TryApply(
-            Workspace workspace, IProgressTracker progressTracker, CancellationToken cancellationToken)
+            Workspace workspace,
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             return _installerService.TryInstallPackage(
-                workspace, _document.Id, _source, _packageName,
-                _versionOpt, _includePrerelease, cancellationToken);
+                workspace,
+                _document.Id,
+                _source,
+                _packageName,
+                _versionOpt,
+                _includePrerelease,
+                cancellationToken
+            );
         }
     }
 }

@@ -27,7 +27,11 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         /// perspective).
         /// </summary>
         ValueTask<ImmutableArray<PackageWithTypeResult>> FindPackagesWithTypeAsync(
-            string source, string name, int arity, CancellationToken cancellationToken);
+            string source,
+            string name,
+            int arity,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Searches for packages that contain an assembly with the provided name.
@@ -38,7 +42,10 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         /// perspective).
         /// </summary>
         ValueTask<ImmutableArray<PackageWithAssemblyResult>> FindPackagesWithAssemblyAsync(
-            string source, string assemblyName, CancellationToken cancellationToken);
+            string source,
+            string assemblyName,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Searches for reference assemblies that contain a type with the provided name and arity.
@@ -49,8 +56,13 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         /// Implementations should return results in order from best to worst (from their
         /// perspective).
         /// </summary>
-        ValueTask<ImmutableArray<ReferenceAssemblyWithTypeResult>> FindReferenceAssembliesWithTypeAsync(
-            string name, int arity, CancellationToken cancellationToken);
+        ValueTask<
+            ImmutableArray<ReferenceAssemblyWithTypeResult>
+        > FindReferenceAssembliesWithTypeAsync(
+            string name,
+            int arity,
+            CancellationToken cancellationToken
+        );
     }
 
     [DataContract]
@@ -86,8 +98,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             int rank,
             string typeName,
             string? version,
-            ImmutableArray<string> containingNamespaceNames)
-            : base(packageName, rank)
+            ImmutableArray<string> containingNamespaceNames
+        ) : base(packageName, rank)
         {
             TypeName = typeName;
             Version = version;
@@ -96,28 +108,26 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     }
 
     [DataContract]
-    internal sealed class PackageWithAssemblyResult : PackageResult, IEquatable<PackageWithAssemblyResult?>, IComparable<PackageWithAssemblyResult?>
+    internal sealed class PackageWithAssemblyResult
+        : PackageResult,
+          IEquatable<PackageWithAssemblyResult?>,
+          IComparable<PackageWithAssemblyResult?>
     {
         [DataMember(Order = 2)]
         public readonly string? Version;
 
-        public PackageWithAssemblyResult(
-            string packageName,
-            int rank,
-            string version)
+        public PackageWithAssemblyResult(string packageName, int rank, string version)
             : base(packageName, rank)
         {
             Version = version;
         }
 
-        public override int GetHashCode()
-            => PackageName.GetHashCode();
+        public override int GetHashCode() => PackageName.GetHashCode();
 
-        public override bool Equals(object? obj)
-            => Equals(obj as PackageWithAssemblyResult);
+        public override bool Equals(object? obj) => Equals(obj as PackageWithAssemblyResult);
 
-        public bool Equals(PackageWithAssemblyResult? other)
-            => PackageName.Equals(other?.PackageName);
+        public bool Equals(PackageWithAssemblyResult? other) =>
+            PackageName.Equals(other?.PackageName);
 
         public int CompareTo(PackageWithAssemblyResult? other)
         {
@@ -127,8 +137,12 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             return ComparerWithState.CompareTo(this, other, s_comparers);
         }
 
-        private static readonly ImmutableArray<Func<PackageWithAssemblyResult, IComparable>> s_comparers =
-            ImmutableArray.Create<Func<PackageWithAssemblyResult, IComparable>>(p => p.Rank, p => p.PackageName);
+        private static readonly ImmutableArray<
+            Func<PackageWithAssemblyResult, IComparable>
+        > s_comparers = ImmutableArray.Create<Func<PackageWithAssemblyResult, IComparable>>(
+            p => p.Rank,
+            p => p.PackageName
+        );
     }
 
     [DataContract]
@@ -146,7 +160,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         public ReferenceAssemblyWithTypeResult(
             string assemblyName,
             string typeName,
-            ImmutableArray<string> containingNamespaceNames)
+            ImmutableArray<string> containingNamespaceNames
+        )
         {
             AssemblyName = assemblyName;
             TypeName = typeName;
@@ -159,17 +174,27 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSymbolSearchService()
-        {
-        }
+        public DefaultSymbolSearchService() { }
 
-        public ValueTask<ImmutableArray<PackageWithTypeResult>> FindPackagesWithTypeAsync(string source, string name, int arity, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(ImmutableArray<PackageWithTypeResult>.Empty);
+        public ValueTask<ImmutableArray<PackageWithTypeResult>> FindPackagesWithTypeAsync(
+            string source,
+            string name,
+            int arity,
+            CancellationToken cancellationToken
+        ) => ValueTaskFactory.FromResult(ImmutableArray<PackageWithTypeResult>.Empty);
 
-        public ValueTask<ImmutableArray<PackageWithAssemblyResult>> FindPackagesWithAssemblyAsync(string source, string assemblyName, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(ImmutableArray<PackageWithAssemblyResult>.Empty);
+        public ValueTask<ImmutableArray<PackageWithAssemblyResult>> FindPackagesWithAssemblyAsync(
+            string source,
+            string assemblyName,
+            CancellationToken cancellationToken
+        ) => ValueTaskFactory.FromResult(ImmutableArray<PackageWithAssemblyResult>.Empty);
 
-        public ValueTask<ImmutableArray<ReferenceAssemblyWithTypeResult>> FindReferenceAssembliesWithTypeAsync(string name, int arity, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty);
+        public ValueTask<
+            ImmutableArray<ReferenceAssemblyWithTypeResult>
+        > FindReferenceAssembliesWithTypeAsync(
+            string name,
+            int arity,
+            CancellationToken cancellationToken
+        ) => ValueTaskFactory.FromResult(ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty);
     }
 }

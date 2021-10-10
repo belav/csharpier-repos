@@ -4,7 +4,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using SetTriad = System.Tuple<System.Collections.Generic.IEnumerable<int>, System.Collections.Generic.IEnumerable<int>, bool>;
+using SetTriad = System.Tuple<
+    System.Collections.Generic.IEnumerable<int>,
+    System.Collections.Generic.IEnumerable<int>,
+    bool
+>;
 
 namespace System.Collections.Immutable.Tests
 {
@@ -19,7 +23,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void AddDuplicatesTest()
         {
-            var arrayWithDuplicates = Enumerable.Range(1, 100).Concat(Enumerable.Range(1, 100)).ToArray();
+            var arrayWithDuplicates = Enumerable.Range(1, 100)
+                .Concat(Enumerable.Range(1, 100))
+                .ToArray();
             this.AddTestHelper(this.Empty<int>(), arrayWithDuplicates);
         }
 
@@ -81,7 +87,17 @@ namespace System.Collections.Immutable.Tests
         public void ExceptDoesEnumerateSequenceIfThisIsEmpty()
         {
             bool enumerated = false;
-            Empty<int>().Except(Enumerable.Range(1, 1).Select(n => { enumerated = true; return n; }));
+            Empty<int>()
+                .Except(
+                    Enumerable.Range(1, 1)
+                        .Select(
+                            n =>
+                            {
+                                enumerated = true;
+                                return n;
+                            }
+                        )
+                );
             Assert.True(enumerated);
         }
 
@@ -92,37 +108,61 @@ namespace System.Collections.Immutable.Tests
             var nonEmptySet = this.Empty<int>().Add(5);
             Assert.True(nonEmptySet.SetEquals(nonEmptySet));
 
-            this.SetCompareTestHelper(s => s.SetEquals, s => s.SetEquals, this.GetSetEqualsScenarios());
+            this.SetCompareTestHelper(
+                s => s.SetEquals,
+                s => s.SetEquals,
+                this.GetSetEqualsScenarios()
+            );
         }
 
         [Fact]
         public void IsProperSubsetOfTest()
         {
-            this.SetCompareTestHelper(s => s.IsProperSubsetOf, s => s.IsProperSubsetOf, this.GetIsProperSubsetOfScenarios());
+            this.SetCompareTestHelper(
+                s => s.IsProperSubsetOf,
+                s => s.IsProperSubsetOf,
+                this.GetIsProperSubsetOfScenarios()
+            );
         }
 
         [Fact]
         public void IsProperSupersetOfTest()
         {
-            this.SetCompareTestHelper(s => s.IsProperSupersetOf, s => s.IsProperSupersetOf, this.GetIsProperSubsetOfScenarios().Select(Flip));
+            this.SetCompareTestHelper(
+                s => s.IsProperSupersetOf,
+                s => s.IsProperSupersetOf,
+                this.GetIsProperSubsetOfScenarios().Select(Flip)
+            );
         }
 
         [Fact]
         public void IsSubsetOfTest()
         {
-            this.SetCompareTestHelper(s => s.IsSubsetOf, s => s.IsSubsetOf, this.GetIsSubsetOfScenarios());
+            this.SetCompareTestHelper(
+                s => s.IsSubsetOf,
+                s => s.IsSubsetOf,
+                this.GetIsSubsetOfScenarios()
+            );
         }
 
         [Fact]
         public void IsSupersetOfTest()
         {
-            this.SetCompareTestHelper(s => s.IsSupersetOf, s => s.IsSupersetOf, this.GetIsSubsetOfScenarios().Select(Flip));
+            this.SetCompareTestHelper(
+                s => s.IsSupersetOf,
+                s => s.IsSupersetOf,
+                this.GetIsSubsetOfScenarios().Select(Flip)
+            );
         }
 
         [Fact]
         public void OverlapsTest()
         {
-            this.SetCompareTestHelper(s => s.Overlaps, s => s.Overlaps, this.GetOverlapsScenarios());
+            this.SetCompareTestHelper(
+                s => s.Overlaps,
+                s => s.Overlaps,
+                this.GetOverlapsScenarios()
+            );
         }
 
         [Fact]
@@ -141,7 +181,10 @@ namespace System.Collections.Immutable.Tests
         public void GetHashCodeTest()
         {
             // verify that get hash code is the default address based one.
-            Assert.Equal(EqualityComparer<object>.Default.GetHashCode(Empty<int>()), Empty<int>().GetHashCode());
+            Assert.Equal(
+                EqualityComparer<object>.Default.GetHashCode(Empty<int>()),
+                Empty<int>().GetHashCode()
+            );
         }
 
         [Fact]
@@ -242,7 +285,12 @@ namespace System.Collections.Immutable.Tests
             return this.Empty<T>().Union(items);
         }
 
-        protected void CustomSortTestHelper<T>(IImmutableSet<T> emptySet, bool matchOrder, T[] injectedValues, T[] expectedValues)
+        protected void CustomSortTestHelper<T>(
+            IImmutableSet<T> emptySet,
+            bool matchOrder,
+            T[] injectedValues,
+            T[] expectedValues
+        )
         {
             Assert.NotNull(emptySet);
             Assert.NotNull(injectedValues);
@@ -283,13 +331,13 @@ namespace System.Collections.Immutable.Tests
         {
             return new List<SetTriad>
             {
-                new SetTriad(SetWith<int>(), new int[] { }, true),
+                new SetTriad(SetWith<int>(), new int[] {  }, true),
                 new SetTriad(SetWith<int>(5), new int[] { 5 }, true),
                 new SetTriad(SetWith<int>(5), new int[] { 5, 5 }, true),
                 new SetTriad(SetWith<int>(5, 8), new int[] { 5, 5 }, false),
                 new SetTriad(SetWith<int>(5, 8), new int[] { 5, 7 }, false),
                 new SetTriad(SetWith<int>(5, 8), new int[] { 5, 8 }, true),
-                new SetTriad(SetWith<int>(5), new int[] { }, false),
+                new SetTriad(SetWith<int>(5), new int[] {  }, false),
                 new SetTriad(SetWith<int>(), new int[] { 5 }, false),
                 new SetTriad(SetWith<int>(5, 8), new int[] { 5 }, false),
                 new SetTriad(SetWith<int>(5), new int[] { 5, 8 }, false),
@@ -301,12 +349,12 @@ namespace System.Collections.Immutable.Tests
         {
             return new List<SetTriad>
             {
-                new SetTriad(new int[] { }, new int[] { }, false),
-                new SetTriad(new int[] { 1 }, new int[] { }, false),
+                new SetTriad(new int[] {  }, new int[] {  }, false),
+                new SetTriad(new int[] { 1 }, new int[] {  }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2, 3 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 1, 2 }, true),
-                new SetTriad(new int[] { }, new int[] { 1 }, true),
+                new SetTriad(new int[] {  }, new int[] { 1 }, true),
             };
         }
 
@@ -314,10 +362,10 @@ namespace System.Collections.Immutable.Tests
         {
             var results = new List<SetTriad>
             {
-                new SetTriad(new int[] { }, new int[] { }, true),
+                new SetTriad(new int[] {  }, new int[] {  }, true),
                 new SetTriad(new int[] { 1 }, new int[] { 1 }, true),
                 new SetTriad(new int[] { 1, 2 }, new int[] { 1, 2 }, true),
-                new SetTriad(new int[] { 1 }, new int[] { }, false),
+                new SetTriad(new int[] { 1 }, new int[] {  }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2, 3 }, false),
             };
@@ -332,8 +380,8 @@ namespace System.Collections.Immutable.Tests
         {
             return new List<SetTriad>
             {
-                new SetTriad(new int[] { }, new int[] { }, false),
-                new SetTriad(new int[] { }, new int[] { 1 }, false),
+                new SetTriad(new int[] {  }, new int[] {  }, false),
+                new SetTriad(new int[] {  }, new int[] { 1 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2, 3 }, false),
                 new SetTriad(new int[] { 1, 2 }, new int[] { 3 }, false),
@@ -344,7 +392,11 @@ namespace System.Collections.Immutable.Tests
             };
         }
 
-        private void SetCompareTestHelper<T>(Func<IImmutableSet<T>, Func<IEnumerable<T>, bool>> operation, Func<ISet<T>, Func<IEnumerable<T>, bool>> baselineOperation, IEnumerable<Tuple<IEnumerable<T>, IEnumerable<T>, bool>> scenarios)
+        private void SetCompareTestHelper<T>(
+            Func<IImmutableSet<T>, Func<IEnumerable<T>, bool>> operation,
+            Func<ISet<T>, Func<IEnumerable<T>, bool>> baselineOperation,
+            IEnumerable<Tuple<IEnumerable<T>, IEnumerable<T>, bool>> scenarios
+        )
         {
             //const string message = "Scenario #{0}: Set 1: {1}, Set 2: {2}";
 
@@ -361,15 +413,26 @@ namespace System.Collections.Immutable.Tests
                 Assert.Equal(expected, scenario.Item3); //, "Test scenario has an expected result that is inconsistent with BCL mutable collection behavior.");
 
                 var actualFunc = operation(this.SetWith(scenario.Item1.ToArray()));
-                var args = new object[] { iteration, ToStringDeferred(scenario.Item1), ToStringDeferred(scenario.Item2) };
+                var args = new object[]
+                {
+                    iteration,
+                    ToStringDeferred(scenario.Item1),
+                    ToStringDeferred(scenario.Item2)
+                };
                 Assert.Equal(scenario.Item3, actualFunc(this.SetWith(scenario.Item2.ToArray()))); //, message, args);
                 Assert.Equal(scenario.Item3, actualFunc(scenario.Item2)); //, message, args);
             }
         }
 
-        private static Tuple<IEnumerable<T>, IEnumerable<T>, bool> Flip<T>(Tuple<IEnumerable<T>, IEnumerable<T>, bool> scenario)
+        private static Tuple<IEnumerable<T>, IEnumerable<T>, bool> Flip<T>(
+            Tuple<IEnumerable<T>, IEnumerable<T>, bool> scenario
+        )
         {
-            return new Tuple<IEnumerable<T>, IEnumerable<T>, bool>(scenario.Item2, scenario.Item1, scenario.Item3);
+            return new Tuple<IEnumerable<T>, IEnumerable<T>, bool>(
+                scenario.Item2,
+                scenario.Item1,
+                scenario.Item3
+            );
         }
 
         private void RemoveTestHelper<T>(IImmutableSet<T> set, params T[] values)
@@ -421,7 +484,11 @@ namespace System.Collections.Immutable.Tests
             }
         }
 
-        protected void EnumeratorTestHelper<T>(IImmutableSet<T> emptySet, IComparer<T> comparer, params T[] values)
+        protected void EnumeratorTestHelper<T>(
+            IImmutableSet<T> emptySet,
+            IComparer<T> comparer,
+            params T[] values
+        )
         {
             var set = emptySet;
             foreach (T value in values)

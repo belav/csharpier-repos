@@ -18,44 +18,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
 {
     public partial class RemoveUnusedValueExpressionStatementTests : RemoveUnusedValuesTestsBase
     {
-        public RemoveUnusedValueExpressionStatementTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public RemoveUnusedValueExpressionStatementTests(ITestOutputHelper logger) : base(logger)
+        { }
 
         private protected override OptionsCollection PreferNone =>
-            Option(CSharpCodeStyleOptions.UnusedValueExpressionStatement,
-                   new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.DiscardVariable, NotificationOption2.None));
+            Option(
+                CSharpCodeStyleOptions.UnusedValueExpressionStatement,
+                new CodeStyleOption2<UnusedValuePreference>(
+                    UnusedValuePreference.DiscardVariable,
+                    NotificationOption2.None
+                )
+            );
 
         private protected override OptionsCollection PreferDiscard =>
-            Option(CSharpCodeStyleOptions.UnusedValueExpressionStatement,
-                   new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.DiscardVariable, NotificationOption2.Silent));
+            Option(
+                CSharpCodeStyleOptions.UnusedValueExpressionStatement,
+                new CodeStyleOption2<UnusedValuePreference>(
+                    UnusedValuePreference.DiscardVariable,
+                    NotificationOption2.Silent
+                )
+            );
 
         private protected override OptionsCollection PreferUnusedLocal =>
-            Option(CSharpCodeStyleOptions.UnusedValueExpressionStatement,
-                   new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.UnusedLocalVariable, NotificationOption2.Silent));
+            Option(
+                CSharpCodeStyleOptions.UnusedValueExpressionStatement,
+                new CodeStyleOption2<UnusedValuePreference>(
+                    UnusedValuePreference.UnusedLocalVariable,
+                    NotificationOption2.Silent
+                )
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         public async Task ExpressionStatement_Suppressed()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
-{
-    void M()
-    {
-        [|M2()|];
-    }
-
-    int M2() => 0;
-}", options: PreferNone);
-        }
-
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
-        public async Task ExpressionStatement_PreferDiscard_CSharp6()
-        {
-            // Discard not supported in C# 6.0, so we fallback to unused local variable.
-            await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -64,7 +61,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
 
     int M2() => 0;
 }",
-@"class C
+                options: PreferNone
+            );
+        }
+
+        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
+        public async Task ExpressionStatement_PreferDiscard_CSharp6()
+        {
+            // Discard not supported in C# 6.0, so we fallback to unused local variable.
+            await TestInRegularAndScriptAsync(
+                @"class C
+{
+    void M()
+    {
+        [|M2()|];
+    }
+
+    int M2() => 0;
+}",
+                @"class C
 {
     void M()
     {
@@ -72,8 +87,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
     }
 
     int M2() => 0;
-}", options: PreferDiscard,
-    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6));
+}",
+                options: PreferDiscard,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -82,7 +101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         public async Task ExpressionStatement_VariableInitialization(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -90,16 +109,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
     }
 
     int M2() => 0;
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         [InlineData(nameof(PreferDiscard), "_")]
         [InlineData(nameof(PreferUnusedLocal), "var unused")]
-        public async Task ExpressionStatement_NonConstantPrimitiveTypeValue(string optionName, string fix)
+        public async Task ExpressionStatement_NonConstantPrimitiveTypeValue(
+            string optionName,
+            string fix
+        )
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -108,7 +132,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
 
     int M2() => 0;
 }",
-$@"class C
+                $@"class C
 {{
     void M()
     {{
@@ -116,7 +140,9 @@ $@"class C
     }}
 
     int M2() => 0;
-}}", optionName);
+}}",
+                optionName
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -125,7 +151,7 @@ $@"class C
         public async Task ExpressionStatement_UserDefinedType(string optionName, string fix)
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -134,7 +160,7 @@ $@"class C
 
     C M2() => new C();
 }",
-$@"class C
+                $@"class C
 {{
     void M()
     {{
@@ -142,7 +168,9 @@ $@"class C
     }}
 
     C M2() => new C();
-}}", optionName);
+}}",
+                optionName
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -151,13 +179,15 @@ $@"class C
         public async Task ExpressionStatement_ConstantValue(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         [|1|];
     }
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -166,7 +196,7 @@ $@"class C
         public async Task ExpressionStatement_SyntaxError(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -174,7 +204,9 @@ $@"class C
     }
 
     int M2() => 0;
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -183,13 +215,15 @@ $@"class C
         public async Task ExpressionStatement_SemanticError(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         [|M2()|];
     }
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [WorkItem(33073, "https://github.com/dotnet/roslyn/issues/33073")]
@@ -199,7 +233,7 @@ $@"class C
         public async Task ExpressionStatement_SemanticError_02(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -207,7 +241,9 @@ $@"class C
     }
 
     UndefinedType M2() => null;
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [WorkItem(33073, "https://github.com/dotnet/roslyn/issues/33073")]
@@ -217,7 +253,7 @@ $@"class C
         public async Task ExpressionStatement_SemanticError_03(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -226,7 +262,9 @@ class C
         // error CS0103: The name 'CancellationToken' does not exist in the current context
         [|await Task.Delay(0, CancellationToken.None).ConfigureAwait(false)|];
     }
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [WorkItem(33073, "https://github.com/dotnet/roslyn/issues/33073")]
@@ -236,7 +274,7 @@ class C
         public async Task ExpressionStatement_SemanticError_04(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     private async Task M()
     {
@@ -245,7 +283,9 @@ class C
         // error CS1983: The return type of an async method must be void, Task or Task<T>
         [|await Task.Delay(0, CancellationToken.None).ConfigureAwait(false)|];
     }
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -254,7 +294,7 @@ class C
         public async Task ExpressionStatement_VoidReturningMethodCall(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -262,7 +302,9 @@ class C
     }
 
     void M2() { }
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -271,7 +313,7 @@ class C
         public async Task ExpressionStatement_AssignmentExpression(string op)
         {
             await TestMissingInRegularAndScriptWithAllOptionsAsync(
-$@"class C
+                $@"class C
 {{
     void M(int x)
     {{
@@ -279,7 +321,8 @@ $@"class C
     }}
 
     int M2() => 0;
-}}");
+}}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -290,21 +333,22 @@ $@"class C
         public async Task ExpressionStatement_IncrementOrDecrement(string incrementOrDecrement)
         {
             await TestMissingInRegularAndScriptWithAllOptionsAsync(
-$@"class C
+                $@"class C
 {{
     int M(int x)
     {{
         [|{incrementOrDecrement}|];
         return x;
     }}
-}}");
+}}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         public async Task ExpressionStatement_UnusedLocal_NameAlreadyUsed()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -314,7 +358,7 @@ $@"class C
 
     int M2() => 0;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -323,14 +367,16 @@ $@"class C
     }
 
     int M2() => 0;
-}", options: PreferUnusedLocal);
+}",
+                options: PreferUnusedLocal
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         public async Task ExpressionStatement_UnusedLocal_NameAlreadyUsed_02()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -340,7 +386,7 @@ $@"class C
 
     int M2() => 0;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -349,14 +395,16 @@ $@"class C
     }
 
     int M2() => 0;
-}", options: PreferUnusedLocal);
+}",
+                options: PreferUnusedLocal
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         public async Task ExpressionStatement_UnusedLocal_NameAlreadyUsed_03()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(int p)
     {
@@ -369,7 +417,7 @@ $@"class C
 
     int M2() => 0;
 }",
-@"class C
+                @"class C
 {
     void M(int p)
     {
@@ -381,14 +429,16 @@ $@"class C
     }
 
     int M2() => 0;
-}", options: PreferUnusedLocal);
+}",
+                options: PreferUnusedLocal
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         public async Task ExpressionStatement_UnusedLocal_NameAlreadyUsed_04()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(int p)
     {
@@ -404,7 +454,7 @@ $@"class C
 
     int M2() => 0;
 }",
-@"class C
+                @"class C
 {
     void M(int p)
     {
@@ -419,16 +469,23 @@ $@"class C
     }
 
     int M2() => 0;
-}", options: PreferUnusedLocal);
+}",
+                options: PreferUnusedLocal
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         [InlineData(nameof(PreferDiscard), "_", "_", "_")]
         [InlineData(nameof(PreferUnusedLocal), "var unused", "var unused", "var unused3")]
-        public async Task ExpressionStatement_FixAll(string optionName, string fix1, string fix2, string fix3)
+        public async Task ExpressionStatement_FixAll(
+            string optionName,
+            string fix1,
+            string fix2,
+            string fix3
+        )
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public C()
     {
@@ -445,7 +502,7 @@ $@"class C
 
     int M2() => 0;
 }",
-$@"class C
+                $@"class C
 {{
     public C()
     {{
@@ -461,14 +518,16 @@ $@"class C
     }}
 
     int M2() => 0;
-}}", optionName);
+}}",
+                optionName
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         public async Task ExpressionStatement_Trivia_PreferDiscard_01()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -479,7 +538,7 @@ $@"class C
 
     int M2() => 0;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -489,14 +548,16 @@ $@"class C
     }
 
     int M2() => 0;
-}", options: PreferDiscard);
+}",
+                options: PreferDiscard
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         public async Task ExpressionStatement_Trivia_PreferDiscard_02()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {/*C0*/
@@ -506,7 +567,7 @@ $@"class C
 
     int M2() => 0;
 }",
-@"class C
+                @"class C
 {
     void M()
     {/*C0*/
@@ -516,14 +577,16 @@ $@"class C
     }
 
     int M2() => 0;
-}", options: PreferDiscard);
+}",
+                options: PreferDiscard
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         public async Task ExpressionStatement_Trivia_PreferUnusedLocal_01()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -534,7 +597,7 @@ $@"class C
 
     int M2() => 0;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -544,14 +607,16 @@ $@"class C
     }
 
     int M2() => 0;
-}", options: PreferUnusedLocal);
+}",
+                options: PreferUnusedLocal
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
         public async Task ExpressionStatement_Trivia_PreferUnusedLocal_02()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {/*C0*/
@@ -561,7 +626,7 @@ $@"class C
 
     int M2() => 0;
 }",
-@"class C
+                @"class C
 {
     void M()
     {/*C0*/
@@ -571,7 +636,9 @@ $@"class C
     }
 
     int M2() => 0;
-}", options: PreferUnusedLocal);
+}",
+                options: PreferUnusedLocal
+            );
         }
 
         [WorkItem(32942, "https://github.com/dotnet/roslyn/issues/32942")]
@@ -581,11 +648,13 @@ $@"class C
         public async Task ExpressionBodiedMember_01(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M() => [|M2()|];
     int M2() => 0;
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [WorkItem(32942, "https://github.com/dotnet/roslyn/issues/32942")]
@@ -595,7 +664,7 @@ $@"class C
         public async Task ExpressionBodiedMember_02(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -603,7 +672,9 @@ $@"class C
     }
 
     int M2() => 0;
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [WorkItem(32942, "https://github.com/dotnet/roslyn/issues/32942")]
@@ -613,7 +684,7 @@ $@"class C
         public async Task ExpressionBodiedMember_03(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -624,7 +695,9 @@ $@"class C
     }
 
     int M2() => 0;
-}", optionName);
+}",
+                optionName
+            );
         }
 
         [WorkItem(43648, "https://github.com/dotnet/roslyn/issues/43648")]
@@ -634,7 +707,7 @@ $@"class C
         public async Task ExpressionStatement_Dynamic(string optionName)
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -646,7 +719,9 @@ class C
 
             [|returnValue.Add(dynamicValue)|];
     }
-}", optionName);
+}",
+                optionName
+            );
         }
     }
 }

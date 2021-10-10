@@ -14,8 +14,6 @@ namespace Microsoft.AspNetCore.Http.Features
         public CancellationToken RequestAborted { get; set; }
 
         /// <inheritdoc />
-        public void Abort()
-        {
-        }
+        public void Abort() { }
     }
 }

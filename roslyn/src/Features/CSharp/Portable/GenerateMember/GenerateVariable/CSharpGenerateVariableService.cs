@@ -20,27 +20,35 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
 {
     [ExportLanguageService(typeof(IGenerateVariableService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpGenerateVariableService :
-        AbstractGenerateVariableService<CSharpGenerateVariableService, SimpleNameSyntax, ExpressionSyntax>
+    internal partial class CSharpGenerateVariableService
+        : AbstractGenerateVariableService<
+              CSharpGenerateVariableService,
+              SimpleNameSyntax,
+              ExpressionSyntax
+          >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateVariableService()
-        {
-        }
+        public CSharpGenerateVariableService() { }
 
-        protected override bool IsExplicitInterfaceGeneration(SyntaxNode node)
-            => node is PropertyDeclarationSyntax;
+        protected override bool IsExplicitInterfaceGeneration(SyntaxNode node) =>
+            node is PropertyDeclarationSyntax;
 
-        protected override bool IsIdentifierNameGeneration(SyntaxNode node)
-            => node is IdentifierNameSyntax identifier && !identifier.Identifier.CouldBeKeyword();
+        protected override bool IsIdentifierNameGeneration(SyntaxNode node) =>
+            node is IdentifierNameSyntax identifier && !identifier.Identifier.CouldBeKeyword();
 
-        protected override bool ContainingTypesOrSelfHasUnsafeKeyword(INamedTypeSymbol containingType)
-            => containingType.ContainingTypesOrSelfHasUnsafeKeyword();
+        protected override bool ContainingTypesOrSelfHasUnsafeKeyword(
+            INamedTypeSymbol containingType
+        ) => containingType.ContainingTypesOrSelfHasUnsafeKeyword();
 
         protected override bool TryInitializeExplicitInterfaceState(
-            SemanticDocument document, SyntaxNode node, CancellationToken cancellationToken,
-            out SyntaxToken identifierToken, out IPropertySymbol propertySymbol, out INamedTypeSymbol typeToGenerateIn)
+            SemanticDocument document,
+            SyntaxNode node,
+            CancellationToken cancellationToken,
+            out SyntaxToken identifierToken,
+            out IPropertySymbol propertySymbol,
+            out INamedTypeSymbol typeToGenerateIn
+        )
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)node;
             identifierToken = propertyDeclaration.Identifier;
@@ -48,10 +56,17 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             if (propertyDeclaration.ExplicitInterfaceSpecifier != null)
             {
                 var semanticModel = document.SemanticModel;
-                propertySymbol = semanticModel.GetDeclaredSymbol(propertyDeclaration, cancellationToken) as IPropertySymbol;
-                if (propertySymbol != null && !propertySymbol.ExplicitInterfaceImplementations.Any())
+                propertySymbol =
+                    semanticModel.GetDeclaredSymbol(propertyDeclaration, cancellationToken)
+                    as IPropertySymbol;
+                if (
+                    propertySymbol != null && !propertySymbol.ExplicitInterfaceImplementations.Any()
+                )
                 {
-                    var info = semanticModel.GetTypeInfo(propertyDeclaration.ExplicitInterfaceSpecifier.Name, cancellationToken);
+                    var info = semanticModel.GetTypeInfo(
+                        propertyDeclaration.ExplicitInterfaceSpecifier.Name,
+                        cancellationToken
+                    );
                     typeToGenerateIn = info.Type as INamedTypeSymbol;
                     return typeToGenerateIn != null;
                 }
@@ -64,21 +79,33 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
         }
 
         protected override bool TryInitializeIdentifierNameState(
-            SemanticDocument document, SimpleNameSyntax identifierName, CancellationToken cancellationToken,
-            out SyntaxToken identifierToken, out ExpressionSyntax simpleNameOrMemberAccessExpression, out bool isInExecutableBlock, out bool isConditionalAccessExpression)
+            SemanticDocument document,
+            SimpleNameSyntax identifierName,
+            CancellationToken cancellationToken,
+            out SyntaxToken identifierToken,
+            out ExpressionSyntax simpleNameOrMemberAccessExpression,
+            out bool isInExecutableBlock,
+            out bool isConditionalAccessExpression
+        )
         {
             identifierToken = identifierName.Identifier;
-            if (identifierToken.ValueText != string.Empty &&
-                !identifierName.IsVar &&
-                !IsProbablyGeneric(identifierName, cancellationToken))
+            if (
+                identifierToken.ValueText != string.Empty
+                && !identifierName.IsVar
+                && !IsProbablyGeneric(identifierName, cancellationToken)
+            )
             {
                 var memberAccess = identifierName.Parent as MemberAccessExpressionSyntax;
-                var conditionalMemberAccess = identifierName.Parent.Parent as ConditionalAccessExpressionSyntax;
+                var conditionalMemberAccess =
+                    identifierName.Parent.Parent as ConditionalAccessExpressionSyntax;
                 if (memberAccess?.Name == identifierName)
                 {
                     simpleNameOrMemberAccessExpression = memberAccess;
                 }
-                else if ((conditionalMemberAccess?.WhenNotNull as MemberBindingExpressionSyntax)?.Name == identifierName)
+                else if (
+                    (conditionalMemberAccess?.WhenNotNull as MemberBindingExpressionSyntax)?.Name
+                    == identifierName
+                )
                 {
                     simpleNameOrMemberAccessExpression = conditionalMemberAccess;
                 }
@@ -98,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
                 }
 
                 var block = identifierName.GetAncestor<BlockSyntax>();
-                isInExecutableBlock = block != null && !block.OverlapsHiddenPosition(cancellationToken);
+                isInExecutableBlock =
+                    block != null && !block.OverlapsHiddenPosition(cancellationToken);
                 isConditionalAccessExpression = conditionalMemberAccess != null;
                 return true;
             }
@@ -110,7 +138,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             return false;
         }
 
-        private static bool IsProbablyGeneric(SimpleNameSyntax identifierName, CancellationToken cancellationToken)
+        private static bool IsProbablyGeneric(
+            SimpleNameSyntax identifierName,
+            CancellationToken cancellationToken
+        )
         {
             if (identifierName.IsKind(SyntaxKind.GenericName))
             {
@@ -121,9 +152,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             // In this case, we would want to generate offer a member called 'Goo'.  however, if we have
             // something like "Goo < string >" then that's clearly something generic and we don't want
             // to offer to generate a member there.
-            var localRoot = identifierName.GetAncestor<StatementSyntax>() ??
-                            identifierName.GetAncestor<MemberDeclarationSyntax>() ??
-                            identifierName.SyntaxTree.GetRoot(cancellationToken);
+            var localRoot =
+                identifierName.GetAncestor<StatementSyntax>()
+                ?? identifierName.GetAncestor<MemberDeclarationSyntax>()
+                ?? identifierName.SyntaxTree.GetRoot(cancellationToken);
 
             // In order to figure this out (without writing our own parser), we just try to parse out a
             // type name here.  If we get a generic name back, without any errors, then we'll assume the
@@ -132,7 +164,11 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             var localText = localRoot.ToString();
             var startIndex = identifierName.Span.Start - localRoot.Span.Start;
 
-            var parsedType = SyntaxFactory.ParseTypeName(localText, startIndex, consumeFullText: false);
+            var parsedType = SyntaxFactory.ParseTypeName(
+                localText,
+                startIndex,
+                consumeFullText: false
+            );
 
             return parsedType.IsKind(SyntaxKind.GenericName) && !parsedType.ContainsDiagnostics;
         }
@@ -140,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
         private static bool IsLegal(
             SemanticDocument document,
             ExpressionSyntax expression,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // TODO(cyrusn): Consider supporting this at some point.  It is difficult because we'd
             // need to replace the identifier typed with the fully qualified name of the field we
@@ -160,8 +197,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
                 return true;
             }
 
-            if (expression.IsParentKind(SyntaxKind.NameColon) &&
-                expression.Parent.IsParentKind(SyntaxKind.Subpattern))
+            if (
+                expression.IsParentKind(SyntaxKind.NameColon)
+                && expression.Parent.IsParentKind(SyntaxKind.Subpattern)
+            )
             {
                 return true;
             }
@@ -174,11 +213,21 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
             return expression.CanReplaceWithLValue(document.SemanticModel, cancellationToken);
         }
 
-        protected override bool TryConvertToLocalDeclaration(ITypeSymbol type, SyntaxToken identifierToken, OptionSet options, SemanticModel semanticModel, CancellationToken cancellationToken, out SyntaxNode newRoot)
+        protected override bool TryConvertToLocalDeclaration(
+            ITypeSymbol type,
+            SyntaxToken identifierToken,
+            OptionSet options,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken,
+            out SyntaxNode newRoot
+        )
         {
             var token = identifierToken;
             var node = identifierToken.Parent as IdentifierNameSyntax;
-            if (node.IsLeftSideOfAssignExpression() && node.Parent.IsParentKind(SyntaxKind.ExpressionStatement))
+            if (
+                node.IsLeftSideOfAssignExpression()
+                && node.Parent.IsParentKind(SyntaxKind.ExpressionStatement)
+            )
             {
                 var assignExpression = (AssignmentExpressionSyntax)node.Parent;
                 var expressionStatement = (StatementSyntax)assignExpression.Parent;
@@ -187,9 +236,20 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
                     SyntaxFactory.VariableDeclaration(
                         type.GenerateTypeSyntax(),
                         SyntaxFactory.SingletonSeparatedList(
-                            SyntaxFactory.VariableDeclarator(token, null, SyntaxFactory.EqualsValueClause(
-                                assignExpression.OperatorToken, assignExpression.Right)))));
-                declarationStatement = declarationStatement.WithAdditionalAnnotations(Formatter.Annotation);
+                            SyntaxFactory.VariableDeclarator(
+                                token,
+                                null,
+                                SyntaxFactory.EqualsValueClause(
+                                    assignExpression.OperatorToken,
+                                    assignExpression.Right
+                                )
+                            )
+                        )
+                    )
+                );
+                declarationStatement = declarationStatement.WithAdditionalAnnotations(
+                    Formatter.Annotation
+                );
 
                 var root = token.GetAncestor<CompilationUnitSyntax>();
                 newRoot = root.ReplaceNode(expressionStatement, declarationStatement);

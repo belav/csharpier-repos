@@ -12,10 +12,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             DirectiveKind.SingleLine,
             builder =>
             {
-                builder.AddAttributeToken(ComponentResources.AttributeDirective_AttributeToken_Name, ComponentResources.AttributeDirective_AttributeToken_Description);
+                builder.AddAttributeToken(
+                    ComponentResources.AttributeDirective_AttributeToken_Name,
+                    ComponentResources.AttributeDirective_AttributeToken_Description
+                );
                 builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
                 builder.Description = ComponentResources.AttributeDirective_Description;
-            });
+            }
+        );
 
         public static void Register(RazorProjectEngineBuilder builder)
         {
@@ -24,7 +28,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.AddDirective(Directive, FileKinds.Legacy, FileKinds.Component, FileKinds.ComponentImport);
+            builder.AddDirective(
+                Directive,
+                FileKinds.Legacy,
+                FileKinds.Component,
+                FileKinds.ComponentImport
+            );
             builder.Features.Add(new AttributeDirectivePass());
         }
     }

@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         Task<int> ExecuteNonQueryAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Executes the command with a single scalar result.
@@ -69,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         Task<object?> ExecuteScalarAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Executes the command with a <see cref="RelationalDataReader" /> result.
@@ -89,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         Task<RelationalDataReader> ExecuteReaderAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     <para>
@@ -108,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         DbCommand CreateDbCommand(
             RelationalCommandParameterObject parameterObject,
             Guid commandId,
-            DbCommandMethod commandMethod);
+            DbCommandMethod commandMethod
+        );
 
         /// <summary>
         ///     Populates this command from the provided <paramref name="templateCommand"/>.

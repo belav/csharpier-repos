@@ -30,7 +30,10 @@ namespace System.Security
             }
             if (length < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(length), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(length),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (length > MaxLength)
             {
@@ -51,6 +54,7 @@ namespace System.Security
                 Span<char> span = AcquireSpan(ref bufferToRelease);
                 value.CopyTo(span);
             }
+
             finally
             {
                 ProtectMemory();
@@ -60,7 +64,10 @@ namespace System.Security
 
         private SecureString(SecureString str)
         {
-            Debug.Assert(str._buffer != null, "Expected other SecureString's buffer to be non-null");
+            Debug.Assert(
+                str._buffer != null,
+                "Expected other SecureString's buffer to be non-null"
+            );
             Debug.Assert(str._encrypted, "Expected to be used only on encrypted SecureStrings");
 
             _buffer = UnmanagedBuffer.Allocate((int)str._buffer.ByteLength);
@@ -84,7 +91,10 @@ namespace System.Security
         {
             if (capacity > MaxLength)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_Capacity);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    SR.ArgumentOutOfRange_Capacity
+                );
             }
 
             Debug.Assert(_buffer != null);
@@ -121,6 +131,7 @@ namespace System.Security
                     span[_decryptedLength] = c;
                     _decryptedLength++;
                 }
+
                 finally
                 {
                     ProtectMemory();
@@ -147,6 +158,7 @@ namespace System.Security
                     Span<char> span = AcquireSpan(ref bufferToRelease);
                     span.Clear();
                 }
+
                 finally
                 {
                     bufferToRelease?.DangerousRelease();
@@ -182,7 +194,10 @@ namespace System.Security
             {
                 if (index < 0 || index > _decryptedLength)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexString);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexString
+                    );
                 }
 
                 EnsureNotDisposed();
@@ -203,6 +218,7 @@ namespace System.Security
                     span[index] = c;
                     _decryptedLength++;
                 }
+
                 finally
                 {
                     ProtectMemory();
@@ -229,7 +245,10 @@ namespace System.Security
             {
                 if (index < 0 || index >= _decryptedLength)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexString);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexString
+                    );
                 }
 
                 EnsureNotDisposed();
@@ -247,6 +266,7 @@ namespace System.Security
                     span.Slice(index + 1, _decryptedLength - (index + 1)).CopyTo(span.Slice(index));
                     _decryptedLength--;
                 }
+
                 finally
                 {
                     ProtectMemory();
@@ -261,7 +281,10 @@ namespace System.Security
             {
                 if (index < 0 || index >= _decryptedLength)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexString);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexString
+                    );
                 }
 
                 EnsureNotDisposed();
@@ -278,6 +301,7 @@ namespace System.Security
                     Span<char> span = AcquireSpan(ref bufferToRelease);
                     span[index] = c;
                 }
+
                 finally
                 {
                     ProtectMemory();
@@ -337,6 +361,7 @@ namespace System.Security
                     ptr = IntPtr.Zero;
                     return result;
                 }
+
                 finally
                 {
                     // If we failed for any reason, free the new buffer
@@ -387,7 +412,10 @@ namespace System.Security
 
                     if (unicode)
                     {
-                        Span<char> resultSpan = new Span<char>((void*)ptr, byteLength / sizeof(char));
+                        Span<char> resultSpan = new Span<char>(
+                            (void*)ptr,
+                            byteLength / sizeof(char)
+                        );
                         span.CopyTo(resultSpan);
                         resultSpan[resultSpan.Length - 1] = '\0';
                     }
@@ -400,6 +428,7 @@ namespace System.Security
                     ptr = IntPtr.Zero;
                     return result;
                 }
+
                 finally
                 {
                     // If we failed for any reason, free the new buffer
@@ -441,20 +470,26 @@ namespace System.Security
                 return buffer;
             }
 
-            internal static unsafe void Copy(UnmanagedBuffer source, UnmanagedBuffer destination, ulong bytesLength)
+            internal static unsafe void Copy(
+                UnmanagedBuffer source,
+                UnmanagedBuffer destination,
+                ulong bytesLength
+            )
             {
                 if (bytesLength == 0)
                 {
                     return;
                 }
 
-                byte* srcPtr = null, dstPtr = null;
+                byte* srcPtr = null,
+                    dstPtr = null;
                 try
                 {
                     source.AcquirePointer(ref srcPtr);
                     destination.AcquirePointer(ref dstPtr);
                     Buffer.MemoryCopy(srcPtr, dstPtr, destination.ByteLength, bytesLength);
                 }
+
                 finally
                 {
                     if (dstPtr != null)

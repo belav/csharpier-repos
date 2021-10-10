@@ -13,11 +13,14 @@ namespace SimpleArray_01
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                                 new RngTest(Test.Test2),
-                                 new RngTest(Test.Test3),
-                                 new RngTest(Test.Test4),
-                                 new RngTest(Test.Test5)};
+            RngTest[] Tests =
+            {
+                new RngTest(Test.Test1),
+                new RngTest(Test.Test2),
+                new RngTest(Test.Test3),
+                new RngTest(Test.Test4),
+                new RngTest(Test.Test5)
+            };
             foreach (RngTest test in Tests)
             {
                 testNum++;
@@ -61,13 +64,9 @@ namespace SimpleArray_01
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test1()
         {
-            int[][] myJaggedArray = new int[3][]
-                        {
-                            new int[5],
-                            new int[3],
-                            new int[4]
-                        };
-            int i, j;
+            int[][] myJaggedArray = new int[3][] { new int[5], new int[3], new int[4] };
+            int i,
+                j;
 
             for (i = 0; i < myJaggedArray.Length; i++)
             {
@@ -84,13 +83,9 @@ namespace SimpleArray_01
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test2()
         {
-            int[][] myJaggedArray = new int[3][]
-                        {
-                            new int[5],
-                            new int[3],
-                            new int[4]
-                        };
-            int i, j;
+            int[][] myJaggedArray = new int[3][] { new int[5], new int[3], new int[4] };
+            int i,
+                j;
             int innerUpper = myJaggedArray[2].Length;
             for (i = 0; i < myJaggedArray.Length; i++)
             {
@@ -107,18 +102,10 @@ namespace SimpleArray_01
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test3()
         {
-            int[][] myJaggedArray = new int[3][]
-                        {
-                            new int[5],
-                            new int[3],
-                            new int[4]
-                        };
-            int i, j;
-            int[][] dummy = new int[2][]
-                {
-                    new int[5],
-                    new int[3]
-                };
+            int[][] myJaggedArray = new int[3][] { new int[5], new int[3], new int[4] };
+            int i,
+                j;
+            int[][] dummy = new int[2][] { new int[5], new int[3] };
             int upper = myJaggedArray.Length;
             for (i = 0; i < upper; i++)
             {
@@ -136,13 +123,9 @@ namespace SimpleArray_01
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test4()
         {
-            int[][] myJaggedArray = new int[3][]
-                        {
-                            new int[5],
-                            new int[3],
-                            new int[4]
-                        };
-            int i, j;
+            int[][] myJaggedArray = new int[3][] { new int[5], new int[3], new int[4] };
+            int i,
+                j;
             int innerUpper = myJaggedArray[2].Length;
             for (i = 0; i < myJaggedArray.Length; i++)
             {
@@ -158,13 +141,9 @@ namespace SimpleArray_01
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test5()
         {
-            int[][] myJaggedArray = new int[3][]
-                        {
-                            new int[5],
-                            new int[3],
-                            new int[4]
-                        };
-            int i, j;
+            int[][] myJaggedArray = new int[3][] { new int[5], new int[3], new int[4] };
+            int i,
+                j;
             int innerUpper = myJaggedArray[2].Length;
             for (i = 0; i < myJaggedArray.Length; i++)
             {

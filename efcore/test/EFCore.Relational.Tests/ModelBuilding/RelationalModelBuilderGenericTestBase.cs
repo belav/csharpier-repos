@@ -8,8 +8,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 {
     public class RelationalModelBuilderTest : ModelBuilderTest
     {
-        public abstract class TestTableBuilder<TEntity>
-            where TEntity : class
+        public abstract class TestTableBuilder<TEntity> where TEntity : class
         {
             public abstract TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true);
         }
@@ -24,11 +23,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             protected TableBuilder<TEntity> TableBuilder { get; }
 
-            protected virtual TestTableBuilder<TEntity> Wrap(TableBuilder<TEntity> tableBuilder)
-                => new GenericTestTableBuilder<TEntity>(tableBuilder);
+            protected virtual TestTableBuilder<TEntity> Wrap(TableBuilder<TEntity> tableBuilder) =>
+                new GenericTestTableBuilder<TEntity>(tableBuilder);
 
-            public override TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true)
-                => Wrap(TableBuilder.ExcludeFromMigrations(excluded));
+            public override TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true) =>
+                Wrap(TableBuilder.ExcludeFromMigrations(excluded));
         }
 
         public class NonGenericTestTableBuilder<TEntity> : TestTableBuilder<TEntity>
@@ -41,11 +40,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             protected TableBuilder TableBuilder { get; }
 
-            protected virtual TestTableBuilder<TEntity> Wrap(TableBuilder tableBuilder)
-                => new NonGenericTestTableBuilder<TEntity>(tableBuilder);
+            protected virtual TestTableBuilder<TEntity> Wrap(TableBuilder tableBuilder) =>
+                new NonGenericTestTableBuilder<TEntity>(tableBuilder);
 
-            public override TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true)
-                => Wrap(TableBuilder.ExcludeFromMigrations(excluded));
+            public override TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true) =>
+                Wrap(TableBuilder.ExcludeFromMigrations(excluded));
         }
     }
 }

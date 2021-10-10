@@ -5,8 +5,11 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
 {
     public class ExternalLogins : DefaultUIPage
     {
-        public ExternalLogins(HttpClient client, IHtmlDocument externalLoginDocument, DefaultUIContext context)
-            : base(client, externalLoginDocument, context)
+        public ExternalLogins(
+            HttpClient client,
+            IHtmlDocument externalLoginDocument,
+            DefaultUIContext context
+        ) : base(client, externalLoginDocument, context)
         {
             if (context.SocialLoginProvider != null && context.PasswordLoginEnabled)
             {
@@ -15,7 +18,10 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
 
             if (context.SocialLoginProvider != null)
             {
-                ExternalLoginDisplayName = HtmlAssert.HasElement("#login-provider-Contoso", Document);
+                ExternalLoginDisplayName = HtmlAssert.HasElement(
+                    "#login-provider-Contoso",
+                    Document
+                );
             }
         }
 

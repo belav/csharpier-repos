@@ -15,14 +15,17 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
     internal class GetDocumentCommandWorker
     {
         private const string DefaultDocumentName = "v1";
-        private const string DocumentService = "Microsoft.Extensions.ApiDescriptions.IDocumentProvider";
+        private const string DocumentService =
+            "Microsoft.Extensions.ApiDescriptions.IDocumentProvider";
         private const string DotString = ".";
         private const string InvalidFilenameString = "..";
         private const string JsonExtension = ".json";
         private const string UnderscoreString = "_";
         private static readonly char[] InvalidFilenameCharacters = Path.GetInvalidFileNameChars();
-        private static readonly Encoding UTF8EncodingWithoutBOM
-            = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private static readonly Encoding UTF8EncodingWithoutBOM = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
 
         private const string GetDocumentsMethodName = "GetDocumentNames";
         private static readonly object[] GetDocumentsArguments = Array.Empty<object>();
@@ -30,7 +33,11 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
         private static readonly Type GetDocumentsReturnType = typeof(IEnumerable<string>);
 
         private const string GenerateMethodName = "GenerateAsync";
-        private static readonly Type[] GenerateMethodParameterTypes = new[] { typeof(string), typeof(TextWriter) };
+        private static readonly Type[] GenerateMethodParameterTypes = new[]
+        {
+            typeof(string),
+            typeof(TextWriter)
+        };
         private static readonly Type GenerateMethodReturnType = typeof(Task);
 
         private readonly GetDocumentCommandContext _context;
@@ -58,11 +65,14 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                 var serviceFactory = HostFactoryResolver.ResolveServiceProviderFactory(assembly);
                 if (serviceFactory == null)
                 {
-                    _reporter.WriteError(Resources.FormatMethodsNotFound(
-                        HostFactoryResolver.BuildWebHost,
-                        HostFactoryResolver.CreateHostBuilder,
-                        HostFactoryResolver.CreateWebHostBuilder,
-                        entryPointType));
+                    _reporter.WriteError(
+                        Resources.FormatMethodsNotFound(
+                            HostFactoryResolver.BuildWebHost,
+                            HostFactoryResolver.CreateHostBuilder,
+                            HostFactoryResolver.CreateWebHostBuilder,
+                            entryPointType
+                        )
+                    );
 
                     return 4;
                 }
@@ -70,12 +80,15 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                 var services = serviceFactory(Array.Empty<string>());
                 if (services == null)
                 {
-                    _reporter.WriteError(Resources.FormatServiceProviderNotFound(
-                        typeof(IServiceProvider),
-                        HostFactoryResolver.BuildWebHost,
-                        HostFactoryResolver.CreateHostBuilder,
-                        HostFactoryResolver.CreateWebHostBuilder,
-                        entryPointType));
+                    _reporter.WriteError(
+                        Resources.FormatServiceProviderNotFound(
+                            typeof(IServiceProvider),
+                            HostFactoryResolver.BuildWebHost,
+                            HostFactoryResolver.CreateHostBuilder,
+                            HostFactoryResolver.CreateWebHostBuilder,
+                            entryPointType
+                        )
+                    );
 
                     return 5;
                 }
@@ -117,7 +130,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                 GetDocumentsMethodName,
                 serviceType,
                 GetDocumentsParameterTypes,
-                GetDocumentsReturnType);
+                GetDocumentsReturnType
+            );
             if (getDocumentsMethod == null)
             {
                 return false;
@@ -127,7 +141,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                 GenerateMethodName,
                 serviceType,
                 GenerateMethodParameterTypes,
-                GenerateMethodReturnType);
+                GenerateMethodReturnType
+            );
             if (generateMethod == null)
             {
                 return false;
@@ -140,7 +155,12 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                 return false;
             }
 
-            var documentNames = (IEnumerable<string>)InvokeMethod(getDocumentsMethod, service, GetDocumentsArguments);
+            var documentNames =
+                (IEnumerable<string>)InvokeMethod(
+                    getDocumentsMethod,
+                    service,
+                    GetDocumentsArguments
+                );
             if (documentNames == null)
             {
                 return false;
@@ -157,7 +177,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                     _context.ProjectName,
                     _context.OutputDirectory,
                     generateMethod,
-                    service);
+                    service
+                );
                 if (filePath == null)
                 {
                     return false;
@@ -185,12 +206,20 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             string projectName,
             string outputDirectory,
             MethodInfo generateMethod,
-            object service)
+            object service
+        )
         {
             _reporter.WriteInformation(Resources.FormatGeneratingDocument(documentName));
 
             using var stream = new MemoryStream();
-            using (var writer = new StreamWriter(stream, UTF8EncodingWithoutBOM, bufferSize: 1024, leaveOpen: true))
+            using (
+                var writer = new StreamWriter(
+                    stream,
+                    UTF8EncodingWithoutBOM,
+                    bufferSize: 1024,
+                    leaveOpen: true
+                )
+            )
             {
                 var arguments = new object[] { documentName, writer };
                 using var resultTask = (Task)InvokeMethod(generateMethod, service, arguments);
@@ -202,7 +231,9 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                 var finished = resultTask.Wait(TimeSpan.FromMinutes(1));
                 if (!finished)
                 {
-                    _reporter.WriteError(Resources.FormatMethodTimedOut(GenerateMethodName, DocumentService, 1));
+                    _reporter.WriteError(
+                        Resources.FormatMethodTimedOut(GenerateMethodName, DocumentService, 1)
+                    );
                     return null;
                 }
             }
@@ -210,7 +241,12 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             if (stream.Length == 0L)
             {
                 _reporter.WriteError(
-                    Resources.FormatMethodWroteNoContent(GenerateMethodName, DocumentService, documentName));
+                    Resources.FormatMethodWroteNoContent(
+                        GenerateMethodName,
+                        DocumentService,
+                        documentName
+                    )
+                );
 
                 return null;
             }
@@ -234,7 +270,11 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             return filePath;
         }
 
-        private static string GetDocumentPath(string documentName, string projectName, string outputDirectory)
+        private static string GetDocumentPath(
+            string documentName,
+            string projectName,
+            string outputDirectory
+        )
         {
             string path;
             if (string.Equals(DefaultDocumentName, documentName, StringComparison.Ordinal))
@@ -248,11 +288,15 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                 // characters such as '/' and '?' and the string "..". Do not treat slashes as folder separators.
                 var sanitizedDocumentName = string.Join(
                     UnderscoreString,
-                    documentName.Split(InvalidFilenameCharacters));
+                    documentName.Split(InvalidFilenameCharacters)
+                );
 
                 while (sanitizedDocumentName.Contains(InvalidFilenameString))
                 {
-                    sanitizedDocumentName = sanitizedDocumentName.Replace(InvalidFilenameString, DotString);
+                    sanitizedDocumentName = sanitizedDocumentName.Replace(
+                        InvalidFilenameString,
+                        DotString
+                    );
                 }
 
                 path = $"{projectName}_{documentName}{JsonExtension}";
@@ -266,7 +310,12 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             return path;
         }
 
-        private MethodInfo GetMethod(string methodName, Type type, Type[] parameterTypes, Type returnType)
+        private MethodInfo GetMethod(
+            string methodName,
+            Type type,
+            Type[] parameterTypes,
+            Type returnType
+        )
         {
             var method = type.GetMethod(methodName, parameterTypes);
             if (method == null)
@@ -284,7 +333,13 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             if (!returnType.IsAssignableFrom(method.ReturnType))
             {
                 _reporter.WriteError(
-                    Resources.FormatMethodReturnTypeUnsupported(methodName, type, method.ReturnType, returnType));
+                    Resources.FormatMethodReturnTypeUnsupported(
+                        methodName,
+                        type,
+                        method.ReturnType,
+                        returnType
+                    )
+                );
 
                 return null;
             }
@@ -298,7 +353,12 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
             if (result == null)
             {
                 _reporter.WriteError(
-                    Resources.FormatMethodReturnedNull(method.Name, method.DeclaringType, method.ReturnType));
+                    Resources.FormatMethodReturnedNull(
+                        method.Name,
+                        method.DeclaringType,
+                        method.ReturnType
+                    )
+                );
             }
 
             return result;

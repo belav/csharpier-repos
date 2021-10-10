@@ -7,7 +7,6 @@ using System;
 
 class SP1d
 {
-
     // Struct in reg (2 ints)
     struct S
     {
@@ -27,7 +26,7 @@ class SP1d
         S s;
         s.i0 = i3;
         s.i1 = i2;
-        return Foo(i1, i0, i4, i5, i6, s); // r0 <= r1; r1 <= r0; r2 <= inarg[0]; r3 <= inarg[4]; 
+        return Foo(i1, i0, i4, i5, i6, s); // r0 <= r1; r1 <= r0; r2 <= inarg[0]; r3 <= inarg[4];
         // outarg[0] <= inarg[8]; outarg[4] <= r3; outarg[8] <= r2
     }
 

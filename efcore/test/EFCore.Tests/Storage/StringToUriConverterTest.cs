@@ -18,7 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(new Uri("https://www.github.com"), converter("https://www.github.com"));
             Assert.Equal(new Uri("/relative/path", UriKind.Relative), converter("/relative/path"));
-            Assert.Equal(new Uri("ftp://www.github.com", UriKind.Absolute), converter("ftp://www.github.com/"));
+            Assert.Equal(
+                new Uri("ftp://www.github.com", UriKind.Absolute),
+                converter("ftp://www.github.com/")
+            );
             Assert.Equal(new Uri(".", UriKind.Relative), converter("."));
             Assert.Null(converter("http:///"));
             Assert.Null(converter(null));
@@ -31,7 +34,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(new Uri("https://www.github.com"), converter("https://www.github.com"));
             Assert.Equal(new Uri("/relative/path", UriKind.Relative), converter("/relative/path"));
-            Assert.Equal(new Uri("ftp://www.github.com", UriKind.Absolute), converter("ftp://www.github.com/"));
+            Assert.Equal(
+                new Uri("ftp://www.github.com", UriKind.Absolute),
+                converter("ftp://www.github.com/")
+            );
             Assert.Equal(new Uri(".", UriKind.Relative), converter("."));
             Assert.Null(converter("http:///"));
             Assert.Null(converter(null));
@@ -44,7 +50,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal("https://www.github.com/", converter(new Uri("https://www.github.com")));
             Assert.Equal("/relative/path", converter(new Uri("/relative/path", UriKind.Relative)));
-            Assert.Equal("ftp://www.github.com/", converter(new Uri("ftp://www.github.com/", UriKind.Absolute)));
+            Assert.Equal(
+                "ftp://www.github.com/",
+                converter(new Uri("ftp://www.github.com/", UriKind.Absolute))
+            );
             Assert.Equal(".", converter(new Uri(".", UriKind.Relative)));
             Assert.Null(converter(null));
         }
@@ -56,7 +65,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal("https://www.github.com/", converter(new Uri("https://www.github.com")));
             Assert.Equal("/relative/path", converter(new Uri("/relative/path", UriKind.Relative)));
-            Assert.Equal("ftp://www.github.com/", converter(new Uri("ftp://www.github.com/", UriKind.Absolute)));
+            Assert.Equal(
+                "ftp://www.github.com/",
+                converter(new Uri("ftp://www.github.com/", UriKind.Absolute))
+            );
             Assert.Equal(".", converter(new Uri(".", UriKind.Relative)));
             Assert.Null(converter(null));
         }

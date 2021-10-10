@@ -11,7 +11,10 @@ namespace Microsoft.AspNetCore.Authentication
     {
         public Func<HttpRequestMessage, HttpResponseMessage> Sender { get; set; }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            System.Threading.CancellationToken cancellationToken
+        )
         {
             if (Sender != null)
             {

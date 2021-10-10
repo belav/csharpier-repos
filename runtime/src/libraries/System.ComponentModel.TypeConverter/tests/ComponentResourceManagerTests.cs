@@ -69,7 +69,9 @@ namespace System.ComponentModel.Tests
             };
 
             var value = new MulticasedClass();
-            Assert.Throws<AmbiguousMatchException>(() => resourceManager.ApplyResources(value, "Object"));
+            Assert.Throws<AmbiguousMatchException>(
+                () => resourceManager.ApplyResources(value, "Object")
+            );
         }
 
         private class MulticasedClass
@@ -86,7 +88,9 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(AmbiguousWithDifferentDeclaringType_TestData))]
-        public void ApplyResources_AmibguousWithDifferentDeclaringTypeInValueType_UsesMostDeclaredProperty<T>(T value) where T : MulticaseSubClass
+        public void ApplyResources_AmibguousWithDifferentDeclaringTypeInValueType_UsesMostDeclaredProperty<T>(
+            T value
+        ) where T : MulticaseSubClass
         {
             var resourceManager = new ComponentResourceManager(typeof(global::Resources.TestResx))
             {
@@ -168,7 +172,11 @@ namespace System.ComponentModel.Tests
 
             public IComponent Component => throw new NotImplementedException();
             public IContainer Container => throw new NotImplementedException();
-            public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+            public string Name
+            {
+                get => throw new NotImplementedException();
+                set => throw new NotImplementedException();
+            }
             public object GetService(Type serviceType) => null;
         }
 
@@ -204,16 +212,28 @@ namespace System.ComponentModel.Tests
         public void ApplyResources_NullValue_ThrowsArgumentNullException()
         {
             var resourceManager = new ComponentResourceManager();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => resourceManager.ApplyResources(null, "objectName"));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => resourceManager.ApplyResources(null, "objectName", CultureInfo.CurrentCulture));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => resourceManager.ApplyResources(null, "objectName")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => resourceManager.ApplyResources(null, "objectName", CultureInfo.CurrentCulture)
+            );
         }
 
         [Fact]
         public void ApplyResources_NullObjectName_ThrowsArgumentNullException()
         {
             var resourceManager = new ComponentResourceManager();
-            AssertExtensions.Throws<ArgumentNullException>("objectName", () => resourceManager.ApplyResources("value", null));
-            AssertExtensions.Throws<ArgumentNullException>("objectName", () => resourceManager.ApplyResources("value", null, CultureInfo.CurrentCulture));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "objectName",
+                () => resourceManager.ApplyResources("value", null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "objectName",
+                () => resourceManager.ApplyResources("value", null, CultureInfo.CurrentCulture)
+            );
         }
     }
 }

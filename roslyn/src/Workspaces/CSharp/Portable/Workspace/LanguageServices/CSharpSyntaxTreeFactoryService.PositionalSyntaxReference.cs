@@ -40,14 +40,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public override SyntaxNode GetSyntax(CancellationToken cancellationToken)
                 {
-                    // Find our node going down in the tree. 
+                    // Find our node going down in the tree.
                     // Try not going deeper than needed.
                     return this.GetNode(SyntaxTree.GetRoot(cancellationToken));
                 }
 
-                public override async Task<SyntaxNode> GetSyntaxAsync(CancellationToken cancellationToken = default)
+                public override async Task<SyntaxNode> GetSyntaxAsync(
+                    CancellationToken cancellationToken = default
+                )
                 {
-                    var root = await SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
+                    var root = await SyntaxTree.GetRootAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     return this.GetNode(root);
                 }
 
@@ -81,8 +84,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // Syntax references to nonterminals in structured trivia should be uncommon.
                     // Provide more efficient implementation if that is not true
-                    var descendantsIntersectingSpan = parent.DescendantNodes(Span, descendIntoTrivia: true);
-                    return descendantsIntersectingSpan.First(node => node.IsKind(_kind) && node.Span == Span);
+                    var descendantsIntersectingSpan = parent.DescendantNodes(
+                        Span,
+                        descendIntoTrivia: true
+                    );
+                    return descendantsIntersectingSpan.First(
+                        node => node.IsKind(_kind) && node.Span == Span
+                    );
                 }
             }
         }

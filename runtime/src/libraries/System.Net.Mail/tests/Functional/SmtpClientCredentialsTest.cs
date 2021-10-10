@@ -118,14 +118,20 @@ namespace System.Net.Mail.Functional.Tests
 
         private ICredentialsByHost GetTransportCredentials(SmtpClient client)
         {
-            Type smtpTransportType = (typeof(SmtpClient)).Assembly.GetType("System.Net.Mail.SmtpTransport");
+            Type smtpTransportType = (typeof(SmtpClient)).Assembly.GetType(
+                "System.Net.Mail.SmtpTransport"
+            );
 
-            var transport = typeof(SmtpClient)
-                .GetField("_transport", BindingFlags.NonPublic | BindingFlags.GetField | BindingFlags.Instance)
+            var transport = typeof(SmtpClient).GetField(
+                    "_transport",
+                    BindingFlags.NonPublic | BindingFlags.GetField | BindingFlags.Instance
+                )
                 .GetValue(client);
 
-            var transportCredentials = smtpTransportType
-                .GetProperty("Credentials", BindingFlags.NonPublic | BindingFlags.GetProperty | BindingFlags.Instance)
+            var transportCredentials = smtpTransportType.GetProperty(
+                    "Credentials",
+                    BindingFlags.NonPublic | BindingFlags.GetProperty | BindingFlags.Instance
+                )
                 .GetValue(transport);
 
             return (ICredentialsByHost)transportCredentials;

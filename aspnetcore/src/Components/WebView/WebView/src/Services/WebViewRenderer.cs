@@ -23,8 +23,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
             Dispatcher dispatcher,
             IpcSender ipcSender,
             ILoggerFactory loggerFactory,
-            ElementReferenceContext elementReferenceContext) :
-            base(serviceProvider, loggerFactory)
+            ElementReferenceContext elementReferenceContext
+        ) : base(serviceProvider, loggerFactory)
         {
             _dispatcher = dispatcher;
             _ipcSender = ipcSender;
@@ -46,21 +46,25 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
         {
             var batchId = nextRenderBatchId++;
             var tcs = new TaskCompletionSource();
-            _unacknowledgedRenderBatches.Enqueue(new UnacknowledgedRenderBatch
-            {
-                BatchId = batchId,
-                CompletionSource = tcs,
-            });
+            _unacknowledgedRenderBatches.Enqueue(
+                new UnacknowledgedRenderBatch { BatchId = batchId, CompletionSource = tcs, }
+            );
 
             _ipcSender.ApplyRenderBatch(batchId, renderBatch);
             return tcs.Task;
         }
 
-        public async Task AddRootComponentAsync(Type componentType, string selector, ParameterView parameters)
+        public async Task AddRootComponentAsync(
+            Type componentType,
+            string selector,
+            ParameterView parameters
+        )
         {
             if (_componentIdBySelector.ContainsKey(selector))
             {
-                throw new InvalidOperationException("A component is already associated with the given selector.");
+                throw new InvalidOperationException(
+                    "A component is already associated with the given selector."
+                );
             }
 
             var component = InstantiateComponent(componentType);
@@ -76,7 +80,9 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
         {
             if (!_componentIdBySelector.TryGetValue(selector, out var componentId))
             {
-                throw new InvalidOperationException("Could not find a component Id associated with the given selector.");
+                throw new InvalidOperationException(
+                    "Could not find a component Id associated with the given selector."
+                );
             }
 
             // TODO: The renderer needs an API to do trigger the disposal of the component tree.
@@ -90,7 +96,9 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
             var nextUnacknowledgedBatch = _unacknowledgedRenderBatches.Dequeue();
             if (nextUnacknowledgedBatch.BatchId != batchId)
             {
-                throw new InvalidOperationException($"Received unexpected acknowledgement for render batch {batchId} (next batch should be {nextUnacknowledgedBatch.BatchId})");
+                throw new InvalidOperationException(
+                    $"Received unexpected acknowledgement for render batch {batchId} (next batch should be {nextUnacknowledgedBatch.BatchId})"
+                );
             }
 
             nextUnacknowledgedBatch.CompletionSource.SetResult();

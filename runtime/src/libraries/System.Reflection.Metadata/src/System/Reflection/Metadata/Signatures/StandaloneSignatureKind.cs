@@ -12,7 +12,6 @@ namespace System.Reflection.Metadata
         /// The <see cref="StandaloneSignature"/> represents a standalone method signature.
         /// </summary>
         Method,
-
         /// <summary>
         /// The <see cref="MemberReference"/> references a local variable signature.
         /// </summary>

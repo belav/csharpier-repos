@@ -19,7 +19,6 @@ public class Dummy
     public int i;
 }
 
-
 public class ToFromIntPtrTest
 {
     private int _numTests = 0;
@@ -47,7 +46,6 @@ public class ToFromIntPtrTest
         return false;
     }
 
-
     private bool FromZeroTest()
     {
         _numTests++;
@@ -70,7 +68,6 @@ public class ToFromIntPtrTest
         return false;
     }
 
-
     private bool ToZeroTest()
     {
         _numTests++;
@@ -88,7 +85,6 @@ public class ToFromIntPtrTest
         Console.WriteLine("ToZeroTest Failed");
         return false;
     }
-
 
     public bool RunTests()
     {
@@ -112,7 +108,6 @@ public class ToFromIntPtrTest
         Console.WriteLine();
         return (_numTests == numPassed);
     }
-
 
     public static int Main()
     {

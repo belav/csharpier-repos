@@ -15,9 +15,11 @@ namespace System.Security.Cryptography
         private const string AssemblyName_Cng = "System.Security.Cryptography.Cng";
         private const string AssemblyName_Csp = "System.Security.Cryptography.Csp";
         private const string AssemblyName_Pkcs = "System.Security.Cryptography.Pkcs";
-        private const string AssemblyName_X509Certificates = "System.Security.Cryptography.X509Certificates";
+        private const string AssemblyName_X509Certificates =
+            "System.Security.Cryptography.X509Certificates";
 
-        private const BindingFlags ConstructorDefault = BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance;
+        private const BindingFlags ConstructorDefault =
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance;
 
         private const string OID_RSA_SMIMEalgCMS3DESwrap = "1.2.840.113549.1.9.16.3.6";
         private const string OID_RSA_MD5 = "1.2.840.113549.2.5";
@@ -34,8 +36,10 @@ namespace System.Security.Cryptography
 
         private static volatile Dictionary<string, string>? s_defaultOidHT;
         private static volatile Dictionary<string, object>? s_defaultNameHT;
-        private static readonly ConcurrentDictionary<string, Type> appNameHT = new ConcurrentDictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
-        private static readonly ConcurrentDictionary<string, string> appOidHT = new ConcurrentDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private static readonly ConcurrentDictionary<string, Type> appNameHT =
+            new ConcurrentDictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
+        private static readonly ConcurrentDictionary<string, string> appOidHT =
+            new ConcurrentDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
         // .NET Core does not support AllowOnlyFipsAlgorithms
         public static bool AllowOnlyFipsAlgorithms => false;
@@ -50,7 +54,10 @@ namespace System.Security.Cryptography
                 }
 
                 int capacity = 37;
-                Dictionary<string, string> ht = new Dictionary<string, string>(capacity, StringComparer.OrdinalIgnoreCase);
+                Dictionary<string, string> ht = new Dictionary<string, string>(
+                    capacity,
+                    StringComparer.OrdinalIgnoreCase
+                );
 
                 ht.Add("SHA", OID_OIWSEC_SHA1);
                 ht.Add("SHA1", OID_OIWSEC_SHA1);
@@ -61,19 +68,28 @@ namespace System.Security.Cryptography
 
                 ht.Add("SHA256", OID_OIWSEC_SHA256);
                 ht.Add("System.Security.Cryptography.SHA256", OID_OIWSEC_SHA256);
-                ht.Add("System.Security.Cryptography.SHA256CryptoServiceProvider", OID_OIWSEC_SHA256);
+                ht.Add(
+                    "System.Security.Cryptography.SHA256CryptoServiceProvider",
+                    OID_OIWSEC_SHA256
+                );
                 ht.Add("System.Security.Cryptography.SHA256Cng", OID_OIWSEC_SHA256);
                 ht.Add("System.Security.Cryptography.SHA256Managed", OID_OIWSEC_SHA256);
 
                 ht.Add("SHA384", OID_OIWSEC_SHA384);
                 ht.Add("System.Security.Cryptography.SHA384", OID_OIWSEC_SHA384);
-                ht.Add("System.Security.Cryptography.SHA384CryptoServiceProvider", OID_OIWSEC_SHA384);
+                ht.Add(
+                    "System.Security.Cryptography.SHA384CryptoServiceProvider",
+                    OID_OIWSEC_SHA384
+                );
                 ht.Add("System.Security.Cryptography.SHA384Cng", OID_OIWSEC_SHA384);
                 ht.Add("System.Security.Cryptography.SHA384Managed", OID_OIWSEC_SHA384);
 
                 ht.Add("SHA512", OID_OIWSEC_SHA512);
                 ht.Add("System.Security.Cryptography.SHA512", OID_OIWSEC_SHA512);
-                ht.Add("System.Security.Cryptography.SHA512CryptoServiceProvider", OID_OIWSEC_SHA512);
+                ht.Add(
+                    "System.Security.Cryptography.SHA512CryptoServiceProvider",
+                    OID_OIWSEC_SHA512
+                );
                 ht.Add("System.Security.Cryptography.SHA512Cng", OID_OIWSEC_SHA512);
                 ht.Add("System.Security.Cryptography.SHA512Managed", OID_OIWSEC_SHA512);
 
@@ -95,7 +111,10 @@ namespace System.Security.Cryptography
                 ht.Add("System.Security.Cryptography.DESCryptoServiceProvider", OID_OIWSEC_desCBC);
 
                 ht.Add("TripleDES", OID_RSA_DES_EDE3_CBC);
-                ht.Add("System.Security.Cryptography.TripleDESCryptoServiceProvider", OID_RSA_DES_EDE3_CBC);
+                ht.Add(
+                    "System.Security.Cryptography.TripleDESCryptoServiceProvider",
+                    OID_RSA_DES_EDE3_CBC
+                );
 
                 Debug.Assert(ht.Count <= capacity); // if more entries are added in the future, increase initial capacity.
                 s_defaultOidHT = ht;
@@ -114,7 +133,10 @@ namespace System.Security.Cryptography
 
                 const int capacity = 89;
 
-                Dictionary<string, object> ht = new Dictionary<string, object>(capacity: capacity, comparer: StringComparer.OrdinalIgnoreCase);
+                Dictionary<string, object> ht = new Dictionary<string, object>(
+                    capacity: capacity,
+                    comparer: StringComparer.OrdinalIgnoreCase
+                );
 
                 Type HMACMD5Type = typeof(System.Security.Cryptography.HMACMD5);
                 Type HMACSHA1Type = typeof(System.Security.Cryptography.HMACSHA1);
@@ -127,21 +149,34 @@ namespace System.Security.Cryptography
                 Type SHA384DefaultType = typeof(System.Security.Cryptography.SHA384Managed);
                 Type SHA512DefaultType = typeof(System.Security.Cryptography.SHA512Managed);
 
-                string SHA1CryptoServiceProviderType = "System.Security.Cryptography.SHA1CryptoServiceProvider, " + AssemblyName_Csp;
-                string MD5CryptoServiceProviderType = "System.Security.Cryptography.MD5CryptoServiceProvider," + AssemblyName_Csp;
-                string RSACryptoServiceProviderType = "System.Security.Cryptography.RSACryptoServiceProvider, " + AssemblyName_Csp;
-                string DSACryptoServiceProviderType = "System.Security.Cryptography.DSACryptoServiceProvider, " + AssemblyName_Csp;
-                string DESCryptoServiceProviderType = "System.Security.Cryptography.DESCryptoServiceProvider, " + AssemblyName_Csp;
-                string TripleDESCryptoServiceProviderType = "System.Security.Cryptography.TripleDESCryptoServiceProvider, " + AssemblyName_Csp;
-                string RC2CryptoServiceProviderType = "System.Security.Cryptography.RC2CryptoServiceProvider, " + AssemblyName_Csp;
-                string RNGCryptoServiceProviderType = "System.Security.Cryptography.RNGCryptoServiceProvider, " + AssemblyName_Csp;
-                string AesCryptoServiceProviderType = "System.Security.Cryptography.AesCryptoServiceProvider, " + AssemblyName_Csp;
+                string SHA1CryptoServiceProviderType =
+                    "System.Security.Cryptography.SHA1CryptoServiceProvider, " + AssemblyName_Csp;
+                string MD5CryptoServiceProviderType =
+                    "System.Security.Cryptography.MD5CryptoServiceProvider," + AssemblyName_Csp;
+                string RSACryptoServiceProviderType =
+                    "System.Security.Cryptography.RSACryptoServiceProvider, " + AssemblyName_Csp;
+                string DSACryptoServiceProviderType =
+                    "System.Security.Cryptography.DSACryptoServiceProvider, " + AssemblyName_Csp;
+                string DESCryptoServiceProviderType =
+                    "System.Security.Cryptography.DESCryptoServiceProvider, " + AssemblyName_Csp;
+                string TripleDESCryptoServiceProviderType =
+                    "System.Security.Cryptography.TripleDESCryptoServiceProvider, "
+                    + AssemblyName_Csp;
+                string RC2CryptoServiceProviderType =
+                    "System.Security.Cryptography.RC2CryptoServiceProvider, " + AssemblyName_Csp;
+                string RNGCryptoServiceProviderType =
+                    "System.Security.Cryptography.RNGCryptoServiceProvider, " + AssemblyName_Csp;
+                string AesCryptoServiceProviderType =
+                    "System.Security.Cryptography.AesCryptoServiceProvider, " + AssemblyName_Csp;
 
                 string ECDsaCngType = "System.Security.Cryptography.ECDsaCng, " + AssemblyName_Cng;
 
                 // Random number generator
                 ht.Add("RandomNumberGenerator", RNGCryptoServiceProviderType);
-                ht.Add("System.Security.Cryptography.RandomNumberGenerator", RNGCryptoServiceProviderType);
+                ht.Add(
+                    "System.Security.Cryptography.RandomNumberGenerator",
+                    RNGCryptoServiceProviderType
+                );
 
                 // Hash functions
                 ht.Add("SHA", SHA1CryptoServiceProviderType);
@@ -181,7 +216,10 @@ namespace System.Security.Cryptography
                 // Asymmetric algorithms
                 ht.Add("RSA", RSACryptoServiceProviderType);
                 ht.Add("System.Security.Cryptography.RSA", RSACryptoServiceProviderType);
-                ht.Add("System.Security.Cryptography.AsymmetricAlgorithm", RSACryptoServiceProviderType);
+                ht.Add(
+                    "System.Security.Cryptography.AsymmetricAlgorithm",
+                    RSACryptoServiceProviderType
+                );
 
                 ht.Add("DSA", DSACryptoServiceProviderType);
                 ht.Add("System.Security.Cryptography.DSA", DSACryptoServiceProviderType);
@@ -202,7 +240,10 @@ namespace System.Security.Cryptography
                 ht.Add("3DES", TripleDESCryptoServiceProviderType);
                 ht.Add("TripleDES", TripleDESCryptoServiceProviderType);
                 ht.Add("Triple DES", TripleDESCryptoServiceProviderType);
-                ht.Add("System.Security.Cryptography.TripleDES", TripleDESCryptoServiceProviderType);
+                ht.Add(
+                    "System.Security.Cryptography.TripleDES",
+                    TripleDESCryptoServiceProviderType
+                );
 
                 ht.Add("RC2", RC2CryptoServiceProviderType);
                 ht.Add("System.Security.Cryptography.RC2", RC2CryptoServiceProviderType);
@@ -214,7 +255,10 @@ namespace System.Security.Cryptography
 
                 ht.Add("AES", AesCryptoServiceProviderType);
                 ht.Add("AesCryptoServiceProvider", AesCryptoServiceProviderType);
-                ht.Add("System.Security.Cryptography.AesCryptoServiceProvider", AesCryptoServiceProviderType);
+                ht.Add(
+                    "System.Security.Cryptography.AesCryptoServiceProvider",
+                    AesCryptoServiceProviderType
+                );
                 ht.Add("AesManaged", AesManagedType);
                 ht.Add("System.Security.Cryptography.AesManaged", AesManagedType);
 
@@ -226,8 +270,14 @@ namespace System.Security.Cryptography
 
                 // Xml Encryption symmetric keys
                 ht.Add("http://www.w3.org/2001/04/xmlenc#des-cbc", DESCryptoServiceProviderType);
-                ht.Add("http://www.w3.org/2001/04/xmlenc#tripledes-cbc", TripleDESCryptoServiceProviderType);
-                ht.Add("http://www.w3.org/2001/04/xmlenc#kw-tripledes", TripleDESCryptoServiceProviderType);
+                ht.Add(
+                    "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+                    TripleDESCryptoServiceProviderType
+                );
+                ht.Add(
+                    "http://www.w3.org/2001/04/xmlenc#kw-tripledes",
+                    TripleDESCryptoServiceProviderType
+                );
 
                 ht.Add("http://www.w3.org/2001/04/xmlenc#aes128-cbc", RijndaelManagedType);
                 ht.Add("http://www.w3.org/2001/04/xmlenc#kw-aes128", RijndaelManagedType);
@@ -248,30 +298,69 @@ namespace System.Security.Cryptography
                 ht.Add("http://www.w3.org/2001/04/xmldsig-more#hmac-sha512", HMACSHA512Type);
                 // X509 Extensions (custom decoders)
                 // Basic Constraints OID value
-                ht.Add("2.5.29.10", "System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension, " + AssemblyName_X509Certificates);
-                ht.Add("2.5.29.19", "System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension, " + AssemblyName_X509Certificates);
+                ht.Add(
+                    "2.5.29.10",
+                    "System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension, "
+                        + AssemblyName_X509Certificates
+                );
+                ht.Add(
+                    "2.5.29.19",
+                    "System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension, "
+                        + AssemblyName_X509Certificates
+                );
                 // Subject Key Identifier OID value
-                ht.Add("2.5.29.14", "System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension, " + AssemblyName_X509Certificates);
+                ht.Add(
+                    "2.5.29.14",
+                    "System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension, "
+                        + AssemblyName_X509Certificates
+                );
                 // Key Usage OID value
-                ht.Add("2.5.29.15", "System.Security.Cryptography.X509Certificates.X509KeyUsageExtension, " + AssemblyName_X509Certificates);
+                ht.Add(
+                    "2.5.29.15",
+                    "System.Security.Cryptography.X509Certificates.X509KeyUsageExtension, "
+                        + AssemblyName_X509Certificates
+                );
                 // Enhanced Key Usage OID value
-                ht.Add("2.5.29.37", "System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension, " + AssemblyName_X509Certificates);
+                ht.Add(
+                    "2.5.29.37",
+                    "System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension, "
+                        + AssemblyName_X509Certificates
+                );
 
                 // X509Chain class can be overridden to use a different chain engine.
-                ht.Add("X509Chain", "System.Security.Cryptography.X509Certificates.X509Chain, " + AssemblyName_X509Certificates);
+                ht.Add(
+                    "X509Chain",
+                    "System.Security.Cryptography.X509Certificates.X509Chain, "
+                        + AssemblyName_X509Certificates
+                );
 
                 // PKCS9 attributes
-                ht.Add("1.2.840.113549.1.9.3", "System.Security.Cryptography.Pkcs.Pkcs9ContentType, " + AssemblyName_Pkcs);
-                ht.Add("1.2.840.113549.1.9.4", "System.Security.Cryptography.Pkcs.Pkcs9MessageDigest, " + AssemblyName_Pkcs);
-                ht.Add("1.2.840.113549.1.9.5", "System.Security.Cryptography.Pkcs.Pkcs9SigningTime, " + AssemblyName_Pkcs);
-                ht.Add("1.3.6.1.4.1.311.88.2.1", "System.Security.Cryptography.Pkcs.Pkcs9DocumentName, " + AssemblyName_Pkcs);
-                ht.Add("1.3.6.1.4.1.311.88.2.2", "System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription, " + AssemblyName_Pkcs);
+                ht.Add(
+                    "1.2.840.113549.1.9.3",
+                    "System.Security.Cryptography.Pkcs.Pkcs9ContentType, " + AssemblyName_Pkcs
+                );
+                ht.Add(
+                    "1.2.840.113549.1.9.4",
+                    "System.Security.Cryptography.Pkcs.Pkcs9MessageDigest, " + AssemblyName_Pkcs
+                );
+                ht.Add(
+                    "1.2.840.113549.1.9.5",
+                    "System.Security.Cryptography.Pkcs.Pkcs9SigningTime, " + AssemblyName_Pkcs
+                );
+                ht.Add(
+                    "1.3.6.1.4.1.311.88.2.1",
+                    "System.Security.Cryptography.Pkcs.Pkcs9DocumentName, " + AssemblyName_Pkcs
+                );
+                ht.Add(
+                    "1.3.6.1.4.1.311.88.2.2",
+                    "System.Security.Cryptography.Pkcs.Pkcs9DocumentDescription, "
+                        + AssemblyName_Pkcs
+                );
 
                 Debug.Assert(ht.Count <= capacity); // // if more entries are added in the future, increase initial capacity.
 
                 s_defaultNameHT = ht;
                 return s_defaultNameHT;
-
                 // Types in .NET Framework but currently unsupported in .NET Core:
                 // Type HMACRIPEMD160Type = typeof(System.Security.Cryptography.HMACRIPEMD160);
                 // Type MAC3DESType = typeof(System.Security.Cryptography.MACTripleDES);
@@ -299,7 +388,10 @@ namespace System.Security.Cryptography
             if (algorithm == null)
                 throw new ArgumentNullException(nameof(algorithm));
             if (!algorithm.IsVisible)
-                throw new ArgumentException(SR.Cryptography_AlgorithmTypesMustBeVisible, nameof(algorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_AlgorithmTypesMustBeVisible,
+                    nameof(algorithm)
+                );
             if (names == null)
                 throw new ArgumentNullException(nameof(names));
 
@@ -323,7 +415,9 @@ namespace System.Security.Cryptography
             }
         }
 
-        [RequiresUnreferencedCode("The default algorithm implementations might be removed, use strong type references like 'RSA.Create()' instead.")]
+        [RequiresUnreferencedCode(
+            "The default algorithm implementations might be removed, use strong type references like 'RSA.Create()' instead."
+        )]
         public static object? CreateFromName(string name, params object?[]? args)
         {
             if (name == null)
@@ -364,9 +458,7 @@ namespace System.Security.Cryptography
 
             // Special case asking for "ECDsa" since the default map from .NET Framework uses
             // a Windows-only type.
-            if (retvalType == null &&
-                (args == null || args.Length == 1) &&
-                name == ECDsaIdentifier)
+            if (retvalType == null && (args == null || args.Length == 1) && name == ECDsaIdentifier)
             {
                 return ECDsa.Create();
             }
@@ -417,14 +509,16 @@ namespace System.Security.Cryptography
             cons = candidates.ToArray();
 
             // Bind to matching ctor.
-            ConstructorInfo? rci = Type.DefaultBinder.BindToMethod(
-                ConstructorDefault,
-                cons,
-                ref args,
-                null,
-                null,
-                null,
-                out object? state) as ConstructorInfo;
+            ConstructorInfo? rci =
+                Type.DefaultBinder.BindToMethod(
+                    ConstructorDefault,
+                    cons,
+                    ref args,
+                    null,
+                    null,
+                    null,
+                    out object? state
+                ) as ConstructorInfo;
 
             // Check for ctor we don't like (non-existent, delegate or decorated with declarative linktime demand).
             if (rci == null || typeof(Delegate).IsAssignableFrom(rci.DeclaringType))
@@ -538,7 +632,9 @@ namespace System.Security.Cryptography
 
             // Final return value is 06 <length> encodedOidNums[]
             if (encodedOidNumsIndex - 2 > 0x7f)
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_Config_EncodedOIDError);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_Config_EncodedOIDError
+                );
 
             encodedOidNums[0] = (byte)0x06;
             encodedOidNums[1] = (byte)(encodedOidNumsIndex - 2);

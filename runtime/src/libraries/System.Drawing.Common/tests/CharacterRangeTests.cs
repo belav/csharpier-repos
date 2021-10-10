@@ -35,10 +35,7 @@ namespace System.Drawing.Tests
         [InlineData(10)]
         public void First_Set_GetReturnsExpected(int value)
         {
-            var range = new CharacterRange
-            {
-                First = value
-            };
+            var range = new CharacterRange { First = value };
             Assert.Equal(value, range.First);
 
             // Set same.
@@ -52,10 +49,7 @@ namespace System.Drawing.Tests
         [InlineData(10)]
         public void Length_Set_GetReturnsExpected(int value)
         {
-            var range = new CharacterRange
-            {
-                Length = value
-            };
+            var range = new CharacterRange { Length = value };
             Assert.Equal(value, range.Length);
 
             // Set same.

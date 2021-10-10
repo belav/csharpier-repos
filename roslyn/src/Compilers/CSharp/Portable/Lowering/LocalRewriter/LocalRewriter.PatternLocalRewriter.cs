@@ -27,7 +27,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             protected readonly SyntheticBoundNodeFactory _factory;
             protected readonly DagTempAllocator _tempAllocator;
 
-            public PatternLocalRewriter(SyntaxNode node, LocalRewriter localRewriter, bool generateInstrumentation)
+            public PatternLocalRewriter(
+                SyntaxNode node,
+                LocalRewriter localRewriter,
+                bool generateInstrumentation
+            )
             {
                 _localRewriter = localRewriter;
                 _factory = localRewriter._factory;
@@ -53,13 +57,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             public sealed class DagTempAllocator
             {
                 private readonly SyntheticBoundNodeFactory _factory;
-                private readonly PooledDictionary<BoundDagTemp, BoundExpression> _map = PooledDictionary<BoundDagTemp, BoundExpression>.GetInstance();
-                private readonly ArrayBuilder<LocalSymbol> _temps = ArrayBuilder<LocalSymbol>.GetInstance();
+                private readonly PooledDictionary<BoundDagTemp, BoundExpression> _map =
+                    PooledDictionary<BoundDagTemp, BoundExpression>.GetInstance();
+                private readonly ArrayBuilder<LocalSymbol> _temps =
+                    ArrayBuilder<LocalSymbol>.GetInstance();
                 private readonly SyntaxNode _node;
 
                 private readonly bool _generateSequencePoints;
 
-                public DagTempAllocator(SyntheticBoundNodeFactory factory, SyntaxNode node, bool generateSequencePoints)
+                public DagTempAllocator(
+                    SyntheticBoundNodeFactory factory,
+                    SyntaxNode node,
+                    bool generateSequencePoints
+                )
                 {
                     _factory = factory;
                     _node = node;
@@ -95,8 +105,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (!_map.TryGetValue(dagTemp, out BoundExpression result))
                     {
-                        var kind = _generateSequencePoints ? SynthesizedLocalKind.SwitchCasePatternMatching : SynthesizedLocalKind.LoweringTemp;
-                        LocalSymbol temp = _factory.SynthesizedLocal(dagTemp.Type, syntax: _node, kind: kind);
+                        var kind = _generateSequencePoints
+                            ? SynthesizedLocalKind.SwitchCasePatternMatching
+                            : SynthesizedLocalKind.LoweringTemp;
+                        LocalSymbol temp = _factory.SynthesizedLocal(
+                            dagTemp.Type,
+                            syntax: _node,
+                            kind: kind
+                        );
                         result = _factory.Local(temp);
                         _map.Add(dagTemp, result);
                         _temps.Add(temp);
@@ -138,112 +154,152 @@ namespace Microsoft.CodeAnalysis.CSharp
                 switch (evaluation)
                 {
                     case BoundDagFieldEvaluation f:
-                        {
-                            FieldSymbol field = f.Field;
-                            var outputTemp = new BoundDagTemp(f.Syntax, field.Type, f);
-                            BoundExpression output = _tempAllocator.GetTemp(outputTemp);
-                            BoundExpression access = _localRewriter.MakeFieldAccess(f.Syntax, input, field, null, LookupResultKind.Viable, field.Type);
-                            access.WasCompilerGenerated = true;
-                            return _factory.AssignmentExpression(output, access);
-                        }
+                    {
+                        FieldSymbol field = f.Field;
+                        var outputTemp = new BoundDagTemp(f.Syntax, field.Type, f);
+                        BoundExpression output = _tempAllocator.GetTemp(outputTemp);
+                        BoundExpression access = _localRewriter.MakeFieldAccess(
+                            f.Syntax,
+                            input,
+                            field,
+                            null,
+                            LookupResultKind.Viable,
+                            field.Type
+                        );
+                        access.WasCompilerGenerated = true;
+                        return _factory.AssignmentExpression(output, access);
+                    }
 
                     case BoundDagPropertyEvaluation p:
-                        {
-                            PropertySymbol property = p.Property;
-                            var outputTemp = new BoundDagTemp(p.Syntax, property.Type, p);
-                            BoundExpression output = _tempAllocator.GetTemp(outputTemp);
-                            return _factory.AssignmentExpression(output, _factory.Property(input, property));
-                        }
+                    {
+                        PropertySymbol property = p.Property;
+                        var outputTemp = new BoundDagTemp(p.Syntax, property.Type, p);
+                        BoundExpression output = _tempAllocator.GetTemp(outputTemp);
+                        return _factory.AssignmentExpression(
+                            output,
+                            _factory.Property(input, property)
+                        );
+                    }
 
                     case BoundDagDeconstructEvaluation d:
+                    {
+                        MethodSymbol method = d.DeconstructMethod;
+                        var refKindBuilder = ArrayBuilder<RefKind>.GetInstance();
+                        var argBuilder = ArrayBuilder<BoundExpression>.GetInstance();
+                        BoundExpression receiver;
+                        void addArg(RefKind refKind, BoundExpression expression)
                         {
-                            MethodSymbol method = d.DeconstructMethod;
-                            var refKindBuilder = ArrayBuilder<RefKind>.GetInstance();
-                            var argBuilder = ArrayBuilder<BoundExpression>.GetInstance();
-                            BoundExpression receiver;
-                            void addArg(RefKind refKind, BoundExpression expression)
-                            {
-                                refKindBuilder.Add(refKind);
-                                argBuilder.Add(expression);
-                            }
-
-                            Debug.Assert(method.Name == WellKnownMemberNames.DeconstructMethodName);
-                            int extensionExtra;
-                            if (method.IsStatic)
-                            {
-                                Debug.Assert(method.IsExtensionMethod);
-                                receiver = _factory.Type(method.ContainingType);
-                                addArg(method.ParameterRefKinds[0], input);
-                                extensionExtra = 1;
-                            }
-                            else
-                            {
-                                receiver = input;
-                                extensionExtra = 0;
-                            }
-
-                            for (int i = extensionExtra; i < method.ParameterCount; i++)
-                            {
-                                ParameterSymbol parameter = method.Parameters[i];
-                                Debug.Assert(parameter.RefKind == RefKind.Out);
-                                var outputTemp = new BoundDagTemp(d.Syntax, parameter.Type, d, i - extensionExtra);
-                                addArg(RefKind.Out, _tempAllocator.GetTemp(outputTemp));
-                            }
-
-                            return _factory.Call(receiver, method, refKindBuilder.ToImmutableAndFree(), argBuilder.ToImmutableAndFree());
+                            refKindBuilder.Add(refKind);
+                            argBuilder.Add(expression);
                         }
+
+                        Debug.Assert(method.Name == WellKnownMemberNames.DeconstructMethodName);
+                        int extensionExtra;
+                        if (method.IsStatic)
+                        {
+                            Debug.Assert(method.IsExtensionMethod);
+                            receiver = _factory.Type(method.ContainingType);
+                            addArg(method.ParameterRefKinds[0], input);
+                            extensionExtra = 1;
+                        }
+                        else
+                        {
+                            receiver = input;
+                            extensionExtra = 0;
+                        }
+
+                        for (int i = extensionExtra; i < method.ParameterCount; i++)
+                        {
+                            ParameterSymbol parameter = method.Parameters[i];
+                            Debug.Assert(parameter.RefKind == RefKind.Out);
+                            var outputTemp = new BoundDagTemp(
+                                d.Syntax,
+                                parameter.Type,
+                                d,
+                                i - extensionExtra
+                            );
+                            addArg(RefKind.Out, _tempAllocator.GetTemp(outputTemp));
+                        }
+
+                        return _factory.Call(
+                            receiver,
+                            method,
+                            refKindBuilder.ToImmutableAndFree(),
+                            argBuilder.ToImmutableAndFree()
+                        );
+                    }
 
                     case BoundDagTypeEvaluation t:
+                    {
+                        TypeSymbol inputType = input.Type;
+                        Debug.Assert(inputType is { });
+                        if (inputType.IsDynamic())
                         {
-                            TypeSymbol inputType = input.Type;
-                            Debug.Assert(inputType is { });
-                            if (inputType.IsDynamic())
-                            {
-                                // Avoid using dynamic conversions for pattern-matching.
-                                inputType = _factory.SpecialType(SpecialType.System_Object);
-                                input = _factory.Convert(inputType, input);
-                            }
+                            // Avoid using dynamic conversions for pattern-matching.
+                            inputType = _factory.SpecialType(SpecialType.System_Object);
+                            input = _factory.Convert(inputType, input);
+                        }
 
-                            TypeSymbol type = t.Type;
-                            var outputTemp = new BoundDagTemp(t.Syntax, type, t);
-                            BoundExpression output = _tempAllocator.GetTemp(outputTemp);
-                            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = _localRewriter.GetNewCompoundUseSiteInfo();
-                            Conversion conversion = _factory.Compilation.Conversions.ClassifyBuiltInConversion(inputType, output.Type, ref useSiteInfo);
-                            _localRewriter._diagnostics.Add(t.Syntax, useSiteInfo);
-                            BoundExpression evaluated;
-                            if (conversion.Exists)
+                        TypeSymbol type = t.Type;
+                        var outputTemp = new BoundDagTemp(t.Syntax, type, t);
+                        BoundExpression output = _tempAllocator.GetTemp(outputTemp);
+                        CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                            _localRewriter.GetNewCompoundUseSiteInfo();
+                        Conversion conversion =
+                            _factory.Compilation.Conversions.ClassifyBuiltInConversion(
+                                inputType,
+                                output.Type,
+                                ref useSiteInfo
+                            );
+                        _localRewriter._diagnostics.Add(t.Syntax, useSiteInfo);
+                        BoundExpression evaluated;
+                        if (conversion.Exists)
+                        {
+                            if (
+                                conversion.Kind == ConversionKind.ExplicitNullable
+                                && inputType.GetNullableUnderlyingType()
+                                    .Equals(output.Type, TypeCompareKind.AllIgnoreOptions)
+                                && _localRewriter.TryGetNullableMethod(
+                                    t.Syntax,
+                                    inputType,
+                                    SpecialMember.System_Nullable_T_GetValueOrDefault,
+                                    out MethodSymbol getValueOrDefault
+                                )
+                            )
                             {
-                                if (conversion.Kind == ConversionKind.ExplicitNullable &&
-                                    inputType.GetNullableUnderlyingType().Equals(output.Type, TypeCompareKind.AllIgnoreOptions) &&
-                                    _localRewriter.TryGetNullableMethod(t.Syntax, inputType, SpecialMember.System_Nullable_T_GetValueOrDefault, out MethodSymbol getValueOrDefault))
-                                {
-                                    // As a special case, since the null test has already been done we can use Nullable<T>.GetValueOrDefault
-                                    evaluated = _factory.Call(input, getValueOrDefault);
-                                }
-                                else
-                                {
-                                    evaluated = _factory.Convert(type, input, conversion);
-                                }
+                                // As a special case, since the null test has already been done we can use Nullable<T>.GetValueOrDefault
+                                evaluated = _factory.Call(input, getValueOrDefault);
                             }
                             else
                             {
-                                evaluated = _factory.As(input, type);
+                                evaluated = _factory.Convert(type, input, conversion);
                             }
-
-                            return _factory.AssignmentExpression(output, evaluated);
                         }
+                        else
+                        {
+                            evaluated = _factory.As(input, type);
+                        }
+
+                        return _factory.AssignmentExpression(output, evaluated);
+                    }
 
                     case BoundDagIndexEvaluation e:
-                        {
-                            // This is an evaluation of an indexed property with a constant int value.
-                            // The input type must be ITuple, and the property must be a property of ITuple.
-                            Debug.Assert(e.Property.GetMethod.ParameterCount == 1);
-                            Debug.Assert(e.Property.GetMethod.Parameters[0].Type.SpecialType == SpecialType.System_Int32);
-                            TypeSymbol type = e.Property.GetMethod.ReturnType;
-                            var outputTemp = new BoundDagTemp(e.Syntax, type, e);
-                            BoundExpression output = _tempAllocator.GetTemp(outputTemp);
-                            return _factory.AssignmentExpression(output, _factory.Call(input, e.Property.GetMethod, _factory.Literal(e.Index)));
-                        }
+                    {
+                        // This is an evaluation of an indexed property with a constant int value.
+                        // The input type must be ITuple, and the property must be a property of ITuple.
+                        Debug.Assert(e.Property.GetMethod.ParameterCount == 1);
+                        Debug.Assert(
+                            e.Property.GetMethod.Parameters[0].Type.SpecialType
+                                == SpecialType.System_Int32
+                        );
+                        TypeSymbol type = e.Property.GetMethod.ReturnType;
+                        var outputTemp = new BoundDagTemp(e.Syntax, type, e);
+                        BoundExpression output = _tempAllocator.GetTemp(outputTemp);
+                        return _factory.AssignmentExpression(
+                            output,
+                            _factory.Call(input, e.Property.GetMethod, _factory.Literal(e.Index))
+                        );
+                    }
 
                     default:
                         throw ExceptionUtilities.UnexpectedValue(evaluation);
@@ -261,14 +317,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                 switch (test)
                 {
                     case BoundDagNonNullTest d:
-                        return MakeNullCheck(d.Syntax, input, input.Type.IsNullableType() ? BinaryOperatorKind.NullableNullNotEqual : BinaryOperatorKind.NotEqual);
+                        return MakeNullCheck(
+                            d.Syntax,
+                            input,
+                            input.Type.IsNullableType()
+                              ? BinaryOperatorKind.NullableNullNotEqual
+                              : BinaryOperatorKind.NotEqual
+                        );
 
                     case BoundDagTypeTest d:
                         // Note that this tests for non-null as a side-effect. We depend on that to sometimes avoid the null check.
                         return _factory.Is(input, d.Type);
 
                     case BoundDagExplicitNullTest d:
-                        return MakeNullCheck(d.Syntax, input, input.Type.IsNullableType() ? BinaryOperatorKind.NullableNullEqual : BinaryOperatorKind.Equal);
+                        return MakeNullCheck(
+                            d.Syntax,
+                            input,
+                            input.Type.IsNullableType()
+                              ? BinaryOperatorKind.NullableNullEqual
+                              : BinaryOperatorKind.Equal
+                        );
 
                     case BoundDagValueTest d:
                         Debug.Assert(!input.Type.IsNullableType());
@@ -284,25 +352,39 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            private BoundExpression MakeNullCheck(SyntaxNode syntax, BoundExpression rewrittenExpr, BinaryOperatorKind operatorKind)
+            private BoundExpression MakeNullCheck(
+                SyntaxNode syntax,
+                BoundExpression rewrittenExpr,
+                BinaryOperatorKind operatorKind
+            )
             {
                 if (rewrittenExpr.Type.IsPointerOrFunctionPointer())
                 {
                     TypeSymbol objectType = _factory.SpecialType(SpecialType.System_Object);
-                    var operandType = new PointerTypeSymbol(TypeWithAnnotations.Create(_factory.SpecialType(SpecialType.System_Void)));
+                    var operandType = new PointerTypeSymbol(
+                        TypeWithAnnotations.Create(_factory.SpecialType(SpecialType.System_Void))
+                    );
                     return _localRewriter.MakeBinaryOperator(
                         syntax,
                         operatorKind,
                         _factory.Convert(operandType, rewrittenExpr),
-                        _factory.Convert(operandType, new BoundLiteral(syntax, ConstantValue.Null, objectType)),
+                        _factory.Convert(
+                            operandType,
+                            new BoundLiteral(syntax, ConstantValue.Null, objectType)
+                        ),
                         _factory.SpecialType(SpecialType.System_Boolean),
-                        null);
+                        null
+                    );
                 }
 
                 return _localRewriter.MakeNullCheck(syntax, rewrittenExpr, operatorKind);
             }
 
-            protected BoundExpression MakeValueTest(SyntaxNode syntax, BoundExpression input, ConstantValue value)
+            protected BoundExpression MakeValueTest(
+                SyntaxNode syntax,
+                BoundExpression input,
+                ConstantValue value
+            )
             {
                 TypeSymbol comparisonType = input.Type.EnumUnderlyingTypeOrSelf();
                 var operatorType = Binder.RelationalOperatorType(comparisonType);
@@ -311,10 +393,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return MakeRelationalTest(syntax, input, operatorKind, value);
             }
 
-            protected BoundExpression MakeRelationalTest(SyntaxNode syntax, BoundExpression input, BinaryOperatorKind operatorKind, ConstantValue value)
+            protected BoundExpression MakeRelationalTest(
+                SyntaxNode syntax,
+                BoundExpression input,
+                BinaryOperatorKind operatorKind,
+                ConstantValue value
+            )
             {
-                if (input.Type.SpecialType == SpecialType.System_Double && double.IsNaN(value.DoubleValue) ||
-                    input.Type.SpecialType == SpecialType.System_Single && float.IsNaN(value.SingleValue))
+                if (
+                    input.Type.SpecialType == SpecialType.System_Double
+                        && double.IsNaN(value.DoubleValue)
+                    || input.Type.SpecialType == SpecialType.System_Single
+                        && float.IsNaN(value.SingleValue)
+                )
                 {
                     Debug.Assert(operatorKind.Operator() == BinaryOperatorKind.Equal);
                     return _factory.MakeIsNotANumberTest(input);
@@ -322,23 +413,35 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 BoundExpression literal = _localRewriter.MakeLiteral(syntax, value, input.Type);
                 TypeSymbol comparisonType = input.Type.EnumUnderlyingTypeOrSelf();
-                if (operatorKind.OperandTypes() == BinaryOperatorKind.Int && comparisonType.SpecialType != SpecialType.System_Int32)
+                if (
+                    operatorKind.OperandTypes() == BinaryOperatorKind.Int
+                    && comparisonType.SpecialType != SpecialType.System_Int32
+                )
                 {
                     // Promote operands to int before comparison for byte, sbyte, short, ushort
-                    Debug.Assert(comparisonType.SpecialType switch
-                    {
-                        SpecialType.System_Byte => true,
-                        SpecialType.System_SByte => true,
-                        SpecialType.System_Int16 => true,
-                        SpecialType.System_UInt16 => true,
-                        _ => false
-                    });
+                    Debug.Assert(
+                        comparisonType.SpecialType switch
+                        {
+                            SpecialType.System_Byte => true,
+                            SpecialType.System_SByte => true,
+                            SpecialType.System_Int16 => true,
+                            SpecialType.System_UInt16 => true,
+                            _ => false
+                        }
+                    );
                     comparisonType = _factory.SpecialType(SpecialType.System_Int32);
                     input = _factory.Convert(comparisonType, input);
                     literal = _factory.Convert(comparisonType, literal);
                 }
 
-                return this._localRewriter.MakeBinaryOperator(_factory.Syntax, operatorKind, input, literal, _factory.SpecialType(SpecialType.System_Boolean), method: null);
+                return this._localRewriter.MakeBinaryOperator(
+                    _factory.Syntax,
+                    operatorKind,
+                    input,
+                    literal,
+                    _factory.SpecialType(SpecialType.System_Boolean),
+                    method: null
+                );
             }
 
             /// <summary>
@@ -356,36 +459,64 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDagTest test,
                 BoundDagEvaluation evaluation,
                 [NotNullWhen(true)] out BoundExpression sideEffect,
-                [NotNullWhen(true)] out BoundExpression testExpression)
+                [NotNullWhen(true)] out BoundExpression testExpression
+            )
             {
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = _localRewriter.GetNewCompoundUseSiteInfo();
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    _localRewriter.GetNewCompoundUseSiteInfo();
 
                 // case 1: type test followed by cast to that type
-                if (test is BoundDagTypeTest typeDecision &&
-                    evaluation is BoundDagTypeEvaluation typeEvaluation1 &&
-                    typeDecision.Type.IsReferenceType &&
-                    typeEvaluation1.Type.Equals(typeDecision.Type, TypeCompareKind.AllIgnoreOptions) &&
-                    typeEvaluation1.Input == typeDecision.Input)
+                if (
+                    test is BoundDagTypeTest typeDecision
+                    && evaluation is BoundDagTypeEvaluation typeEvaluation1
+                    && typeDecision.Type.IsReferenceType
+                    && typeEvaluation1.Type.Equals(
+                        typeDecision.Type,
+                        TypeCompareKind.AllIgnoreOptions
+                    )
+                    && typeEvaluation1.Input == typeDecision.Input
+                )
                 {
                     BoundExpression input = _tempAllocator.GetTemp(test.Input);
-                    BoundExpression output = _tempAllocator.GetTemp(new BoundDagTemp(evaluation.Syntax, typeEvaluation1.Type, evaluation));
+                    BoundExpression output = _tempAllocator.GetTemp(
+                        new BoundDagTemp(evaluation.Syntax, typeEvaluation1.Type, evaluation)
+                    );
                     Debug.Assert(output.Type is { });
-                    sideEffect = _factory.AssignmentExpression(output, _factory.As(input, typeEvaluation1.Type));
+                    sideEffect = _factory.AssignmentExpression(
+                        output,
+                        _factory.As(input, typeEvaluation1.Type)
+                    );
                     testExpression = _factory.ObjectNotEqual(output, _factory.Null(output.Type));
                     return true;
                 }
 
                 // case 2: null check followed by cast to a base type
-                if (test is BoundDagNonNullTest nonNullTest &&
-                    evaluation is BoundDagTypeEvaluation typeEvaluation2 &&
-                    _factory.Compilation.Conversions.ClassifyBuiltInConversion(test.Input.Type, typeEvaluation2.Type, ref useSiteInfo) is Conversion conv &&
-                    (conv.IsIdentity || conv.Kind == ConversionKind.ImplicitReference || conv.IsBoxing) &&
-                    typeEvaluation2.Input == nonNullTest.Input)
+                if (
+                    test is BoundDagNonNullTest nonNullTest
+                    && evaluation is BoundDagTypeEvaluation typeEvaluation2
+                    && _factory.Compilation.Conversions.ClassifyBuiltInConversion(
+                        test.Input.Type,
+                        typeEvaluation2.Type,
+                        ref useSiteInfo
+                    )
+                        is Conversion conv
+                    && (
+                        conv.IsIdentity
+                        || conv.Kind == ConversionKind.ImplicitReference
+                        || conv.IsBoxing
+                    )
+                    && typeEvaluation2.Input == nonNullTest.Input
+                )
                 {
                     BoundExpression input = _tempAllocator.GetTemp(test.Input);
                     var baseType = typeEvaluation2.Type;
-                    BoundExpression output = _tempAllocator.GetTemp(new BoundDagTemp(evaluation.Syntax, baseType, evaluation));
-                    sideEffect = _factory.AssignmentExpression(output, _factory.Convert(baseType, input));
+                    BoundExpression output = _tempAllocator.GetTemp(
+                        new BoundDagTemp(evaluation.Syntax, baseType, evaluation)
+                    );
+                    sideEffect = _factory.AssignmentExpression(
+                        output,
+                        _factory.Convert(baseType, input)
+                    );
                     testExpression = _factory.ObjectNotEqual(output, _factory.Null(baseType));
                     _localRewriter._diagnostics.Add(test.Syntax, useSiteInfo);
                     return true;
@@ -403,19 +534,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression loweredInput,
                 BoundDecisionDag decisionDag,
                 Action<BoundExpression> addCode,
-                out BoundExpression savedInputExpression)
+                out BoundExpression savedInputExpression
+            )
             {
                 Debug.Assert(loweredInput.Type is { });
 
                 // We share input variables if there is no when clause (because a when clause might mutate them).
-                bool anyWhenClause =
-                    decisionDag.TopologicallySortedNodes
-                    .Any(node => node is BoundWhenDecisionDagNode { WhenExpression: { ConstantValue: null } });
+                bool anyWhenClause = decisionDag.TopologicallySortedNodes.Any(
+                    node =>
+                        node is BoundWhenDecisionDagNode { WhenExpression: { ConstantValue: null } }
+                );
 
                 var inputDagTemp = BoundDagTemp.ForOriginalInput(loweredInput);
-                if ((loweredInput.Kind == BoundKind.Local || loweredInput.Kind == BoundKind.Parameter)
-                    && loweredInput.GetRefKind() == RefKind.None &&
-                    !anyWhenClause)
+                if (
+                    (
+                        loweredInput.Kind == BoundKind.Local
+                        || loweredInput.Kind == BoundKind.Parameter
+                    )
+                    && loweredInput.GetRefKind() == RefKind.None
+                    && !anyWhenClause
+                )
                 {
                     // If we're switching on a local variable and there is no when clause,
                     // we assume the value of the local variable does not change during the execution of the
@@ -439,24 +577,40 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             if (binding.VariableAccess is BoundLocal l)
                             {
-                                Debug.Assert(l.LocalSymbol.DeclarationKind == LocalDeclarationKind.PatternVariable);
-                                _ = _tempAllocator.TrySetTemp(binding.TempContainingValue, binding.VariableAccess);
+                                Debug.Assert(
+                                    l.LocalSymbol.DeclarationKind
+                                        == LocalDeclarationKind.PatternVariable
+                                );
+                                _ = _tempAllocator.TrySetTemp(
+                                    binding.TempContainingValue,
+                                    binding.VariableAccess
+                                );
                             }
                         }
                     }
                 }
 
-                if (loweredInput.Type.IsTupleType &&
-                    !loweredInput.Type.OriginalDefinition.Equals(_factory.Compilation.GetWellKnownType(WellKnownType.System_ValueTuple_TRest)) &&
-                    loweredInput.Syntax.Kind() == SyntaxKind.TupleExpression &&
-                    loweredInput is BoundObjectCreationExpression expr &&
-                    !decisionDag.TopologicallySortedNodes.Any(n => usesOriginalInput(n)))
+                if (
+                    loweredInput.Type.IsTupleType
+                    && !loweredInput.Type.OriginalDefinition.Equals(
+                        _factory.Compilation.GetWellKnownType(WellKnownType.System_ValueTuple_TRest)
+                    )
+                    && loweredInput.Syntax.Kind() == SyntaxKind.TupleExpression
+                    && loweredInput is BoundObjectCreationExpression expr
+                    && !decisionDag.TopologicallySortedNodes.Any(n => usesOriginalInput(n))
+                )
                 {
                     // If the switch governing expression is a tuple literal whose whole value is not used anywhere,
                     // (though perhaps its component parts are used), then we can save the component parts
                     // and assign them into temps (or perhaps user variables) to avoid the creation of
                     // the tuple altogether.
-                    decisionDag = RewriteTupleInput(decisionDag, expr, addCode, !anyWhenClause, out savedInputExpression);
+                    decisionDag = RewriteTupleInput(
+                        decisionDag,
+                        expr,
+                        addCode,
+                        !anyWhenClause,
+                        out savedInputExpression
+                    );
                 }
                 else
                 {
@@ -508,19 +662,29 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundObjectCreationExpression loweredInput,
                 Action<BoundExpression> addCode,
                 bool canShareInputs,
-                out BoundExpression savedInputExpression)
+                out BoundExpression savedInputExpression
+            )
             {
                 int count = loweredInput.Arguments.Length;
 
                 // first evaluate the inputs (in order) into temps
-                var originalInput = BoundDagTemp.ForOriginalInput(loweredInput.Syntax, loweredInput.Type);
-                var newArguments = ArrayBuilder<BoundExpression>.GetInstance(loweredInput.Arguments.Length);
+                var originalInput = BoundDagTemp.ForOriginalInput(
+                    loweredInput.Syntax,
+                    loweredInput.Type
+                );
+                var newArguments = ArrayBuilder<BoundExpression>.GetInstance(
+                    loweredInput.Arguments.Length
+                );
                 for (int i = 0; i < count; i++)
                 {
                     var field = loweredInput.Type.TupleElements[i].CorrespondingTupleField;
                     Debug.Assert(field != null);
                     var expr = loweredInput.Arguments[i];
-                    var fieldFetchEvaluation = new BoundDagFieldEvaluation(expr.Syntax, field, originalInput);
+                    var fieldFetchEvaluation = new BoundDagFieldEvaluation(
+                        expr.Syntax,
+                        field,
+                        originalInput
+                    );
                     var temp = new BoundDagTemp(expr.Syntax, expr.Type, fieldFetchEvaluation);
                     storeToTemp(temp, expr);
                     newArguments.Add(_tempAllocator.GetTemp(temp));
@@ -528,15 +692,27 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var rewrittenDag = decisionDag.Rewrite(makeReplacement);
                 savedInputExpression = loweredInput.Update(
-                    loweredInput.Constructor, arguments: newArguments.ToImmutableAndFree(), loweredInput.ArgumentNamesOpt, loweredInput.ArgumentRefKindsOpt,
-                    loweredInput.Expanded, loweredInput.ArgsToParamsOpt, loweredInput.DefaultArguments, loweredInput.ConstantValueOpt,
-                    loweredInput.InitializerExpressionOpt, loweredInput.Type);
+                    loweredInput.Constructor,
+                    arguments: newArguments.ToImmutableAndFree(),
+                    loweredInput.ArgumentNamesOpt,
+                    loweredInput.ArgumentRefKindsOpt,
+                    loweredInput.Expanded,
+                    loweredInput.ArgsToParamsOpt,
+                    loweredInput.DefaultArguments,
+                    loweredInput.ConstantValueOpt,
+                    loweredInput.InitializerExpressionOpt,
+                    loweredInput.Type
+                );
 
                 return rewrittenDag;
 
                 void storeToTemp(BoundDagTemp temp, BoundExpression expr)
                 {
-                    if (canShareInputs && (expr.Kind == BoundKind.Parameter || expr.Kind == BoundKind.Local) && _tempAllocator.TrySetTemp(temp, expr))
+                    if (
+                        canShareInputs
+                        && (expr.Kind == BoundKind.Parameter || expr.Kind == BoundKind.Local)
+                        && _tempAllocator.TrySetTemp(temp, expr)
+                    )
                     {
                         // we've arranged to use the input value from the variable it is already stored in
                     }
@@ -547,16 +723,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                BoundDecisionDagNode makeReplacement(BoundDecisionDagNode node, Func<BoundDecisionDagNode, BoundDecisionDagNode> replacement)
+                BoundDecisionDagNode makeReplacement(
+                    BoundDecisionDagNode node,
+                    Func<BoundDecisionDagNode, BoundDecisionDagNode> replacement
+                )
                 {
                     switch (node)
                     {
                         case BoundEvaluationDecisionDagNode evalNode:
-                            if (evalNode.Evaluation is BoundDagFieldEvaluation eval &&
-                                eval.Input.IsOriginalInput &&
-                                eval.Field is var field &&
-                                field.CorrespondingTupleField != null &&
-                                field.TupleElementIndex is int i)
+                            if (
+                                evalNode.Evaluation is BoundDagFieldEvaluation eval
+                                && eval.Input.IsOriginalInput
+                                && eval.Field is var field
+                                && field.CorrespondingTupleField != null
+                                && field.TupleElementIndex is int i
+                            )
                             {
                                 // The elements of an input tuple were evaluated beforehand, so don't need to be evaluated now.
                                 return replacement(evalNode.Next);

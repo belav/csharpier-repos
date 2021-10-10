@@ -28,7 +28,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Prevent registering the same implementation of IStartupFilter (AnalysisStartupFilter) multiple times.
             // But allow multiple registrations of different implementation types.
-            services.TryAddEnumerable(ServiceDescriptor.Transient<IStartupFilter, AnalysisStartupFilter>());
+            services.TryAddEnumerable(
+                ServiceDescriptor.Transient<IStartupFilter, AnalysisStartupFilter>()
+            );
             return services;
         }
     }

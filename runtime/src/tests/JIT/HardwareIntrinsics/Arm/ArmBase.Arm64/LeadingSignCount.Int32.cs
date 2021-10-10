@@ -97,7 +97,6 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             Succeeded = true;
 
-            
             _fld = TestLibrary.Generator.GetInt32();
             _data = TestLibrary.Generator.GetInt32();
         }
@@ -121,10 +120,17 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(ArmBase.Arm64).GetMethod(nameof(ArmBase.Arm64.LeadingSignCount), new Type[] { typeof(Int32) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<Int32>(ref Unsafe.As<Int32, byte>(ref _data))
-                                     });
+            var result = typeof(ArmBase.Arm64).GetMethod(
+                    nameof(ArmBase.Arm64.LeadingSignCount),
+                    new Type[] { typeof(Int32) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<Int32>(ref Unsafe.As<Int32, byte>(ref _data))
+                    }
+                );
 
             ValidateResult(_data, (Int32)result);
         }
@@ -133,9 +139,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = ArmBase.Arm64.LeadingSignCount(
-                _clsVar
-            );
+            var result = ArmBase.Arm64.LeadingSignCount(_clsVar);
 
             ValidateResult(_clsVar, result);
         }
@@ -211,11 +215,18 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             var isUnexpectedResult = false;
 
-            int expectedResult = 0; for (int index = 30; (((uint)data >> index) & 1) == (((uint)data >> 31) & 1); index--) { expectedResult++; } isUnexpectedResult = (expectedResult != result);
+            int expectedResult = 0;
+            for (int index = 30; (((uint)data >> index) & 1) == (((uint)data >> 31) & 1); index--)
+            {
+                expectedResult++;
+            }
+            isUnexpectedResult = (expectedResult != result);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.LeadingSignCount)}<Int32>(Int32): LeadingSignCount failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.LeadingSignCount)}<Int32>(Int32): LeadingSignCount failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

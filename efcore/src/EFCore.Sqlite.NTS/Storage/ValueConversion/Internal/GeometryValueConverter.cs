@@ -23,10 +23,6 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.ValueConversion.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public GeometryValueConverter(GaiaGeoReader reader, GaiaGeoWriter writer)
-            : base(
-                g => writer.Write(g),
-                b => (TGeometry)reader.Read(b))
-        {
-        }
+            : base(g => writer.Write(g), b => (TGeometry)reader.Read(b)) { }
     }
 }

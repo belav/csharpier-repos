@@ -8,13 +8,11 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-
     public enum AccessControlType
     {
         Allow = 0,
         Deny = 1,
     }
-
 
     public abstract class AuthorizationRule
     {
@@ -35,7 +33,8 @@ namespace System.Security.AccessControl
             int accessMask,
             bool isInherited,
             InheritanceFlags inheritanceFlags,
-            PropagationFlags propagationFlags)
+            PropagationFlags propagationFlags
+        )
         {
             if (identity == null)
             {
@@ -47,23 +46,33 @@ namespace System.Security.AccessControl
                 throw new ArgumentException(SR.Argument_ArgumentZero, nameof(accessMask));
             }
 
-            if (inheritanceFlags < InheritanceFlags.None || inheritanceFlags > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit))
+            if (
+                inheritanceFlags < InheritanceFlags.None
+                || inheritanceFlags
+                    > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit)
+            )
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(inheritanceFlags), SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "InheritanceFlags"));
+                    nameof(inheritanceFlags),
+                    SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "InheritanceFlags")
+                );
             }
 
-            if (propagationFlags < PropagationFlags.None || propagationFlags > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly))
+            if (
+                propagationFlags < PropagationFlags.None
+                || propagationFlags
+                    > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly)
+            )
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(propagationFlags), SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "PropagationFlags"));
+                    nameof(propagationFlags),
+                    SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "PropagationFlags")
+                );
             }
 
             if (identity.IsValidTargetType(typeof(SecurityIdentifier)) == false)
             {
-                throw new ArgumentException(
-                    SR.Arg_MustBeIdentityReferenceType,
-                    nameof(identity));
+                throw new ArgumentException(SR.Arg_MustBeIdentityReferenceType, nameof(identity));
             }
 
             _identity = identity;
@@ -109,10 +118,8 @@ namespace System.Security.AccessControl
         {
             get { return _propagationFlags; }
         }
-
         #endregion
     }
-
 
     public abstract class AccessRule : AuthorizationRule
     {
@@ -130,25 +137,36 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
-            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
+            AccessControlType type
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
         {
-            if (type != AccessControlType.Allow &&
-                type != AccessControlType.Deny)
+            if (type != AccessControlType.Allow && type != AccessControlType.Deny)
             {
                 throw new ArgumentOutOfRangeException(nameof(type), SR.ArgumentOutOfRange_Enum);
             }
 
-            if (inheritanceFlags < InheritanceFlags.None || inheritanceFlags > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit))
+            if (
+                inheritanceFlags < InheritanceFlags.None
+                || inheritanceFlags
+                    > (InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit)
+            )
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(inheritanceFlags), SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "InheritanceFlags"));
+                    nameof(inheritanceFlags),
+                    SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "InheritanceFlags")
+                );
             }
 
-            if (propagationFlags < PropagationFlags.None || propagationFlags > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly))
+            if (
+                propagationFlags < PropagationFlags.None
+                || propagationFlags
+                    > (PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly)
+            )
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(propagationFlags), SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "PropagationFlags"));
+                    nameof(propagationFlags),
+                    SR.Format(SR.Argument_InvalidEnumValue, inheritanceFlags, "PropagationFlags")
+                );
             }
 
             _type = type;
@@ -162,10 +180,8 @@ namespace System.Security.AccessControl
         {
             get { return _type; }
         }
-
         #endregion
     }
-
 
     public abstract class ObjectAccessRule : AccessRule
     {
@@ -179,10 +195,21 @@ namespace System.Security.AccessControl
 
         #region Constructors
 
-        protected ObjectAccessRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, Guid objectType, Guid inheritedObjectType, AccessControlType type)
-            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
+        protected ObjectAccessRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            Guid objectType,
+            Guid inheritedObjectType,
+            AccessControlType type
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
         {
-            if ((!objectType.Equals(Guid.Empty)) && ((accessMask & ObjectAce.AccessMaskWithObjectType) != 0))
+            if (
+                (!objectType.Equals(Guid.Empty))
+                && ((accessMask & ObjectAce.AccessMaskWithObjectType) != 0)
+            )
             {
                 _objectType = objectType;
                 _objectFlags |= ObjectAceFlags.ObjectAceTypePresent;
@@ -192,7 +219,10 @@ namespace System.Security.AccessControl
                 _objectType = Guid.Empty;
             }
 
-            if ((!inheritedObjectType.Equals(Guid.Empty)) && ((inheritanceFlags & InheritanceFlags.ContainerInherit) != 0))
+            if (
+                (!inheritedObjectType.Equals(Guid.Empty))
+                && ((inheritanceFlags & InheritanceFlags.ContainerInherit) != 0)
+            )
             {
                 _inheritedObjectType = inheritedObjectType;
                 _objectFlags |= ObjectAceFlags.InheritedObjectAceTypePresent;
@@ -221,10 +251,8 @@ namespace System.Security.AccessControl
         {
             get { return _objectFlags; }
         }
-
         #endregion
     }
-
 
     public abstract class AuditRule : AuthorizationRule
     {
@@ -242,8 +270,8 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags auditFlags)
-            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
+            AuditFlags auditFlags
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
         {
             if (auditFlags == AuditFlags.None)
             {
@@ -251,7 +279,10 @@ namespace System.Security.AccessControl
             }
             else if ((auditFlags & ~(AuditFlags.Success | AuditFlags.Failure)) != 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(auditFlags), SR.ArgumentOutOfRange_Enum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(auditFlags),
+                    SR.ArgumentOutOfRange_Enum
+                );
             }
 
             _flags = auditFlags;
@@ -265,10 +296,8 @@ namespace System.Security.AccessControl
         {
             get { return _flags; }
         }
-
         #endregion
     }
-
 
     public abstract class ObjectAuditRule : AuditRule
     {
@@ -282,11 +311,21 @@ namespace System.Security.AccessControl
 
         #region Constructors
 
-        protected ObjectAuditRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, Guid objectType, Guid inheritedObjectType, AuditFlags auditFlags)
-            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, auditFlags)
+        protected ObjectAuditRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            Guid objectType,
+            Guid inheritedObjectType,
+            AuditFlags auditFlags
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, auditFlags)
         {
-
-            if ((!objectType.Equals(Guid.Empty)) && ((accessMask & ObjectAce.AccessMaskWithObjectType) != 0))
+            if (
+                (!objectType.Equals(Guid.Empty))
+                && ((accessMask & ObjectAce.AccessMaskWithObjectType) != 0)
+            )
             {
                 _objectType = objectType;
                 _objectFlags |= ObjectAceFlags.ObjectAceTypePresent;
@@ -296,7 +335,10 @@ namespace System.Security.AccessControl
                 _objectType = Guid.Empty;
             }
 
-            if ((!inheritedObjectType.Equals(Guid.Empty)) && ((inheritanceFlags & InheritanceFlags.ContainerInherit) != 0))
+            if (
+                (!inheritedObjectType.Equals(Guid.Empty))
+                && ((inheritanceFlags & InheritanceFlags.ContainerInherit) != 0)
+            )
             {
                 _inheritedObjectType = inheritedObjectType;
                 _objectFlags |= ObjectAceFlags.InheritedObjectAceTypePresent;
@@ -325,20 +367,14 @@ namespace System.Security.AccessControl
         {
             get { return _objectFlags; }
         }
-
-
         #endregion
     }
-
 
     public sealed class AuthorizationRuleCollection : ReadOnlyCollectionBase
     {
         #region Constructors
 
-        public AuthorizationRuleCollection()
-            : base()
-        {
-        }
+        public AuthorizationRuleCollection() : base() { }
 
         #endregion
 
@@ -366,7 +402,6 @@ namespace System.Security.AccessControl
         {
             get { return InnerList[index] as AuthorizationRule; }
         }
-
         #endregion
     }
 }

@@ -37,7 +37,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.PathMap = "K1=V1,K2=V2";
-            Assert.Equal("/pathmap:\"K1=V1,K2=V2\" /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/pathmap:\"K1=V1,K2=V2\" /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
@@ -50,12 +53,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.Deterministic = true;
-            Assert.Equal("/out:test.exe /deterministic+ test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.exe /deterministic+ test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.Deterministic = false;
-            Assert.Equal("/out:test.exe /deterministic- test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.exe /deterministic- test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
@@ -86,7 +95,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.RuntimeMetadataVersion = "v1234";
-            Assert.Equal("/out:test.exe /runtimemetadataversion:v1234 test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.exe /runtimemetadataversion:v1234 test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
@@ -100,7 +112,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.LangVersion = "iso-1";
-            Assert.Equal("/out:test.exe /langversion:iso-1 test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.exe /langversion:iso-1 test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -109,7 +124,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.ChecksumAlgorithm = "sha256";
-            Assert.Equal("/out:test.exe /checksumalgorithm:sha256 test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.exe /checksumalgorithm:sha256 test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
@@ -119,7 +137,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.ChecksumAlgorithm = "";
-            Assert.Equal("/out:test.exe /checksumalgorithm: test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.exe /checksumalgorithm: test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -139,7 +160,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
             csc = new Csc();
             csc.Instrument = "TestCoverage,Mumble;Stumble";
-            Assert.Equal("/instrument:TestCoverage,Mumble,Stumble", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/instrument:TestCoverage,Mumble,Stumble",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -148,7 +172,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.TargetType = "library";
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
-            Assert.Equal("/out:test.dll /target:library test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.dll /target:library test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -177,7 +204,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 var csc = new Csc();
                 csc.DefineConstants = s;
                 csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
-                Assert.Equal("/define:D1;D2 /out:test.exe test.cs", csc.GenerateResponseFileContents());
+                Assert.Equal(
+                    "/define:D1;D2 /out:test.exe test.cs",
+                    csc.GenerateResponseFileContents()
+                );
             };
 
             test("D1;D2");
@@ -193,7 +223,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 var csc = new Csc();
                 csc.Features = s;
                 csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
-                Assert.Equal("/out:test.exe /features:a /features:b test.cs", csc.GenerateResponseFileContents());
+                Assert.Equal(
+                    "/out:test.exe /features:a /features:b test.cs",
+                    csc.GenerateResponseFileContents()
+                );
             };
 
             test("a;b");
@@ -227,17 +260,26 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.DebugType = "pdbonly";
-            Assert.Equal("/debug:pdbonly /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/debug:pdbonly /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.DebugType = "portable";
-            Assert.Equal("/debug:portable /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/debug:portable /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.DebugType = "embedded";
-            Assert.Equal("/debug:embedded /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/debug:embedded /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
@@ -257,19 +299,28 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.DebugType = "portable";
             csc.SourceLink = @"C:\x y\z.json";
-            Assert.Equal(@"/debug:portable /out:test.exe /sourcelink:""C:\x y\z.json"" test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/debug:portable /out:test.exe /sourcelink:""C:\x y\z.json"" test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.DebugType = "portable";
             csc.SourceLink = null;
-            Assert.Equal(@"/debug:portable /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/debug:portable /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.DebugType = "portable";
             csc.SourceLink = "";
-            Assert.Equal(@"/debug:portable /out:test.exe /sourcelink: test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/debug:portable /out:test.exe /sourcelink: test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -279,19 +330,28 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.DebugType = "portable";
             csc.EmbeddedFiles = MSBuildUtil.CreateTaskItems(@"test.cs", @"test.txt");
-            Assert.Equal(@"/debug:portable /out:test.exe /embed:test.cs /embed:test.txt test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/debug:portable /out:test.exe /embed:test.cs /embed:test.txt test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.DebugType = "portable";
             csc.EmbeddedFiles = MSBuildUtil.CreateTaskItems(@"C:\x y\z.json");
-            Assert.Equal(@"/debug:portable /out:test.exe /embed:""C:\x y\z.json"" test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/debug:portable /out:test.exe /embed:""C:\x y\z.json"" test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.DebugType = "portable";
             csc.EmbeddedFiles = null;
-            Assert.Equal(@"/debug:portable /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/debug:portable /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
@@ -308,7 +368,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             csc.EmbeddedFiles = MSBuildUtil.CreateTaskItems(@"test.cs", @"test.txt");
             csc.EmbedAllSources = true;
 
-            Assert.Equal(@"/out:test.exe /embed /embed:test.cs /embed:test.txt test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/out:test.exe /embed /embed:test.cs /embed:test.txt test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
@@ -323,7 +386,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.OutputRefAssembly = MSBuildUtil.CreateTaskItem("ref\\test.dll");
-            Assert.Equal("/out:test.exe /refout:ref\\test.dll test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.exe /refout:ref\\test.dll test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -341,7 +407,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.Nullable = "enable";
-            Assert.Equal("/nullable:enable /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/nullable:enable /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -350,7 +419,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.Nullable = "disable";
-            Assert.Equal("/nullable:disable /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/nullable:disable /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -359,7 +431,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.Nullable = "safeonly";
-            Assert.Equal("/nullable:safeonly /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/nullable:safeonly /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -368,7 +443,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.Nullable = "warnings";
-            Assert.Equal("/nullable:warnings /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/nullable:warnings /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -377,7 +455,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.Nullable = "safeonlywarnings";
-            Assert.Equal("/nullable:safeonlywarnings /out:test.exe test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/nullable:safeonlywarnings /out:test.exe test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -452,13 +533,19 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             Assert.Equal("", csc.GenerateCommandLine());
             // StartsWith because it can be csc.exe or csc.dll
-            Assert.StartsWith(Path.Combine("path", "to", "custom_csc", "csc."), csc.GeneratePathToTool());
+            Assert.StartsWith(
+                Path.Combine("path", "to", "custom_csc", "csc."),
+                csc.GeneratePathToTool()
+            );
 
             csc = new Csc();
             csc.ToolPath = Path.Combine("path", "to", "custom_csc");
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             Assert.Equal("", csc.GenerateCommandLine());
-            Assert.StartsWith(Path.Combine("path", "to", "custom_csc", "csc."), csc.GeneratePathToTool());
+            Assert.StartsWith(
+                Path.Combine("path", "to", "custom_csc", "csc."),
+                csc.GeneratePathToTool()
+            );
         }
 
         [Fact]
@@ -467,17 +554,32 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems(".editorconfig");
-            Assert.Equal(@"/out:test.exe /analyzerconfig:.editorconfig test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/out:test.exe /analyzerconfig:.editorconfig test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs", "subdir\\test.cs");
-            csc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems(".editorconfig", "subdir\\.editorconfig");
-            Assert.Equal($@"/out:test.exe /analyzerconfig:.editorconfig /analyzerconfig:subdir\.editorconfig test.cs subdir{Path.DirectorySeparatorChar}test.cs", csc.GenerateResponseFileContents());
+            csc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems(
+                ".editorconfig",
+                "subdir\\.editorconfig"
+            );
+            Assert.Equal(
+                $@"/out:test.exe /analyzerconfig:.editorconfig /analyzerconfig:subdir\.editorconfig test.cs subdir{Path.DirectorySeparatorChar}test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
-            csc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems("..\\.editorconfig", "sub dir\\.editorconfig");
-            Assert.Equal(@"/out:test.exe /analyzerconfig:..\.editorconfig /analyzerconfig:""sub dir\.editorconfig"" test.cs", csc.GenerateResponseFileContents());
+            csc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems(
+                "..\\.editorconfig",
+                "sub dir\\.editorconfig"
+            );
+            Assert.Equal(
+                @"/out:test.exe /analyzerconfig:..\.editorconfig /analyzerconfig:""sub dir\.editorconfig"" test.cs",
+                csc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -487,12 +589,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.SkipAnalyzers = true;
-            Assert.Equal("/out:test.exe /skipanalyzers+ test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.exe /skipanalyzers+ test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");
             csc.SkipAnalyzers = false;
-            Assert.Equal("/out:test.exe /skipanalyzers- test.cs", csc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/out:test.exe /skipanalyzers- test.cs",
+                csc.GenerateResponseFileContents()
+            );
 
             csc = new Csc();
             csc.Sources = MSBuildUtil.CreateTaskItems("test.cs");

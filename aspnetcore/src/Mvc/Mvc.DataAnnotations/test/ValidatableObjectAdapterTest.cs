@@ -11,8 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 {
     public class ValidatableObjectAdapterTest
     {
-        private static readonly ModelMetadataProvider _metadataProvider
-            = TestModelMetadataProvider.CreateDefaultProvider();
+        private static readonly ModelMetadataProvider _metadataProvider =
+            TestModelMetadataProvider.CreateDefaultProvider();
 
         // Inspired by DataAnnotationsModelValidatorTest.Validate_SetsMemberName_AsExpectedData but using a type that
         // implements IValidatableObject. Values are metadata, expected DisplayName, and expected MemberName.
@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         // Validating a property.
                         _metadataProvider.GetMetadataForProperty(
                             typeof(SampleModelContainer),
-                            nameof(SampleModelContainer.SampleModel)),
+                            nameof(SampleModelContainer.SampleModel)
+                        ),
                         nameof(SampleModelContainer.SampleModel),
                         nameof(SampleModelContainer.SampleModel)
                     },
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         // Validating a property with [Display(Name = "...")].
                         _metadataProvider.GetMetadataForProperty(
                             typeof(SampleModelContainer),
-                            nameof(SampleModelContainer.SampleModelWithDisplay)),
+                            nameof(SampleModelContainer.SampleModelWithDisplay)
+                        ),
                         "sample model",
                         nameof(SampleModelContainer.SampleModelWithDisplay)
                     },
@@ -57,7 +59,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             }
         }
 
-        public static TheoryData<ValidationResult[], ModelValidationResult[]> Validate_ReturnsExpectedResultsData
+        public static TheoryData<
+            ValidationResult[],
+            ModelValidationResult[]
+        > Validate_ReturnsExpectedResultsData
         {
             get
             {
@@ -65,25 +70,52 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 {
                     {
                         new[] { new ValidationResult("Error message") },
-                        new[] { new ModelValidationResult(memberName: null, message: "Error message") }
+                        new[]
+                        {
+                            new ModelValidationResult(memberName: null, message: "Error message")
+                        }
                     },
                     {
-                        new[] { new ValidationResult("Error message", new[] { nameof(SampleModel.FirstName) }) },
-                        new[] { new ModelValidationResult(nameof(SampleModel.FirstName), "Error message") }
+                        new[]
+                        {
+                            new ValidationResult(
+                                "Error message",
+                                new[] { nameof(SampleModel.FirstName) }
+                            )
+                        },
+                        new[]
+                        {
+                            new ModelValidationResult(
+                                nameof(SampleModel.FirstName),
+                                "Error message"
+                            )
+                        }
                     },
                     {
                         new[]
                         {
                             new ValidationResult("Error message1"),
-                            new ValidationResult("Error message2", new[] { nameof(SampleModel.FirstName) }),
-                            new ValidationResult("Error message3", new[] { nameof(SampleModel.LastName) }),
+                            new ValidationResult(
+                                "Error message2",
+                                new[] { nameof(SampleModel.FirstName) }
+                            ),
+                            new ValidationResult(
+                                "Error message3",
+                                new[] { nameof(SampleModel.LastName) }
+                            ),
                             new ValidationResult("Error message4", new[] { nameof(SampleModel) }),
                         },
                         new[]
                         {
                             new ModelValidationResult(memberName: null, message: "Error message1"),
-                            new ModelValidationResult(nameof(SampleModel.FirstName), "Error message2"),
-                            new ModelValidationResult(nameof(SampleModel.LastName), "Error message3"),
+                            new ModelValidationResult(
+                                nameof(SampleModel.FirstName),
+                                "Error message2"
+                            ),
+                            new ModelValidationResult(
+                                nameof(SampleModel.LastName),
+                                "Error message3"
+                            ),
                             // No special case for ValidationContext.MemberName==ValidationResult.MemberName
                             new ModelValidationResult(nameof(SampleModel), "Error message4"),
                         }
@@ -91,17 +123,26 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     {
                         new[]
                         {
-                            new ValidationResult("Error message1", new[]
-                            {
-                                nameof(SampleModel.FirstName),
-                                nameof(SampleModel.LastName),
-                            }),
+                            new ValidationResult(
+                                "Error message1",
+                                new[]
+                                {
+                                    nameof(SampleModel.FirstName),
+                                    nameof(SampleModel.LastName),
+                                }
+                            ),
                             new ValidationResult("Error message2"),
                         },
                         new[]
                         {
-                            new ModelValidationResult(nameof(SampleModel.FirstName), "Error message1"),
-                            new ModelValidationResult(nameof(SampleModel.LastName), "Error message1"),
+                            new ModelValidationResult(
+                                nameof(SampleModel.FirstName),
+                                "Error message1"
+                            ),
+                            new ModelValidationResult(
+                                nameof(SampleModel.LastName),
+                                "Error message1"
+                            ),
                             new ModelValidationResult(memberName: null, message: "Error message2"),
                         }
                     },
@@ -109,13 +150,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             }
         }
 
-
         [Theory]
         [MemberData(nameof(Validate_PassesExpectedNamesData))]
         public void Validate_PassesExpectedNames(
             ModelMetadata metadata,
             string expectedDisplayName,
-            string expectedMemberName)
+            string expectedMemberName
+        )
         {
             // Arrange
             var adapter = new ValidatableObjectAdapter();
@@ -125,7 +166,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 metadata,
                 _metadataProvider,
                 container: new SampleModelContainer(),
-                model: model);
+                model: model
+            );
 
             // Act
             var results = adapter.Validate(validationContext);
@@ -143,7 +185,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [MemberData(nameof(Validate_ReturnsExpectedResultsData))]
         public void Validate_ReturnsExpectedResults(
             ValidationResult[] innerResults,
-            ModelValidationResult[] expectedResults)
+            ModelValidationResult[] expectedResults
+        )
         {
             // Arrange
             var adapter = new ValidatableObjectAdapter();
@@ -155,13 +198,15 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var metadata = _metadataProvider.GetMetadataForProperty(
                 typeof(SampleModelContainer),
-                nameof(SampleModelContainer.SampleModel));
+                nameof(SampleModelContainer.SampleModel)
+            );
             var validationContext = new ModelValidationContext(
                 new ActionContext(),
                 metadata,
                 _metadataProvider,
                 container: null,
-                model: model);
+                model: model
+            );
 
             // Act
             var results = adapter.Validate(validationContext);
@@ -189,7 +234,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             // What Validate(...) should return.
 
-            public IList<ValidationResult> ValidationResults { get; } = new List<ValidationResult>();
+            public IList<ValidationResult> ValidationResults { get; } =
+                new List<ValidationResult>();
 
             // Test method.
 

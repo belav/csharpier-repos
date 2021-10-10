@@ -122,8 +122,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithClassConstraint<T>
-        where T : class
+    public class MemberClassWithClassConstraint<T> where T : class
     {
         public int Method_ReturnsInt()
         {
@@ -136,8 +135,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithNewConstraint<T>
-        where T : new()
+    public class MemberClassWithNewConstraint<T> where T : new()
     {
         public T Method_ReturnsT()
         {
@@ -150,8 +148,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithAnotherTypeConstraint<T, U>
-        where T : U
+    public class MemberClassWithAnotherTypeConstraint<T, U> where T : U
     {
         public U Method_ReturnsU(dynamic d)
         {
@@ -165,8 +162,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     }
 
     #region Negative tests - you should not be able to construct this with a dynamic object
-    public class MemberClassWithUDClassConstraint<T>
-        where T : C, new()
+    public class MemberClassWithUDClassConstraint<T> where T : C, new()
     {
         public C Method_ReturnsC()
         {
@@ -174,8 +170,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithStructConstraint<T>
-        where T : struct
+    public class MemberClassWithStructConstraint<T> where T : struct
     {
         public dynamic Method_ReturnsDynamic(int x)
         {
@@ -183,8 +178,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithInterfaceConstraint<T>
-        where T : I
+    public class MemberClassWithInterfaceConstraint<T> where T : I
     {
         public dynamic Method_ReturnsDynamic(int x, T v)
         {
@@ -193,8 +187,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     }
     #endregion
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass001.genclass001
 {
@@ -229,8 +221,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass002.genclass002
 {
@@ -289,8 +279,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass003.genclass003
 {
     // <Title> Tests generic class regular method used in static variable.</Title>
@@ -320,8 +308,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass005.genclass005
 {
     // <Title> Tests generic class regular method used in unsafe.</Title>
@@ -347,8 +333,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass006.genclass006
 {
     // <Title> Tests generic class regular method used in generic method body.</Title>
@@ -360,7 +344,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -385,8 +368,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass008.genclass008
 {
@@ -422,18 +403,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic dy = new MemberClass<int>();
             float x = 3.3f;
             int i = -1;
-            return new Test()
-            {
-                Field = t + (int)dy.Method_ReturnsT(x, i)
-            }
-
-            ;
+            return new Test() { Field = t + (int)dy.Method_ReturnsT(x, i) };
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass009.genclass009
 {
@@ -468,8 +442,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass009a.genclass009a
 {
     // <Title> Tests generic class regular method used in for loop.</Title>
@@ -503,8 +475,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass010.genclass010
 {
     // <Title> Tests generic class regular method used in static constructor.</Title>
@@ -524,7 +494,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             s_result = (float)dy.Method_ReturnsFloat(new Test(), dy, ref s_dec);
         }
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -538,8 +507,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass012.genclass012
 {
@@ -565,15 +532,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic d1 = 3;
             dynamic d2 = "Test";
             Func<string, string, string> fun = (x, y) => (y + x.ToString());
-            string result = fun((string)dy.Method_ReturnsDynamic("foo", d1), (string)dy.Method_ReturnsDynamic("bar", d2));
+            string result = fun(
+                (string)dy.Method_ReturnsDynamic("foo", d1),
+                (string)dy.Method_ReturnsDynamic("bar", d2)
+            );
             if (result == "barfoo")
                 return 0;
             return 1;
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass013.genclass013
 {
@@ -597,17 +565,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic dy = new MemberClass<string>();
             string[] array = new string[]
             {
-            (string)dy.Method_ReturnsDynamic(string.Empty, 1, dy), (string)dy.Method_ReturnsDynamic(null, 0, dy), (string)dy.Method_ReturnsDynamic("a", -1, dy)}
-
-            ;
-            if (array.Length == 3 && array[0] == string.Empty && array[1] == null && array[2] == "a")
+                (string)dy.Method_ReturnsDynamic(string.Empty, 1, dy),
+                (string)dy.Method_ReturnsDynamic(null, 0, dy),
+                (string)dy.Method_ReturnsDynamic("a", -1, dy)
+            };
+            if (
+                array.Length == 3 && array[0] == string.Empty && array[1] == null && array[2] == "a"
+            )
                 return 0;
             return 1;
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass014.genclass014
 {
@@ -636,8 +605,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass015.genclass015
 {
     // <Title> Tests generic class regular method used in static method body.</Title>
@@ -663,8 +630,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass016.genclass016
 {
@@ -696,24 +661,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic dy = new MemberClassWithClassConstraint<MyClass>();
             var list = new List<M>()
             {
-            new M()
-            {
-            Field1 = 1, Field2 = 2
-            }
-
-            , new M()
-            {
-            Field1 = 2, Field2 = 1
-            }
-            }
-
-            ;
+                new M() { Field1 = 1, Field2 = 2 },
+                new M() { Field1 = 2, Field2 = 1 }
+            };
             return list.Any(p => p.Field1 == (int)dy.Method_ReturnsInt()) ? 0 : 1;
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass017.genclass017
 {
@@ -735,13 +689,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         public static int MainMethod()
         {
             dynamic dy = new MemberClassWithClassConstraint<string>();
-            string result = (string)dy.Method_ReturnsT(decimal.MaxValue, dy) == null ? string.Empty : (string)dy.Method_ReturnsT(decimal.MaxValue, dy);
+            string result =
+                (string)dy.Method_ReturnsT(decimal.MaxValue, dy) == null
+                    ? string.Empty
+                    : (string)dy.Method_ReturnsT(decimal.MaxValue, dy);
             return result == string.Empty ? 0 : 1;
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass018.genclass018
 {
@@ -774,8 +729,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass019.genclass019
 {
     // <Title> Tests generic class regular method used in switch section statement list.</Title>
@@ -799,7 +752,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic dy2 = new MemberClassWithAnotherTypeConstraint<int, int>();
             C result = new C();
             int result2 = -1;
-            switch ((int)dy2.Method_ReturnsU(dy1)) // 0
+            switch (
+                (int)dy2.Method_ReturnsU(dy1)
+            ) // 0
             {
                 case 0:
                     result = (C)dy1.Method_ReturnsDynamic(result); // called
@@ -813,8 +768,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.implicit01.implicit01
 {

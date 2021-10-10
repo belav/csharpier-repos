@@ -34,10 +34,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
         private readonly InMemoryTransportFactory _transportFactory;
         private readonly IHost _host;
 
-        public TestServer(RequestDelegate app)
-            : this(app, new TestServiceContext())
-        {
-        }
+        public TestServer(RequestDelegate app) : this(app, new TestServiceContext()) { }
 
         public TestServer(RequestDelegate app, TestServiceContext context)
             : this(app, context, new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)))
@@ -45,13 +42,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             // The endpoint is ignored, but this ensures no cert loading happens for HTTPS endpoints.
         }
 
-        public TestServer(RequestDelegate app, TestServiceContext context, ListenOptions listenOptions)
-            : this(app, context, options => options.CodeBackedListenOptions.Add(listenOptions), _ => { })
-        {
-        }
+        public TestServer(
+            RequestDelegate app,
+            TestServiceContext context,
+            ListenOptions listenOptions
+        )
+            : this(
+                app,
+                context,
+                options => options.CodeBackedListenOptions.Add(listenOptions),
+                _ => { }
+            ) { }
 
-        public TestServer(RequestDelegate app, TestServiceContext context, Action<ListenOptions> configureListenOptions)
-            : this(app, context, options =>
+        public TestServer(
+            RequestDelegate app,
+            TestServiceContext context,
+            Action<ListenOptions> configureListenOptions
+        )
+            : this(
+                app,
+                context,
+                options =>
                 {
                     var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                     {
@@ -61,11 +72,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                     configureListenOptions(listenOptions);
                     options.CodeBackedListenOptions.Add(listenOptions);
                 },
-                _ => { })
-        {
-        }
+                _ => { }
+            ) { }
 
-        public TestServer(RequestDelegate app, TestServiceContext context, Action<KestrelServerOptions> configureKestrel, Action<IServiceCollection> configureServices)
+        public TestServer(
+            RequestDelegate app,
+            TestServiceContext context,
+            Action<KestrelServerOptions> configureKestrel,
+            Action<IServiceCollection> configureServices
+        )
         {
             _app = app;
             Context = context;
@@ -73,38 +88,59 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             _transportFactory = new InMemoryTransportFactory();
             HttpClientSlim = new InMemoryHttpClientSlim(this);
 
-            var hostBuilder = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting(WebHostDefaults.ShutdownTimeoutKey, TestConstants.DefaultTimeout.TotalSeconds.ToString(CultureInfo.InvariantCulture))
-                        .Configure(app => { app.Run(_app); });
-                })
-                .ConfigureServices(services =>
-                {
-                    configureServices(services);
-
-                    // Ensure there is at least one multiplexed connection lister factory if none was added to services.
-                    if (!services.Any(d => d.ServiceType == typeof(IMultiplexedConnectionListenerFactory)))
+            var hostBuilder = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        // Mock multiplexed connection listner is added so Kestrel doesn't error
-                        // when a HTTP/3 endpoint is configured.
-                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(new MockMultiplexedConnectionListenerFactory());
+                        webHostBuilder.UseSetting(
+                                WebHostDefaults.ShutdownTimeoutKey,
+                                TestConstants.DefaultTimeout.TotalSeconds.ToString(
+                                    CultureInfo.InvariantCulture
+                                )
+                            )
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(_app);
+                                }
+                            );
                     }
-
-                    services.AddSingleton<IStartup>(this);
-                    services.AddSingleton(context.LoggerFactory);
-
-                    services.AddSingleton<IServer>(sp =>
+                )
+                .ConfigureServices(
+                    services =>
                     {
-                        context.ServerOptions.ApplicationServices = sp;
-                        configureKestrel(context.ServerOptions);
-                        return new KestrelServerImpl(
-                            new IConnectionListenerFactory[] { _transportFactory },
-                            sp.GetServices<IMultiplexedConnectionListenerFactory>(),
-                            context);
-                    });
-                });
+                        configureServices(services);
+
+                        // Ensure there is at least one multiplexed connection lister factory if none was added to services.
+                        if (
+                            !services.Any(
+                                d => d.ServiceType == typeof(IMultiplexedConnectionListenerFactory)
+                            )
+                        )
+                        {
+                            // Mock multiplexed connection listner is added so Kestrel doesn't error
+                            // when a HTTP/3 endpoint is configured.
+                            services.AddSingleton<IMultiplexedConnectionListenerFactory>(
+                                new MockMultiplexedConnectionListenerFactory()
+                            );
+                        }
+
+                        services.AddSingleton<IStartup>(this);
+                        services.AddSingleton(context.LoggerFactory);
+
+                        services.AddSingleton<IServer>(
+                            sp =>
+                            {
+                                context.ServerOptions.ApplicationServices = sp;
+                                configureKestrel(context.ServerOptions);
+                                return new KestrelServerImpl(
+                                    new IConnectionListenerFactory[] { _transportFactory },
+                                    sp.GetServices<IMultiplexedConnectionListenerFactory>(),
+                                    context
+                                );
+                            }
+                        );
+                    }
+                );
 
             _host = hostBuilder.Build();
             _host.Start();
@@ -118,7 +154,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
 
         public InMemoryConnection CreateConnection()
         {
-            var transportConnection = new InMemoryTransportConnection(_memoryPool, Context.Log, Context.Scheduler);
+            var transportConnection = new InMemoryTransportConnection(
+                _memoryPool,
+                Context.Log,
+                Context.Scheduler
+            );
             _transportFactory.AddConnection(transportConnection);
             return new InMemoryConnection(transportConnection);
         }
@@ -127,7 +167,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
         {
             return _host.StopAsync(cancellationToken);
         }
-
 
         void IStartup.Configure(IApplicationBuilder app)
         {

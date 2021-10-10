@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         /// </summary>
         public SqlServerModificationCommandBatchFactory(
             ModificationCommandBatchFactoryDependencies dependencies,
-            IDbContextOptions options)
+            IDbContextOptions options
+        )
         {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(options, nameof(options));
@@ -54,9 +55,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         /// </summary>
         public virtual ModificationCommandBatch Create()
         {
-            var optionsExtension = _options.Extensions.OfType<SqlServerOptionsExtension>().FirstOrDefault();
+            var optionsExtension = _options.Extensions.OfType<SqlServerOptionsExtension>()
+                .FirstOrDefault();
 
-            return new SqlServerModificationCommandBatch(_dependencies, optionsExtension?.MaxBatchSize);
+            return new SqlServerModificationCommandBatch(
+                _dependencies,
+                optionsExtension?.MaxBatchSize
+            );
         }
     }
 }

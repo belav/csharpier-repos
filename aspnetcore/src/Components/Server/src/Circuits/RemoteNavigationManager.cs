@@ -81,17 +81,33 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         private static class Log
         {
             private static readonly Action<ILogger, string, bool, Exception> _requestingNavigation =
-                LoggerMessage.Define<string, bool>(LogLevel.Debug, new EventId(1, "RequestingNavigation"), "Requesting navigation to URI {Uri} with forceLoad={ForceLoad}");
+                LoggerMessage.Define<string, bool>(
+                    LogLevel.Debug,
+                    new EventId(1, "RequestingNavigation"),
+                    "Requesting navigation to URI {Uri} with forceLoad={ForceLoad}"
+                );
 
-            private static readonly Action<ILogger, string, bool, Exception> _receivedLocationChangedNotification =
-                LoggerMessage.Define<string, bool>(LogLevel.Debug, new EventId(2, "ReceivedLocationChangedNotification"), "Received notification that the URI has changed to {Uri} with isIntercepted={IsIntercepted}");
+            private static readonly Action<
+                ILogger,
+                string,
+                bool,
+                Exception
+            > _receivedLocationChangedNotification = LoggerMessage.Define<string, bool>(
+                LogLevel.Debug,
+                new EventId(2, "ReceivedLocationChangedNotification"),
+                "Received notification that the URI has changed to {Uri} with isIntercepted={IsIntercepted}"
+            );
 
             public static void RequestingNavigation(ILogger logger, string uri, bool forceLoad)
             {
                 _requestingNavigation(logger, uri, forceLoad, null);
             }
 
-            public static void ReceivedLocationChangedNotification(ILogger logger, string uri, bool isIntercepted)
+            public static void ReceivedLocationChangedNotification(
+                ILogger logger,
+                string uri,
+                bool isIntercepted
+            )
             {
                 _receivedLocationChangedNotification(logger, uri, isIntercepted, null);
             }

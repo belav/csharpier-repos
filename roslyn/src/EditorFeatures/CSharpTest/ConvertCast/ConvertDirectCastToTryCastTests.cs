@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertConversionOperat
         [Fact]
         public async Task ConvertFromExplicitToAs()
         {
-            const string InitialMarkup = @"
+            const string InitialMarkup =
+                @"
 class Program
 {
     public static void Main()
@@ -27,7 +28,8 @@ class Program
         var x = ([||]object)1;
     }
 }";
-            const string ExpectedMarkup = @"
+            const string ExpectedMarkup =
+                @"
 class Program
 {
     public static void Main()
@@ -51,7 +53,8 @@ class Program
         [InlineData("List<int>")]
         public async Task ConvertFromExplicitToAsSpecialTypes(string targetType)
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 using System;
 using System.Collections.Generic;
 
@@ -63,7 +66,8 @@ class Program
         var x = ([||]{targetType})o;
     }}
 }}";
-            var expectedMarkup = @$"
+            var expectedMarkup =
+                @$"
 using System;
 using System.Collections.Generic;
 
@@ -87,7 +91,8 @@ class Program
         [Fact]
         public async Task ConvertFromExplicitToAs_ValueType()
         {
-            const string InitialMarkup = @"
+            const string InitialMarkup =
+                @"
 class Program
 {
     public static void Main()
@@ -107,7 +112,8 @@ class Program
         [Fact]
         public async Task ConvertFromExplicitToAs_ValueTypeConstraint()
         {
-            const string InitialMarkup = @"
+            const string InitialMarkup =
+                @"
 public class C
 {
     public void M<T>() where T: struct
@@ -129,7 +135,8 @@ public class C
         [Fact]
         public async Task ConvertFromExplicitToAs_Unconstraint()
         {
-            const string InitialMarkup = @"
+            const string InitialMarkup =
+                @"
 public class C
 {
     public void M<T>()
@@ -151,7 +158,8 @@ public class C
         [Fact]
         public async Task ConvertFromExplicitToAs_ClassConstraint()
         {
-            const string InitialMarkup = @"
+            const string InitialMarkup =
+                @"
 public class C
 {
     public void M<T>() where T: class
@@ -161,7 +169,8 @@ public class C
     }
 }
 ";
-            const string FixedCode = @"
+            const string FixedCode =
+                @"
 public class C
 {
     public void M<T>() where T: class
@@ -182,9 +191,13 @@ public class C
         [Theory]
         [InlineData("class", true)]
         [InlineData("interface", false)]
-        public async Task ConvertFromExplicitToAs_ConcreteClassOrInterfaceConstraint(string targetTypeKind, bool shouldBeFixed)
+        public async Task ConvertFromExplicitToAs_ConcreteClassOrInterfaceConstraint(
+            string targetTypeKind,
+            bool shouldBeFixed
+        )
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 public {targetTypeKind} Target {{ }}
 
 public class C
@@ -196,7 +209,8 @@ public class C
     }}
 }}
 ";
-            var fixedCode = @$"
+            var fixedCode =
+                @$"
 public {targetTypeKind} Target {{ }}
 
 public class C
@@ -220,7 +234,8 @@ public class C
         [Fact]
         public async Task ConvertFromExplicitToAs_NestedTypeParameters()
         {
-            var initialMarkup = @"
+            var initialMarkup =
+                @"
 public class Target { }
 
 public class C
@@ -234,7 +249,8 @@ public class C
     }
 }
 ";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 public class Target { }
 
 public class C
@@ -260,7 +276,8 @@ public class C
         [Fact]
         public async Task ConvertFromExplicitToAs_MissingType()
         {
-            const string InitialMarkup = @"
+            const string InitialMarkup =
+                @"
 public class C
 {
     public void M()
@@ -272,10 +289,16 @@ public class C
 ";
             await new VerifyCS.Test
             {
-                TestState = {
+                TestState =
+                {
                     Sources = { InitialMarkup },
                     // /0/Test0.cs(7,18): error CS0246: Type or namespace "MissingType" not found.
-                    ExpectedDiagnostics = { DiagnosticResult.CompilerError("CS0246").WithLocation(0).WithArguments("MissingType") }
+                    ExpectedDiagnostics =
+                    {
+                        DiagnosticResult.CompilerError("CS0246")
+                            .WithLocation(0)
+                            .WithArguments("MissingType")
+                    }
                 },
                 FixedCode = InitialMarkup,
                 OffersEmptyRefactoring = false,
@@ -283,31 +306,31 @@ public class C
             }.RunAsync();
         }
         [Theory]
-        [InlineData("(C$$)((object)1)",
-                    "((object)1) as C")]
-        [InlineData("(C)((object$$)1)",
-                    "(C)(1 as object)")]
+        [InlineData("(C$$)((object)1)", "((object)1) as C")]
+        [InlineData("(C)((object$$)1)", "(C)(1 as object)")]
         public async Task ConvertFromExplicitToAs_Nested(string cast, string asExpression)
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 class C {{ }}
 
 class Program
 {{
     public static void Main()
     {{
-        var x = { cast };
+        var x = {cast};
     }}
 }}
 ";
-            var expectedMarkup = @$"
+            var expectedMarkup =
+                @$"
 class C {{ }}
 
 class Program
 {{
     public static void Main()
     {{
-        var x = { asExpression };
+        var x = {asExpression};
     }}
 }}
 ";
@@ -317,49 +340,49 @@ class Program
                 FixedCode = expectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
             }.RunAsync();
-
         }
 
         [Theory]
-        [InlineData("/* Leading */ (obj$$ect)1",
-                    "/* Leading */ 1 as object")]
-        [InlineData("(obj$$ect)1 /* Trailing */",
-                    "1 as object /* Trailing */")]
-        [InlineData("(obj$$ect)1; // Trailing",
-                    "1 as object; // Trailing")]
-        [InlineData("(/* Middle1 */ obj$$ect)1",
-                    "1 as\r\n/* Middle1 */ object")]
-        [InlineData("(obj$$ect /* Middle2 */ )1",
-                    "1 as object /* Middle2 */ ")]
-        [InlineData("(obj$$ect) /* Middle3 */ 1",
-                    "/* Middle3 */ 1 as object")]
-        [InlineData("/* Leading */ (/* Middle1 */ obj$$ect /* Middle2 */ ) /* Middle3 */ 1 /* Trailing */",
-                    "/* Leading */ /* Middle3 */ 1 as\r\n/* Middle1 */ object /* Middle2 */  /* Trailing */")]
-        [InlineData(@"
+        [InlineData("/* Leading */ (obj$$ect)1", "/* Leading */ 1 as object")]
+        [InlineData("(obj$$ect)1 /* Trailing */", "1 as object /* Trailing */")]
+        [InlineData("(obj$$ect)1; // Trailing", "1 as object; // Trailing")]
+        [InlineData("(/* Middle1 */ obj$$ect)1", "1 as\r\n/* Middle1 */ object")]
+        [InlineData("(obj$$ect /* Middle2 */ )1", "1 as object /* Middle2 */ ")]
+        [InlineData("(obj$$ect) /* Middle3 */ 1", "/* Middle3 */ 1 as object")]
+        [InlineData(
+            "/* Leading */ (/* Middle1 */ obj$$ect /* Middle2 */ ) /* Middle3 */ 1 /* Trailing */",
+            "/* Leading */ /* Middle3 */ 1 as\r\n/* Middle1 */ object /* Middle2 */  /* Trailing */"
+        )]
+        [InlineData(
+            @"
 ($$
 object
 )
-1", @"
+1",
+            @"
 
 1 as
-object")]
+object"
+        )]
         public async Task ConvertFromExplicitToAs_Trivia(string cast, string asExpression)
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 class Program
 {{
     public static void Main()
     {{
-        var x = { cast };
+        var x = {cast};
     }}
 }}
 ";
-            var expectedMarkup = @$"
+            var expectedMarkup =
+                @$"
 class Program
 {{
     public static void Main()
     {{
-        var x = { asExpression };
+        var x = {asExpression};
     }}
 }}
 ";

@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Highlights
         public async Task TestGetDocumentHighlightAsync()
         {
             var markup =
-@"class B
+                @"class B
 {
 }
 class A
@@ -37,10 +37,16 @@ class A
             {
                 CreateDocumentHighlight(LSP.DocumentHighlightKind.Text, locations["text"].Single()),
                 CreateDocumentHighlight(LSP.DocumentHighlightKind.Read, locations["read"].Single()),
-                CreateDocumentHighlight(LSP.DocumentHighlightKind.Write, locations["write"].Single())
+                CreateDocumentHighlight(
+                    LSP.DocumentHighlightKind.Write,
+                    locations["write"].Single()
+                )
             };
 
-            var results = await RunGetDocumentHighlightAsync(testLspServer, locations["caret"].Single());
+            var results = await RunGetDocumentHighlightAsync(
+                testLspServer,
+                locations["caret"].Single()
+            );
             AssertJsonEquals(expected, results);
         }
 
@@ -48,7 +54,7 @@ class A
         public async Task TestGetDocumentHighlightAsync_InvalidLocation()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -57,29 +63,44 @@ class A
 }";
             using var testLspServer = CreateTestLspServer(markup, out var locations);
 
-            var results = await RunGetDocumentHighlightAsync(testLspServer, locations["caret"].Single());
+            var results = await RunGetDocumentHighlightAsync(
+                testLspServer,
+                locations["caret"].Single()
+            );
             Assert.Empty(results);
         }
 
-        private static async Task<LSP.DocumentHighlight[]> RunGetDocumentHighlightAsync(TestLspServer testLspServer, LSP.Location caret)
+        private static async Task<LSP.DocumentHighlight[]> RunGetDocumentHighlightAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret
+        )
         {
-            var results = await testLspServer.ExecuteRequestAsync<LSP.TextDocumentPositionParams, LSP.DocumentHighlight[]>(LSP.Methods.TextDocumentDocumentHighlightName,
-                CreateTextDocumentPositionParams(caret), new LSP.ClientCapabilities(), null, CancellationToken.None);
-            Array.Sort(results, (h1, h2) =>
-            {
-                var compareKind = h1.Kind.CompareTo(h2.Kind);
-                var compareRange = CompareRange(h1.Range, h2.Range);
-                return compareKind != 0 ? compareKind : compareRange;
-            });
+            var results = await testLspServer.ExecuteRequestAsync<
+                LSP.TextDocumentPositionParams,
+                LSP.DocumentHighlight[]
+            >(
+                LSP.Methods.TextDocumentDocumentHighlightName,
+                CreateTextDocumentPositionParams(caret),
+                new LSP.ClientCapabilities(),
+                null,
+                CancellationToken.None
+            );
+            Array.Sort(
+                results,
+                (h1, h2) =>
+                {
+                    var compareKind = h1.Kind.CompareTo(h2.Kind);
+                    var compareRange = CompareRange(h1.Range, h2.Range);
+                    return compareKind != 0 ? compareKind : compareRange;
+                }
+            );
 
             return results;
         }
 
-        private static LSP.DocumentHighlight CreateDocumentHighlight(LSP.DocumentHighlightKind kind, LSP.Location location)
-            => new LSP.DocumentHighlight()
-            {
-                Kind = kind,
-                Range = location.Range
-            };
+        private static LSP.DocumentHighlight CreateDocumentHighlight(
+            LSP.DocumentHighlightKind kind,
+            LSP.Location location
+        ) => new LSP.DocumentHighlight() { Kind = kind, Range = location.Range };
     }
 }

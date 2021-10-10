@@ -12,11 +12,17 @@ namespace Microsoft.DotNet.OpenApi
     {
         public static void HandleDebugSwitch(ref string[] args)
         {
-            if (args.Length > 0 && string.Equals("--debug", args[0], StringComparison.OrdinalIgnoreCase))
+            if (
+                args.Length > 0
+                && string.Equals("--debug", args[0], StringComparison.OrdinalIgnoreCase)
+            )
             {
                 args = args.Skip(1).ToArray();
 
-                Console.WriteLine("Waiting for debugger in pid: {0}", Process.GetCurrentProcess().Id);
+                Console.WriteLine(
+                    "Waiting for debugger in pid: {0}",
+                    Process.GetCurrentProcess().Id
+                );
                 while (!Debugger.IsAttached)
                 {
                     Thread.Sleep(TimeSpan.FromSeconds(3));

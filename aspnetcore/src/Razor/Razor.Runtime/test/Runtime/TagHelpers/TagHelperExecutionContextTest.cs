@@ -31,10 +31,13 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 {
                     calledEnd = true;
                     return new DefaultTagHelperContent();
-                });
+                }
+            );
 
             // Act & Assert
-            await Assert.ThrowsAsync<Exception>(async () => await executionContext.SetOutputContentAsync());
+            await Assert.ThrowsAsync<Exception>(
+                async () => await executionContext.SetOutputContentAsync()
+            );
             Assert.True(calledEnd);
         }
 
@@ -54,11 +57,17 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 {
                     calledEnd = true;
                     return new DefaultTagHelperContent();
-                });
+                }
+            );
 
             // Act & Assert
             await Assert.ThrowsAsync<Exception>(
-                async () => await executionContext.GetChildContentAsync(useCachedResult: false, encoder: null));
+                async () =>
+                    await executionContext.GetChildContentAsync(
+                        useCachedResult: false,
+                        encoder: null
+                    )
+            );
             Assert.True(calledEnd);
         }
 
@@ -80,7 +89,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                     return Task.FromResult(result: true);
                 },
                 startTagHelperWritingScope: _ => { },
-                endTagHelperWritingScope: () => tagHelperContent);
+                endTagHelperWritingScope: () => tagHelperContent
+            );
 
             // Act
             await executionContext.SetOutputContentAsync();
@@ -110,7 +120,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 uniqueId: string.Empty,
                 executeChildContentAsync: executeChildContentAsync,
                 startTagHelperWritingScope: startTagHelperWritingScope,
-                endTagHelperWritingScope: endTagHelperWritingScope);
+                endTagHelperWritingScope: endTagHelperWritingScope
+            );
             var updatedTagName = "p";
             var updatedTagMode = TagMode.SelfClosing;
             var updatedCallCount = 0;
@@ -127,7 +138,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 updatedTagMode,
                 items: new Dictionary<object, object>(),
                 uniqueId: string.Empty,
-                executeChildContentAsync: updatedExecuteChildContentAsync);
+                executeChildContentAsync: updatedExecuteChildContentAsync
+            );
             executionContext.AddHtmlAttribute(new TagHelperAttribute("Another attribute"));
 
             // Assert - 1
@@ -168,7 +180,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 uniqueId,
                 executeChildContentAsync,
                 startWritingScope,
-                endWritingScope);
+                endWritingScope
+            );
             var updatedItems = new Dictionary<object, object>();
             var updatedUniqueId = "another unique id";
             executionContext.AddHtmlAttribute(new TagHelperAttribute("something"));
@@ -179,7 +192,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 tagMode,
                 updatedItems,
                 updatedUniqueId,
-                executeChildContentAsync);
+                executeChildContentAsync
+            );
             executionContext.AddHtmlAttribute(new TagHelperAttribute("Another attribute"));
 
             // Assert
@@ -211,10 +225,7 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         public void ParentItems_SetsItemsProperty()
         {
             // Arrange
-            var expectedItems = new Dictionary<object, object>
-            {
-                { "test-entry", 1234 }
-            };
+            var expectedItems = new Dictionary<object, object> { { "test-entry", 1234 } };
 
             // Act
             var executionContext = new TagHelperExecutionContext(
@@ -224,7 +235,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 uniqueId: string.Empty,
                 executeChildContentAsync: async () => await Task.FromResult(result: true),
                 startTagHelperWritingScope: _ => { },
-                endTagHelperWritingScope: () => new DefaultTagHelperContent());
+                endTagHelperWritingScope: () => new DefaultTagHelperContent()
+            );
 
             // Assert
             Assert.NotNull(executionContext.Items);
@@ -285,10 +297,14 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                     return Task.FromResult(result: true);
                 },
                 startTagHelperWritingScope: _ => { },
-                endTagHelperWritingScope: () => tagHelperContent);
+                endTagHelperWritingScope: () => tagHelperContent
+            );
 
             // Act
-            var actualContent = await executionContext.GetChildContentAsync(useCachedResult: true, encoder: encoder);
+            var actualContent = await executionContext.GetChildContentAsync(
+                useCachedResult: true,
+                encoder: encoder
+            );
 
             // Assert
             Assert.Equal(expectedContent, actualContent.GetContent(new HtmlTestEncoder()));
@@ -296,7 +312,9 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
 
         [Theory]
         [MemberData(nameof(HtmlEncoderData))]
-        public async Task GetChildContentAsync_StartsWritingScopeWithGivenEncoder(HtmlEncoder encoder)
+        public async Task GetChildContentAsync_StartsWritingScopeWithGivenEncoder(
+            HtmlEncoder encoder
+        )
         {
             // Arrange
             HtmlEncoder passedEncoder = null;
@@ -307,7 +325,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 uniqueId: string.Empty,
                 executeChildContentAsync: () => Task.FromResult(result: true),
                 startTagHelperWritingScope: encoderArgument => passedEncoder = encoderArgument,
-                endTagHelperWritingScope: () => new DefaultTagHelperContent());
+                endTagHelperWritingScope: () => new DefaultTagHelperContent()
+            );
 
             // Act
             await executionContext.GetChildContentAsync(useCachedResult: true, encoder: encoder);
@@ -333,11 +352,18 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                     return Task.FromResult(result: true);
                 },
                 startTagHelperWritingScope: _ => { },
-                endTagHelperWritingScope: () => new DefaultTagHelperContent());
+                endTagHelperWritingScope: () => new DefaultTagHelperContent()
+            );
 
             // Act
-            var content1 = await executionContext.GetChildContentAsync(useCachedResult: true, encoder: encoder);
-            var content2 = await executionContext.GetChildContentAsync(useCachedResult: true, encoder: encoder);
+            var content1 = await executionContext.GetChildContentAsync(
+                useCachedResult: true,
+                encoder: encoder
+            );
+            var content2 = await executionContext.GetChildContentAsync(
+                useCachedResult: true,
+                encoder: encoder
+            );
 
             // Assert
             Assert.Equal(1, executionCount);
@@ -360,11 +386,18 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                     return Task.FromResult(result: true);
                 },
                 startTagHelperWritingScope: _ => { },
-                endTagHelperWritingScope: () => new DefaultTagHelperContent());
+                endTagHelperWritingScope: () => new DefaultTagHelperContent()
+            );
 
             // Act
-            var content1 = await executionContext.GetChildContentAsync(useCachedResult: true, encoder: null);
-            var content2 = await executionContext.GetChildContentAsync(useCachedResult: true, encoder: encoder);
+            var content1 = await executionContext.GetChildContentAsync(
+                useCachedResult: true,
+                encoder: null
+            );
+            var content2 = await executionContext.GetChildContentAsync(
+                useCachedResult: true,
+                encoder: encoder
+            );
 
             // Assert
             Assert.Equal(2, executionCount);
@@ -387,14 +420,21 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                     return Task.FromResult(result: true);
                 },
                 startTagHelperWritingScope: _ => { },
-                endTagHelperWritingScope: () => new DefaultTagHelperContent());
+                endTagHelperWritingScope: () => new DefaultTagHelperContent()
+            );
 
             // HtmlEncoderData includes another HtmlTestEncoder instance but method compares HtmlEncoder instances.
             var firstEncoder = new HtmlTestEncoder();
 
             // Act
-            var content1 = await executionContext.GetChildContentAsync(useCachedResult: true, encoder: firstEncoder);
-            var content2 = await executionContext.GetChildContentAsync(useCachedResult: true, encoder: encoder);
+            var content1 = await executionContext.GetChildContentAsync(
+                useCachedResult: true,
+                encoder: firstEncoder
+            );
+            var content2 = await executionContext.GetChildContentAsync(
+                useCachedResult: true,
+                encoder: encoder
+            );
 
             // Assert
             Assert.Equal(2, executionCount);
@@ -417,7 +457,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                     return Task.FromResult(result: true);
                 },
                 startTagHelperWritingScope: _ => { },
-                endTagHelperWritingScope: () => new DefaultTagHelperContent());
+                endTagHelperWritingScope: () => new DefaultTagHelperContent()
+            );
 
             // Act
             await executionContext.GetChildContentAsync(useCachedResult: false, encoder: encoder);
@@ -430,7 +471,9 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task GetChildContentAsync_ReturnsNewObjectEveryTimeItIsCalled(bool useCachedResult)
+        public async Task GetChildContentAsync_ReturnsNewObjectEveryTimeItIsCalled(
+            bool useCachedResult
+        )
         {
             // Arrange
             var executionContext = new TagHelperExecutionContext(
@@ -440,11 +483,18 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 uniqueId: string.Empty,
                 executeChildContentAsync: () => Task.FromResult(result: true),
                 startTagHelperWritingScope: _ => { },
-                endTagHelperWritingScope: () => new DefaultTagHelperContent());
+                endTagHelperWritingScope: () => new DefaultTagHelperContent()
+            );
 
             // Act
-            var content1 = await executionContext.GetChildContentAsync(useCachedResult, encoder: null);
-            var content2 = await executionContext.GetChildContentAsync(useCachedResult, encoder: null);
+            var content1 = await executionContext.GetChildContentAsync(
+                useCachedResult,
+                encoder: null
+            );
+            var content2 = await executionContext.GetChildContentAsync(
+                useCachedResult,
+                encoder: null
+            );
 
             // Assert
             Assert.NotSame(content1, content2);
@@ -455,11 +505,10 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         {
             // Arrange
             var executionContext = new TagHelperExecutionContext("p", TagMode.StartTagAndEndTag);
-            var expectedAttributes = new TagHelperAttributeList
-            {
-                { "class", "btn" },
-            };
-            expectedAttributes.Add(new TagHelperAttribute("type", "text", HtmlAttributeValueStyle.SingleQuotes));
+            var expectedAttributes = new TagHelperAttributeList { { "class", "btn" }, };
+            expectedAttributes.Add(
+                new TagHelperAttribute("type", "text", HtmlAttributeValueStyle.SingleQuotes)
+            );
 
             // Act
             executionContext.AddHtmlAttribute("class", "btn", HtmlAttributeValueStyle.DoubleQuotes);
@@ -470,14 +519,18 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             Assert.Equal(
                 expectedAttributes,
                 output.Attributes,
-                CaseSensitiveTagHelperAttributeComparer.Default);
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Fact]
         public void AddHtmlAttribute_MaintainsMinimizedHtmlAttributes()
         {
             // Arrange
-            var executionContext = new TagHelperExecutionContext("input", tagMode: TagMode.StartTagOnly);
+            var executionContext = new TagHelperExecutionContext(
+                "input",
+                tagMode: TagMode.StartTagOnly
+            );
             var expectedAttributes = new TagHelperAttributeList
             {
                 new TagHelperAttribute("checked"),
@@ -493,21 +546,29 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             Assert.Equal(
                 expectedAttributes,
                 output.Attributes,
-                CaseSensitiveTagHelperAttributeComparer.Default);
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Fact]
         public void AddHtmlAttribute_MaintainsHtmlAttributes_VariousStyles()
         {
             // Arrange
-            var executionContext = new TagHelperExecutionContext("input", tagMode: TagMode.SelfClosing);
+            var executionContext = new TagHelperExecutionContext(
+                "input",
+                tagMode: TagMode.SelfClosing
+            );
             var expectedAttributes = new TagHelperAttributeList
             {
                 { "class", "btn" },
                 { "foo", "bar" }
             };
-            expectedAttributes.Add(new TagHelperAttribute("valid", "true", HtmlAttributeValueStyle.NoQuotes));
-            expectedAttributes.Add(new TagHelperAttribute("type", "text", HtmlAttributeValueStyle.SingleQuotes));
+            expectedAttributes.Add(
+                new TagHelperAttribute("valid", "true", HtmlAttributeValueStyle.NoQuotes)
+            );
+            expectedAttributes.Add(
+                new TagHelperAttribute("type", "text", HtmlAttributeValueStyle.SingleQuotes)
+            );
             expectedAttributes.Add(new TagHelperAttribute(name: "checked"));
             expectedAttributes.Add(new TagHelperAttribute(name: "visible"));
 
@@ -524,7 +585,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             Assert.Equal(
                 expectedAttributes,
                 output.Attributes,
-                CaseSensitiveTagHelperAttributeComparer.Default);
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Fact]
@@ -532,16 +594,21 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         {
             // Arrange
             var executionContext = new TagHelperExecutionContext("p", TagMode.StartTagAndEndTag);
-            var expectedAttributes = new TagHelperAttributeList
-            {
-                { "class", "btn" },
-            };
-            expectedAttributes.Add(new TagHelperAttribute("something", true, HtmlAttributeValueStyle.SingleQuotes));
-            expectedAttributes.Add(new TagHelperAttribute("type", "text", HtmlAttributeValueStyle.NoQuotes));
+            var expectedAttributes = new TagHelperAttributeList { { "class", "btn" }, };
+            expectedAttributes.Add(
+                new TagHelperAttribute("something", true, HtmlAttributeValueStyle.SingleQuotes)
+            );
+            expectedAttributes.Add(
+                new TagHelperAttribute("type", "text", HtmlAttributeValueStyle.NoQuotes)
+            );
 
             // Act
             executionContext.AddHtmlAttribute("class", "btn", HtmlAttributeValueStyle.DoubleQuotes);
-            executionContext.AddTagHelperAttribute("something", true, HtmlAttributeValueStyle.SingleQuotes);
+            executionContext.AddTagHelperAttribute(
+                "something",
+                true,
+                HtmlAttributeValueStyle.SingleQuotes
+            );
             executionContext.AddHtmlAttribute("type", "text", HtmlAttributeValueStyle.NoQuotes);
             var context = executionContext.Context;
 
@@ -549,7 +616,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             Assert.Equal(
                 expectedAttributes,
                 context.AllAttributes,
-                CaseSensitiveTagHelperAttributeComparer.Default);
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Fact]

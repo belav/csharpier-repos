@@ -15,7 +15,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     {
         private static readonly JsonEncodedText Errors = JsonEncodedText.Encode("errors");
 
-        public override ValidationProblemDetails Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ValidationProblemDetails Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             var problemDetails = new ValidationProblemDetails();
 
@@ -28,7 +32,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 if (reader.ValueTextEquals(Errors.EncodedUtf8Bytes))
                 {
-                    var errors = JsonSerializer.Deserialize<Dictionary<string, string[]>>(ref reader, options);
+                    var errors = JsonSerializer.Deserialize<Dictionary<string, string[]>>(
+                        ref reader,
+                        options
+                    );
                     if (errors is not null)
                     {
                         foreach (var item in errors)
@@ -51,7 +58,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             return problemDetails;
         }
 
-        public override void Write(Utf8JsonWriter writer, ValidationProblemDetails value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            ValidationProblemDetails value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStartObject();
             WriteProblemDetails(writer, value, options);
@@ -60,7 +71,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             foreach (var kvp in value.Errors)
             {
                 writer.WritePropertyName(kvp.Key);
-                JsonSerializer.Serialize(writer, kvp.Value, kvp.Value?.GetType() ?? typeof(object), options);
+                JsonSerializer.Serialize(
+                    writer,
+                    kvp.Value,
+                    kvp.Value?.GetType() ?? typeof(object),
+                    options
+                );
             }
             writer.WriteEndObject();
 

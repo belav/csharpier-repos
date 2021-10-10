@@ -46,8 +46,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.dlgate002.dlgate002
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -91,8 +89,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.dynamic001.dynamic001
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -112,7 +108,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         {
             return i;
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -137,8 +132,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.dynamic002.dynamic002
 {
@@ -185,8 +178,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.dynamic003.dynamic003
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -207,7 +198,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public event Dele E;
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -232,8 +222,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.dynamic004.dynamic004
 {
@@ -281,8 +269,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.fieldproperty001.fieldproperty001
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -300,15 +286,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public Dele field;
         public Dele Field
         {
-            get
-            {
-                return field;
-            }
-
-            set
-            {
-                field = value;
-            }
+            get { return field; }
+            set { field = value; }
         }
 
         public event Dele E;
@@ -351,8 +330,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.fieldproperty002.fieldproperty002
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -370,15 +347,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public Dele field;
         public Dele Field
         {
-            get
-            {
-                return field;
-            }
-
-            set
-            {
-                field = value;
-            }
+            get { return field; }
+            set { field = value; }
         }
 
         public Dele E;
@@ -420,8 +390,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.null001.null001
 {
@@ -465,8 +433,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.null002.null002
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -504,7 +470,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.AmbigBinaryOps, e.Message, "+=", "<null>", "<null>"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.AmbigBinaryOps,
+                        e.Message,
+                        "+=",
+                        "<null>",
+                        "<null>"
+                    )
+                )
                     return 1;
             }
 
@@ -518,8 +492,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.return001.return001
 {
@@ -569,8 +541,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.pluseql.return002.return002
 {

@@ -15,8 +15,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 {
     public struct DkmEvaluationEnumAsyncResult
     {
-        public DkmEvaluationEnumAsyncResult(DkmEvaluationResult[] Items)
-            : this()
+        public DkmEvaluationEnumAsyncResult(DkmEvaluationResult[] Items) : this()
         {
             if (Items == null)
             {
@@ -31,7 +30,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 
         public static DkmEvaluationEnumAsyncResult CreateErrorResult(Exception exception)
         {
-            return new DkmEvaluationEnumAsyncResult(new DkmEvaluationResult[0]) { Exception = exception };
+            return new DkmEvaluationEnumAsyncResult(new DkmEvaluationResult[0])
+            {
+                Exception = exception
+            };
         }
     }
 }

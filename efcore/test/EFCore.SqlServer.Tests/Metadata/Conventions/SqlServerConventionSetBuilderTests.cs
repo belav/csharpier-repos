@@ -17,10 +17,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             return model;
         }
 
-        protected override ConventionSet GetConventionSet()
-            => SqlServerConventionSetBuilder.Build();
+        protected override ConventionSet GetConventionSet() =>
+            SqlServerConventionSetBuilder.Build();
 
-        protected override ModelBuilder GetModelBuilder()
-            => SqlServerConventionSetBuilder.CreateModelBuilder();
+        protected override ModelBuilder GetModelBuilder() =>
+            SqlServerConventionSetBuilder.CreateModelBuilder();
     }
 }

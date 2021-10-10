@@ -21,11 +21,16 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class TestingInfrastructureTests : IClassFixture<WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting>>
+    public class TestingInfrastructureTests
+        : IClassFixture<WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting>>
     {
-        public TestingInfrastructureTests(WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting> fixture)
+        public TestingInfrastructureTests(
+            WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting> fixture
+        )
         {
-            Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            Factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = Factory.CreateClient();
         }
 
@@ -50,8 +55,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             using var factory = new WebApplicationFactory<ClassLibraryStartup>();
             var ex = Assert.Throws<InvalidOperationException>(() => factory.CreateClient());
-            Assert.Equal($"The provided Type '{typeof(RazorPagesClassLibrary.ClassLibraryStartup).Name}' does not belong to an assembly with an entry point. A common cause for this error is providing a Type from a class library.",
-               ex.Message);
+            Assert.Equal(
+                $"The provided Type '{typeof(RazorPagesClassLibrary.ClassLibraryStartup).Name}' does not belong to an assembly with an entry point. A common cause for this error is providing a Type from a class library.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -60,7 +67,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             var request = new HttpRequestMessage(HttpMethod.Post, "Testing/RedirectHandler/2")
             {
-                Content = new ObjectContent<Number>(new Number { Value = 5 }, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<Number>(
+                    new Number { Value = 5 },
+                    new JsonMediaTypeFormatter()
+                )
             };
             request.Headers.Add("X-Pass-Thru", "Some-Value");
             var response = await Client.SendAsync(request);
@@ -81,11 +91,24 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             var request = new HttpRequestMessage(HttpMethod.Post, "Testing/RedirectHandler/2")
             {
-                Content = new ObjectContent<Number>(new Number { Value = 5 }, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<Number>(
+                    new Number { Value = 5 },
+                    new JsonMediaTypeFormatter()
+                )
             };
             request.Headers.Add("X-Pass-Thru", "Some-Value");
-            Assert.True(request.Headers.TryAddWithoutValidation("X-Invalid-Request-Header", "Bearer 1234,5678"));
-            Assert.True(request.Content.Headers.TryAddWithoutValidation("X-Invalid-Content-Header", "Bearer 1234,5678"));
+            Assert.True(
+                request.Headers.TryAddWithoutValidation(
+                    "X-Invalid-Request-Header",
+                    "Bearer 1234,5678"
+                )
+            );
+            Assert.True(
+                request.Content.Headers.TryAddWithoutValidation(
+                    "X-Invalid-Content-Header",
+                    "Bearer 1234,5678"
+                )
+            );
             var response = await Client.SendAsync(request);
 
             // Assert
@@ -103,8 +126,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Act
             var request = new HttpRequestMessage(HttpMethod.Get, "Testing/RedirectHandler/Headers");
-            var client = Factory.CreateDefaultClient(
-                new RedirectHandler(), new TestHandler());
+            var client = Factory.CreateDefaultClient(new RedirectHandler(), new TestHandler());
             var response = await client.SendAsync(request);
 
             // Assert
@@ -121,9 +143,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var acquireToken = await Client.GetAsync("Testing/AntiforgerySimulator/3");
             Assert.Equal(HttpStatusCode.OK, acquireToken.StatusCode);
 
-            var response = await Client.PostAsync(
-                "Testing/PostRedirectGet/Post/3",
-                content: null);
+            var response = await Client.PostAsync("Testing/PostRedirectGet/Post/3", content: null);
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -146,9 +166,17 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Fact]
         public async Task TestingInfrastructure_WorksWithGenericHost()
         {
-            using var factory = new WebApplicationFactory<GenericHostWebSite.Program>()
-                .WithWebHostBuilder(builder =>
-                    builder.ConfigureTestServices(s => s.AddSingleton<GenericHostWebSite.TestGenericService, OverridenGenericService>()));
+            using var factory =
+                new WebApplicationFactory<GenericHostWebSite.Program>().WithWebHostBuilder(
+                    builder =>
+                        builder.ConfigureTestServices(
+                            s =>
+                                s.AddSingleton<
+                                    GenericHostWebSite.TestGenericService,
+                                    OverridenGenericService
+                                >()
+                        )
+                );
 
             var response = await factory.CreateClient().GetStringAsync("Testing/Builder");
 
@@ -209,17 +237,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         private class TestHandler : DelegatingHandler
         {
-            public TestHandler()
-            {
-            }
+            public TestHandler() { }
 
-            public TestHandler(HttpMessageHandler innerHandler) : base(innerHandler)
-            {
-            }
+            public TestHandler(HttpMessageHandler innerHandler) : base(innerHandler) { }
 
             public bool HeaderAdded { get; set; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 if (!HeaderAdded)
                 {

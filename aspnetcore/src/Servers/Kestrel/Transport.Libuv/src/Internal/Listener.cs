@@ -19,28 +19,31 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         // REVIEW: This needs to be bounded and we need a strategy for what to do when the queue is full
         private bool _closed;
 
-        public Listener(LibuvTransportContext transportContext) : base(transportContext)
-        {
-        }
+        public Listener(LibuvTransportContext transportContext) : base(transportContext) { }
 
         protected UvStreamHandle ListenSocket { get; private set; }
 
         public ILibuvTrace Log => TransportContext.Log;
 
-        public Task StartAsync(
-            EndPoint endPoint,
-            LibuvThread thread)
+        public Task StartAsync(EndPoint endPoint, LibuvThread thread)
         {
             EndPoint = endPoint;
             Thread = thread;
 
-            return Thread.PostAsync(listener =>
-            {
-                listener.ListenSocket = listener.CreateListenSocket();
+            return Thread.PostAsync(
+                listener =>
+                {
+                    listener.ListenSocket = listener.CreateListenSocket();
 #pragma warning disable CS0618
-                listener.ListenSocket.Listen(TransportContext.Options.Backlog, ConnectionCallback, listener);
+                    listener.ListenSocket.Listen(
+                        TransportContext.Options.Backlog,
+                        ConnectionCallback,
+                        listener
+                    );
 #pragma warning restore CS0618
-            }, this);
+                },
+                this
+            );
         }
 
         /// <summary>
@@ -153,7 +156,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             return handle;
         }
 
-        private static void ConnectionCallback(UvStreamHandle stream, int status, UvException error, object state)
+        private static void ConnectionCallback(
+            UvStreamHandle stream,
+            int status,
+            UvException error,
+            object state
+        )
         {
             var listener = (Listener)state;
 
@@ -207,15 +215,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             // the exception that stopped the event loop will never be surfaced.
             if (Thread.FatalError == null && ListenSocket != null)
             {
-                await Thread.PostAsync(listener =>
-                {
-                    listener.ListenSocket.Dispose();
+                await Thread.PostAsync(
+                        listener =>
+                        {
+                            listener.ListenSocket.Dispose();
 
-                    listener._closed = true;
+                            listener._closed = true;
 
-                    listener.StopAcceptingConnections();
-
-                }, this).ConfigureAwait(false);
+                            listener.StopAcceptingConnections();
+                        },
+                        this
+                    )
+                    .ConfigureAwait(false);
             }
 
             ListenSocket = null;

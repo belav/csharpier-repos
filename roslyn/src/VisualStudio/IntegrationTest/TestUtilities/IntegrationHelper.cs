@@ -57,7 +57,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             using (var webClient = new WebClient())
             {
-                await webClient.DownloadFileTaskAsync(downloadUrl, fileName).ConfigureAwait(continueOnCapturedContext: false);
+                await webClient.DownloadFileTaskAsync(downloadUrl, fileName)
+                    .ConfigureAwait(continueOnCapturedContext: false);
             }
         }
 
@@ -74,8 +75,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             do
             {
                 foregroundWindow = NativeMethods.GetForegroundWindow();
-            }
-            while (foregroundWindow == IntPtr.Zero && stopwatch.Elapsed < TimeSpan.FromMilliseconds(250));
+            } while (
+                foregroundWindow == IntPtr.Zero
+                && stopwatch.Elapsed < TimeSpan.FromMilliseconds(250)
+            );
 
             return foregroundWindow;
         }
@@ -91,9 +94,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 //  * The owner window has the WS_POPUP style
                 // GetWindow with GW_OWNER specified will return the owner window, but not the parent window
                 // GetAncestor with GA_PARENT specified will return the parent window, but not the owner window
-                if ((NativeMethods.GetParent(topLevelWindow) == parentWindow) ||
-                    (NativeMethods.GetWindow(topLevelWindow, NativeMethods.GW_OWNER) == parentWindow) ||
-                    (NativeMethods.GetAncestor(topLevelWindow, NativeMethods.GA_PARENT) == parentWindow))
+                if (
+                    (NativeMethods.GetParent(topLevelWindow) == parentWindow)
+                    || (
+                        NativeMethods.GetWindow(topLevelWindow, NativeMethods.GW_OWNER)
+                        == parentWindow
+                    )
+                    || (
+                        NativeMethods.GetAncestor(topLevelWindow, NativeMethods.GA_PARENT)
+                        == parentWindow
+                    )
+                )
                 {
                     return topLevelWindow;
                 }
@@ -102,13 +113,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             return IntPtr.Zero;
         }
 
-        public static object GetRegistryKeyValue(RegistryKey baseKey, string subKeyName, string valueName)
+        public static object GetRegistryKeyValue(
+            RegistryKey baseKey,
+            string subKeyName,
+            string valueName
+        )
         {
             using (var registryKey = baseKey.OpenSubKey(subKeyName))
             {
                 if (registryKey == null)
                 {
-                    throw new Exception($@"The specified registry key could not be found. Registry Key: '{baseKey}\{subKeyName}'");
+                    throw new Exception(
+                        $@"The specified registry key could not be found. Registry Key: '{baseKey}\{subKeyName}'"
+                    );
                 }
 
                 return registryKey.GetValue(valueName);
@@ -123,7 +140,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </remarks>
         public static string GetTitleForWindow(IntPtr window)
         {
-            var titleLength = NativeMethods.SendMessage(window, NativeMethods.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
+            var titleLength = NativeMethods.SendMessage(
+                window,
+                NativeMethods.WM_GETTEXTLENGTH,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
 
             if (titleLength == IntPtr.Zero)
             {
@@ -132,7 +154,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
             var title = new StringBuilder(titleLength.ToInt32() + 1);
 
-            NativeMethods.SendMessage(window, NativeMethods.WM_GETTEXT, (IntPtr)(title.Capacity), title);
+            NativeMethods.SendMessage(
+                window,
+                NativeMethods.WM_GETTEXT,
+                (IntPtr)(title.Capacity),
+                title
+            );
             return title.ToString();
         }
 
@@ -140,11 +167,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             var topLevelWindows = new List<IntPtr>();
 
-            var enumFunc = new NativeMethods.WNDENUMPROC((hWnd, lParam) =>
-            {
-                topLevelWindows.Add(hWnd);
-                return true;
-            });
+            var enumFunc = new NativeMethods.WNDENUMPROC(
+                (hWnd, lParam) =>
+                {
+                    topLevelWindows.Add(hWnd);
+                    return true;
+                }
+            );
 
             var success = NativeMethods.EnumWindows(enumFunc, IntPtr.Zero);
 
@@ -200,11 +229,22 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                         throw new InvalidOperationException("Failed to obtain the console window.");
                     }
 
-                    if (!NativeMethods.SetWindowPos(consoleWindow, IntPtr.Zero, 0, 0, 0, 0, NativeMethods.SWP_NOZORDER))
+                    if (
+                        !NativeMethods.SetWindowPos(
+                            consoleWindow,
+                            IntPtr.Zero,
+                            0,
+                            0,
+                            0,
+                            0,
+                            NativeMethods.SWP_NOZORDER
+                        )
+                    )
                     {
                         Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
                     }
                 }
+
                 finally
                 {
                     if (!NativeMethods.FreeConsole())
@@ -226,12 +266,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
             LogKeyboardInputs(inputs);
 
-            var eventsInserted = NativeMethods.SendInput((uint)inputs.Length, inputs, NativeMethods.SizeOf_INPUT);
+            var eventsInserted = NativeMethods.SendInput(
+                (uint)inputs.Length,
+                inputs,
+                NativeMethods.SizeOf_INPUT
+            );
 
             if (eventsInserted == 0)
             {
                 var hresult = Marshal.GetHRForLastWin32Error();
-                throw new ExternalException("Sending input failed because input was blocked by another thread.", hresult);
+                throw new ExternalException(
+                    "Sending input failed because input was blocked by another thread.",
+                    hresult
+                );
             }
         }
 
@@ -268,7 +315,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
             if (isUnicode && input.wVk != 0)
             {
-                Debug.WriteLine("UNEXPECTED: if KEYEVENTF_UNICODE flag is specified then wVk must be 0.");
+                Debug.WriteLine(
+                    "UNEXPECTED: if KEYEVENTF_UNICODE flag is specified then wVk must be 0."
+                );
                 return;
             }
 
@@ -285,7 +334,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             else
             {
                 builder.Append(input.wVk.ToString("x4"));
-                ch = (char)(NativeMethods.MapVirtualKey(input.wVk, NativeMethods.MAPVK_VK_TO_CHAR) & 0x0000ffff);
+                ch = (char)(
+                    NativeMethods.MapVirtualKey(input.wVk, NativeMethods.MAPVK_VK_TO_CHAR)
+                    & 0x0000ffff
+                );
             }
 
             // Append code and printable character
@@ -361,9 +413,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 case '\v':
                     return @"\v";
                 default:
-                    return !char.IsControl(ch)
-                        ? new string(ch, 1)
-                        : null;
+                    return !char.IsControl(ch) ? new string(ch, 1) : null;
             }
         }
 
@@ -397,7 +447,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             }
             catch (Exception e)
             {
-                Debug.WriteLine($"Warning: Failed to recursively delete the specified directory. (Name: '{path}')");
+                Debug.WriteLine(
+                    $"Warning: Failed to recursively delete the specified directory. (Name: '{path}')"
+                );
                 Debug.WriteLine($"\t{e}");
                 return false;
             }
@@ -438,13 +490,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     continue;
                 }
 
-                if (displayNameParts[0].StartsWith("!VisualStudio.DTE", StringComparison.OrdinalIgnoreCase) &&
-                    displayNameProcessId == process.Id)
+                if (
+                    displayNameParts[0].StartsWith(
+                        "!VisualStudio.DTE",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && displayNameProcessId == process.Id
+                )
                 {
                     runningObjectTable.GetObject(moniker, out dte);
                 }
-            }
-            while (dte == null);
+            } while (dte == null);
 
             return (DTE)dte;
         }

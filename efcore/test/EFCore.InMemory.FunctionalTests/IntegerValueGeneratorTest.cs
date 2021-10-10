@@ -176,12 +176,10 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Generators_are_associated_with_database_root()
         {
-            var serviceProvider1 = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider1 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
-            var serviceProvider2 = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
+            var serviceProvider2 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
             var root = new InMemoryDatabaseRoot();
@@ -368,7 +366,8 @@ namespace Microsoft.EntityFrameworkCore
             public PetsContext(
                 string databaseName,
                 InMemoryDatabaseRoot root = null,
-                IServiceProvider internalServiceProvider = null)
+                IServiceProvider internalServiceProvider = null
+            )
             {
                 _databaseName = databaseName;
                 _root = root;
@@ -407,10 +406,8 @@ namespace Microsoft.EntityFrameworkCore
             public PetsContextWithData(
                 string databaseName,
                 InMemoryDatabaseRoot root = null,
-                IServiceProvider internalServiceProvider = null)
-                : base(databaseName, root, internalServiceProvider)
-            {
-            }
+                IServiceProvider internalServiceProvider = null
+            ) : base(databaseName, root, internalServiceProvider) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {

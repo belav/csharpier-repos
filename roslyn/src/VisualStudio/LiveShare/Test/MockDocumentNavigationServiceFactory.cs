@@ -18,14 +18,16 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
 {
     using Workspace = CodeAnalysis.Workspace;
 
-    [ExportWorkspaceServiceFactory(typeof(IDocumentNavigationService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceServiceFactory(typeof(IDocumentNavigationService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal class MockDocumentNavigationServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockDocumentNavigationServiceFactory()
-        {
-        }
+        public MockDocumentNavigationServiceFactory() { }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
@@ -34,17 +36,55 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
 
         private class MockDocumentNavigationService : IDocumentNavigationService
         {
-            public bool CanNavigateToLineAndOffset(Workspace workspace, DocumentId documentId, int lineNumber, int offset, CancellationToken cancellationToken) => true;
+            public bool CanNavigateToLineAndOffset(
+                Workspace workspace,
+                DocumentId documentId,
+                int lineNumber,
+                int offset,
+                CancellationToken cancellationToken
+            ) => true;
 
-            public bool CanNavigateToPosition(Workspace workspace, DocumentId documentId, int position, int virtualSpace, CancellationToken cancellationToken) => true;
+            public bool CanNavigateToPosition(
+                Workspace workspace,
+                DocumentId documentId,
+                int position,
+                int virtualSpace,
+                CancellationToken cancellationToken
+            ) => true;
 
-            public bool CanNavigateToSpan(Workspace workspace, DocumentId documentId, TextSpan textSpan, CancellationToken cancellationToken) => true;
+            public bool CanNavigateToSpan(
+                Workspace workspace,
+                DocumentId documentId,
+                TextSpan textSpan,
+                CancellationToken cancellationToken
+            ) => true;
 
-            public bool TryNavigateToLineAndOffset(Workspace workspace, DocumentId documentId, int lineNumber, int offset, OptionSet options, CancellationToken cancellationToken) => true;
+            public bool TryNavigateToLineAndOffset(
+                Workspace workspace,
+                DocumentId documentId,
+                int lineNumber,
+                int offset,
+                OptionSet options,
+                CancellationToken cancellationToken
+            ) => true;
 
-            public bool TryNavigateToPosition(Workspace workspace, DocumentId documentId, int position, int virtualSpace, OptionSet options, CancellationToken cancellationToken) => true;
+            public bool TryNavigateToPosition(
+                Workspace workspace,
+                DocumentId documentId,
+                int position,
+                int virtualSpace,
+                OptionSet options,
+                CancellationToken cancellationToken
+            ) => true;
 
-            public bool TryNavigateToSpan(Workspace workspace, DocumentId documentId, TextSpan textSpan, OptionSet options, bool allowInvalidSpans, CancellationToken cancellationToken) => true;
+            public bool TryNavigateToSpan(
+                Workspace workspace,
+                DocumentId documentId,
+                TextSpan textSpan,
+                OptionSet options,
+                bool allowInvalidSpans,
+                CancellationToken cancellationToken
+            ) => true;
         }
     }
 }

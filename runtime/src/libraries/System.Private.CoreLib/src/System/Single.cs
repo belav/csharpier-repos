@@ -22,8 +22,15 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public readonly struct Single : IComparable, IConvertible, ISpanFormattable, IComparable<float>, IEquatable<float>
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public readonly struct Single
+        : IComparable,
+          IConvertible,
+          ISpanFormattable,
+          IComparable<float>,
+          IEquatable<float>
     {
         private readonly float m_value; // Do not rename (binary serialization)
 
@@ -89,9 +96,9 @@ namespace System
             // A NaN will never equal itself so this is an
             // easy and efficient way to check for NaN.
 
-            #pragma warning disable CS1718
+#pragma warning disable CS1718
             return f != f;
-            #pragma warning restore CS1718
+#pragma warning restore CS1718
         }
 
         /// <summary>Determines whether the specified value is negative.</summary>
@@ -163,9 +170,12 @@ namespace System
 
             if (value is float f)
             {
-                if (m_value < f) return -1;
-                if (m_value > f) return 1;
-                if (m_value == f) return 0;
+                if (m_value < f)
+                    return -1;
+                if (m_value > f)
+                    return 1;
+                if (m_value == f)
+                    return 0;
 
                 // At least one of the values is NaN.
                 if (IsNaN(m_value))
@@ -179,9 +189,12 @@ namespace System
 
         public int CompareTo(float value)
         {
-            if (m_value < value) return -1;
-            if (m_value > value) return 1;
-            if (m_value == value) return 0;
+            if (m_value < value)
+                return -1;
+            if (m_value > value)
+                return 1;
+            if (m_value == value)
+                return 0;
 
             // At least one of the values is NaN.
             if (IsNaN(m_value))
@@ -268,9 +281,20 @@ namespace System
             return Number.FormatSingle(m_value, format, NumberFormatInfo.GetInstance(provider));
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
-            return Number.TryFormatSingle(m_value, format, NumberFormatInfo.GetInstance(provider), destination, out charsWritten);
+            return Number.TryFormatSingle(
+                m_value,
+                format,
+                NumberFormatInfo.GetInstance(provider),
+                destination,
+                out charsWritten
+            );
         }
 
         // Parses a float from a String in the given style.  If
@@ -283,31 +307,47 @@ namespace System
         //
         public static float Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseSingle(s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseSingle(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.CurrentInfo
+            );
         }
 
         public static float Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseSingle(s, style, NumberFormatInfo.CurrentInfo);
         }
 
         public static float Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseSingle(s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseSingle(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         public static float Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseSingle(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static float Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands, IFormatProvider? provider = null)
+        public static float Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.ParseSingle(s, style, NumberFormatInfo.GetInstance(provider));
@@ -321,15 +361,30 @@ namespace System
                 return false;
             }
 
-            return TryParse((ReadOnlySpan<char>)s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out result);
+            return TryParse(
+                (ReadOnlySpan<char>)s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.CurrentInfo,
+                out result
+            );
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out float result)
         {
-            return TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out result);
+            return TryParse(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.CurrentInfo,
+                out result
+            );
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out float result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out float result
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
 
@@ -339,16 +394,31 @@ namespace System
                 return false;
             }
 
-            return TryParse((ReadOnlySpan<char>)s, style, NumberFormatInfo.GetInstance(provider), out result);
+            return TryParse(
+                (ReadOnlySpan<char>)s,
+                style,
+                NumberFormatInfo.GetInstance(provider),
+                out result
+            );
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out float result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out float result
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return TryParse(s, style, NumberFormatInfo.GetInstance(provider), out result);
         }
 
-        private static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, NumberFormatInfo info, out float result)
+        private static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            NumberFormatInfo info,
+            out float result
+        )
         {
             return Number.TryParseSingle(s, style, info, out result);
         }

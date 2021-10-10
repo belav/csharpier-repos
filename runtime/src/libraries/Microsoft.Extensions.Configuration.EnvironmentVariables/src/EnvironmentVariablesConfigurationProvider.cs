@@ -22,8 +22,7 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        public EnvironmentVariablesConfigurationProvider() =>
-            _prefix = string.Empty;
+        public EnvironmentVariablesConfigurationProvider() => _prefix = string.Empty;
 
         /// <summary>
         /// Initializes a new instance with the specified prefix.
@@ -35,8 +34,7 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
         /// <summary>
         /// Loads the environment variables.
         /// </summary>
-        public override void Load() =>
-            Load(Environment.GetEnvironmentVariables());
+        public override void Load() => Load(Environment.GetEnvironmentVariables());
 
         internal void Load(IDictionary envVariables)
         {
@@ -57,7 +55,9 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
                         prefix = MySqlServerPrefix;
                         provider = "MySql.Data.MySqlClient";
                     }
-                    else if (key.StartsWith(SqlAzureServerPrefix, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        key.StartsWith(SqlAzureServerPrefix, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         prefix = SqlAzureServerPrefix;
                         provider = "System.Data.SqlClient";
@@ -77,7 +77,6 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
                         // We can also do a fast path branch, I guess? No point in reallocating if the prefix is empty.
                         key = NormalizeKey(key.Substring(_prefix.Length));
                         data[key] = entry.Value as string;
-
                         continue;
                     }
                     else
@@ -94,6 +93,7 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
                     }
                 }
             }
+
             finally
             {
                 (e as IDisposable)?.Dispose();
@@ -111,6 +111,7 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
             }
         }
 
-        private static string NormalizeKey(string key) => key.Replace("__", ConfigurationPath.KeyDelimiter);
+        private static string NormalizeKey(string key) =>
+            key.Replace("__", ConfigurationPath.KeyDelimiter);
     }
 }

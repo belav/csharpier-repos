@@ -11,7 +11,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public abstract RazorCodeGenerationOptions Options { get; }
 
-        public static RazorHtmlDocument Create(string generatedHtml, RazorCodeGenerationOptions options)
+        public static RazorHtmlDocument Create(
+            string generatedHtml,
+            RazorCodeGenerationOptions options
+        )
         {
             if (generatedHtml == null)
             {

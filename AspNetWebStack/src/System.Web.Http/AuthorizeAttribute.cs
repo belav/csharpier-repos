@@ -18,8 +18,16 @@ namespace System.Web.Http
     /// </summary>
     /// <remarks>You can declare multiple of these attributes per action. You can also use <see cref="AllowAnonymousAttribute"/>
     /// to disable authorization for a specific action.</remarks>
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "We want to support extensibility")]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "We want to support extensibility"
+    )]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Class,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public class AuthorizeAttribute : AuthorizationFilterAttribute
     {
         private static readonly string[] _emptyArray = new string[0];
@@ -95,7 +103,10 @@ namespace System.Web.Http
                 return false;
             }
 
-            if (_usersSplit.Length > 0 && !_usersSplit.Contains(user.Identity.Name, StringComparer.OrdinalIgnoreCase))
+            if (
+                _usersSplit.Length > 0
+                && !_usersSplit.Contains(user.Identity.Name, StringComparer.OrdinalIgnoreCase)
+            )
             {
                 return false;
             }
@@ -153,15 +164,20 @@ namespace System.Web.Http
                 throw Error.ArgumentNull("actionContext");
             }
 
-            actionContext.Response = actionContext.ControllerContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, SRResources.RequestNotAuthorized);
+            actionContext.Response = actionContext.ControllerContext.Request.CreateErrorResponse(
+                HttpStatusCode.Unauthorized,
+                SRResources.RequestNotAuthorized
+            );
         }
 
         private static bool SkipAuthorization(HttpActionContext actionContext)
         {
             Contract.Assert(actionContext != null);
 
-            return actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any()
-                   || actionContext.ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any();
+            return actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
+                    .Any()
+                || actionContext.ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
+                    .Any();
         }
 
         /// <summary>
@@ -176,10 +192,11 @@ namespace System.Web.Http
                 return _emptyArray;
             }
 
-            var split = from piece in original.Split(',')
-                        let trimmed = piece.Trim()
-                        where !String.IsNullOrEmpty(trimmed)
-                        select trimmed;
+            var split =
+                from piece in original.Split(',')
+                let trimmed = piece.Trim()
+                where !String.IsNullOrEmpty(trimmed)
+                select trimmed;
             return split.ToArray();
         }
     }

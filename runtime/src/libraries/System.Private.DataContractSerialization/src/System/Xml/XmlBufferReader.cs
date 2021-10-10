@@ -47,30 +47,24 @@ namespace System.Xml
 
         public static XmlBufferReader Empty
         {
-            get
-            {
-                return s_empty;
-            }
+            get { return s_empty; }
         }
 
         public byte[] Buffer
         {
-            get
-            {
-                return _buffer;
-            }
+            get { return _buffer; }
         }
 
         public bool IsStreamed
         {
-            get
-            {
-                return _stream != null;
-            }
+            get { return _stream != null; }
         }
 
-
-        public void SetBuffer(Stream stream, IXmlDictionary? dictionary, XmlBinaryReaderSession? session)
+        public void SetBuffer(
+            Stream stream,
+            IXmlDictionary? dictionary,
+            XmlBinaryReaderSession? session
+        )
         {
             if (_streamBuffer == null)
             {
@@ -81,12 +75,25 @@ namespace System.Xml
             _windowOffsetMax = _streamBuffer.Length;
         }
 
-        public void SetBuffer(byte[] buffer, int offset, int count, IXmlDictionary? dictionary, XmlBinaryReaderSession? session)
+        public void SetBuffer(
+            byte[] buffer,
+            int offset,
+            int count,
+            IXmlDictionary? dictionary,
+            XmlBinaryReaderSession? session
+        )
         {
             SetBuffer(null, buffer, offset, count, dictionary, session);
         }
 
-        private void SetBuffer(Stream? stream, byte[] buffer, int offset, int count, IXmlDictionary? dictionary, XmlBinaryReaderSession? session)
+        private void SetBuffer(
+            Stream? stream,
+            byte[] buffer,
+            int offset,
+            int count,
+            IXmlDictionary? dictionary,
+            XmlBinaryReaderSession? session
+        )
         {
             _stream = stream;
             _buffer = buffer;
@@ -119,10 +126,7 @@ namespace System.Xml
 
         public bool EndOfFile
         {
-            get
-            {
-                return _offset == _offsetMax && !TryEnsureByte();
-            }
+            get { return _offset == _offsetMax && !TryEnsureByte(); }
         }
 
         public byte GetByte()
@@ -261,7 +265,13 @@ namespace System.Xml
                 _buffer = newBuffer;
                 _streamBuffer = newBuffer;
             }
-            System.Buffer.BlockCopy(_buffer, _offset, _buffer, _offset + count, _offsetMax - _offset);
+            System.Buffer.BlockCopy(
+                _buffer,
+                _offset,
+                _buffer,
+                _offset + count,
+                _offsetMax - _offset
+            );
             _offsetMax += count;
             System.Buffer.BlockCopy(buffer, offset, _buffer, _offset, count);
         }
@@ -278,7 +288,13 @@ namespace System.Xml
 
             if (_offset != windowOffset)
             {
-                System.Buffer.BlockCopy(_buffer, _offset, _buffer, windowOffset, _offsetMax - _offset);
+                System.Buffer.BlockCopy(
+                    _buffer,
+                    _offset,
+                    _buffer,
+                    windowOffset,
+                    _offsetMax - _offset
+                );
                 _offsetMax = windowOffset + (_offsetMax - _offset);
                 _offset = windowOffset;
             }
@@ -288,10 +304,7 @@ namespace System.Xml
 
         public int Offset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
             set
             {
                 DiagnosticUtility.DebugAssert(value >= _offsetMin && value <= _offsetMax, "");
@@ -462,15 +475,33 @@ namespace System.Xml
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "DateTime", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "DateTime",
+                        exception
+                    )
+                );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "DateTime", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "DateTime",
+                        exception
+                    )
+                );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "DateTime", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "DateTime",
+                        exception
+                    )
+                );
             }
         }
 
@@ -484,15 +515,33 @@ namespace System.Xml
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "TimeSpan", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "TimeSpan",
+                        exception
+                    )
+                );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "TimeSpan", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "TimeSpan",
+                        exception
+                    )
+                );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "TimeSpan", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "TimeSpan",
+                        exception
+                    )
+                );
             }
         }
 
@@ -585,7 +634,14 @@ namespace System.Xml
             {
                 byte b = buffer[offset + i];
                 if (b >= 0x80)
-                    return i + XmlConverter.ToChars(buffer, offset + i, length - i, chars, charOffset + i);
+                    return i
+                        + XmlConverter.ToChars(
+                            buffer,
+                            offset + i,
+                            length - i,
+                            chars,
+                            charOffset + i
+                        );
                 chars[charOffset + i] = (char)b;
             }
             return length;
@@ -687,9 +743,7 @@ namespace System.Xml
         private int GetLessThanCharEntity(int offset, int length)
         {
             byte[] buffer = _buffer;
-            if (length != 4 ||
-                buffer[offset + 1] != (byte)'l' ||
-                buffer[offset + 2] != (byte)'t')
+            if (length != 4 || buffer[offset + 1] != (byte)'l' || buffer[offset + 2] != (byte)'t')
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(_reader);
             }
@@ -699,9 +753,7 @@ namespace System.Xml
         private int GetGreaterThanCharEntity(int offset, int length)
         {
             byte[] buffer = _buffer;
-            if (length != 4 ||
-                buffer[offset + 1] != (byte)'g' ||
-                buffer[offset + 2] != (byte)'t')
+            if (length != 4 || buffer[offset + 1] != (byte)'g' || buffer[offset + 2] != (byte)'t')
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(_reader);
             }
@@ -711,11 +763,13 @@ namespace System.Xml
         private int GetQuoteCharEntity(int offset, int length)
         {
             byte[] buffer = _buffer;
-            if (length != 6 ||
-                buffer[offset + 1] != (byte)'q' ||
-                buffer[offset + 2] != (byte)'u' ||
-                buffer[offset + 3] != (byte)'o' ||
-                buffer[offset + 4] != (byte)'t')
+            if (
+                length != 6
+                || buffer[offset + 1] != (byte)'q'
+                || buffer[offset + 2] != (byte)'u'
+                || buffer[offset + 3] != (byte)'o'
+                || buffer[offset + 4] != (byte)'t'
+            )
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(_reader);
             }
@@ -725,10 +779,12 @@ namespace System.Xml
         private int GetAmpersandCharEntity(int offset, int length)
         {
             byte[] buffer = _buffer;
-            if (length != 5 ||
-                buffer[offset + 1] != (byte)'a' ||
-                buffer[offset + 2] != (byte)'m' ||
-                buffer[offset + 3] != (byte)'p')
+            if (
+                length != 5
+                || buffer[offset + 1] != (byte)'a'
+                || buffer[offset + 2] != (byte)'m'
+                || buffer[offset + 3] != (byte)'p'
+            )
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(_reader);
             }
@@ -738,11 +794,13 @@ namespace System.Xml
         private int GetApostropheCharEntity(int offset, int length)
         {
             byte[] buffer = _buffer;
-            if (length != 6 ||
-                buffer[offset + 1] != (byte)'a' ||
-                buffer[offset + 2] != (byte)'p' ||
-                buffer[offset + 3] != (byte)'o' ||
-                buffer[offset + 4] != (byte)'s')
+            if (
+                length != 6
+                || buffer[offset + 1] != (byte)'a'
+                || buffer[offset + 2] != (byte)'p'
+                || buffer[offset + 3] != (byte)'o'
+                || buffer[offset + 4] != (byte)'s'
+            )
             {
                 XmlExceptionHelper.ThrowInvalidCharRef(_reader);
             }
@@ -821,7 +879,6 @@ namespace System.Xml
             }
         }
 
-
         public bool IsWhitespaceKey(int key)
         {
             string s = GetDictionaryString(key).Value;
@@ -861,7 +918,8 @@ namespace System.Xml
             if (key1 == key2)
                 return true;
             else
-                return GetDictionaryString(key1).Value == bufferReader2.GetDictionaryString(key2).Value;
+                return GetDictionaryString(key1).Value
+                    == bufferReader2.GetDictionaryString(key2).Value;
         }
 
         public bool Equals2(int key1, XmlDictionaryString xmlString2)
@@ -886,7 +944,13 @@ namespace System.Xml
             return true;
         }
 
-        public bool Equals2(int offset1, int length1, XmlBufferReader bufferReader2, int offset2, int length2)
+        public bool Equals2(
+            int offset1,
+            int length1,
+            XmlBufferReader bufferReader2,
+            int offset2,
+            int length2
+        )
         {
             if (length1 != length2)
                 return false;
@@ -1014,7 +1078,10 @@ namespace System.Xml
         public long GetInt64(int offset)
         {
             byte[] buffer = _buffer;
-            byte b1, b2, b3, b4;
+            byte b1,
+                b2,
+                b3,
+                b4;
             b1 = buffer[offset + 0];
             b2 = buffer[offset + 1];
             b3 = buffer[offset + 2];
@@ -1091,7 +1158,6 @@ namespace System.Xml
             System.Buffer.BlockCopy(_buffer, srcOffset, buffer, dstOffset, count);
         }
 
-
         public XmlBinaryNodeType GetNodeType()
         {
             return (XmlBinaryNodeType)GetByte();
@@ -1119,12 +1185,12 @@ namespace System.Xml
                 }
                 return objects;
             }
+
             finally
             {
                 this.Offset = bufferOffset;
             }
         }
-
 
         public XmlDictionaryString GetDictionaryString(int key)
         {
@@ -1154,9 +1220,15 @@ namespace System.Xml
                 XmlDictionaryString? xmlString;
                 if (!_session.TryLookup(sessionKey, out xmlString))
                 {
-                    if (sessionKey < XmlDictionaryString.MinKey || sessionKey > XmlDictionaryString.MaxKey)
+                    if (
+                        sessionKey < XmlDictionaryString.MinKey
+                        || sessionKey > XmlDictionaryString.MaxKey
+                    )
                         XmlExceptionHelper.ThrowXmlDictionaryStringIDOutOfRange(_reader);
-                    XmlExceptionHelper.ThrowXmlDictionaryStringIDUndefinedSession(_reader, sessionKey);
+                    XmlExceptionHelper.ThrowXmlDictionaryStringIDUndefinedSession(
+                        _reader,
+                        sessionKey
+                    );
                 }
             }
             else
@@ -1167,9 +1239,15 @@ namespace System.Xml
                 XmlDictionaryString? xmlString;
                 if (!_dictionary.TryLookup(staticKey, out xmlString))
                 {
-                    if (staticKey < XmlDictionaryString.MinKey || staticKey > XmlDictionaryString.MaxKey)
+                    if (
+                        staticKey < XmlDictionaryString.MinKey
+                        || staticKey > XmlDictionaryString.MaxKey
+                    )
                         XmlExceptionHelper.ThrowXmlDictionaryStringIDOutOfRange(_reader);
-                    XmlExceptionHelper.ThrowXmlDictionaryStringIDUndefinedStatic(_reader, staticKey);
+                    XmlExceptionHelper.ThrowXmlDictionaryStringIDUndefinedStatic(
+                        _reader,
+                        staticKey
+                    );
                 }
             }
             return key;
@@ -1309,7 +1387,6 @@ namespace System.Xml
             }
             value.SetValue(ValueHandleType.List, offset, count);
         }
-
 
         public void ReadQName(ValueHandle value)
         {

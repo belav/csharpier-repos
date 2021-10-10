@@ -49,30 +49,48 @@ namespace System.ComponentModel
         private static readonly object s_noValue = new object();
 
         private static readonly int s_bitDefaultValueQueried = InterlockedBitVector32.CreateMask();
-        private static readonly int s_bitGetQueried = InterlockedBitVector32.CreateMask(s_bitDefaultValueQueried);
-        private static readonly int s_bitSetQueried = InterlockedBitVector32.CreateMask(s_bitGetQueried);
-        private static readonly int s_bitShouldSerializeQueried = InterlockedBitVector32.CreateMask(s_bitSetQueried);
-        private static readonly int s_bitResetQueried = InterlockedBitVector32.CreateMask(s_bitShouldSerializeQueried);
-        private static readonly int s_bitChangedQueried = InterlockedBitVector32.CreateMask(s_bitResetQueried);
-        private static readonly int s_bitIPropChangedQueried = InterlockedBitVector32.CreateMask(s_bitChangedQueried);
-        private static readonly int s_bitReadOnlyChecked = InterlockedBitVector32.CreateMask(s_bitIPropChangedQueried);
-        private static readonly int s_bitAmbientValueQueried = InterlockedBitVector32.CreateMask(s_bitReadOnlyChecked);
-        private static readonly int s_bitSetOnDemand = InterlockedBitVector32.CreateMask(s_bitAmbientValueQueried);
+        private static readonly int s_bitGetQueried = InterlockedBitVector32.CreateMask(
+            s_bitDefaultValueQueried
+        );
+        private static readonly int s_bitSetQueried = InterlockedBitVector32.CreateMask(
+            s_bitGetQueried
+        );
+        private static readonly int s_bitShouldSerializeQueried = InterlockedBitVector32.CreateMask(
+            s_bitSetQueried
+        );
+        private static readonly int s_bitResetQueried = InterlockedBitVector32.CreateMask(
+            s_bitShouldSerializeQueried
+        );
+        private static readonly int s_bitChangedQueried = InterlockedBitVector32.CreateMask(
+            s_bitResetQueried
+        );
+        private static readonly int s_bitIPropChangedQueried = InterlockedBitVector32.CreateMask(
+            s_bitChangedQueried
+        );
+        private static readonly int s_bitReadOnlyChecked = InterlockedBitVector32.CreateMask(
+            s_bitIPropChangedQueried
+        );
+        private static readonly int s_bitAmbientValueQueried = InterlockedBitVector32.CreateMask(
+            s_bitReadOnlyChecked
+        );
+        private static readonly int s_bitSetOnDemand = InterlockedBitVector32.CreateMask(
+            s_bitAmbientValueQueried
+        );
 
-        private InterlockedBitVector32 _state;             // Contains the state bits for this proeprty descriptor.
+        private InterlockedBitVector32 _state; // Contains the state bits for this proeprty descriptor.
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-        private readonly Type _componentClass;             // used to determine if we should all on us or on the designer
-        private readonly Type _type;                       // the data type of the property
-        private object _defaultValue;               // the default value of the property (or noValue)
-        private object _ambientValue;               // the ambient value of the property (or noValue)
-        private PropertyInfo _propInfo;                   // the property info
-        private MethodInfo _getMethod;                  // the property get method
-        private MethodInfo _setMethod;                  // the property set method
-        private MethodInfo _shouldSerializeMethod;      // the should serialize method
-        private MethodInfo _resetMethod;                // the reset property method
-        private EventDescriptor _realChangedEvent;           // <propertyname>Changed event handler on object
-        private EventDescriptor _realIPropChangedEvent;      // INotifyPropertyChanged.PropertyChanged event handler on object
-        private readonly Type _receiverType;               // Only set if we are an extender
+        private readonly Type _componentClass; // used to determine if we should all on us or on the designer
+        private readonly Type _type; // the data type of the property
+        private object _defaultValue; // the default value of the property (or noValue)
+        private object _ambientValue; // the ambient value of the property (or noValue)
+        private PropertyInfo _propInfo; // the property info
+        private MethodInfo _getMethod; // the property get method
+        private MethodInfo _setMethod; // the property set method
+        private MethodInfo _shouldSerializeMethod; // the should serialize method
+        private MethodInfo _resetMethod; // the reset property method
+        private EventDescriptor _realChangedEvent; // <propertyname>Changed event handler on object
+        private EventDescriptor _realIPropChangedEvent; // INotifyPropertyChanged.PropertyChanged event handler on object
+        private readonly Type _receiverType; // Only set if we are an extender
 
         /// <summary>
         /// The main constructor for ReflectPropertyDescriptors.
@@ -82,10 +100,12 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentClass,
             string name,
             Type type,
-            Attribute[] attributes)
-            : base(name, attributes)
+            Attribute[] attributes
+        ) : base(name, attributes)
         {
-            Debug.WriteLine($"Creating ReflectPropertyDescriptor for {componentClass?.FullName}.{name}");
+            Debug.WriteLine(
+                $"Creating ReflectPropertyDescriptor for {componentClass?.FullName}.{name}"
+            );
 
             try
             {
@@ -97,14 +117,18 @@ namespace System.ComponentModel
                 if (componentClass == null)
                 {
                     Debug.WriteLine($"componentClass == null, name == {name}");
-                    throw new ArgumentException(SR.Format(SR.InvalidNullArgument, nameof(componentClass)));
+                    throw new ArgumentException(
+                        SR.Format(SR.InvalidNullArgument, nameof(componentClass))
+                    );
                 }
                 _type = type;
                 _componentClass = componentClass;
             }
             catch (Exception t)
             {
-                Debug.Fail($"Property '{name}' on component {componentClass.FullName} failed to init.");
+                Debug.Fail(
+                    $"Property '{name}' on component {componentClass.FullName} failed to init."
+                );
                 Debug.Fail(t.ToString());
                 throw;
             }
@@ -121,8 +145,8 @@ namespace System.ComponentModel
             PropertyInfo propInfo,
             MethodInfo getMethod,
             MethodInfo setMethod,
-            Attribute[] attrs)
-            : this(componentClass, name, type, attrs)
+            Attribute[] attrs
+        ) : this(componentClass, name, type, attrs)
         {
             _propInfo = propInfo;
             _getMethod = getMethod;
@@ -144,8 +168,8 @@ namespace System.ComponentModel
             Type receiverType,
             MethodInfo getMethod,
             MethodInfo setMethod,
-            Attribute[] attrs)
-            : this(componentClass, name, type, attrs)
+            Attribute[] attrs
+        ) : this(componentClass, name, type, attrs)
         {
             _receiverType = receiverType;
             _getMethod = getMethod;
@@ -161,15 +185,17 @@ namespace System.ComponentModel
         public ReflectPropertyDescriptor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentClass,
             PropertyDescriptor oldReflectPropertyDescriptor,
-            Attribute[] attributes)
-            : base(oldReflectPropertyDescriptor, attributes)
+            Attribute[] attributes
+        ) : base(oldReflectPropertyDescriptor, attributes)
         {
             _componentClass = componentClass;
             _type = oldReflectPropertyDescriptor.PropertyType;
 
             if (componentClass == null)
             {
-                throw new ArgumentException(SR.Format(SR.InvalidNullArgument, nameof(componentClass)));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidNullArgument, nameof(componentClass))
+                );
             }
 
             // If the classes are the same, we can potentially optimize the method fetch because
@@ -200,7 +226,11 @@ namespace System.ComponentModel
                         {
                             _defaultValue = dva.Value;
                             // Default values for enums are often stored as their underlying integer type:
-                            if (_defaultValue != null && PropertyType.IsEnum && PropertyType.GetEnumUnderlyingType() == _defaultValue.GetType())
+                            if (
+                                _defaultValue != null
+                                && PropertyType.IsEnum
+                                && PropertyType.GetEnumUnderlyingType() == _defaultValue.GetType()
+                            )
                             {
                                 _defaultValue = Enum.ToObject(PropertyType, _defaultValue);
                             }
@@ -269,7 +299,9 @@ namespace System.ComponentModel
                 {
                     if (typeof(INotifyPropertyChanged).IsAssignableFrom(ComponentType))
                     {
-                        _realIPropChangedEvent = TypeDescriptor.GetEvents(typeof(INotifyPropertyChanged))["PropertyChanged"];
+                        _realIPropChangedEvent = TypeDescriptor.GetEvents(
+                            typeof(INotifyPropertyChanged)
+                        )["PropertyChanged"];
                     }
 
                     _state[s_bitIPropChangedQueried] = true;
@@ -298,10 +330,13 @@ namespace System.ComponentModel
                     {
                         // Default values for enums are often stored as their underlying integer type:
                         object defaultValue = ((DefaultValueAttribute)a).Value;
-                        bool storedAsUnderlyingType = defaultValue != null && PropertyType.IsEnum && PropertyType.GetEnumUnderlyingType() == defaultValue.GetType();
-                        _defaultValue = storedAsUnderlyingType ?
-                            Enum.ToObject(PropertyType, _defaultValue) :
-                            defaultValue;
+                        bool storedAsUnderlyingType =
+                            defaultValue != null
+                            && PropertyType.IsEnum
+                            && PropertyType.GetEnumUnderlyingType() == defaultValue.GetType();
+                        _defaultValue = storedAsUnderlyingType
+                            ? Enum.ToObject(PropertyType, _defaultValue)
+                            : defaultValue;
                     }
                     else
                     {
@@ -326,8 +361,19 @@ namespace System.ComponentModel
                     {
                         if (_propInfo == null)
                         {
-                            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.GetProperty;
-                            _propInfo = _componentClass.GetProperty(Name, bindingFlags, binder: null, PropertyType, Type.EmptyTypes, Array.Empty<ParameterModifier>());
+                            BindingFlags bindingFlags =
+                                BindingFlags.Instance
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.GetProperty;
+                            _propInfo = _componentClass.GetProperty(
+                                Name,
+                                bindingFlags,
+                                binder: null,
+                                PropertyType,
+                                Type.EmptyTypes,
+                                Array.Empty<ParameterModifier>()
+                            );
                         }
                         if (_propInfo != null)
                         {
@@ -335,15 +381,27 @@ namespace System.ComponentModel
                         }
                         if (_getMethod == null)
                         {
-                            throw new InvalidOperationException(SR.Format(SR.ErrorMissingPropertyAccessors, _componentClass.FullName + "." + Name));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.ErrorMissingPropertyAccessors,
+                                    _componentClass.FullName + "." + Name
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        _getMethod = FindMethod(_componentClass, "Get" + Name, new Type[] { _receiverType }, _type);
+                        _getMethod = FindMethod(
+                            _componentClass,
+                            "Get" + Name,
+                            new Type[] { _receiverType },
+                            _type
+                        );
                         if (_getMethod == null)
                         {
-                            throw new ArgumentException(SR.Format(SR.ErrorMissingPropertyAccessors, Name));
+                            throw new ArgumentException(
+                                SR.Format(SR.ErrorMissingPropertyAccessors, Name)
+                            );
                         }
                     }
                     _state[s_bitGetQueried] = true;
@@ -360,7 +418,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Indicates whether this property is read only.
         /// </summary>
-        public override bool IsReadOnly => SetMethodValue == null || ((ReadOnlyAttribute)Attributes[typeof(ReadOnlyAttribute)]).IsReadOnly;
+        public override bool IsReadOnly =>
+            SetMethodValue == null
+            || ((ReadOnlyAttribute)Attributes[typeof(ReadOnlyAttribute)]).IsReadOnly;
 
         /// <summary>
         /// Retrieves the type of the property.
@@ -387,7 +447,13 @@ namespace System.ComponentModel
                         args = new Type[] { _receiverType };
                     }
 
-                    _resetMethod = FindMethod(_componentClass, "Reset" + Name, args, typeof(void), /* publicOnly= */ false);
+                    _resetMethod = FindMethod(
+                        _componentClass,
+                        "Reset" + Name,
+                        args,
+                        typeof(void), /* publicOnly= */
+                        false
+                    );
 
                     _state[s_bitResetQueried] = true;
                 }
@@ -408,10 +474,24 @@ namespace System.ComponentModel
 
                     if (_setMethod == null)
                     {
-                        for (Type t = _componentClass.BaseType; t != null && t != typeof(object); t = t.BaseType)
+                        for (
+                            Type t = _componentClass.BaseType;
+                            t != null && t != typeof(object);
+                            t = t.BaseType
+                        )
                         {
-                            BindingFlags bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
-                            PropertyInfo p = t.GetProperty(name, bindingFlags, binder: null, PropertyType, Type.EmptyTypes, null);
+                            BindingFlags bindingFlags =
+                                BindingFlags.DeclaredOnly
+                                | BindingFlags.Public
+                                | BindingFlags.Instance;
+                            PropertyInfo p = t.GetProperty(
+                                name,
+                                bindingFlags,
+                                binder: null,
+                                PropertyType,
+                                Type.EmptyTypes,
+                                null
+                            );
                             if (p != null)
                             {
                                 _setMethod = p.GetSetMethod(nonPublic: false);
@@ -431,8 +511,19 @@ namespace System.ComponentModel
                     {
                         if (_propInfo == null)
                         {
-                            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.GetProperty;
-                            _propInfo = _componentClass.GetProperty(Name, bindingFlags, binder: null, PropertyType, Type.EmptyTypes, Array.Empty<ParameterModifier>());
+                            BindingFlags bindingFlags =
+                                BindingFlags.Instance
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.GetProperty;
+                            _propInfo = _componentClass.GetProperty(
+                                Name,
+                                bindingFlags,
+                                binder: null,
+                                PropertyType,
+                                Type.EmptyTypes,
+                                Array.Empty<ParameterModifier>()
+                            );
                         }
                         if (_propInfo != null)
                         {
@@ -441,8 +532,12 @@ namespace System.ComponentModel
                     }
                     else
                     {
-                        _setMethod = FindMethod(_componentClass, "Set" + Name,
-                                               new Type[] { _receiverType, _type }, typeof(void));
+                        _setMethod = FindMethod(
+                            _componentClass,
+                            "Set" + Name,
+                            new Type[] { _receiverType, _type },
+                            typeof(void)
+                        );
                     }
 
                     _state[s_bitSetQueried] = true;
@@ -471,7 +566,13 @@ namespace System.ComponentModel
                         args = new Type[] { _receiverType };
                     }
 
-                    _shouldSerializeMethod = FindMethod(_componentClass, "ShouldSerialize" + Name, args, typeof(bool), publicOnly: false);
+                    _shouldSerializeMethod = FindMethod(
+                        _componentClass,
+                        "ShouldSerialize" + Name,
+                        args,
+                        typeof(bool),
+                        publicOnly: false
+                    );
                     _state[s_bitShouldSerializeQueried] = true;
                 }
                 return _shouldSerializeMethod;
@@ -498,7 +599,6 @@ namespace System.ComponentModel
             {
                 changedEvent.AddEventHandler(component, handler);
             }
-
             // Otherwise let the base class add the handler to its ValueChanged event for this component
             else
             {
@@ -507,7 +607,10 @@ namespace System.ComponentModel
                 if (GetValueChangedHandler(component) == null)
                 {
                     EventDescriptor iPropChangedEvent = IPropChangedEventValue;
-                    iPropChangedEvent?.AddEventHandler(component, new PropertyChangedEventHandler(OnINotifyPropertyChanged));
+                    iPropChangedEvent?.AddEventHandler(
+                        component,
+                        new PropertyChangedEventHandler(OnINotifyPropertyChanged)
+                    );
                 }
 
                 base.AddValueChanged(component, handler);
@@ -529,7 +632,10 @@ namespace System.ComponentModel
                 {
                     try
                     {
-                        provider = (IExtenderProvider)GetInvocationTarget(_componentClass, provider);
+                        provider = (IExtenderProvider)GetInvocationTarget(
+                            _componentClass,
+                            provider
+                        );
                         return (bool)shouldSerialize.Invoke(provider, new object[] { component });
                     }
                     catch { }
@@ -554,7 +660,11 @@ namespace System.ComponentModel
             return null;
         }
 
-        internal void ExtenderResetValue(IExtenderProvider provider, object component, PropertyDescriptor notifyDesc)
+        internal void ExtenderResetValue(
+            IExtenderProvider provider,
+            object component,
+            PropertyDescriptor notifyDesc
+        )
         {
             if (DefaultValue != s_noValue)
             {
@@ -574,7 +684,9 @@ namespace System.ComponentModel
                 // Announce that we are about to change this component
                 if (site != null)
                 {
-                    changeService = (IComponentChangeService)site.GetService(typeof(IComponentChangeService));
+                    changeService = (IComponentChangeService)site.GetService(
+                        typeof(IComponentChangeService)
+                    );
                 }
 
                 // Make sure that it is ok to send the onchange events
@@ -610,7 +722,12 @@ namespace System.ComponentModel
             }
         }
 
-        internal void ExtenderSetValue(IExtenderProvider provider, object component, object value, PropertyDescriptor notifyDesc)
+        internal void ExtenderSetValue(
+            IExtenderProvider provider,
+            object component,
+            object value,
+            PropertyDescriptor notifyDesc
+        )
         {
             if (provider != null)
             {
@@ -621,7 +738,9 @@ namespace System.ComponentModel
                 // Announce that we are about to change this component
                 if (site != null)
                 {
-                    changeService = (IComponentChangeService)site.GetService(typeof(IComponentChangeService));
+                    changeService = (IComponentChangeService)site.GetService(
+                        typeof(IComponentChangeService)
+                    );
                 }
 
                 // Make sure that it is ok to send the onchange events
@@ -664,7 +783,10 @@ namespace System.ComponentModel
                 {
                     try
                     {
-                        return (bool)ShouldSerializeMethodValue.Invoke(provider, new object[] { component });
+                        return (bool)ShouldSerializeMethodValue.Invoke(
+                            provider,
+                            new object[] { component }
+                        );
                     }
                     catch { }
                 }
@@ -676,7 +798,10 @@ namespace System.ComponentModel
                 {
                     try
                     {
-                        return (bool)ShouldSerializeMethodValue.Invoke(provider, new object[] { component });
+                        return (bool)ShouldSerializeMethodValue.Invoke(
+                            provider,
+                            new object[] { component }
+                        );
                     }
                     catch { }
                 }
@@ -685,9 +810,18 @@ namespace System.ComponentModel
             return !Equals(DefaultValue, ExtenderGetValue(provider, component));
         }
 
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields, typeof(DesignerSerializationVisibilityAttribute))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "The DynamicDependency ensures the correct members are preserved.")]
-        private bool AttributesContainsDesignerVisibilityContent() => Attributes.Contains(DesignerSerializationVisibilityAttribute.Content);
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                | DynamicallyAccessedMemberTypes.PublicFields,
+            typeof(DesignerSerializationVisibilityAttribute)
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The DynamicDependency ensures the correct members are preserved."
+        )]
+        private bool AttributesContainsDesignerVisibilityContent() =>
+            Attributes.Contains(DesignerSerializationVisibilityAttribute.Content);
 
         /// <summary>
         /// Indicates whether reset will change the value of the component. If there
@@ -731,8 +865,11 @@ namespace System.ComponentModel
             return false;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:UnrecognizedReflectionPattern",
-            Justification = "ReflectPropertyDescriptor ctors are all marked as RequiresUnreferencedCode because PropertyType can't be annotated as 'All'.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2072:UnrecognizedReflectionPattern",
+            Justification = "ReflectPropertyDescriptor ctors are all marked as RequiresUnreferencedCode because PropertyType can't be annotated as 'All'."
+        )]
         protected override void FillAttributes(IList attributes)
         {
             Debug.Assert(_componentClass != null, "Must have a component class for FillAttributes");
@@ -793,22 +930,40 @@ namespace System.ComponentModel
                 {
                     MemberInfo memberInfo = null;
 
-                    BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly;
+                    BindingFlags bindingFlags =
+                        BindingFlags.Instance
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Public
+                        | BindingFlags.DeclaredOnly;
                     // Fill in our member info so we can get at the custom attributes.
                     if (IsExtender)
                     {
                         //receiverType is used to avoid ambitiousness when there are overloads for the get method.
-                        memberInfo = currentReflectType.GetMethod("Get" + Name, bindingFlags, binder: null, new Type[] { _receiverType }, modifiers: null);
+                        memberInfo = currentReflectType.GetMethod(
+                            "Get" + Name,
+                            bindingFlags,
+                            binder: null,
+                            new Type[] { _receiverType },
+                            modifiers: null
+                        );
                     }
                     else
                     {
-                        memberInfo = currentReflectType.GetProperty(Name, bindingFlags, binder: null, PropertyType, Type.EmptyTypes, Array.Empty<ParameterModifier>());
+                        memberInfo = currentReflectType.GetProperty(
+                            Name,
+                            bindingFlags,
+                            binder: null,
+                            PropertyType,
+                            Type.EmptyTypes,
+                            Array.Empty<ParameterModifier>()
+                        );
                     }
 
                     // Get custom attributes for the member info.
                     if (memberInfo != null)
                     {
-                        attributeStack[--depth] = ReflectTypeDescriptionProvider.ReflectGetAttributes(memberInfo);
+                        attributeStack[--depth] =
+                            ReflectTypeDescriptionProvider.ReflectGetAttributes(memberInfo);
                     }
 
                     // Ready for the next loop iteration.
@@ -832,15 +987,23 @@ namespace System.ComponentModel
 
                                     if (!string.IsNullOrEmpty(sta.PropertyName))
                                     {
-                                        MemberInfo[] milist = specificType.GetMember(sta.PropertyName);
+                                        MemberInfo[] milist = specificType.GetMember(
+                                            sta.PropertyName
+                                        );
                                         if (milist.Length > 0 && milist[0] != null)
                                         {
-                                            stAttrs = ReflectTypeDescriptionProvider.ReflectGetAttributes(milist[0]);
+                                            stAttrs =
+                                                ReflectTypeDescriptionProvider.ReflectGetAttributes(
+                                                    milist[0]
+                                                );
                                         }
                                     }
                                     else
                                     {
-                                        stAttrs = ReflectTypeDescriptionProvider.ReflectGetAttributes(specificType);
+                                        stAttrs =
+                                            ReflectTypeDescriptionProvider.ReflectGetAttributes(
+                                                specificType
+                                            );
                                     }
                                     if (stAttrs != null)
                                     {
@@ -901,7 +1064,6 @@ namespace System.ComponentModel
             {
                 component = GetInvocationTarget(_componentClass, component);
 
-
                 try
                 {
                     return GetMethodValue.Invoke(component, null);
@@ -928,7 +1090,10 @@ namespace System.ComponentModel
 
                     string message = t.Message ?? t.GetType().Name;
 
-                    throw new TargetInvocationException(SR.Format(SR.ErrorPropertyAccessorException, Name, name, message), t);
+                    throw new TargetInvocationException(
+                        SR.Format(SR.ErrorPropertyAccessorException, Name, name, message),
+                        t
+                    );
                 }
             }
             Debug.WriteLine("[" + Name + "]:   ---> returning: null");
@@ -941,8 +1106,10 @@ namespace System.ComponentModel
         /// </summary>
         internal void OnINotifyPropertyChanged(object component, PropertyChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(e.PropertyName) ||
-                string.Compare(e.PropertyName, Name, true, CultureInfo.InvariantCulture) == 0)
+            if (
+                string.IsNullOrEmpty(e.PropertyName)
+                || string.Compare(e.PropertyName, Name, true, CultureInfo.InvariantCulture) == 0
+            )
             {
                 OnValueChanged(component, e);
             }
@@ -981,7 +1148,6 @@ namespace System.ComponentModel
             {
                 changedEvent.RemoveEventHandler(component, handler);
             }
-
             // Otherwise the base class added the handler to its ValueChanged
             // event for this component, so let the base class remove it now.
             else
@@ -993,7 +1159,10 @@ namespace System.ComponentModel
                 if (GetValueChangedHandler(component) == null)
                 {
                     EventDescriptor iPropChangedEvent = IPropChangedEventValue;
-                    iPropChangedEvent?.RemoveEventHandler(component, new PropertyChangedEventHandler(OnINotifyPropertyChanged));
+                    iPropChangedEvent?.RemoveEventHandler(
+                        component,
+                        new PropertyChangedEventHandler(OnINotifyPropertyChanged)
+                    );
                 }
             }
         }
@@ -1028,7 +1197,9 @@ namespace System.ComponentModel
                 // Announce that we are about to change this component
                 if (site != null)
                 {
-                    changeService = (IComponentChangeService)site.GetService(typeof(IComponentChangeService));
+                    changeService = (IComponentChangeService)site.GetService(
+                        typeof(IComponentChangeService)
+                    );
                 }
 
                 // Make sure that it is ok to send the onchange events
@@ -1074,7 +1245,9 @@ namespace System.ComponentModel
         /// </summary>
         public override void SetValue(object component, object value)
         {
-            Debug.WriteLine($"[{Name}]: SetValue({component?.GetType().Name ?? "(null)"}, {value?.GetType().Name ?? "(null)"})");
+            Debug.WriteLine(
+                $"[{Name}]: SetValue({component?.GetType().Name ?? "(null)"}, {value?.GetType().Name ?? "(null)"})"
+            );
 
             if (component != null)
             {
@@ -1090,7 +1263,9 @@ namespace System.ComponentModel
                     // Announce that we are about to change this component
                     if (site != null)
                     {
-                        changeService = (IComponentChangeService)site.GetService(typeof(IComponentChangeService));
+                        changeService = (IComponentChangeService)site.GetService(
+                            typeof(IComponentChangeService)
+                        );
                     }
 
                     // Make sure that it is ok to send the onchange events
@@ -1140,6 +1315,7 @@ namespace System.ComponentModel
                             }
                         }
                     }
+
                     finally
                     {
                         // Now notify the change service that the change was successful.
@@ -1197,6 +1373,7 @@ namespace System.ComponentModel
         /// from direct calls made to PropertyDescriptor.SetValue (value=false). For example, the component may
         /// implement the INotifyPropertyChanged interface, or may have an explicit '{name}Changed' event for this property.
         /// </summary>
-        public override bool SupportsChangeEvents => IPropChangedEventValue != null || ChangedEventValue != null;
+        public override bool SupportsChangeEvents =>
+            IPropChangedEventValue != null || ChangedEventValue != null;
     }
 }

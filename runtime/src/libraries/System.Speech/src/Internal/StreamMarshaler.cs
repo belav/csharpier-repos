@@ -11,9 +11,7 @@ namespace System.Speech.Internal
     {
         #region Constructors
 
-        internal StreamMarshaler()
-        {
-        }
+        internal StreamMarshaler() { }
 
         internal StreamMarshaler(Stream stream)
         {
@@ -146,18 +144,12 @@ namespace System.Speech.Internal
 
         internal Stream Stream
         {
-            get
-            {
-                return _stream;
-            }
+            get { return _stream; }
         }
 
         internal uint Position
         {
-            set
-            {
-                _stream.Position = value;
-            }
+            set { _stream.Position = value; }
         }
 
         #endregion
@@ -167,7 +159,6 @@ namespace System.Speech.Internal
         private HGlobalSafeHandle _safeHMem = new();
 
         private Stream _stream;
-
         #endregion
     }
 }

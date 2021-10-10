@@ -35,7 +35,6 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
                 _visitor = new IntermediateNodeWriter(_writer);
                 _baseline = baseline;
-
             }
 
             public TextWriter Writer { get; }
@@ -59,10 +58,18 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             public void AssertReachedEndOfBaseline()
             {
                 // Since we're walking the nodes of our generated code there's the chance that our baseline is longer.
-                Assert.True(_baseline.Length == _index, "Not all lines of the baseline were visited!");
+                Assert.True(
+                    _baseline.Length == _index,
+                    "Not all lines of the baseline were visited!"
+                );
             }
 
-            private void AssertNodeEquals(IntermediateNode node, IEnumerable<IntermediateNode> ancestors, string expected, string actual)
+            private void AssertNodeEquals(
+                IntermediateNode node,
+                IEnumerable<IntermediateNode> ancestors,
+                string expected,
+                string actual
+            )
             {
                 if (string.Equals(expected, actual))
                 {
@@ -73,7 +80,13 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 if (expected == null)
                 {
                     var message = "The node is missing from baseline.";
-                    throw new IntermediateNodeBaselineException(node, Ancestors.ToArray(), expected, actual, message);
+                    throw new IntermediateNodeBaselineException(
+                        node,
+                        Ancestors.ToArray(),
+                        expected,
+                        actual,
+                        message
+                    );
                 }
 
                 int charsVerified = 0;
@@ -84,10 +97,18 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 AssertDelimiter(node, expected, actual, false, ref charsVerified);
                 AssertContentEqual(node, ancestors, expected, actual, ref charsVerified);
 
-                throw new InvalidOperationException("We can't figure out HOW these two things are different. This is a bug.");
+                throw new InvalidOperationException(
+                    "We can't figure out HOW these two things are different. This is a bug."
+                );
             }
 
-            private void AssertNestingEqual(IntermediateNode node, IEnumerable<IntermediateNode> ancestors, string expected, string actual, ref int charsVerified)
+            private void AssertNestingEqual(
+                IntermediateNode node,
+                IEnumerable<IntermediateNode> ancestors,
+                string expected,
+                string actual,
+                ref int charsVerified
+            )
             {
                 var i = 0;
                 for (; i < expected.Length; i++)
@@ -116,14 +137,27 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
                 if (failed)
                 {
-                    var message = "The node is at the wrong level of nesting. This usually means a child is missing.";
-                    throw new IntermediateNodeBaselineException(node, ancestors.ToArray(), expected, actual, message);
+                    var message =
+                        "The node is at the wrong level of nesting. This usually means a child is missing.";
+                    throw new IntermediateNodeBaselineException(
+                        node,
+                        ancestors.ToArray(),
+                        expected,
+                        actual,
+                        message
+                    );
                 }
 
                 charsVerified = j;
             }
 
-            private void AssertNameEqual(IntermediateNode node, IEnumerable<IntermediateNode> ancestors, string expected, string actual, ref int charsVerified)
+            private void AssertNameEqual(
+                IntermediateNode node,
+                IEnumerable<IntermediateNode> ancestors,
+                string expected,
+                string actual,
+                ref int charsVerified
+            )
             {
                 var expectedName = GetName(expected, charsVerified);
                 var actualName = GetName(actual, charsVerified);
@@ -131,23 +165,39 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 if (!string.Equals(expectedName, actualName))
                 {
                     var message = $"Node names are not equal.";
-                    throw new IntermediateNodeBaselineException(node, ancestors.ToArray(), expected, actual, message);
+                    throw new IntermediateNodeBaselineException(
+                        node,
+                        ancestors.ToArray(),
+                        expected,
+                        actual,
+                        message
+                    );
                 }
 
                 charsVerified += expectedName.Length;
             }
 
             // Either both strings need to have a delimiter next or neither should.
-            private void AssertDelimiter(IntermediateNode node, string expected, string actual, bool required, ref int charsVerified)
+            private void AssertDelimiter(
+                IntermediateNode node,
+                string expected,
+                string actual,
+                bool required,
+                ref int charsVerified
+            )
             {
                 if (charsVerified == expected.Length && required)
                 {
-                    throw new InvalidOperationException($"Baseline text is not well-formed: '{expected}'.");
+                    throw new InvalidOperationException(
+                        $"Baseline text is not well-formed: '{expected}'."
+                    );
                 }
 
                 if (charsVerified == actual.Length && required)
                 {
-                    throw new InvalidOperationException($"Baseline text is not well-formed: '{actual}'.");
+                    throw new InvalidOperationException(
+                        $"Baseline text is not well-formed: '{actual}'."
+                    );
                 }
 
                 if (charsVerified == expected.Length && charsVerified == actual.Length)
@@ -155,16 +205,28 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     return;
                 }
 
-                var expectedDelimiter = expected.IndexOf(" - ", charsVerified, StringComparison.Ordinal);
+                var expectedDelimiter = expected.IndexOf(
+                    " - ",
+                    charsVerified,
+                    StringComparison.Ordinal
+                );
                 if (expectedDelimiter != charsVerified && expectedDelimiter != -1)
                 {
-                    throw new InvalidOperationException($"Baseline text is not well-formed: '{actual}'.");
+                    throw new InvalidOperationException(
+                        $"Baseline text is not well-formed: '{actual}'."
+                    );
                 }
 
-                var actualDelimiter = actual.IndexOf(" - ", charsVerified, StringComparison.Ordinal);
+                var actualDelimiter = actual.IndexOf(
+                    " - ",
+                    charsVerified,
+                    StringComparison.Ordinal
+                );
                 if (actualDelimiter != charsVerified && actualDelimiter != -1)
                 {
-                    throw new InvalidOperationException($"Baseline text is not well-formed: '{actual}'.");
+                    throw new InvalidOperationException(
+                        $"Baseline text is not well-formed: '{actual}'."
+                    );
                 }
 
                 Assert.Equal(expectedDelimiter, actualDelimiter);
@@ -172,7 +234,13 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 charsVerified += 3;
             }
 
-            private void AssertLocationEqual(IntermediateNode node, IEnumerable<IntermediateNode> ancestors, string expected, string actual, ref int charsVerified)
+            private void AssertLocationEqual(
+                IntermediateNode node,
+                IEnumerable<IntermediateNode> ancestors,
+                string expected,
+                string actual,
+                ref int charsVerified
+            )
             {
                 var expectedLocation = GetLocation(expected, charsVerified);
                 var actualLocation = GetLocation(actual, charsVerified);
@@ -180,13 +248,25 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 if (!string.Equals(expectedLocation, actualLocation))
                 {
                     var message = $"Locations are not equal.";
-                    throw new IntermediateNodeBaselineException(node, ancestors.ToArray(), expected, actual, message);
+                    throw new IntermediateNodeBaselineException(
+                        node,
+                        ancestors.ToArray(),
+                        expected,
+                        actual,
+                        message
+                    );
                 }
 
                 charsVerified += expectedLocation.Length;
             }
 
-            private void AssertContentEqual(IntermediateNode node, IEnumerable<IntermediateNode> ancestors, string expected, string actual, ref int charsVerified)
+            private void AssertContentEqual(
+                IntermediateNode node,
+                IEnumerable<IntermediateNode> ancestors,
+                string expected,
+                string actual,
+                ref int charsVerified
+            )
             {
                 var expectedContent = GetContent(expected, charsVerified);
                 var actualContent = GetContent(actual, charsVerified);
@@ -194,7 +274,13 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 if (!string.Equals(expectedContent, actualContent))
                 {
                     var message = $"Contents are not equal.";
-                    throw new IntermediateNodeBaselineException(node, ancestors.ToArray(), expected, actual, message);
+                    throw new IntermediateNodeBaselineException(
+                        node,
+                        ancestors.ToArray(),
+                        expected,
+                        actual,
+                        message
+                    );
                 }
 
                 charsVerified += expectedContent.Length;
@@ -205,7 +291,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 var delimiter = text.IndexOf(" - ", start, StringComparison.Ordinal);
                 if (delimiter == -1)
                 {
-                    throw new InvalidOperationException($"Baseline text is not well-formed: '{text}'.");
+                    throw new InvalidOperationException(
+                        $"Baseline text is not well-formed: '{text}'."
+                    );
                 }
 
                 return text.Substring(start, delimiter - start);
@@ -214,7 +302,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             private string GetLocation(string text, int start)
             {
                 var delimiter = text.IndexOf(" - ", start, StringComparison.Ordinal);
-                return delimiter == -1 ? text.Substring(start) : text.Substring(start, delimiter - start);
+                return delimiter == -1
+                  ? text.Substring(start)
+                  : text.Substring(start, delimiter - start);
             }
 
             private string GetContent(string text, int start)
@@ -224,8 +314,13 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
             private class IntermediateNodeBaselineException : XunitException
             {
-                public IntermediateNodeBaselineException(IntermediateNode node, IntermediateNode[] ancestors, string expected, string actual, string userMessage)
-                    : base(Format(node, ancestors, expected, actual, userMessage))
+                public IntermediateNodeBaselineException(
+                    IntermediateNode node,
+                    IntermediateNode[] ancestors,
+                    string expected,
+                    string actual,
+                    string userMessage
+                ) : base(Format(node, ancestors, expected, actual, userMessage))
                 {
                     Node = node;
                     Expected = expected;
@@ -238,7 +333,13 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
                 public string Expected { get; }
 
-                private static string Format(IntermediateNode node, IntermediateNode[] ancestors, string expected, string actual, string userMessage)
+                private static string Format(
+                    IntermediateNode node,
+                    IntermediateNode[] ancestors,
+                    string expected,
+                    string actual,
+                    string userMessage
+                )
                 {
                     var builder = new StringBuilder();
                     builder.AppendLine(userMessage);

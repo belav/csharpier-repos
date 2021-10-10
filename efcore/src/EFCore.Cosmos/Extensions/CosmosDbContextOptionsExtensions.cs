@@ -29,14 +29,15 @@ namespace Microsoft.EntityFrameworkCore
             string accountEndpoint,
             string accountKey,
             string databaseName,
-            Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
-            where TContext : DbContext
-            => (DbContextOptionsBuilder<TContext>)UseCosmos(
+            Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+        ) where TContext : DbContext =>
+            (DbContextOptionsBuilder<TContext>)UseCosmos(
                 (DbContextOptionsBuilder)optionsBuilder,
                 accountEndpoint,
                 accountKey,
                 databaseName,
-                cosmosOptionsAction);
+                cosmosOptionsAction
+            );
 
         /// <summary>
         ///     Configures the context to connect to a Azure Cosmos database.
@@ -52,22 +53,25 @@ namespace Microsoft.EntityFrameworkCore
             string accountEndpoint,
             string accountKey,
             string databaseName,
-            Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
+            Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+        )
         {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotNull(accountEndpoint, nameof(accountEndpoint));
             Check.NotEmpty(accountKey, nameof(accountKey));
             Check.NotEmpty(databaseName, nameof(databaseName));
 
-            var extension = optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
+            var extension =
+                optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
                 ?? new CosmosOptionsExtension();
 
-            extension = extension
-                .WithAccountEndpoint(accountEndpoint)
+            extension = extension.WithAccountEndpoint(accountEndpoint)
                 .WithAccountKey(accountKey)
                 .WithDatabaseName(databaseName);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                extension
+            );
 
             cosmosOptionsAction?.Invoke(new CosmosDbContextOptionsBuilder(optionsBuilder));
 
@@ -87,13 +91,14 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             string connectionString,
             string databaseName,
-            Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
-            where TContext : DbContext
-            => (DbContextOptionsBuilder<TContext>)UseCosmos(
+            Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+        ) where TContext : DbContext =>
+            (DbContextOptionsBuilder<TContext>)UseCosmos(
                 (DbContextOptionsBuilder)optionsBuilder,
                 connectionString,
                 databaseName,
-                cosmosOptionsAction);
+                cosmosOptionsAction
+            );
 
         /// <summary>
         ///     Configures the context to connect to a Azure Cosmos database.
@@ -107,20 +112,23 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder optionsBuilder,
             string connectionString,
             string databaseName,
-            Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
+            Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+        )
         {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotNull(connectionString, nameof(connectionString));
             Check.NotNull(databaseName, nameof(databaseName));
 
-            var extension = optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
+            var extension =
+                optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
                 ?? new CosmosOptionsExtension();
 
-            extension = extension
-                .WithConnectionString(connectionString)
+            extension = extension.WithConnectionString(connectionString)
                 .WithDatabaseName(databaseName);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                extension
+            );
 
             cosmosOptionsAction?.Invoke(new CosmosDbContextOptionsBuilder(optionsBuilder));
 

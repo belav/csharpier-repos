@@ -146,7 +146,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Next_IntInt_Next_IntInt_AllValuesAreWithinRange_MemberData))]
-        public void Next_IntInt_Next_IntInt_AllValuesAreWithinRange(bool derived, bool seeded, int min, int max)
+        public void Next_IntInt_Next_IntInt_AllValuesAreWithinRange(
+            bool derived,
+            bool seeded,
+            int min,
+            int max
+        )
         {
             Random r = Create(derived, seeded);
             for (int i = 0; i < 100; i++)
@@ -219,7 +224,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Next_LongLong_Next_IntInt_AllValuesAreWithinRange_MemberData))]
-        public void Next_LongLong_Next_IntInt_AllValuesAreWithinRange(bool derived, bool seeded, long min, long max)
+        public void Next_LongLong_Next_IntInt_AllValuesAreWithinRange(
+            bool derived,
+            bool seeded,
+            long min,
+            long max
+        )
         {
             Random r = Create(derived, seeded);
             for (int i = 0; i < 100; i++)
@@ -269,26 +279,266 @@ namespace System.Tests
             // sequences to change, this test verifies the first few numbers for a few seeds.
             int[][] expectedValues = new int[][]
             {
-                new int[] { 1559595546, 1755192844, 1649316166, 1198642031, 442452829, 1200195957, 1945678308, 949569752, 2099272109, 587775847 },
-                new int[] { 534011718, 237820880, 1002897798, 1657007234, 1412011072, 929393559, 760389092, 2026928803, 217468053, 1379662799 },
-                new int[] { 1655911537, 867932563, 356479430, 2115372437, 234085668, 658591161, 1722583523, 956804207, 483147644, 24066104 },
-                new int[] { 630327709, 1498044246, 1857544709, 426253993, 1203643911, 387788763, 537294307, 2034163258, 748827235, 815953056 },
-                new int[] { 1752227528, 2128155929, 1211126341, 884619196, 25718507, 116986365, 1499488738, 964038662, 1014506826, 1607840008 },
-                new int[] { 726643700, 610783965, 564707973, 1342984399, 995276750, 1993667614, 314199522, 2041397713, 1280186417, 252243313 },
-                new int[] { 1848543519, 1240895648, 2065773252, 1801349602, 1964834993, 1722865216, 1276393953, 971273117, 1545866008, 1044130265 },
-                new int[] { 822959691, 1871007331, 1419354884, 112231158, 786909589, 1452062818, 91104737, 2048632168, 1811545599, 1836017217 },
-                new int[] { 1944859510, 353635367, 772936516, 570596361, 1756467832, 1181260420, 1053299168, 978507572, 2077225190, 480420522 },
-                new int[] { 919275682, 983747050, 126518148, 1028961564, 578542428, 910458022, 2015493599, 2055866623, 195421134, 1272307474 },
-                new int[] { 2041175501, 1613858733, 1627583427, 1487326767, 1548100671, 639655624, 830204383, 985742027, 461100725, 2064194426 },
-                new int[] { 1015591673, 96486769, 981165059, 1945691970, 370175267, 368853226, 1792398814, 2063101078, 726780316, 708597731 },
-                new int[] { 2137491492, 726598452, 334746691, 256573526, 1339733510, 98050828, 607109598, 992976482, 992459907, 1500484683 },
-                new int[] { 1111907664, 1356710135, 1835811970, 714938729, 161808106, 1974732077, 1569304029, 2070335533, 1258139498, 144887988 },
-                new int[] { 86323836, 1986821818, 1189393602, 1173303932, 1131366349, 1703929679, 384014813, 1000210937, 1523819089, 936774940 },
-                new int[] { 1208223655, 469449854, 542975234, 1631669135, 2100924592, 1433127281, 1346209244, 2077569988, 1789498680, 1728661892 },
-                new int[] { 182639827, 1099561537, 2044040513, 2090034338, 922999188, 1162324883, 160920028, 1007445392, 2055178271, 373065197 },
-                new int[] { 1304539646, 1729673220, 1397622145, 400915894, 1892557431, 891522485, 1123114459, 2084804443, 173374215, 1164952149 },
-                new int[] { 278955818, 212301256, 751203777, 859281097, 714632027, 620720087, 2085308890, 1014679847, 439053806, 1956839101 },
-                new int[] { 1400855637, 842412939, 104785409, 1317646300, 1684190270, 349917689, 900019674, 2092038898, 704733397, 601242406 },
+                new int[]
+                {
+                    1559595546,
+                    1755192844,
+                    1649316166,
+                    1198642031,
+                    442452829,
+                    1200195957,
+                    1945678308,
+                    949569752,
+                    2099272109,
+                    587775847
+                },
+                new int[]
+                {
+                    534011718,
+                    237820880,
+                    1002897798,
+                    1657007234,
+                    1412011072,
+                    929393559,
+                    760389092,
+                    2026928803,
+                    217468053,
+                    1379662799
+                },
+                new int[]
+                {
+                    1655911537,
+                    867932563,
+                    356479430,
+                    2115372437,
+                    234085668,
+                    658591161,
+                    1722583523,
+                    956804207,
+                    483147644,
+                    24066104
+                },
+                new int[]
+                {
+                    630327709,
+                    1498044246,
+                    1857544709,
+                    426253993,
+                    1203643911,
+                    387788763,
+                    537294307,
+                    2034163258,
+                    748827235,
+                    815953056
+                },
+                new int[]
+                {
+                    1752227528,
+                    2128155929,
+                    1211126341,
+                    884619196,
+                    25718507,
+                    116986365,
+                    1499488738,
+                    964038662,
+                    1014506826,
+                    1607840008
+                },
+                new int[]
+                {
+                    726643700,
+                    610783965,
+                    564707973,
+                    1342984399,
+                    995276750,
+                    1993667614,
+                    314199522,
+                    2041397713,
+                    1280186417,
+                    252243313
+                },
+                new int[]
+                {
+                    1848543519,
+                    1240895648,
+                    2065773252,
+                    1801349602,
+                    1964834993,
+                    1722865216,
+                    1276393953,
+                    971273117,
+                    1545866008,
+                    1044130265
+                },
+                new int[]
+                {
+                    822959691,
+                    1871007331,
+                    1419354884,
+                    112231158,
+                    786909589,
+                    1452062818,
+                    91104737,
+                    2048632168,
+                    1811545599,
+                    1836017217
+                },
+                new int[]
+                {
+                    1944859510,
+                    353635367,
+                    772936516,
+                    570596361,
+                    1756467832,
+                    1181260420,
+                    1053299168,
+                    978507572,
+                    2077225190,
+                    480420522
+                },
+                new int[]
+                {
+                    919275682,
+                    983747050,
+                    126518148,
+                    1028961564,
+                    578542428,
+                    910458022,
+                    2015493599,
+                    2055866623,
+                    195421134,
+                    1272307474
+                },
+                new int[]
+                {
+                    2041175501,
+                    1613858733,
+                    1627583427,
+                    1487326767,
+                    1548100671,
+                    639655624,
+                    830204383,
+                    985742027,
+                    461100725,
+                    2064194426
+                },
+                new int[]
+                {
+                    1015591673,
+                    96486769,
+                    981165059,
+                    1945691970,
+                    370175267,
+                    368853226,
+                    1792398814,
+                    2063101078,
+                    726780316,
+                    708597731
+                },
+                new int[]
+                {
+                    2137491492,
+                    726598452,
+                    334746691,
+                    256573526,
+                    1339733510,
+                    98050828,
+                    607109598,
+                    992976482,
+                    992459907,
+                    1500484683
+                },
+                new int[]
+                {
+                    1111907664,
+                    1356710135,
+                    1835811970,
+                    714938729,
+                    161808106,
+                    1974732077,
+                    1569304029,
+                    2070335533,
+                    1258139498,
+                    144887988
+                },
+                new int[]
+                {
+                    86323836,
+                    1986821818,
+                    1189393602,
+                    1173303932,
+                    1131366349,
+                    1703929679,
+                    384014813,
+                    1000210937,
+                    1523819089,
+                    936774940
+                },
+                new int[]
+                {
+                    1208223655,
+                    469449854,
+                    542975234,
+                    1631669135,
+                    2100924592,
+                    1433127281,
+                    1346209244,
+                    2077569988,
+                    1789498680,
+                    1728661892
+                },
+                new int[]
+                {
+                    182639827,
+                    1099561537,
+                    2044040513,
+                    2090034338,
+                    922999188,
+                    1162324883,
+                    160920028,
+                    1007445392,
+                    2055178271,
+                    373065197
+                },
+                new int[]
+                {
+                    1304539646,
+                    1729673220,
+                    1397622145,
+                    400915894,
+                    1892557431,
+                    891522485,
+                    1123114459,
+                    2084804443,
+                    173374215,
+                    1164952149
+                },
+                new int[]
+                {
+                    278955818,
+                    212301256,
+                    751203777,
+                    859281097,
+                    714632027,
+                    620720087,
+                    2085308890,
+                    1014679847,
+                    439053806,
+                    1956839101
+                },
+                new int[]
+                {
+                    1400855637,
+                    842412939,
+                    104785409,
+                    1317646300,
+                    1684190270,
+                    349917689,
+                    900019674,
+                    2092038898,
+                    704733397,
+                    601242406
+                },
             };
 
             for (int seed = 0; seed < expectedValues.Length; seed++)
@@ -393,7 +643,13 @@ namespace System.Tests
                 Assert.True(r.NextCalled);
             }
 
-            foreach ((long minValue, long maxValue) in new[] { (42L, 47L), ((long)int.MaxValue + 1, long.MaxValue) })
+            foreach (
+                (long minValue, long maxValue) in new[]
+                {
+                    (42L, 47L),
+                    ((long)int.MaxValue + 1, long.MaxValue)
+                }
+            )
             {
                 r = seeded ? new SubRandom(42) : new SubRandom();
                 r.NextInt64(minValue, maxValue);
@@ -452,33 +708,37 @@ namespace System.Tests
         public void Shared_ParallelUsage()
         {
             using var barrier = new Barrier(2);
-            Parallel.For(0, 2, _ =>
-            {
-                byte[] buffer = new byte[1000];
-
-                barrier.SignalAndWait();
-                for (int i = 0; i < 1_000; i++)
+            Parallel.For(
+                0,
+                2,
+                _ =>
                 {
-                    Assert.InRange(Random.Shared.Next(), 0, int.MaxValue - 1);
-                    Assert.InRange(Random.Shared.Next(5), 0, 4);
-                    Assert.InRange(Random.Shared.Next(42, 50), 42, 49);
+                    byte[] buffer = new byte[1000];
 
-                    Assert.InRange(Random.Shared.NextInt64(), 0, long.MaxValue - 1);
-                    Assert.InRange(Random.Shared.NextInt64(5), 0L, 5L);
-                    Assert.InRange(Random.Shared.NextInt64(42L, 50L), 42L, 49L);
+                    barrier.SignalAndWait();
+                    for (int i = 0; i < 1_000; i++)
+                    {
+                        Assert.InRange(Random.Shared.Next(), 0, int.MaxValue - 1);
+                        Assert.InRange(Random.Shared.Next(5), 0, 4);
+                        Assert.InRange(Random.Shared.Next(42, 50), 42, 49);
 
-                    Assert.InRange(Random.Shared.NextSingle(), 0.0f, 1.0f);
-                    Assert.InRange(Random.Shared.NextDouble(), 0.0, 1.0);
+                        Assert.InRange(Random.Shared.NextInt64(), 0, long.MaxValue - 1);
+                        Assert.InRange(Random.Shared.NextInt64(5), 0L, 5L);
+                        Assert.InRange(Random.Shared.NextInt64(42L, 50L), 42L, 49L);
 
-                    Array.Clear(buffer, 0, buffer.Length);
-                    Random.Shared.NextBytes(buffer);
-                    Assert.Contains(buffer, b => b != 0);
+                        Assert.InRange(Random.Shared.NextSingle(), 0.0f, 1.0f);
+                        Assert.InRange(Random.Shared.NextDouble(), 0.0, 1.0);
 
-                    Array.Clear(buffer, 0, buffer.Length);
-                    Random.Shared.NextBytes((Span<byte>)buffer);
-                    Assert.Contains(buffer, b => b != 0);
+                        Array.Clear(buffer, 0, buffer.Length);
+                        Random.Shared.NextBytes(buffer);
+                        Assert.Contains(buffer, b => b != 0);
+
+                        Array.Clear(buffer, 0, buffer.Length);
+                        Random.Shared.NextBytes((Span<byte>)buffer);
+                        Assert.Contains(buffer, b => b != 0);
+                    }
                 }
-            });
+            );
         }
 
         [ConditionalFact(typeof(BitConverter), nameof(BitConverter.IsLittleEndian))] // test makes little-endian assumptions
@@ -488,13 +748,14 @@ namespace System.Tests
             // updated, this test will need to be updated as well.
 
             // One and only one of Xoshiro128StarStar and Xoshiro256StarStar should be in a given build.
-            Type implType = typeof(Random)
-                .GetNestedTypes(BindingFlags.NonPublic)
+            Type implType = typeof(Random).GetNestedTypes(BindingFlags.NonPublic)
                 .Single(t => t.Name.StartsWith("Xoshiro", StringComparison.Ordinal));
             Assert.NotNull(implType);
 
             var randOuter = new Random();
-            object randInner = randOuter.GetType().GetField("_impl", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(randOuter);
+            object randInner = randOuter.GetType()
+                .GetField("_impl", BindingFlags.Instance | BindingFlags.NonPublic)
+                .GetValue(randOuter);
             Assert.NotNull(randInner);
 
             Type t = randInner.GetType();
@@ -518,26 +779,272 @@ namespace System.Tests
                 var buffer = new byte[256];
                 randOuter.NextBytes(buffer);
 
-                Assert.Contains("xoshiro256** by Blackman & Vigna", Encoding.ASCII.GetString(buffer));
-                AssertExtensions.SequenceEqual(new byte[]
-                {
-                    0xdd, 0x51, 0xb2, 0xb7, 0xd9, 0x30, 0x3a, 0x37, 0xeb, 0xd9, 0x63, 0x66, 0xa6, 0x70, 0xfd, 0x50,
-                    0x26, 0xe7, 0x29, 0x1f, 0x21, 0x21, 0xc0, 0x35, 0x36, 0xc1, 0x2d, 0x03, 0x77, 0xb1, 0x41, 0xd3,
-                    0x43, 0x33, 0x2f, 0x77, 0xf7, 0xfe, 0x97, 0x01, 0x1e, 0x93, 0xc3, 0xce, 0xe4, 0xdf, 0xfc, 0xc4,
-                    0xdb, 0x6c, 0x06, 0x54, 0x08, 0x25, 0x6f, 0x5a, 0x0e, 0x86, 0x82, 0x4d, 0x1c, 0x72, 0xc9, 0x50,
-                    0x20, 0xae, 0xca, 0x84, 0xd9, 0x24, 0x87, 0xb9, 0x51, 0x96, 0x93, 0xae, 0xae, 0xd2, 0x8f, 0xce,
-                    0x57, 0x37, 0xc1, 0x5c, 0xf4, 0xcc, 0x5c, 0xd6, 0x2a, 0x29, 0x72, 0xcb, 0xf0, 0xc5, 0xf8, 0xf8,
-                    0x46, 0x1e, 0x33, 0xa2, 0x5d, 0xb1, 0x66, 0xb4, 0x15, 0x6f, 0x3b, 0xed, 0x93, 0xe4, 0x70, 0xba,
-                    0x11, 0xbe, 0x24, 0xb0, 0x20, 0x64, 0x13, 0x86, 0x71, 0x72, 0x92, 0x31, 0xd8, 0xbe, 0x03, 0xa9,
-                    0x78, 0x6f, 0x73, 0x68, 0x69, 0x72, 0x6f, 0x32, 0x35, 0x36, 0x2a, 0x2a, 0x20, 0x62, 0x79, 0x20,
-                    0x42, 0x6c, 0x61, 0x63, 0x6b, 0x6d, 0x61, 0x6e, 0x20, 0x26, 0x20, 0x56, 0x69, 0x67, 0x6e, 0x61,
-                    0xbd, 0x9a, 0xf9, 0xbd, 0x3a, 0x79, 0x52, 0xd3, 0x76, 0x50, 0x5e, 0x1e, 0x55, 0x6a, 0x36, 0x48,
-                    0x9f, 0xc0, 0x39, 0xc2, 0x5c, 0xdb, 0x99, 0xa3, 0x5c, 0xd5, 0x4b, 0xa2, 0x15, 0x35, 0x53, 0x9c,
-                    0xda, 0xdd, 0xc6, 0x0b, 0xbf, 0x33, 0xef, 0xa7, 0x82, 0xeb, 0x06, 0x52, 0x6d, 0x6d, 0x31, 0x2b,
-                    0x24, 0x7a, 0x0c, 0x3f, 0x70, 0x43, 0xd1, 0x6f, 0xaa, 0xc6, 0x88, 0x7e, 0xf9, 0x30, 0xee, 0xff,
-                    0x22, 0x31, 0xaf, 0xc6, 0x1f, 0xe5, 0x68, 0x22, 0xe9, 0x6e, 0x30, 0x06, 0xf6, 0x7f, 0x9a, 0x6e,
-                    0xbe, 0x19, 0x0c, 0xf7, 0xae, 0xe2, 0xfa, 0xec, 0x8e, 0xc6, 0x22, 0xe1, 0x78, 0xb6, 0x39, 0xd1,
-                }, buffer);
+                Assert.Contains(
+                    "xoshiro256** by Blackman & Vigna",
+                    Encoding.ASCII.GetString(buffer)
+                );
+                AssertExtensions.SequenceEqual(
+                    new byte[]
+                    {
+                        0xdd,
+                        0x51,
+                        0xb2,
+                        0xb7,
+                        0xd9,
+                        0x30,
+                        0x3a,
+                        0x37,
+                        0xeb,
+                        0xd9,
+                        0x63,
+                        0x66,
+                        0xa6,
+                        0x70,
+                        0xfd,
+                        0x50,
+                        0x26,
+                        0xe7,
+                        0x29,
+                        0x1f,
+                        0x21,
+                        0x21,
+                        0xc0,
+                        0x35,
+                        0x36,
+                        0xc1,
+                        0x2d,
+                        0x03,
+                        0x77,
+                        0xb1,
+                        0x41,
+                        0xd3,
+                        0x43,
+                        0x33,
+                        0x2f,
+                        0x77,
+                        0xf7,
+                        0xfe,
+                        0x97,
+                        0x01,
+                        0x1e,
+                        0x93,
+                        0xc3,
+                        0xce,
+                        0xe4,
+                        0xdf,
+                        0xfc,
+                        0xc4,
+                        0xdb,
+                        0x6c,
+                        0x06,
+                        0x54,
+                        0x08,
+                        0x25,
+                        0x6f,
+                        0x5a,
+                        0x0e,
+                        0x86,
+                        0x82,
+                        0x4d,
+                        0x1c,
+                        0x72,
+                        0xc9,
+                        0x50,
+                        0x20,
+                        0xae,
+                        0xca,
+                        0x84,
+                        0xd9,
+                        0x24,
+                        0x87,
+                        0xb9,
+                        0x51,
+                        0x96,
+                        0x93,
+                        0xae,
+                        0xae,
+                        0xd2,
+                        0x8f,
+                        0xce,
+                        0x57,
+                        0x37,
+                        0xc1,
+                        0x5c,
+                        0xf4,
+                        0xcc,
+                        0x5c,
+                        0xd6,
+                        0x2a,
+                        0x29,
+                        0x72,
+                        0xcb,
+                        0xf0,
+                        0xc5,
+                        0xf8,
+                        0xf8,
+                        0x46,
+                        0x1e,
+                        0x33,
+                        0xa2,
+                        0x5d,
+                        0xb1,
+                        0x66,
+                        0xb4,
+                        0x15,
+                        0x6f,
+                        0x3b,
+                        0xed,
+                        0x93,
+                        0xe4,
+                        0x70,
+                        0xba,
+                        0x11,
+                        0xbe,
+                        0x24,
+                        0xb0,
+                        0x20,
+                        0x64,
+                        0x13,
+                        0x86,
+                        0x71,
+                        0x72,
+                        0x92,
+                        0x31,
+                        0xd8,
+                        0xbe,
+                        0x03,
+                        0xa9,
+                        0x78,
+                        0x6f,
+                        0x73,
+                        0x68,
+                        0x69,
+                        0x72,
+                        0x6f,
+                        0x32,
+                        0x35,
+                        0x36,
+                        0x2a,
+                        0x2a,
+                        0x20,
+                        0x62,
+                        0x79,
+                        0x20,
+                        0x42,
+                        0x6c,
+                        0x61,
+                        0x63,
+                        0x6b,
+                        0x6d,
+                        0x61,
+                        0x6e,
+                        0x20,
+                        0x26,
+                        0x20,
+                        0x56,
+                        0x69,
+                        0x67,
+                        0x6e,
+                        0x61,
+                        0xbd,
+                        0x9a,
+                        0xf9,
+                        0xbd,
+                        0x3a,
+                        0x79,
+                        0x52,
+                        0xd3,
+                        0x76,
+                        0x50,
+                        0x5e,
+                        0x1e,
+                        0x55,
+                        0x6a,
+                        0x36,
+                        0x48,
+                        0x9f,
+                        0xc0,
+                        0x39,
+                        0xc2,
+                        0x5c,
+                        0xdb,
+                        0x99,
+                        0xa3,
+                        0x5c,
+                        0xd5,
+                        0x4b,
+                        0xa2,
+                        0x15,
+                        0x35,
+                        0x53,
+                        0x9c,
+                        0xda,
+                        0xdd,
+                        0xc6,
+                        0x0b,
+                        0xbf,
+                        0x33,
+                        0xef,
+                        0xa7,
+                        0x82,
+                        0xeb,
+                        0x06,
+                        0x52,
+                        0x6d,
+                        0x6d,
+                        0x31,
+                        0x2b,
+                        0x24,
+                        0x7a,
+                        0x0c,
+                        0x3f,
+                        0x70,
+                        0x43,
+                        0xd1,
+                        0x6f,
+                        0xaa,
+                        0xc6,
+                        0x88,
+                        0x7e,
+                        0xf9,
+                        0x30,
+                        0xee,
+                        0xff,
+                        0x22,
+                        0x31,
+                        0xaf,
+                        0xc6,
+                        0x1f,
+                        0xe5,
+                        0x68,
+                        0x22,
+                        0xe9,
+                        0x6e,
+                        0x30,
+                        0x06,
+                        0xf6,
+                        0x7f,
+                        0x9a,
+                        0x6e,
+                        0xbe,
+                        0x19,
+                        0x0c,
+                        0xf7,
+                        0xae,
+                        0xe2,
+                        0xfa,
+                        0xec,
+                        0x8e,
+                        0xc6,
+                        0x22,
+                        0xe1,
+                        0x78,
+                        0xb6,
+                        0x39,
+                        0xd1,
+                    },
+                    buffer
+                );
 
                 Assert.Equal(50101881, randOuter.Next());
                 Assert.Equal(1272175254, randOuter.Next());
@@ -566,7 +1073,10 @@ namespace System.Tests
                 Assert.Equal(1, randOuter.NextInt64(1, 2));
                 Assert.Equal(15, randOuter.NextInt64(0, 42));
                 Assert.Equal(4155, randOuter.NextInt64(42, 12345));
-                Assert.Equal(9223372036854775803, randOuter.NextInt64(long.MaxValue - 5, long.MaxValue));
+                Assert.Equal(
+                    9223372036854775803,
+                    randOuter.NextInt64(long.MaxValue - 5, long.MaxValue)
+                );
                 Assert.Equal(375288451405801266, randOuter.NextInt64(long.MinValue, long.MaxValue));
 
                 Assert.Equal(0.2885307561293763, randOuter.NextDouble());
@@ -586,17 +1096,140 @@ namespace System.Tests
 
                 var buffer = new byte[128];
                 randOuter.NextBytes(buffer);
-                AssertExtensions.SequenceEqual(new byte[]
-                {
-                    0xDD, 0x20, 0x3A, 0x37, 0xEB, 0x6F, 0xFD, 0x50, 0xA3, 0x7B, 0xCD, 0x37, 0xA8, 0xAA, 0x19, 0xA8,
-                    0x22, 0xD6, 0x21, 0x57, 0x55, 0xF3, 0xA2, 0x56, 0x73, 0x30, 0x61, 0xDE, 0x62, 0xD8, 0x02, 0xB9,
-                    0x5C, 0xAE, 0x3E, 0x2D, 0xC8, 0xD6, 0xBF, 0x7D, 0x6D, 0x86, 0xCE, 0x95, 0x3F, 0x7C, 0xF0, 0x86,
-                    0x36, 0x26, 0xB8, 0xA7, 0x5C, 0x80, 0xC8, 0xA7, 0xAC, 0x2C, 0xE6, 0x0E, 0x25, 0x6F, 0xEB, 0x04,
-                    0x22, 0xDE, 0xB4, 0xB6, 0x48, 0xB2, 0x07, 0x79, 0x09, 0xA8, 0xF6, 0x42, 0xA8, 0x5C, 0x3F, 0xCE,
-                    0x11, 0xE9, 0x91, 0x8B, 0x17, 0x48, 0x0B, 0xE1, 0xEB, 0x0A, 0x89, 0xC1, 0x64, 0x3B, 0x58, 0x76,
-                    0x30, 0x53, 0x67, 0x13, 0x68, 0xAC, 0xF3, 0x5D, 0x1B, 0x84, 0xF5, 0x88, 0x42, 0xC7, 0x45, 0x74,
-                    0x65, 0xB5, 0x11, 0xF2, 0x0D, 0x3F, 0x62, 0xC8, 0x5C, 0x7C, 0x1C, 0x35, 0x34, 0x2D, 0xBC, 0x9E,
-                }, buffer);
+                AssertExtensions.SequenceEqual(
+                    new byte[]
+                    {
+                        0xDD,
+                        0x20,
+                        0x3A,
+                        0x37,
+                        0xEB,
+                        0x6F,
+                        0xFD,
+                        0x50,
+                        0xA3,
+                        0x7B,
+                        0xCD,
+                        0x37,
+                        0xA8,
+                        0xAA,
+                        0x19,
+                        0xA8,
+                        0x22,
+                        0xD6,
+                        0x21,
+                        0x57,
+                        0x55,
+                        0xF3,
+                        0xA2,
+                        0x56,
+                        0x73,
+                        0x30,
+                        0x61,
+                        0xDE,
+                        0x62,
+                        0xD8,
+                        0x02,
+                        0xB9,
+                        0x5C,
+                        0xAE,
+                        0x3E,
+                        0x2D,
+                        0xC8,
+                        0xD6,
+                        0xBF,
+                        0x7D,
+                        0x6D,
+                        0x86,
+                        0xCE,
+                        0x95,
+                        0x3F,
+                        0x7C,
+                        0xF0,
+                        0x86,
+                        0x36,
+                        0x26,
+                        0xB8,
+                        0xA7,
+                        0x5C,
+                        0x80,
+                        0xC8,
+                        0xA7,
+                        0xAC,
+                        0x2C,
+                        0xE6,
+                        0x0E,
+                        0x25,
+                        0x6F,
+                        0xEB,
+                        0x04,
+                        0x22,
+                        0xDE,
+                        0xB4,
+                        0xB6,
+                        0x48,
+                        0xB2,
+                        0x07,
+                        0x79,
+                        0x09,
+                        0xA8,
+                        0xF6,
+                        0x42,
+                        0xA8,
+                        0x5C,
+                        0x3F,
+                        0xCE,
+                        0x11,
+                        0xE9,
+                        0x91,
+                        0x8B,
+                        0x17,
+                        0x48,
+                        0x0B,
+                        0xE1,
+                        0xEB,
+                        0x0A,
+                        0x89,
+                        0xC1,
+                        0x64,
+                        0x3B,
+                        0x58,
+                        0x76,
+                        0x30,
+                        0x53,
+                        0x67,
+                        0x13,
+                        0x68,
+                        0xAC,
+                        0xF3,
+                        0x5D,
+                        0x1B,
+                        0x84,
+                        0xF5,
+                        0x88,
+                        0x42,
+                        0xC7,
+                        0x45,
+                        0x74,
+                        0x65,
+                        0xB5,
+                        0x11,
+                        0xF2,
+                        0x0D,
+                        0x3F,
+                        0x62,
+                        0xC8,
+                        0x5C,
+                        0x7C,
+                        0x1C,
+                        0x35,
+                        0x34,
+                        0x2D,
+                        0xBC,
+                        0x9E,
+                    },
+                    buffer
+                );
 
                 Assert.Equal(1539844677, randOuter.Next());
                 Assert.Equal(1451010027, randOuter.Next());
@@ -625,8 +1258,14 @@ namespace System.Tests
                 Assert.Equal(1, randOuter.NextInt64(1, 2));
                 Assert.Equal(25, randOuter.NextInt64(0, 42));
                 Assert.Equal(593, randOuter.NextInt64(42, 12345));
-                Assert.Equal(9223372036854775805, randOuter.NextInt64(long.MaxValue - 5, long.MaxValue));
-                Assert.Equal(-1415073976784572606, randOuter.NextInt64(long.MinValue, long.MaxValue));
+                Assert.Equal(
+                    9223372036854775805,
+                    randOuter.NextInt64(long.MaxValue - 5, long.MaxValue)
+                );
+                Assert.Equal(
+                    -1415073976784572606,
+                    randOuter.NextInt64(long.MinValue, long.MaxValue)
+                );
 
                 Assert.Equal(0.054582986776168796, randOuter.NextDouble());
                 Assert.Equal(0.7599686772523376, randOuter.NextDouble());
@@ -649,7 +1288,8 @@ namespace System.Tests
 
         private class SubRandom : Random
         {
-            public bool SampleCalled, NextCalled;
+            public bool SampleCalled,
+                NextCalled;
 
             public SubRandom() { }
             public SubRandom(int Seed) : base(Seed) { }

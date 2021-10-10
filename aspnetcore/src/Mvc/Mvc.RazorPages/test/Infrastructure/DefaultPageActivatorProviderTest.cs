@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             ExceptionAssert.ThrowsArgument(
                 () => activator.CreateActivator(descriptor),
                 "actionDescriptor",
-                "The 'PageTypeInfo' property of 'actionDescriptor' must not be null.");
+                "The 'PageTypeInfo' property of 'actionDescriptor' must not be null."
+            );
         }
 
         [Theory]
@@ -39,7 +40,6 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             {
                 PageTypeInfo = type.GetTypeInfo(),
             };
-
 
             var activator = new DefaultPageActivatorProvider();
 
@@ -78,10 +78,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var page = new TestPage();
 
             // Act
-            var releaser = activator.CreateReleaser(new CompiledPageActionDescriptor
-            {
-                PageTypeInfo = pageType.GetTypeInfo()
-            });
+            var releaser = activator.CreateReleaser(
+                new CompiledPageActionDescriptor { PageTypeInfo = pageType.GetTypeInfo() }
+            );
 
             // Assert
             Assert.Null(releaser);
@@ -90,7 +89,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         [Theory]
         [InlineData(typeof(TestPage))]
         [InlineData(typeof(object))]
-        public void CreateAsyncReleaser_ReturnsNullForPagesThatDoNotImplementDisposable(Type pageType)
+        public void CreateAsyncReleaser_ReturnsNullForPagesThatDoNotImplementDisposable(
+            Type pageType
+        )
         {
             // Arrange
             var context = new PageContext();
@@ -98,10 +99,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var page = new TestPage();
 
             // Act
-            var releaser = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-            {
-                PageTypeInfo = pageType.GetTypeInfo()
-            });
+            var releaser = activator.CreateAsyncReleaser(
+                new CompiledPageActionDescriptor { PageTypeInfo = pageType.GetTypeInfo() }
+            );
 
             // Assert
             Assert.Null(releaser);
@@ -117,10 +117,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var page = new DisposablePage();
 
             // Act & Assert
-            var disposer = activator.CreateReleaser(new CompiledPageActionDescriptor
-            {
-                PageTypeInfo = page.GetType().GetTypeInfo()
-            });
+            var disposer = activator.CreateReleaser(
+                new CompiledPageActionDescriptor { PageTypeInfo = page.GetType().GetTypeInfo() }
+            );
             Assert.NotNull(disposer);
             disposer(context, viewContext, page);
 
@@ -138,10 +137,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var page = new DisposablePage();
 
             // Act & Assert
-            var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-            {
-                PageTypeInfo = page.GetType().GetTypeInfo()
-            });
+            var disposer = activator.CreateAsyncReleaser(
+                new CompiledPageActionDescriptor { PageTypeInfo = page.GetType().GetTypeInfo() }
+            );
             Assert.NotNull(disposer);
             disposer(context, viewContext, page);
 
@@ -159,10 +157,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var page = new AsyncDisposablePage();
 
             // Act & Assert
-            var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-            {
-                PageTypeInfo = page.GetType().GetTypeInfo()
-            });
+            var disposer = activator.CreateAsyncReleaser(
+                new CompiledPageActionDescriptor { PageTypeInfo = page.GetType().GetTypeInfo() }
+            );
             Assert.NotNull(disposer);
             await disposer(context, viewContext, page);
 
@@ -180,10 +177,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var page = new DisposableAndAsyncDisposablePage();
 
             // Act & Assert
-            var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-            {
-                PageTypeInfo = page.GetType().GetTypeInfo()
-            });
+            var disposer = activator.CreateAsyncReleaser(
+                new CompiledPageActionDescriptor { PageTypeInfo = page.GetType().GetTypeInfo() }
+            );
             Assert.NotNull(disposer);
             await disposer(context, viewContext, page);
 
@@ -202,15 +198,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private class PageWithMultipleConstructors : Page
         {
-            public PageWithMultipleConstructors(int x)
-            {
+            public PageWithMultipleConstructors(int x) { }
 
-            }
-
-            public PageWithMultipleConstructors()
-            {
-
-            }
+            public PageWithMultipleConstructors() { }
 
             public override Task ExecuteAsync()
             {
@@ -220,9 +210,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private class PageWithoutParameterlessConstructor : Page
         {
-            public PageWithoutParameterlessConstructor(ILogger logger)
-            {
-            }
+            public PageWithoutParameterlessConstructor(ILogger logger) { }
 
             public override Task ExecuteAsync()
             {

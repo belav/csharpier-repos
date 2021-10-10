@@ -41,7 +41,10 @@ namespace System.Buffers
             }
         }
 
-        private static void CopyToMultiSegment(in ReadOnlySequence<byte> buffer, PipeWriter pipeWriter)
+        private static void CopyToMultiSegment(
+            in ReadOnlySequence<byte> buffer,
+            PipeWriter pipeWriter
+        )
         {
             foreach (var item in buffer)
             {
@@ -67,7 +70,11 @@ namespace System.Buffers
         /// Returns position of first occurrence of item in the <see cref="ReadOnlySequence{T}"/>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static SequencePosition? PositionOfAny<T>(in this ReadOnlySequence<T> source, T value0, T value1) where T : IEquatable<T>
+        public static SequencePosition? PositionOfAny<T>(
+            in this ReadOnlySequence<T> source,
+            T value0,
+            T value1
+        ) where T : IEquatable<T>
         {
             if (source.IsSingleSegment)
             {
@@ -85,7 +92,11 @@ namespace System.Buffers
             }
         }
 
-        private static SequencePosition? PositionOfAnyMultiSegment<T>(in ReadOnlySequence<T> source, T value0, T value1) where T : IEquatable<T>
+        private static SequencePosition? PositionOfAnyMultiSegment<T>(
+            in ReadOnlySequence<T> source,
+            T value0,
+            T value1
+        ) where T : IEquatable<T>
         {
             SequencePosition position = source.Start;
             SequencePosition result = position;
@@ -129,7 +140,10 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe void WriteNumeric(ref this BufferWriter<PipeWriter> buffer, ulong number)
+        internal static unsafe void WriteNumeric(
+            ref this BufferWriter<PipeWriter> buffer,
+            ulong number
+        )
         {
             const byte AsciiDigitStart = (byte)'0';
 
@@ -179,7 +193,10 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void WriteNumericMultiWrite(ref this BufferWriter<PipeWriter> buffer, ulong number)
+        private static void WriteNumericMultiWrite(
+            ref this BufferWriter<PipeWriter> buffer,
+            ulong number
+        )
         {
             const byte AsciiDigitStart = (byte)'0';
 
@@ -192,15 +209,17 @@ namespace System.Buffers
                 var quotient = value / 10;
                 byteBuffer[--position] = (byte)(AsciiDigitStart + (value - quotient * 10)); // 0x30 = '0'
                 value = quotient;
-            }
-            while (value != 0);
+            } while (value != 0);
 
             var length = _maxULongByteLength - position;
             buffer.Write(new ReadOnlySpan<byte>(byteBuffer, position, length));
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void WriteAsciiMultiWrite(ref this BufferWriter<PipeWriter> buffer, string data)
+        private static void WriteAsciiMultiWrite(
+            ref this BufferWriter<PipeWriter> buffer,
+            string data
+        )
         {
             var dataLength = data.Length;
             var offset = 0;
@@ -227,7 +246,8 @@ namespace System.Buffers
             } while (true);
         }
 
-        private static byte[] NumericBytesScratch => _numericBytesScratch ?? CreateNumericBytesScratch();
+        private static byte[] NumericBytesScratch =>
+            _numericBytesScratch ?? CreateNumericBytesScratch();
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static byte[] CreateNumericBytesScratch()

@@ -12,31 +12,40 @@ namespace Microsoft.EntityFrameworkCore
 {
     public class EntityTypeMapping
     {
-        public EntityTypeMapping()
-        {
-        }
+        public EntityTypeMapping() { }
 
         public EntityTypeMapping(IEntityType entityType)
         {
             Name = entityType.Name;
             TableName = entityType.GetTableName();
-            PrimaryKey = entityType.FindPrimaryKey()!.ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+            PrimaryKey = entityType.FindPrimaryKey()!.ToDebugString(
+                MetadataDebugStringOptions.SingleLineDefault
+            );
 
             Properties.AddRange(
                 entityType.GetProperties()
-                    .Select(p => p.ToDebugString(MetadataDebugStringOptions.SingleLineDefault)));
+                    .Select(p => p.ToDebugString(MetadataDebugStringOptions.SingleLineDefault))
+            );
 
             Indexes.AddRange(
-                entityType.GetIndexes().Select(i => $"{i.Properties.Format()} {(i.IsUnique ? "Unique" : "")}"));
+                entityType.GetIndexes()
+                    .Select(i => $"{i.Properties.Format()} {(i.IsUnique ? "Unique" : "")}")
+            );
 
             FKs.AddRange(
-                entityType.GetForeignKeys().Select(f => f.ToDebugString(MetadataDebugStringOptions.SingleLineDefault)));
+                entityType.GetForeignKeys()
+                    .Select(f => f.ToDebugString(MetadataDebugStringOptions.SingleLineDefault))
+            );
 
             Navigations.AddRange(
-                entityType.GetNavigations().Select(n => n.ToDebugString(MetadataDebugStringOptions.SingleLineDefault)));
+                entityType.GetNavigations()
+                    .Select(n => n.ToDebugString(MetadataDebugStringOptions.SingleLineDefault))
+            );
 
             SkipNavigations.AddRange(
-                entityType.GetSkipNavigations().Select(n => n.ToDebugString(MetadataDebugStringOptions.SingleLineDefault)));
+                entityType.GetSkipNavigations()
+                    .Select(n => n.ToDebugString(MetadataDebugStringOptions.SingleLineDefault))
+            );
         }
 
         public string Name { get; set; }
@@ -109,7 +118,10 @@ namespace Microsoft.EntityFrameworkCore
             return builder.ToString();
         }
 
-        public static void AssertEqual(IReadOnlyList<EntityTypeMapping> expected, IReadOnlyList<EntityTypeMapping> actual)
+        public static void AssertEqual(
+            IReadOnlyList<EntityTypeMapping> expected,
+            IReadOnlyList<EntityTypeMapping> actual
+        )
         {
             Assert.Equal(expected.Count, actual.Count);
             for (var i = 0; i < expected.Count; i++)

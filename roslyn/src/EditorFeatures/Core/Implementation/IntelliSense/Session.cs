@@ -10,7 +10,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 {
-    internal class Session<TController, TModel, TPresenterSession> : ForegroundThreadAffinitizedObject, ISession<TModel>
+    internal class Session<TController, TModel, TPresenterSession>
+        : ForegroundThreadAffinitizedObject,
+          ISession<TModel>
         where TPresenterSession : IIntelliSensePresenterSession
         where TController : IController<TModel>
         where TModel : class
@@ -24,8 +26,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         // end the presentation session.
         public TPresenterSession PresenterSession { get; }
 
-        public Session(TController controller, ModelComputation<TModel> computation, TPresenterSession presenterSession)
-            : base(computation.ThreadingContext)
+        public Session(
+            TController controller,
+            ModelComputation<TModel> computation,
+            TPresenterSession presenterSession
+        ) : base(computation.ThreadingContext)
         {
             this.Controller = controller;
             this.Computation = computation;
@@ -36,7 +41,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             this.PresenterSession.Dismissed += OnPresenterSessionDismissed;
         }
 
-        public TModel InitialUnfilteredModel { get { return this.Computation.InitialUnfilteredModel; } }
+        public TModel InitialUnfilteredModel
+        {
+            get { return this.Computation.InitialUnfilteredModel; }
+        }
 
         private void OnPresenterSessionDismissed(object sender, EventArgs e)
         {

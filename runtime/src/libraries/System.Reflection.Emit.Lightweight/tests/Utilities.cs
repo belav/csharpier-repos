@@ -12,7 +12,15 @@ namespace System.Reflection.Emit.Tests
             return asmBuild.DefineDynamicModule(moduleName);
         }
 
-        public static void VerifyMethod(DynamicMethod method, string name, MethodAttributes attributes, CallingConventions callingConvention, Type returnType, Type[] parameterTypes, Module module)
+        public static void VerifyMethod(
+            DynamicMethod method,
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[] parameterTypes,
+            Module module
+        )
         {
             Assert.Equal(name, method.Name);
             Assert.Equal(attributes, method.Attributes);
@@ -65,7 +73,10 @@ namespace System.Reflection.Emit.Tests
     {
         private int _id;
 
-        public IDClass(int id) { _id = id; }
+        public IDClass(int id)
+        {
+            _id = id;
+        }
         public IDClass() : this(0) { }
 
         public int ID => _id;

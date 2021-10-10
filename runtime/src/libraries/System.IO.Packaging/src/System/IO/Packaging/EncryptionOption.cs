@@ -12,7 +12,6 @@ namespace System.IO.Packaging
         /// Encryption is turned off in this mode. This is not supported.
         /// </summary>
         None = 0,
-
         /// <summary>
         /// RightsManagement is the only supported option right now.
         /// </summary>

@@ -28,7 +28,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public int? Priority;
 
-        public BinaryOperatorSignature(BinaryOperatorKind kind, TypeSymbol leftType, TypeSymbol rightType, TypeSymbol returnType, MethodSymbol method = null)
+        public BinaryOperatorSignature(
+            BinaryOperatorKind kind,
+            TypeSymbol leftType,
+            TypeSymbol rightType,
+            TypeSymbol returnType,
+            MethodSymbol method = null
+        )
         {
             this.Kind = kind;
             this.LeftType = leftType;
@@ -45,12 +51,23 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public bool Equals(BinaryOperatorSignature other)
         {
-            return
-                this.Kind == other.Kind &&
-                TypeSymbol.Equals(this.LeftType, other.LeftType, TypeCompareKind.ConsiderEverything2) &&
-                TypeSymbol.Equals(this.RightType, other.RightType, TypeCompareKind.ConsiderEverything2) &&
-                TypeSymbol.Equals(this.ReturnType, other.ReturnType, TypeCompareKind.ConsiderEverything2) &&
-                this.Method == other.Method;
+            return this.Kind == other.Kind
+                && TypeSymbol.Equals(
+                    this.LeftType,
+                    other.LeftType,
+                    TypeCompareKind.ConsiderEverything2
+                )
+                && TypeSymbol.Equals(
+                    this.RightType,
+                    other.RightType,
+                    TypeCompareKind.ConsiderEverything2
+                )
+                && TypeSymbol.Equals(
+                    this.ReturnType,
+                    other.ReturnType,
+                    TypeCompareKind.ConsiderEverything2
+                )
+                && this.Method == other.Method;
         }
 
         public static bool operator ==(BinaryOperatorSignature x, BinaryOperatorSignature y)
@@ -70,10 +87,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override int GetHashCode()
         {
-            return Hash.Combine(ReturnType,
-                   Hash.Combine(LeftType,
-                   Hash.Combine(RightType,
-                   Hash.Combine(Method, (int)Kind))));
+            return Hash.Combine(
+                ReturnType,
+                Hash.Combine(LeftType, Hash.Combine(RightType, Hash.Combine(Method, (int)Kind)))
+            );
         }
 
         public RefKind LeftRefKind

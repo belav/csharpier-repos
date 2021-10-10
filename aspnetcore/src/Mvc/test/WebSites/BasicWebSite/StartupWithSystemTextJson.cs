@@ -11,8 +11,7 @@ namespace BasicWebSite
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddMvc();
+            services.AddMvc();
 
             services.AddSingleton<ContactsRepository>();
         }

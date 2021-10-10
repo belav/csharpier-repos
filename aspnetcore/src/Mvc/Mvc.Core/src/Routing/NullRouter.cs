@@ -11,9 +11,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
     {
         public static readonly IRouter Instance = new NullRouter();
 
-        private NullRouter()
-        {
-        }
+        private NullRouter() { }
 
         public VirtualPathData? GetVirtualPath(VirtualPathContext context)
         {

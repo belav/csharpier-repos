@@ -99,8 +99,15 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (short)0; }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Int16>, byte>(ref testStruct._fld), ref Unsafe.As<Int16, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Int16>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data[i] = (short)0;
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Int16>, byte>(ref testStruct._fld),
+                    ref Unsafe.As<Int16, byte>(ref _data[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Int16>>()
+                );
 
                 testStruct._scalarFldData = (short)2;
 
@@ -118,8 +125,10 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Int16>>() / sizeof(Int16);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<Int16>>() / sizeof(Int16);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Int16>>() / sizeof(Int16);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<Int16>>() / sizeof(Int16);
 
         private static Int16[] _data = new Int16[Op1ElementCount];
         private static Int16 _scalarClsData = (short)2;
@@ -133,19 +142,40 @@ namespace JIT.HardwareIntrinsics.X86
 
         static InsertScalarTest__InsertInt16129()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (short)0; }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Int16>, byte>(ref _clsVar), ref Unsafe.As<Int16, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Int16>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (short)0;
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Int16>, byte>(ref _clsVar),
+                ref Unsafe.As<Int16, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Int16>>()
+            );
         }
 
         public InsertScalarTest__InsertInt16129()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (short)0; }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Int16>, byte>(ref _fld), ref Unsafe.As<Int16, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Int16>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (short)0;
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Int16>, byte>(ref _fld),
+                ref Unsafe.As<Int16, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Int16>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (short)0; }
-            _dataTable = new SimpleUnaryOpTest__DataTable<Int16, Int16>(_data, new Int16[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (short)0;
+            }
+            _dataTable = new SimpleUnaryOpTest__DataTable<Int16, Int16>(
+                _data,
+                new Int16[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Sse2.IsSupported;
@@ -204,12 +234,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
-            var result = typeof(Sse2).GetMethod(nameof(Sse2.Insert), new Type[] { typeof(Vector128<Int16>), typeof(Int16), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Int16>>(_dataTable.inArrayPtr),
-                                        (short)2,
-                                        (byte)129
-                                     });
+            var result = typeof(Sse2).GetMethod(
+                    nameof(Sse2.Insert),
+                    new Type[] { typeof(Vector128<Int16>), typeof(Int16), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector128<Int16>>(_dataTable.inArrayPtr),
+                        (short)2,
+                        (byte)129
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Int16>)(result));
             ValidateResult(_dataTable.inArrayPtr, (short)2, _dataTable.outArrayPtr);
@@ -219,12 +256,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse2).GetMethod(nameof(Sse2.Insert), new Type[] { typeof(Vector128<Int16>), typeof(Int16), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadVector128((Int16*)(_dataTable.inArrayPtr)),
-                                        (short)2,
-                                        (byte)129
-                                     });
+            var result = typeof(Sse2).GetMethod(
+                    nameof(Sse2.Insert),
+                    new Type[] { typeof(Vector128<Int16>), typeof(Int16), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Sse2.LoadVector128((Int16*)(_dataTable.inArrayPtr)),
+                        (short)2,
+                        (byte)129
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Int16>)(result));
             ValidateResult(_dataTable.inArrayPtr, (short)2, _dataTable.outArrayPtr);
@@ -234,12 +278,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse2).GetMethod(nameof(Sse2.Insert), new Type[] { typeof(Vector128<Int16>), typeof(Int16), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadAlignedVector128((Int16*)(_dataTable.inArrayPtr)),
-                                        (short)2,
-                                        (byte)129
-                                     });
+            var result = typeof(Sse2).GetMethod(
+                    nameof(Sse2.Insert),
+                    new Type[] { typeof(Vector128<Int16>), typeof(Int16), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Sse2.LoadAlignedVector128((Int16*)(_dataTable.inArrayPtr)),
+                        (short)2,
+                        (byte)129
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Int16>)(result));
             ValidateResult(_dataTable.inArrayPtr, (short)2, _dataTable.outArrayPtr);
@@ -249,14 +300,10 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Sse2.Insert(
-                _clsVar,
-                _scalarClsData,
-                129
-            );
+            var result = Sse2.Insert(_clsVar, _scalarClsData, 129);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_clsVar, _scalarClsData,_dataTable.outArrayPtr);
+            ValidateResult(_clsVar, _scalarClsData, _dataTable.outArrayPtr);
         }
 
         public void RunLclVarScenario()
@@ -359,29 +406,56 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector128<Int16> firstOp, Int16 scalarData, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Int16> firstOp,
+            Int16 scalarData,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Int16[] inArray = new Int16[Op1ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref inArray[0]), firstOp);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Int16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Int16>>()
+            );
 
             ValidateResult(inArray, scalarData, outArray, method);
         }
 
-        private void ValidateResult(void* firstOp, Int16 scalarData, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* firstOp,
+            Int16 scalarData,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Int16[] inArray = new Int16[Op1ElementCount];
             Int16[] outArray = new Int16[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int16, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector128<Int16>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Int16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int16, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector128<Int16>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Int16>>()
+            );
 
             ValidateResult(inArray, scalarData, outArray, method);
         }
 
-        private void ValidateResult(Int16[] firstOp,  Int16 scalarData, Int16[] result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int16[] firstOp,
+            Int16 scalarData,
+            Int16[] result,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -396,9 +470,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Sse2)}.{nameof(Sse2.Insert)}<Int16>(Vector128<Int16><9>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary.TestFramework.LogInformation($"   result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Sse2)}.{nameof(Sse2.Insert)}<Int16>(Vector128<Int16><9>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -25,16 +25,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public void RunApp()
         {
             var project = sharedState.PortableAppFixture.TestProject;
-            string[] args =
-            {
-                ApplicationExecutionArg,
-                sharedState.HostFxrPath,
-                project.AppDll
-            };
+            string[] args = { ApplicationExecutionArg, sharedState.HostFxrPath, project.AppDll };
 
             sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.InitializeContextForApp(project.AppDll)
                 .And.ExecuteApplication(sharedState.NativeHostPath, project.AppDll);
         }
@@ -43,16 +39,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         public void RunApp_UnhandledException()
         {
             var project = sharedState.PortableAppWithExceptionFixture.TestProject;
-            string[] args =
-            {
-                ApplicationExecutionArg,
-                sharedState.HostFxrPath,
-                project.AppDll
-            };
+            string[] args = { ApplicationExecutionArg, sharedState.HostFxrPath, project.AppDll };
 
             sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute()
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.InitializeContextForApp(project.AppDll)
                 .And.ExecuteApplicationWithException(sharedState.NativeHostPath, project.AppDll);
         }
@@ -67,17 +59,21 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
             public SharedTestState()
             {
-                var dotNet = new Microsoft.DotNet.Cli.Build.DotNetCli(Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"));
+                var dotNet = new Microsoft.DotNet.Cli.Build.DotNetCli(
+                    Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish")
+                );
                 DotNetRoot = dotNet.BinPath;
                 HostFxrPath = dotNet.GreatestVersionHostFxrFilePath;
 
-                PortableAppFixture = new TestProjectFixture("PortableApp", RepoDirectories)
-                    .EnsureRestored()
-                    .PublishProject();
+                PortableAppFixture = new TestProjectFixture(
+                    "PortableApp",
+                    RepoDirectories
+                ).EnsureRestored().PublishProject();
 
-                PortableAppWithExceptionFixture = new TestProjectFixture("PortableAppWithException", RepoDirectories)
-                    .EnsureRestored()
-                    .PublishProject();
+                PortableAppWithExceptionFixture = new TestProjectFixture(
+                    "PortableAppWithException",
+                    RepoDirectories
+                ).EnsureRestored().PublishProject();
             }
 
             protected override void Dispose(bool disposing)
@@ -92,24 +88,36 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
     internal static class ApplicationExecutionResultExtensions
     {
-        public static FluentAssertions.AndConstraint<CommandResultAssertions> ExecuteApplication(this CommandResultAssertions assertion, string hostPath, string appPath)
+        public static FluentAssertions.AndConstraint<CommandResultAssertions> ExecuteApplication(
+            this CommandResultAssertions assertion,
+            string hostPath,
+            string appPath
+        )
         {
             return assertion.HaveStdErrContaining($"Launch host: {hostPath}, app: {appPath}")
                 .And.HaveStdOutContaining("Hello World!");
         }
 
-        public static FluentAssertions.AndConstraint<CommandResultAssertions> ExecuteApplicationWithException(this CommandResultAssertions assertion, string hostPath, string appPath)
+        public static FluentAssertions.AndConstraint<CommandResultAssertions> ExecuteApplicationWithException(
+            this CommandResultAssertions assertion,
+            string hostPath,
+            string appPath
+        )
         {
             var constraint = assertion.ExecuteApplication(hostPath, appPath);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                return constraint.And.HaveStdOutContaining($"hostfxr_run_app threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}");
+                return constraint.And.HaveStdOutContaining(
+                    $"hostfxr_run_app threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
+                );
             }
             else
             {
                 // Exception is unhandled by native host on non-Windows systems
                 return constraint.And.ExitWith(Constants.ErrorCode.SIGABRT)
-                    .And.HaveStdErrContaining("Unhandled exception. System.Exception: Goodbye World!");
+                    .And.HaveStdErrContaining(
+                        "Unhandled exception. System.Exception: Goodbye World!"
+                    );
             }
         }
     }

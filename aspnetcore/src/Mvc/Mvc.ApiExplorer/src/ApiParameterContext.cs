@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public ApiParameterContext(
             IModelMetadataProvider metadataProvider,
             ControllerActionDescriptor actionDescriptor,
-            IReadOnlyList<TemplatePart> routeParameters)
+            IReadOnlyList<TemplatePart> routeParameters
+        )
         {
             MetadataProvider = metadataProvider;
             ActionDescriptor = actionDescriptor;

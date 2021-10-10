@@ -26,6 +26,7 @@ namespace System.IO.Pipelines
                         return false;
                     }
                 }
+
                 finally
                 {
                     // Don't consume or advance
@@ -44,6 +45,7 @@ namespace System.IO.Pipelines
                 {
                     return result.Buffer.ToArray();
                 }
+
                 finally
                 {
                     pipeReader.AdvanceTo(result.Buffer.End);

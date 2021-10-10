@@ -34,7 +34,13 @@ namespace Microsoft.VisualStudio.LanguageServices
             lock (s_gate)
             {
                 // internally, it just uses our existing ILogger
-                Logger.SetLogger(AggregateLogger.AddOrReplace(new TraceSourceLogger(traceSource), Logger.GetLogger(), l => (l as TraceSourceLogger)?.TraceSource == traceSource));
+                Logger.SetLogger(
+                    AggregateLogger.AddOrReplace(
+                        new TraceSourceLogger(traceSource),
+                        Logger.GetLogger(),
+                        l => (l as TraceSourceLogger)?.TraceSource == traceSource
+                    )
+                );
             }
         }
 
@@ -45,7 +51,12 @@ namespace Microsoft.VisualStudio.LanguageServices
             lock (s_gate)
             {
                 // internally, it just uses our existing ILogger
-                Logger.SetLogger(AggregateLogger.Remove(Logger.GetLogger(), l => (l as TraceSourceLogger)?.TraceSource == traceSource));
+                Logger.SetLogger(
+                    AggregateLogger.Remove(
+                        Logger.GetLogger(),
+                        l => (l as TraceSourceLogger)?.TraceSource == traceSource
+                    )
+                );
             }
         }
 
@@ -62,12 +73,12 @@ namespace Microsoft.VisualStudio.LanguageServices
             static TraceSourceLogger()
             {
                 // build enum to string cache
-                s_functionIdCache =
-                    Enum.GetValues(typeof(FunctionId)).Cast<FunctionId>().ToImmutableDictionary(f => f, f => f.ToString());
+                s_functionIdCache = Enum.GetValues(typeof(FunctionId))
+                    .Cast<FunctionId>()
+                    .ToImmutableDictionary(f => f, f => f.ToString());
             }
 
-            public TraceSourceLogger(TraceSource traceSource)
-                => TraceSource = traceSource;
+            public TraceSourceLogger(TraceSource traceSource) => TraceSource = traceSource;
 
             public bool IsEnabled(FunctionId functionId)
             {
@@ -75,14 +86,43 @@ namespace Microsoft.VisualStudio.LanguageServices
                 return true;
             }
 
-            public void Log(FunctionId functionId, LogMessage logMessage)
-                => TraceSource.TraceData(TraceEventType.Verbose, LogEventId, s_functionIdCache[functionId], logMessage.GetMessage());
+            public void Log(FunctionId functionId, LogMessage logMessage) =>
+                TraceSource.TraceData(
+                    TraceEventType.Verbose,
+                    LogEventId,
+                    s_functionIdCache[functionId],
+                    logMessage.GetMessage()
+                );
 
-            public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int uniquePairId, CancellationToken cancellationToken)
-                => TraceSource.TraceData(TraceEventType.Verbose, StartEventId, s_functionIdCache[functionId], uniquePairId);
+            public void LogBlockStart(
+                FunctionId functionId,
+                LogMessage logMessage,
+                int uniquePairId,
+                CancellationToken cancellationToken
+            ) =>
+                TraceSource.TraceData(
+                    TraceEventType.Verbose,
+                    StartEventId,
+                    s_functionIdCache[functionId],
+                    uniquePairId
+                );
 
-            public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int uniquePairId, int delta, CancellationToken cancellationToken)
-                => TraceSource.TraceData(TraceEventType.Verbose, EndEventId, s_functionIdCache[functionId], uniquePairId, cancellationToken.IsCancellationRequested, delta, logMessage.GetMessage());
+            public void LogBlockEnd(
+                FunctionId functionId,
+                LogMessage logMessage,
+                int uniquePairId,
+                int delta,
+                CancellationToken cancellationToken
+            ) =>
+                TraceSource.TraceData(
+                    TraceEventType.Verbose,
+                    EndEventId,
+                    s_functionIdCache[functionId],
+                    uniquePairId,
+                    cancellationToken.IsCancellationRequested,
+                    delta,
+                    logMessage.GetMessage()
+                );
         }
     }
 }

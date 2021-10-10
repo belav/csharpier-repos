@@ -103,7 +103,11 @@ namespace System.Reflection.Emit
 		}
 #endif
         // sizeConst and sizeParamIndex can be -1 meaning they are not specified
-        internal static UnmanagedMarshal DefineLPArrayInternal(UnmanagedType elemType, int sizeConst, int sizeParamIndex)
+        internal static UnmanagedMarshal DefineLPArrayInternal(
+            UnmanagedType elemType,
+            int sizeConst,
+            int sizeParamIndex
+        )
         {
             UnmanagedMarshal res = new UnmanagedMarshal(UnmanagedType.LPArray, elemType);
             res.count = sizeConst;

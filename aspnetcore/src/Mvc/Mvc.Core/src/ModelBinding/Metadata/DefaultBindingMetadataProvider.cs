@@ -24,7 +24,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             }
 
             // BinderModelName
-            foreach (var binderModelNameAttribute in context.Attributes.OfType<IModelNameProvider>())
+            foreach (
+                var binderModelNameAttribute in context.Attributes.OfType<IModelNameProvider>()
+            )
             {
                 if (binderModelNameAttribute.Name != null)
                 {
@@ -34,7 +36,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             }
 
             // BinderType
-            foreach (var binderTypeAttribute in context.Attributes.OfType<IBinderTypeProviderMetadata>())
+            foreach (
+                var binderTypeAttribute in context.Attributes.OfType<IBinderTypeProviderMetadata>()
+            )
             {
                 if (binderTypeAttribute.BinderType != null)
                 {
@@ -44,7 +48,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             }
 
             // BindingSource
-            foreach (var bindingSourceAttribute in context.Attributes.OfType<IBindingSourceMetadata>())
+            foreach (
+                var bindingSourceAttribute in context.Attributes.OfType<IBindingSourceMetadata>()
+            )
             {
                 if (bindingSourceAttribute.BindingSource != null)
                 {
@@ -54,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             }
 
             // PropertyFilterProvider
-            var propertyFilterProviders = context.Attributes.OfType<IPropertyFilterProvider>().ToArray();
+            var propertyFilterProviders = context.Attributes.OfType<IPropertyFilterProvider>()
+                .ToArray();
             if (propertyFilterProviders.Length == 0)
             {
                 context.BindingMetadata.PropertyFilterProvider = null;
@@ -72,8 +79,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var bindingBehavior = FindBindingBehavior(context);
             if (bindingBehavior != null)
             {
-                context.BindingMetadata.IsBindingAllowed = bindingBehavior.Behavior != BindingBehavior.Never;
-                context.BindingMetadata.IsBindingRequired = bindingBehavior.Behavior == BindingBehavior.Required;
+                context.BindingMetadata.IsBindingAllowed =
+                    bindingBehavior.Behavior != BindingBehavior.Never;
+                context.BindingMetadata.IsBindingRequired =
+                    bindingBehavior.Behavior == BindingBehavior.Required;
             }
 
             if (GetBoundConstructor(context.Key.ModelType) is ConstructorInfo constructorInfo)
@@ -98,7 +107,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             return GetRecordTypeConstructor(type, constructors);
         }
 
-        private static ConstructorInfo? GetRecordTypeConstructor(Type type, ConstructorInfo[] constructors)
+        private static ConstructorInfo? GetRecordTypeConstructor(
+            Type type,
+            ConstructorInfo[] constructors
+        )
         {
             if (!IsRecordType(type))
             {
@@ -129,9 +141,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             for (var i = 0; i < parameters.Length; i++)
             {
                 var parameter = parameters[i];
-                var mappedProperty = properties.FirstOrDefault(property =>
-                    string.Equals(property.Name, parameter.Name, StringComparison.Ordinal) &&
-                    property.Property.PropertyType == parameter.ParameterType);
+                var mappedProperty = properties.FirstOrDefault(
+                    property =>
+                        string.Equals(property.Name, parameter.Name, StringComparison.Ordinal)
+                        && property.Property.PropertyType == parameter.ParameterType
+                );
 
                 if (mappedProperty is null)
                 {
@@ -145,26 +159,35 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             static bool IsRecordType(Type type)
             {
                 // Based on the state of the art as described in https://github.com/dotnet/roslyn/issues/45777
-                var cloneMethod = type.GetMethod("<Clone>$", BindingFlags.Public | BindingFlags.Instance);
+                var cloneMethod = type.GetMethod(
+                    "<Clone>$",
+                    BindingFlags.Public | BindingFlags.Instance
+                );
                 return cloneMethod != null && cloneMethod.ReturnType == type;
             }
         }
 
-        private static BindingBehaviorAttribute? FindBindingBehavior(BindingMetadataProviderContext context)
+        private static BindingBehaviorAttribute? FindBindingBehavior(
+            BindingMetadataProviderContext context
+        )
         {
             switch (context.Key.MetadataKind)
             {
                 case ModelMetadataKind.Property:
                     // BindingBehavior can fall back to attributes on the Container Type, but we should ignore
                     // attributes on the Property Type.
-                    var matchingAttributes = context.PropertyAttributes!.OfType<BindingBehaviorAttribute>();
+                    var matchingAttributes =
+                        context.PropertyAttributes!.OfType<BindingBehaviorAttribute>();
                     return matchingAttributes.FirstOrDefault()
-                        ?? context.Key.ContainerType!
-                            .GetCustomAttributes(typeof(BindingBehaviorAttribute), inherit: true)
+                        ?? context.Key.ContainerType!.GetCustomAttributes(
+                                typeof(BindingBehaviorAttribute),
+                                inherit: true
+                            )
                             .OfType<BindingBehaviorAttribute>()
                             .FirstOrDefault();
                 case ModelMetadataKind.Parameter:
-                    return context.ParameterAttributes!.OfType<BindingBehaviorAttribute>().FirstOrDefault();
+                    return context.ParameterAttributes!.OfType<BindingBehaviorAttribute>()
+                        .FirstOrDefault();
                 default:
                     return null;
             }
@@ -183,8 +206,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
 
             private Func<ModelMetadata, bool> CreatePropertyFilter()
             {
-                var propertyFilters = _providers
-                    .Select(p => p.PropertyFilter)
+                var propertyFilters = _providers.Select(p => p.PropertyFilter)
                     .Where(p => p != null);
 
                 return (m) =>

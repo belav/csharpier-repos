@@ -23,7 +23,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
             var ancmConfigPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
-                "IIS Express", "config", "schema", "aspnetcore_schema.xml");
+                "IIS Express",
+                "config",
+                "schema",
+                "aspnetcore_schema.xml"
+            );
 
             if (!File.Exists(ancmConfigPath))
             {
@@ -43,12 +47,14 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 return;
             }
 
-            SupportsInProcessHosting = ancmConfig
-                .Root
-                .Descendants("attribute")
-                .Any(n => "hostingModel".Equals(n.Attribute("name")?.Value, StringComparison.Ordinal));
+            SupportsInProcessHosting = ancmConfig.Root.Descendants("attribute")
+                .Any(
+                    n => "hostingModel".Equals(n.Attribute("name")?.Value, StringComparison.Ordinal)
+                );
 
-            SkipReason = SupportsInProcessHosting ? null : "IIS Express must be upgraded to support in-process hosting.";
+            SkipReason = SupportsInProcessHosting
+                ? null
+                : "IIS Express must be upgraded to support in-process hosting.";
         }
     }
 }

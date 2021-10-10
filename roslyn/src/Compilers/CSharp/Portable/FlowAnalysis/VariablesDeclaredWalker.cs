@@ -19,15 +19,30 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal class VariablesDeclaredWalker : AbstractRegionControlFlowPass
     {
-        internal static IEnumerable<Symbol> Analyze(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion)
+        internal static IEnumerable<Symbol> Analyze(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        )
         {
-            var walker = new VariablesDeclaredWalker(compilation, member, node, firstInRegion, lastInRegion);
+            var walker = new VariablesDeclaredWalker(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion
+            );
             try
             {
                 bool badRegion = false;
                 walker.Analyze(ref badRegion);
-                return badRegion ? SpecializedCollections.EmptyEnumerable<Symbol>() : walker._variablesDeclared;
+                return badRegion
+                  ? SpecializedCollections.EmptyEnumerable<Symbol>()
+                  : walker._variablesDeclared;
             }
+
             finally
             {
                 walker.Free();
@@ -36,10 +51,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private HashSet<Symbol> _variablesDeclared = new HashSet<Symbol>();
 
-        internal VariablesDeclaredWalker(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion)
-            : base(compilation, member, node, firstInRegion, lastInRegion)
-        {
-        }
+        internal VariablesDeclaredWalker(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        ) : base(compilation, member, node, firstInRegion, lastInRegion) { }
 
         protected override void Free()
         {
@@ -73,6 +91,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 switch (pattern)
                 {
                     case BoundDeclarationPattern decl:
+
                         {
                             // The variable may be null if it is a discard designation `_`.
                             if (decl.Variable?.Kind == SymbolKind.Local)
@@ -84,6 +103,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         break;
                     case BoundRecursivePattern recur:
+
                         {
                             if (recur.Variable?.Kind == SymbolKind.Local)
                             {
@@ -144,12 +164,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else
                 {
                     // Deconstruction foreach declares multiple variables.
-                    ((BoundTupleExpression)deconstructionAssignment.Left).VisitAllElements((x, self) => self.Visit(x), this);
+                    ((BoundTupleExpression)deconstructionAssignment.Left).VisitAllElements(
+                        (x, self) => self.Visit(x),
+                        this
+                    );
                 }
             }
         }
 
-        protected override void VisitCatchBlock(BoundCatchBlock catchBlock, ref LocalState finallyState)
+        protected override void VisitCatchBlock(
+            BoundCatchBlock catchBlock,
+            ref LocalState finallyState
+        )
         {
             if (IsInside)
             {

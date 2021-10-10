@@ -9,7 +9,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class FiltersTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+    public class FiltersTest
+        : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
     {
         public FiltersTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
         {
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("ab-cd", "en-US")]
         public async Task MiddlewareFilter_LocalizationMiddlewareRegistration_UsesRouteDataToFindCulture(
             string culture,
-            string expected)
+            string expected
+        )
         {
             // Arrange & Act
             var response = await Client.GetAsync($"{culture}/Filters/MiddlewareFilterTest");
@@ -65,7 +67,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(
                 $"CurrentCulture:{expected},CurrentUICulture:{expected}",
-                await response.Content.ReadAsStringAsync());
+                await response.Content.ReadAsStringAsync()
+            );
         }
 
         [Fact]

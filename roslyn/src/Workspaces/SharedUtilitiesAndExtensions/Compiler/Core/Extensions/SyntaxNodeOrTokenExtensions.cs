@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class SyntaxNodeOrTokenExtensions
     {
-        public static IEnumerable<SyntaxNodeOrToken> DepthFirstTraversal(this SyntaxNodeOrToken node)
+        public static IEnumerable<SyntaxNodeOrToken> DepthFirstTraversal(
+            this SyntaxNodeOrToken node
+        )
         {
             var stack = new Stack<SyntaxNodeOrToken>();
             stack.Push(node);
@@ -31,7 +33,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static SyntaxTrivia[] GetTrivia(params SyntaxNodeOrToken[] nodesOrTokens)
-            => nodesOrTokens.SelectMany(nodeOrToken => nodeOrToken.GetLeadingTrivia().Concat(nodeOrToken.GetTrailingTrivia())).ToArray();
+        public static SyntaxTrivia[] GetTrivia(params SyntaxNodeOrToken[] nodesOrTokens) =>
+            nodesOrTokens.SelectMany(
+                    nodeOrToken =>
+                        nodeOrToken.GetLeadingTrivia().Concat(nodeOrToken.GetTrailingTrivia())
+                )
+                .ToArray();
     }
 }

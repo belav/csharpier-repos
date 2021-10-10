@@ -19,27 +19,32 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     /// ourselves so that we can do things like navigate to MetadataAsSource.
     /// </summary>
     [Export(typeof(ITableControlEventProcessorProvider))]
-    [DataSourceType(StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceSourceTypeIdentifier)]
+    [DataSourceType(
+        StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceSourceTypeIdentifier
+    )]
     [DataSource(StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceIdentifier)]
     [Name(nameof(FindUsagesTableControlEventProcessorProvider))]
     [Order(Before = Priority.Default)]
-    internal class FindUsagesTableControlEventProcessorProvider : ITableControlEventProcessorProvider
+    internal class FindUsagesTableControlEventProcessorProvider
+        : ITableControlEventProcessorProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FindUsagesTableControlEventProcessorProvider()
-        {
-        }
+        public FindUsagesTableControlEventProcessorProvider() { }
 
         public ITableControlEventProcessor GetAssociatedEventProcessor(
-            IWpfTableControl tableControl)
+            IWpfTableControl tableControl
+        )
         {
             return new TableControlEventProcessor();
         }
 
         private class TableControlEventProcessor : TableControlEventProcessorBase
         {
-            public override void PreprocessNavigate(ITableEntryHandle entry, TableEntryNavigateEventArgs e)
+            public override void PreprocessNavigate(
+                ITableEntryHandle entry,
+                TableEntryNavigateEventArgs e
+            )
             {
                 if (entry.Identity is ISupportsNavigation supportsNavigation)
                 {
@@ -51,7 +56,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     }
                 }
 
-                if (entry.TryGetValue(StreamingFindUsagesPresenter.SelfKeyName, out var item) && item is ISupportsNavigation itemSupportsNavigation)
+                if (
+                    entry.TryGetValue(StreamingFindUsagesPresenter.SelfKeyName, out var item)
+                    && item is ISupportsNavigation itemSupportsNavigation
+                )
                 {
                     // TODO: Use a threaded-wait-dialog here so we can cancel navigation.
                     if (itemSupportsNavigation.TryNavigateTo(e.IsPreview, CancellationToken.None))

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount
-{    
+{
     /// <summary>
     /// <see cref="AuthenticationProperties"/> for Microsoft OAuth challenge request.
     /// See https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code for reference
@@ -34,24 +34,22 @@ namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount
         /// <summary>
         /// Initializes a new instance for <see cref="MicrosoftChallengeProperties"/>.
         /// </summary>
-        public MicrosoftChallengeProperties()
-        { }
+        public MicrosoftChallengeProperties() { }
 
         /// <summary>
         /// Initializes a new instance for <see cref="MicrosoftChallengeProperties"/>.
         /// </summary>
         /// <inheritdoc />
-        public MicrosoftChallengeProperties(IDictionary<string, string?> items)
-            : base(items)
-        { }
+        public MicrosoftChallengeProperties(IDictionary<string, string?> items) : base(items) { }
 
         /// <summary>
         /// Initializes a new instance for <see cref="MicrosoftChallengeProperties"/>.
         /// </summary>
         /// <inheritdoc />
-        public MicrosoftChallengeProperties(IDictionary<string, string?> items, IDictionary<string, object?> parameters)
-            : base(items, parameters)
-        { }
+        public MicrosoftChallengeProperties(
+            IDictionary<string, string?> items,
+            IDictionary<string, object?> parameters
+        ) : base(items, parameters) { }
 
         /// <summary>
         /// Gets or sets the value for the <c>response_mode</c> parameter used for a challenge request. The response mode specifies the method

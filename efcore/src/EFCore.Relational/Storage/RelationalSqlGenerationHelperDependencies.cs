@@ -51,8 +51,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public RelationalSqlGenerationHelperDependencies()
-        {
-        }
+        public RelationalSqlGenerationHelperDependencies() { }
     }
 }

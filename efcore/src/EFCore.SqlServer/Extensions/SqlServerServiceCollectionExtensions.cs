@@ -47,24 +47,35 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>
         ///     The same service collection so that multiple calls can be chained.
         /// </returns>
-        public static IServiceCollection AddEntityFrameworkSqlServer(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddEntityFrameworkSqlServer(
+            this IServiceCollection serviceCollection
+        )
         {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
-            new EntityFrameworkRelationalServicesBuilder(serviceCollection)
-                .TryAdd<LoggingDefinitions, SqlServerLoggingDefinitions>()
+            new EntityFrameworkRelationalServicesBuilder(serviceCollection).TryAdd<
+                LoggingDefinitions,
+                SqlServerLoggingDefinitions
+            >()
                 .TryAdd<IDatabaseProvider, DatabaseProvider<SqlServerOptionsExtension>>()
-                .TryAdd<IValueGeneratorCache>(p => p.GetRequiredService<ISqlServerValueGeneratorCache>())
+                .TryAdd<IValueGeneratorCache>(
+                    p => p.GetRequiredService<ISqlServerValueGeneratorCache>()
+                )
                 .TryAdd<IRelationalTypeMappingSource, SqlServerTypeMappingSource>()
                 .TryAdd<ISqlGenerationHelper, SqlServerSqlGenerationHelper>()
                 .TryAdd<IRelationalAnnotationProvider, SqlServerAnnotationProvider>()
                 .TryAdd<IMigrationsAnnotationProvider, SqlServerMigrationsAnnotationProvider>()
                 .TryAdd<IModelValidator, SqlServerModelValidator>()
                 .TryAdd<IProviderConventionSetBuilder, SqlServerConventionSetBuilder>()
-                .TryAdd<IUpdateSqlGenerator>(p => p.GetRequiredService<ISqlServerUpdateSqlGenerator>())
+                .TryAdd<IUpdateSqlGenerator>(
+                    p => p.GetRequiredService<ISqlServerUpdateSqlGenerator>()
+                )
                 .TryAdd<IEvaluatableExpressionFilter, SqlServerEvaluatableExpressionFilter>()
                 .TryAdd<IRelationalTransactionFactory, SqlServerTransactionFactory>()
-                .TryAdd<IModificationCommandBatchFactory, SqlServerModificationCommandBatchFactory>()
+                .TryAdd<
+                    IModificationCommandBatchFactory,
+                    SqlServerModificationCommandBatchFactory
+                >()
                 .TryAdd<IValueGeneratorSelector, SqlServerValueGeneratorSelector>()
                 .TryAdd<IRelationalConnection>(p => p.GetRequiredService<ISqlServerConnection>())
                 .TryAdd<IMigrationsSqlGenerator, SqlServerMigrationsSqlGenerator>()
@@ -77,14 +88,30 @@ namespace Microsoft.Extensions.DependencyInjection
                 .TryAdd<IMethodCallTranslatorProvider, SqlServerMethodCallTranslatorProvider>()
                 .TryAdd<IMemberTranslatorProvider, SqlServerMemberTranslatorProvider>()
                 .TryAdd<IQuerySqlGeneratorFactory, SqlServerQuerySqlGeneratorFactory>()
-                .TryAdd<IRelationalSqlTranslatingExpressionVisitorFactory, SqlServerSqlTranslatingExpressionVisitorFactory>()
-                .TryAdd<IRelationalParameterBasedSqlProcessorFactory, SqlServerParameterBasedSqlProcessorFactory>()
+                .TryAdd<
+                    IRelationalSqlTranslatingExpressionVisitorFactory,
+                    SqlServerSqlTranslatingExpressionVisitorFactory
+                >()
+                .TryAdd<
+                    IRelationalParameterBasedSqlProcessorFactory,
+                    SqlServerParameterBasedSqlProcessorFactory
+                >()
                 .TryAddProviderSpecificServices(
-                    b => b
-                        .TryAddSingleton<ISqlServerValueGeneratorCache, SqlServerValueGeneratorCache>()
-                        .TryAddSingleton<ISqlServerUpdateSqlGenerator, SqlServerUpdateSqlGenerator>()
-                        .TryAddSingleton<ISqlServerSequenceValueGeneratorFactory, SqlServerSequenceValueGeneratorFactory>()
-                        .TryAddScoped<ISqlServerConnection, SqlServerConnection>())
+                    b =>
+                        b.TryAddSingleton<
+                            ISqlServerValueGeneratorCache,
+                            SqlServerValueGeneratorCache
+                        >()
+                            .TryAddSingleton<
+                                ISqlServerUpdateSqlGenerator,
+                                SqlServerUpdateSqlGenerator
+                            >()
+                            .TryAddSingleton<
+                                ISqlServerSequenceValueGeneratorFactory,
+                                SqlServerSequenceValueGeneratorFactory
+                            >()
+                            .TryAddScoped<ISqlServerConnection, SqlServerConnection>()
+                )
                 .TryAddCoreServices();
 
             return serviceCollection;

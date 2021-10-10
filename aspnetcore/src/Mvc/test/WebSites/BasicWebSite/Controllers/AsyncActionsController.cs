@@ -104,7 +104,9 @@ namespace BasicWebSite.Controllers
             return new ValueTask<IActionResult>(Content(message));
         }
 
-        public ValueTask<IActionResult> PreCompletedValueTaskOfIActionResultExceptionAction(string message)
+        public ValueTask<IActionResult> PreCompletedValueTaskOfIActionResultExceptionAction(
+            string message
+        )
         {
             throw new CustomException();
         }
@@ -114,7 +116,9 @@ namespace BasicWebSite.Controllers
             return new ValueTask<ContentResult>(Content(message));
         }
 
-        public ValueTask<ContentResult> PreCompletedValueTaskOfContentResultExceptionAction(string message)
+        public ValueTask<ContentResult> PreCompletedValueTaskOfContentResultExceptionAction(
+            string message
+        )
         {
             throw new CustomException();
         }
@@ -133,7 +137,8 @@ namespace BasicWebSite.Controllers
         {
             return new CustomAwaitable<Message>(
                 SimulateDelayMilliseconds,
-                new Message { Text = message });
+                new Message { Text = message }
+            );
         }
 
         public CustomAwaitable<Message> CustomAwaitableOfObjectExceptionAction(string message)
@@ -146,7 +151,9 @@ namespace BasicWebSite.Controllers
             return new CustomAwaitable<IActionResult>(SimulateDelayMilliseconds, Content(message));
         }
 
-        public CustomAwaitable<IActionResult> CustomAwaitableOfIActionResultExceptionAction(string message)
+        public CustomAwaitable<IActionResult> CustomAwaitableOfIActionResultExceptionAction(
+            string message
+        )
         {
             throw new CustomException();
         }
@@ -156,7 +163,9 @@ namespace BasicWebSite.Controllers
             return new CustomAwaitable<ContentResult>(SimulateDelayMilliseconds, Content(message));
         }
 
-        public CustomAwaitable<ContentResult> CustomAwaitableOfContentResultExceptionAction(string message)
+        public CustomAwaitable<ContentResult> CustomAwaitableOfContentResultExceptionAction(
+            string message
+        )
         {
             throw new CustomException();
         }
@@ -203,21 +212,23 @@ namespace BasicWebSite.Controllers
 
             public CustomAwaiter(int simulateDelayMilliseconds)
             {
-                Task.Factory.StartNew(() =>
-                {
-                    Thread.Sleep(simulateDelayMilliseconds);
-                    lock(_continuations)
+                Task.Factory.StartNew(
+                    () =>
                     {
-                        IsCompleted = true;
-
-                        foreach (var continuation in _continuations)
+                        Thread.Sleep(simulateDelayMilliseconds);
+                        lock (_continuations)
                         {
-                            continuation();
-                        }
+                            IsCompleted = true;
 
-                        _continuations.Clear();
+                            foreach (var continuation in _continuations)
+                            {
+                                continuation();
+                            }
+
+                            _continuations.Clear();
+                        }
                     }
-                });
+                );
             }
 
             public bool IsCompleted { get; private set; }
@@ -237,9 +248,7 @@ namespace BasicWebSite.Controllers
                 }
             }
 
-            public void GetResult()
-            {
-            }
+            public void GetResult() { }
         }
 
         public class CustomAwaiter<T> : CustomAwaiter
@@ -257,9 +266,7 @@ namespace BasicWebSite.Controllers
 
         public class CustomException : Exception
         {
-            public CustomException() : base("This is a custom exception.")
-            {
-            }
+            public CustomException() : base("This is a custom exception.") { }
         }
     }
 }

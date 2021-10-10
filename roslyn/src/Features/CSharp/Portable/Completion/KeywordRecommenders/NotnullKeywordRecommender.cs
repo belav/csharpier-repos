@@ -11,11 +11,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class NotNullKeywordRecommender : IKeywordRecommender<CSharpSyntaxContext>
     {
-        public ImmutableArray<RecommendedKeyword> RecommendKeywords(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        public ImmutableArray<RecommendedKeyword> RecommendKeywords(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             return context.SyntaxTree.IsTypeParameterConstraintContext(position, context.LeftToken)
-                ? ImmutableArray.Create(new RecommendedKeyword("notnull"))
-                : ImmutableArray<RecommendedKeyword>.Empty;
+              ? ImmutableArray.Create(new RecommendedKeyword("notnull"))
+              : ImmutableArray<RecommendedKeyword>.Empty;
         }
     }
 }

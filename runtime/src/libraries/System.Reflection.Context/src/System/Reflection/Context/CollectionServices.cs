@@ -38,7 +38,11 @@ namespace System.Reflection.Context
         public static object[] ConvertListToArray(List<object> list, Type arrayType)
         {
             // Mimic the behavior of GetCustomAttributes in runtime reflection.
-            if (arrayType.HasElementType || arrayType.IsValueType || arrayType.ContainsGenericParameters)
+            if (
+                arrayType.HasElementType
+                || arrayType.IsValueType
+                || arrayType.ContainsGenericParameters
+            )
                 return list.ToArray();
 
             // Converts results to typed array.

@@ -59,11 +59,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     context.FrameWriter,
                     context.ConnectionInputFlowControl,
                     context.ServerPeerSettings.InitialWindowSize,
-                    context.ServerPeerSettings.InitialWindowSize / 2);
+                    context.ServerPeerSettings.InitialWindowSize / 2
+                );
 
                 _outputFlowControl = new StreamOutputFlowControl(
                     context.ConnectionOutputFlowControl,
-                    context.ClientPeerSettings.InitialWindowSize);
+                    context.ClientPeerSettings.InitialWindowSize
+                );
 
                 _http2Output = new Http2OutputProducer(this, context, _outputFlowControl);
 
@@ -92,9 +94,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         public long? InputRemaining { get; internal set; }
 
         public bool RequestBodyStarted { get; private set; }
-        public bool EndStreamReceived => (_completionState & StreamCompletionFlags.EndStreamReceived) == StreamCompletionFlags.EndStreamReceived;
-        private bool IsAborted => (_completionState & StreamCompletionFlags.Aborted) == StreamCompletionFlags.Aborted;
-        internal bool RstStreamReceived => (_completionState & StreamCompletionFlags.RstStreamReceived) == StreamCompletionFlags.RstStreamReceived;
+        public bool EndStreamReceived =>
+            (_completionState & StreamCompletionFlags.EndStreamReceived)
+            == StreamCompletionFlags.EndStreamReceived;
+        private bool IsAborted =>
+            (_completionState & StreamCompletionFlags.Aborted) == StreamCompletionFlags.Aborted;
+        internal bool RstStreamReceived =>
+            (_completionState & StreamCompletionFlags.RstStreamReceived)
+            == StreamCompletionFlags.RstStreamReceived;
 
         public bool ReceivedEmptyRequestBody
         {
@@ -149,7 +156,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                         if (!errored)
                         {
                             // Don't block on IO. This never faults.
-                            _ = _http2Output.WriteRstStreamAsync(Http2ErrorCode.NO_ERROR).Preserve();
+                            _ = _http2Output.WriteRstStreamAsync(Http2ErrorCode.NO_ERROR)
+                                .Preserve();
                         }
                         RequestBodyPipe.Writer.Complete();
                     }
@@ -167,14 +175,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 // This ensures Http2OutputProducer.ProcessDataWrites is in the correct state to be reused.
                 CanReuse = !_connectionAborted && HasResponseCompleted;
             }
+
             finally
             {
                 _context.StreamLifetimeHandler.OnStreamCompleted(this);
             }
         }
 
-        protected override string CreateRequestId()
-            => StringUtilities.ConcatAsHexSuffix(ConnectionId, ':', (uint)StreamId);
+        protected override string CreateRequestId() =>
+            StringUtilities.ConcatAsHexSuffix(ConnectionId, ':', (uint)StreamId);
 
         protected override MessageBody CreateMessageBody()
         {
@@ -225,9 +234,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             // CONNECT - :scheme and :path must be excluded
             if (Method == HttpMethod.Connect)
             {
-                if (!String.IsNullOrEmpty(HttpRequestHeaders.HeaderScheme) || !String.IsNullOrEmpty(HttpRequestHeaders.HeaderPath))
+                if (
+                    !String.IsNullOrEmpty(HttpRequestHeaders.HeaderScheme)
+                    || !String.IsNullOrEmpty(HttpRequestHeaders.HeaderPath)
+                )
                 {
-                    ResetAndAbort(new ConnectionAbortedException(CoreStrings.Http2ErrorConnectMustNotSendSchemeOrPath), Http2ErrorCode.PROTOCOL_ERROR);
+                    ResetAndAbort(
+                        new ConnectionAbortedException(
+                            CoreStrings.Http2ErrorConnectMustNotSendSchemeOrPath
+                        ),
+                        Http2ErrorCode.PROTOCOL_ERROR
+                    );
                     return false;
                 }
 
@@ -245,11 +262,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             // - For now we'll restrict it to http/s and require it match the transport.
             // - We'll need to find some concrete scenarios to warrant unblocking this.
             var headerScheme = HttpRequestHeaders.HeaderScheme.ToString();
-            if (!ReferenceEquals(headerScheme, Scheme) &&
-                !string.Equals(headerScheme, Scheme, StringComparison.OrdinalIgnoreCase))
+            if (
+                !ReferenceEquals(headerScheme, Scheme)
+                && !string.Equals(headerScheme, Scheme, StringComparison.OrdinalIgnoreCase)
+            )
             {
-                ResetAndAbort(new ConnectionAbortedException(
-                    CoreStrings.FormatHttp2StreamErrorSchemeMismatch(HttpRequestHeaders.HeaderScheme, Scheme)), Http2ErrorCode.PROTOCOL_ERROR);
+                ResetAndAbort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatHttp2StreamErrorSchemeMismatch(
+                            HttpRequestHeaders.HeaderScheme,
+                            Scheme
+                        )
+                    ),
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
                 return false;
             }
 
@@ -274,10 +300,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             }
 
             // Approximate MaxRequestLineSize by totaling the required pseudo header field lengths.
-            var requestLineLength = _methodText!.Length + Scheme!.Length + hostText.Length + path.Length;
+            var requestLineLength =
+                _methodText!.Length + Scheme!.Length + hostText.Length + path.Length;
             if (requestLineLength > ServerOptions.Limits.MaxRequestLineSize)
             {
-                ResetAndAbort(new ConnectionAbortedException(CoreStrings.BadRequest_RequestLineTooLong), Http2ErrorCode.PROTOCOL_ERROR);
+                ResetAndAbort(
+                    new ConnectionAbortedException(CoreStrings.BadRequest_RequestLineTooLong),
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
                 return false;
             }
 
@@ -297,7 +327,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 
             if (Method == HttpMethod.None)
             {
-                ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatHttp2ErrorMethodInvalid(_methodText)), Http2ErrorCode.PROTOCOL_ERROR);
+                ResetAndAbort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatHttp2ErrorMethodInvalid(_methodText)
+                    ),
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
                 return false;
             }
 
@@ -305,7 +340,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             {
                 if (HttpCharacters.IndexOfInvalidTokenChar(_methodText) >= 0)
                 {
-                    ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatHttp2ErrorMethodInvalid(_methodText)), Http2ErrorCode.PROTOCOL_ERROR);
+                    ResetAndAbort(
+                        new ConnectionAbortedException(
+                            CoreStrings.FormatHttp2ErrorMethodInvalid(_methodText)
+                        ),
+                        Http2ErrorCode.PROTOCOL_ERROR
+                    );
                     return false;
                 }
             }
@@ -345,7 +385,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             if (host.Count > 1 || !HttpUtilities.IsHostHeaderValid(hostText))
             {
                 // RST replaces 400
-                ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(hostText)), Http2ErrorCode.PROTOCOL_ERROR);
+                ResetAndAbort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(hostText)
+                    ),
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
                 return false;
             }
 
@@ -357,7 +402,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             // Must start with a leading slash
             if (pathSegment.Length == 0 || pathSegment[0] != '/')
             {
-                ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatHttp2StreamErrorPathInvalid(RawTarget)), Http2ErrorCode.PROTOCOL_ERROR);
+                ResetAndAbort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatHttp2StreamErrorPathInvalid(RawTarget)
+                    ),
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
                 return false;
             }
 
@@ -374,13 +424,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 const int MaxPathBufferStackAllocSize = 256;
 
                 // The decoder operates only on raw bytes
-                Span<byte> pathBuffer = pathSegment.Length <= MaxPathBufferStackAllocSize
-                    // A constant size plus slice generates better code
-                    // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383159929
-                    ? stackalloc byte[MaxPathBufferStackAllocSize].Slice(0, pathSegment.Length)
-                    // TODO - Consider pool here for less than 4096
-                    // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383604184
-                    : new byte[pathSegment.Length];
+                Span<byte> pathBuffer =
+                    pathSegment.Length <= MaxPathBufferStackAllocSize
+                        // A constant size plus slice generates better code
+                        // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383159929
+                        ? stackalloc byte[MaxPathBufferStackAllocSize].Slice(0, pathSegment.Length)
+                        // TODO - Consider pool here for less than 4096
+                        // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383604184
+                        : new byte[pathSegment.Length];
 
                 for (var i = 0; i < pathSegment.Length; i++)
                 {
@@ -390,13 +441,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     pathBuffer[i] = (byte)ch;
                 }
 
-                Path = PathNormalizer.DecodePath(pathBuffer, pathEncoded, RawTarget!, QueryString!.Length);
+                Path = PathNormalizer.DecodePath(
+                    pathBuffer,
+                    pathEncoded,
+                    RawTarget!,
+                    QueryString!.Length
+                );
 
                 return true;
             }
             catch (InvalidOperationException)
             {
-                ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatHttp2StreamErrorPathInvalid(RawTarget)), Http2ErrorCode.PROTOCOL_ERROR);
+                ResetAndAbort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatHttp2StreamErrorPathInvalid(RawTarget)
+                    ),
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
                 return false;
             }
         }
@@ -435,7 +496,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                         // https://tools.ietf.org/html/rfc7540#section-8.1.2.6
                         if (dataPayload.Length > InputRemaining.Value)
                         {
-                            throw new Http2StreamErrorException(StreamId, CoreStrings.Http2StreamErrorMoreDataThanLength, Http2ErrorCode.PROTOCOL_ERROR);
+                            throw new Http2StreamErrorException(
+                                StreamId,
+                                CoreStrings.Http2StreamErrorMoreDataThanLength,
+                                Http2ErrorCode.PROTOCOL_ERROR
+                            );
                         }
 
                         InputRemaining -= dataPayload.Length;
@@ -454,7 +519,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                             // It shouldn't be possible for the RequestBodyPipe to fill up an return an incomplete task if
                             // _inputFlowControl.Advance() didn't throw.
                             Debug.Assert(flushTask.IsCompletedSuccessfully);
-                            
+
                             // If it's a IValueTaskSource backed ValueTask,
                             // inform it its result has been read so it can reset
                             flushTask.GetAwaiter().GetResult();
@@ -480,7 +545,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 // https://tools.ietf.org/html/rfc7540#section-8.1.2.6
                 if (InputRemaining.Value != 0)
                 {
-                    throw new Http2StreamErrorException(StreamId, CoreStrings.Http2StreamErrorLessDataThanLength, Http2ErrorCode.PROTOCOL_ERROR);
+                    throw new Http2StreamErrorException(
+                        StreamId,
+                        CoreStrings.Http2StreamErrorLessDataThanLength,
+                        Http2ErrorCode.PROTOCOL_ERROR
+                    );
                 }
             }
 
@@ -524,11 +593,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         protected override void OnErrorAfterResponseStarted()
         {
             // We can no longer change the response, send a Reset instead.
-            var abortReason = new ConnectionAbortedException(CoreStrings.Http2StreamErrorAfterHeaders);
+            var abortReason = new ConnectionAbortedException(
+                CoreStrings.Http2StreamErrorAfterHeaders
+            );
             ResetAndAbort(abortReason, Http2ErrorCode.INTERNAL_ERROR);
         }
 
-        protected override void ApplicationAbort() => ApplicationAbort(new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication), Http2ErrorCode.INTERNAL_ERROR);
+        protected override void ApplicationAbort() =>
+            ApplicationAbort(
+                new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication),
+                Http2ErrorCode.INTERNAL_ERROR
+            );
 
         private void ApplicationAbort(ConnectionAbortedException abortReason, Http2ErrorCode error)
         {
@@ -582,25 +657,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 
                 _decrementCalled = true;
             }
-          
+
             _context.StreamLifetimeHandler.DecrementActiveClientStreamCount();
         }
 
-        private Pipe CreateRequestBodyPipe()
-            => new Pipe(new PipeOptions
-            (
-                pool: _context.MemoryPool,
-                readerScheduler: ServiceContext.Scheduler,
-                writerScheduler: PipeScheduler.Inline,
-                // Never pause within the window range. Flow control will prevent more data from being added.
-                // See the assert in OnDataAsync.
-                pauseWriterThreshold: _context.ServerPeerSettings.InitialWindowSize + 1,
-                resumeWriterThreshold: _context.ServerPeerSettings.InitialWindowSize + 1,
-                useSynchronizationContext: false,
-                minimumSegmentSize: _context.MemoryPool.GetMinimumSegmentSize()
-            ));
+        private Pipe CreateRequestBodyPipe() =>
+            new Pipe(
+                new PipeOptions(
+                    pool: _context.MemoryPool,
+                    readerScheduler: ServiceContext.Scheduler,
+                    writerScheduler: PipeScheduler.Inline,
+                    // Never pause within the window range. Flow control will prevent more data from being added.
+                    // See the assert in OnDataAsync.
+                    pauseWriterThreshold: _context.ServerPeerSettings.InitialWindowSize + 1,
+                    resumeWriterThreshold: _context.ServerPeerSettings.InitialWindowSize + 1,
+                    useSynchronizationContext: false,
+                    minimumSegmentSize: _context.MemoryPool.GetMinimumSegmentSize()
+                )
+            );
 
-        private (StreamCompletionFlags OldState, StreamCompletionFlags NewState) ApplyCompletionFlag(StreamCompletionFlags completionState)
+        private (StreamCompletionFlags OldState, StreamCompletionFlags NewState) ApplyCompletionFlag(
+            StreamCompletionFlags completionState
+        )
         {
             lock (_completionLock)
             {
@@ -630,7 +708,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Aborted = 4,
         }
 
-        public override void OnHeader(int index, bool indexedValue, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+        public override void OnHeader(
+            int index,
+            bool indexedValue,
+            ReadOnlySpan<byte> name,
+            ReadOnlySpan<byte> value
+        )
         {
             base.OnHeader(index, indexedValue, name, value);
 

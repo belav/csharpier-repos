@@ -18,10 +18,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public EventTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
@@ -58,7 +56,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.MountTestComponent<FocusEventComponent>();
 
             Browser.FindElement(By.Id("button-that-disappears")).Click();
-            Browser.Equal("True", () => Browser.FindElement(By.Id("button-received-focus-out")).Text);
+            Browser.Equal(
+                "True",
+                () => Browser.FindElement(By.Id("button-received-focus-out")).Text
+            );
         }
 
         [Fact]
@@ -74,9 +75,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var other = Browser.Exists(By.Id("other"));
 
             // Mouse over the button and then back off
-            var actions = new Actions(Browser)
-                .MoveToElement(input)
-                .MoveToElement(other);
+            var actions = new Actions(Browser).MoveToElement(input).MoveToElement(other);
 
             actions.Perform();
             Browser.Equal("onmouseover,onmouseout,", () => output.Text);
@@ -93,9 +92,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Assert.Equal(string.Empty, output.Text);
 
             // Move a little bit
-            var actions = new Actions(Browser)
-                .MoveToElement(input)
-                .MoveToElement(input, 10, 10);
+            var actions = new Actions(Browser).MoveToElement(input).MoveToElement(input, 10, 10);
 
             actions.Perform();
             Browser.Contains("onmousemove,", () => output.Text);
@@ -124,7 +121,6 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             actions.Perform();
             Browser.Equal("onmousedown,onmouseup,", () => output.Text);
         }
-
 
         [Fact]
         public void Toggle_CanTrigger()
@@ -183,7 +179,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var appElement = Browser.MountTestComponent<EventPreventDefaultComponent>();
 
             appElement.FindElement(By.Id("form-1-button")).Click();
-            Browser.Equal("Event was handled", () => appElement.FindElement(By.Id("event-handled")).Text);
+            Browser.Equal(
+                "Event was handled",
+                () => appElement.FindElement(By.Id("event-handled")).Text
+            );
         }
 
         [Fact]
@@ -253,7 +252,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         [InlineData("#disabled-button")]
         [InlineData("#disabled-button span")]
         [InlineData("#disabled-textarea")]
-        public void InteractiveElementWithDisabledAttributeDoesNotRespondToMouseEvents(string elementSelector)
+        public void InteractiveElementWithDisabledAttributeDoesNotRespondToMouseEvents(
+            string elementSelector
+        )
         {
             Browser.MountTestComponent<EventDisablingComponent>();
             var element = Browser.Exists(By.CssSelector(elementSelector));
@@ -279,10 +280,11 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             SendKeysSequentially(input, "abc");
             Browser.Equal("abc", () => input.GetAttribute("value"));
             Browser.Equal(
-                "Change event on item First with value a\n" +
-                "Change event on item First with value ab\n" +
-                "Change event on item First with value abc",
-                () => eventLog.Text.Trim().Replace("\r\n", "\n"));
+                "Change event on item First with value a\n"
+                    + "Change event on item First with value ab\n"
+                    + "Change event on item First with value abc",
+                () => eventLog.Text.Trim().Replace("\r\n", "\n")
+            );
         }
 
         [Fact]
@@ -292,9 +294,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var errorLog = Browser.Exists(By.Id("web-component-error-log"));
 
             Browser.Exists(By.Id("add-web-component")).Click();
-            var expectedMessage = _serverFixture.ExecutionMode == ExecutionMode.Client
-                ? "Assertion failed - heap is currently locked"
-                : "There was an exception invoking 'SomeMethodThatDoesntNeedToExistForThisTest' on assembly 'SomeAssembly'";
+            var expectedMessage =
+                _serverFixture.ExecutionMode == ExecutionMode.Client
+                    ? "Assertion failed - heap is currently locked"
+                    : "There was an exception invoking 'SomeMethodThatDoesntNeedToExistForThisTest' on assembly 'SomeAssembly'";
 
             Browser.Contains(expectedMessage, () => errorLog.Text);
         }
@@ -327,7 +330,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // We can trigger a pointer event and receive a PointerEventArgs
             new Actions(Browser).Click(elem).Perform();
-            Browser.Equal("Microsoft.AspNetCore.Components.Web.PointerEventArgs:mouse", () => output.Text);
+            Browser.Equal(
+                "Microsoft.AspNetCore.Components.Web.PointerEventArgs:mouse",
+                () => output.Text
+            );
 
             // We can trigger a drag event and receive a DragEventArgs *on the same handler delegate*
             Browser.FindElement(By.Id("clear_event_log")).Click();

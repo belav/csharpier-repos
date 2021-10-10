@@ -40,7 +40,10 @@ namespace Microsoft.DotNet.OpenApi.Refresh.Tests
             AssertNoErrors(run);
 
             var secondWriteTime = File.GetLastWriteTime(expectedJsonPath);
-            Assert.True(firstWriteTime < secondWriteTime, $"File wasn't updated! {firstWriteTime} {secondWriteTime}");
+            Assert.True(
+                firstWriteTime < secondWriteTime,
+                $"File wasn't updated! {firstWriteTime} {secondWriteTime}"
+            );
         }
     }
 }

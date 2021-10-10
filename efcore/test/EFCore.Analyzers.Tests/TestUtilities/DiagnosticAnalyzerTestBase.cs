@@ -26,19 +26,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Assert.Empty(diagnostics);
         }
 
-        protected virtual async Task<(Diagnostic[], string)> GetDiagnosticsAsync(string source, params string[] extraUsings)
+        protected virtual async Task<(Diagnostic[], string)> GetDiagnosticsAsync(
+            string source,
+            params string[] extraUsings
+        )
         {
             var sb = new StringBuilder();
             foreach (var @using in _usings.Concat(extraUsings))
             {
-                sb
-                    .Append("using ")
-                    .Append(@using)
-                    .AppendLine(";");
+                sb.Append("using ").Append(@using).AppendLine(";");
             }
 
-            sb
-                .AppendLine()
+            sb.AppendLine()
                 .AppendLine("class C {")
                 .AppendLine("void M() {")
                 .AppendLine(source)
@@ -52,17 +51,21 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         protected async Task<Diagnostic[]> GetDiagnosticsFullSourceAsync(string source)
         {
             var compilation = await CreateProject(source).GetCompilationAsync();
-            var errors = compilation.GetDiagnostics().Where(d => d.Severity == DiagnosticSeverity.Error);
+            var errors = compilation.GetDiagnostics()
+                .Where(d => d.Severity == DiagnosticSeverity.Error);
 
             Assert.Empty(errors);
 
             var analyzer = CreateDiagnosticAnalyzer();
-            var compilationWithAnalyzers
-                = compilation
-                    .WithOptions(
-                        compilation.Options.WithSpecificDiagnosticOptions(
-                            analyzer.SupportedDiagnostics.ToDictionary(d => d.Id, d => ReportDiagnostic.Default)))
-                    .WithAnalyzers(ImmutableArray.Create(analyzer));
+            var compilationWithAnalyzers = compilation.WithOptions(
+                    compilation.Options.WithSpecificDiagnosticOptions(
+                        analyzer.SupportedDiagnostics.ToDictionary(
+                            d => d.Id,
+                            d => ReportDiagnostic.Default
+                        )
+                    )
+                )
+                .WithAnalyzers(ImmutableArray.Create(analyzer));
 
             var diagnostics = await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync();
 
@@ -78,22 +81,25 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             var projectId = ProjectId.CreateNewId(debugName: "TestProject");
             var documentId = DocumentId.CreateNewId(projectId, fileName);
 
-            var metadataReferences
-                = DependencyContext.Load(GetType().Assembly)
-                    .CompileLibraries
-                    .SelectMany(c => c.ResolveReferencePaths())
-                    .Select(path => MetadataReference.CreateFromFile(path))
-                    .Cast<MetadataReference>()
-                    .ToList();
+            var metadataReferences = DependencyContext.Load(GetType().Assembly)
+                .CompileLibraries.SelectMany(c => c.ResolveReferencePaths())
+                .Select(path => MetadataReference.CreateFromFile(path))
+                .Cast<MetadataReference>()
+                .ToList();
 
-            var solution = new AdhocWorkspace()
-                .CurrentSolution
-                .AddProject(projectId, "TestProject", "TestProject", LanguageNames.CSharp)
+            var solution = new AdhocWorkspace().CurrentSolution.AddProject(
+                    projectId,
+                    "TestProject",
+                    "TestProject",
+                    LanguageNames.CSharp
+                )
                 .AddMetadataReferences(projectId, metadataReferences)
                 .AddDocument(documentId, fileName, SourceText.From(source));
 
             return solution.GetProject(projectId)
-                .WithCompilationOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                .WithCompilationOptions(
+                    new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                );
         }
     }
 }

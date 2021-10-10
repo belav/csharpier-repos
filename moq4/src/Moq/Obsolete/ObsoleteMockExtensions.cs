@@ -9,17 +9,17 @@ using Moq.Language.Flow;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	/// Provides additional methods on mocks.
 	/// </summary>
 	/// <devdoc>
 	/// Provided as extension methods as they confuse the compiler 
 	/// with the overloads taking Action.
 	/// </devdoc>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public static class ObsoleteMockExtensions
-	{
-		/// <summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public static class ObsoleteMockExtensions
+    {
+        /// <summary>
 		/// Specifies a setup on the mocked type for a call to 
 		/// to a property setter, regardless of its value.
 		/// </summary>
@@ -40,17 +40,19 @@ namespace Moq
 		/// This method is not legacy, but must be on an extension method to avoid 
 		/// confusing the compiler with the new Action syntax.
 		/// </devdoc>
-		[Obsolete("Replaced by SetupSet(Action)")]
-		public static ISetupSetter<T, TProperty> SetupSet<T, TProperty>(this Mock<T> mock, Expression<Func<T, TProperty>> expression)
-			where T : class
-		{
-			Guard.NotNull(expression, nameof(expression));
+        [Obsolete("Replaced by SetupSet(Action)")]
+        public static ISetupSetter<T, TProperty> SetupSet<T, TProperty>(
+            this Mock<T> mock,
+            Expression<Func<T, TProperty>> expression
+        ) where T : class
+        {
+            Guard.NotNull(expression, nameof(expression));
 
-			var setup = Mock.SetupSet(mock, expression.AssignItIsAny(), condition: null);
-			return new SetterSetupPhrase<T, TProperty>(setup);
-		}
+            var setup = Mock.SetupSet(mock, expression.AssignItIsAny(), condition: null);
+            return new SetterSetupPhrase<T, TProperty>(setup);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Verifies that a property has been set on the mock, regardless of its value.
 		/// </summary>
 		/// <example group="verification">
@@ -71,16 +73,18 @@ namespace Moq
 		/// <typeparam name="T">Mocked type.</typeparam>
 		/// <typeparam name="TProperty">Type of the property to verify. Typically omitted as it can 
 		/// be inferred from the expression's return type.</typeparam>
-		[Obsolete("Replaced by VerifySet(Action)")]
-		public static void VerifySet<T, TProperty>(this Mock<T> mock, Expression<Func<T, TProperty>> expression)
-			where T : class
-		{
-			Guard.NotNull(expression, nameof(expression));
+        [Obsolete("Replaced by VerifySet(Action)")]
+        public static void VerifySet<T, TProperty>(
+            this Mock<T> mock,
+            Expression<Func<T, TProperty>> expression
+        ) where T : class
+        {
+            Guard.NotNull(expression, nameof(expression));
 
-			Mock.VerifySet(mock, expression.AssignItIsAny(), Times.AtLeastOnce(), null);
-		}
+            Mock.VerifySet(mock, expression.AssignItIsAny(), Times.AtLeastOnce(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Verifies that a property has been set on the mock, specifying a failure  
 		/// error message. 
 		/// </summary>
@@ -103,14 +107,17 @@ namespace Moq
 		/// <typeparam name="T">Mocked type.</typeparam>
 		/// <typeparam name="TProperty">Type of the property to verify. Typically omitted as it can 
 		/// be inferred from the expression's return type.</typeparam>
-		[Obsolete("Replaced by  VerifySet(Action, string)")]
-		public static void VerifySet<T, TProperty>(this Mock<T> mock, Expression<Func<T, TProperty>> expression, string failMessage)
-			where T : class
-		{
-			Mock.VerifySet(mock, expression, Times.AtLeastOnce(), failMessage);
-		}
+        [Obsolete("Replaced by  VerifySet(Action, string)")]
+        public static void VerifySet<T, TProperty>(
+            this Mock<T> mock,
+            Expression<Func<T, TProperty>> expression,
+            string failMessage
+        ) where T : class
+        {
+            Mock.VerifySet(mock, expression, Times.AtLeastOnce(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Verifies that a property has been set on the mock, regardless 
 		/// of the value but only the specified number of times.
 		/// </summary>
@@ -135,14 +142,17 @@ namespace Moq
 		/// <param name="expression">Expression to verify.</param>
 		/// <typeparam name="TProperty">Type of the property to verify. Typically omitted as it can 
 		/// be inferred from the expression's return type.</typeparam>
-		[Obsolete("Replaced by  VerifySet(Action, Times)")]
-		public static void VerifySet<T, TProperty>(this Mock<T> mock, Expression<Func<T, TProperty>> expression, Times times)
-			where T : class
-		{
-			Mock.VerifySet(mock, expression, times, null);
-		}
+        [Obsolete("Replaced by  VerifySet(Action, Times)")]
+        public static void VerifySet<T, TProperty>(
+            this Mock<T> mock,
+            Expression<Func<T, TProperty>> expression,
+            Times times
+        ) where T : class
+        {
+            Mock.VerifySet(mock, expression, times, null);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Verifies that a property has been set on the mock, regardless 
 		/// of the value but only the specified number of times, and specifying a failure  
 		/// error message. 
@@ -169,11 +179,15 @@ namespace Moq
 		/// <param name="expression">Expression to verify.</param>
 		/// <typeparam name="TProperty">Type of the property to verify. Typically omitted as it can 
 		/// be inferred from the expression's return type.</typeparam>
-		[Obsolete("Replaced by  VerifySet(Action, Times, string)")]
-		public static void VerifySet<T, TProperty>(this Mock<T> mock, Expression<Func<T, TProperty>> expression, Times times, string failMessage)
-			where T : class
-		{
-			Mock.VerifySet(mock, expression, times, failMessage);
-		}
-	}
+        [Obsolete("Replaced by  VerifySet(Action, Times, string)")]
+        public static void VerifySet<T, TProperty>(
+            this Mock<T> mock,
+            Expression<Func<T, TProperty>> expression,
+            Times times,
+            string failMessage
+        ) where T : class
+        {
+            Mock.VerifySet(mock, expression, times, failMessage);
+        }
+    }
 }

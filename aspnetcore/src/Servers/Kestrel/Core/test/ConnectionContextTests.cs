@@ -16,12 +16,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             ConnectionAbortedException ex = null;
 
             mockConnectionContext.Setup(c => c.Abort(It.IsAny<ConnectionAbortedException>()))
-                                 .Callback<ConnectionAbortedException>(abortReason => ex = abortReason);
+                .Callback<ConnectionAbortedException>(abortReason => ex = abortReason);
 
             mockConnectionContext.Object.Abort();
 
             Assert.NotNull(ex);
-            Assert.Equal("The connection was aborted by the application via ConnectionContext.Abort().", ex.Message);
+            Assert.Equal(
+                "The connection was aborted by the application via ConnectionContext.Abort().",
+                ex.Message
+            );
         }
     }
 }

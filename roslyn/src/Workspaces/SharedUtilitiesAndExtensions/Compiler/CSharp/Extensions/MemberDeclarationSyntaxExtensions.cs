@@ -16,20 +16,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class MemberDeclarationSyntaxExtensions
     {
-        private static readonly ConditionalWeakTable<MemberDeclarationSyntax, Dictionary<string, ImmutableArray<SyntaxToken>>> s_declarationCache =
-            new();
-        private static readonly ConditionalWeakTable<MemberDeclarationSyntax, Dictionary<string, ImmutableArray<SyntaxToken>>>.CreateValueCallback s_createLocalDeclarationMap = CreateLocalDeclarationMap;
+        private static readonly ConditionalWeakTable<
+            MemberDeclarationSyntax,
+            Dictionary<string, ImmutableArray<SyntaxToken>>
+        > s_declarationCache = new();
+        private static readonly ConditionalWeakTable<
+            MemberDeclarationSyntax,
+            Dictionary<string, ImmutableArray<SyntaxToken>>
+        >.CreateValueCallback s_createLocalDeclarationMap = CreateLocalDeclarationMap;
 
-        public static LocalDeclarationMap GetLocalDeclarationMap(this MemberDeclarationSyntax member)
+        public static LocalDeclarationMap GetLocalDeclarationMap(
+            this MemberDeclarationSyntax member
+        )
         {
             var result = s_declarationCache.GetValue(member, s_createLocalDeclarationMap);
             return new LocalDeclarationMap(result);
         }
 
-        private static Dictionary<string, ImmutableArray<SyntaxToken>> CreateLocalDeclarationMap(MemberDeclarationSyntax member)
+        private static Dictionary<string, ImmutableArray<SyntaxToken>> CreateLocalDeclarationMap(
+            MemberDeclarationSyntax member
+        )
         {
             var dictionary = DeclarationFinder.GetAllDeclarations(member);
-            return dictionary.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.AsImmutable<SyntaxToken>());
+            return dictionary.ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value.AsImmutable<SyntaxToken>()
+            );
         }
 
         public static SyntaxToken GetNameToken(this MemberDeclarationSyntax member)
@@ -48,9 +60,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     case SyntaxKind.DelegateDeclaration:
                         return ((DelegateDeclarationSyntax)member).Identifier;
                     case SyntaxKind.FieldDeclaration:
-                        return ((FieldDeclarationSyntax)member).Declaration.Variables.First().Identifier;
+                        return (
+                            (FieldDeclarationSyntax)member
+                        ).Declaration.Variables.First().Identifier;
                     case SyntaxKind.EventFieldDeclaration:
-                        return ((EventFieldDeclarationSyntax)member).Declaration.Variables.First().Identifier;
+                        return (
+                            (EventFieldDeclarationSyntax)member
+                        ).Declaration.Variables.First().Identifier;
                     case SyntaxKind.PropertyDeclaration:
                         return ((PropertyDeclarationSyntax)member).Identifier;
                     case SyntaxKind.EventDeclaration:
@@ -93,7 +109,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return 0;
         }
 
-        public static TypeParameterListSyntax GetTypeParameterList(this MemberDeclarationSyntax member)
+        public static TypeParameterListSyntax GetTypeParameterList(
+            this MemberDeclarationSyntax member
+        )
         {
             if (member != null)
             {
@@ -142,24 +160,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static MemberDeclarationSyntax WithParameterList(
             this MemberDeclarationSyntax member,
-            BaseParameterListSyntax parameterList)
+            BaseParameterListSyntax parameterList
+        )
         {
             if (member != null)
             {
                 switch (member.Kind())
                 {
                     case SyntaxKind.DelegateDeclaration:
-                        return ((DelegateDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((DelegateDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.MethodDeclaration:
-                        return ((MethodDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((MethodDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.ConstructorDeclaration:
-                        return ((ConstructorDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((ConstructorDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.IndexerDeclaration:
-                        return ((IndexerDeclarationSyntax)member).WithParameterList((BracketedParameterListSyntax)parameterList);
+                        return ((IndexerDeclarationSyntax)member).WithParameterList(
+                            (BracketedParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.OperatorDeclaration:
-                        return ((OperatorDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((OperatorDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        return ((ConversionOperatorDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((ConversionOperatorDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                 }
             }
 
@@ -168,14 +199,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static MemberDeclarationSyntax AddAttributeLists(
             this MemberDeclarationSyntax member,
-            params AttributeListSyntax[] attributeLists)
+            params AttributeListSyntax[] attributeLists
+        )
         {
             return member.WithAttributeLists(member.GetAttributes().AddRange(attributeLists));
         }
 
         public static MemberDeclarationSyntax WithAttributeLists(
             this MemberDeclarationSyntax member,
-            SyntaxList<AttributeListSyntax> attributeLists)
+            SyntaxList<AttributeListSyntax> attributeLists
+        )
         {
             if (member != null)
             {
@@ -184,32 +217,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     case SyntaxKind.EnumDeclaration:
                         return ((EnumDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.EnumMemberDeclaration:
-                        return ((EnumMemberDeclarationSyntax)member).WithAttributeLists(attributeLists);
+                        return ((EnumMemberDeclarationSyntax)member).WithAttributeLists(
+                            attributeLists
+                        );
                     case SyntaxKind.ClassDeclaration:
                     case SyntaxKind.RecordDeclaration:
                     case SyntaxKind.InterfaceDeclaration:
                     case SyntaxKind.StructDeclaration:
                         return ((TypeDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.DelegateDeclaration:
-                        return ((DelegateDeclarationSyntax)member).WithAttributeLists(attributeLists);
+                        return ((DelegateDeclarationSyntax)member).WithAttributeLists(
+                            attributeLists
+                        );
                     case SyntaxKind.FieldDeclaration:
                         return ((FieldDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.EventFieldDeclaration:
-                        return ((EventFieldDeclarationSyntax)member).WithAttributeLists(attributeLists);
+                        return ((EventFieldDeclarationSyntax)member).WithAttributeLists(
+                            attributeLists
+                        );
                     case SyntaxKind.ConstructorDeclaration:
-                        return ((ConstructorDeclarationSyntax)member).WithAttributeLists(attributeLists);
+                        return ((ConstructorDeclarationSyntax)member).WithAttributeLists(
+                            attributeLists
+                        );
                     case SyntaxKind.DestructorDeclaration:
-                        return ((DestructorDeclarationSyntax)member).WithAttributeLists(attributeLists);
+                        return ((DestructorDeclarationSyntax)member).WithAttributeLists(
+                            attributeLists
+                        );
                     case SyntaxKind.PropertyDeclaration:
-                        return ((PropertyDeclarationSyntax)member).WithAttributeLists(attributeLists);
+                        return ((PropertyDeclarationSyntax)member).WithAttributeLists(
+                            attributeLists
+                        );
                     case SyntaxKind.EventDeclaration:
                         return ((EventDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.IndexerDeclaration:
-                        return ((IndexerDeclarationSyntax)member).WithAttributeLists(attributeLists);
+                        return ((IndexerDeclarationSyntax)member).WithAttributeLists(
+                            attributeLists
+                        );
                     case SyntaxKind.OperatorDeclaration:
-                        return ((OperatorDeclarationSyntax)member).WithAttributeLists(attributeLists);
+                        return ((OperatorDeclarationSyntax)member).WithAttributeLists(
+                            attributeLists
+                        );
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        return ((ConversionOperatorDeclarationSyntax)member).WithAttributeLists(attributeLists);
+                        return ((ConversionOperatorDeclarationSyntax)member).WithAttributeLists(
+                            attributeLists
+                        );
                     case SyntaxKind.MethodDeclaration:
                         return ((MethodDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.IncompleteMember:
@@ -288,7 +339,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return null;
         }
 
-        public static ArrowExpressionClauseSyntax GetExpressionBody(this MemberDeclarationSyntax memberDeclaration)
+        public static ArrowExpressionClauseSyntax GetExpressionBody(
+            this MemberDeclarationSyntax memberDeclaration
+        )
         {
             switch (memberDeclaration?.Kind())
             {
@@ -313,7 +366,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static MemberDeclarationSyntax WithBody(
             this MemberDeclarationSyntax memberDeclaration,
-            BlockSyntax body)
+            BlockSyntax body
+        )
         {
             if (memberDeclaration != null)
             {
@@ -324,7 +378,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     case SyntaxKind.OperatorDeclaration:
                         return ((OperatorDeclarationSyntax)memberDeclaration).WithBody(body);
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        return ((ConversionOperatorDeclarationSyntax)memberDeclaration).WithBody(body);
+                        return ((ConversionOperatorDeclarationSyntax)memberDeclaration).WithBody(
+                            body
+                        );
                     case SyntaxKind.ConstructorDeclaration:
                         return ((ConstructorDeclarationSyntax)memberDeclaration).WithBody(body);
                     case SyntaxKind.DestructorDeclaration:

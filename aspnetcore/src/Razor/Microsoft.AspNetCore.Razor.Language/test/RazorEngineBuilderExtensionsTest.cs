@@ -15,13 +15,17 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var expected = new DefaultRazorDirectiveFeature();
-            var engine = RazorEngine.CreateEmpty(b =>
-            {
-                b.Features.Add(expected);
+            var engine = RazorEngine.CreateEmpty(
+                b =>
+                {
+                    b.Features.Add(expected);
 
-                // Act
-                b.AddDirective(DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine));
-            });
+                    // Act
+                    b.AddDirective(
+                        DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)
+                    );
+                }
+            );
 
             // Assert
             var actual = Assert.Single(engine.Features.OfType<IRazorDirectiveFeature>());
@@ -35,11 +39,15 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void AddDirective_NoFeature_CreatesFeature()
         {
             // Arrange
-            var engine = RazorEngine.CreateEmpty(b =>
-            {
-                // Act
-                b.AddDirective(DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine));
-            });
+            var engine = RazorEngine.CreateEmpty(
+                b =>
+                {
+                    // Act
+                    b.AddDirective(
+                        DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)
+                    );
+                }
+            );
 
             // Assert
             var actual = Assert.Single(engine.Features.OfType<IRazorDirectiveFeature>());
@@ -56,13 +64,15 @@ namespace Microsoft.AspNetCore.Razor.Language
             var extension = new MyTargetExtension();
 
             var expected = new DefaultRazorTargetExtensionFeature();
-            var engine = RazorEngine.CreateEmpty(b =>
-            {
-                b.Features.Add(expected);
+            var engine = RazorEngine.CreateEmpty(
+                b =>
+                {
+                    b.Features.Add(expected);
 
-                // Act
-                b.AddTargetExtension(extension);
-            });
+                    // Act
+                    b.AddTargetExtension(extension);
+                }
+            );
 
             // Assert
             var actual = Assert.Single(engine.Features.OfType<IRazorTargetExtensionFeature>());
@@ -77,11 +87,13 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var extension = new MyTargetExtension();
 
-            var engine = RazorEngine.CreateEmpty(b =>
-            {
-                // Act
-                b.AddTargetExtension(extension);
-            });
+            var engine = RazorEngine.CreateEmpty(
+                b =>
+                {
+                    // Act
+                    b.AddTargetExtension(extension);
+                }
+            );
 
             // Assert
             var actual = Assert.Single(engine.Features.OfType<IRazorTargetExtensionFeature>());

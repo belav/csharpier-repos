@@ -31,7 +31,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="claims">The collection of <see cref="Claim"/>s to add.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task AddClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken);
+        Task AddClaimsAsync(
+            TUser user,
+            IEnumerable<Claim> claims,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Replaces the given <paramref name="claim"/> on the specified <paramref name="user"/> with the <paramref name="newClaim"/>
@@ -41,7 +45,12 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="newClaim">The new claim to replace the existing <paramref name="claim"/> with.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task ReplaceClaimAsync(TUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken);
+        Task ReplaceClaimAsync(
+            TUser user,
+            Claim claim,
+            Claim newClaim,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Removes the specified <paramref name="claims"/> from the given <paramref name="user"/>.
@@ -50,7 +59,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="claims">A collection of <see cref="Claim"/>s to remove.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task RemoveClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken);
+        Task RemoveClaimsAsync(
+            TUser user,
+            IEnumerable<Claim> claims,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns a list of users who contain the specified <see cref="Claim"/>.

@@ -32,9 +32,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         }
 
         /// <inheritdoc />
-        public void OnProvidersExecuted(FilterProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(FilterProviderContext context) { }
 
         public void ProvideFilter(FilterProviderContext context, FilterItem filterItem)
         {
@@ -58,9 +56,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
                 if (filterItem.Filter == null)
                 {
-                    throw new InvalidOperationException(Resources.FormatTypeMethodMustReturnNotNullValue(
-                        "CreateInstance",
-                        typeof(IFilterFactory).Name));
+                    throw new InvalidOperationException(
+                        Resources.FormatTypeMethodMustReturnNotNullValue(
+                            "CreateInstance",
+                            typeof(IFilterFactory).Name
+                        )
+                    );
                 }
 
                 ApplyFilterToContainer(filterItem.Filter, filterFactory);

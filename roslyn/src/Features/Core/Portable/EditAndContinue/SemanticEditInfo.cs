@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SymbolKey symbol,
             Func<SyntaxNode, SyntaxNode?>? syntaxMap,
             SyntaxTree? syntaxMapTree,
-            SymbolKey? partialType)
+            SymbolKey? partialType
+        )
         {
             Kind = kind;
             Symbol = symbol;

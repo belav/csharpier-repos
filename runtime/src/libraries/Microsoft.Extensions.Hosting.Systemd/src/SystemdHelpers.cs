@@ -20,8 +20,8 @@ namespace Microsoft.Extensions.Hosting.Systemd
         /// Check if the current process is hosted as a systemd Service.
         /// </summary>
         /// <returns><c>True</c> if the current process is hosted as a systemd Service, otherwise <c>false</c>.</returns>
-        public static bool IsSystemdService()
-            => _isSystemdService ?? (bool)(_isSystemdService = CheckParentIsSystemd());
+        public static bool IsSystemdService() =>
+            _isSystemdService ?? (bool)(_isSystemdService = CheckParentIsSystemd());
 
         private static bool CheckParentIsSystemd()
         {
@@ -39,9 +39,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
                 byte[] comm = File.ReadAllBytes("/proc/" + ppidString + "/comm");
                 return comm.AsSpan().SequenceEqual(Encoding.ASCII.GetBytes("systemd\n"));
             }
-            catch
-            {
-            }
+            catch { }
 
             return false;
         }

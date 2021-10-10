@@ -31,7 +31,9 @@ namespace BasicWebSite.Controllers.ContentNegotiation
                 var result = context.Result as ObjectResult;
                 if (result != null)
                 {
-                    result.Formatters.Add(new CustomFormatter("application/FormatFilterController"));
+                    result.Formatters.Add(
+                        new CustomFormatter("application/FormatFilterController")
+                    );
                 }
             }
         }
@@ -41,5 +43,4 @@ namespace BasicWebSite.Controllers.ContentNegotiation
             public string Name { get; set; }
         }
     }
-
 }

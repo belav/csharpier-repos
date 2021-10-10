@@ -44,7 +44,9 @@ namespace System.Runtime.Serialization.Json
                             }
                             else
                             {
-                                tempDelegate = new JsonFormatReaderGenerator().GenerateClassReader(TraditionalClassDataContract);
+                                tempDelegate = new JsonFormatReaderGenerator().GenerateClassReader(
+                                    TraditionalClassDataContract
+                                );
                             }
 
                             Interlocked.MemoryBarrier();
@@ -79,7 +81,9 @@ namespace System.Runtime.Serialization.Json
                             }
                             else
                             {
-                                tempDelegate = new JsonFormatWriterGenerator().GenerateClassWriter(TraditionalClassDataContract);
+                                tempDelegate = new JsonFormatWriterGenerator().GenerateClassWriter(
+                                    TraditionalClassDataContract
+                                );
                             }
 
                             Interlocked.MemoryBarrier();
@@ -95,23 +99,48 @@ namespace System.Runtime.Serialization.Json
 
         internal override string TypeName => _helper.TypeName;
 
-        private ClassDataContract TraditionalClassDataContract => _helper.TraditionalClassDataContract;
+        private ClassDataContract TraditionalClassDataContract =>
+            _helper.TraditionalClassDataContract;
 
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
-        public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
+        public override object? ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson? context
+        )
         {
             jsonReader.Read();
-            object o = JsonFormatReaderDelegate(jsonReader, context, XmlDictionaryString.Empty, MemberNames);
+            object o = JsonFormatReaderDelegate(
+                jsonReader,
+                context,
+                XmlDictionaryString.Empty,
+                MemberNames
+            );
             jsonReader.ReadEndElement();
             return o;
         }
 
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
-        public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson? context, RuntimeTypeHandle declaredTypeHandle)
+        public override void WriteJsonValueCore(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson? context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
             Debug.Assert(context != null);
-            jsonWriter.WriteAttributeString(null, JsonGlobals.typeString, null, JsonGlobals.objectString);
-            JsonFormatWriterDelegate(jsonWriter, obj, context, TraditionalClassDataContract, MemberNames);
+            jsonWriter.WriteAttributeString(
+                null,
+                JsonGlobals.typeString,
+                null,
+                JsonGlobals.objectString
+            );
+            JsonFormatWriterDelegate(
+                jsonWriter,
+                obj,
+                context,
+                TraditionalClassDataContract,
+                MemberNames
+            );
         }
 
         private sealed class JsonClassDataContractCriticalHelper : JsonDataContractCriticalHelper
@@ -126,7 +155,15 @@ namespace System.Runtime.Serialization.Json
             public JsonClassDataContractCriticalHelper(ClassDataContract traditionalDataContract)
                 : base(traditionalDataContract)
             {
-                _typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value) ? traditionalDataContract.Name.Value : string.Concat(traditionalDataContract.Name.Value, JsonGlobals.NameValueSeparatorString, XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(traditionalDataContract.Namespace.Value));
+                _typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value)
+                    ? traditionalDataContract.Name.Value
+                    : string.Concat(
+                          traditionalDataContract.Name.Value,
+                          JsonGlobals.NameValueSeparatorString,
+                          XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(
+                              traditionalDataContract.Namespace.Value
+                          )
+                      );
                 _traditionalClassDataContract = traditionalDataContract;
                 CopyMembersAndCheckDuplicateNames();
             }
@@ -158,18 +195,38 @@ namespace System.Runtime.Serialization.Json
                 if (_traditionalClassDataContract.MemberNames != null)
                 {
                     int memberCount = _traditionalClassDataContract.MemberNames.Length;
-                    Dictionary<string, object?> memberTable = new Dictionary<string, object?>(memberCount);
+                    Dictionary<string, object?> memberTable = new Dictionary<string, object?>(
+                        memberCount
+                    );
                     XmlDictionaryString[] decodedMemberNames = new XmlDictionaryString[memberCount];
                     for (int i = 0; i < memberCount; i++)
                     {
-                        if (memberTable.ContainsKey(_traditionalClassDataContract.MemberNames[i].Value))
+                        if (
+                            memberTable.ContainsKey(
+                                _traditionalClassDataContract.MemberNames[i].Value
+                            )
+                        )
                         {
-                            throw new SerializationException(SR.Format(SR.JsonDuplicateMemberNames, DataContract.GetClrTypeFullName(_traditionalClassDataContract.UnderlyingType), _traditionalClassDataContract.MemberNames[i].Value));
+                            throw new SerializationException(
+                                SR.Format(
+                                    SR.JsonDuplicateMemberNames,
+                                    DataContract.GetClrTypeFullName(
+                                        _traditionalClassDataContract.UnderlyingType
+                                    ),
+                                    _traditionalClassDataContract.MemberNames[i].Value
+                                )
+                            );
                         }
                         else
                         {
-                            memberTable.Add(_traditionalClassDataContract.MemberNames[i].Value, null);
-                            decodedMemberNames[i] = DataContractJsonSerializerImpl.ConvertXmlNameToJsonName(_traditionalClassDataContract.MemberNames[i]);
+                            memberTable.Add(
+                                _traditionalClassDataContract.MemberNames[i].Value,
+                                null
+                            );
+                            decodedMemberNames[i] =
+                                DataContractJsonSerializerImpl.ConvertXmlNameToJsonName(
+                                    _traditionalClassDataContract.MemberNames[i]
+                                );
                         }
                     }
                     _memberNames = decodedMemberNames;

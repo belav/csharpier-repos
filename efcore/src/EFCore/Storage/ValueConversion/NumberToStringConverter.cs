@@ -17,19 +17,18 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
         ///     facets for the converted data.
         /// </param>
-        public NumberToStringConverter(
-            ConverterMappingHints? mappingHints = null)
-            : base(
-                ToString(),
-                ToNumber(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+        public NumberToStringConverter(ConverterMappingHints? mappingHints = null)
+            : base(ToString(), ToNumber(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(TNumber), typeof(string), i => new NumberToStringConverter<TNumber>(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(TNumber),
+                typeof(string),
+                i => new NumberToStringConverter<TNumber>(i.MappingHints),
+                _defaultHints
+            );
     }
 }

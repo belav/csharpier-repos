@@ -46,13 +46,16 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Assert.False(CacheableKeyRing.IsValid(cacheableKeyRing, now.AddHours(1).UtcDateTime));
         }
 
-
         [Fact]
         public void KeyRing_Prop()
         {
             // Arrange
             var keyRing = new Mock<IKeyRing>().Object;
-            var cacheableKeyRing = new CacheableKeyRing(CancellationToken.None, DateTimeOffset.Now, keyRing);
+            var cacheableKeyRing = new CacheableKeyRing(
+                CancellationToken.None,
+                DateTimeOffset.Now,
+                keyRing
+            );
 
             // Act & assert
             Assert.Same(keyRing, cacheableKeyRing.KeyRing);

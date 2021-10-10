@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
         {
             get
             {
-                var annotation = GetAnnotations().FirstOrDefault(n => n.Kind == DirectiveDescriptorKey);
+                var annotation = GetAnnotations()
+                    .FirstOrDefault(n => n.Kind == DirectiveDescriptorKey);
                 return annotation?.Data as DirectiveDescriptor;
             }
         }

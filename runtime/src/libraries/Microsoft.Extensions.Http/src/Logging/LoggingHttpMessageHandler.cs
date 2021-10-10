@@ -43,20 +43,25 @@ namespace Microsoft.Extensions.Http.Logging
             _options = options;
         }
 
-        protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected async override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            Func<string, bool> shouldRedactHeaderValue = _options?.ShouldRedactHeaderValue ?? _shouldNotRedactHeaderValue;
+            Func<string, bool> shouldRedactHeaderValue =
+                _options?.ShouldRedactHeaderValue ?? _shouldNotRedactHeaderValue;
 
             // Not using a scope here because we always expect this to be at the end of the pipeline, thus there's
             // not really anything to surround.
             Log.RequestStart(_logger, request, shouldRedactHeaderValue);
             var stopwatch = ValueStopwatch.StartNew();
-            HttpResponseMessage response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            HttpResponseMessage response = await base.SendAsync(request, cancellationToken)
+                .ConfigureAwait(false);
             Log.RequestEnd(_logger, response, stopwatch.GetElapsedTime(), shouldRedactHeaderValue);
 
             return response;
@@ -74,17 +79,25 @@ namespace Microsoft.Extensions.Http.Logging
                 public static readonly EventId ResponseHeader = new EventId(103, "ResponseHeader");
             }
 
-            private static readonly Action<ILogger, HttpMethod, Uri, Exception> _requestStart = LoggerMessage.Define<HttpMethod, Uri>(
-                LogLevel.Information,
-                EventIds.RequestStart,
-                "Sending HTTP request {HttpMethod} {Uri}");
+            private static readonly Action<ILogger, HttpMethod, Uri, Exception> _requestStart =
+                LoggerMessage.Define<HttpMethod, Uri>(
+                    LogLevel.Information,
+                    EventIds.RequestStart,
+                    "Sending HTTP request {HttpMethod} {Uri}"
+                );
 
-            private static readonly Action<ILogger, double, int, Exception> _requestEnd = LoggerMessage.Define<double, int>(
-                LogLevel.Information,
-                EventIds.RequestEnd,
-                "Received HTTP response headers after {ElapsedMilliseconds}ms - {StatusCode}");
+            private static readonly Action<ILogger, double, int, Exception> _requestEnd =
+                LoggerMessage.Define<double, int>(
+                    LogLevel.Information,
+                    EventIds.RequestEnd,
+                    "Received HTTP response headers after {ElapsedMilliseconds}ms - {StatusCode}"
+                );
 
-            public static void RequestStart(ILogger logger, HttpRequestMessage request, Func<string, bool> shouldRedactHeaderValue)
+            public static void RequestStart(
+                ILogger logger,
+                HttpRequestMessage request,
+                Func<string, bool> shouldRedactHeaderValue
+            )
             {
                 _requestStart(logger, request.Method, request.RequestUri, null);
 
@@ -93,13 +106,24 @@ namespace Microsoft.Extensions.Http.Logging
                     logger.Log(
                         LogLevel.Trace,
                         EventIds.RequestHeader,
-                        new HttpHeadersLogValue(HttpHeadersLogValue.Kind.Request, request.Headers, request.Content?.Headers, shouldRedactHeaderValue),
+                        new HttpHeadersLogValue(
+                            HttpHeadersLogValue.Kind.Request,
+                            request.Headers,
+                            request.Content?.Headers,
+                            shouldRedactHeaderValue
+                        ),
                         null,
-                        (state, ex) => state.ToString());
+                        (state, ex) => state.ToString()
+                    );
                 }
             }
 
-            public static void RequestEnd(ILogger logger, HttpResponseMessage response, TimeSpan duration, Func<string, bool> shouldRedactHeaderValue)
+            public static void RequestEnd(
+                ILogger logger,
+                HttpResponseMessage response,
+                TimeSpan duration,
+                Func<string, bool> shouldRedactHeaderValue
+            )
             {
                 _requestEnd(logger, duration.TotalMilliseconds, (int)response.StatusCode, null);
 
@@ -108,9 +132,15 @@ namespace Microsoft.Extensions.Http.Logging
                     logger.Log(
                         LogLevel.Trace,
                         EventIds.ResponseHeader,
-                        new HttpHeadersLogValue(HttpHeadersLogValue.Kind.Response, response.Headers, response.Content?.Headers, shouldRedactHeaderValue),
+                        new HttpHeadersLogValue(
+                            HttpHeadersLogValue.Kind.Response,
+                            response.Headers,
+                            response.Content?.Headers,
+                            shouldRedactHeaderValue
+                        ),
                         null,
-                        (state, ex) => state.ToString());
+                        (state, ex) => state.ToString()
+                    );
                 }
             }
         }

@@ -14,12 +14,12 @@ namespace System.Xml
     /// </summary>
     internal sealed class XmlEventCache : XmlRawWriter
     {
-        private List<XmlEvent[]>? _pages;     // All event pages
-        private XmlEvent[]? _pageCurr;        // Page that is currently being built
-        private int _pageSize;               // Number of events in pageCurr
-        private readonly bool _hasRootNode;           // True if the cached document has a root node, false if it's a fragment
-        private StringConcat _singleText;    // If document consists of a single text node, cache it here rather than creating pages
-        private readonly string _baseUri;             // Base Uri of document
+        private List<XmlEvent[]>? _pages; // All event pages
+        private XmlEvent[]? _pageCurr; // Page that is currently being built
+        private int _pageSize; // Number of events in pageCurr
+        private readonly bool _hasRootNode; // True if the cached document has a root node, false if it's a fragment
+        private StringConcat _singleText; // If document consists of a single text node, cache it here rather than creating pages
+        private readonly string _baseUri; // Base Uri of document
 
         private enum XmlEventType
         {
@@ -69,7 +69,6 @@ namespace System.Xml
                 AddEvent(XmlEventType.Unknown);
         }
 
-
         //-----------------------------------------------
         // XmlEventCache methods
         //-----------------------------------------------
@@ -96,7 +95,8 @@ namespace System.Xml
         public void EventsToWriter(XmlWriter writer)
         {
             XmlEvent[] page;
-            int idxPage, idxEvent;
+            int idxPage,
+                idxEvent;
             byte[] bytes;
             char[] chars;
             XmlRawWriter? rawWriter;
@@ -126,15 +126,28 @@ namespace System.Xml
                             return;
 
                         case XmlEventType.DocType:
-                            writer.WriteDocType(page[idxEvent].String1!, page[idxEvent].String2, page[idxEvent].String3, (string?)page[idxEvent].Object);
+                            writer.WriteDocType(
+                                page[idxEvent].String1!,
+                                page[idxEvent].String2,
+                                page[idxEvent].String3,
+                                (string?)page[idxEvent].Object
+                            );
                             break;
 
                         case XmlEventType.StartElem:
-                            writer.WriteStartElement(page[idxEvent].String1, page[idxEvent].String2!, page[idxEvent].String3);
+                            writer.WriteStartElement(
+                                page[idxEvent].String1,
+                                page[idxEvent].String2!,
+                                page[idxEvent].String3
+                            );
                             break;
 
                         case XmlEventType.StartAttr:
-                            writer.WriteStartAttribute(page[idxEvent].String1, page[idxEvent].String2!, page[idxEvent].String3);
+                            writer.WriteStartAttribute(
+                                page[idxEvent].String1,
+                                page[idxEvent].String2!,
+                                page[idxEvent].String3
+                            );
                             break;
 
                         case XmlEventType.EndAttr:
@@ -150,7 +163,10 @@ namespace System.Xml
                             break;
 
                         case XmlEventType.PI:
-                            writer.WriteProcessingInstruction(page[idxEvent].String1!, page[idxEvent].String2);
+                            writer.WriteProcessingInstruction(
+                                page[idxEvent].String1!,
+                                page[idxEvent].String2
+                            );
                             break;
 
                         case XmlEventType.Whitespace:
@@ -190,7 +206,9 @@ namespace System.Xml
 
                         case XmlEventType.XmlDecl1:
                             if (rawWriter != null)
-                                rawWriter.WriteXmlDeclaration((XmlStandalone)page[idxEvent].Object!);
+                                rawWriter.WriteXmlDeclaration(
+                                    (XmlStandalone)page[idxEvent].Object!
+                                );
                             break;
 
                         case XmlEventType.XmlDecl2:
@@ -205,23 +223,39 @@ namespace System.Xml
 
                         case XmlEventType.EndElem:
                             if (rawWriter != null)
-                                rawWriter.WriteEndElement(page[idxEvent].String1!, page[idxEvent].String2!, page[idxEvent].String3!);
+                                rawWriter.WriteEndElement(
+                                    page[idxEvent].String1!,
+                                    page[idxEvent].String2!,
+                                    page[idxEvent].String3!
+                                );
                             else
                                 writer.WriteEndElement();
                             break;
 
                         case XmlEventType.FullEndElem:
                             if (rawWriter != null)
-                                rawWriter.WriteFullEndElement(page[idxEvent].String1!, page[idxEvent].String2!, page[idxEvent].String3!);
+                                rawWriter.WriteFullEndElement(
+                                    page[idxEvent].String1!,
+                                    page[idxEvent].String2!,
+                                    page[idxEvent].String3!
+                                );
                             else
                                 writer.WriteFullEndElement();
                             break;
 
                         case XmlEventType.Nmsp:
                             if (rawWriter != null)
-                                rawWriter.WriteNamespaceDeclaration(page[idxEvent].String1!, page[idxEvent].String2!);
+                                rawWriter.WriteNamespaceDeclaration(
+                                    page[idxEvent].String1!,
+                                    page[idxEvent].String2!
+                                );
                             else
-                                writer.WriteAttributeString("xmlns", page[idxEvent].String1!, XmlReservedNs.NsXmlNs, page[idxEvent].String2);
+                                writer.WriteAttributeString(
+                                    "xmlns",
+                                    page[idxEvent].String1!,
+                                    XmlReservedNs.NsXmlNs,
+                                    page[idxEvent].String2
+                                );
                             break;
 
                         case XmlEventType.EndBase64:
@@ -258,7 +292,8 @@ namespace System.Xml
         {
             StringBuilder bldr;
             XmlEvent[] page;
-            int idxPage, idxEvent;
+            int idxPage,
+                idxEvent;
             bool inAttr;
 
             // Special-case single text node at the top-level
@@ -308,7 +343,6 @@ namespace System.Xml
             Debug.Fail("Unknown event should be added to end of event sequence.");
             return string.Empty;
         }
-
 
         //-----------------------------------------------
         // XmlWriter interface
@@ -447,12 +481,12 @@ namespace System.Xml
                     AddEvent(XmlEventType.Dispose);
                 }
             }
+
             finally
             {
                 base.Dispose(disposing);
             }
         }
-
 
         //-----------------------------------------------
         // XmlRawWriter interface
@@ -492,7 +526,6 @@ namespace System.Xml
         {
             AddEvent(XmlEventType.EndBase64);
         }
-
 
         //-----------------------------------------------
         // Helper methods
@@ -580,7 +613,6 @@ namespace System.Xml
             return buffer;
         }
 
-
         /// <summary>
         /// Caches information for XML events like BeginElement, String, and EndAttribute so that they can be replayed later.
         /// </summary>
@@ -618,7 +650,13 @@ namespace System.Xml
                 _s3 = s3;
             }
 
-            public void InitEvent(XmlEventType eventType, string? s1, string? s2, string? s3, object? o)
+            public void InitEvent(
+                XmlEventType eventType,
+                string? s1,
+                string? s2,
+                string? s3,
+                object? o
+            )
             {
                 _eventType = eventType;
                 _s1 = s1;

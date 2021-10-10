@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         private readonly Func<int, int, ValueTask>? _updateAction;
 
-        public StreamingProgressTracker(Func<int, int, ValueTask>? updateAction = null)
-            => _updateAction = updateAction;
+        public StreamingProgressTracker(Func<int, int, ValueTask>? updateAction = null) =>
+            _updateAction = updateAction;
 
         public ValueTask AddItemsAsync(int count)
         {

@@ -12,7 +12,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class BuildReference
     {
-        private BuildReference(IEnumerable<MetadataReference> references, bool copyLocal = false, string path = null)
+        private BuildReference(
+            IEnumerable<MetadataReference> references,
+            bool copyLocal = false,
+            string path = null
+        )
         {
             References = references;
             CopyLocal = copyLocal;
@@ -26,22 +30,21 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public static BuildReference ByName(string name, bool copyLocal = false)
         {
-            var references = (from l in DependencyContext.Default.CompileLibraries
-                              from r in l.ResolveReferencePaths()
-                              where IOPath.GetFileNameWithoutExtension(r) == name
-                              select MetadataReference.CreateFromFile(r)).ToList();
+            var references = (
+                from l in DependencyContext.Default.CompileLibraries
+                from r in l.ResolveReferencePaths()
+                where IOPath.GetFileNameWithoutExtension(r) == name
+                select MetadataReference.CreateFromFile(r)
+            ).ToList();
             if (references.Count == 0)
             {
-                throw new InvalidOperationException(
-                    $"Assembly '{name}' not found.");
+                throw new InvalidOperationException($"Assembly '{name}' not found.");
             }
 
-            return new BuildReference(
-                references,
-                copyLocal);
+            return new BuildReference(references, copyLocal);
         }
 
-        public static BuildReference ByPath(string path)
-            => new(new[] { MetadataReference.CreateFromFile(path) }, path: path);
+        public static BuildReference ByPath(string path) =>
+            new(new[] { MetadataReference.CreateFromFile(path) }, path: path);
     }
 }

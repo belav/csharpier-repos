@@ -17,13 +17,16 @@ namespace Microsoft.CodeAnalysis.Rebuild
             var b = blobReader.ReadByte();
             if (b != '\0')
             {
-                throw new InvalidDataException($"Encountered unexpected byte \"{b}\" when expecting a null terminator");
+                throw new InvalidDataException(
+                    $"Encountered unexpected byte \"{b}\" when expecting a null terminator"
+                );
             }
         }
 
         public static MetadataReader? GetEmbeddedPdbMetadataReader(this PEReader peReader)
         {
-            var entry = peReader.ReadDebugDirectory().SingleOrDefault(x => x.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
+            var entry = peReader.ReadDebugDirectory()
+                .SingleOrDefault(x => x.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
             if (entry.Type == DebugDirectoryEntryType.Unknown)
             {
                 return null;

@@ -8,10 +8,12 @@ namespace BasicTestApp.ServerReliability
     {
         public void Attach(RenderHandle renderHandle)
         {
-            renderHandle.Render(builder =>
-            {
-                throw new InvalidTimeZoneException();
-            });
+            renderHandle.Render(
+                builder =>
+                {
+                    throw new InvalidTimeZoneException();
+                }
+            );
         }
 
         public Task SetParametersAsync(ParameterView parameters)

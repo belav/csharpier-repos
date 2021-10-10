@@ -77,10 +77,22 @@ class Program
             Assert.AreEqual(new GenClass1c<double>(4.13).ToStringEx(7), "4.13 7");
             Assert.AreEqual(new GenClass1c<int?>(9).ToString(), "9");
 
-            Assert.AreEqual(new GenClass2<DateTime, double>(dt, 3.1416).ToString(), dtString + " 3.1416");
-            Assert.AreEqual(new GenClass2<DateTime, double>(dt, 3.1416).ToStringEx(7, 8), dtString + " 3.1416 7 8");
-            Assert.AreEqual(new GenClass2<object, string>(new object(), "3.1416").ToString(), "System.Object 3.1416");
-            Assert.AreEqual(new GenClass2<object, string>(new object(), "3.1416").ToStringEx(7L, 8L), "System.Object 3.1416 7 8");
+            Assert.AreEqual(
+                new GenClass2<DateTime, double>(dt, 3.1416).ToString(),
+                dtString + " 3.1416"
+            );
+            Assert.AreEqual(
+                new GenClass2<DateTime, double>(dt, 3.1416).ToStringEx(7, 8),
+                dtString + " 3.1416 7 8"
+            );
+            Assert.AreEqual(
+                new GenClass2<object, string>(new object(), "3.1416").ToString(),
+                "System.Object 3.1416"
+            );
+            Assert.AreEqual(
+                new GenClass2<object, string>(new object(), "3.1416").ToStringEx(7L, 8L),
+                "System.Object 3.1416 7 8"
+            );
             Assert.AreEqual(GetString(7.0, 8.0), "7 8");
 
             var gen1a = new GenClass1a<object>();
@@ -92,23 +104,42 @@ class Program
             var gen1bLong = new GenClass1b<long>();
             Assert.AreEqual(gen1bInt.IsGenClass1a(gen1aInt).ToString(), "True");
             Assert.AreEqual(gen1bLong.IsGenClass1a(gen1aInt).ToString(), "False");
-            Assert.AreEqual(gen1bInt.AsGenClass1a(gen1aInt)?.ToString() ?? "null", gen1aInt.ToString());
+            Assert.AreEqual(
+                gen1bInt.AsGenClass1a(gen1aInt)?.ToString() ?? "null",
+                gen1aInt.ToString()
+            );
             Assert.AreEqual(gen1bLong.AsGenClass1a(gen1aInt)?.ToString() ?? "null", "null");
 
             var gen1aString = new GenClass1a<string>();
             var gen1b = new GenClass1b<string>();
             Assert.AreEqual(gen1b.IsGenClass1a(gen1aString).ToString(), "True");
-            Assert.AreEqual(gen1b.AsGenClass1a(gen1aString)?.ToString() ?? "null", gen1aString.ToString());
-            Assert.AreEqual(GenClass1a<string>.CallVirtual(gen1b), "GenClass1b`1[System.String].VirtualMethod");
-            Assert.AreEqual(GenClass1a<string>.CallInterface(gen1b), "GenClass1b`1[System.String].InterfaceMethod1");
-            Assert.AreEqual(GenClass1a<string>.CallInterface(gen1b, "Test").ToString(), "GenClass1b`1[System.String]");
+            Assert.AreEqual(
+                gen1b.AsGenClass1a(gen1aString)?.ToString() ?? "null",
+                gen1aString.ToString()
+            );
+            Assert.AreEqual(
+                GenClass1a<string>.CallVirtual(gen1b),
+                "GenClass1b`1[System.String].VirtualMethod"
+            );
+            Assert.AreEqual(
+                GenClass1a<string>.CallInterface(gen1b),
+                "GenClass1b`1[System.String].InterfaceMethod1"
+            );
+            Assert.AreEqual(
+                GenClass1a<string>.CallInterface(gen1b, "Test").ToString(),
+                "GenClass1b`1[System.String]"
+            );
 
             NormalClass n = new NormalClass();
             Assert.AreEqual(CallGenVirtMethod<int>(n).ToString(), "GenClass1a`1[System.Int32]");
             Assert.AreEqual(CallGenVirtMethod<int>(n, 42).ToString(), "System.Int32[]");
             Assert.AreEqual(CallGenVirtMethod<string>(n).ToString(), "GenClass1a`1[System.String]");
-            Assert.AreEqual(CallGenVirtMethod<string>(n, "forty-two").ToString(), "System.String[]");
+            Assert.AreEqual(
+                CallGenVirtMethod<string>(n, "forty-two").ToString(),
+                "System.String[]"
+            );
         }
+
         finally
         {
             CultureInfo.CurrentCulture = originalCultureInfo;
@@ -142,27 +173,72 @@ class Program
         var ol = new GenBase<object, long>();
 
         // GENERIC INTERFACE CALL AND CASTING TEST
-        Assert.AreEqual(mi.IFaceCallTest(mi), "IFaceCallTest = IFooFunc - GenBase`2[MyClass0,System.Int32]");
-        Assert.AreEqual(ol.IFaceCallTest(ol), "IFaceCallTest = IFooFunc - GenBase`2[System.Object,System.Int64]");
-        Assert.AreEqual(mi.IFaceCallTest(mi), "IFaceCallTest = IFooFunc - GenBase`2[MyClass0,System.Int32]");
+        Assert.AreEqual(
+            mi.IFaceCallTest(mi),
+            "IFaceCallTest = IFooFunc - GenBase`2[MyClass0,System.Int32]"
+        );
+        Assert.AreEqual(
+            ol.IFaceCallTest(ol),
+            "IFaceCallTest = IFooFunc - GenBase`2[System.Object,System.Int64]"
+        );
+        Assert.AreEqual(
+            mi.IFaceCallTest(mi),
+            "IFaceCallTest = IFooFunc - GenBase`2[MyClass0,System.Int32]"
+        );
 
         // LDTOKEN TEST
-        Assert.AreEqual(mi.LdTokenTest(), "LdTokenTest - System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]");
-        Assert.AreEqual(ol.LdTokenTest(), "LdTokenTest - System.Collections.Generic.Dictionary`2[System.Object,System.Int64]");
-        Assert.AreEqual(mi.LdTokenTest(), "LdTokenTest - System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]");
+        Assert.AreEqual(
+            mi.LdTokenTest(),
+            "LdTokenTest - System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]"
+        );
+        Assert.AreEqual(
+            ol.LdTokenTest(),
+            "LdTokenTest - System.Collections.Generic.Dictionary`2[System.Object,System.Int64]"
+        );
+        Assert.AreEqual(
+            mi.LdTokenTest(),
+            "LdTokenTest - System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]"
+        );
 
         // DICTIONARY ACCESS FROM STATIC METHOD
-        Assert.AreEqual(GenBase<MyClass0, int>.StaticNonGenMethod(), "StaticNonGenMethod - System.Collections.Generic.List`1[MyClass0]");
-        Assert.AreEqual(GenBase<object, long>.StaticNonGenMethod(), "StaticNonGenMethod - System.Collections.Generic.List`1[System.Object]");
-        Assert.AreEqual(GenBase<MyClass0, int>.StaticNonGenMethod(), "StaticNonGenMethod - System.Collections.Generic.List`1[MyClass0]");
-        Assert.AreEqual(GenBase<MyClass0, int>.StaticGenMethod<Type>(), "StaticGenMethod - System.Collections.Generic.Dictionary`2[System.Type,MyClass0]");
-        Assert.AreEqual(GenBase<object, long>.StaticGenMethod<Type>(), "StaticGenMethod - System.Collections.Generic.Dictionary`2[System.Type,System.Object]");
-        Assert.AreEqual(GenBase<MyClass0, int>.StaticGenMethod<Type>(), "StaticGenMethod - System.Collections.Generic.Dictionary`2[System.Type,MyClass0]");
+        Assert.AreEqual(
+            GenBase<MyClass0, int>.StaticNonGenMethod(),
+            "StaticNonGenMethod - System.Collections.Generic.List`1[MyClass0]"
+        );
+        Assert.AreEqual(
+            GenBase<object, long>.StaticNonGenMethod(),
+            "StaticNonGenMethod - System.Collections.Generic.List`1[System.Object]"
+        );
+        Assert.AreEqual(
+            GenBase<MyClass0, int>.StaticNonGenMethod(),
+            "StaticNonGenMethod - System.Collections.Generic.List`1[MyClass0]"
+        );
+        Assert.AreEqual(
+            GenBase<MyClass0, int>.StaticGenMethod<Type>(),
+            "StaticGenMethod - System.Collections.Generic.Dictionary`2[System.Type,MyClass0]"
+        );
+        Assert.AreEqual(
+            GenBase<object, long>.StaticGenMethod<Type>(),
+            "StaticGenMethod - System.Collections.Generic.Dictionary`2[System.Type,System.Object]"
+        );
+        Assert.AreEqual(
+            GenBase<MyClass0, int>.StaticGenMethod<Type>(),
+            "StaticGenMethod - System.Collections.Generic.Dictionary`2[System.Type,MyClass0]"
+        );
 
         // NEW TEST
-        Assert.AreEqual(mi.NewTest(), "NewTest - MyClass0 - MyGenClass1`1[MyClass0] - MyClass0[] - MyClass0[,] - MyGenClass3`1[MyClass0][] - MyGenClass3`1[MyClass0][,]");
-        Assert.AreEqual(ol.NewTest(), "NewTest - System.Object - MyGenClass1`1[System.Object] - System.Object[] - System.Object[,] - MyGenClass3`1[System.Object][] - MyGenClass3`1[System.Object][,]");
-        Assert.AreEqual(mi.NewTest(), "NewTest - MyClass0 - MyGenClass1`1[MyClass0] - MyClass0[] - MyClass0[,] - MyGenClass3`1[MyClass0][] - MyGenClass3`1[MyClass0][,]");
+        Assert.AreEqual(
+            mi.NewTest(),
+            "NewTest - MyClass0 - MyGenClass1`1[MyClass0] - MyClass0[] - MyClass0[,] - MyGenClass3`1[MyClass0][] - MyGenClass3`1[MyClass0][,]"
+        );
+        Assert.AreEqual(
+            ol.NewTest(),
+            "NewTest - System.Object - MyGenClass1`1[System.Object] - System.Object[] - System.Object[,] - MyGenClass3`1[System.Object][] - MyGenClass3`1[System.Object][,]"
+        );
+        Assert.AreEqual(
+            mi.NewTest(),
+            "NewTest - MyClass0 - MyGenClass1`1[MyClass0] - MyClass0[] - MyClass0[,] - MyGenClass3`1[MyClass0][] - MyGenClass3`1[MyClass0][,]"
+        );
     }
 
     static void RunTest4()
@@ -170,25 +246,109 @@ class Program
         // FIELDS TEST
         var fobj1 = new GenBase<MyIdClass0, int>();
         var fobj2 = new GenBase<MyIdClass1, int>();
-        GenBase<MyIdClass0, int>.SetFieldsTest(fobj1, new MyIdClass0("1"), new MyIdClass0("2"), new MyIdClass0("3"), 1, 2, 3);
-        GenBase<MyIdClass1, int>.SetFieldsTest(fobj2, new MyIdClass1("1"), new MyIdClass1("2"), new MyIdClass1("3"), 1, 2, 3);
+        GenBase<MyIdClass0, int>.SetFieldsTest(
+            fobj1,
+            new MyIdClass0("1"),
+            new MyIdClass0("2"),
+            new MyIdClass0("3"),
+            1,
+            2,
+            3
+        );
+        GenBase<MyIdClass1, int>.SetFieldsTest(
+            fobj2,
+            new MyIdClass1("1"),
+            new MyIdClass1("2"),
+            new MyIdClass1("3"),
+            1,
+            2,
+            3
+        );
 
-        GenBase<MyIdClass0, int>.GetFieldsTest(fobj1, "MyIdClass0=1", "MyIdClass0=2", "MyIdClass0=3", 1, 2, 3);
-        GenBase<MyIdClass1, int>.GetFieldsTest(fobj2, "MyIdClass1=1", "MyIdClass1=2", "MyIdClass1=3", 1, 2, 3);
+        GenBase<MyIdClass0, int>.GetFieldsTest(
+            fobj1,
+            "MyIdClass0=1",
+            "MyIdClass0=2",
+            "MyIdClass0=3",
+            1,
+            2,
+            3
+        );
+        GenBase<MyIdClass1, int>.GetFieldsTest(
+            fobj2,
+            "MyIdClass1=1",
+            "MyIdClass1=2",
+            "MyIdClass1=3",
+            1,
+            2,
+            3
+        );
 
-        Thread t = new Thread(new ThreadStart(() =>
-        {
-            GenBase<MyIdClass0, int>.SetFieldsTest(fobj1, new MyIdClass0("11"), new MyIdClass0("22"), new MyIdClass0("33"), 11, 22, 33);
-            GenBase<MyIdClass1, int>.SetFieldsTest(fobj2, new MyIdClass1("11"), new MyIdClass1("22"), new MyIdClass1("33"), 11, 22, 33);
+        Thread t = new Thread(
+            new ThreadStart(
+                () =>
+                {
+                    GenBase<MyIdClass0, int>.SetFieldsTest(
+                        fobj1,
+                        new MyIdClass0("11"),
+                        new MyIdClass0("22"),
+                        new MyIdClass0("33"),
+                        11,
+                        22,
+                        33
+                    );
+                    GenBase<MyIdClass1, int>.SetFieldsTest(
+                        fobj2,
+                        new MyIdClass1("11"),
+                        new MyIdClass1("22"),
+                        new MyIdClass1("33"),
+                        11,
+                        22,
+                        33
+                    );
 
-            GenBase<MyIdClass0, int>.GetFieldsTest(fobj1, "MyIdClass0=11", "MyIdClass0=22", "MyIdClass0=33", 11, 22, 33);
-            GenBase<MyIdClass1, int>.GetFieldsTest(fobj2, "MyIdClass1=11", "MyIdClass1=22", "MyIdClass1=33", 11, 22, 33);
-        }));
+                    GenBase<MyIdClass0, int>.GetFieldsTest(
+                        fobj1,
+                        "MyIdClass0=11",
+                        "MyIdClass0=22",
+                        "MyIdClass0=33",
+                        11,
+                        22,
+                        33
+                    );
+                    GenBase<MyIdClass1, int>.GetFieldsTest(
+                        fobj2,
+                        "MyIdClass1=11",
+                        "MyIdClass1=22",
+                        "MyIdClass1=33",
+                        11,
+                        22,
+                        33
+                    );
+                }
+            )
+        );
         t.Start();
         t.Join();
 
-        GenBase<MyIdClass0, int>.GetFieldsTest(fobj1, "MyIdClass0=11", "MyIdClass0=22", "MyIdClass0=3", 11, 22, 3);
-        GenBase<MyIdClass1, int>.GetFieldsTest(fobj2, "MyIdClass1=11", "MyIdClass1=22", "MyIdClass1=3", 11, 22, 3);
+        GenBase<MyIdClass0, int>.GetFieldsTest(
+            fobj1,
+            "MyIdClass0=11",
+            "MyIdClass0=22",
+            "MyIdClass0=3",
+            11,
+            22,
+            3
+        );
+        GenBase<MyIdClass1, int>.GetFieldsTest(
+            fobj2,
+            "MyIdClass1=11",
+            "MyIdClass1=22",
+            "MyIdClass1=3",
+            11,
+            22,
+            3
+        );
     }
 
     static void RunTest5()
@@ -199,11 +359,20 @@ class Program
 
         Func<MyIdClass0, int, string>[] del1 = fobj1.GetDelegateTest();
         Func<MyIdClass1, int, string>[] del2 = fobj2.GetDelegateTest();
-        Assert.AreEqual(del1[0](new MyIdClass0("1"), 1), "InstanceDelMethod(GenBase`2[MyIdClass0,System.Int32] - MyIdClass0=1 - 1)");
+        Assert.AreEqual(
+            del1[0](new MyIdClass0("1"), 1),
+            "InstanceDelMethod(GenBase`2[MyIdClass0,System.Int32] - MyIdClass0=1 - 1)"
+        );
         Assert.AreEqual(del1[1](new MyIdClass0("2"), 2), "StaticDelMethod(MyIdClass0=2 - 2)");
-        Assert.AreEqual(del2[0](new MyIdClass1("3"), 3), "InstanceDelMethod(GenBase`2[MyIdClass1,System.Int32] - MyIdClass1=3 - 3)");
+        Assert.AreEqual(
+            del2[0](new MyIdClass1("3"), 3),
+            "InstanceDelMethod(GenBase`2[MyIdClass1,System.Int32] - MyIdClass1=3 - 3)"
+        );
         Assert.AreEqual(del2[1](new MyIdClass1("4"), 4), "StaticDelMethod(MyIdClass1=4 - 4)");
-        Assert.AreEqual(del1[0](new MyIdClass0("5"), 5), "InstanceDelMethod(GenBase`2[MyIdClass0,System.Int32] - MyIdClass0=5 - 5)");
+        Assert.AreEqual(
+            del1[0](new MyIdClass0("5"), 5),
+            "InstanceDelMethod(GenBase`2[MyIdClass0,System.Int32] - MyIdClass0=5 - 5)"
+        );
         Assert.AreEqual(del1[1](new MyIdClass0("6"), 6), "StaticDelMethod(MyIdClass0=6 - 6)");
     }
 
@@ -213,16 +382,22 @@ class Program
         var mi = new GenBase<MyClass0, int>();
         var ol = new GenBase<object, long>();
 
-        Assert.AreEqual(mi.BoxingAndNullableTest(
-            new MyGenClass1<KeyValuePair<MyClass0, int>>(),
-            new MyGenStruct1<Dictionary<MyClass0, int>>(),
-            new MyGenStruct1<Dictionary<MyClass0, int>>()),
-            "BoxingAndNullableTest - GenBase`2[MyClass0,System.Int32]::(MyGenClass1`1[System.Collections.Generic.KeyValuePair`2[MyClass0,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]])");
-        Assert.AreEqual(ol.BoxingAndNullableTest(
-            new MyGenClass1<KeyValuePair<object, long>>(),
-            new MyGenStruct1<Dictionary<object, long>>(),
-            new MyGenStruct1<Dictionary<object, long>>()),
-            "BoxingAndNullableTest - GenBase`2[System.Object,System.Int64]::(MyGenClass1`1[System.Collections.Generic.KeyValuePair`2[System.Object,System.Int64]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[System.Object,System.Int64]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[System.Object,System.Int64]])");
+        Assert.AreEqual(
+            mi.BoxingAndNullableTest(
+                new MyGenClass1<KeyValuePair<MyClass0, int>>(),
+                new MyGenStruct1<Dictionary<MyClass0, int>>(),
+                new MyGenStruct1<Dictionary<MyClass0, int>>()
+            ),
+            "BoxingAndNullableTest - GenBase`2[MyClass0,System.Int32]::(MyGenClass1`1[System.Collections.Generic.KeyValuePair`2[MyClass0,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]])"
+        );
+        Assert.AreEqual(
+            ol.BoxingAndNullableTest(
+                new MyGenClass1<KeyValuePair<object, long>>(),
+                new MyGenStruct1<Dictionary<object, long>>(),
+                new MyGenStruct1<Dictionary<object, long>>()
+            ),
+            "BoxingAndNullableTest - GenBase`2[System.Object,System.Int64]::(MyGenClass1`1[System.Collections.Generic.KeyValuePair`2[System.Object,System.Int64]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[System.Object,System.Int64]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[System.Object,System.Int64]])"
+        );
     }
 
     static void RunTest7()
@@ -238,8 +413,14 @@ class Program
         Assert.AreEqual(b.GetT<object>().ToString(), "System.Object");
         Assert.AreEqual(b.GetTArray<string>().ToString(), "System.String[]");
         Assert.AreEqual(b.GetTArray<object>().ToString(), "System.Object[]");
-        Assert.AreEqual(b.GetTBasedInst<string>().ToString(), "MyGenClass2`1[MyGenClass1`1[System.String]]");
-        Assert.AreEqual(b.GetTBasedInst<object>().ToString(), "MyGenClass2`1[MyGenClass1`1[System.Object]]");
+        Assert.AreEqual(
+            b.GetTBasedInst<string>().ToString(),
+            "MyGenClass2`1[MyGenClass1`1[System.String]]"
+        );
+        Assert.AreEqual(
+            b.GetTBasedInst<object>().ToString(),
+            "MyGenClass2`1[MyGenClass1`1[System.Object]]"
+        );
 
         Assert.AreEqual(b.GetT<MyClass1, int>(), "MyClass1");
         Assert.AreEqual(b.GetU<MyClass1, int>(), "System.Int32");
@@ -247,34 +428,62 @@ class Program
         Assert.AreEqual(b.GetU<MyClass2, long>(), "System.Int64");
 
         // GENERIC INTERFACE CALL AND CASTING TEST
-        Assert.AreEqual(b.IFaceCallTest<MyClass1, int>(obj1), "IFaceCallTest = IFooFunc - GenBase`2[MyClass1,System.Int32]");
-        Assert.AreEqual(b.IFaceCallTest<MyClass2, long>(obj2), "IFaceCallTest = IFooFunc - GenBase`2[MyClass2,System.Int64]");
+        Assert.AreEqual(
+            b.IFaceCallTest<MyClass1, int>(obj1),
+            "IFaceCallTest = IFooFunc - GenBase`2[MyClass1,System.Int32]"
+        );
+        Assert.AreEqual(
+            b.IFaceCallTest<MyClass2, long>(obj2),
+            "IFaceCallTest = IFooFunc - GenBase`2[MyClass2,System.Int64]"
+        );
 
         // LDTOKEN TEST
-        Assert.AreEqual(b.LdTokenTest<MyClass1, int>(), "System.Collections.Generic.Dictionary`2[MyClass1,System.Int32]");
-        Assert.AreEqual(b.LdTokenTest<MyClass2, long>(), "System.Collections.Generic.Dictionary`2[MyClass2,System.Int64]");
+        Assert.AreEqual(
+            b.LdTokenTest<MyClass1, int>(),
+            "System.Collections.Generic.Dictionary`2[MyClass1,System.Int32]"
+        );
+        Assert.AreEqual(
+            b.LdTokenTest<MyClass2, long>(),
+            "System.Collections.Generic.Dictionary`2[MyClass2,System.Int64]"
+        );
 
         // DICTIONARY ACCESS FROM STATIC METHOD
-        Assert.AreEqual(Base.StaticGenMethod<float, MyClass1>(), "StaticGenMethod - System.Collections.Generic.Dictionary`2[MyClass1,System.Single]");
-        Assert.AreEqual(Base.StaticGenMethod<float, MyClass2>(), "StaticGenMethod - System.Collections.Generic.Dictionary`2[MyClass2,System.Single]");
+        Assert.AreEqual(
+            Base.StaticGenMethod<float, MyClass1>(),
+            "StaticGenMethod - System.Collections.Generic.Dictionary`2[MyClass1,System.Single]"
+        );
+        Assert.AreEqual(
+            Base.StaticGenMethod<float, MyClass2>(),
+            "StaticGenMethod - System.Collections.Generic.Dictionary`2[MyClass2,System.Single]"
+        );
 
         // NEW TEST
-        Assert.AreEqual(b.NewTest<MyClass1, MyClass2>(),
-            "NewTest - MyClass1 - MyGenClass1`1[MyClass1] - MyClass1[] - MyClass1[,] - MyGenClass2`1[MyClass1][] - MyGenClass2`1[MyClass1][,]");
-        Assert.AreEqual(b.NewTest<MyClass2, MyClass1>(),
-            "NewTest - MyClass2 - MyGenClass1`1[MyClass2] - MyClass2[] - MyClass2[,] - MyGenClass2`1[MyClass2][] - MyGenClass2`1[MyClass2][,]");
+        Assert.AreEqual(
+            b.NewTest<MyClass1, MyClass2>(),
+            "NewTest - MyClass1 - MyGenClass1`1[MyClass1] - MyClass1[] - MyClass1[,] - MyGenClass2`1[MyClass1][] - MyGenClass2`1[MyClass1][,]"
+        );
+        Assert.AreEqual(
+            b.NewTest<MyClass2, MyClass1>(),
+            "NewTest - MyClass2 - MyGenClass1`1[MyClass2] - MyClass2[] - MyClass2[,] - MyGenClass2`1[MyClass2][] - MyGenClass2`1[MyClass2][,]"
+        );
 
         // BOXING AND NULLABLE TEST
-        Assert.AreEqual(b.BoxingAndNullableTest<MyClass0, int>(
-            new MyGenClass1<KeyValuePair<MyClass0, int>>(),
-            new MyGenStruct1<Dictionary<MyClass0, int>>(),
-            new MyGenStruct1<Dictionary<MyClass0, int>>()),
-            "BoxingAndNullableTest - Base::(MyGenClass1`1[System.Collections.Generic.KeyValuePair`2[MyClass0,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]])");
-        Assert.AreEqual(b.BoxingAndNullableTest<object, int>(
-            new MyGenClass1<KeyValuePair<object, int>>(),
-            new MyGenStruct1<Dictionary<object, int>>(),
-            new MyGenStruct1<Dictionary<object, int>>()),
-            "BoxingAndNullableTest - Base::(MyGenClass1`1[System.Collections.Generic.KeyValuePair`2[System.Object,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[System.Object,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[System.Object,System.Int32]])");
+        Assert.AreEqual(
+            b.BoxingAndNullableTest<MyClass0, int>(
+                new MyGenClass1<KeyValuePair<MyClass0, int>>(),
+                new MyGenStruct1<Dictionary<MyClass0, int>>(),
+                new MyGenStruct1<Dictionary<MyClass0, int>>()
+            ),
+            "BoxingAndNullableTest - Base::(MyGenClass1`1[System.Collections.Generic.KeyValuePair`2[MyClass0,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[MyClass0,System.Int32]])"
+        );
+        Assert.AreEqual(
+            b.BoxingAndNullableTest<object, int>(
+                new MyGenClass1<KeyValuePair<object, int>>(),
+                new MyGenStruct1<Dictionary<object, int>>(),
+                new MyGenStruct1<Dictionary<object, int>>()
+            ),
+            "BoxingAndNullableTest - Base::(MyGenClass1`1[System.Collections.Generic.KeyValuePair`2[System.Object,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[System.Object,System.Int32]] - MyGenStruct1`1[System.Collections.Generic.Dictionary`2[System.Object,System.Int32]])"
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -404,7 +613,10 @@ class Program
 
         struct MediumStruct
         {
-            public int X, Y, Z, W;
+            public int X,
+                Y,
+                Z,
+                W;
         }
 
         unsafe struct BigStruct
@@ -478,7 +690,6 @@ class Program
                 if (result.X != x.X || result.Y != x.Y || result.Z != x.Z || result.W != x.W)
                     throw new Exception();
             }
-
             unsafe
             {
                 Func<BigStruct, BigStruct> f = o.BigStructGeneric<object>;
@@ -571,8 +782,11 @@ class Program
             public string MakeGenString<U>()
             {
                 // Use a constructed type that is not used elsewhere
-                return typeof(T[,,]).GetElementType().Name + ", " +
-                    typeof(U[,,,]).GetElementType().Name + ": " + X.ToString();
+                return typeof(T[,,]).GetElementType().Name
+                    + ", "
+                    + typeof(U[,,,]).GetElementType().Name
+                    + ": "
+                    + X.ToString();
             }
         }
 
@@ -594,8 +808,11 @@ class Program
             public string MakeGenString<U>()
             {
                 // Use a constructed type that is not used elsewhere
-                return typeof(T[,,]).GetElementType().Name + ", " +
-                    typeof(U[,,,]).GetElementType().Name + ": " + X.ToString();
+                return typeof(T[,,]).GetElementType().Name
+                    + ", "
+                    + typeof(U[,,,]).GetElementType().Name
+                    + ": "
+                    + X.ToString();
             }
         }
 
@@ -966,32 +1183,86 @@ class Program
 
         public class BaseClass<T> : IFace<T>
         {
-            public virtual string Method1(T t) { return "BaseClass.Method1"; }
-            public virtual string Method2(T t) { return "BaseClass.Method2"; }
-            public virtual string Method3(T t) { return "BaseClass.Method3"; }
-            public virtual string Method4(T t) { return "BaseClass.Method4"; }
-            public virtual string GVMethod1<U>(T t, U u) { return "BaseClass.GVMethod1"; }
-            public virtual string GVMethod2<U>(T t, U u) { return "BaseClass.GVMethod2"; }
-            public virtual string GVMethod3<U>(T t, U u) { return "BaseClass.GVMethod3"; }
-            public virtual string GVMethod4<U>(T t, U u) { return "BaseClass.GVMethod4"; }
+            public virtual string Method1(T t)
+            {
+                return "BaseClass.Method1";
+            }
+            public virtual string Method2(T t)
+            {
+                return "BaseClass.Method2";
+            }
+            public virtual string Method3(T t)
+            {
+                return "BaseClass.Method3";
+            }
+            public virtual string Method4(T t)
+            {
+                return "BaseClass.Method4";
+            }
+            public virtual string GVMethod1<U>(T t, U u)
+            {
+                return "BaseClass.GVMethod1";
+            }
+            public virtual string GVMethod2<U>(T t, U u)
+            {
+                return "BaseClass.GVMethod2";
+            }
+            public virtual string GVMethod3<U>(T t, U u)
+            {
+                return "BaseClass.GVMethod3";
+            }
+            public virtual string GVMethod4<U>(T t, U u)
+            {
+                return "BaseClass.GVMethod4";
+            }
 
-            public virtual string IFaceMethod1(T t) { return "BaseClass.IFaceMethod1"; }
-            public virtual string IFaceGVMethod1<U>(T t, U u) { return "BaseClass.IFaceGVMethod1"; }
+            public virtual string IFaceMethod1(T t)
+            {
+                return "BaseClass.IFaceMethod1";
+            }
+            public virtual string IFaceGVMethod1<U>(T t, U u)
+            {
+                return "BaseClass.IFaceGVMethod1";
+            }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public virtual string VirtualButNotUsedVirtuallyMethod(T t) { return "BaseClass.VirtualButNotUsedVirtuallyMethod"; }
+            public virtual string VirtualButNotUsedVirtuallyMethod(T t)
+            {
+                return "BaseClass.VirtualButNotUsedVirtuallyMethod";
+            }
         }
 
         public class DerivedClass1<T> : BaseClass<T>, IFace<T>
         {
-            public override sealed string Method1(T t) { return "DerivedClass1.Method1"; }
-            public override string Method2(T t) { return "DerivedClass1.Method2"; }
-            public new virtual string Method3(T t) { return "DerivedClass1.Method3"; }
-            public override sealed string GVMethod1<U>(T t, U u) { return "DerivedClass1.GVMethod1"; }
-            public override string GVMethod2<U>(T t, U u) { return "DerivedClass1.GVMethod2"; }
-            public new virtual string GVMethod3<U>(T t, U u) { return "DerivedClass1.GVMethod3"; }
+            public override sealed string Method1(T t)
+            {
+                return "DerivedClass1.Method1";
+            }
+            public override string Method2(T t)
+            {
+                return "DerivedClass1.Method2";
+            }
+            public new virtual string Method3(T t)
+            {
+                return "DerivedClass1.Method3";
+            }
+            public override sealed string GVMethod1<U>(T t, U u)
+            {
+                return "DerivedClass1.GVMethod1";
+            }
+            public override string GVMethod2<U>(T t, U u)
+            {
+                return "DerivedClass1.GVMethod2";
+            }
+            public new virtual string GVMethod3<U>(T t, U u)
+            {
+                return "DerivedClass1.GVMethod3";
+            }
 
-            public override string IFaceMethod1(T t) { return "DerivedClass1.IFaceMethod1"; }
+            public override string IFaceMethod1(T t)
+            {
+                return "DerivedClass1.IFaceMethod1";
+            }
 
             public string UseVirtualButNotUsedVirtuallyMethod(T t)
             {
@@ -1002,13 +1273,31 @@ class Program
 
         public class DerivedClass2<T> : DerivedClass1<T>, IFace<T>
         {
-            public override string Method3(T t) { return "DerivedClass2.Method3"; }
-            public override string Method4(T t) { return "DerivedClass2.Method4"; }
-            public override string GVMethod3<U>(T t, U u) { return "DerivedClass2.GVMethod3"; }
-            public override string GVMethod4<U>(T t, U u) { return "DerivedClass2.GVMethod4"; }
+            public override string Method3(T t)
+            {
+                return "DerivedClass2.Method3";
+            }
+            public override string Method4(T t)
+            {
+                return "DerivedClass2.Method4";
+            }
+            public override string GVMethod3<U>(T t, U u)
+            {
+                return "DerivedClass2.GVMethod3";
+            }
+            public override string GVMethod4<U>(T t, U u)
+            {
+                return "DerivedClass2.GVMethod4";
+            }
 
-            string IFace<T>.IFaceMethod1(T t) { return "DerivedClass2.IFaceMethod1"; }
-            public override string IFaceGVMethod1<U>(T t, U u) { return "DerivedClass2.IFaceGVMethod1"; }
+            string IFace<T>.IFaceMethod1(T t)
+            {
+                return "DerivedClass2.IFaceMethod1";
+            }
+            public override string IFaceGVMethod1<U>(T t, U u)
+            {
+                return "DerivedClass2.IFaceGVMethod1";
+            }
         }
 
         private static void Verify<T>(T expected, T actual)
@@ -1033,7 +1322,8 @@ class Program
             object o = new Foo<string>();
 
             {
-                MethodInfo mi = typeof(Foo<string>).GetMethod("SetAndCheck").MakeGenericMethod(typeof(string));
+                MethodInfo mi = typeof(Foo<string>).GetMethod("SetAndCheck")
+                    .MakeGenericMethod(typeof(string));
                 if (!(bool)mi.Invoke(o, new object[] { 123, "hello" }))
                     s_NumErrors++;
 
@@ -1047,7 +1337,8 @@ class Program
 
             // Uncomment when we have the type loader to buld invoke stub dictionaries.
             {
-                MethodInfo mi = typeof(Foo<string>).GetMethod("SetAndCheck").MakeGenericMethod(typeof(object));
+                MethodInfo mi = typeof(Foo<string>).GetMethod("SetAndCheck")
+                    .MakeGenericMethod(typeof(object));
                 if ((bool)mi.Invoke(o, new object[] { 123, new object() }))
                     s_NumErrors++;
             }
@@ -1082,94 +1373,262 @@ class Program
                 new DerivedClass2<string>().GVMethod4<string>("string", "string2");
                 Func<IFace<string>> f = () => new BaseClass<string>(); // Hack to prevent devirtualization
                 f().IFaceMethod1("string");
-                ((IFace<string>)new BaseClass<string>()).IFaceGVMethod1<string>("string1", "string2");
+                ((IFace<string>)new BaseClass<string>()).IFaceGVMethod1<string>(
+                    "string1",
+                    "string2"
+                );
 
                 MethodInfo m1 = typeof(BaseClass<string>).GetMethod("Method1");
                 MethodInfo m2 = typeof(BaseClass<string>).GetMethod("Method2");
                 MethodInfo m3 = typeof(BaseClass<string>).GetMethod("Method3");
                 MethodInfo m4 = typeof(BaseClass<string>).GetMethod("Method4");
-                MethodInfo unusedMethod = typeof(BaseClass<string>).GetMethod("VirtualButNotUsedVirtuallyMethod");
-                MethodInfo gvm1 = typeof(BaseClass<string>).GetMethod("GVMethod1").MakeGenericMethod(typeof(string));
-                MethodInfo gvm2 = typeof(BaseClass<string>).GetMethod("GVMethod2").MakeGenericMethod(typeof(string));
-                MethodInfo gvm3 = typeof(BaseClass<string>).GetMethod("GVMethod3").MakeGenericMethod(typeof(string));
-                MethodInfo gvm4 = typeof(BaseClass<string>).GetMethod("GVMethod4").MakeGenericMethod(typeof(string));
+                MethodInfo unusedMethod = typeof(BaseClass<string>).GetMethod(
+                    "VirtualButNotUsedVirtuallyMethod"
+                );
+                MethodInfo gvm1 = typeof(BaseClass<string>).GetMethod("GVMethod1")
+                    .MakeGenericMethod(typeof(string));
+                MethodInfo gvm2 = typeof(BaseClass<string>).GetMethod("GVMethod2")
+                    .MakeGenericMethod(typeof(string));
+                MethodInfo gvm3 = typeof(BaseClass<string>).GetMethod("GVMethod3")
+                    .MakeGenericMethod(typeof(string));
+                MethodInfo gvm4 = typeof(BaseClass<string>).GetMethod("GVMethod4")
+                    .MakeGenericMethod(typeof(string));
                 Verify("BaseClass.Method1", m1.Invoke(new BaseClass<string>(), new[] { "" }));
                 Verify("BaseClass.Method2", m2.Invoke(new BaseClass<string>(), new[] { "" }));
                 Verify("BaseClass.Method3", m3.Invoke(new BaseClass<string>(), new[] { "" }));
                 Verify("BaseClass.Method4", m4.Invoke(new BaseClass<string>(), new[] { "" }));
-                Verify("BaseClass.VirtualButNotUsedVirtuallyMethod", unusedMethod.Invoke(new BaseClass<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method2", m2.Invoke(new DerivedClass1<string>(), new[] { "" }));
+                Verify(
+                    "BaseClass.VirtualButNotUsedVirtuallyMethod",
+                    unusedMethod.Invoke(new BaseClass<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method2",
+                    m2.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
                 Verify("BaseClass.Method3", m3.Invoke(new DerivedClass1<string>(), new[] { "" }));
                 Verify("BaseClass.Method4", m4.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method2", m2.Invoke(new DerivedClass2<string>(), new[] { "" }));
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method2",
+                    m2.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
                 Verify("BaseClass.Method3", m3.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.Method4", m4.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("BaseClass.GVMethod1", gvm1.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod2", gvm2.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod3", gvm3.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod4", gvm4.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod1", gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod2", gvm2.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod3", gvm3.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod4", gvm4.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod1", gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod2", gvm2.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod3", gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass2.GVMethod4", gvm4.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
+                Verify(
+                    "DerivedClass2.Method4",
+                    m4.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod1",
+                    gvm1.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod2",
+                    gvm2.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod3",
+                    gvm3.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod4",
+                    gvm4.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod1",
+                    gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod2",
+                    gvm2.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod3",
+                    gvm3.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod4",
+                    gvm4.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod1",
+                    gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod2",
+                    gvm2.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod3",
+                    gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass2.GVMethod4",
+                    gvm4.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
 
                 m1 = typeof(DerivedClass1<string>).GetMethod("Method1");
                 m2 = typeof(DerivedClass1<string>).GetMethod("Method2");
                 m3 = typeof(DerivedClass1<string>).GetMethod("Method3");
-                gvm1 = typeof(DerivedClass1<string>).GetMethod("GVMethod1").MakeGenericMethod(typeof(string));
-                gvm2 = typeof(DerivedClass1<string>).GetMethod("GVMethod2").MakeGenericMethod(typeof(string));
-                gvm3 = typeof(DerivedClass1<string>).GetMethod("GVMethod3", BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly).MakeGenericMethod(typeof(string));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method2", m2.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method3", m3.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method2", m2.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.Method3", m3.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass1.GVMethod1", gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod2", gvm2.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod3", gvm3.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod1", gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod2", gvm2.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass2.GVMethod3", gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
+                gvm1 = typeof(DerivedClass1<string>).GetMethod("GVMethod1")
+                    .MakeGenericMethod(typeof(string));
+                gvm2 = typeof(DerivedClass1<string>).GetMethod("GVMethod2")
+                    .MakeGenericMethod(typeof(string));
+                gvm3 = typeof(DerivedClass1<string>).GetMethod(
+                        "GVMethod3",
+                        BindingFlags.Instance
+                            | BindingFlags.Static
+                            | BindingFlags.Public
+                            | BindingFlags.DeclaredOnly
+                    )
+                    .MakeGenericMethod(typeof(string));
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method2",
+                    m2.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method3",
+                    m3.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method2",
+                    m2.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass2.Method3",
+                    m3.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod1",
+                    gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod2",
+                    gvm2.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod3",
+                    gvm3.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod1",
+                    gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod2",
+                    gvm2.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass2.GVMethod3",
+                    gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
 
                 m3 = typeof(DerivedClass2<string>).GetMethod("Method3");
                 m4 = typeof(DerivedClass2<string>).GetMethod("Method4");
-                gvm3 = typeof(DerivedClass2<string>).GetMethod("GVMethod3", BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly).MakeGenericMethod(typeof(string));
-                gvm4 = typeof(DerivedClass2<string>).GetMethod("GVMethod4", BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly).MakeGenericMethod(typeof(string));
-                Verify("DerivedClass2.Method3", m3.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.Method4", m4.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.GVMethod3", gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass2.GVMethod4", gvm4.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
+                gvm3 = typeof(DerivedClass2<string>).GetMethod(
+                        "GVMethod3",
+                        BindingFlags.Instance
+                            | BindingFlags.Static
+                            | BindingFlags.Public
+                            | BindingFlags.DeclaredOnly
+                    )
+                    .MakeGenericMethod(typeof(string));
+                gvm4 = typeof(DerivedClass2<string>).GetMethod(
+                        "GVMethod4",
+                        BindingFlags.Instance
+                            | BindingFlags.Static
+                            | BindingFlags.Public
+                            | BindingFlags.DeclaredOnly
+                    )
+                    .MakeGenericMethod(typeof(string));
+                Verify(
+                    "DerivedClass2.Method3",
+                    m3.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass2.Method4",
+                    m4.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass2.GVMethod3",
+                    gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass2.GVMethod4",
+                    gvm4.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
 
                 // BaseClass<int>.Method1 has the same slot as BaseClass<float>.Method3 on CoreRT, because vtable entries
                 // get populated on demand (the first type won't get a Method3 entry, and the latter won't get a Method1 entry)
                 // On ProjectN, both types will get vtable entries for both methods.
                 new BaseClass<int>().Method1(1);
                 m1 = typeof(BaseClass<int>).GetMethod("Method1");
-                Verify("BaseClass.Method1", m1.Invoke(new BaseClass<int>(), new object[] { (int)1 }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass1<int>(), new object[] { (int)1 }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass2<int>(), new object[] { (int)1 }));
+                Verify(
+                    "BaseClass.Method1",
+                    m1.Invoke(new BaseClass<int>(), new object[] { (int)1 })
+                );
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass1<int>(), new object[] { (int)1 })
+                );
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass2<int>(), new object[] { (int)1 })
+                );
 
                 new BaseClass<float>().Method3(1);
                 m3 = typeof(BaseClass<float>).GetMethod("Method3");
-                Verify("BaseClass.Method3", m3.Invoke(new BaseClass<float>(), new object[] { 1.1f }));
-                Verify("BaseClass.Method3", m3.Invoke(new DerivedClass1<float>(), new object[] { 1.1f }));
-                Verify("BaseClass.Method3", m3.Invoke(new DerivedClass2<float>(), new object[] { 1.1f }));
+                Verify(
+                    "BaseClass.Method3",
+                    m3.Invoke(new BaseClass<float>(), new object[] { 1.1f })
+                );
+                Verify(
+                    "BaseClass.Method3",
+                    m3.Invoke(new DerivedClass1<float>(), new object[] { 1.1f })
+                );
+                Verify(
+                    "BaseClass.Method3",
+                    m3.Invoke(new DerivedClass2<float>(), new object[] { 1.1f })
+                );
 
                 m1 = typeof(IFace<string>).GetMethod("IFaceMethod1");
-                gvm1 = typeof(IFace<string>).GetMethod("IFaceGVMethod1").MakeGenericMethod(typeof(string));
+                gvm1 = typeof(IFace<string>).GetMethod("IFaceGVMethod1")
+                    .MakeGenericMethod(typeof(string));
                 Verify("BaseClass.IFaceMethod1", m1.Invoke(new BaseClass<string>(), new[] { "" }));
-                Verify("BaseClass.IFaceGVMethod1", gvm1.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.IFaceMethod1", m1.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("BaseClass.IFaceGVMethod1", gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass2.IFaceMethod1", m1.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.IFaceGVMethod1", gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
+                Verify(
+                    "BaseClass.IFaceGVMethod1",
+                    gvm1.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.IFaceMethod1",
+                    m1.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "BaseClass.IFaceGVMethod1",
+                    gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass2.IFaceMethod1",
+                    m1.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass2.IFaceGVMethod1",
+                    gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
             }
 
             if (s_NumErrors != 0)
@@ -1433,55 +1892,148 @@ class Program
 
         class Base : IFoo<string>, IFoo<int>
         {
-            public virtual string GMethod1<T>(T t1, T t2) { return "Base.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            public virtual string IMethod1<T>(T t1, T t2) { return "Base.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            public virtual string GMethod1<T>(T t1, T t2)
+            {
+                return "Base.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+            public virtual string IMethod1<T>(T t1, T t2)
+            {
+                return "Base.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
         class Derived : Base, IFoo<string>, IFoo<int>
         {
-            public override string GMethod1<T>(T t1, T t2) { return "Derived.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            string IFoo<string>.IMethod1<T>(T t1, T t2) { return "Derived.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            public override string GMethod1<T>(T t1, T t2)
+            {
+                return "Derived.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+            string IFoo<string>.IMethod1<T>(T t1, T t2)
+            {
+                return "Derived.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
         class SuperDerived : Derived, IFoo<string>, IFoo<int>
         {
-            string IFoo<int>.IMethod1<T>(T t1, T t2) { return "SuperDerived.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            string IFoo<int>.IMethod1<T>(T t1, T t2)
+            {
+                return "SuperDerived.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
-
 
         class GenBase<A> : IFoo<string>, IFoo<int>
         {
-            public virtual string GMethod1<T>(T t1, T t2) { return "GenBase<" + typeof(A) + ">.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            public virtual string IMethod1<T>(T t1, T t2) { return "GenBase<" + typeof(A) + ">.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            public virtual string GMethod1<T>(T t1, T t2)
+            {
+                return "GenBase<"
+                    + typeof(A)
+                    + ">.GMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
+            public virtual string IMethod1<T>(T t1, T t2)
+            {
+                return "GenBase<"
+                    + typeof(A)
+                    + ">.IMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
         }
         class GenDerived<A> : GenBase<A>, IFoo<string>, IFoo<int>
         {
-            public override string GMethod1<T>(T t1, T t2) { return "GenDerived<" + typeof(A) + ">.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            string IFoo<string>.IMethod1<T>(T t1, T t2) { return "GenDerived<" + typeof(A) + ">.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            public override string GMethod1<T>(T t1, T t2)
+            {
+                return "GenDerived<"
+                    + typeof(A)
+                    + ">.GMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
+            string IFoo<string>.IMethod1<T>(T t1, T t2)
+            {
+                return "GenDerived<"
+                    + typeof(A)
+                    + ">.IFoo<string>.IMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
         }
         class GenSuperDerived<A> : GenDerived<A>, IFoo<string>, IFoo<int>
         {
-            string IFoo<int>.IMethod1<T>(T t1, T t2) { return "GenSuperDerived<" + typeof(A) + ">.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            string IFoo<int>.IMethod1<T>(T t1, T t2)
+            {
+                return "GenSuperDerived<"
+                    + typeof(A)
+                    + ">.IFoo<int>.IMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
         }
 
         struct MyStruct1 : IFoo<string>, IFoo<int>
         {
-            string IFoo<string>.IMethod1<T>(T t1, T t2) { return "MyStruct1.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            string IFoo<int>.IMethod1<T>(T t1, T t2) { return "MyStruct1.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            string IFoo<string>.IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct1.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+            string IFoo<int>.IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct1.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
         struct MyStruct2 : IFoo<string>, IFoo<int>
         {
-            string IFoo<string>.IMethod1<T>(T t1, T t2) { return "MyStruct2.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            public string IMethod1<T>(T t1, T t2) { return "MyStruct2.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            string IFoo<string>.IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct2.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+            public string IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct2.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
         struct MyStruct3 : IFoo<string>, IFoo<int>
         {
-            string IFoo<int>.IMethod1<T>(T t1, T t2) { return "MyStruct3.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            public string IMethod1<T>(T t1, T t2) { return "MyStruct3.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            string IFoo<int>.IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct3.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+            public string IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct3.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
 
         public class AnotherBaseClass<T>
         {
-            public virtual string IFaceMethod1(T t) { return "AnotherBaseClass.IFaceMethod1"; }
-            public virtual string IFaceGVMethod1<U>(T t, U u) { return "AnotherBaseClass.IFaceGVMethod1"; }
+            public virtual string IFaceMethod1(T t)
+            {
+                return "AnotherBaseClass.IFaceMethod1";
+            }
+            public virtual string IFaceGVMethod1<U>(T t, U u)
+            {
+                return "AnotherBaseClass.IFaceGVMethod1";
+            }
         }
 
         public class AnotherDerivedClass<T> : AnotherBaseClass<T>, IFace<T>
@@ -1490,22 +2042,38 @@ class Program
 
         public class BarImplementor : IBar<int>
         {
-            public virtual U IBarGVMethod<U>(Func<int, U> arg) { return arg(123); }
+            public virtual U IBarGVMethod<U>(Func<int, U> arg)
+            {
+                return arg(123);
+            }
         }
 
         public class Yahoo<T>
         {
-            public virtual U YahooGVM<U>(Func<T, U> arg) { return default(U); }
+            public virtual U YahooGVM<U>(Func<T, U> arg)
+            {
+                return default(U);
+            }
         }
 
         public class YahooDerived : Yahoo<int>
         {
-            public override U YahooGVM<U>(Func<int, U> arg) { return arg(456); }
+            public override U YahooGVM<U>(Func<int, U> arg)
+            {
+                return arg(456);
+            }
         }
 
         public class Covariant<T> : ICovariant<T>
         {
-            public string ICovariantGVM<U>() { return String.Format("Covariant<{0}>.ICovariantGVM<{1}>", typeof(T).Name, typeof(U).Name); }
+            public string ICovariantGVM<U>()
+            {
+                return String.Format(
+                    "Covariant<{0}>.ICovariantGVM<{1}>",
+                    typeof(T).Name,
+                    typeof(U).Name
+                );
+            }
         }
 
         static string s_GMethod1;
@@ -1515,7 +2083,11 @@ class Program
 
         static int s_NumErrors = 0;
 
-        private static void TestWithStruct(IFoo<string> ifooStr, IFoo<object> ifooObj, IFoo<int> ifooInt)
+        private static void TestWithStruct(
+            IFoo<string> ifooStr,
+            IFoo<object> ifooObj,
+            IFoo<int> ifooInt
+        )
         {
             var res = ifooStr.IMethod1<int>(1, 2);
             WriteLineWithVerification(res, s_IFooString);
@@ -1589,14 +2161,12 @@ class Program
                 TestWithClass(new Base());
                 Console.WriteLine("====================");
 
-
                 s_GMethod1 = "Derived.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "Derived.IFoo<string>.IMethod1<System.Int32>(3,4)";
                 s_IFooObject = "Derived.IFoo<string>.IMethod1<System.Int32>(5,6)";
                 s_IFooInt = "Base.IMethod1<System.Int32>(7,8)";
                 TestWithClass(new Derived());
                 Console.WriteLine("====================");
-
 
                 s_GMethod1 = "Derived.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "Derived.IFoo<string>.IMethod1<System.Int32>(3,4)";
@@ -1614,7 +2184,6 @@ class Program
                 TestWithGenClass<byte>(new GenBase<byte>());
                 Console.WriteLine("====================");
 
-
                 s_GMethod1 = "GenDerived<System.Byte>.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "GenDerived<System.Byte>.IFoo<string>.IMethod1<System.Int32>(3,4)";
                 s_IFooObject = "GenDerived<System.Byte>.IFoo<string>.IMethod1<System.Int32>(5,6)";
@@ -1622,14 +2191,12 @@ class Program
                 TestWithGenClass<byte>(new GenDerived<byte>());
                 Console.WriteLine("====================");
 
-
                 s_GMethod1 = "GenDerived<System.String>.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "GenDerived<System.String>.IFoo<string>.IMethod1<System.Int32>(3,4)";
                 s_IFooObject = "GenDerived<System.String>.IFoo<string>.IMethod1<System.Int32>(5,6)";
                 s_IFooInt = "GenBase<System.String>.IMethod1<System.Int32>(7,8)";
                 TestWithGenClass<String>(new GenDerived<String>());
                 Console.WriteLine("====================");
-
 
                 s_GMethod1 = "GenDerived<System.Byte>.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "GenDerived<System.Byte>.IFoo<string>.IMethod1<System.Int32>(3,4)";
@@ -1646,13 +2213,11 @@ class Program
                 TestWithStruct(new MyStruct1(), new MyStruct1(), new MyStruct1());
                 Console.WriteLine("====================");
 
-
                 s_IFooString = "MyStruct2.IFoo<string>.IMethod1<System.Int32>(1,2)";
                 s_IFooObject = "MyStruct2.IFoo<string>.IMethod1<System.Int32>(3,4)";
                 s_IFooInt = "MyStruct2.IMethod1<System.Int32>(5,6)";
                 TestWithStruct(new MyStruct2(), new MyStruct2(), new MyStruct2());
                 Console.WriteLine("====================");
-
 
                 s_IFooString = "MyStruct3.IMethod1<System.Int32>(1,2)";
                 s_IFooObject = "MyStruct3.IMethod1<System.Int32>(3,4)";
@@ -1662,17 +2227,27 @@ class Program
             }
 
             {
-                string res = ((IFace<string>)new AnotherDerivedClass<string>()).IFaceGVMethod1<string>("string1", "string2");
+                string res = (
+                    (IFace<string>)new AnotherDerivedClass<string>()
+                ).IFaceGVMethod1<string>("string1", "string2");
                 WriteLineWithVerification("AnotherBaseClass.IFaceGVMethod1", res);
 
-                res = ((IBar<int>)new BarImplementor()).IBarGVMethod<string>((i) => "BarImplementor:" + i.ToString());
+                res = ((IBar<int>)new BarImplementor()).IBarGVMethod<string>(
+                    (i) => "BarImplementor:" + i.ToString()
+                );
                 WriteLineWithVerification("BarImplementor:123", res);
 
                 Yahoo<int> y = new YahooDerived();
-                WriteLineWithVerification("YahooDerived:456", y.YahooGVM<string>((i) => "YahooDerived:" + i.ToString()));
+                WriteLineWithVerification(
+                    "YahooDerived:456",
+                    y.YahooGVM<string>((i) => "YahooDerived:" + i.ToString())
+                );
 
                 ICovariant<object> cov = new Covariant<string>();
-                WriteLineWithVerification("Covariant<String>.ICovariantGVM<Exception>", cov.ICovariantGVM<Exception>());
+                WriteLineWithVerification(
+                    "Covariant<String>.ICovariantGVM<Exception>",
+                    cov.ICovariantGVM<Exception>()
+                );
             }
 
             if (s_NumErrors != 0)
@@ -2033,16 +2608,22 @@ class Program
             }
 
             {
-                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(typeof(string));
+                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(
+                    typeof(string)
+                );
                 object dynamicDerivedObj = Activator.CreateInstance(dynamicDerivedOfString);
                 var virtualMethodDynamicDerived = dynamicDerivedOfString.GetMethod("VirtualMethod");
-                string result = (string)virtualMethodDynamicDerived.Invoke(dynamicDerivedObj, new[] { "fad" });
+                string result = (string)virtualMethodDynamicDerived.Invoke(
+                    dynamicDerivedObj,
+                    new[] { "fad" }
+                );
                 Verify("DynamicDerived<T>.VirtualMethod", result);
             }
 
             // Test generic method invocation
             {
-                var genericMethod = dynamicBaseOfString.GetMethod("GenericMethod").MakeGenericMethod(new[] { typeof(string) });
+                var genericMethod = dynamicBaseOfString.GetMethod("GenericMethod")
+                    .MakeGenericMethod(new[] { typeof(string) });
                 string result = (string)genericMethod.Invoke(obj, new[] { "hey", "hello" });
 
                 Verify("System.Stringhello", result);
@@ -2057,10 +2638,18 @@ class Program
             }
 
             {
-                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(typeof(string));
+                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(
+                    typeof(string)
+                );
                 object dynamicDerivedObj = Activator.CreateInstance(dynamicDerivedOfString);
-                var virtualMethodDynamicDerived = dynamicDerivedOfString.GetMethod("GenericVirtualMethod").MakeGenericMethod(new[] { typeof(string) });
-                string result = (string)virtualMethodDynamicDerived.Invoke(dynamicDerivedObj, new[] { "hey", "fad" });
+                var virtualMethodDynamicDerived = dynamicDerivedOfString.GetMethod(
+                        "GenericVirtualMethod"
+                    )
+                    .MakeGenericMethod(new[] { typeof(string) });
+                string result = (string)virtualMethodDynamicDerived.Invoke(
+                    dynamicDerivedObj,
+                    new[] { "hey", "fad" }
+                );
                 Verify("DynamicDerivedSystem.Stringfad", result);
             }
         }
@@ -2078,7 +2667,6 @@ class Program
             Foo<StructType>.s_floatField = 43.21f;
             Foo<StructType>.s_objectField = "321";
             Foo<StructType>.s_kvp = new KeyValuePair<string, string>("4433", "2211");
-
 
             Bar.s_intField = 778899;
             Bar.s_stringField = "xxyyzz";
@@ -2128,7 +2716,8 @@ class Program
 
                 typeof(Foo<ClassType>).GetField("s_stringField").SetValue(null, "ThisIsAString1");
                 typeof(Foo<ClassType>).GetField("s_objectField").SetValue(null, "ThisIsAString2");
-                typeof(Foo<ClassType>).GetField("s_kvp").SetValue(null, new KeyValuePair<string, string>("ThisIs", "AString"));
+                typeof(Foo<ClassType>).GetField("s_kvp")
+                    .SetValue(null, new KeyValuePair<string, string>("ThisIs", "AString"));
                 Verify("ThisIsAString1", (string)Foo<ClassType>.s_stringField);
                 Verify("ThisIsAString2", (string)Foo<ClassType>.s_objectField);
                 Verify("ThisIs", (string)Foo<ClassType>.s_kvp.Key);
@@ -2156,7 +2745,8 @@ class Program
 
                 typeof(Foo<StructType>).GetField("s_stringField").SetValue(null, "ThisIsAString3");
                 typeof(Foo<StructType>).GetField("s_objectField").SetValue(null, "ThisIsAString4");
-                typeof(Foo<StructType>).GetField("s_kvp").SetValue(null, new KeyValuePair<string, string>("ThisIs1", "AString1"));
+                typeof(Foo<StructType>).GetField("s_kvp")
+                    .SetValue(null, new KeyValuePair<string, string>("ThisIs1", "AString1"));
                 Verify("ThisIsAString3", (string)Foo<StructType>.s_stringField);
                 Verify("ThisIsAString4", (string)Foo<StructType>.s_objectField);
                 Verify("ThisIs1", (string)Foo<StructType>.s_kvp.Key);
@@ -2184,7 +2774,8 @@ class Program
 
                 typeof(Bar).GetField("s_stringField").SetValue(null, "ThisIsAString5");
                 typeof(Bar).GetField("s_objectField").SetValue(null, "ThisIsAString6");
-                typeof(Bar).GetField("s_kvp").SetValue(null, new KeyValuePair<string, string>("ThisIs2", "AString2"));
+                typeof(Bar).GetField("s_kvp")
+                    .SetValue(null, new KeyValuePair<string, string>("ThisIs2", "AString2"));
                 Verify("ThisIsAString5", (string)Bar.s_stringField);
                 Verify("ThisIsAString6", (string)Bar.s_objectField);
                 Verify("ThisIs2", (string)Bar.s_kvp.Key);
@@ -2232,8 +2823,10 @@ class Program
                 fi = typeof(Foo<ClassType>).GetField("m_objectField");
                 Verify("4545", fi.GetValue(fooClassType));
 
-                typeof(Foo<ClassType>).GetField("m_stringField").SetValue(fooClassType, "ThisIsAString7");
-                typeof(Foo<ClassType>).GetField("m_objectField").SetValue(fooClassType, "ThisIsAString8");
+                typeof(Foo<ClassType>).GetField("m_stringField")
+                    .SetValue(fooClassType, "ThisIsAString7");
+                typeof(Foo<ClassType>).GetField("m_objectField")
+                    .SetValue(fooClassType, "ThisIsAString8");
                 Verify("ThisIsAString7", (string)fooClassType.m_stringField);
                 Verify("ThisIsAString8", (string)fooClassType.m_objectField);
             }
@@ -2252,8 +2845,10 @@ class Program
                 fi = typeof(Foo<StructType>).GetField("m_objectField");
                 Verify("5656", fi.GetValue(fooStructType));
 
-                typeof(Foo<StructType>).GetField("m_stringField").SetValue(fooStructType, "ThisIsAString9");
-                typeof(Foo<StructType>).GetField("m_objectField").SetValue(fooStructType, "ThisIsAString10");
+                typeof(Foo<StructType>).GetField("m_stringField")
+                    .SetValue(fooStructType, "ThisIsAString9");
+                typeof(Foo<StructType>).GetField("m_objectField")
+                    .SetValue(fooStructType, "ThisIsAString10");
                 Verify("ThisIsAString9", (string)fooStructType.m_stringField);
                 Verify("ThisIsAString10", (string)fooStructType.m_objectField);
             }
@@ -2283,8 +2878,10 @@ class Program
         {
             // Testing for compilation failures due to references to unused static bases
             // See: https://github.com/dotnet/corert/issues/3211
-            var a = typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithGCStatics>).ToString();
-            var b = typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithNonGCStatics>).ToString();
+            var a =
+                typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithGCStatics>).ToString();
+            var b =
+                typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithNonGCStatics>).ToString();
         }
 
         public static void Run()
@@ -2325,9 +2922,7 @@ class Program
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public void Blagh()
-            {
-            }
+            public void Blagh() { }
         }
 
         public static void Run()
@@ -2857,16 +3452,67 @@ class NormalClass
     }
 }
 
-public interface IFoo<T> { string IFooFunc(); }
+public interface IFoo<T>
+{
+    string IFooFunc();
+}
 public class MyClass0 { }
 public class MyClass1 { }
 public class MyClass2 { }
-public class MyGenClass1<T> { public override string ToString() { return this.GetType().ToString(); } }
-public class MyGenClass2<T> { public override string ToString() { return this.GetType().ToString(); } }
-public class MyGenClass3<T> { public override string ToString() { return this.GetType().ToString(); } }
-public struct MyGenStruct1<T> { public override string ToString() { return this.GetType().ToString(); } }
-public class MyIdClass0 { string _id; public MyIdClass0() { } public MyIdClass0(string id) { _id = id; } public override string ToString() { return "MyIdClass0=" + _id; } }
-public class MyIdClass1 { string _id; public MyIdClass1() { } public MyIdClass1(string id) { _id = id; } public override string ToString() { return "MyIdClass1=" + _id; } }
+public class MyGenClass1<T>
+{
+    public override string ToString()
+    {
+        return this.GetType().ToString();
+    }
+}
+public class MyGenClass2<T>
+{
+    public override string ToString()
+    {
+        return this.GetType().ToString();
+    }
+}
+public class MyGenClass3<T>
+{
+    public override string ToString()
+    {
+        return this.GetType().ToString();
+    }
+}
+public struct MyGenStruct1<T>
+{
+    public override string ToString()
+    {
+        return this.GetType().ToString();
+    }
+}
+public class MyIdClass0
+{
+    string _id;
+    public MyIdClass0() { }
+    public MyIdClass0(string id)
+    {
+        _id = id;
+    }
+    public override string ToString()
+    {
+        return "MyIdClass0=" + _id;
+    }
+}
+public class MyIdClass1
+{
+    string _id;
+    public MyIdClass1() { }
+    public MyIdClass1(string id)
+    {
+        _id = id;
+    }
+    public override string ToString()
+    {
+        return "MyIdClass1=" + _id;
+    }
+}
 
 public class GenBase<T, U> : IFoo<T> where T : new()
 {
@@ -2892,7 +3538,15 @@ public class GenBase<T, U> : IFoo<T> where T : new()
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void GetFieldsTest(GenBase<T, U> obj, string s1, string s2, string s3, U u1, U u2, U u3)
+    public static void GetFieldsTest(
+        GenBase<T, U> obj,
+        string s1,
+        string s2,
+        string s3,
+        U u1,
+        U u2,
+        U u3
+    )
     {
         Assert.AreEqual(obj.m_fieldT.ToString(), s1);
         Assert.AreEqual(GenBase<T, U>.s_fieldT.ToString(), s2);
@@ -2986,14 +3640,18 @@ public class GenBase<T, U> : IFoo<T> where T : new()
         var a = new T();
         var b = new MyGenClass1<T>();
         var c = new T[10];
-        var d = new T[30,30];
+        var d = new T[30, 30];
         var e = new MyGenClass3<T>[5];
-        var f = new MyGenClass3<T>[5,13];
+        var f = new MyGenClass3<T>[5, 13];
         return "NewTest - " + a + " - " + b + " - " + c + " - " + d + " - " + e + " - " + f;
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public string BoxingAndNullableTest(MyGenClass1<KeyValuePair<T,U>> t, MyGenStruct1<Dictionary<T,U>> u, MyGenStruct1<Dictionary<T,U>>? u2)
+    public string BoxingAndNullableTest(
+        MyGenClass1<KeyValuePair<T, U>> t,
+        MyGenStruct1<Dictionary<T, U>> u,
+        MyGenStruct1<Dictionary<T, U>>? u2
+    )
     {
         return "BoxingAndNullableTest - " + this + "::(" + t + " - " + u + " - " + u2 + ")";
     }
@@ -3038,7 +3696,6 @@ public class Base
         return "IFaceCallTest = " + i.IFooFunc();
     }
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public string LdTokenTest<T, U>()
     {
@@ -3064,7 +3721,11 @@ public class Base
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public string BoxingAndNullableTest<T, U>(MyGenClass1<KeyValuePair<T, U>> t, MyGenStruct1<Dictionary<T, U>> u, MyGenStruct1<Dictionary<T, U>>? u2)
+    public string BoxingAndNullableTest<T, U>(
+        MyGenClass1<KeyValuePair<T, U>> t,
+        MyGenStruct1<Dictionary<T, U>> u,
+        MyGenStruct1<Dictionary<T, U>>? u2
+    )
     {
         return "BoxingAndNullableTest - " + this + "::(" + t + " - " + u + " - " + u2 + ")";
     }

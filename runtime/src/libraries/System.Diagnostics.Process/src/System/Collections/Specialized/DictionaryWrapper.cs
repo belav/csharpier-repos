@@ -76,9 +76,11 @@ namespace System.Collections.Specialized
             return Remove(item.Key);
         }
 
-        public bool TryGetValue(string key, out string? value) => _contents.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out string? value) =>
+            _contents.TryGetValue(key, out value);
 
-        public IEnumerator<KeyValuePair<string, string?>> GetEnumerator() => _contents.GetEnumerator();
+        public IEnumerator<KeyValuePair<string, string?>> GetEnumerator() =>
+            _contents.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _contents.GetEnumerator();
         IDictionaryEnumerator IDictionary.GetEnumerator() => _contents.GetEnumerator();
     }

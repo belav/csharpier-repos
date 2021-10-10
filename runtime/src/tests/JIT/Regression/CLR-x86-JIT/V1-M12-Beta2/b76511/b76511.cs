@@ -26,7 +26,12 @@ internal class bug1
 
         Console.WriteLine("The correct result is 1");
         Console.Write("The actual result is ");
-        int retval = Convert.ToInt32(Convert.ToInt32((long)(Convert.ToInt32(vtstatic.a3) + (long)(18L / cl.a5 / 3)) / (cl.a5 * a1 / a4) + (cl.a2 / arr1d[0] - cl.a2)));
+        int retval = Convert.ToInt32(
+            Convert.ToInt32(
+                (long)(Convert.ToInt32(vtstatic.a3) + (long)(18L / cl.a5 / 3)) / (cl.a5 * a1 / a4)
+                    + (cl.a2 / arr1d[0] - cl.a2)
+            )
+        );
         Console.WriteLine(retval);
         return retval + 99;
     }

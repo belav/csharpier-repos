@@ -81,10 +81,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             else
             {
                 var length = shortName.Length;
-                var dotIndex = shortName.LastIndexOf(".", hashIndex, hashIndex + 1, StringComparison.Ordinal);
+                var dotIndex = shortName.LastIndexOf(
+                    ".",
+                    hashIndex,
+                    hashIndex + 1,
+                    StringComparison.Ordinal
+                );
                 if (dotIndex != -1)
                 {
-                    dotIndex = shortName.LastIndexOf(".", dotIndex - 1, dotIndex, StringComparison.Ordinal);
+                    dotIndex = shortName.LastIndexOf(
+                        ".",
+                        dotIndex - 1,
+                        dotIndex,
+                        StringComparison.Ordinal
+                    );
                     if (dotIndex != -1)
                     {
                         shortName = shortName[(dotIndex + 1)..];
@@ -93,8 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             }
 
             return shortName == Name
-                       ? shortName + " (" + ClrType.ShortDisplayName() + ")"
-                       : shortName;
+              ? shortName + " (" + ClrType.ShortDisplayName() + ")"
+              : shortName;
         }
 
         /// <summary>
@@ -116,9 +126,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 if (plusIndex == -1)
                 {
                     var dotIndex = Name.LastIndexOf(".", StringComparison.Ordinal);
-                    return dotIndex == -1
-                            ? Name
-                            : Name[(dotIndex + 1)..];
+                    return dotIndex == -1 ? Name : Name[(dotIndex + 1)..];
                 }
 
                 return Name[(plusIndex + 1)..];
@@ -137,9 +145,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> The access mode being used. </returns>
-        PropertyAccessMode GetPropertyAccessMode()
-            => (PropertyAccessMode?)this[CoreAnnotationNames.PropertyAccessMode]
-                ?? Model.GetPropertyAccessMode();
+        PropertyAccessMode GetPropertyAccessMode() =>
+            (PropertyAccessMode?)this[CoreAnnotationNames.PropertyAccessMode]
+            ?? Model.GetPropertyAccessMode();
 
         /// <summary>
         ///     <para>
@@ -151,9 +159,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> The access mode being used. </returns>
-        PropertyAccessMode GetNavigationAccessMode()
-            => (PropertyAccessMode?)this[CoreAnnotationNames.NavigationAccessMode]
-                ?? GetPropertyAccessMode();
+        PropertyAccessMode GetNavigationAccessMode() =>
+            (PropertyAccessMode?)this[CoreAnnotationNames.NavigationAccessMode]
+            ?? GetPropertyAccessMode();
 
         /// <summary>
         ///     Returns the <seealso cref="PropertyInfo"/> for the indexer on the associated CLR type if one exists.

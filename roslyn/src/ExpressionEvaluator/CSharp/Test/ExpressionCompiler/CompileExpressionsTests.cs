@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void NoRequests()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F()
     {
@@ -35,20 +35,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 validator: runtime =>
                 {
                     var context = CreateMethodContext(runtime, "C.F");
-                    var assembly = context.CompileExpressions(ImmutableArray<string>.Empty,
+                    var assembly = context.CompileExpressions(
+                        ImmutableArray<string>.Empty,
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
                     Assert.Null(assembly);
                     Assert.True(methodTokens.IsEmpty);
                     Assert.True(errorMessages.IsEmpty);
-                });
+                }
+            );
         }
 
         [Fact]
         public void SingleRequest()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F()
     {
@@ -66,25 +69,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var assembly = context.CompileExpressions(
                         ImmutableArray.Create("1"),
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
                     Assert.NotNull(assembly);
                     Assert.True(errorMessages.IsEmpty);
                     Assert.Equal(1, methodTokens.Length);
-                    assembly.VerifyIL(methodTokens[0], "<>x0.<>m0",
-@"{
+                    assembly.VerifyIL(
+                        methodTokens[0],
+                        "<>x0.<>m0",
+                        @"{
   // Code size        2 (0x2)
   .maxstack  8
   IL_0000:  ldc.i4.1
   IL_0001:  ret
-}");
-                });
+}"
+                    );
+                }
+            );
         }
 
         [Fact]
         public void MultipleRequests()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F(object x)
     {
@@ -103,20 +111,26 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var assembly = context.CompileExpressions(
                         ImmutableArray.Create("x", "x ?? y"),
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
                     Assert.NotNull(assembly);
                     Assert.True(errorMessages.IsEmpty);
                     Assert.Equal(2, methodTokens.Length);
-                    assembly.VerifyIL(methodTokens[0], "<>x0.<>m0",
-@"Locals: object
+                    assembly.VerifyIL(
+                        methodTokens[0],
+                        "<>x0.<>m0",
+                        @"Locals: object
 {
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ret
-}");
-                    assembly.VerifyIL(methodTokens[1], "<>x1.<>m0",
-@"Locals: object
+}"
+                    );
+                    assembly.VerifyIL(
+                        methodTokens[1],
+                        "<>x1.<>m0",
+                        @"Locals: object
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -126,15 +140,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0004:  pop
   IL_0005:  ldloc.0
   IL_0006:  ret
-}");
-                });
+}"
+                    );
+                }
+            );
         }
 
         [Fact]
         public void ParseErrors()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F(object x)
     {
@@ -153,24 +169,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var assembly = context.CompileExpressions(
                         ImmutableArray.Create("x", "x ??", "?? z", "x ?? z"),
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
 
                     Assert.Null(assembly);
-                    AssertEx.Equal(new[]
-                    {
-                        $"(1,5): error CS1733: { CSharpResources.ERR_ExpressionExpected }",
-                        $"(1,1): error CS1525: { string.Format(CSharpResources.ERR_InvalidExprTerm, "??") }",
-                    }, errorMessages);
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            $"(1,5): error CS1733: {CSharpResources.ERR_ExpressionExpected}",
+                            $"(1,1): error CS1525: {string.Format(CSharpResources.ERR_InvalidExprTerm, "??")}",
+                        },
+                        errorMessages
+                    );
 
                     Assert.True(methodTokens.IsEmpty);
-                });
+                }
+            );
         }
 
         [Fact]
         public void BindingErrors()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F(object x)
     {
@@ -192,18 +213,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                             "z", // (1,1): error CS0103: The name 'z' does not exist in the current context
                             "x ?? y",
                             "x ?? z", // (1,6): error CS0103: The name 'z' does not exist in the current context
-                            "0l"), // (1,2): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                            "0l"
+                        ), // (1,2): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
 
                     Assert.Null(assembly);
-                    AssertEx.Equal(new[]
-                    {
-                        $"(1,1): error CS0103: { string.Format(CSharpResources.ERR_NameNotInContext,"z") }",
-                        $"(1,6): error CS0103: { string.Format(CSharpResources.ERR_NameNotInContext,"z") }",
-                    }, errorMessages);
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            $"(1,1): error CS0103: {string.Format(CSharpResources.ERR_NameNotInContext, "z")}",
+                            $"(1,6): error CS0103: {string.Format(CSharpResources.ERR_NameNotInContext, "z")}",
+                        },
+                        errorMessages
+                    );
                     Assert.True(methodTokens.IsEmpty);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -211,7 +238,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         {
             var longName = new string('P', 1100);
             var source =
-@"class C
+                @"class C
 {
     static void F()
     {
@@ -229,27 +256,32 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var assembly = context.CompileExpressions(
                         ImmutableArray.Create($"new {{ {longName} = 1 }}"),
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
                     Assert.Null(assembly);
-                    AssertEx.Equal(new[]
-                    {
-                        $"error CS7013: { string.Format(CSharpResources.ERR_MetadataNameTooLong, $"<{longName}>i__Field") }",
-                        $"error CS7013: { string.Format(CSharpResources.ERR_MetadataNameTooLong, $"<{longName}>j__TPar") }",
-                        $"error CS7013: { string.Format(CSharpResources.ERR_MetadataNameTooLong, $"<{longName}>i__Field") }",
-                        $"error CS7013: { string.Format(CSharpResources.ERR_MetadataNameTooLong, $"get_{longName}") }",
-                        $"error CS7013: { string.Format(CSharpResources.ERR_MetadataNameTooLong, $"{longName}") }",
-                        $"error CS7013: { string.Format(CSharpResources.ERR_MetadataNameTooLong, $"{longName}") }",
-                    }, errorMessages);
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            $"error CS7013: {string.Format(CSharpResources.ERR_MetadataNameTooLong, $"<{longName}>i__Field")}",
+                            $"error CS7013: {string.Format(CSharpResources.ERR_MetadataNameTooLong, $"<{longName}>j__TPar")}",
+                            $"error CS7013: {string.Format(CSharpResources.ERR_MetadataNameTooLong, $"<{longName}>i__Field")}",
+                            $"error CS7013: {string.Format(CSharpResources.ERR_MetadataNameTooLong, $"get_{longName}")}",
+                            $"error CS7013: {string.Format(CSharpResources.ERR_MetadataNameTooLong, $"{longName}")}",
+                            $"error CS7013: {string.Format(CSharpResources.ERR_MetadataNameTooLong, $"{longName}")}",
+                        },
+                        errorMessages
+                    );
 
                     Assert.True(methodTokens.IsEmpty);
-                });
+                }
+            );
         }
 
         [Fact]
         public void Assignment()
         {
             var source =
-@"class C
+                @"class C
 {
     object F;
     void M()
@@ -269,12 +301,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var assembly = context.CompileExpressions(
                         ImmutableArray.Create("o = F"),
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
                     Assert.NotNull(assembly);
                     Assert.True(errorMessages.IsEmpty);
                     Assert.Equal(1, methodTokens.Length);
-                    assembly.VerifyIL(methodTokens[0], "<>x0.<>m0",
-@"Locals: object
+                    assembly.VerifyIL(
+                        methodTokens[0],
+                        "<>x0.<>m0",
+                        @"Locals: object
 {
   // Code size        9 (0x9)
   .maxstack  2
@@ -283,15 +318,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0006:  dup
   IL_0007:  stloc.0
   IL_0008:  ret
-}");
-                });
+}"
+                    );
+                }
+            );
         }
 
         [Fact]
         public void VoidExpression()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F()
     {
@@ -309,25 +346,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var assembly = context.CompileExpressions(
                         ImmutableArray.Create("F()"),
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
                     Assert.NotNull(assembly);
                     Assert.True(errorMessages.IsEmpty);
                     Assert.Equal(1, methodTokens.Length);
-                    assembly.VerifyIL(methodTokens[0], "<>x0.<>m0",
-@"{
+                    assembly.VerifyIL(
+                        methodTokens[0],
+                        "<>x0.<>m0",
+                        @"{
   // Code size        6 (0x6)
   .maxstack  8
   IL_0000:  call       0x0A000006
   IL_0005:  ret
-}");
-                });
+}"
+                    );
+                }
+            );
         }
 
         [Fact]
         public void Declaration()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F()
     {
@@ -349,20 +391,26 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var assembly = context.CompileExpressions(
                         ImmutableArray.Create("G(out var o)"),
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
                     Assert.Null(assembly);
                     AssertEx.Equal(
-                        new[] { $"(1,11): error CS8185: { CSharpResources.ERR_DeclarationExpressionNotPermitted }" },
-                        errorMessages);
+                        new[]
+                        {
+                            $"(1,11): error CS8185: {CSharpResources.ERR_DeclarationExpressionNotPermitted}"
+                        },
+                        errorMessages
+                    );
                     Assert.True(methodTokens.IsEmpty);
-                });
+                }
+            );
         }
 
         [Fact]
         public void PseudoVariables()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F()
     {
@@ -380,30 +428,39 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var assembly = context.CompileExpressions(
                         ImmutableArray.Create("$exception", "$1 ?? $unknown"),
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
                     Assert.Null(assembly);
-                    AssertEx.Equal(new[]
-                    {
-                        $"(1,1): error CS0103: { string.Format(CSharpResources.ERR_NameNotInContext, "$exception") }",
-                        $"(1,1): error CS0103: { string.Format(CSharpResources.ERR_NameNotInContext, "$1") }",
-                        $"(1,7): error CS0103: { string.Format(CSharpResources.ERR_NameNotInContext, "$unknown") }",
-                    }, errorMessages);
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            $"(1,1): error CS0103: {string.Format(CSharpResources.ERR_NameNotInContext, "$exception")}",
+                            $"(1,1): error CS0103: {string.Format(CSharpResources.ERR_NameNotInContext, "$1")}",
+                            $"(1,7): error CS0103: {string.Format(CSharpResources.ERR_NameNotInContext, "$unknown")}",
+                        },
+                        errorMessages
+                    );
                     Assert.True(methodTokens.IsEmpty);
-                });
+                }
+            );
         }
 
         [Fact]
         public void GenericAndDynamic()
         {
             var source =
-@"class C<T>
+                @"class C<T>
 {
     static void F<U>(dynamic d)
     {
         d.F();
     }
 }";
-            var comp = CreateCompilation(source, new[] { CSharpRef }, options: TestOptions.DebugDll);
+            var comp = CreateCompilation(
+                source,
+                new[] { CSharpRef },
+                options: TestOptions.DebugDll
+            );
             WithRuntimeInstance(
                 comp,
                 references: null,
@@ -415,12 +472,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var assembly = context.CompileExpressions(
                         ImmutableArray.Create("default(T)", "default(U)", "d.F()"),
                         out var methodTokens,
-                        out var errorMessages);
+                        out var errorMessages
+                    );
                     Assert.NotNull(assembly);
                     Assert.True(errorMessages.IsEmpty);
                     Assert.Equal(3, methodTokens.Length);
-                    assembly.VerifyIL(methodTokens[0], "<>x0.<>m0",
-@"Locals: !0
+                    assembly.VerifyIL(
+                        methodTokens[0],
+                        "<>x0.<>m0",
+                        @"Locals: !0
 {
   // Code size       10 (0xa)
   .maxstack  1
@@ -428,9 +488,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0002:  initobj    0x1B000001
   IL_0008:  ldloc.0
   IL_0009:  ret
-}");
-                    assembly.VerifyIL(methodTokens[1], "<>x1.<>m0",
-@"Locals: !!0
+}"
+                    );
+                    assembly.VerifyIL(
+                        methodTokens[1],
+                        "<>x1.<>m0",
+                        @"Locals: !!0
 {
   // Code size       10 (0xa)
   .maxstack  1
@@ -438,9 +501,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0002:  initobj    0x1B000002
   IL_0008:  ldloc.0
   IL_0009:  ret
-}");
-                    assembly.VerifyIL(methodTokens[2], "<>x2.<>m0",
-@"{
+}"
+                    );
+                    assembly.VerifyIL(
+                        methodTokens[2],
+                        "<>x2.<>m0",
+                        @"{
   // Code size       77 (0x4d)
   .maxstack  9
   IL_0000:  ldsfld     0x0A000008
@@ -467,8 +533,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0046:  ldarg.0
   IL_0047:  callvirt   0x0A00000E
   IL_004c:  ret
-}");
-                });
+}"
+                    );
+                }
+            );
         }
 
         [WorkItem(482753, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=482753")]
@@ -476,7 +544,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void LocalsInAsync()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 class C
 {
@@ -502,7 +570,11 @@ class C
             // Test with CompileExpression rather than CompileExpressions
             // so field references in IL are named.
             // Debug build.
-            var comp = CreateCompilationWithMscorlib45(source, options: TestOptions.DebugDll, references: new[] { TestMetadata.Net40.SystemCore });
+            var comp = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.DebugDll,
+                references: new[] { TestMetadata.Net40.SystemCore }
+            );
             WithRuntimeInstance(
                 comp,
                 references: null,
@@ -510,14 +582,19 @@ class C
                 includeIntrinsicAssembly: false,
                 validator: runtime =>
                 {
-                    var context = CreateMethodContext(runtime, "C.<M>d__3.MoveNext()", atLineNumber: 999);
+                    var context = CreateMethodContext(
+                        runtime,
+                        "C.<M>d__3.MoveNext()",
+                        atLineNumber: 999
+                    );
                     string error;
                     var testData = new CompilationTestData();
                     var result = context.CompileExpression("z ?? x", out error, testData);
                     Assert.NotNull(result.Assembly);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0").VerifyIL(
-@"{
+                    testData.GetMethodData("<>x.<>m0")
+                        .VerifyIL(
+                            @"{
   // Code size       22 (0x16)
   .maxstack  2
   .locals init (int V_0,
@@ -534,18 +611,27 @@ class C
   IL_000b:  ldfld      ""C.<>c__DisplayClass3_0 C.<M>d__3.<>8__1""
   IL_0010:  ldfld      ""object C.<>c__DisplayClass3_0.x""
   IL_0015:  ret
-}");
-                });
+}"
+                        );
+                }
+            );
             // Release build.
-            comp = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseDll, references: new[] { SystemCoreRef });
+            comp = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseDll,
+                references: new[] { SystemCoreRef }
+            );
             {
                 // Note from MoveNext() below that local CS$<>8__locals0 should not be
                 // used in the compiled expression to access the display class since that
                 // local is only set the first time through MoveNext() (see loc.2 below).
                 var testData = new CompilationTestData();
                 comp.EmitToArray(testData: testData);
-                testData.GetMethodData("C.<M>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()").VerifyIL(
-@"{
+                testData.GetMethodData(
+                        "C.<M>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()"
+                    )
+                    .VerifyIL(
+                        @"{
   // Code size      293 (0x125)
   .maxstack  3
   .locals init (int V_0,
@@ -669,7 +755,8 @@ class C
   IL_011a:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder C.<M>d__3.<>t__builder""
   IL_011f:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0124:  ret
-}");
+}"
+                    );
             }
             WithRuntimeInstance(
                 comp,
@@ -678,14 +765,19 @@ class C
                 includeIntrinsicAssembly: false,
                 validator: runtime =>
                 {
-                    var context = CreateMethodContext(runtime, "C.<M>d__3.MoveNext()", atLineNumber: 999);
+                    var context = CreateMethodContext(
+                        runtime,
+                        "C.<M>d__3.MoveNext()",
+                        atLineNumber: 999
+                    );
                     string error;
                     var testData = new CompilationTestData();
                     var result = context.CompileExpression("z ?? x", out error, testData);
                     Assert.NotNull(result.Assembly);
                     Assert.Null(error);
-                    testData.GetMethodData("<>x.<>m0").VerifyIL(
-@"{
+                    testData.GetMethodData("<>x.<>m0")
+                        .VerifyIL(
+                            @"{
   // Code size       12 (0xc)
   .maxstack  2
   .locals init (int V_0,
@@ -702,8 +794,10 @@ class C
   IL_0005:  ldarg.0
   IL_0006:  ldfld      ""object C.<M>d__3.x""
   IL_000b:  ret
-}");
-                });
+}"
+                        );
+                }
+            );
         }
     }
 }

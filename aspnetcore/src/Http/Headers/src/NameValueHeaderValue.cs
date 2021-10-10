@@ -19,10 +19,10 @@ namespace Microsoft.Net.Http.Headers
     /// </summary>
     public class NameValueHeaderValue
     {
-        private static readonly HttpHeaderParser<NameValueHeaderValue> SingleValueParser
-            = new GenericHeaderParser<NameValueHeaderValue>(false, GetNameValueLength);
-        internal static readonly HttpHeaderParser<NameValueHeaderValue> MultipleValueParser
-            = new GenericHeaderParser<NameValueHeaderValue>(true, GetNameValueLength);
+        private static readonly HttpHeaderParser<NameValueHeaderValue> SingleValueParser =
+            new GenericHeaderParser<NameValueHeaderValue>(false, GetNameValueLength);
+        internal static readonly HttpHeaderParser<NameValueHeaderValue> MultipleValueParser =
+            new GenericHeaderParser<NameValueHeaderValue>(true, GetNameValueLength);
 
         private StringSegment _name;
         private StringSegment _value;
@@ -37,10 +37,7 @@ namespace Microsoft.Net.Http.Headers
         /// Initializes a new instance of <see cref="NameValueHeaderValue"/>.
         /// </summary>
         /// <param name="name">The header name.</param>
-        public NameValueHeaderValue(StringSegment name)
-            : this(name, null)
-        {
-        }
+        public NameValueHeaderValue(StringSegment name) : this(name, null) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="NameValueHeaderValue"/>.
@@ -80,7 +77,10 @@ namespace Microsoft.Net.Http.Headers
         /// <summary>
         /// Gets a value that determines if this header is read only.
         /// </summary>
-        public bool IsReadOnly { get { return _isReadOnly; } }
+        public bool IsReadOnly
+        {
+            get { return _isReadOnly; }
+        }
 
         /// <summary>
         /// Provides a copy of this object without the cost of re-validating the values.
@@ -88,11 +88,7 @@ namespace Microsoft.Net.Http.Headers
         /// <returns>A copy.</returns>
         public NameValueHeaderValue Copy()
         {
-            return new NameValueHeaderValue()
-            {
-                _name = _name,
-                _value = _value
-            };
+            return new NameValueHeaderValue() { _name = _name, _value = _value };
         }
 
         /// <summary>
@@ -219,7 +215,10 @@ namespace Microsoft.Net.Http.Headers
         /// <param name="input">The value to parse.</param>
         /// <param name="parsedValue">The parsed value.</param>
         /// <returns><see langword="true"/> if input is a valid <see cref="NameValueHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-        public static bool TryParse(StringSegment input, [NotNullWhen(true)] out NameValueHeaderValue? parsedValue)
+        public static bool TryParse(
+            StringSegment input,
+            [NotNullWhen(true)] out NameValueHeaderValue? parsedValue
+        )
         {
             var index = 0;
             return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
@@ -251,7 +250,10 @@ namespace Microsoft.Net.Http.Headers
         /// <param name="input">The values to parse.</param>
         /// <param name="parsedValues">The parsed values.</param>
         /// <returns><see langword="true"/> if all inputs are valid <see cref="NameValueHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-        public static bool TryParseList(IList<string>? input, [NotNullWhen(true)] out IList<NameValueHeaderValue>? parsedValues)
+        public static bool TryParseList(
+            IList<string>? input,
+            [NotNullWhen(true)] out IList<NameValueHeaderValue>? parsedValues
+        )
         {
             return MultipleValueParser.TryParseValues(input, out parsedValues);
         }
@@ -262,7 +264,10 @@ namespace Microsoft.Net.Http.Headers
         /// <param name="input">The values to parse.</param>
         /// <param name="parsedValues">The parsed values.</param>
         /// <returns><see langword="true"/> if all inputs are valid <see cref="StringWithQualityHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-        public static bool TryParseStrictList(IList<string>? input, [NotNullWhen(true)] out IList<NameValueHeaderValue>? parsedValues)
+        public static bool TryParseStrictList(
+            IList<string>? input,
+            [NotNullWhen(true)] out IList<NameValueHeaderValue>? parsedValues
+        )
         {
             return MultipleValueParser.TryParseStrictValues(input, out parsedValues);
         }
@@ -281,7 +286,8 @@ namespace Microsoft.Net.Http.Headers
             IList<NameValueHeaderValue>? values,
             char separator,
             bool leadingSeparator,
-            StringBuilder destination)
+            StringBuilder destination
+        )
         {
             Contract.Assert(destination != null);
 
@@ -306,7 +312,11 @@ namespace Microsoft.Net.Http.Headers
             }
         }
 
-        internal static string? ToString(IList<NameValueHeaderValue>? values, char separator, bool leadingSeparator)
+        internal static string? ToString(
+            IList<NameValueHeaderValue>? values,
+            char separator,
+            bool leadingSeparator
+        )
         {
             if ((values == null) || (values.Count == 0))
             {
@@ -335,7 +345,11 @@ namespace Microsoft.Net.Http.Headers
             return result;
         }
 
-        private static int GetNameValueLength(StringSegment input, int startIndex, out NameValueHeaderValue? parsedValue)
+        private static int GetNameValueLength(
+            StringSegment input,
+            int startIndex,
+            out NameValueHeaderValue? parsedValue
+        )
         {
             Contract.Requires(startIndex >= 0);
 
@@ -391,7 +405,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             char delimiter,
-            IList<NameValueHeaderValue> nameValueCollection)
+            IList<NameValueHeaderValue> nameValueCollection
+        )
         {
             Contract.Requires(startIndex >= 0);
 
@@ -433,7 +448,10 @@ namespace Microsoft.Net.Http.Headers
         /// <param name="values">The collection to search.</param>
         /// <param name="name">The name to find.</param>
         /// <returns>The <see cref="NameValueHeaderValue" /> if found, otherwise <see langword="null" />.</returns>
-        public static NameValueHeaderValue? Find(IList<NameValueHeaderValue>? values, StringSegment name)
+        public static NameValueHeaderValue? Find(
+            IList<NameValueHeaderValue>? values,
+            StringSegment name
+        )
         {
             Contract.Requires(name.Length > 0);
 
@@ -465,7 +483,10 @@ namespace Microsoft.Net.Http.Headers
             if (valueLength == 0)
             {
                 // A value can either be a token or a quoted string. Check if it is a quoted string.
-                if (HttpRuleParser.GetQuotedStringLength(input, startIndex, out valueLength) != HttpParseResult.Parsed)
+                if (
+                    HttpRuleParser.GetQuotedStringLength(input, startIndex, out valueLength)
+                    != HttpParseResult.Parsed
+                )
                 {
                     // We have an invalid value. Reset the name and return.
                     return 0;
@@ -485,7 +506,13 @@ namespace Microsoft.Net.Http.Headers
             // Either value is null/empty or a valid token/quoted string
             if (!(StringSegment.IsNullOrEmpty(value) || (GetValueLength(value, 0) == value.Length)))
             {
-                throw new FormatException(string.Format(CultureInfo.InvariantCulture, "The header value is invalid: '{0}'", value));
+                throw new FormatException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "The header value is invalid: '{0}'",
+                        value
+                    )
+                );
             }
         }
 

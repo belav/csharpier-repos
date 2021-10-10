@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         /// Retrieves the current UTC system time.
         /// </summary>
         public DateTimeOffset UtcNow => DateTimeOffset.UtcNow;
-        
+
         /// <summary>
         /// Retrieves ticks for the current UTC system time.
         /// </summary>

@@ -24,49 +24,51 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var serviceContext = new TestServiceContext(LoggerFactory);
             var heartbeatManager = new HeartbeatManager(serviceContext.ConnectionManager);
 
-            var appRunningEvent = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var appRunningEvent = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            await using (var server = new TestServer(context =>
-            {
-                context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate =
-                    new MinDataRate(bytesPerSecond: 1, gracePeriod: gracePeriod);
+            await using (
+                var server = new TestServer(
+                    context =>
+                    {
+                        context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate =
+                            new MinDataRate(bytesPerSecond: 1, gracePeriod: gracePeriod);
 
-                // The server must call Request.Body.ReadAsync() *before* the test sets systemClock.UtcNow (which is triggered by the
-                // server calling appRunningEvent.SetResult(null)).  If systemClock.UtcNow is set first, it's possible for the test to fail
-                // due to the following race condition:
-                //
-                // 1. [test]    systemClock.UtcNow += gracePeriod + TimeSpan.FromSeconds(1);
-                // 2. [server]  Heartbeat._timer is triggered, which calls HttpConnection.Tick()
-                // 3. [server]  HttpConnection.Tick() calls HttpConnection.CheckForReadDataRateTimeout()
-                // 4. [server]  HttpConnection.CheckForReadDataRateTimeout() is a no-op, since _readTimingEnabled is false,
-                //              since Request.Body.ReadAsync() has not been called yet
-                // 5. [server]  HttpConnection.Tick() sets _lastTimestamp = timestamp
-                // 6. [server]  Request.Body.ReadAsync() is called
-                // 6. [test]    systemClock.UtcNow is never updated again, so server timestamp is never updated,
-                //              so HttpConnection.CheckForReadDataRateTimeout() is always a no-op until test fails
-                //
-                // This is a pretty tight race, since the once-per-second Heartbeat._timer needs to fire between the test updating
-                // systemClock.UtcNow and the server calling Request.Body.ReadAsync().  But it happened often enough to cause
-                // test flakiness in our CI (https://github.com/aspnet/KestrelHttpServer/issues/2539).
-                //
-                // For verification, I was able to induce the race by adding a sleep in the RequestDelegate:
-                //     appRunningEvent.SetResult(null);
-                //     Thread.Sleep(5000);
-                //     return context.Request.Body.ReadAsync(new byte[1], 0, 1);
+                        // The server must call Request.Body.ReadAsync() *before* the test sets systemClock.UtcNow (which is triggered by the
+                        // server calling appRunningEvent.SetResult(null)).  If systemClock.UtcNow is set first, it's possible for the test to fail
+                        // due to the following race condition:
+                        //
+                        // 1. [test]    systemClock.UtcNow += gracePeriod + TimeSpan.FromSeconds(1);
+                        // 2. [server]  Heartbeat._timer is triggered, which calls HttpConnection.Tick()
+                        // 3. [server]  HttpConnection.Tick() calls HttpConnection.CheckForReadDataRateTimeout()
+                        // 4. [server]  HttpConnection.CheckForReadDataRateTimeout() is a no-op, since _readTimingEnabled is false,
+                        //              since Request.Body.ReadAsync() has not been called yet
+                        // 5. [server]  HttpConnection.Tick() sets _lastTimestamp = timestamp
+                        // 6. [server]  Request.Body.ReadAsync() is called
+                        // 6. [test]    systemClock.UtcNow is never updated again, so server timestamp is never updated,
+                        //              so HttpConnection.CheckForReadDataRateTimeout() is always a no-op until test fails
+                        //
+                        // This is a pretty tight race, since the once-per-second Heartbeat._timer needs to fire between the test updating
+                        // systemClock.UtcNow and the server calling Request.Body.ReadAsync().  But it happened often enough to cause
+                        // test flakiness in our CI (https://github.com/aspnet/KestrelHttpServer/issues/2539).
+                        //
+                        // For verification, I was able to induce the race by adding a sleep in the RequestDelegate:
+                        //     appRunningEvent.SetResult(null);
+                        //     Thread.Sleep(5000);
+                        //     return context.Request.Body.ReadAsync(new byte[1], 0, 1);
 
-                var readTask = context.Request.Body.ReadAsync(new byte[1], 0, 1);
-                appRunningEvent.SetResult();
-                return readTask;
-            }, serviceContext))
+                        var readTask = context.Request.Body.ReadAsync(new byte[1], 0, 1);
+                        appRunningEvent.SetResult();
+                        return readTask;
+                    },
+                    serviceContext
+                )
+            )
             {
                 using (var connection = server.CreateConnection())
                 {
-                    await connection.Send(
-                        "POST / HTTP/1.1",
-                        "Host:",
-                        "Content-Length: 1",
-                        "",
-                        "");
+                    await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 1", "", "");
 
                     await appRunningEvent.Task.DefaultTimeout();
 
@@ -77,15 +79,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         heartbeatManager.OnHeartbeat(serviceContext.SystemClock.UtcNow);
                     }
 
-                    await connection.Receive(
-                        "HTTP/1.1 408 Request Timeout",
-                        "");
+                    await connection.Receive("HTTP/1.1 408 Request Timeout", "");
                     await connection.ReceiveEnd(
                         "Connection: close",
                         $"Date: {serviceContext.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
         }
@@ -103,24 +104,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             date.OnHeartbeat(clock.UtcNow);
             serviceContext.DateHeaderValueManager = date;
 
-            var appRunningEvent = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var appRunningEvent = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            await using (var server = new TestServer(context =>
-            {
-                context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate = null;
+            await using (
+                var server = new TestServer(
+                    context =>
+                    {
+                        context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate =
+                            null;
 
-                appRunningEvent.SetResult();
-                return Task.CompletedTask;
-            }, serviceContext))
+                        appRunningEvent.SetResult();
+                        return Task.CompletedTask;
+                    },
+                    serviceContext
+                )
+            )
             {
                 using (var connection = server.CreateConnection())
                 {
-                    await connection.Send(
-                        "POST / HTTP/1.1",
-                        "Host:",
-                        "Content-Length: 1",
-                        "",
-                        "");
+                    await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 1", "", "");
 
                     await appRunningEvent.Task.DefaultTimeout();
 
@@ -130,12 +134,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         $"Date: {serviceContext.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
 
-            Assert.Contains(TestSink.Writes, w => w.EventId.Id == 32 && w.LogLevel == LogLevel.Information);
-            Assert.Contains(TestSink.Writes, w => w.EventId.Id == 33 && w.LogLevel == LogLevel.Information);
+            Assert.Contains(
+                TestSink.Writes,
+                w => w.EventId.Id == 32 && w.LogLevel == LogLevel.Information
+            );
+            Assert.Contains(
+                TestSink.Writes,
+                w => w.EventId.Id == 33 && w.LogLevel == LogLevel.Information
+            );
         }
 
         [Fact]
@@ -145,45 +156,50 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var serviceContext = new TestServiceContext(LoggerFactory);
             var heartbeatManager = new HeartbeatManager(serviceContext.ConnectionManager);
 
-            var appRunningTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            var exceptionSwallowedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var appRunningTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var exceptionSwallowedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            await using (var server = new TestServer(async context =>
-            {
-                context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate =
-                    new MinDataRate(bytesPerSecond: 1, gracePeriod: gracePeriod);
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate =
+                            new MinDataRate(bytesPerSecond: 1, gracePeriod: gracePeriod);
 
-                // See comment in RequestTimesOutWhenRequestBodyNotReceivedAtSpecifiedMinimumRate for
-                // why we call ReadAsync before setting the appRunningEvent.
-                var readTask = context.Request.Body.ReadAsync(new byte[1], 0, 1);
-                appRunningTcs.SetResult();
+                        // See comment in RequestTimesOutWhenRequestBodyNotReceivedAtSpecifiedMinimumRate for
+                        // why we call ReadAsync before setting the appRunningEvent.
+                        var readTask = context.Request.Body.ReadAsync(new byte[1], 0, 1);
+                        appRunningTcs.SetResult();
 
-                try
-                {
-                    await readTask;
-                }
-                catch (Microsoft.AspNetCore.Http.BadHttpRequestException ex) when (ex.StatusCode == 408)
-                {
-                    exceptionSwallowedTcs.SetResult();
-                }
-                catch (Exception ex)
-                {
-                    exceptionSwallowedTcs.SetException(ex);
-                }
+                        try
+                        {
+                            await readTask;
+                        }
+                        catch (Microsoft.AspNetCore.Http.BadHttpRequestException ex)
+                            when (ex.StatusCode == 408)
+                        {
+                            exceptionSwallowedTcs.SetResult();
+                        }
+                        catch (Exception ex)
+                        {
+                            exceptionSwallowedTcs.SetException(ex);
+                        }
 
-                var response = "hello, world";
-                context.Response.ContentLength = response.Length;
-                await context.Response.WriteAsync("hello, world");
-            }, serviceContext))
+                        var response = "hello, world";
+                        context.Response.ContentLength = response.Length;
+                        await context.Response.WriteAsync("hello, world");
+                    },
+                    serviceContext
+                )
+            )
             {
                 using (var connection = server.CreateConnection())
                 {
-                    await connection.Send(
-                        "POST / HTTP/1.1",
-                        "Host:",
-                        "Content-Length: 1",
-                        "",
-                        "");
+                    await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 1", "", "");
 
                     await appRunningTcs.Task.DefaultTimeout();
 
@@ -196,14 +212,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                     await exceptionSwallowedTcs.Task.DefaultTimeout();
 
-                    await connection.Receive(
-                        "HTTP/1.1 200 OK",
-                        "");
+                    await connection.Receive("HTTP/1.1 200 OK", "");
                     await connection.ReceiveEnd(
                         $"Date: {serviceContext.DateHeaderValue}",
                         "Content-Length: 12",
                         "",
-                        "hello, world");
+                        "hello, world"
+                    );
                 }
             }
         }

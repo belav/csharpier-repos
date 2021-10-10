@@ -23,22 +23,30 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <returns>The <see cref="CompiledPageActionDescriptor"/>.</returns>
         public static CompiledPageActionDescriptor Build(
             PageApplicationModel applicationModel,
-            FilterCollection globalFilters)
+            FilterCollection globalFilters
+        )
         {
             var boundProperties = CreateBoundProperties(applicationModel);
             var filters = Enumerable.Concat(
                     globalFilters.Select(f => new FilterDescriptor(f, FilterScope.Global)),
-                    applicationModel.Filters.Select(f => new FilterDescriptor(f, FilterScope.Action)))
+                    applicationModel.Filters.Select(
+                        f => new FilterDescriptor(f, FilterScope.Action)
+                    )
+                )
                 .ToArray();
             var handlerMethods = CreateHandlerMethods(applicationModel);
 
-            if (applicationModel.ModelType != null && applicationModel.DeclaredModelType != null &&
-                !applicationModel.DeclaredModelType.IsAssignableFrom(applicationModel.ModelType))
+            if (
+                applicationModel.ModelType != null
+                && applicationModel.DeclaredModelType != null
+                && !applicationModel.DeclaredModelType.IsAssignableFrom(applicationModel.ModelType)
+            )
             {
                 var message = Resources.FormatInvalidActionDescriptorModelType(
                     applicationModel.ActionDescriptor.DisplayName,
                     applicationModel.ModelType.Name,
-                    applicationModel.DeclaredModelType.Name);
+                    applicationModel.DeclaredModelType.Name
+                );
 
                 throw new InvalidOperationException(message);
             }
@@ -68,13 +76,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             // It is criticial to get the order in which metadata appears in endpoint metadata correct. More significant metadata
             // must appear later in the sequence.
-            // In this case, handlerMetadata is attributes on the Page \ PageModel, and endPointMetadata is configured via conventions. and 
+            // In this case, handlerMetadata is attributes on the Page \ PageModel, and endPointMetadata is configured via conventions. and
             // We consider the latter to be more significant.
             return Enumerable.Concat(handlerMetatdata, endpointMetadata).ToList();
         }
 
         // Internal for unit testing
-        internal static HandlerMethodDescriptor[] CreateHandlerMethods(PageApplicationModel applicationModel)
+        internal static HandlerMethodDescriptor[] CreateHandlerMethods(
+            PageApplicationModel applicationModel
+        )
         {
             var handlerModels = applicationModel.HandlerMethods;
             var handlerDescriptors = new HandlerMethodDescriptor[handlerModels.Count];
@@ -96,7 +106,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         }
 
         // internal for unit testing
-        internal static HandlerParameterDescriptor[] CreateHandlerParameters(PageHandlerModel handlerModel)
+        internal static HandlerParameterDescriptor[] CreateHandlerParameters(
+            PageHandlerModel handlerModel
+        )
         {
             var methodParameters = handlerModel.Parameters;
             var parameters = new HandlerParameterDescriptor[methodParameters.Count];
@@ -118,7 +130,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         }
 
         // internal for unit testing
-        internal static PageBoundPropertyDescriptor[] CreateBoundProperties(PageApplicationModel applicationModel)
+        internal static PageBoundPropertyDescriptor[] CreateBoundProperties(
+            PageApplicationModel applicationModel
+        )
         {
             var results = new List<PageBoundPropertyDescriptor>();
             var properties = applicationModel.HandlerProperties;

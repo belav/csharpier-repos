@@ -1,11 +1,11 @@
 ﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,21 +14,27 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Xml.XPath;
-	using System.Xml.Xsl;
+    using System;
+    using System.Xml.XPath;
+    using System.Xml.Xsl;
 
-	[AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true)]
-	public abstract class XPathVariableAttribute : Attribute, IXsltContextVariable
-	{
-		protected XPathVariableAttribute() { }
+    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true)]
+    public abstract class XPathVariableAttribute : Attribute, IXsltContextVariable
+    {
+        protected XPathVariableAttribute() { }
 
-		public abstract XmlName Name { get; }
-		public abstract XPathResultType VariableType { get; }
+        public abstract XmlName Name { get; }
+        public abstract XPathResultType VariableType { get; }
 
-		bool IXsltContextVariable.IsLocal { get { return false; } }
-		bool IXsltContextVariable.IsParam { get { return false; } }
+        bool IXsltContextVariable.IsLocal
+        {
+            get { return false; }
+        }
+        bool IXsltContextVariable.IsParam
+        {
+            get { return false; }
+        }
 
-		public abstract object Evaluate(XsltContext context);
-	}
+        public abstract object Evaluate(XsltContext context);
+    }
 }

@@ -18,17 +18,17 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         /// <summary>
         /// Gets an instance of <see cref="DefaultComplexObjectValidationStrategy"/>.
         /// </summary>
-        public static readonly IValidationStrategy Instance = new DefaultComplexObjectValidationStrategy();
+        public static readonly IValidationStrategy Instance =
+            new DefaultComplexObjectValidationStrategy();
 
-        private DefaultComplexObjectValidationStrategy()
-        {
-        }
+        private DefaultComplexObjectValidationStrategy() { }
 
         /// <inheritdoc />
         public IEnumerator<ValidationEntry> GetChildren(
             ModelMetadata metadata,
             string key,
-            object model)
+            object model
+        )
         {
             return new Enumerator(metadata, key, model);
         }
@@ -45,10 +45,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             private ValidationEntry _entry;
             private int _index;
 
-            public Enumerator(
-                ModelMetadata modelMetadata,
-                string key,
-                object model)
+            public Enumerator(ModelMetadata modelMetadata, string key, object model)
             {
                 _modelMetadata = modelMetadata;
                 _key = key;
@@ -77,7 +74,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             public bool MoveNext()
             {
                 _index++;
-                
+
                 if (_index >= _count)
                 {
                     return false;
@@ -95,13 +92,26 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     }
                     else
                     {
-                        if (!_modelMetadata.BoundConstructorParameterMapping.TryGetValue(parameter, out var property))
+                        if (
+                            !_modelMetadata.BoundConstructorParameterMapping.TryGetValue(
+                                parameter,
+                                out var property
+                            )
+                        )
                         {
                             throw new InvalidOperationException(
-                                Resources.FormatValidationStrategy_MappedPropertyNotFound(parameter, _modelMetadata.ModelType));
+                                Resources.FormatValidationStrategy_MappedPropertyNotFound(
+                                    parameter,
+                                    _modelMetadata.ModelType
+                                )
+                            );
                         }
 
-                        _entry = new ValidationEntry(parameter, key, () => GetModel(_model, property));
+                        _entry = new ValidationEntry(
+                            parameter,
+                            key,
+                            () => GetModel(_model, property)
+                        );
                     }
                 }
                 else
@@ -117,16 +127,18 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     }
                     else
                     {
-                        _entry = new ValidationEntry(property, key, () => GetModel(_model, property));
+                        _entry = new ValidationEntry(
+                            property,
+                            key,
+                            () => GetModel(_model, property)
+                        );
                     }
                 }
 
                 return true;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Reset()
             {

@@ -13,10 +13,22 @@ namespace System.Security.Cryptography.Pkcs
     {
         static partial void PrepareRegistrationECDsa(Dictionary<string, CmsSignature> lookup)
         {
-            lookup.Add(Oids.ECDsaWithSha1, new ECDsaCmsSignature(Oids.ECDsaWithSha1, HashAlgorithmName.SHA1));
-            lookup.Add(Oids.ECDsaWithSha256, new ECDsaCmsSignature(Oids.ECDsaWithSha256, HashAlgorithmName.SHA256));
-            lookup.Add(Oids.ECDsaWithSha384, new ECDsaCmsSignature(Oids.ECDsaWithSha384, HashAlgorithmName.SHA384));
-            lookup.Add(Oids.ECDsaWithSha512, new ECDsaCmsSignature(Oids.ECDsaWithSha512, HashAlgorithmName.SHA512));
+            lookup.Add(
+                Oids.ECDsaWithSha1,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha1, HashAlgorithmName.SHA1)
+            );
+            lookup.Add(
+                Oids.ECDsaWithSha256,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha256, HashAlgorithmName.SHA256)
+            );
+            lookup.Add(
+                Oids.ECDsaWithSha384,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha384, HashAlgorithmName.SHA384)
+            );
+            lookup.Add(
+                Oids.ECDsaWithSha512,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha512, HashAlgorithmName.SHA512)
+            );
             lookup.Add(Oids.EcPublicKey, new ECDsaCmsSignature(null, default));
         }
 
@@ -47,7 +59,8 @@ namespace System.Security.Cryptography.Pkcs
                 string? digestAlgorithmOid,
                 HashAlgorithmName digestAlgorithmName,
                 ReadOnlyMemory<byte>? signatureParameters,
-                X509Certificate2 certificate)
+                X509Certificate2 certificate
+            )
             {
                 if (_expectedDigest != digestAlgorithmName)
                 {
@@ -55,7 +68,9 @@ namespace System.Security.Cryptography.Pkcs
                         SR.Format(
                             SR.Cryptography_Cms_InvalidSignerHashForSignatureAlg,
                             digestAlgorithmOid,
-                            _signatureAlgorithm));
+                            _signatureAlgorithm
+                        )
+                    );
                 }
 
                 ECDsa? key = certificate.GetECDsaPublicKey();
@@ -90,6 +105,7 @@ namespace System.Security.Cryptography.Pkcs
                     return key.VerifyHash(valueHash, ieee);
 #if NETCOREAPP || NETSTANDARD2_1
                 }
+
                 finally
                 {
                     CryptoPool.Return(rented, bufSize);
@@ -108,12 +124,14 @@ namespace System.Security.Cryptography.Pkcs
                 AsymmetricAlgorithm? certKey,
                 bool silent,
                 [NotNullWhen(true)] out string? signatureAlgorithm,
-                [NotNullWhen(true)] out byte[]? signatureValue)
+                [NotNullWhen(true)] out byte[]? signatureValue
+            )
             {
                 // If there's no private key, fall back to the public key for a "no private key" exception.
-                ECDsa? key = certKey as ECDsa ??
-                    PkcsPal.Instance.GetPrivateKeyForSigning<ECDsa>(certificate, silent) ??
-                    certificate.GetECDsaPublicKey();
+                ECDsa? key =
+                    certKey as ECDsa
+                    ?? PkcsPal.Instance.GetPrivateKeyForSigning<ECDsa>(certificate, silent)
+                    ?? certificate.GetECDsaPublicKey();
 
                 if (key == null)
                 {
@@ -123,11 +141,15 @@ namespace System.Security.Cryptography.Pkcs
                 }
 
                 string? oidValue =
-                    hashAlgorithmName == HashAlgorithmName.SHA1 ? Oids.ECDsaWithSha1 :
-                    hashAlgorithmName == HashAlgorithmName.SHA256 ? Oids.ECDsaWithSha256 :
-                    hashAlgorithmName == HashAlgorithmName.SHA384 ? Oids.ECDsaWithSha384 :
-                    hashAlgorithmName == HashAlgorithmName.SHA512 ? Oids.ECDsaWithSha512 :
-                    null;
+                    hashAlgorithmName == HashAlgorithmName.SHA1
+                        ? Oids.ECDsaWithSha1
+                        : hashAlgorithmName == HashAlgorithmName.SHA256
+                            ? Oids.ECDsaWithSha256
+                            : hashAlgorithmName == HashAlgorithmName.SHA384
+                                ? Oids.ECDsaWithSha384
+                                : hashAlgorithmName == HashAlgorithmName.SHA512
+                                    ? Oids.ECDsaWithSha512
+                                    : null;
 
                 if (oidValue == null)
                 {
@@ -156,7 +178,10 @@ namespace System.Security.Cryptography.Pkcs
                     {
                         var signedHash = new ReadOnlySpan<byte>(rented, 0, bytesWritten);
 
-                        if (key != null && !certificate.GetECDsaPublicKey()!.VerifyHash(dataHash, signedHash))
+                        if (
+                            key != null
+                            && !certificate.GetECDsaPublicKey()!.VerifyHash(dataHash, signedHash)
+                        )
                         {
                             // key did not match certificate
                             signatureValue = null;
@@ -167,19 +192,22 @@ namespace System.Security.Cryptography.Pkcs
                         return true;
                     }
                 }
+
                 finally
                 {
                     CryptoPool.Return(rented, bytesWritten);
                 }
 #endif
 
-                signatureValue = DsaIeeeToDer(key.SignHash(
+                signatureValue = DsaIeeeToDer(
+                    key.SignHash(
 #if NETCOREAPP || NETSTANDARD2_1
-                    dataHash.ToArray()
+                        dataHash.ToArray()
 #else
-                    dataHash
+                        dataHash
 #endif
-                    ));
+                    )
+                );
                 return true;
             }
         }

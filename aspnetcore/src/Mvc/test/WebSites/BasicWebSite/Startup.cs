@@ -13,9 +13,7 @@ namespace BasicWebSite
         // Set up application services
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddNewtonsoftJson()
-                .AddXmlDataContractSerializerFormatters();
+            services.AddMvc().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
             services.ConfigureBaseWebSiteAuthPolicies();
 
@@ -33,17 +31,21 @@ namespace BasicWebSite
             app.UseMiddleware<RequestIdMiddleware>();
 
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "ActionAsMethod",
-                    pattern: "{controller}/{action}",
-                    defaults: new { controller = "Home", action = "Index" });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllerRoute(
+                        name: "ActionAsMethod",
+                        pattern: "{controller}/{action}",
+                        defaults: new { controller = "Home", action = "Index" }
+                    );
 
-                endpoints.MapControllerRoute(
-                    name: "PageRoute",
-                    pattern: "{controller}/{action}/{page}");
-            });
+                    endpoints.MapControllerRoute(
+                        name: "PageRoute",
+                        pattern: "{controller}/{action}/{page}"
+                    );
+                }
+            );
         }
     }
 }

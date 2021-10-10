@@ -14,8 +14,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
     {
         private readonly string _otherProperty;
 
-        public CompareAttributeAdapter(CompareAttribute attribute, IStringLocalizer? stringLocalizer)
-            : base(new CompareAttributeWrapper(attribute), stringLocalizer)
+        public CompareAttributeAdapter(
+            CompareAttribute attribute,
+            IStringLocalizer? stringLocalizer
+        ) : base(new CompareAttributeWrapper(attribute), stringLocalizer)
         {
             _otherProperty = "*." + attribute.OtherProperty;
         }
@@ -43,11 +45,16 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var displayName = validationContext.ModelMetadata.GetDisplayName();
             var otherPropertyDisplayName = CompareAttributeWrapper.GetOtherPropertyDisplayName(
                 validationContext,
-                Attribute);
+                Attribute
+            );
 
             ((CompareAttributeWrapper)Attribute).ValidationContext = validationContext;
 
-            return GetErrorMessage(validationContext.ModelMetadata, displayName, otherPropertyDisplayName);
+            return GetErrorMessage(
+                validationContext.ModelMetadata,
+                displayName,
+                otherPropertyDisplayName
+            );
         }
 
         // TODO: This entire class is needed because System.ComponentModel.DataAnnotations.CompareAttribute doesn't
@@ -63,9 +70,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 // CompareAttribute constructor calls ValidationAttribute constructor) when all properties are null to
                 // preserve default error message. Reset the message accessor when just ErrorMessageResourceType is
                 // non-null to ensure correct InvalidOperationException.
-                if (!string.IsNullOrEmpty(attribute.ErrorMessage) ||
-                    !string.IsNullOrEmpty(attribute.ErrorMessageResourceName) ||
-                    attribute.ErrorMessageResourceType != null)
+                if (
+                    !string.IsNullOrEmpty(attribute.ErrorMessage)
+                    || !string.IsNullOrEmpty(attribute.ErrorMessageResourceName)
+                    || attribute.ErrorMessageResourceType != null
+                )
                 {
                     ErrorMessage = attribute.ErrorMessage;
                     ErrorMessageResourceName = attribute.ErrorMessageResourceName;
@@ -76,25 +85,32 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             public override string FormatErrorMessage(string name)
             {
                 var displayName = ValidationContext.ModelMetadata.GetDisplayName();
-                return string.Format(CultureInfo.CurrentCulture,
-                                     ErrorMessageString,
-                                     displayName,
-                                     GetOtherPropertyDisplayName(ValidationContext, this));
+                return string.Format(
+                    CultureInfo.CurrentCulture,
+                    ErrorMessageString,
+                    displayName,
+                    GetOtherPropertyDisplayName(ValidationContext, this)
+                );
             }
 
             public static string GetOtherPropertyDisplayName(
                 ModelValidationContextBase validationContext,
-                CompareAttribute attribute)
+                CompareAttribute attribute
+            )
             {
                 // The System.ComponentModel.DataAnnotations.CompareAttribute doesn't populate the
                 // OtherPropertyDisplayName until after IsValid() is called. Therefore, at the time we get
                 // the error message for client validation, the display name is not populated and won't be used.
                 var otherPropertyDisplayName = attribute.OtherPropertyDisplayName;
-                if (otherPropertyDisplayName == null && validationContext.ModelMetadata.ContainerType != null)
+                if (
+                    otherPropertyDisplayName == null
+                    && validationContext.ModelMetadata.ContainerType != null
+                )
                 {
                     var otherProperty = validationContext.MetadataProvider.GetMetadataForProperty(
                         validationContext.ModelMetadata.ContainerType,
-                        attribute.OtherProperty);
+                        attribute.OtherProperty
+                    );
                     if (otherProperty != null)
                     {
                         return otherProperty.GetDisplayName();

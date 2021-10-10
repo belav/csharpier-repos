@@ -8,14 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
 {
-    public class InMemoryContext :
-        InMemoryContext<IdentityUser, IdentityRole, string>
+    public class InMemoryContext : InMemoryContext<IdentityUser, IdentityRole, string>
     {
-        private InMemoryContext(DbConnection connection) : base(connection)
-        { }
+        private InMemoryContext(DbConnection connection) : base(connection) { }
 
-        public new static InMemoryContext Create(DbConnection connection)
-            => Initialize(new InMemoryContext(connection));
+        public new static InMemoryContext Create(DbConnection connection) =>
+            Initialize(new InMemoryContext(connection));
 
         public static TContext Initialize<TContext>(TContext context) where TContext : DbContext
         {
@@ -25,8 +23,7 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         }
     }
 
-    public class InMemoryContext<TUser> :
-        IdentityUserContext<TUser, string>
+    public class InMemoryContext<TUser> : IdentityUserContext<TUser, string>
         where TUser : IdentityUser
     {
         private readonly DbConnection _connection;
@@ -36,11 +33,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
             _connection = connection;
         }
 
-        public static InMemoryContext<TUser> Create(DbConnection connection)
-            => InMemoryContext.Initialize(new InMemoryContext<TUser>(connection));
+        public static InMemoryContext<TUser> Create(DbConnection connection) =>
+            InMemoryContext.Initialize(new InMemoryContext<TUser>(connection));
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlite(_connection);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlite(_connection);
     }
 
     public class InMemoryContext<TUser, TRole, TKey> : IdentityDbContext<TUser, TRole, TKey>
@@ -55,15 +52,33 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
             _connection = connection;
         }
 
-        public static InMemoryContext<TUser, TRole, TKey> Create(DbConnection connection)
-            => InMemoryContext.Initialize(new InMemoryContext<TUser, TRole, TKey>(connection));
+        public static InMemoryContext<TUser, TRole, TKey> Create(DbConnection connection) =>
+            InMemoryContext.Initialize(new InMemoryContext<TUser, TRole, TKey>(connection));
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlite(_connection);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlite(_connection);
     }
 
-    public abstract class InMemoryContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken> :
-            IdentityDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken>
+    public abstract class InMemoryContext<
+        TUser,
+        TRole,
+        TKey,
+        TUserClaim,
+        TUserRole,
+        TUserLogin,
+        TRoleClaim,
+        TUserToken
+    >
+        : IdentityDbContext<
+              TUser,
+              TRole,
+              TKey,
+              TUserClaim,
+              TUserRole,
+              TUserLogin,
+              TRoleClaim,
+              TUserToken
+          >
         where TUser : IdentityUser<TKey>
         where TRole : IdentityRole<TKey>
         where TKey : IEquatable<TKey>
@@ -73,9 +88,6 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         where TRoleClaim : IdentityRoleClaim<TKey>
         where TUserToken : IdentityUserToken<TKey>
     {
-        protected InMemoryContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        protected InMemoryContext(DbContextOptions options) : base(options) { }
     }
 }

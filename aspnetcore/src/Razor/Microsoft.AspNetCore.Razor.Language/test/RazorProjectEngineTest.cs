@@ -17,7 +17,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
 
             // Act
-            var engine = RazorProjectEngine.Create(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
+            var engine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                Mock.Of<RazorProjectFileSystem>()
+            );
 
             // Assert
             AssertDefaultPhases(engine);
@@ -37,7 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 phase => Assert.IsType<DefaultRazorDocumentClassifierPhase>(phase),
                 phase => Assert.IsType<DefaultRazorDirectiveClassifierPhase>(phase),
                 phase => Assert.IsType<DefaultRazorOptimizationPhase>(phase),
-                phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase));
+                phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase)
+            );
         }
 
         private static void AssertDefaultFeatures(RazorProjectEngine engine)
@@ -84,7 +88,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 feature => Assert.IsType<InheritsDirectivePass>(feature),
                 feature => Assert.IsType<MetadataAttributePass>(feature),
                 feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature),
-                feature => Assert.IsType<ViewCssScopePass>(feature));
+                feature => Assert.IsType<ViewCssScopePass>(feature)
+            );
         }
 
         private static void AssertDefaultDirectives(RazorProjectEngine engine)
@@ -97,12 +102,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 directive => Assert.Same(ImplementsDirective.Directive, directive),
                 directive => Assert.Same(InheritsDirective.Directive, directive),
                 directive => Assert.Same(NamespaceDirective.Directive, directive),
-                directive => Assert.Same(AttributeDirective.Directive, directive));
+                directive => Assert.Same(AttributeDirective.Directive, directive)
+            );
         }
 
         private static void AssertDefaultTargetExtensions(RazorProjectEngine engine)
         {
-            var feature = engine.EngineFeatures.OfType<IRazorTargetExtensionFeature>().FirstOrDefault();
+            var feature = engine.EngineFeatures.OfType<IRazorTargetExtensionFeature>()
+                .FirstOrDefault();
             Assert.NotNull(feature);
 
             var extensions = feature.TargetExtensions.OrderBy(f => f.GetType().Name).ToArray();
@@ -111,7 +118,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 extension => Assert.IsType<DefaultTagHelperTargetExtension>(extension),
                 extension => Assert.IsType<DesignTimeDirectiveTargetExtension>(extension),
                 extension => Assert.IsType<MetadataAttributeTargetExtension>(extension),
-                extension => Assert.IsType<PreallocatedAttributeTargetExtension>(extension));
+                extension => Assert.IsType<PreallocatedAttributeTargetExtension>(extension)
+            );
         }
     }
 }

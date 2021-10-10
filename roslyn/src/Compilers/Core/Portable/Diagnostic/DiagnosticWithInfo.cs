@@ -20,7 +20,11 @@ namespace Microsoft.CodeAnalysis
         private readonly Location _location;
         private readonly bool _isSuppressed;
 
-        internal DiagnosticWithInfo(DiagnosticInfo info, Location location, bool isSuppressed = false)
+        internal DiagnosticWithInfo(
+            DiagnosticInfo info,
+            Location location,
+            bool isSuppressed = false
+        )
         {
             RoslynDebug.Assert(info != null);
             RoslynDebug.Assert(location != null);
@@ -41,18 +45,12 @@ namespace Microsoft.CodeAnalysis
 
         internal override IReadOnlyList<string> CustomTags
         {
-            get
-            {
-                return this.Info.CustomTags;
-            }
+            get { return this.Info.CustomTags; }
         }
 
         public override DiagnosticDescriptor Descriptor
         {
-            get
-            {
-                return this.Info.Descriptor;
-            }
+            get { return this.Info.Descriptor; }
         }
 
         public override string Id
@@ -64,7 +62,6 @@ namespace Microsoft.CodeAnalysis
         {
             get { return this.Info.Category; }
         }
-
 
         internal sealed override int Code
         {
@@ -131,8 +128,8 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return _info.Severity == InternalDiagnosticSeverity.Unknown ||
-                    _info.Severity == InternalDiagnosticSeverity.Void;
+                return _info.Severity == InternalDiagnosticSeverity.Unknown
+                    || _info.Severity == InternalDiagnosticSeverity.Void;
             }
         }
 
@@ -160,10 +157,9 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            return
-                this.Location.Equals(other._location) &&
-                this.Info.Equals(other.Info) &&
-                this.AdditionalLocations.SequenceEqual(other.AdditionalLocations);
+            return this.Location.Equals(other._location)
+                && this.Info.Equals(other.Info)
+                && this.AdditionalLocations.SequenceEqual(other.AdditionalLocations);
         }
 
         private string GetDebuggerDisplay()
@@ -205,7 +201,11 @@ namespace Microsoft.CodeAnalysis
         {
             if (this.Severity != severity)
             {
-                return new DiagnosticWithInfo(this.Info.GetInstanceWithSeverity(severity), _location, _isSuppressed);
+                return new DiagnosticWithInfo(
+                    this.Info.GetInstanceWithSeverity(severity),
+                    _location,
+                    _isSuppressed
+                );
             }
 
             return this;

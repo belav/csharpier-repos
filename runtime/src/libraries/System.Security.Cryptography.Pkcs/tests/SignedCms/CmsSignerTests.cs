@@ -17,7 +17,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AssertExtensions.Throws<ArgumentException>(
                 expectedParamName: null,
-                () => signer.SignerIdentifierType = invalidType);
+                () => signer.SignerIdentifierType = invalidType
+            );
         }
     }
 }

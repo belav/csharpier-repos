@@ -19,8 +19,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         private int _currentLineCharacterIndex;
 
         public CodeWriter() : this(Environment.NewLine, RazorCodeGenerationOptions.CreateDefault())
-        {
-        }
+        { }
 
         public CodeWriter(string newLine, RazorCodeGenerationOptions options)
         {
@@ -46,7 +45,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
                 if (value != "\r\n" && value != "\n")
                 {
-                    throw new ArgumentException(Resources.FormatCodeWriter_InvalidNewLine(value), nameof(value));
+                    throw new ArgumentException(
+                        Resources.FormatCodeWriter_InvalidNewLine(value),
+                        nameof(value)
+                    );
                 }
 
                 _newLine = value;
@@ -57,7 +59,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
         public int TabSize { get; }
 
-        public SourceLocation Location => new SourceLocation(_absoluteIndex, _currentLineIndex, _currentLineCharacterIndex);
+        public SourceLocation Location =>
+            new SourceLocation(_absoluteIndex, _currentLineIndex, _currentLineCharacterIndex);
 
         public char this[int index]
         {
@@ -82,7 +85,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             var actualSize = 0;
             if (IndentWithTabs)
             {
-                // Avoid writing directly to the StringBuilder here, that will throw off the manual indexing 
+                // Avoid writing directly to the StringBuilder here, that will throw off the manual indexing
                 // done by the base class.
                 var tabs = size / TabSize;
                 actualSize += tabs;
@@ -154,11 +157,13 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             if (
                 // Check the last character of the previous write operation.
-                _builder.Length - count - 1 >= 0 &&
-                _builder[_builder.Length - count - 1] == '\r' &&
-
+                _builder.Length - count - 1
+                    >= 0
+                && _builder[_builder.Length - count - 1] == '\r'
+                &&
                 // Check the first character of the current write operation.
-                _builder[_builder.Length - count] == '\n')
+                _builder[_builder.Length - count] == '\n'
+            )
             {
                 // This is newline that's spread across two writes. Skip the first character of the
                 // current write operation.
@@ -181,9 +186,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
                 // We might have stopped at a \r, so check if it's followed by \n and then advance the index to
                 // start the next search after it.
-                if (count > i &&
-                    value[i - 1] == '\r' &&
-                    value[i] == '\n')
+                if (count > i && value[i - 1] == '\r' && value[i] == '\n')
                 {
                     i++;
                 }

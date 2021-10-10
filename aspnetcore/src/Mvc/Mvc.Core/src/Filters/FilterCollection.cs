@@ -87,7 +87,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             {
                 var message = Resources.FormatTypeMustDeriveFromType(
                     filterType.FullName,
-                    typeof(IFilterMetadata).FullName);
+                    typeof(IFilterMetadata).FullName
+                );
                 throw new ArgumentException(message, nameof(filterType));
             }
 
@@ -95,7 +96,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             Add(filter);
             return filter;
         }
-        
+
         /// <summary>
         /// Adds a type representing a <see cref="IFilterMetadata"/>.
         /// </summary>
@@ -144,7 +145,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         /// <see cref="Add(Type)"/> to register a service that will be created via
         /// type activation.
         /// </remarks>
-        public IFilterMetadata AddService<TFilterType>(int order) where TFilterType : IFilterMetadata
+        public IFilterMetadata AddService<TFilterType>(int order)
+            where TFilterType : IFilterMetadata
         {
             return AddService(typeof(TFilterType), order);
         }
@@ -171,7 +173,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             {
                 var message = Resources.FormatTypeMustDeriveFromType(
                     filterType.FullName,
-                    typeof(IFilterMetadata).FullName);
+                    typeof(IFilterMetadata).FullName
+                );
                 throw new ArgumentException(message, nameof(filterType));
             }
 

@@ -19,9 +19,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             manager.ApplicationParts.Add(new ViewComponentsPart("ViewComponentsPartB"));
             manager.ApplicationParts.Add(new ControllersPart("ControllersPartC"));
             manager.FeatureProviders.Add(
-                new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider1{v}")));
+                new ControllersFeatureProvider(
+                    (f, v) => f.Values.Add($"ControllersFeatureProvider1{v}")
+                )
+            );
             manager.FeatureProviders.Add(
-                new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider2{v}")));
+                new ControllersFeatureProvider(
+                    (f, v) => f.Values.Add($"ControllersFeatureProvider2{v}")
+                )
+            );
 
             var feature = new ControllersFeature();
             var expectedResults = new[]
@@ -46,9 +52,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             var manager = new ApplicationPartManager();
             manager.ApplicationParts.Add(new ControllersPart("ControllersPart"));
             manager.FeatureProviders.Add(
-                new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider{v}")));
+                new ControllersFeatureProvider(
+                    (f, v) => f.Values.Add($"ControllersFeatureProvider{v}")
+                )
+            );
             manager.FeatureProviders.Add(
-                new NotControllersedFeatureProvider((f, v) => f.Values.Add($"ViewComponentsFeatureProvider{v}")));
+                new NotControllersedFeatureProvider(
+                    (f, v) => f.Values.Add($"ViewComponentsFeatureProvider{v}")
+                )
+            );
 
             var feature = new ControllersFeature();
             var expectedResults = new[] { "ControllersFeatureProviderControllersPart" };
@@ -67,7 +79,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             var manager = new ApplicationPartManager();
             manager.ApplicationParts.Add(new ViewComponentsPart("ViewComponentsPart"));
             manager.FeatureProviders.Add(
-                new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider{v}")));
+                new ControllersFeatureProvider(
+                    (f, v) => f.Values.Add($"ControllersFeatureProvider{v}")
+                )
+            );
 
             var feature = new ControllersFeature();
 
@@ -112,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             public IList<string> Values { get; } = new List<string>();
         }
 
-        private class NotControllersedFeatureProvider : IApplicationFeatureProvider<ViewComponentsFeature>
+        private class NotControllersedFeatureProvider
+            : IApplicationFeatureProvider<ViewComponentsFeature>
         {
             private readonly Action<ViewComponentsFeature, string> _operation;
 
@@ -121,7 +137,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
                 _operation = operation;
             }
 
-            public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentsFeature feature)
+            public void PopulateFeature(
+                IEnumerable<ApplicationPart> parts,
+                ViewComponentsFeature feature
+            )
             {
                 foreach (var part in parts.OfType<ViewComponentsPart>())
                 {
@@ -139,7 +158,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
                 _operation = operation;
             }
 
-            public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllersFeature feature)
+            public void PopulateFeature(
+                IEnumerable<ApplicationPart> parts,
+                ControllersFeature feature
+            )
             {
                 foreach (var part in parts.OfType<ControllersPart>())
                 {

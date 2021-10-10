@@ -7,7 +7,8 @@ using Xunit.Abstractions;
 
 namespace System.Net.Sockets.Tests
 {
-    public abstract class LocalEndPointTest<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
+    public abstract class LocalEndPointTest<T> : SocketTestHelperBase<T>
+        where T : SocketHelperBase, new()
     {
         protected abstract bool IPv6 { get; }
 
@@ -208,14 +209,16 @@ namespace System.Net.Sockets.Tests
             return ((IPEndPoint)socket.LocalEndPoint).Port;
         }
     }
-    public abstract class LocalEndPointTestIPv4<T> : LocalEndPointTest<T> where T : SocketHelperBase, new()
+    public abstract class LocalEndPointTestIPv4<T> : LocalEndPointTest<T>
+        where T : SocketHelperBase, new()
     {
         protected override bool IPv6 => false;
 
         public LocalEndPointTestIPv4(ITestOutputHelper output) : base(output) { }
     }
 
-    public abstract class LocalEndPointTestIPv6<T> : LocalEndPointTest<T> where T : SocketHelperBase, new()
+    public abstract class LocalEndPointTestIPv6<T> : LocalEndPointTest<T>
+        where T : SocketHelperBase, new()
     {
         protected override bool IPv6 => true;
 
@@ -229,9 +232,11 @@ namespace System.Net.Sockets.Tests
     }
 
     [Trait("IPv4", "true")]
-    public sealed class LocalEndPointTestIPv4SyncForceNonBlocking : LocalEndPointTestIPv4<SocketHelperSyncForceNonBlocking>
+    public sealed class LocalEndPointTestIPv4SyncForceNonBlocking
+        : LocalEndPointTestIPv4<SocketHelperSyncForceNonBlocking>
     {
-        public LocalEndPointTestIPv4SyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv4SyncForceNonBlocking(ITestOutputHelper output) : base(output)
+        { }
     }
 
     [Trait("IPv4", "true")]
@@ -259,9 +264,11 @@ namespace System.Net.Sockets.Tests
     }
 
     [Trait("IPv6", "true")]
-    public sealed class LocalEndPointTestIPv6SyncForceNonBlocking : LocalEndPointTestIPv6<SocketHelperSyncForceNonBlocking>
+    public sealed class LocalEndPointTestIPv6SyncForceNonBlocking
+        : LocalEndPointTestIPv6<SocketHelperSyncForceNonBlocking>
     {
-        public LocalEndPointTestIPv6SyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public LocalEndPointTestIPv6SyncForceNonBlocking(ITestOutputHelper output) : base(output)
+        { }
     }
 
     [Trait("IPv6", "true")]

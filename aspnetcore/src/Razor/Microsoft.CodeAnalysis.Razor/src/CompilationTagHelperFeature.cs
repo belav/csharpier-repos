@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.Razor
             var results = new List<TagHelperDescriptor>();
 
             var context = TagHelperDescriptorProviderContext.Create(results);
-            var compilation = CSharpCompilation.Create("__TagHelpers", references: _referenceFeature.References);
+            var compilation = CSharpCompilation.Create(
+                "__TagHelpers",
+                references: _referenceFeature.References
+            );
             if (IsValidCompilation(compilation))
             {
                 context.SetCompilation(compilation);
@@ -34,8 +37,11 @@ namespace Microsoft.CodeAnalysis.Razor
 
         protected override void OnInitialized()
         {
-            _referenceFeature = Engine.Features.OfType<IMetadataReferenceFeature>().FirstOrDefault();
-            _providers = Engine.Features.OfType<ITagHelperDescriptorProvider>().OrderBy(f => f.Order).ToArray();
+            _referenceFeature = Engine.Features.OfType<IMetadataReferenceFeature>()
+                .FirstOrDefault();
+            _providers = Engine.Features.OfType<ITagHelperDescriptorProvider>()
+                .OrderBy(f => f.Order)
+                .ToArray();
         }
 
         internal static bool IsValidCompilation(Compilation compilation)

@@ -10,7 +10,6 @@ namespace CoreXml.Test.XLinq
 {
     public partial class XNodeReaderFunctionalTests : TestModule
     {
-
         public partial class XNodeReaderTests : XLinqTestCase
         {
             public enum EINTEGRITY
@@ -19,13 +18,11 @@ namespace CoreXml.Test.XLinq
                 BEFORE_READ,
                 AFTER_READ_FALSE,
                 AFTER_RESETSTATE,
-
                 //DataWriter
                 BEFORE_WRITE,
                 AFTER_WRITE_FALSE,
                 AFTER_CLEAR,
                 AFTER_FLUSH,
-
                 // Both DataWriter and DataReader
                 AFTER_CLOSE,
                 CLOSE_IN_THE_MIDDLE,
@@ -59,20 +56,26 @@ namespace CoreXml.Test.XLinq
                     if (this.Desc == "BeforeRead")
                     {
                         IntegrityVer = EINTEGRITY.BEFORE_READ;
-                        TestLog.Compare(DataReader.ReadState, ReadState.Initial, "ReadState=Initial");
+                        TestLog.Compare(
+                            DataReader.ReadState,
+                            ReadState.Initial,
+                            "ReadState=Initial"
+                        );
                         TestLog.Compare(DataReader.EOF, false, "EOF==false");
                     }
                     else if (this.Desc == "AfterReadIsFalse")
                     {
                         IntegrityVer = EINTEGRITY.AFTER_READ_FALSE;
-                        while (DataReader.Read()) ;
+                        while (DataReader.Read())
+                            ;
                         TestLog.Compare(DataReader.ReadState, ReadState.EndOfFile, "ReadState=EOF");
                         TestLog.Compare(DataReader.EOF, true, "EOF==true");
                     }
                     else if (this.Desc == "AfterClose")
                     {
                         IntegrityVer = EINTEGRITY.AFTER_CLOSE;
-                        while (DataReader.Read()) ;
+                        while (DataReader.Read())
+                            ;
                         DataReader.Dispose();
                         TestLog.Compare(DataReader.ReadState, ReadState.Closed, "ReadState=Closed");
                         TestLog.Compare(DataReader.EOF, false, "EOF==true");
@@ -84,7 +87,11 @@ namespace CoreXml.Test.XLinq
                         {
                             if (false == DataReader.Read())
                                 throw new TestFailedException("");
-                            TestLog.Compare(DataReader.ReadState, ReadState.Interactive, "ReadState=Interactive");
+                            TestLog.Compare(
+                                DataReader.ReadState,
+                                ReadState.Interactive,
+                                "ReadState=Interactive"
+                            );
                         }
                         DataReader.Dispose();
                         TestLog.Compare(DataReader.ReadState, ReadState.Closed, "ReadState=Closed");
@@ -95,7 +102,11 @@ namespace CoreXml.Test.XLinq
                         IntegrityVer = EINTEGRITY.AFTER_RESETSTATE;
                         // position the reader somewhere in the middle of the file
                         PositionOnElement(DataReader, "elem1");
-                        TestLog.Compare(DataReader.ReadState, ReadState.Initial, "ReadState=Initial");
+                        TestLog.Compare(
+                            DataReader.ReadState,
+                            ReadState.Initial,
+                            "ReadState=Initial"
+                        );
                     }
                 }
 
@@ -223,28 +234,44 @@ namespace CoreXml.Test.XLinq
                 public void GetAttributeName()
                 {
                     XmlReader DataReader = ReloadSource();
-                    TestLog.Compare(DataReader.GetAttribute(pATTR), null, "Compare the GetAttribute");
+                    TestLog.Compare(
+                        DataReader.GetAttribute(pATTR),
+                        null,
+                        "Compare the GetAttribute"
+                    );
                 }
 
                 //[Variation("GetAttribute(String.Empty)")]
                 public void GetAttributeEmptyName()
                 {
                     XmlReader DataReader = ReloadSource();
-                    TestLog.Compare(DataReader.GetAttribute(string.Empty), null, "Compare the GetAttribute");
+                    TestLog.Compare(
+                        DataReader.GetAttribute(string.Empty),
+                        null,
+                        "Compare the GetAttribute"
+                    );
                 }
 
                 //[Variation("GetAttribute(name,ns)")]
                 public void GetAttributeNameNamespace()
                 {
                     XmlReader DataReader = ReloadSource();
-                    TestLog.Compare(DataReader.GetAttribute(pATTR, pNS), null, "Compare the GetAttribute");
+                    TestLog.Compare(
+                        DataReader.GetAttribute(pATTR, pNS),
+                        null,
+                        "Compare the GetAttribute"
+                    );
                 }
 
                 //[Variation("GetAttribute(String.Empty, String.Empty)")]
                 public void GetAttributeEmptyNameNamespace()
                 {
                     XmlReader DataReader = ReloadSource();
-                    TestLog.Compare(DataReader.GetAttribute(string.Empty, string.Empty), null, "Compare the GetAttribute");
+                    TestLog.Compare(
+                        DataReader.GetAttribute(string.Empty, string.Empty),
+                        null,
+                        "Compare the GetAttribute"
+                    );
                 }
 
                 //[Variation("GetAttribute(i)")]
@@ -360,7 +387,10 @@ namespace CoreXml.Test.XLinq
                     }
 
                     // Closed State
-                    if ((IntegrityVer == EINTEGRITY.AFTER_CLOSE) || (IntegrityVer == EINTEGRITY.CLOSE_IN_THE_MIDDLE))
+                    if (
+                        (IntegrityVer == EINTEGRITY.AFTER_CLOSE)
+                        || (IntegrityVer == EINTEGRITY.CLOSE_IN_THE_MIDDLE)
+                    )
                     {
                         iState = ReadState.Closed;
                     }
@@ -409,7 +439,11 @@ namespace CoreXml.Test.XLinq
                 public void TestMoveToContent()
                 {
                     XmlReader DataReader = ReloadSource();
-                    TestLog.Compare(DataReader.MoveToContent(), XmlNodeType.Element, Variation.Desc);
+                    TestLog.Compare(
+                        DataReader.MoveToContent(),
+                        XmlNodeType.Element,
+                        Variation.Desc
+                    );
                 }
 
                 //[Variation("IsStartElement")]
@@ -444,7 +478,11 @@ namespace CoreXml.Test.XLinq
                 public void TestIsStartElementNameNs2()
                 {
                     XmlReader DataReader = ReloadSource();
-                    TestLog.Compare(DataReader.IsStartElement(string.Empty, string.Empty), false, Variation.Desc);
+                    TestLog.Compare(
+                        DataReader.IsStartElement(string.Empty, string.Empty),
+                        false,
+                        Variation.Desc
+                    );
                 }
 
                 //[Variation("ReadStartElement")]
@@ -537,9 +575,7 @@ namespace CoreXml.Test.XLinq
 
                     for (int i = 0; i < astr.Length; i++)
                     {
-                        if (DataReader.LookupNamespace(astr[i]) != null)
-                        {
-                        }
+                        if (DataReader.LookupNamespace(astr[i]) != null) { }
                         TestLog.Compare(DataReader.LookupNamespace(astr[i]), null, Variation.Desc);
                     }
                 }

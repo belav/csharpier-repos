@@ -84,10 +84,10 @@ namespace System.Xml.Xsl.Xslt
             protected override QilNode Visit(QilNode n)
             {
                 if (
-                    n.NodeType == QilNodeType.Union ||
-                    n.NodeType == QilNodeType.DocOrderDistinct ||
-                    n.NodeType == QilNodeType.Filter ||
-                    n.NodeType == QilNodeType.Loop
+                    n.NodeType == QilNodeType.Union
+                    || n.NodeType == QilNodeType.DocOrderDistinct
+                    || n.NodeType == QilNodeType.Filter
+                    || n.NodeType == QilNodeType.Loop
                 )
                 {
                     return base.Visit(n);
@@ -98,7 +98,10 @@ namespace System.Xml.Xsl.Xslt
             // Filter($j= ... Filter($i = Content(fixup), ...))  -> Filter($j= ... Filter($i = Loop($j = DesendentOrSelf(Root(fixup)), Content($j), ...)))
             protected override QilNode VisitLoop(QilLoop n)
             {
-                if (n.Variable.Binding!.NodeType == QilNodeType.Root || n.Variable.Binding.NodeType == QilNodeType.Deref)
+                if (
+                    n.Variable.Binding!.NodeType == QilNodeType.Root
+                    || n.Variable.Binding.NodeType == QilNodeType.Deref
+                )
                 {
                     // This is absolute path already. We shouldn't touch it
                     return n;

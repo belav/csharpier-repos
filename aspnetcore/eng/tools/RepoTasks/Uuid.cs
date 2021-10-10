@@ -29,7 +29,9 @@ namespace RepoTasks
             // Octet 4-5
             short timeMid = IPAddress.HostToNetworkOrder(BitConverter.ToInt16(namespaceBytes, 4));
             // Octet 6-7
-            short timeHiVersion = IPAddress.HostToNetworkOrder(BitConverter.ToInt16(namespaceBytes, 6));
+            short timeHiVersion = IPAddress.HostToNetworkOrder(
+                BitConverter.ToInt16(namespaceBytes, 6)
+            );
 
             // 2. Compute the hash of the namespace ID concatenated with the name
             byte[] nameBytes = Encoding.Unicode.GetBytes(name);

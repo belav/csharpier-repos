@@ -18,7 +18,10 @@ namespace Microsoft.Extensions.ApiDescription.Client
             var identity = Path.Combine("TestProjects", "files", "NSwag.json");
             var @namespace = "Console.Client";
             var outputPath = Path.Combine("obj", "NSwagClient.cs");
-            var inputMetadata = new Dictionary<string, string> { { "CodeGenerator", "NSwagCSharp" } };
+            var inputMetadata = new Dictionary<string, string>
+            {
+                { "CodeGenerator", "NSwagCSharp" }
+            };
             var task = new GetOpenApiReferenceMetadata
             {
                 Extension = ".cs",
@@ -37,9 +40,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 { "OutputPath", outputPath },
                 {
                     "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName=NSwagClient"
+                    $"Identity={identity}|FirstForGenerator=true|"
+                        + $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|"
+                        + $"OriginalItemSpec={identity}|ClassName=NSwagClient"
                 },
             };
 
@@ -51,7 +54,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
             Assert.False(task.Log.HasLoggedErrors);
             var output = Assert.Single(task.Outputs);
             Assert.Equal(identity, output.ItemSpec);
-            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                output.CloneCustomMetadata()
+            );
 
             // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
             var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -95,9 +100,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 { "OutputPath", outputPath },
                 {
                     "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName={className}"
+                    $"Identity={identity}|FirstForGenerator=true|"
+                        + $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|"
+                        + $"OriginalItemSpec={identity}|ClassName={className}"
                 },
             };
 
@@ -109,7 +114,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
             Assert.False(task.Log.HasLoggedErrors);
             var output = Assert.Single(task.Outputs);
             Assert.Equal(identity, output.ItemSpec);
-            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                output.CloneCustomMetadata()
+            );
 
             // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
             var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -153,9 +160,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 { "OutputPath", outputPath },
                 {
                     "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName=NSwagClient"
+                    $"Identity={identity}|FirstForGenerator=true|"
+                        + $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|"
+                        + $"OriginalItemSpec={identity}|ClassName=NSwagClient"
                 },
             };
 
@@ -167,7 +174,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
             Assert.False(task.Log.HasLoggedErrors);
             var output = Assert.Single(task.Outputs);
             Assert.Equal(identity, output.ItemSpec);
-            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                output.CloneCustomMetadata()
+            );
 
             // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
             var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -211,9 +220,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 { "OutputPath", outputPath },
                 {
                     "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName={className}"
+                    $"Identity={identity}|FirstForGenerator=true|"
+                        + $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|"
+                        + $"OriginalItemSpec={identity}|ClassName={className}"
                 },
             };
 
@@ -225,7 +234,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
             Assert.False(task.Log.HasLoggedErrors);
             var output = Assert.Single(task.Outputs);
             Assert.Equal(identity, output.ItemSpec);
-            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                output.CloneCustomMetadata()
+            );
 
             // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
             var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -243,8 +254,16 @@ namespace Microsoft.Extensions.ApiDescription.Client
             // Arrange
             var identity1 = Path.Combine("TestProjects", "files", "NSwag.json");
             var identity2 = Path.Combine("TestProjects", "files", "swashbuckle.json");
-            var error1 = Resources.FormatInvalidEmptyMetadataValue("CodeGenerator", "OpenApiReference", identity1);
-            var error2 = Resources.FormatInvalidEmptyMetadataValue("CodeGenerator", "OpenApiProjectReference", identity2);
+            var error1 = Resources.FormatInvalidEmptyMetadataValue(
+                "CodeGenerator",
+                "OpenApiReference",
+                identity1
+            );
+            var error2 = Resources.FormatInvalidEmptyMetadataValue(
+                "CodeGenerator",
+                "OpenApiProjectReference",
+                identity2
+            );
             var @namespace = "Console.Client";
             var inputMetadata1 = new Dictionary<string, string>
             {
@@ -289,7 +308,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
             // Arrange
             var identity = Path.Combine("TestProjects", "files", "NSwag.json");
             var codeGenerator = "NSwagCSharp";
-            var error = Resources.FormatDuplicateFileOutputPaths(Path.Combine("obj", "NSwagClient.cs"));
+            var error = Resources.FormatDuplicateFileOutputPaths(
+                Path.Combine("obj", "NSwagClient.cs")
+            );
             var @namespace = "Console.Client";
             var inputMetadata1 = new Dictionary<string, string>
             {
@@ -361,9 +382,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 { "OutputPath", expectedOutputPath },
                 {
                     "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={expectedOutputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName={className}"
+                    $"Identity={identity}|FirstForGenerator=true|"
+                        + $"CodeGenerator=NSwagCSharp|OutputPath={expectedOutputPath}|Namespace={@namespace}|"
+                        + $"OriginalItemSpec={identity}|ClassName={className}"
                 },
             };
 
@@ -375,7 +396,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
             Assert.False(task.Log.HasLoggedErrors);
             var output = Assert.Single(task.Outputs);
             Assert.Equal(identity, output.ItemSpec);
-            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                output.CloneCustomMetadata()
+            );
 
             // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
             var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -394,7 +417,10 @@ namespace Microsoft.Extensions.ApiDescription.Client
         [InlineData("aa\u2005bb\u2005cc.cs", "aa_bb_cc")] // UnicodeCategory.SpaceSeparator (four-per-em space)
         [InlineData("aa\u0096\u0096bb.cs", "aa__bb")] // UnicodeCategory.Control (start of guarded area)
         [InlineData("aa\uFF1C\uFF1C\uFF1Cbb.cs", "aa___bb")] // UnicodeCategory.MathSymbol (fullwidth less-than sign)
-        public void Execute_SetsClassName_BasedOnSanitizedOutputPath(string outputPath, string className)
+        public void Execute_SetsClassName_BasedOnSanitizedOutputPath(
+            string outputPath,
+            string className
+        )
         {
             // Arrange
             var identity = Path.Combine("TestProjects", "files", "NSwag.json");
@@ -424,9 +450,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 { "OutputPath", expectedOutputPath },
                 {
                     "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={expectedOutputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName={className}"
+                    $"Identity={identity}|FirstForGenerator=true|"
+                        + $"CodeGenerator=NSwagCSharp|OutputPath={expectedOutputPath}|Namespace={@namespace}|"
+                        + $"OriginalItemSpec={identity}|ClassName={className}"
                 },
             };
 
@@ -438,7 +464,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
             Assert.False(task.Log.HasLoggedErrors);
             var output = Assert.Single(task.Outputs);
             Assert.Equal(identity, output.ItemSpec);
-            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+            var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                output.CloneCustomMetadata()
+            );
 
             // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
             var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -460,9 +488,18 @@ namespace Microsoft.Extensions.ApiDescription.Client
             var className3 = "swashbuckleClient";
             var codeGenerator13 = "NSwagCSharp";
             var codeGenerator2 = "NSwagTypeScript";
-            var inputMetadata1 = new Dictionary<string, string> { { "CodeGenerator", codeGenerator13 } };
-            var inputMetadata2 = new Dictionary<string, string> { { "CodeGenerator", codeGenerator2 } };
-            var inputMetadata3 = new Dictionary<string, string> { { "CodeGenerator", codeGenerator13 } };
+            var inputMetadata1 = new Dictionary<string, string>
+            {
+                { "CodeGenerator", codeGenerator13 }
+            };
+            var inputMetadata2 = new Dictionary<string, string>
+            {
+                { "CodeGenerator", codeGenerator2 }
+            };
+            var inputMetadata3 = new Dictionary<string, string>
+            {
+                { "CodeGenerator", codeGenerator13 }
+            };
             var @namespace = "Console.Client";
             var outputPath1 = Path.Combine("obj", $"{className12}.cs");
             var outputPath2 = Path.Combine("obj", $"{className12}.ts");
@@ -491,9 +528,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 { "OutputPath", outputPath1 },
                 {
                     "SerializedMetadata",
-                    $"Identity={identity12}|FirstForGenerator=true|" +
-                    $"CodeGenerator={codeGenerator13}|OutputPath={outputPath1}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity12}|ClassName={className12}"
+                    $"Identity={identity12}|FirstForGenerator=true|"
+                        + $"CodeGenerator={codeGenerator13}|OutputPath={outputPath1}|Namespace={@namespace}|"
+                        + $"OriginalItemSpec={identity12}|ClassName={className12}"
                 },
             };
             var expectedMetadata2 = new SortedDictionary<string, string>(StringComparer.Ordinal)
@@ -506,9 +543,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 { "OutputPath", outputPath2 },
                 {
                     "SerializedMetadata",
-                    $"Identity={identity12}|FirstForGenerator=true|" +
-                    $"CodeGenerator={codeGenerator2}|OutputPath={outputPath2}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity12}|ClassName={className12}"
+                    $"Identity={identity12}|FirstForGenerator=true|"
+                        + $"CodeGenerator={codeGenerator2}|OutputPath={outputPath2}|Namespace={@namespace}|"
+                        + $"OriginalItemSpec={identity12}|ClassName={className12}"
                 },
             };
             var expectedMetadata3 = new SortedDictionary<string, string>(StringComparer.Ordinal)
@@ -521,9 +558,9 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 { "OutputPath", outputPath3 },
                 {
                     "SerializedMetadata",
-                    $"Identity={identity3}|FirstForGenerator=false|" +
-                    $"CodeGenerator={codeGenerator13}|OutputPath={outputPath3}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity3}|ClassName={className3}"
+                    $"Identity={identity3}|FirstForGenerator=false|"
+                        + $"CodeGenerator={codeGenerator13}|OutputPath={outputPath3}|Namespace={@namespace}|"
+                        + $"OriginalItemSpec={identity3}|ClassName={className3}"
                 },
             };
 
@@ -538,8 +575,12 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 output =>
                 {
                     Assert.Equal(identity12, output.ItemSpec);
-                    var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
-                    var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
+                    var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                        output.CloneCustomMetadata()
+                    );
+                    var orderedMetadata = new SortedDictionary<string, string>(
+                        StringComparer.Ordinal
+                    );
                     foreach (var key in metadata.Keys)
                     {
                         orderedMetadata.Add(key, metadata[key]);
@@ -550,8 +591,12 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 output =>
                 {
                     Assert.Equal(identity12, output.ItemSpec);
-                    var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
-                    var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
+                    var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                        output.CloneCustomMetadata()
+                    );
+                    var orderedMetadata = new SortedDictionary<string, string>(
+                        StringComparer.Ordinal
+                    );
                     foreach (var key in metadata.Keys)
                     {
                         orderedMetadata.Add(key, metadata[key]);
@@ -562,15 +607,20 @@ namespace Microsoft.Extensions.ApiDescription.Client
                 output =>
                 {
                     Assert.Equal(identity3, output.ItemSpec);
-                    var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
-                    var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
+                    var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                        output.CloneCustomMetadata()
+                    );
+                    var orderedMetadata = new SortedDictionary<string, string>(
+                        StringComparer.Ordinal
+                    );
                     foreach (var key in metadata.Keys)
                     {
                         orderedMetadata.Add(key, metadata[key]);
                     }
 
                     Assert.Equal(expectedMetadata3, orderedMetadata);
-                });
+                }
+            );
         }
     }
 }

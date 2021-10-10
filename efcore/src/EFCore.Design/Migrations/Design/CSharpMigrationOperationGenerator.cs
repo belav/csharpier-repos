@@ -21,7 +21,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         ///     Initializes a new instance of the <see cref="CSharpMigrationOperationGenerator" /> class.
         /// </summary>
         /// <param name="dependencies"> The dependencies. </param>
-        public CSharpMigrationOperationGenerator(CSharpMigrationOperationGeneratorDependencies dependencies)
+        public CSharpMigrationOperationGenerator(
+            CSharpMigrationOperationGeneratorDependencies dependencies
+        )
         {
             Check.NotNull(dependencies, nameof(dependencies));
 
@@ -33,8 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         protected virtual CSharpMigrationOperationGeneratorDependencies Dependencies { get; }
 
-        private ICSharpHelper Code
-            => Dependencies.CSharpHelper;
+        private ICSharpHelper Code => Dependencies.CSharpHelper;
 
         /// <summary>
         ///     Generates code for creating <see cref="MigrationOperation" /> objects.
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         public virtual void Generate(
             string builderName,
             IReadOnlyList<MigrationOperation> operations,
-            IndentedStringBuilder builder)
+            IndentedStringBuilder builder
+        )
         {
             Check.NotEmpty(builderName, nameof(builderName));
             Check.NotNull(operations, nameof(operations));
@@ -60,9 +62,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 }
                 else
                 {
-                    builder
-                        .AppendLine()
-                        .AppendLine();
+                    builder.AppendLine().AppendLine();
                 }
 
                 builder.Append(builderName);
@@ -81,7 +81,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
-            throw new InvalidOperationException(DesignStrings.UnknownOperation(operation.GetType()));
+            throw new InvalidOperationException(
+                DesignStrings.UnknownOperation(operation.GetType())
+            );
         }
 
         /// <summary>
@@ -94,56 +96,43 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
-            builder
-                .Append(".AddColumn<")
+            builder.Append(".AddColumn<")
                 .Append(Code.Reference(operation.ClrType))
                 .AppendLine(">(");
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
-                    .Append("table: ")
-                    .Append(Code.Literal(operation.Table));
+                builder.AppendLine(",").Append("table: ").Append(Code.Literal(operation.Table));
 
                 if (operation.ColumnType != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("type: ")
                         .Append(Code.Literal(operation.ColumnType));
                 }
 
                 if (operation.IsUnicode == false)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("unicode: false");
+                    builder.AppendLine(",").Append("unicode: false");
                 }
 
                 if (operation.IsFixedLength == true)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("fixedLength: true");
+                    builder.AppendLine(",").Append("fixedLength: true");
                 }
 
                 if (operation.MaxLength.HasValue)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("maxLength: ")
                         .Append(Code.Literal(operation.MaxLength.Value));
                 }
@@ -164,9 +153,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.IsRowVersion)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("rowVersion: true");
+                    builder.AppendLine(",").Append("rowVersion: true");
                 }
 
                 builder.AppendLine(",")
@@ -175,46 +162,40 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.DefaultValueSql != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("defaultValueSql: ")
                         .Append(Code.Literal(operation.DefaultValueSql));
                 }
                 else if (operation.ComputedColumnSql != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("computedColumnSql: ")
                         .Append(Code.Literal(operation.ComputedColumnSql));
 
                     if (operation.IsStored != null)
                     {
-                        builder
-                            .AppendLine(",")
+                        builder.AppendLine(",")
                             .Append("stored: ")
                             .Append(Code.Literal(operation.IsStored));
                     }
                 }
                 else if (operation.DefaultValue != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("defaultValue: ")
                         .Append(Code.UnknownLiteral(operation.DefaultValue));
                 }
 
                 if (operation.Comment != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("comment: ")
                         .Append(Code.Literal(operation.Comment));
                 }
 
                 if (operation.Collation != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("collation: ")
                         .Append(Code.Literal(operation.Collation));
                 }
@@ -230,7 +211,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(AddForeignKeyOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            AddForeignKeyOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -239,47 +223,37 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .AppendLine(",");
 
                 if (operation.Columns.Length == 1)
                 {
-                    builder
-                        .Append("column: ")
-                        .Append(Code.Literal(operation.Columns[0]));
+                    builder.Append("column: ").Append(Code.Literal(operation.Columns[0]));
                 }
                 else
                 {
-                    builder
-                        .Append("columns: ")
-                        .Append(Code.Literal(operation.Columns));
+                    builder.Append("columns: ").Append(Code.Literal(operation.Columns));
                 }
 
                 if (operation.PrincipalSchema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("principalSchema: ")
                         .Append(Code.Literal(operation.PrincipalSchema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("principalTable: ")
                     .Append(Code.Literal(operation.PrincipalTable));
 
@@ -287,15 +261,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 {
                     if (operation.PrincipalColumns.Length == 1)
                     {
-                        builder
-                            .AppendLine(",")
+                        builder.AppendLine(",")
                             .Append("principalColumn: ")
                             .Append(Code.Literal(operation.PrincipalColumns[0]));
                     }
                     else
                     {
-                        builder
-                            .AppendLine(",")
+                        builder.AppendLine(",")
                             .Append("principalColumns: ")
                             .Append(Code.Literal(operation.PrincipalColumns));
                     }
@@ -303,16 +275,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.OnUpdate != ReferentialAction.NoAction)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("onUpdate: ")
                         .Append(Code.Literal(operation.OnUpdate));
                 }
 
                 if (operation.OnDelete != ReferentialAction.NoAction)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("onDelete: ")
                         .Append(Code.Literal(operation.OnDelete));
                 }
@@ -328,7 +298,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(AddPrimaryKeyOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            AddPrimaryKeyOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -337,35 +310,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .AppendLine(",");
 
                 if (operation.Columns.Length == 1)
                 {
-                    builder
-                        .Append("column: ")
-                        .Append(Code.Literal(operation.Columns[0]));
+                    builder.Append("column: ").Append(Code.Literal(operation.Columns[0]));
                 }
                 else
                 {
-                    builder
-                        .Append("columns: ")
-                        .Append(Code.Literal(operation.Columns));
+                    builder.Append("columns: ").Append(Code.Literal(operation.Columns));
                 }
 
                 builder.Append(")");
@@ -379,7 +344,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(AddUniqueConstraintOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            AddUniqueConstraintOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -388,35 +356,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .AppendLine(",");
 
                 if (operation.Columns.Length == 1)
                 {
-                    builder
-                        .Append("column: ")
-                        .Append(Code.Literal(operation.Columns[0]));
+                    builder.Append("column: ").Append(Code.Literal(operation.Columns[0]));
                 }
                 else
                 {
-                    builder
-                        .Append("columns: ")
-                        .Append(Code.Literal(operation.Columns));
+                    builder.Append("columns: ").Append(Code.Literal(operation.Columns));
                 }
 
                 builder.Append(")");
@@ -430,7 +390,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(AddCheckConstraintOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            AddCheckConstraintOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -439,20 +402,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .AppendLine(",")
@@ -469,34 +428,30 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(AlterColumnOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            AlterColumnOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
-            builder
-                .Append(".AlterColumn<")
+            builder.Append(".AlterColumn<")
                 .Append(Code.Reference(operation.ClrType))
                 .AppendLine(">(");
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
-                    .Append("table: ")
-                    .Append(Code.Literal(operation.Table));
+                builder.AppendLine(",").Append("table: ").Append(Code.Literal(operation.Table));
 
                 if (operation.ColumnType != null)
                 {
@@ -507,16 +462,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.IsUnicode == false)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("unicode: false");
+                    builder.AppendLine(",").Append("unicode: false");
                 }
 
                 if (operation.IsFixedLength == true)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("fixedLength: true");
+                    builder.AppendLine(",").Append("fixedLength: true");
                 }
 
                 if (operation.MaxLength.HasValue)
@@ -542,9 +493,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.IsRowVersion)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("rowVersion: true");
+                    builder.AppendLine(",").Append("rowVersion: true");
                 }
 
                 builder.AppendLine(",")
@@ -553,46 +502,40 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.DefaultValueSql != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("defaultValueSql: ")
                         .Append(Code.Literal(operation.DefaultValueSql));
                 }
                 else if (operation.ComputedColumnSql != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("computedColumnSql: ")
                         .Append(Code.Literal(operation.ComputedColumnSql));
 
                     if (operation.IsStored != null)
                     {
-                        builder
-                            .AppendLine(",")
+                        builder.AppendLine(",")
                             .Append("stored: ")
                             .Append(Code.Literal(operation.IsStored));
                     }
                 }
                 else if (operation.DefaultValue != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("defaultValue: ")
                         .Append(Code.UnknownLiteral(operation.DefaultValue));
                 }
 
                 if (operation.Comment != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("comment: ")
                         .Append(Code.Literal(operation.Comment));
                 }
 
                 if (operation.Collation != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("collation: ")
                         .Append(Code.Literal(operation.Collation));
                 }
@@ -614,16 +557,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.OldColumn.IsUnicode == false)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("oldUnicode: false");
+                    builder.AppendLine(",").Append("oldUnicode: false");
                 }
 
                 if (operation.OldColumn.IsFixedLength == true)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("oldFixedLength: true");
+                    builder.AppendLine(",").Append("oldFixedLength: true");
                 }
 
                 if (operation.OldColumn.MaxLength.HasValue)
@@ -649,59 +588,50 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.OldColumn.IsRowVersion)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("oldRowVersion: true");
+                    builder.AppendLine(",").Append("oldRowVersion: true");
                 }
 
                 if (operation.OldColumn.IsNullable)
                 {
-                    builder.AppendLine(",")
-                        .Append("oldNullable: true");
+                    builder.AppendLine(",").Append("oldNullable: true");
                 }
 
                 if (operation.OldColumn.DefaultValueSql != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("oldDefaultValueSql: ")
                         .Append(Code.Literal(operation.OldColumn.DefaultValueSql));
                 }
                 else if (operation.OldColumn.ComputedColumnSql != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("oldComputedColumnSql: ")
                         .Append(Code.Literal(operation.OldColumn.ComputedColumnSql));
 
                     if (operation.IsStored != null)
                     {
-                        builder
-                            .AppendLine(",")
+                        builder.AppendLine(",")
                             .Append("oldStored: ")
                             .Append(Code.Literal(operation.OldColumn.IsStored));
                     }
                 }
                 else if (operation.OldColumn.DefaultValue != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("oldDefaultValue: ")
                         .Append(Code.UnknownLiteral(operation.OldColumn.DefaultValue));
                 }
 
                 if (operation.OldColumn.Comment != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("oldComment: ")
                         .Append(Code.Literal(operation.OldColumn.Comment));
                 }
 
                 if (operation.OldColumn.Collation != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("oldCollation: ")
                         .Append(Code.Literal(operation.OldColumn.Collation));
                 }
@@ -718,7 +648,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(AlterDatabaseOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            AlterDatabaseOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -731,8 +664,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.Collation != null)
                 {
-                    builder
-                        .AppendLine()
+                    builder.AppendLine()
                         .Append("collation: ")
                         .Append(Code.Literal(operation.Collation));
 
@@ -746,8 +678,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         builder.Append(",");
                     }
 
-                    builder
-                        .AppendLine()
+                    builder.AppendLine()
                         .Append("oldCollation: ")
                         .Append(Code.Literal(operation.OldDatabase.Collation));
 
@@ -766,7 +697,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(AlterSequenceOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            AlterSequenceOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -775,78 +709,65 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
                 if (operation.IncrementBy != 1)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("incrementBy: ")
                         .Append(Code.Literal(operation.IncrementBy));
                 }
 
                 if (operation.MinValue != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("minValue: ")
                         .Append(Code.Literal(operation.MinValue));
                 }
 
                 if (operation.MaxValue != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("maxValue: ")
                         .Append(Code.Literal(operation.MaxValue));
                 }
 
                 if (operation.IsCyclic)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("cyclic: true");
+                    builder.AppendLine(",").Append("cyclic: true");
                 }
 
                 if (operation.OldSequence.IncrementBy != 1)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("oldIncrementBy: ")
                         .Append(Code.Literal(operation.OldSequence.IncrementBy));
                 }
 
                 if (operation.OldSequence.MinValue != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("oldMinValue: ")
                         .Append(Code.Literal(operation.OldSequence.MinValue));
                 }
 
                 if (operation.OldSequence.MaxValue != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("oldMaxValue: ")
                         .Append(Code.Literal(operation.OldSequence.MaxValue));
                 }
 
                 if (operation.OldSequence.IsCyclic)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("oldCyclic: true");
+                    builder.AppendLine(",").Append("oldCyclic: true");
                 }
 
                 builder.Append(")");
@@ -861,7 +782,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(AlterTableOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            AlterTableOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -870,30 +794,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
                 if (operation.Comment != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("comment: ")
                         .Append(Code.Literal(operation.Comment));
                 }
 
                 if (operation.OldTable.Comment != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("oldComment: ")
                         .Append(Code.Literal(operation.OldTable.Comment));
                 }
@@ -910,7 +829,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(CreateIndexOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            CreateIndexOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -919,48 +841,37 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .AppendLine(",");
 
                 if (operation.Columns.Length == 1)
                 {
-                    builder
-                        .Append("column: ")
-                        .Append(Code.Literal(operation.Columns[0]));
+                    builder.Append("column: ").Append(Code.Literal(operation.Columns[0]));
                 }
                 else
                 {
-                    builder
-                        .Append("columns: ")
-                        .Append(Code.Literal(operation.Columns));
+                    builder.Append("columns: ").Append(Code.Literal(operation.Columns));
                 }
 
                 if (operation.IsUnique)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("unique: true");
+                    builder.AppendLine(",").Append("unique: true");
                 }
 
                 if (operation.Filter != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("filter: ")
                         .Append(Code.Literal(operation.Filter));
                 }
@@ -976,7 +887,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(EnsureSchemaOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            EnsureSchemaOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -985,10 +899,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name))
-                    .Append(")");
+                builder.Append("name: ").Append(Code.Literal(operation.Name)).Append(")");
 
                 Annotations(operation.GetAnnotations(), builder);
             }
@@ -999,7 +910,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(CreateSequenceOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            CreateSequenceOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1008,65 +922,53 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             if (operation.ClrType != typeof(long))
             {
-                builder
-                    .Append("<")
-                    .Append(Code.Reference(operation.ClrType))
-                    .Append(">");
+                builder.Append("<").Append(Code.Reference(operation.ClrType)).Append(">");
             }
 
             builder.AppendLine("(");
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
                 if (operation.StartValue != 1L)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("startValue: ")
                         .Append(Code.Literal(operation.StartValue));
                 }
 
                 if (operation.IncrementBy != 1)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("incrementBy: ")
                         .Append(Code.Literal(operation.IncrementBy));
                 }
 
                 if (operation.MinValue.HasValue)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("minValue: ")
                         .Append(Code.Literal(operation.MinValue.Value));
                 }
 
                 if (operation.MaxValue.HasValue)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("maxValue: ")
                         .Append(Code.Literal(operation.MaxValue.Value));
                 }
 
                 if (operation.IsCyclic)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("cyclic: true");
+                    builder.AppendLine(",").Append("cyclic: true");
                 }
 
                 builder.Append(")");
@@ -1080,7 +982,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(CreateTableOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            CreateTableOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1089,22 +994,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
-                    .AppendLine("columns: table => new")
-                    .AppendLine("{");
+                builder.AppendLine(",").AppendLine("columns: table => new").AppendLine("{");
 
                 var map = new Dictionary<string, string>();
                 using (builder.Indent())
@@ -1116,24 +1015,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         var propertyName = Code.Identifier(column.Name, scope);
                         map.Add(column.Name, propertyName);
 
-                        builder
-                            .Append(propertyName)
+                        builder.Append(propertyName)
                             .Append(" = table.Column<")
                             .Append(Code.Reference(column.ClrType))
                             .Append(">(");
 
                         if (propertyName != column.Name)
                         {
-                            builder
-                                .Append("name: ")
-                                .Append(Code.Literal(column.Name))
-                                .Append(", ");
+                            builder.Append("name: ").Append(Code.Literal(column.Name)).Append(", ");
                         }
 
                         if (column.ColumnType != null)
                         {
-                            builder
-                                .Append("type: ")
+                            builder.Append("type: ")
                                 .Append(Code.Literal(column.ColumnType))
                                 .Append(", ");
                         }
@@ -1150,24 +1044,21 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                         if (column.MaxLength.HasValue)
                         {
-                            builder
-                                .Append("maxLength: ")
+                            builder.Append("maxLength: ")
                                 .Append(Code.Literal(column.MaxLength.Value))
                                 .Append(", ");
                         }
 
                         if (column.Precision.HasValue)
                         {
-                            builder
-                                .Append("precision: ")
+                            builder.Append("precision: ")
                                 .Append(Code.Literal(column.Precision.Value))
                                 .Append(", ");
                         }
 
                         if (column.Scale.HasValue)
                         {
-                            builder
-                                .Append("scale: ")
+                            builder.Append("scale: ")
                                 .Append(Code.Literal(column.Scale.Value))
                                 .Append(", ");
                         }
@@ -1177,47 +1068,37 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                             builder.Append("rowVersion: true, ");
                         }
 
-                        builder.Append("nullable: ")
-                            .Append(Code.Literal(column.IsNullable));
+                        builder.Append("nullable: ").Append(Code.Literal(column.IsNullable));
 
                         if (column.DefaultValueSql != null)
                         {
-                            builder
-                                .Append(", defaultValueSql: ")
+                            builder.Append(", defaultValueSql: ")
                                 .Append(Code.Literal(column.DefaultValueSql));
                         }
                         else if (column.ComputedColumnSql != null)
                         {
-                            builder
-                                .Append(", computedColumnSql: ")
+                            builder.Append(", computedColumnSql: ")
                                 .Append(Code.Literal(column.ComputedColumnSql));
 
                             if (column.IsStored != null)
                             {
-                                builder
-                                    .Append(", stored: ")
-                                    .Append(Code.Literal(column.IsStored));
+                                builder.Append(", stored: ").Append(Code.Literal(column.IsStored));
                             }
                         }
                         else if (column.DefaultValue != null)
                         {
-                            builder
-                                .Append(", defaultValue: ")
+                            builder.Append(", defaultValue: ")
                                 .Append(Code.UnknownLiteral(column.DefaultValue));
                         }
 
                         if (column.Comment != null)
                         {
-                            builder
-                                .Append(", comment: ")
-                                .Append(Code.Literal(column.Comment));
+                            builder.Append(", comment: ").Append(Code.Literal(column.Comment));
                         }
 
                         if (column.Collation != null)
                         {
-                            builder
-                                .Append(", collation: ")
-                                .Append(Code.Literal(column.Collation));
+                            builder.Append(", collation: ").Append(Code.Literal(column.Collation));
                         }
 
                         builder.Append(")");
@@ -1236,20 +1117,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     }
                 }
 
-                builder
-                    .AppendLine("},")
-                    .AppendLine("constraints: table =>")
-                    .AppendLine("{");
+                builder.AppendLine("},").AppendLine("constraints: table =>").AppendLine("{");
 
                 using (builder.Indent())
                 {
                     if (operation.PrimaryKey != null)
                     {
-                        builder
-                            .Append("table.PrimaryKey(")
+                        builder.Append("table.PrimaryKey(")
                             .Append(Code.Literal(operation.PrimaryKey.Name))
                             .Append(", ")
-                            .Append(Code.Lambda(operation.PrimaryKey.Columns.Select(c => map[c]).ToList()))
+                            .Append(
+                                Code.Lambda(
+                                    operation.PrimaryKey.Columns.Select(c => map[c]).ToList()
+                                )
+                            )
                             .Append(")");
 
                         using (builder.Indent())
@@ -1262,11 +1143,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                     foreach (var uniqueConstraint in operation.UniqueConstraints)
                     {
-                        builder
-                            .Append("table.UniqueConstraint(")
+                        builder.Append("table.UniqueConstraint(")
                             .Append(Code.Literal(uniqueConstraint.Name))
                             .Append(", ")
-                            .Append(Code.Lambda(uniqueConstraint.Columns.Select(c => map[c]).ToList()))
+                            .Append(
+                                Code.Lambda(uniqueConstraint.Columns.Select(c => map[c]).ToList())
+                            )
                             .Append(")");
 
                         using (builder.Indent())
@@ -1279,8 +1161,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                     foreach (var checkConstraints in operation.CheckConstraints)
                     {
-                        builder
-                            .Append("table.CheckConstraint(")
+                        builder.Append("table.CheckConstraint(")
                             .Append(Code.Literal(checkConstraints.Name))
                             .Append(", ")
                             .Append(Code.Literal(checkConstraints.Sql))
@@ -1300,26 +1181,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                         using (builder.Indent())
                         {
-                            builder
-                                .Append("name: ")
+                            builder.Append("name: ")
                                 .Append(Code.Literal(foreignKey.Name))
                                 .AppendLine(",")
                                 .Append(
-                                    foreignKey.Columns.Length == 1 || foreignKey.PrincipalColumns == null
-                                        ? "column: "
-                                        : "columns: ")
-                                .Append(Code.Lambda(foreignKey.Columns.Select(c => map[c]).ToList()));
+                                    foreignKey.Columns.Length == 1
+                                        || foreignKey.PrincipalColumns == null
+                                      ? "column: "
+                                      : "columns: "
+                                )
+                                .Append(
+                                    Code.Lambda(foreignKey.Columns.Select(c => map[c]).ToList())
+                                );
 
                             if (foreignKey.PrincipalSchema != null)
                             {
-                                builder
-                                    .AppendLine(",")
+                                builder.AppendLine(",")
                                     .Append("principalSchema: ")
                                     .Append(Code.Literal(foreignKey.PrincipalSchema));
                             }
 
-                            builder
-                                .AppendLine(",")
+                            builder.AppendLine(",")
                                 .Append("principalTable: ")
                                 .Append(Code.Literal(foreignKey.PrincipalTable));
 
@@ -1329,30 +1211,26 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                                 if (foreignKey.PrincipalColumns.Length == 1)
                                 {
-                                    builder
-                                        .Append("principalColumn: ")
+                                    builder.Append("principalColumn: ")
                                         .Append(Code.Literal(foreignKey.PrincipalColumns[0]));
                                 }
                                 else
                                 {
-                                    builder
-                                        .Append("principalColumns: ")
+                                    builder.Append("principalColumns: ")
                                         .Append(Code.Literal(foreignKey.PrincipalColumns));
                                 }
                             }
 
                             if (foreignKey.OnUpdate != ReferentialAction.NoAction)
                             {
-                                builder
-                                    .AppendLine(",")
+                                builder.AppendLine(",")
                                     .Append("onUpdate: ")
                                     .Append(Code.Literal(foreignKey.OnUpdate));
                             }
 
                             if (foreignKey.OnDelete != ReferentialAction.NoAction)
                             {
-                                builder
-                                    .AppendLine(",")
+                                builder.AppendLine(",")
                                     .Append("onDelete: ")
                                     .Append(Code.Literal(foreignKey.OnDelete));
                             }
@@ -1370,8 +1248,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.Comment != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("comment: ")
                         .Append(Code.Literal(operation.Comment));
                 }
@@ -1387,7 +1264,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(DropColumnOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            DropColumnOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1396,20 +1276,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .Append(")");
@@ -1423,7 +1299,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(DropForeignKeyOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            DropForeignKeyOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1432,20 +1311,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .Append(")");
@@ -1468,24 +1343,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
                 if (operation.Table != null)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("table: ")
-                        .Append(Code.Literal(operation.Table));
+                    builder.AppendLine(",").Append("table: ").Append(Code.Literal(operation.Table));
                 }
 
                 builder.Append(")");
@@ -1499,7 +1368,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(DropPrimaryKeyOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            DropPrimaryKeyOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1508,20 +1380,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .Append(")");
@@ -1535,7 +1403,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(DropSchemaOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            DropSchemaOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1544,10 +1415,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name))
-                    .Append(")");
+                builder.Append("name: ").Append(Code.Literal(operation.Name)).Append(")");
 
                 Annotations(operation.GetAnnotations(), builder);
             }
@@ -1558,7 +1426,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(DropSequenceOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            DropSequenceOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1567,14 +1438,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
@@ -1599,14 +1467,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
@@ -1622,7 +1487,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(DropUniqueConstraintOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            DropUniqueConstraintOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1631,20 +1499,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .Append(")");
@@ -1658,7 +1522,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(DropCheckConstraintOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            DropCheckConstraintOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1667,20 +1534,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .Append(")");
@@ -1694,7 +1557,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(RenameColumnOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            RenameColumnOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1703,20 +1569,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("table: ")
                     .Append(Code.Literal(operation.Table))
                     .AppendLine(",")
@@ -1733,7 +1595,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(RenameIndexOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            RenameIndexOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1742,28 +1607,21 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
                 if (operation.Table != null)
                 {
-                    builder
-                        .AppendLine(",")
-                        .Append("table: ")
-                        .Append(Code.Literal(operation.Table));
+                    builder.AppendLine(",").Append("table: ").Append(Code.Literal(operation.Table));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("newName: ")
                     .Append(Code.Literal(operation.NewName))
                     .Append(")");
@@ -1777,7 +1635,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(RenameSequenceOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            RenameSequenceOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1786,30 +1647,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
                 if (operation.NewName != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("newName: ")
                         .Append(Code.Literal(operation.NewName));
                 }
 
                 if (operation.NewSchema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("newSchema: ")
                         .Append(Code.Literal(operation.NewSchema));
                 }
@@ -1825,7 +1681,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(RenameTableOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            RenameTableOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1834,30 +1693,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
                 if (operation.NewName != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("newName: ")
                         .Append(Code.Literal(operation.NewName));
                 }
 
                 if (operation.NewSchema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("newSchema: ")
                         .Append(Code.Literal(operation.NewSchema));
                 }
@@ -1873,7 +1727,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         /// <param name="operation"> The operation. </param>
         /// <param name="builder"> The builder code is added to. </param>
-        protected virtual void Generate(RestartSequenceOperation operation, IndentedStringBuilder builder)
+        protected virtual void Generate(
+            RestartSequenceOperation operation,
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1882,20 +1739,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             using (builder.Indent())
             {
-                builder
-                    .Append("name: ")
-                    .Append(Code.Literal(operation.Name));
+                builder.Append("name: ").Append(Code.Literal(operation.Name));
 
                 if (operation.Schema != null)
                 {
-                    builder
-                        .AppendLine(",")
+                    builder.AppendLine(",")
                         .Append("schema: ")
                         .Append(Code.Literal(operation.Schema));
                 }
 
-                builder
-                    .AppendLine(",")
+                builder.AppendLine(",")
                     .Append("startValue: ")
                     .Append(Code.Literal(operation.StartValue))
                     .Append(")");
@@ -1914,10 +1767,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
-            builder
-                .Append(".Sql(")
-                .Append(Code.Literal(operation.Sql))
-                .Append(")");
+            builder.Append(".Sql(").Append(Code.Literal(operation.Sql)).Append(")");
 
             using (builder.Indent())
             {
@@ -1932,7 +1782,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <param name="builder"> The builder code is added to. </param>
         protected virtual void Generate(
             InsertDataOperation operation,
-            IndentedStringBuilder builder)
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1943,59 +1794,47 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             {
                 if (operation.Schema != null)
                 {
-                    builder
-                        .Append("schema: ")
+                    builder.Append("schema: ")
                         .Append(Code.Literal(operation.Schema))
                         .AppendLine(",");
                 }
 
-                builder
-                    .Append("table: ")
-                    .Append(Code.Literal(operation.Table))
-                    .AppendLine(",");
+                builder.Append("table: ").Append(Code.Literal(operation.Table)).AppendLine(",");
 
                 if (operation.Columns.Length == 1)
                 {
-                    builder
-                        .Append("column: ")
-                        .Append(Code.Literal(operation.Columns[0]));
+                    builder.Append("column: ").Append(Code.Literal(operation.Columns[0]));
                 }
                 else
                 {
-                    builder
-                        .Append("columns: ")
-                        .Append(Code.Literal(operation.Columns));
+                    builder.Append("columns: ").Append(Code.Literal(operation.Columns));
                 }
 
                 builder.AppendLine(",");
 
-                if (operation.Values.GetLength(0) == 1
-                    && operation.Values.GetLength(1) == 1)
+                if (operation.Values.GetLength(0) == 1 && operation.Values.GetLength(1) == 1)
                 {
-                    builder
-                        .Append("value: ")
-                        .Append(Code.UnknownLiteral(operation.Values[0, 0]));
+                    builder.Append("value: ").Append(Code.UnknownLiteral(operation.Values[0, 0]));
                 }
                 else if (operation.Values.GetLength(0) == 1)
                 {
-                    builder
-                        .Append("values: ")
+                    builder.Append("values: ")
                         .Append(Code.Literal(ToOnedimensionalArray(operation.Values)));
                 }
                 else if (operation.Values.GetLength(1) == 1)
                 {
-                    builder
-                        .Append("values: ")
+                    builder.Append("values: ")
                         .AppendLines(
                             Code.Literal(
                                 ToOnedimensionalArray(operation.Values, firstDimension: true),
-                                vertical: true),
-                            skipFinalNewline: true);
+                                vertical: true
+                            ),
+                            skipFinalNewline: true
+                        );
                 }
                 else
                 {
-                    builder
-                        .Append("values: ")
+                    builder.Append("values: ")
                         .AppendLines(Code.Literal(operation.Values), skipFinalNewline: true);
                 }
 
@@ -2010,7 +1849,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <param name="builder"> The builder code is added to. </param>
         protected virtual void Generate(
             DeleteDataOperation operation,
-            IndentedStringBuilder builder)
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -2021,28 +1861,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             {
                 if (operation.Schema != null)
                 {
-                    builder
-                        .Append("schema: ")
+                    builder.Append("schema: ")
                         .Append(Code.Literal(operation.Schema))
                         .AppendLine(",");
                 }
 
-                builder
-                    .Append("table: ")
-                    .Append(Code.Literal(operation.Table))
-                    .AppendLine(",");
+                builder.Append("table: ").Append(Code.Literal(operation.Table)).AppendLine(",");
 
                 if (operation.KeyColumns.Length == 1)
                 {
-                    builder
-                        .Append("keyColumn: ")
-                        .Append(Code.Literal(operation.KeyColumns[0]));
+                    builder.Append("keyColumn: ").Append(Code.Literal(operation.KeyColumns[0]));
                 }
                 else
                 {
-                    builder
-                        .Append("keyColumns: ")
-                        .Append(Code.Literal(operation.KeyColumns));
+                    builder.Append("keyColumns: ").Append(Code.Literal(operation.KeyColumns));
                 }
 
                 builder.AppendLine(",");
@@ -2051,47 +1883,42 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 {
                     if (operation.KeyColumnTypes.Length == 1)
                     {
-                        builder
-                            .Append("keyColumnType: ")
+                        builder.Append("keyColumnType: ")
                             .Append(Code.Literal(operation.KeyColumnTypes[0]));
                     }
                     else
                     {
-                        builder
-                            .Append("keyColumnTypes: ")
+                        builder.Append("keyColumnTypes: ")
                             .Append(Code.Literal(operation.KeyColumnTypes));
                     }
 
                     builder.AppendLine(",");
                 }
 
-                if (operation.KeyValues.GetLength(0) == 1
-                    && operation.KeyValues.GetLength(1) == 1)
+                if (operation.KeyValues.GetLength(0) == 1 && operation.KeyValues.GetLength(1) == 1)
                 {
-                    builder
-                        .Append("keyValue: ")
+                    builder.Append("keyValue: ")
                         .Append(Code.UnknownLiteral(operation.KeyValues[0, 0]));
                 }
                 else if (operation.KeyValues.GetLength(0) == 1)
                 {
-                    builder
-                        .Append("keyValues: ")
+                    builder.Append("keyValues: ")
                         .Append(Code.Literal(ToOnedimensionalArray(operation.KeyValues)));
                 }
                 else if (operation.KeyValues.GetLength(1) == 1)
                 {
-                    builder
-                        .Append("keyValues: ")
+                    builder.Append("keyValues: ")
                         .AppendLines(
                             Code.Literal(
                                 ToOnedimensionalArray(operation.KeyValues, firstDimension: true),
-                                vertical: true),
-                            skipFinalNewline: true);
+                                vertical: true
+                            ),
+                            skipFinalNewline: true
+                        );
                 }
                 else
                 {
-                    builder
-                        .Append("keyValues: ")
+                    builder.Append("keyValues: ")
                         .AppendLines(Code.Literal(operation.KeyValues), skipFinalNewline: true);
                 }
 
@@ -2106,7 +1933,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <param name="builder"> The builder code is added to. </param>
         protected virtual void Generate(
             UpdateDataOperation operation,
-            IndentedStringBuilder builder)
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -2117,59 +1945,48 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             {
                 if (operation.Schema != null)
                 {
-                    builder
-                        .Append("schema: ")
+                    builder.Append("schema: ")
                         .Append(Code.Literal(operation.Schema))
                         .AppendLine(",");
                 }
 
-                builder
-                    .Append("table: ")
-                    .Append(Code.Literal(operation.Table))
-                    .AppendLine(",");
+                builder.Append("table: ").Append(Code.Literal(operation.Table)).AppendLine(",");
 
                 if (operation.KeyColumns.Length == 1)
                 {
-                    builder
-                        .Append("keyColumn: ")
-                        .Append(Code.Literal(operation.KeyColumns[0]));
+                    builder.Append("keyColumn: ").Append(Code.Literal(operation.KeyColumns[0]));
                 }
                 else
                 {
-                    builder
-                        .Append("keyColumns: ")
-                        .Append(Code.Literal(operation.KeyColumns));
+                    builder.Append("keyColumns: ").Append(Code.Literal(operation.KeyColumns));
                 }
 
                 builder.AppendLine(",");
 
-                if (operation.KeyValues.GetLength(0) == 1
-                    && operation.KeyValues.GetLength(1) == 1)
+                if (operation.KeyValues.GetLength(0) == 1 && operation.KeyValues.GetLength(1) == 1)
                 {
-                    builder
-                        .Append("keyValue: ")
+                    builder.Append("keyValue: ")
                         .Append(Code.UnknownLiteral(operation.KeyValues[0, 0]));
                 }
                 else if (operation.KeyValues.GetLength(0) == 1)
                 {
-                    builder
-                        .Append("keyValues: ")
+                    builder.Append("keyValues: ")
                         .Append(Code.Literal(ToOnedimensionalArray(operation.KeyValues)));
                 }
                 else if (operation.KeyValues.GetLength(1) == 1)
                 {
-                    builder
-                        .Append("keyValues: ")
+                    builder.Append("keyValues: ")
                         .AppendLines(
                             Code.Literal(
                                 ToOnedimensionalArray(operation.KeyValues, firstDimension: true),
-                                vertical: true),
-                            skipFinalNewline: true);
+                                vertical: true
+                            ),
+                            skipFinalNewline: true
+                        );
                 }
                 else
                 {
-                    builder
-                        .Append("keyValues: ")
+                    builder.Append("keyValues: ")
                         .AppendLines(Code.Literal(operation.KeyValues), skipFinalNewline: true);
                 }
 
@@ -2177,46 +1994,38 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
                 if (operation.Columns.Length == 1)
                 {
-                    builder
-                        .Append("column: ")
-                        .Append(Code.Literal(operation.Columns[0]));
+                    builder.Append("column: ").Append(Code.Literal(operation.Columns[0]));
                 }
                 else
                 {
-                    builder
-                        .Append("columns: ")
-                        .Append(Code.Literal(operation.Columns));
+                    builder.Append("columns: ").Append(Code.Literal(operation.Columns));
                 }
 
                 builder.AppendLine(",");
 
-                if (operation.Values.GetLength(0) == 1
-                    && operation.Values.GetLength(1) == 1)
+                if (operation.Values.GetLength(0) == 1 && operation.Values.GetLength(1) == 1)
                 {
-                    builder
-                        .Append("value: ")
-                        .Append(Code.UnknownLiteral(operation.Values[0, 0]));
+                    builder.Append("value: ").Append(Code.UnknownLiteral(operation.Values[0, 0]));
                 }
                 else if (operation.Values.GetLength(0) == 1)
                 {
-                    builder
-                        .Append("values: ")
+                    builder.Append("values: ")
                         .Append(Code.Literal(ToOnedimensionalArray(operation.Values)));
                 }
                 else if (operation.Values.GetLength(1) == 1)
                 {
-                    builder
-                        .Append("values: ")
+                    builder.Append("values: ")
                         .AppendLines(
                             Code.Literal(
                                 ToOnedimensionalArray(operation.Values, firstDimension: true),
-                                vertical: true),
-                            skipFinalNewline: true);
+                                vertical: true
+                            ),
+                            skipFinalNewline: true
+                        );
                 }
                 else
                 {
-                    builder
-                        .Append("values: ")
+                    builder.Append("values: ")
                         .AppendLines(Code.Literal(operation.Values), skipFinalNewline: true);
                 }
 
@@ -2231,7 +2040,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <param name="builder"> The builder code is added to. </param>
         protected virtual void Annotations(
             IEnumerable<Annotation> annotations,
-            IndentedStringBuilder builder)
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(annotations, nameof(annotations));
             Check.NotNull(builder, nameof(builder));
@@ -2244,8 +2054,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 }
 
                 // TODO: Give providers an opportunity to render these as provider-specific extension methods
-                builder
-                    .AppendLine()
+                builder.AppendLine()
                     .Append(".Annotation(")
                     .Append(Code.Literal(annotation.Name))
                     .Append(", ")
@@ -2261,7 +2070,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <param name="builder"> The builder code is added to. </param>
         protected virtual void OldAnnotations(
             IEnumerable<Annotation> annotations,
-            IndentedStringBuilder builder)
+            IndentedStringBuilder builder
+        )
         {
             Check.NotNull(annotations, nameof(annotations));
             Check.NotNull(builder, nameof(builder));
@@ -2269,8 +2079,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             foreach (var annotation in annotations)
             {
                 // TODO: Give providers an opportunity to render these as provider-specific extension methods
-                builder
-                    .AppendLine()
+                builder.AppendLine()
                     .Append(".OldAnnotation(")
                     .Append(Code.Literal(annotation.Name))
                     .Append(", ")
@@ -2279,18 +2088,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             }
         }
 
-        private static object?[] ToOnedimensionalArray(object?[,] values, bool firstDimension = false)
+        private static object?[] ToOnedimensionalArray(
+            object?[,] values,
+            bool firstDimension = false
+        )
         {
             Check.DebugAssert(
                 values.GetLength(firstDimension ? 1 : 0) == 1,
-                $"Length of dimension {(firstDimension ? 1 : 0)} is not 1.");
+                $"Length of dimension {(firstDimension ? 1 : 0)} is not 1."
+            );
 
             var result = new object?[values.Length];
             for (var i = 0; i < values.Length; i++)
             {
-                result[i] = firstDimension
-                    ? values[i, 0]
-                    : values[0, i];
+                result[i] = firstDimension ? values[i, 0] : values[0, i];
             }
 
             return result;

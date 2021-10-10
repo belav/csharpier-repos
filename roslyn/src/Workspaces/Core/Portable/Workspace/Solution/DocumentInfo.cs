@@ -64,7 +64,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a new instance of a <see cref="DocumentInfo"/>.
         /// </summary>
-        internal DocumentInfo(DocumentAttributes attributes, TextLoader? loader, IDocumentServiceProvider? documentServiceProvider)
+        internal DocumentInfo(
+            DocumentAttributes attributes,
+            TextLoader? loader,
+            IDocumentServiceProvider? documentServiceProvider
+        )
         {
             Attributes = attributes;
             TextLoader = loader;
@@ -78,7 +82,8 @@ namespace Microsoft.CodeAnalysis
             SourceCodeKind sourceCodeKind = SourceCodeKind.Regular,
             TextLoader? loader = null,
             string? filePath = null,
-            bool isGenerated = false)
+            bool isGenerated = false
+        )
         {
             return Create(
                 id ?? throw new ArgumentNullException(nameof(id)),
@@ -89,7 +94,8 @@ namespace Microsoft.CodeAnalysis
                 filePath,
                 isGenerated,
                 designTimeOnly: false,
-                documentServiceProvider: null);
+                documentServiceProvider: null
+            );
         }
 
         internal static DocumentInfo Create(
@@ -101,23 +107,41 @@ namespace Microsoft.CodeAnalysis
             string? filePath,
             bool isGenerated,
             bool designTimeOnly,
-            IDocumentServiceProvider? documentServiceProvider)
+            IDocumentServiceProvider? documentServiceProvider
+        )
         {
-            return new DocumentInfo(new DocumentAttributes(id, name, folders, sourceCodeKind, filePath, isGenerated, designTimeOnly: designTimeOnly), loader, documentServiceProvider);
+            return new DocumentInfo(
+                new DocumentAttributes(
+                    id,
+                    name,
+                    folders,
+                    sourceCodeKind,
+                    filePath,
+                    isGenerated,
+                    designTimeOnly: designTimeOnly
+                ),
+                loader,
+                documentServiceProvider
+            );
         }
 
         private DocumentInfo With(
             DocumentAttributes? attributes = null,
             Optional<TextLoader?> loader = default,
-            Optional<IDocumentServiceProvider?> documentServiceProvider = default)
+            Optional<IDocumentServiceProvider?> documentServiceProvider = default
+        )
         {
             var newAttributes = attributes ?? Attributes;
             var newLoader = loader.HasValue ? loader.Value : TextLoader;
-            var newDocumentServiceProvider = documentServiceProvider.HasValue ? documentServiceProvider.Value : DocumentServiceProvider;
+            var newDocumentServiceProvider = documentServiceProvider.HasValue
+                ? documentServiceProvider.Value
+                : DocumentServiceProvider;
 
-            if (newAttributes == Attributes &&
-                newLoader == TextLoader &&
-                newDocumentServiceProvider == DocumentServiceProvider)
+            if (
+                newAttributes == Attributes
+                && newLoader == TextLoader
+                && newDocumentServiceProvider == DocumentServiceProvider
+            )
             {
                 return this;
             }
@@ -125,26 +149,40 @@ namespace Microsoft.CodeAnalysis
             return new DocumentInfo(newAttributes, newLoader, newDocumentServiceProvider);
         }
 
-        public DocumentInfo WithId(DocumentId id)
-            => With(attributes: Attributes.With(id: id ?? throw new ArgumentNullException(nameof(id))));
+        public DocumentInfo WithId(DocumentId id) =>
+            With(
+                attributes: Attributes.With(id: id ?? throw new ArgumentNullException(nameof(id)))
+            );
 
-        public DocumentInfo WithName(string name)
-            => With(attributes: Attributes.With(name: name ?? throw new ArgumentNullException(nameof(name))));
+        public DocumentInfo WithName(string name) =>
+            With(
+                attributes: Attributes.With(
+                    name: name ?? throw new ArgumentNullException(nameof(name))
+                )
+            );
 
-        public DocumentInfo WithFolders(IEnumerable<string>? folders)
-            => With(attributes: Attributes.With(folders: PublicContract.ToBoxedImmutableArrayWithNonNullItems(folders, nameof(folders))));
+        public DocumentInfo WithFolders(IEnumerable<string>? folders) =>
+            With(
+                attributes: Attributes.With(
+                    folders: PublicContract.ToBoxedImmutableArrayWithNonNullItems(
+                        folders,
+                        nameof(folders)
+                    )
+                )
+            );
 
-        public DocumentInfo WithSourceCodeKind(SourceCodeKind kind)
-            => With(attributes: Attributes.With(sourceCodeKind: kind));
+        public DocumentInfo WithSourceCodeKind(SourceCodeKind kind) =>
+            With(attributes: Attributes.With(sourceCodeKind: kind));
 
-        public DocumentInfo WithFilePath(string? filePath)
-            => With(attributes: Attributes.With(filePath: filePath));
+        public DocumentInfo WithFilePath(string? filePath) =>
+            With(attributes: Attributes.With(filePath: filePath));
 
-        public DocumentInfo WithTextLoader(TextLoader? loader)
-            => With(loader: loader);
+        public DocumentInfo WithTextLoader(TextLoader? loader) => With(loader: loader);
 
-        private string GetDebuggerDisplay()
-            => (FilePath == null) ? (nameof(Name) + " = " + Name) : (nameof(FilePath) + " = " + FilePath);
+        private string GetDebuggerDisplay() =>
+            (FilePath == null)
+                ? (nameof(Name) + " = " + Name)
+                : (nameof(FilePath) + " = " + FilePath);
 
         /// <summary>
         /// type that contains information regarding this document itself but
@@ -197,7 +235,8 @@ namespace Microsoft.CodeAnalysis
                 SourceCodeKind sourceCodeKind,
                 string? filePath,
                 bool isGenerated,
-                bool designTimeOnly)
+                bool designTimeOnly
+            )
             {
                 Id = id;
                 Name = name;
@@ -215,28 +254,43 @@ namespace Microsoft.CodeAnalysis
                 Optional<SourceCodeKind> sourceCodeKind = default,
                 Optional<string?> filePath = default,
                 Optional<bool> isGenerated = default,
-                Optional<bool> designTimeOnly = default)
+                Optional<bool> designTimeOnly = default
+            )
             {
                 var newId = id ?? Id;
                 var newName = name ?? Name;
                 var newFolders = folders ?? Folders;
-                var newSourceCodeKind = sourceCodeKind.HasValue ? sourceCodeKind.Value : SourceCodeKind;
+                var newSourceCodeKind = sourceCodeKind.HasValue
+                    ? sourceCodeKind.Value
+                    : SourceCodeKind;
                 var newFilePath = filePath.HasValue ? filePath.Value : FilePath;
                 var newIsGenerated = isGenerated.HasValue ? isGenerated.Value : IsGenerated;
-                var newDesignTimeOnly = designTimeOnly.HasValue ? designTimeOnly.Value : DesignTimeOnly;
+                var newDesignTimeOnly = designTimeOnly.HasValue
+                    ? designTimeOnly.Value
+                    : DesignTimeOnly;
 
-                if (newId == Id &&
-                    newName == Name &&
-                    newFolders.SequenceEqual(Folders) &&
-                    newSourceCodeKind == SourceCodeKind &&
-                    newFilePath == FilePath &&
-                    newIsGenerated == IsGenerated &&
-                    newDesignTimeOnly == DesignTimeOnly)
+                if (
+                    newId == Id
+                    && newName == Name
+                    && newFolders.SequenceEqual(Folders)
+                    && newSourceCodeKind == SourceCodeKind
+                    && newFilePath == FilePath
+                    && newIsGenerated == IsGenerated
+                    && newDesignTimeOnly == DesignTimeOnly
+                )
                 {
                     return this;
                 }
 
-                return new DocumentAttributes(newId, newName, newFolders, newSourceCodeKind, newFilePath, newIsGenerated, newDesignTimeOnly);
+                return new DocumentAttributes(
+                    newId,
+                    newName,
+                    newFolders,
+                    newSourceCodeKind,
+                    newFilePath,
+                    newIsGenerated,
+                    newDesignTimeOnly
+                );
             }
 
             bool IObjectWritable.ShouldReuseInSerialization => true;
@@ -264,11 +318,22 @@ namespace Microsoft.CodeAnalysis
                 var isGenerated = reader.ReadBoolean();
                 var designTimeOnly = reader.ReadBoolean();
 
-                return new DocumentAttributes(documentId, name, folders, (SourceCodeKind)sourceCodeKind, filePath, isGenerated, designTimeOnly);
+                return new DocumentAttributes(
+                    documentId,
+                    name,
+                    folders,
+                    (SourceCodeKind)sourceCodeKind,
+                    filePath,
+                    isGenerated,
+                    designTimeOnly
+                );
             }
 
-            Checksum IChecksummedObject.Checksum
-                => _lazyChecksum ??= Checksum.Create(WellKnownSynchronizationKind.DocumentAttributes, this);
+            Checksum IChecksummedObject.Checksum =>
+                _lazyChecksum ??= Checksum.Create(
+                    WellKnownSynchronizationKind.DocumentAttributes,
+                    this
+                );
         }
     }
 }

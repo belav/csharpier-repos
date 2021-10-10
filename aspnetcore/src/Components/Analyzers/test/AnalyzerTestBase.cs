@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Components.Analyzers
             var filePath = Path.Combine(ProjectDirectory, "TestFiles", GetType().Name, source);
             if (!File.Exists(filePath))
             {
-                throw new FileNotFoundException($"TestFile {source} could not be found at {filePath}.", filePath);
+                throw new FileNotFoundException(
+                    $"TestFile {source} could not be found at {filePath}.",
+                    filePath
+                );
             }
 
             var fileContent = File.ReadAllText(filePath);

@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
             BaseNameParts = baseNameParts;
         }
 
-        public static IdentifierNameParts CreateIdentifierNameParts(ISymbol symbol, ImmutableArray<NamingRule> rules)
+        public static IdentifierNameParts CreateIdentifierNameParts(
+            ISymbol symbol,
+            ImmutableArray<NamingRule> rules
+        )
         {
             var baseName = RemovePrefixesAndSuffixes(symbol, rules, symbol.Name);
 
@@ -34,7 +37,11 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
             return new IdentifierNameParts(baseName, words);
         }
 
-        private static string RemovePrefixesAndSuffixes(ISymbol symbol, ImmutableArray<NamingRule> rules, string baseName)
+        private static string RemovePrefixesAndSuffixes(
+            ISymbol symbol,
+            ImmutableArray<NamingRule> rules,
+            string baseName
+        )
         {
             var newBaseName = baseName;
 
@@ -53,7 +60,6 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
                     newBaseName = newBaseName.EndsWith(suffix)
                         ? newBaseName.Substring(0, newBaseName.Length - suffix.Length)
                         : newBaseName;
-
                     break;
                 }
             }
@@ -73,7 +79,10 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
 
         private static ImmutableArray<string> CreateWords(ArrayBuilder<TextSpan> parts, string name)
         {
-            using var resultDisposer = ArrayBuilder<string>.GetInstance(parts.Count, out var result);
+            using var resultDisposer = ArrayBuilder<string>.GetInstance(
+                parts.Count,
+                out var result
+            );
             foreach (var part in parts)
             {
                 result.Add(name.Substring(part.Start, part.Length));

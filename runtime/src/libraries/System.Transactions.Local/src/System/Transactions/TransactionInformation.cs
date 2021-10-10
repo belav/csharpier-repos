@@ -28,6 +28,7 @@ namespace System.Transactions
                 {
                     return _internalTransaction.TransactionTraceId.TransactionIdentifier;
                 }
+
                 finally
                 {
                     if (etwLog.IsEnabled())
@@ -37,7 +38,6 @@ namespace System.Transactions
                 }
             }
         }
-
 
         public Guid DistributedIdentifier
         {
@@ -60,6 +60,7 @@ namespace System.Transactions
                         return _internalTransaction.State.get_Identifier(_internalTransaction);
                     }
                 }
+
                 finally
                 {
                     if (etwLog.IsEnabled())
@@ -69,7 +70,6 @@ namespace System.Transactions
                 }
             }
         }
-
 
         public DateTime CreationTime => new DateTime(_internalTransaction.CreationTime);
 
@@ -88,6 +88,7 @@ namespace System.Transactions
                     Debug.Assert(_internalTransaction.State != null);
                     return _internalTransaction.State.get_Status(_internalTransaction);
                 }
+
                 finally
                 {
                     if (etwLog.IsEnabled())

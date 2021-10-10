@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
     /// <summary>
     /// Options for Azure diagnostics blob logging.
     /// </summary>
-    public class AzureBlobLoggerOptions: BatchingLoggerOptions
+    public class AzureBlobLoggerOptions : BatchingLoggerOptions
     {
         private string _blobName = "applicationLog.txt";
 
@@ -24,7 +24,10 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException(nameof(value), $"{nameof(BlobName)} must be non-empty string.");
+                    throw new ArgumentException(
+                        nameof(value),
+                        $"{nameof(BlobName)} must be non-empty string."
+                    );
                 }
                 _blobName = value;
             }

@@ -92,7 +92,9 @@ namespace Microsoft.Web.Mvc.Controls
         {
             if (_attributes == null)
             {
-                _attributes = new SortedDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                _attributes = new SortedDictionary<string, string>(
+                    StringComparer.OrdinalIgnoreCase
+                );
             }
         }
 
@@ -121,7 +123,6 @@ namespace Microsoft.Web.Mvc.Controls
         {
             SetAttribute(key, value);
         }
-
         #endregion
     }
 }

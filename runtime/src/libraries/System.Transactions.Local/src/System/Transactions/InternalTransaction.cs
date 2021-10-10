@@ -125,7 +125,10 @@ namespace System.Transactions
             get { return _promotedTransaction; }
             set
             {
-                Debug.Assert(_promotedTransaction == null, "A transaction can only be promoted once!");
+                Debug.Assert(
+                    _promotedTransaction == null,
+                    "A transaction can only be promoted once!"
+                );
                 _promotedTransaction = value;
             }
         }
@@ -168,7 +171,11 @@ namespace System.Transactions
 
         private static string? s_instanceIdentifier;
         internal static string InstanceIdentifier =>
-            LazyInitializer.EnsureInitialized(ref s_instanceIdentifier, ref s_classSyncObject, () => Guid.NewGuid().ToString() + ":");
+            LazyInitializer.EnsureInitialized(
+                ref s_instanceIdentifier,
+                ref s_classSyncObject,
+                () => Guid.NewGuid().ToString() + ":"
+            );
 
         // Double-checked locking pattern requires volatile for read/write synchronization
         private volatile bool _traceIdentifierInited;
@@ -186,8 +193,13 @@ namespace System.Transactions
                         if (!_traceIdentifierInited)
                         {
                             TransactionTraceIdentifier temp = new TransactionTraceIdentifier(
-                                InstanceIdentifier + Convert.ToString(_transactionHash, CultureInfo.InvariantCulture),
-                                0);
+                                InstanceIdentifier
+                                    + Convert.ToString(
+                                        _transactionHash,
+                                        CultureInfo.InvariantCulture
+                                    ),
+                                0
+                            );
                             _traceIdentifier = temp;
                             _traceIdentifierInited = true;
                         }
@@ -210,7 +222,10 @@ namespace System.Transactions
         internal void SetPromoterTypeToMSDTC()
         {
             // The promoter type should either not yet be set or should already be TransactionInterop.PromoterTypeDtc in this case.
-            if ((_promoterType != Guid.Empty) && (_promoterType != TransactionInterop.PromoterTypeDtc))
+            if (
+                (_promoterType != Guid.Empty)
+                && (_promoterType != TransactionInterop.PromoterTypeDtc)
+            )
             {
                 throw new InvalidOperationException(SR.PromoterTypeInvalid);
             }
@@ -221,14 +236,23 @@ namespace System.Transactions
         // Guid.Empty AND NOT TransactionInterop.PromoterTypeDtc.
         internal void ThrowIfPromoterTypeIsNotMSDTC()
         {
-            if ((_promoterType != Guid.Empty) && (_promoterType != TransactionInterop.PromoterTypeDtc))
+            if (
+                (_promoterType != Guid.Empty)
+                && (_promoterType != TransactionInterop.PromoterTypeDtc)
+            )
             {
-                throw new TransactionPromotionException(SR.Format(SR.PromoterTypeUnrecognized, _promoterType.ToString()), _innerException);
+                throw new TransactionPromotionException(
+                    SR.Format(SR.PromoterTypeUnrecognized, _promoterType.ToString()),
+                    _innerException
+                );
             }
         }
 
         // Construct an internal transaction
-        internal InternalTransaction(TimeSpan timeout, CommittableTransaction committableTransaction)
+        internal InternalTransaction(
+            TimeSpan timeout,
+            CommittableTransaction committableTransaction
+        )
         {
             // Calculate the absolute timeout for this transaction
             _absoluteTimeout = TransactionManager.TransactionTable.TimeoutTicks(timeout);
@@ -248,7 +272,10 @@ namespace System.Transactions
         }
 
         // Construct an internal transaction
-        internal InternalTransaction(Transaction outcomeSource, DistributedTransaction distributedTx)
+        internal InternalTransaction(
+            Transaction outcomeSource,
+            DistributedTransaction distributedTx
+        )
         {
             _promotedTransaction = distributedTx;
 
@@ -288,7 +315,10 @@ namespace System.Transactions
             _promoteState = TransactionState.TransactionStateDelegatedSubordinate;
         }
 
-        internal static void DistributedTransactionOutcome(InternalTransaction tx, TransactionStatus status)
+        internal static void DistributedTransactionOutcome(
+            InternalTransaction tx,
+            TransactionStatus status
+        )
         {
             FinalizedObject? fo = null;
 
@@ -304,33 +334,36 @@ namespace System.Transactions
                 switch (status)
                 {
                     case TransactionStatus.Committed:
-                        {
-                            tx.State.ChangeStatePromotedCommitted(tx);
-                            break;
-                        }
+                    {
+                        tx.State.ChangeStatePromotedCommitted(tx);
+                        break;
+                    }
 
                     case TransactionStatus.Aborted:
-                        {
-                            tx.State.ChangeStatePromotedAborted(tx);
-                            break;
-                        }
+                    {
+                        tx.State.ChangeStatePromotedAborted(tx);
+                        break;
+                    }
 
                     case TransactionStatus.InDoubt:
-                        {
-                            tx.State.InDoubtFromDtc(tx);
-                            break;
-                        }
+                    {
+                        tx.State.InDoubtFromDtc(tx);
+                        break;
+                    }
 
                     default:
-                        {
-                            Debug.Fail("InternalTransaction.DistributedTransactionOutcome - Unexpected TransactionStatus");
-                            TransactionException.CreateInvalidOperationException(TraceSourceType.TraceSourceLtm,
-                                "",
-                                null,
-                                tx.DistributedTxId
-                                );
-                            break;
-                        }
+                    {
+                        Debug.Fail(
+                            "InternalTransaction.DistributedTransactionOutcome - Unexpected TransactionStatus"
+                        );
+                        TransactionException.CreateInvalidOperationException(
+                            TraceSourceType.TraceSourceLtm,
+                            "",
+                            null,
+                            tx.DistributedTxId
+                        );
+                        break;
+                    }
                 }
 
                 fo = tx._finalizedObject;
@@ -360,6 +393,7 @@ namespace System.Transactions
                     Debug.Assert(_committableTransaction != null);
                     _asyncCallback(_committableTransaction);
                 }
+
                 finally
                 {
                     Monitor.Enter(this);
@@ -381,7 +415,6 @@ namespace System.Transactions
             }
         }
 
-
         #endregion
 
 
@@ -395,7 +428,6 @@ namespace System.Transactions
                 _promotedTransaction.Dispose();
             }
         }
-
         #endregion
     }
 
@@ -448,7 +480,6 @@ namespace System.Transactions
         {
             Dispose(true);
         }
-
 
         ~FinalizedObject()
         {

@@ -31,6 +31,7 @@ namespace System.Threading
             {
                 _nodes.Add(node);
             }
+
             finally
             {
                 s_lock.Release();
@@ -84,6 +85,7 @@ namespace System.Threading
                 {
                     counter._overflowCount += _count;
                 }
+
                 finally
                 {
                     s_lock.Release();
@@ -119,6 +121,7 @@ namespace System.Threading
                     _count = 0;
                     counter._overflowCount += (long)uint.MaxValue + 1;
                 }
+
                 finally
                 {
                     s_lock.Release();

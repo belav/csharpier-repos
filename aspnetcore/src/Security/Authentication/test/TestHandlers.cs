@@ -9,10 +9,16 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Tests
 {
-    public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>, IAuthenticationSignInHandler
+    public class TestAuthHandler
+        : AuthenticationHandler<AuthenticationSchemeOptions>,
+          IAuthenticationSignInHandler
     {
-        public TestAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
-        { }
+        public TestAuthHandler(
+            IOptionsMonitor<AuthenticationSchemeOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder,
+            ISystemClock clock
+        ) : base(options, logger, encoder, clock) { }
 
         public int SignInCount { get; set; }
         public int SignOutCount { get; set; }
@@ -37,9 +43,20 @@ namespace Microsoft.AspNetCore.Authentication.Tests
             AuthenticateCount++;
             var principal = new ClaimsPrincipal();
             var id = new ClaimsIdentity();
-            id.AddClaim(new Claim(ClaimTypes.NameIdentifier, Scheme.Name, ClaimValueTypes.String, Scheme.Name));
+            id.AddClaim(
+                new Claim(
+                    ClaimTypes.NameIdentifier,
+                    Scheme.Name,
+                    ClaimValueTypes.String,
+                    Scheme.Name
+                )
+            );
             principal.AddIdentity(id);
-            return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)));
+            return Task.FromResult(
+                AuthenticateResult.Success(
+                    new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)
+                )
+            );
         }
 
         public Task SignInAsync(ClaimsPrincipal user, AuthenticationProperties properties)
@@ -69,9 +86,20 @@ namespace Microsoft.AspNetCore.Authentication.Tests
             AuthenticateCount++;
             var principal = new ClaimsPrincipal();
             var id = new ClaimsIdentity();
-            id.AddClaim(new Claim(ClaimTypes.NameIdentifier, Scheme.Name, ClaimValueTypes.String, Scheme.Name));
+            id.AddClaim(
+                new Claim(
+                    ClaimTypes.NameIdentifier,
+                    Scheme.Name,
+                    ClaimValueTypes.String,
+                    Scheme.Name
+                )
+            );
             principal.AddIdentity(id);
-            return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)));
+            return Task.FromResult(
+                AuthenticateResult.Success(
+                    new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)
+                )
+            );
         }
 
         public Task ChallengeAsync(AuthenticationProperties properties)

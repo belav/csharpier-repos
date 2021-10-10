@@ -52,7 +52,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Remove = 8,
             Clear = 16
         }
-
         #endregion
     }
 }

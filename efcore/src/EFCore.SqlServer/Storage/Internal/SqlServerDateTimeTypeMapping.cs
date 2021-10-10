@@ -44,15 +44,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         public SqlServerDateTimeTypeMapping(
             string storeType,
             DbType? dbType = null,
-            StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
+            StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
+        )
             : base(
                 new RelationalTypeMappingParameters(
                     new CoreTypeMappingParameters(typeof(DateTime)),
                     storeType,
                     storeTypePostfix,
-                    dbType))
-        {
-        }
+                    dbType
+                )
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,9 +62,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected SqlServerDateTimeTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+            : base(parameters) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,8 +80,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                 ((SqlParameter)parameter).SqlDbType = SqlDbType.Date;
             }
 
-            if (Size.HasValue
-                && Size.Value != -1)
+            if (Size.HasValue && Size.Value != -1)
             {
                 parameter.Size = Size.Value;
             }
@@ -98,8 +96,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         /// </summary>
         /// <param name="parameters"> The parameters for this mapping. </param>
         /// <returns> The newly created mapping. </returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new SqlServerDateTimeTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new SqlServerDateTimeTypeMapping(parameters);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -123,8 +122,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                         if (Precision.HasValue)
                         {
                             var precision = Precision.Value;
-                            if (precision <= 7
-                                && precision >= 0)
+                            if (precision <= 7 && precision >= 0)
                             {
                                 return _dateTime2Formats[precision];
                             }

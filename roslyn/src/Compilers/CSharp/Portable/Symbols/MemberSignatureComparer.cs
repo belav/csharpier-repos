@@ -40,14 +40,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// The member signatures are compared without regard to name (including the interface part, if any)
         /// and the return types must match.
         /// </summary>
-        public static readonly MemberSignatureComparer ExplicitImplementationComparer = new MemberSignatureComparer(
-            considerName: false,
-            considerExplicitlyImplementedInterfaces: false,
-            considerReturnType: true,
-            considerTypeConstraints: false,
-            considerRefKindDifferences: true,
-            considerCallingConvention: true,
-            typeComparison: TypeCompareKind.AllIgnoreOptions);
+        public static readonly MemberSignatureComparer ExplicitImplementationComparer =
+            new MemberSignatureComparer(
+                considerName: false,
+                considerExplicitlyImplementedInterfaces: false,
+                considerReturnType: true,
+                considerTypeConstraints: false,
+                considerRefKindDifferences: true,
+                considerCallingConvention: true,
+                typeComparison: TypeCompareKind.AllIgnoreOptions
+            );
 
         /// <summary>
         /// This instance is used when trying to determine if one member implicitly implements another,
@@ -62,28 +64,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// In this scenario, we want to compare I.M to MT.M without regard to custom modifiers, because if C1 != C2,
         /// we can just synthesize an explicit implementation of I.M in ST that calls MT.M.
         /// </remarks>
-        public static readonly MemberSignatureComparer CSharpImplicitImplementationComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: true,
-            considerReturnType: true,
-            considerTypeConstraints: false, // constraints are checked by caller instead
-            considerCallingConvention: true,
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.AllIgnoreOptions);
+        public static readonly MemberSignatureComparer CSharpImplicitImplementationComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: true,
+                considerReturnType: true,
+                considerTypeConstraints: false, // constraints are checked by caller instead
+                considerCallingConvention: true,
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.AllIgnoreOptions
+            );
 
         /// <summary>
         /// This instance is used as a fallback when it is determined that one member does not implicitly implement
         /// another. It applies a looser check to determine whether the proposed implementation should be reported
         /// as "close".
         /// </summary>
-        public static readonly MemberSignatureComparer CSharpCloseImplicitImplementationComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: true,
-            considerReturnType: false,
-            considerTypeConstraints: false,
-            considerCallingConvention: false,
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.AllIgnoreOptions); //shouldn't actually matter for source members
+        public static readonly MemberSignatureComparer CSharpCloseImplicitImplementationComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: true,
+                considerReturnType: false,
+                considerTypeConstraints: false,
+                considerCallingConvention: false,
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.AllIgnoreOptions
+            ); //shouldn't actually matter for source members
 
         /// <summary>
         /// This instance is used to determine if two C# member declarations in source conflict with each other.
@@ -93,118 +99,140 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <remarks>
         /// This does the same comparison that MethodSignature used to do.
         /// </remarks>
-        public static readonly MemberSignatureComparer DuplicateSourceComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: true,
-            considerReturnType: false,
-            considerTypeConstraints: false,
-            considerCallingConvention: false,
-            considerRefKindDifferences: false,
-            typeComparison: TypeCompareKind.AllIgnoreOptions);
+        public static readonly MemberSignatureComparer DuplicateSourceComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: true,
+                considerReturnType: false,
+                considerTypeConstraints: false,
+                considerCallingConvention: false,
+                considerRefKindDifferences: false,
+                typeComparison: TypeCompareKind.AllIgnoreOptions
+            );
 
         /// <summary>
         /// This instance is used to determine if some API specific to records is explicitly declared.
         /// It is the same as <see cref="DuplicateSourceComparer"/> except it considers ref kinds as well.
         /// </summary>
-        public static readonly MemberSignatureComparer RecordAPISignatureComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: true,
-            considerReturnType: false,
-            considerTypeConstraints: false,
-            considerCallingConvention: false,
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.AllIgnoreOptions);
+        public static readonly MemberSignatureComparer RecordAPISignatureComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: true,
+                considerReturnType: false,
+                considerTypeConstraints: false,
+                considerCallingConvention: false,
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.AllIgnoreOptions
+            );
 
         /// <summary>
         /// This instance is used to determine if a partial method implementation matches the definition.
         /// It is the same as <see cref="DuplicateSourceComparer"/> except it considers ref kinds as well.
         /// </summary>
-        public static readonly MemberSignatureComparer PartialMethodsComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: true,
-            considerReturnType: false,
-            considerTypeConstraints: false,
-            considerCallingConvention: false,
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.AllIgnoreOptions);
+        public static readonly MemberSignatureComparer PartialMethodsComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: true,
+                considerReturnType: false,
+                considerTypeConstraints: false,
+                considerCallingConvention: false,
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.AllIgnoreOptions
+            );
 
         /// <summary>
         /// This instance is used to check whether one member overrides another, according to the C# definition.
         /// </summary>
-        public static readonly MemberSignatureComparer CSharpOverrideComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: false,
-            considerReturnType: false,
-            considerTypeConstraints: false,
-            considerCallingConvention: false, //ignore static-ness
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.AllIgnoreOptions);
+        public static readonly MemberSignatureComparer CSharpOverrideComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: false,
+                considerReturnType: false,
+                considerTypeConstraints: false,
+                considerCallingConvention: false, //ignore static-ness
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.AllIgnoreOptions
+            );
 
         /// <summary>
         /// This instance checks whether two signatures match including tuples names, in both return type and parameters.
         /// It is used to detect tuple-name-only differences.
         /// </summary>
-        private static readonly MemberSignatureComparer CSharpWithTupleNamesComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: false,
-            considerReturnType: true,
-            considerTypeConstraints: false,
-            considerCallingConvention: false, //ignore static-ness
-            considerRefKindDifferences: false,
-            typeComparison: TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.IgnoreTupleNames);
+        private static readonly MemberSignatureComparer CSharpWithTupleNamesComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: false,
+                considerReturnType: true,
+                considerTypeConstraints: false,
+                considerCallingConvention: false, //ignore static-ness
+                considerRefKindDifferences: false,
+                typeComparison: TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.IgnoreTupleNames
+            );
 
         /// <summary>
         /// This instance checks whether two signatures match excluding tuples names, in both return type and parameters.
         /// It is used to detect tuple-name-only differences.
         /// </summary>
-        private static readonly MemberSignatureComparer CSharpWithoutTupleNamesComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: false,
-            considerReturnType: true,
-            considerTypeConstraints: false,
-            considerCallingConvention: false, //ignore static-ness
-            considerRefKindDifferences: false,
-            typeComparison: TypeCompareKind.AllIgnoreOptions);
+        private static readonly MemberSignatureComparer CSharpWithoutTupleNamesComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: false,
+                considerReturnType: true,
+                considerTypeConstraints: false,
+                considerCallingConvention: false, //ignore static-ness
+                considerRefKindDifferences: false,
+                typeComparison: TypeCompareKind.AllIgnoreOptions
+            );
 
         /// <summary>
         /// This instance is used to check whether one property or event overrides another, according to the C# definition.
         /// <para>NOTE: C# ignores accessor member names.</para>
         /// </summary>
-        public static readonly MemberSignatureComparer CSharpAccessorOverrideComparer = new MemberSignatureComparer(
-            considerName: false,
-            considerExplicitlyImplementedInterfaces: false, //Bug: DevDiv #15775
-            considerReturnType: false,
-            considerTypeConstraints: false,
-            considerCallingConvention: false, //ignore static-ness
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.AllIgnoreOptions);
+        public static readonly MemberSignatureComparer CSharpAccessorOverrideComparer =
+            new MemberSignatureComparer(
+                considerName: false,
+                considerExplicitlyImplementedInterfaces: false, //Bug: DevDiv #15775
+                considerReturnType: false,
+                considerTypeConstraints: false,
+                considerCallingConvention: false, //ignore static-ness
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.AllIgnoreOptions
+            );
 
         /// <summary>
         /// Same as <see cref="CSharpOverrideComparer"/> except that it pays attention to custom modifiers and return type.  
         /// Normally, the return type isn't considered during overriding, but this comparer is actually used to find
         /// exact matches (i.e. before tie-breaking takes place amongst close matches).
         /// </summary>
-        public static readonly MemberSignatureComparer CSharpCustomModifierOverrideComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: false,
-            considerReturnType: true,
-            considerTypeConstraints: false,
-            considerCallingConvention: false, //ignore static-ness
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes | TypeCompareKind.IgnoreNativeIntegers);
+        public static readonly MemberSignatureComparer CSharpCustomModifierOverrideComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: false,
+                considerReturnType: true,
+                considerTypeConstraints: false,
+                considerCallingConvention: false, //ignore static-ness
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames
+                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    | TypeCompareKind.IgnoreNativeIntegers
+            );
 
         /// <summary>
         /// If this returns false, then the real override comparer (whichever one is appropriate for the scenario)
         /// will also return false.
         /// </summary>
-        internal static readonly MemberSignatureComparer SloppyOverrideComparer = new MemberSignatureComparer(
-            considerName: false,
-            considerExplicitlyImplementedInterfaces: false,
-            considerReturnType: false,
-            considerTypeConstraints: false,
-            considerCallingConvention: false, //ignore static-ness
-            considerRefKindDifferences: false,
-            typeComparison: TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes | TypeCompareKind.IgnoreDynamicAndTupleNames);
+        internal static readonly MemberSignatureComparer SloppyOverrideComparer =
+            new MemberSignatureComparer(
+                considerName: false,
+                considerExplicitlyImplementedInterfaces: false,
+                considerReturnType: false,
+                considerTypeConstraints: false,
+                considerCallingConvention: false, //ignore static-ness
+                considerRefKindDifferences: false,
+                typeComparison: TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    | TypeCompareKind.IgnoreDynamicAndTupleNames
+            );
 
         /// <summary>
         /// This instance is intended to reflect the definition of signature equality used by the runtime 
@@ -212,67 +240,87 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// It considers return type, name, parameters, calling convention, and custom modifiers, but ignores
         /// the difference between <see cref="RefKind.Out"/> and <see cref="RefKind.Ref"/>.
         /// </summary>
-        public static readonly MemberSignatureComparer RuntimeSignatureComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: false,
-            considerReturnType: true,
-            considerTypeConstraints: false,
-            considerCallingConvention: true,
-            considerRefKindDifferences: false,
-            typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes | TypeCompareKind.IgnoreNativeIntegers);
+        public static readonly MemberSignatureComparer RuntimeSignatureComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: false,
+                considerReturnType: true,
+                considerTypeConstraints: false,
+                considerCallingConvention: true,
+                considerRefKindDifferences: false,
+                typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames
+                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    | TypeCompareKind.IgnoreNativeIntegers
+            );
 
         /// <summary>
         /// Same as <see cref="RuntimeSignatureComparer"/>, but distinguishes between <c>ref</c> and <c>out</c>. During override resolution,
         /// if we find two methods that match except for <c>ref</c>/<c>out</c>, we want to prefer the one that matches, even
         /// if the runtime doesn't.
         /// </summary>
-        public static readonly MemberSignatureComparer RuntimePlusRefOutSignatureComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: false,
-            considerReturnType: true,
-            considerTypeConstraints: false,
-            considerCallingConvention: true,
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes | TypeCompareKind.IgnoreNativeIntegers);
+        public static readonly MemberSignatureComparer RuntimePlusRefOutSignatureComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: false,
+                considerReturnType: true,
+                considerTypeConstraints: false,
+                considerCallingConvention: true,
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames
+                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    | TypeCompareKind.IgnoreNativeIntegers
+            );
 
         /// <summary>
         /// This instance is the same as RuntimeSignatureComparer.
         /// CONSIDER: just use RuntimeSignatureComparer?
         /// </summary>
-        public static readonly MemberSignatureComparer RuntimeImplicitImplementationComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: true,
-            considerReturnType: true,
-            considerTypeConstraints: false, // constraints are checked by caller instead
-            considerCallingConvention: true,
-            considerRefKindDifferences: false,
-            typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes | TypeCompareKind.IgnoreNativeIntegers);
+        public static readonly MemberSignatureComparer RuntimeImplicitImplementationComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: true,
+                considerReturnType: true,
+                considerTypeConstraints: false, // constraints are checked by caller instead
+                considerCallingConvention: true,
+                considerRefKindDifferences: false,
+                typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames
+                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    | TypeCompareKind.IgnoreNativeIntegers
+            );
 
         // NOTE: Not used anywhere. Do we still need to keep it?
         /// <summary>
         /// This instance is used to search for members that have the same name, parameters, (return) type, and constraints (if any)
         /// according to the C# definition. Custom modifiers are ignored.
         /// </summary>
-        public static readonly MemberSignatureComparer CSharpSignatureAndConstraintsAndReturnTypeComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: true,
-            considerReturnType: true,
-            considerTypeConstraints: true,
-            considerCallingConvention: true,
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes | TypeCompareKind.IgnoreNativeIntegers);
+        public static readonly MemberSignatureComparer CSharpSignatureAndConstraintsAndReturnTypeComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: true,
+                considerReturnType: true,
+                considerTypeConstraints: true,
+                considerCallingConvention: true,
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames
+                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    | TypeCompareKind.IgnoreNativeIntegers
+            );
 
         /// <summary>
         /// This instance is used to search for members that have identical signatures in every regard.
         /// </summary>
-        public static readonly MemberSignatureComparer RetargetedExplicitImplementationComparer = new MemberSignatureComparer(
-            considerName: true,
-            considerExplicitlyImplementedInterfaces: false, //we'll be comparing interface members anyway
-            considerReturnType: true,
-            considerTypeConstraints: false,
-            considerCallingConvention: true,
-            considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes | TypeCompareKind.IgnoreNativeIntegers); //if it was a true explicit impl, we expect it to remain so after retargeting
+        public static readonly MemberSignatureComparer RetargetedExplicitImplementationComparer =
+            new MemberSignatureComparer(
+                considerName: true,
+                considerExplicitlyImplementedInterfaces: false, //we'll be comparing interface members anyway
+                considerReturnType: true,
+                considerTypeConstraints: false,
+                considerCallingConvention: true,
+                considerRefKindDifferences: true,
+                typeComparison: TypeCompareKind.IgnoreDynamicAndTupleNames
+                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    | TypeCompareKind.IgnoreNativeIntegers
+            ); //if it was a true explicit impl, we expect it to remain so after retargeting
 
         /// <summary>
         /// This instance is used for performing approximate overload resolution of documentation
@@ -285,7 +333,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             considerTypeConstraints: false,
             considerCallingConvention: false, //ignore static-ness
             considerRefKindDifferences: true,
-            typeComparison: TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes | TypeCompareKind.IgnoreDynamicAndTupleNames);
+            typeComparison: TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                | TypeCompareKind.IgnoreDynamicAndTupleNames
+        );
 
         // Compare the "unqualified" part of the member name (no explicit part)
         private readonly bool _considerName;
@@ -315,9 +366,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool considerTypeConstraints,
             bool considerCallingConvention,
             bool considerRefKindDifferences,
-            TypeCompareKind typeComparison = TypeCompareKind.IgnoreDynamic | TypeCompareKind.IgnoreNativeIntegers)
+            TypeCompareKind typeComparison =
+                TypeCompareKind.IgnoreDynamic | TypeCompareKind.IgnoreNativeIntegers
+        )
         {
-            Debug.Assert(!considerExplicitlyImplementedInterfaces || considerName, "Doesn't make sense to consider interfaces separately from name.");
+            Debug.Assert(
+                !considerExplicitlyImplementedInterfaces || considerName,
+                "Doesn't make sense to consider interfaces separately from name."
+            );
 
             _considerName = considerName;
             _considerExplicitlyImplementedInterfaces = considerExplicitlyImplementedInterfaces;
@@ -326,8 +382,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _considerCallingConvention = considerCallingConvention;
             _considerRefKindDifferences = considerRefKindDifferences;
             _typeComparison = typeComparison;
-            Debug.Assert((_typeComparison & TypeCompareKind.FunctionPointerRefMatchesOutInRefReadonly) == 0,
-                         $"Rely on the {nameof(considerRefKindDifferences)} flag to set this to ensure all cases are handled.");
+            Debug.Assert(
+                (_typeComparison & TypeCompareKind.FunctionPointerRefMatchesOutInRefReadonly) == 0,
+                $"Rely on the {nameof(considerRefKindDifferences)} flag to set this to ensure all cases are handled."
+            );
             if (!considerRefKindDifferences)
             {
                 _typeComparison |= TypeCompareKind.FunctionPointerRefMatchesOutInRefReadonly;
@@ -353,8 +411,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (_considerName)
             {
-                string name1 = ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member1.Name);
-                string name2 = ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member2.Name);
+                string name1 = ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(
+                    member1.Name
+                );
+                string name2 = ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(
+                    member2.Name
+                );
 
                 sawInterfaceInName1 = name1 != member1.Name;
                 sawInterfaceInName2 = name2 != member2.Name;
@@ -368,8 +430,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // NB: up to, and including, this check, we have not actually forced the (type) parameters
             // to be expanded - we're only using the counts.
             int arity = member1.GetMemberArity();
-            if ((arity != member2.GetMemberArity()) ||
-                (member1.GetParameterCount() != member2.GetParameterCount()))
+            if (
+                (arity != member2.GetMemberArity())
+                || (member1.GetParameterCount() != member2.GetParameterCount())
+            )
             {
                 return false;
             }
@@ -377,13 +441,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeMap typeMap1 = GetTypeMap(member1);
             TypeMap typeMap2 = GetTypeMap(member2);
 
-            if (_considerReturnType && !HaveSameReturnTypes(member1, typeMap1, member2, typeMap2, _typeComparison))
+            if (
+                _considerReturnType
+                && !HaveSameReturnTypes(member1, typeMap1, member2, typeMap2, _typeComparison)
+            )
             {
                 return false;
             }
 
-            if (member1.GetParameterCount() > 0 && !HaveSameParameterTypes(member1.GetParameters(), typeMap1, member2.GetParameters(), typeMap2,
-                                                                           _considerRefKindDifferences, _typeComparison))
+            if (
+                member1.GetParameterCount() > 0
+                && !HaveSameParameterTypes(
+                    member1.GetParameters(),
+                    typeMap1,
+                    member2.GetParameters(),
+                    typeMap2,
+                    _considerRefKindDifferences,
+                    _typeComparison
+                )
+            )
             {
                 return false;
             }
@@ -412,7 +488,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // The purpose of this check is to determine whether the interface parts of the member names agree,
                 // but to do so using robust symbolic checks, rather than syntactic ones.  Therefore, if neither member
-                // name contains an interface name, this check is not relevant.  
+                // name contains an interface name, this check is not relevant.
                 // Phrased differently, the explicitly implemented interface is not part of the signature unless it's
                 // part of the name.
                 if (sawInterfaceInName1)
@@ -420,7 +496,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Debug.Assert(sawInterfaceInName2);
 
                     // May avoid realizing interface members.
-                    if (member1.IsExplicitInterfaceImplementation() != member2.IsExplicitInterfaceImplementation())
+                    if (
+                        member1.IsExplicitInterfaceImplementation()
+                        != member2.IsExplicitInterfaceImplementation()
+                    )
                     {
                         return false;
                     }
@@ -433,17 +512,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // can explicitly implement more than one interface method, in which case it doesn't really
                     // make sense to pretend that all of them are part of the signature.
 
-                    var explicitInterfaceImplementations1 = member1.GetExplicitInterfaceImplementations();
-                    var explicitInterfaceImplementations2 = member2.GetExplicitInterfaceImplementations();
+                    var explicitInterfaceImplementations1 =
+                        member1.GetExplicitInterfaceImplementations();
+                    var explicitInterfaceImplementations2 =
+                        member2.GetExplicitInterfaceImplementations();
 
-                    if (!explicitInterfaceImplementations1.SetEquals(explicitInterfaceImplementations2, SymbolEqualityComparer.ConsiderEverything))
+                    if (
+                        !explicitInterfaceImplementations1.SetEquals(
+                            explicitInterfaceImplementations2,
+                            SymbolEqualityComparer.ConsiderEverything
+                        )
+                    )
                     {
                         return false;
                     }
                 }
             }
 
-            return !_considerTypeConstraints || HaveSameConstraints(member1, typeMap1, member2, typeMap2);
+            return !_considerTypeConstraints
+                || HaveSameConstraints(member1, typeMap1, member2, typeMap2);
         }
 
         public int GetHashCode(Symbol member)
@@ -455,12 +542,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (_considerName)
                 {
-                    hash = Hash.Combine(ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member.Name), hash);
+                    hash = Hash.Combine(
+                        ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member.Name),
+                        hash
+                    );
                     // CONSIDER: could use interface type, but that might be quite expensive
                 }
 
-                if (_considerReturnType && member.GetMemberArity() == 0 &&
-                    (_typeComparison & TypeCompareKind.AllIgnoreOptions) == 0) // If it is generic, then type argument might be in return type.
+                if (
+                    _considerReturnType
+                    && member.GetMemberArity() == 0
+                    && (_typeComparison & TypeCompareKind.AllIgnoreOptions) == 0
+                ) // If it is generic, then type argument might be in return type.
                 {
                     hash = Hash.Combine(member.GetTypeOrReturnType().GetHashCode(), hash);
                 }
@@ -478,17 +571,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         #endregion
 
-        private static bool HaveSameReturnTypes(Symbol member1, TypeMap typeMap1, Symbol member2, TypeMap typeMap2, TypeCompareKind typeComparison)
+        private static bool HaveSameReturnTypes(
+            Symbol member1,
+            TypeMap typeMap1,
+            Symbol member2,
+            TypeMap typeMap2,
+            TypeCompareKind typeComparison
+        )
         {
             RefKind refKind1;
             TypeWithAnnotations unsubstitutedReturnType1;
             ImmutableArray<CustomModifier> refCustomModifiers1;
-            member1.GetTypeOrReturnType(out refKind1, out unsubstitutedReturnType1, out refCustomModifiers1);
+            member1.GetTypeOrReturnType(
+                out refKind1,
+                out unsubstitutedReturnType1,
+                out refCustomModifiers1
+            );
 
             RefKind refKind2;
             TypeWithAnnotations unsubstitutedReturnType2;
             ImmutableArray<CustomModifier> refCustomModifiers2;
-            member2.GetTypeOrReturnType(out refKind2, out unsubstitutedReturnType2, out refCustomModifiers2);
+            member2.GetTypeOrReturnType(
+                out refKind2,
+                out unsubstitutedReturnType2,
+                out refCustomModifiers2
+            );
 
             // short-circuit type map building in the easiest cases
             if (refKind1 != refKind2)
@@ -506,8 +613,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (isVoid1)
             {
-                if ((typeComparison & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds) != 0 ||
-                    (unsubstitutedReturnType1.CustomModifiers.IsEmpty && unsubstitutedReturnType2.CustomModifiers.IsEmpty))
+                if (
+                    (
+                        typeComparison
+                        & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    ) != 0
+                    || (
+                        unsubstitutedReturnType1.CustomModifiers.IsEmpty
+                        && unsubstitutedReturnType2.CustomModifiers.IsEmpty
+                    )
+                )
                 {
                     return true;
                 }
@@ -520,8 +635,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             }
 
-            if (((typeComparison & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds) == 0) &&
-                !HaveSameCustomModifiers(refCustomModifiers1, typeMap1, refCustomModifiers2, typeMap2))
+            if (
+                (
+                    (
+                        typeComparison
+                        & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    ) == 0
+                )
+                && !HaveSameCustomModifiers(
+                    refCustomModifiers1,
+                    typeMap1,
+                    refCustomModifiers2,
+                    typeMap2
+                )
+            )
             {
                 return false;
             }
@@ -532,15 +659,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static TypeMap GetTypeMap(Symbol member)
         {
             var typeParameters = member.GetMemberTypeParameters();
-            return typeParameters.IsEmpty ?
-                null :
-                new TypeMap(
+            return typeParameters.IsEmpty
+              ? null
+              : new TypeMap(
                     typeParameters,
                     IndexedTypeParameterSymbol.Take(member.GetMemberArity()),
-                    true);
+                    true
+                );
         }
 
-        private static bool HaveSameConstraints(Symbol member1, TypeMap typeMap1, Symbol member2, TypeMap typeMap2)
+        private static bool HaveSameConstraints(
+            Symbol member1,
+            TypeMap typeMap1,
+            Symbol member2,
+            TypeMap typeMap2
+        )
         {
             Debug.Assert(member1.GetMemberArity() == member2.GetMemberArity());
 
@@ -555,14 +688,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return HaveSameConstraints(typeParameters1, typeMap1, typeParameters2, typeMap2);
         }
 
-        public static bool HaveSameConstraints(ImmutableArray<TypeParameterSymbol> typeParameters1, TypeMap typeMap1, ImmutableArray<TypeParameterSymbol> typeParameters2, TypeMap typeMap2)
+        public static bool HaveSameConstraints(
+            ImmutableArray<TypeParameterSymbol> typeParameters1,
+            TypeMap typeMap1,
+            ImmutableArray<TypeParameterSymbol> typeParameters2,
+            TypeMap typeMap2
+        )
         {
             Debug.Assert(typeParameters1.Length == typeParameters2.Length);
 
             int arity = typeParameters1.Length;
             for (int i = 0; i < arity; i++)
             {
-                if (!HaveSameConstraints(typeParameters1[i], typeMap1, typeParameters2[i], typeMap2))
+                if (
+                    !HaveSameConstraints(typeParameters1[i], typeMap1, typeParameters2[i], typeMap2)
+                )
                 {
                     return false;
                 }
@@ -571,23 +711,48 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return true;
         }
 
-        public static bool HaveSameConstraints(TypeParameterSymbol typeParameter1, TypeMap typeMap1, TypeParameterSymbol typeParameter2, TypeMap typeMap2)
+        public static bool HaveSameConstraints(
+            TypeParameterSymbol typeParameter1,
+            TypeMap typeMap1,
+            TypeParameterSymbol typeParameter2,
+            TypeMap typeMap2
+        )
         {
             // Spec 13.4.3: Implementation of generic methods.
 
-            if ((typeParameter1.HasConstructorConstraint != typeParameter2.HasConstructorConstraint) ||
-                (typeParameter1.HasReferenceTypeConstraint != typeParameter2.HasReferenceTypeConstraint) ||
-                (typeParameter1.HasValueTypeConstraint != typeParameter2.HasValueTypeConstraint) ||
-                (typeParameter1.HasUnmanagedTypeConstraint != typeParameter2.HasUnmanagedTypeConstraint) ||
-                (typeParameter1.Variance != typeParameter2.Variance))
+            if (
+                (typeParameter1.HasConstructorConstraint != typeParameter2.HasConstructorConstraint)
+                || (
+                    typeParameter1.HasReferenceTypeConstraint
+                    != typeParameter2.HasReferenceTypeConstraint
+                )
+                || (typeParameter1.HasValueTypeConstraint != typeParameter2.HasValueTypeConstraint)
+                || (
+                    typeParameter1.HasUnmanagedTypeConstraint
+                    != typeParameter2.HasUnmanagedTypeConstraint
+                )
+                || (typeParameter1.Variance != typeParameter2.Variance)
+            )
             {
                 return false;
             }
 
-            return HaveSameTypeConstraints(typeParameter1, typeMap1, typeParameter2, typeMap2, SymbolEqualityComparer.IgnoringDynamicTupleNamesAndNullability);
+            return HaveSameTypeConstraints(
+                typeParameter1,
+                typeMap1,
+                typeParameter2,
+                typeMap2,
+                SymbolEqualityComparer.IgnoringDynamicTupleNamesAndNullability
+            );
         }
 
-        private static bool HaveSameTypeConstraints(TypeParameterSymbol typeParameter1, TypeMap typeMap1, TypeParameterSymbol typeParameter2, TypeMap typeMap2, IEqualityComparer<TypeSymbol> comparer)
+        private static bool HaveSameTypeConstraints(
+            TypeParameterSymbol typeParameter1,
+            TypeMap typeMap1,
+            TypeParameterSymbol typeParameter2,
+            TypeMap typeMap2,
+            IEqualityComparer<TypeSymbol> comparer
+        )
         {
             // Check that constraintTypes1 is a subset of constraintTypes2 and
             // also that constraintTypes2 is a subset of constraintTypes1
@@ -610,31 +775,49 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SubstituteConstraintTypes(constraintTypes1, typeMap1, substitutedTypes1);
             SubstituteConstraintTypes(constraintTypes2, typeMap2, substitutedTypes2);
 
-            return AreConstraintTypesSubset(substitutedTypes1, substitutedTypes2, typeParameter2) &&
-                AreConstraintTypesSubset(substitutedTypes2, substitutedTypes1, typeParameter1);
+            return AreConstraintTypesSubset(substitutedTypes1, substitutedTypes2, typeParameter2)
+                && AreConstraintTypesSubset(substitutedTypes2, substitutedTypes1, typeParameter1);
         }
 
-        public static bool HaveSameNullabilityInConstraints(TypeParameterSymbol typeParameter1, TypeMap typeMap1, TypeParameterSymbol typeParameter2, TypeMap typeMap2)
+        public static bool HaveSameNullabilityInConstraints(
+            TypeParameterSymbol typeParameter1,
+            TypeMap typeMap1,
+            TypeParameterSymbol typeParameter2,
+            TypeMap typeMap2
+        )
         {
             if (!typeParameter1.IsValueType)
             {
                 bool? isNotNullable1 = typeParameter1.IsNotNullable;
                 bool? isNotNullable2 = typeParameter2.IsNotNullable;
-                if (isNotNullable1.HasValue && isNotNullable2.HasValue &&
-                    isNotNullable1.GetValueOrDefault() != isNotNullable2.GetValueOrDefault())
+                if (
+                    isNotNullable1.HasValue
+                    && isNotNullable2.HasValue
+                    && isNotNullable1.GetValueOrDefault() != isNotNullable2.GetValueOrDefault()
+                )
                 {
                     return false;
                 }
             }
 
-            return HaveSameTypeConstraints(typeParameter1, typeMap1, typeParameter2, typeMap2, SymbolEqualityComparer.AllIgnoreOptionsPlusNullableWithUnknownMatchesAny);
+            return HaveSameTypeConstraints(
+                typeParameter1,
+                typeMap1,
+                typeParameter2,
+                typeMap2,
+                SymbolEqualityComparer.AllIgnoreOptionsPlusNullableWithUnknownMatchesAny
+            );
         }
 
         /// <summary>
         /// Returns true if the first set of constraint types
         /// is a subset of the second set.
         /// </summary>
-        private static bool AreConstraintTypesSubset(HashSet<TypeSymbol> constraintTypes1, HashSet<TypeSymbol> constraintTypes2, TypeParameterSymbol typeParameter2)
+        private static bool AreConstraintTypesSubset(
+            HashSet<TypeSymbol> constraintTypes1,
+            HashSet<TypeSymbol> constraintTypes2,
+            TypeParameterSymbol typeParameter2
+        )
         {
             foreach (var constraintType in constraintTypes1)
             {
@@ -652,8 +835,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // The struct constraint implies a System.ValueType constraint
                 // type which may be explicit in the other type parameter
                 // constraints (through type substitution in derived types).
-                if ((constraintType.SpecialType == SpecialType.System_ValueType) &&
-                    typeParameter2.HasValueTypeConstraint)
+                if (
+                    (constraintType.SpecialType == SpecialType.System_ValueType)
+                    && typeParameter2.HasValueTypeConstraint
+                )
                 {
                     continue;
                 }
@@ -664,7 +849,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return true;
         }
 
-        private static void SubstituteConstraintTypes(ImmutableArray<TypeWithAnnotations> types, TypeMap typeMap, HashSet<TypeSymbol> result)
+        private static void SubstituteConstraintTypes(
+            ImmutableArray<TypeWithAnnotations> types,
+            TypeMap typeMap,
+            HashSet<TypeSymbol> result
+        )
         {
             foreach (var type in types)
             {
@@ -672,8 +861,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private static bool HaveSameParameterTypes(ImmutableArray<ParameterSymbol> params1, TypeMap typeMap1, ImmutableArray<ParameterSymbol> params2, TypeMap typeMap2,
-                                                   bool considerRefKindDifferences, TypeCompareKind typeComparison)
+        private static bool HaveSameParameterTypes(
+            ImmutableArray<ParameterSymbol> params1,
+            TypeMap typeMap1,
+            ImmutableArray<ParameterSymbol> params2,
+            TypeMap typeMap2,
+            bool considerRefKindDifferences,
+            TypeCompareKind typeComparison
+        )
         {
             Debug.Assert(params1.Length == params2.Length);
 
@@ -692,8 +887,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return false;
                 }
 
-                if ((typeComparison & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds) == 0 &&
-                    !HaveSameCustomModifiers(param1.RefCustomModifiers, typeMap1, param2.RefCustomModifiers, typeMap2))
+                if (
+                    (
+                        typeComparison
+                        & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    ) == 0
+                    && !HaveSameCustomModifiers(
+                        param1.RefCustomModifiers,
+                        typeMap1,
+                        param2.RefCustomModifiers,
+                        typeMap2
+                    )
+                )
                 {
                     return false;
                 }
@@ -721,20 +926,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return true;
         }
 
-        private static TypeWithAnnotations SubstituteType(TypeMap typeMap, TypeWithAnnotations typeSymbol)
+        private static TypeWithAnnotations SubstituteType(
+            TypeMap typeMap,
+            TypeWithAnnotations typeSymbol
+        )
         {
             return typeMap == null ? typeSymbol : typeSymbol.SubstituteType(typeMap);
         }
 
-        private static bool HaveSameCustomModifiers(ImmutableArray<CustomModifier> customModifiers1, TypeMap typeMap1, ImmutableArray<CustomModifier> customModifiers2, TypeMap typeMap2)
+        private static bool HaveSameCustomModifiers(
+            ImmutableArray<CustomModifier> customModifiers1,
+            TypeMap typeMap1,
+            ImmutableArray<CustomModifier> customModifiers2,
+            TypeMap typeMap2
+        )
         {
             // the runtime compares custom modifiers using (effectively) SequenceEqual
-            return SubstituteModifiers(typeMap1, customModifiers1).SequenceEqual(SubstituteModifiers(typeMap2, customModifiers2));
+            return SubstituteModifiers(typeMap1, customModifiers1)
+                .SequenceEqual(SubstituteModifiers(typeMap2, customModifiers2));
         }
 
-        private static ImmutableArray<CustomModifier> SubstituteModifiers(TypeMap typeMap, ImmutableArray<CustomModifier> customModifiers)
+        private static ImmutableArray<CustomModifier> SubstituteModifiers(
+            TypeMap typeMap,
+            ImmutableArray<CustomModifier> customModifiers
+        )
         {
-            return typeMap == null ? customModifiers : typeMap.SubstituteCustomModifiers(customModifiers);
+            return typeMap == null
+              ? customModifiers
+              : typeMap.SubstituteCustomModifiers(customModifiers);
         }
 
         private static Cci.CallingConvention GetCallingConvention(Symbol member)
@@ -771,8 +990,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal static bool ConsideringTupleNamesCreatesDifference(Symbol member1, Symbol member2)
         {
-            return !CSharpWithTupleNamesComparer.Equals(member1, member2) &&
-                CSharpWithoutTupleNamesComparer.Equals(member1, member2);
+            return !CSharpWithTupleNamesComparer.Equals(member1, member2)
+                && CSharpWithoutTupleNamesComparer.Equals(member1, member2);
         }
     }
 }

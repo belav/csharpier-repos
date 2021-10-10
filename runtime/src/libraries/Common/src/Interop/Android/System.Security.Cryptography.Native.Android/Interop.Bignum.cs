@@ -50,8 +50,6 @@ namespace System.Security.Cryptography
 {
     internal sealed class SafeBignumHandle : Interop.JObjectLifetime.SafeJObjectHandle
     {
-        public SafeBignumHandle()
-        {
-        }
+        public SafeBignumHandle() { }
     }
 }

@@ -15,7 +15,10 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlValidatingReaderImpl : XmlReader, IXmlLineInfo, IXmlNamespaceResolver
+    internal sealed partial class XmlValidatingReaderImpl
+        : XmlReader,
+          IXmlLineInfo,
+          IXmlNamespaceResolver
     {
         // Returns the text value of the current node.
         public override Task<string> GetValueAsync()
@@ -71,7 +74,11 @@ namespace System.Xml
             }
         }
 
-        public override async Task<int> ReadContentAsBase64Async(byte[] buffer, int index, int count)
+        public override async Task<int> ReadContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -81,21 +88,29 @@ namespace System.Xml
             // init ReadChunkHelper if called the first time
             if (_parsingFunction != ParsingFunction.InReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, _outerReader);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    _outerReader
+                );
             }
 
             // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
-            int readCount = await _readBinaryHelper!.ReadContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper!.ReadContentAsBase64Async(buffer, index, count)
+                .ConfigureAwait(false);
 
             // setup parsingFunction
             _parsingFunction = ParsingFunction.InReadBinaryContent;
             return readCount;
         }
 
-        public override async Task<int> ReadContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override async Task<int> ReadContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -105,21 +120,29 @@ namespace System.Xml
             // init ReadChunkHelper when called first time
             if (_parsingFunction != ParsingFunction.InReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, _outerReader);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    _outerReader
+                );
             }
 
             // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
-            int readCount = await _readBinaryHelper!.ReadContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper!.ReadContentAsBinHexAsync(buffer, index, count)
+                .ConfigureAwait(false);
 
             // setup parsingFunction
             _parsingFunction = ParsingFunction.InReadBinaryContent;
             return readCount;
         }
 
-        public override async Task<int> ReadElementContentAsBase64Async(byte[] buffer, int index, int count)
+        public override async Task<int> ReadElementContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -129,21 +152,33 @@ namespace System.Xml
             // init ReadChunkHelper if called the first time
             if (_parsingFunction != ParsingFunction.InReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, _outerReader);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    _outerReader
+                );
             }
 
             // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
-            int readCount = await _readBinaryHelper!.ReadElementContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper!.ReadElementContentAsBase64Async(
+                    buffer,
+                    index,
+                    count
+                )
+                .ConfigureAwait(false);
 
             // setup parsingFunction
             _parsingFunction = ParsingFunction.InReadBinaryContent;
             return readCount;
         }
 
-        public override async Task<int> ReadElementContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override async Task<int> ReadElementContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -153,14 +188,22 @@ namespace System.Xml
             // init ReadChunkHelper when called first time
             if (_parsingFunction != ParsingFunction.InReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, _outerReader);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    _outerReader
+                );
             }
 
             // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
-            int readCount = await _readBinaryHelper!.ReadElementContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper!.ReadElementContentAsBinHexAsync(
+                    buffer,
+                    index,
+                    count
+                )
+                .ConfigureAwait(false);
 
             // setup parsingFunction
             _parsingFunction = ParsingFunction.InReadBinaryContent;
@@ -182,8 +225,18 @@ namespace System.Xml
             }
 
             IDtdParser dtdParser = DtdParser.Create();
-            XmlTextReaderImpl.DtdParserProxy proxy = new XmlTextReaderImpl.DtdParserProxy(_coreReaderImpl);
-            IDtdInfo dtdInfo = await dtdParser.ParseFreeFloatingDtdAsync(_parserContext.BaseURI, _parserContext.DocTypeName, _parserContext.PublicId, _parserContext.SystemId, _parserContext.InternalSubset, proxy).ConfigureAwait(false);
+            XmlTextReaderImpl.DtdParserProxy proxy = new XmlTextReaderImpl.DtdParserProxy(
+                _coreReaderImpl
+            );
+            IDtdInfo dtdInfo = await dtdParser.ParseFreeFloatingDtdAsync(
+                    _parserContext.BaseURI,
+                    _parserContext.DocTypeName,
+                    _parserContext.PublicId,
+                    _parserContext.SystemId,
+                    _parserContext.InternalSubset,
+                    proxy
+                )
+                .ConfigureAwait(false);
             _coreReaderImpl.SetDtdInfo(dtdInfo);
 
             ValidateDtd();
@@ -194,7 +247,11 @@ namespace System.Xml
             Debug.Assert(_coreReader.NodeType == XmlNodeType.EntityReference);
             int initialDepth = _coreReader.Depth;
             _outerReader.ResolveEntity();
-            while (await _outerReader.ReadAsync().ConfigureAwait(false) && _coreReader.Depth > initialDepth) ;
+            while (
+                await _outerReader.ReadAsync().ConfigureAwait(false)
+                && _coreReader.Depth > initialDepth
+            )
+                ;
         }
     }
 }

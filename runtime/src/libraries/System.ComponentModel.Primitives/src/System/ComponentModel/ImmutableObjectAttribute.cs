@@ -25,7 +25,6 @@ namespace System.ComponentModel
         /// </summary>
         public static readonly ImmutableObjectAttribute No = new ImmutableObjectAttribute(false);
 
-
         /// <summary>
         /// Defaults to ImmutableObjectAttribute.No
         /// </summary>

@@ -64,6 +64,7 @@ namespace Microsoft.Extensions.Hosting
 
                 await host.WaitForShutdownAsync(token).ConfigureAwait(false);
             }
+
             finally
             {
                 if (host is IAsyncDisposable asyncDisposable)
@@ -74,7 +75,6 @@ namespace Microsoft.Extensions.Hosting
                 {
                     host.Dispose();
                 }
-
             }
         }
 
@@ -84,22 +84,33 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="host">The running <see cref="IHost"/>.</param>
         /// <param name="token">The token to trigger shutdown.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public static async Task WaitForShutdownAsync(this IHost host, CancellationToken token = default)
+        public static async Task WaitForShutdownAsync(
+            this IHost host,
+            CancellationToken token = default
+        )
         {
-            IHostApplicationLifetime applicationLifetime = host.Services.GetService<IHostApplicationLifetime>();
+            IHostApplicationLifetime applicationLifetime =
+                host.Services.GetService<IHostApplicationLifetime>();
 
-            token.Register(state =>
-            {
-                ((IHostApplicationLifetime)state).StopApplication();
-            },
-            applicationLifetime);
+            token.Register(
+                state =>
+                {
+                    ((IHostApplicationLifetime)state).StopApplication();
+                },
+                applicationLifetime
+            );
 
-            var waitForStop = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
-            applicationLifetime.ApplicationStopping.Register(obj =>
-            {
-                var tcs = (TaskCompletionSource<object>)obj;
-                tcs.TrySetResult(null);
-            }, waitForStop);
+            var waitForStop = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            applicationLifetime.ApplicationStopping.Register(
+                obj =>
+                {
+                    var tcs = (TaskCompletionSource<object>)obj;
+                    tcs.TrySetResult(null);
+                },
+                waitForStop
+            );
 
             await waitForStop.Task.ConfigureAwait(false);
 

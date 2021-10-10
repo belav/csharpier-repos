@@ -15,8 +15,12 @@ namespace Microsoft.Extensions.Caching.SqlServer
     /// </summary>
     public class SqlServerCache : IDistributedCache
     {
-        private static readonly TimeSpan MinimumExpiredItemsDeletionInterval = TimeSpan.FromMinutes(5);
-        private static readonly TimeSpan DefaultExpiredItemsDeletionInterval = TimeSpan.FromMinutes(30);
+        private static readonly TimeSpan MinimumExpiredItemsDeletionInterval = TimeSpan.FromMinutes(
+            5
+        );
+        private static readonly TimeSpan DefaultExpiredItemsDeletionInterval = TimeSpan.FromMinutes(
+            30
+        );
 
         private readonly IDatabaseOperations _dbOperations;
         private readonly ISystemClock _systemClock;
@@ -37,31 +41,39 @@ namespace Microsoft.Extensions.Caching.SqlServer
             if (string.IsNullOrEmpty(cacheOptions.ConnectionString))
             {
                 throw new ArgumentException(
-                    $"{nameof(SqlServerCacheOptions.ConnectionString)} cannot be empty or null.");
+                    $"{nameof(SqlServerCacheOptions.ConnectionString)} cannot be empty or null."
+                );
             }
             if (string.IsNullOrEmpty(cacheOptions.SchemaName))
             {
                 throw new ArgumentException(
-                    $"{nameof(SqlServerCacheOptions.SchemaName)} cannot be empty or null.");
+                    $"{nameof(SqlServerCacheOptions.SchemaName)} cannot be empty or null."
+                );
             }
             if (string.IsNullOrEmpty(cacheOptions.TableName))
             {
                 throw new ArgumentException(
-                    $"{nameof(SqlServerCacheOptions.TableName)} cannot be empty or null.");
+                    $"{nameof(SqlServerCacheOptions.TableName)} cannot be empty or null."
+                );
             }
-            if (cacheOptions.ExpiredItemsDeletionInterval.HasValue &&
-                cacheOptions.ExpiredItemsDeletionInterval.Value < MinimumExpiredItemsDeletionInterval)
+            if (
+                cacheOptions.ExpiredItemsDeletionInterval.HasValue
+                && cacheOptions.ExpiredItemsDeletionInterval.Value
+                    < MinimumExpiredItemsDeletionInterval
+            )
             {
                 throw new ArgumentException(
-                    $"{nameof(SqlServerCacheOptions.ExpiredItemsDeletionInterval)} cannot be less than the minimum " +
-                    $"value of {MinimumExpiredItemsDeletionInterval.TotalMinutes} minutes.");
+                    $"{nameof(SqlServerCacheOptions.ExpiredItemsDeletionInterval)} cannot be less than the minimum "
+                        + $"value of {MinimumExpiredItemsDeletionInterval.TotalMinutes} minutes."
+                );
             }
             if (cacheOptions.DefaultSlidingExpiration <= TimeSpan.Zero)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(cacheOptions.DefaultSlidingExpiration),
                     cacheOptions.DefaultSlidingExpiration,
-                    "The sliding expiration value must be positive.");
+                    "The sliding expiration value must be positive."
+                );
             }
 
             _systemClock = cacheOptions.SystemClock ?? new SystemClock();
@@ -79,7 +91,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
                     cacheOptions.ConnectionString,
                     cacheOptions.SchemaName,
                     cacheOptions.TableName,
-                    _systemClock);
+                    _systemClock
+                );
             }
             else
             {
@@ -87,7 +100,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
                     cacheOptions.ConnectionString,
                     cacheOptions.SchemaName,
                     cacheOptions.TableName,
-                    _systemClock);
+                    _systemClock
+                );
             }
         }
 
@@ -107,7 +121,10 @@ namespace Microsoft.Extensions.Caching.SqlServer
         }
 
         /// <inheritdoc />
-        public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
+        public async Task<byte[]> GetAsync(
+            string key,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             if (key == null)
             {
@@ -137,7 +154,10 @@ namespace Microsoft.Extensions.Caching.SqlServer
         }
 
         /// <inheritdoc />
-        public async Task RefreshAsync(string key, CancellationToken token = default(CancellationToken))
+        public async Task RefreshAsync(
+            string key,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             if (key == null)
             {
@@ -165,7 +185,10 @@ namespace Microsoft.Extensions.Caching.SqlServer
         }
 
         /// <inheritdoc />
-        public async Task RemoveAsync(string key, CancellationToken token = default(CancellationToken))
+        public async Task RemoveAsync(
+            string key,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             if (key == null)
             {
@@ -209,7 +232,8 @@ namespace Microsoft.Extensions.Caching.SqlServer
             string key,
             byte[] value,
             DistributedCacheEntryOptions options,
-            CancellationToken token = default(CancellationToken))
+            CancellationToken token = default(CancellationToken)
+        )
         {
             if (key == null)
             {
@@ -239,7 +263,7 @@ namespace Microsoft.Extensions.Caching.SqlServer
         // If sufficient time has elapsed then a scan is initiated on a background task.
         private void ScanForExpiredItemsIfRequired()
         {
-            lock(_mutex)
+            lock (_mutex)
             {
                 var utcNow = _systemClock.UtcNow;
                 if ((utcNow - _lastExpirationScan) > _expiredItemsDeletionInterval)
@@ -257,9 +281,11 @@ namespace Microsoft.Extensions.Caching.SqlServer
 
         private void GetOptions(ref DistributedCacheEntryOptions options)
         {
-            if (!options.AbsoluteExpiration.HasValue
+            if (
+                !options.AbsoluteExpiration.HasValue
                 && !options.AbsoluteExpirationRelativeToNow.HasValue
-                && !options.SlidingExpiration.HasValue)
+                && !options.SlidingExpiration.HasValue
+            )
             {
                 options = new DistributedCacheEntryOptions()
                 {

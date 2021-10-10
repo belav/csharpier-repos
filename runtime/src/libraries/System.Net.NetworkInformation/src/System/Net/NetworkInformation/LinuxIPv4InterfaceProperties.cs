@@ -17,24 +17,55 @@ namespace System.Net.NetworkInformation
             _isForwardingEnabled = GetIsForwardingEnabled();
         }
 
-        public override bool IsAutomaticPrivateAddressingActive { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsAutomaticPrivateAddressingActive
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override bool IsAutomaticPrivateAddressingEnabled { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsAutomaticPrivateAddressingEnabled
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override bool IsDhcpEnabled { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsDhcpEnabled
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override bool IsForwardingEnabled { get { return _isForwardingEnabled; } }
+        public override bool IsForwardingEnabled
+        {
+            get { return _isForwardingEnabled; }
+        }
 
-        public override int Mtu { get { return _linuxNetworkInterface._mtu; } }
+        public override int Mtu
+        {
+            get { return _linuxNetworkInterface._mtu; }
+        }
 
-        public override bool UsesWins { get { return _linuxNetworkInterface.GetIPProperties().WinsServersAddresses.Count > 0; } }
+        public override bool UsesWins
+        {
+            get { return _linuxNetworkInterface.GetIPProperties().WinsServersAddresses.Count > 0; }
+        }
 
         private bool GetIsForwardingEnabled()
         {
             string[] paths = new string[]
             {
                 // /proc/sys/net/ipv4/conf/<name>/forwarding
-                Path.Join(NetworkFiles.Ipv4ConfigFolder, _linuxNetworkInterface.Name, NetworkFiles.ForwardingFileName),
+                Path.Join(
+                    NetworkFiles.Ipv4ConfigFolder,
+                    _linuxNetworkInterface.Name,
+                    NetworkFiles.ForwardingFileName
+                ),
                 // Fall back to global forwarding config /proc/sys/net/ipv4/ip_forward
                 NetworkFiles.Ipv4GlobalForwardingFile
             };

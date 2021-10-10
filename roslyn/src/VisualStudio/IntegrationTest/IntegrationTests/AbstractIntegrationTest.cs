@@ -51,7 +51,10 @@ namespace Roslyn.VisualStudio.IntegrationTests
         {
             try
             {
-                _visualStudioContext = await _instanceFactory.GetNewOrUsedInstanceAsync(SharedIntegrationHostFixture.RequiredPackageIds).ConfigureAwait(false);
+                _visualStudioContext = await _instanceFactory.GetNewOrUsedInstanceAsync(
+                        SharedIntegrationHostFixture.RequiredPackageIds
+                    )
+                    .ConfigureAwait(false);
                 _visualStudioContext.Instance.ActivateMainWindow();
             }
             catch
@@ -79,8 +82,7 @@ namespace Roslyn.VisualStudio.IntegrationTests
             return Task.CompletedTask;
         }
 
-        protected virtual MessageFilter RegisterMessageFilter()
-            => new MessageFilter();
+        protected virtual MessageFilter RegisterMessageFilter() => new MessageFilter();
 
         protected void Wait(double seconds)
         {
@@ -98,13 +100,11 @@ namespace Roslyn.VisualStudio.IntegrationTests
             _messageFilter.Dispose();
         }
 
-        protected KeyPress Ctrl(VirtualKey virtualKey)
-            => new KeyPress(virtualKey, ShiftState.Ctrl);
+        protected KeyPress Ctrl(VirtualKey virtualKey) => new KeyPress(virtualKey, ShiftState.Ctrl);
 
-        protected KeyPress Shift(VirtualKey virtualKey)
-            => new KeyPress(virtualKey, ShiftState.Shift);
+        protected KeyPress Shift(VirtualKey virtualKey) =>
+            new KeyPress(virtualKey, ShiftState.Shift);
 
-        protected KeyPress Alt(VirtualKey virtualKey)
-            => new KeyPress(virtualKey, ShiftState.Alt);
+        protected KeyPress Alt(VirtualKey virtualKey) => new KeyPress(virtualKey, ShiftState.Alt);
     }
 }

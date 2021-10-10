@@ -13,15 +13,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
     public class LoggingStreamTests
     {
         [Theory]
-        [InlineData( 1, "00                                                 .")]
-        [InlineData( 2, "00 00                                              ..")]
-        [InlineData( 3, "00 00 00                                           ...")]
-        [InlineData( 4, "00 00 00 00                                        ....")]
-        [InlineData( 5, "00 00 00 00 00                                     .....")]
-        [InlineData( 6, "00 00 00 00 00 00                                  ......")]
-        [InlineData( 7, "00 00 00 00 00 00 00                               .......")]
-        [InlineData( 8, "00 00 00 00 00 00 00 00                            ........ ")]
-        [InlineData( 9, "00 00 00 00 00 00 00 00  00                        ........ .")]
+        [InlineData(1, "00                                                 .")]
+        [InlineData(2, "00 00                                              ..")]
+        [InlineData(3, "00 00 00                                           ...")]
+        [InlineData(4, "00 00 00 00                                        ....")]
+        [InlineData(5, "00 00 00 00 00                                     .....")]
+        [InlineData(6, "00 00 00 00 00 00                                  ......")]
+        [InlineData(7, "00 00 00 00 00 00 00                               .......")]
+        [InlineData(8, "00 00 00 00 00 00 00 00                            ........ ")]
+        [InlineData(9, "00 00 00 00 00 00 00 00  00                        ........ .")]
         [InlineData(10, "00 00 00 00 00 00 00 00  00 00                     ........ ..")]
         [InlineData(11, "00 00 00 00 00 00 00 00  00 00 00                  ........ ...")]
         [InlineData(12, "00 00 00 00 00 00 00 00  00 00 00 00               ........ ....")]
@@ -36,7 +36,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             loggingStream.Write(new byte[bufferLength]);
 
-            Assert.Equal($"Write[{bufferLength}]{Environment.NewLine}{expectedOutput}", mockLogger.Logs);
+            Assert.Equal(
+                $"Write[{bufferLength}]{Environment.NewLine}{expectedOutput}",
+                mockLogger.Logs
+            );
         }
 
         [Fact]
@@ -63,7 +66,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             public bool IsEnabled(LogLevel logLevel) => true;
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            )
             {
                 _logs.Append(formatter(state, exception));
             }

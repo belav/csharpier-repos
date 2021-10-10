@@ -12,13 +12,9 @@ namespace Microsoft.CodeAnalysis
     internal enum TaggedTextStyle
     {
         None = 0,
-
         Strong = 0x1,
-
         Emphasis = 0x2,
-
         Underline = 0x4,
-
         Code = 0x8,
     }
 }

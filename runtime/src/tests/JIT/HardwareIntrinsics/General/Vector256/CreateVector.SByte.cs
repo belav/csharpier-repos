@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<SByte>>() / sizeof(SByte);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<SByte>>() / sizeof(SByte);
 
         public bool Succeeded { get; set; } = true;
 
@@ -67,21 +68,33 @@ namespace JIT.HardwareIntrinsics.General
             SByte upperValue = TestLibrary.Generator.GetSByte();
             Vector128<SByte> upper = Vector128.Create(upperValue);
 
-            object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.Create), new Type[] { typeof(Vector128<SByte>), typeof(Vector128<SByte>) })
-                                .Invoke(null, new object[] { lower, upper });
+            object result = typeof(Vector256).GetMethod(
+                    nameof(Vector256.Create),
+                    new Type[] { typeof(Vector128<SByte>), typeof(Vector128<SByte>) }
+                )
+                .Invoke(null, new object[] { lower, upper });
 
             ValidateResult((Vector256<SByte>)(result), lowerValue, upperValue);
         }
 
-        private void ValidateResult(Vector256<SByte> result, SByte expectedLowerValue, SByte expectedUpperValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<SByte> result,
+            SByte expectedLowerValue,
+            SByte expectedUpperValue,
+            [CallerMemberName] string method = ""
+        )
         {
             SByte[] resultElements = new SByte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedLowerValue, expectedUpperValue, method);
         }
 
-        private void ValidateResult(SByte[] resultElements, SByte expectedLowerValue, SByte expectedUpperValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            SByte[] resultElements,
+            SByte expectedLowerValue,
+            SByte expectedUpperValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -105,10 +118,14 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256.Create(SByte): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256.Create(SByte): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   lower: {expectedLowerValue}");
                 TestLibrary.TestFramework.LogInformation($"   upper: {expectedUpperValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

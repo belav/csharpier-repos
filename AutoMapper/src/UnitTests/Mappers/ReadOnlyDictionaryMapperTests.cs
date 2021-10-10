@@ -17,25 +17,19 @@ namespace AutoMapper.UnitTests.Mappers.ReadOnlyDictionaryMapper
             public IReadOnlyDictionary<int, int> Values { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(config =>
-        {
-            config.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                config =>
+                {
+                    config.CreateMap<Source, Destination>();
+                }
+            );
 
         [Fact]
         public void Should_map_readonly_values()
         {
-            var values = new Dictionary<int, int>
-            {
-                {1, 1},
-                {2, 2},
-                {3, 3},
-                {4, 4},
-            };
-            var source = new Source
-            {
-                Values = values
-            };
+            var values = new Dictionary<int, int> { { 1, 1 }, { 2, 2 }, { 3, 3 }, { 4, 4 }, };
+            var source = new Source { Values = values };
 
             var dest = Mapper.Map<Destination>(source);
 
@@ -54,25 +48,19 @@ namespace AutoMapper.UnitTests.Mappers.ReadOnlyDictionaryMapper
             public ReadOnlyDictionary<int, int> Values { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(config =>
-        {
-            config.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                config =>
+                {
+                    config.CreateMap<Source, Destination>();
+                }
+            );
 
         [Fact]
         public void Should_map_readonly_values()
         {
-            var values = new Dictionary<int, int>
-            {
-                {1, 1},
-                {2, 2},
-                {3, 3},
-                {4, 4},
-            };
-            var source = new Source
-            {
-                Values = new ReadOnlyDictionary<int, int>(values)
-            };
+            var values = new Dictionary<int, int> { { 1, 1 }, { 2, 2 }, { 3, 3 }, { 4, 4 }, };
+            var source = new Source { Values = new ReadOnlyDictionary<int, int>(values) };
 
             var dest = Mapper.Map<Destination>(source);
 

@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 {
     internal partial class Controller
     {
-        CommandState IChainedCommandHandler<TypeCharCommandArgs>.GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextHandler)
+        CommandState IChainedCommandHandler<TypeCharCommandArgs>.GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextHandler
+        )
         {
             AssertIsForeground();
 
@@ -25,7 +28,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             return nextHandler();
         }
 
-        void IChainedCommandHandler<TypeCharCommandArgs>.ExecuteCommand(TypeCharCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        void IChainedCommandHandler<TypeCharCommandArgs>.ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             AssertIsForeground();
 
@@ -45,6 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             {
                 nextHandler();
             }
+
             finally
             {
                 this.TextView.TextBuffer.PostChanged += OnTextViewBufferPostChanged;
@@ -54,7 +62,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             // involved.  i.e. if there was a typechar, but someone processed it and moved the caret
             // somewhere else then we don't want signature help.  Also, if a character was typed but
             // something intercepted and placed different text into the editor, then we don't want
-            // to proceed. 
+            // to proceed.
             //
             // Note: we do not want to pass along a text version here.  It is expected that multiple
             // version changes may happen when we call 'nextHandler' and we will still want to
@@ -76,8 +84,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             // care of cases where the filtered set of providers didn't provide anything but one of the
             // other providers could still be valid, but doesn't explicitly treat the typed character as
             // a trigger character.
-            var (textuallyTriggeredProviders, untriggeredProviders) = FilterProviders(allProviders, args.TypedChar);
-            var triggerInfo = new SignatureHelpTriggerInfo(SignatureHelpTriggerReason.TypeCharCommand, args.TypedChar);
+            var (textuallyTriggeredProviders, untriggeredProviders) = FilterProviders(
+                allProviders,
+                args.TypedChar
+            );
+            var triggerInfo = new SignatureHelpTriggerInfo(
+                SignatureHelpTriggerReason.TypeCharCommand,
+                args.TypedChar
+            );
 
             if (!IsSessionActive)
             {
@@ -86,7 +100,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 // computation and start computing the model in the background.
                 if (textuallyTriggeredProviders.Any())
                 {
-                    // First create the session that represents that we now have a potential 
+                    // First create the session that represents that we now have a potential
                     // signature help list. Then tell it to start computing.
                     StartSession(textuallyTriggeredProviders, triggerInfo);
                     return;
@@ -106,7 +120,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     // In this case, we should requery all providers.
                     //
                     // e.g.     Math.Max(Math.Min(1,2)$$
-                    sessionOpt.ComputeModel(allProviders, new SignatureHelpTriggerInfo(SignatureHelpTriggerReason.RetriggerCommand, triggerInfo.TriggerCharacter));
+                    sessionOpt.ComputeModel(
+                        allProviders,
+                        new SignatureHelpTriggerInfo(
+                            SignatureHelpTriggerReason.RetriggerCommand,
+                            triggerInfo.TriggerCharacter
+                        )
+                    );
                     computed = true;
                 }
 
@@ -117,25 +137,36 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     //
                     // Or it can trigger a new list. Ask the computation to compute again.
                     sessionOpt.ComputeModel(
-                        textuallyTriggeredProviders.Concat(untriggeredProviders), triggerInfo);
+                        textuallyTriggeredProviders.Concat(untriggeredProviders),
+                        triggerInfo
+                    );
                     computed = true;
                 }
 
                 if (!computed)
                 {
                     // A character was typed and we haven't updated our model; do so now.
-                    sessionOpt.ComputeModel(allProviders, new SignatureHelpTriggerInfo(SignatureHelpTriggerReason.RetriggerCommand));
+                    sessionOpt.ComputeModel(
+                        allProviders,
+                        new SignatureHelpTriggerInfo(SignatureHelpTriggerReason.RetriggerCommand)
+                    );
                 }
             }
         }
 
         private (ImmutableArray<ISignatureHelpProvider> matched, ImmutableArray<ISignatureHelpProvider> unmatched) FilterProviders(
-            ImmutableArray<ISignatureHelpProvider> providers, char ch)
+            ImmutableArray<ISignatureHelpProvider> providers,
+            char ch
+        )
         {
             AssertIsForeground();
 
-            using var matchedProvidersDisposer = ArrayBuilder<ISignatureHelpProvider>.GetInstance(out var matchedProviders);
-            using var unmatchedProvidersDisposer = ArrayBuilder<ISignatureHelpProvider>.GetInstance(out var unmatchedProviders);
+            using var matchedProvidersDisposer = ArrayBuilder<ISignatureHelpProvider>.GetInstance(
+                out var matchedProviders
+            );
+            using var unmatchedProvidersDisposer = ArrayBuilder<ISignatureHelpProvider>.GetInstance(
+                out var unmatchedProviders
+            );
             foreach (var provider in providers)
             {
                 if (provider.IsTriggerCharacter(ch))

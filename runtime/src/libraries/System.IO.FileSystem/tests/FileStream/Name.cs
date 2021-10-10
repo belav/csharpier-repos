@@ -29,7 +29,14 @@ namespace System.IO.Tests
             string name = Path.GetFileName(path);
             string dir = Path.GetDirectoryName(path);
 
-            string fileName = dir + Path.DirectorySeparatorChar + "." + Path.AltDirectorySeparatorChar + "." + Path.DirectorySeparatorChar + name;
+            string fileName =
+                dir
+                + Path.DirectorySeparatorChar
+                + "."
+                + Path.AltDirectorySeparatorChar
+                + "."
+                + Path.DirectorySeparatorChar
+                + name;
 
             using (FileStream fs = new FileStream(fileName, FileMode.Create))
             {
@@ -37,12 +44,17 @@ namespace System.IO.Tests
             }
         }
 
-
         [Fact]
         public void NameReturnsUnknownForHandle()
         {
             using (new ThreadCultureChange(CultureInfo.InvariantCulture))
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite
+                )
+            )
             using (FileStream fsh = new FileStream(fs.SafeFileHandle, FileAccess.ReadWrite))
             {
                 Assert.Equal("[Unknown]", fsh.Name);

@@ -28,13 +28,16 @@ namespace Microsoft.AspNetCore.Mvc.Cors
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var accessControlRequestMethod =
-                        context.HttpContext.Request.Headers[CorsConstants.AccessControlRequestMethod];
-            if (string.Equals(
+            var accessControlRequestMethod = context.HttpContext.Request.Headers[
+                CorsConstants.AccessControlRequestMethod
+            ];
+            if (
+                string.Equals(
                     context.HttpContext.Request.Method,
                     CorsConstants.PreflightHttpMethod,
-                    StringComparison.OrdinalIgnoreCase) &&
-                !StringValues.IsNullOrEmpty(accessControlRequestMethod))
+                    StringComparison.OrdinalIgnoreCase
+                ) && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
+            )
             {
                 // Short circuit if the request is preflight as that should not result in action execution.
                 context.Result = new StatusCodeResult(StatusCodes.Status204NoContent);

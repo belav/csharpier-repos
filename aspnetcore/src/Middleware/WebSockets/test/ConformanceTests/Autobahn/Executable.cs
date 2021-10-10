@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
 {
     public class Executable
     {
-        private static readonly string _exeSuffix = OperatingSystem.IsWindows() ? ".exe" : string.Empty;
+        private static readonly string _exeSuffix = OperatingSystem.IsWindows()
+            ? ".exe"
+            : string.Empty;
 
         public string Location { get; }
 
@@ -20,7 +22,9 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
 
         public static string Locate(string name)
         {
-            foreach (var dir in Environment.GetEnvironmentVariable("PATH").Split(Path.PathSeparator))
+            foreach (
+                var dir in Environment.GetEnvironmentVariable("PATH").Split(Path.PathSeparator)
+            )
             {
                 var candidate = Path.Combine(dir, name + _exeSuffix);
                 if (File.Exists(candidate))
@@ -31,7 +35,11 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
             return null;
         }
 
-        public async Task<int> ExecAsync(string args, CancellationToken cancellationToken, ILogger logger)
+        public async Task<int> ExecAsync(
+            string args,
+            CancellationToken cancellationToken,
+            ILogger logger
+        )
         {
             var process = new Process()
             {
@@ -50,8 +58,10 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
             using (cancellationToken.Register(() => Cancel(process, tcs)))
             {
                 process.Exited += (_, __) => tcs.TrySetResult(process.ExitCode);
-                process.OutputDataReceived += (_, a) => LogIfNotNull(logger.LogInformation, "stdout: {0}", a.Data);
-                process.ErrorDataReceived += (_, a) => LogIfNotNull(logger.LogError, "stderr: {0}", a.Data);
+                process.OutputDataReceived += (_, a) =>
+                    LogIfNotNull(logger.LogInformation, "stdout: {0}", a.Data);
+                process.ErrorDataReceived += (_, a) =>
+                    LogIfNotNull(logger.LogError, "stderr: {0}", a.Data);
 
                 process.Start();
 

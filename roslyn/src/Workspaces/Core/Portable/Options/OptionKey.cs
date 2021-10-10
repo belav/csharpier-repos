@@ -21,11 +21,15 @@ namespace Microsoft.CodeAnalysis.Options
         {
             if (language != null && !option.IsPerLanguage)
             {
-                throw new ArgumentException(WorkspacesResources.A_language_name_cannot_be_specified_for_this_option);
+                throw new ArgumentException(
+                    WorkspacesResources.A_language_name_cannot_be_specified_for_this_option
+                );
             }
             else if (language == null && option.IsPerLanguage)
             {
-                throw new ArgumentNullException(WorkspacesResources.A_language_name_must_be_specified_for_this_option);
+                throw new ArgumentNullException(
+                    WorkspacesResources.A_language_name_must_be_specified_for_this_option
+                );
             }
 
             this.Option = option ?? throw new ArgumentNullException(nameof(option));
@@ -34,8 +38,7 @@ namespace Microsoft.CodeAnalysis.Options
 
         public override bool Equals(object? obj)
         {
-            return obj is OptionKey key &&
-                   Equals(key);
+            return obj is OptionKey key && Equals(key);
         }
 
         public bool Equals(OptionKey other)
@@ -44,8 +47,9 @@ namespace Microsoft.CodeAnalysis.Options
 
             static bool OptionEqual(IOption thisOption, IOption otherOption)
             {
-                if (!(thisOption is IOption2 thisOption2) ||
-                    !(otherOption is IOption2 otherOption2))
+                if (
+                    !(thisOption is IOption2 thisOption2) || !(otherOption is IOption2 otherOption2)
+                )
                 {
                     // Third party definition of 'IOption'.
                     return thisOption.Equals(otherOption);
@@ -74,17 +78,13 @@ namespace Microsoft.CodeAnalysis.Options
                 return "";
             }
 
-            var languageDisplay = Option.IsPerLanguage
-                ? $"({Language}) "
-                : string.Empty;
+            var languageDisplay = Option.IsPerLanguage ? $"({Language}) " : string.Empty;
 
             return languageDisplay + Option.ToString();
         }
 
-        public static bool operator ==(OptionKey left, OptionKey right)
-            => left.Equals(right);
+        public static bool operator ==(OptionKey left, OptionKey right) => left.Equals(right);
 
-        public static bool operator !=(OptionKey left, OptionKey right)
-            => !left.Equals(right);
+        public static bool operator !=(OptionKey left, OptionKey right) => !left.Equals(right);
     }
 }

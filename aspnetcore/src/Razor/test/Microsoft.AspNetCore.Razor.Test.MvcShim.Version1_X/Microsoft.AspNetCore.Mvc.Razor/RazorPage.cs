@@ -29,23 +29,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
         public ITempDataDictionary TempData { get; }
 
-        public void EnsureRenderedBodyOrSections()
-        {
-        }
+        public void EnsureRenderedBodyOrSections() { }
 
-        public void DefineSection(string name, RenderAsyncDelegate section)
-        {
-        }
+        public void DefineSection(string name, RenderAsyncDelegate section) { }
 
         public abstract Task ExecuteAsync();
 
-        public void BeginContext(int position, int length, bool isLiteral)
-        {
-        }
+        public void BeginContext(int position, int length, bool isLiteral) { }
 
-        public void EndContext()
-        {
-        }
+        public void EndContext() { }
 
         public TTagHelper CreateTagHelper<TTagHelper>() where TTagHelper : ITagHelper
         {

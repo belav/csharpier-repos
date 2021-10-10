@@ -20,12 +20,8 @@ namespace AutoMapper.UnitTests
 
                 public static implicit operator Bar(Foo other)
                 {
-                    return new Bar
-                    {
-                        OtherValue = other.Value
-                    };
+                    return new Bar { OtherValue = other.Value };
                 }
-
             }
 
             [Fact]
@@ -39,7 +35,7 @@ namespace AutoMapper.UnitTests
                 _bar.OtherValue.ShouldBe("Hello");
             }
         }
-        
+
         public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_source
         {
             private Bar _bar;
@@ -50,17 +46,13 @@ namespace AutoMapper.UnitTests
 
                 public static implicit operator Bar(Foo other)
                 {
-                    return new Bar
-                    {
-                        OtherValue = other.Value
-                    };
+                    return new Bar { OtherValue = other.Value };
                 }
 
                 public static implicit operator string(Foo other)
                 {
                     return other.Value;
                 }
-
             }
 
             public class Bar
@@ -95,10 +87,7 @@ namespace AutoMapper.UnitTests
 
                 public static explicit operator Bar(Foo other)
                 {
-                    return new Bar
-                    {
-                        OtherValue = other.Value
-                    };
+                    return new Bar { OtherValue = other.Value };
                 }
             }
 
@@ -121,10 +110,7 @@ namespace AutoMapper.UnitTests
 
                 public static explicit operator Bar(Foo other)
                 {
-                    return new Bar
-                    {
-                        OtherValue = other.Value
-                    };
+                    return new Bar { OtherValue = other.Value };
                 }
             }
 

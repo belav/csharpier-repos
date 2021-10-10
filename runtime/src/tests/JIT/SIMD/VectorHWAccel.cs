@@ -38,7 +38,8 @@ internal partial class VectorTest
     private static int Main()
     {
         int returnVal = Pass;
-        if (VectorHWAccelTest<float>.VectorHWAccel(1, 2, (float)(1 + 2)) != Pass) returnVal = Fail;
+        if (VectorHWAccelTest<float>.VectorHWAccel(1, 2, (float)(1 + 2)) != Pass)
+            returnVal = Fail;
         return returnVal;
     }
 }

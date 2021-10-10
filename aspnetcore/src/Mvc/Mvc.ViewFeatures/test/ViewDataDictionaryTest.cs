@@ -53,8 +53,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var metadataProvider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
-            metadataProvider
-                .Setup(m => m.GetMetadataForType(typeof(object)))
+            metadataProvider.Setup(m => m.GetMetadataForType(typeof(object)))
                 .Returns(new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)))
                 .Verifiable();
             var modelState = new ModelStateDictionary();
@@ -72,8 +71,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var metadataProvider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
-            metadataProvider
-                .Setup(m => m.GetMetadataForType(typeof(TestModel)))
+            metadataProvider.Setup(m => m.GetMetadataForType(typeof(TestModel)))
                 .Returns(new EmptyModelMetadataProvider().GetMetadataForType(typeof(TestModel)))
                 .Verifiable();
             var viewData = new TestViewDataDictionary(metadataProvider.Object, typeof(TestModel));
@@ -92,12 +90,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var metadataProvider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
-            metadataProvider
-                .Setup(m => m.GetMetadataForType(typeof(object)))
+            metadataProvider.Setup(m => m.GetMetadataForType(typeof(object)))
                 .Returns(new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)))
                 .Verifiable();
-            metadataProvider
-                .Setup(m => m.GetMetadataForType(typeof(TestModel)))
+            metadataProvider.Setup(m => m.GetMetadataForType(typeof(TestModel)))
                 .Returns(new EmptyModelMetadataProvider().GetMetadataForType(typeof(TestModel)))
                 .Verifiable();
             var viewData = new TestViewDataDictionary(metadataProvider.Object);
@@ -136,28 +132,33 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         [Theory]
         [MemberData(nameof(IncompatibleModelData))]
-        public void SetModel_Throws_IfModelIncompatibleWithDeclaredType(object model, Type expectedType)
+        public void SetModel_Throws_IfModelIncompatibleWithDeclaredType(
+            object model,
+            Type expectedType
+        )
         {
             // Arrange
-            var viewData = new TestViewDataDictionary(new EmptyModelMetadataProvider(), typeof(TestModel));
+            var viewData = new TestViewDataDictionary(
+                new EmptyModelMetadataProvider(),
+                typeof(TestModel)
+            );
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => viewData.SetModelPublic(model));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => viewData.SetModelPublic(model)
+            );
             Assert.Equal(
-                $"The model item passed into the ViewDataDictionary is of type '{ model.GetType() }', but this " +
-                $"ViewDataDictionary instance requires a model item of type '{ typeof(TestModel) }'.",
-                exception.Message);
+                $"The model item passed into the ViewDataDictionary is of type '{model.GetType()}', but this "
+                    + $"ViewDataDictionary instance requires a model item of type '{typeof(TestModel)}'.",
+                exception.Message
+            );
         }
 
         public static TheoryData<object> EnumerableModelData
         {
             get
             {
-                var model = new List<TestModel>()
-                {
-                    new TestModel(),
-                    new TestModel()
-                };
+                var model = new List<TestModel>() { new TestModel(), new TestModel() };
 
                 return new TheoryData<object>
                 {
@@ -241,10 +242,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var source = new ViewDataDictionary(metadataProvider)
-            {
-                Model = instance,
-            };
+            var source = new ViewDataDictionary(metadataProvider) { Model = instance, };
 
             // Act
             var viewData = new ViewDataDictionary(source);
@@ -276,7 +274,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void ModelSetter_UpdatesModelMetadata_IfModelIncompatibleWithSourceMetadata(
             Type sourceType,
             object model,
-            Type expectedType)
+            Type expectedType
+        )
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
@@ -300,7 +299,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [InlineData(typeof(int), 23)]
         [InlineData(typeof(string), "test string")]
         [InlineData(typeof(IEnumerable<string>), new string[] { "1", "2", "3" })]
-        public void ModelSetter_PreservesSourceMetadata_IfModelCompatible(Type sourceType, object model)
+        public void ModelSetter_PreservesSourceMetadata_IfModelCompatible(
+            Type sourceType,
+            object model
+        )
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
@@ -323,10 +325,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var viewData = new ViewDataDictionary(metadataProvider)
-            {
-                Model = 3,
-            };
+            var viewData = new ViewDataDictionary(metadataProvider) { Model = 3, };
 
             var originalMetadata = viewData.ModelMetadata;
             var originalExplorer = viewData.ModelExplorer;
@@ -377,10 +376,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var metadataProvider = new EmptyModelMetadataProvider();
             var metadata = metadataProvider.GetMetadataForType(typeof(bool?));
             var explorer = new ModelExplorer(metadataProvider, metadata, model: null);
-            var viewData = new ViewDataDictionary(metadataProvider)
-            {
-                ModelExplorer = explorer,
-            };
+            var viewData = new ViewDataDictionary(metadataProvider) { ModelExplorer = explorer, };
 
             // Act
             viewData.Model = true;
@@ -400,14 +396,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void ModelSetter_SetNonNullableToNull_Throws()
         {
             // Arrange
-            var viewData = new TestViewDataDictionary(new EmptyModelMetadataProvider(), typeof(int));
+            var viewData = new TestViewDataDictionary(
+                new EmptyModelMetadataProvider(),
+                typeof(int)
+            );
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => viewData.SetModelPublic(value: null));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => viewData.SetModelPublic(value: null)
+            );
             Assert.Equal(
-                "The model item passed is null, but this ViewDataDictionary instance requires a non-null model item " +
-                $"of type '{ typeof(int) }'.",
-                exception.Message);
+                "The model item passed is null, but this ViewDataDictionary instance requires a non-null model item "
+                    + $"of type '{typeof(int)}'.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -415,10 +417,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var viewData = new ViewDataDictionary(metadataProvider)
-            {
-                Model = 3,
-            };
+            var viewData = new ViewDataDictionary(metadataProvider) { Model = 3, };
 
             var originalMetadata = viewData.ModelMetadata;
             var originalExplorer = viewData.ModelExplorer;
@@ -442,10 +441,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var model = "Hello";
 
             var metadataProvider = new EmptyModelMetadataProvider();
-            var viewData = new ViewDataDictionary(metadataProvider)
-            {
-                Model = model,
-            };
+            var viewData = new ViewDataDictionary(metadataProvider) { Model = model, };
 
             var originalMetadata = viewData.ModelMetadata;
             var originalExplorer = viewData.ModelExplorer;
@@ -466,21 +462,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             {
                 return new TheoryData<object, string, object>
                 {
-                    {
-                        new { Foo = "Bar" },
-                        "Foo",
-                        "Bar"
-                    },
+                    { new { Foo = "Bar" }, "Foo", "Bar" },
                     {
                         new { Foo = new Dictionary<string, object> { { "Bar", "Baz" } } },
                         "Foo.Bar",
                         "Baz"
                     },
-                    {
-                        new { Foo = new { Bar = "Baz" } },
-                        "Foo.Bar",
-                        "Baz"
-                    }
+                    { new { Foo = new { Bar = "Baz" } }, "Foo.Bar", "Baz" }
                 };
             }
         }
@@ -605,7 +593,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider())
             {
-                {  "Foo", new { Bar = "Not Baz" } },
+                { "Foo", new { Bar = "Not Baz" } },
                 { "Foo.Bar", "Baz" }
             };
 
@@ -704,10 +692,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
             var value = new Dictionary<string, object>
             {
-                ["Bar"] = new Dictionary<string, string>
-                {
-                    { "Baz", "Quux" }
-                }
+                ["Bar"] = new Dictionary<string, string> { { "Baz", "Quux" } }
             };
             viewData.Add("Foo", value);
 
@@ -803,10 +788,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private static ViewDataDictionary GetViewDataDictionary(object model)
         {
-            return new ViewDataDictionary(new EmptyModelMetadataProvider())
-            {
-                Model = model
-            };
+            return new ViewDataDictionary(new EmptyModelMetadataProvider()) { Model = model };
         }
 
         private class TestModel
@@ -821,14 +803,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private class TestViewDataDictionary : ViewDataDictionary
         {
             public TestViewDataDictionary(IModelMetadataProvider metadataProvider)
-                : base(metadataProvider)
-            {
-            }
+                : base(metadataProvider) { }
 
-            public TestViewDataDictionary(IModelMetadataProvider metadataProvider, Type declaredModelType)
-                : base(metadataProvider, declaredModelType)
-            {
-            }
+            public TestViewDataDictionary(
+                IModelMetadataProvider metadataProvider,
+                Type declaredModelType
+            ) : base(metadataProvider, declaredModelType) { }
 
             public void SetModelPublic(object value)
             {

@@ -15,8 +15,8 @@ namespace Microsoft.AspNetCore.Routing
             {
                 return new TheoryData<string, StringSegment[]>
                 {
-                    { string.Empty, new StringSegment[] { } },
-                    { "/", new StringSegment[] { } },
+                    { string.Empty, new StringSegment[] {  } },
+                    { "/", new StringSegment[] {  } },
                     { "//", new StringSegment[] { new StringSegment("//", 1, 0) } },
                     {
                         "///",

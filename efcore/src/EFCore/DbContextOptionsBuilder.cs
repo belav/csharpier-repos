@@ -37,10 +37,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbContextOptionsBuilder" /> class with no options set.
         /// </summary>
-        public DbContextOptionsBuilder()
-            : this(new DbContextOptions<DbContext>())
-        {
-        }
+        public DbContextOptionsBuilder() : this(new DbContextOptions<DbContext>()) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbContextOptionsBuilder" /> class to further configure
@@ -57,8 +54,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Gets the options being configured.
         /// </summary>
-        public virtual DbContextOptions Options
-            => _options;
+        public virtual DbContextOptions Options => _options;
 
         /// <summary>
         ///     <para>
@@ -71,8 +67,7 @@ namespace Microsoft.EntityFrameworkCore
         ///         <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" />.
         ///     </para>
         /// </summary>
-        public virtual bool IsConfigured
-            => _options.Extensions.Any(e => e.Info.IsDatabaseProvider);
+        public virtual bool IsConfigured => _options.Extensions.Any(e => e.Info.IsDatabaseProvider);
 
         /// <summary>
         ///     <para>
@@ -85,8 +80,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="model"> The model to be used. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder UseModel(IModel model)
-            => WithOption(e => e.WithModel(Check.NotNull(model, nameof(model))));
+        public virtual DbContextOptionsBuilder UseModel(IModel model) =>
+            WithOption(e => e.WithModel(Check.NotNull(model, nameof(model))));
 
         /// <summary>
         ///     <para>
@@ -105,8 +100,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="loggerFactory"> The logger factory to be used. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder UseLoggerFactory(ILoggerFactory? loggerFactory)
-            => WithOption(e => e.WithLoggerFactory(loggerFactory));
+        public virtual DbContextOptionsBuilder UseLoggerFactory(ILoggerFactory? loggerFactory) =>
+            WithOption(e => e.WithLoggerFactory(loggerFactory));
 
         /// <summary>
         ///     <para>
@@ -135,8 +130,8 @@ namespace Microsoft.EntityFrameworkCore
         public virtual DbContextOptionsBuilder LogTo(
             Action<string> action,
             LogLevel minimumLevel = LogLevel.Debug,
-            DbContextLoggerOptions? options = null)
-            => LogTo(action, (i, l) => l >= minimumLevel, options);
+            DbContextLoggerOptions? options = null
+        ) => LogTo(action, (i, l) => l >= minimumLevel, options);
 
         /// <summary>
         ///     <para>
@@ -165,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore
             Action<string> action,
             IEnumerable<EventId> events,
             LogLevel minimumLevel = LogLevel.Debug,
-            DbContextLoggerOptions? options = null)
+            DbContextLoggerOptions? options = null
+        )
         {
             Check.NotNull(events, nameof(events));
 
@@ -181,26 +177,26 @@ namespace Microsoft.EntityFrameworkCore
                 var firstEvent = eventsArray[0];
                 return LogTo(
                     action,
-                    (eventId, level) => level >= minimumLevel
-                        && eventId == firstEvent,
-                    options);
+                    (eventId, level) => level >= minimumLevel && eventId == firstEvent,
+                    options
+                );
             }
 
             if (eventsArray.Length < 6)
             {
                 return LogTo(
                     action,
-                    (eventId, level) => level >= minimumLevel
-                        && eventsArray.Contains(eventId),
-                    options);
+                    (eventId, level) => level >= minimumLevel && eventsArray.Contains(eventId),
+                    options
+                );
             }
 
             var eventsHash = eventsArray.ToHashSet();
             return LogTo(
                 action,
-                (eventId, level) => level >= minimumLevel
-                    && eventsHash.Contains(eventId),
-                options);
+                (eventId, level) => level >= minimumLevel && eventsHash.Contains(eventId),
+                options
+            );
         }
 
         /// <summary>
@@ -230,7 +226,8 @@ namespace Microsoft.EntityFrameworkCore
             Action<string> action,
             IEnumerable<string> categories,
             LogLevel minimumLevel = LogLevel.Debug,
-            DbContextLoggerOptions? options = null)
+            DbContextLoggerOptions? options = null
+        )
         {
             Check.NotNull(categories, nameof(categories));
 
@@ -253,7 +250,12 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             for (var i = 0; i < categoriesArray.Length; i++)
                             {
-                                if (eventId.Name!.StartsWith(categoriesArray[i], StringComparison.OrdinalIgnoreCase))
+                                if (
+                                    eventId.Name!.StartsWith(
+                                        categoriesArray[i],
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
                                 {
                                     return true;
                                 }
@@ -262,15 +264,18 @@ namespace Microsoft.EntityFrameworkCore
 
                         return false;
                     },
-                    options);
+                    options
+                );
             }
 
             var singleCategory = categoriesArray[0];
             return LogTo(
                 action,
-                (eventId, level) => level >= minimumLevel
+                (eventId, level) =>
+                    level >= minimumLevel
                     && eventId.Name!.StartsWith(singleCategory, StringComparison.OrdinalIgnoreCase),
-                options);
+                options
+            );
         }
 
         /// <summary>
@@ -296,12 +301,19 @@ namespace Microsoft.EntityFrameworkCore
         public virtual DbContextOptionsBuilder LogTo(
             Action<string> action,
             Func<EventId, LogLevel, bool> filter,
-            DbContextLoggerOptions? options = null)
+            DbContextLoggerOptions? options = null
+        )
         {
             Check.NotNull(action, nameof(action));
             Check.NotNull(filter, nameof(filter));
 
-            return LogTo(new FormattingDbContextLogger(action, filter, options ?? DbContextLoggerOptions.DefaultWithLocalTime));
+            return LogTo(
+                new FormattingDbContextLogger(
+                    action,
+                    filter,
+                    options ?? DbContextLoggerOptions.DefaultWithLocalTime
+                )
+            );
         }
 
         /// <summary>
@@ -325,7 +337,8 @@ namespace Microsoft.EntityFrameworkCore
         // Filter comes first, logger second, otherwise it's hard to get the correct overload to resolve
         public virtual DbContextOptionsBuilder LogTo(
             Func<EventId, LogLevel, bool> filter,
-            Action<EventData> logger)
+            Action<EventData> logger
+        )
         {
             Check.NotNull(logger, nameof(logger));
             Check.NotNull(filter, nameof(filter));
@@ -333,8 +346,8 @@ namespace Microsoft.EntityFrameworkCore
             return LogTo(new DelegatingDbContextLogger(logger, filter));
         }
 
-        private DbContextOptionsBuilder LogTo(IDbContextLogger logger)
-            => WithOption(e => e.WithDbContextLogger(logger));
+        private DbContextOptionsBuilder LogTo(IDbContextLogger logger) =>
+            WithOption(e => e.WithDbContextLogger(logger));
 
         /// <summary>
         ///     <para>
@@ -355,8 +368,9 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder DisableConcurrencyDetection(bool concurrencyDetectionDisabled = true)
-            => WithOption(e => e.WithConcurrencyDetectionEnabled(!concurrencyDetectionDisabled));
+        public virtual DbContextOptionsBuilder DisableConcurrencyDetection(
+            bool concurrencyDetectionDisabled = true
+        ) => WithOption(e => e.WithConcurrencyDetectionEnabled(!concurrencyDetectionDisabled));
 
         /// <summary>
         ///     <para>
@@ -377,8 +391,9 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder EnableDetailedErrors(bool detailedErrorsEnabled = true)
-            => WithOption(e => e.WithDetailedErrorsEnabled(detailedErrorsEnabled));
+        public virtual DbContextOptionsBuilder EnableDetailedErrors(
+            bool detailedErrorsEnabled = true
+        ) => WithOption(e => e.WithDetailedErrorsEnabled(detailedErrorsEnabled));
 
         /// <summary>
         ///     <para>
@@ -397,8 +412,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="memoryCache"> The memory cache to be used. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder UseMemoryCache(IMemoryCache? memoryCache)
-            => WithOption(e => e.WithMemoryCache(memoryCache));
+        public virtual DbContextOptionsBuilder UseMemoryCache(IMemoryCache? memoryCache) =>
+            WithOption(e => e.WithMemoryCache(memoryCache));
 
         /// <summary>
         ///     <para>
@@ -419,8 +434,9 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="serviceProvider"> The service provider to be used. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder UseInternalServiceProvider(IServiceProvider? serviceProvider)
-            => WithOption(e => e.WithInternalServiceProvider(serviceProvider));
+        public virtual DbContextOptionsBuilder UseInternalServiceProvider(
+            IServiceProvider? serviceProvider
+        ) => WithOption(e => e.WithInternalServiceProvider(serviceProvider));
 
         /// <summary>
         ///     Sets the <see cref="IServiceProvider" /> from which application services will be obtained. This
@@ -429,8 +445,9 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="serviceProvider"> The service provider to be used. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder UseApplicationServiceProvider(IServiceProvider? serviceProvider)
-            => WithOption(e => e.WithApplicationServiceProvider(serviceProvider));
+        public virtual DbContextOptionsBuilder UseApplicationServiceProvider(
+            IServiceProvider? serviceProvider
+        ) => WithOption(e => e.WithApplicationServiceProvider(serviceProvider));
 
         /// <summary>
         ///     <para>
@@ -448,8 +465,9 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="sensitiveDataLoggingEnabled"> If <see langword="true" />, then sensitive data is logged. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder EnableSensitiveDataLogging(bool sensitiveDataLoggingEnabled = true)
-            => WithOption(e => e.WithSensitiveDataLoggingEnabled(sensitiveDataLoggingEnabled));
+        public virtual DbContextOptionsBuilder EnableSensitiveDataLogging(
+            bool sensitiveDataLoggingEnabled = true
+        ) => WithOption(e => e.WithSensitiveDataLoggingEnabled(sensitiveDataLoggingEnabled));
 
         /// <summary>
         ///     <para>
@@ -464,8 +482,9 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="cacheServiceProvider"> If <see langword="true" />, then the internal service provider is cached. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder EnableServiceProviderCaching(bool cacheServiceProvider = true)
-            => WithOption(e => e.WithServiceProviderCachingEnabled(cacheServiceProvider));
+        public virtual DbContextOptionsBuilder EnableServiceProviderCaching(
+            bool cacheServiceProvider = true
+        ) => WithOption(e => e.WithServiceProviderCachingEnabled(cacheServiceProvider));
 
         /// <summary>
         ///     <para>
@@ -486,8 +505,9 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder UseQueryTrackingBehavior(QueryTrackingBehavior queryTrackingBehavior)
-            => WithOption(e => e.WithQueryTrackingBehavior(queryTrackingBehavior));
+        public virtual DbContextOptionsBuilder UseQueryTrackingBehavior(
+            QueryTrackingBehavior queryTrackingBehavior
+        ) => WithOption(e => e.WithQueryTrackingBehavior(queryTrackingBehavior));
 
         /// <summary>
         ///     <para>
@@ -519,9 +539,13 @@ namespace Microsoft.EntityFrameworkCore
         /// </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public virtual DbContextOptionsBuilder ConfigureWarnings(
-            Action<WarningsConfigurationBuilder> warningsConfigurationBuilderAction)
+            Action<WarningsConfigurationBuilder> warningsConfigurationBuilderAction
+        )
         {
-            Check.NotNull(warningsConfigurationBuilderAction, nameof(warningsConfigurationBuilderAction));
+            Check.NotNull(
+                warningsConfigurationBuilderAction,
+                nameof(warningsConfigurationBuilderAction)
+            );
 
             warningsConfigurationBuilderAction(new WarningsConfigurationBuilder(this));
 
@@ -547,8 +571,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TImplementation"> The new implementation type for the service. </typeparam>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public virtual DbContextOptionsBuilder ReplaceService<TService, TImplementation>()
-            where TImplementation : TService
-            => WithOption(e => e.WithReplacedService(typeof(TService), typeof(TImplementation)));
+            where TImplementation : TService =>
+            WithOption(e => e.WithReplacedService(typeof(TService), typeof(TImplementation)));
 
         /// <summary>
         ///     <para>
@@ -573,10 +597,21 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TCurrentImplementation"> The current implementation type for the service. </typeparam>
         /// <typeparam name="TNewImplementation"> The new implementation type for the service. </typeparam>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder ReplaceService<TService, TCurrentImplementation, TNewImplementation>()
+        public virtual DbContextOptionsBuilder ReplaceService<
+            TService,
+            TCurrentImplementation,
+            TNewImplementation
+        >()
             where TCurrentImplementation : TService
-            where TNewImplementation : TService
-            => WithOption(e => e.WithReplacedService(typeof(TService), typeof(TNewImplementation), typeof(TCurrentImplementation)));
+            where TNewImplementation : TService =>
+            WithOption(
+                e =>
+                    e.WithReplacedService(
+                        typeof(TService),
+                        typeof(TNewImplementation),
+                        typeof(TCurrentImplementation)
+                    )
+            );
 
         /// <summary>
         ///     <para>
@@ -603,8 +638,9 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="interceptors"> The interceptors to add. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder AddInterceptors(IEnumerable<IInterceptor> interceptors)
-            => WithOption(e => e.WithInterceptors(Check.NotNull(interceptors, nameof(interceptors))));
+        public virtual DbContextOptionsBuilder AddInterceptors(
+            IEnumerable<IInterceptor> interceptors
+        ) => WithOption(e => e.WithInterceptors(Check.NotNull(interceptors, nameof(interceptors))));
 
         /// <summary>
         ///     <para>
@@ -627,8 +663,9 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="interceptors"> The interceptors to add. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder AddInterceptors(params IInterceptor[] interceptors)
-            => AddInterceptors((IEnumerable<IInterceptor>)interceptors);
+        public virtual DbContextOptionsBuilder AddInterceptors(
+            params IInterceptor[] interceptors
+        ) => AddInterceptors((IEnumerable<IInterceptor>)interceptors);
 
         /// <summary>
         ///     <para>
@@ -642,8 +679,9 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="loggingConfigCacheTime"> The maximum time period over which to skip logging checks before checking again. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual DbContextOptionsBuilder LoggingConfigCacheTime(TimeSpan loggingConfigCacheTime)
-            => WithOption(e => e.WithLoggingConfigCacheTime(loggingConfigCacheTime));
+        public virtual DbContextOptionsBuilder LoggingConfigCacheTime(
+            TimeSpan loggingConfigCacheTime
+        ) => WithOption(e => e.WithLoggingConfigCacheTime(loggingConfigCacheTime));
 
         /// <summary>
         ///     <para>
@@ -656,17 +694,24 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <typeparam name="TExtension"> The type of extension to be added. </typeparam>
         /// <param name="extension"> The extension to be added. </param>
-        void IDbContextOptionsBuilderInfrastructure.AddOrUpdateExtension<TExtension>(TExtension extension)
+        void IDbContextOptionsBuilderInfrastructure.AddOrUpdateExtension<TExtension>(
+            TExtension extension
+        )
         {
             Check.NotNull(extension, nameof(extension));
 
             _options = _options.WithExtension(extension);
         }
 
-        private DbContextOptionsBuilder WithOption(Func<CoreOptionsExtension, CoreOptionsExtension> withFunc)
+        private DbContextOptionsBuilder WithOption(
+            Func<CoreOptionsExtension, CoreOptionsExtension> withFunc
+        )
         {
             ((IDbContextOptionsBuilderInfrastructure)this).AddOrUpdateExtension(
-                withFunc(Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()));
+                withFunc(
+                    Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()
+                )
+            );
 
             return this;
         }
@@ -678,8 +723,7 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -687,17 +731,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="obj"> The object to compare with the current object. </param>
         /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
         /// <returns> A hash code for the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode()
-            => base.GetHashCode();
-
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
     }
 }

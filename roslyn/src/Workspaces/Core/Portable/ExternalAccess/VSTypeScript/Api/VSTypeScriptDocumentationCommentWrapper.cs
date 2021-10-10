@@ -10,20 +10,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         private readonly DocumentationComment _underlyingObject;
 
-        public VSTypeScriptDocumentationCommentWrapper(DocumentationComment underlyingObject)
-            => _underlyingObject = underlyingObject;
+        public VSTypeScriptDocumentationCommentWrapper(DocumentationComment underlyingObject) =>
+            _underlyingObject = underlyingObject;
 
-        public static VSTypeScriptDocumentationCommentWrapper FromXmlFragment(string xml)
-            => new(DocumentationComment.FromXmlFragment(xml));
+        public static VSTypeScriptDocumentationCommentWrapper FromXmlFragment(string xml) =>
+            new(DocumentationComment.FromXmlFragment(xml));
 
-        public bool IsDefault
-            => _underlyingObject == null;
+        public bool IsDefault => _underlyingObject == null;
 
-        public string? SummaryTextOpt
-            => _underlyingObject?.SummaryText;
+        public string? SummaryTextOpt => _underlyingObject?.SummaryText;
 
-        public string? GetParameterTextOpt(string parameterName)
-            => _underlyingObject?.GetParameterText(parameterName);
-
+        public string? GetParameterTextOpt(string parameterName) =>
+            _underlyingObject?.GetParameterText(parameterName);
     }
 }

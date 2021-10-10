@@ -14,8 +14,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
 {
     internal sealed class LocalhostListenOptions : ListenOptions
     {
-        internal LocalhostListenOptions(int port)
-            : base(new IPEndPoint(IPAddress.Loopback, port))
+        internal LocalhostListenOptions(int port) : base(new IPEndPoint(IPAddress.Loopback, port))
         {
             if (port == 0)
             {
@@ -31,35 +30,55 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             return $"{Scheme}://localhost:{IPEndPoint!.Port}";
         }
 
-        internal override async Task BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+        internal override async Task BindAsync(
+            AddressBindContext context,
+            CancellationToken cancellationToken
+        )
         {
             var exceptions = new List<Exception>();
 
             try
             {
                 var v4Options = Clone(IPAddress.Loopback);
-                await AddressBinder.BindEndpointAsync(v4Options, context, cancellationToken).ConfigureAwait(false);
+                await AddressBinder.BindEndpointAsync(v4Options, context, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (Exception ex) when (!(ex is IOException or OperationCanceledException))
             {
-                context.Logger.LogInformation(0, CoreStrings.NetworkInterfaceBindingFailed, GetDisplayName(), "IPv4 loopback", ex.Message);
+                context.Logger.LogInformation(
+                    0,
+                    CoreStrings.NetworkInterfaceBindingFailed,
+                    GetDisplayName(),
+                    "IPv4 loopback",
+                    ex.Message
+                );
                 exceptions.Add(ex);
             }
 
             try
             {
                 var v6Options = Clone(IPAddress.IPv6Loopback);
-                await AddressBinder.BindEndpointAsync(v6Options, context, cancellationToken).ConfigureAwait(false);
+                await AddressBinder.BindEndpointAsync(v6Options, context, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (Exception ex) when (!(ex is IOException or OperationCanceledException))
             {
-                context.Logger.LogInformation(0, CoreStrings.NetworkInterfaceBindingFailed, GetDisplayName(), "IPv6 loopback", ex.Message);
+                context.Logger.LogInformation(
+                    0,
+                    CoreStrings.NetworkInterfaceBindingFailed,
+                    GetDisplayName(),
+                    "IPv6 loopback",
+                    ex.Message
+                );
                 exceptions.Add(ex);
             }
 
             if (exceptions.Count == 2)
             {
-                throw new IOException(CoreStrings.FormatAddressBindingFailed(GetDisplayName()), new AggregateException(exceptions));
+                throw new IOException(
+                    CoreStrings.FormatAddressBindingFailed(GetDisplayName()),
+                    new AggregateException(exceptions)
+                );
             }
 
             // If StartLocalhost doesn't throw, there is at least one listener.

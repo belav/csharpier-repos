@@ -13,7 +13,8 @@ namespace Microsoft.Net.Http.Headers
     {
         private static readonly bool[] TokenChars = CreateTokenChars();
         private const int MaxNestedCount = 5;
-        private static readonly string[] DateFormats = new string[] {
+        private static readonly string[] DateFormats = new string[]
+        {
             // "r", // RFC 1123, required output format but too strict for input
             "ddd, d MMM yyyy H:m:s 'GMT'", // RFC 1123 (r, except it allows both 1 and 01 for date and time)
             "ddd, d MMM yyyy H:m:s", // RFC 1123, no zone - assume GMT
@@ -23,12 +24,10 @@ namespace Microsoft.Net.Http.Headers
             "ddd, d MMM yy H:m:s", // RFC 1123, short year, no zone
             "d MMM yy H:m:s 'GMT'", // RFC 1123, no day-of-week, short year
             "d MMM yy H:m:s", // RFC 1123, no day-of-week, short year, no zone
-
             "dddd, d'-'MMM'-'yy H:m:s 'GMT'", // RFC 850, short year
             "dddd, d'-'MMM'-'yy H:m:s", // RFC 850 no zone
             "ddd, d'-'MMM'-'yyyy H:m:s 'GMT'", // RFC 850, long year
             "ddd MMM d H:m:s yyyy", // ANSI C's asctime() format
-
             "ddd, d MMM yyyy H:m:s zzz", // RFC 5322
             "ddd, d MMM yyyy H:m:s", // RFC 5322 no zone
             "d MMM yyyy H:m:s zzz", // RFC 5322 no day-of-week
@@ -93,7 +92,10 @@ namespace Microsoft.Net.Http.Headers
         [Pure]
         internal static int GetTokenLength(StringSegment input, int startIndex)
         {
-            Contract.Ensures((Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - startIndex)));
+            Contract.Ensures(
+                (Contract.Result<int>() >= 0)
+                    && (Contract.Result<int>() <= (input.Length - startIndex))
+            );
 
             if (startIndex >= input.Length)
             {
@@ -115,7 +117,10 @@ namespace Microsoft.Net.Http.Headers
 
         internal static int GetWhitespaceLength(StringSegment input, int startIndex)
         {
-            Contract.Ensures((Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - startIndex)));
+            Contract.Ensures(
+                (Contract.Result<int>() >= 0)
+                    && (Contract.Result<int>() <= (input.Length - startIndex))
+            );
 
             if (startIndex >= input.Length)
             {
@@ -159,7 +164,10 @@ namespace Microsoft.Net.Http.Headers
         internal static int GetNumberLength(StringSegment input, int startIndex, bool allowDecimal)
         {
             Contract.Requires((startIndex >= 0) && (startIndex < input.Length));
-            Contract.Ensures((Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - startIndex)));
+            Contract.Ensures(
+                (Contract.Result<int>() >= 0)
+                    && (Contract.Result<int>() <= (input.Length - startIndex))
+            );
 
             var current = startIndex;
             char c;
@@ -200,19 +208,37 @@ namespace Microsoft.Net.Http.Headers
             return current - startIndex;
         }
 
-        internal static HttpParseResult GetQuotedStringLength(StringSegment input, int startIndex, out int length)
+        internal static HttpParseResult GetQuotedStringLength(
+            StringSegment input,
+            int startIndex,
+            out int length
+        )
         {
             var nestedCount = 0;
-            return GetExpressionLength(input, startIndex, '"', '"', false, ref nestedCount, out length);
+            return GetExpressionLength(
+                input,
+                startIndex,
+                '"',
+                '"',
+                false,
+                ref nestedCount,
+                out length
+            );
         }
 
         // quoted-pair = "\" CHAR
         // CHAR = <any US-ASCII character (octets 0 - 127)>
-        internal static HttpParseResult GetQuotedPairLength(StringSegment input, int startIndex, out int length)
+        internal static HttpParseResult GetQuotedPairLength(
+            StringSegment input,
+            int startIndex,
+            out int length
+        )
         {
             Contract.Requires((startIndex >= 0) && (startIndex < input.Length));
-            Contract.Ensures((Contract.ValueAtReturn(out length) >= 0) &&
-                (Contract.ValueAtReturn(out length) <= (input.Length - startIndex)));
+            Contract.Ensures(
+                (Contract.ValueAtReturn(out length) >= 0)
+                    && (Contract.ValueAtReturn(out length) <= (input.Length - startIndex))
+            );
 
             length = 0;
 
@@ -236,8 +262,13 @@ namespace Microsoft.Net.Http.Headers
         // Try the various date formats in the order listed above.
         // We should accept a wide verity of common formats, but only output RFC 1123 style dates.
         internal static bool TryStringToDate(StringSegment input, out DateTimeOffset result) =>
-            DateTimeOffset.TryParseExact(input.ToString(), DateFormats, DateTimeFormatInfo.InvariantInfo,
-                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal, out result);
+            DateTimeOffset.TryParseExact(
+                input.ToString(),
+                DateFormats,
+                DateTimeFormatInfo.InvariantInfo,
+                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal,
+                out result
+            );
 
         // TEXT = <any OCTET except CTLs, but including LWS>
         // LWS = [CRLF] 1*( SP | HT )
@@ -257,12 +288,15 @@ namespace Microsoft.Net.Http.Headers
             char closeChar,
             bool supportsNesting,
             ref int nestedCount,
-            out int length)
+            out int length
+        )
         {
             Contract.Requires(input != null);
             Contract.Requires((startIndex >= 0) && (startIndex < input.Length));
-            Contract.Ensures((Contract.Result<HttpParseResult>() != HttpParseResult.Parsed) ||
-                (Contract.ValueAtReturn<int>(out length) > 0));
+            Contract.Ensures(
+                (Contract.Result<HttpParseResult>() != HttpParseResult.Parsed)
+                    || (Contract.ValueAtReturn<int>(out length) > 0)
+            );
 
             length = 0;
 
@@ -277,8 +311,13 @@ namespace Microsoft.Net.Http.Headers
                 // Only check whether we have a quoted char, if we have at least 3 characters left to read (i.e.
                 // quoted char + closing char). Otherwise the closing char may be considered part of the quoted char.
                 var quotedPairLength = 0;
-                if ((current + 2 < input.Length) &&
-                    (GetQuotedPairLength(input, current, out quotedPairLength) == HttpParseResult.Parsed))
+                if (
+                    (current + 2 < input.Length)
+                    && (
+                        GetQuotedPairLength(input, current, out quotedPairLength)
+                        == HttpParseResult.Parsed
+                    )
+                )
                 {
                     // We ignore invalid quoted-pairs. Invalid quoted-pairs may mean that it looked like a quoted pair,
                     // but we actually have a quoted-string: e.g. "\ü" ('\' followed by a char >127 - quoted-pair only
@@ -300,8 +339,15 @@ namespace Microsoft.Net.Http.Headers
                         }
 
                         var nestedLength = 0;
-                        HttpParseResult nestedResult = GetExpressionLength(input, current, openChar, closeChar,
-                            supportsNesting, ref nestedCount, out nestedLength);
+                        HttpParseResult nestedResult = GetExpressionLength(
+                            input,
+                            current,
+                            openChar,
+                            closeChar,
+                            supportsNesting,
+                            ref nestedCount,
+                            out nestedLength
+                        );
 
                         switch (nestedResult)
                         {
@@ -310,9 +356,12 @@ namespace Microsoft.Net.Http.Headers
                                 break;
 
                             case HttpParseResult.NotParsed:
-                                Contract.Assert(false, "'NotParsed' is unexpected: We started nested expression " +
-                                    "parsing, because we found the open-char. So either it's a valid nested " +
-                                    "expression or it has invalid format.");
+                                Contract.Assert(
+                                    false,
+                                    "'NotParsed' is unexpected: We started nested expression "
+                                        + "parsing, because we found the open-char. So either it's a valid nested "
+                                        + "expression or it has invalid format."
+                                );
                                 break;
 
                             case HttpParseResult.InvalidFormat:
@@ -324,6 +373,7 @@ namespace Microsoft.Net.Http.Headers
                                 break;
                         }
                     }
+
                     finally
                     {
                         nestedCount--;

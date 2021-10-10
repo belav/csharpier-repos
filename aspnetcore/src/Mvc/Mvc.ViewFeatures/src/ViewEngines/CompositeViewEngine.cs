@@ -36,15 +36,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
 
             if (string.IsNullOrEmpty(viewName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(viewName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(viewName)
+                );
             }
 
             if (ViewEngines.Count == 0)
             {
-                throw new InvalidOperationException(Resources.FormatViewEnginesAreRequired(
-                    typeof(MvcViewOptions).FullName,
-                    nameof(MvcViewOptions.ViewEngines),
-                    typeof(IViewEngine).FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatViewEnginesAreRequired(
+                        typeof(MvcViewOptions).FullName,
+                        nameof(MvcViewOptions.ViewEngines),
+                        typeof(IViewEngine).FullName
+                    )
+                );
             }
 
             // Do not allocate in the common cases: ViewEngines contains one entry or initial attempt is successful.
@@ -57,7 +63,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
                 {
                     if (result.View is IAsyncDisposable)
                     {
-                        throw new InvalidOperationException(Resources.FormatAsyncDisposableViewsNotSupported(typeof(IAsyncDisposable).FullName));
+                        throw new InvalidOperationException(
+                            Resources.FormatAsyncDisposableViewsNotSupported(
+                                typeof(IAsyncDisposable).FullName
+                            )
+                        );
                     }
                     return result;
                 }
@@ -80,7 +90,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
                 }
             }
 
-            return ViewEngineResult.NotFound(viewName, searchedLocations ?? Enumerable.Empty<string>());
+            return ViewEngineResult.NotFound(
+                viewName,
+                searchedLocations ?? Enumerable.Empty<string>()
+            );
         }
 
         /// <inheritdoc />
@@ -88,15 +101,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
         {
             if (string.IsNullOrEmpty(viewPath))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(viewPath));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(viewPath)
+                );
             }
 
             if (ViewEngines.Count == 0)
             {
-                throw new InvalidOperationException(Resources.FormatViewEnginesAreRequired(
-                    typeof(MvcViewOptions).FullName,
-                    nameof(MvcViewOptions.ViewEngines),
-                    typeof(IViewEngine).FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatViewEnginesAreRequired(
+                        typeof(MvcViewOptions).FullName,
+                        nameof(MvcViewOptions.ViewEngines),
+                        typeof(IViewEngine).FullName
+                    )
+                );
             }
 
             // Do not allocate in the common cases: ViewEngines contains one entry or initial attempt is successful.
@@ -131,7 +150,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewEngines
                 }
             }
 
-            return ViewEngineResult.NotFound(viewPath, searchedLocations ?? Enumerable.Empty<string>());
+            return ViewEngineResult.NotFound(
+                viewPath,
+                searchedLocations ?? Enumerable.Empty<string>()
+            );
         }
     }
 }

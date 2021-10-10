@@ -5,7 +5,7 @@ public static class Library
 {
     private static string s_name
 #if NoCCtor
- = "Library";
+    = "Library";
 #else
     ;
     static Library()
@@ -14,5 +14,8 @@ public static class Library
     }
 #endif
 
-    public static string Name { get { return s_name; } }
+    public static string Name
+    {
+        get { return s_name; }
+    }
 }

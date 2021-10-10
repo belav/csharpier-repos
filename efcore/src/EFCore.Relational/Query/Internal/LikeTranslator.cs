@@ -18,15 +18,17 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class LikeTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo
-            = typeof(DbFunctionsExtensions).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _methodInfo =
+            typeof(DbFunctionsExtensions).GetRequiredRuntimeMethod(
                 nameof(DbFunctionsExtensions.Like),
-                new[] { typeof(DbFunctions), typeof(string), typeof(string) });
+                new[] { typeof(DbFunctions), typeof(string), typeof(string) }
+            );
 
-        private static readonly MethodInfo _methodInfoWithEscape
-            = typeof(DbFunctionsExtensions).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _methodInfoWithEscape =
+            typeof(DbFunctionsExtensions).GetRequiredRuntimeMethod(
                 nameof(DbFunctionsExtensions.Like),
-                new[] { typeof(DbFunctions), typeof(string), typeof(string), typeof(string) });
+                new[] { typeof(DbFunctions), typeof(string), typeof(string), typeof(string) }
+            );
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -51,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));

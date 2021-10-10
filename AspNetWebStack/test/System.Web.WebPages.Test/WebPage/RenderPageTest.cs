@@ -30,7 +30,8 @@ namespace System.Web.WebPages.Test
                     p.PageData["Title"] = title;
                     p.Write(p.PageData["Title"]);
                     p.Write(content);
-                });
+                }
+            );
 
             Assert.Equal(title + content, result);
         }
@@ -53,7 +54,8 @@ namespace System.Web.WebPages.Test
                     p.Page.Title = title;
                     p.Write(p.Page.Title);
                     p.Write(content);
-                });
+                }
+            );
 
             Assert.Equal(title + content, result);
         }
@@ -76,7 +78,11 @@ namespace System.Web.WebPages.Test
                     p.Write("hello");
                     p.Write(p.RenderPage("subpage.cshtml"));
                 },
-                p => { p.Write("world"); });
+                p =>
+                {
+                    p.Write("world");
+                }
+            );
             Assert.Equal("helloworld", result);
         }
 
@@ -93,7 +99,15 @@ namespace System.Web.WebPages.Test
             //
             // Expected result: hellovalue myvalue hellovalue myvalue
             var result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", new { HelloKey = "hellovalue", MyKey = "myvalue" })); },
+                p =>
+                {
+                    p.Write(
+                        p.RenderPage(
+                            "subpage.cshtml",
+                            new { HelloKey = "hellovalue", MyKey = "myvalue" }
+                        )
+                    );
+                },
                 p =>
                 {
                     p.Write(p.PageData["HelloKey"]);
@@ -103,7 +117,8 @@ namespace System.Web.WebPages.Test
                     p.Write(p.Model.HelloKey);
                     p.Write(" ");
                     p.Write(p.Model.MyKey);
-                });
+                }
+            );
             Assert.Equal("hellovalue myvalue hellovalue myvalue", result);
         }
 
@@ -120,7 +135,15 @@ namespace System.Web.WebPages.Test
             //
             // Expected result: hellovalue myvalue hellovalue myvalue
             var result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", new { HelloKey = "hellovalue", MyKey = "myvalue" })); },
+                p =>
+                {
+                    p.Write(
+                        p.RenderPage(
+                            "subpage.cshtml",
+                            new { HelloKey = "hellovalue", MyKey = "myvalue" }
+                        )
+                    );
+                },
                 p =>
                 {
                     p.Write(p.Page.HelloKey);
@@ -130,7 +153,8 @@ namespace System.Web.WebPages.Test
                     p.Write(p.Model.HelloKey);
                     p.Write(" ");
                     p.Write(p.Model.MyKey);
-                });
+                }
+            );
             Assert.Equal("hellovalue myvalue hellovalue myvalue", result);
         }
 
@@ -148,7 +172,15 @@ namespace System.Web.WebPages.Test
             // Expected result: 1 hello System.Collections.Generic.Dictionary`2[System.String,System.Object]
 
             var result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } })); },
+                p =>
+                {
+                    p.Write(
+                        p.RenderPage(
+                            "subpage.cshtml",
+                            new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } }
+                        )
+                    );
+                },
                 p =>
                 {
                     p.Write(p.PageData["foo"]);
@@ -156,8 +188,12 @@ namespace System.Web.WebPages.Test
                     p.Write(p.PageData["bar"]);
                     p.Write(" ");
                     p.Write(p.PageData[0]);
-                });
-            Assert.Equal("1 hello System.Collections.Generic.Dictionary`2[System.String,System.Object]", result);
+                }
+            );
+            Assert.Equal(
+                "1 hello System.Collections.Generic.Dictionary`2[System.String,System.Object]",
+                result
+            );
         }
 
         [Fact]
@@ -174,7 +210,15 @@ namespace System.Web.WebPages.Test
             // Expected result: 1 hello System.Collections.Generic.Dictionary`2[System.String,System.Object]
 
             var result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } })); },
+                p =>
+                {
+                    p.Write(
+                        p.RenderPage(
+                            "subpage.cshtml",
+                            new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } }
+                        )
+                    );
+                },
                 p =>
                 {
                     p.Write(p.Page.foo);
@@ -182,8 +226,12 @@ namespace System.Web.WebPages.Test
                     p.Write(p.Page.bar);
                     p.Write(" ");
                     p.Write(p.Page[0]);
-                });
-            Assert.Equal("1 hello System.Collections.Generic.Dictionary`2[System.String,System.Object]", result);
+                }
+            );
+            Assert.Equal(
+                "1 hello System.Collections.Generic.Dictionary`2[System.String,System.Object]",
+                result
+            );
         }
 
         [Fact]
@@ -200,7 +248,10 @@ namespace System.Web.WebPages.Test
             // Expected result: hello world 1 2 3
 
             var result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", "hello", "world", 1, 2, 3)); },
+                p =>
+                {
+                    p.Write(p.RenderPage("subpage.cshtml", "hello", "world", 1, 2, 3));
+                },
                 p =>
                 {
                     p.Write(p.PageData[0]);
@@ -212,7 +263,8 @@ namespace System.Web.WebPages.Test
                     p.Write(p.PageData[3]);
                     p.Write(" ");
                     p.Write(p.PageData[4]);
-                });
+                }
+            );
             Assert.Equal("hello world 1 2 3", result);
         }
 
@@ -230,7 +282,10 @@ namespace System.Web.WebPages.Test
             // Expected result: hello world 1 2 3
 
             var result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", "hello", "world", 1, 2, 3)); },
+                p =>
+                {
+                    p.Write(p.RenderPage("subpage.cshtml", "hello", "world", 1, 2, 3));
+                },
                 p =>
                 {
                     p.Write(p.Page[0]);
@@ -242,7 +297,8 @@ namespace System.Web.WebPages.Test
                     p.Write(p.Page[3]);
                     p.Write(" ");
                     p.Write(p.Page[4]);
-                });
+                }
+            );
             Assert.Equal("hello world 1 2 3", result);
         }
 
@@ -263,8 +319,17 @@ namespace System.Web.WebPages.Test
             //
             // Expected result: MyFirstName
             var result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", new Person() { FirstName = "MyFirstName" })); },
-                p => { p.Write(p.PageData[0].FirstName); });
+                p =>
+                {
+                    p.Write(
+                        p.RenderPage("subpage.cshtml", new Person() { FirstName = "MyFirstName" })
+                    );
+                },
+                p =>
+                {
+                    p.Write(p.PageData[0].FirstName);
+                }
+            );
             Assert.Equal("MyFirstName", result);
         }
 
@@ -280,8 +345,17 @@ namespace System.Web.WebPages.Test
             //
             // Expected result: MyFirstName
             var result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", new Person() { FirstName = "MyFirstName" })); },
-                p => { p.Write(p.Page[0].FirstName); });
+                p =>
+                {
+                    p.Write(
+                        p.RenderPage("subpage.cshtml", new Person() { FirstName = "MyFirstName" })
+                    );
+                },
+                p =>
+                {
+                    p.Write(p.Page[0].FirstName);
+                }
+            );
             Assert.Equal("MyFirstName", result);
         }
 
@@ -295,7 +369,11 @@ namespace System.Web.WebPages.Test
                     p.PageData["test"] = "hello";
                     p.Write(p.RenderPage("subpage.cshtml"));
                 },
-                p => { p.Write(p.PageData["test"]); });
+                p =>
+                {
+                    p.Write(p.PageData["test"]);
+                }
+            );
             Assert.Equal("hello", result);
         }
 
@@ -309,7 +387,11 @@ namespace System.Web.WebPages.Test
                     p.Page.test = "hello";
                     p.Write(p.RenderPage("subpage.cshtml"));
                 },
-                p => { p.Write(p.Page.test); });
+                p =>
+                {
+                    p.Write(p.Page.test);
+                }
+            );
             Assert.Equal("hello", result);
         }
 
@@ -317,7 +399,7 @@ namespace System.Web.WebPages.Test
         public void OverridePageDataSetByParentTest()
         {
             // Items set in the PageData should be accessible by the subpage unless
-            // overriden by parameters passed into RenderPage, in which case the 
+            // overriden by parameters passed into RenderPage, in which case the
             // specified value should be used.
             var result = Utils.RenderWebPageWithSubPage(
                 p =>
@@ -329,7 +411,8 @@ namespace System.Web.WebPages.Test
                 {
                     p.Write(p.PageData["test"]);
                     p.Write(p.PageData[0].Test);
-                });
+                }
+            );
             Assert.Equal("worldworld", result);
         }
 
@@ -337,7 +420,7 @@ namespace System.Web.WebPages.Test
         public void OverrideDynamicDictionarySetByParentTest()
         {
             // Items set in the PageData should be accessible by the subpage unless
-            // overriden by parameters passed into RenderPage, in which case the 
+            // overriden by parameters passed into RenderPage, in which case the
             // specified value should be used.
             var result = Utils.RenderWebPageWithSubPage(
                 p =>
@@ -349,7 +432,8 @@ namespace System.Web.WebPages.Test
                 {
                     p.Write(p.Page.test);
                     p.Write(p.Page[0].Test);
-                });
+                }
+            );
             Assert.Equal("worldworld", result);
         }
 
@@ -371,7 +455,12 @@ namespace System.Web.WebPages.Test
             var result = Utils.RenderWebPageWithSubPage(
                 p =>
                 {
-                    p.Write(p.RenderPage("subpage.cshtml", new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } }));
+                    p.Write(
+                        p.RenderPage(
+                            "subpage.cshtml",
+                            new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } }
+                        )
+                    );
                     p.Write(p.RenderPage("subpage.cshtml", "x", "y", "z"));
                 },
                 p =>
@@ -380,7 +469,8 @@ namespace System.Web.WebPages.Test
                     p.Write(" ");
                     p.Write(p.PageData["bar"] ?? "null2");
                     p.Write(" ");
-                });
+                }
+            );
             Assert.Equal("null1 hello y null2 ", result);
         }
 
@@ -407,17 +497,32 @@ namespace System.Web.WebPages.Test
                 p.Write(" ");
             };
             var result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } })); }, subPage);
+                p =>
+                {
+                    p.Write(
+                        p.RenderPage(
+                            "subpage.cshtml",
+                            new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } }
+                        )
+                    );
+                },
+                subPage
+            );
             Assert.Equal("null1 hello ", result);
             result = Utils.RenderWebPageWithSubPage(
-                p => { p.Write(p.RenderPage("subpage.cshtml", "x", "y", "z")); }, subPage);
+                p =>
+                {
+                    p.Write(p.RenderPage("subpage.cshtml", "x", "y", "z"));
+                },
+                subPage
+            );
             Assert.Equal("y null2 ", result);
         }
 
         [Fact]
         public void RenderPageNoArgumentsTest()
         {
-            // Test that using PageData within the calling page, and also 
+            // Test that using PageData within the calling page, and also
             // within the subppage when the calling page doesn't provide any arguments
             //
             // ~/index.cshtml does the following:
@@ -441,14 +546,15 @@ namespace System.Web.WebPages.Test
                     p.Write(p.PageData[1] ?? "null2");
                     p.Write(" ");
                     p.Write(p.PageData["bar"] ?? "null3");
-                });
+                }
+            );
             Assert.Equal("null1 null2 null3", result);
         }
 
         [Fact]
         public void RenderPageDynamicDictionaryNoArgumentsTest()
         {
-            // Test that using PageData within the calling page, and also 
+            // Test that using PageData within the calling page, and also
             // within the subppage when the calling page doesn't provide any arguments
             //
             // ~/index.cshtml does the following:
@@ -472,14 +578,15 @@ namespace System.Web.WebPages.Test
                     p.Write(p.Page[1] ?? "null2");
                     p.Write(" ");
                     p.Write(p.Page.bar ?? "null3");
-                });
+                }
+            );
             Assert.Equal("null1 null2 null3", result);
         }
 
         [Fact]
         public void RenderPageNestedSubPageListTest()
         {
-            // Test that PageData for each level of nesting returns the values as specified in the 
+            // Test that PageData for each level of nesting returns the values as specified in the
             // previous calling page.
             //
             // ~/index.cshtml does the following:
@@ -505,7 +612,8 @@ namespace System.Web.WebPages.Test
                 {
                     p.Write(p.PageData["foo"] ?? "null ");
                     p.Write(p.RenderPage("subpage1.cshtml", "a", "b", "c"));
-                });
+                }
+            );
             var subpage1Path = "~/subpage1.cshtml";
             var subpage1 = Utils.CreatePage(
                 p =>
@@ -519,7 +627,9 @@ namespace System.Web.WebPages.Test
                     p.Write(p.PageData[3] ?? "sub1null3");
                     p.Write(" ");
                     p.Write(p.RenderPage("subpage2.cshtml", "x", "y", "z"));
-                }, subpage1Path);
+                },
+                subpage1Path
+            );
             var subpage2Path = "~/subpage2.cshtml";
             var subpage2 = Utils.CreatePage(
                 p =>
@@ -531,7 +641,9 @@ namespace System.Web.WebPages.Test
                     p.Write(p.PageData[2] ?? "sub2null2");
                     p.Write(" ");
                     p.Write(p.PageData[3] ?? "sub2null3");
-                }, subpage2Path);
+                },
+                subpage2Path
+            );
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, subpage1, subpage2);
 
@@ -542,7 +654,7 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void RenderPageNestedSubPageAnonymousTypeTest()
         {
-            // Test that PageData for each level of nesting returns the values as specified in the 
+            // Test that PageData for each level of nesting returns the values as specified in the
             // previous calling page.
             //
             // ~/index.cshtml does the following:
@@ -568,7 +680,8 @@ namespace System.Web.WebPages.Test
                 {
                     p.Write(p.PageData["foo"] ?? "null ");
                     p.Write(p.RenderPage("subpage1.cshtml", new { foo = 1, bar = "hello" }));
-                });
+                }
+            );
             var subpage1Path = "~/subpage1.cshtml";
             var subpage1 = Utils.CreatePage(
                 p =>
@@ -581,8 +694,15 @@ namespace System.Web.WebPages.Test
                     p.Write(" ");
                     p.Write(p.PageData["y"] ?? "sub1nully");
                     p.Write(" ");
-                    p.Write(p.RenderPage("subpage2.cshtml", new { bar = "world", x = "good", y = "bye" }));
-                }, subpage1Path);
+                    p.Write(
+                        p.RenderPage(
+                            "subpage2.cshtml",
+                            new { bar = "world", x = "good", y = "bye" }
+                        )
+                    );
+                },
+                subpage1Path
+            );
             var subpage2Path = "~/subpage2.cshtml";
             var subpage2 = Utils.CreatePage(
                 p =>
@@ -594,7 +714,9 @@ namespace System.Web.WebPages.Test
                     p.Write(p.PageData["x"] ?? "sub2nullx");
                     p.Write(" ");
                     p.Write(p.PageData["y"] ?? "sub2nully");
-                }, subpage2Path);
+                },
+                subpage2Path
+            );
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(subpage1, subpage2, page);
 
@@ -605,7 +727,7 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void RenderPageNestedSubPageDictionaryTest()
         {
-            // Test that PageData for each level of nesting returns the values as specified in the 
+            // Test that PageData for each level of nesting returns the values as specified in the
             // previous calling page.
             //
             // ~/index.cshtml does the following:
@@ -630,8 +752,14 @@ namespace System.Web.WebPages.Test
                 p =>
                 {
                     p.Write(p.PageData["foo"] ?? "null ");
-                    p.Write(p.RenderPage("subpage1.cshtml", new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } }));
-                });
+                    p.Write(
+                        p.RenderPage(
+                            "subpage1.cshtml",
+                            new Dictionary<string, object>() { { "foo", 1 }, { "bar", "hello" } }
+                        )
+                    );
+                }
+            );
             var subpage1Path = "~/subpage1.cshtml";
             var subpage1 = Utils.CreatePage(
                 p =>
@@ -644,8 +772,20 @@ namespace System.Web.WebPages.Test
                     p.Write(" ");
                     p.Write(p.PageData["y"] ?? "sub1nully");
                     p.Write(" ");
-                    p.Write(p.RenderPage("subpage2.cshtml", new Dictionary<string, object>() { { "bar", "world" }, { "x", "good" }, { "y", "bye" } }));
-                }, subpage1Path);
+                    p.Write(
+                        p.RenderPage(
+                            "subpage2.cshtml",
+                            new Dictionary<string, object>()
+                            {
+                                { "bar", "world" },
+                                { "x", "good" },
+                                { "y", "bye" }
+                            }
+                        )
+                    );
+                },
+                subpage1Path
+            );
             var subpage2Path = "~/subpage2.cshtml";
             var subpage2 = Utils.CreatePage(
                 p =>
@@ -657,7 +797,9 @@ namespace System.Web.WebPages.Test
                     p.Write(p.PageData["x"] ?? "sub2nullx");
                     p.Write(" ");
                     p.Write(p.PageData["y"] ?? "sub2nully");
-                }, subpage2Path);
+                },
+                subpage2Path
+            );
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, subpage1, subpage2);
 
@@ -674,7 +816,8 @@ namespace System.Web.WebPages.Test
                 {
                     p.PageData["key1"] = "value1";
                     p.Write(p.RenderPage("subpage1.cshtml"));
-                });
+                }
+            );
             var subpage1Path = "~/subpage1.cshtml";
             var subpage1 = Utils.CreatePage(
                 p =>
@@ -686,7 +829,9 @@ namespace System.Web.WebPages.Test
                     p.PageData["key1"] = "value2";
                     p.Write(p.RenderPage("subpage2.cshtml"));
                     p.WriteLiteral("</subpage1>");
-                }, subpage1Path);
+                },
+                subpage1Path
+            );
             var subpage2Path = "~/subpage2.cshtml";
             var subpage2 = Utils.CreatePage(
                 p =>
@@ -698,7 +843,9 @@ namespace System.Web.WebPages.Test
                     p.PageData["key1"] = "value3";
                     p.Write(p.RenderPage("subpage3.cshtml", new { Key1 = "value4" }));
                     p.WriteLiteral("</subpage2>");
-                }, subpage2Path);
+                },
+                subpage2Path
+            );
             var subpage3Path = "~/subpage3.cshtml";
             var subpage3 = Utils.CreatePage(
                 p =>
@@ -706,12 +853,17 @@ namespace System.Web.WebPages.Test
                     p.WriteLiteral("<subpage3>");
                     p.Write(p.PageData["key1"]);
                     p.WriteLiteral("</subpage3>");
-                }, subpage3Path);
+                },
+                subpage3Path
+            );
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(subpage1, subpage2, subpage3, page);
 
             var result = Utils.RenderWebPage(page);
-            Assert.Equal("<subpage1>value1<subpage2>value1<subpage3>value4</subpage3></subpage2>value1<subpage2>value2<subpage3>value4</subpage3></subpage2></subpage1>", result);
+            Assert.Equal(
+                "<subpage1>value1<subpage2>value1<subpage3>value4</subpage3></subpage2>value1<subpage2>value2<subpage3>value4</subpage3></subpage2></subpage1>",
+                result
+            );
         }
 
         [Fact]
@@ -724,7 +876,8 @@ namespace System.Web.WebPages.Test
                     p.Write(null);
                     p.Write((object)null);
                     p.Write((HelperResult)null);
-                });
+                }
+            );
 
             Assert.Equal("", result);
         }
@@ -742,7 +895,11 @@ namespace System.Web.WebPages.Test
             };
             var helper = new HelperResult(action);
             var result = Utils.RenderWebPage(
-                p => { p.Write(helper); });
+                p =>
+                {
+                    p.Write(helper);
+                }
+            );
             Assert.Equal(text, result);
             Assert.True(wrote);
         }
@@ -760,7 +917,11 @@ namespace System.Web.WebPages.Test
             };
             var helper = new HelperResult(action);
             var result = Utils.RenderWebPage(
-                p => { p.WriteLiteral(helper); });
+                p =>
+                {
+                    p.WriteLiteral(helper);
+                }
+            );
             Assert.Equal(text, result);
             Assert.True(wrote);
         }
@@ -774,15 +935,31 @@ namespace System.Web.WebPages.Test
             var ext = ".txt";
             var compilationUtilThrowingBuildManager = new CompilationUtil();
             var otherExceptionBuildManager = new Mock<IVirtualPathFactory>();
-            var msg = "The file \"~/hello/world.txt\" could not be rendered, because it does not exist or is not a valid page.";
-            otherExceptionBuildManager.Setup(c => c.CreateInstance(It.IsAny<string>())).Throws(new HttpException(msg));
+            var msg =
+                "The file \"~/hello/world.txt\" could not be rendered, because it does not exist or is not a valid page.";
+            otherExceptionBuildManager.Setup(c => c.CreateInstance(It.IsAny<string>()))
+                .Throws(new HttpException(msg));
 
-            Assert.Throws<HttpException>(() =>
-                                                  WebPage.CreateInstanceFromVirtualPath(vpath, new VirtualPathFactoryManager(compilationUtilThrowingBuildManager)),
-                                                  String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_FileNotSupported, ext, vpath));
+            Assert.Throws<HttpException>(
+                () =>
+                    WebPage.CreateInstanceFromVirtualPath(
+                        vpath,
+                        new VirtualPathFactoryManager(compilationUtilThrowingBuildManager)
+                    ),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_FileNotSupported,
+                    ext,
+                    vpath
+                )
+            );
 
             // Test that other error messages are thrown unmodified.
-            Assert.Throws<HttpException>(() => WebPage.CreateInstanceFromVirtualPath(vpath, otherExceptionBuildManager.Object), msg);
+            Assert.Throws<HttpException>(
+                () =>
+                    WebPage.CreateInstanceFromVirtualPath(vpath, otherExceptionBuildManager.Object),
+                msg
+            );
         }
 
         [Fact]
@@ -790,46 +967,72 @@ namespace System.Web.WebPages.Test
         {
             // A Page that is called by RenderPage should not be able to call RenderBody().
 
-            Assert.Throws<HttpException>(() =>
-                Utils.RenderWebPageWithSubPage(
-                    p =>
-                    {
-                        p.Write("hello");
-                        p.Write(p.RenderPage("subpage.cshtml"));
-                    },
-                    p =>
-                    {
-                        p.Write("world");
-                        p.RenderBody();
-                    }),
-                String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_CannotRequestDirectly, "~/subpage.cshtml", "RenderBody"));
+            Assert.Throws<HttpException>(
+                () =>
+                    Utils.RenderWebPageWithSubPage(
+                        p =>
+                        {
+                            p.Write("hello");
+                            p.Write(p.RenderPage("subpage.cshtml"));
+                        },
+                        p =>
+                        {
+                            p.Write("world");
+                            p.RenderBody();
+                        }
+                    ),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_CannotRequestDirectly,
+                    "~/subpage.cshtml",
+                    "RenderBody"
+                )
+            );
         }
 
         [Fact]
         public void RenderPageInvalidPageType()
         {
             var pagePath = "~/foo.js";
-            var page = Utils.CreatePage(p => { p.Write(p.RenderPage(pagePath)); });
+            var page = Utils.CreatePage(
+                p =>
+                {
+                    p.Write(p.RenderPage(pagePath));
+                }
+            );
 
             var objectFactory = new Mock<IVirtualPathFactory>();
-            objectFactory.Setup(c => c.Exists(It.IsAny<string>())).Returns<string>(p => pagePath.Equals(p, StringComparison.OrdinalIgnoreCase));
-            objectFactory.Setup(c => c.CreateInstance(It.IsAny<string>())).Returns<string>(_ => null);
+            objectFactory.Setup(c => c.Exists(It.IsAny<string>()))
+                .Returns<string>(p => pagePath.Equals(p, StringComparison.OrdinalIgnoreCase));
+            objectFactory.Setup(c => c.CreateInstance(It.IsAny<string>()))
+                .Returns<string>(_ => null);
             page.VirtualPathFactory = objectFactory.Object;
 
-            Assert.Throws<HttpException>(() =>
-            {
-                page.VirtualPathFactory = objectFactory.Object;
-                page.DisplayModeProvider = new DisplayModeProvider();
-                Utils.RenderWebPage(page);
-            },
-            String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_InvalidPageType, pagePath));
+            Assert.Throws<HttpException>(
+                () =>
+                {
+                    page.VirtualPathFactory = objectFactory.Object;
+                    page.DisplayModeProvider = new DisplayModeProvider();
+                    Utils.RenderWebPage(page);
+                },
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_InvalidPageType,
+                    pagePath
+                )
+            );
         }
 
         [Fact]
         public void RenderPageValidPageType()
         {
             var pagePath = "~/foo.js";
-            var page = Utils.CreatePage(p => { p.Write(p.RenderPage(pagePath)); });
+            var page = Utils.CreatePage(
+                p =>
+                {
+                    p.Write(p.RenderPage(pagePath));
+                }
+            );
 
             var contents = "hello world";
             var subPage = Utils.CreatePage(p => p.Write(contents), pagePath);
@@ -842,13 +1045,19 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void RenderPageNull()
         {
-            Assert.ThrowsArgumentNullOrEmptyString(() => Utils.RenderWebPage(p => p.RenderPage(null)), "path");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => Utils.RenderWebPage(p => p.RenderPage(null)),
+                "path"
+            );
         }
 
         [Fact]
         public void RenderPageEmptyString()
         {
-            Assert.ThrowsArgumentNullOrEmptyString(() => Utils.RenderWebPage(p => p.RenderPage("")), "path");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => Utils.RenderWebPage(p => p.RenderPage("")),
+                "path"
+            );
         }
 
         [Fact]
@@ -860,7 +1069,8 @@ namespace System.Web.WebPages.Test
                     p.PageData["xyz"] = "value";
                     p.PageData["XYZ"] = "VALUE";
                     p.Write(p.PageData["xYz"]);
-                });
+                }
+            );
 
             Assert.Equal("VALUE", result);
         }

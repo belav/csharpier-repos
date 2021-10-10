@@ -13,12 +13,14 @@ internal static partial class Interop
         internal static extern bool ClearCommError(
             SafeFileHandle hFile,
             ref int lpErrors,
-            ref COMSTAT lpStat);
+            ref COMSTAT lpStat
+        );
 
         [DllImport(Libraries.Kernel32, SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern bool ClearCommError(
             SafeFileHandle hFile,
             ref int lpErrors,
-            IntPtr lpStat);
+            IntPtr lpStat
+        );
     }
 }

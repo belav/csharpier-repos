@@ -18,20 +18,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
     using Constants = ConvertSwitchStatementToExpressionConstants;
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed partial class ConvertSwitchStatementToExpressionDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed partial class ConvertSwitchStatementToExpressionDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConvertSwitchStatementToExpressionDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId,
+            : base(
+                IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId,
                 EnforceOnBuildValues.ConvertSwitchStatementToExpression,
                 CSharpCodeStyleOptions.PreferSwitchExpression,
                 LanguageNames.CSharp,
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Convert_switch_statement_to_expression), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_switch_expression), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Convert_switch_statement_to_expression),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_switch_expression),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.SwitchStatement);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.SwitchStatement);
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
@@ -46,23 +55,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             var options = context.Options;
             var cancellationToken = context.CancellationToken;
 
-            var styleOption = options.GetOption(CSharpCodeStyleOptions.PreferSwitchExpression, syntaxTree, cancellationToken);
+            var styleOption = options.GetOption(
+                CSharpCodeStyleOptions.PreferSwitchExpression,
+                syntaxTree,
+                cancellationToken
+            );
             if (!styleOption.Value)
             {
                 // User has disabled this feature.
                 return;
             }
 
-            if (switchStatement.GetDiagnostics().Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error))
+            if (
+                switchStatement.GetDiagnostics()
+                    .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
+            )
             {
                 return;
             }
 
-            var (nodeToGenerate, declaratorToRemoveOpt) =
-                Analyzer.Analyze(
-                    (SwitchStatementSyntax)switchStatement,
-                    context.SemanticModel,
-                    out var shouldRemoveNextStatement);
+            var (nodeToGenerate, declaratorToRemoveOpt) = Analyzer.Analyze(
+                (SwitchStatementSyntax)switchStatement,
+                context.SemanticModel,
+                out var shouldRemoveNextStatement
+            );
             if (nodeToGenerate == default)
             {
                 return;
@@ -72,17 +88,26 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             additionalLocations.Add(switchStatement.GetLocation());
             additionalLocations.AddOptional(declaratorToRemoveOpt?.GetLocation());
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(Descriptor,
-                // Report the diagnostic on the "switch" keyword.
-                location: switchStatement.GetFirstToken().GetLocation(),
-                effectiveSeverity: styleOption.Notification.Severity,
-                additionalLocations: additionalLocations.ToArrayAndFree(),
-                properties: ImmutableDictionary<string, string>.Empty
-                    .Add(Constants.NodeToGenerateKey, ((int)nodeToGenerate).ToString(CultureInfo.InvariantCulture))
-                    .Add(Constants.ShouldRemoveNextStatementKey, shouldRemoveNextStatement.ToString(CultureInfo.InvariantCulture))));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    // Report the diagnostic on the "switch" keyword.
+                    location: switchStatement.GetFirstToken().GetLocation(),
+                    effectiveSeverity: styleOption.Notification.Severity,
+                    additionalLocations: additionalLocations.ToArrayAndFree(),
+                    properties: ImmutableDictionary<string, string>.Empty.Add(
+                            Constants.NodeToGenerateKey,
+                            ((int)nodeToGenerate).ToString(CultureInfo.InvariantCulture)
+                        )
+                        .Add(
+                            Constants.ShouldRemoveNextStatementKey,
+                            shouldRemoveNextStatement.ToString(CultureInfo.InvariantCulture)
+                        )
+                )
+            );
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
     }
 }

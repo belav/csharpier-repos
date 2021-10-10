@@ -69,9 +69,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             return tagHelper;
         }
 
-        private static TagHelperDescriptor CreateViewComponentTagHelperDescriptor(string name = "ViewComponentName")
+        private static TagHelperDescriptor CreateViewComponentTagHelperDescriptor(
+            string name = "ViewComponentName"
+        )
         {
-            var tagHelper = TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TypeName", "AssemblyName")
+            var tagHelper = TagHelperDescriptorBuilder.Create(
+                    ViewComponentTagHelperConventions.Kind,
+                    "TypeName",
+                    "AssemblyName"
+                )
                 .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tag-name"))
                 .AddMetadata(ViewComponentTagHelperMetadata.Name, name)
                 .Build();

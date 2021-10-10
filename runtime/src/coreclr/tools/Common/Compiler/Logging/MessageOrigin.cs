@@ -27,7 +27,12 @@ namespace ILCompiler.Logging
             MemberDefinition = null;
         }
 
-        public MessageOrigin(TypeSystemEntity memberDefinition, string fileName = null, int? sourceLine = 0, int? sourceColumn = 0)
+        public MessageOrigin(
+            TypeSystemEntity memberDefinition,
+            string fileName = null,
+            int? sourceLine = 0,
+            int? sourceColumn = 0
+        )
         {
             FileName = fileName;
             MemberDefinition = memberDefinition;

@@ -23,16 +23,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public YieldStatementHighlighter()
-        {
-        }
+        public YieldStatementHighlighter() { }
 
         protected override void AddHighlights(
-            YieldStatementSyntax yieldStatement, List<TextSpan> spans, CancellationToken cancellationToken)
+            YieldStatementSyntax yieldStatement,
+            List<TextSpan> spans,
+            CancellationToken cancellationToken
+        )
         {
-            var parent = yieldStatement
-                             .GetAncestorsOrThis<SyntaxNode>()
-                             .FirstOrDefault(n => n.IsReturnableConstruct());
+            var parent = yieldStatement.GetAncestorsOrThis<SyntaxNode>()
+                .FirstOrDefault(n => n.IsReturnableConstruct());
 
             if (parent == null)
             {
@@ -53,7 +53,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
                     spans.Add(
                         TextSpan.FromBounds(
                             statement.YieldKeyword.SpanStart,
-                            statement.ReturnOrBreakKeyword.Span.End));
+                            statement.ReturnOrBreakKeyword.Span.End
+                        )
+                    );
 
                     spans.Add(EmptySpan(statement.SemicolonToken.Span.End));
                     break;

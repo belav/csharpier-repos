@@ -22,7 +22,11 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private const int VoidResult = 2;
         private const int NonVoidResult = 3;
 
-        public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, [NotNullWhen(true)] out HubMessage? message)
+        public bool TryParseMessage(
+            ref ReadOnlySequence<byte> input,
+            IInvocationBinder binder,
+            [NotNullWhen(true)] out HubMessage? message
+        )
         {
             if (!BinaryMessageParser.TryParseMessage(ref input, out var payload))
             {
@@ -63,7 +67,11 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             }
         }
 
-        private HubMessage CreateInvocationMessage(ref MessagePackReader reader, IInvocationBinder binder, int itemCount)
+        private HubMessage CreateInvocationMessage(
+            ref MessagePackReader reader,
+            IInvocationBinder binder,
+            int itemCount
+        )
         {
             var headers = ReadHeaders(ref reader);
             var invocationId = ReadInvocationId(ref reader);
@@ -85,7 +93,11 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             }
             catch (Exception ex)
             {
-                return new InvocationBindingFailureMessage(invocationId, target, ExceptionDispatchInfo.Capture(ex));
+                return new InvocationBindingFailureMessage(
+                    invocationId,
+                    target,
+                    ExceptionDispatchInfo.Capture(ex)
+                );
             }
 
             string[]? streams = null;
@@ -95,10 +107,17 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 streams = ReadStreamIds(ref reader);
             }
 
-            return ApplyHeaders(headers, new InvocationMessage(invocationId, target, arguments, streams));
+            return ApplyHeaders(
+                headers,
+                new InvocationMessage(invocationId, target, arguments, streams)
+            );
         }
 
-        private HubMessage CreateStreamInvocationMessage(ref MessagePackReader reader, IInvocationBinder binder, int itemCount)
+        private HubMessage CreateStreamInvocationMessage(
+            ref MessagePackReader reader,
+            IInvocationBinder binder,
+            int itemCount
+        )
         {
             var headers = ReadHeaders(ref reader);
             var invocationId = ReadInvocationId(ref reader);
@@ -112,7 +131,11 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             }
             catch (Exception ex)
             {
-                return new InvocationBindingFailureMessage(invocationId, target, ExceptionDispatchInfo.Capture(ex));
+                return new InvocationBindingFailureMessage(
+                    invocationId,
+                    target,
+                    ExceptionDispatchInfo.Capture(ex)
+                );
             }
 
             string[]? streams = null;
@@ -122,10 +145,16 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 streams = ReadStreamIds(ref reader);
             }
 
-            return ApplyHeaders(headers, new StreamInvocationMessage(invocationId, target, arguments, streams));
+            return ApplyHeaders(
+                headers,
+                new StreamInvocationMessage(invocationId, target, arguments, streams)
+            );
         }
 
-        private HubMessage CreateStreamItemMessage(ref MessagePackReader reader, IInvocationBinder binder)
+        private HubMessage CreateStreamItemMessage(
+            ref MessagePackReader reader,
+            IInvocationBinder binder
+        )
         {
             var headers = ReadHeaders(ref reader);
             var invocationId = ReadInvocationId(ref reader);
@@ -137,13 +166,19 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             }
             catch (Exception ex)
             {
-                return new StreamBindingFailureMessage(invocationId, ExceptionDispatchInfo.Capture(ex));
+                return new StreamBindingFailureMessage(
+                    invocationId,
+                    ExceptionDispatchInfo.Capture(ex)
+                );
             }
 
             return ApplyHeaders(headers, new StreamItemMessage(invocationId, value));
         }
 
-        private CompletionMessage CreateCompletionMessage(ref MessagePackReader reader, IInvocationBinder binder)
+        private CompletionMessage CreateCompletionMessage(
+            ref MessagePackReader reader,
+            IInvocationBinder binder
+        )
         {
             var headers = ReadHeaders(ref reader);
             var invocationId = ReadInvocationId(ref reader);
@@ -170,7 +205,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                     throw new InvalidDataException("Invalid invocation result kind.");
             }
 
-            return ApplyHeaders(headers, new CompletionMessage(invocationId, error, result, hasResult));
+            return ApplyHeaders(
+                headers,
+                new CompletionMessage(invocationId, error, result, hasResult)
+            );
         }
 
         private CancelInvocationMessage CreateCancelInvocationMessage(ref MessagePackReader reader)
@@ -237,14 +275,18 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             return streams?.ToArray();
         }
 
-        private object[] BindArguments(ref MessagePackReader reader, IReadOnlyList<Type> parameterTypes)
+        private object[] BindArguments(
+            ref MessagePackReader reader,
+            IReadOnlyList<Type> parameterTypes
+        )
         {
             var argumentCount = ReadArrayLength(ref reader, "arguments");
 
             if (parameterTypes.Count != argumentCount)
             {
                 throw new InvalidDataException(
-                    $"Invocation provides {argumentCount} argument(s) but target expects {parameterTypes.Count}.");
+                    $"Invocation provides {argumentCount} argument(s) but target expects {parameterTypes.Count}."
+                );
             }
 
             try
@@ -259,13 +301,21 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             }
             catch (Exception ex)
             {
-                throw new InvalidDataException("Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.", ex);
+                throw new InvalidDataException(
+                    "Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.",
+                    ex
+                );
             }
         }
 
-        protected abstract object DeserializeObject(ref MessagePackReader reader, Type type, string field);
+        protected abstract object DeserializeObject(
+            ref MessagePackReader reader,
+            Type type,
+            string field
+        );
 
-        private T ApplyHeaders<T>(IDictionary<string, string>? source, T destination) where T : HubInvocationMessage
+        private T ApplyHeaders<T>(IDictionary<string, string>? source, T destination)
+            where T : HubInvocationMessage
         {
             if (source != null && source.Count > 0)
             {
@@ -291,6 +341,7 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 BinaryMessageFormatter.WriteLengthPrefix(memoryBufferWriter.Length, output);
                 memoryBufferWriter.CopyTo(output);
             }
+
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);
@@ -310,18 +361,24 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 WriteMessageCore(message, ref writer);
 
                 var dataLength = memoryBufferWriter.Length;
-                var prefixLength = BinaryMessageFormatter.LengthPrefixLength(memoryBufferWriter.Length);
+                var prefixLength = BinaryMessageFormatter.LengthPrefixLength(
+                    memoryBufferWriter.Length
+                );
 
                 var array = new byte[dataLength + prefixLength];
                 var span = array.AsSpan();
 
                 // Write length then message to output
-                var written = BinaryMessageFormatter.WriteLengthPrefix(memoryBufferWriter.Length, span);
+                var written = BinaryMessageFormatter.WriteLengthPrefix(
+                    memoryBufferWriter.Length,
+                    span
+                );
                 Debug.Assert(written == prefixLength);
                 memoryBufferWriter.CopyTo(span.Slice(prefixLength));
 
                 return array;
             }
+
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);
@@ -354,7 +411,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                     WriteCloseMessage(closeMessage, ref writer);
                     break;
                 default:
-                    throw new InvalidDataException($"Unexpected message type: {message.GetType().Name}");
+                    throw new InvalidDataException(
+                        $"Unexpected message type: {message.GetType().Name}"
+                    );
             }
 
             writer.Flush();
@@ -392,7 +451,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             WriteStreamIds(message.StreamIds, ref writer);
         }
 
-        private void WriteStreamInvocationMessage(StreamInvocationMessage message, ref MessagePackWriter writer)
+        private void WriteStreamInvocationMessage(
+            StreamInvocationMessage message,
+            ref MessagePackWriter writer
+        )
         {
             writer.WriteArrayHeader(6);
 
@@ -417,7 +479,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             WriteStreamIds(message.StreamIds, ref writer);
         }
 
-        private void WriteStreamingItemMessage(StreamItemMessage message, ref MessagePackWriter writer)
+        private void WriteStreamingItemMessage(
+            StreamItemMessage message,
+            ref MessagePackWriter writer
+        )
         {
             writer.WriteArrayHeader(4);
             writer.Write(HubProtocolConstants.StreamItemMessageType);
@@ -459,9 +524,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         private void WriteCompletionMessage(CompletionMessage message, ref MessagePackWriter writer)
         {
             var resultKind =
-                message.Error != null ? ErrorResult :
-                message.HasResult ? NonVoidResult :
-                VoidResult;
+                message.Error != null
+                    ? ErrorResult
+                    : message.HasResult ? NonVoidResult : VoidResult;
 
             writer.WriteArrayHeader(4 + (resultKind != VoidResult ? 1 : 0));
             writer.Write(HubProtocolConstants.CompletionMessageType);
@@ -479,7 +544,10 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             }
         }
 
-        private void WriteCancelInvocationMessage(CancelInvocationMessage message, ref MessagePackWriter writer)
+        private void WriteCancelInvocationMessage(
+            CancelInvocationMessage message,
+            ref MessagePackWriter writer
+        )
         {
             writer.WriteArrayHeader(3);
             writer.Write(HubProtocolConstants.CancelInvocationMessageType);
@@ -578,7 +646,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             {
                 throw new InvalidDataException($"Reading map length for '{field}' failed.", ex);
             }
-
         }
 
         private long ReadArrayLength(ref MessagePackReader reader, string field)

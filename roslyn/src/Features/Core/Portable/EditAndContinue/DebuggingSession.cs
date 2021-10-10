@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// MVIDs read from the assembly built for given project id.
         /// </summary>
-        private readonly Dictionary<ProjectId, (Guid Mvid, Diagnostic Error)> _projectModuleIds = new();
+        private readonly Dictionary<ProjectId, (Guid Mvid, Diagnostic Error)> _projectModuleIds =
+            new();
         private readonly object _projectModuleIdsGuard = new();
 
         /// <summary>
@@ -83,7 +84,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         // 3rd break: previously updated statements contains (F, v=1, il=1)->span3
         //            get active statements returns (F, v=3, il=3, span3) the active statement is up-to-date
         //
-        internal ImmutableDictionary<ManagedMethodId, ImmutableArray<NonRemappableRegion>> NonRemappableRegions { get; private set; }
+        internal ImmutableDictionary<
+            ManagedMethodId,
+            ImmutableArray<NonRemappableRegion>
+        > NonRemappableRegions { get; private set; }
 
         private readonly HashSet<Guid> _modulesPreparedForUpdate = new();
         private readonly object _modulesPreparedForUpdateGuard = new();
@@ -105,16 +109,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Solution solution,
             IManagedEditAndContinueDebuggerService debuggerService,
             Func<Project, CompilationOutputs> compilationOutputsProvider,
-            IEnumerable<KeyValuePair<DocumentId, CommittedSolution.DocumentState>> initialDocumentStates,
+            IEnumerable<
+                KeyValuePair<DocumentId, CommittedSolution.DocumentState>
+            > initialDocumentStates,
             DebuggingSessionTelemetry debuggingSessionTelemetry,
-            EditSessionTelemetry editSessionTelemetry)
+            EditSessionTelemetry editSessionTelemetry
+        )
         {
             _compilationOutputsProvider = compilationOutputsProvider;
             _telemetry = debuggingSessionTelemetry;
 
             DebuggerService = debuggerService;
             LastCommittedSolution = new CommittedSolution(this, solution, initialDocumentStates);
-            NonRemappableRegions = ImmutableDictionary<ManagedMethodId, ImmutableArray<NonRemappableRegion>>.Empty;
+            NonRemappableRegions =
+                ImmutableDictionary<ManagedMethodId, ImmutableArray<NonRemappableRegion>>.Empty;
             EditSession = new EditSession(this, editSessionTelemetry, inBreakState: false);
         }
 
@@ -145,14 +153,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public void EndSession(out ImmutableArray<DocumentId> documentsToReanalyze, out DebuggingSessionTelemetry.Data telemetryData)
+        public void EndSession(
+            out ImmutableArray<DocumentId> documentsToReanalyze,
+            out DebuggingSessionTelemetry.Data telemetryData
+        )
         {
             EndEditSession(out documentsToReanalyze);
             telemetryData = _telemetry.GetDataAndClear();
             Dispose();
         }
 
-        internal void RestartEditSession(bool inBreakState, out ImmutableArray<DocumentId> documentsToReanalyze)
+        internal void RestartEditSession(
+            bool inBreakState,
+            out ImmutableArray<DocumentId> documentsToReanalyze
+        )
         {
             EndEditSession(out documentsToReanalyze);
             EditSession = new EditSession(this, EditSession.Telemetry, inBreakState);
@@ -166,8 +180,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        internal CompilationOutputs GetCompilationOutputs(Project project)
-            => _compilationOutputsProvider(project);
+        internal CompilationOutputs GetCompilationOutputs(Project project) =>
+            _compilationOutputsProvider(project);
 
         internal bool AddModulePreparedForUpdate(Guid mvid)
         {
@@ -185,7 +199,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var nonRemappableRegions = GroupToImmutableDictionary(
                 from moduleRegions in update.NonRemappableRegions
                 from region in moduleRegions.Regions
-                group region.Region by new ManagedMethodId(moduleRegions.ModuleId, region.Method));
+                group region.Region by new ManagedMethodId(moduleRegions.ModuleId, region.Method)
+            );
 
             if (nonRemappableRegions.Count > 0)
             {
@@ -211,7 +226,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// An MVID and an error message to report, in case an IO exception occurred while reading the binary.
         /// The MVID is default if either project not built, or an it can't be read from the module binary.
         /// </returns>
-        public async Task<(Guid Mvid, Diagnostic? Error)> GetProjectModuleIdAsync(Project project, CancellationToken cancellationToken)
+        public async Task<(Guid Mvid, Diagnostic? Error)> GetProjectModuleIdAsync(
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             lock (_projectModuleIdsGuard)
             {
@@ -229,14 +247,24 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 {
                     return (outputs.ReadAssemblyModuleVersionId(), Error: null);
                 }
-                catch (Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException)
+                catch (Exception e)
+                    when (e is FileNotFoundException || e is DirectoryNotFoundException)
                 {
                     return (Mvid: Guid.Empty, Error: null);
                 }
                 catch (Exception e)
                 {
-                    var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(EditAndContinueErrorCode.ErrorReadingFile);
-                    return (Mvid: Guid.Empty, Error: Diagnostic.Create(descriptor, Location.None, new[] { outputs.AssemblyDisplayPath, e.Message }));
+                    var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
+                        EditAndContinueErrorCode.ErrorReadingFile
+                    );
+                    return (
+                        Mvid: Guid.Empty,
+                        Error: Diagnostic.Create(
+                            descriptor,
+                            Location.None,
+                            new[] { outputs.AssemblyDisplayPath, e.Message }
+                        )
+                    );
                 }
             }
 
@@ -257,7 +285,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Get <see cref="EmitBaseline"/> for given project.
         /// </summary>
         /// <returns>True unless the project outputs can't be read.</returns>
-        public bool TryGetOrCreateEmitBaseline(Project project, out ImmutableArray<Diagnostic> diagnostics, [NotNullWhen(true)] out EmitBaseline? baseline)
+        public bool TryGetOrCreateEmitBaseline(
+            Project project,
+            out ImmutableArray<Diagnostic> diagnostics,
+            [NotNullWhen(true)] out EmitBaseline? baseline
+        )
         {
             lock (_projectEmitBaselinesGuard)
             {
@@ -269,7 +301,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             var outputs = GetCompilationOutputs(project);
-            if (!TryCreateInitialBaseline(outputs, out diagnostics, out var newBaseline, out var debugInfoReaderProvider, out var metadataReaderProvider))
+            if (
+                !TryCreateInitialBaseline(
+                    outputs,
+                    out diagnostics,
+                    out var newBaseline,
+                    out var debugInfoReaderProvider,
+                    out var metadataReaderProvider
+                )
+            )
             {
                 // Unable to read the DLL/PDB at this point (it might be open by another process).
                 // Don't cache the failure so that the user can attempt to apply changes again.
@@ -300,12 +340,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             out ImmutableArray<Diagnostic> diagnostics,
             [NotNullWhen(true)] out EmitBaseline? baseline,
             [NotNullWhen(true)] out DebugInformationReaderProvider? debugInfoReaderProvider,
-            [NotNullWhen(true)] out MetadataReaderProvider? metadataReaderProvider)
+            [NotNullWhen(true)] out MetadataReaderProvider? metadataReaderProvider
+        )
         {
-            // Read the metadata and symbols from the disk. Close the files as soon as we are done emitting the delta to minimize 
+            // Read the metadata and symbols from the disk. Close the files as soon as we are done emitting the delta to minimize
             // the time when they are being locked. Since we need to use the baseline that is produced by delta emit for the subsequent
-            // delta emit we need to keep the module metadata and symbol info backing the symbols of the baseline alive in memory. 
-            // Alternatively, we could drop the data once we are done with emitting the delta and re-emit the baseline again 
+            // delta emit we need to keep the module metadata and symbol info backing the symbols of the baseline alive in memory.
+            // Alternatively, we could drop the data once we are done with emitting the delta and re-emit the baseline again
             // when we need it next time and the module is loaded.
 
             diagnostics = default;
@@ -323,7 +364,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     throw new FileNotFoundException();
                 }
 
-                var debugInfoReader = debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
+                var debugInfoReader =
+                    debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
 
                 fileBeingRead = compilationOutputs.AssemblyDisplayPath;
 
@@ -334,21 +376,29 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
 
                 var metadataReader = metadataReaderProvider.GetMetadataReader();
-                var moduleMetadata = ModuleMetadata.CreateFromMetadata((IntPtr)metadataReader.MetadataPointer, metadataReader.MetadataLength);
+                var moduleMetadata = ModuleMetadata.CreateFromMetadata(
+                    (IntPtr)metadataReader.MetadataPointer,
+                    metadataReader.MetadataLength
+                );
 
                 baseline = EmitBaseline.CreateInitialBaseline(
                     moduleMetadata,
                     debugInfoReader.GetDebugInfo,
                     debugInfoReader.GetLocalSignature,
-                    debugInfoReader.IsPortable);
+                    debugInfoReader.IsPortable
+                );
 
                 success = true;
                 return true;
             }
             catch (Exception e)
             {
-                var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(EditAndContinueErrorCode.ErrorReadingFile);
-                diagnostics = ImmutableArray.Create(Diagnostic.Create(descriptor, Location.None, new[] { fileBeingRead, e.Message }));
+                var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
+                    EditAndContinueErrorCode.ErrorReadingFile
+                );
+                diagnostics = ImmutableArray.Create(
+                    Diagnostic.Create(descriptor, Location.None, new[] { fileBeingRead, e.Message })
+                );
             }
             finally
             {
@@ -362,8 +412,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return false;
         }
 
-        private static ImmutableDictionary<K, ImmutableArray<V>> GroupToImmutableDictionary<K, V>(IEnumerable<IGrouping<K, V>> items)
-            where K : notnull
+        private static ImmutableDictionary<K, ImmutableArray<V>> GroupToImmutableDictionary<K, V>(
+            IEnumerable<IGrouping<K, V>> items
+        ) where K : notnull
         {
             var builder = ImmutableDictionary.CreateBuilder<K, ImmutableArray<V>>();
 
@@ -375,18 +426,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return builder.ToImmutable();
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly DebuggingSession _instance;
 
-            public TestAccessor(DebuggingSession instance)
-                => _instance = instance;
+            public TestAccessor(DebuggingSession instance) => _instance = instance;
 
-            public void SetNonRemappableRegions(ImmutableDictionary<ManagedMethodId, ImmutableArray<NonRemappableRegion>> nonRemappableRegions)
-                => _instance.NonRemappableRegions = nonRemappableRegions;
+            public void SetNonRemappableRegions(
+                ImmutableDictionary<
+                    ManagedMethodId,
+                    ImmutableArray<NonRemappableRegion>
+                > nonRemappableRegions
+            ) => _instance.NonRemappableRegions = nonRemappableRegions;
 
             public ImmutableHashSet<Guid> GetModulesPreparedForUpdate()
             {
@@ -404,8 +457,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
             }
 
-            public ImmutableArray<IDisposable> GetBaselineModuleReaders()
-                => _instance.GetBaselineModuleReaders();
+            public ImmutableArray<IDisposable> GetBaselineModuleReaders() =>
+                _instance.GetBaselineModuleReaders();
         }
     }
 }

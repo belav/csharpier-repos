@@ -21,14 +21,24 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 0 }, new float[4] { 22, -1, -50, 0 }, new float[4]))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 0 },
+                        new float[4] { 22, -1, -50, 0 },
+                        new float[4]
+                    )
+                )
                 {
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var vf2 = Sse.LoadHigh(vf1, (float*)(floatTable.inArray2Ptr));
                     Unsafe.Write(floatTable.outArrayPtr, vf2);
 
-                    if (!floatTable.CheckResult((x, y, z) => z[0] == x[0] && z[1] == x[1] &&
-                                                             z[2] == y[0] && z[3] == y[1]))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y, z) =>
+                                z[0] == x[0] && z[1] == x[1] && z[2] == y[0] && z[3] == y[1]
+                        )
+                    )
                     {
                         Console.WriteLine("SSE LoadHigh failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -79,6 +89,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

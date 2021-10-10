@@ -18,7 +18,8 @@ namespace System.Text
 
         /// <summary>Creates a new builder.</summary>
         /// <remarks>Should be used instead of default struct initialization.</remarks>
-        public static SegmentStringBuilder Create() => new SegmentStringBuilder() { _array = Array.Empty<ReadOnlyMemory<char>>() };
+        public static SegmentStringBuilder Create() =>
+            new SegmentStringBuilder() { _array = Array.Empty<ReadOnlyMemory<char>>() };
 
         /// <summary>Gets the number of segments added to the builder.</summary>
         public int Count => _count;
@@ -52,7 +53,9 @@ namespace System.Text
             const int DefaultArraySize = 256;
             int newSize = array.Length == 0 ? DefaultArraySize : array.Length * 2;
 
-            ReadOnlyMemory<char>[] newArray = _array = ArrayPool<ReadOnlyMemory<char>>.Shared.Rent(newSize);
+            ReadOnlyMemory<char>[] newArray = _array = ArrayPool<ReadOnlyMemory<char>>.Shared.Rent(
+                newSize
+            );
             Array.Copy(array, newArray, _count);
             ArrayPool<ReadOnlyMemory<char>>.Shared.Return(array, clearArray: true);
             newArray[_count++] = segment;
@@ -60,7 +63,8 @@ namespace System.Text
 
         /// <summary>Gets a span of all segments in the builder.</summary>
         /// <returns></returns>
-        public Span<ReadOnlyMemory<char>> AsSpan() => new Span<ReadOnlyMemory<char>>(_array, 0, _count);
+        public Span<ReadOnlyMemory<char>> AsSpan() =>
+            new Span<ReadOnlyMemory<char>>(_array, 0, _count);
 
         /// <summary>Creates a string from all the segments in the builder and then disposes of the builder.</summary>
         public override string ToString()
@@ -74,16 +78,20 @@ namespace System.Text
                 length += span[i].Length;
             }
 
-            string result = string.Create(length, this, static (dest, builder) =>
-            {
-                Span<ReadOnlyMemory<char>> localSpan = builder.AsSpan();
-                for (int i = 0; i < localSpan.Length; i++)
+            string result = string.Create(
+                length,
+                this,
+                static (dest, builder) =>
                 {
-                    ReadOnlySpan<char> segment = localSpan[i].Span;
-                    segment.CopyTo(dest);
-                    dest = dest.Slice(segment.Length);
+                    Span<ReadOnlyMemory<char>> localSpan = builder.AsSpan();
+                    for (int i = 0; i < localSpan.Length; i++)
+                    {
+                        ReadOnlySpan<char> segment = localSpan[i].Span;
+                        segment.CopyTo(dest);
+                        dest = dest.Slice(segment.Length);
+                    }
                 }
-            });
+            );
 
             span.Clear();
             this = default;

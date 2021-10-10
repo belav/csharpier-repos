@@ -30,10 +30,13 @@ namespace Microsoft.CodeAnalysis.PersistentStorage
             IsPrimaryBranch = isPrimaryBranch;
         }
 
-        public static SolutionKey ToSolutionKey(Solution solution)
-            => ToSolutionKey(solution.State);
+        public static SolutionKey ToSolutionKey(Solution solution) => ToSolutionKey(solution.State);
 
-        public static SolutionKey ToSolutionKey(SolutionState solutionState)
-            => new(solutionState.Id, solutionState.FilePath, solutionState.BranchId == solutionState.Workspace.PrimaryBranchId);
+        public static SolutionKey ToSolutionKey(SolutionState solutionState) =>
+            new(
+                solutionState.Id,
+                solutionState.FilePath,
+                solutionState.BranchId == solutionState.Workspace.PrimaryBranchId
+            );
     }
 }

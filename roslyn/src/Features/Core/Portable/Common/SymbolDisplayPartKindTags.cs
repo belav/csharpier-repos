@@ -8,8 +8,8 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class SymbolDisplayPartKindTags
     {
-        public static string GetTag(SymbolDisplayPartKind kind)
-            => kind switch
+        public static string GetTag(SymbolDisplayPartKind kind) =>
+            kind switch
             {
                 SymbolDisplayPartKind.AliasName => TextTags.Alias,
                 SymbolDisplayPartKind.AssemblyName => TextTags.Assembly,

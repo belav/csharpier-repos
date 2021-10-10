@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
     {
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasColumnName<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
-            string name)
+            string name
+        )
         {
             switch (builder)
             {
@@ -28,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasColumnType<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
-            string typeName)
+            string typeName
+        )
         {
             switch (builder)
             {
@@ -45,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasDefaultValueSql<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
-            string sql)
+            string sql
+        )
         {
             switch (builder)
             {
@@ -62,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasComputedColumnSql<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
-            string sql)
+            string sql
+        )
         {
             switch (builder)
             {
@@ -79,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> HasDefaultValue<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
-            object value)
+            object value
+        )
         {
             switch (builder)
             {
@@ -96,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public static ModelBuilderTest.TestPropertyBuilder<TProperty> IsFixedLength<TProperty>(
             this ModelBuilderTest.TestPropertyBuilder<TProperty> builder,
-            bool fixedLength = true)
+            bool fixedLength = true
+        )
         {
             switch (builder)
             {
@@ -113,8 +119,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> ToTable<TEntity>(
             this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
-            string name)
-            where TEntity : class
+            string name
+        ) where TEntity : class
         {
             switch (builder)
             {
@@ -132,8 +138,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> ToTable<TEntity>(
             this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
             string name,
-            string schema)
-            where TEntity : class
+            string schema
+        ) where TEntity : class
         {
             switch (builder)
             {
@@ -151,18 +157,30 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> ToTable<TEntity>(
             this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
             string name,
-            Action<RelationalModelBuilderTest.TestTableBuilder<TEntity>> buildAction)
-            where TEntity : class
+            Action<RelationalModelBuilderTest.TestTableBuilder<TEntity>> buildAction
+        ) where TEntity : class
         {
             switch (builder)
             {
                 case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                    genericBuilder.Instance.ToTable(name,
-                        b => buildAction(new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)));
+                    genericBuilder.Instance.ToTable(
+                        name,
+                        b =>
+                            buildAction(
+                                new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)
+                            )
+                    );
                     break;
                 case IInfrastructure<EntityTypeBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.ToTable(name,
-                        b => buildAction(new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(b)));
+                    nongenericBuilder.Instance.ToTable(
+                        name,
+                        b =>
+                            buildAction(
+                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
+                                    b
+                                )
+                            )
+                    );
                     break;
             }
 
@@ -173,33 +191,53 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
             string name,
             string schema,
-            Action<RelationalModelBuilderTest.TestTableBuilder<TEntity>> buildAction)
-            where TEntity : class
+            Action<RelationalModelBuilderTest.TestTableBuilder<TEntity>> buildAction
+        ) where TEntity : class
         {
             switch (builder)
             {
                 case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                    genericBuilder.Instance.ToTable(name, schema,
-                        b => buildAction(new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)));
+                    genericBuilder.Instance.ToTable(
+                        name,
+                        schema,
+                        b =>
+                            buildAction(
+                                new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)
+                            )
+                    );
                     break;
                 case IInfrastructure<EntityTypeBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.ToTable(name, schema,
-                        b => buildAction(new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(b)));
+                    nongenericBuilder.Instance.ToTable(
+                        name,
+                        schema,
+                        b =>
+                            buildAction(
+                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
+                                    b
+                                )
+                            )
+                    );
                     break;
             }
 
             return builder;
         }
 
-        public static ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<TEntity, TRelatedEntity>(
+        public static ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<
+            TEntity,
+            TRelatedEntity
+        >(
             this ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> builder,
-            string name)
+            string name
+        )
             where TEntity : class
             where TRelatedEntity : class
         {
             switch (builder)
             {
-                case IInfrastructure<OwnedNavigationBuilder<TEntity, TRelatedEntity>> genericBuilder:
+                case IInfrastructure<
+                    OwnedNavigationBuilder<TEntity, TRelatedEntity>
+                > genericBuilder:
                     genericBuilder.Instance.ToTable(name);
                     break;
                 case IInfrastructure<OwnedNavigationBuilder> nongenericBuilder:
@@ -210,16 +248,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             return builder;
         }
 
-        public static ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<TEntity, TRelatedEntity>(
+        public static ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<
+            TEntity,
+            TRelatedEntity
+        >(
             this ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> builder,
             string name,
-            string schema)
+            string schema
+        )
             where TEntity : class
             where TRelatedEntity : class
         {
             switch (builder)
             {
-                case IInfrastructure<OwnedNavigationBuilder<TEntity, TRelatedEntity>> genericBuilder:
+                case IInfrastructure<
+                    OwnedNavigationBuilder<TEntity, TRelatedEntity>
+                > genericBuilder:
                     genericBuilder.Instance.ToTable(name, schema);
                     break;
                 case IInfrastructure<OwnedNavigationBuilder> nongenericBuilder:
@@ -230,16 +274,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             return builder;
         }
 
-        public static ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<TEntity, TRelatedEntity>(
+        public static ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<
+            TEntity,
+            TRelatedEntity
+        >(
             this ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> builder,
             string name,
-            bool excludedFromMigrations)
+            bool excludedFromMigrations
+        )
             where TEntity : class
             where TRelatedEntity : class
         {
             switch (builder)
             {
-                case IInfrastructure<OwnedNavigationBuilder<TEntity, TRelatedEntity>> genericBuilder:
+                case IInfrastructure<
+                    OwnedNavigationBuilder<TEntity, TRelatedEntity>
+                > genericBuilder:
                     genericBuilder.Instance.ToTable(name, excludedFromMigrations);
                     break;
                 case IInfrastructure<OwnedNavigationBuilder> nongenericBuilder:
@@ -250,17 +300,23 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             return builder;
         }
 
-        public static ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<TEntity, TRelatedEntity>(
+        public static ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> ToTable<
+            TEntity,
+            TRelatedEntity
+        >(
             this ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TRelatedEntity> builder,
             string name,
             string schema,
-            bool excludedFromMigrations)
+            bool excludedFromMigrations
+        )
             where TEntity : class
             where TRelatedEntity : class
         {
             switch (builder)
             {
-                case IInfrastructure<OwnedNavigationBuilder<TEntity, TRelatedEntity>> genericBuilder:
+                case IInfrastructure<
+                    OwnedNavigationBuilder<TEntity, TRelatedEntity>
+                > genericBuilder:
                     genericBuilder.Instance.ToTable(name, schema, excludedFromMigrations);
                     break;
                 case IInfrastructure<OwnedNavigationBuilder> nongenericBuilder:
@@ -271,9 +327,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             return builder;
         }
 
-        public static ModelBuilderTest.TestOwnershipBuilder<TEntity, TRelatedEntity> HasConstraintName<TEntity, TRelatedEntity>(
+        public static ModelBuilderTest.TestOwnershipBuilder<
+            TEntity,
+            TRelatedEntity
+        > HasConstraintName<TEntity, TRelatedEntity>(
             this ModelBuilderTest.TestOwnershipBuilder<TEntity, TRelatedEntity> builder,
-            string name)
+            string name
+        )
             where TEntity : class
             where TRelatedEntity : class
         {
@@ -290,15 +350,21 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             return builder;
         }
 
-        public static ModelBuilderTest.TestReferenceReferenceBuilder<TEntity, TRelatedEntity> HasConstraintName<TEntity, TRelatedEntity>(
+        public static ModelBuilderTest.TestReferenceReferenceBuilder<
+            TEntity,
+            TRelatedEntity
+        > HasConstraintName<TEntity, TRelatedEntity>(
             this ModelBuilderTest.TestReferenceReferenceBuilder<TEntity, TRelatedEntity> builder,
-            string name)
+            string name
+        )
             where TEntity : class
             where TRelatedEntity : class
         {
             switch (builder)
             {
-                case IInfrastructure<ReferenceReferenceBuilder<TEntity, TRelatedEntity>> genericBuilder:
+                case IInfrastructure<
+                    ReferenceReferenceBuilder<TEntity, TRelatedEntity>
+                > genericBuilder:
                     genericBuilder.Instance.HasConstraintName(name);
                     break;
                 case IInfrastructure<ReferenceReferenceBuilder> nongenericBuilder:
@@ -309,15 +375,21 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             return builder;
         }
 
-        public static ModelBuilderTest.TestReferenceCollectionBuilder<TEntity, TRelatedEntity> HasConstraintName<TEntity, TRelatedEntity>(
+        public static ModelBuilderTest.TestReferenceCollectionBuilder<
+            TEntity,
+            TRelatedEntity
+        > HasConstraintName<TEntity, TRelatedEntity>(
             this ModelBuilderTest.TestReferenceCollectionBuilder<TEntity, TRelatedEntity> builder,
-            string name)
+            string name
+        )
             where TEntity : class
             where TRelatedEntity : class
         {
             switch (builder)
             {
-                case IInfrastructure<ReferenceCollectionBuilder<TEntity, TRelatedEntity>> genericBuilder:
+                case IInfrastructure<
+                    ReferenceCollectionBuilder<TEntity, TRelatedEntity>
+                > genericBuilder:
                     genericBuilder.Instance.HasConstraintName(name);
                     break;
                 case IInfrastructure<ReferenceCollectionBuilder> nongenericBuilder:
@@ -330,7 +402,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public static ModelBuilderTest.TestIndexBuilder<TEntity> HasFilter<TEntity>(
             this ModelBuilderTest.TestIndexBuilder<TEntity> builder,
-            string filterExpression)
+            string filterExpression
+        )
         {
             switch (builder)
             {
@@ -347,7 +420,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public static ModelBuilderTest.TestIndexBuilder<TEntity> HasName<TEntity>(
             this ModelBuilderTest.TestIndexBuilder<TEntity> builder,
-            string name)
+            string name
+        )
         {
             switch (builder)
             {
@@ -364,7 +438,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public static ModelBuilderTest.TestKeyBuilder<TEntity> HasName<TEntity>(
             this ModelBuilderTest.TestKeyBuilder<TEntity> builder,
-            string name)
+            string name
+        )
         {
             switch (builder)
             {

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 
         private static string GenerateString(int value)
         {
-            const string Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const string Alphabet =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var builder = new StringBuilder();
 
             while (value > 0)
@@ -43,7 +44,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 
         private static void Test(bool isCaseSensitive)
         {
-            var comparer = isCaseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
+            var comparer = isCaseSensitive
+                ? StringComparer.Ordinal
+                : StringComparer.OrdinalIgnoreCase;
             var strings = GenerateStrings(2000).Skip(500).Take(1000).ToSet(comparer);
             var testStrings = GenerateStrings(100000);
 
@@ -76,17 +79,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
                 }
 
                 var falsePositivePercentage = incorrectCount / (correctCount + incorrectCount);
-                Assert.True(falsePositivePercentage < (d * 1.5), string.Format("falsePositivePercentage={0}, d={1}", falsePositivePercentage, d));
+                Assert.True(
+                    falsePositivePercentage < (d * 1.5),
+                    string.Format("falsePositivePercentage={0}, d={1}", falsePositivePercentage, d)
+                );
             }
         }
 
         [Fact]
-        public void Test1()
-            => Test(isCaseSensitive: true);
+        public void Test1() => Test(isCaseSensitive: true);
 
         [Fact]
-        public void TestInsensitive()
-            => Test(isCaseSensitive: false);
+        public void TestInsensitive() => Test(isCaseSensitive: false);
 
         [Fact]
         public void TestEmpty()
@@ -129,7 +133,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
         public void TestSerialization2()
         {
             var stream = new MemoryStream();
-            var bloomFilter = new BloomFilter(0.001, new[] { "Hello, World" }, new long[] { long.MaxValue, -1, 0, 1, long.MinValue });
+            var bloomFilter = new BloomFilter(
+                0.001,
+                new[] { "Hello, World" },
+                new long[] { long.MaxValue, -1, 0, 1, long.MinValue }
+            );
 
             using (var writer = new ObjectWriter(stream, leaveOpen: true))
             {
@@ -146,12 +154,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
         [Fact]
         public void TestInt64()
         {
-            var longs = CreateLongs(GenerateStrings(2000).Skip(500).Take(1000).Select(s => s.GetHashCode()).ToList());
-            var testLongs = CreateLongs(GenerateStrings(100000).Select(s => s.GetHashCode()).ToList());
+            var longs = CreateLongs(
+                GenerateStrings(2000).Skip(500).Take(1000).Select(s => s.GetHashCode()).ToList()
+            );
+            var testLongs = CreateLongs(
+                GenerateStrings(100000).Select(s => s.GetHashCode()).ToList()
+            );
 
             for (var d = 0.1; d >= 0.0001; d /= 10)
             {
-                var filter = new BloomFilter(d, new string[] { }, longs);
+                var filter = new BloomFilter(d, new string[] {  }, longs);
 
                 var correctCount = 0.0;
                 var incorrectCount = 0.0;
@@ -177,7 +189,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
                 }
 
                 var falsePositivePercentage = incorrectCount / (correctCount + incorrectCount);
-                Assert.True(falsePositivePercentage < (d * 1.5), string.Format("falsePositivePercentage={0}, d={1}", falsePositivePercentage, d));
+                Assert.True(
+                    falsePositivePercentage < (d * 1.5),
+                    string.Format("falsePositivePercentage={0}, d={1}", falsePositivePercentage, d)
+                );
             }
         }
 

@@ -18,11 +18,16 @@ namespace System.Net.Quic.Implementations.Mock
 
         // We synthesize port numbers for the listener, starting with 1, and track these in a dictionary.
         private static int s_mockPort;
-        private static ConcurrentDictionary<int, MockListener> s_listenerMap = new ConcurrentDictionary<int, MockListener>();
+        private static ConcurrentDictionary<int, MockListener> s_listenerMap =
+            new ConcurrentDictionary<int, MockListener>();
 
         internal MockListener(QuicListenerOptions options)
         {
-            if (options.ListenEndPoint is null || options.ListenEndPoint.Address != IPAddress.Loopback || options.ListenEndPoint.Port != 0)
+            if (
+                options.ListenEndPoint is null
+                || options.ListenEndPoint.Address != IPAddress.Loopback
+                || options.ListenEndPoint.Port != 0
+            )
             {
                 throw new ArgumentException("Must pass loopback address and port 0");
             }
@@ -35,7 +40,9 @@ namespace System.Net.Quic.Implementations.Mock
             bool success = s_listenerMap.TryAdd(port, this);
             Debug.Assert(success);
 
-            _listenQueue = Channel.CreateBounded<MockConnection.ConnectionState>(new BoundedChannelOptions(options.ListenBacklog));
+            _listenQueue = Channel.CreateBounded<MockConnection.ConnectionState>(
+                new BoundedChannelOptions(options.ListenBacklog)
+            );
         }
 
         // TODO: IPEndPoint is mutable, so we should create a copy here.
@@ -57,11 +64,16 @@ namespace System.Net.Quic.Implementations.Mock
             return listener;
         }
 
-        internal override async ValueTask<QuicConnectionProvider> AcceptConnectionAsync(CancellationToken cancellationToken = default)
+        internal override async ValueTask<QuicConnectionProvider> AcceptConnectionAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             CheckDisposed();
 
-            MockConnection.ConnectionState state = await _listenQueue.Reader.ReadAsync(cancellationToken).ConfigureAwait(false);
+            MockConnection.ConnectionState state = await _listenQueue.Reader.ReadAsync(
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return new MockConnection(_listenEndPoint, state);
         }
@@ -75,7 +87,6 @@ namespace System.Net.Quic.Implementations.Mock
         internal override void Start()
         {
             CheckDisposed();
-
             // TODO: Track start
         }
 

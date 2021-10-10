@@ -23,9 +23,13 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
         private sealed class ClassificationVerifier : ForegroundThreadAffinitizedObject
         {
             private readonly IServiceProvider _serviceProvider;
-            private readonly ImmutableDictionary<SchemeName, ImmutableDictionary<Guid, ImmutableDictionary<string, uint>>> _colorSchemes;
+            private readonly ImmutableDictionary<
+                SchemeName,
+                ImmutableDictionary<Guid, ImmutableDictionary<string, uint>>
+            > _colorSchemes;
 
-            private static readonly Guid TextEditorMEFItemsColorCategory = new("75a05685-00a8-4ded-bae5-e7a50bfa929a");
+            private static readonly Guid TextEditorMEFItemsColorCategory =
+                new("75a05685-00a8-4ded-bae5-e7a50bfa929a");
 
             // These classification colors (0x00BBGGRR) should match the VS\EditorColors.xml file.
             // They are not in the scheme files because they are core classifications.
@@ -68,23 +72,39 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
 
             private ImmutableArray<string> Classifications { get; }
 
-            public ClassificationVerifier(IThreadingContext threadingContext, IServiceProvider serviceProvider, ImmutableDictionary<SchemeName, ColorScheme> colorSchemes)
-                : base(threadingContext)
+            public ClassificationVerifier(
+                IThreadingContext threadingContext,
+                IServiceProvider serviceProvider,
+                ImmutableDictionary<SchemeName, ColorScheme> colorSchemes
+            ) : base(threadingContext)
             {
                 _serviceProvider = serviceProvider;
 
                 _colorSchemes = colorSchemes.ToImmutableDictionary(
                     nameAndScheme => nameAndScheme.Key,
-                    nameAndScheme => nameAndScheme.Value.Themes.ToImmutableDictionary(
-                        theme => theme.Guid,
-                        theme => theme.Category.Colors
-                            .Where(color => color.Foreground.HasValue)
-                            .ToImmutableDictionary(color => color.Name, color => color.Foreground!.Value)));
+                    nameAndScheme =>
+                        nameAndScheme.Value.Themes.ToImmutableDictionary(
+                            theme => theme.Guid,
+                            theme =>
+                                theme.Category.Colors.Where(color => color.Foreground.HasValue)
+                                    .ToImmutableDictionary(
+                                        color => color.Name,
+                                        color => color.Foreground!.Value
+                                    )
+                        )
+                );
 
                 // Gather all the classifications from the core and scheme dictionaries.
-                var coreClassifications = DarkThemeForeground.Keys.Concat(BlueLightThemeForeground.Keys).Distinct();
-                var colorSchemeClassifications = _colorSchemes.Values.SelectMany(scheme => scheme.Values.SelectMany(theme => theme.Keys)).Distinct();
-                Classifications = coreClassifications.Concat(colorSchemeClassifications).ToImmutableArray();
+                var coreClassifications = DarkThemeForeground.Keys.Concat(
+                        BlueLightThemeForeground.Keys
+                    )
+                    .Distinct();
+                var colorSchemeClassifications = _colorSchemes.Values.SelectMany(
+                        scheme => scheme.Values.SelectMany(theme => theme.Keys)
+                    )
+                    .Distinct();
+                Classifications = coreClassifications.Concat(colorSchemeClassifications)
+                    .ToImmutableArray();
             }
 
             /// <summary>
@@ -97,24 +117,35 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 // Ensure we are initialized
                 if (_fontAndColorStorage is null)
                 {
-                    _fontAndColorStorage = _serviceProvider.GetService<SVsFontAndColorStorage, IVsFontAndColorStorage>();
+                    _fontAndColorStorage = _serviceProvider.GetService<
+                        SVsFontAndColorStorage,
+                        IVsFontAndColorStorage
+                    >();
                     _fontAndColorUtilities = (IVsFontAndColorUtilities)_fontAndColorStorage!;
                 }
 
                 // Make no changes when in high contast mode or in unknown theme.
-                if (SystemParameters.HighContrast ||
-                    !_colorSchemes.TryGetValue(schemeName, out var colorScheme) ||
-                    !colorScheme.TryGetValue(themeId, out var colorSchemeTheme))
+                if (
+                    SystemParameters.HighContrast
+                    || !_colorSchemes.TryGetValue(schemeName, out var colorScheme)
+                    || !colorScheme.TryGetValue(themeId, out var colorSchemeTheme)
+                )
                 {
                     return false;
                 }
 
-                var coreThemeColors = (themeId == KnownColorThemes.Dark)
-                    ? DarkThemeForeground
-                    : BlueLightThemeForeground;
+                var coreThemeColors =
+                    (themeId == KnownColorThemes.Dark)
+                        ? DarkThemeForeground
+                        : BlueLightThemeForeground;
 
                 // Open Text Editor category for readonly access and do not load items if they are defaulted.
-                if (_fontAndColorStorage.OpenCategory(TextEditorMEFItemsColorCategory, (uint)__FCSTORAGEFLAGS.FCSF_READONLY) != VSConstants.S_OK)
+                if (
+                    _fontAndColorStorage.OpenCategory(
+                        TextEditorMEFItemsColorCategory,
+                        (uint)__FCSTORAGEFLAGS.FCSF_READONLY
+                    ) != VSConstants.S_OK
+                )
                 {
                     // We were unable to access color information.
                     return false;
@@ -126,7 +157,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                     {
                         var colorItems = new ColorableItemInfo[1];
 
-                        if (_fontAndColorStorage.GetItem(classification, colorItems) != VSConstants.S_OK)
+                        if (
+                            _fontAndColorStorage.GetItem(classification, colorItems)
+                            != VSConstants.S_OK
+                        )
                         {
                             // Classifications that are still defaulted will not have entries.
                             continue;
@@ -134,12 +168,20 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
 
                         var colorItem = colorItems[0];
 
-                        if (IsClassificationCustomized(coreThemeColors, colorSchemeTheme, colorItem, classification))
+                        if (
+                            IsClassificationCustomized(
+                                coreThemeColors,
+                                colorSchemeTheme,
+                                colorItem,
+                                classification
+                            )
+                        )
                         {
                             return true;
                         }
                     }
                 }
+
                 finally
                 {
                     _fontAndColorStorage.CloseCategory();
@@ -156,14 +198,20 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 ImmutableDictionary<string, uint> coreThemeColors,
                 ImmutableDictionary<string, uint> schemeThemeColors,
                 ColorableItemInfo colorItem,
-                string classification)
+                string classification
+            )
             {
                 AssertIsForeground();
                 Contract.ThrowIfNull(_fontAndColorUtilities);
 
                 var foregroundColorRef = colorItem.crForeground;
 
-                if (_fontAndColorUtilities.GetColorType(foregroundColorRef, out var foregroundColorType) != VSConstants.S_OK)
+                if (
+                    _fontAndColorUtilities.GetColorType(
+                        foregroundColorRef,
+                        out var foregroundColorType
+                    ) != VSConstants.S_OK
+                )
                 {
                     // Without being able to check color type, we cannot make a determination.
                     return false;
@@ -197,8 +245,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 // this switch case will handle the 3 cases we expect.
                 var fallbackColor = classification switch
                 {
-                    ClassificationTypeNames.OperatorOverloaded => coreThemeColors[ClassificationTypeNames.Operator],
-                    ClassificationTypeNames.ControlKeyword => coreThemeColors[ClassificationTypeNames.Keyword],
+                    ClassificationTypeNames.OperatorOverloaded
+                      => coreThemeColors[ClassificationTypeNames.Operator],
+                    ClassificationTypeNames.ControlKeyword
+                      => coreThemeColors[ClassificationTypeNames.Keyword],
                     _ => coreThemeColors[ClassificationTypeNames.Identifier]
                 };
 

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Authentication
 
         public IdentityServerJwtPolicySchemeForwardSelector(
             string identityPath,
-            string IdentityServerJwtScheme)
+            string IdentityServerJwtScheme
+        )
         {
             _identityPath = identityPath;
             _IdentityServerJwtScheme = IdentityServerJwtScheme;
@@ -22,7 +23,12 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Authentication
 
         public string SelectScheme(HttpContext ctx)
         {
-            if (ctx.Request.Path.StartsWithSegments(_identityPath, StringComparison.OrdinalIgnoreCase))
+            if (
+                ctx.Request.Path.StartsWithSegments(
+                    _identityPath,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return IdentityConstants.ApplicationScheme;
             }

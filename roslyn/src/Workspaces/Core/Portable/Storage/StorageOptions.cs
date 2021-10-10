@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.Storage
 
         public const string OptionName = "FeatureManager/Storage";
 
-        public static readonly Option<StorageDatabase> Database = new(
-            OptionName, nameof(Database), defaultValue: StorageDatabase.SQLite);
+        public static readonly Option<StorageDatabase> Database =
+            new(OptionName, nameof(Database), defaultValue: StorageDatabase.SQLite);
     }
 
     [ExportOptionProvider, Shared]
@@ -26,11 +26,9 @@ namespace Microsoft.CodeAnalysis.Storage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteHostOptionsProvider()
-        {
-        }
+        public RemoteHostOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            StorageOptions.Database);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(StorageOptions.Database);
     }
 }

@@ -18,10 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpBraceCompletionServiceFactory(
-            [ImportMany(LanguageNames.CSharp)] IEnumerable<IBraceCompletionService> braceCompletionServices,
-            IThreadingContext threadingContext)
-            : base(braceCompletionServices, threadingContext)
-        {
-        }
+            [ImportMany(LanguageNames.CSharp)]
+                IEnumerable<IBraceCompletionService> braceCompletionServices,
+            IThreadingContext threadingContext
+        ) : base(braceCompletionServices, threadingContext) { }
     }
 }

@@ -24,35 +24,49 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.InvokeDelegateWithConditionalAccess), Shared]
-    internal partial class InvokeDelegateWithConditionalAccessCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.InvokeDelegateWithConditionalAccess
+        ),
+        Shared
+    ]
+    internal partial class InvokeDelegateWithConditionalAccessCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public InvokeDelegateWithConditionalAccessCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public InvokeDelegateWithConditionalAccessCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(IDEDiagnosticIds.InvokeDelegateWithConditionalAccessId);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(IDEDiagnosticIds.InvokeDelegateWithConditionalAccessId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         // Filter out the diagnostics we created for the faded out code.  We don't want
         // to try to fix those as well as the normal diagnostics we created.
-        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => !diagnostic.Properties.ContainsKey(WellKnownDiagnosticTags.Unnecessary);
+        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+            !diagnostic.Properties.ContainsKey(WellKnownDiagnosticTags.Unnecessary);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-               context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -64,7 +78,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
         }
 
         private static void AddEdits(
-            SyntaxEditor editor, Diagnostic diagnostic, CancellationToken cancellationToken)
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             if (diagnostic.Properties[Constants.Kind] == Constants.VariableAndIfStatementForm)
             {
@@ -72,7 +89,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             }
             else
             {
-                Debug.Assert(diagnostic.Properties[Constants.Kind] == Constants.SingleIfStatementForm);
+                Debug.Assert(
+                    diagnostic.Properties[Constants.Kind] == Constants.SingleIfStatementForm
+                );
                 HandleSingleIfStatementForm(editor, diagnostic, cancellationToken);
             }
         }
@@ -80,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
         private static void HandleSingleIfStatementForm(
             SyntaxEditor editor,
             Diagnostic diagnostic,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var root = editor.OriginalRoot;
 
@@ -90,7 +110,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var ifStatement = (IfStatementSyntax)root.FindNode(ifStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
-            var expressionStatement = (ExpressionStatementSyntax)root.FindNode(expressionStatementLocation.SourceSpan);
+            var expressionStatement = (ExpressionStatementSyntax)root.FindNode(
+                expressionStatementLocation.SourceSpan
+            );
             cancellationToken.ThrowIfCancellationRequested();
 
             var invocationExpression = (InvocationExpressionSyntax)expressionStatement.Expression;
@@ -100,11 +122,19 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                 SyntaxFactory.ConditionalAccessExpression(
                     invocationExpression.Expression,
                     SyntaxFactory.InvocationExpression(
-                        SyntaxFactory.MemberBindingExpression(SyntaxFactory.IdentifierName(nameof(Action.Invoke))), invocationExpression.ArgumentList)));
+                        SyntaxFactory.MemberBindingExpression(
+                            SyntaxFactory.IdentifierName(nameof(Action.Invoke))
+                        ),
+                        invocationExpression.ArgumentList
+                    )
+                )
+            );
             newStatement = newStatement.WithPrependedLeadingTrivia(ifStatement.GetLeadingTrivia());
 
-            if (ifStatement.Parent.IsKind(SyntaxKind.ElseClause) &&
-                ifStatement.Statement.IsKind(SyntaxKind.Block, out BlockSyntax block))
+            if (
+                ifStatement.Parent.IsKind(SyntaxKind.ElseClause)
+                && ifStatement.Statement.IsKind(SyntaxKind.Block, out BlockSyntax block)
+            )
             {
                 newStatement = block.WithStatements(SyntaxFactory.SingletonList(newStatement));
             }
@@ -116,7 +146,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
         }
 
         private static void HandleVariableAndIfStatementForm(
-            SyntaxEditor editor, Diagnostic diagnostic, CancellationToken cancellationToken)
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             var root = editor.OriginalRoot;
 
@@ -124,13 +157,17 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var ifStatementLocation = diagnostic.AdditionalLocations[1];
             var expressionStatementLocation = diagnostic.AdditionalLocations[2];
 
-            var localDeclarationStatement = (LocalDeclarationStatementSyntax)root.FindNode(localDeclarationLocation.SourceSpan);
+            var localDeclarationStatement = (LocalDeclarationStatementSyntax)root.FindNode(
+                localDeclarationLocation.SourceSpan
+            );
             cancellationToken.ThrowIfCancellationRequested();
 
             var ifStatement = (IfStatementSyntax)root.FindNode(ifStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
-            var expressionStatement = (ExpressionStatementSyntax)root.FindNode(expressionStatementLocation.SourceSpan);
+            var expressionStatement = (ExpressionStatementSyntax)root.FindNode(
+                expressionStatementLocation.SourceSpan
+            );
             cancellationToken.ThrowIfCancellationRequested();
 
             var invocationExpression = (InvocationExpressionSyntax)expressionStatement.Expression;
@@ -138,23 +175,35 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
 
             var newStatement = expressionStatement.WithExpression(
                 SyntaxFactory.ConditionalAccessExpression(
-                    localDeclarationStatement.Declaration.Variables[0].Initializer.Value.Parenthesize(),
+                    localDeclarationStatement.Declaration.Variables[
+                        0
+                    ].Initializer.Value.Parenthesize(),
                     SyntaxFactory.InvocationExpression(
-                        SyntaxFactory.MemberBindingExpression(SyntaxFactory.IdentifierName(nameof(Action.Invoke))), invocationExpression.ArgumentList)));
+                        SyntaxFactory.MemberBindingExpression(
+                            SyntaxFactory.IdentifierName(nameof(Action.Invoke))
+                        ),
+                        invocationExpression.ArgumentList
+                    )
+                )
+            );
 
             newStatement = newStatement.WithAdditionalAnnotations(Formatter.Annotation);
 
             editor.ReplaceNode(ifStatement, newStatement);
-            editor.RemoveNode(localDeclarationStatement, SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
+            editor.RemoveNode(
+                localDeclarationStatement,
+                SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker
+            );
             cancellationToken.ThrowIfCancellationRequested();
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Delegate_invocation_can_be_simplified, createChangedDocument)
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Delegate_invocation_can_be_simplified,
+                    createChangedDocument
+                ) { }
         }
     }
 }

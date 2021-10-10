@@ -35,7 +35,6 @@ namespace System.Speech.Recognition
 
         private object _userToken;
         private TimeSpan _audioPosition;
-
         #endregion
     }
 }

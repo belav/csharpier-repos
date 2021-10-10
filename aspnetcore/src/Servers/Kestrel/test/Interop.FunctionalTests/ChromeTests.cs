@@ -23,7 +23,7 @@ namespace Interop.FunctionalTests
     public class ChromeTests : LoggedTest
     {
         private static readonly string _postHtml =
-@"<!DOCTYPE html>
+            @"<!DOCTYPE html>
 <html>
  <head>
    <script type=""text/javascript"">
@@ -43,11 +43,21 @@ namespace Interop.FunctionalTests
 
         private void InitializeArgs()
         {
-            NetLogPath = Path.Combine(ResolvedLogOutputDirectory, $"{ResolvedTestMethodName}.nl.json");
-            StartupLogPath = Path.Combine(ResolvedLogOutputDirectory, $"{ResolvedTestMethodName}.su.json");
-            ShutdownLogPath = Path.Combine(ResolvedLogOutputDirectory, $"{ResolvedTestMethodName}.sd.json");
+            NetLogPath = Path.Combine(
+                ResolvedLogOutputDirectory,
+                $"{ResolvedTestMethodName}.nl.json"
+            );
+            StartupLogPath = Path.Combine(
+                ResolvedLogOutputDirectory,
+                $"{ResolvedTestMethodName}.su.json"
+            );
+            ShutdownLogPath = Path.Combine(
+                ResolvedLogOutputDirectory,
+                $"{ResolvedTestMethodName}.sd.json"
+            );
 
-            ChromeArgs = new[] {
+            ChromeArgs = new[]
+            {
                 $"--headless",
                 $"--no-sandbox",
                 $"--disable-gpu",
@@ -63,45 +73,75 @@ namespace Interop.FunctionalTests
             };
         }
 
-        [ConditionalTheory(Skip = "Disabling while debugging. https://github.com/dotnet/aspnetcore-internal/issues/1363")]
-        [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727")]
-        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81, SkipReason = "Missing Windows ALPN support: https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation#Support")]
+        [ConditionalTheory(
+            Skip = "Disabling while debugging. https://github.com/dotnet/aspnetcore-internal/issues/1363"
+        )]
+        [OSSkipCondition(
+            OperatingSystems.MacOSX,
+            SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727"
+        )]
+        [MinimumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win81,
+            SkipReason = "Missing Windows ALPN support: https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation#Support"
+        )]
         [InlineData("", "Interop HTTP/2 GET")]
         [InlineData("?TestMethod=POST", "Interop HTTP/2 POST")]
         public async Task Http2(string requestSuffix, string expectedResponse)
         {
             InitializeArgs();
 
-            var hostBuilder = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(options =>
-                        {
-                            options.Listen(IPAddress.Loopback, 0, listenOptions =>
-                            {
-                                listenOptions.Protocols = HttpProtocols.Http2;
-                                listenOptions.UseHttps(TestResources.GetTestCertificate());
-                            });
-                        })
-                        .Configure(app => app.Run(async context =>
-                        {
-                            if (HttpMethods.IsPost(context.Request.Query["TestMethod"]))
-                            {
-                                await context.Response.WriteAsync(_postHtml);
-                            }
-                            else
-                            {
-                                await context.Response.WriteAsync($"Interop {context.Request.Protocol} {context.Request.Method}");
-                            }
-                        }));
-                })
+            var hostBuilder = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseKestrel(
+                                options =>
+                                {
+                                    options.Listen(
+                                        IPAddress.Loopback,
+                                        0,
+                                        listenOptions =>
+                                        {
+                                            listenOptions.Protocols = HttpProtocols.Http2;
+                                            listenOptions.UseHttps(
+                                                TestResources.GetTestCertificate()
+                                            );
+                                        }
+                                    );
+                                }
+                            )
+                            .Configure(
+                                app =>
+                                    app.Run(
+                                        async context =>
+                                        {
+                                            if (
+                                                HttpMethods.IsPost(
+                                                    context.Request.Query["TestMethod"]
+                                                )
+                                            )
+                                            {
+                                                await context.Response.WriteAsync(_postHtml);
+                                            }
+                                            else
+                                            {
+                                                await context.Response.WriteAsync(
+                                                    $"Interop {context.Request.Protocol} {context.Request.Method}"
+                                                );
+                                            }
+                                        }
+                                    )
+                            );
+                    }
+                )
                 .ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
             {
                 await host.StartAsync();
-                var chromeOutput = RunHeadlessChrome($"https://localhost:{host.GetPort()}/{requestSuffix}");
+                var chromeOutput = RunHeadlessChrome(
+                    $"https://localhost:{host.GetPort()}/{requestSuffix}"
+                );
 
                 AssertExpectedResponseOrShowDebugInstructions(expectedResponse, chromeOutput);
 
@@ -114,7 +154,12 @@ namespace Interop.FunctionalTests
             var chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments(ChromeArgs);
 
-            using (var driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), chromeOptions))
+            using (
+                var driver = new ChromeDriver(
+                    Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                    chromeOptions
+                )
+            )
             {
                 driver.Navigate().GoToUrl(testUrl);
 
@@ -122,7 +167,10 @@ namespace Interop.FunctionalTests
             }
         }
 
-        private void AssertExpectedResponseOrShowDebugInstructions(string expectedResponse, string actualResponse)
+        private void AssertExpectedResponseOrShowDebugInstructions(
+            string expectedResponse,
+            string actualResponse
+        )
         {
             try
             {

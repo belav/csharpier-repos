@@ -17,8 +17,8 @@ namespace System.Data
         /// convert an object to the given destination type using the context.
         /// </summary>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
-            destinationType == typeof(InstanceDescriptor) ||
-            base.CanConvertTo(context, destinationType);
+            destinationType == typeof(InstanceDescriptor)
+            || base.CanConvertTo(context, destinationType);
 
         /// <summary>
         /// Converts the given object to another type.  The most common types to convert
@@ -27,7 +27,12 @@ namespace System.Data
         /// type is string.  If this cannot convert to the destination type, this will
         /// throw a NotSupportedException.
         /// </summary>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == null)
             {
@@ -39,22 +44,53 @@ namespace System.Data
                 if (value is UniqueConstraint)
                 {
                     UniqueConstraint constr = (UniqueConstraint)value;
-                    Reflection.ConstructorInfo ctor = typeof(UniqueConstraint).GetConstructor(new Type[] { typeof(string), typeof(string[]), typeof(bool) })!;
+                    Reflection.ConstructorInfo ctor = typeof(UniqueConstraint).GetConstructor(
+                        new Type[] { typeof(string), typeof(string[]), typeof(bool) }
+                    )!;
                     if (ctor != null)
                     {
-                        return new InstanceDescriptor(ctor, new object[] { constr.ConstraintName, constr.ColumnNames, constr.IsPrimaryKey });
+                        return new InstanceDescriptor(
+                            ctor,
+                            new object[]
+                            {
+                                constr.ConstraintName,
+                                constr.ColumnNames,
+                                constr.IsPrimaryKey
+                            }
+                        );
                     }
                 }
                 else
                 {
                     ForeignKeyConstraint constr = (ForeignKeyConstraint)value;
                     System.Reflection.ConstructorInfo ctor =
-                        typeof(ForeignKeyConstraint).GetConstructor(new Type[] { typeof(string), typeof(string), typeof(string[]),
-                            typeof(string[]), typeof(AcceptRejectRule), typeof(Rule), typeof(Rule) })!;
+                        typeof(ForeignKeyConstraint).GetConstructor(
+                            new Type[]
+                            {
+                                typeof(string),
+                                typeof(string),
+                                typeof(string[]),
+                                typeof(string[]),
+                                typeof(AcceptRejectRule),
+                                typeof(Rule),
+                                typeof(Rule)
+                            }
+                        )!;
                     if (ctor != null)
                     {
-                        return new InstanceDescriptor(ctor, new object[] { constr.ConstraintName, constr.ParentKey.Table.TableName, constr.ParentColumnNames,
-                            constr.ChildColumnNames, constr.AcceptRejectRule, constr.DeleteRule, constr.UpdateRule });
+                        return new InstanceDescriptor(
+                            ctor,
+                            new object[]
+                            {
+                                constr.ConstraintName,
+                                constr.ParentKey.Table.TableName,
+                                constr.ParentColumnNames,
+                                constr.ChildColumnNames,
+                                constr.AcceptRejectRule,
+                                constr.DeleteRule,
+                                constr.UpdateRule
+                            }
+                        );
                     }
                 }
             }

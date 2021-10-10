@@ -26,13 +26,18 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             var routeOptionsSetup = new MvcCoreRouteOptionsSetup();
             serviceCollection.Configure<RouteOptions>(routeOptionsSetup.Configure);
-            serviceCollection.AddRouting(options =>
-            {
-                options.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
-            });
+            serviceCollection.AddRouting(
+                options =>
+                {
+                    options.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
+                }
+            );
 
             Services = serviceCollection.BuildServiceProvider();
-            Factory = new ActionEndpointFactory(Services.GetRequiredService<RoutePatternTransformer>(), Enumerable.Empty<IRequestDelegateFactory>());
+            Factory = new ActionEndpointFactory(
+                Services.GetRequiredService<RoutePatternTransformer>(),
+                Enumerable.Empty<IRequestDelegateFactory>()
+            );
         }
 
         internal ActionEndpointFactory Factory { get; }
@@ -43,7 +48,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_ConventionalRouted_WithEmptyRouteName_CreatesMetadataWithEmptyRouteName()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values);
             var route = CreateRoute(routeName: string.Empty, pattern: "{controller}/{action}");
 
@@ -60,12 +70,18 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_ConventionalRouted_ContainsParameterWithNullRequiredRouteValue_NoEndpointCreated()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values);
             var route = CreateRoute(
                 routeName: "Test",
                 pattern: "{controller}/{action}/{page}",
-                defaults: new RouteValueDictionary(new { action = "TestAction" }));
+                defaults: new RouteValueDictionary(new { action = "TestAction" })
+            );
 
             // Act
             var endpoints = CreateConventionalRoutedEndpoints(action, route);
@@ -111,7 +127,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_ConventionalRouted_NonAreaRouteForAreaAction_DoesNotProduceEndpoint()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", area = "admin", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                area = "admin",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values);
             var route = CreateRoute(routeName: "test", pattern: "{controller}/{action}");
 
@@ -126,7 +148,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_ConventionalRouted_AreaRouteForNonAreaAction_DoesNotProduceEndpoint()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", area = (string)null, page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                area = (string)null,
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values);
             var route = CreateRoute(routeName: "test", pattern: "{area}/{controller}/{action}");
 
@@ -141,12 +169,20 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_ConventionalRouted_RequiredValues_DoesNotMatchParameterDefaults_CreatesEndpoint()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values);
             var route = CreateRoute(
                 routeName: "test",
                 pattern: "{controller}/{action}/{id?}",
-                defaults: new RouteValueDictionary(new { controller = "TestController", action = "TestAction1" }));
+                defaults: new RouteValueDictionary(
+                    new { controller = "TestController", action = "TestAction1" }
+                )
+            );
 
             // Act
             var endpoint = CreateConventionalRoutedEndpoint(action, route);
@@ -163,12 +199,20 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_ConventionalRouted_RequiredValues_DoesNotMatchNonParameterDefaults_DoesNotProduceEndpoint()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values);
             var route = CreateRoute(
                 routeName: "test",
                 pattern: "/Blog/{*slug}",
-                defaults: new RouteValueDictionary(new { controller = "TestController", action = "TestAction1" }));
+                defaults: new RouteValueDictionary(
+                    new { controller = "TestController", action = "TestAction1" }
+                )
+            );
 
             // Act
             var endpoints = CreateConventionalRoutedEndpoints(action, route);
@@ -181,7 +225,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_ConventionalRouted_AttributeRoutes_DefaultDifferentCaseFromRouteValue_UseDefaultCase()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values, "{controller}/{action=TESTACTION}/{id?}");
             // Act
             var endpoint = CreateAttributeRoutedEndpoint(action);
@@ -212,23 +261,36 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_AttributeRouted_ContainsParameterUsingReservedNameWithConstraint_ExceptionThrown()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values, "Products/{action:int}");
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => CreateAttributeRoutedEndpoint(action));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => CreateAttributeRoutedEndpoint(action)
+            );
             Assert.Equal(
-                "Failed to update the route pattern 'Products/{action:int}' with required route values. " +
-                "This can occur when the route pattern contains parameters with reserved names such as: 'controller', 'action', 'page' and also uses route constraints such as '{action:int}'. " +
-                "To fix this error, choose a different parameter name.",
-                exception.Message);
+                "Failed to update the route pattern 'Products/{action:int}' with required route values. "
+                    + "This can occur when the route pattern contains parameters with reserved names such as: 'controller', 'action', 'page' and also uses route constraints such as '{action:int}'. "
+                    + "To fix this error, choose a different parameter name.",
+                exception.Message
+            );
         }
 
         [Fact]
         public void AddEndpoints_AttributeRouted_ContainsParameterWithNullRequiredRouteValue_EndpointCreated()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values, "{controller}/{action}/{page}");
 
             // Act
@@ -245,7 +307,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_AttributeRouted_WithRouteName_EndpointCreated()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values, "{controller}/{action}/{page}");
             action.AttributeRouteInfo.Name = "Test";
 
@@ -258,25 +325,46 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             Assert.Equal("TestAction", endpoint.RoutePattern.RequiredValues["action"]);
             Assert.False(endpoint.RoutePattern.RequiredValues.ContainsKey("page"));
             Assert.Equal("Test", endpoint.Metadata.GetMetadata<IRouteNameMetadata>().RouteName);
-            Assert.Equal("Test", endpoint.Metadata.GetMetadata<IEndpointNameMetadata>().EndpointName);
+            Assert.Equal(
+                "Test",
+                endpoint.Metadata.GetMetadata<IEndpointNameMetadata>().EndpointName
+            );
         }
 
         [Fact]
         public void RequestDelegateFactoryWorks()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values, "{controller}/{action}/{page}");
             action.AttributeRouteInfo.Name = "Test";
             RequestDelegate del = context => Task.CompletedTask;
             var requestDelegateFactory = new Mock<IRequestDelegateFactory>();
-            requestDelegateFactory.Setup(m => m.CreateRequestDelegate(action, It.IsAny<RouteValueDictionary>())).Returns(del);
+            requestDelegateFactory.Setup(
+                    m => m.CreateRequestDelegate(action, It.IsAny<RouteValueDictionary>())
+                )
+                .Returns(del);
 
             // Act
-            var factory = new ActionEndpointFactory(Services.GetRequiredService<RoutePatternTransformer>(), new[] { requestDelegateFactory.Object });
+            var factory = new ActionEndpointFactory(
+                Services.GetRequiredService<RoutePatternTransformer>(),
+                new[] { requestDelegateFactory.Object }
+            );
 
             var endpoints = new List<Endpoint>();
-            factory.AddEndpoints(endpoints, new HashSet<string>(), action, Array.Empty<ConventionalRouteEntry>(), Array.Empty<Action<EndpointBuilder>>(), createInertEndpoints: false);
+            factory.AddEndpoints(
+                endpoints,
+                new HashSet<string>(),
+                action,
+                Array.Empty<ConventionalRouteEntry>(),
+                Array.Empty<Action<EndpointBuilder>>(),
+                createInertEndpoints: false
+            );
 
             var endpoint = Assert.IsType<RouteEndpoint>(Assert.Single(endpoints));
 
@@ -288,12 +376,18 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_ConventionalRouted_WithMatchingConstraint_CreatesEndpoint()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction1", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction1",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values);
             var route = CreateRoute(
                 routeName: "test",
                 pattern: "{controller}/{action}",
-                constraints: new RouteValueDictionary(new { action = "(TestAction1|TestAction2)" }));
+                constraints: new RouteValueDictionary(new { action = "(TestAction1|TestAction2)" })
+            );
 
             // Act
             var endpoints = CreateConventionalRoutedEndpoints(action, route);
@@ -306,12 +400,18 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AddEndpoints_ConventionalRouted_WithNotMatchingConstraint_DoesNotCreateEndpoint()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values);
             var route = CreateRoute(
                 routeName: "test",
                 pattern: "{controller}/{action}",
-                constraints: new RouteValueDictionary(new { action = "(TestAction1|TestAction2)" }));
+                constraints: new RouteValueDictionary(new { action = "(TestAction1|TestAction2)" })
+            );
 
             // Act
             var endpoints = CreateConventionalRoutedEndpoints(action, route);
@@ -329,7 +429,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var routes = new[]
             {
                 CreateRoute(routeName: "test1", pattern: "{controller}/{action}/{id?}", order: 1),
-                CreateRoute(routeName: "test2", pattern: "named/{controller}/{action}/{id?}", order: 2),
+                CreateRoute(
+                    routeName: "test2",
+                    pattern: "named/{controller}/{action}/{id?}",
+                    order: 2
+                ),
             };
 
             // Act
@@ -341,7 +445,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 (ep) =>
                 {
                     var matcherEndpoint = Assert.IsType<RouteEndpoint>(ep);
-                    Assert.Equal("{controller}/{action}/{id?}", matcherEndpoint.RoutePattern.RawText);
+                    Assert.Equal(
+                        "{controller}/{action}/{id?}",
+                        matcherEndpoint.RoutePattern.RawText
+                    );
                     Assert.Equal("Index", matcherEndpoint.RoutePattern.RequiredValues["action"]);
                     Assert.Equal("Home", matcherEndpoint.RoutePattern.RequiredValues["controller"]);
                     Assert.Equal(1, matcherEndpoint.Order);
@@ -349,22 +456,35 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 (ep) =>
                 {
                     var matcherEndpoint = Assert.IsType<RouteEndpoint>(ep);
-                    Assert.Equal("named/{controller}/{action}/{id?}", matcherEndpoint.RoutePattern.RawText);
+                    Assert.Equal(
+                        "named/{controller}/{action}/{id?}",
+                        matcherEndpoint.RoutePattern.RawText
+                    );
                     Assert.Equal("Index", matcherEndpoint.RoutePattern.RequiredValues["action"]);
                     Assert.Equal("Home", matcherEndpoint.RoutePattern.RequiredValues["controller"]);
                     Assert.Equal(2, matcherEndpoint.Order);
-                });
+                }
+            );
         }
 
         [Fact]
         public void AddEndpoints_CreatesInertEndpoint()
         {
             // Arrange
-            var values = new { controller = "TestController", action = "TestAction", page = (string)null };
+            var values = new
+            {
+                controller = "TestController",
+                action = "TestAction",
+                page = (string)null
+            };
             var action = CreateActionDescriptor(values);
 
             // Act
-            var endpoints = CreateConventionalRoutedEndpoints(action, Array.Empty<ConventionalRouteEntry>(), createInertEndpoints: true);
+            var endpoints = CreateConventionalRoutedEndpoints(
+                action,
+                Array.Empty<ConventionalRouteEntry>(),
+                createInertEndpoints: true
+            );
 
             // Assert
             Assert.IsType<Endpoint>(Assert.Single(endpoints));
@@ -373,38 +493,86 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private RouteEndpoint CreateAttributeRoutedEndpoint(ActionDescriptor action)
         {
             var endpoints = new List<Endpoint>();
-            Factory.AddEndpoints(endpoints, new HashSet<string>(), action, Array.Empty<ConventionalRouteEntry>(), Array.Empty<Action<EndpointBuilder>>(), createInertEndpoints: false);
+            Factory.AddEndpoints(
+                endpoints,
+                new HashSet<string>(),
+                action,
+                Array.Empty<ConventionalRouteEntry>(),
+                Array.Empty<Action<EndpointBuilder>>(),
+                createInertEndpoints: false
+            );
             return Assert.IsType<RouteEndpoint>(Assert.Single(endpoints));
         }
 
-        private RouteEndpoint CreateConventionalRoutedEndpoint(ActionDescriptor action, string template)
+        private RouteEndpoint CreateConventionalRoutedEndpoint(
+            ActionDescriptor action,
+            string template
+        )
         {
-            return CreateConventionalRoutedEndpoint(action, new ConventionalRouteEntry(routeName: null, template, null, null, null, order: 0, new List<Action<EndpointBuilder>>()));
+            return CreateConventionalRoutedEndpoint(
+                action,
+                new ConventionalRouteEntry(
+                    routeName: null,
+                    template,
+                    null,
+                    null,
+                    null,
+                    order: 0,
+                    new List<Action<EndpointBuilder>>()
+                )
+            );
         }
 
-        private RouteEndpoint CreateConventionalRoutedEndpoint(ActionDescriptor action, ConventionalRouteEntry route)
+        private RouteEndpoint CreateConventionalRoutedEndpoint(
+            ActionDescriptor action,
+            ConventionalRouteEntry route
+        )
         {
             Assert.NotNull(action.RouteValues);
 
             var endpoints = new List<Endpoint>();
-            Factory.AddEndpoints(endpoints, new HashSet<string>(), action, new[] { route, }, Array.Empty<Action<EndpointBuilder>>(), createInertEndpoints: false);
+            Factory.AddEndpoints(
+                endpoints,
+                new HashSet<string>(),
+                action,
+                new[] { route, },
+                Array.Empty<Action<EndpointBuilder>>(),
+                createInertEndpoints: false
+            );
             var endpoint = Assert.IsType<RouteEndpoint>(Assert.Single(endpoints));
 
             // This should be true for all conventional-routed actions.
-            AssertIsSubset(new RouteValueDictionary(action.RouteValues), endpoint.RoutePattern.RequiredValues);
+            AssertIsSubset(
+                new RouteValueDictionary(action.RouteValues),
+                endpoint.RoutePattern.RequiredValues
+            );
 
             return endpoint;
         }
 
-        private IReadOnlyList<Endpoint> CreateConventionalRoutedEndpoints(ActionDescriptor action, ConventionalRouteEntry route)
+        private IReadOnlyList<Endpoint> CreateConventionalRoutedEndpoints(
+            ActionDescriptor action,
+            ConventionalRouteEntry route
+        )
         {
             return CreateConventionalRoutedEndpoints(action, new[] { route, });
         }
 
-        private IReadOnlyList<Endpoint> CreateConventionalRoutedEndpoints(ActionDescriptor action, IReadOnlyList<ConventionalRouteEntry> routes, bool createInertEndpoints = false)
+        private IReadOnlyList<Endpoint> CreateConventionalRoutedEndpoints(
+            ActionDescriptor action,
+            IReadOnlyList<ConventionalRouteEntry> routes,
+            bool createInertEndpoints = false
+        )
         {
             var endpoints = new List<Endpoint>();
-            Factory.AddEndpoints(endpoints, new HashSet<string>(), action, routes, Array.Empty<Action<EndpointBuilder>>(), createInertEndpoints);
+            Factory.AddEndpoints(
+                endpoints,
+                new HashSet<string>(),
+                action,
+                routes,
+                Array.Empty<Action<EndpointBuilder>>(),
+                createInertEndpoints
+            );
             return endpoints.ToList();
         }
 
@@ -415,16 +583,26 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IDictionary<string, object> constraints = null,
             RouteValueDictionary dataTokens = null,
             int order = 0,
-            List<Action<EndpointBuilder>> conventions = null)
+            List<Action<EndpointBuilder>> conventions = null
+        )
         {
             conventions ??= new List<Action<EndpointBuilder>>();
-            return new ConventionalRouteEntry(routeName, pattern, defaults, constraints, dataTokens, order, conventions);
+            return new ConventionalRouteEntry(
+                routeName,
+                pattern,
+                defaults,
+                constraints,
+                dataTokens,
+                order,
+                conventions
+            );
         }
 
         private ActionDescriptor CreateActionDescriptor(
             object requiredValues,
             string pattern = null,
-            IList<object> metadata = null)
+            IList<object> metadata = null
+        )
         {
             var actionDescriptor = new ActionDescriptor();
             var routeValues = new RouteValueDictionary(requiredValues);
@@ -448,7 +626,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private void AssertIsSubset(
             IReadOnlyDictionary<string, object> subset,
-            IReadOnlyDictionary<string, object> fullSet)
+            IReadOnlyDictionary<string, object> fullSet
+        )
         {
             foreach (var subsetPair in subset)
             {
@@ -460,7 +639,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private void AssertMatchingSuppressed(Endpoint endpoint, bool suppressed)
         {
-            var isEndpointSuppressed = endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching ?? false;
+            var isEndpointSuppressed =
+                endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching
+                ?? false;
             Assert.Equal(suppressed, isEndpointSuppressed);
         }
 

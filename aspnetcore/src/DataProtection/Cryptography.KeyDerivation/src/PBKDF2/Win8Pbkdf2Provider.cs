@@ -15,7 +15,13 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
     /// </summary>
     internal unsafe sealed class Win8Pbkdf2Provider : IPbkdf2Provider
     {
-        public byte[] DeriveKey(string password, byte[] salt, KeyDerivationPrf prf, int iterationCount, int numBytesRequested)
+        public byte[] DeriveKey(
+            string password,
+            byte[] salt,
+            KeyDerivationPrf prf,
+            int iterationCount,
+            int numBytesRequested
+        )
         {
             Debug.Assert(password != null);
             Debug.Assert(salt != null);
@@ -29,11 +35,25 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                 byte* pbSalt = (pbHeapAllocatedSalt != null) ? pbHeapAllocatedSalt : &dummy;
 
                 byte[] retVal = new byte[numBytesRequested];
-                using (BCryptKeyHandle keyHandle = PasswordToPbkdfKeyHandle(password, CachedAlgorithmHandles.PBKDF2, prf))
+                using (
+                    BCryptKeyHandle keyHandle = PasswordToPbkdfKeyHandle(
+                        password,
+                        CachedAlgorithmHandles.PBKDF2,
+                        prf
+                    )
+                )
                 {
                     fixed (byte* pbRetVal = retVal)
                     {
-                        DeriveKeyCore(keyHandle, algorithmName, pbSalt, (uint)salt.Length, (ulong)iterationCount, pbRetVal, (uint)retVal.Length);
+                        DeriveKeyCore(
+                            keyHandle,
+                            algorithmName,
+                            pbSalt,
+                            (uint)salt.Length,
+                            (ulong)iterationCount,
+                            pbRetVal,
+                            (uint)retVal.Length
+                        );
                     }
                     return retVal;
                 }
@@ -55,14 +75,23 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             }
         }
 
-        private static BCryptKeyHandle PasswordToPbkdfKeyHandle(string password, BCryptAlgorithmHandle pbkdf2AlgHandle, KeyDerivationPrf prf)
+        private static BCryptKeyHandle PasswordToPbkdfKeyHandle(
+            string password,
+            BCryptAlgorithmHandle pbkdf2AlgHandle,
+            KeyDerivationPrf prf
+        )
         {
             byte dummy; // CLR doesn't like pinning zero-length buffers, so this provides a valid memory address when working with zero-length buffers
 
             // Convert password string to bytes.
             // Allocate on the stack whenever we can to save allocations.
             int cbPasswordBuffer = Encoding.UTF8.GetMaxByteCount(password.Length);
-            fixed (byte* pbHeapAllocatedPasswordBuffer = (cbPasswordBuffer > Constants.MAX_STACKALLOC_BYTES) ? new byte[cbPasswordBuffer] : null)
+            fixed (
+                byte* pbHeapAllocatedPasswordBuffer =
+                    (cbPasswordBuffer > Constants.MAX_STACKALLOC_BYTES)
+                        ? new byte[cbPasswordBuffer]
+                        : null
+            )
             {
                 byte* pbPasswordBuffer = pbHeapAllocatedPasswordBuffer;
                 if (pbPasswordBuffer == null)
@@ -83,11 +112,22 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                     int cbPasswordBufferUsed; // we're not filling the entire buffer, just a partial buffer
                     fixed (char* pszPassword = password)
                     {
-                        cbPasswordBufferUsed = Encoding.UTF8.GetBytes(pszPassword, password.Length, pbPasswordBuffer, cbPasswordBuffer);
+                        cbPasswordBufferUsed = Encoding.UTF8.GetBytes(
+                            pszPassword,
+                            password.Length,
+                            pbPasswordBuffer,
+                            cbPasswordBuffer
+                        );
                     }
 
-                    return PasswordToPbkdfKeyHandleStep2(pbkdf2AlgHandle, pbPasswordBuffer, (uint)cbPasswordBufferUsed, prf);
+                    return PasswordToPbkdfKeyHandleStep2(
+                        pbkdf2AlgHandle,
+                        pbPasswordBuffer,
+                        (uint)cbPasswordBufferUsed,
+                        prf
+                    );
                 }
+
                 finally
                 {
                     UnsafeBufferUtil.SecureZeroMemory(pbPasswordBuffer, cbPasswordBuffer);
@@ -95,7 +135,12 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             }
         }
 
-        private static BCryptKeyHandle PasswordToPbkdfKeyHandleStep2(BCryptAlgorithmHandle pbkdf2AlgHandle, byte* pbPassword, uint cbPassword, KeyDerivationPrf prf)
+        private static BCryptKeyHandle PasswordToPbkdfKeyHandleStep2(
+            BCryptAlgorithmHandle pbkdf2AlgHandle,
+            byte* pbPassword,
+            uint cbPassword,
+            KeyDerivationPrf prf
+        )
         {
             const uint PBKDF2_MAX_KEYLENGTH_IN_BYTES = 2048; // GetSupportedKeyLengths() on a Win8 box; value should never be lowered in any future version of Windows
             if (cbPassword <= PBKDF2_MAX_KEYLENGTH_IN_BYTES)
@@ -126,7 +171,9 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                 }
 
                 // Final sanity check: don't hash the password if the HMAC key initialization function wouldn't have done it for us.
-                if (cbPassword <= prfAlgorithmHandle.GetHashBlockLength() /* in bytes */)
+                if (
+                    cbPassword <= prfAlgorithmHandle.GetHashBlockLength() /* in bytes */
+                )
                 {
                     return pbkdf2AlgHandle.GenerateSymmetricKey(pbPassword, cbPassword);
                 }
@@ -140,10 +187,19 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                     {
                         using (var hashHandle = prfAlgorithmHandle.CreateHash())
                         {
-                            hashHandle.HashData(pbPassword, cbPassword, pbPasswordDigest, cbPasswordDigest);
+                            hashHandle.HashData(
+                                pbPassword,
+                                cbPassword,
+                                pbPasswordDigest,
+                                cbPasswordDigest
+                            );
                         }
-                        return pbkdf2AlgHandle.GenerateSymmetricKey(pbPasswordDigest, cbPasswordDigest);
+                        return pbkdf2AlgHandle.GenerateSymmetricKey(
+                            pbPasswordDigest,
+                            cbPasswordDigest
+                        );
                     }
+
                     finally
                     {
                         UnsafeBufferUtil.SecureZeroMemory(pbPasswordDigest, cbPasswordDigest);
@@ -152,7 +208,15 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             }
         }
 
-        private static void DeriveKeyCore(BCryptKeyHandle pbkdf2KeyHandle, string hashAlgorithm, byte* pbSalt, uint cbSalt, ulong iterCount, byte* pbDerivedBytes, uint cbDerivedBytes)
+        private static void DeriveKeyCore(
+            BCryptKeyHandle pbkdf2KeyHandle,
+            string hashAlgorithm,
+            byte* pbSalt,
+            uint cbSalt,
+            ulong iterCount,
+            byte* pbDerivedBytes,
+            uint cbDerivedBytes
+        )
         {
             // First, build the buffers necessary to pass (hash alg, salt, iter count) into the KDF
             BCryptBuffer* pBuffers = stackalloc BCryptBuffer[3];
@@ -180,16 +244,20 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                 // Finally, import the KDK into the KDF algorithm, then invoke the KDF
                 uint numBytesDerived;
                 int ntstatus = UnsafeNativeMethods.BCryptKeyDerivation(
-                        hKey: pbkdf2KeyHandle,
-                        pParameterList: &bufferDesc,
-                        pbDerivedKey: pbDerivedBytes,
-                        cbDerivedKey: cbDerivedBytes,
-                        pcbResult: out numBytesDerived,
-                        dwFlags: 0);
+                    hKey: pbkdf2KeyHandle,
+                    pParameterList: &bufferDesc,
+                    pbDerivedKey: pbDerivedBytes,
+                    cbDerivedKey: cbDerivedBytes,
+                    pcbResult: out numBytesDerived,
+                    dwFlags: 0
+                );
                 UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
 
                 // Final sanity checks before returning control to caller.
-                CryptoUtil.Assert(numBytesDerived == cbDerivedBytes, "numBytesDerived == cbDerivedBytes");
+                CryptoUtil.Assert(
+                    numBytesDerived == cbDerivedBytes,
+                    "numBytesDerived == cbDerivedBytes"
+                );
             }
         }
 

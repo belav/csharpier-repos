@@ -42,22 +42,32 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            if (method.IsGenericMethod
+            if (
+                method.IsGenericMethod
                 && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
-                && arguments[0].Type == typeof(byte[]))
+                && arguments[0].Type == typeof(byte[])
+            )
             {
                 var source = arguments[0];
                 var sourceTypeMapping = source.TypeMapping;
 
                 var value = arguments[1] is SqlConstantExpression constantValue
-                    ? (SqlExpression)_sqlExpressionFactory.Constant(new[] { (byte)constantValue.Value! }, sourceTypeMapping)
-                    : _sqlExpressionFactory.Convert(arguments[1], typeof(byte[]), sourceTypeMapping);
+                    ? (SqlExpression)_sqlExpressionFactory.Constant(
+                          new[] { (byte)constantValue.Value! },
+                          sourceTypeMapping
+                      )
+                    : _sqlExpressionFactory.Convert(
+                          arguments[1],
+                          typeof(byte[]),
+                          sourceTypeMapping
+                      );
 
                 return _sqlExpressionFactory.GreaterThan(
                     _sqlExpressionFactory.Function(
@@ -65,13 +75,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         new[] { value, source },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true },
-                        typeof(int)),
-                    _sqlExpressionFactory.Constant(0));
+                        typeof(int)
+                    ),
+                    _sqlExpressionFactory.Constant(0)
+                );
             }
 
-            if (method.IsGenericMethod
-                && method.GetGenericMethodDefinition().Equals(EnumerableMethods.FirstWithoutPredicate)
-                && arguments[0].Type == typeof(byte[]))
+            if (
+                method.IsGenericMethod
+                && method.GetGenericMethodDefinition()
+                    .Equals(EnumerableMethods.FirstWithoutPredicate)
+                && arguments[0].Type == typeof(byte[])
+            )
             {
                 return _sqlExpressionFactory.Convert(
                     _sqlExpressionFactory.Function(
@@ -84,8 +99,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true, true },
-                        typeof(byte[])),
-                    method.ReturnType);
+                        typeof(byte[])
+                    ),
+                    method.ReturnType
+                );
             }
 
             return null;

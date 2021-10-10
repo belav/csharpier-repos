@@ -28,7 +28,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioDecompilerEulaService(SVsServiceProvider serviceProvider, IThreadingContext threadingContext)
+        public VisualStudioDecompilerEulaService(
+            SVsServiceProvider serviceProvider,
+            IThreadingContext threadingContext
+        )
         {
             _serviceProvider = (IAsyncServiceProvider)serviceProvider;
             _threadingContext = threadingContext;
@@ -36,30 +39,44 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         public async Task<bool> IsAcceptedAsync(CancellationToken cancellationToken)
         {
-            var roslynPackage = await TryGetRoslynPackageAsync(cancellationToken).ConfigureAwait(false);
+            var roslynPackage = await TryGetRoslynPackageAsync(cancellationToken)
+                .ConfigureAwait(false);
             return roslynPackage?.IsDecompilerEulaAccepted ?? false;
         }
 
         public async Task MarkAcceptedAsync(CancellationToken cancellationToken)
         {
-            var roslynPackage = await TryGetRoslynPackageAsync(cancellationToken).ConfigureAwait(false);
+            var roslynPackage = await TryGetRoslynPackageAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (roslynPackage is object)
             {
                 roslynPackage.IsDecompilerEulaAccepted = true;
             }
         }
 
-        private async ValueTask<RoslynPackage?> TryGetRoslynPackageAsync(CancellationToken cancellationToken)
+        private async ValueTask<RoslynPackage?> TryGetRoslynPackageAsync(
+            CancellationToken cancellationToken
+        )
         {
             if (_roslynPackage is null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
-                var shell = (IVsShell7?)await _serviceProvider.GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
+                var shell = (IVsShell7?)await _serviceProvider.GetServiceAsync(typeof(SVsShell))
+                    .ConfigureAwait(true);
                 Assumes.Present(shell);
                 await shell.LoadPackageAsync(typeof(RoslynPackage).GUID);
 
-                if (ErrorHandler.Succeeded(((IVsShell)shell).IsPackageLoaded(typeof(RoslynPackage).GUID, out var package)))
+                if (
+                    ErrorHandler.Succeeded(
+                        ((IVsShell)shell).IsPackageLoaded(
+                            typeof(RoslynPackage).GUID,
+                            out var package
+                        )
+                    )
+                )
                 {
                     _roslynPackage = (RoslynPackage)package;
                 }

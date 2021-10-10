@@ -20,8 +20,9 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
     /// </summary>
     internal class NewtonsoftJsonResultExecutor : IActionResultExecutor<JsonResult>
     {
-        private static readonly string DefaultContentType = new MediaTypeHeaderValue("application/json")
-        {
+        private static readonly string DefaultContentType = new MediaTypeHeaderValue(
+            "application/json"
+        ) {
             Encoding = Encoding.UTF8
         }.ToString();
 
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             ILogger<NewtonsoftJsonResultExecutor> logger,
             IOptions<MvcOptions> mvcOptions,
             IOptions<MvcNewtonsoftJsonOptions> jsonOptions,
-            ArrayPool<char> charPool)
+            ArrayPool<char> charPool
+        )
         {
             if (writerFactory == null)
             {
@@ -102,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 response.ContentType,
                 DefaultContentType,
                 out var resolvedContentType,
-                out var resolvedContentTypeEncoding);
+                out var resolvedContentTypeEncoding
+            );
 
             response.ContentType = resolvedContentType;
 
@@ -123,7 +126,12 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
 
             try
             {
-                await using (var writer = _writerFactory.CreateWriter(responseStream, resolvedContentTypeEncoding))
+                await using (
+                    var writer = _writerFactory.CreateWriter(
+                        responseStream,
+                        resolvedContentTypeEncoding
+                    )
+                )
                 {
                     using var jsonWriter = new JsonTextWriter(writer);
                     jsonWriter.ArrayPool = _charPool;
@@ -132,7 +140,13 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
 
                     var jsonSerializer = JsonSerializer.Create(jsonSerializerSettings);
                     var value = result.Value;
-                    if (value != null && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader))
+                    if (
+                        value != null
+                        && _asyncEnumerableReaderFactory.TryGetReader(
+                            value.GetType(),
+                            out var reader
+                        )
+                    )
                     {
                         Log.BufferingAsyncEnumerable(_logger, value);
                         value = await reader(value);
@@ -146,6 +160,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                     await fileBufferingWriteStream.DrainBufferAsync(response.Body);
                 }
             }
+
             finally
             {
                 if (fileBufferingWriteStream != null)
@@ -166,10 +181,13 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             {
                 if (!(serializerSettings is JsonSerializerSettings settingsFromResult))
                 {
-                    throw new InvalidOperationException(Resources.FormatProperty_MustBeInstanceOfType(
-                        nameof(JsonResult),
-                        nameof(JsonResult.SerializerSettings),
-                        typeof(JsonSerializerSettings)));
+                    throw new InvalidOperationException(
+                        Resources.FormatProperty_MustBeInstanceOfType(
+                            nameof(JsonResult),
+                            nameof(JsonResult.SerializerSettings),
+                            typeof(JsonSerializerSettings)
+                        )
+                    );
                 }
 
                 return settingsFromResult;
@@ -178,17 +196,21 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
 
         private static class Log
         {
-            private static readonly Action<ILogger, string?, Exception?> _jsonResultExecuting = LoggerMessage.Define<string?>(
-                LogLevel.Information,
-                new EventId(1, "JsonResultExecuting"),
-                "Executing JsonResult, writing value of type '{Type}'.",
-                skipEnabledCheck: true);
+            private static readonly Action<ILogger, string?, Exception?> _jsonResultExecuting =
+                LoggerMessage.Define<string?>(
+                    LogLevel.Information,
+                    new EventId(1, "JsonResultExecuting"),
+                    "Executing JsonResult, writing value of type '{Type}'.",
+                    skipEnabledCheck: true
+                );
 
-            private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable = LoggerMessage.Define<string?>(
-                LogLevel.Debug,
-                new EventId(1, "BufferingAsyncEnumerable"),
-                "Buffering IAsyncEnumerable instance of type '{Type}'.",
-                skipEnabledCheck: true);
+            private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable =
+                LoggerMessage.Define<string?>(
+                    LogLevel.Debug,
+                    new EventId(1, "BufferingAsyncEnumerable"),
+                    "Buffering IAsyncEnumerable instance of type '{Type}'.",
+                    skipEnabledCheck: true
+                );
 
             public static void JsonResultExecuting(ILogger logger, object? value)
             {

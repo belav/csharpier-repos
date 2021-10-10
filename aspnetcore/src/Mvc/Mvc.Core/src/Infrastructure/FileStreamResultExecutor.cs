@@ -13,16 +13,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     /// <summary>
     /// An <see cref="IActionResultExecutor{FileStreamResult}"/> for a file stream result.
     /// </summary>
-    public class FileStreamResultExecutor : FileResultExecutorBase, IActionResultExecutor<FileStreamResult>
+    public class FileStreamResultExecutor
+        : FileResultExecutorBase,
+          IActionResultExecutor<FileStreamResult>
     {
         /// <summary>
         /// Initializes a new <see cref="FileStreamResultExecutor"/>.
         /// </summary>
         /// <param name="loggerFactory">The factory used to create loggers.</param>
         public FileStreamResultExecutor(ILoggerFactory loggerFactory)
-            : base(CreateLogger<FileStreamResultExecutor>(loggerFactory))
-        {
-        }
+            : base(CreateLogger<FileStreamResultExecutor>(loggerFactory)) { }
 
         /// <inheritdoc />
         public virtual async Task ExecuteAsync(ActionContext context, FileStreamResult result)
@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     fileLength,
                     result.EnableRangeProcessing,
                     result.LastModified,
-                    result.EntityTag);
+                    result.EntityTag
+                );
 
                 if (!serveBody)
                 {
@@ -75,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             ActionContext context,
             FileStreamResult result,
             RangeItemHeaderValue? range,
-            long rangeLength)
+            long rangeLength
+        )
         {
             if (context == null)
             {

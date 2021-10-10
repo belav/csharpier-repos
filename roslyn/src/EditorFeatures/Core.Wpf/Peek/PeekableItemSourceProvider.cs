@@ -31,14 +31,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
         public PeekableItemSourceProvider(
             IPeekableItemFactory peekableItemFactory,
             IPeekResultFactory peekResultFactory,
-            IWaitIndicator waitIndicator)
+            IWaitIndicator waitIndicator
+        )
         {
             _peekableItemFactory = peekableItemFactory;
             _peekResultFactory = peekResultFactory;
             _waitIndicator = waitIndicator;
         }
 
-        public IPeekableItemSource TryCreatePeekableItemSource(ITextBuffer textBuffer)
-            => textBuffer.Properties.GetOrCreateSingletonProperty(() => new PeekableItemSource(textBuffer, _peekableItemFactory, _peekResultFactory, _waitIndicator));
+        public IPeekableItemSource TryCreatePeekableItemSource(ITextBuffer textBuffer) =>
+            textBuffer.Properties.GetOrCreateSingletonProperty(
+                () =>
+                    new PeekableItemSource(
+                        textBuffer,
+                        _peekableItemFactory,
+                        _peekResultFactory,
+                        _waitIndicator
+                    )
+            );
     }
 }

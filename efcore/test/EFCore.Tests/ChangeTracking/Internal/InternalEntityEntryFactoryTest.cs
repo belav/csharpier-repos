@@ -29,7 +29,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var factory = contextServices.GetRequiredService<IInternalEntityEntryFactory>();
 
             var entity = new RedHook();
-            var entry = factory.Create(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+            var entry = factory.Create(
+                stateManager,
+                (IEntityType)entityTypeBuilder.Metadata,
+                entity
+            );
 
             Assert.IsType<InternalClrEntityEntry>(entry);
 
@@ -54,7 +58,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var factory = contextServices.GetRequiredService<IInternalEntityEntryFactory>();
 
             var entity = new RedHook();
-            var entry = factory.Create(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+            var entry = factory.Create(
+                stateManager,
+                (IEntityType)entityTypeBuilder.Metadata,
+                entity
+            );
 
             Assert.IsType<InternalMixedEntityEntry>(entry);
 

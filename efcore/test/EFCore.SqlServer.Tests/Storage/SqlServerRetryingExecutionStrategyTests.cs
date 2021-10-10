@@ -39,12 +39,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 Assert.True(
                     Math.Abs((delays[i] - expectedDelays[i]).TotalMilliseconds)
-                    <= expectedDelays[i].TotalMilliseconds * 0.1 + 1,
-                    $"Expected: {expectedDelays[i]}; Actual: {delays[i]}");
+                        <= expectedDelays[i].TotalMilliseconds * 0.1 + 1,
+                    $"Expected: {expectedDelays[i]}; Actual: {delays[i]}"
+                );
             }
         }
 
-        protected DbContext CreateContext()
-            => SqlServerTestHelpers.Instance.CreateContext();
+        protected DbContext CreateContext() => SqlServerTestHelpers.Instance.CreateContext();
     }
 }

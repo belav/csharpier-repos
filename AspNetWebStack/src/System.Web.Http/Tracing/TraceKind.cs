@@ -12,12 +12,10 @@ namespace System.Web.Http.Tracing
         /// Single trace, not part of a Begin/End trace pair
         /// </summary>
         Trace = 0,
-
         /// <summary>
         /// Trace marking the beginning of some operation.
         /// </summary>
         Begin,
-
         /// <summary>
         /// Trace marking the end of some operation.
         /// </summary>

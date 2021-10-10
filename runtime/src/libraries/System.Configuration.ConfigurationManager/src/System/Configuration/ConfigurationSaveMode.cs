@@ -9,10 +9,8 @@ namespace System.Configuration
         // If a setting is modified, it'll get written no matter it's
         // same as the parent or not.
         Modified = 0,
-
         // If a setting is the same as in its parent, it won't get written
         Minimal = 1,
-
         // It writes out all the properties in the configurationat that level,
         // including the one from the parents.  Used for writing out the
         // full config settings at a file.

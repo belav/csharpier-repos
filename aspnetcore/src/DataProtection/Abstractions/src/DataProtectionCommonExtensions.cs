@@ -26,7 +26,10 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <see cref="IDataProtectionProvider.CreateProtector(string)"/>. See that method's
         /// documentation for more information.
         /// </remarks>
-        public static IDataProtector CreateProtector(this IDataProtectionProvider provider, IEnumerable<string> purposes)
+        public static IDataProtector CreateProtector(
+            this IDataProtectionProvider provider,
+            IEnumerable<string> purposes
+        )
         {
             if (provider == null)
             {
@@ -44,15 +47,23 @@ namespace Microsoft.AspNetCore.DataProtection
             {
                 if (purpose == null)
                 {
-                    throw new ArgumentException(Resources.DataProtectionExtensions_NullPurposesCollection, nameof(purposes));
+                    throw new ArgumentException(
+                        Resources.DataProtectionExtensions_NullPurposesCollection,
+                        nameof(purposes)
+                    );
                 }
-                retVal = retVal.CreateProtector(purpose) ?? CryptoUtil.Fail<IDataProtector>("CreateProtector returned null.");
+                retVal =
+                    retVal.CreateProtector(purpose)
+                    ?? CryptoUtil.Fail<IDataProtector>("CreateProtector returned null.");
                 collectionIsEmpty = false;
             }
 
             if (collectionIsEmpty)
             {
-                throw new ArgumentException(Resources.DataProtectionExtensions_NullPurposesCollection, nameof(purposes));
+                throw new ArgumentException(
+                    Resources.DataProtectionExtensions_NullPurposesCollection,
+                    nameof(purposes)
+                );
             }
 
             Debug.Assert(retVal is IDataProtector); // CreateProtector is supposed to return an instance of this interface
@@ -72,7 +83,11 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <see cref="IDataProtectionProvider.CreateProtector(string)"/>. See that method's
         /// documentation for more information.
         /// </remarks>
-        public static IDataProtector CreateProtector(this IDataProtectionProvider provider, string purpose, params string[] subPurposes)
+        public static IDataProtector CreateProtector(
+            this IDataProtectionProvider provider,
+            string purpose,
+            params string[] subPurposes
+        )
         {
             if (provider == null)
             {
@@ -102,7 +117,9 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <param name="services">The service provider from which to retrieve the <see cref="IDataProtectionProvider"/>.</param>
         /// <returns>An <see cref="IDataProtectionProvider"/>. This method is guaranteed never to return null.</returns>
         /// <exception cref="InvalidOperationException">If no <see cref="IDataProtectionProvider"/> service exists in <paramref name="services"/>.</exception>
-        public static IDataProtectionProvider GetDataProtectionProvider(this IServiceProvider services)
+        public static IDataProtectionProvider GetDataProtectionProvider(
+            this IServiceProvider services
+        )
         {
             if (services == null)
             {
@@ -111,10 +128,16 @@ namespace Microsoft.AspNetCore.DataProtection
 
             // We have our own implementation of GetRequiredService<T> since we don't want to
             // take a dependency on DependencyInjection.Interfaces.
-            var provider = (IDataProtectionProvider?)services.GetService(typeof(IDataProtectionProvider));
+            var provider = (IDataProtectionProvider?)services.GetService(
+                typeof(IDataProtectionProvider)
+            );
             if (provider == null)
             {
-                throw new InvalidOperationException(Resources.FormatDataProtectionExtensions_NoService(typeof(IDataProtectionProvider).FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatDataProtectionExtensions_NoService(
+                        typeof(IDataProtectionProvider).FullName
+                    )
+                );
             }
             return provider;
         }
@@ -132,7 +155,10 @@ namespace Microsoft.AspNetCore.DataProtection
         /// then <see cref="CreateProtector(IDataProtectionProvider, IEnumerable{string})"/>. See those methods'
         /// documentation for more information.
         /// </remarks>
-        public static IDataProtector GetDataProtector(this IServiceProvider services, IEnumerable<string> purposes)
+        public static IDataProtector GetDataProtector(
+            this IServiceProvider services,
+            IEnumerable<string> purposes
+        )
         {
             if (services == null)
             {
@@ -161,7 +187,11 @@ namespace Microsoft.AspNetCore.DataProtection
         /// then <see cref="CreateProtector(IDataProtectionProvider, string, string[])"/>. See those methods'
         /// documentation for more information.
         /// </remarks>
-        public static IDataProtector GetDataProtector(this IServiceProvider services, string purpose, params string[] subPurposes)
+        public static IDataProtector GetDataProtector(
+            this IServiceProvider services,
+            string purpose,
+            params string[] subPurposes
+        )
         {
             if (services == null)
             {

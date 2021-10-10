@@ -126,8 +126,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             {
                 var candidateAssets = new Dictionary<(string, string), int>();
                 var rid = RuntimeInformation.RuntimeIdentifier;
-                var rids = DependencyContext.Default!.RuntimeGraph.FirstOrDefault(g => g.Runtime == rid)?.Fallbacks.ToList()
-                    ?? new List<string>();
+                var rids =
+                    DependencyContext.Default!.RuntimeGraph.FirstOrDefault(
+                        g => g.Runtime == rid
+                    )?.Fallbacks.ToList() ?? new List<string>();
                 rids.Insert(0, rid);
 
                 foreach (var library in DependencyContext.Default.RuntimeLibraries)
@@ -136,10 +138,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     {
                         foreach (var file in group.RuntimeFiles)
                         {
-                            if (string.Equals(
-                                Path.GetFileName(file.Path),
-                                "mod_spatialite" + _sharedLibraryExtension,
-                                StringComparison.OrdinalIgnoreCase))
+                            if (
+                                string.Equals(
+                                    Path.GetFileName(file.Path),
+                                    "mod_spatialite" + _sharedLibraryExtension,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                             {
                                 var fallbacks = rids.IndexOf(group.Runtime);
                                 if (fallbacks != -1)
@@ -152,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 }
 
                 var assetPath = candidateAssets.OrderBy(p => p.Value)
-                    .Select(p => p.Key).FirstOrDefault();
+                    .Select(p => p.Key)
+                    .FirstOrDefault();
                 if (assetPath != default)
                 {
                     string? assetDirectory = null;
@@ -161,18 +167,26 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         // NB: This enables framework-dependent deployments
                         assetDirectory = Path.Combine(
                             AppContext.BaseDirectory,
-                            Path.GetDirectoryName(assetPath.Item2.Replace('/', Path.DirectorySeparatorChar))!);
+                            Path.GetDirectoryName(
+                                assetPath.Item2.Replace('/', Path.DirectorySeparatorChar)
+                            )!
+                        );
                     }
                     else
                     {
                         string? assetFullPath = null;
-                        var probingDirectories = ((string)AppDomain.CurrentDomain.GetData("PROBING_DIRECTORIES")!)
-                            .Split(Path.PathSeparator);
+                        var probingDirectories = (
+                            (string)AppDomain.CurrentDomain.GetData("PROBING_DIRECTORIES")!
+                        ).Split(Path.PathSeparator);
                         foreach (var directory in probingDirectories)
                         {
                             var candidateFullPath = Path.Combine(
                                 directory,
-                                (assetPath.Item1 + "/" + assetPath.Item2).Replace('/', Path.DirectorySeparatorChar));
+                                (assetPath.Item1 + "/" + assetPath.Item2).Replace(
+                                    '/',
+                                    Path.DirectorySeparatorChar
+                                )
+                            );
                             if (File.Exists(candidateFullPath))
                             {
                                 assetFullPath = candidateFullPath;
@@ -198,16 +212,23 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         currentPath = Environment.GetEnvironmentVariable(_pathVariableName!);
                     }
 
-                    if (currentPath == null
-                        || !currentPath.Split(Path.PathSeparator).Any(
-                            p => string.Equals(
-                                p.TrimEnd(Path.DirectorySeparatorChar),
-                                assetDirectory,
-                                StringComparison.OrdinalIgnoreCase)))
+                    if (
+                        currentPath == null
+                        || !currentPath.Split(Path.PathSeparator)
+                            .Any(
+                                p =>
+                                    string.Equals(
+                                        p.TrimEnd(Path.DirectorySeparatorChar),
+                                        assetDirectory,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                            )
+                    )
                     {
                         Environment.SetEnvironmentVariable(
                             _pathVariableName!,
-                            assetDirectory + Path.PathSeparator + currentPath);
+                            assetDirectory + Path.PathSeparator + currentPath
+                        );
                     }
                 }
             }

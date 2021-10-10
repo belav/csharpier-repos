@@ -99,9 +99,17 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt64>, byte>(ref testStruct._fld1), ref Unsafe.As<UInt64, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<UInt64>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<UInt64, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+                );
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt64>, byte>(ref testStruct._fld2), ref Unsafe.As<UInt64, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<UInt64>, byte>(ref testStruct._fld2),
+                    ref Unsafe.As<UInt64, byte>(ref _data2[0]),
+                    (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+                );
                 return testStruct;
             }
 
@@ -116,11 +124,12 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
 
-        private static UInt64[] _data1 = new UInt64[2] {2, 20};
-        private static UInt64[] _data2 = new UInt64[2] {25, 95};
-        private static UInt64[] _expectedRet = new UInt64[2] {500, 0};
+        private static UInt64[] _data1 = new UInt64[2] { 2, 20 };
+        private static UInt64[] _data2 = new UInt64[2] { 25, 95 };
+        private static UInt64[] _expectedRet = new UInt64[2] { 500, 0 };
 
         private static Vector128<UInt64> _clsVar1;
         private static Vector128<UInt64> _clsVar2;
@@ -132,20 +141,40 @@ namespace JIT.HardwareIntrinsics.X86
 
         static PclmulqdqOpTest__CarrylessMultiplyUInt641()
         {
-
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt64>, byte>(ref _clsVar1), ref Unsafe.As<UInt64, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt64>, byte>(ref _clsVar2), ref Unsafe.As<UInt64, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt64>, byte>(ref _clsVar1),
+                ref Unsafe.As<UInt64, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt64>, byte>(ref _clsVar2),
+                ref Unsafe.As<UInt64, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
         }
 
         public PclmulqdqOpTest__CarrylessMultiplyUInt641()
         {
             Succeeded = true;
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt64>, byte>(ref _fld1), ref Unsafe.As<UInt64, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt64>, byte>(ref _fld1),
+                ref Unsafe.As<UInt64, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt64>, byte>(ref _fld2), ref Unsafe.As<UInt64, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt64>, byte>(ref _fld2),
+                ref Unsafe.As<UInt64, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
 
-            _dataTable = new SimpleBinaryOpTest__DataTable<UInt64, UInt64, UInt64>(_data1, _data2, new UInt64[RetElementCount], LargestVectorSize);
+            _dataTable = new SimpleBinaryOpTest__DataTable<UInt64, UInt64, UInt64>(
+                _data1,
+                _data2,
+                new UInt64[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Pclmulqdq.IsSupported;
@@ -198,12 +227,24 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Pclmulqdq).GetMethod(nameof(Pclmulqdq.CarrylessMultiply), new Type[] { typeof(Vector128<UInt64>), typeof(Vector128<UInt64>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<UInt64>>(_dataTable.inArray1Ptr),
-                                        Unsafe.Read<Vector128<UInt64>>(_dataTable.inArray2Ptr),
-                                        (byte)1
-                                     });
+            var result = typeof(Pclmulqdq).GetMethod(
+                    nameof(Pclmulqdq.CarrylessMultiply),
+                    new Type[]
+                    {
+                        typeof(Vector128<UInt64>),
+                        typeof(Vector128<UInt64>),
+                        typeof(byte)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector128<UInt64>>(_dataTable.inArray1Ptr),
+                        Unsafe.Read<Vector128<UInt64>>(_dataTable.inArray2Ptr),
+                        (byte)1
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt64>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -213,12 +254,24 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Pclmulqdq).GetMethod(nameof(Pclmulqdq.CarrylessMultiply), new Type[] { typeof(Vector128<UInt64>), typeof(Vector128<UInt64>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Pclmulqdq.LoadVector128((UInt64*)(_dataTable.inArray1Ptr)),
-                                        Pclmulqdq.LoadVector128((UInt64*)(_dataTable.inArray2Ptr)),
-                                        (byte)1
-                                     });
+            var result = typeof(Pclmulqdq).GetMethod(
+                    nameof(Pclmulqdq.CarrylessMultiply),
+                    new Type[]
+                    {
+                        typeof(Vector128<UInt64>),
+                        typeof(Vector128<UInt64>),
+                        typeof(byte)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pclmulqdq.LoadVector128((UInt64*)(_dataTable.inArray1Ptr)),
+                        Pclmulqdq.LoadVector128((UInt64*)(_dataTable.inArray2Ptr)),
+                        (byte)1
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt64>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -228,12 +281,24 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Pclmulqdq).GetMethod(nameof(Pclmulqdq.CarrylessMultiply), new Type[] { typeof(Vector128<UInt64>), typeof(Vector128<UInt64>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Pclmulqdq.LoadAlignedVector128((UInt64*)(_dataTable.inArray1Ptr)),
-                                        Pclmulqdq.LoadAlignedVector128((UInt64*)(_dataTable.inArray2Ptr)),
-                                        (byte)1
-                                     });
+            var result = typeof(Pclmulqdq).GetMethod(
+                    nameof(Pclmulqdq.CarrylessMultiply),
+                    new Type[]
+                    {
+                        typeof(Vector128<UInt64>),
+                        typeof(Vector128<UInt64>),
+                        typeof(byte)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pclmulqdq.LoadAlignedVector128((UInt64*)(_dataTable.inArray1Ptr)),
+                        Pclmulqdq.LoadAlignedVector128((UInt64*)(_dataTable.inArray2Ptr)),
+                        (byte)1
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt64>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -243,11 +308,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Pclmulqdq.CarrylessMultiply(
-                _clsVar1,
-                _clsVar2,
-                1
-            );
+            var result = Pclmulqdq.CarrylessMultiply(_clsVar1, _clsVar2, 1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -352,10 +413,13 @@ namespace JIT.HardwareIntrinsics.X86
 
         private void ValidateResult(void* result, [CallerMemberName] string method = "")
         {
-
             UInt64[] outArray = new UInt64[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt64, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt64, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
 
             ValidateResult(outArray, method);
         }
@@ -366,22 +430,27 @@ namespace JIT.HardwareIntrinsics.X86
 
             for (int i = 0; i < result.Length; i++)
             {
-                if (result[i] != _expectedRet[i] )
+                if (result[i] != _expectedRet[i])
                 {
                     succeeded = false;
-                } 
+                }
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Pclmulqdq)}.{nameof(Pclmulqdq.CarrylessMultiply)}<UInt64>(Vector128<UInt64>, 1): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  expectedRet: ({string.Join(", ", _expectedRet)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Pclmulqdq)}.{nameof(Pclmulqdq.CarrylessMultiply)}<UInt64>(Vector128<UInt64>, 1): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  expectedRet: ({string.Join(", ", _expectedRet)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
             }
         }
-
     }
 }

@@ -18,7 +18,13 @@ namespace System.IO.Compression.Tests
             string noBaseDir = GetTestFilePath();
             ZipFile.CreateFromDirectory(folderName, noBaseDir);
 
-            await IsZipSameAsDirAsync(noBaseDir, folderName, ZipArchiveMode.Read, requireExplicit: false, checkTimes: false);
+            await IsZipSameAsDirAsync(
+                noBaseDir,
+                folderName,
+                ZipArchiveMode.Read,
+                requireExplicit: false,
+                checkTimes: false
+            );
         }
 
         [Fact]
@@ -28,12 +34,18 @@ namespace System.IO.Compression.Tests
             string withBaseDir = GetTestFilePath();
             ZipFile.CreateFromDirectory(folderName, withBaseDir, CompressionLevel.Optimal, true);
 
-            IEnumerable<string> expected = Directory.EnumerateFiles(zfolder("normal"), "*", SearchOption.AllDirectories);
+            IEnumerable<string> expected = Directory.EnumerateFiles(
+                zfolder("normal"),
+                "*",
+                SearchOption.AllDirectories
+            );
             using (ZipArchive actual_withbasedir = ZipFile.Open(withBaseDir, ZipArchiveMode.Read))
             {
                 foreach (ZipArchiveEntry actualEntry in actual_withbasedir.Entries)
                 {
-                    string expectedFile = expected.Single(i => Path.GetFileName(i).Equals(actualEntry.Name));
+                    string expectedFile = expected.Single(
+                        i => Path.GetFileName(i).Equals(actualEntry.Name)
+                    );
                     Assert.StartsWith("normal", actualEntry.FullName);
                     Assert.Equal(new FileInfo(expectedFile).Length, actualEntry.Length);
                     using (Stream expectedStream = File.OpenRead(expectedFile))
@@ -55,8 +67,18 @@ namespace System.IO.Compression.Tests
             using (ZipArchive archive = ZipFile.OpenRead(noBaseDir))
             {
                 IEnumerable<string> actual = archive.Entries.Select(entry => entry.Name);
-                IEnumerable<string> expected = Directory.EnumerateFileSystemEntries(zfolder("unicode"), "*", SearchOption.AllDirectories).ToList();
-                Assert.True(Enumerable.SequenceEqual(expected.Select(i => Path.GetFileName(i)), actual.Select(i => i)));
+                IEnumerable<string> expected = Directory.EnumerateFileSystemEntries(
+                        zfolder("unicode"),
+                        "*",
+                        SearchOption.AllDirectories
+                    )
+                    .ToList();
+                Assert.True(
+                    Enumerable.SequenceEqual(
+                        expected.Select(i => Path.GetFileName(i)),
+                        actual.Select(i => i)
+                    )
+                );
             }
         }
 
@@ -70,8 +92,12 @@ namespace System.IO.Compression.Tests
 
                 string archivePath = GetTestFilePath();
                 ZipFile.CreateFromDirectory(
-                    rootDir.FullName, archivePath,
-                    CompressionLevel.Optimal, false, Encoding.UTF8);
+                    rootDir.FullName,
+                    archivePath,
+                    CompressionLevel.Optimal,
+                    false,
+                    Encoding.UTF8
+                );
 
                 using (ZipArchive archive = ZipFile.OpenRead(archivePath))
                 {
@@ -92,10 +118,20 @@ namespace System.IO.Compression.Tests
 
                 string archivePath = GetTestFilePath();
                 ZipFile.CreateFromDirectory(
-                    rootDir.FullName, archivePath,
-                    CompressionLevel.Optimal, false, entryEncoding);
+                    rootDir.FullName,
+                    archivePath,
+                    CompressionLevel.Optimal,
+                    false,
+                    entryEncoding
+                );
 
-                using (ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Read, entryEncoding))
+                using (
+                    ZipArchive archive = ZipFile.Open(
+                        archivePath,
+                        ZipArchiveMode.Read,
+                        entryEncoding
+                    )
+                )
                 {
                     Assert.Equal(1, archive.Entries.Count);
                     Assert.StartsWith("empty1", archive.Entries[0].FullName);
@@ -111,8 +147,11 @@ namespace System.IO.Compression.Tests
                 DirectoryInfo emptyRoot = new DirectoryInfo(tempFolder.Path);
                 string archivePath = GetTestFilePath();
                 ZipFile.CreateFromDirectory(
-                    emptyRoot.FullName, archivePath,
-                    CompressionLevel.Optimal, true);
+                    emptyRoot.FullName,
+                    archivePath,
+                    CompressionLevel.Optimal,
+                    true
+                );
 
                 using (ZipArchive archive = ZipFile.OpenRead(archivePath))
                 {
@@ -124,7 +163,9 @@ namespace System.IO.Compression.Tests
         [Fact]
         public void InvalidInstanceMethods()
         {
-            using (TempFile testArchive = CreateTempCopyFile(zfile("normal.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(zfile("normal.zip"), GetTestFilePath())
+            )
             using (ZipArchive archive = ZipFile.Open(testArchive.Path, ZipArchiveMode.Update))
             {
                 //non-existent entry
@@ -135,7 +176,10 @@ namespace System.IO.Compression.Tests
                 ZipArchiveEntry entry = archive.GetEntry("first.txt");
 
                 //null/empty string
-                AssertExtensions.Throws<ArgumentException>("entryName", () => archive.CreateEntry(""));
+                AssertExtensions.Throws<ArgumentException>(
+                    "entryName",
+                    () => archive.CreateEntry("")
+                );
                 Assert.Throws<ArgumentNullException>(() => archive.CreateEntry(null));
             }
         }
@@ -144,41 +188,80 @@ namespace System.IO.Compression.Tests
         public void InvalidConstructors()
         {
             //out of range enum values
-            Assert.Throws<ArgumentOutOfRangeException>(() => ZipFile.Open("bad file", (ZipArchiveMode)(10)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => ZipFile.Open("bad file", (ZipArchiveMode)(10))
+            );
         }
 
         [Fact]
         public void InvalidFiles()
         {
             Assert.Throws<InvalidDataException>(() => ZipFile.OpenRead(bad("EOCDmissing.zip")));
-            using (TempFile testArchive = CreateTempCopyFile(bad("EOCDmissing.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(bad("EOCDmissing.zip"), GetTestFilePath())
+            )
             {
-                Assert.Throws<InvalidDataException>(() => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                Assert.Throws<InvalidDataException>(
+                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+                );
             }
 
-            Assert.Throws<InvalidDataException>(() => ZipFile.OpenRead(bad("CDoffsetOutOfBounds.zip")));
-            using (TempFile testArchive = CreateTempCopyFile(bad("CDoffsetOutOfBounds.zip"), GetTestFilePath()))
+            Assert.Throws<InvalidDataException>(
+                () => ZipFile.OpenRead(bad("CDoffsetOutOfBounds.zip"))
+            );
+            using (
+                TempFile testArchive = CreateTempCopyFile(
+                    bad("CDoffsetOutOfBounds.zip"),
+                    GetTestFilePath()
+                )
+            )
             {
-                Assert.Throws<InvalidDataException>(() => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                Assert.Throws<InvalidDataException>(
+                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+                );
             }
 
             using (ZipArchive archive = ZipFile.OpenRead(bad("CDoffsetInBoundsWrong.zip")))
             {
-                Assert.Throws<InvalidDataException>(() => { var x = archive.Entries; });
+                Assert.Throws<InvalidDataException>(
+                    () =>
+                    {
+                        var x = archive.Entries;
+                    }
+                );
             }
 
-            using (TempFile testArchive = CreateTempCopyFile(bad("CDoffsetInBoundsWrong.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(
+                    bad("CDoffsetInBoundsWrong.zip"),
+                    GetTestFilePath()
+                )
+            )
             {
-                Assert.Throws<InvalidDataException>(() => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                Assert.Throws<InvalidDataException>(
+                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+                );
             }
 
             using (ZipArchive archive = ZipFile.OpenRead(bad("numberOfEntriesDifferent.zip")))
             {
-                Assert.Throws<InvalidDataException>(() => { var x = archive.Entries; });
+                Assert.Throws<InvalidDataException>(
+                    () =>
+                    {
+                        var x = archive.Entries;
+                    }
+                );
             }
-            using (TempFile testArchive = CreateTempCopyFile(bad("numberOfEntriesDifferent.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(
+                    bad("numberOfEntriesDifferent.zip"),
+                    GetTestFilePath()
+                )
+            )
             {
-                Assert.Throws<InvalidDataException>(() => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                Assert.Throws<InvalidDataException>(
+                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+                );
             }
 
             //read mode on empty file
@@ -194,9 +277,16 @@ namespace System.IO.Compression.Tests
                 Assert.Throws<InvalidDataException>(() => e.Open());
             }
 
-            using (TempFile testArchive = CreateTempCopyFile(bad("localFileOffsetOutOfBounds.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(
+                    bad("localFileOffsetOutOfBounds.zip"),
+                    GetTestFilePath()
+                )
+            )
             {
-                Assert.Throws<InvalidDataException>(() => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                Assert.Throws<InvalidDataException>(
+                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+                );
             }
 
             //compressed data offset + compressed size out of bounds
@@ -206,9 +296,16 @@ namespace System.IO.Compression.Tests
                 Assert.Throws<InvalidDataException>(() => e.Open());
             }
 
-            using (TempFile testArchive = CreateTempCopyFile(bad("compressedSizeOutOfBounds.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(
+                    bad("compressedSizeOutOfBounds.zip"),
+                    GetTestFilePath()
+                )
+            )
             {
-                Assert.Throws<InvalidDataException>(() => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                Assert.Throws<InvalidDataException>(
+                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+                );
             }
 
             //signature wrong
@@ -218,9 +315,16 @@ namespace System.IO.Compression.Tests
                 Assert.Throws<InvalidDataException>(() => e.Open());
             }
 
-            using (TempFile testArchive = CreateTempCopyFile(bad("localFileHeaderSignatureWrong.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(
+                    bad("localFileHeaderSignatureWrong.zip"),
+                    GetTestFilePath()
+                )
+            )
             {
-                Assert.Throws<InvalidDataException>(() => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
+                Assert.Throws<InvalidDataException>(
+                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
+                );
             }
         }
 
@@ -249,7 +353,8 @@ namespace System.IO.Compression.Tests
             using (TempFile updatedCopy = CreateTempCopyFile(filename, GetTestFilePath()))
             {
                 string name;
-                long length, compressedLength;
+                long length,
+                    compressedLength;
                 DateTimeOffset lastWriteTime;
                 using (ZipArchive archive = ZipFile.Open(updatedCopy.Path, ZipArchiveMode.Update))
                 {
@@ -279,7 +384,10 @@ namespace System.IO.Compression.Tests
         {
             using (ZipArchive archive = ZipFile.OpenRead(bad("invaliddate.zip")))
             {
-                Assert.Equal(new DateTime(1980, 1, 1, 0, 0, 0), archive.Entries[0].LastWriteTime.DateTime);
+                Assert.Equal(
+                    new DateTime(1980, 1, 1, 0, 0, 0),
+                    archive.Entries[0].LastWriteTime.DateTime
+                );
             }
 
             // Browser VFS does not support saving file attributes, so skip
@@ -297,7 +405,10 @@ namespace System.IO.Compression.Tests
                 }
                 using (ZipArchive archive = ZipFile.OpenRead(archivePath))
                 {
-                    Assert.Equal(new DateTime(1980, 1, 1, 0, 0, 0), archive.Entries[0].LastWriteTime.DateTime);
+                    Assert.Equal(
+                        new DateTime(1980, 1, 1, 0, 0, 0),
+                        archive.Entries[0].LastWriteTime.DateTime
+                    );
                 }
             }
         }
@@ -307,11 +418,18 @@ namespace System.IO.Compression.Tests
         {
             string archivePath = GetTestFilePath();
             using (ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Create))
-            using (StreamWriter writer = new StreamWriter(archive.CreateEntry(Path.Combine("..", "entry1"), CompressionLevel.Optimal).Open()))
+            using (
+                StreamWriter writer = new StreamWriter(
+                    archive.CreateEntry(Path.Combine("..", "entry1"), CompressionLevel.Optimal)
+                        .Open()
+                )
+            )
             {
                 writer.Write("This is a test.");
             }
-            Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
+            Assert.Throws<IOException>(
+                () => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
+            );
         }
 
         [Fact]
@@ -319,11 +437,21 @@ namespace System.IO.Compression.Tests
         {
             string archivePath = GetTestFilePath();
             using (ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Create))
-            using (StreamWriter writer = new StreamWriter(archive.CreateEntry("testdir" + Path.DirectorySeparatorChar, CompressionLevel.Optimal).Open()))
+            using (
+                StreamWriter writer = new StreamWriter(
+                    archive.CreateEntry(
+                            "testdir" + Path.DirectorySeparatorChar,
+                            CompressionLevel.Optimal
+                        )
+                        .Open()
+                )
+            )
             {
                 writer.Write("This is a test.");
             }
-            Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
+            Assert.Throws<IOException>(
+                () => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
+            );
         }
 
         [Fact]
@@ -351,10 +479,12 @@ namespace System.IO.Compression.Tests
         [Theory]
         [InlineData("NullCharFileName_FromWindows")]
         [InlineData("NullCharFileName_FromUnix")]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Checks Unix-specific invalid file path
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Checks Unix-specific invalid file path
         public void Unix_ZipWithInvalidFileNames_ThrowsArgumentException(string zipName)
         {
-            Assert.Throws<ArgumentException>(() => ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath()));
+            Assert.Throws<ArgumentException>(
+                () => ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath())
+            );
         }
 
         [Fact]
@@ -364,7 +494,8 @@ namespace System.IO.Compression.Tests
             using (ZipArchive archive = ZipFile.Open(testArchive.Path, ZipArchiveMode.Update))
             {
                 ZipArchiveEntry entry = archive.Entries[0];
-                string contents1, contents2;
+                string contents1,
+                    contents2;
                 using (StreamReader s = new StreamReader(entry.Open()))
                 {
                     contents1 = s.ReadToEnd();
@@ -381,37 +512,67 @@ namespace System.IO.Compression.Tests
         public async Task UpdateAddFile()
         {
             //add file
-            using (TempFile testArchive = CreateTempCopyFile(zfile("normal.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(zfile("normal.zip"), GetTestFilePath())
+            )
             {
                 using (ZipArchive archive = ZipFile.Open(testArchive.Path, ZipArchiveMode.Update))
                 {
-                    await UpdateArchive(archive, zmodified(Path.Combine("addFile", "added.txt")), "added.txt");
+                    await UpdateArchive(
+                        archive,
+                        zmodified(Path.Combine("addFile", "added.txt")),
+                        "added.txt"
+                    );
                 }
-                await IsZipSameAsDirAsync(testArchive.Path, zmodified("addFile"), ZipArchiveMode.Read);
+                await IsZipSameAsDirAsync(
+                    testArchive.Path,
+                    zmodified("addFile"),
+                    ZipArchiveMode.Read
+                );
             }
 
             //add file and read entries before
-            using (TempFile testArchive = CreateTempCopyFile(zfile("normal.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(zfile("normal.zip"), GetTestFilePath())
+            )
             {
                 using (ZipArchive archive = ZipFile.Open(testArchive.Path, ZipArchiveMode.Update))
                 {
                     var x = archive.Entries;
 
-                    await UpdateArchive(archive, zmodified(Path.Combine("addFile", "added.txt")), "added.txt");
+                    await UpdateArchive(
+                        archive,
+                        zmodified(Path.Combine("addFile", "added.txt")),
+                        "added.txt"
+                    );
                 }
-                await IsZipSameAsDirAsync(testArchive.Path, zmodified("addFile"), ZipArchiveMode.Read);
+                await IsZipSameAsDirAsync(
+                    testArchive.Path,
+                    zmodified("addFile"),
+                    ZipArchiveMode.Read
+                );
             }
 
             //add file and read entries after
-            using (TempFile testArchive = CreateTempCopyFile(zfile("normal.zip"), GetTestFilePath()))
+            using (
+                TempFile testArchive = CreateTempCopyFile(zfile("normal.zip"), GetTestFilePath())
+            )
             {
                 using (ZipArchive archive = ZipFile.Open(testArchive.Path, ZipArchiveMode.Update))
                 {
-                    await UpdateArchive(archive, zmodified(Path.Combine("addFile", "added.txt")), "added.txt");
+                    await UpdateArchive(
+                        archive,
+                        zmodified(Path.Combine("addFile", "added.txt")),
+                        "added.txt"
+                    );
 
                     var x = archive.Entries;
                 }
-                await IsZipSameAsDirAsync(testArchive.Path, zmodified("addFile"), ZipArchiveMode.Read);
+                await IsZipSameAsDirAsync(
+                    testArchive.Path,
+                    zmodified("addFile"),
+                    ZipArchiveMode.Read
+                );
             }
         }
 
@@ -424,16 +585,29 @@ namespace System.IO.Compression.Tests
         [InlineData("WindowsInvalid_FromWindows", null)]
         [InlineData("NullCharFileName_FromWindows", "path")]
         [InlineData("NullCharFileName_FromUnix", "path")]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Checks Windows-specific invalid file path
-        public void Windows_ZipWithInvalidFileNames_ThrowsException(string zipName, string paramName)
+        [PlatformSpecific(TestPlatforms.Windows)] // Checks Windows-specific invalid file path
+        public void Windows_ZipWithInvalidFileNames_ThrowsException(
+            string zipName,
+            string paramName
+        )
         {
             if (paramName == null)
-                Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath()));
+                Assert.Throws<IOException>(
+                    () => ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath())
+                );
             else
-                AssertExtensions.Throws<ArgumentException>(paramName, null, () => ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath()));
+                AssertExtensions.Throws<ArgumentException>(
+                    paramName,
+                    null,
+                    () => ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath())
+                );
         }
 
-        private static async Task UpdateArchive(ZipArchive archive, string installFile, string entryName)
+        private static async Task UpdateArchive(
+            ZipArchive archive,
+            string installFile,
+            string entryName
+        )
         {
             string fileName = installFile;
             ZipArchiveEntry e = archive.CreateEntry(entryName);

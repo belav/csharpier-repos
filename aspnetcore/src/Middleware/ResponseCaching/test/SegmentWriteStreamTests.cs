@@ -12,7 +12,21 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
     {
         private static byte[] WriteData = new byte[]
         {
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
         };
 
         [Theory]
@@ -58,7 +72,7 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var segments = stream.GetSegments();
 
             Assert.Equal(WriteData.Length, stream.Length);
-            Assert.Equal((WriteData.Length + segmentSize - 1)/ segmentSize, segments.Count);
+            Assert.Equal((WriteData.Length + segmentSize - 1) / segmentSize, segments.Count);
 
             for (var i = 0; i < WriteData.Length; i += segmentSize)
             {
@@ -83,7 +97,6 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         {
             var segmentSize = 5;
             var stream = new SegmentWriteStream(segmentSize);
-
 
             for (var i = 0; i < WriteData.Length; i += writeSize)
             {

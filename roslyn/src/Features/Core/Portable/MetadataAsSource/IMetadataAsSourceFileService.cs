@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         /// representation of the original sources; otherwise <see langword="false"/> to only show member
         /// signatures.</param>
         /// <param name="cancellationToken">To cancel project and document operations</param>
-        Task<MetadataAsSourceFile> GetGeneratedFileAsync(Project project, ISymbol symbol, bool allowDecompilation, CancellationToken cancellationToken = default);
+        Task<MetadataAsSourceFile> GetGeneratedFileAsync(
+            Project project,
+            ISymbol symbol,
+            bool allowDecompilation,
+            CancellationToken cancellationToken = default
+        );
 
         bool TryAddDocumentToWorkspace(string filePath, SourceTextContainer buffer);
 

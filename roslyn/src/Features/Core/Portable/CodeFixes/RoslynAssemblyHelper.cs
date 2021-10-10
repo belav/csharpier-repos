@@ -12,7 +12,12 @@ namespace Microsoft.CodeAnalysis
     internal static class RoslynAssemblyHelper
     {
         public static bool HasRoslynPublicKey(object source) =>
-            source.GetType().GetTypeInfo().Assembly.GetName().GetPublicKey().SequenceEqual(
-            typeof(RoslynAssemblyHelper).GetTypeInfo().Assembly.GetName().GetPublicKey());
+            source.GetType()
+                .GetTypeInfo()
+                .Assembly.GetName()
+                .GetPublicKey()
+                .SequenceEqual(
+                    typeof(RoslynAssemblyHelper).GetTypeInfo().Assembly.GetName().GetPublicKey()
+                );
     }
 }

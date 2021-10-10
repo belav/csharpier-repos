@@ -44,29 +44,27 @@ namespace Microsoft.DotNet.Build.Tasks
         [Required]
         public ITaskItem[] Platforms { get; set; }
 
-
         private string Begin(string marker) => $"<!-- BEGIN {marker} -->";
         private string End(string marker) => $"<!-- END {marker} -->";
-
 
         public override bool Execute()
         {
             string[] readmeLines = File.ReadAllLines(ReadmeFile);
 
-            if (readmeLines.Contains(Begin(LinksComment)) &&
-                readmeLines.Contains(End(LinksComment)))
+            if (
+                readmeLines.Contains(Begin(LinksComment)) && readmeLines.Contains(End(LinksComment))
+            )
             {
                 // In the links section, extract the name of each reference-style Markdown link.
                 // For example, grabs 'win-x86-badge-2.1.X' from
                 // [win-x86-badge-2.1.X]: https://example.org/foo
-                string[] links = readmeLines
-                    .SkipWhile(line => line != Begin(LinksComment))
+                string[] links = readmeLines.SkipWhile(line => line != Begin(LinksComment))
                     .Skip(1)
                     .TakeWhile(line => line != End(LinksComment))
                     .Where(line => line.StartsWith("[") && line.Contains("]:"))
-                    .Select(line => line.Substring(
-                        1,
-                        line.IndexOf("]:", StringComparison.Ordinal) - 1))
+                    .Select(
+                        line => line.Substring(1, line.IndexOf("]:", StringComparison.Ordinal) - 1)
+                    )
                     .ToArray();
 
                 string[] rows = Platforms.Select(p => CreateRow(p, links)).ToArray();
@@ -77,27 +75,24 @@ namespace Microsoft.DotNet.Build.Tasks
                     "",
                     $"| Platform |{string.Concat(Branches.Select(p => $" {p.ItemSpec} |"))}",
                     $"| --- | {string.Concat(Enumerable.Repeat(" :---: |", Branches.Length))}"
-                }.Concat(rows).Concat(new[]
-                {
-                    ""
-                }).ToArray();
+                }.Concat(rows).Concat(new[] { "" }).ToArray();
 
-                if (readmeLines.Contains(Begin(TableComment)) &&
-                    readmeLines.Contains(End(TableComment)))
+                if (
+                    readmeLines.Contains(Begin(TableComment))
+                    && readmeLines.Contains(End(TableComment))
+                )
                 {
-                    string[] beforeTable = readmeLines
-                        .TakeWhile(line => line != Begin(TableComment))
+                    string[] beforeTable = readmeLines.TakeWhile(
+                            line => line != Begin(TableComment)
+                        )
                         .Concat(new[] { Begin(TableComment) })
                         .ToArray();
 
-                    string[] afterTable = readmeLines
-                        .Skip(beforeTable.Length)
+                    string[] afterTable = readmeLines.Skip(beforeTable.Length)
                         .SkipWhile(line => line != End(TableComment))
                         .ToArray();
 
-                    File.WriteAllLines(
-                        ReadmeFile,
-                        beforeTable.Concat(table).Concat(afterTable));
+                    File.WriteAllLines(ReadmeFile, beforeTable.Concat(table).Concat(afterTable));
                 }
                 else
                 {
@@ -117,7 +112,8 @@ namespace Microsoft.DotNet.Build.Tasks
             string parenthetical = platform.GetMetadata("Parenthetical");
 
             string cells = string.Concat(
-                Branches.Select(branch => $" {CreateCell(platform, branch, links)} |"));
+                Branches.Select(branch => $" {CreateCell(platform, branch, links)} |")
+            );
 
             return $"| **{platform.ItemSpec}**{parenthetical} |{cells}";
         }

@@ -11,9 +11,7 @@ namespace System.CommandLine
 {
     public static class OptionExtensions
     {
-        public static TOption FromAmong<TOption>(
-            this TOption option,
-            params string[] values)
+        public static TOption FromAmong<TOption>(this TOption option, params string[] values)
             where TOption : Option
         {
             option.Argument.AddAllowedValues(values);
@@ -22,9 +20,7 @@ namespace System.CommandLine
             return option;
         }
 
-        public static TOption AddSuggestions<TOption>(
-            this TOption option,
-            params string[] values)
+        public static TOption AddSuggestions<TOption>(this TOption option, params string[] values)
             where TOption : Option
         {
             option.Argument.Suggestions.Add(values);
@@ -32,10 +28,8 @@ namespace System.CommandLine
             return option;
         }
 
-        public static TOption AddSuggestions<TOption>(
-            this TOption option,
-            SuggestDelegate suggest)
-            where TOption : Option 
+        public static TOption AddSuggestions<TOption>(this TOption option, SuggestDelegate suggest)
+            where TOption : Option
         {
             option.Argument.Suggestions.Add(suggest);
 
@@ -46,11 +40,11 @@ namespace System.CommandLine
         {
             option.Argument.AddValidator(
                 a =>
-                    a.Tokens
-                     .Select(t => t.Value)
-                     .Where(filePath => !File.Exists(filePath))
-                     .Select(a.ValidationMessages.FileDoesNotExist)
-                     .FirstOrDefault());
+                    a.Tokens.Select(t => t.Value)
+                        .Where(filePath => !File.Exists(filePath))
+                        .Select(a.ValidationMessages.FileDoesNotExist)
+                        .FirstOrDefault()
+            );
 
             return option;
         }
@@ -59,11 +53,11 @@ namespace System.CommandLine
         {
             option.Argument.AddValidator(
                 a =>
-                    a.Tokens
-                     .Select(t => t.Value)
-                     .Where(filePath => !Directory.Exists(filePath))
-                     .Select(a.ValidationMessages.DirectoryDoesNotExist)
-                     .FirstOrDefault());
+                    a.Tokens.Select(t => t.Value)
+                        .Where(filePath => !Directory.Exists(filePath))
+                        .Select(a.ValidationMessages.DirectoryDoesNotExist)
+                        .FirstOrDefault()
+            );
 
             return option;
         }
@@ -72,11 +66,11 @@ namespace System.CommandLine
         {
             option.Argument.AddValidator(
                 a =>
-                    a.Tokens
-                     .Select(t => t.Value)
-                     .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                     .Select(a.ValidationMessages.FileOrDirectoryDoesNotExist)
-                     .FirstOrDefault());
+                    a.Tokens.Select(t => t.Value)
+                        .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
+                        .Select(a.ValidationMessages.FileOrDirectoryDoesNotExist)
+                        .FirstOrDefault()
+            );
 
             return option;
         }
@@ -92,8 +86,7 @@ namespace System.CommandLine
             return option;
         }
 
-        public static TOption LegalFilePathsOnly<TOption>(
-            this TOption option)
+        public static TOption LegalFilePathsOnly<TOption>(this TOption option)
             where TOption : Option
         {
             option.Argument.LegalFilePathsOnly();
@@ -101,8 +94,7 @@ namespace System.CommandLine
             return option;
         }
 
-        public static TOption LegalFileNamesOnly<TOption>(
-            this TOption option)
+        public static TOption LegalFileNamesOnly<TOption>(this TOption option)
             where TOption : Option
         {
             option.Argument.LegalFileNamesOnly();
@@ -110,9 +102,7 @@ namespace System.CommandLine
             return option;
         }
 
-        public static ParseResult Parse(
-            this Option option,
-            string commandLine) =>
+        public static ParseResult Parse(this Option option, string commandLine) =>
             new Parser(new CommandLineConfiguration(new[] { option })).Parse(commandLine);
     }
 }

@@ -24,11 +24,23 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         /// <summary>
         /// This method will be called for all nodes that match the types specified by the <see cref="SyntaxNodeTypes"/> property.
         /// </summary>
-        void AddClassifications(Workspace workspace, SyntaxNode node, SemanticModel semanticModel, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken);
+        void AddClassifications(
+            Workspace workspace,
+            SyntaxNode node,
+            SemanticModel semanticModel,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// This method will be called for all tokens that match the kinds specified by the <see cref="SyntaxTokenKinds"/> property.
         /// </summary>
-        void AddClassifications(Workspace workspace, SyntaxToken token, SemanticModel semanticModel, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken);
+        void AddClassifications(
+            Workspace workspace,
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
     }
 }

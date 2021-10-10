@@ -42,8 +42,18 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a client for the current user only.
         /// </summary>
-        internal static NamedPipeClientStream CreateClient(string serverName, string pipeName, PipeDirection direction, PipeOptions options)
-            => new NamedPipeClientStream(serverName, GetPipeNameOrPath(pipeName), direction, options | CurrentUserOption);
+        internal static NamedPipeClientStream CreateClient(
+            string serverName,
+            string pipeName,
+            PipeDirection direction,
+            PipeOptions options
+        ) =>
+            new NamedPipeClientStream(
+                serverName,
+                GetPipeNameOrPath(pipeName),
+                direction,
+                options | CurrentUserOption
+            );
 
         /// <summary>
         /// Does the client of "pipeStream" have the same identity and elevation as we do? The <see cref="CreateClient"/> and 
@@ -58,17 +68,26 @@ namespace Microsoft.CodeAnalysis
                 var serverIdentity = getIdentity(impersonating: false);
 
                 (string name, bool admin) clientIdentity = default;
-                pipeStream.RunAsClient(() => { clientIdentity = getIdentity(impersonating: true); });
+                pipeStream.RunAsClient(
+                    () =>
+                    {
+                        clientIdentity = getIdentity(impersonating: true);
+                    }
+                );
 
-                return
-                    StringComparer.OrdinalIgnoreCase.Equals(serverIdentity.name, clientIdentity.name) &&
-                    serverIdentity.admin == clientIdentity.admin;
+                return StringComparer.OrdinalIgnoreCase.Equals(
+                        serverIdentity.name,
+                        clientIdentity.name
+                    )
+                    && serverIdentity.admin == clientIdentity.admin;
 
                 (string name, bool admin) getIdentity(bool impersonating)
                 {
                     var currentIdentity = WindowsIdentity.GetCurrent(impersonating);
                     var currentPrincipal = new WindowsPrincipal(currentIdentity);
-                    var elevatedToAdmin = currentPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
+                    var elevatedToAdmin = currentPrincipal.IsInRole(
+                        WindowsBuiltInRole.Administrator
+                    );
                     return (currentIdentity.Name, elevatedToAdmin);
                 }
             }
@@ -79,7 +98,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a server for the current user only
         /// </summary>
-        internal static NamedPipeServerStream CreateServer(string pipeName, PipeDirection? pipeDirection = null)
+        internal static NamedPipeServerStream CreateServer(
+            string pipeName,
+            PipeDirection? pipeDirection = null
+        )
         {
             var pipeOptions = PipeOptions.Asynchronous | PipeOptions.WriteThrough;
             return CreateServer(
@@ -89,7 +111,8 @@ namespace Microsoft.CodeAnalysis
                 PipeTransmissionMode.Byte,
                 pipeOptions,
                 PipeBufferSize,
-                PipeBufferSize);
+                PipeBufferSize
+            );
         }
 
 #if NET472
@@ -111,7 +134,8 @@ namespace Microsoft.CodeAnalysis
             PipeTransmissionMode transmissionMode,
             PipeOptions options,
             int inBufferSize,
-            int outBufferSize) =>
+            int outBufferSize
+        ) =>
             new NamedPipeServerStream(
                 GetPipeNameOrPath(pipeName),
                 direction,
@@ -121,7 +145,8 @@ namespace Microsoft.CodeAnalysis
                 inBufferSize,
                 outBufferSize,
                 CreatePipeSecurity(),
-                HandleInheritability.None);
+                HandleInheritability.None
+            );
 
         /// <summary>
         /// Check to ensure that the named pipe server we connected to is owned by the same
@@ -148,7 +173,7 @@ namespace Microsoft.CodeAnalysis
             if (PlatformInformation.IsRunningOnMono)
             {
                 // Pipe security and additional access rights constructor arguments
-                //  are not supported by Mono 
+                //  are not supported by Mono
                 // https://github.com/dotnet/roslyn/pull/30810
                 // https://github.com/mono/mono/issues/11406
                 return null;
@@ -157,8 +182,12 @@ namespace Microsoft.CodeAnalysis
             var security = new PipeSecurity();
             SecurityIdentifier identifier = WindowsIdentity.GetCurrent().Owner;
 
-            // Restrict access to just this account.  
-            PipeAccessRule rule = new PipeAccessRule(identifier, PipeAccessRights.ReadWrite | PipeAccessRights.CreateNewInstance, AccessControlType.Allow);
+            // Restrict access to just this account.
+            PipeAccessRule rule = new PipeAccessRule(
+                identifier,
+                PipeAccessRights.ReadWrite | PipeAccessRights.CreateNewInstance,
+                AccessControlType.Allow
+            );
             security.AddAccessRule(rule);
             security.SetOwner(identifier);
             return security;
@@ -181,7 +210,8 @@ namespace Microsoft.CodeAnalysis
             PipeTransmissionMode transmissionMode,
             PipeOptions options,
             int inBufferSize,
-            int outBufferSize) =>
+            int outBufferSize
+        ) =>
             new NamedPipeServerStream(
                 GetPipeNameOrPath(pipeName),
                 direction,
@@ -189,8 +219,8 @@ namespace Microsoft.CodeAnalysis
                 transmissionMode,
                 options | CurrentUserOption,
                 inBufferSize,
-                outBufferSize);
-
+                outBufferSize
+            );
 #else
 #error Unsupported configuration
 #endif

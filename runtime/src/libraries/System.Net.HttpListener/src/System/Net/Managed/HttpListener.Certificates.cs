@@ -11,7 +11,11 @@ namespace System.Net
 {
     public partial class HttpListener
     {
-        internal SslStream CreateSslStream(Stream innerStream, bool ownsStream, RemoteCertificateValidationCallback callback)
+        internal SslStream CreateSslStream(
+            Stream innerStream,
+            bool ownsStream,
+            RemoteCertificateValidationCallback callback
+        )
         {
             return new SslStream(innerStream, ownsStream, callback);
         }

@@ -27,13 +27,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             // Model validation events
             SchemaConfiguredWarning = CoreEventId.ProviderBaseId,
             SequenceConfiguredWarning,
-
             // Infrastructure events
             UnexpectedConnectionTypeWarning = CoreEventId.ProviderBaseId + 100,
-
             // Migrations events
             TableRebuildPendingWarning = CoreEventId.ProviderBaseId + 200,
-
             // Scaffolding events
             ColumnFound = CoreEventId.ProviderDesignBaseId,
             ForeignKeyFound,
@@ -47,10 +44,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             UniqueConstraintFound
         }
 
-        private static readonly string _validationPrefix = DbLoggerCategory.Model.Validation.Name + ".";
+        private static readonly string _validationPrefix =
+            DbLoggerCategory.Model.Validation.Name + ".";
 
-        private static EventId MakeValidationId(Id id)
-            => new((int)id, _validationPrefix + id);
+        private static EventId MakeValidationId(Id id) => new((int)id, _validationPrefix + id);
 
         /// <summary>
         ///     <para>
@@ -63,7 +60,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="EntityTypeSchemaEventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </summary>
-        public static readonly EventId SchemaConfiguredWarning = MakeValidationId(Id.SchemaConfiguredWarning);
+        public static readonly EventId SchemaConfiguredWarning = MakeValidationId(
+            Id.SchemaConfiguredWarning
+        );
 
         /// <summary>
         ///     <para>
@@ -76,12 +75,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event uses the <see cref="SequenceEventData" /> payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </summary>
-        public static readonly EventId SequenceConfiguredWarning = MakeValidationId(Id.SequenceConfiguredWarning);
+        public static readonly EventId SequenceConfiguredWarning = MakeValidationId(
+            Id.SequenceConfiguredWarning
+        );
 
         private static readonly string _infraPrefix = DbLoggerCategory.Infrastructure.Name + ".";
 
-        private static EventId MakeInfraId(Id id)
-            => new((int)id, _infraPrefix + id);
+        private static EventId MakeInfraId(Id id) => new((int)id, _infraPrefix + id);
 
         /// <summary>
         ///     <para>
@@ -95,23 +95,25 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         payload when used with a <see cref="DiagnosticSource" />.
         ///     </para>
         /// </summary>
-        public static readonly EventId UnexpectedConnectionTypeWarning = MakeInfraId(Id.UnexpectedConnectionTypeWarning);
+        public static readonly EventId UnexpectedConnectionTypeWarning = MakeInfraId(
+            Id.UnexpectedConnectionTypeWarning
+        );
 
         private static readonly string _migrationsPrefix = DbLoggerCategory.Migrations.Name + ".";
 
-        private static EventId MakeMigrationsId(Id id)
-            => new((int)id, _migrationsPrefix + id);
+        private static EventId MakeMigrationsId(Id id) => new((int)id, _migrationsPrefix + id);
 
         /// <summary>
         ///     An operation may fail due to a pending rebuild of the table.
         ///     This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
         /// </summary>
-        public static readonly EventId TableRebuildPendingWarning = MakeMigrationsId(Id.TableRebuildPendingWarning);
+        public static readonly EventId TableRebuildPendingWarning = MakeMigrationsId(
+            Id.TableRebuildPendingWarning
+        );
 
         private static readonly string _scaffoldingPrefix = DbLoggerCategory.Scaffolding.Name + ".";
 
-        private static EventId MakeScaffoldingId(Id id)
-            => new((int)id, _scaffoldingPrefix + id);
+        private static EventId MakeScaffoldingId(Id id) => new((int)id, _scaffoldingPrefix + id);
 
         /// <summary>
         ///     A column was found.
@@ -123,14 +125,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     SQLite does not support schemas.
         ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
         /// </summary>
-        public static readonly EventId SchemasNotSupportedWarning = MakeScaffoldingId(Id.SchemasNotSupportedWarning);
+        public static readonly EventId SchemasNotSupportedWarning = MakeScaffoldingId(
+            Id.SchemasNotSupportedWarning
+        );
 
         /// <summary>
         ///     A foreign key references a missing table.
         ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
         /// </summary>
-        public static readonly EventId ForeignKeyReferencesMissingTableWarning =
-            MakeScaffoldingId(Id.ForeignKeyReferencesMissingTableWarning);
+        public static readonly EventId ForeignKeyReferencesMissingTableWarning = MakeScaffoldingId(
+            Id.ForeignKeyReferencesMissingTableWarning
+        );
 
         /// <summary>
         ///     A table was found.
@@ -142,14 +147,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     The database is missing a table.
         ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
         /// </summary>
-        public static readonly EventId MissingTableWarning = MakeScaffoldingId(Id.MissingTableWarning);
+        public static readonly EventId MissingTableWarning = MakeScaffoldingId(
+            Id.MissingTableWarning
+        );
 
         /// <summary>
         ///     A column referenced by a foreign key constraint was not found.
         ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
         /// </summary>
-        public static readonly EventId ForeignKeyPrincipalColumnMissingWarning =
-            MakeScaffoldingId(Id.ForeignKeyPrincipalColumnMissingWarning);
+        public static readonly EventId ForeignKeyPrincipalColumnMissingWarning = MakeScaffoldingId(
+            Id.ForeignKeyPrincipalColumnMissingWarning
+        );
 
         /// <summary>
         ///     An index was found.
@@ -173,6 +181,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     A unique constraint was found.
         ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
         /// </summary>
-        public static readonly EventId UniqueConstraintFound = MakeScaffoldingId(Id.UniqueConstraintFound);
+        public static readonly EventId UniqueConstraintFound = MakeScaffoldingId(
+            Id.UniqueConstraintFound
+        );
     }
 }

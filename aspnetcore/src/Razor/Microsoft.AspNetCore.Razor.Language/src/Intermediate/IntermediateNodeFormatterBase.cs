@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
     internal class IntermediateNodeFormatterBase : IntermediateNodeFormatter
     {
         private string _content;
-        private Dictionary<string, string> _properties = new Dictionary<string, string>(StringComparer.Ordinal);
+        private Dictionary<string, string> _properties = new Dictionary<string, string>(
+            StringComparer.Ordinal
+        );
 
         protected FormatterContentMode ContentMode { get; set; }
 
@@ -100,7 +102,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         private void EndNode(IntermediateNode node)
         {
-            if (_content != null && (_properties.Count == 0 || ContentMode == FormatterContentMode.PreferContent))
+            if (
+                _content != null
+                && (_properties.Count == 0 || ContentMode == FormatterContentMode.PreferContent)
+            )
             {
                 Writer.Write(" ");
                 Writer.Write("\"");
@@ -108,11 +113,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                 Writer.Write("\"");
             }
 
-            if (_properties.Count > 0 && (_content == null || ContentMode == FormatterContentMode.PreferProperties))
+            if (
+                _properties.Count > 0
+                && (_content == null || ContentMode == FormatterContentMode.PreferProperties)
+            )
             {
                 Writer.Write(" ");
                 Writer.Write("{ ");
-                Writer.Write(string.Join(", ", _properties.Select(kvp => $"{kvp.Key}: \"{kvp.Value}\"")));
+                Writer.Write(
+                    string.Join(", ", _properties.Select(kvp => $"{kvp.Key}: \"{kvp.Value}\""))
+                );
                 Writer.Write(" }");
             }
 
@@ -123,10 +133,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
         private string GetShortName(IntermediateNode node)
         {
             var typeName = node.GetType().Name;
-            return
-                typeName.EndsWith(nameof(IntermediateNode), StringComparison.Ordinal) ?
-                typeName.Substring(0, typeName.Length - nameof(IntermediateNode).Length) :
-                typeName;
+            return typeName.EndsWith(nameof(IntermediateNode), StringComparison.Ordinal)
+              ? typeName.Substring(0, typeName.Length - nameof(IntermediateNode).Length)
+              : typeName;
         }
 
         private string EscapeNewlines(string content)
@@ -169,7 +178,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                 }
                 _formatter.FormatNode(node);
                 _formatter.Writer.WriteLine();
-                
+
                 // Process children
                 _indent += IndentSize;
                 base.VisitDefault(node);

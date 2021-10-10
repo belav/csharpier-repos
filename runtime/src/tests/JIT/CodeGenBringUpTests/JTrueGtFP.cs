@@ -15,10 +15,14 @@ public class BringUpTest
     {
         int returnValue = -1;
 
-        if (x > 1f)                returnValue = 4;
-        else if (x > 0f)                returnValue = 3;
-        else if (x > -1f)               returnValue = 2;
-        else if (x > Single.MinValue)     returnValue = 1;
+        if (x > 1f)
+            returnValue = 4;
+        else if (x > 0f)
+            returnValue = 3;
+        else if (x > -1f)
+            returnValue = 2;
+        else if (x > Single.MinValue)
+            returnValue = 1;
 
         return returnValue;
     }
@@ -27,10 +31,14 @@ public class BringUpTest
     {
         int returnValue = Pass;
 
-        if (JTrueGtFP(-1f) != 1) returnValue = Fail;
-        if (JTrueGtFP(0f) != 2) returnValue = Fail;
-        if (JTrueGtFP(1f) != 3) returnValue = Fail;
-        if (JTrueGtFP(2f) != 4) returnValue = Fail;
+        if (JTrueGtFP(-1f) != 1)
+            returnValue = Fail;
+        if (JTrueGtFP(0f) != 2)
+            returnValue = Fail;
+        if (JTrueGtFP(1f) != 3)
+            returnValue = Fail;
+        if (JTrueGtFP(2f) != 4)
+            returnValue = Fail;
 
         return returnValue;
     }

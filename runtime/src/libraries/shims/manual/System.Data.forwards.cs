@@ -6,5 +6,5 @@
 // These types are required for Desktop to Core serialization as they are not covered by GenAPI because they are not exposed in the ref assembly.
 #if NETCOREAPP
 // System.Data.Odbc is only supported on netcoreapp
-[assembly:System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Data.Odbc.ODBC32))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Data.Odbc.ODBC32))]
 #endif

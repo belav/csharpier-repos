@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Buffers;
@@ -45,7 +45,13 @@ namespace Microsoft.AspNetCore.Mvc
             MediaTypeAssert.Equal("text/plain; charset=utf-16", httpContext.Response.ContentType);
         }
 
-        public static TheoryData<MediaTypeHeaderValue, string, string, string, byte[]> ContentResultContentTypeData
+        public static TheoryData<
+            MediaTypeHeaderValue,
+            string,
+            string,
+            string,
+            byte[]
+        > ContentResultContentTypeData
         {
             get
             {
@@ -80,13 +86,7 @@ namespace Microsoft.AspNetCore.Mvc
                         "text/foo; charset=us-ascii",
                         new byte[] { 97, 98, 99, 100 }
                     },
-                    {
-                        null,
-                        "abcd",
-                        "text/bar",
-                        "text/bar",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
+                    { null, "abcd", "text/bar", "text/bar", new byte[] { 97, 98, 99, 100 } },
                     {
                         null,
                         "abcd",
@@ -119,7 +119,8 @@ namespace Microsoft.AspNetCore.Mvc
             string content,
             string responseContentType,
             string expectedContentType,
-            byte[] expectedContentData)
+            byte[] expectedContentData
+        )
         {
             // Arrange
             var contentResult = new ContentResult
@@ -143,93 +144,249 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.Equal(expectedContentData.Length, httpContext.Response.ContentLength);
         }
 
-        public static TheoryData<string, string> ContentResult_WritesDataCorrectly_ForDifferentContentSizesData
+        public static TheoryData<
+            string,
+            string
+        > ContentResult_WritesDataCorrectly_ForDifferentContentSizesData
         {
             get
             {
                 // content, contentType
                 return new TheoryData<string, string>
                 {
-                    {  string.Empty, "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) - 1), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) - 2), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) - 3), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) + 1), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) + 2), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) + 3), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) - 1), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) - 2), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) - 3), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) + 1), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) + 2), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) + 3), "text/plain; charset=utf-8" },
-
-                    {  new string('色', DefaultCharacterChunkSize), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 1), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 2), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 3), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 1), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 2), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 3), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 1), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 2), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 3), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 1), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 2), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 3), "text/plain; charset=utf-16" },
-
-                    {  new string('色', DefaultCharacterChunkSize), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 1), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 2), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 3), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 1), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 2), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 3), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 1), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 2), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 3), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 1), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 2), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 3), "text/plain; charset=utf-32" },
+                    { string.Empty, "text/plain; charset=utf-8" },
+                    { new string('a', DefaultCharacterChunkSize), "text/plain; charset=utf-8" },
+                    { new string('a', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-8" },
+                    { new string('a', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-8" },
+                    { new string('a', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-8" },
+                    { new string('a', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-8" },
+                    { new string('a', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-8" },
+                    { new string('a', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-8" },
+                    { new string('a', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-8" },
+                    { new string('a', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-8" },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 2) - 1),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 2) - 2),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 2) - 3),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 2) + 1),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 2) + 2),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 2) + 3),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 3) - 1),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 3) - 2),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 3) - 3),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 3) + 1),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 3) + 2),
+                        "text/plain; charset=utf-8"
+                    },
+                    {
+                        new string('a', (DefaultCharacterChunkSize * 3) + 3),
+                        "text/plain; charset=utf-8"
+                    },
+                    { new string('色', DefaultCharacterChunkSize), "text/plain; charset=utf-16" },
+                    {
+                        new string('色', DefaultCharacterChunkSize - 1),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize + 1),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize - 2),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize + 2),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize - 3),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize + 3),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize * 2),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize * 3),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) - 1),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) - 2),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) - 3),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) + 1),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) + 2),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) + 3),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) - 1),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) - 2),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) - 3),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) + 1),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) + 2),
+                        "text/plain; charset=utf-16"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) + 3),
+                        "text/plain; charset=utf-16"
+                    },
+                    { new string('色', DefaultCharacterChunkSize), "text/plain; charset=utf-32" },
+                    {
+                        new string('色', DefaultCharacterChunkSize - 1),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize + 1),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize - 2),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize + 2),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize - 3),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize + 3),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize * 2),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', DefaultCharacterChunkSize * 3),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) - 1),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) - 2),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) - 3),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) + 1),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) + 2),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 2) + 3),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) - 1),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) - 2),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) - 3),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) + 1),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) + 2),
+                        "text/plain; charset=utf-32"
+                    },
+                    {
+                        new string('色', (DefaultCharacterChunkSize * 3) + 3),
+                        "text/plain; charset=utf-32"
+                    },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(ContentResult_WritesDataCorrectly_ForDifferentContentSizesData))]
-        public async Task ContentResult_WritesDataCorrectly_ForDifferentContentSizes(string content, string contentType)
+        public async Task ContentResult_WritesDataCorrectly_ForDifferentContentSizes(
+            string content,
+            string contentType
+        )
         {
             // Arrange
-            var contentResult = new ContentResult
-            {
-                Content = content,
-                ContentType = contentType
-            };
+            var contentResult = new ContentResult { Content = content, ContentType = contentType };
             var httpContext = GetHttpContext();
             var memoryStream = new MemoryStream();
             httpContext.Response.Body = memoryStream;
@@ -251,9 +408,7 @@ namespace Microsoft.AspNetCore.Mvc
             var routeData = new RouteData();
             routeData.Routers.Add(Mock.Of<IRouter>());
 
-            return new ActionContext(httpContext,
-                                    routeData,
-                                    new ActionDescriptor());
+            return new ActionContext(httpContext, routeData, new ActionDescriptor());
         }
 
         private static IServiceCollection CreateServices()
@@ -262,14 +417,19 @@ namespace Microsoft.AspNetCore.Mvc
             // chunk size. Since the tests here depend on a specific character buffer size to test boundary conditions,
             // make sure to only return a buffer of that size.
             var charArrayPool = new Mock<ArrayPool<char>>();
-            charArrayPool
-                .Setup(ap => ap.Rent(DefaultCharacterChunkSize))
+            charArrayPool.Setup(ap => ap.Rent(DefaultCharacterChunkSize))
                 .Returns(new char[DefaultCharacterChunkSize]);
 
             var services = new ServiceCollection();
-            services.AddSingleton<IActionResultExecutor<ContentResult>>(new ContentResultExecutor(
-                new Logger<ContentResultExecutor>(NullLoggerFactory.Instance),
-                new MemoryPoolHttpResponseStreamWriterFactory(ArrayPool<byte>.Shared, charArrayPool.Object)));
+            services.AddSingleton<IActionResultExecutor<ContentResult>>(
+                new ContentResultExecutor(
+                    new Logger<ContentResultExecutor>(NullLoggerFactory.Instance),
+                    new MemoryPoolHttpResponseStreamWriterFactory(
+                        ArrayPool<byte>.Shared,
+                        charArrayPool.Object
+                    )
+                )
+            );
             return services;
         }
 

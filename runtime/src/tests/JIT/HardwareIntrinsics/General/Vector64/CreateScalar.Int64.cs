@@ -57,21 +57,31 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             Int64 value = TestLibrary.Generator.GetInt64();
-            object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.CreateScalar), new Type[] { typeof(Int64) })
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector64).GetMethod(
+                    nameof(Vector64.CreateScalar),
+                    new Type[] { typeof(Int64) }
+                )
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector64<Int64>)(result), value);
         }
 
-        private void ValidateResult(Vector64<Int64> result, Int64 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector64<Int64> result,
+            Int64 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             Int64[] resultElements = new Int64[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int64, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(Int64[] resultElements, Int64 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int64[] resultElements,
+            Int64 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -93,9 +103,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64.CreateScalar(Int64): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64.CreateScalar(Int64): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

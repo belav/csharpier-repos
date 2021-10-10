@@ -17,12 +17,16 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
                 ManifestDirectory.CreateRootDirectory(
                     new[]
                     {
-                        ManifestDirectory.CreateDirectory("wwwroot",
-                        new[]
-                        {
-                            new ManifestFile("jquery.validate.js","wwwroot.jquery.validate.js")
-                        })
-                    }));
+                        ManifestDirectory.CreateDirectory(
+                            "wwwroot",
+                            new[]
+                            {
+                                new ManifestFile("jquery.validate.js", "wwwroot.jquery.validate.js")
+                            }
+                        )
+                    }
+                )
+            );
             // Act
             var entry = manifest.ResolveEntry(path);
 
@@ -42,12 +46,16 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
                 ManifestDirectory.CreateRootDirectory(
                     new[]
                     {
-                        ManifestDirectory.CreateDirectory("wwwroot",
-                        new[]
-                        {
-                            new ManifestFile("jquery.validate.js","wwwroot.jquery.validate.js")
-                        })
-                    }));
+                        ManifestDirectory.CreateDirectory(
+                            "wwwroot",
+                            new[]
+                            {
+                                new ManifestFile("jquery.validate.js", "wwwroot.jquery.validate.js")
+                            }
+                        )
+                    }
+                )
+            );
             // Act
             var entry = manifest.ResolveEntry(path);
 

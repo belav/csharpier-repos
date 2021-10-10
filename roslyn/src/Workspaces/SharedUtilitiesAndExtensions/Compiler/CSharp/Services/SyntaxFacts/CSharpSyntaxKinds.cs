@@ -10,13 +10,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
     {
         public static readonly CSharpSyntaxKinds Instance = new();
 
-        protected CSharpSyntaxKinds()
-        {
-        }
+        protected CSharpSyntaxKinds() { }
 
         // Boxing/Unboxing casts from Object to TSyntaxKind will be erased by jit.
-        public TSyntaxKind Convert<TSyntaxKind>(int kind) where TSyntaxKind : struct
-            => (TSyntaxKind)(object)(SyntaxKind)kind;
+        public TSyntaxKind Convert<TSyntaxKind>(int kind) where TSyntaxKind : struct =>
+            (TSyntaxKind)(object)(SyntaxKind)kind;
 
         public int ConflictMarkerTrivia => (int)SyntaxKind.ConflictMarkerTrivia;
         public int DisabledTextTrivia => (int)SyntaxKind.DisabledTextTrivia;
@@ -42,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 
         public int TupleType => (int)SyntaxKind.TupleType;
 
-        public int AnonymousObjectCreationExpression => (int)SyntaxKind.AnonymousObjectCreationExpression;
+        public int AnonymousObjectCreationExpression =>
+            (int)SyntaxKind.AnonymousObjectCreationExpression;
         public int AwaitExpression => (int)SyntaxKind.AwaitExpression;
         public int BaseExpression => (int)SyntaxKind.BaseExpression;
         public int CharacterLiteralExpression => (int)SyntaxKind.CharacterLiteralExpression;

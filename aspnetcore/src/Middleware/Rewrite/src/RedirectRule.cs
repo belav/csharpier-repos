@@ -28,7 +28,11 @@ namespace Microsoft.AspNetCore.Rewrite
                 throw new ArgumentException(nameof(replacement));
             }
 
-            InitialMatch = new Regex(regex, RegexOptions.Compiled | RegexOptions.CultureInvariant, _regexTimeout);
+            InitialMatch = new Regex(
+                regex,
+                RegexOptions.Compiled | RegexOptions.CultureInvariant,
+                _regexTimeout
+            );
             Replacement = replacement;
             StatusCode = statusCode;
         }
@@ -49,7 +53,6 @@ namespace Microsoft.AspNetCore.Rewrite
                 initMatchResults = InitialMatch.Match(path.ToString().Substring(1));
             }
 
-
             if (initMatchResults.Success)
             {
                 var newPath = initMatchResults.Result(Replacement);
@@ -67,7 +70,10 @@ namespace Microsoft.AspNetCore.Rewrite
                 else
                 {
                     var host = default(HostString);
-                    var schemeSplit = newPath.IndexOf(Uri.SchemeDelimiter, StringComparison.Ordinal);
+                    var schemeSplit = newPath.IndexOf(
+                        Uri.SchemeDelimiter,
+                        StringComparison.Ordinal
+                    );
                     if (schemeSplit >= 0)
                     {
                         schemeSplit += Uri.SchemeDelimiter.Length;
@@ -80,7 +86,9 @@ namespace Microsoft.AspNetCore.Rewrite
                         }
                         else
                         {
-                            host = new HostString(newPath.Substring(schemeSplit, pathSplit - schemeSplit));
+                            host = new HostString(
+                                newPath.Substring(schemeSplit, pathSplit - schemeSplit)
+                            );
                             newPath = newPath.Substring(pathSplit);
                         }
                     }
@@ -95,12 +103,21 @@ namespace Microsoft.AspNetCore.Rewrite
                     var querySplit = newPath.IndexOf('?');
                     if (querySplit >= 0)
                     {
-                        resolvedQuery = request.QueryString.Add(QueryString.FromUriComponent(newPath.Substring(querySplit)));
+                        resolvedQuery = request.QueryString.Add(
+                            QueryString.FromUriComponent(newPath.Substring(querySplit))
+                        );
                         resolvedPath = newPath.Substring(0, querySplit);
                     }
 
                     encodedPath = host.HasValue
-                        ? UriHelper.BuildAbsolute(request.Scheme, host, pathBase, resolvedPath, resolvedQuery, default)
+                        ? UriHelper.BuildAbsolute(
+                              request.Scheme,
+                              host,
+                              pathBase,
+                              resolvedPath,
+                              resolvedQuery,
+                              default
+                          )
                         : UriHelper.BuildRelative(pathBase, resolvedPath, resolvedQuery, default);
                 }
 

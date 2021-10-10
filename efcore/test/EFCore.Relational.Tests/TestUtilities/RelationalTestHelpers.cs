@@ -10,18 +10,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class RelationalTestHelpers : TestHelpers
     {
-        protected RelationalTestHelpers()
-        {
-        }
+        protected RelationalTestHelpers() { }
 
         public static RelationalTestHelpers Instance { get; } = new();
 
-        public override IServiceCollection AddProviderServices(IServiceCollection services)
-            => FakeRelationalOptionsExtension.AddEntityFrameworkRelationalDatabase(services);
+        public override IServiceCollection AddProviderServices(IServiceCollection services) =>
+            FakeRelationalOptionsExtension.AddEntityFrameworkRelationalDatabase(services);
 
-        public override void UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseFakeRelational();
+        public override void UseProviderOptions(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseFakeRelational();
 
-        public override LoggingDefinitions LoggingDefinitions { get; } = new TestRelationalLoggingDefinitions();
+        public override LoggingDefinitions LoggingDefinitions { get; } =
+            new TestRelationalLoggingDefinitions();
     }
 }

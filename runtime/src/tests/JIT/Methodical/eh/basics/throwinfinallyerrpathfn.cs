@@ -31,6 +31,7 @@ public class a
             throw new Exception();
             Console.WriteLine("Unreached");
         }
+
         finally
         {
             Console.WriteLine("In finally, throwing");

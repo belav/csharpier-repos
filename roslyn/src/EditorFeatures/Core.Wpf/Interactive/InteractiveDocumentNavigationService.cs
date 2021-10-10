@@ -19,16 +19,37 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
 {
     internal sealed class InteractiveDocumentNavigationService : IDocumentNavigationService
     {
-        public bool CanNavigateToSpan(Workspace workspace, DocumentId documentId, TextSpan textSpan, CancellationToken cancellationToken)
-            => true;
+        public bool CanNavigateToSpan(
+            Workspace workspace,
+            DocumentId documentId,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        ) => true;
 
-        public bool CanNavigateToLineAndOffset(Workspace workspace, DocumentId documentId, int lineNumber, int offset, CancellationToken cancellationToken)
-            => false;
+        public bool CanNavigateToLineAndOffset(
+            Workspace workspace,
+            DocumentId documentId,
+            int lineNumber,
+            int offset,
+            CancellationToken cancellationToken
+        ) => false;
 
-        public bool CanNavigateToPosition(Workspace workspace, DocumentId documentId, int position, int virtualSpace, CancellationToken cancellationToken)
-            => false;
+        public bool CanNavigateToPosition(
+            Workspace workspace,
+            DocumentId documentId,
+            int position,
+            int virtualSpace,
+            CancellationToken cancellationToken
+        ) => false;
 
-        public bool TryNavigateToSpan(Workspace workspace, DocumentId documentId, TextSpan textSpan, OptionSet options, bool allowInvalidSpan, CancellationToken cancellationToken)
+        public bool TryNavigateToSpan(
+            Workspace workspace,
+            DocumentId documentId,
+            TextSpan textSpan,
+            OptionSet options,
+            bool allowInvalidSpan,
+            CancellationToken cancellationToken
+        )
         {
             if (workspace is not InteractiveWindowWorkspace interactiveWorkspace)
             {
@@ -39,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
             var textView = interactiveWorkspace.Window.TextView;
             var document = interactiveWorkspace.CurrentSolution.GetDocument(documentId);
 
-            var textSnapshot = document.GetTextSynchronously(cancellationToken).FindCorrespondingEditorTextSnapshot();
+            var textSnapshot = document.GetTextSynchronously(cancellationToken)
+                .FindCorrespondingEditorTextSnapshot();
             if (textSnapshot == null)
             {
                 return false;
@@ -54,11 +76,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
             }
 
             textView.Selection.Select(surfaceBufferSpan.Start, surfaceBufferSpan.End);
-            textView.ViewScroller.EnsureSpanVisible(surfaceBufferSpan.SnapshotSpan, EnsureSpanVisibleOptions.AlwaysCenter);
+            textView.ViewScroller.EnsureSpanVisible(
+                surfaceBufferSpan.SnapshotSpan,
+                EnsureSpanVisibleOptions.AlwaysCenter
+            );
 
-            // Moving the caret must be the last operation involving surfaceBufferSpan because 
+            // Moving the caret must be the last operation involving surfaceBufferSpan because
             // it might update the version number of textView.TextSnapshot (VB does line commit
-            // when the caret leaves a line which might cause pretty listing), which must be 
+            // when the caret leaves a line which might cause pretty listing), which must be
             // equal to surfaceBufferSpan.SnapshotSpan.Snapshot's version number.
             textView.Caret.MoveTo(surfaceBufferSpan.Start);
 
@@ -67,10 +92,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
             return true;
         }
 
-        public bool TryNavigateToLineAndOffset(Workspace workspace, DocumentId documentId, int lineNumber, int offset, OptionSet options, CancellationToken cancellationToken)
-            => throw new NotSupportedException();
+        public bool TryNavigateToLineAndOffset(
+            Workspace workspace,
+            DocumentId documentId,
+            int lineNumber,
+            int offset,
+            OptionSet options,
+            CancellationToken cancellationToken
+        ) => throw new NotSupportedException();
 
-        public bool TryNavigateToPosition(Workspace workspace, DocumentId documentId, int position, int virtualSpace, OptionSet options, CancellationToken cancellationToken)
-            => throw new NotSupportedException();
+        public bool TryNavigateToPosition(
+            Workspace workspace,
+            DocumentId documentId,
+            int position,
+            int virtualSpace,
+            OptionSet options,
+            CancellationToken cancellationToken
+        ) => throw new NotSupportedException();
     }
 }

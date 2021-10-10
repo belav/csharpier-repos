@@ -20,14 +20,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
 {
-    internal abstract partial class AbstractSimplifyThisOrMeCodeFixProvider<
-        TMemberAccessExpressionSyntax>
-        : SyntaxEditorBasedCodeFixProvider
-        where TMemberAccessExpressionSyntax : SyntaxNode
+    internal abstract partial class AbstractSimplifyThisOrMeCodeFixProvider<TMemberAccessExpressionSyntax>
+        : SyntaxEditorBasedCodeFixProvider where TMemberAccessExpressionSyntax : SyntaxNode
     {
-        protected AbstractSimplifyThisOrMeCodeFixProvider()
-        {
-        }
+        protected AbstractSimplifyThisOrMeCodeFixProvider() { }
 
         protected abstract string GetTitle();
 
@@ -41,38 +37,55 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
             var document = context.Document;
             var diagnostic = context.Diagnostics[0];
 
-            context.RegisterCodeFix(new MyCodeAction(
-                GetTitle(),
-                c => FixAsync(document, diagnostic, c),
-                IDEDiagnosticIds.RemoveQualificationDiagnosticId), context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(
+                    GetTitle(),
+                    c => FixAsync(document, diagnostic, c),
+                    IDEDiagnosticIds.RemoveQualificationDiagnosticId
+                ),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var documentOptions = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
+            var documentOptions = await document.GetOptionsAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var memberAccessNodes = diagnostics.Select(
-                d => (TMemberAccessExpressionSyntax)d.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken)).ToSet();
+                    d =>
+                        (TMemberAccessExpressionSyntax)d.AdditionalLocations[0].FindNode(
+                            getInnermostNodeForTie: true,
+                            cancellationToken
+                        )
+                )
+                .ToSet();
 
             var newRoot = Rewrite(root, memberAccessNodes);
             editor.ReplaceNode(root, newRoot);
         }
 
-        protected abstract SyntaxNode Rewrite(SyntaxNode root, ISet<TMemberAccessExpressionSyntax> memberAccessNodes);
+        protected abstract SyntaxNode Rewrite(
+            SyntaxNode root,
+            ISet<TMemberAccessExpressionSyntax> memberAccessNodes
+        );
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(
-                string title, Func<CancellationToken, Task<Document>> createChangedDocument, string equivalenceKey)
-                : base(title, createChangedDocument, equivalenceKey)
-            {
-            }
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument,
+                string equivalenceKey
+            ) : base(title, createChangedDocument, equivalenceKey) { }
         }
     }
 }

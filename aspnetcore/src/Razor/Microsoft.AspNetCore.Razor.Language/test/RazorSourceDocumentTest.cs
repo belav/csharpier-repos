@@ -42,7 +42,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var content = TestRazorSourceDocument.CreateStreamContent(encoding: Encoding.UTF32);
-            var properties = new RazorSourceDocumentProperties("c:\\myapp\\filePath.cshtml", "filePath.cshtml");
+            var properties = new RazorSourceDocumentProperties(
+                "c:\\myapp\\filePath.cshtml",
+                "filePath.cshtml"
+            );
 
             // Act
             var document = RazorSourceDocument.ReadFrom(content, Encoding.UTF32, properties);
@@ -57,7 +60,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ReadFrom_EmptyStream_WithEncoding()
         {
             // Arrange
-            var content = TestRazorSourceDocument.CreateStreamContent(content: string.Empty, encoding: Encoding.UTF32);
+            var content = TestRazorSourceDocument.CreateStreamContent(
+                content: string.Empty,
+                encoding: Encoding.UTF32
+            );
 
             // Act
             var document = RazorSourceDocument.ReadFrom(content, "file.cshtml", Encoding.UTF32);
@@ -71,7 +77,12 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ReadFrom_ProjectItem()
         {
             // Arrange
-            var projectItem = new TestRazorProjectItem("filePath.cshtml", "c:\\myapp\\filePath.cshtml", "filePath.cshtml", "c:\\myapp\\");
+            var projectItem = new TestRazorProjectItem(
+                "filePath.cshtml",
+                "c:\\myapp\\filePath.cshtml",
+                "filePath.cshtml",
+                "c:\\myapp\\"
+            );
 
             // Act
             var document = RazorSourceDocument.ReadFrom(projectItem);
@@ -86,7 +97,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ReadFrom_ProjectItem_NoRelativePath()
         {
             // Arrange
-            var projectItem = new TestRazorProjectItem("filePath.cshtml", "c:\\myapp\\filePath.cshtml", basePath: "c:\\myapp\\");
+            var projectItem = new TestRazorProjectItem(
+                "filePath.cshtml",
+                "c:\\myapp\\filePath.cshtml",
+                basePath: "c:\\myapp\\"
+            );
 
             // Act
             var document = RazorSourceDocument.ReadFrom(projectItem);
@@ -101,7 +116,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ReadFrom_ProjectItem_FallbackToRelativePath()
         {
             // Arrange
-            var projectItem = new TestRazorProjectItem("filePath.cshtml", relativePhysicalPath: "filePath.cshtml", basePath: "c:\\myapp\\");
+            var projectItem = new TestRazorProjectItem(
+                "filePath.cshtml",
+                relativePhysicalPath: "filePath.cshtml",
+                basePath: "c:\\myapp\\"
+            );
 
             // Act
             var document = RazorSourceDocument.ReadFrom(projectItem);
@@ -165,7 +184,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var content = "Hello world";
-            var properties = new RazorSourceDocumentProperties("c:\\myapp\\filePath.cshtml", "filePath.cshtml");
+            var properties = new RazorSourceDocumentProperties(
+                "c:\\myapp\\filePath.cshtml",
+                "filePath.cshtml"
+            );
 
             // Act
             var document = RazorSourceDocument.Create(content, Encoding.UTF32, properties);
@@ -198,7 +220,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var filePath = "filePath.cshtml";
             var relativePhysicalPath = "relative-path.cshtml";
-            var projectItem = new TestRazorProjectItem(filePath, relativePhysicalPath: relativePhysicalPath);
+            var projectItem = new TestRazorProjectItem(
+                filePath,
+                relativePhysicalPath: relativePhysicalPath
+            );
 
             // Act
             var document = RazorSourceDocument.ReadFrom(projectItem);

@@ -74,28 +74,42 @@ namespace System.Threading.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/49890", TestPlatforms.Android)]
         public void PingPong()
         {
-            using (ManualResetEvent mre1 = new ManualResetEvent(true), mre2 = new ManualResetEvent(false))
+            using (
+                ManualResetEvent mre1 = new ManualResetEvent(true),
+                    mre2 = new ManualResetEvent(false)
+            )
             {
                 const int Iters = 10;
                 Task.WaitAll(
-                    Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < Iters; i++)
+                    Task.Factory.StartNew(
+                        () =>
                         {
-                            Assert.True(mre1.WaitOne(FailedWaitTimeout));
-                            mre1.Reset();
-                            mre2.Set();
-                        }
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default),
-                    Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < Iters; i++)
+                            for (int i = 0; i < Iters; i++)
+                            {
+                                Assert.True(mre1.WaitOne(FailedWaitTimeout));
+                                mre1.Reset();
+                                mre2.Set();
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    ),
+                    Task.Factory.StartNew(
+                        () =>
                         {
-                            Assert.True(mre2.WaitOne(FailedWaitTimeout));
-                            mre2.Reset();
-                            mre1.Set();
-                        }
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
+                            for (int i = 0; i < Iters; i++)
+                            {
+                                Assert.True(mre2.WaitOne(FailedWaitTimeout));
+                                mre2.Reset();
+                                mre1.Set();
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
+                );
             }
         }
     }

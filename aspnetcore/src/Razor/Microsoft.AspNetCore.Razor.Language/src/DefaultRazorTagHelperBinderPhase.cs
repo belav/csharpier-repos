@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language
 {
-    internal class DefaultRazorTagHelperBinderPhase : RazorEnginePhaseBase, IRazorTagHelperBinderPhase
+    internal class DefaultRazorTagHelperBinderPhase
+        : RazorEnginePhaseBase,
+          IRazorTagHelperBinderPhase
     {
         private static readonly char[] NamespaceSeparators = new char[] { '.' };
 
@@ -38,11 +40,20 @@ namespace Microsoft.AspNetCore.Razor.Language
             // should be processed.
             DirectiveVisitor visitor = null;
             var parserOptions = codeDocument.GetParserOptions();
-            if (FileKinds.IsComponent(codeDocument.GetFileKind()) &&
-                (parserOptions == null || parserOptions.FeatureFlags.AllowComponentFileKind))
+            if (
+                FileKinds.IsComponent(codeDocument.GetFileKind())
+                && (parserOptions == null || parserOptions.FeatureFlags.AllowComponentFileKind)
+            )
             {
-                codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var currentNamespace);
-                visitor = new ComponentDirectiveVisitor(codeDocument.Source.FilePath, descriptors, currentNamespace);
+                codeDocument.TryComputeNamespace(
+                    fallbackToRootNamespace: true,
+                    out var currentNamespace
+                );
+                visitor = new ComponentDirectiveVisitor(
+                    codeDocument.Source.FilePath,
+                    descriptors,
+                    currentNamespace
+                );
             }
             else
             {
@@ -74,12 +85,20 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return;
             }
 
-            var rewrittenSyntaxTree = TagHelperParseTreeRewriter.Rewrite(syntaxTree, tagHelperPrefix, descriptors);
-            
+            var rewrittenSyntaxTree = TagHelperParseTreeRewriter.Rewrite(
+                syntaxTree,
+                tagHelperPrefix,
+                descriptors
+            );
+
             codeDocument.SetSyntaxTree(rewrittenSyntaxTree);
         }
 
-        private static bool MatchesDirective(TagHelperDescriptor descriptor, string typePattern, string assemblyName)
+        private static bool MatchesDirective(
+            TagHelperDescriptor descriptor,
+            string typePattern,
+            string assemblyName
+        )
         {
             if (!string.Equals(descriptor.AssemblyName, assemblyName, StringComparison.Ordinal))
             {
@@ -124,7 +143,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public override string TagHelperPrefix => _tagHelperPrefix;
 
-            public override HashSet<TagHelperDescriptor> Matches { get; } = new HashSet<TagHelperDescriptor>();
+            public override HashSet<TagHelperDescriptor> Matches { get; } =
+                new HashSet<TagHelperDescriptor>();
 
             public override void Visit(RazorSyntaxTree tree)
             {
@@ -164,20 +184,27 @@ namespace Microsoft.AspNetCore.Razor.Language
                         for (var i = 0; i < _tagHelpers.Count; i++)
                         {
                             var tagHelper = _tagHelpers[i];
-                            if (MatchesDirective(tagHelper, addTagHelper.TypePattern, addTagHelper.AssemblyName))
+                            if (
+                                MatchesDirective(
+                                    tagHelper,
+                                    addTagHelper.TypePattern,
+                                    addTagHelper.AssemblyName
+                                )
+                            )
                             {
                                 Matches.Add(tagHelper);
                             }
                         }
                     }
-                    else if (context.ChunkGenerator is RemoveTagHelperChunkGenerator removeTagHelper)
+                    else if (
+                        context.ChunkGenerator is RemoveTagHelperChunkGenerator removeTagHelper
+                    )
                     {
                         if (removeTagHelper.AssemblyName == null)
                         {
                             // Skip this one, it's an error
                             continue;
                         }
-
 
                         if (!AssemblyContainsTagHelpers(removeTagHelper.AssemblyName, _tagHelpers))
                         {
@@ -188,13 +215,22 @@ namespace Microsoft.AspNetCore.Razor.Language
                         for (var i = 0; i < _tagHelpers.Count; i++)
                         {
                             var tagHelper = _tagHelpers[i];
-                            if (MatchesDirective(tagHelper, removeTagHelper.TypePattern, removeTagHelper.AssemblyName))
+                            if (
+                                MatchesDirective(
+                                    tagHelper,
+                                    removeTagHelper.TypePattern,
+                                    removeTagHelper.AssemblyName
+                                )
+                            )
                             {
                                 Matches.Remove(tagHelper);
                             }
                         }
                     }
-                    else if (context.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator tagHelperPrefix)
+                    else if (
+                        context.ChunkGenerator
+                        is TagHelperPrefixDirectiveChunkGenerator tagHelperPrefix
+                    )
                     {
                         if (!string.IsNullOrEmpty(tagHelperPrefix.DirectiveText))
                         {
@@ -205,11 +241,20 @@ namespace Microsoft.AspNetCore.Razor.Language
                 }
             }
 
-            private bool AssemblyContainsTagHelpers(string assemblyName, IReadOnlyList<TagHelperDescriptor> tagHelpers)
+            private bool AssemblyContainsTagHelpers(
+                string assemblyName,
+                IReadOnlyList<TagHelperDescriptor> tagHelpers
+            )
             {
                 for (var i = 0; i < tagHelpers.Count; i++)
                 {
-                    if (string.Equals(tagHelpers[i].AssemblyName, assemblyName, StringComparison.Ordinal))
+                    if (
+                        string.Equals(
+                            tagHelpers[i].AssemblyName,
+                            assemblyName,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return true;
                     }
@@ -225,12 +270,19 @@ namespace Microsoft.AspNetCore.Razor.Language
             private string _filePath;
             private RazorSourceDocument _source;
 
-            public ComponentDirectiveVisitor(string filePath, IReadOnlyList<TagHelperDescriptor> tagHelpers, string currentNamespace)
+            public ComponentDirectiveVisitor(
+                string filePath,
+                IReadOnlyList<TagHelperDescriptor> tagHelpers,
+                string currentNamespace
+            )
             {
                 _filePath = filePath;
 
                 // We don't want to consider non-component tag helpers in a component document.
-                _tagHelpers = tagHelpers.Where(t => t.IsAnyComponentDocumentTagHelper() && !IsTagHelperFromMangledClass(t)).ToList();
+                _tagHelpers = tagHelpers.Where(
+                        t => t.IsAnyComponentDocumentTagHelper() && !IsTagHelperFromMangledClass(t)
+                    )
+                    .ToList();
 
                 for (var i = 0; i < _tagHelpers.Count; i++)
                 {
@@ -259,7 +311,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 }
             }
 
-            public override HashSet<TagHelperDescriptor> Matches { get; } = new HashSet<TagHelperDescriptor>();
+            public override HashSet<TagHelperDescriptor> Matches { get; } =
+                new HashSet<TagHelperDescriptor>();
 
             // There is no support for tag helper prefix in component documents.
             public override string TagHelperPrefix => null;
@@ -292,28 +345,45 @@ namespace Microsoft.AspNetCore.Razor.Language
                         if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                         {
                             addTagHelper.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(node.GetSourceSpan(_source)));
+                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
+                                    node.GetSourceSpan(_source)
+                                )
+                            );
                         }
                     }
-                    else if (context.ChunkGenerator is RemoveTagHelperChunkGenerator removeTagHelper)
+                    else if (
+                        context.ChunkGenerator is RemoveTagHelperChunkGenerator removeTagHelper
+                    )
                     {
                         // Make sure this node exists in the file we're parsing and not in its imports.
                         if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                         {
                             removeTagHelper.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(node.GetSourceSpan(_source)));
+                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
+                                    node.GetSourceSpan(_source)
+                                )
+                            );
                         }
                     }
-                    else if (context.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator tagHelperPrefix)
+                    else if (
+                        context.ChunkGenerator
+                        is TagHelperPrefixDirectiveChunkGenerator tagHelperPrefix
+                    )
                     {
                         // Make sure this node exists in the file we're parsing and not in its imports.
                         if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                         {
                             tagHelperPrefix.Diagnostics.Add(
-                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(node.GetSourceSpan(_source)));
+                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
+                                    node.GetSourceSpan(_source)
+                                )
+                            );
                         }
                     }
-                    else if (context.ChunkGenerator is AddImportChunkGenerator usingStatement && !usingStatement.IsStatic)
+                    else if (
+                        context.ChunkGenerator is AddImportChunkGenerator usingStatement
+                        && !usingStatement.IsStatic
+                    )
                     {
                         // Get the namespace from the using statement.
                         var @namespace = usingStatement.ParsedNamespace;
@@ -337,7 +407,11 @@ namespace Microsoft.AspNetCore.Razor.Language
                             {
                                 // If this is a child content tag helper, we want to add it if it's original type is in scope of the given namespace.
                                 // E.g, if the type name is `Test.MyComponent.ChildContent`, we want to add it if `Test.MyComponent` is in this namespace.
-                                TrySplitNamespaceAndType(typeName, out var namespaceTextSpan, out var _);
+                                TrySplitNamespaceAndType(
+                                    typeName,
+                                    out var namespaceTextSpan,
+                                    out var _
+                                );
                                 typeName = GetTextSpanContent(namespaceTextSpan, typeName);
                             }
                             if (typeName != null && IsTypeInNamespace(typeName, @namespace))
@@ -352,13 +426,24 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             internal static bool IsTypeInNamespace(string typeName, string @namespace)
             {
-                if (!TrySplitNamespaceAndType(typeName, out var namespaceTextSpan, out var _) || namespaceTextSpan.Length == 0)
+                if (
+                    !TrySplitNamespaceAndType(typeName, out var namespaceTextSpan, out var _)
+                    || namespaceTextSpan.Length == 0
+                )
                 {
                     // Either the typeName is not the full type name or this type is at the top level.
                     return true;
                 }
 
-                return @namespace.Length == namespaceTextSpan.Length && 0 == string.CompareOrdinal(typeName, namespaceTextSpan.Start, @namespace, 0, @namespace.Length);
+                return @namespace.Length == namespaceTextSpan.Length
+                    && 0
+                        == string.CompareOrdinal(
+                            typeName,
+                            namespaceTextSpan.Start,
+                            @namespace,
+                            0,
+                            @namespace.Length
+                        );
             }
 
             // Check if the given type is already in scope given the namespace of the current document.
@@ -368,15 +453,24 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Whereas `MyComponents.SomethingElse.OtherComponent` is not in scope.
             internal static bool IsTypeInScope(string typeName, string currentNamespace)
             {
-                if (!TrySplitNamespaceAndType(typeName, out var namespaceTextSpan, out var _) || namespaceTextSpan.Length == 0)
+                if (
+                    !TrySplitNamespaceAndType(typeName, out var namespaceTextSpan, out var _)
+                    || namespaceTextSpan.Length == 0
+                )
                 {
                     // Either the typeName is not the full type name or this type is at the top level.
                     return true;
                 }
 
                 var typeNamespace = GetTextSpanContent(namespaceTextSpan, typeName);
-                var typeNamespaceSegments = typeNamespace.Split(NamespaceSeparators, StringSplitOptions.RemoveEmptyEntries);
-                var currentNamespaceSegments = currentNamespace.Split(NamespaceSeparators, StringSplitOptions.RemoveEmptyEntries);
+                var typeNamespaceSegments = typeNamespace.Split(
+                    NamespaceSeparators,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
+                var currentNamespaceSegments = currentNamespace.Split(
+                    NamespaceSeparators,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 if (typeNamespaceSegments.Length > currentNamespaceSegments.Length)
                 {
                     return false;
@@ -384,7 +478,12 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                 for (var i = 0; i < typeNamespaceSegments.Length; i++)
                 {
-                    if (!typeNamespaceSegments[i].Equals(currentNamespaceSegments[i], StringComparison.Ordinal))
+                    if (
+                        !typeNamespaceSegments[i].Equals(
+                            currentNamespaceSegments[i],
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return false;
                     }
@@ -393,7 +492,7 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return true;
             }
 
-            // We need to filter out the duplicate tag helper descriptors that come from the 
+            // We need to filter out the duplicate tag helper descriptors that come from the
             // open file in the editor. We mangle the class name for its generated code, so using that here to filter these out.
             internal static bool IsTagHelperFromMangledClass(TagHelperDescriptor tagHelper)
             {
@@ -415,7 +514,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
 
             // Internal for testing.
-            internal static bool TrySplitNamespaceAndType(string fullTypeName, out TextSpan @namespace, out TextSpan typeName)
+            internal static bool TrySplitNamespaceAndType(
+                string fullTypeName,
+                out TextSpan @namespace,
+                out TextSpan typeName
+            )
             {
                 @namespace = default;
                 typeName = default;
@@ -456,7 +559,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                 var typeNameStartLocation = splitLocation + 1;
                 if (typeNameStartLocation < fullTypeName.Length)
                 {
-                    typeName = new TextSpan(typeNameStartLocation, fullTypeName.Length - typeNameStartLocation);
+                    typeName = new TextSpan(
+                        typeNameStartLocation,
+                        fullTypeName.Length - typeNameStartLocation
+                    );
                 }
 
                 return true;

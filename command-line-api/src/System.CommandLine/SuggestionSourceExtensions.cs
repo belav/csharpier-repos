@@ -7,9 +7,7 @@ namespace System.CommandLine
 {
     public static class SuggestionSourceExtensions
     {
-        public static void Add(
-            this SuggestionSourceList suggestionSources,
-            SuggestDelegate suggest)
+        public static void Add(this SuggestionSourceList suggestionSources, SuggestDelegate suggest)
         {
             if (suggestionSources is null)
             {
@@ -26,7 +24,8 @@ namespace System.CommandLine
 
         public static void Add(
             this SuggestionSourceList suggestionSources,
-            params string[] suggestions)
+            params string[] suggestions
+        )
         {
             if (suggestionSources is null)
             {

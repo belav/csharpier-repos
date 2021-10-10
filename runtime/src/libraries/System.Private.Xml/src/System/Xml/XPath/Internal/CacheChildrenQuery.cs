@@ -24,7 +24,8 @@ namespace MS.Internal.Xml.XPath
         private XPathNavigator? _lastNode;
 #endif
 
-        public CacheChildrenQuery(Query qyInput, string name, string prefix, XPathNodeType type) : base(qyInput, name, prefix, type)
+        public CacheChildrenQuery(Query qyInput, string name, string prefix, XPathNodeType type)
+            : base(qyInput, name, prefix, type)
         {
             _elementStk = new StackNav();
             _positionStk = new StackInt();
@@ -139,6 +140,9 @@ namespace MS.Internal.Xml.XPath
             return result;
         }
 
-        public override XPathNodeIterator Clone() { return new CacheChildrenQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new CacheChildrenQuery(this);
+        }
     } // Children Query}
 }

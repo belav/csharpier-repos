@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<Int64>>() / sizeof(Int64);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<Int64>>() / sizeof(Int64);
 
         public bool Succeeded { get; set; } = true;
 
@@ -72,20 +73,27 @@ namespace JIT.HardwareIntrinsics.General
 
             Vector256<Int64> value = Vector256.Create(values[0], values[1], values[2], values[3]);
 
-            object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.ToScalar))
-                                .MakeGenericMethod(typeof(Int64))
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector256).GetMethod(nameof(Vector256.ToScalar))
+                .MakeGenericMethod(typeof(Int64))
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Int64)(result), values);
         }
 
-        private void ValidateResult(Int64 result, Int64[] values, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int64 result,
+            Int64[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256<Int64>.ToScalar(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  values: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256<Int64>.ToScalar(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  values: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

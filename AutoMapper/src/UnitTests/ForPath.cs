@@ -42,25 +42,45 @@ namespace AutoMapper.UnitTests
             public string DescendantField { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
-        {
-            cfg.CreateMap<RootModel, DataModel>()
-                            .ForMember(dest => dest.OtherID, opt => opt.MapFrom(src => src.Nested.NestedID))
-                            .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Nested.NestedTitle))
-                            .ForMember(dest => dest.Title2, opt => opt.MapFrom(src => src.Nested.NestedTitle2))
-                            .ReverseMap()
-                            .ForPath(d=>d.Nested.NestedTitle2, o=>o.Ignore());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<RootModel, DataModel>()
+                        .ForMember(
+                            dest => dest.OtherID,
+                            opt => opt.MapFrom(src => src.Nested.NestedID)
+                        )
+                        .ForMember(
+                            dest => dest.Title,
+                            opt => opt.MapFrom(src => src.Nested.NestedTitle)
+                        )
+                        .ForMember(
+                            dest => dest.Title2,
+                            opt => opt.MapFrom(src => src.Nested.NestedTitle2)
+                        )
+                        .ReverseMap()
+                        .ForPath(d => d.Nested.NestedTitle2, o => o.Ignore());
 
-            cfg.CreateMap<DerivedModel, DerivedDataModel>()
-                            .IncludeBase<RootModel, DataModel>().ReverseMap()
-                            .ForPath(d=>d.Nested.NestedTitle, o=>o.Ignore())
-                            .ForPath(d => d.Nested.NestedTitle2, opt => opt.MapFrom(src => src.Title2));
-        });
+                    cfg.CreateMap<DerivedModel, DerivedDataModel>()
+                        .IncludeBase<RootModel, DataModel>()
+                        .ReverseMap()
+                        .ForPath(d => d.Nested.NestedTitle, o => o.Ignore())
+                        .ForPath(d => d.Nested.NestedTitle2, opt => opt.MapFrom(src => src.Title2));
+                }
+            );
 
         [Fact]
         public void Should_work()
         {
-            var source = new DerivedDataModel() { OtherID = 2, Title2 = "nested test", ID = 1, Title = "test", DescendantField = "descendant field" };
+            var source = new DerivedDataModel()
+            {
+                OtherID = 2,
+                Title2 = "nested test",
+                ID = 1,
+                Title = "test",
+                DescendantField = "descendant field"
+            };
             var destination = Mapper.Map<DerivedModel>(source);
             destination.Nested.NestedID.ShouldBe(2);
             destination.Nested.NestedTitle.ShouldBeNull();
@@ -92,12 +112,21 @@ namespace AutoMapper.UnitTests
             public decimal Total { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<OrderDto, Order>()
-                .ForPath(o=>o.CustomerHolder.Customer.Name, o=>o.MapFrom(s=>s.CustomerName))
-                .ForPath(o => o.CustomerHolder.Customer.Total, o => o.MapFrom(s => s.Total));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<OrderDto, Order>()
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Name,
+                            o => o.MapFrom(s => s.CustomerName)
+                        )
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Total,
+                            o => o.MapFrom(s => s.Total)
+                        );
+                }
+            );
 
         [Fact]
         public void Should_unflatten()
@@ -133,18 +162,33 @@ namespace AutoMapper.UnitTests
             public decimal Total { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<OrderDto, Order>()
-                .ForPath(o => o.CustomerHolder.Customer.Name, o => o.MapFrom(s => s.CustomerName))
-                .ForPath(o => o.CustomerHolder.Customer.Total, o => o.MapFrom(s => s.Total));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<OrderDto, Order>()
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Name,
+                            o => o.MapFrom(s => s.CustomerName)
+                        )
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Total,
+                            o => o.MapFrom(s => s.Total)
+                        );
+                }
+            );
 
         [Fact]
         public void Should_unflatten()
         {
-            new Action(() => Mapper.Map<Order>(new OrderDto())).ShouldThrowException<AutoMapperMappingException>(ex =>
-                  ex.InnerException?.Message.ShouldBe("typeMapDestination.CustomerHolder.Customer cannot be null because it's used by ForPath."));
+            new Action(
+                () => Mapper.Map<Order>(new OrderDto())
+            ).ShouldThrowException<AutoMapperMappingException>(
+                ex =>
+                    ex.InnerException?.Message.ShouldBe(
+                        "typeMapDestination.CustomerHolder.Customer cannot be null because it's used by ForPath."
+                    )
+            );
         }
     }
 
@@ -173,13 +217,22 @@ namespace AutoMapper.UnitTests
             public decimal Total { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<OrderDto, Order>()
-                .ForMember(o=>o.Value, o=>o.MapFrom(src => 9))
-                .ForPath(o => o.CustomerHolder.Customer.Name, o => o.MapFrom(s => s.CustomerName))
-                .ForPath(o => o.CustomerHolder.Customer.Total, o => o.MapFrom(s => s.Total));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<OrderDto, Order>()
+                        .ForMember(o => o.Value, o => o.MapFrom(src => 9))
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Name,
+                            o => o.MapFrom(s => s.CustomerName)
+                        )
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Total,
+                            o => o.MapFrom(s => s.Total)
+                        );
+                }
+            );
 
         [Fact]
         public void Should_unflatten()
@@ -213,13 +266,16 @@ namespace AutoMapper.UnitTests
             public int Id { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<TimesheetModel, TimesheetViewModel>()
-                .ForMember(d => d.Contact, o => o.MapFrom(s => s.ContactNavigation.Id))
-                .ReverseMap()
-                .ForPath(s => s.ContactNavigation.Id, opt => opt.Ignore());
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<TimesheetModel, TimesheetViewModel>()
+                        .ForMember(d => d.Contact, o => o.MapFrom(s => s.ContactNavigation.Id))
+                        .ReverseMap()
+                        .ForPath(s => s.ContactNavigation.Id, opt => opt.Ignore());
+                }
+            );
 
         [Fact]
         public void Should_not_set_value()
@@ -227,15 +283,9 @@ namespace AutoMapper.UnitTests
             var source = new TimesheetModel
             {
                 Contact = 6,
-                ContactNavigation = new ContactModel
-                {
-                    Id = 5
-                }
+                ContactNavigation = new ContactModel { Id = 5 }
             };
-            var dest = new TimesheetViewModel
-            {
-                Contact = 10
-            };
+            var dest = new TimesheetViewModel { Contact = 10 };
             Mapper.Map(dest, source);
 
             source.ContactNavigation.Id.ShouldBe(5);
@@ -253,21 +303,30 @@ namespace AutoMapper.UnitTests
         {
             public string Name { get; set; }
         }
-        
+
         [Fact]
         public void Should_throw_exception()
         {
-            Assert.Throws<NullReferenceException>(() =>
-            {
-                var cfg = new MapperConfiguration(config =>
+            Assert.Throws<NullReferenceException>(
+                () =>
                 {
-                    Assert.Throws<ArgumentNullException>(() =>
-                    {
-                        config.CreateMap<SourceModel, DestinationModel>()
-                            .ForPath(sourceModel => sourceModel.Name, opts => opts.MapFrom<string>(null));
-                    });
-                });
-            });
+                    var cfg = new MapperConfiguration(
+                        config =>
+                        {
+                            Assert.Throws<ArgumentNullException>(
+                                () =>
+                                {
+                                    config.CreateMap<SourceModel, DestinationModel>()
+                                        .ForPath(
+                                            sourceModel => sourceModel.Name,
+                                            opts => opts.MapFrom<string>(null)
+                                        );
+                                }
+                            );
+                        }
+                    );
+                }
+            );
         }
     }
 
@@ -295,12 +354,21 @@ namespace AutoMapper.UnitTests
             public decimal Total { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<OrderDto, Order>()
-                .ForPath(o => o.CustomerHolder.Customer.Name, o => o.MapFrom(s => s.CustomerName))
-                .ForPath(o => o.CustomerHolder.Customer.Total, o => o.MapFrom(s => s.Total));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<OrderDto, Order>()
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Name,
+                            o => o.MapFrom(s => s.CustomerName)
+                        )
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Total,
+                            o => o.MapFrom(s => s.Total)
+                        );
+                }
+            );
 
         [Fact]
         public void Should_unflatten()
@@ -336,12 +404,21 @@ namespace AutoMapper.UnitTests
             public decimal Total;
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<OrderDto, Order>()
-                .ForPath(o => o.CustomerHolder.Customer.Name, o => o.MapFrom(s => s.CustomerName))
-                .ForPath(o => o.CustomerHolder.Customer.Total, o => o.MapFrom(s => s.Total));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<OrderDto, Order>()
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Name,
+                            o => o.MapFrom(s => s.CustomerName)
+                        )
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Total,
+                            o => o.MapFrom(s => s.Total)
+                        );
+                }
+            );
 
         [Fact]
         public void Should_unflatten()
@@ -379,30 +456,47 @@ namespace AutoMapper.UnitTests
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<OrderDto, Order>()
-                .ForPath(o => o.CustomerHolder.Customer.Name, o =>
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
                 {
-                    o.Condition(c => !c.SourceMember.StartsWith("George"));
-                    o.MapFrom(s => s.CustomerName);
-                })
-                .ForPath(o => o.CustomerHolder.Customer.Total, o =>
-                {
-                    o.Condition(c => c.Source.Total < 50);
-                    o.MapFrom(s => s.Total);
-                })
-                .ForPath(o => o.CustomerHolder.Customer.Value, o =>
-                {
-                    o.Condition(c => c.Destination.CustomerHolder.Customer.Value == 0);
-                    o.MapFrom(s => s.Value);
-                });
-        });
+                    cfg.CreateMap<OrderDto, Order>()
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Name,
+                            o =>
+                            {
+                                o.Condition(c => !c.SourceMember.StartsWith("George"));
+                                o.MapFrom(s => s.CustomerName);
+                            }
+                        )
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Total,
+                            o =>
+                            {
+                                o.Condition(c => c.Source.Total < 50);
+                                o.MapFrom(s => s.Total);
+                            }
+                        )
+                        .ForPath(
+                            o => o.CustomerHolder.Customer.Value,
+                            o =>
+                            {
+                                o.Condition(c => c.Destination.CustomerHolder.Customer.Value == 0);
+                                o.MapFrom(s => s.Value);
+                            }
+                        );
+                }
+            );
 
         [Fact]
         public void Should_unflatten()
         {
-            var dto = new OrderDto { CustomerName = "George Costanza", Total = 74.85m, Value = 100 };
+            var dto = new OrderDto
+            {
+                CustomerName = "George Costanza",
+                Total = 74.85m,
+                Value = 100
+            };
             var model = Mapper.Map<Order>(dto);
             model.CustomerHolder.Customer.Name.ShouldBeNull();
             model.CustomerHolder.Customer.Total.ShouldBe(0);

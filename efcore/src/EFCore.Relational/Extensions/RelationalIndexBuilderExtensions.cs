@@ -34,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="name"> The name of the index. </param>
         /// <returns> A builder to further configure the index. </returns>
         [Obsolete("Use HasDatabaseName() instead.")]
-        public static IndexBuilder HasName(this IndexBuilder indexBuilder, string? name)
-            => HasDatabaseName(indexBuilder, name);
+        public static IndexBuilder HasName(this IndexBuilder indexBuilder, string? name) =>
+            HasDatabaseName(indexBuilder, name);
 
         /// <summary>
         ///     Configures the name of the index in the database when targeting a relational database.
@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> A builder to further configure the index. </returns>
         public static IndexBuilder<TEntity> HasDatabaseName<TEntity>(
             this IndexBuilder<TEntity> indexBuilder,
-            string? name)
+            string? name
+        )
         {
             indexBuilder.Metadata.SetDatabaseName(name);
 
@@ -61,8 +62,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="name"> The name of the index. </param>
         /// <returns> A builder to further configure the index. </returns>
         [Obsolete("Use HasDatabaseName() instead.")]
-        public static IndexBuilder<TEntity> HasName<TEntity>(this IndexBuilder<TEntity> indexBuilder, string? name)
-            => indexBuilder.HasDatabaseName(name);
+        public static IndexBuilder<TEntity> HasName<TEntity>(
+            this IndexBuilder<TEntity> indexBuilder,
+            string? name
+        ) => indexBuilder.HasDatabaseName(name);
 
         /// <summary>
         ///     Configures the name of the index in the database when targeting a relational database.
@@ -77,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionIndexBuilder? HasDatabaseName(
             this IConventionIndexBuilder indexBuilder,
             string? name,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (indexBuilder.CanSetDatabaseName(name, fromDataAnnotation))
             {
@@ -102,8 +106,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionIndexBuilder? HasName(
             this IConventionIndexBuilder indexBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-            => indexBuilder.HasDatabaseName(name, fromDataAnnotation);
+            bool fromDataAnnotation = false
+        ) => indexBuilder.HasDatabaseName(name, fromDataAnnotation);
 
         /// <summary>
         ///     Returns a value indicating whether the given name can be set for the index.
@@ -115,8 +119,9 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetDatabaseName(
             this IConventionIndexBuilder indexBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-            => indexBuilder.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
+            bool fromDataAnnotation = false
+        ) =>
+            indexBuilder.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
 
         /// <summary>
         ///     Returns a value indicating whether the given name can be set for the index.
@@ -129,8 +134,8 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetName(
             this IConventionIndexBuilder indexBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-            => CanSetDatabaseName(indexBuilder, name, fromDataAnnotation);
+            bool fromDataAnnotation = false
+        ) => CanSetDatabaseName(indexBuilder, name, fromDataAnnotation);
 
         /// <summary>
         ///     Configures the filter expression for the index.
@@ -155,8 +160,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="indexBuilder"> The builder for the index being configured. </param>
         /// <param name="sql"> The filter expression for the index. </param>
         /// <returns>A builder to further configure the index. </returns>
-        public static IndexBuilder<TEntity> HasFilter<TEntity>(this IndexBuilder<TEntity> indexBuilder, string? sql)
-            => (IndexBuilder<TEntity>)HasFilter((IndexBuilder)indexBuilder, sql);
+        public static IndexBuilder<TEntity> HasFilter<TEntity>(
+            this IndexBuilder<TEntity> indexBuilder,
+            string? sql
+        ) => (IndexBuilder<TEntity>)HasFilter((IndexBuilder)indexBuilder, sql);
 
         /// <summary>
         ///     Configures the filter expression for the index.
@@ -171,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionIndexBuilder? HasFilter(
             this IConventionIndexBuilder indexBuilder,
             string? sql,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (indexBuilder.CanSetFilter(sql, fromDataAnnotation))
             {
@@ -192,7 +200,12 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetFilter(
             this IConventionIndexBuilder indexBuilder,
             string? sql,
-            bool fromDataAnnotation = false)
-            => indexBuilder.CanSetAnnotation(RelationalAnnotationNames.Filter, sql, fromDataAnnotation);
+            bool fromDataAnnotation = false
+        ) =>
+            indexBuilder.CanSetAnnotation(
+                RelationalAnnotationNames.Filter,
+                sql,
+                fromDataAnnotation
+            );
     }
 }

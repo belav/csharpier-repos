@@ -23,7 +23,9 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
         /// <returns>An <see cref="PageActionEndpointConventionBuilder"/> for endpoints associated with Razor Pages.</returns>
-        public static PageActionEndpointConventionBuilder MapRazorPages(this IEndpointRouteBuilder endpoints)
+        public static PageActionEndpointConventionBuilder MapRazorPages(
+            this IEndpointRouteBuilder endpoints
+        )
         {
             if (endpoints == null)
             {
@@ -59,7 +61,10 @@ namespace Microsoft.AspNetCore.Builder
         /// will be available.
         /// </para>
         /// </remarks>
-        public static IEndpointConventionBuilder MapFallbackToPage(this IEndpointRouteBuilder endpoints, string page)
+        public static IEndpointConventionBuilder MapFallbackToPage(
+            this IEndpointRouteBuilder endpoints,
+            string page
+        )
         {
             if (endpoints == null)
             {
@@ -83,12 +88,16 @@ namespace Microsoft.AspNetCore.Builder
             // Maps a fallback endpoint with an empty delegate. This is OK because
             // we don't expect the delegate to run.
             var builder = endpoints.MapFallback(context => Task.CompletedTask);
-            builder.Add(b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
-                b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
-            });
+            builder.Add(
+                b =>
+                {
+                    // MVC registers a policy that looks for this metadata.
+                    b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
+                    b.Metadata.Add(
+                        new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId)
+                    );
+                }
+            );
             return builder;
         }
 
@@ -123,7 +132,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapFallbackToPage(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            string page)
+            string page
+        )
         {
             if (endpoints == null)
             {
@@ -152,12 +162,16 @@ namespace Microsoft.AspNetCore.Builder
             // Maps a fallback endpoint with an empty delegate. This is OK because
             // we don't expect the delegate to run.
             var builder = endpoints.MapFallback(pattern, context => Task.CompletedTask);
-            builder.Add(b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
-                b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
-            });
+            builder.Add(
+                b =>
+                {
+                    // MVC registers a policy that looks for this metadata.
+                    b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
+                    b.Metadata.Add(
+                        new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId)
+                    );
+                }
+            );
             return builder;
         }
 
@@ -189,7 +203,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapFallbackToAreaPage(
             this IEndpointRouteBuilder endpoints,
             string page,
-            string area)
+            string area
+        )
         {
             if (endpoints == null)
             {
@@ -213,12 +228,16 @@ namespace Microsoft.AspNetCore.Builder
             // Maps a fallback endpoint with an empty delegate. This is OK because
             // we don't expect the delegate to run.
             var builder = endpoints.MapFallback(context => Task.CompletedTask);
-            builder.Add(b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicPageMetadata(page, area));
-                b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
-            });
+            builder.Add(
+                b =>
+                {
+                    // MVC registers a policy that looks for this metadata.
+                    b.Metadata.Add(CreateDynamicPageMetadata(page, area));
+                    b.Metadata.Add(
+                        new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId)
+                    );
+                }
+            );
             return builder;
         }
 
@@ -255,7 +274,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             string page,
-            string area)
+            string area
+        )
         {
             if (endpoints == null)
             {
@@ -284,12 +304,16 @@ namespace Microsoft.AspNetCore.Builder
             // Maps a fallback endpoint with an empty delegate. This is OK because
             // we don't expect the delegate to run.
             var builder = endpoints.MapFallback(pattern, context => Task.CompletedTask);
-            builder.Add(b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicPageMetadata(page, area));
-                b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
-            });
+            builder.Add(
+                b =>
+                {
+                    // MVC registers a policy that looks for this metadata.
+                    b.Metadata.Add(CreateDynamicPageMetadata(page, area));
+                    b.Metadata.Add(
+                        new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId)
+                    );
+                }
+            );
             return builder;
         }
 
@@ -310,8 +334,10 @@ namespace Microsoft.AspNetCore.Builder
         /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
         /// </para>
         /// </remarks>
-        public static void MapDynamicPageRoute<TTransformer>(this IEndpointRouteBuilder endpoints, string pattern)
-            where TTransformer : DynamicRouteValueTransformer
+        public static void MapDynamicPageRoute<TTransformer>(
+            this IEndpointRouteBuilder endpoints,
+            string pattern
+        ) where TTransformer : DynamicRouteValueTransformer
         {
             MapDynamicPageRoute<TTransformer>(endpoints, pattern, state: null);
         }
@@ -334,8 +360,11 @@ namespace Microsoft.AspNetCore.Builder
         /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
         /// </para>
         /// </remarks>
-        public static void MapDynamicPageRoute<TTransformer>(this IEndpointRouteBuilder endpoints, string pattern, object state)
-            where TTransformer : DynamicRouteValueTransformer
+        public static void MapDynamicPageRoute<TTransformer>(
+            this IEndpointRouteBuilder endpoints,
+            string pattern,
+            object state
+        ) where TTransformer : DynamicRouteValueTransformer
         {
             if (endpoints == null)
             {
@@ -375,8 +404,12 @@ namespace Microsoft.AspNetCore.Builder
         /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
         /// </para>
         /// </remarks>
-        public static void MapDynamicPageRoute<TTransformer>(this IEndpointRouteBuilder endpoints, string pattern, object state, int order)
-            where TTransformer : DynamicRouteValueTransformer
+        public static void MapDynamicPageRoute<TTransformer>(
+            this IEndpointRouteBuilder endpoints,
+            string pattern,
+            object state,
+            int order
+        ) where TTransformer : DynamicRouteValueTransformer
         {
             if (endpoints == null)
             {
@@ -394,45 +427,63 @@ namespace Microsoft.AspNetCore.Builder
             var pageDataSource = GetOrCreateDataSource(endpoints);
             RegisterInCache(endpoints.ServiceProvider, pageDataSource);
 
-            pageDataSource.AddDynamicPageEndpoint(endpoints, pattern, typeof(TTransformer), state, order);
+            pageDataSource.AddDynamicPageEndpoint(
+                endpoints,
+                pattern,
+                typeof(TTransformer),
+                state,
+                order
+            );
         }
 
         private static DynamicPageMetadata CreateDynamicPageMetadata(string page, string area)
         {
-            return new DynamicPageMetadata(new RouteValueDictionary()
-            {
-                { "page", page },
-                { "area", area }
-            });
+            return new DynamicPageMetadata(
+                new RouteValueDictionary() { { "page", page }, { "area", area } }
+            );
         }
 
         private static void EnsureRazorPagesServices(IEndpointRouteBuilder endpoints)
         {
-            var marker = endpoints.ServiceProvider.GetService<PageActionEndpointDataSourceFactory>();
+            var marker =
+                endpoints.ServiceProvider.GetService<PageActionEndpointDataSourceFactory>();
             if (marker == null)
             {
-                throw new InvalidOperationException(Mvc.Core.Resources.FormatUnableToFindServices(
-                    nameof(IServiceCollection),
-                    "AddRazorPages",
-                    "ConfigureServices(...)"));
+                throw new InvalidOperationException(
+                    Mvc.Core.Resources.FormatUnableToFindServices(
+                        nameof(IServiceCollection),
+                        "AddRazorPages",
+                        "ConfigureServices(...)"
+                    )
+                );
             }
         }
 
-        private static PageActionEndpointDataSource GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+        private static PageActionEndpointDataSource GetOrCreateDataSource(
+            IEndpointRouteBuilder endpoints
+        )
         {
-            var dataSource = endpoints.DataSources.OfType<PageActionEndpointDataSource>().FirstOrDefault();
+            var dataSource = endpoints.DataSources.OfType<PageActionEndpointDataSource>()
+                .FirstOrDefault();
             if (dataSource == null)
             {
-                var orderProviderCache = endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
-                var factory = endpoints.ServiceProvider.GetRequiredService<PageActionEndpointDataSourceFactory>();
-                dataSource = factory.Create(orderProviderCache.GetOrCreateOrderedEndpointsSequenceProvider(endpoints));
+                var orderProviderCache =
+                    endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
+                var factory =
+                    endpoints.ServiceProvider.GetRequiredService<PageActionEndpointDataSourceFactory>();
+                dataSource = factory.Create(
+                    orderProviderCache.GetOrCreateOrderedEndpointsSequenceProvider(endpoints)
+                );
                 endpoints.DataSources.Add(dataSource);
             }
 
             return dataSource;
         }
 
-        private static void RegisterInCache(IServiceProvider serviceProvider, PageActionEndpointDataSource dataSource)
+        private static void RegisterInCache(
+            IServiceProvider serviceProvider,
+            PageActionEndpointDataSource dataSource
+        )
         {
             var cache = serviceProvider.GetRequiredService<DynamicPageEndpointSelectorCache>();
             cache.AddDataSource(dataSource);

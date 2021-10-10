@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static void AddModelError<TModel>(
             this ModelStateDictionary modelState,
             Expression<Func<TModel, object>> expression,
-            string errorMessage)
+            string errorMessage
+        )
         {
             if (modelState == null)
             {
@@ -64,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static void TryAddModelException<TModel>(
             this ModelStateDictionary modelState,
             Expression<Func<TModel, object>> expression,
-            Exception exception)
+            Exception exception
+        )
         {
             if (modelState == null)
             {
@@ -94,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             this ModelStateDictionary modelState,
             Expression<Func<TModel, object>> expression,
             Exception exception,
-            ModelMetadata metadata)
+            ModelMetadata metadata
+        )
         {
             if (modelState == null)
             {
@@ -126,7 +129,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </returns>
         public static bool Remove<TModel>(
             this ModelStateDictionary modelState,
-            Expression<Func<TModel, object>> expression)
+            Expression<Func<TModel, object>> expression
+        )
         {
             if (modelState == null)
             {
@@ -150,7 +154,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <param name="expression">An expression to be evaluated against an item in the current model.</param>
         public static void RemoveAll<TModel>(
             this ModelStateDictionary modelState,
-            Expression<Func<TModel, object>> expression)
+            Expression<Func<TModel, object>> expression
+        )
         {
             if (modelState == null)
             {
@@ -165,7 +170,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             string modelKey = GetExpressionText(expression);
             if (string.IsNullOrEmpty(modelKey))
             {
-                var modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(TModel));
+                var modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    typeof(TModel)
+                );
                 for (var i = 0; i < modelMetadata.Properties.Count; i++)
                 {
                     var property = modelMetadata.Properties[i];
@@ -197,9 +204,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             if (IsConversionToObject(unaryExpression))
             {
-                return ExpressionHelper.GetUncachedExpressionText(Expression.Lambda(
-                    unaryExpression.Operand,
-                    expression.Parameters[0]));
+                return ExpressionHelper.GetUncachedExpressionText(
+                    Expression.Lambda(unaryExpression.Operand, expression.Parameters[0])
+                );
             }
 
             return ExpressionHelper.GetUncachedExpressionText(expression);
@@ -207,9 +214,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         private static bool IsConversionToObject(UnaryExpression expression)
         {
-            return expression?.NodeType == ExpressionType.Convert &&
-                expression.Operand?.NodeType == ExpressionType.MemberAccess &&
-                expression.Type == typeof(object);
+            return expression?.NodeType == ExpressionType.Convert
+                && expression.Operand?.NodeType == ExpressionType.MemberAccess
+                && expression.Type == typeof(object);
         }
     }
 }

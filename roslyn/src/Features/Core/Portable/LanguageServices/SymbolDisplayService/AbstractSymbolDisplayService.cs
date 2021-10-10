@@ -16,40 +16,102 @@ namespace Microsoft.CodeAnalysis.LanguageServices
     {
         protected readonly IAnonymousTypeDisplayService AnonymousTypeDisplayService;
 
-        protected AbstractSymbolDisplayService(IAnonymousTypeDisplayService anonymousTypeDisplayService)
-            => AnonymousTypeDisplayService = anonymousTypeDisplayService;
+        protected AbstractSymbolDisplayService(
+            IAnonymousTypeDisplayService anonymousTypeDisplayService
+        ) => AnonymousTypeDisplayService = anonymousTypeDisplayService;
 
-        protected abstract AbstractSymbolDescriptionBuilder CreateDescriptionBuilder(Workspace workspace, SemanticModel semanticModel, int position, CancellationToken cancellationToken);
+        protected abstract AbstractSymbolDescriptionBuilder CreateDescriptionBuilder(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        );
 
-        public Task<string> ToDescriptionStringAsync(Workspace workspace, SemanticModel semanticModel, int position, ISymbol symbol, SymbolDescriptionGroups groups, CancellationToken cancellationToken)
-            => ToDescriptionStringAsync(workspace, semanticModel, position, ImmutableArray.Create<ISymbol>(symbol), groups, cancellationToken);
+        public Task<string> ToDescriptionStringAsync(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            ISymbol symbol,
+            SymbolDescriptionGroups groups,
+            CancellationToken cancellationToken
+        ) =>
+            ToDescriptionStringAsync(
+                workspace,
+                semanticModel,
+                position,
+                ImmutableArray.Create<ISymbol>(symbol),
+                groups,
+                cancellationToken
+            );
 
-        public async Task<string> ToDescriptionStringAsync(Workspace workspace, SemanticModel semanticModel, int position, ImmutableArray<ISymbol> symbols, SymbolDescriptionGroups groups, CancellationToken cancellationToken)
+        public async Task<string> ToDescriptionStringAsync(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            ImmutableArray<ISymbol> symbols,
+            SymbolDescriptionGroups groups,
+            CancellationToken cancellationToken
+        )
         {
-            var parts = await ToDescriptionPartsAsync(workspace, semanticModel, position, symbols, groups, cancellationToken).ConfigureAwait(false);
+            var parts = await ToDescriptionPartsAsync(
+                    workspace,
+                    semanticModel,
+                    position,
+                    symbols,
+                    groups,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return parts.ToDisplayString();
         }
 
-        public async Task<ImmutableArray<SymbolDisplayPart>> ToDescriptionPartsAsync(Workspace workspace, SemanticModel semanticModel, int position, ImmutableArray<ISymbol> symbols, SymbolDescriptionGroups groups, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<SymbolDisplayPart>> ToDescriptionPartsAsync(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            ImmutableArray<ISymbol> symbols,
+            SymbolDescriptionGroups groups,
+            CancellationToken cancellationToken
+        )
         {
             if (symbols.Length == 0)
             {
                 return ImmutableArray.Create<SymbolDisplayPart>();
             }
 
-            var builder = CreateDescriptionBuilder(workspace, semanticModel, position, cancellationToken);
+            var builder = CreateDescriptionBuilder(
+                workspace,
+                semanticModel,
+                position,
+                cancellationToken
+            );
             return await builder.BuildDescriptionAsync(symbols, groups).ConfigureAwait(false);
         }
 
-        public async Task<IDictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>>> ToDescriptionGroupsAsync(
-            Workspace workspace, SemanticModel semanticModel, int position, ImmutableArray<ISymbol> symbols, CancellationToken cancellationToken)
+        public async Task<
+            IDictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>>
+        > ToDescriptionGroupsAsync(
+            Workspace workspace,
+            SemanticModel semanticModel,
+            int position,
+            ImmutableArray<ISymbol> symbols,
+            CancellationToken cancellationToken
+        )
         {
             if (symbols.Length == 0)
             {
-                return SpecializedCollections.EmptyDictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>>();
+                return SpecializedCollections.EmptyDictionary<
+                    SymbolDescriptionGroups,
+                    ImmutableArray<TaggedText>
+                >();
             }
 
-            var builder = CreateDescriptionBuilder(workspace, semanticModel, position, cancellationToken);
+            var builder = CreateDescriptionBuilder(
+                workspace,
+                semanticModel,
+                position,
+                cancellationToken
+            );
             return await builder.BuildDescriptionSectionsAsync(symbols).ConfigureAwait(false);
         }
     }

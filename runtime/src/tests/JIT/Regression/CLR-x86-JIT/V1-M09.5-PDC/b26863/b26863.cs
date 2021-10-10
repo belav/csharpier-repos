@@ -17,15 +17,32 @@ namespace Test
 
     class Obj
     {
-        bool[] Method1() { return null; }
-        uint Method2(bool param1) { return 0; }
-        int Method3() { return 0; }
-        bool Method4() { return false; }
+        bool[] Method1()
+        {
+            return null;
+        }
+        uint Method2(bool param1)
+        {
+            return 0;
+        }
+        int Method3()
+        {
+            return 0;
+        }
+        bool Method4()
+        {
+            return false;
+        }
 
         static uint[] Recurse(float[] param1, bool param2, uint[] param3)
-        { return null; }
+        {
+            return null;
+        }
 
-        static double[] Static2() { return null; }
+        static double[] Static2()
+        {
+            return null;
+        }
 
         static float[] Static3()
         {
@@ -34,25 +51,45 @@ namespace Test
             {
                 do
                 {
-
-                    Recurse(new float[4], new Obj().Method1()[2],
-                    Recurse(new float[4], obj.Method1()[2],
-                    Recurse(new float[4], true,
-                    Recurse(new float[4], obj.Method3() !=
-                      Recurse(new float[4], new Obj().Method4(),
-                      Recurse(new float[4], false, null))[2],
-                    Recurse(new float[4], new Obj().Method1()[2],
-                    Recurse(new float[4], obj.Method1()[2],
-                    Recurse(new float[4], obj.Method1()[2],
-                    Recurse(new float[4], true,
-                    null))))))));
+                    Recurse(
+                        new float[4],
+                        new Obj().Method1()[2],
+                        Recurse(
+                            new float[4],
+                            obj.Method1()[2],
+                            Recurse(
+                                new float[4],
+                                true,
+                                Recurse(
+                                    new float[4],
+                                    obj.Method3()
+                                        != Recurse(
+                                            new float[4],
+                                            new Obj().Method4(),
+                                            Recurse(new float[4], false, null)
+                                        )[2],
+                                    Recurse(
+                                        new float[4],
+                                        new Obj().Method1()[2],
+                                        Recurse(
+                                            new float[4],
+                                            obj.Method1()[2],
+                                            Recurse(
+                                                new float[4],
+                                                obj.Method1()[2],
+                                                Recurse(new float[4], true, null)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    );
 
                     obj.Method1();
-
                 } while (new Random().Next(16) != 5 && new Obj().Method4());
 
                 obj.Method1();
-
             } while (new Random().Next(16) != 5 && new Obj().Method4());
 
             return new float[4];
@@ -64,9 +101,7 @@ namespace Test
             {
                 Static3();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             return 100;
         }
     }

@@ -20,10 +20,10 @@ namespace System.CommandLine.Suggest.Tests
         {
             var path = Path.GetTempPath();
             FileEnumerator.EnumerateFilesWithoutExtension(
-                new DirectoryInfo(Path.Combine(path,
-                Path.GetRandomFileName(),
-                "notexist")))
-                .Should().BeEmpty();
+                    new DirectoryInfo(Path.Combine(path, Path.GetRandomFileName(), "notexist"))
+                )
+                .Should()
+                .BeEmpty();
         }
 
         [Fact]
@@ -38,9 +38,10 @@ namespace System.CommandLine.Suggest.Tests
                 FileEnumerator.EnumerateFilesWithoutExtension(new DirectoryInfo(path))
                     .Should()
                     .BeEquivalentTo(
-                        GlobalToolsSuggestionRegistrationTests
-                        .FilesNameWithoutExtensionUnderDotnetProfileToolsExample);
+                        GlobalToolsSuggestionRegistrationTests.FilesNameWithoutExtensionUnderDotnetProfileToolsExample
+                    );
             }
+
             finally
             {
                 Directory.Delete(path, true);

@@ -18,13 +18,17 @@ namespace Microsoft.JSInterop.Implementation
         /// </summary>
         /// <param name="jsRuntime">The <see cref="JSInProcessRuntime"/> used for invoking JS interop calls.</param>
         /// <param name="id">The unique identifier.</param>
-        protected internal JSInProcessObjectReference(JSInProcessRuntime jsRuntime, long id) : base(jsRuntime, id)
+        protected internal JSInProcessObjectReference(JSInProcessRuntime jsRuntime, long id)
+            : base(jsRuntime, id)
         {
             _jsRuntime = jsRuntime;
         }
 
         /// <inheritdoc />
-        public TValue Invoke<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string identifier, params object?[]? args)
+        public TValue Invoke<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+            string identifier,
+            params object?[]? args
+        )
         {
             ThrowIfDisposed();
 

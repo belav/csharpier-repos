@@ -25,13 +25,21 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     {
         // `rootNamespace` is required for VB projects that has non-global namespace as root namespace,
         // otherwise we would not be able to get correct data from syntax.
-        bool TryGetDeclaredSymbolInfo(StringTable stringTable, SyntaxNode node, string rootNamespace, out DeclaredSymbolInfo declaredSymbolInfo);
+        bool TryGetDeclaredSymbolInfo(
+            StringTable stringTable,
+            SyntaxNode node,
+            string rootNamespace,
+            out DeclaredSymbolInfo declaredSymbolInfo
+        );
 
         // Get the name of the receiver type of specified extension method declaration node.
         // The returned value would be "" or "[]" for complex types.
         string GetReceiverTypeName(SyntaxNode node);
 
-        bool TryGetAliasesFromUsingDirective(SyntaxNode node, out ImmutableArray<(string aliasName, string name)> aliases);
+        bool TryGetAliasesFromUsingDirective(
+            SyntaxNode node,
+            out ImmutableArray<(string aliasName, string name)> aliases
+        );
 
         string GetRootNamespace(CompilationOptions compilationOptions);
     }
@@ -41,8 +49,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         // The probability of getting a false positive when calling ContainsIdentifier.
         private const double FalsePositiveProbability = 0.0001;
 
-        public static readonly ObjectPool<HashSet<string>> StringLiteralHashSetPool = SharedPools.Default<HashSet<string>>();
-        public static readonly ObjectPool<HashSet<long>> LongLiteralHashSetPool = SharedPools.Default<HashSet<long>>();
+        public static readonly ObjectPool<HashSet<string>> StringLiteralHashSetPool =
+            SharedPools.Default<HashSet<string>>();
+        public static readonly ObjectPool<HashSet<long>> LongLiteralHashSetPool =
+            SharedPools.Default<HashSet<long>>();
 
         /// <summary>
         /// String interning table so that we can share many more strings in our DeclaredSymbolInfo
@@ -57,7 +67,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             new();
 
         private static async Task<SyntaxTreeIndex> CreateIndexAsync(
-            Document document, Checksum checksum, CancellationToken cancellationToken)
+            Document document,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        )
         {
             var project = document.Project;
             var stringTable = GetStringTable(project);
@@ -73,7 +86,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var longLiterals = LongLiteralHashSetPool.Allocate();
 
             var declaredSymbolInfos = ArrayBuilder<DeclaredSymbolInfo>.GetInstance();
-            var extensionMethodInfoBuilder = PooledDictionary<string, ArrayBuilder<int>>.GetInstance();
+            var extensionMethodInfoBuilder = PooledDictionary<
+                string,
+                ArrayBuilder<int>
+            >.GetInstance();
             using var _ = PooledDictionary<string, string>.GetInstance(out var usingAliases);
 
             try
@@ -98,33 +114,57 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 if (syntaxFacts != null)
                 {
-                    var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                    var root = await document.GetSyntaxRootAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     var rootNamespace = infoFactory.GetRootNamespace(project.CompilationOptions);
 
-                    foreach (var current in root.DescendantNodesAndTokensAndSelf(descendIntoTrivia: true))
+                    foreach (
+                        var current in root.DescendantNodesAndTokensAndSelf(descendIntoTrivia: true)
+                    )
                     {
                         if (current.IsNode)
                         {
                             var node = (SyntaxNode)current;
 
-                            containsForEachStatement = containsForEachStatement || syntaxFacts.IsForEachStatement(node);
-                            containsLockStatement = containsLockStatement || syntaxFacts.IsLockStatement(node);
-                            containsUsingStatement = containsUsingStatement || syntaxFacts.IsUsingStatement(node);
-                            containsQueryExpression = containsQueryExpression || syntaxFacts.IsQueryExpression(node);
-                            containsElementAccess = containsElementAccess || syntaxFacts.IsElementAccessExpression(node);
-                            containsIndexerMemberCref = containsIndexerMemberCref || syntaxFacts.IsIndexerMemberCRef(node);
+                            containsForEachStatement =
+                                containsForEachStatement || syntaxFacts.IsForEachStatement(node);
+                            containsLockStatement =
+                                containsLockStatement || syntaxFacts.IsLockStatement(node);
+                            containsUsingStatement =
+                                containsUsingStatement || syntaxFacts.IsUsingStatement(node);
+                            containsQueryExpression =
+                                containsQueryExpression || syntaxFacts.IsQueryExpression(node);
+                            containsElementAccess =
+                                containsElementAccess
+                                || syntaxFacts.IsElementAccessExpression(node);
+                            containsIndexerMemberCref =
+                                containsIndexerMemberCref || syntaxFacts.IsIndexerMemberCRef(node);
 
-                            containsDeconstruction = containsDeconstruction || syntaxFacts.IsDeconstructionAssignment(node)
+                            containsDeconstruction =
+                                containsDeconstruction
+                                || syntaxFacts.IsDeconstructionAssignment(node)
                                 || syntaxFacts.IsDeconstructionForEachStatement(node);
 
                             containsAwait = containsAwait || syntaxFacts.IsAwaitExpression(node);
-                            containsTupleExpressionOrTupleType = containsTupleExpressionOrTupleType ||
-                                syntaxFacts.IsTupleExpression(node) || syntaxFacts.IsTupleType(node);
-                            containsImplicitObjectCreation = containsImplicitObjectCreation || syntaxFacts.IsImplicitObjectCreationExpression(node);
-                            containsGlobalAttributes = containsGlobalAttributes || syntaxFacts.IsGlobalAttribute(node);
-                            containsConversion = containsConversion || syntaxFacts.IsConversionExpression(node);
+                            containsTupleExpressionOrTupleType =
+                                containsTupleExpressionOrTupleType
+                                || syntaxFacts.IsTupleExpression(node)
+                                || syntaxFacts.IsTupleType(node);
+                            containsImplicitObjectCreation =
+                                containsImplicitObjectCreation
+                                || syntaxFacts.IsImplicitObjectCreationExpression(node);
+                            containsGlobalAttributes =
+                                containsGlobalAttributes || syntaxFacts.IsGlobalAttribute(node);
+                            containsConversion =
+                                containsConversion || syntaxFacts.IsConversionExpression(node);
 
-                            if (syntaxFacts.IsUsingAliasDirective(node) && infoFactory.TryGetAliasesFromUsingDirective(node, out var aliases))
+                            if (
+                                syntaxFacts.IsUsingAliasDirective(node)
+                                && infoFactory.TryGetAliasesFromUsingDirective(
+                                    node,
+                                    out var aliases
+                                )
+                            )
                             {
                                 foreach (var (aliasName, name) in aliases)
                                 {
@@ -161,7 +201,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             // the future then we know the problem lies in (2).  If, however, the problem is really in
                             // TryGetDeclaredSymbolInfo, then this will at least prevent us from returning bad spans
                             // and will prevent the crash from occurring.
-                            if (infoFactory.TryGetDeclaredSymbolInfo(stringTable, node, rootNamespace, out var declaredSymbolInfo))
+                            if (
+                                infoFactory.TryGetDeclaredSymbolInfo(
+                                    stringTable,
+                                    node,
+                                    rootNamespace,
+                                    out var declaredSymbolInfo
+                                )
+                            )
                             {
                                 if (root.FullSpan.Contains(declaredSymbolInfo.Span))
                                 {
@@ -174,16 +221,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                         usingAliases,
                                         declaredSymbolInfoIndex,
                                         declaredSymbolInfo,
-                                        extensionMethodInfoBuilder);
+                                        extensionMethodInfoBuilder
+                                    );
                                 }
                                 else
                                 {
                                     var message =
-$@"Invalid span in {nameof(declaredSymbolInfo)}.
+                                        $@"Invalid span in {nameof(declaredSymbolInfo)}.
 {nameof(declaredSymbolInfo.Span)} = {declaredSymbolInfo.Span}
 {nameof(root.FullSpan)} = {root.FullSpan}";
 
-                                    FatalError.ReportAndCatch(new InvalidOperationException(message));
+                                    FatalError.ReportAndCatch(
+                                        new InvalidOperationException(message)
+                                    );
                                 }
                             }
                         }
@@ -191,11 +241,17 @@ $@"Invalid span in {nameof(declaredSymbolInfo)}.
                         {
                             var token = (SyntaxToken)current;
 
-                            containsThisConstructorInitializer = containsThisConstructorInitializer || syntaxFacts.IsThisConstructorInitializer(token);
-                            containsBaseConstructorInitializer = containsBaseConstructorInitializer || syntaxFacts.IsBaseConstructorInitializer(token);
+                            containsThisConstructorInitializer =
+                                containsThisConstructorInitializer
+                                || syntaxFacts.IsThisConstructorInitializer(token);
+                            containsBaseConstructorInitializer =
+                                containsBaseConstructorInitializer
+                                || syntaxFacts.IsBaseConstructorInitializer(token);
 
-                            if (syntaxFacts.IsIdentifier(token) ||
-                                syntaxFacts.IsGlobalNamespaceKeyword(token))
+                            if (
+                                syntaxFacts.IsIdentifier(token)
+                                || syntaxFacts.IsGlobalNamespaceKeyword(token)
+                            )
                             {
                                 var valueText = token.ValueText;
 
@@ -211,7 +267,12 @@ $@"Invalid span in {nameof(declaredSymbolInfo)}.
                                 predefinedTypes |= (int)predefinedType;
                             }
 
-                            if (syntaxFacts.TryGetPredefinedOperator(token, out var predefinedOperator))
+                            if (
+                                syntaxFacts.TryGetPredefinedOperator(
+                                    token,
+                                    out var predefinedOperator
+                                )
+                            )
                             {
                                 predefinedOperators |= (int)predefinedOperator;
                             }
@@ -252,34 +313,44 @@ $@"Invalid span in {nameof(declaredSymbolInfo)}.
                 return new SyntaxTreeIndex(
                     checksum,
                     new LiteralInfo(
-                        new BloomFilter(FalsePositiveProbability, stringLiterals, longLiterals)),
+                        new BloomFilter(FalsePositiveProbability, stringLiterals, longLiterals)
+                    ),
                     new IdentifierInfo(
                         new BloomFilter(FalsePositiveProbability, isCaseSensitive, identifiers),
-                        new BloomFilter(FalsePositiveProbability, isCaseSensitive, escapedIdentifiers)),
+                        new BloomFilter(
+                            FalsePositiveProbability,
+                            isCaseSensitive,
+                            escapedIdentifiers
+                        )
+                    ),
                     new ContextInfo(
-                            predefinedTypes,
-                            predefinedOperators,
-                            containsForEachStatement,
-                            containsLockStatement,
-                            containsUsingStatement,
-                            containsQueryExpression,
-                            containsThisConstructorInitializer,
-                            containsBaseConstructorInitializer,
-                            containsElementAccess,
-                            containsIndexerMemberCref,
-                            containsDeconstruction,
-                            containsAwait,
-                            containsTupleExpressionOrTupleType,
-                            containsImplicitObjectCreation,
-                            containsGlobalAttributes,
-                            containsConversion),
-                    new DeclarationInfo(
-                            declaredSymbolInfos.ToImmutable()),
+                        predefinedTypes,
+                        predefinedOperators,
+                        containsForEachStatement,
+                        containsLockStatement,
+                        containsUsingStatement,
+                        containsQueryExpression,
+                        containsThisConstructorInitializer,
+                        containsBaseConstructorInitializer,
+                        containsElementAccess,
+                        containsIndexerMemberCref,
+                        containsDeconstruction,
+                        containsAwait,
+                        containsTupleExpressionOrTupleType,
+                        containsImplicitObjectCreation,
+                        containsGlobalAttributes,
+                        containsConversion
+                    ),
+                    new DeclarationInfo(declaredSymbolInfos.ToImmutable()),
                     new ExtensionMethodInfo(
                         extensionMethodInfoBuilder.ToImmutableDictionary(
                             static kvp => kvp.Key,
-                            static kvp => kvp.Value.ToImmutable())));
+                            static kvp => kvp.Value.ToImmutable()
+                        )
+                    )
+                );
             }
+
             finally
             {
                 Free(ignoreCase, identifiers, escapedIdentifiers);
@@ -302,7 +373,8 @@ $@"Invalid span in {nameof(declaredSymbolInfo)}.
             PooledDictionary<string, string> aliases,
             int declaredSymbolInfoIndex,
             DeclaredSymbolInfo declaredSymbolInfo,
-            PooledDictionary<string, ArrayBuilder<int>> extensionMethodsInfoBuilder)
+            PooledDictionary<string, ArrayBuilder<int>> extensionMethodsInfoBuilder
+        )
         {
             if (declaredSymbolInfo.Kind != DeclaredSymbolInfoKind.ExtensionMethod)
             {
@@ -336,10 +408,14 @@ $@"Invalid span in {nameof(declaredSymbolInfo)}.
             arrayBuilder.Add(declaredSymbolInfoIndex);
         }
 
-        private static StringTable GetStringTable(Project project)
-            => s_projectStringTable.GetValue(project, _ => StringTable.GetInstance());
+        private static StringTable GetStringTable(Project project) =>
+            s_projectStringTable.GetValue(project, _ => StringTable.GetInstance());
 
-        private static void GetIdentifierSet(bool ignoreCase, out HashSet<string> identifiers, out HashSet<string> escapedIdentifiers)
+        private static void GetIdentifierSet(
+            bool ignoreCase,
+            out HashSet<string> identifiers,
+            out HashSet<string> escapedIdentifiers
+        )
         {
             if (ignoreCase)
             {
@@ -358,7 +434,11 @@ $@"Invalid span in {nameof(declaredSymbolInfo)}.
             Debug.Assert(escapedIdentifiers.Comparer == StringComparer.Ordinal);
         }
 
-        private static void Free(bool ignoreCase, HashSet<string> identifiers, HashSet<string> escapedIdentifiers)
+        private static void Free(
+            bool ignoreCase,
+            HashSet<string> identifiers,
+            HashSet<string> escapedIdentifiers
+        )
         {
             if (ignoreCase)
             {

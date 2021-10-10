@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         /// </summary>
         public DbContextPool(DbContextOptions<TContext> options)
         {
-            _maxSize = options.FindExtension<CoreOptionsExtension>()?.MaxPoolSize ?? DefaultPoolSize;
+            _maxSize =
+                options.FindExtension<CoreOptionsExtension>()?.MaxPoolSize ?? DefaultPoolSize;
 
             options.Freeze();
 
@@ -49,20 +50,31 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
         private static Func<DbContext> CreateActivator(DbContextOptions<TContext> options)
         {
-            var constructors = typeof(TContext).GetTypeInfo().DeclaredConstructors.Where(c => !c.IsStatic && c.IsPublic).ToArray();
+            var constructors = typeof(TContext).GetTypeInfo()
+                .DeclaredConstructors.Where(c => !c.IsStatic && c.IsPublic)
+                .ToArray();
 
             if (constructors.Length == 1)
             {
                 var parameters = constructors[0].GetParameters();
-                if (parameters.Length == 1
-                    && (parameters[0].ParameterType == typeof(DbContextOptions)
-                        || parameters[0].ParameterType == typeof(DbContextOptions<TContext>)))
+                if (
+                    parameters.Length == 1
+                    && (
+                        parameters[0].ParameterType == typeof(DbContextOptions)
+                        || parameters[0].ParameterType == typeof(DbContextOptions<TContext>)
+                    )
+                )
                 {
-                    return Expression.Lambda<Func<TContext>>(Expression.New(constructors[0], Expression.Constant(options))).Compile();
+                    return Expression.Lambda<Func<TContext>>(
+                            Expression.New(constructors[0], Expression.Constant(options))
+                        )
+                        .Compile();
                 }
             }
 
-            throw new InvalidOperationException(CoreStrings.PoolingContextCtorError(typeof(TContext).ShortDisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.PoolingContextCtorError(typeof(TContext).ShortDisplayName())
+            );
         }
 
         /// <summary>
@@ -115,7 +127,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual async ValueTask ReturnAsync(IDbContextPoolable context, CancellationToken cancellationToken = default)
+        public virtual async ValueTask ReturnAsync(
+            IDbContextPoolable context,
+            CancellationToken cancellationToken = default
+        )
         {
             if (Interlocked.Increment(ref _count) <= _maxSize)
             {

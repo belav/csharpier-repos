@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var endpoint = new Endpoint(
                 null,
                 new EndpointMetadataCollection(new AuthorizeAttribute()),
-                "Test endpoint");
+                "Test endpoint"
+            );
 
             var httpContext = new DefaultHttpContext();
             httpContext.RequestServices = services;
@@ -53,17 +54,20 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var app = new ApplicationBuilder(new ServiceCollection().BuildServiceProvider());
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-            {
-                app.UseAuthorization();
-            });
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    app.UseAuthorization();
+                }
+            );
 
             // Assert
             Assert.Equal(
-                "Unable to find the required services. Please add all the required services by calling " +
-                "'IServiceCollection.AddAuthorization' inside the call to 'ConfigureServices(...)' " +
-                "in the application startup code.",
-                ex.Message);
+                "Unable to find the required services. Please add all the required services by calling "
+                    + "'IServiceCollection.AddAuthorization' inside the call to 'ConfigureServices(...)' "
+                    + "in the application startup code.",
+                ex.Message
+            );
         }
 
         private IServiceProvider CreateServices(IAuthenticationService authenticationService)

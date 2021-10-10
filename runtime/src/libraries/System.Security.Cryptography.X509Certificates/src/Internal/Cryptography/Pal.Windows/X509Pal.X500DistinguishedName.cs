@@ -21,9 +21,14 @@ namespace Internal.Cryptography.Pal
     /// </summary>
     internal sealed partial class X509Pal : IX509Pal
     {
-        public string X500DistinguishedNameDecode(byte[] encodedDistinguishedName, X500DistinguishedNameFlags flag)
+        public string X500DistinguishedNameDecode(
+            byte[] encodedDistinguishedName,
+            X500DistinguishedNameFlags flag
+        )
         {
-            int dwStrType = (int)(CertNameStrTypeAndFlags.CERT_X500_NAME_STR | MapNameToStrFlag(flag));
+            int dwStrType = (int)(
+                CertNameStrTypeAndFlags.CERT_X500_NAME_STR | MapNameToStrFlag(flag)
+            );
             unsafe
             {
                 fixed (byte* pbEncoded = encodedDistinguishedName)
@@ -32,14 +37,29 @@ namespace Internal.Cryptography.Pal
                     nameBlob.cbData = encodedDistinguishedName.Length;
                     nameBlob.pbData = pbEncoded;
 
-                    int cchDecoded = Interop.Crypt32.CertNameToStr((int)CertEncodingType.All, &nameBlob, dwStrType, null, 0);
+                    int cchDecoded = Interop.Crypt32.CertNameToStr(
+                        (int)CertEncodingType.All,
+                        &nameBlob,
+                        dwStrType,
+                        null,
+                        0
+                    );
                     if (cchDecoded == 0)
                         throw ErrorCode.CERT_E_INVALID_NAME.ToCryptographicException();
 
-                    Span<char> buffer = cchDecoded <= 256 ? stackalloc char[cchDecoded] : new char[cchDecoded];
+                    Span<char> buffer =
+                        cchDecoded <= 256 ? stackalloc char[cchDecoded] : new char[cchDecoded];
                     fixed (char* ptr = buffer)
                     {
-                        if (Interop.Crypt32.CertNameToStr((int)CertEncodingType.All, &nameBlob, dwStrType, ptr, cchDecoded) == 0)
+                        if (
+                            Interop.Crypt32.CertNameToStr(
+                                (int)CertEncodingType.All,
+                                &nameBlob,
+                                dwStrType,
+                                ptr,
+                                cchDecoded
+                            ) == 0
+                        )
                             throw ErrorCode.CERT_E_INVALID_NAME.ToCryptographicException();
                     }
 
@@ -48,50 +68,62 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        public byte[] X500DistinguishedNameEncode(string distinguishedName, X500DistinguishedNameFlags flag)
+        public byte[] X500DistinguishedNameEncode(
+            string distinguishedName,
+            X500DistinguishedNameFlags flag
+        )
         {
             Debug.Assert(distinguishedName != null);
 
-            CertNameStrTypeAndFlags dwStrType = CertNameStrTypeAndFlags.CERT_X500_NAME_STR | MapNameToStrFlag(flag);
+            CertNameStrTypeAndFlags dwStrType =
+                CertNameStrTypeAndFlags.CERT_X500_NAME_STR | MapNameToStrFlag(flag);
 
             int cbEncoded = 0;
-            if (!Interop.crypt32.CertStrToName(CertEncodingType.All, distinguishedName, dwStrType, IntPtr.Zero, null, ref cbEncoded, IntPtr.Zero))
+            if (
+                !Interop.crypt32.CertStrToName(
+                    CertEncodingType.All,
+                    distinguishedName,
+                    dwStrType,
+                    IntPtr.Zero,
+                    null,
+                    ref cbEncoded,
+                    IntPtr.Zero
+                )
+            )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
             byte[] encodedName = new byte[cbEncoded];
-            if (!Interop.crypt32.CertStrToName(CertEncodingType.All, distinguishedName, dwStrType, IntPtr.Zero, encodedName, ref cbEncoded, IntPtr.Zero))
+            if (
+                !Interop.crypt32.CertStrToName(
+                    CertEncodingType.All,
+                    distinguishedName,
+                    dwStrType,
+                    IntPtr.Zero,
+                    encodedName,
+                    ref cbEncoded,
+                    IntPtr.Zero
+                )
+            )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
             return encodedName;
         }
 
-        public unsafe string X500DistinguishedNameFormat(byte[] encodedDistinguishedName, bool multiLine)
+        public unsafe string X500DistinguishedNameFormat(
+            byte[] encodedDistinguishedName,
+            bool multiLine
+        )
         {
             if (encodedDistinguishedName == null || encodedDistinguishedName.Length == 0)
                 return string.Empty;
 
-            int stringType = multiLine ? Interop.Crypt32.CRYPT_FORMAT_STR_MULTI_LINE : Interop.Crypt32.CRYPT_FORMAT_STR_NONE;
+            int stringType = multiLine
+                ? Interop.Crypt32.CRYPT_FORMAT_STR_MULTI_LINE
+                : Interop.Crypt32.CRYPT_FORMAT_STR_NONE;
 
             int cbFormat = 0;
-            if (!Interop.Crypt32.CryptFormatObject(
-                (int)CertEncodingType.X509_ASN_ENCODING,
-                (int)FormatObjectType.None,
-                stringType,
-                IntPtr.Zero,
-                (byte*)(int)FormatObjectStructType.X509_NAME,
-                encodedDistinguishedName,
-                encodedDistinguishedName.Length,
-                null,
-                ref cbFormat))
-            {
-                return encodedDistinguishedName.ToHexStringUpper();
-            }
-
-            int spanLength = (cbFormat + 1) / 2;
-            Span<char> buffer = spanLength <= 256 ? stackalloc char[spanLength] : new char[spanLength];
-            fixed (char* ptr = buffer)
-            {
-                if (!Interop.Crypt32.CryptFormatObject(
+            if (
+                !Interop.Crypt32.CryptFormatObject(
                     (int)CertEncodingType.X509_ASN_ENCODING,
                     (int)FormatObjectType.None,
                     stringType,
@@ -99,8 +131,32 @@ namespace Internal.Cryptography.Pal
                     (byte*)(int)FormatObjectStructType.X509_NAME,
                     encodedDistinguishedName,
                     encodedDistinguishedName.Length,
-                    (byte*)ptr,
-                    ref cbFormat))
+                    null,
+                    ref cbFormat
+                )
+            )
+            {
+                return encodedDistinguishedName.ToHexStringUpper();
+            }
+
+            int spanLength = (cbFormat + 1) / 2;
+            Span<char> buffer =
+                spanLength <= 256 ? stackalloc char[spanLength] : new char[spanLength];
+            fixed (char* ptr = buffer)
+            {
+                if (
+                    !Interop.Crypt32.CryptFormatObject(
+                        (int)CertEncodingType.X509_ASN_ENCODING,
+                        (int)FormatObjectType.None,
+                        stringType,
+                        IntPtr.Zero,
+                        (byte*)(int)FormatObjectStructType.X509_NAME,
+                        encodedDistinguishedName,
+                        encodedDistinguishedName.Length,
+                        (byte*)ptr,
+                        ref cbFormat
+                    )
+                )
                 {
                     return encodedDistinguishedName.ToHexStringUpper();
                 }
@@ -119,27 +175,54 @@ namespace Internal.Cryptography.Pal
             CertNameStrTypeAndFlags dwStrType = 0;
             if (dwFlags != 0)
             {
-                if ((flag & X500DistinguishedNameFlags.Reversed) == X500DistinguishedNameFlags.Reversed)
+                if (
+                    (flag & X500DistinguishedNameFlags.Reversed)
+                    == X500DistinguishedNameFlags.Reversed
+                )
                     dwStrType |= CertNameStrTypeAndFlags.CERT_NAME_STR_REVERSE_FLAG;
 
-                if ((flag & X500DistinguishedNameFlags.UseSemicolons) == X500DistinguishedNameFlags.UseSemicolons)
+                if (
+                    (flag & X500DistinguishedNameFlags.UseSemicolons)
+                    == X500DistinguishedNameFlags.UseSemicolons
+                )
                     dwStrType |= CertNameStrTypeAndFlags.CERT_NAME_STR_SEMICOLON_FLAG;
-                else if ((flag & X500DistinguishedNameFlags.UseCommas) == X500DistinguishedNameFlags.UseCommas)
+                else if (
+                    (flag & X500DistinguishedNameFlags.UseCommas)
+                    == X500DistinguishedNameFlags.UseCommas
+                )
                     dwStrType |= CertNameStrTypeAndFlags.CERT_NAME_STR_COMMA_FLAG;
-                else if ((flag & X500DistinguishedNameFlags.UseNewLines) == X500DistinguishedNameFlags.UseNewLines)
+                else if (
+                    (flag & X500DistinguishedNameFlags.UseNewLines)
+                    == X500DistinguishedNameFlags.UseNewLines
+                )
                     dwStrType |= CertNameStrTypeAndFlags.CERT_NAME_STR_CRLF_FLAG;
 
-                if ((flag & X500DistinguishedNameFlags.DoNotUsePlusSign) == X500DistinguishedNameFlags.DoNotUsePlusSign)
+                if (
+                    (flag & X500DistinguishedNameFlags.DoNotUsePlusSign)
+                    == X500DistinguishedNameFlags.DoNotUsePlusSign
+                )
                     dwStrType |= CertNameStrTypeAndFlags.CERT_NAME_STR_NO_PLUS_FLAG;
-                if ((flag & X500DistinguishedNameFlags.DoNotUseQuotes) == X500DistinguishedNameFlags.DoNotUseQuotes)
+                if (
+                    (flag & X500DistinguishedNameFlags.DoNotUseQuotes)
+                    == X500DistinguishedNameFlags.DoNotUseQuotes
+                )
                     dwStrType |= CertNameStrTypeAndFlags.CERT_NAME_STR_NO_QUOTING_FLAG;
 
-                if ((flag & X500DistinguishedNameFlags.ForceUTF8Encoding) == X500DistinguishedNameFlags.ForceUTF8Encoding)
+                if (
+                    (flag & X500DistinguishedNameFlags.ForceUTF8Encoding)
+                    == X500DistinguishedNameFlags.ForceUTF8Encoding
+                )
                     dwStrType |= CertNameStrTypeAndFlags.CERT_NAME_STR_FORCE_UTF8_DIR_STR_FLAG;
 
-                if ((flag & X500DistinguishedNameFlags.UseUTF8Encoding) == X500DistinguishedNameFlags.UseUTF8Encoding)
+                if (
+                    (flag & X500DistinguishedNameFlags.UseUTF8Encoding)
+                    == X500DistinguishedNameFlags.UseUTF8Encoding
+                )
                     dwStrType |= CertNameStrTypeAndFlags.CERT_NAME_STR_ENABLE_UTF8_UNICODE_FLAG;
-                else if ((flag & X500DistinguishedNameFlags.UseT61Encoding) == X500DistinguishedNameFlags.UseT61Encoding)
+                else if (
+                    (flag & X500DistinguishedNameFlags.UseT61Encoding)
+                    == X500DistinguishedNameFlags.UseT61Encoding
+                )
                     dwStrType |= CertNameStrTypeAndFlags.CERT_NAME_STR_ENABLE_T61_UNICODE_FLAG;
             }
             return dwStrType;

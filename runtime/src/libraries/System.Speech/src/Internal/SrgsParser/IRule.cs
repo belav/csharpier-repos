@@ -25,6 +25,5 @@ namespace System.Speech.Internal.SrgsParser
         False,
         NotSet
     };
-
     #endregion
 }

@@ -17,7 +17,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="ChangeTrackingStrategyConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public ChangeTrackingStrategyConvention(ProviderConventionSetBuilderDependencies dependencies)
+        public ChangeTrackingStrategyConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        )
         {
             Dependencies = dependencies;
         }
@@ -30,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {

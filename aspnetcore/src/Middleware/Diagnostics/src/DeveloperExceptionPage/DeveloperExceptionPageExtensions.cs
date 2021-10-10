@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Builder
         /// </remarks>
         public static IApplicationBuilder UseDeveloperExceptionPage(
             this IApplicationBuilder app,
-            DeveloperExceptionPageOptions options)
+            DeveloperExceptionPageOptions options
+        )
         {
             if (app == null)
             {
@@ -52,7 +53,7 @@ namespace Microsoft.AspNetCore.Builder
             {
                 throw new ArgumentNullException(nameof(options));
             }
-            
+
             return app.UseMiddleware<DeveloperExceptionPageMiddleware>(Options.Create(options));
         }
     }

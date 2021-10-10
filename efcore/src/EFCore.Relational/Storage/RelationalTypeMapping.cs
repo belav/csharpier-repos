@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 int? size = null,
                 bool fixedLength = false,
                 int? precision = null,
-                int? scale = null)
+                int? scale = null
+            )
             {
                 Check.NotNull(storeType, nameof(storeType));
 
@@ -118,8 +119,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             /// </summary>
             /// <param name="mappingInfo"> The mapping info containing the facets to use. </param>
             /// <returns> The new parameter object. </returns>
-            public RelationalTypeMappingParameters WithTypeMappingInfo(in RelationalTypeMappingInfo mappingInfo)
-                => new(
+            public RelationalTypeMappingParameters WithTypeMappingInfo(
+                in RelationalTypeMappingInfo mappingInfo
+            ) =>
+                new(
                     CoreParameters,
                     mappingInfo.StoreTypeName ?? StoreType,
                     StoreTypePostfix,
@@ -128,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     mappingInfo.Size ?? Size,
                     mappingInfo.IsFixedLength ?? FixedLength,
                     mappingInfo.Precision ?? Precision,
-                    mappingInfo.Scale ?? Scale);
+                    mappingInfo.Scale ?? Scale
+                );
 
             /// <summary>
             ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given
@@ -141,8 +145,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
             public RelationalTypeMappingParameters WithStoreTypeAndSize(
                 string storeType,
                 int? size,
-                StoreTypePostfix? storeTypePostfix = null)
-                => new(
+                StoreTypePostfix? storeTypePostfix = null
+            ) =>
+                new(
                     CoreParameters,
                     storeType,
                     storeTypePostfix ?? StoreTypePostfix,
@@ -151,7 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     size,
                     FixedLength,
                     Precision,
-                    Scale);
+                    Scale
+                );
 
             /// <summary>
             ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given precision and scale
@@ -161,8 +167,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
             /// <returns> The new parameter object. </returns>
             public RelationalTypeMappingParameters WithPrecisionAndScale(
                 int? precision,
-                int? scale)
-                => new(
+                int? scale
+            ) =>
+                new(
                     CoreParameters,
                     StoreType,
                     StoreTypePostfix,
@@ -171,15 +178,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Size,
                     FixedLength,
                     precision,
-                    scale);
+                    scale
+                );
 
             /// <summary>
             ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given precision.
             /// </summary>
             /// <param name="precision"> The precision of data the property is configured to store, or null if no size is configured. </param>
             /// <returns> The new parameter object. </returns>
-            public RelationalTypeMappingParameters WithPrecision(int? precision)
-                => new(
+            public RelationalTypeMappingParameters WithPrecision(int? precision) =>
+                new(
                     CoreParameters,
                     StoreType,
                     StoreTypePostfix,
@@ -188,15 +196,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Size,
                     FixedLength,
                     precision,
-                    Scale);
+                    Scale
+                );
 
             /// <summary>
             ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given scale.
             /// </summary>
             /// <param name="scale"> The scale of data the property is configured to store, or null if no size is configured. </param>
             /// <returns> The new parameter object. </returns>
-            public RelationalTypeMappingParameters WithScale(int? scale)
-                => new(
+            public RelationalTypeMappingParameters WithScale(int? scale) =>
+                new(
                     CoreParameters,
                     StoreType,
                     StoreTypePostfix,
@@ -205,7 +214,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Size,
                     FixedLength,
                     Precision,
-                    scale);
+                    scale
+                );
 
             /// <summary>
             ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given
@@ -213,8 +223,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             /// </summary>
             /// <param name="converter"> The converter. </param>
             /// <returns> The new parameter object. </returns>
-            public RelationalTypeMappingParameters WithComposedConverter(ValueConverter? converter)
-                => new(
+            public RelationalTypeMappingParameters WithComposedConverter(
+                ValueConverter? converter
+            ) =>
+                new(
                     CoreParameters.WithComposedConverter(converter),
                     StoreType,
                     StoreTypePostfix,
@@ -223,31 +235,35 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Size,
                     FixedLength,
                     Precision,
-                    Scale);
+                    Scale
+                );
         }
 
-        private static readonly MethodInfo _getFieldValueMethod
-            = GetDataReaderMethod(nameof(DbDataReader.GetFieldValue));
+        private static readonly MethodInfo _getFieldValueMethod = GetDataReaderMethod(
+            nameof(DbDataReader.GetFieldValue)
+        );
 
-        private static readonly IDictionary<Type, MethodInfo> _getXMethods
-            = new Dictionary<Type, MethodInfo>
-            {
-                { typeof(bool), GetDataReaderMethod(nameof(DbDataReader.GetBoolean)) },
-                { typeof(byte), GetDataReaderMethod(nameof(DbDataReader.GetByte)) },
-                { typeof(char), GetDataReaderMethod(nameof(DbDataReader.GetChar)) },
-                { typeof(DateTime), GetDataReaderMethod(nameof(DbDataReader.GetDateTime)) },
-                { typeof(decimal), GetDataReaderMethod(nameof(DbDataReader.GetDecimal)) },
-                { typeof(double), GetDataReaderMethod(nameof(DbDataReader.GetDouble)) },
-                { typeof(float), GetDataReaderMethod(nameof(DbDataReader.GetFloat)) },
-                { typeof(Guid), GetDataReaderMethod(nameof(DbDataReader.GetGuid)) },
-                { typeof(short), GetDataReaderMethod(nameof(DbDataReader.GetInt16)) },
-                { typeof(int), GetDataReaderMethod(nameof(DbDataReader.GetInt32)) },
-                { typeof(long), GetDataReaderMethod(nameof(DbDataReader.GetInt64)) },
-                { typeof(string), GetDataReaderMethod(nameof(DbDataReader.GetString)) }
-            };
+        private static readonly IDictionary<Type, MethodInfo> _getXMethods = new Dictionary<
+            Type,
+            MethodInfo
+        >
+        {
+            { typeof(bool), GetDataReaderMethod(nameof(DbDataReader.GetBoolean)) },
+            { typeof(byte), GetDataReaderMethod(nameof(DbDataReader.GetByte)) },
+            { typeof(char), GetDataReaderMethod(nameof(DbDataReader.GetChar)) },
+            { typeof(DateTime), GetDataReaderMethod(nameof(DbDataReader.GetDateTime)) },
+            { typeof(decimal), GetDataReaderMethod(nameof(DbDataReader.GetDecimal)) },
+            { typeof(double), GetDataReaderMethod(nameof(DbDataReader.GetDouble)) },
+            { typeof(float), GetDataReaderMethod(nameof(DbDataReader.GetFloat)) },
+            { typeof(Guid), GetDataReaderMethod(nameof(DbDataReader.GetGuid)) },
+            { typeof(short), GetDataReaderMethod(nameof(DbDataReader.GetInt16)) },
+            { typeof(int), GetDataReaderMethod(nameof(DbDataReader.GetInt32)) },
+            { typeof(long), GetDataReaderMethod(nameof(DbDataReader.GetInt64)) },
+            { typeof(string), GetDataReaderMethod(nameof(DbDataReader.GetString)) }
+        };
 
-        private static MethodInfo GetDataReaderMethod(string name)
-            => typeof(DbDataReader).GetRuntimeMethod(name, new[] { typeof(int) })!;
+        private static MethodInfo GetDataReaderMethod(string name) =>
+            typeof(DbDataReader).GetRuntimeMethod(name, new[] { typeof(int) })!;
 
         /// <summary>
         ///     Gets the mapping to be used when the only piece of information is that there is a null value.
@@ -256,13 +272,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private sealed class NullTypeMapping : RelationalTypeMapping
         {
-            public NullTypeMapping(string storeType)
-                : base(storeType, typeof(object))
-            {
-            }
+            public NullTypeMapping(string storeType) : base(storeType, typeof(object)) { }
 
-            protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-                => this;
+            protected override RelationalTypeMapping Clone(
+                RelationalTypeMappingParameters parameters
+            ) => this;
         }
 
         /// <summary>
@@ -291,30 +305,36 @@ namespace Microsoft.EntityFrameworkCore.Storage
         protected virtual string ProcessStoreType(
             RelationalTypeMappingParameters parameters,
             string storeType,
-            string storeTypeNameBase)
+            string storeTypeNameBase
+        )
         {
             Check.NotNull(storeType, nameof(storeType));
             Check.NotNull(storeTypeNameBase, nameof(storeTypeNameBase));
 
             var size = parameters.Size;
 
-            if (size != null
-                && parameters.StoreTypePostfix == StoreTypePostfix.Size)
+            if (size != null && parameters.StoreTypePostfix == StoreTypePostfix.Size)
             {
                 storeType = storeTypeNameBase + "(" + size + ")";
             }
-            else if (parameters.StoreTypePostfix == StoreTypePostfix.PrecisionAndScale
-                || parameters.StoreTypePostfix == StoreTypePostfix.Precision)
+            else if (
+                parameters.StoreTypePostfix == StoreTypePostfix.PrecisionAndScale
+                || parameters.StoreTypePostfix == StoreTypePostfix.Precision
+            )
             {
                 var precision = parameters.Precision;
                 if (precision != null)
                 {
                     var scale = parameters.Scale;
-                    storeType = storeTypeNameBase
+                    storeType =
+                        storeTypeNameBase
                         + "("
-                        + (scale == null || parameters.StoreTypePostfix == StoreTypePostfix.Precision
-                            ? precision.ToString()
-                            : precision + "," + scale)
+                        + (
+                            scale == null
+                            || parameters.StoreTypePostfix == StoreTypePostfix.Precision
+                                ? precision.ToString()
+                                : precision + "," + scale
+                        )
                         + ")";
                 }
             }
@@ -352,13 +372,21 @@ namespace Microsoft.EntityFrameworkCore.Storage
             int? size = null,
             bool fixedLength = false,
             int? precision = null,
-            int? scale = null)
+            int? scale = null
+        )
             : this(
                 new RelationalTypeMappingParameters(
-                    new CoreTypeMappingParameters(clrType), storeType, StoreTypePostfix.None, dbType, unicode, size, fixedLength, precision,
-                    scale))
-        {
-        }
+                    new CoreTypeMappingParameters(clrType),
+                    storeType,
+                    StoreTypePostfix.None,
+                    dbType,
+                    unicode,
+                    size,
+                    fixedLength,
+                    precision,
+                    scale
+                )
+            ) { }
 
         /// <summary>
         ///     Returns the parameters used to create this type mapping.
@@ -378,8 +406,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="storeType"> The name of the database type. </param>
         /// <param name="size"> The size of data the property is configured to store, or null if no size is configured. </param>
         /// <returns> The newly created mapping. </returns>
-        public virtual RelationalTypeMapping Clone(string storeType, int? size)
-            => Clone(Parameters.WithStoreTypeAndSize(storeType, size));
+        public virtual RelationalTypeMapping Clone(string storeType, int? size) =>
+            Clone(Parameters.WithStoreTypeAndSize(storeType, size));
 
         /// <summary>
         ///     Creates a copy of this mapping.
@@ -387,8 +415,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="precision"> The precision of data the property is configured to store, or null if no size is configured. </param>
         /// <param name="scale"> The scale of data the property is configured to store, or null if no size is configured. </param>
         /// <returns> The newly created mapping. </returns>
-        public virtual RelationalTypeMapping Clone(int? precision, int? scale)
-            => Clone(Parameters.WithPrecisionAndScale(precision, scale));
+        public virtual RelationalTypeMapping Clone(int? precision, int? scale) =>
+            Clone(Parameters.WithPrecisionAndScale(precision, scale));
 
         /// <summary>
         ///     Returns a new copy of this type mapping with the given <see cref="ValueConverter" />
@@ -396,22 +424,21 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="converter"> The converter to use. </param>
         /// <returns> A new type mapping </returns>
-        public override CoreTypeMapping Clone(ValueConverter? converter)
-            => Clone(Parameters.WithComposedConverter(converter));
+        public override CoreTypeMapping Clone(ValueConverter? converter) =>
+            Clone(Parameters.WithComposedConverter(converter));
 
         /// <summary>
         ///     Clones the type mapping to update facets from the mapping info, if needed.
         /// </summary>
         /// <param name="mappingInfo"> The mapping info containing the facets to use. </param>
         /// <returns> The cloned mapping, or the original mapping if no clone was needed. </returns>
-        public virtual RelationalTypeMapping Clone(in RelationalTypeMappingInfo mappingInfo)
-            => Clone(Parameters.WithTypeMappingInfo(mappingInfo));
+        public virtual RelationalTypeMapping Clone(in RelationalTypeMappingInfo mappingInfo) =>
+            Clone(Parameters.WithTypeMappingInfo(mappingInfo));
 
         /// <summary>
         ///     Gets the name of the database type.
         /// </summary>
-        public virtual StoreTypePostfix StoreTypePostfix
-            => Parameters.StoreTypePostfix;
+        public virtual StoreTypePostfix StoreTypePostfix => Parameters.StoreTypePostfix;
 
         /// <summary>
         ///     Gets the name of the database type.
@@ -426,38 +453,32 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Gets the <see cref="System.Data.DbType" /> to be used.
         /// </summary>
-        public virtual DbType? DbType
-            => Parameters.DbType;
+        public virtual DbType? DbType => Parameters.DbType;
 
         /// <summary>
         ///     Gets a value indicating whether the type should handle Unicode data or not.
         /// </summary>
-        public virtual bool IsUnicode
-            => Parameters.Unicode;
+        public virtual bool IsUnicode => Parameters.Unicode;
 
         /// <summary>
         ///     Gets the size of data the property is configured to store, or null if no size is configured.
         /// </summary>
-        public virtual int? Size
-            => Parameters.Size;
+        public virtual int? Size => Parameters.Size;
 
         /// <summary>
         ///     Gets the precision of data the property is configured to store, or null if no precision is configured.
         /// </summary>
-        public virtual int? Precision
-            => Parameters.Precision;
+        public virtual int? Precision => Parameters.Precision;
 
         /// <summary>
         ///     Gets the scale of data the property is configured to store, or null if no scale is configured.
         /// </summary>
-        public virtual int? Scale
-            => Parameters.Scale;
+        public virtual int? Scale => Parameters.Scale;
 
         /// <summary>
         ///     Gets a value indicating whether the type is constrained to fixed-length data.
         /// </summary>
-        public virtual bool IsFixedLength
-            => Parameters.FixedLength;
+        public virtual bool IsFixedLength => Parameters.FixedLength;
 
         /// <summary>
         ///     Gets the string format to be used to generate SQL literals of this type.
@@ -476,7 +497,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             DbCommand command,
             string name,
             object? value,
-            bool? nullable = null)
+            bool? nullable = null
+        )
         {
             Check.NotNull(command, nameof(command));
 
@@ -494,7 +516,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             if (nullable.HasValue)
             {
-                Check.DebugAssert(nullable.Value || value != null, "Null value in a non-nullable parameter");
+                Check.DebugAssert(
+                    nullable.Value || value != null,
+                    "Null value in a non-nullable parameter"
+                );
 
                 parameter.IsNullable = nullable.Value;
             }
@@ -513,8 +538,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         // when enum would contain convert node. We remove the convert node but we also
         // need to convert the integral value to enum value.
         // This allows us to use converter on enum value or print enum value directly if supported by provider
-        private object? ConvertUnderlyingEnumValueToEnum(object? value)
-            => value?.GetType().IsInteger() == true && ClrType.UnwrapNullableType().IsEnum
+        private object? ConvertUnderlyingEnumValueToEnum(object? value) =>
+            value?.GetType().IsInteger() == true && ClrType.UnwrapNullableType().IsEnum
                 ? Enum.ToObject(ClrType.UnwrapNullableType(), value)
                 : value;
 
@@ -522,9 +547,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Configures type information of a <see cref="DbParameter" />.
         /// </summary>
         /// <param name="parameter"> The parameter to be configured. </param>
-        protected virtual void ConfigureParameter(DbParameter parameter)
-        {
-        }
+        protected virtual void ConfigureParameter(DbParameter parameter) { }
 
         /// <summary>
         ///     Generates the SQL representation of a literal value.
@@ -552,10 +575,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>
         ///     The generated string.
         /// </returns>
-        public virtual string GenerateProviderValueSqlLiteral(object? value)
-            => value == null
-                ? "NULL"
-                : GenerateNonNullSqlLiteral(value);
+        public virtual string GenerateProviderValueSqlLiteral(object? value) =>
+            value == null ? "NULL" : GenerateNonNullSqlLiteral(value);
 
         /// <summary>
         ///     Generates the SQL representation of a non-null literal value.
@@ -564,8 +585,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>
         ///     The generated string.
         /// </returns>
-        protected virtual string GenerateNonNullSqlLiteral(object value)
-            => string.Format(CultureInfo.InvariantCulture, SqlLiteralFormatString, Check.NotNull(value, nameof(value)));
+        protected virtual string GenerateNonNullSqlLiteral(object value) =>
+            string.Format(
+                CultureInfo.InvariantCulture,
+                SqlLiteralFormatString,
+                Check.NotNull(value, nameof(value))
+            );
 
         /// <summary>
         ///     The method to use when reading values of the given type. The method must be defined
@@ -584,8 +609,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     on <see cref="DbDataReader" />.
         /// </summary>
         /// <returns> The method to use to read the value. </returns>
-        public static MethodInfo GetDataReaderMethod(Type type)
-            => _getXMethods.TryGetValue(type, out var method)
+        public static MethodInfo GetDataReaderMethod(Type type) =>
+            _getXMethods.TryGetValue(type, out var method)
                 ? method
                 : _getFieldValueMethod.MakeGenericMethod(type);
 
@@ -595,7 +620,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="expression"> The input expression, containing the database value. </param>
         /// <returns> The expression with customization added. </returns>
-        public virtual Expression CustomizeDataReaderExpression(Expression expression)
-            => expression;
+        public virtual Expression CustomizeDataReaderExpression(Expression expression) =>
+            expression;
     }
 }

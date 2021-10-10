@@ -30,16 +30,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     /// </remarks>
     public abstract class DocumentBasedFixAllProvider : FixAllProvider
     {
-        protected DocumentBasedFixAllProvider()
-        {
-        }
+        protected DocumentBasedFixAllProvider() { }
 
         /// <summary>
         /// Produce a suitable title for the fix-all <see cref="CodeAction"/> this type creates in <see
         /// cref="GetFixAsync(FixAllContext)"/>.  Override this if customizing that title is desired.
         /// </summary>
-        protected virtual string GetFixAllTitle(FixAllContext fixAllContext)
-            => FixAllContextHelper.GetDefaultFixAllTitle(fixAllContext);
+        protected virtual string GetFixAllTitle(FixAllContext fixAllContext) =>
+            FixAllContextHelper.GetDefaultFixAllTitle(fixAllContext);
 
         /// <summary>
         /// Fix all the <paramref name="diagnostics"/> present in <paramref name="document"/>.  The document returned
@@ -55,16 +53,26 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// <para>-or-</para>
         /// <para><see langword="null"/>, if no changes were made to the document.</para>
         /// </returns>
-        protected abstract Task<Document?> FixAllAsync(FixAllContext fixAllContext, Document document, ImmutableArray<Diagnostic> diagnostics);
+        protected abstract Task<Document?> FixAllAsync(
+            FixAllContext fixAllContext,
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics
+        );
 
-        public sealed override IEnumerable<FixAllScope> GetSupportedFixAllScopes()
-            => base.GetSupportedFixAllScopes();
+        public sealed override IEnumerable<FixAllScope> GetSupportedFixAllScopes() =>
+            base.GetSupportedFixAllScopes();
 
-        public sealed override Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext)
-            => DefaultFixAllProviderHelpers.GetFixAsync(
-                FixAllContextHelper.GetDefaultFixAllTitle(fixAllContext), fixAllContext, FixAllContextsAsync);
+        public sealed override Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext) =>
+            DefaultFixAllProviderHelpers.GetFixAsync(
+                FixAllContextHelper.GetDefaultFixAllTitle(fixAllContext),
+                fixAllContext,
+                FixAllContextsAsync
+            );
 
-        private async Task<Solution?> FixAllContextsAsync(FixAllContext originalFixAllContext, ImmutableArray<FixAllContext> fixAllContexts)
+        private async Task<Solution?> FixAllContextsAsync(
+            FixAllContext originalFixAllContext,
+            ImmutableArray<FixAllContext> fixAllContexts
+        )
         {
             var progressTracker = originalFixAllContext.GetProgressTracker();
             progressTracker.Description = this.GetFixAllTitle(originalFixAllContext);
@@ -78,23 +86,46 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             var currentSolution = solution;
             foreach (var fixAllContext in fixAllContexts)
             {
-                Contract.ThrowIfFalse(fixAllContext.Scope is FixAllScope.Document or FixAllScope.Project);
-                currentSolution = await FixSingleContextAsync(currentSolution, fixAllContext, progressTracker).ConfigureAwait(false);
+                Contract.ThrowIfFalse(
+                    fixAllContext.Scope is FixAllScope.Document or FixAllScope.Project
+                );
+                currentSolution = await FixSingleContextAsync(
+                        currentSolution,
+                        fixAllContext,
+                        progressTracker
+                    )
+                    .ConfigureAwait(false);
             }
 
             return currentSolution;
         }
 
-        private async Task<Solution> FixSingleContextAsync(Solution currentSolution, FixAllContext fixAllContext, IProgressTracker progressTracker)
+        private async Task<Solution> FixSingleContextAsync(
+            Solution currentSolution,
+            FixAllContext fixAllContext,
+            IProgressTracker progressTracker
+        )
         {
             // First, determine the diagnostics to fix.
-            var diagnostics = await DetermineDiagnosticsAsync(fixAllContext, progressTracker).ConfigureAwait(false);
+            var diagnostics = await DetermineDiagnosticsAsync(fixAllContext, progressTracker)
+                .ConfigureAwait(false);
 
             // Second, get the fixes for all the diagnostics, and apply them to determine the new root/text for each doc.
-            var docIdToNewRootOrText = await GetFixedDocumentsAsync(fixAllContext, progressTracker, diagnostics).ConfigureAwait(false);
+            var docIdToNewRootOrText = await GetFixedDocumentsAsync(
+                    fixAllContext,
+                    progressTracker,
+                    diagnostics
+                )
+                .ConfigureAwait(false);
 
             // Finally, cleanup the new doc roots, and apply the results to the solution.
-            currentSolution = await CleanupAndApplyChangesAsync(fixAllContext, progressTracker, currentSolution, docIdToNewRootOrText).ConfigureAwait(false);
+            currentSolution = await CleanupAndApplyChangesAsync(
+                    fixAllContext,
+                    progressTracker,
+                    currentSolution,
+                    docIdToNewRootOrText
+                )
+                .ConfigureAwait(false);
 
             return currentSolution;
         }
@@ -102,13 +133,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// <summary>
         /// Determines all the diagnostics we should be fixing for the given <paramref name="fixAllContext"/>.
         /// </summary>
-        private static async Task<ImmutableArray<Diagnostic>> DetermineDiagnosticsAsync(FixAllContext fixAllContext, IProgressTracker progressTracker)
+        private static async Task<ImmutableArray<Diagnostic>> DetermineDiagnosticsAsync(
+            FixAllContext fixAllContext,
+            IProgressTracker progressTracker
+        )
         {
             using var _ = progressTracker.ItemCompletedScope();
 
             return fixAllContext.Document != null
-                ? await fixAllContext.GetDocumentDiagnosticsAsync(fixAllContext.Document).ConfigureAwait(false)
-                : await fixAllContext.GetAllDiagnosticsAsync(fixAllContext.Project).ConfigureAwait(false);
+              ? await fixAllContext.GetDocumentDiagnosticsAsync(fixAllContext.Document)
+                    .ConfigureAwait(false)
+              : await fixAllContext.GetAllDiagnosticsAsync(fixAllContext.Project)
+                    .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -117,20 +153,33 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// them, and are used to perform a final cleanup pass for formatting/simplication/etc.  Text is returned for
         /// documents that don't support syntax.
         /// </summary>
-        private async Task<Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>> GetFixedDocumentsAsync(
-            FixAllContext fixAllContext, IProgressTracker progressTracker, ImmutableArray<Diagnostic> diagnostics)
+        private async Task<
+            Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>
+        > GetFixedDocumentsAsync(
+            FixAllContext fixAllContext,
+            IProgressTracker progressTracker,
+            ImmutableArray<Diagnostic> diagnostics
+        )
         {
             var cancellationToken = fixAllContext.CancellationToken;
 
             using var _1 = progressTracker.ItemCompletedScope();
-            using var _2 = ArrayBuilder<Task<(DocumentId, (SyntaxNode? node, SourceText? text))>>.GetInstance(out var tasks);
+            using var _2 = ArrayBuilder<
+                Task<(DocumentId, (SyntaxNode? node, SourceText? text))>
+            >.GetInstance(out var tasks);
 
-            var docIdToNewRootOrText = new Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>();
+            var docIdToNewRootOrText = new Dictionary<
+                DocumentId,
+                (SyntaxNode? node, SourceText? text)
+            >();
             if (!diagnostics.IsEmpty)
             {
                 // Then, once we've got the diagnostics, bucket them by document and the process all documents in
                 // parallel to get the change for each doc.
-                foreach (var group in diagnostics.Where(d => d.Location.IsInSource).GroupBy(d => d.Location.SourceTree))
+                foreach (
+                    var group in diagnostics.Where(d => d.Location.IsInSource)
+                        .GroupBy(d => d.Location.SourceTree)
+                )
                 {
                     var tree = group.Key;
                     Contract.ThrowIfNull(tree);
@@ -139,19 +188,37 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     if (documentDiagnostics.IsDefaultOrEmpty)
                         continue;
 
-                    tasks.Add(Task.Run(async () =>
-                    {
-                        var newDocument = await this.FixAllAsync(fixAllContext, document, documentDiagnostics).ConfigureAwait(false);
-                        if (newDocument == null || newDocument == document)
-                            return default;
+                    tasks.Add(
+                        Task.Run(
+                            async () =>
+                            {
+                                var newDocument = await this.FixAllAsync(
+                                        fixAllContext,
+                                        document,
+                                        documentDiagnostics
+                                    )
+                                    .ConfigureAwait(false);
+                                if (newDocument == null || newDocument == document)
+                                    return default;
 
-                        // For documents that support syntax, grab the tree so that we can clean it up later.  If it's a
-                        // language that doesn't support that, then just grab the text.
-                        var node = newDocument.SupportsSyntaxTree ? await newDocument.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false) : null;
-                        var text = newDocument.SupportsSyntaxTree ? null : await newDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                                // For documents that support syntax, grab the tree so that we can clean it up later.  If it's a
+                                // language that doesn't support that, then just grab the text.
+                                var node = newDocument.SupportsSyntaxTree
+                                    ? await newDocument.GetRequiredSyntaxRootAsync(
+                                              cancellationToken
+                                          )
+                                          .ConfigureAwait(false)
+                                    : null;
+                                var text = newDocument.SupportsSyntaxTree
+                                    ? null
+                                    : await newDocument.GetTextAsync(cancellationToken)
+                                          .ConfigureAwait(false);
 
-                        return (document.Id, (node, text));
-                    }, cancellationToken));
+                                return (document.Id, (node, text));
+                            },
+                            cancellationToken
+                        )
+                    );
                 }
 
                 await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -176,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             FixAllContext fixAllContext,
             IProgressTracker progressTracker,
             Solution currentSolution,
-            Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)> docIdToNewRootOrText)
+            Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)> docIdToNewRootOrText
+        )
         {
             var cancellationToken = fixAllContext.CancellationToken;
             using var _1 = progressTracker.ItemCompletedScope();
@@ -191,9 +259,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 // forked solution.
                 foreach (var (docId, (newRoot, newText)) in docIdToNewRootOrText)
                 {
-                    currentSolution = newRoot != null
-                        ? currentSolution.WithDocumentSyntaxRoot(docId, newRoot)
-                        : currentSolution.WithDocumentText(docId, newText!);
+                    currentSolution =
+                        newRoot != null
+                            ? currentSolution.WithDocumentSyntaxRoot(docId, newRoot)
+                            : currentSolution.WithDocumentText(docId, newText!);
                 }
 
                 // Next, go and cleanup any trees we inserted. Once we clean the document, we get the text of it and
@@ -201,19 +270,34 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 // the cleaned tree (both of which can be much more expensive than just text).
                 //
                 // Do this in parallel across all the documents that were fixed.
-                using var _2 = ArrayBuilder<Task<(DocumentId docId, SourceText sourceText)>>.GetInstance(out var tasks);
+                using var _2 = ArrayBuilder<
+                    Task<(DocumentId docId, SourceText sourceText)>
+                >.GetInstance(out var tasks);
 
                 foreach (var (docId, (newRoot, _)) in docIdToNewRootOrText)
                 {
                     if (newRoot != null)
                     {
                         var dirtyDocument = currentSolution.GetRequiredDocument(docId);
-                        tasks.Add(Task.Run(async () =>
-                        {
-                            var cleanedDocument = await PostProcessCodeAction.Instance.PostProcessChangesAsync(dirtyDocument, cancellationToken).ConfigureAwait(false);
-                            var cleanedText = await cleanedDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                            return (dirtyDocument.Id, cleanedText);
-                        }, cancellationToken));
+                        tasks.Add(
+                            Task.Run(
+                                async () =>
+                                {
+                                    var cleanedDocument =
+                                        await PostProcessCodeAction.Instance.PostProcessChangesAsync(
+                                                dirtyDocument,
+                                                cancellationToken
+                                            )
+                                            .ConfigureAwait(false);
+                                    var cleanedText = await cleanedDocument.GetTextAsync(
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false);
+                                    return (dirtyDocument.Id, cleanedText);
+                                },
+                                cancellationToken
+                            )
+                        );
                     }
                 }
 
@@ -239,8 +323,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             public override string Title => "";
 
-            public new Task<Document> PostProcessChangesAsync(Document document, CancellationToken cancellationToken)
-                => base.PostProcessChangesAsync(document, cancellationToken);
+            public new Task<Document> PostProcessChangesAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => base.PostProcessChangesAsync(document, cancellationToken);
         }
     }
 }

@@ -23,12 +23,14 @@ namespace Microsoft.AspNetCore.Components.Forms
         private ValidationMessageStore? _parsingValidationMessages;
         private Type? _nullableUnderlyingType;
 
-        [CascadingParameter] EditContext CascadedEditContext { get; set; } = default!;
+        [CascadingParameter]
+        EditContext CascadedEditContext { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets a collection of additional attributes that will be applied to the created element.
         /// </summary>
-        [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
         /// <summary>
         /// Gets or sets the value of the input. This should be used with two-way binding.
@@ -42,18 +44,21 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <summary>
         /// Gets or sets a callback that updates the bound value.
         /// </summary>
-        [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+        [Parameter]
+        public EventCallback<TValue> ValueChanged { get; set; }
 
         /// <summary>
         /// Gets or sets an expression that identifies the bound value.
         /// </summary>
-        [Parameter] public Expression<Func<TValue>>? ValueExpression { get; set; }
+        [Parameter]
+        public Expression<Func<TValue>>? ValueExpression { get; set; }
 
         /// <summary>
         /// Gets or sets the display name for this field.
         /// <para>This value is used when generating error messages when the input value fails to parse correctly.</para>
         /// </summary>
-        [Parameter] public string? DisplayName { get; set; }
+        [Parameter]
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// Gets the associated <see cref="Forms.EditContext"/>.
@@ -103,7 +108,13 @@ namespace Microsoft.AspNetCore.Components.Forms
                     parsingFailed = false;
                     CurrentValue = default!;
                 }
-                else if (TryParseValueFromString(value, out var parsedValue, out var validationErrorMessage))
+                else if (
+                    TryParseValueFromString(
+                        value,
+                        out var parsedValue,
+                        out var validationErrorMessage
+                    )
+                )
                 {
                     parsingFailed = false;
                     CurrentValue = parsedValue!;
@@ -145,8 +156,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// </summary>
         /// <param name="value">The value to format.</param>
         /// <returns>A string representation of the value.</returns>
-        protected virtual string? FormatValueAsString(TValue? value)
-            => value?.ToString();
+        protected virtual string? FormatValueAsString(TValue? value) => value?.ToString();
 
         /// <summary>
         /// Parses a string to create an instance of <typeparamref name="TValue"/>. Derived classes can override this to change how
@@ -156,14 +166,17 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <param name="result">An instance of <typeparamref name="TValue"/>.</param>
         /// <param name="validationErrorMessage">If the value could not be parsed, provides a validation error message.</param>
         /// <returns>True if the value could be parsed; otherwise false.</returns>
-        protected abstract bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out TValue result, [NotNullWhen(false)] out string? validationErrorMessage);
+        protected abstract bool TryParseValueFromString(
+            string? value,
+            [MaybeNullWhen(false)] out TValue result,
+            [NotNullWhen(false)] out string? validationErrorMessage
+        );
 
         /// <summary>
         /// Gets a string that indicates the status of the field being edited. This will include
         /// some combination of "modified", "valid", or "invalid", depending on the status of the field.
         /// </summary>
-        private string FieldClass
-            => EditContext.FieldCssClass(FieldIdentifier);
+        private string FieldClass => EditContext.FieldCssClass(FieldIdentifier);
 
         /// <summary>
         /// Gets a CSS class string that combines the <c>class</c> attribute and <see cref="FieldClass"/>
@@ -174,9 +187,11 @@ namespace Microsoft.AspNetCore.Components.Forms
         {
             get
             {
-                if (AdditionalAttributes != null &&
-                    AdditionalAttributes.TryGetValue("class", out var @class) &&
-                    !string.IsNullOrEmpty(Convert.ToString(@class, CultureInfo.InvariantCulture)))
+                if (
+                    AdditionalAttributes != null
+                    && AdditionalAttributes.TryGetValue("class", out var @class)
+                    && !string.IsNullOrEmpty(Convert.ToString(@class, CultureInfo.InvariantCulture))
+                )
                 {
                     return $"{@class} {FieldClass}";
                 }
@@ -184,7 +199,6 @@ namespace Microsoft.AspNetCore.Components.Forms
                 return FieldClass; // Never null or empty
             }
         }
-
 
         /// <inheritdoc />
         [MemberNotNull(nameof(EditContext), nameof(CascadedEditContext))]
@@ -199,15 +213,19 @@ namespace Microsoft.AspNetCore.Components.Forms
 
                 if (CascadedEditContext == null)
                 {
-                    throw new InvalidOperationException($"{GetType()} requires a cascading parameter " +
-                        $"of type {nameof(Forms.EditContext)}. For example, you can use {GetType().FullName} inside " +
-                        $"an {nameof(EditForm)}.");
+                    throw new InvalidOperationException(
+                        $"{GetType()} requires a cascading parameter "
+                            + $"of type {nameof(Forms.EditContext)}. For example, you can use {GetType().FullName} inside "
+                            + $"an {nameof(EditForm)}."
+                    );
                 }
 
                 if (ValueExpression == null)
                 {
-                    throw new InvalidOperationException($"{GetType()} requires a value for the 'ValueExpression' " +
-                        $"parameter. Normally this is provided automatically when using 'bind-Value'.");
+                    throw new InvalidOperationException(
+                        $"{GetType()} requires a value for the 'ValueExpression' "
+                            + $"parameter. Normally this is provided automatically when using 'bind-Value'."
+                    );
                 }
 
                 EditContext = CascadedEditContext;
@@ -223,8 +241,10 @@ namespace Microsoft.AspNetCore.Components.Forms
                 // We don't support changing EditContext because it's messy to be clearing up state and event
                 // handlers for the previous one, and there's no strong use case. If a strong use case
                 // emerges, we can consider changing this.
-                throw new InvalidOperationException($"{GetType()} does not support changing the " +
-                    $"{nameof(Forms.EditContext)} dynamically.");
+                throw new InvalidOperationException(
+                    $"{GetType()} does not support changing the "
+                        + $"{nameof(Forms.EditContext)} dynamically."
+                );
             }
 
             UpdateAdditionalValidationAttributes();
@@ -233,7 +253,10 @@ namespace Microsoft.AspNetCore.Components.Forms
             return base.SetParametersAsync(ParameterView.Empty);
         }
 
-        private void OnValidateStateChanged(object? sender, ValidationStateChangedEventArgs eventArgs)
+        private void OnValidateStateChanged(
+            object? sender,
+            ValidationStateChangedEventArgs eventArgs
+        )
         {
             UpdateAdditionalValidationAttributes();
 
@@ -242,7 +265,8 @@ namespace Microsoft.AspNetCore.Components.Forms
 
         private void UpdateAdditionalValidationAttributes()
         {
-            var hasAriaInvalidAttribute = AdditionalAttributes != null && AdditionalAttributes.ContainsKey("aria-invalid");
+            var hasAriaInvalidAttribute =
+                AdditionalAttributes != null && AdditionalAttributes.ContainsKey("aria-invalid");
             if (EditContext.GetValidationMessages(FieldIdentifier).Any())
             {
                 if (hasAriaInvalidAttribute)
@@ -285,7 +309,10 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// Returns a dictionary with the same values as the specified <paramref name="source"/>.
         /// </summary>
         /// <returns>true, if a new dictrionary with copied values was created. false - otherwise.</returns>
-        private bool ConvertToDictionary(IReadOnlyDictionary<string, object>? source, out Dictionary<string, object> result)
+        private bool ConvertToDictionary(
+            IReadOnlyDictionary<string, object>? source,
+            out Dictionary<string, object> result
+        )
         {
             var newDictionaryCreated = true;
             if (source == null)
@@ -310,9 +337,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
 
         /// <inheritdoc/>
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         void IDisposable.Dispose()
         {

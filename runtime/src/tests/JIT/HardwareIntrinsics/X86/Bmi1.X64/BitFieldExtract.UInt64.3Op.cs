@@ -140,12 +140,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi1.X64).GetMethod(nameof(Bmi1.X64.BitFieldExtract), new Type[] { typeof(UInt64), typeof(Byte), typeof(Byte) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
-                                        Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data2)),
-                                        Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data3))
-                                     });
+            var result = typeof(Bmi1.X64).GetMethod(
+                    nameof(Bmi1.X64.BitFieldExtract),
+                    new Type[] { typeof(UInt64), typeof(Byte), typeof(Byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
+                        Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data2)),
+                        Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data3))
+                    }
+                );
 
             ValidateResult(_data1, _data2, _data3, (UInt64)result);
         }
@@ -154,11 +161,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Bmi1.X64.BitFieldExtract(
-                _clsVar1,
-                _clsVar2,
-                _clsVar3
-            );
+            var result = Bmi1.X64.BitFieldExtract(_clsVar1, _clsVar2, _clsVar3);
 
             ValidateResult(_clsVar1, _clsVar2, _clsVar3, result);
         }
@@ -232,15 +235,24 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(UInt64 op1, Byte op2, Byte op3, UInt64 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt64 op1,
+            Byte op2,
+            Byte op3,
+            UInt64 result,
+            [CallerMemberName] string method = ""
+        )
         {
             var isUnexpectedResult = false;
 
-            ulong expectedResult = 15; isUnexpectedResult = (expectedResult != result);
+            ulong expectedResult = 15;
+            isUnexpectedResult = (expectedResult != result);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.BitFieldExtract)}<UInt64>(UInt64, Byte, Byte): BitFieldExtract failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.BitFieldExtract)}<UInt64>(UInt64, Byte, Byte): BitFieldExtract failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   op1: {op1}");
                 TestLibrary.TestFramework.LogInformation($"   op2: {op2}");
                 TestLibrary.TestFramework.LogInformation($"   op3: {op3}");

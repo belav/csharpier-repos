@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                     _cachedToString = string.Format(
                         CultureInfo.InvariantCulture,
                         "TransportConnectionId:{0}",
-                        ConnectionId);
+                        ConnectionId
+                    );
                 }
             }
 

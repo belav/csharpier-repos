@@ -28,7 +28,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData("PO / HTTP/1.1", false, null, (int)HttpMethod.Custom)]
         [InlineData("PO ST / HTTP/1.1", false, null, (int)HttpMethod.Custom)]
         [InlineData("short ", false, null, (int)HttpMethod.Custom)]
-        public void GetsKnownMethod(string input, bool expectedResult, string expectedKnownString, int intExpectedMethod)
+        public void GetsKnownMethod(
+            string input,
+            bool expectedResult,
+            string expectedKnownString,
+            int intExpectedMethod
+        )
         {
             var expectedMethod = (HttpMethod)intExpectedMethod;
             // Arrange
@@ -42,7 +47,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             {
                 toString = HttpUtilities.MethodToString(knownMethod);
             }
-
 
             // Assert
             Assert.Equal(expectedResult, result);
@@ -58,7 +62,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData("http/1.0\r", false, null, (int)HttpVersion.Unknown)]
         [InlineData("http/1.1\r", false, null, (int)HttpVersion.Unknown)]
         [InlineData("short ", false, null, (int)HttpVersion.Unknown)]
-        public void GetsKnownVersion(string input, bool expectedResult, string expectedKnownString, int intVersion)
+        public void GetsKnownVersion(
+            string input,
+            bool expectedResult,
+            string expectedKnownString,
+            int intVersion
+        )
         {
             var version = (HttpVersion)intVersion;
             // Arrange
@@ -84,11 +93,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData("HTTP/1.1\r", "HTTP/1.1")]
         public void KnownVersionsAreInterned(string input, string expected)
         {
-            TestKnownStringsInterning(input, expected, span =>
-            {
-                HttpUtilities.GetKnownVersion(span, out var version, out var _);
-                return HttpUtilities.VersionToString(version);
-            });
+            TestKnownStringsInterning(
+                input,
+                expected,
+                span =>
+                {
+                    HttpUtilities.GetKnownVersion(span, out var version, out var _);
+                    return HttpUtilities.VersionToString(version);
+                }
+            );
         }
 
         [Theory]
@@ -96,11 +109,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData("http://host/", "http://")]
         public void KnownSchemesAreInterned(string input, string expected)
         {
-            TestKnownStringsInterning(input, expected, span =>
-            {
-                HttpUtilities.GetKnownHttpScheme(span, out var scheme);
-                return HttpUtilities.SchemeToString(scheme);
-            });
+            TestKnownStringsInterning(
+                input,
+                expected,
+                span =>
+                {
+                    HttpUtilities.GetKnownHttpScheme(span, out var scheme);
+                    return HttpUtilities.SchemeToString(scheme);
+                }
+            );
         }
 
         [Theory]
@@ -115,14 +132,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData("TRACE / HTTP/1.1", "TRACE")]
         public void KnownMethodsAreInterned(string input, string expected)
         {
-            TestKnownStringsInterning(input, expected, span =>
-            {
-                HttpUtilities.GetKnownMethod(span, out var method, out var length);
-                return HttpUtilities.MethodToString(method);
-            });
+            TestKnownStringsInterning(
+                input,
+                expected,
+                span =>
+                {
+                    HttpUtilities.GetKnownMethod(span, out var method, out var length);
+                    return HttpUtilities.MethodToString(method);
+                }
+            );
         }
 
-        private void TestKnownStringsInterning(string input, string expected, Func<byte[], string> action)
+        private void TestKnownStringsInterning(
+            string input,
+            string expected,
+            Func<byte[], string> action
+        )
         {
             // Act
             var knownString1 = action(Encoding.ASCII.GetBytes(input));
@@ -137,7 +162,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             get
             {
-                return new TheoryData<string> {
+                return new TheoryData<string>
+                {
                     "z",
                     "1",
                     "y:1",
@@ -179,7 +205,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             get
             {
                 // see https://tools.ietf.org/html/rfc7230#section-5.4
-                var data = new TheoryData<string> {
+                var data = new TheoryData<string>
+                {
                     "[]", // Too short
                     "[::]", // Too short
                     "[ghijkl]", // Non-hex

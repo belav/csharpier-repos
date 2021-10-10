@@ -27,7 +27,10 @@ namespace Microsoft.AspNetCore.Http
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(() => context.Session);
-            Assert.Equal("Session has not been configured for this application or request.", exception.Message);
+            Assert.Equal(
+                "Session has not been configured for this application or request.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -175,7 +178,6 @@ namespace Microsoft.AspNetCore.Http
             context.Uninitialize();
             TestCachedFeaturesAreNull(context, null);
 
-
             var newFeatures = new FeatureCollection();
             newFeatures.Set<IHttpRequestFeature>(new HttpRequestFeature());
             newFeatures.Set<IHttpResponseFeature>(new HttpResponseFeature());
@@ -195,8 +197,7 @@ namespace Microsoft.AspNetCore.Http
         [Fact]
         public void RequestServicesAreNotOverwrittenIfAlreadySet()
         {
-            var serviceProvider = new ServiceCollection()
-                        .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection().BuildServiceProvider();
 
             var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
 
@@ -210,8 +211,7 @@ namespace Microsoft.AspNetCore.Http
         [Fact]
         public async Task RequestServicesAreDisposedOnCompleted()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddTransient<DisposableThing>()
+            var serviceProvider = new ServiceCollection().AddTransient<DisposableThing>()
                 .BuildServiceProvider();
 
             var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
@@ -237,9 +237,9 @@ namespace Microsoft.AspNetCore.Http
         [Fact]
         public async Task RequestServicesAreDisposedAsynOnCompleted()
         {
-            var serviceProvider = new AsyncDisposableServiceProvider(new ServiceCollection()
-                .AddTransient<DisposableThing>()
-                .BuildServiceProvider());
+            var serviceProvider = new AsyncDisposableServiceProvider(
+                new ServiceCollection().AddTransient<DisposableThing>().BuildServiceProvider()
+            );
 
             var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
             DisposableThing instance = null;
@@ -293,15 +293,17 @@ namespace Microsoft.AspNetCore.Http
         {
             var type = value.GetType();
 
-            var field = type
-                .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
-                .Single(f =>
-                    f.FieldType.GetTypeInfo().IsGenericType &&
-                    f.FieldType.GetGenericTypeDefinition() == typeof(FeatureReferences<>));
+            var field = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Single(
+                    f =>
+                        f.FieldType.GetTypeInfo().IsGenericType
+                        && f.FieldType.GetGenericTypeDefinition() == typeof(FeatureReferences<>)
+                );
 
-            var boxedExpectedStruct = features == null ?
-                Activator.CreateInstance(field.FieldType) :
-                Activator.CreateInstance(field.FieldType, features);
+            var boxedExpectedStruct =
+                features == null
+                    ? Activator.CreateInstance(field.FieldType)
+                    : Activator.CreateInstance(field.FieldType, features);
 
             var boxedActualStruct = field.GetValue(value);
 
@@ -321,15 +323,19 @@ namespace Microsoft.AspNetCore.Http
         {
             var type = value.GetType();
 
-            var properties = type
-                .GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+            var properties = type.GetProperties(
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+                )
                 .Where(p => p.PropertyType.GetTypeInfo().IsInterface);
 
             TestFeatureProperties(value, features, properties);
 
-            var fields = type
-                .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
-                .Where(f => f.FieldType.GetTypeInfo().IsInterface && f.GetCustomAttribute<CompilerGeneratedAttribute>() == null);
+            var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Where(
+                    f =>
+                        f.FieldType.GetTypeInfo().IsInterface
+                        && f.GetCustomAttribute<CompilerGeneratedAttribute>() == null
+                );
 
             foreach (var field in fields)
             {
@@ -344,10 +350,13 @@ namespace Microsoft.AspNetCore.Http
                     Assert.NotNull(v);
                 }
             }
-
         }
 
-        private static void TestFeatureProperties(object value, IFeatureCollection features, IEnumerable<PropertyInfo> properties)
+        private static void TestFeatureProperties(
+            object value,
+            IFeatureCollection features,
+            IEnumerable<PropertyInfo> properties
+        )
         {
             foreach (var property in properties)
             {
@@ -384,7 +393,8 @@ namespace Microsoft.AspNetCore.Http
 
         private class TestHttpResponseFeature : IHttpResponseFeature
         {
-            public List<(Func<object, Task> callback, object state)> CompletedCallbacks = new List<(Func<object, Task> callback, object state)>();
+            public List<(Func<object, Task> callback, object state)> CompletedCallbacks =
+                new List<(Func<object, Task> callback, object state)>();
 
             public int StatusCode { get; set; }
             public string ReasonPhrase { get; set; }
@@ -398,21 +408,23 @@ namespace Microsoft.AspNetCore.Http
                 CompletedCallbacks.Add((callback, state));
             }
 
-            public void OnStarting(Func<object, Task> callback, object state)
-            {
-            }
+            public void OnStarting(Func<object, Task> callback, object state) { }
         }
 
         private class TestSession : ISession
         {
-            private Dictionary<string, byte[]> _store
-                = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
+            private Dictionary<string, byte[]> _store = new Dictionary<string, byte[]>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             public string Id { get; set; }
 
             public bool IsAvailable { get; } = true;
 
-            public IEnumerable<string> Keys { get { return _store.Keys; } }
+            public IEnumerable<string> Keys
+            {
+                get { return _store.Keys; }
+            }
 
             public void Clear()
             {
@@ -454,10 +466,7 @@ namespace Microsoft.AspNetCore.Http
         {
             public bool IsWebSocketRequest
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public Task<WebSocket> AcceptAsync(WebSocketAcceptContext context)
@@ -466,7 +475,10 @@ namespace Microsoft.AspNetCore.Http
             }
         }
 
-        private class AsyncDisposableServiceProvider : IServiceProvider, IDisposable, IServiceScopeFactory
+        private class AsyncDisposableServiceProvider
+            : IServiceProvider,
+              IDisposable,
+              IServiceScopeFactory
         {
             private readonly ServiceProvider _serviceProvider;
 
@@ -494,7 +506,9 @@ namespace Microsoft.AspNetCore.Http
 
             public IServiceScope CreateScope()
             {
-                var scope = new AsyncServiceScope(_serviceProvider.GetService<IServiceScopeFactory>().CreateScope());
+                var scope = new AsyncServiceScope(
+                    _serviceProvider.GetService<IServiceScopeFactory>().CreateScope()
+                );
                 Scopes.Add(scope);
                 return scope;
             }

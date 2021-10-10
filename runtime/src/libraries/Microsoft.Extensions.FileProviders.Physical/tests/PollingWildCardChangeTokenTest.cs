@@ -39,10 +39,13 @@ namespace Microsoft.Extensions.FileProviders.Physical
             var filePath = "1.txt";
             var fileInfo = CreateFile(filePath);
             var directoryInfo = new Mock<DirectoryInfoBase>();
-            directoryInfo.Setup(d => d.EnumerateFileSystemInfos())
-                .Returns(new[] { fileInfo });
+            directoryInfo.Setup(d => d.EnumerateFileSystemInfos()).Returns(new[] { fileInfo });
             var clock = new TestClock();
-            var token = new TestablePollingWildCardChangeToken(directoryInfo.Object, "**/*.txt", clock);
+            var token = new TestablePollingWildCardChangeToken(
+                directoryInfo.Object,
+                "**/*.txt",
+                clock
+            );
 
             // Act
             clock.Increment();
@@ -62,7 +65,11 @@ namespace Microsoft.Extensions.FileProviders.Physical
             directoryInfo.Setup(d => d.EnumerateFileSystemInfos())
                 .Returns(new[] { CreateFile(filePath1) });
             var clock = new TestClock();
-            var token = new TestablePollingWildCardChangeToken(directoryInfo.Object, "**/*.txt", clock);
+            var token = new TestablePollingWildCardChangeToken(
+                directoryInfo.Object,
+                "**/*.txt",
+                clock
+            );
 
             // Act - 1
             clock.Increment();
@@ -92,7 +99,11 @@ namespace Microsoft.Extensions.FileProviders.Physical
             directoryInfo.Setup(d => d.EnumerateFileSystemInfos())
                 .Returns(new[] { CreateFile(filePath1), CreateFile(filePath2) });
             var clock = new TestClock();
-            var token = new TestablePollingWildCardChangeToken(directoryInfo.Object, "**/*.txt", clock);
+            var token = new TestablePollingWildCardChangeToken(
+                directoryInfo.Object,
+                "**/*.txt",
+                clock
+            );
 
             // Act - 1
             clock.Increment();
@@ -121,7 +132,11 @@ namespace Microsoft.Extensions.FileProviders.Physical
             directoryInfo.Setup(d => d.EnumerateFileSystemInfos())
                 .Returns(new[] { CreateFile(filePath1), CreateFile(filePath2) });
             var clock = new TestClock();
-            var token = new TestablePollingWildCardChangeToken(directoryInfo.Object, "**/*.txt", clock);
+            var token = new TestablePollingWildCardChangeToken(
+                directoryInfo.Object,
+                "**/*.txt",
+                clock
+            );
 
             // Act - 1
             clock.Increment();
@@ -149,7 +164,11 @@ namespace Microsoft.Extensions.FileProviders.Physical
             directoryInfo.Setup(d => d.EnumerateFileSystemInfos())
                 .Returns(new[] { CreateFile(filePath1), CreateFile(filePath2) });
             var clock = new TestClock();
-            var token = new TestablePollingWildCardChangeToken(directoryInfo.Object, "**/*.txt", clock);
+            var token = new TestablePollingWildCardChangeToken(
+                directoryInfo.Object,
+                "**/*.txt",
+                clock
+            );
 
             // Act - 1
             clock.Increment();
@@ -170,10 +189,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
         private static FileInfoBase CreateFile(string filePath)
         {
             var fileInfo = new Mock<FileInfoBase>();
-            fileInfo.SetupGet(f => f.FullName)
-                .Returns(filePath);
-            fileInfo.SetupGet(f => f.Name)
-                .Returns(Path.GetFileName(filePath));
+            fileInfo.SetupGet(f => f.FullName).Returns(filePath);
+            fileInfo.SetupGet(f => f.Name).Returns(Path.GetFileName(filePath));
             return fileInfo.Object;
         }
 
@@ -182,10 +199,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
             public TestablePollingWildCardChangeToken(
                 DirectoryInfoBase directoryInfo,
                 string pattern,
-                IClock clock)
-                : base(directoryInfo, pattern, clock)
-            {
-            }
+                IClock clock
+            ) : base(directoryInfo, pattern, clock) { }
 
             public Dictionary<string, DateTime> FileTimestampLookup { get; } =
                 new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);

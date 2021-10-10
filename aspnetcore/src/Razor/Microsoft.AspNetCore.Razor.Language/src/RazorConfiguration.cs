@@ -11,16 +11,18 @@ namespace Microsoft.AspNetCore.Razor.Language
     public abstract class RazorConfiguration : IEquatable<RazorConfiguration>
     {
         public static readonly RazorConfiguration Default = new DefaultRazorConfiguration(
-            RazorLanguageVersion.Latest, 
+            RazorLanguageVersion.Latest,
             "unnamed",
             Array.Empty<RazorExtension>(),
-            false);
+            false
+        );
 
         public static RazorConfiguration Create(
             RazorLanguageVersion languageVersion,
             string configurationName,
             IEnumerable<RazorExtension> extensions,
-            bool useConsolidatedMvcViews = false)
+            bool useConsolidatedMvcViews = false
+        )
         {
             if (languageVersion == null)
             {
@@ -37,7 +39,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(extensions));
             }
 
-            return new DefaultRazorConfiguration(languageVersion, configurationName, extensions.ToArray(), useConsolidatedMvcViews);
+            return new DefaultRazorConfiguration(
+                languageVersion,
+                configurationName,
+                extensions.ToArray(),
+                useConsolidatedMvcViews
+            );
         }
 
         public abstract string ConfigurationName { get; }
@@ -111,7 +118,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 RazorLanguageVersion languageVersion,
                 string configurationName,
                 RazorExtension[] extensions,
-                bool useConsolidatedMvcViews = false)
+                bool useConsolidatedMvcViews = false
+            )
             {
                 LanguageVersion = languageVersion;
                 ConfigurationName = configurationName;

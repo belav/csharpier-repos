@@ -97,7 +97,6 @@ namespace JIT.HardwareIntrinsics.X86
         {
             Succeeded = true;
 
-            
             _fld = TestLibrary.Generator.GetUInt64();
             _data = TestLibrary.Generator.GetUInt64();
         }
@@ -121,10 +120,17 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi1.X64).GetMethod(nameof(Bmi1.X64.TrailingZeroCount), new Type[] { typeof(UInt64) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data))
-                                     });
+            var result = typeof(Bmi1.X64).GetMethod(
+                    nameof(Bmi1.X64.TrailingZeroCount),
+                    new Type[] { typeof(UInt64) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data))
+                    }
+                );
 
             ValidateResult(_data, (UInt64)result);
         }
@@ -133,9 +139,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Bmi1.X64.TrailingZeroCount(
-                _clsVar
-            );
+            var result = Bmi1.X64.TrailingZeroCount(_clsVar);
 
             ValidateResult(_clsVar, result);
         }
@@ -207,15 +211,26 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(UInt64 data, UInt64 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt64 data,
+            UInt64 result,
+            [CallerMemberName] string method = ""
+        )
         {
             var isUnexpectedResult = false;
 
-            ulong expectedResult = 0; for (int index = 0; ((data >> index) & 1) == 0; index++) { expectedResult++; } isUnexpectedResult = (expectedResult != result);
+            ulong expectedResult = 0;
+            for (int index = 0; ((data >> index) & 1) == 0; index++)
+            {
+                expectedResult++;
+            }
+            isUnexpectedResult = (expectedResult != result);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.TrailingZeroCount)}<UInt64>(UInt64): TrailingZeroCount failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.TrailingZeroCount)}<UInt64>(UInt64): TrailingZeroCount failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

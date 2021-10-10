@@ -12,16 +12,23 @@ namespace System.Runtime.InteropServices.JavaScript
 {
     public static class Runtime
     {
-        private static readonly Dictionary<int, WeakReference<JSObject>> _boundObjects = new Dictionary<int, WeakReference<JSObject>>();
-        private static readonly Dictionary<object, JSObject> _rawToJS = new Dictionary<object, JSObject>();
+        private static readonly Dictionary<int, WeakReference<JSObject>> _boundObjects =
+            new Dictionary<int, WeakReference<JSObject>>();
+        private static readonly Dictionary<object, JSObject> _rawToJS = new Dictionary<
+            object,
+            JSObject
+        >();
         // _weakDelegateTable is a ConditionalWeakTable with the Delegate and associated JSObject:
         // Key Lifetime:
         //    Once the key dies, the dictionary automatically removes the key/value entry.
         // No need to lock as it is thread safe.
-        private static readonly ConditionalWeakTable<Delegate, JSObject> _weakDelegateTable = new ConditionalWeakTable<Delegate, JSObject>();
+        private static readonly ConditionalWeakTable<Delegate, JSObject> _weakDelegateTable =
+            new ConditionalWeakTable<Delegate, JSObject>();
 
         private const string TaskGetResultName = "get_Result";
-        private static readonly MethodInfo _taskGetResultMethodInfo = typeof(Task<>).GetMethod(TaskGetResultName)!;
+        private static readonly MethodInfo _taskGetResultMethodInfo = typeof(Task<>).GetMethod(
+            TaskGetResultName
+        )!;
 
         // <summary>
         // Execute the provided string in the JavaScript context
@@ -70,7 +77,7 @@ namespace System.Runtime.InteropServices.JavaScript
             return Interop.Runtime.GetGlobalObject(str);
         }
 
-        public static void DumpAotProfileData (ref byte buf, int len, string extraArg)
+        public static void DumpAotProfileData(ref byte buf, int len, string extraArg)
         {
             Interop.Runtime.DumpAotProfileData(ref buf, len, extraArg);
         }
@@ -81,13 +88,21 @@ namespace System.Runtime.InteropServices.JavaScript
 
             lock (_boundObjects)
             {
-                if (!_boundObjects.TryGetValue(jsId, out WeakReference<JSObject>? reference) ||
-                    !reference.TryGetTarget(out target) ||
-                    target.IsDisposed)
+                if (
+                    !_boundObjects.TryGetValue(jsId, out WeakReference<JSObject>? reference)
+                    || !reference.TryGetTarget(out target)
+                    || target.IsDisposed
+                )
                 {
                     IntPtr jsIntPtr = (IntPtr)jsId;
-                    target = mappedType > 0 ? BindJSType(jsIntPtr, ownsHandle, mappedType) : new JSObject(jsIntPtr, ownsHandle);
-                    _boundObjects[jsId] = new WeakReference<JSObject>(target, trackResurrection: true);
+                    target =
+                        mappedType > 0
+                            ? BindJSType(jsIntPtr, ownsHandle, mappedType)
+                            : new JSObject(jsIntPtr, ownsHandle);
+                    _boundObjects[jsId] = new WeakReference<JSObject>(
+                        target,
+                        trackResurrection: true
+                    );
                 }
             }
 
@@ -103,7 +118,10 @@ namespace System.Runtime.InteropServices.JavaScript
             {
                 if (_boundObjects.TryGetValue(jsId, out WeakReference<JSObject>? wr))
                 {
-                    if (!wr.TryGetTarget(out JSObject? instance) || (instance.Int32Handle != (int)(IntPtr)h && h.IsAllocated))
+                    if (
+                        !wr.TryGetTarget(out JSObject? instance)
+                        || (instance.Int32Handle != (int)(IntPtr)h && h.IsAllocated)
+                    )
                     {
                         throw new JSException(SR.Format(SR.MultipleHandlesPointingJsId, jsId));
                     }
@@ -112,7 +130,10 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 else if (h.Target is JSObject instance)
                 {
-                    _boundObjects.Add(jsId, new WeakReference<JSObject>(instance, trackResurrection: true));
+                    _boundObjects.Add(
+                        jsId,
+                        new WeakReference<JSObject>(instance, trackResurrection: true)
+                    );
                     obj = instance;
                 }
             }
@@ -145,7 +166,9 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             Interop.Runtime.ReleaseHandle(objToRelease.JSHandle, out int exception);
             if (exception != 0)
-                throw new JSException($"Error releasing handle on (js-obj js '{objToRelease.JSHandle}' mono '{objToRelease.Int32Handle} raw '{objToRelease.RawObject != null}' weak raw '{objToRelease.IsWeakWrapper}'   )");
+                throw new JSException(
+                    $"Error releasing handle on (js-obj js '{objToRelease.JSHandle}' mono '{objToRelease.Int32Handle} raw '{objToRelease.RawObject != null}' weak raw '{objToRelease.IsWeakWrapper}'   )"
+                );
 
             lock (_boundObjects)
             {
@@ -240,8 +263,7 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             GCHandle h = (GCHandle)(IntPtr)gcHandle;
 
-            return h.Target is JSObject js ?
-                js.GetWrappedObject() ?? h.Target : h.Target;
+            return h.Target is JSObject js ? js.GetWrappedObject() ?? h.Target : h.Target;
         }
 
         public static bool IsSimpleArray(object a)
@@ -264,7 +286,13 @@ namespace System.Runtime.InteropServices.JavaScript
             IntPtrAndHandle tmp = default(IntPtrAndHandle);
             tmp.ptr = methodHandle;
 
-            MethodBase? mb = objForRuntimeType == null ? MethodBase.GetMethodFromHandle(tmp.handle) : MethodBase.GetMethodFromHandle(tmp.handle, Type.GetTypeHandle(objForRuntimeType));
+            MethodBase? mb =
+                objForRuntimeType == null
+                    ? MethodBase.GetMethodFromHandle(tmp.handle)
+                    : MethodBase.GetMethodFromHandle(
+                          tmp.handle,
+                          Type.GetTypeHandle(objForRuntimeType)
+                      );
             if (mb == null)
                 return string.Empty;
 
@@ -389,8 +417,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// The reason for this restriction is to make this use of Reflection trim-compatible,
         /// ensuring that trimming doesn't change the application's behavior.
         /// </remarks>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Task<T>.Result is preserved by the ILLinker because _taskGetResultMethodInfo was initialized with it.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Task<T>.Result is preserved by the ILLinker because _taskGetResultMethodInfo was initialized with it."
+        )]
         private static MethodInfo? GetTaskResultMethodInfo(Type taskType)
         {
             MethodInfo? result = taskType.GetMethod(TaskGetResultName);
@@ -412,7 +443,9 @@ namespace System.Runtime.InteropServices.JavaScript
             if (dtv == null)
                 throw new ArgumentNullException(nameof(dtv));
             if (!(dtv is DateTime dt))
-                throw new InvalidCastException(SR.Format(SR.UnableCastObjectToType, dtv.GetType(), typeof(DateTime)));
+                throw new InvalidCastException(
+                    SR.Format(SR.UnableCastObjectToType, dtv.GetType(), typeof(DateTime))
+                );
             if (dt.Kind == DateTimeKind.Local)
                 dt = dt.ToUniversalTime();
             else if (dt.Kind == DateTimeKind.Unspecified)
@@ -458,7 +491,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
             }
 #if DEBUG_HANDLE
-            Debug.WriteLine($"\tSafeHandleAddRef: {safeHandle.DangerousGetHandle()} / RefCount: {((_anyref == null) ? 0 : _anyref.RefCount)}");
+            Debug.WriteLine(
+                $"\tSafeHandleAddRef: {safeHandle.DangerousGetHandle()} / RefCount: {((_anyref == null) ? 0 : _anyref.RefCount)}"
+            );
 #endif
             return _addRefSucceeded;
         }
@@ -471,7 +506,9 @@ namespace System.Runtime.InteropServices.JavaScript
             if (_anyref != null)
             {
                 _anyref.Release();
-                Debug.WriteLine($"\tSafeHandleRelease: {safeHandle.DangerousGetHandle()} / RefCount: {_anyref.RefCount}");
+                Debug.WriteLine(
+                    $"\tSafeHandleRelease: {safeHandle.DangerousGetHandle()} / RefCount: {_anyref.RefCount}"
+                );
             }
 #endif
         }
@@ -486,7 +523,10 @@ namespace System.Runtime.InteropServices.JavaScript
                 if (_boundObjects.TryGetValue(jsId, out WeakReference<JSObject>? reference))
                 {
                     reference.TryGetTarget(out JSObject? target);
-                    Debug.Assert(target != null, $"\tSafeHandleReleaseByHandle: did not find active target {jsId}");
+                    Debug.Assert(
+                        target != null,
+                        $"\tSafeHandleReleaseByHandle: did not find active target {jsId}"
+                    );
                     SafeHandleRelease(target);
                 }
                 else
@@ -499,11 +539,13 @@ namespace System.Runtime.InteropServices.JavaScript
         public static IntPtr SafeHandleGetHandle(SafeHandle safeHandle, bool addRef)
         {
 #if DEBUG_HANDLE
-            Debug.WriteLine($"SafeHandleGetHandle: {safeHandle.DangerousGetHandle()} / addRef {addRef}");
+            Debug.WriteLine(
+                $"SafeHandleGetHandle: {safeHandle.DangerousGetHandle()} / addRef {addRef}"
+            );
 #endif
-            if (addRef && !SafeHandleAddRef(safeHandle)) return IntPtr.Zero;
+            if (addRef && !SafeHandleAddRef(safeHandle))
+                return IntPtr.Zero;
             return safeHandle.DangerousGetHandle();
         }
-
     }
 }

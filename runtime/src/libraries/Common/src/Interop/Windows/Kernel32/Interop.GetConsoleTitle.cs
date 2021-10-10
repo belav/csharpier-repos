@@ -8,7 +8,12 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [DllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true)]
+        [DllImport(
+            Libraries.Kernel32,
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            ExactSpelling = true
+        )]
         internal static extern unsafe uint GetConsoleTitleW(char* title, uint nSize);
     }
 }

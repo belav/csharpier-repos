@@ -22,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Diagnostics.Internal
         public UnexpectedConnectionTypeEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
-            Type connectionType)
-            : base(eventDefinition, messageGenerator)
+            Type connectionType
+        ) : base(eventDefinition, messageGenerator)
         {
             ConnectionType = connectionType;
         }

@@ -30,7 +30,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             ParseAndValidate(text, null, errors);
         }
 
-        private SyntaxTree ParseAndValidate(string text, CSharpParseOptions options, params ErrorDescription[] errors)
+        private SyntaxTree ParseAndValidate(
+            string text,
+            CSharpParseOptions options,
+            params ErrorDescription[] errors
+        )
         {
             var parsedTree = ParseTree(text, options);
             var parsedText = parsedTree.GetCompilationUnitRoot();
@@ -57,46 +61,70 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void Error_StaticPartial()
         {
-            var test = @"
+            var test =
+                @"
 int
 
 static partial class C { }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1585, Line = 4, Column = 1 } //static must precede type
-                           );
+            ParseAndValidate(
+                test,
+                new ErrorDescription { Code = 1585, Line = 4, Column = 1 } //static must precede type
+            );
         }
 
         [WorkItem(529472, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529472")]
         [Fact(Skip = "529472")]
         public void CS1002ERR_SemicolonExpected()
         {
-            var test = @"
+            var test =
+                @"
 int a  
 Console.Goo
 ";
-            ParseAndValidate(test, TestOptions.Script,
-                new ErrorDescription[] {
-                    new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 6 },
-                    new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 3, Column = 12 }});
+            ParseAndValidate(
+                test,
+                TestOptions.Script,
+                new ErrorDescription[]
+                {
+                    new ErrorDescription
+                    {
+                        Code = (int)ErrorCode.ERR_SemicolonExpected,
+                        Line = 2,
+                        Column = 6
+                    },
+                    new ErrorDescription
+                    {
+                        Code = (int)ErrorCode.ERR_SemicolonExpected,
+                        Line = 3,
+                        Column = 12
+                    }
+                }
+            );
         }
 
         [Fact]
         public void Error_NewKeywordUsedAsOperator()
         {
-            var test = @"
+            var test =
+                @"
 new in
 ";
 
-            UsingTree(test).GetDiagnostics().Verify(
-                // (2,5): error CS1526: A new expression requires an argument list or (), [], or {} after type
-                // new in
-                Diagnostic(ErrorCode.ERR_BadNewExpr, "in").WithLocation(2, 5),
-                // (2,5): error CS1002: ; expected
-                // new in
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "in").WithLocation(2, 5),
-                // (2,5): error CS7017: Member definition, statement, or end-of-file expected
-                // new in
-                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "in").WithLocation(2, 5));
+            UsingTree(test)
+                .GetDiagnostics()
+                .Verify(
+                    // (2,5): error CS1526: A new expression requires an argument list or (), [], or {} after type
+                    // new in
+                    Diagnostic(ErrorCode.ERR_BadNewExpr, "in").WithLocation(2, 5),
+                    // (2,5): error CS1002: ; expected
+                    // new in
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "in").WithLocation(2, 5),
+                    // (2,5): error CS7017: Member definition, statement, or end-of-file expected
+                    // new in
+                    Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "in")
+                        .WithLocation(2, 5)
+                );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -130,10 +158,12 @@ new in
         [Fact]
         public void MethodDeclarationAndMethodCall()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 void bar() { }
 bar();
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -271,16 +301,26 @@ bar();
         [Fact]
         public void Constructor()
         {
-            var test = @"
+            var test =
+                @"
 Script() { }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 10 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 10
+                }
+            );
         }
 
         [Fact]
         public void StaticConstructor()
         {
-            var test = @"
+            var test =
+                @"
 static Script() { }
 ";
             ParseAndValidate(test, new ErrorDescription { Code = 1520, Line = 2, Column = 8 });
@@ -289,10 +329,19 @@ static Script() { }
         [Fact]
         public void Finalizer()
         {
-            var test = @"
+            var test =
+                @"
 ~Script() { }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 11 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 11
+                }
+            );
         }
 
         #endregion
@@ -501,9 +550,11 @@ static Script() { }
         [Fact]
         public void NewModifier_Method_ReturnsIdentifier()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new T Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -567,9 +618,11 @@ new T Goo();
         [Fact]
         public void NewModifier_Method_ReturnsPartial()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial Goo();
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -594,9 +647,11 @@ new partial Goo();
         [Fact]
         public void NewModifier_Method_ReturnsPartialArray()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial[] Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -634,9 +689,11 @@ new partial[] Goo();
         [Fact]
         public void NewModifier_Method_ReturnsPartialQualified()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial.partial Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -675,7 +732,10 @@ new partial.partial Goo();
             NewModifier_PartialMethod_ReturnsPredefined("bool", SyntaxKind.BoolKeyword);
         }
 
-        private void NewModifier_PartialMethod_ReturnsPredefined(string typeName, SyntaxKind keyword)
+        private void NewModifier_PartialMethod_ReturnsPredefined(
+            string typeName,
+            SyntaxKind keyword
+        )
         {
             var tree = UsingTree("new partial " + typeName + " Goo();");
 
@@ -704,9 +764,11 @@ new partial.partial Goo();
         [Fact]
         public void NewModifier_PartialMethod_ReturnsPartial()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial partial Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -733,9 +795,11 @@ new partial partial Goo();
         [Fact]
         public void NewModifier_PartialMethod_ReturnsPartialQualified()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial partial.partial partial();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -796,9 +860,11 @@ new partial partial.partial partial();
         [Fact]
         public void NewModifier_Indexer_ReturnsIdentifier()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new T this[int a] { get; }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -841,9 +907,11 @@ new T this[int a] { get; }
         [Fact]
         public void NewModifier_Indexer_ReturnsArray()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new T[] this[int a] { get; }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.IndexerDeclaration);
@@ -900,9 +968,11 @@ new T[] this[int a] { get; }
             // partial indexers are not allowed, but we should still parse it and report a semantic error
             // "Only methods, classes, structs, or interfaces may be partial"
 
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial partial this[int i] { get; }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -992,9 +1062,11 @@ new partial partial this[int i] { get; }
         [Fact]
         public void NewModifier_Class()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new class C { }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1012,9 +1084,11 @@ new class C { }
         [Fact]
         public void NewModifier_PartialClass()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial class C { }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1034,9 +1108,11 @@ new partial class C { }
         [Fact]
         public void NewModifier_ClassWithMisplacedModifiers1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial public class C { }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1056,9 +1132,11 @@ new partial public class C { }
         [Fact]
         public void NewModifier_ClassWithMisplacedModifiers2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new static partial public class C { }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1084,12 +1162,14 @@ new static partial public class C { }
         [Fact]
         public void Using()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 using Goo;
 using Goo.Bar;
 using Goo = Bar;
 using (var x = bar) { }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1180,9 +1260,11 @@ using (var x = bar) { }
         [Fact]
         public void Unsafe_Block()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 unsafe { }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1205,9 +1287,11 @@ unsafe { }
         [Fact]
         public void Unsafe_Field()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 unsafe int Goo;
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.FieldDeclaration);
@@ -1233,9 +1317,11 @@ unsafe int Goo;
         [Fact]
         public void Unsafe_Method()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 unsafe void Goo() { }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -1264,9 +1350,11 @@ unsafe void Goo() { }
         [Fact]
         public void Unsafe_Property()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 unsafe int Goo { get; }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.PropertyDeclaration);
@@ -1296,7 +1384,8 @@ unsafe int Goo { get; }
         [Fact]
         public void PointerDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 unsafe Idf * Idf;
 ";
             ParseAndValidate(test);
@@ -1309,10 +1398,12 @@ unsafe Idf * Idf;
         [Fact]
         public void Fixed()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 fixed (int* a = b) { }
 fixed int x[5];
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -1391,9 +1482,11 @@ fixed int x[5];
         [Fact]
         public void Delegate1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 delegate { }();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1428,9 +1521,11 @@ delegate { }();
         [Fact]
         public void Delegate2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 delegate(){ }();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1470,9 +1565,11 @@ delegate(){ }();
         [Fact]
         public void Delegate3()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 delegate void Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1502,9 +1599,11 @@ delegate void Goo();
         [Fact]
         public void Indexer1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 bool this[int index]{} 
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1541,9 +1640,11 @@ bool this[int index]{}
         [Fact]
         public void Indexer2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 public partial bool this[int index] {}
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1582,9 +1683,11 @@ public partial bool this[int index] {}
         [Fact]
         public void Indexer4()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new public bool this[int index] { get; }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1629,9 +1732,11 @@ new public bool this[int index] { get; }
         [Fact]
         public void Indexer5()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new public bool this[int index] { get; }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1677,34 +1782,44 @@ new public bool this[int index] { get; }
         public void Error_IndexerDefinition()
         {
             var test = @"string this ="""";";
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 new ErrorDescription { Code = 1001, Line = 1, Column = 13 },
                 new ErrorDescription { Code = 1003, Line = 1, Column = 13 },
                 new ErrorDescription { Code = 1003, Line = 1, Column = 17 },
                 new ErrorDescription { Code = 1514, Line = 1, Column = 17 },
-                new ErrorDescription { Code = 1513, Line = 1, Column = 17 });
+                new ErrorDescription { Code = 1513, Line = 1, Column = 17 }
+            );
 
-            CreateCompilation(test).VerifyDiagnostics(
-                // (1,13): error CS1003: Syntax error, '[' expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments("[", "=").WithLocation(1, 13),
-                // (1,13): error CS1001: Identifier expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 13),
-                // (1,17): error CS1003: Syntax error, ']' expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("]", "").WithLocation(1, 17),
-                // (1,17): error CS1514: { expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 17),
-                // (1,17): error CS1513: } expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 17),
-                // (1,8): error CS0548: '<invalid-global-code>.this': property or indexer must have at least one accessor
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this").WithArguments("<invalid-global-code>.this").WithLocation(1, 8),
-                // error CS1551: Indexers must have at least one parameter
-                Diagnostic(ErrorCode.ERR_IndexerNeedsParam).WithLocation(1, 1));
+            CreateCompilation(test)
+                .VerifyDiagnostics(
+                    // (1,13): error CS1003: Syntax error, '[' expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "=")
+                        .WithArguments("[", "=")
+                        .WithLocation(1, 13),
+                    // (1,13): error CS1001: Identifier expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 13),
+                    // (1,17): error CS1003: Syntax error, ']' expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "")
+                        .WithArguments("]", "")
+                        .WithLocation(1, 17),
+                    // (1,17): error CS1514: { expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 17),
+                    // (1,17): error CS1513: } expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 17),
+                    // (1,8): error CS0548: '<invalid-global-code>.this': property or indexer must have at least one accessor
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
+                        .WithArguments("<invalid-global-code>.this")
+                        .WithLocation(1, 8),
+                    // error CS1551: Indexers must have at least one parameter
+                    Diagnostic(ErrorCode.ERR_IndexerNeedsParam).WithLocation(1, 1)
+                );
         }
 
         #endregion
@@ -1714,12 +1829,14 @@ new public bool this[int index] { get; }
         [Fact]
         public void ExternAlias()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 extern alias Goo;
 extern alias Goo();
 extern alias Goo { get; }
 extern alias Goo<T> { get; }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1794,21 +1911,35 @@ extern alias Goo<T> { get; }
         [Fact]
         public void Delegate()
         {
-            var test = @"
+            var test =
+                @"
 delegate { }
 delegate() { }
 delegate void Goo();
 delegate void MyDel(int i);
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 13 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 3, Column = 15 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 13
+                },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 3,
+                    Column = 15
+                }
+            );
         }
 
         [Fact]
         public void ExternAliasAmbiguity()
         {
-            var test = @"
+            var test =
+                @"
 extern alias Goo;
 extern alias Goo();
 extern alias Goo { get; }
@@ -1820,7 +1951,8 @@ extern alias Goo<T> { get; }
         [Fact]
         public void ExternOrdering_Statement()
         {
-            var test = @"
+            var test =
+                @"
 using(var x = 1) { }
 extern alias Goo;
 ";
@@ -1830,7 +1962,8 @@ extern alias Goo;
         [Fact]
         public void ExternOrdering_Method()
         {
-            var test = @"
+            var test =
+                @"
 extern void goo();
 extern alias Goo;
 ";
@@ -1840,7 +1973,8 @@ extern alias Goo;
         [Fact]
         public void ExternOrdering_Field()
         {
-            var test = @"
+            var test =
+                @"
 int a = 1;
 extern alias Goo;
 ";
@@ -1850,7 +1984,8 @@ extern alias Goo;
         [Fact]
         public void ExternOrdering_Property()
         {
-            var test = @"
+            var test =
+                @"
 extern alias Goo { get; }
 extern alias Goo;
 ";
@@ -1861,7 +1996,8 @@ extern alias Goo;
         [Fact]
         public void UsingOrdering_Statement()
         {
-            var test = @"
+            var test =
+                @"
 using(var x = 1) { }
 using Goo;
 ";
@@ -1871,7 +2007,8 @@ using Goo;
         [Fact]
         public void UsingOrdering_Member()
         {
-            var test = @"
+            var test =
+                @"
 void goo() { }
 using Goo;
 ";
@@ -1885,9 +2022,11 @@ using Goo;
         [Fact]
         public void PartialMethod()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 partial void Goo();
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -1907,7 +2046,8 @@ partial void Goo();
                 }
                 N(SyntaxKind.EndOfFileToken);
             }
-            var test = @"
+            var test =
+                @"
 new public bool this[int index] 
  {
      get { return true; }
@@ -1920,7 +2060,8 @@ new public bool this[int index]
         [Fact]
         public void PartialMethodDefinition()
         {
-            var test = @"
+            var test =
+                @"
  partial void Goo();
 ";
             ParseAndValidate(test);
@@ -1930,7 +2071,8 @@ new public bool this[int index]
         [Fact]
         public void UsingNewModifierWithPartialMethodDefinition()
         {
-            var test = @"
+            var test =
+                @"
 new partial void Goo();
 ";
             ParseAndValidate(test);
@@ -1939,7 +2081,8 @@ new partial void Goo();
         [Fact]
         public void ImplementingDeclarationOfPartialMethod()
         {
-            var test = @"
+            var test =
+                @"
 partial void Goo(){};
 ";
             ParseAndValidate(test, new ErrorDescription { Code = 1597, Line = 2, Column = 21 });
@@ -1948,22 +2091,26 @@ partial void Goo(){};
         [Fact]
         public void EnumDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 partial enum en {};
 ";
-            CreateCompilation(test).VerifyDiagnostics(
-                // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // partial enum en {};
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1),
-                // (2,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // partial enum en {};
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "en").WithLocation(2, 14));
+            CreateCompilation(test)
+                .VerifyDiagnostics(
+                    // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // partial enum en {};
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1),
+                    // (2,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // partial enum en {};
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "en").WithLocation(2, 14)
+                );
         }
 
         [Fact]
         public void UsingPartial()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 partial = partial;
 
 partial partial;
@@ -1978,7 +2125,8 @@ partial Goo() { }
 partial partial Goo() { } 
 partial partial[] Goo() { } 
 partial partial<int> Goo() { } 
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2242,7 +2390,8 @@ partial partial<int> Goo() { }
         [Fact]
         public void Attributes()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 [assembly: Goo]
 [module: Bar]
 [Goo]
@@ -2257,7 +2406,8 @@ struct C { }
 enum C { }
 [Baz]
 delegate D();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2447,13 +2597,15 @@ delegate D();
         [Fact]
         public void Fields()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 int x;
 volatile int x;
 readonly int x;
 static int x;
 fixed int x[10];
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2565,7 +2717,19 @@ fixed int x[10];
 
             // pointer decl
             test = @"a.b * c";
-            ParseAndValidate(test, TestOptions.Regular9, new[] { new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 1, Column = 8 } }); // expected ';'
+            ParseAndValidate(
+                test,
+                TestOptions.Regular9,
+                new[]
+                {
+                    new ErrorDescription
+                    {
+                        Code = (int)ErrorCode.ERR_SemicolonExpected,
+                        Line = 1,
+                        Column = 8
+                    }
+                }
+            ); // expected ';'
 
             // multiplication
             test = @"a.b * c;";
@@ -2724,7 +2888,7 @@ fixed int x[10];
 
         // field decls:
         // T ? idf;
-        // T ? idf, ... 
+        // T ? idf, ...
         // T ? idf = <expr>, ...
         // T ? idf = <expr>;
 
@@ -2736,8 +2900,8 @@ fixed int x[10];
         // method decls:
         // T ? idf() where ...
         // T ? idf() { ...
-        // T ? idf(T idf ...            
-        // T ? idf.idf(T idf ...            
+        // T ? idf(T idf ...
+        // T ? idf.idf(T idf ...
         // T ? idf<Ts>(T idf ...
         // T ? idf<Ts>.idf<Ts>. ...(T idf ...
         // T ? idf([Attr]T idf ...
@@ -2758,15 +2922,15 @@ fixed int x[10];
         // T ? idf<Ts>
         // T ? idf<Ts>.
         // T ? idf<Ts>. ... (
-        // T ? idf(                
-        // T ? idf(a               
+        // T ? idf(
+        // T ? idf(a
         // T ? idf(a)
         // T ? idf(this
         // T ? idf(this = ...
-        // T ? idf(this[ ... 
-        // T ? idf(this. ... 
-        // T ? idf(this< ... 
-        // T ? idf(this( ... 
+        // T ? idf(this[ ...
+        // T ? idf(this. ...
+        // T ? idf(this< ...
+        // T ? idf(this( ...
         // T ? idf(ref a)
         // T ? idf()
         // T ? idf();              // method without body must be abstract, which is probably not what user intended to write in interactive
@@ -7184,9 +7348,11 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression52()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? f(a ? b : c)
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7326,9 +7492,11 @@ T ? f(a ? b : c)
         [Fact]
         public void Ternary_WithQuery_FieldDecl1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T? from;
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.FieldDeclaration);
@@ -7357,9 +7525,11 @@ T? from;
         [Fact]
         public void Ternary_WithQuery_Expression1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? from
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7394,9 +7564,11 @@ T ? from
         [Fact]
         public void Ternary_WithQuery_Expression2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? from x
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7455,9 +7627,11 @@ T ? from x
         [Fact]
         public void Ternary_WithQuery_Expression3()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? f(from
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7510,9 +7684,11 @@ T ? f(from
         [Fact]
         public void Ternary_WithQuery_Expression4()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? f(from x
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8315,10 +8491,12 @@ T ? f(from x
         [Fact]
         public void GlobalStatementSeparators_Comma2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 a < b,
 void goo() { }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8366,10 +8544,12 @@ void goo() { }
         [Fact]
         public void GlobalStatementSeparators_ClosingParen()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 a < b)
 void goo() { }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8417,10 +8597,12 @@ void goo() { }
         [Fact]
         public void GlobalStatementSeparators_ClosingBracket()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 a < b]
 void goo() { }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8468,10 +8650,12 @@ void goo() { }
         [Fact]
         public void GlobalStatementSeparators_ClosingBrace()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 a < b}
 void goo() { }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8520,34 +8704,63 @@ void goo() { }
         [Fact]
         public void GlobalStatementSeparators_NonAsciiCharacter()
         {
-            var test = @"
+            var test =
+                @"
 H �oz
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 3 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_UnexpectedCharacter, Line = 2, Column = 3 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 3
+                },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_UnexpectedCharacter,
+                    Line = 2,
+                    Column = 3
+                }
+            );
         }
 
         [Fact]
         public void GlobalStatementSeparators_UnicodeCharacter()
         {
-            var test = @"
+            var test =
+                @"
 int नुसौप्रख्यातनिदेशकपुरानी 
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 29 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 29
+                }
+            );
         }
 
         [Fact]
         public void GlobalStatementSeparators_Missing()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 int a
 Console.Goo()
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 3, Column = 6 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 3,
+                    Column = 6
+                }
+            );
         }
 
         #endregion
@@ -8558,36 +8771,57 @@ Console.Goo()
         public void OperatorError()
         {
             var test = @"operator";
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
                 new ErrorDescription { Code = 1031, Line = 1, Column = 9 },
                 new ErrorDescription { Code = 1003, Line = 1, Column = 1 },
                 new ErrorDescription { Code = 1026, Line = 1, Column = 9 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 1, Column = 9 });
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 1,
+                    Column = 9
+                }
+            );
         }
 
         [Fact]
         public void OperatorImplicitError()
         {
             var test = @"implicit";
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
                 new ErrorDescription { Code = 1031, Line = 1, Column = 9 },
                 new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
                 new ErrorDescription { Code = 1026, Line = 1, Column = 9 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 1, Column = 9 });
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 1,
+                    Column = 9
+                }
+            );
         }
 
         [Fact]
         public void OperatorExplicitError()
         {
             var test = @"explicit";
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
                 new ErrorDescription { Code = 1031, Line = 1, Column = 9 },
                 new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
                 new ErrorDescription { Code = 1026, Line = 1, Column = 9 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 1, Column = 9 });
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 1,
+                    Column = 9
+                }
+            );
         }
 
         #endregion
@@ -8595,7 +8829,8 @@ Console.Goo()
         [Fact]
         public void FieldDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 volatile int x;
 const int w;
 readonly int y;
@@ -8608,7 +8843,8 @@ static int z;
         [Fact]
         public void ClassDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 class C { }
 static class C2 { }
 partial class C3 { }
@@ -8620,7 +8856,8 @@ partial class C3 { }
         [Fact]
         public void InterfaceDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 interface IC { }
 ";
             ParseAndValidate(test);
@@ -8629,39 +8866,63 @@ interface IC { }
         [Fact]
         public void TopLevelXML()
         {
-            var test = @"
+            var test =
+                @"
 <Expects Status=success></Expects>
 ";
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 new ErrorDescription { Code = 1525, Line = 2, Column = 1 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 10 },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 10
+                },
                 new ErrorDescription { Code = 1525, Line = 2, Column = 25 },
                 new ErrorDescription { Code = 1525, Line = 2, Column = 26 },
-                new ErrorDescription { Code = 1733, Line = 2, Column = 35 });
+                new ErrorDescription { Code = 1733, Line = 2, Column = 35 }
+            );
         }
 
         [Fact]
         public void NotIncorrectKeyword()
         {
-            var test = @"
+            var test =
+                @"
 parial class Test
 {
 }
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 8 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 8
+                }
+            );
         }
 
         [Fact]
         public void Keyword()
         {
-            var test = @"
+            var test =
+                @"
 p class A
  {
  }
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 3 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 3
+                }
+            );
         }
 
         [WorkItem(528532, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528532")]
@@ -8672,7 +8933,10 @@ p class A
             var tree = SyntaxFactory.ParseSyntaxTree(test, options: TestOptions.Script);
 
             Assert.Equal(1, tree.GetCompilationUnitRoot().ChildNodes().Count());
-            Assert.Equal(SyntaxKind.GlobalStatement, tree.GetCompilationUnitRoot().ChildNodes().ToList()[0].Kind());
+            Assert.Equal(
+                SyntaxKind.GlobalStatement,
+                tree.GetCompilationUnitRoot().ChildNodes().ToList()[0].Kind()
+            );
         }
 
         [WorkItem(541164, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541164")]
@@ -8681,10 +8945,12 @@ p class A
         {
             var test = @"Console.WriteLine(""Hello"")?";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 new ErrorDescription { Code = 1733, Line = 1, Column = 28 },
                 new ErrorDescription { Code = 1003, Line = 1, Column = 28 },
-                new ErrorDescription { Code = 1733, Line = 1, Column = 28 });
+                new ErrorDescription { Code = 1733, Line = 1, Column = 28 }
+            );
         }
 
         #region Shebang
@@ -8719,8 +8985,10 @@ p class A
             TestShebang(root.GetDirectives().Single(), command);
 
             tree = ParseAndValidate(
-$@"#!{command}
-Console.WriteLine(""Hi!"");", TestOptions.Script);
+                $@"#!{command}
+Console.WriteLine(""Hi!"");",
+                TestOptions.Script
+            );
             root = tree.GetCompilationUnitRoot();
 
             var statement = root.ChildNodes().Single();
@@ -8734,34 +9002,90 @@ Console.WriteLine(""Hi!"");", TestOptions.Script);
         [Fact]
         public void ShebangNotFirstCharacter()
         {
-            ParseAndValidate(" #!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 1, Column = 2 });
+            ParseAndValidate(
+                " #!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 1,
+                    Column = 2
+                }
+            );
 
-            ParseAndValidate("\n#!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 2, Column = 1 });
+            ParseAndValidate(
+                "\n#!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 2,
+                    Column = 1
+                }
+            );
 
-            ParseAndValidate("\r\n#!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 2, Column = 1 });
+            ParseAndValidate(
+                "\r\n#!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 2,
+                    Column = 1
+                }
+            );
 
-            ParseAndValidate("#!/bin/sh\r\n#!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 2, Column = 1 });
+            ParseAndValidate(
+                "#!/bin/sh\r\n#!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 2,
+                    Column = 1
+                }
+            );
 
-            ParseAndValidate("a #!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadDirectivePlacement, Line = 1, Column = 3 });
+            ParseAndValidate(
+                "a #!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadDirectivePlacement,
+                    Line = 1,
+                    Column = 3
+                }
+            );
         }
 
         [Fact]
         public void ShebangNoBang()
         {
-            ParseAndValidate("#/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 1, Column = 1 });
+            ParseAndValidate(
+                "#/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 1,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
         public void ShebangSpaceBang()
         {
-            ParseAndValidate("# !/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 1, Column = 1 });
+            ParseAndValidate(
+                "# !/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 1,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
@@ -8773,14 +9097,25 @@ Console.WriteLine(""Hi!"");", TestOptions.Script);
             Assert.Empty(root.ChildNodes());
             var eof = root.EndOfFileToken;
             Assert.Equal(SyntaxKind.EndOfFileToken, eof.Kind());
-            Assert.Equal(SyntaxKind.SingleLineCommentTrivia, eof.GetLeadingTrivia().Single().Kind());
+            Assert.Equal(
+                SyntaxKind.SingleLineCommentTrivia,
+                eof.GetLeadingTrivia().Single().Kind()
+            );
         }
 
         [Fact]
         public void ShebangNotInScript()
         {
-            ParseAndValidate("#!/usr/bin/env csi", TestOptions.Regular,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 1, Column = 1 });
+            ParseAndValidate(
+                "#!/usr/bin/env csi",
+                TestOptions.Regular,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 1,
+                    Column = 1
+                }
+            );
         }
 
         private void TestShebang(SyntaxTrivia trivia, string expectedSkippedText)
@@ -8804,7 +9139,6 @@ Console.WriteLine(""Hi!"");", TestOptions.Script);
             Assert.Equal(SyntaxKind.PreprocessingMessageTrivia, skippedText.Kind());
             Assert.Equal(expectedSkippedText, skippedText.ToString());
         }
-
         #endregion
     }
 }

@@ -31,11 +31,9 @@ namespace System.Reflection.Emit
 
         public override int GetHashCode() => m_label;
 
-        public override bool Equals(object? obj) =>
-            obj is Label other && Equals(other);
+        public override bool Equals(object? obj) => obj is Label other && Equals(other);
 
-        public bool Equals(Label obj) =>
-            obj.m_label == m_label;
+        public bool Equals(Label obj) => obj.m_label == m_label;
 
         public static bool operator ==(Label a, Label b) => a.Equals(b);
 

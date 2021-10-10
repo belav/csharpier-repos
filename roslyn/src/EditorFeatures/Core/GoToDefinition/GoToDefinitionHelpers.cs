@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             ISymbol symbol,
             Solution solution,
             bool thirdPartyNavigationAllowed,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var alias = symbol as IAliasSymbol;
             if (alias != null)
@@ -42,7 +43,10 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             if (alias != null)
             {
                 var sourceLocations = NavigableItemFactory.GetPreferredSourceLocations(
-                    solution, symbol, cancellationToken);
+                    solution,
+                    symbol,
+                    cancellationToken
+                );
 
                 if (sourceLocations.All(l => solution.GetDocument(l.SourceTree) == null))
                 {
@@ -50,7 +54,12 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 }
             }
 
-            var definition = SymbolFinder.FindSourceDefinitionAsync(symbol, solution, cancellationToken).WaitAndGetResult(cancellationToken);
+            var definition = SymbolFinder.FindSourceDefinitionAsync(
+                    symbol,
+                    solution,
+                    cancellationToken
+                )
+                .WaitAndGetResult(cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
 
             symbol = definition ?? symbol;
@@ -62,7 +71,9 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 symbol = method.PartialImplementationPart ?? symbol;
             }
 
-            using var definitionsDisposer = ArrayBuilder<DefinitionItem>.GetInstance(out var definitions);
+            using var definitionsDisposer = ArrayBuilder<DefinitionItem>.GetInstance(
+                out var definitions
+            );
 
             // Going to a symbol may end up actually showing the symbol in the Find-Usages window.
             // This happens when there is more than one location for the symbol (i.e. for partial
@@ -75,20 +86,28 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             //
             // Passing along the classified information is valuable for OOP scenarios where we want
             // all that expensive computation done on the OOP side and not in the VS side.
-            // 
+            //
             // However, Go To Definition is all in-process, and is also synchronous.  So we do not
-            // want to fetch the classifications here.  It slows down the command and leads to a 
+            // want to fetch the classifications here.  It slows down the command and leads to a
             // measurable delay in our perf tests.
-            // 
+            //
             // So, if we only have a single location to go to, this does no unnecessary work.  And,
             // if we do have multiple locations to show, it will just be done in the BG, unblocking
             // this command thread so it can return the user faster.
-            var definitionItem = symbol.ToNonClassifiedDefinitionItem(solution, includeHiddenLocations: true);
+            var definitionItem = symbol.ToNonClassifiedDefinitionItem(
+                solution,
+                includeHiddenLocations: true
+            );
 
             if (thirdPartyNavigationAllowed)
             {
-                var factory = solution.Workspace.Services.GetService<IDefinitionsAndReferencesFactory>();
-                var thirdPartyItem = factory?.GetThirdPartyDefinitionItem(solution, definitionItem, cancellationToken);
+                var factory =
+                    solution.Workspace.Services.GetService<IDefinitionsAndReferencesFactory>();
+                var thirdPartyItem = factory?.GetThirdPartyDefinitionItem(
+                    solution,
+                    definitionItem,
+                    cancellationToken
+                );
                 definitions.AddIfNotNull(thirdPartyItem);
             }
 
@@ -102,16 +121,31 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter,
             CancellationToken cancellationToken,
-            bool thirdPartyNavigationAllowed = true)
+            bool thirdPartyNavigationAllowed = true
+        )
         {
-            var definitions = GetDefinitions(symbol, solution, thirdPartyNavigationAllowed, cancellationToken);
+            var definitions = GetDefinitions(
+                symbol,
+                solution,
+                thirdPartyNavigationAllowed,
+                cancellationToken
+            );
 
-            var title = string.Format(EditorFeaturesResources._0_declarations,
-                FindUsagesHelpers.GetDisplayName(symbol));
+            var title = string.Format(
+                EditorFeaturesResources._0_declarations,
+                FindUsagesHelpers.GetDisplayName(symbol)
+            );
 
             return threadingContext.JoinableTaskFactory.Run(
-                () => streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                    threadingContext, solution.Workspace, title, definitions, cancellationToken));
+                () =>
+                    streamingPresenter.TryNavigateToOrPresentItemsAsync(
+                        threadingContext,
+                        solution.Workspace,
+                        title,
+                        definitions,
+                        cancellationToken
+                    )
+            );
         }
 
         public static bool TryGoToDefinition(
@@ -120,14 +154,22 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             string title,
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (definitions.IsDefaultOrEmpty)
                 return false;
 
-            return threadingContext.JoinableTaskFactory.Run(() =>
-                streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                    threadingContext, solution.Workspace, title, definitions, cancellationToken));
+            return threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    streamingPresenter.TryNavigateToOrPresentItemsAsync(
+                        threadingContext,
+                        solution.Workspace,
+                        title,
+                        definitions,
+                        cancellationToken
+                    )
+            );
         }
     }
 }

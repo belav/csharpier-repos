@@ -91,6 +91,7 @@ namespace System.Data.Tests
                 Assert.Equal(-1, _args.OldIndex);
                 Assert.Equal(4, dv.Count);
             }
+
             finally
             {
                 ib.ListChanged -= new ListChangedEventHandler(OnListChanged);
@@ -120,7 +121,6 @@ namespace System.Data.Tests
                 Assert.True(ib.IsSorted);
                 Assert.NotNull(ib.SortProperty);
                 Assert.Equal(ListSortDirection.Descending, ib.SortDirection);
-
 
                 _args = null;
                 dv.Sort = null;
@@ -158,6 +158,7 @@ namespace System.Data.Tests
                 Assert.Equal("[id] DESC", dv.Sort);
                 _args = null;
             }
+
             finally
             {
                 ib.ListChanged -= new ListChangedEventHandler(OnListChanged);
@@ -184,6 +185,7 @@ namespace System.Data.Tests
                 index = ib.Find(pd, 44);
                 Assert.Equal(-1, index);
             }
+
             finally
             {
                 ib.ListChanged -= new ListChangedEventHandler(OnListChanged);

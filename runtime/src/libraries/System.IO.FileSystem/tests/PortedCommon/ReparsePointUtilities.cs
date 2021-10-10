@@ -20,12 +20,34 @@ using System.Threading;
 using System.Threading.Tasks;
 public static class MountHelper
 {
-    [DllImport("kernel32.dll", EntryPoint = "GetVolumeNameForVolumeMountPointW", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
-    private static extern bool GetVolumeNameForVolumeMountPoint(string volumeName, StringBuilder uniqueVolumeName, int uniqueNameBufferCapacity);
+    [DllImport(
+        "kernel32.dll",
+        EntryPoint = "GetVolumeNameForVolumeMountPointW",
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false,
+        SetLastError = true
+    )]
+    private static extern bool GetVolumeNameForVolumeMountPoint(
+        string volumeName,
+        StringBuilder uniqueVolumeName,
+        int uniqueNameBufferCapacity
+    );
     // unique volume name must be "\\?\Volume{GUID}\"
-    [DllImport("kernel32.dll", EntryPoint = "SetVolumeMountPointW", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
+    [DllImport(
+        "kernel32.dll",
+        EntryPoint = "SetVolumeMountPointW",
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false,
+        SetLastError = true
+    )]
     private static extern bool SetVolumeMountPoint(string mountPoint, string uniqueVolumeName);
-    [DllImport("kernel32.dll", EntryPoint = "DeleteVolumeMountPointW", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
+    [DllImport(
+        "kernel32.dll",
+        EntryPoint = "DeleteVolumeMountPointW",
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false,
+        SetLastError = true
+    )]
     private static extern bool DeleteVolumeMountPoint(string mountPoint);
 
     /// <summary>Creates a symbolic link using command line tools</summary>
@@ -37,12 +59,21 @@ public static class MountHelper
         if (OperatingSystem.IsWindows())
         {
             symLinkProcess.StartInfo.FileName = "cmd";
-            symLinkProcess.StartInfo.Arguments = string.Format("/c mklink{0} \"{1}\" \"{2}\"", isDirectory ? " /D" : "", linkPath, targetPath);
+            symLinkProcess.StartInfo.Arguments = string.Format(
+                "/c mklink{0} \"{1}\" \"{2}\"",
+                isDirectory ? " /D" : "",
+                linkPath,
+                targetPath
+            );
         }
         else
         {
             symLinkProcess.StartInfo.FileName = "/bin/ln";
-            symLinkProcess.StartInfo.Arguments = string.Format("-s \"{0}\" \"{1}\"", targetPath, linkPath);
+            symLinkProcess.StartInfo.Arguments = string.Format(
+                "-s \"{0}\" \"{1}\"",
+                targetPath,
+                linkPath
+            );
         }
         symLinkProcess.StartInfo.UseShellExecute = false;
         symLinkProcess.StartInfo.RedirectStandardOutput = true;
@@ -61,7 +92,6 @@ public static class MountHelper
 
     public static void Mount(string volumeName, string mountPoint)
     {
-
         if (volumeName[volumeName.Length - 1] != Path.DirectorySeparatorChar)
             volumeName += Path.DirectorySeparatorChar;
         if (mountPoint[mountPoint.Length - 1] != Path.DirectorySeparatorChar)
@@ -94,19 +124,18 @@ public static class MountHelper
     }
 
     /// For standalone debugging help. Change Main0 to Main
-     public static void Main0(string[] args)
+    public static void Main0(string[] args)
     {
-         try
+        try
         {
-            if (args[0]=="-m")
+            if (args[0] == "-m")
                 Mount(args[1], args[2]);
-            if (args[0]=="-u")
+            if (args[0] == "-u")
                 Unmount(args[1]);
-         }
+        }
         catch (Exception ex)
         {
-             Console.WriteLine(ex);
+            Console.WriteLine(ex);
         }
     }
-
 }

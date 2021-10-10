@@ -28,40 +28,69 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         // corresponds to the name of the property in the project file (for example LangVersion), whereas the configuration
         // property name comes from an interface such as CSharpProjectConfigurationProperties3 (for example LanguageVersion).
 
-        public static ProjectPropertyStorage Create(Project project, IServiceProvider serviceProvider)
+        public static ProjectPropertyStorage Create(
+            Project project,
+            IServiceProvider serviceProvider
+        )
         {
             var solution = (IVsSolution)serviceProvider.GetService(typeof(SVsSolution));
             solution.GetProjectOfUniqueName(project.UniqueName, out var hierarchy);
 
             return hierarchy.IsCapabilityMatch("CPS")
-                ? new BuildPropertyStorage((IVsBuildPropertyStorage)hierarchy)
-                : new PerConfigurationPropertyStorage(project.ConfigurationManager) as ProjectPropertyStorage;
+              ? new BuildPropertyStorage((IVsBuildPropertyStorage)hierarchy)
+              : new PerConfigurationPropertyStorage(project.ConfigurationManager)
+                as ProjectPropertyStorage;
         }
 
-        public abstract void SetProperty(string buildPropertyName, string configurationPropertyName, string value);
+        public abstract void SetProperty(
+            string buildPropertyName,
+            string configurationPropertyName,
+            string value
+        );
 
-        public void SetProperty(string buildPropertyName, string configurationPropertyName, bool value)
-            => SetProperty(buildPropertyName, configurationPropertyName, value.ToString(CultureInfo.InvariantCulture).ToLowerInvariant());
+        public void SetProperty(
+            string buildPropertyName,
+            string configurationPropertyName,
+            bool value
+        ) =>
+            SetProperty(
+                buildPropertyName,
+                configurationPropertyName,
+                value.ToString(CultureInfo.InvariantCulture).ToLowerInvariant()
+            );
 
         private sealed class BuildPropertyStorage : ProjectPropertyStorage
         {
             private readonly IVsBuildPropertyStorage _propertyStorage;
 
-            public BuildPropertyStorage(IVsBuildPropertyStorage propertyStorage)
-                => this._propertyStorage = propertyStorage;
+            public BuildPropertyStorage(IVsBuildPropertyStorage propertyStorage) =>
+                this._propertyStorage = propertyStorage;
 
-            public override void SetProperty(string buildPropertyName, string configurationPropertyName, string value)
-                => _propertyStorage.SetPropertyValue(buildPropertyName, null, (uint)_PersistStorageType.PST_PROJECT_FILE, value);
+            public override void SetProperty(
+                string buildPropertyName,
+                string configurationPropertyName,
+                string value
+            ) =>
+                _propertyStorage.SetPropertyValue(
+                    buildPropertyName,
+                    null,
+                    (uint)_PersistStorageType.PST_PROJECT_FILE,
+                    value
+                );
         }
 
         private sealed class PerConfigurationPropertyStorage : ProjectPropertyStorage
         {
             private readonly ConfigurationManager _configurationManager;
 
-            public PerConfigurationPropertyStorage(ConfigurationManager configurationManager)
-                => this._configurationManager = configurationManager;
+            public PerConfigurationPropertyStorage(ConfigurationManager configurationManager) =>
+                this._configurationManager = configurationManager;
 
-            public override void SetProperty(string buildPropertyName, string configurationPropertyName, string value)
+            public override void SetProperty(
+                string buildPropertyName,
+                string configurationPropertyName,
+                string value
+            )
             {
                 foreach (Configuration configuration in _configurationManager)
                 {

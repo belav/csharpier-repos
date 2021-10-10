@@ -15,10 +15,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
             var sourceDocument = TestRazorSourceDocument.Create();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -37,20 +34,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
             var sourceDocument = TestRazorSourceDocument.Create();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
             var irDocument = new DocumentIntermediateNode()
             {
-                Options = RazorCodeGenerationOptions.Create(o =>
-                {
-                    o.SuppressMetadataAttributes = true;
-                }),
+                Options = RazorCodeGenerationOptions.Create(
+                    o =>
+                    {
+                        o.SuppressMetadataAttributes = true;
+                    }
+                ),
             };
 
             // Act
@@ -65,10 +61,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
             var sourceDocument = TestRazorSourceDocument.Create();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -76,10 +69,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             var irDocument = new DocumentIntermediateNode()
             {
                 DocumentKind = ComponentDocumentClassifierPass.ComponentDocumentKind,
-                Options = RazorCodeGenerationOptions.Create(o =>
-                {
-                    o.SuppressMetadataAttributes = true;
-                }),
+                Options = RazorCodeGenerationOptions.Create(
+                    o =>
+                    {
+                        o.SuppressMetadataAttributes = true;
+                    }
+                ),
             };
 
             // Act
@@ -94,10 +89,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
             var sourceDocument = TestRazorSourceDocument.Create();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -138,10 +130,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
             var sourceDocument = TestRazorSourceDocument.Create();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -182,10 +171,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
             var sourceDocument = TestRazorSourceDocument.Create();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -223,12 +209,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
-            var sourceDocument = TestRazorSourceDocument.Create("", new RazorSourceDocumentProperties(null, null));
+            var sourceDocument = TestRazorSourceDocument.Create(
+                "",
+                new RazorSourceDocumentProperties(null, null)
+            );
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
             var irDocument = new DocumentIntermediateNode()
@@ -268,12 +254,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
-            var sourceDocument = TestRazorSourceDocument.Create("", new RazorSourceDocumentProperties(null, "Foo\\Bar.cshtml"));
+            var sourceDocument = TestRazorSourceDocument.Create(
+                "",
+                new RazorSourceDocumentProperties(null, "Foo\\Bar.cshtml")
+            );
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
             var irDocument = new DocumentIntermediateNode()
@@ -307,13 +293,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             Assert.Equal(2, irDocument.Children.Count);
 
-            var item = Assert.IsType<RazorCompiledItemAttributeIntermediateNode>(irDocument.Children[0]);
+            var item = Assert.IsType<RazorCompiledItemAttributeIntermediateNode>(
+                irDocument.Children[0]
+            );
             Assert.Equal("/Foo/Bar.cshtml", item.Identifier);
             Assert.Equal("test", item.Kind);
             Assert.Equal("Some.Namespace.Test", item.TypeName);
 
             Assert.Equal(2, @namespace.Children.Count);
-            var checksum = Assert.IsType<RazorSourceChecksumAttributeIntermediateNode>(@namespace.Children[0]);
+            var checksum = Assert.IsType<RazorSourceChecksumAttributeIntermediateNode>(
+                @namespace.Children[0]
+            );
             Assert.NotNull(checksum.Checksum); // Not verifying the checksum here
             Assert.Equal("SHA1", checksum.ChecksumAlgorithm);
             Assert.Equal("/Foo/Bar.cshtml", checksum.Identifier);
@@ -324,13 +314,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
-            var sourceDocument = TestRazorSourceDocument.Create("", new RazorSourceDocumentProperties(null, "Foo\\Bar.cshtml"));
-            var import = TestRazorSourceDocument.Create("@using System", new RazorSourceDocumentProperties(null, "Foo\\Import.cshtml"));
+            var sourceDocument = TestRazorSourceDocument.Create(
+                "",
+                new RazorSourceDocumentProperties(null, "Foo\\Bar.cshtml")
+            );
+            var import = TestRazorSourceDocument.Create(
+                "@using System",
+                new RazorSourceDocumentProperties(null, "Foo\\Import.cshtml")
+            );
             var codeDocument = RazorCodeDocument.Create(sourceDocument, new[] { import, });
 
             var irDocument = new DocumentIntermediateNode()
@@ -364,18 +357,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             Assert.Equal(2, irDocument.Children.Count);
 
-            var item = Assert.IsType<RazorCompiledItemAttributeIntermediateNode>(irDocument.Children[0]);
+            var item = Assert.IsType<RazorCompiledItemAttributeIntermediateNode>(
+                irDocument.Children[0]
+            );
             Assert.Equal("/Foo/Bar.cshtml", item.Identifier);
             Assert.Equal("test", item.Kind);
             Assert.Equal("Some.Namespace.Test", item.TypeName);
 
             Assert.Equal(3, @namespace.Children.Count);
-            var checksum = Assert.IsType<RazorSourceChecksumAttributeIntermediateNode>(@namespace.Children[0]);
+            var checksum = Assert.IsType<RazorSourceChecksumAttributeIntermediateNode>(
+                @namespace.Children[0]
+            );
             Assert.NotNull(checksum.Checksum); // Not verifying the checksum here
             Assert.Equal("SHA1", checksum.ChecksumAlgorithm);
             Assert.Equal("/Foo/Bar.cshtml", checksum.Identifier);
 
-            checksum = Assert.IsType<RazorSourceChecksumAttributeIntermediateNode>(@namespace.Children[1]);
+            checksum = Assert.IsType<RazorSourceChecksumAttributeIntermediateNode>(
+                @namespace.Children[1]
+            );
             Assert.NotNull(checksum.Checksum); // Not verifying the checksum here
             Assert.Equal("SHA1", checksum.ChecksumAlgorithm);
             Assert.Equal("/Foo/Import.cshtml", checksum.Identifier);
@@ -386,19 +385,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         {
             // Arrange
             var engine = CreateEngine();
-            var pass = new MetadataAttributePass()
-            {
-                Engine = engine,
-            };
+            var pass = new MetadataAttributePass() { Engine = engine, };
 
-            var sourceDocument = TestRazorSourceDocument.Create("", new RazorSourceDocumentProperties(null, "Foo\\Bar.cshtml"));
-            var import = TestRazorSourceDocument.Create("@using System", new RazorSourceDocumentProperties(null, "Foo\\Import.cshtml"));
+            var sourceDocument = TestRazorSourceDocument.Create(
+                "",
+                new RazorSourceDocumentProperties(null, "Foo\\Bar.cshtml")
+            );
+            var import = TestRazorSourceDocument.Create(
+                "@using System",
+                new RazorSourceDocumentProperties(null, "Foo\\Import.cshtml")
+            );
             var codeDocument = RazorCodeDocument.Create(sourceDocument, new[] { import, });
 
             var irDocument = new DocumentIntermediateNode()
             {
                 DocumentKind = "test",
-                Options = RazorCodeGenerationOptions.Create(o => o.SuppressMetadataSourceChecksumAttributes = true),
+                Options = RazorCodeGenerationOptions.Create(
+                    o => o.SuppressMetadataSourceChecksumAttributes = true
+                ),
             };
             var builder = IntermediateNodeBuilder.Create(irDocument);
             var @namespace = new NamespaceDeclarationIntermediateNode
@@ -426,7 +430,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             Assert.Equal(2, irDocument.Children.Count);
 
-            var item = Assert.IsType<RazorCompiledItemAttributeIntermediateNode>(irDocument.Children[0]);
+            var item = Assert.IsType<RazorCompiledItemAttributeIntermediateNode>(
+                irDocument.Children[0]
+            );
             Assert.Equal("/Foo/Bar.cshtml", item.Identifier);
             Assert.Equal("test", item.Kind);
             Assert.Equal("Some.Namespace.Test", item.TypeName);
@@ -437,10 +443,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
         private static RazorEngine CreateEngine()
         {
-            return RazorProjectEngine.Create(b =>
-            {
-                b.Features.Add(new DefaultMetadataIdentifierFeature());
-            }).Engine;
+            return RazorProjectEngine.Create(
+                b =>
+                {
+                    b.Features.Add(new DefaultMetadataIdentifierFeature());
+                }
+            ).Engine;
         }
     }
 }

@@ -21,9 +21,15 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         /// and we want to restore the value back to its original state when the user does the
         /// next FindReferences call.
         /// </summary>
-        public static readonly Option<int> DefinitionGroupingPriority = new(
-            nameof(FindUsagesOptions), nameof(DefinitionGroupingPriority), defaultValue: -1,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(DefinitionGroupingPriority)));
+        public static readonly Option<int> DefinitionGroupingPriority =
+            new(
+                nameof(FindUsagesOptions),
+                nameof(DefinitionGroupingPriority),
+                defaultValue: -1,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(DefinitionGroupingPriority)
+                )
+            );
     }
 
     [ExportOptionProvider, Shared]
@@ -31,11 +37,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FindUsagesOptionsProvider()
-        {
-        }
+        public FindUsagesOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            FindUsagesOptions.DefinitionGroupingPriority);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(FindUsagesOptions.DefinitionGroupingPriority);
     }
 }

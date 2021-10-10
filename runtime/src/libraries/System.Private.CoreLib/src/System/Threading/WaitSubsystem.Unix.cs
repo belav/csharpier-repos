@@ -129,6 +129,7 @@ namespace System.Threading
                 safeWaitHandle = new SafeWaitHandle(handle, ownsHandle: true);
                 return safeWaitHandle;
             }
+
             finally
             {
                 if (safeWaitHandle == null)
@@ -161,7 +162,13 @@ namespace System.Threading
             // by the thread. See <see cref="ThreadWaitInfo.LockedMutexesHead"/>. So, acquire the lock only after all
             // possibilities for exceptions have been exhausted.
             ThreadWaitInfo waitInfo = Thread.CurrentThread.WaitInfo;
-            bool acquiredLock = waitableObject.Wait(waitInfo, timeoutMilliseconds: 0, interruptible: false, prioritize: false) == 0;
+            bool acquiredLock =
+                waitableObject.Wait(
+                    waitInfo,
+                    timeoutMilliseconds: 0,
+                    interruptible: false,
+                    prioritize: false
+                ) == 0;
             Debug.Assert(acquiredLock);
             return safeWaitHandle;
         }
@@ -185,6 +192,7 @@ namespace System.Threading
             {
                 waitableObject.SignalEvent();
             }
+
             finally
             {
                 s_lock.Release();
@@ -205,6 +213,7 @@ namespace System.Threading
             {
                 waitableObject.UnsignalEvent();
             }
+
             finally
             {
                 s_lock.Release();
@@ -227,6 +236,7 @@ namespace System.Threading
             {
                 return waitableObject.SignalSemaphore(count);
             }
+
             finally
             {
                 s_lock.Release();
@@ -247,6 +257,7 @@ namespace System.Threading
             {
                 waitableObject.SignalMutex();
             }
+
             finally
             {
                 s_lock.Release();
@@ -263,18 +274,21 @@ namespace System.Threading
             WaitableObject waitableObject,
             int timeoutMilliseconds,
             bool interruptible = true,
-            bool prioritize = false)
+            bool prioritize = false
+        )
         {
             Debug.Assert(waitableObject != null);
             Debug.Assert(timeoutMilliseconds >= -1);
 
-            return waitableObject.Wait(Thread.CurrentThread.WaitInfo, timeoutMilliseconds, interruptible, prioritize);
+            return waitableObject.Wait(
+                Thread.CurrentThread.WaitInfo,
+                timeoutMilliseconds,
+                interruptible,
+                prioritize
+            );
         }
 
-        public static int Wait(
-            Span<IntPtr> waitHandles,
-            bool waitForAll,
-            int timeoutMilliseconds)
+        public static int Wait(Span<IntPtr> waitHandles, bool waitForAll, int timeoutMilliseconds)
         {
             Debug.Assert(waitHandles != null);
             Debug.Assert(waitHandles.Length > 0);
@@ -309,6 +323,7 @@ namespace System.Threading
                 }
                 success = true;
             }
+
             finally
             {
                 if (!success)
@@ -324,33 +339,38 @@ namespace System.Threading
             {
                 WaitableObject waitableObject = waitableObjects[0]!;
                 waitableObjects[0] = null;
-                return
-                    waitableObject.Wait(waitInfo, timeoutMilliseconds, interruptible: true, prioritize : false);
-            }
-
-            return
-                WaitableObject.Wait(
-                    waitableObjects,
-                    waitHandles.Length,
-                    waitForAll,
+                return waitableObject.Wait(
                     waitInfo,
                     timeoutMilliseconds,
                     interruptible: true,
-                    prioritize: false);
+                    prioritize: false
+                );
+            }
+
+            return WaitableObject.Wait(
+                waitableObjects,
+                waitHandles.Length,
+                waitForAll,
+                waitInfo,
+                timeoutMilliseconds,
+                interruptible: true,
+                prioritize: false
+            );
         }
 
         public static int SignalAndWait(
             IntPtr handleToSignal,
             IntPtr handleToWaitOn,
-            int timeoutMilliseconds)
+            int timeoutMilliseconds
+        )
         {
             Debug.Assert(timeoutMilliseconds >= -1);
 
-            return
-                SignalAndWait(
-                    HandleManager.FromHandle(handleToSignal),
-                    HandleManager.FromHandle(handleToWaitOn),
-                    timeoutMilliseconds);
+            return SignalAndWait(
+                HandleManager.FromHandle(handleToSignal),
+                HandleManager.FromHandle(handleToWaitOn),
+                timeoutMilliseconds
+            );
         }
 
         public static int SignalAndWait(
@@ -358,7 +378,8 @@ namespace System.Threading
             WaitableObject waitableObjectToWaitOn,
             int timeoutMilliseconds,
             bool interruptible = true,
-            bool prioritize = false)
+            bool prioritize = false
+        )
         {
             Debug.Assert(waitableObjectToSignal != null);
             Debug.Assert(waitableObjectToWaitOn != null);
@@ -384,8 +405,14 @@ namespace System.Threading
                     throw new InvalidOperationException(SR.Threading_WaitHandleTooManyPosts, ex);
                 }
                 waitCalled = true;
-                return waitableObjectToWaitOn.Wait_Locked(waitInfo, timeoutMilliseconds, interruptible, prioritize);
+                return waitableObjectToWaitOn.Wait_Locked(
+                    waitInfo,
+                    timeoutMilliseconds,
+                    interruptible,
+                    prioritize
+                );
             }
+
             finally
             {
                 // Once the wait function is called, it will release the lock
@@ -419,6 +446,7 @@ namespace System.Threading
             {
                 thread.WaitInfo.TrySignalToInterruptWaitOrRecordPendingInterrupt();
             }
+
             finally
             {
                 s_lock.Release();

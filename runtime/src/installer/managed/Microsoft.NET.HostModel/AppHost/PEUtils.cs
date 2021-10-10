@@ -50,12 +50,16 @@ namespace Microsoft.NET.HostModel.AppHost
 
                 // https://en.wikipedia.org/wiki/Portable_Executable
                 // Validate that we're looking at Windows PE file
-                if (((ushort*)bytes)[0] != PEFileSignature || accessor.Capacity < PEHeaderPointerOffset + sizeof(uint))
+                if (
+                    ((ushort*)bytes)[0] != PEFileSignature
+                    || accessor.Capacity < PEHeaderPointerOffset + sizeof(uint)
+                )
                 {
                     return false;
                 }
                 return true;
             }
+
             finally
             {
                 if (pointer != null)
@@ -83,7 +87,9 @@ namespace Microsoft.NET.HostModel.AppHost
         /// This method will attempt to set the subsystem to GUI. The apphost file should be a windows PE file.
         /// </summary>
         /// <param name="accessor">The memory accessor which has the apphost file opened.</param>
-        internal static unsafe void SetWindowsGraphicalUserInterfaceBit(MemoryMappedViewAccessor accessor)
+        internal static unsafe void SetWindowsGraphicalUserInterfaceBit(
+            MemoryMappedViewAccessor accessor
+        )
         {
             byte* pointer = null;
 
@@ -112,6 +118,7 @@ namespace Microsoft.NET.HostModel.AppHost
                 // Set the subsystem to GUI
                 subsystem[0] = WindowsGUISubsystem;
             }
+
             finally
             {
                 if (pointer != null)
@@ -136,7 +143,9 @@ namespace Microsoft.NET.HostModel.AppHost
         /// This method will return the subsystem CUI/GUI value. The apphost file should be a windows PE file.
         /// </summary>
         /// <param name="accessor">The memory accessor which has the apphost file opened.</param>
-        internal static unsafe ushort GetWindowsGraphicalUserInterfaceBit(MemoryMappedViewAccessor accessor)
+        internal static unsafe ushort GetWindowsGraphicalUserInterfaceBit(
+            MemoryMappedViewAccessor accessor
+        )
         {
             byte* pointer = null;
 
@@ -157,6 +166,7 @@ namespace Microsoft.NET.HostModel.AppHost
 
                 return subsystem[0];
             }
+
             finally
             {
                 if (pointer != null)

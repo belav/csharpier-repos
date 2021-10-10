@@ -15,9 +15,8 @@ namespace System.Data.Common
         private SqlString[] _values = default!; // Late-initialized
 
         public SqlStringStorage(DataColumn column)
-        : base(column, typeof(SqlString), SqlString.Null, SqlString.Null, StorageType.SqlString)
-        {
-        }
+            : base(column, typeof(SqlString), SqlString.Null, SqlString.Null, StorageType.SqlString)
+        { }
 
         public override object Aggregate(int[] recordNos, AggregateType kind)
         {
@@ -49,7 +48,6 @@ namespace System.Data.Common
                             return Get(min);
                         }
                         return _nullValue;
-
 
                     case AggregateType.Max:
                         int max = -1;
@@ -194,7 +192,12 @@ namespace System.Data.Common
             return new SqlString[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             SqlString[] typedStore = (SqlString[])store;
             typedStore[storeIndex] = _values[record];

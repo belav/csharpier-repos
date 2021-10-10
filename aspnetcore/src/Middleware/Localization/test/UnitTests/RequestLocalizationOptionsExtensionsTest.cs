@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Localization
         {
             // Arrange
             var options = new RequestLocalizationOptions();
-            var provider = new CustomRequestCultureProvider(context => Task.FromResult(new ProviderCultureResult("ar-YE")));
+            var provider = new CustomRequestCultureProvider(
+                context => Task.FromResult(new ProviderCultureResult("ar-YE"))
+            );
 
             // Act
             options.AddInitialRequestCultureProvider(provider);

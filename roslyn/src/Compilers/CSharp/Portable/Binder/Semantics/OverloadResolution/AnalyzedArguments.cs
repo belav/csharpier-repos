@@ -96,7 +96,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var argument = Arguments[i];
 
                     // By-ref dynamic arguments don't make the invocation dynamic.
-                    if ((object)argument.Type != null && argument.Type.IsDynamic() && (!hasRefKinds || RefKinds[i] == Microsoft.CodeAnalysis.RefKind.None))
+                    if (
+                        (object)argument.Type != null
+                        && argument.Type.IsDynamic()
+                        && (!hasRefKinds || RefKinds[i] == Microsoft.CodeAnalysis.RefKind.None)
+                    )
                     {
                         _lazyHasDynamicArgument = ThreeState.True;
                         return true;
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static AnalyzedArguments GetInstance(
             ImmutableArray<BoundExpression> arguments,
             ImmutableArray<RefKind> argumentRefKindsOpt,
-            ImmutableArray<IdentifierNameSyntax> argumentNamesOpt)
+            ImmutableArray<IdentifierNameSyntax> argumentNamesOpt
+        )
         {
             var instance = GetInstance();
             instance.Arguments.AddRange(arguments);
@@ -178,7 +183,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             pool = new ObjectPool<AnalyzedArguments>(() => new AnalyzedArguments(), 10);
             return pool;
         }
-
         #endregion
     }
 }

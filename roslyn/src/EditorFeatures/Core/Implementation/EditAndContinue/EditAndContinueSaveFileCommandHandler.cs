@@ -21,17 +21,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
     [Export(typeof(VSCommanding.ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.EditAndContinueFileSave)]
-    internal sealed class EditAndContinueSaveFileCommandHandler : IChainedCommandHandler<SaveCommandArgs>
+    internal sealed class EditAndContinueSaveFileCommandHandler
+        : IChainedCommandHandler<SaveCommandArgs>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditAndContinueSaveFileCommandHandler()
-        {
-        }
+        public EditAndContinueSaveFileCommandHandler() { }
 
         public string DisplayName => PredefinedCommandHandlerNames.EditAndContinueFileSave;
 
-        void IChainedCommandHandler<SaveCommandArgs>.ExecuteCommand(SaveCommandArgs args, Action nextCommandHandler, CommandExecutionContext executionContext)
+        void IChainedCommandHandler<SaveCommandArgs>.ExecuteCommand(
+            SaveCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        )
         {
             var textContainer = args.SubjectBuffer.AsTextContainer();
 
@@ -46,7 +49,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                         var proxy = new RemoteEditAndContinueServiceProxy(workspace);
 
                         // fire and forget
-                        _ = Task.Run(() => proxy.OnSourceFileUpdatedAsync(currentDocument, CancellationToken.None)).ReportNonFatalErrorAsync();
+                        _ = Task.Run(
+                                () =>
+                                    proxy.OnSourceFileUpdatedAsync(
+                                        currentDocument,
+                                        CancellationToken.None
+                                    )
+                            )
+                            .ReportNonFatalErrorAsync();
                     }
                 }
             }
@@ -54,8 +64,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
             nextCommandHandler();
         }
 
-        public VSCommanding.CommandState GetCommandState(SaveCommandArgs args, Func<VSCommanding.CommandState> nextCommandHandler)
-            => nextCommandHandler();
+        public VSCommanding.CommandState GetCommandState(
+            SaveCommandArgs args,
+            Func<VSCommanding.CommandState> nextCommandHandler
+        ) => nextCommandHandler();
     }
 }
 

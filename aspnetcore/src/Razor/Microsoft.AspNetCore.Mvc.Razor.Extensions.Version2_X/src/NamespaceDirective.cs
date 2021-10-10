@@ -21,10 +21,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             {
                 builder.AddNamespaceToken(
                     Resources.NamespaceDirective_NamespaceToken_Name,
-                    Resources.NamespaceDirective_NamespaceToken_Description);
+                    Resources.NamespaceDirective_NamespaceToken_Description
+                );
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
                 builder.Description = Resources.NamespaceDirective_Description;
-            });
+            }
+        );
 
         public static void Register(RazorProjectEngineBuilder builder)
         {
@@ -40,10 +42,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         // internal for testing
         internal class Pass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
         {
-            protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+            protected override void ExecuteCore(
+                RazorCodeDocument codeDocument,
+                DocumentIntermediateNode documentNode
+            )
             {
-                if (documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind &&
-                    documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind)
+                if (
+                    documentNode.DocumentKind
+                        != RazorPageDocumentClassifierPass.RazorPageDocumentKind
+                    && documentNode.DocumentKind
+                        != MvcViewDocumentClassifierPass.MvcViewDocumentKind
+                )
                 {
                     // Not a page. Skip.
                     return;
@@ -95,8 +104,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             }
 
             // We're specifically using OrdinalIgnoreCase here because Razor treats all paths as case-insensitive.
-            if (!source.StartsWith(directiveSource, StringComparison.OrdinalIgnoreCase) ||
-                source.Length <= directiveSource.Length)
+            if (
+                !source.StartsWith(directiveSource, StringComparison.OrdinalIgnoreCase)
+                || source.Length <= directiveSource.Length
+            )
             {
                 // The imports are not from the directory hierarchy, can't compute a suffix.
                 return baseNamespace;
@@ -128,7 +139,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         // both 'view engine' style paths and absolute paths.
         //
         // We also don't normalize the separators here. We expect that all documents are using a consistent style of path.
-        // 
+        //
         // If we can't normalize the path, we just return null so it will be ignored.
         private static string NormalizeDirectory(string path)
         {
@@ -156,7 +167,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             // We want the last one, so get them all and then .
             public DirectiveIntermediateNode LastNamespaceDirective { get; private set; }
 
-            public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
+            public override void VisitNamespaceDeclaration(
+                NamespaceDeclarationIntermediateNode node
+            )
             {
                 if (FirstNamespace == null)
                 {

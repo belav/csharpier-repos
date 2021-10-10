@@ -36,10 +36,11 @@ namespace Newtonsoft.Json.TestConsole
     {
         public static void Main(string[] args)
         {
-            var attribute = (AssemblyFileVersionAttribute)typeof(JsonConvert).GetTypeInfo().Assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute));
+            var attribute = (AssemblyFileVersionAttribute)typeof(JsonConvert).GetTypeInfo()
+                .Assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute));
             Console.WriteLine("Json.NET Version: " + attribute.Version);
 
-            new BenchmarkSwitcher(new [] { typeof(LowLevelBenchmarks) }).Run(new[] { "*" });
+            new BenchmarkSwitcher(new[] { typeof(LowLevelBenchmarks) }).Run(new[] { "*" });
         }
     }
 }

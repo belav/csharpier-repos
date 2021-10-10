@@ -11,7 +11,9 @@ namespace System.Configuration
         public void GetValidatorInstance_DefaultConstructorThrows()
         {
             var testCallBackValidatorAttribute = new CallbackValidatorAttribute();
-            Assert.Throws<ArgumentNullException>(() => testCallBackValidatorAttribute.ValidatorInstance);
+            Assert.Throws<ArgumentNullException>(
+                () => testCallBackValidatorAttribute.ValidatorInstance
+            );
         }
 
         [Fact]
@@ -21,7 +23,9 @@ namespace System.Configuration
             {
                 Type = typeof(double)
             };
-            Assert.Throws<ArgumentException>(() => testCallBackValidatorAttribute.ValidatorInstance);
+            Assert.Throws<ArgumentException>(
+                () => testCallBackValidatorAttribute.ValidatorInstance
+            );
         }
 
         [Fact]
@@ -32,7 +36,9 @@ namespace System.Configuration
                 Type = typeof(double),
                 CallbackMethodName = "Test"
             };
-            Assert.Throws<ArgumentException>(() => testCallBackValidatorAttribute.ValidatorInstance);
+            Assert.Throws<ArgumentException>(
+                () => testCallBackValidatorAttribute.ValidatorInstance
+            );
         }
 
         [Fact]
@@ -68,7 +74,9 @@ namespace System.Configuration
                 Type = typeof(CallBackValidatorAttributeTests),
                 CallbackMethodName = "CallBackValidatorTestMethodNumberTwo"
             };
-            Assert.Throws<ArgumentException>(() => testCallBackValidatorAttribute.ValidatorInstance);
+            Assert.Throws<ArgumentException>(
+                () => testCallBackValidatorAttribute.ValidatorInstance
+            );
         }
 
         [Fact]
@@ -92,13 +100,9 @@ namespace System.Configuration
         }
 
 #pragma warning disable xUnit1013 // Required to be public for CallbackValidatorAttribute to work
-        public static void CallBackValidatorTestMethod(object o)
-        {
-        }
+        public static void CallBackValidatorTestMethod(object o) { }
 
-        public static void CallBackValidatorTestMethodNumberTwo(object o, object p)
-        {
-        }
+        public static void CallBackValidatorTestMethodNumberTwo(object o, object p) { }
 #pragma warning restore xUnit1013
     }
 }

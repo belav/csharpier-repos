@@ -29,7 +29,10 @@ unsafe partial class GenericsNative
     public static extern Point2<double> AddPoint2Ds(Point2<double>* pValues, int count);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Point2<double> AddPoint2Ds([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<double>[] pValues, int count);
+    public static extern Point2<double> AddPoint2Ds(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<double>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Point2<double> AddPoint2Ds(in Point2<double> pValues, int count);
@@ -56,7 +59,10 @@ unsafe partial class GenericsTest
         Assert.AreEqual(value4->e00, 1.0);
         Assert.AreEqual(value4->e01, 2.0);
 
-        ref readonly GenericsNative.Point2<double> value5 = ref GenericsNative.GetPoint2DRef(1.0, 2.0);
+        ref readonly GenericsNative.Point2<double> value5 = ref GenericsNative.GetPoint2DRef(
+            1.0,
+            2.0
+        );
         Assert.AreEqual(value5.e00, 1.0);
         Assert.AreEqual(value5.e01, 2.0);
 
@@ -64,7 +70,8 @@ unsafe partial class GenericsTest
         Assert.AreEqual(result.e00, 2.0);
         Assert.AreEqual(result.e01, 4.0);
 
-        GenericsNative.Point2<double>[] values = new GenericsNative.Point2<double>[] {
+        GenericsNative.Point2<double>[] values = new GenericsNative.Point2<double>[]
+        {
             value,
             value2,
             value3,
@@ -74,7 +81,10 @@ unsafe partial class GenericsTest
 
         fixed (GenericsNative.Point2<double>* pValues = &values[0])
         {
-            GenericsNative.Point2<double> result2 = GenericsNative.AddPoint2Ds(pValues, values.Length);
+            GenericsNative.Point2<double> result2 = GenericsNative.AddPoint2Ds(
+                pValues,
+                values.Length
+            );
             Assert.AreEqual(result2.e00, 5.0);
             Assert.AreEqual(result2.e01, 10.0);
         }
@@ -83,7 +93,10 @@ unsafe partial class GenericsTest
         Assert.AreEqual(result3.e00, 5.0);
         Assert.AreEqual(result3.e01, 10.0);
 
-        GenericsNative.Point2<double> result4 = GenericsNative.AddPoint2Ds(in values[0], values.Length);
+        GenericsNative.Point2<double> result4 = GenericsNative.AddPoint2Ds(
+            in values[0],
+            values.Length
+        );
         Assert.AreEqual(result4.e00, 5.0);
         Assert.AreEqual(result4.e01, 10.0);
     }

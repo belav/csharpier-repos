@@ -21,13 +21,15 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         [ConditionalFact]
         public void CreateContext_gets_service_without_AddDbContext()
         {
-            CreateOperations(typeof(TestProgramWithoutAddDbContext)).CreateContext(typeof(TestContext).FullName);
+            CreateOperations(typeof(TestProgramWithoutAddDbContext))
+                .CreateContext(typeof(TestContext).FullName);
         }
 
         [ConditionalFact]
         public void CreateContext_gets_service_when_context_factory_used()
         {
-            CreateOperations(typeof(TestProgramWithContextFactory)).CreateContext(typeof(TestContextFromFactory).FullName);
+            CreateOperations(typeof(TestProgramWithContextFactory))
+                .CreateContext(typeof(TestContextFromFactory).FullName);
         }
 
         [ConditionalFact]
@@ -41,31 +43,42 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 assembly,
                 assembly,
                 args: null,
-                new TestAppServiceProviderFactory(assembly));
+                new TestAppServiceProviderFactory(assembly)
+            );
         }
 
         [ConditionalFact]
         public void CreateContext_uses_exact_factory_method()
         {
-            var assembly = MockAssembly.Create(typeof(BaseContext), typeof(DerivedContext), typeof(HierarchyContextFactory));
+            var assembly = MockAssembly.Create(
+                typeof(BaseContext),
+                typeof(DerivedContext),
+                typeof(HierarchyContextFactory)
+            );
             var operations = new TestDbContextOperations(
                 new TestOperationReporter(),
                 assembly,
                 assembly,
                 args: Array.Empty<string>(),
-                new TestAppServiceProviderFactory(assembly));
+                new TestAppServiceProviderFactory(assembly)
+            );
 
-            var baseContext = Assert.IsType<BaseContext>(operations.CreateContext(nameof(BaseContext)));
+            var baseContext = Assert.IsType<BaseContext>(
+                operations.CreateContext(nameof(BaseContext))
+            );
             Assert.Equal(nameof(BaseContext), baseContext.FactoryUsed);
 
-            var derivedContext = Assert.IsType<DerivedContext>(operations.CreateContext(nameof(DerivedContext)));
+            var derivedContext = Assert.IsType<DerivedContext>(
+                operations.CreateContext(nameof(DerivedContext))
+            );
             Assert.Equal(nameof(DerivedContext), derivedContext.FactoryUsed);
         }
 
         [ConditionalFact]
         public void GetContextInfo_returns_correct_info()
         {
-            var info = CreateOperations(typeof(TestProgramRelational)).GetContextInfo(nameof(TestContext));
+            var info = CreateOperations(typeof(TestProgramRelational))
+                .GetContextInfo(nameof(TestContext));
 
             Assert.Equal("Test", info.DatabaseName);
             Assert.Equal(@"(localdb)\mssqllocaldb", info.DataSource);
@@ -86,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 expected = e;
             }
 
-            var info = CreateOperations(typeof(TestProgramRelationalBad)).GetContextInfo(nameof(TestContext));
+            var info = CreateOperations(typeof(TestProgramRelationalBad))
+                .GetContextInfo(nameof(TestContext));
 
             Assert.Equal(DesignStrings.BadConnection(expected.Message), info.DatabaseName);
             Assert.Equal(DesignStrings.BadConnection(expected.Message), info.DataSource);
@@ -107,43 +121,52 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
         private static class TestProgram
         {
-            private static TestWebHost BuildWebHost(string[] args)
-                => CreateWebHost(b => b.UseInMemoryDatabase("In-memory test database"));
+            private static TestWebHost BuildWebHost(string[] args) =>
+                CreateWebHost(b => b.UseInMemoryDatabase("In-memory test database"));
         }
 
         private static class TestProgramWithoutAddDbContext
         {
-            private static TestWebHost BuildWebHost(string[] args)
-                => new(
-                    new ServiceCollection()
-                        .AddSingleton(
+            private static TestWebHost BuildWebHost(string[] args) =>
+                new(
+                    new ServiceCollection().AddSingleton(
                             new TestContext(
-                                new DbContextOptionsBuilder<TestContext>()
-                                    .UseInMemoryDatabase("In-memory test database")
-                                    .EnableServiceProviderCaching(false)
-                                    .Options))
-                        .BuildServiceProvider());
+                                new DbContextOptionsBuilder<TestContext>().UseInMemoryDatabase(
+                                        "In-memory test database"
+                                    )
+                                    .EnableServiceProviderCaching(false).Options
+                            )
+                        )
+                        .BuildServiceProvider()
+                );
         }
 
         private static class TestProgramWithContextFactory
         {
-            private static TestWebHost BuildWebHost(string[] args)
-                => new(
-                    new ServiceCollection()
-                        .AddDbContextFactory<TestContextFromFactory>(b => b.UseInMemoryDatabase("In-memory test database"))
-                        .BuildServiceProvider());
+            private static TestWebHost BuildWebHost(string[] args) =>
+                new(
+                    new ServiceCollection().AddDbContextFactory<TestContextFromFactory>(
+                            b => b.UseInMemoryDatabase("In-memory test database")
+                        )
+                        .BuildServiceProvider()
+                );
         }
 
         private static class TestProgramRelational
         {
-            private static TestWebHost BuildWebHost(string[] args)
-                => CreateWebHost(b => b.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0"));
+            private static TestWebHost BuildWebHost(string[] args) =>
+                CreateWebHost(
+                    b =>
+                        b.UseSqlServer(
+                            @"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0"
+                        )
+                );
         }
 
         private static class TestProgramRelationalBad
         {
-            private static TestWebHost BuildWebHost(string[] args)
-                => CreateWebHost(b => b.UseSqlServer(@"Cake=None"));
+            private static TestWebHost BuildWebHost(string[] args) =>
+                CreateWebHost(b => b.UseSqlServer(@"Cake=None"));
         }
 
         private static TestDbContextOperations CreateOperations(Type testProgramType)
@@ -153,17 +176,20 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 new TestOperationReporter(),
                 assembly,
                 assembly,
-                /* args: */ Array.Empty<string>(),
-                new TestAppServiceProviderFactory(assembly));
+                /* args: */Array.Empty<string>(),
+                new TestAppServiceProviderFactory(assembly)
+            );
         }
 
-        private static TestWebHost CreateWebHost(Func<DbContextOptionsBuilder, DbContextOptionsBuilder> configureProvider)
-            => new(
-                new ServiceCollection()
-                    .AddDbContext<TestContext>(
-                        b =>
-                            configureProvider(b.EnableServiceProviderCaching(false)))
-                    .BuildServiceProvider());
+        private static TestWebHost CreateWebHost(
+            Func<DbContextOptionsBuilder, DbContextOptionsBuilder> configureProvider
+        ) =>
+            new(
+                new ServiceCollection().AddDbContext<TestContext>(
+                        b => configureProvider(b.EnableServiceProviderCaching(false))
+                    )
+                    .BuildServiceProvider()
+            );
 
         private class TestContext : DbContext
         {
@@ -172,10 +198,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 throw new Exception("This isn't the constructor you're looking for.");
             }
 
-            public TestContext(DbContextOptions<TestContext> options)
-                : base(options)
-            {
-            }
+            public TestContext(DbContextOptions<TestContext> options) : base(options) { }
         }
 
         private class TestContextFromFactory : DbContext
@@ -186,9 +209,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
 
             public TestContextFromFactory(DbContextOptions<TestContextFromFactory> options)
-                : base(options)
-            {
-            }
+                : base(options) { }
         }
 
         private class BaseContext : DbContext
@@ -198,27 +219,27 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 FactoryUsed = factoryUsed;
             }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder options)
-                => options.UseInMemoryDatabase(GetType().Name);
+            protected override void OnConfiguring(DbContextOptionsBuilder options) =>
+                options.UseInMemoryDatabase(GetType().Name);
 
             public string FactoryUsed { get; }
         }
 
         private class DerivedContext : BaseContext
         {
-            public DerivedContext(string factoryUsed)
-                : base(factoryUsed)
-            {
-            }
+            public DerivedContext(string factoryUsed) : base(factoryUsed) { }
         }
 
-        private class HierarchyContextFactory : IDesignTimeDbContextFactory<BaseContext>, IDesignTimeDbContextFactory<DerivedContext>
+        private class HierarchyContextFactory
+            : IDesignTimeDbContextFactory<BaseContext>,
+              IDesignTimeDbContextFactory<DerivedContext>
         {
-            BaseContext IDesignTimeDbContextFactory<BaseContext>.CreateDbContext(string[] args)
-                => new(nameof(BaseContext));
+            BaseContext IDesignTimeDbContextFactory<BaseContext>.CreateDbContext(string[] args) =>
+                new(nameof(BaseContext));
 
-            DerivedContext IDesignTimeDbContextFactory<DerivedContext>.CreateDbContext(string[] args)
-                => new(nameof(DerivedContext));
+            DerivedContext IDesignTimeDbContextFactory<DerivedContext>.CreateDbContext(
+                string[] args
+            ) => new(nameof(DerivedContext));
         }
     }
 }

@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Metadata
         /// <summary>
         ///     The list of unique constraints defined on the table.
         /// </summary>
-        public virtual IList<DatabaseUniqueConstraint> UniqueConstraints { get; } = new List<DatabaseUniqueConstraint>();
+        public virtual IList<DatabaseUniqueConstraint> UniqueConstraints { get; } =
+            new List<DatabaseUniqueConstraint>();
 
         /// <summary>
         ///     The list of indexes defined on the table.
@@ -54,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Metadata
         /// <summary>
         ///     The list of foreign key constraints defined on the table.
         /// </summary>
-        public virtual IList<DatabaseForeignKey> ForeignKeys { get; } = new List<DatabaseForeignKey>();
+        public virtual IList<DatabaseForeignKey> ForeignKeys { get; } =
+            new List<DatabaseForeignKey>();
 
         /// <inheritdoc />
         public override string ToString()

@@ -24,9 +24,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
         private readonly SignatureHelpItem _signatureHelpItem;
 
-        public Signature(ITrackingSpan applicableToSpan, SignatureHelpItem signatureHelpItem, int selectedParameterIndex)
+        public Signature(
+            ITrackingSpan applicableToSpan,
+            SignatureHelpItem signatureHelpItem,
+            int selectedParameterIndex
+        )
         {
-            if (selectedParameterIndex < -1 || selectedParameterIndex >= signatureHelpItem.Parameters.Length)
+            if (
+                selectedParameterIndex < -1
+                || selectedParameterIndex >= signatureHelpItem.Parameters.Length
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(selectedParameterIndex));
             }
@@ -69,7 +76,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             get
             {
                 EnsureInitialized();
-                return _parameterIndex >= 0 && _parameters != null ? _parameters[_parameterIndex] : null;
+                return _parameterIndex >= 0 && _parameters != null
+                  ? _parameters[_parameterIndex]
+                  : null;
             }
         }
 
@@ -88,16 +97,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         // (once created the CurrentParameter property cannot change)
         public event EventHandler<CurrentParameterChangedEventArgs> CurrentParameterChanged
         {
-            add
-            {
-            }
-            remove
-            {
-            }
+            add { }
+            remove { }
         }
 
         private IList<TaggedText> _prettyPrintedDisplayParts;
-        internal IList<TaggedText> PrettyPrintedDisplayParts => InitializedThis._prettyPrintedDisplayParts;
+        internal IList<TaggedText> PrettyPrintedDisplayParts =>
+            InitializedThis._prettyPrintedDisplayParts;
 
         private void Initialize()
         {
@@ -120,7 +126,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
             var newLinePart = new TaggedText(TextTags.LineBreak, "\r\n");
             var newLineContent = newLinePart.ToString();
-            var spacerPart = new TaggedText(TextTags.Space, new string(' ', signaturePrefixContent.Length));
+            var spacerPart = new TaggedText(
+                TextTags.Space,
+                new string(' ', signaturePrefixContent.Length)
+            );
             var spacerContent = spacerPart.ToString();
 
             var paramColumnCount = 0;
@@ -133,13 +142,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 var parameterPrefixContext = sigHelpParameter.PrefixDisplayParts.GetFullText();
 
                 var parameterParts = AddOptionalBrackets(
-                    sigHelpParameter.IsOptional, sigHelpParameter.DisplayParts);
+                    sigHelpParameter.IsOptional,
+                    sigHelpParameter.DisplayParts
+                );
                 var parameterContent = parameterParts.GetFullText();
 
                 var parameterSuffixParts = sigHelpParameter.SuffixDisplayParts;
                 var parameterSuffixContext = sigHelpParameter.SuffixDisplayParts.GetFullText();
 
-                paramColumnCount += separatorContent.Length + parameterPrefixContext.Length + parameterContent.Length + parameterSuffixContext.Length;
+                paramColumnCount +=
+                    separatorContent.Length
+                    + parameterPrefixContext.Length
+                    + parameterContent.Length
+                    + parameterSuffixContext.Length;
 
                 if (i > 0)
                 {
@@ -160,7 +175,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 AddRange(parameterPrefixParts, parts, prettyPrintedParts);
                 Append(parameterPrefixContext, content, prettyPrintedContent);
 
-                parameters.Add(new Parameter(this, sigHelpParameter, parameterContent, content.Length, prettyPrintedContent.Length));
+                parameters.Add(
+                    new Parameter(
+                        this,
+                        sigHelpParameter,
+                        parameterContent,
+                        content.Length,
+                        prettyPrintedContent.Length
+                    )
+                );
 
                 AddRange(parameterParts, parts, prettyPrintedParts);
                 Append(parameterContent, content, prettyPrintedContent);
@@ -170,20 +193,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             }
 
             AddRange(_signatureHelpItem.SuffixDisplayParts, parts, prettyPrintedParts);
-            Append(_signatureHelpItem.SuffixDisplayParts.GetFullText(), content, prettyPrintedContent);
+            Append(
+                _signatureHelpItem.SuffixDisplayParts.GetFullText(),
+                content,
+                prettyPrintedContent
+            );
 
             if (_parameterIndex >= 0)
             {
                 var sigHelpParameter = _signatureHelpItem.Parameters[_parameterIndex];
 
                 AddRange(sigHelpParameter.SelectedDisplayParts, parts, prettyPrintedParts);
-                Append(sigHelpParameter.SelectedDisplayParts.GetFullText(), content, prettyPrintedContent);
+                Append(
+                    sigHelpParameter.SelectedDisplayParts.GetFullText(),
+                    content,
+                    prettyPrintedContent
+                );
             }
 
             AddRange(_signatureHelpItem.DescriptionParts, parts, prettyPrintedParts);
-            Append(_signatureHelpItem.DescriptionParts.GetFullText(), content, prettyPrintedContent);
+            Append(
+                _signatureHelpItem.DescriptionParts.GetFullText(),
+                content,
+                prettyPrintedContent
+            );
 
-            var documentation = _signatureHelpItem.DocumentationFactory(CancellationToken.None).ToList();
+            var documentation = _signatureHelpItem.DocumentationFactory(CancellationToken.None)
+                .ToList();
             if (documentation.Count > 0)
             {
                 AddRange(new[] { newLinePart }, parts, prettyPrintedParts);
@@ -200,19 +236,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             _parameters = parameters.ToReadOnlyCollection();
         }
 
-        private static void AddRange(IList<TaggedText> values, List<TaggedText> parts, List<TaggedText> prettyPrintedParts)
+        private static void AddRange(
+            IList<TaggedText> values,
+            List<TaggedText> parts,
+            List<TaggedText> prettyPrintedParts
+        )
         {
             parts.AddRange(values);
             prettyPrintedParts.AddRange(values);
         }
 
-        private static void Append(string text, StringBuilder content, StringBuilder prettyPrintedContent)
+        private static void Append(
+            string text,
+            StringBuilder content,
+            StringBuilder prettyPrintedContent
+        )
         {
             content.Append(text);
             prettyPrintedContent.Append(text);
         }
 
-        private static IList<TaggedText> AddOptionalBrackets(bool isOptional, IList<TaggedText> list)
+        private static IList<TaggedText> AddOptionalBrackets(
+            bool isOptional,
+            IList<TaggedText> list
+        )
         {
             if (isOptional)
             {

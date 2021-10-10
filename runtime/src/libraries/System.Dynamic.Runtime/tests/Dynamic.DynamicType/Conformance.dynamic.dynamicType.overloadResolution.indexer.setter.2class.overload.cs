@@ -185,8 +185,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Twoclass.overload.overload023.overload023
 {
     // <Title>Overloaded methods in 2 classes</Title>
@@ -199,10 +197,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[string x]
         {
-            set
-            {
-                Test.Status = 2;
-            }
+            set { Test.Status = 2; }
         }
     }
 
@@ -210,10 +205,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[int x]
         {
-            set
-            {
-                Test.Status = 4;
-            }
+            set { Test.Status = 4; }
         }
     }
 
@@ -221,10 +213,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[dynamic x]
         {
-            set
-            {
-                Test.Status = 3;
-            }
+            set { Test.Status = 3; }
         }
     }
 
@@ -256,8 +245,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Twoclass.overload.overload037.overload037
 {
     // <Title>Overloaded methods in 2 classes</Title>
@@ -270,10 +257,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[string x]
         {
-            set
-            {
-                Test.Status = 2;
-            }
+            set { Test.Status = 2; }
         }
     }
 
@@ -281,10 +265,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[int x]
         {
-            set
-            {
-                Test.Status = 4;
-            }
+            set { Test.Status = 4; }
         }
     }
 
@@ -292,10 +273,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[object x]
         {
-            set
-            {
-                Test.Status = 3;
-            }
+            set { Test.Status = 3; }
         }
     }
 

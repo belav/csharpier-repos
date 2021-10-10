@@ -54,16 +54,18 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public void CreateValidationMetadata_SetsHasValidatorsToTrue_IfProviderReturnsTrue()
         {
             // Arrange
-            var metadataBasedModelValidatorProvider = new Mock<IMetadataBasedModelValidatorProvider>();
-            metadataBasedModelValidatorProvider.Setup(p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()))
+            var metadataBasedModelValidatorProvider =
+                new Mock<IMetadataBasedModelValidatorProvider>();
+            metadataBasedModelValidatorProvider.Setup(
+                    p => p.HasValidators(typeof(object), It.IsAny<IList<object>>())
+                )
                 .Returns(true)
                 .Verifiable();
 
             var validationProviders = new IModelValidatorProvider[]
             {
-                 new DefaultModelValidatorProvider(),
-                 metadataBasedModelValidatorProvider.Object,
-
+                new DefaultModelValidatorProvider(),
+                metadataBasedModelValidatorProvider.Object,
             };
             var metadataProvider = new HasValidatorsValidationMetadataProvider(validationProviders);
 
@@ -83,11 +85,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public void CreateValidationMetadata_SetsHasValidatorsToFalse_IfNoProviderReturnsTrue()
         {
             // Arrange
-            var provider = Mock.Of<IMetadataBasedModelValidatorProvider>(p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()) == false);
+            var provider = Mock.Of<IMetadataBasedModelValidatorProvider>(
+                p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()) == false
+            );
             var validationProviders = new IModelValidatorProvider[]
             {
-                 new DefaultModelValidatorProvider(),
-                 provider,
+                new DefaultModelValidatorProvider(),
+                provider,
             };
             var metadataProvider = new HasValidatorsValidationMetadataProvider(validationProviders);
 
@@ -106,18 +110,20 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public void CreateValidationMetadata_DoesNotOverrideExistingHasValidatorsValue()
         {
             // Arrange
-            var provider = Mock.Of<IMetadataBasedModelValidatorProvider>(p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()) == false);
+            var provider = Mock.Of<IMetadataBasedModelValidatorProvider>(
+                p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()) == false
+            );
             var validationProviders = new IModelValidatorProvider[]
             {
-                 new DefaultModelValidatorProvider(),
-                 provider,
+                new DefaultModelValidatorProvider(),
+                provider,
             };
             var metadataProvider = new HasValidatorsValidationMetadataProvider(validationProviders);
 
             var key = ModelMetadataIdentity.ForType(typeof(object));
             var modelAttributes = new ModelAttributes(new object[0], new object[0], new object[0]);
             var context = new ValidationMetadataProviderContext(key, modelAttributes);
-            
+
             // Initialize this value.
             context.ValidationMetadata.HasValidators = true;
 

@@ -14,14 +14,15 @@ using VSLangProj80;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
 {
-    [ExportLanguageService(typeof(ICompilationOptionsChangingService), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageService(typeof(ICompilationOptionsChangingService), LanguageNames.CSharp),
+        Shared
+    ]
     internal class CSharpCompilationOptionsChangingService : ICompilationOptionsChangingService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCompilationOptionsChangingService()
-        {
-        }
+        public CSharpCompilationOptionsChangingService() { }
 
         public bool CanApplyChange(CompilationOptions oldOptions, CompilationOptions newOptions)
         {
@@ -36,8 +37,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
         {
             var csharpOptions = (CSharpCompilationOptions)options;
 
-            storage.SetProperty("AllowUnsafeBlocks", nameof(ProjectConfigurationProperties3.AllowUnsafeBlocks),
-                csharpOptions.AllowUnsafe);
+            storage.SetProperty(
+                "AllowUnsafeBlocks",
+                nameof(ProjectConfigurationProperties3.AllowUnsafeBlocks),
+                csharpOptions.AllowUnsafe
+            );
         }
     }
 }

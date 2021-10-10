@@ -61,7 +61,12 @@ namespace System.IO.Strategies
         /// <summary>Whether the file stream's handle has been exposed.</summary>
         private bool _exposedHandle;
 
-        internal Net5CompatFileStreamStrategy(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync)
+        internal Net5CompatFileStreamStrategy(
+            SafeFileHandle handle,
+            FileAccess access,
+            int bufferSize,
+            bool isAsync
+        )
         {
             _exposedHandle = true;
             _bufferLength = bufferSize;
@@ -78,7 +83,14 @@ namespace System.IO.Strategies
             _fileHandle = handle;
         }
 
-        internal Net5CompatFileStreamStrategy(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
+        internal Net5CompatFileStreamStrategy(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options
+        )
         {
             string fullPath = Path.GetFullPath(path);
 
@@ -133,9 +145,11 @@ namespace System.IO.Strategies
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            return _useAsyncIO ?
-                ReadAsyncTask(buffer, offset, count, CancellationToken.None).GetAwaiter().GetResult() :
-                ReadSpan(new Span<byte>(buffer, offset, count));
+            return _useAsyncIO
+              ? ReadAsyncTask(buffer, offset, count, CancellationToken.None)
+                    .GetAwaiter()
+                    .GetResult()
+              : ReadSpan(new Span<byte>(buffer, offset, count));
         }
 
         public override int Read(Span<byte> buffer)
@@ -155,7 +169,12 @@ namespace System.IO.Strategies
             return base.Read(buffer);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (!_useAsyncIO)
             {
@@ -163,13 +182,24 @@ namespace System.IO.Strategies
                 // Read is invoked asynchronously.  But we can do so using the base Stream's internal helper
                 // that bypasses delegating to BeginRead, since we already know this is FileStream rather
                 // than something derived from it and what our BeginRead implementation is going to do.
-                return (Task<int>)base.BeginReadInternal(buffer, offset, count, null, null, serializeAsynchronously: true, apm: false);
+                return (Task<int>)base.BeginReadInternal(
+                    buffer,
+                    offset,
+                    count,
+                    null,
+                    null,
+                    serializeAsynchronously: true,
+                    apm: false
+                );
             }
 
             return ReadAsyncTask(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (!_useAsyncIO)
             {
@@ -177,25 +207,45 @@ namespace System.IO.Strategies
                 // Read is invoked asynchronously.  But if we have a byte[], we can do so using the base Stream's
                 // internal helper that bypasses delegating to BeginRead, since we already know this is FileStream
                 // rather than something derived from it and what our BeginRead implementation is going to do.
-                return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment) ?
-                    new ValueTask<int>((Task<int>)base.BeginReadInternal(segment.Array!, segment.Offset, segment.Count, null, null, serializeAsynchronously: true, apm: false)) :
-                    base.ReadAsync(buffer, cancellationToken);
+                return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
+                  ? new ValueTask<int>(
+                        (Task<int>)base.BeginReadInternal(
+                            segment.Array!,
+                            segment.Offset,
+                            segment.Count,
+                            null,
+                            null,
+                            serializeAsynchronously: true,
+                            apm: false
+                        )
+                    )
+                  : base.ReadAsync(buffer, cancellationToken);
             }
 
             Task<int>? t = ReadAsyncInternal(buffer, cancellationToken, out int synchronousResult);
-            return t != null ?
-                new ValueTask<int>(t) :
-                new ValueTask<int>(synchronousResult);
+            return t != null ? new ValueTask<int>(t) : new ValueTask<int>(synchronousResult);
         }
 
-        private Task<int> ReadAsyncTask(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        private Task<int> ReadAsyncTask(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
-            Task<int>? t = ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken, out int synchronousResult);
+            Task<int>? t = ReadAsyncInternal(
+                new Memory<byte>(buffer, offset, count),
+                cancellationToken,
+                out int synchronousResult
+            );
 
             if (t == null)
             {
                 t = _lastSynchronouslyCompletedTask;
-                Debug.Assert(t == null || t.IsCompletedSuccessfully, "Cached task should have completed successfully");
+                Debug.Assert(
+                    t == null || t.IsCompletedSuccessfully,
+                    "Cached task should have completed successfully"
+                );
 
                 if (t == null || t.Result != synchronousResult)
                 {
@@ -210,7 +260,13 @@ namespace System.IO.Strategies
         {
             if (_useAsyncIO)
             {
-                WriteAsyncInternal(new ReadOnlyMemory<byte>(buffer, offset, count), CancellationToken.None).AsTask().GetAwaiter().GetResult();
+                WriteAsyncInternal(
+                        new ReadOnlyMemory<byte>(buffer, offset, count),
+                        CancellationToken.None
+                    )
+                    .AsTask()
+                    .GetAwaiter()
+                    .GetResult();
             }
             else
             {
@@ -237,7 +293,12 @@ namespace System.IO.Strategies
             }
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (!_useAsyncIO)
             {
@@ -245,13 +306,28 @@ namespace System.IO.Strategies
                 // Write is invoked asynchronously.  But we can do so using the base Stream's internal helper
                 // that bypasses delegating to BeginWrite, since we already know this is FileStream rather
                 // than something derived from it and what our BeginWrite implementation is going to do.
-                return (Task)base.BeginWriteInternal(buffer, offset, count, null, null, serializeAsynchronously: true, apm: false);
+                return (Task)base.BeginWriteInternal(
+                    buffer,
+                    offset,
+                    count,
+                    null,
+                    null,
+                    serializeAsynchronously: true,
+                    apm: false
+                );
             }
 
-            return WriteAsyncInternal(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return WriteAsyncInternal(
+                    new ReadOnlyMemory<byte>(buffer, offset, count),
+                    cancellationToken
+                )
+                .AsTask();
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (!_useAsyncIO)
             {
@@ -259,9 +335,19 @@ namespace System.IO.Strategies
                 // Write is invoked asynchronously.  But if we have a byte[], we can do so using the base Stream's
                 // internal helper that bypasses delegating to BeginWrite, since we already know this is FileStream
                 // rather than something derived from it and what our BeginWrite implementation is going to do.
-                return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment) ?
-                    new ValueTask((Task)base.BeginWriteInternal(segment.Array!, segment.Offset, segment.Count, null, null, serializeAsynchronously: true, apm: false)) :
-                    base.WriteAsync(buffer, cancellationToken);
+                return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
+                  ? new ValueTask(
+                        (Task)base.BeginWriteInternal(
+                            segment.Array!,
+                            segment.Offset,
+                            segment.Count,
+                            null,
+                            null,
+                            serializeAsynchronously: true,
+                            apm: false
+                        )
+                    )
+                  : base.WriteAsync(buffer, cancellationToken);
             }
 
             return WriteAsyncInternal(buffer, cancellationToken);
@@ -369,10 +455,7 @@ namespace System.IO.Strategies
                 // bytes we've written into the buffer.
                 return (_filePosition - _readLength) + _readPos + _writePos;
             }
-            set
-            {
-                Seek(value, SeekOrigin.Begin);
-            }
+            set { Seek(value, SeekOrigin.Begin); }
         }
 
         internal override bool IsClosed => _fileHandle.IsClosed;
@@ -422,7 +505,10 @@ namespace System.IO.Strategies
             // functions should call this function to preserve the position in the file.
 
             AssertBufferInvariants();
-            Debug.Assert(_writePos == 0, "FileStream: Write buffer must be empty in FlushReadBuffer!");
+            Debug.Assert(
+                _writePos == 0,
+                "FileStream: Write buffer must be empty in FlushReadBuffer!"
+            );
 
             int rewind = _readPos - _readLength;
             if (rewind != 0)
@@ -487,7 +573,8 @@ namespace System.IO.Strategies
             // this checking and flushing.
             if (_writePos == 0)
             {
-                if (!CanWrite) ThrowHelper.ThrowNotSupportedException_UnwritableStream();
+                if (!CanWrite)
+                    ThrowHelper.ThrowNotSupportedException_UnwritableStream();
                 FlushReadBuffer();
                 Debug.Assert(_bufferLength > 0, "_bufferSize > 0");
             }
@@ -495,20 +582,44 @@ namespace System.IO.Strategies
 
         partial void OnBufferAllocated();
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             if (!_useAsyncIO)
                 return base.BeginRead(buffer, offset, count, callback, state);
             else
-                return TaskToApm.Begin(ReadAsyncTask(buffer, offset, count, CancellationToken.None), callback, state);
+                return TaskToApm.Begin(
+                    ReadAsyncTask(buffer, offset, count, CancellationToken.None),
+                    callback,
+                    state
+                );
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             if (!_useAsyncIO)
                 return base.BeginWrite(buffer, offset, count, callback, state);
             else
-                return TaskToApm.Begin(WriteAsyncInternal(new ReadOnlyMemory<byte>(buffer, offset, count), CancellationToken.None).AsTask(), callback, state);
+                return TaskToApm.Begin(
+                    WriteAsyncInternal(
+                            new ReadOnlyMemory<byte>(buffer, offset, count),
+                            CancellationToken.None
+                        )
+                        .AsTask(),
+                    callback,
+                    state
+                );
         }
 
         public override int EndRead(IAsyncResult asyncResult)

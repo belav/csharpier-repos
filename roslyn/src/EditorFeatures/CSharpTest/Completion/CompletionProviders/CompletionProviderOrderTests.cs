@@ -24,16 +24,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderOrder()
         {
-            var exportProvider = EditorTestCompositions.EditorFeaturesWpf.ExportProviderFactory.CreateExportProvider();
-            var completionProviderExports = exportProvider.GetExports<CompletionProvider, CompletionProviderMetadata>();
-            var orderedCSharpCompletionProviders = ExtensionOrderer.Order(completionProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp));
+            var exportProvider =
+                EditorTestCompositions.EditorFeaturesWpf.ExportProviderFactory.CreateExportProvider();
+            var completionProviderExports = exportProvider.GetExports<
+                CompletionProvider,
+                CompletionProviderMetadata
+            >();
+            var orderedCSharpCompletionProviders = ExtensionOrderer.Order(
+                completionProviderExports.Where(
+                    export => export.Metadata.Language == LanguageNames.CSharp
+                )
+            );
 
-            var actualOrder = orderedCSharpCompletionProviders.Select(x => x.Value.GetType()).ToArray();
+            var actualOrder = orderedCSharpCompletionProviders.Select(x => x.Value.GetType())
+                .ToArray();
             var expectedOrder = new[]
             {
                 // Marker for start of built-in completion providers
                 typeof(FirstBuiltInCompletionProvider),
-
                 // Built-in providers
                 typeof(AttributeNamedParameterCompletionProvider),
                 typeof(NamedParameterCompletionProvider),
@@ -63,18 +71,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 typeof(ExtensionMethodImportCompletionProvider),
                 typeof(EmbeddedLanguageCompletionProvider),
                 typeof(FunctionPointerUnmanagedCallingConventionCompletionProvider),
-
                 // Built-in interactive providers
                 typeof(LoadDirectiveCompletionProvider),
                 typeof(ReferenceDirectiveCompletionProvider),
-
                 // Marker for end of built-in completion providers
                 typeof(LastBuiltInCompletionProvider),
             };
 
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedOrder.Select(x => x.FullName)),
-                string.Join(Environment.NewLine, actualOrder.Select(x => x.FullName)));
+                string.Join(Environment.NewLine, actualOrder.Select(x => x.FullName))
+            );
         }
 
         /// <summary>
@@ -86,9 +93,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderOrderMetadata()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var completionProviderExports = exportProvider.GetExports<CompletionProvider, CompletionProviderMetadata>();
-            var orderedCSharpCompletionProviders = ExtensionOrderer.Order(completionProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp));
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var completionProviderExports = exportProvider.GetExports<
+                CompletionProvider,
+                CompletionProviderMetadata
+            >();
+            var orderedCSharpCompletionProviders = ExtensionOrderer.Order(
+                completionProviderExports.Where(
+                    export => export.Metadata.Language == LanguageNames.CSharp
+                )
+            );
 
             for (var i = 0; i < orderedCSharpCompletionProviders.Count; i++)
             {
@@ -104,20 +119,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
                     // The last completion marker should be last; this is ensured by either the last "real" provider saying it comes before the
                     // marker, or the last completion marker comes after the last "real" provider.
-                    if (!orderedCSharpCompletionProviders[i].Metadata.AfterTyped.Contains(orderedCSharpCompletionProviders[i - 1].Metadata.Name))
+                    if (
+                        !orderedCSharpCompletionProviders[i].Metadata.AfterTyped.Contains(
+                            orderedCSharpCompletionProviders[i - 1].Metadata.Name
+                        )
+                    )
                     {
                         // Make sure the last built-in provider comes before the marker
-                        Assert.Contains(orderedCSharpCompletionProviders[i].Metadata.Name, orderedCSharpCompletionProviders[i - 1].Metadata.BeforeTyped);
+                        Assert.Contains(
+                            orderedCSharpCompletionProviders[i].Metadata.Name,
+                            orderedCSharpCompletionProviders[i - 1].Metadata.BeforeTyped
+                        );
                     }
                 }
                 else
                 {
                     if (orderedCSharpCompletionProviders[i].Metadata.BeforeTyped.Any())
                     {
-                        Assert.Equal(orderedCSharpCompletionProviders.Last().Metadata.Name, Assert.Single(orderedCSharpCompletionProviders[i].Metadata.BeforeTyped));
+                        Assert.Equal(
+                            orderedCSharpCompletionProviders.Last().Metadata.Name,
+                            Assert.Single(orderedCSharpCompletionProviders[i].Metadata.BeforeTyped)
+                        );
                     }
 
-                    var after = Assert.Single(orderedCSharpCompletionProviders[i].Metadata.AfterTyped);
+                    var after = Assert.Single(
+                        orderedCSharpCompletionProviders[i].Metadata.AfterTyped
+                    );
                     Assert.Equal(orderedCSharpCompletionProviders[i - 1].Metadata.Name, after);
                 }
             }
@@ -126,9 +153,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderFirstNameMetadata()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var completionProviderExports = exportProvider.GetExports<CompletionProvider, CompletionProviderMetadata>();
-            var orderedCSharpCompletionProviders = ExtensionOrderer.Order(completionProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp));
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var completionProviderExports = exportProvider.GetExports<
+                CompletionProvider,
+                CompletionProviderMetadata
+            >();
+            var orderedCSharpCompletionProviders = ExtensionOrderer.Order(
+                completionProviderExports.Where(
+                    export => export.Metadata.Language == LanguageNames.CSharp
+                )
+            );
             var firstCompletionProvider = orderedCSharpCompletionProviders.First();
 
             Assert.Equal("FirstBuiltInCompletionProvider", firstCompletionProvider.Metadata.Name);
@@ -137,9 +172,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderLastNameMetadata()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var completionProviderExports = exportProvider.GetExports<CompletionProvider, CompletionProviderMetadata>();
-            var orderedCSharpCompletionProviders = ExtensionOrderer.Order(completionProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp));
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var completionProviderExports = exportProvider.GetExports<
+                CompletionProvider,
+                CompletionProviderMetadata
+            >();
+            var orderedCSharpCompletionProviders = ExtensionOrderer.Order(
+                completionProviderExports.Where(
+                    export => export.Metadata.Language == LanguageNames.CSharp
+                )
+            );
             var lastCompletionProvider = orderedCSharpCompletionProviders.Last();
 
             Assert.Equal("LastBuiltInCompletionProvider", lastCompletionProvider.Metadata.Name);
@@ -148,9 +191,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderNameMetadata()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var completionProviderExports = exportProvider.GetExports<CompletionProvider, CompletionProviderMetadata>();
-            var csharpCompletionProviders = completionProviderExports.Where(export => export.Metadata.Language == LanguageNames.CSharp);
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var completionProviderExports = exportProvider.GetExports<
+                CompletionProvider,
+                CompletionProviderMetadata
+            >();
+            var csharpCompletionProviders = completionProviderExports.Where(
+                export => export.Metadata.Language == LanguageNames.CSharp
+            );
             foreach (var export in csharpCompletionProviders)
             {
                 Assert.Equal(export.Value.GetType().Name, export.Metadata.Name);

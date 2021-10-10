@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Components
     {
         private static readonly ConcurrentDictionary<Key, RouteTable> Cache =
             new ConcurrentDictionary<Key, RouteTable>();
-        public static readonly IComparer<RouteEntry> RoutePrecedence = Comparer<RouteEntry>.Create(RouteComparison);
+        public static readonly IComparer<RouteEntry> RoutePrecedence = Comparer<RouteEntry>.Create(
+            RouteComparison
+        );
 
         public static RouteTable Create(IEnumerable<Assembly> assemblies)
         {
@@ -41,7 +43,10 @@ namespace Microsoft.AspNetCore.Components
             {
                 foreach (var type in assembly.ExportedTypes)
                 {
-                    if (typeof(IComponent).IsAssignableFrom(type) && type.IsDefined(typeof(RouteAttribute)))
+                    if (
+                        typeof(IComponent).IsAssignableFrom(type)
+                        && type.IsDefined(typeof(RouteAttribute))
+                    )
                     {
                         routeableComponents.Add(type);
                     }
@@ -60,7 +65,9 @@ namespace Microsoft.AspNetCore.Components
                 //
                 // RouteAttribute is defined as non-inherited, because inheriting a route attribute always causes an
                 // ambiguity. You end up with two components (base class and derived class) with the same route.
-                var routeAttributes = componentType.GetCustomAttributes<RouteAttribute>(inherit: false);
+                var routeAttributes = componentType.GetCustomAttributes<RouteAttribute>(
+                    inherit: false
+                );
 
                 var templates = routeAttributes.Select(t => t.Template).ToArray();
                 templatesByHandler.Add(componentType, templates);
@@ -73,18 +80,26 @@ namespace Microsoft.AspNetCore.Components
             var routes = new List<RouteEntry>();
             foreach (var keyValuePair in templatesByHandler)
             {
-                var parsedTemplates = keyValuePair.Value.Select(v => TemplateParser.ParseTemplate(v)).ToArray();
-                var allRouteParameterNames = parsedTemplates
-                    .SelectMany(GetParameterNames)
+                var parsedTemplates = keyValuePair.Value.Select(
+                        v => TemplateParser.ParseTemplate(v)
+                    )
+                    .ToArray();
+                var allRouteParameterNames = parsedTemplates.SelectMany(GetParameterNames)
                     .Distinct(StringComparer.OrdinalIgnoreCase)
                     .ToArray();
 
                 foreach (var parsedTemplate in parsedTemplates)
                 {
-                    var unusedRouteParameterNames = allRouteParameterNames
-                        .Except(GetParameterNames(parsedTemplate), StringComparer.OrdinalIgnoreCase)
+                    var unusedRouteParameterNames = allRouteParameterNames.Except(
+                            GetParameterNames(parsedTemplate),
+                            StringComparer.OrdinalIgnoreCase
+                        )
                         .ToArray();
-                    var entry = new RouteEntry(parsedTemplate, keyValuePair.Key, unusedRouteParameterNames);
+                    var entry = new RouteEntry(
+                        parsedTemplate,
+                        keyValuePair.Key,
+                        unusedRouteParameterNames
+                    );
                     routes.Add(entry);
                 }
             }
@@ -94,10 +109,7 @@ namespace Microsoft.AspNetCore.Components
 
         private static string[] GetParameterNames(RouteTemplate routeTemplate)
         {
-            return routeTemplate.Segments
-                .Where(s => s.IsParameter)
-                .Select(s => s.Value)
-                .ToArray();
+            return routeTemplate.Segments.Where(s => s.IsParameter).Select(s => s.Value).ToArray();
         }
 
         /// <summary>
@@ -153,7 +165,10 @@ namespace Microsoft.AspNetCore.Components
                 // If they are both literals we can disambiguate
                 if ((xRank, yRank) == (0, 0))
                 {
-                    currentResult = StringComparer.OrdinalIgnoreCase.Compare(xSegment.Value, ySegment.Value);
+                    currentResult = StringComparer.OrdinalIgnoreCase.Compare(
+                        xSegment.Value,
+                        ySegment.Value
+                    );
                 }
 
                 if (currentResult != 0)
@@ -169,10 +184,12 @@ namespace Microsoft.AspNetCore.Components
 
             if (currentResult == 0)
             {
-                throw new InvalidOperationException($@"The following routes are ambiguous:
+                throw new InvalidOperationException(
+                    $@"The following routes are ambiguous:
 '{x.Template.TemplateText}' in '{x.Handler.FullName}'
 '{y.Template.TemplateText}' in '{y.Handler.FullName}'
-");
+"
+                );
             }
 
             return currentResult;
@@ -193,7 +210,8 @@ namespace Microsoft.AspNetCore.Components
                 // Catch all parameter without constraints
                 { IsParameter: true, IsCatchAll: true, Constraints: { Length: 0 } } => 4,
                 // The segment is not correct
-                _ => throw new InvalidOperationException($"Unknown segment definition '{xSegment}.")
+                _
+                  => throw new InvalidOperationException($"Unknown segment definition '{xSegment}.")
             };
         }
 

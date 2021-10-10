@@ -38,8 +38,7 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Utilities
 {
-    internal interface IWrappedDictionary
-        : IDictionary
+    internal interface IWrappedDictionary : IDictionary
     {
         object UnderlyingDictionary { get; }
     }
@@ -321,9 +320,13 @@ namespace Newtonsoft.Json.Utilities
                     while (e.MoveNext())
                     {
                         DictionaryEntry entry = e.Entry;
-                        array[arrayIndex++] = new KeyValuePair<TKey, TValue>((TKey)entry.Key, (TValue)entry.Value);
+                        array[arrayIndex++] = new KeyValuePair<TKey, TValue>(
+                            (TKey)entry.Key,
+                            (TValue)entry.Value
+                        );
                     }
                 }
+
                 finally
                 {
                     (e as IDisposable)?.Dispose();
@@ -422,7 +425,9 @@ namespace Newtonsoft.Json.Utilities
         {
             if (_dictionary != null)
             {
-                return _dictionary.Cast<DictionaryEntry>().Select(de => new KeyValuePair<TKey, TValue>((TKey)de.Key, (TValue)de.Value)).GetEnumerator();
+                return _dictionary.Cast<DictionaryEntry>()
+                    .Select(de => new KeyValuePair<TKey, TValue>((TKey)de.Key, (TValue)de.Value))
+                    .GetEnumerator();
             }
 #if HAVE_READ_ONLY_COLLECTIONS
             else if (_readOnlyDictionary != null)
@@ -503,11 +508,14 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        private readonly struct DictionaryEnumerator<TEnumeratorKey, TEnumeratorValue> : IDictionaryEnumerator
+        private readonly struct DictionaryEnumerator<TEnumeratorKey, TEnumeratorValue>
+            : IDictionaryEnumerator
         {
             private readonly IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> _e;
 
-            public DictionaryEnumerator(IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> e)
+            public DictionaryEnumerator(
+                IEnumerator<KeyValuePair<TEnumeratorKey, TEnumeratorValue>> e
+            )
             {
                 ValidationUtils.ArgumentNotNull(e, nameof(e));
                 _e = e;

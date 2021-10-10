@@ -12,11 +12,14 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class TempDataPropertyTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+    public class TempDataPropertyTest
+        : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
     {
         protected HttpClient Client { get; }
 
-        public TempDataPropertyTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
+        public TempDataPropertyTest(
+            MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
+        )
         {
             Client = fixture.CreateDefaultClient();
         }
@@ -31,17 +34,23 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 new KeyValuePair<string, string>("FullName", "Bob"),
                 new KeyValuePair<string, string>("id", "1"),
             };
-            var expected = $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
+            var expected =
+                $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
             var content = new FormUrlEncodedContent(nameValueCollection);
 
             // Act 1
-            var redirectResponse = await Client.PostAsync("TempDataProperty/CreateForView", content);
+            var redirectResponse = await Client.PostAsync(
+                "TempDataProperty/CreateForView",
+                content
+            );
 
             // Assert 1
             await redirectResponse.AssertStatusCodeAsync(HttpStatusCode.Redirect);
 
             // Act 2
-            var response = await Client.SendAsync(GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse));
+            var response = await Client.SendAsync(
+                GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse)
+            );
 
             // Assert 2
             await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -59,7 +68,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 new KeyValuePair<string, string>("FullName", "Bob"),
                 new KeyValuePair<string, string>("id", "1"),
             };
-            var expected = $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
+            var expected =
+                $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
             var content = new FormUrlEncodedContent(nameValueCollection);
 
             // Act 1
@@ -69,7 +79,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.Redirect, redirectResponse.StatusCode);
 
             // Act 2
-            var response = await Client.SendAsync(GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse));
+            var response = await Client.SendAsync(
+                GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse)
+            );
 
             // Assert 2
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -88,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 new KeyValuePair<string, string>("id", "1"),
             };
 
-            var expected = $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
+            var expected =
+                $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
             var content = new FormUrlEncodedContent(nameValueCollection);
 
             // Act 1
@@ -98,7 +111,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             // Act 2
-            response = await Client.SendAsync(GetRequest("TempDataProperty/TempDataKept", response));
+            response = await Client.SendAsync(
+                GetRequest("TempDataProperty/TempDataKept", response)
+            );
 
             // Assert 2
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -106,7 +121,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(tempDataContent, body);
 
             // Act 3
-            response = await Client.SendAsync(GetRequest("TempDataProperty/ReadTempData", response));
+            response = await Client.SendAsync(
+                GetRequest("TempDataProperty/ReadTempData", response)
+            );
 
             // Assert 3
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -125,7 +142,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 new KeyValuePair<string, string>("id", "1"),
             };
 
-            var expected = $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
+            var expected =
+                $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
             var content = new FormUrlEncodedContent(nameValueCollection);
 
             // Act 1
@@ -135,7 +153,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             // Act 2
-            response = await Client.SendAsync(GetRequest("TempDataProperty/ReadTempData", response));
+            response = await Client.SendAsync(
+                GetRequest("TempDataProperty/ReadTempData", response)
+            );
 
             // Assert 2
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -143,7 +163,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(tempDataContent, body);
 
             // Act 3
-            response = await Client.SendAsync(GetRequest("TempDataProperty/ReadTempData", response));
+            response = await Client.SendAsync(
+                GetRequest("TempDataProperty/ReadTempData", response)
+            );
 
             // Assert 3
             body = await response.Content.ReadAsStringAsync();
@@ -159,7 +181,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 {
                     if (cookie.Expires == null || cookie.Expires >= DateTimeOffset.UtcNow)
                     {
-                        request.Headers.Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
+                        request.Headers.Add(
+                            "Cookie",
+                            new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
+                        );
                     }
                 }
             }

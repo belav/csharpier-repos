@@ -12,7 +12,8 @@ namespace System.DirectoryServices.Tests
     public partial class DirectoryServicesTests
     {
         internal static bool IsLdapConfigurationExist => LdapConfiguration.Configuration != null;
-        internal static bool IsActiveDirectoryServer => IsLdapConfigurationExist && LdapConfiguration.Configuration.IsActiveDirectoryServer;
+        internal static bool IsActiveDirectoryServer =>
+            IsLdapConfigurationExist && LdapConfiguration.Configuration.IsActiveDirectoryServer;
 
         [ConditionalFact(nameof(IsLdapConfigurationExist))]
         public void TestOU() // adding and removing organization unit
@@ -29,6 +30,7 @@ namespace System.DirectoryServices.Tests
                 {
                     SearchOUByName(de, ouName);
                 }
+
                 finally
                 {
                     // Clean up the added ou
@@ -48,14 +50,42 @@ namespace System.DirectoryServices.Tests
                 {
                     try
                     {
-                        DirectoryEntry child1OU = CreateOU(rootOU, "CoreFxChild1OU", "CoreFx Child OU 1");
-                        DirectoryEntry child2OU = CreateOU(rootOU, "CoreFxChild2OU", "CoreFx Child OU 2");
+                        DirectoryEntry child1OU = CreateOU(
+                            rootOU,
+                            "CoreFxChild1OU",
+                            "CoreFx Child OU 1"
+                        );
+                        DirectoryEntry child2OU = CreateOU(
+                            rootOU,
+                            "CoreFxChild2OU",
+                            "CoreFx Child OU 2"
+                        );
 
-                        CreateOrganizationalRole(child1OU, "user.ou1.1", "User 1 is in CoreFx ou 1", "1 111 111 1111");
-                        CreateOrganizationalRole(child1OU, "user.ou1.2", "User 2 is in CoreFx ou 1", "1 222 222 2222");
+                        CreateOrganizationalRole(
+                            child1OU,
+                            "user.ou1.1",
+                            "User 1 is in CoreFx ou 1",
+                            "1 111 111 1111"
+                        );
+                        CreateOrganizationalRole(
+                            child1OU,
+                            "user.ou1.2",
+                            "User 2 is in CoreFx ou 1",
+                            "1 222 222 2222"
+                        );
 
-                        CreateOrganizationalRole(child2OU, "user.ou2.1", "User 1 is in CoreFx ou 2", "1 333 333 3333");
-                        CreateOrganizationalRole(child2OU, "user.ou2.2", "User 2 is in CoreFx ou 2", "1 333 333 3333");
+                        CreateOrganizationalRole(
+                            child2OU,
+                            "user.ou2.1",
+                            "User 1 is in CoreFx ou 2",
+                            "1 333 333 3333"
+                        );
+                        CreateOrganizationalRole(
+                            child2OU,
+                            "user.ou2.2",
+                            "User 2 is in CoreFx ou 2",
+                            "1 333 333 3333"
+                        );
 
                         // now let's search for the added data:
                         SearchOUByName(rootOU, "CoreFxChild1OU");
@@ -67,6 +97,7 @@ namespace System.DirectoryServices.Tests
                         SearchOrganizationalRole(child2OU, "user.ou2.1");
                         SearchOrganizationalRole(child2OU, "user.ou2.2");
                     }
+
                     finally
                     {
                         // rootOU.DeleteTree(); doesn't work as getting "A protocol error occurred. (Exception from HRESULT: 0x80072021)"
@@ -87,37 +118,71 @@ namespace System.DirectoryServices.Tests
                 {
                     try
                     {
-                        using (DirectoryEntry userEntry = CreateOrganizationalRole(rootOU, "caching.user.1", "User 1 in caching OU", "1 111 111 1111"))
+                        using (
+                            DirectoryEntry userEntry = CreateOrganizationalRole(
+                                rootOU,
+                                "caching.user.1",
+                                "User 1 in caching OU",
+                                "1 111 111 1111"
+                            )
+                        )
                         {
                             Assert.True(userEntry.UsePropertyCache);
 
                             SearchOrganizationalRole(rootOU, "caching.user.1");
-                            string originalPhone = (string) userEntry.Properties["telephoneNumber"].Value;
+                            string originalPhone = (string)userEntry.Properties[
+                                "telephoneNumber"
+                            ].Value;
                             string newPhone = "1 222 222 2222";
                             userEntry.Properties["telephoneNumber"].Value = newPhone;
 
-                            using (DirectoryEntry sameUserEntry = GetOrganizationalRole(rootOU, "caching.user.1"))
+                            using (
+                                DirectoryEntry sameUserEntry = GetOrganizationalRole(
+                                    rootOU,
+                                    "caching.user.1"
+                                )
+                            )
                             {
-                                Assert.Equal(originalPhone, (string) sameUserEntry.Properties["telephoneNumber"].Value);
+                                Assert.Equal(
+                                    originalPhone,
+                                    (string)sameUserEntry.Properties["telephoneNumber"].Value
+                                );
                             }
 
                             userEntry.CommitChanges();
 
-                            using (DirectoryEntry sameUserEntry = GetOrganizationalRole(rootOU, "caching.user.1"))
+                            using (
+                                DirectoryEntry sameUserEntry = GetOrganizationalRole(
+                                    rootOU,
+                                    "caching.user.1"
+                                )
+                            )
                             {
-                                Assert.Equal(newPhone, (string) sameUserEntry.Properties["telephoneNumber"].Value);
+                                Assert.Equal(
+                                    newPhone,
+                                    (string)sameUserEntry.Properties["telephoneNumber"].Value
+                                );
                             }
 
                             userEntry.UsePropertyCache = false;
                             Assert.False(userEntry.UsePropertyCache);
 
                             userEntry.Properties["telephoneNumber"].Value = originalPhone;
-                            using (DirectoryEntry sameUserEntry = GetOrganizationalRole(rootOU, "caching.user.1"))
+                            using (
+                                DirectoryEntry sameUserEntry = GetOrganizationalRole(
+                                    rootOU,
+                                    "caching.user.1"
+                                )
+                            )
                             {
-                                Assert.Equal(originalPhone, (string) sameUserEntry.Properties["telephoneNumber"].Value);
+                                Assert.Equal(
+                                    originalPhone,
+                                    (string)sameUserEntry.Properties["telephoneNumber"].Value
+                                );
                             }
                         }
                     }
+
                     finally
                     {
                         DeleteOU(de, "CachingOU");
@@ -137,29 +202,45 @@ namespace System.DirectoryServices.Tests
                 {
                     using (DirectoryEntry rootOU = CreateOU(de, "MoveingOU", "Moving Root OU"))
                     {
-                        using (DirectoryEntry fromOU = CreateOU(rootOU, "MoveFromOU", "Moving From OU"))
-                        using (DirectoryEntry toOU   = CreateOU(rootOU, "MoveToOU", "Moving To OU"))
+                        using (
+                            DirectoryEntry fromOU = CreateOU(rootOU, "MoveFromOU", "Moving From OU")
+                        )
+                        using (DirectoryEntry toOU = CreateOU(rootOU, "MoveToOU", "Moving To OU"))
                         {
-                            DirectoryEntry user = CreateOrganizationalRole(fromOU, "user.move.1", "User to move across OU's", "1 111 111 1111");
+                            DirectoryEntry user = CreateOrganizationalRole(
+                                fromOU,
+                                "user.move.1",
+                                "User to move across OU's",
+                                "1 111 111 1111"
+                            );
                             SearchOrganizationalRole(fromOU, "user.move.1");
 
                             user.MoveTo(toOU);
                             user.CommitChanges();
 
                             SearchOrganizationalRole(toOU, "user.move.1");
-                            Assert.Throws<DirectoryServicesCOMException>(() => SearchOrganizationalRole(fromOU, "user.move.1"));
+                            Assert.Throws<DirectoryServicesCOMException>(
+                                () => SearchOrganizationalRole(fromOU, "user.move.1")
+                            );
 
                             user.MoveTo(fromOU, "cn=user.moved.1");
                             user.CommitChanges();
 
                             SearchOrganizationalRole(fromOU, "user.moved.1");
 
-                            Assert.Throws<DirectoryServicesCOMException>(() => SearchOrganizationalRole(fromOU, "user.move.1"));
-                            Assert.Throws<DirectoryServicesCOMException>(() => SearchOrganizationalRole(toOU, "user.move.1"));
-                            Assert.Throws<DirectoryServicesCOMException>(() => user.MoveTo(toOU, "user.move.2"));
+                            Assert.Throws<DirectoryServicesCOMException>(
+                                () => SearchOrganizationalRole(fromOU, "user.move.1")
+                            );
+                            Assert.Throws<DirectoryServicesCOMException>(
+                                () => SearchOrganizationalRole(toOU, "user.move.1")
+                            );
+                            Assert.Throws<DirectoryServicesCOMException>(
+                                () => user.MoveTo(toOU, "user.move.2")
+                            );
                         }
                     }
                 }
+
                 finally
                 {
                     DeleteOU(de, "MoveingOU");
@@ -178,18 +259,32 @@ namespace System.DirectoryServices.Tests
                 {
                     using (DirectoryEntry rootOU = CreateOU(de, "CopyingOU", "Copying Root OU"))
                     {
-                        using (DirectoryEntry fromOU = CreateOU(rootOU, "CopyFromOU", "Copying From OU"))
-                        using (DirectoryEntry toOU   = CreateOU(rootOU, "CopyToOU", "Copying To OU"))
+                        using (
+                            DirectoryEntry fromOU = CreateOU(
+                                rootOU,
+                                "CopyFromOU",
+                                "Copying From OU"
+                            )
+                        )
+                        using (DirectoryEntry toOU = CreateOU(rootOU, "CopyToOU", "Copying To OU"))
                         {
-                            DirectoryEntry user = CreateOrganizationalRole(fromOU, "user.move.1", "User to copy across OU's", "1 111 111 1111");
+                            DirectoryEntry user = CreateOrganizationalRole(
+                                fromOU,
+                                "user.move.1",
+                                "User to copy across OU's",
+                                "1 111 111 1111"
+                            );
                             SearchOrganizationalRole(fromOU, "user.move.1");
 
                             // The Lightweight Directory Access Protocol (LDAP) provider does not currently support the CopyTo(DirectoryEntry) method.
                             Assert.Throws<NotImplementedException>(() => user.CopyTo(toOU));
-                            Assert.Throws<NotImplementedException>(() => user.CopyTo(toOU, "user.move.2"));
+                            Assert.Throws<NotImplementedException>(
+                                () => user.CopyTo(toOU, "user.move.2")
+                            );
                         }
                     }
                 }
+
                 finally
                 {
                     DeleteOU(de, "CopyingOU");
@@ -208,20 +303,29 @@ namespace System.DirectoryServices.Tests
                 {
                     using (DirectoryEntry rootOU = CreateOU(de, "RenamingOU", "Renaming Root OU"))
                     {
-                        DirectoryEntry user = CreateOrganizationalRole(rootOU, "user.before.rename", "User to rename", "1 111 111 1111");
+                        DirectoryEntry user = CreateOrganizationalRole(
+                            rootOU,
+                            "user.before.rename",
+                            "User to rename",
+                            "1 111 111 1111"
+                        );
                         SearchOrganizationalRole(rootOU, "user.before.rename");
-
 
                         user.Rename("cn=user.after.rename");
                         user.CommitChanges();
 
-                        Assert.Throws<DirectoryServicesCOMException>(() => SearchOrganizationalRole(rootOU, "user.before.rename"));
+                        Assert.Throws<DirectoryServicesCOMException>(
+                            () => SearchOrganizationalRole(rootOU, "user.before.rename")
+                        );
 
                         SearchOrganizationalRole(rootOU, "user.after.rename");
 
-                        Assert.Throws<DirectoryServicesCOMException>(() => user.Rename("user.after.after.rename"));
+                        Assert.Throws<DirectoryServicesCOMException>(
+                            () => user.Rename("user.after.after.rename")
+                        );
                     }
                 }
+
                 finally
                 {
                     DeleteOU(de, "RenamingOU");
@@ -251,6 +355,7 @@ namespace System.DirectoryServices.Tests
                         Assert.Equal(parentOU.Name, childOU.Parent.Name);
                     }
                 }
+
                 finally
                 {
                     DeleteOU(de, "GrandParent");
@@ -269,10 +374,36 @@ namespace System.DirectoryServices.Tests
                 {
                     using (DirectoryEntry rootOU = CreateOU(de, "RootToDelete", "Root OU"))
                     using (DirectoryEntry childOU = CreateOU(rootOU, "Child1", "Root Child 1 OU"))
-                    using (DirectoryEntry anotherChildOU = CreateOU(rootOU, "Child2", "Root Child 2 OU"))
-                    using (DirectoryEntry grandChildOU = CreateOU(childOU, "GrandChild", "Grand Child OU"))
-                    using (DirectoryEntry user1 = CreateOrganizationalRole(grandChildOU, "user.grandChild.1", "Grand Child User", "1 111 111 1111"))
-                    using (DirectoryEntry user2 = CreateOrganizationalRole(grandChildOU, "user.grandChild.2", "Grand Child User", "1 222 222 2222"))
+                    using (
+                        DirectoryEntry anotherChildOU = CreateOU(
+                            rootOU,
+                            "Child2",
+                            "Root Child 2 OU"
+                        )
+                    )
+                    using (
+                        DirectoryEntry grandChildOU = CreateOU(
+                            childOU,
+                            "GrandChild",
+                            "Grand Child OU"
+                        )
+                    )
+                    using (
+                        DirectoryEntry user1 = CreateOrganizationalRole(
+                            grandChildOU,
+                            "user.grandChild.1",
+                            "Grand Child User",
+                            "1 111 111 1111"
+                        )
+                    )
+                    using (
+                        DirectoryEntry user2 = CreateOrganizationalRole(
+                            grandChildOU,
+                            "user.grandChild.2",
+                            "Grand Child User",
+                            "1 222 222 2222"
+                        )
+                    )
                     {
                         SearchOUByName(de, "RootToDelete");
                         SearchOUByName(rootOU, "Child1");
@@ -284,11 +415,21 @@ namespace System.DirectoryServices.Tests
                         {
                             rootOU.DeleteTree();
 
-                            Assert.Throws<DirectoryServicesCOMException>(() => SearchOUByName(de, "RootToDelete"));
-                            Assert.Throws<DirectoryServicesCOMException>(() => SearchOUByName(rootOU, "Child1"));
-                            Assert.Throws<DirectoryServicesCOMException>(() => SearchOUByName(rootOU, "Child2"));
-                            Assert.Throws<DirectoryServicesCOMException>(() => SearchOUByName(childOU, "GrandChild"));
-                            Assert.Throws<DirectoryServicesCOMException>(() => SearchOrganizationalRole(grandChildOU, "user.grandChild.1"));
+                            Assert.Throws<DirectoryServicesCOMException>(
+                                () => SearchOUByName(de, "RootToDelete")
+                            );
+                            Assert.Throws<DirectoryServicesCOMException>(
+                                () => SearchOUByName(rootOU, "Child1")
+                            );
+                            Assert.Throws<DirectoryServicesCOMException>(
+                                () => SearchOUByName(rootOU, "Child2")
+                            );
+                            Assert.Throws<DirectoryServicesCOMException>(
+                                () => SearchOUByName(childOU, "GrandChild")
+                            );
+                            Assert.Throws<DirectoryServicesCOMException>(
+                                () => SearchOrganizationalRole(grandChildOU, "user.grandChild.1")
+                            );
                         }
                         else
                         {
@@ -297,6 +438,7 @@ namespace System.DirectoryServices.Tests
                         }
                     }
                 }
+
                 finally
                 {
                     DeleteOU(de, "RootToDelete");
@@ -309,11 +451,16 @@ namespace System.DirectoryServices.Tests
         {
             using (DirectoryEntry de = new DirectoryEntry("SomeWrongPath"))
             {
-                Assert.Throws<COMException>(() => { foreach (var e in de.Children) {} } );
+                Assert.Throws<COMException>(
+                    () =>
+                    {
+                        foreach (var e in de.Children) { }
+                    }
+                );
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
-                    Assert.Throws<COMException>(() => ds.FindAll() );
+                    Assert.Throws<COMException>(() => ds.FindAll());
                 }
             }
         }
@@ -323,7 +470,12 @@ namespace System.DirectoryServices.Tests
         {
             using (DirectoryEntry de = new DirectoryEntry(LdapConfiguration.Configuration.LdapPath))
             {
-                CheckSpecificException(() => { foreach (var e in de.Children) {} } );
+                CheckSpecificException(
+                    () =>
+                    {
+                        foreach (var e in de.Children) { }
+                    }
+                );
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
@@ -335,27 +487,45 @@ namespace System.DirectoryServices.Tests
         [ConditionalFact(nameof(IsLdapConfigurationExist))]
         public void TestInvalidUserAndPassword()
         {
-            using (DirectoryEntry de = new DirectoryEntry(LdapConfiguration.Configuration.LdapPath, "wrongUser", "wrongPassword"))
+            using (
+                DirectoryEntry de = new DirectoryEntry(
+                    LdapConfiguration.Configuration.LdapPath,
+                    "wrongUser",
+                    "wrongPassword"
+                )
+            )
             {
-                CheckSpecificException(() => { foreach (var e in de.Children) {} });
+                CheckSpecificException(
+                    () =>
+                    {
+                        foreach (var e in de.Children) { }
+                    }
+                );
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
-                    CheckSpecificException(() => ds.FindAll() );
+                    CheckSpecificException(() => ds.FindAll());
                 }
             }
 
-            using (DirectoryEntry de = new DirectoryEntry(
-                                            LdapConfiguration.Configuration.LdapPath,
-                                            LdapConfiguration.Configuration.UserName,
-                                            "wrongPassword"
-                                            ))
+            using (
+                DirectoryEntry de = new DirectoryEntry(
+                    LdapConfiguration.Configuration.LdapPath,
+                    LdapConfiguration.Configuration.UserName,
+                    "wrongPassword"
+                )
+            )
             {
-                CheckSpecificException(() => { foreach (var e in de.Children) {} } );
+                CheckSpecificException(
+                    () =>
+                    {
+                        foreach (var e in de.Children) { }
+                    }
+                );
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
-                    CheckSpecificException(() => ds.FindAll() );
+                    CheckSpecificException(() => ds.FindAll());
                 }
             }
         }
@@ -363,16 +533,18 @@ namespace System.DirectoryServices.Tests
         [ConditionalFact(nameof(IsLdapConfigurationExist))]
         public void TestInvalidSearchFilter()
         {
-            using (DirectoryEntry de = new DirectoryEntry(
-                                            LdapConfiguration.Configuration.LdapPath,
-                                            LdapConfiguration.Configuration.UserName,
-                                            "wrongPassword"
-                                            ))
+            using (
+                DirectoryEntry de = new DirectoryEntry(
+                    LdapConfiguration.Configuration.LdapPath,
+                    LdapConfiguration.Configuration.UserName,
+                    "wrongPassword"
+                )
+            )
             {
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*))"; // invalid search filter
-                    CheckSpecificException(() => ds.FindOne() );
+                    CheckSpecificException(() => ds.FindOne());
                 }
             }
         }
@@ -386,15 +558,22 @@ namespace System.DirectoryServices.Tests
 
                 try
                 {
-                    using (DirectoryEntry rootOU = CreateOU(de, "NegativeRoot", "Negative Test Root OU"))
+                    using (
+                        DirectoryEntry rootOU = CreateOU(
+                            de,
+                            "NegativeRoot",
+                            "Negative Test Root OU"
+                        )
+                    )
                     {
-                        DirectoryEntry entry = rootOU.Children.Add($"cn=MyNamedObject","Class");
+                        DirectoryEntry entry = rootOU.Children.Add($"cn=MyNamedObject", "Class");
                         entry.Properties["objectClass"].Value = "namedObject";
                         entry.Properties["cn"].Value = "MyNamedObject";
                         entry.Properties["description"].Value = "description"; // description is not allowed in the schema
                         Assert.Throws<DirectoryServicesCOMException>(() => entry.CommitChanges());
                     }
                 }
+
                 finally
                 {
                     DeleteOU(de, "NegativeRoot");
@@ -412,18 +591,52 @@ namespace System.DirectoryServices.Tests
                 try
                 {
                     using (DirectoryEntry rootOU = CreateOU(de, "SearchRoot", "Root OU"))
-                    using (DirectoryEntry childOU = CreateOU(rootOU, "Search.Child1", "Root Child 1 OU"))
-                    using (DirectoryEntry anotherChildOU = CreateOU(rootOU, "Search.Child2", "Root Child 2 OU"))
-                    using (DirectoryEntry grandChildOU = CreateOU(childOU, "Search.GrandChild", "Grand Child OU"))
-                    using (DirectoryEntry user1 = CreateOrganizationalRole(grandChildOU, "user.search.grandChild.1", "Grand Child User", "1 111 111 1111"))
-                    using (DirectoryEntry user2 = CreateOrganizationalRole(grandChildOU, "user.search.grandChild.2", "Grand Child User", "1 222 222 2222"))
+                    using (
+                        DirectoryEntry childOU = CreateOU(
+                            rootOU,
+                            "Search.Child1",
+                            "Root Child 1 OU"
+                        )
+                    )
+                    using (
+                        DirectoryEntry anotherChildOU = CreateOU(
+                            rootOU,
+                            "Search.Child2",
+                            "Root Child 2 OU"
+                        )
+                    )
+                    using (
+                        DirectoryEntry grandChildOU = CreateOU(
+                            childOU,
+                            "Search.GrandChild",
+                            "Grand Child OU"
+                        )
+                    )
+                    using (
+                        DirectoryEntry user1 = CreateOrganizationalRole(
+                            grandChildOU,
+                            "user.search.grandChild.1",
+                            "Grand Child User",
+                            "1 111 111 1111"
+                        )
+                    )
+                    using (
+                        DirectoryEntry user2 = CreateOrganizationalRole(
+                            grandChildOU,
+                            "user.search.grandChild.2",
+                            "Grand Child User",
+                            "1 222 222 2222"
+                        )
+                    )
                     {
                         user1.Properties["postalCode"].Value = 98052;
-                        user1.Properties["postalAddress"].Value = "12345 SE 1st Street, City1, State1";
+                        user1.Properties["postalAddress"].Value =
+                            "12345 SE 1st Street, City1, State1";
                         user1.CommitChanges();
 
                         user2.Properties["postalCode"].Value = 98088;
-                        user2.Properties["postalAddress"].Value = "67890 SE 2nd Street, City2, State2";
+                        user2.Properties["postalAddress"].Value =
+                            "67890 SE 2nd Street, City2, State2";
                         user2.CommitChanges();
 
                         using (DirectorySearcher ds = new DirectorySearcher(rootOU))
@@ -459,7 +672,8 @@ namespace System.DirectoryServices.Tests
                             ds.Filter = "(&(description=*)(objectClass=organizationalRole))";
                             Assert.Equal(2, ds.FindAll().Count);
 
-                            ds.Filter = "(&(description=No Description)(objectClass=organizationalRole))";
+                            ds.Filter =
+                                "(&(description=No Description)(objectClass=organizationalRole))";
                             Assert.Equal(0, ds.FindAll().Count);
 
                             ds.Filter = "(postalCode=*)";
@@ -477,6 +691,7 @@ namespace System.DirectoryServices.Tests
                         }
                     }
                 }
+
                 finally
                 {
                     DeleteOU(de, "SearchRoot");
@@ -498,10 +713,16 @@ namespace System.DirectoryServices.Tests
 
                 try
                 {
-                    using (DirectoryEntry rootOU = CreateOU(de, "AttributesRoot", "Attributes Root OU"))
+                    using (
+                        DirectoryEntry rootOU = CreateOU(de, "AttributesRoot", "Attributes Root OU")
+                    )
                     {
-                        DirectoryEntry cnEntry = rootOU.Children.Add($"cn=CustomUser","Class");
-                        cnEntry.Properties["objectClass"].Value = new string [] { "extensibleObject", "organizationalRole" };
+                        DirectoryEntry cnEntry = rootOU.Children.Add($"cn=CustomUser", "Class");
+                        cnEntry.Properties["objectClass"].Value = new string[]
+                        {
+                            "extensibleObject",
+                            "organizationalRole"
+                        };
                         cnEntry.Properties["cn"].Value = "CustomUser";
                         cnEntry.Properties["description"].Value = "Some Custom User";
                         cnEntry.Properties["telephoneNumber"].Value = "1 111 111 11111";
@@ -516,7 +737,9 @@ namespace System.DirectoryServices.Tests
                             SearchResult sr = ds.FindOne();
                             if (sr == null)
                             {
-                                throw new DirectoryServicesCOMException($"Couldn't find CustomUser in the entry {de.Name}");
+                                throw new DirectoryServicesCOMException(
+                                    $"Couldn't find CustomUser in the entry {de.Name}"
+                                );
                             }
                             Assert.Equal((object)true, sr.Properties["deleteOldRDN"][0]);
                             Assert.Equal(101, sr.Properties["changeNumber"][0]);
@@ -525,6 +748,7 @@ namespace System.DirectoryServices.Tests
                         }
                     }
                 }
+
                 finally
                 {
                     DeleteOU(de, "AttributesRoot");
@@ -537,25 +761,39 @@ namespace System.DirectoryServices.Tests
             Exception exception = Record.Exception(blockToExecute);
             Assert.True(exception != null, "No exception was thrown");
 
-            Type expected = IsActiveDirectoryServer ? typeof(DirectoryServicesCOMException) : typeof(COMException);
+            Type expected = IsActiveDirectoryServer
+                ? typeof(DirectoryServicesCOMException)
+                : typeof(COMException);
 
             if (exception.GetType() != expected)
-                throw new XunitException(String.Format("Expected exception type '{0}' got '{1}' with message '{2}'", expected, exception.GetType(), exception.Message));
+                throw new XunitException(
+                    String.Format(
+                        "Expected exception type '{0}' got '{1}' with message '{2}'",
+                        expected,
+                        exception.GetType(),
+                        exception.Message
+                    )
+                );
         }
 
         private DirectoryEntry CreateOU(DirectoryEntry de, string ou, string description)
         {
-            DirectoryEntry ouCoreDevs = de.Children.Add($"ou={ou}","Class");
-            ouCoreDevs.Properties["objectClass"].Value = "organizationalUnit";    // has to be organizationalUnit
+            DirectoryEntry ouCoreDevs = de.Children.Add($"ou={ou}", "Class");
+            ouCoreDevs.Properties["objectClass"].Value = "organizationalUnit"; // has to be organizationalUnit
             ouCoreDevs.Properties["description"].Value = description;
             ouCoreDevs.Properties["ou"].Value = ou;
             ouCoreDevs.CommitChanges();
             return ouCoreDevs;
         }
 
-        private DirectoryEntry CreateOrganizationalRole(DirectoryEntry ouEntry, string cn, string description, string phone)
+        private DirectoryEntry CreateOrganizationalRole(
+            DirectoryEntry ouEntry,
+            string cn,
+            string description,
+            string phone
+        )
         {
-            DirectoryEntry cnEntry = ouEntry.Children.Add($"cn={cn}","Class");
+            DirectoryEntry cnEntry = ouEntry.Children.Add($"cn={cn}", "Class");
             cnEntry.Properties["objectClass"].Value = "organizationalRole";
             cnEntry.Properties["cn"].Value = cn;
             cnEntry.Properties["description"].Value = description;
@@ -601,7 +839,9 @@ namespace System.DirectoryServices.Tests
                 SearchResult sr = ds.FindOne();
                 if (sr == null)
                 {
-                    throw new DirectoryServicesCOMException($"Couldn't find {ouName} in the entry {de.Name}");
+                    throw new DirectoryServicesCOMException(
+                        $"Couldn't find {ouName} in the entry {de.Name}"
+                    );
                 }
                 Assert.Equal(ouName, sr.Properties["ou"][0]);
             }
@@ -618,7 +858,9 @@ namespace System.DirectoryServices.Tests
 
                 if (sr == null)
                 {
-                    throw new DirectoryServicesCOMException($"Couldn't find {cnName} in the entry {de.Name}");
+                    throw new DirectoryServicesCOMException(
+                        $"Couldn't find {cnName} in the entry {de.Name}"
+                    );
                 }
 
                 Assert.Equal(cnName, sr.Properties["cn"][0]);
@@ -639,10 +881,12 @@ namespace System.DirectoryServices.Tests
 
         private DirectoryEntry CreateRootEntry()
         {
-            return new DirectoryEntry(LdapConfiguration.Configuration.LdapPath,
-                                      LdapConfiguration.Configuration.UserName,
-                                      LdapConfiguration.Configuration.Password,
-                                      LdapConfiguration.Configuration.AuthenticationTypes);
+            return new DirectoryEntry(
+                LdapConfiguration.Configuration.LdapPath,
+                LdapConfiguration.Configuration.UserName,
+                LdapConfiguration.Configuration.Password,
+                LdapConfiguration.Configuration.AuthenticationTypes
+            );
         }
     }
 }

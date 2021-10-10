@@ -31,9 +31,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class with the specified <paramref name="name"/> and no attributes.
         /// </summary>
-        protected MemberDescriptor(string name) : this(name, null)
-        {
-        }
+        protected MemberDescriptor(string name) : this(name, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class with the specified <paramref name="name"/> and <paramref name="attributes "/> array.
@@ -173,19 +171,26 @@ namespace System.ComponentModel
         /// Gets the name of the category that the member belongs to, as specified
         /// in the <see cref='System.ComponentModel.CategoryAttribute'/>.
         /// </summary>
-        public virtual string Category => _category ?? (_category = ((CategoryAttribute)Attributes[typeof(CategoryAttribute)]).Category);
+        public virtual string Category =>
+            _category
+            ?? (_category = ((CategoryAttribute)Attributes[typeof(CategoryAttribute)]).Category);
 
         /// <summary>
         /// Gets the description of the member as specified in the <see cref='System.ComponentModel.DescriptionAttribute'/>.
         /// </summary>
-        public virtual string Description => _description ??
-                                             (_description = ((DescriptionAttribute)Attributes[typeof(DescriptionAttribute)]).Description);
+        public virtual string Description =>
+            _description
+            ?? (
+                _description =
+                    ((DescriptionAttribute)Attributes[typeof(DescriptionAttribute)]).Description
+            );
 
         /// <summary>
         /// Gets a value indicating whether the member is browsable as specified in the
         /// <see cref='System.ComponentModel.BrowsableAttribute'/>.
         /// </summary>
-        public virtual bool IsBrowsable => ((BrowsableAttribute)Attributes[typeof(BrowsableAttribute)]).Browsable;
+        public virtual bool IsBrowsable =>
+            ((BrowsableAttribute)Attributes[typeof(BrowsableAttribute)]).Browsable;
 
         /// <summary>
         /// Gets the name of the member.
@@ -201,7 +206,8 @@ namespace System.ComponentModel
         /// Determines whether this member should be set only at
         /// design time as specified in the <see cref='System.ComponentModel.DesignOnlyAttribute'/>.
         /// </summary>
-        public virtual bool DesignTimeOnly => (DesignOnlyAttribute.Yes.Equals(Attributes[typeof(DesignOnlyAttribute)]));
+        public virtual bool DesignTimeOnly =>
+            (DesignOnlyAttribute.Yes.Equals(Attributes[typeof(DesignOnlyAttribute)]));
 
         /// <summary>
         /// Gets the name that can be displayed in a window like a properties window.
@@ -210,7 +216,12 @@ namespace System.ComponentModel
         {
             get
             {
-                if (!(Attributes[typeof(DisplayNameAttribute)] is DisplayNameAttribute displayNameAttr) || displayNameAttr.IsDefaultAttribute())
+                if (
+                    !(
+                        Attributes[typeof(DisplayNameAttribute)]
+                        is DisplayNameAttribute displayNameAttr
+                    ) || displayNameAttr.IsDefaultAttribute()
+                )
                 {
                     return _displayName;
                 }
@@ -274,14 +285,18 @@ namespace System.ComponentModel
                 return false;
             }
 
-            if ((mdObj._category == null) != (_category == null) ||
-                (_category != null && !mdObj._category.Equals(_category)))
+            if (
+                (mdObj._category == null) != (_category == null)
+                || (_category != null && !mdObj._category.Equals(_category))
+            )
             {
                 return false;
             }
 
-            if ((mdObj._description == null) != (_description == null) ||
-                (_description != null && !mdObj._description.Equals(_description)))
+            if (
+                (mdObj._description == null) != (_description == null)
+                || (_description != null && !mdObj._description.Equals(_description))
+            )
             {
                 return false;
             }
@@ -345,9 +360,7 @@ namespace System.ComponentModel
                     {
                         FillAttributes(list);
                     }
-                    catch (Exception)
-                    {
-                    }
+                    catch (Exception) { }
                 }
                 else
                 {
@@ -391,13 +404,18 @@ namespace System.ComponentModel
         /// <summary>
         /// Finds the given method through reflection. This method only looks for public methods.
         /// </summary>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2067:UnrecognizedReflectionPattern",
-            Justification = "This method only looks for public methods by hard-coding publicOnly=true")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2067:UnrecognizedReflectionPattern",
+            Justification = "This method only looks for public methods by hard-coding publicOnly=true"
+        )]
         protected static MethodInfo FindMethod(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type componentClass,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                Type componentClass,
             string name,
             Type[] args,
-            Type returnType)
+            Type returnType
+        )
         {
             return FindMethod(componentClass, name, args, returnType, publicOnly: true);
         }
@@ -406,11 +424,16 @@ namespace System.ComponentModel
         /// Finds the given method through reflection.
         /// </summary>
         protected static MethodInfo FindMethod(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type componentClass,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type componentClass,
             string name,
             Type[] args,
             Type returnType,
-            bool publicOnly)
+            bool publicOnly
+        )
         {
             if (componentClass == null)
             {
@@ -424,7 +447,16 @@ namespace System.ComponentModel
             }
             else
             {
-                result = componentClass.GetMethod(name, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, null, args, null);
+                result = componentClass.GetMethod(
+                    name,
+                    BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic,
+                    null,
+                    args,
+                    null
+                );
             }
             if (result != null && !result.ReturnType.IsEquivalentTo(returnType))
             {
@@ -465,10 +497,11 @@ namespace System.ComponentModel
         /// </summary>
         protected static ISite GetSite(object component) => (component as IComponent)?.Site;
 
-        [Obsolete("This method has been deprecated. Use GetInvocationTarget instead. https://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This method has been deprecated. Use GetInvocationTarget instead. https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         protected static object GetInvokee(Type componentClass, object component)
         {
-
             if (componentClass == null)
             {
                 throw new ArgumentNullException(nameof(componentClass));

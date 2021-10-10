@@ -69,7 +69,10 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             model.DictionaryOfStringToInteger["one"] = 1;
             model.DictionaryOfStringToInteger["two"] = 2;
             var patchDocument = new JsonPatchDocument();
-            patchDocument.Move("/DictionaryOfStringToInteger/one", "/DictionaryOfStringToInteger/two");
+            patchDocument.Move(
+                "/DictionaryOfStringToInteger/one",
+                "/DictionaryOfStringToInteger/two"
+            );
 
             // Act
             patchDocument.ApplyTo(model);
@@ -106,7 +109,10 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             model.DictionaryOfStringToInteger["one"] = 1;
             model.DictionaryOfStringToInteger["two"] = 2;
             var patchDocument = new JsonPatchDocument();
-            patchDocument.Copy("/DictionaryOfStringToInteger/one", "/DictionaryOfStringToInteger/two");
+            patchDocument.Copy(
+                "/DictionaryOfStringToInteger/one",
+                "/DictionaryOfStringToInteger/two"
+            );
 
             // Act
             patchDocument.ApplyTo(model);
@@ -130,12 +136,14 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
 
         private class IntDictionary
         {
-            public IDictionary<string, int> DictionaryOfStringToInteger { get; } = new Dictionary<string, int>();
+            public IDictionary<string, int> DictionaryOfStringToInteger { get; } =
+                new Dictionary<string, int>();
         }
 
         private class CustomerDictionary
         {
-            public IDictionary<int, Customer> DictionaryOfStringToCustomer { get; } = new Dictionary<int, Customer>();
+            public IDictionary<int, Customer> DictionaryOfStringToCustomer { get; } =
+                new Dictionary<int, Customer>();
         }
 
         [Fact]
@@ -165,13 +173,18 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             patchDocument.Test($"/DictionaryOfStringToCustomer/{key1}/Name", "Mike");
 
             // Act
-            var exception = Assert.Throws<JsonPatchException>(() =>
-            {
-                patchDocument.ApplyTo(model);
-            });
+            var exception = Assert.Throws<JsonPatchException>(
+                () =>
+                {
+                    patchDocument.ApplyTo(model);
+                }
+            );
 
             // Assert
-            Assert.Equal("The current value 'James' at path 'Name' is not equal to the test value 'Mike'.", exception.Message);
+            Assert.Equal(
+                "The current value 'James' at path 'Name' is not equal to the test value 'Mike'.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -232,7 +245,10 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             model.DictionaryOfStringToCustomer[key1] = value1;
             model.DictionaryOfStringToCustomer[key2] = value2;
             var patchDocument = new JsonPatchDocument();
-            patchDocument.Move($"/DictionaryOfStringToCustomer/{key1}/Name", $"/DictionaryOfStringToCustomer/{key2}/Name");
+            patchDocument.Move(
+                $"/DictionaryOfStringToCustomer/{key1}/Name",
+                $"/DictionaryOfStringToCustomer/{key2}/Name"
+            );
 
             // Act
             patchDocument.ApplyTo(model);
@@ -255,7 +271,10 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             model.DictionaryOfStringToCustomer[key1] = value1;
             model.DictionaryOfStringToCustomer[key2] = value2;
             var patchDocument = new JsonPatchDocument();
-            patchDocument.Copy($"/DictionaryOfStringToCustomer/{key1}/Name", $"/DictionaryOfStringToCustomer/{key2}/Name");
+            patchDocument.Copy(
+                $"/DictionaryOfStringToCustomer/{key1}/Name",
+                $"/DictionaryOfStringToCustomer/{key2}/Name"
+            );
 
             // Act
             patchDocument.ApplyTo(model);

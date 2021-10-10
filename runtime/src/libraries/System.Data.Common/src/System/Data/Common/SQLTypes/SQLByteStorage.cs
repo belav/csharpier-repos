@@ -15,9 +15,7 @@ namespace System.Data.Common
         private SqlByte[] _values = default!; // Late-initialized
 
         public SqlByteStorage(DataColumn column)
-        : base(column, typeof(SqlByte), SqlByte.Null, SqlByte.Null, StorageType.SqlByte)
-        {
-        }
+            : base(column, typeof(SqlByte), SqlByte.Null, SqlByte.Null, StorageType.SqlByte) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -32,7 +30,10 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { sum += _values[record]; }
+                            checked
+                            {
+                                sum += _values[record];
+                            }
                             hasData = true;
                         }
                         if (hasData)
@@ -48,14 +49,20 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { meanSum += _values[record].ToSqlInt64(); }
+                            checked
+                            {
+                                meanSum += _values[record].ToSqlInt64();
+                            }
                             meanCount++;
                             hasData = true;
                         }
                         if (hasData)
                         {
                             SqlByte mean = 0;
-                            checked { mean = (meanSum / meanCount).ToSqlByte(); }
+                            checked
+                            {
+                                mean = (meanSum / meanCount).ToSqlByte();
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -177,7 +184,6 @@ namespace System.Data.Common
             return _nullValue;
         }
 
-
         public override void Copy(int recordNo1, int recordNo2)
         {
             _values[recordNo2] = _values[recordNo1];
@@ -242,7 +248,12 @@ namespace System.Data.Common
             return new SqlByte[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             SqlByte[] typedStore = (SqlByte[])store;
             typedStore[storeIndex] = _values[record];

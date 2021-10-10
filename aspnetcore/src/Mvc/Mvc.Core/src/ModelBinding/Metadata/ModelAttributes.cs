@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         internal ModelAttributes(
             IEnumerable<object> typeAttributes,
             IEnumerable<object>? propertyAttributes,
-            IEnumerable<object>? parameterAttributes)
+            IEnumerable<object>? parameterAttributes
+        )
         {
             if (propertyAttributes != null)
             {
@@ -134,7 +135,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <returns>
         /// A <see cref="ModelAttributes"/> instance with the attributes of the property and its <see cref="Type"/>.
         /// </returns>
-        public static ModelAttributes GetAttributesForProperty(Type containerType, PropertyInfo property, Type modelType)
+        public static ModelAttributes GetAttributesForProperty(
+            Type containerType,
+            PropertyInfo property,
+            Type modelType
+        )
         {
             if (containerType == null)
             {
@@ -155,11 +160,17 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 var metadataProperty = metadataType.GetRuntimeProperty(property.Name);
                 if (metadataProperty != null)
                 {
-                    propertyAttributes = propertyAttributes.Concat(metadataProperty.GetCustomAttributes());
+                    propertyAttributes = propertyAttributes.Concat(
+                        metadataProperty.GetCustomAttributes()
+                    );
                 }
             }
 
-            return new ModelAttributes(typeAttributes, propertyAttributes, parameterAttributes: null);
+            return new ModelAttributes(
+                typeAttributes,
+                propertyAttributes,
+                parameterAttributes: null
+            );
         }
 
         /// <summary>
@@ -183,7 +194,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 attributes = attributes.Concat(metadataType.GetCustomAttributes());
             }
 
-            return new ModelAttributes(attributes, propertyAttributes: null, parameterAttributes: null);
+            return new ModelAttributes(
+                attributes,
+                propertyAttributes: null,
+                parameterAttributes: null
+            );
         }
 
         /// <summary>
@@ -203,7 +218,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var typeAttributes = GetAttributesForType(parameterInfo.ParameterType).TypeAttributes!;
             var parameterAttributes = parameterInfo.GetCustomAttributes();
 
-            return new ModelAttributes(typeAttributes, propertyAttributes: null, parameterAttributes);
+            return new ModelAttributes(
+                typeAttributes,
+                propertyAttributes: null,
+                parameterAttributes
+            );
         }
 
         /// <summary>
@@ -216,7 +235,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <returns>
         /// A <see cref="ModelAttributes"/> instance with the attributes of the parameter and its <see cref="Type"/>.
         /// </returns>
-        public static ModelAttributes GetAttributesForParameter(ParameterInfo parameterInfo, Type modelType)
+        public static ModelAttributes GetAttributesForParameter(
+            ParameterInfo parameterInfo,
+            Type modelType
+        )
         {
             if (parameterInfo == null)
             {
@@ -234,7 +256,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var typeAttributes = GetAttributesForType(modelType).TypeAttributes!;
             var parameterAttributes = parameterInfo.GetCustomAttributes();
 
-            return new ModelAttributes(typeAttributes, propertyAttributes: null, parameterAttributes);
+            return new ModelAttributes(
+                typeAttributes,
+                propertyAttributes: null,
+                parameterAttributes
+            );
         }
 
         private static Type? GetMetadataType(Type type)

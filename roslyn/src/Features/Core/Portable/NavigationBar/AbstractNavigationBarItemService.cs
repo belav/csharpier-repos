@@ -11,26 +11,56 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 {
     internal abstract class AbstractNavigationBarItemService : INavigationBarItemService
     {
-        protected abstract Task<ImmutableArray<RoslynNavigationBarItem>> GetItemsInCurrentProcessAsync(Document document, bool supportsCodeGeneration, CancellationToken cancellationToken);
+        protected abstract Task<
+            ImmutableArray<RoslynNavigationBarItem>
+        > GetItemsInCurrentProcessAsync(
+            Document document,
+            bool supportsCodeGeneration,
+            CancellationToken cancellationToken
+        );
 
-        public async Task<ImmutableArray<RoslynNavigationBarItem>> GetItemsAsync(Document document, bool supportsCodeGeneration, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<RoslynNavigationBarItem>> GetItemsAsync(
+            Document document,
+            bool supportsCodeGeneration,
+            CancellationToken cancellationToken
+        )
         {
-            var client = await RemoteHostClient.TryGetClientAsync(document.Project, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient.TryGetClientAsync(
+                    document.Project,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (client != null)
             {
                 var solution = document.Project.Solution;
 
-                var result = await client.TryInvokeAsync<IRemoteNavigationBarItemService, ImmutableArray<SerializableNavigationBarItem>>(
-                    solution,
-                    (service, solutionInfo, cancellationToken) => service.GetItemsAsync(solutionInfo, document.Id, supportsCodeGeneration, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                var result = await client.TryInvokeAsync<
+                    IRemoteNavigationBarItemService,
+                    ImmutableArray<SerializableNavigationBarItem>
+                >(
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.GetItemsAsync(
+                                solutionInfo,
+                                document.Id,
+                                supportsCodeGeneration,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return result.HasValue
-                    ? result.Value.SelectAsArray(v => v.Rehydrate())
-                    : ImmutableArray<RoslynNavigationBarItem>.Empty;
+                  ? result.Value.SelectAsArray(v => v.Rehydrate())
+                  : ImmutableArray<RoslynNavigationBarItem>.Empty;
             }
 
-            var items = await GetItemsInCurrentProcessAsync(document, supportsCodeGeneration, cancellationToken).ConfigureAwait(false);
+            var items = await GetItemsInCurrentProcessAsync(
+                    document,
+                    supportsCodeGeneration,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return items;
         }
     }

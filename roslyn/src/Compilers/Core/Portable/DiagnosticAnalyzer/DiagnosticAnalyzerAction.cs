@@ -23,8 +23,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public Action<SymbolAnalysisContext> Action { get; }
         public ImmutableArray<SymbolKind> Kinds { get; }
 
-        public SymbolAnalyzerAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> kinds, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public SymbolAnalyzerAction(
+            Action<SymbolAnalysisContext> action,
+            ImmutableArray<SymbolKind> kinds,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
             Kinds = kinds;
@@ -36,8 +39,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public Action<SymbolStartAnalysisContext> Action { get; }
         public SymbolKind Kind { get; }
 
-        public SymbolStartAnalyzerAction(Action<SymbolStartAnalysisContext> action, SymbolKind kind, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public SymbolStartAnalyzerAction(
+            Action<SymbolStartAnalysisContext> action,
+            SymbolKind kind,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
             Kind = kind;
@@ -48,20 +54,26 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public Action<SymbolAnalysisContext> Action { get; }
 
-        public SymbolEndAnalyzerAction(Action<SymbolAnalysisContext> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public SymbolEndAnalyzerAction(
+            Action<SymbolAnalysisContext> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }
     }
 
-    internal sealed class SyntaxNodeAnalyzerAction<TLanguageKindEnum> : AnalyzerAction where TLanguageKindEnum : struct
+    internal sealed class SyntaxNodeAnalyzerAction<TLanguageKindEnum> : AnalyzerAction
+        where TLanguageKindEnum : struct
     {
         public Action<SyntaxNodeAnalysisContext> Action { get; }
         public ImmutableArray<TLanguageKindEnum> Kinds { get; }
 
-        public SyntaxNodeAnalyzerAction(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> kinds, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public SyntaxNodeAnalyzerAction(
+            Action<SyntaxNodeAnalysisContext> action,
+            ImmutableArray<TLanguageKindEnum> kinds,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
             Kinds = kinds;
@@ -72,8 +84,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public Action<OperationBlockStartAnalysisContext> Action { get; }
 
-        public OperationBlockStartAnalyzerAction(Action<OperationBlockStartAnalysisContext> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public OperationBlockStartAnalyzerAction(
+            Action<OperationBlockStartAnalysisContext> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }
@@ -83,8 +97,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public Action<OperationBlockAnalysisContext> Action { get; }
 
-        public OperationBlockAnalyzerAction(Action<OperationBlockAnalysisContext> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public OperationBlockAnalyzerAction(
+            Action<OperationBlockAnalysisContext> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }
@@ -95,8 +111,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public Action<OperationAnalysisContext> Action { get; }
         public ImmutableArray<OperationKind> Kinds { get; }
 
-        public OperationAnalyzerAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> kinds, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public OperationAnalyzerAction(
+            Action<OperationAnalysisContext> action,
+            ImmutableArray<OperationKind> kinds,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
             Kinds = kinds;
@@ -107,8 +126,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public Action<CompilationStartAnalysisContext> Action { get; }
 
-        public CompilationStartAnalyzerAction(Action<CompilationStartAnalysisContext> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public CompilationStartAnalyzerAction(
+            Action<CompilationStartAnalysisContext> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }
@@ -118,8 +139,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public Action<CompilationAnalysisContext> Action { get; }
 
-        public CompilationAnalyzerAction(Action<CompilationAnalysisContext> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public CompilationAnalyzerAction(
+            Action<CompilationAnalysisContext> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }
@@ -129,8 +152,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public Action<SemanticModelAnalysisContext> Action { get; }
 
-        public SemanticModelAnalyzerAction(Action<SemanticModelAnalysisContext> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public SemanticModelAnalyzerAction(
+            Action<SemanticModelAnalysisContext> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }
@@ -140,8 +165,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public Action<SyntaxTreeAnalysisContext> Action { get; }
 
-        public SyntaxTreeAnalyzerAction(Action<SyntaxTreeAnalysisContext> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public SyntaxTreeAnalyzerAction(
+            Action<SyntaxTreeAnalysisContext> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }
@@ -151,19 +178,24 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public Action<AdditionalFileAnalysisContext> Action { get; }
 
-        public AdditionalFileAnalyzerAction(Action<AdditionalFileAnalysisContext> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public AdditionalFileAnalyzerAction(
+            Action<AdditionalFileAnalysisContext> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }
     }
 
-    internal sealed class CodeBlockStartAnalyzerAction<TLanguageKindEnum> : AnalyzerAction where TLanguageKindEnum : struct
+    internal sealed class CodeBlockStartAnalyzerAction<TLanguageKindEnum> : AnalyzerAction
+        where TLanguageKindEnum : struct
     {
         public Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> Action { get; }
 
-        public CodeBlockStartAnalyzerAction(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public CodeBlockStartAnalyzerAction(
+            Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }
@@ -173,8 +205,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public Action<CodeBlockAnalysisContext> Action { get; }
 
-        public CodeBlockAnalyzerAction(Action<CodeBlockAnalysisContext> action, DiagnosticAnalyzer analyzer)
-            : base(analyzer)
+        public CodeBlockAnalyzerAction(
+            Action<CodeBlockAnalysisContext> action,
+            DiagnosticAnalyzer analyzer
+        ) : base(analyzer)
         {
             Action = action;
         }

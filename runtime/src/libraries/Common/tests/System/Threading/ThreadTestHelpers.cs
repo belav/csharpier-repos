@@ -24,11 +24,15 @@ namespace System.Threading.Tests
             return CreateGuardedThread(out checkForThreadErrors, out waitForThread, start);
         }
 
-        public static Thread CreateGuardedThread(out Action checkForThreadErrors, out Action waitForThread, Action start)
+        public static Thread CreateGuardedThread(
+            out Action checkForThreadErrors,
+            out Action waitForThread,
+            Action start
+        )
         {
             Exception backgroundEx = null;
-            var t =
-                new Thread(() =>
+            var t = new Thread(
+                () =>
                 {
                     try
                     {
@@ -39,22 +43,22 @@ namespace System.Threading.Tests
                         backgroundEx = ex;
                         Interlocked.MemoryBarrier();
                     }
-                });
+                }
+            );
             Action localCheckForThreadErrors = checkForThreadErrors = // cannot use ref or out parameters in lambda
-                () =>
+            () =>
+            {
+                Interlocked.MemoryBarrier();
+                if (backgroundEx != null)
                 {
-                    Interlocked.MemoryBarrier();
-                    if (backgroundEx != null)
-                    {
-                        throw new AggregateException(backgroundEx);
-                    }
-                };
-            waitForThread =
-                () =>
-                {
-                    Assert.True(t.Join(UnexpectedThreadTimeoutMilliseconds));
-                    localCheckForThreadErrors();
-                };
+                    throw new AggregateException(backgroundEx);
+                }
+            };
+            waitForThread = () =>
+            {
+                Assert.True(t.Join(UnexpectedThreadTimeoutMilliseconds));
+                localCheckForThreadErrors();
+            };
             return t;
         }
 
@@ -64,11 +68,15 @@ namespace System.Threading.Tests
             return CreateGuardedThread(out checkForThreadErrors, out waitForThread, start);
         }
 
-        public static Thread CreateGuardedThread(out Action checkForThreadErrors, out Action waitForThread, Action<object> start)
+        public static Thread CreateGuardedThread(
+            out Action checkForThreadErrors,
+            out Action waitForThread,
+            Action<object> start
+        )
         {
             Exception backgroundEx = null;
-            var t =
-                new Thread(parameter =>
+            var t = new Thread(
+                parameter =>
                 {
                     try
                     {
@@ -79,22 +87,22 @@ namespace System.Threading.Tests
                         backgroundEx = ex;
                         Interlocked.MemoryBarrier();
                     }
-                });
+                }
+            );
             Action localCheckForThreadErrors = checkForThreadErrors = // cannot use ref or out parameters in lambda
-                () =>
+            () =>
+            {
+                Interlocked.MemoryBarrier();
+                if (backgroundEx != null)
                 {
-                    Interlocked.MemoryBarrier();
-                    if (backgroundEx != null)
-                    {
-                        throw new AggregateException(backgroundEx);
-                    }
-                };
-            waitForThread =
-                () =>
-                {
-                    Assert.True(t.Join(UnexpectedThreadTimeoutMilliseconds));
-                    localCheckForThreadErrors();
-                };
+                    throw new AggregateException(backgroundEx);
+                }
+            };
+            waitForThread = () =>
+            {
+                Assert.True(t.Join(UnexpectedThreadTimeoutMilliseconds));
+                localCheckForThreadErrors();
+            };
             return t;
         }
 
@@ -144,7 +152,11 @@ namespace System.Threading.Tests
                     return;
                 }
 
-                Assert.InRange(Environment.TickCount - startTimeMs, 0, UnexpectedTimeoutMilliseconds);
+                Assert.InRange(
+                    Environment.TickCount - startTimeMs,
+                    0,
+                    UnexpectedTimeoutMilliseconds
+                );
             }
         }
 

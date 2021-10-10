@@ -28,13 +28,18 @@ namespace System.Globalization.Tests
         public void AMDesignator_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.AMDesignator = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.AMDesignator = null
+            );
         }
 
         [Fact]
         public void AMDesignator_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.AMDesignator = "AA");
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.AMDesignator = "AA"
+            );
         }
     }
 }

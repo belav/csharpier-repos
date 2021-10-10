@@ -42,7 +42,9 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var expires = context.Request.Query["Expires"];
             if (!string.IsNullOrEmpty(expires))
             {
-                headers.Expires = DateTimeOffset.Now.AddSeconds(int.Parse(expires, CultureInfo.InvariantCulture));
+                headers.Expires = DateTimeOffset.Now.AddSeconds(
+                    int.Parse(expires, CultureInfo.InvariantCulture)
+                );
             }
 
             if (headers.CacheControl == null)
@@ -50,13 +52,17 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 headers.CacheControl = new CacheControlHeaderValue
                 {
                     Public = true,
-                    MaxAge = string.IsNullOrEmpty(expires) ? TimeSpan.FromSeconds(10) : (TimeSpan?)null
+                    MaxAge = string.IsNullOrEmpty(expires)
+                        ? TimeSpan.FromSeconds(10)
+                        : (TimeSpan?)null
                 };
             }
             else
             {
                 headers.CacheControl.Public = true;
-                headers.CacheControl.MaxAge = string.IsNullOrEmpty(expires) ? TimeSpan.FromSeconds(10) : (TimeSpan?)null;
+                headers.CacheControl.MaxAge = string.IsNullOrEmpty(expires)
+                    ? TimeSpan.FromSeconds(10)
+                    : (TimeSpan?)null;
             }
             headers.Date = DateTimeOffset.UtcNow;
             headers.Headers["X-Value"] = guid;
@@ -114,17 +120,26 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             return CreateTestKeyProvider(new ResponseCachingOptions());
         }
 
-        internal static IResponseCachingKeyProvider CreateTestKeyProvider(ResponseCachingOptions options)
+        internal static IResponseCachingKeyProvider CreateTestKeyProvider(
+            ResponseCachingOptions options
+        )
         {
-            return new ResponseCachingKeyProvider(new DefaultObjectPoolProvider(), Options.Create(options));
+            return new ResponseCachingKeyProvider(
+                new DefaultObjectPoolProvider(),
+                Options.Create(options)
+            );
         }
 
         internal static IEnumerable<IHostBuilder> CreateBuildersWithResponseCaching(
             Action<IApplicationBuilder> configureDelegate = null,
             ResponseCachingOptions options = null,
-            Action<HttpContext> contextAction = null)
+            Action<HttpContext> contextAction = null
+        )
         {
-            return CreateBuildersWithResponseCaching(configureDelegate, options, new RequestDelegate[]
+            return CreateBuildersWithResponseCaching(
+                configureDelegate,
+                options,
+                new RequestDelegate[]
                 {
                     context =>
                     {
@@ -141,13 +156,15 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                         contextAction?.Invoke(context);
                         return TestRequestDelegateSendFileAsync(context);
                     },
-                });
+                }
+            );
         }
 
         private static IEnumerable<IHostBuilder> CreateBuildersWithResponseCaching(
             Action<IApplicationBuilder> configureDelegate = null,
             ResponseCachingOptions options = null,
-            IEnumerable<RequestDelegate> requestDelegates = null)
+            IEnumerable<RequestDelegate> requestDelegates = null
+        )
         {
             if (configureDelegate == null)
             {
@@ -165,30 +182,39 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             foreach (var requestDelegate in requestDelegates)
             {
                 // Test with in memory ResponseCache
-                yield return new HostBuilder()
-                    .ConfigureWebHost(webHostBuilder =>
+                yield return new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(services =>
-                        {
-                            services.AddResponseCaching(responseCachingOptions =>
-                            {
-                                if (options != null)
+                        webHostBuilder.UseTestServer()
+                            .ConfigureServices(
+                                services =>
                                 {
-                                    responseCachingOptions.MaximumBodySize = options.MaximumBodySize;
-                                    responseCachingOptions.UseCaseSensitivePaths = options.UseCaseSensitivePaths;
-                                    responseCachingOptions.SystemClock = options.SystemClock;
+                                    services.AddResponseCaching(
+                                        responseCachingOptions =>
+                                        {
+                                            if (options != null)
+                                            {
+                                                responseCachingOptions.MaximumBodySize =
+                                                    options.MaximumBodySize;
+                                                responseCachingOptions.UseCaseSensitivePaths =
+                                                    options.UseCaseSensitivePaths;
+                                                responseCachingOptions.SystemClock =
+                                                    options.SystemClock;
+                                            }
+                                        }
+                                    );
                                 }
-                            });
-                        })
-                        .Configure(app =>
-                        {
-                            configureDelegate(app);
-                            app.UseResponseCaching();
-                            app.Run(requestDelegate);
-                        });
-                    });
+                            )
+                            .Configure(
+                                app =>
+                                {
+                                    configureDelegate(app);
+                                    app.UseResponseCaching();
+                                    app.Run(requestDelegate);
+                                }
+                            );
+                    }
+                );
             }
         }
 
@@ -198,7 +224,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             ResponseCachingOptions options = null,
             TestSink testSink = null,
             IResponseCachingKeyProvider keyProvider = null,
-            IResponseCachingPolicyProvider policyProvider = null)
+            IResponseCachingPolicyProvider policyProvider = null
+        )
         {
             if (next == null)
             {
@@ -214,7 +241,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             }
             if (keyProvider == null)
             {
-                keyProvider = new ResponseCachingKeyProvider(new DefaultObjectPoolProvider(), Options.Create(options));
+                keyProvider = new ResponseCachingKeyProvider(
+                    new DefaultObjectPoolProvider(),
+                    Options.Create(options)
+                );
             }
             if (policyProvider == null)
             {
@@ -224,10 +254,13 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             return new ResponseCachingMiddleware(
                 next,
                 Options.Create(options),
-                testSink == null ? (ILoggerFactory)NullLoggerFactory.Instance : new TestLoggerFactory(testSink, true),
+                testSink == null
+                  ? (ILoggerFactory)NullLoggerFactory.Instance
+                  : new TestLoggerFactory(testSink, true),
                 policyProvider,
                 cache,
-                keyProvider);
+                keyProvider
+            );
         }
 
         internal static ResponseCachingContext CreateTestContext()
@@ -240,13 +273,18 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
 
         internal static ResponseCachingContext CreateTestContext(ITestSink testSink)
         {
-            return new ResponseCachingContext(new DefaultHttpContext(), new TestLogger("ResponseCachingTests", testSink, true))
-            {
+            return new ResponseCachingContext(
+                new DefaultHttpContext(),
+                new TestLogger("ResponseCachingTests", testSink, true)
+            ) {
                 ResponseTime = DateTimeOffset.UtcNow
             };
         }
 
-        internal static void AssertLoggedMessages(IEnumerable<WriteContext> messages, params LoggedMessage[] expectedMessages)
+        internal static void AssertLoggedMessages(
+            IEnumerable<WriteContext> messages,
+            params LoggedMessage[] expectedMessages
+        )
         {
             var messageList = messages.ToList();
             Assert.Equal(messageList.Count, expectedMessages.Length);
@@ -285,35 +323,62 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
 
     internal class LoggedMessage
     {
-        internal static LoggedMessage RequestMethodNotCacheable => new LoggedMessage(1, LogLevel.Debug);
-        internal static LoggedMessage RequestWithAuthorizationNotCacheable => new LoggedMessage(2, LogLevel.Debug);
-        internal static LoggedMessage RequestWithNoCacheNotCacheable => new LoggedMessage(3, LogLevel.Debug);
-        internal static LoggedMessage RequestWithPragmaNoCacheNotCacheable => new LoggedMessage(4, LogLevel.Debug);
-        internal static LoggedMessage ExpirationMinFreshAdded => new LoggedMessage(5, LogLevel.Debug);
-        internal static LoggedMessage ExpirationSharedMaxAgeExceeded => new LoggedMessage(6, LogLevel.Debug);
-        internal static LoggedMessage ExpirationMustRevalidate => new LoggedMessage(7, LogLevel.Debug);
-        internal static LoggedMessage ExpirationMaxStaleSatisfied => new LoggedMessage(8, LogLevel.Debug);
-        internal static LoggedMessage ExpirationMaxAgeExceeded => new LoggedMessage(9, LogLevel.Debug);
-        internal static LoggedMessage ExpirationExpiresExceeded => new LoggedMessage(10, LogLevel.Debug);
-        internal static LoggedMessage ResponseWithoutPublicNotCacheable => new LoggedMessage(11, LogLevel.Debug);
-        internal static LoggedMessage ResponseWithNoStoreNotCacheable => new LoggedMessage(12, LogLevel.Debug);
-        internal static LoggedMessage ResponseWithNoCacheNotCacheable => new LoggedMessage(13, LogLevel.Debug);
-        internal static LoggedMessage ResponseWithSetCookieNotCacheable => new LoggedMessage(14, LogLevel.Debug);
-        internal static LoggedMessage ResponseWithVaryStarNotCacheable => new LoggedMessage(15, LogLevel.Debug);
-        internal static LoggedMessage ResponseWithPrivateNotCacheable => new LoggedMessage(16, LogLevel.Debug);
-        internal static LoggedMessage ResponseWithUnsuccessfulStatusCodeNotCacheable => new LoggedMessage(17, LogLevel.Debug);
-        internal static LoggedMessage NotModifiedIfNoneMatchStar => new LoggedMessage(18, LogLevel.Debug);
-        internal static LoggedMessage NotModifiedIfNoneMatchMatched => new LoggedMessage(19, LogLevel.Debug);
-        internal static LoggedMessage NotModifiedIfModifiedSinceSatisfied => new LoggedMessage(20, LogLevel.Debug);
-        internal static LoggedMessage NotModifiedServed => new LoggedMessage(21, LogLevel.Information);
-        internal static LoggedMessage CachedResponseServed => new LoggedMessage(22, LogLevel.Information);
-        internal static LoggedMessage GatewayTimeoutServed => new LoggedMessage(23, LogLevel.Information);
-        internal static LoggedMessage NoResponseServed => new LoggedMessage(24, LogLevel.Information);
+        internal static LoggedMessage RequestMethodNotCacheable =>
+            new LoggedMessage(1, LogLevel.Debug);
+        internal static LoggedMessage RequestWithAuthorizationNotCacheable =>
+            new LoggedMessage(2, LogLevel.Debug);
+        internal static LoggedMessage RequestWithNoCacheNotCacheable =>
+            new LoggedMessage(3, LogLevel.Debug);
+        internal static LoggedMessage RequestWithPragmaNoCacheNotCacheable =>
+            new LoggedMessage(4, LogLevel.Debug);
+        internal static LoggedMessage ExpirationMinFreshAdded =>
+            new LoggedMessage(5, LogLevel.Debug);
+        internal static LoggedMessage ExpirationSharedMaxAgeExceeded =>
+            new LoggedMessage(6, LogLevel.Debug);
+        internal static LoggedMessage ExpirationMustRevalidate =>
+            new LoggedMessage(7, LogLevel.Debug);
+        internal static LoggedMessage ExpirationMaxStaleSatisfied =>
+            new LoggedMessage(8, LogLevel.Debug);
+        internal static LoggedMessage ExpirationMaxAgeExceeded =>
+            new LoggedMessage(9, LogLevel.Debug);
+        internal static LoggedMessage ExpirationExpiresExceeded =>
+            new LoggedMessage(10, LogLevel.Debug);
+        internal static LoggedMessage ResponseWithoutPublicNotCacheable =>
+            new LoggedMessage(11, LogLevel.Debug);
+        internal static LoggedMessage ResponseWithNoStoreNotCacheable =>
+            new LoggedMessage(12, LogLevel.Debug);
+        internal static LoggedMessage ResponseWithNoCacheNotCacheable =>
+            new LoggedMessage(13, LogLevel.Debug);
+        internal static LoggedMessage ResponseWithSetCookieNotCacheable =>
+            new LoggedMessage(14, LogLevel.Debug);
+        internal static LoggedMessage ResponseWithVaryStarNotCacheable =>
+            new LoggedMessage(15, LogLevel.Debug);
+        internal static LoggedMessage ResponseWithPrivateNotCacheable =>
+            new LoggedMessage(16, LogLevel.Debug);
+        internal static LoggedMessage ResponseWithUnsuccessfulStatusCodeNotCacheable =>
+            new LoggedMessage(17, LogLevel.Debug);
+        internal static LoggedMessage NotModifiedIfNoneMatchStar =>
+            new LoggedMessage(18, LogLevel.Debug);
+        internal static LoggedMessage NotModifiedIfNoneMatchMatched =>
+            new LoggedMessage(19, LogLevel.Debug);
+        internal static LoggedMessage NotModifiedIfModifiedSinceSatisfied =>
+            new LoggedMessage(20, LogLevel.Debug);
+        internal static LoggedMessage NotModifiedServed =>
+            new LoggedMessage(21, LogLevel.Information);
+        internal static LoggedMessage CachedResponseServed =>
+            new LoggedMessage(22, LogLevel.Information);
+        internal static LoggedMessage GatewayTimeoutServed =>
+            new LoggedMessage(23, LogLevel.Information);
+        internal static LoggedMessage NoResponseServed =>
+            new LoggedMessage(24, LogLevel.Information);
         internal static LoggedMessage VaryByRulesUpdated => new LoggedMessage(25, LogLevel.Debug);
         internal static LoggedMessage ResponseCached => new LoggedMessage(26, LogLevel.Information);
-        internal static LoggedMessage ResponseNotCached => new LoggedMessage(27, LogLevel.Information);
-        internal static LoggedMessage ResponseContentLengthMismatchNotCached => new LoggedMessage(28, LogLevel.Warning);
-        internal static LoggedMessage ExpirationInfiniteMaxStaleSatisfied => new LoggedMessage(29, LogLevel.Debug);
+        internal static LoggedMessage ResponseNotCached =>
+            new LoggedMessage(27, LogLevel.Information);
+        internal static LoggedMessage ResponseContentLengthMismatchNotCached =>
+            new LoggedMessage(28, LogLevel.Warning);
+        internal static LoggedMessage ExpirationInfiniteMaxStaleSatisfied =>
+            new LoggedMessage(29, LogLevel.Debug);
 
         private LoggedMessage(int evenId, LogLevel logLevel)
         {
@@ -337,7 +402,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
 
         public bool AllowCacheStorage(ResponseCachingContext context) => AllowCacheStorageValue;
 
-        public bool AttemptResponseCaching(ResponseCachingContext context) => AttemptResponseCachingValue;
+        public bool AttemptResponseCaching(ResponseCachingContext context) =>
+            AttemptResponseCachingValue;
 
         public bool IsCachedEntryFresh(ResponseCachingContext context) => IsCachedEntryFreshValue;
 
@@ -349,7 +415,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         private readonly string _baseKey;
         private readonly StringValues _varyKey;
 
-        public TestResponseCachingKeyProvider(string lookupBaseKey = null, StringValues? lookupVaryKey = null)
+        public TestResponseCachingKeyProvider(
+            string lookupBaseKey = null,
+            StringValues? lookupVaryKey = null
+        )
         {
             _baseKey = lookupBaseKey;
             if (lookupVaryKey.HasValue)
@@ -379,7 +448,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
 
     internal class TestResponseCache : IResponseCache
     {
-        private readonly IDictionary<string, IResponseCacheEntry> _storage = new Dictionary<string, IResponseCacheEntry>();
+        private readonly IDictionary<string, IResponseCacheEntry> _storage = new Dictionary<
+            string,
+            IResponseCacheEntry
+        >();
         public int GetCount { get; private set; }
         public int SetCount { get; private set; }
 

@@ -119,7 +119,9 @@ namespace System.Data.SqlTypes
         /// Returns a string describing a <see cref='SqlBinary'/> object.
         /// </summary>
         public override string ToString() =>
-            _value is null ? SQLResource.NullString : "SqlBinary(" + _value.Length.ToString(CultureInfo.InvariantCulture) + ")";
+            _value is null
+                ? SQLResource.NullString
+                : "SqlBinary(" + _value.Length.ToString(CultureInfo.InvariantCulture) + ")";
 
         // Unary operators
 
@@ -141,7 +143,6 @@ namespace System.Data.SqlTypes
 
             return new SqlBinary(rgbResult);
         }
-
 
         // Comparisons
 
@@ -356,8 +357,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -420,7 +423,10 @@ namespace System.Data.SqlTypes
             return HashByteArray(_value, cbLen);
         }
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {

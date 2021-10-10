@@ -20,7 +20,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             foreach (var tagName in tagNames)
             {
-                var descriptor = TagHelperDescriptorBuilder.Create(tagName + "taghelper", "SomeAssembly")
+                var descriptor = TagHelperDescriptorBuilder.Create(
+                        tagName + "taghelper",
+                        "SomeAssembly"
+                    )
                     .TagMatchingRuleDescriptor(rule => rule.RequireTagName(tagName))
                     .Build();
                 descriptors.Add(descriptor);
@@ -33,11 +36,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             IEnumerable<TagHelperDescriptor> descriptors,
             string documentContent,
             string tagHelperPrefix = null,
-            RazorParserFeatureFlags featureFlags = null)
+            RazorParserFeatureFlags featureFlags = null
+        )
         {
             var syntaxTree = ParseDocument(documentContent, featureFlags: featureFlags);
 
-            var rewrittenTree = TagHelperParseTreeRewriter.Rewrite(syntaxTree, tagHelperPrefix, descriptors);
+            var rewrittenTree = TagHelperParseTreeRewriter.Rewrite(
+                syntaxTree,
+                tagHelperPrefix,
+                descriptors
+            );
 
             BaselineTest(rewrittenTree);
         }

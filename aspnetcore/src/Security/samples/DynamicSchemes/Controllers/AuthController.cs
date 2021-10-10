@@ -11,7 +11,10 @@ namespace AuthSamples.DynamicSchemes.Controllers
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IOptionsMonitorCache<SimpleOptions> _optionsCache;
 
-        public AuthController(IAuthenticationSchemeProvider schemeProvider, IOptionsMonitorCache<SimpleOptions> optionsCache)
+        public AuthController(
+            IAuthenticationSchemeProvider schemeProvider,
+            IOptionsMonitorCache<SimpleOptions> optionsCache
+        )
         {
             _schemeProvider = schemeProvider;
             _optionsCache = optionsCache;
@@ -29,7 +32,9 @@ namespace AuthSamples.DynamicSchemes.Controllers
         {
             if (await _schemeProvider.GetSchemeAsync(scheme) == null)
             {
-                _schemeProvider.AddScheme(new AuthenticationScheme(scheme, scheme, typeof(SimpleAuthHandler)));
+                _schemeProvider.AddScheme(
+                    new AuthenticationScheme(scheme, scheme, typeof(SimpleAuthHandler))
+                );
             }
             else
             {

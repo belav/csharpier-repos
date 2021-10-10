@@ -11,18 +11,21 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 {
     internal partial class SQLitePersistentStorage
     {
-        private static string GetProjectIdString(int projectPathId, int projectNameId)
-            => Invariant($"{projectPathId}-{projectNameId}");
+        private static string GetProjectIdString(int projectPathId, int projectNameId) =>
+            Invariant($"{projectPathId}-{projectNameId}");
 
-        private static string GetDocumentIdString(int projectId, int documentPathId, int documentNameId)
-            => Invariant($"{projectId}-{documentPathId}-{documentNameId}");
+        private static string GetDocumentIdString(
+            int projectId,
+            int documentPathId,
+            int documentNameId
+        ) => Invariant($"{projectId}-{documentPathId}-{documentNameId}");
 
-        private static long CombineInt32ValuesToInt64(int v1, int v2)
-            => ((long)v1 << 32) | (long)v2;
+        private static long CombineInt32ValuesToInt64(int v1, int v2) =>
+            ((long)v1 << 32) | (long)v2;
 
         private static (byte[] bytes, int length, bool fromPool) GetBytes(Stream stream)
         {
-            // Attempt to copy into a pooled byte[] if the stream length is known and it's 
+            // Attempt to copy into a pooled byte[] if the stream length is known and it's
             // less than 128k.  This accounts for 99%+ of all of our streams while keeping
             // a generally small pool around (<10 items) when I've debugged VS.
 

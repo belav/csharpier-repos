@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var viewContext = CreateViewContext();
             var modelExplorer = viewContext.ViewData.ModelExplorer.GetExplorerForProperty(
-                nameof(RazorPageCreateModelExpressionModel.Name));
+                nameof(RazorPageCreateModelExpressionModel.Name)
+            );
             var viewData = new ViewDataDictionary<string>(viewContext.ViewData)
             {
                 ModelExplorer = modelExplorer,
@@ -51,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var viewContext = CreateViewContext();
             var modelExplorer = viewContext.ViewData.ModelExplorer.GetExplorerForProperty(
-                nameof(RazorPageCreateModelExpressionModel.Name));
+                nameof(RazorPageCreateModelExpressionModel.Name)
+            );
             var viewData = new ViewDataDictionary<string>(viewContext.ViewData)
             {
                 ModelExplorer = modelExplorer,
@@ -77,7 +79,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var expectedName = "Model";
             var expectedType = typeof(RecursiveModel);
 
-            CreateModelExpression_NotQuiteIdentityExpressions(page => page.CreateModelExpression1(), expectedName, expectedType);
+            CreateModelExpression_NotQuiteIdentityExpressions(
+                page => page.CreateModelExpression1(),
+                expectedName,
+                expectedType
+            );
         }
 
         [Fact]
@@ -88,7 +94,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var expectedName = "ViewData.Model";
             var expectedType = typeof(RecursiveModel);
 
-            CreateModelExpression_NotQuiteIdentityExpressions(page => page.CreateModelExpression2(), expectedName, expectedType);
+            CreateModelExpression_NotQuiteIdentityExpressions(
+                page => page.CreateModelExpression2(),
+                expectedName,
+                expectedType
+            );
         }
 
         [Fact]
@@ -100,13 +110,18 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // This property has type object because ViewData is not exposed as ViewDataDictionary<TModel>.
             var expectedType = typeof(object);
 
-            CreateModelExpression_NotQuiteIdentityExpressions(page => page.CreateModelExpression3(), expectedName, expectedType);
+            CreateModelExpression_NotQuiteIdentityExpressions(
+                page => page.CreateModelExpression3(),
+                expectedName,
+                expectedType
+            );
         }
 
         private static void CreateModelExpression_NotQuiteIdentityExpressions(
             Func<NotQuiteIdentityRazorPage, ModelExpression> createModelExpression,
             string expectedName,
-            Type expectedType)
+            Type expectedType
+        )
         {
             var viewContext = CreateViewContext();
             var viewData = new ViewDataDictionary<RecursiveModel>(viewContext.ViewData);
@@ -138,7 +153,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var page = CreatePage(viewContext);
 
             // Act
-            var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model => somethingElse);
+            var result = page.ModelExpressionProvider.CreateModelExpression(
+                page.ViewData,
+                model => somethingElse
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -156,7 +174,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var page = CreatePage(viewContext);
 
             // Act
-            var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model => model.Id);
+            var result = page.ModelExpressionProvider.CreateModelExpression(
+                page.ViewData,
+                model => model.Id
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -174,7 +195,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var page = CreatePage(viewContext);
 
             // Act
-            var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model => model.SubModel.Id);
+            var result = page.ModelExpressionProvider.CreateModelExpression(
+                page.ViewData,
+                model => model.SubModel.Id
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -192,7 +216,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var page = CreatePage(viewContext);
 
             // Act
-            var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model => model.SubModel.SubSubModel.Id);
+            var result = page.ModelExpressionProvider.CreateModelExpression(
+                page.ViewData,
+                model => model.SubModel.SubSubModel.Id
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -211,7 +238,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var page = CreatePage(viewContext);
 
             // Act
-            var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model => somethingElse);
+            var result = page.ModelExpressionProvider.CreateModelExpression(
+                page.ViewData,
+                model => somethingElse
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -229,7 +259,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var page = CreatePage(viewContext);
 
             // Act
-            var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model => model.Name);
+            var result = page.ModelExpressionProvider.CreateModelExpression(
+                page.ViewData,
+                model => model.Name
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -247,7 +280,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var page = CreatePage(viewContext);
 
             // Act
-            var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model => model.SubModel.SubSubModel.Name);
+            var result = page.ModelExpressionProvider.CreateModelExpression(
+                page.ViewData,
+                model => model.SubModel.SubSubModel.Name
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -265,7 +301,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var page = CreatePage(viewContext);
 
             // Act
-            var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model => model.SubModel.Name);
+            var result = page.ModelExpressionProvider.CreateModelExpression(
+                page.ViewData,
+                model => model.SubModel.Name
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -299,7 +338,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             return new TestRazorPage
             {
                 ViewContext = viewContext,
-                ViewData = (ViewDataDictionary<RazorPageCreateModelExpressionModel>)viewContext.ViewData,
+                ViewData =
+                    (ViewDataDictionary<RazorPageCreateModelExpressionModel>)viewContext.ViewData,
                 ModelExpressionProvider = CreateModelExpressionProvider(),
             };
         }
@@ -315,7 +355,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private static ViewContext CreateViewContext()
         {
             var provider = new EmptyModelMetadataProvider();
-            var viewData = new ViewDataDictionary<RazorPageCreateModelExpressionModel>(provider, new ModelStateDictionary());
+            var viewData = new ViewDataDictionary<RazorPageCreateModelExpressionModel>(
+                provider,
+                new ModelStateDictionary()
+            );
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<IModelMetadataProvider>(provider);
 
@@ -323,7 +366,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             {
                 RequestServices = serviceCollection.BuildServiceProvider(),
             };
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             return new ViewContext(
                 actionContext,
@@ -331,7 +378,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 viewData,
                 Mock.Of<ITempDataDictionary>(),
                 new StringWriter(),
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
         }
 
         public class IdentityRazorPage : TestRazorPage<string>
@@ -366,7 +414,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             public ModelExpression CreateModelExpression3()
             {
-                return ModelExpressionProvider.CreateModelExpression(ViewData, m => ViewContext.ViewData.Model);
+                return ModelExpressionProvider.CreateModelExpression(
+                    ViewData,
+                    m => ViewContext.ViewData.Model
+                );
             }
 
             public override Task ExecuteAsync()

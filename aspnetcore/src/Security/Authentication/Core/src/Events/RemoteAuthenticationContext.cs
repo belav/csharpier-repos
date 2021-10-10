@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Authentication
     /// <summary>
     /// Base context for remote authentication.
     /// </summary>
-    public abstract class RemoteAuthenticationContext<TOptions> : HandleRequestContext<TOptions> where TOptions : AuthenticationSchemeOptions
+    public abstract class RemoteAuthenticationContext<TOptions> : HandleRequestContext<TOptions>
+        where TOptions : AuthenticationSchemeOptions
     {
         /// <summary>
         /// Constructor.
@@ -23,9 +24,9 @@ namespace Microsoft.AspNetCore.Authentication
             HttpContext context,
             AuthenticationScheme scheme,
             TOptions options,
-            AuthenticationProperties? properties)
-            : base(context, scheme, options)
-            => Properties = properties ?? new AuthenticationProperties();
+            AuthenticationProperties? properties
+        ) : base(context, scheme, options) =>
+            Properties = properties ?? new AuthenticationProperties();
 
         /// <summary>
         /// Gets the <see cref="ClaimsPrincipal"/> containing the user claims.
@@ -40,7 +41,10 @@ namespace Microsoft.AspNetCore.Authentication
         /// <summary>
         /// Calls success creating a ticket with the <see cref="Principal"/> and <see cref="Properties"/>.
         /// </summary>
-        public void Success() => Result = HandleRequestResult.Success(new AuthenticationTicket(Principal!, Properties, Scheme.Name));
+        public void Success() =>
+            Result = HandleRequestResult.Success(
+                new AuthenticationTicket(Principal!, Properties, Scheme.Name)
+            );
 
         /// <summary>
         /// Indicates that authentication failed.
@@ -52,6 +56,7 @@ namespace Microsoft.AspNetCore.Authentication
         /// Indicates that authentication failed.
         /// </summary>
         /// <param name="failureMessage">The exception associated with the failure.</param>
-        public void Fail(string failureMessage) => Result = HandleRequestResult.Fail(failureMessage);
+        public void Fail(string failureMessage) =>
+            Result = HandleRequestResult.Fail(failureMessage);
     }
 }

@@ -58,7 +58,9 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             }
             else
             {
-                _logger.EncryptingToWindowsDPAPIForCurrentUserAccount(WindowsIdentity.GetCurrent().Name);
+                _logger.EncryptingToWindowsDPAPIForCurrentUserAccount(
+                    WindowsIdentity.GetCurrent().Name
+                );
             }
 
             // Convert the XML element to a binary secret so that it can be run through DPAPI
@@ -67,7 +69,10 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             {
                 using (var plaintextElementAsSecret = plaintextElement.ToSecret())
                 {
-                    dpapiEncryptedData = DpapiSecretSerializerHelper.ProtectWithDpapi(plaintextElementAsSecret, protectToLocalMachine: _protectToLocalMachine);
+                    dpapiEncryptedData = DpapiSecretSerializerHelper.ProtectWithDpapi(
+                        plaintextElementAsSecret,
+                        protectToLocalMachine: _protectToLocalMachine
+                    );
                 }
             }
             catch (Exception ex)
@@ -81,10 +86,11 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             //   <value>{base64}</value>
             // </encryptedKey>
 
-            var element = new XElement("encryptedKey",
+            var element = new XElement(
+                "encryptedKey",
                 new XComment(" This key is encrypted with Windows DPAPI. "),
-                new XElement("value",
-                    Convert.ToBase64String(dpapiEncryptedData)));
+                new XElement("value", Convert.ToBase64String(dpapiEncryptedData))
+            );
 
             return new EncryptedXmlInfo(element, typeof(DpapiXmlDecryptor));
         }

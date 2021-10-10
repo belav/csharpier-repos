@@ -23,12 +23,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public SynthesizedRecordClone(
             SourceMemberContainerTypeSymbol containingType,
             int memberOffset,
-            BindingDiagnosticBag diagnostics)
-            : base(containingType, WellKnownMemberNames.CloneMethodName, hasBody: !containingType.IsAbstract, memberOffset, diagnostics)
-        {
-        }
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.CloneMethodName,
+                hasBody: !containingType.IsAbstract,
+                memberOffset,
+                diagnostics
+            ) { }
 
-        protected override DeclarationModifiers MakeDeclarationModifiers(DeclarationModifiers allowedModifiers, BindingDiagnosticBag diagnostics)
+        protected override DeclarationModifiers MakeDeclarationModifiers(
+            DeclarationModifiers allowedModifiers,
+            BindingDiagnosticBag diagnostics
+        )
         {
             DeclarationModifiers result = DeclarationModifiers.Public;
 
@@ -38,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                result |= ContainingType.IsSealed ? DeclarationModifiers.None : DeclarationModifiers.Virtual;
+                result |= ContainingType.IsSealed
+                    ? DeclarationModifiers.None
+                    : DeclarationModifiers.Virtual;
             }
 
             if (ContainingType.IsAbstract)
@@ -50,13 +60,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert((result & ~allowedModifiers) == 0);
 #if DEBUG
             Debug.Assert(modifiersAreValid(result));
-#endif 
+#endif
             return result;
-
 #if DEBUG
             static bool modifiersAreValid(DeclarationModifiers modifiers)
             {
-                if ((modifiers & DeclarationModifiers.AccessibilityMask) != DeclarationModifiers.Public)
+                if (
+                    (modifiers & DeclarationModifiers.AccessibilityMask)
+                    != DeclarationModifiers.Public
+                )
                 {
                     return false;
                 }
@@ -79,7 +91,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return false;
                 }
             }
-#endif 
+#endif
         }
 
         private MethodSymbol? VirtualCloneInBase()
@@ -95,23 +107,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return null;
         }
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
+            BindingDiagnosticBag diagnostics
+        )
         {
-            return (ReturnType: VirtualCloneInBase() is { } baseClone ?
-                                     baseClone.ReturnTypeWithAnnotations : // Use covariant returns when available
-                                     TypeWithAnnotations.Create(isNullableEnabled: true, ContainingType),
-                    Parameters: ImmutableArray<ParameterSymbol>.Empty,
-                    IsVararg: false,
-                    DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty);
+            return (
+                ReturnType: VirtualCloneInBase() is { } baseClone
+                  ? baseClone.ReturnTypeWithAnnotations
+                  : // Use covariant returns when available
+                    TypeWithAnnotations.Create(isNullableEnabled: true, ContainingType),
+                Parameters: ImmutableArray<ParameterSymbol>.Empty,
+                IsVararg: false,
+                DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => 0;
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(!IsAbstract);
 
-            var F = new SyntheticBoundNodeFactory(this, ContainingType.GetNonNullSyntaxNode(), compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                ContainingType.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
 
             try
             {
@@ -125,8 +150,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 foreach (var member in members)
                 {
                     var ctor = (MethodSymbol)member;
-                    if (ctor.ParameterCount == 1 && ctor.Parameters[0].RefKind == RefKind.None &&
-                        ctor.Parameters[0].Type.Equals(ContainingType, TypeCompareKind.AllIgnoreOptions))
+                    if (
+                        ctor.ParameterCount == 1
+                        && ctor.Parameters[0].RefKind == RefKind.None
+                        && ctor.Parameters[0].Type.Equals(
+                            ContainingType,
+                            TypeCompareKind.AllIgnoreOptions
+                        )
+                    )
                     {
                         F.CloseMethod(F.Return(F.New(ctor, F.This())));
                         return;
@@ -142,9 +173,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal static MethodSymbol? FindValidCloneMethod(TypeSymbol containingType, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        internal static MethodSymbol? FindValidCloneMethod(
+            TypeSymbol containingType,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            if (containingType.IsObjectType() || containingType is not NamedTypeSymbol containingNamedType)
+            if (
+                containingType.IsObjectType()
+                || containingType is not NamedTypeSymbol containingNamedType
+            )
             {
                 return null;
             }
@@ -161,13 +198,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (var member in containingType.GetMembers(WellKnownMemberNames.CloneMethodName))
             {
-                if (member is MethodSymbol
+                if (
+                    member is MethodSymbol
                     {
                         DeclaredAccessibility: Accessibility.Public,
                         IsStatic: false,
                         ParameterCount: 0,
                         Arity: 0
-                    } method)
+                    } method
+                )
                 {
                     if (candidate is object)
                     {
@@ -179,12 +218,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            if (candidate is null ||
-                !(containingType.IsSealed || candidate.IsOverride || candidate.IsVirtual || candidate.IsAbstract) ||
-                !containingType.IsEqualToOrDerivedFrom(
+            if (
+                candidate is null
+                || !(
+                    containingType.IsSealed
+                    || candidate.IsOverride
+                    || candidate.IsVirtual
+                    || candidate.IsAbstract
+                )
+                || !containingType.IsEqualToOrDerivedFrom(
                     candidate.ReturnType,
                     TypeCompareKind.AllIgnoreOptions,
-                    ref useSiteInfo))
+                    ref useSiteInfo
+                )
+            )
             {
                 return null;
             }

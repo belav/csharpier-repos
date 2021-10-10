@@ -31,8 +31,14 @@ namespace Microsoft.CodeAnalysis.Razor
             Assert.Empty(item.Diagnostics);
             Assert.False(item.HasErrors);
             Assert.Equal(ComponentMetadata.Ref.TagHelperKind, item.Kind);
-            Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
-            Assert.Equal(ComponentMetadata.Ref.RuntimeName, item.Metadata[TagHelperMetadata.Runtime.Name]);
+            Assert.Equal(
+                bool.TrueString,
+                item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]
+            );
+            Assert.Equal(
+                ComponentMetadata.Ref.RuntimeName,
+                item.Metadata[TagHelperMetadata.Runtime.Name]
+            );
             Assert.False(item.IsDefaultKind());
             Assert.False(item.KindUsesDefaultTagHelperRuntime());
             Assert.False(item.IsComponentOrChildContentTagHelper());
@@ -40,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
             Assert.Equal(
                 "Populates the specified field or property with a reference to the element or component.",
-                item.Documentation);
+                item.Documentation
+            );
 
             Assert.Equal("Microsoft.AspNetCore.Components", item.AssemblyName);
             Assert.Equal("Ref", item.Name);
@@ -59,9 +66,15 @@ namespace Microsoft.CodeAnalysis.Razor
             Assert.Empty(requiredAttribute.Diagnostics);
             Assert.Equal("@ref", requiredAttribute.DisplayName);
             Assert.Equal("@ref", requiredAttribute.Name);
-            Assert.Equal(RequiredAttributeDescriptor.NameComparisonMode.FullMatch, requiredAttribute.NameComparison);
+            Assert.Equal(
+                RequiredAttributeDescriptor.NameComparisonMode.FullMatch,
+                requiredAttribute.NameComparison
+            );
             Assert.Null(requiredAttribute.Value);
-            Assert.Equal(RequiredAttributeDescriptor.ValueComparisonMode.None, requiredAttribute.ValueComparison);
+            Assert.Equal(
+                RequiredAttributeDescriptor.ValueComparisonMode.None,
+                requiredAttribute.ValueComparison
+            );
 
             var attribute = Assert.Single(item.BoundAttributes);
             Assert.Empty(attribute.Diagnostics);
@@ -76,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
             Assert.Equal(
                 "Populates the specified field or property with a reference to the element or component.",
-                attribute.Documentation);
+                attribute.Documentation
+            );
 
             Assert.Equal("@ref", attribute.Name);
             Assert.Equal("Ref", attribute.GetPropertyName());

@@ -24,20 +24,36 @@ namespace Microsoft.CodeAnalysis.CSharp
         private LocalState _endOfRegionState;
         private readonly HashSet<LabelSymbol> _labelsInside = new HashSet<LabelSymbol>();
 
-        private AlwaysAssignedWalker(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion)
-            : base(compilation, member, node, firstInRegion, lastInRegion)
-        {
-        }
+        private AlwaysAssignedWalker(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        ) : base(compilation, member, node, firstInRegion, lastInRegion) { }
 
-        internal static IEnumerable<Symbol> Analyze(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion)
+        internal static IEnumerable<Symbol> Analyze(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        )
         {
-            var walker = new AlwaysAssignedWalker(compilation, member, node, firstInRegion, lastInRegion);
+            var walker = new AlwaysAssignedWalker(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion
+            );
             bool badRegion = false;
             try
             {
                 var result = walker.Analyze(ref badRegion);
                 return badRegion ? SpecializedCollections.EmptyEnumerable<Symbol>() : result;
             }
+
             finally
             {
                 walker.Free();
@@ -69,7 +85,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return result;
         }
 
-        protected override void WriteArgument(BoundExpression arg, RefKind refKind, MethodSymbol method)
+        protected override void WriteArgument(
+            BoundExpression arg,
+            RefKind refKind,
+            MethodSymbol method
+        )
         {
             // ref parameter does not "always" assign.
             if (refKind == RefKind.Out)
@@ -78,7 +98,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected override void ResolveBranch(PendingBranch pending, LabelSymbol label, BoundStatement target, ref bool labelStateChanged)
+        protected override void ResolveBranch(
+            PendingBranch pending,
+            LabelSymbol label,
+            BoundStatement target,
+            ref bool labelStateChanged
+        )
         {
             // branches into a region are considered entry points
             if (IsInside && pending.Branch != null && !RegionContains(pending.Branch.Syntax.Span))
@@ -103,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void ResolveLabel(BoundNode node, LabelSymbol label)
         {
-            if (node.Syntax != null && RegionContains(node.Syntax.Span)) _labelsInside.Add(label);
+            if (node.Syntax != null && RegionContains(node.Syntax.Span))
+                _labelsInside.Add(label);
         }
 
         protected override void EnterRegion()
@@ -128,7 +154,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var branch in base.PendingBranches)
             {
-                if (branch.Branch != null && RegionContains(branch.Branch.Syntax.Span) && !_labelsInside.Contains(branch.Label))
+                if (
+                    branch.Branch != null
+                    && RegionContains(branch.Branch.Syntax.Span)
+                    && !_labelsInside.Contains(branch.Label)
+                )
                 {
                     Join(ref _endOfRegionState, ref branch.State);
                 }

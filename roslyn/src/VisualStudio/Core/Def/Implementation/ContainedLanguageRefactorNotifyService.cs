@@ -22,33 +22,49 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     [Export(typeof(IRefactorNotifyService))]
     internal sealed class ContainedLanguageRefactorNotifyService : IRefactorNotifyService
     {
-        private static readonly SymbolDisplayFormat s_qualifiedDisplayFormat = new(
-            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+        private static readonly SymbolDisplayFormat s_qualifiedDisplayFormat =
+            new(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ContainedLanguageRefactorNotifyService()
-        {
-        }
+        public ContainedLanguageRefactorNotifyService() { }
 
-        public bool TryOnBeforeGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, ISymbol symbol, string newName, bool throwOnFailure)
-            => true;
+        public bool TryOnBeforeGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            ISymbol symbol,
+            string newName,
+            bool throwOnFailure
+        ) => true;
 
-        public bool TryOnAfterGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, ISymbol symbol, string newName, bool throwOnFailure)
+        public bool TryOnAfterGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            ISymbol symbol,
+            string newName,
+            bool throwOnFailure
+        )
         {
             if (workspace is VisualStudioWorkspaceImpl visualStudioWorkspace)
             {
                 foreach (var documentId in changedDocumentIDs)
                 {
-                    var containedDocument = visualStudioWorkspace.TryGetContainedDocument(documentId);
+                    var containedDocument = visualStudioWorkspace.TryGetContainedDocument(
+                        documentId
+                    );
                     if (containedDocument != null)
                     {
                         var containedLanguageHost = containedDocument.ContainedLanguageHost;
                         if (containedLanguageHost != null)
                         {
                             var hresult = containedLanguageHost.OnRenamed(
-                                GetRenameType(symbol), symbol.ToDisplayString(s_qualifiedDisplayFormat), newName);
+                                GetRenameType(symbol),
+                                symbol.ToDisplayString(s_qualifiedDisplayFormat),
+                                newName
+                            );
                             if (hresult < 0)
                             {
                                 if (throwOnFailure)
@@ -74,14 +90,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             {
                 return ContainedLanguageRenameType.CLRT_NAMESPACE;
             }
-            else if (symbol is INamedTypeSymbol && (symbol as INamedTypeSymbol).TypeKind == TypeKind.Class)
+            else if (
+                symbol is INamedTypeSymbol
+                && (symbol as INamedTypeSymbol).TypeKind == TypeKind.Class
+            )
             {
                 return ContainedLanguageRenameType.CLRT_CLASS;
             }
-            else if (symbol.Kind == SymbolKind.Event ||
-                symbol.Kind == SymbolKind.Field ||
-                symbol.Kind == SymbolKind.Method ||
-                symbol.Kind == SymbolKind.Property)
+            else if (
+                symbol.Kind == SymbolKind.Event
+                || symbol.Kind == SymbolKind.Field
+                || symbol.Kind == SymbolKind.Method
+                || symbol.Kind == SymbolKind.Property
+            )
             {
                 return ContainedLanguageRenameType.CLRT_CLASSMEMBER;
             }

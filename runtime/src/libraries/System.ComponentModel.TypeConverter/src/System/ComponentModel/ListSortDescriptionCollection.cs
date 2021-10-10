@@ -9,9 +9,7 @@ namespace System.ComponentModel
     {
         private readonly ArrayList _sorts = new ArrayList();
 
-        public ListSortDescriptionCollection()
-        {
-        }
+        public ListSortDescriptionCollection() { }
 
         public ListSortDescriptionCollection(ListSortDescription[] sorts)
         {
@@ -42,19 +40,24 @@ namespace System.ComponentModel
             set => throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
         }
 
-        int IList.Add(object value) => throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
+        int IList.Add(object value) =>
+            throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
 
-        void IList.Clear() => throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
+        void IList.Clear() =>
+            throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
 
         public bool Contains(object value) => ((IList)_sorts).Contains(value);
 
         public int IndexOf(object value) => ((IList)_sorts).IndexOf(value);
 
-        void IList.Insert(int index, object value) => throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
+        void IList.Insert(int index, object value) =>
+            throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
 
-        void IList.Remove(object value) => throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
+        void IList.Remove(object value) =>
+            throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
 
-        void IList.RemoveAt(int index) => throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
+        void IList.RemoveAt(int index) =>
+            throw new InvalidOperationException(SR.CantModifyListSortDescriptionCollection);
 
         // ICollection
 

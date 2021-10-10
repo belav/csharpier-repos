@@ -9,11 +9,23 @@ namespace System.ComponentModel.Tests
     public class MyTypeDescriptorContext : ITypeDescriptorContext
     {
         public IContainer Container => null;
-        public object Instance { get { return null; } }
-        public PropertyDescriptor PropertyDescriptor { get { return null; } }
-        public bool OnComponentChanging() { return true; }
+        public object Instance
+        {
+            get { return null; }
+        }
+        public PropertyDescriptor PropertyDescriptor
+        {
+            get { return null; }
+        }
+        public bool OnComponentChanging()
+        {
+            return true;
+        }
         public void OnComponentChanged() { }
-        public object GetService(Type serviceType) { return null; }
+        public object GetService(Type serviceType)
+        {
+            return null;
+        }
     }
 
     public struct SomeValueType
@@ -61,16 +73,17 @@ namespace System.ComponentModel.Tests
 
     public class MyTypeListConverter : TypeListConverter
     {
-        public MyTypeListConverter(Type[] types)
-            : base(types)
-        {
-        }
+        public MyTypeListConverter(Type[] types) : base(types) { }
     }
 
 #if FUNCTIONAL_TESTS
-    [TypeConverter("System.ComponentModel.Tests.BaseClassConverter, System.ComponentModel.TypeConverter.Tests, Version=9.9.9.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")]
+    [TypeConverter(
+        "System.ComponentModel.Tests.BaseClassConverter, System.ComponentModel.TypeConverter.Tests, Version=9.9.9.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+    )]
 #elif PERFORMANCE_TESTS
-    [TypeConverter("System.ComponentModel.Tests.BaseClassConverter, System.ComponentModel.TypeConverter.PerformanceTests, Version=9.9.9.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")]
+    [TypeConverter(
+        "System.ComponentModel.Tests.BaseClassConverter, System.ComponentModel.TypeConverter.PerformanceTests, Version=9.9.9.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+    )]
 #else
 #error Define FUNCTIONAL_TESTS or PERFORMANCE_TESTS
 #endif
@@ -102,7 +115,12 @@ namespace System.ComponentModel.Tests
 
     public class BaseClassConverter : TypeConverter
     {
-        public BaseClassConverter(string someString) { throw new InvalidOperationException("This constructor should not be invoked by TypeDescriptor.GetConverter."); }
+        public BaseClassConverter(string someString)
+        {
+            throw new InvalidOperationException(
+                "This constructor should not be invoked by TypeDescriptor.GetConverter."
+            );
+        }
         public BaseClassConverter() { }
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
@@ -120,7 +138,11 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertTo(context, destinationType);
         }
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             if (value is int)
             {
@@ -130,7 +152,12 @@ namespace System.ComponentModel.Tests
             }
             return base.ConvertFrom(context, culture, value);
         }
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(int))
             {
@@ -147,13 +174,11 @@ namespace System.ComponentModel.Tests
     [TypeConverter("System.ComponentModel.Tests.DerivedClassConverter")]
     internal class DerivedClass : BaseClass
     {
-        public DerivedClass()
-            : base()
+        public DerivedClass() : base()
         {
             DerivedProperty = 2;
         }
-        public DerivedClass(int i)
-            : base()
+        public DerivedClass(int i) : base()
         {
             DerivedProperty = i;
         }
@@ -197,7 +222,11 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertTo(context, destinationType);
         }
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             if (value is int)
             {
@@ -208,7 +237,12 @@ namespace System.ComponentModel.Tests
             }
             return base.ConvertFrom(context, culture, value);
         }
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(int))
             {
@@ -264,7 +298,12 @@ namespace System.ComponentModel.Tests
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string))
             {
@@ -289,7 +328,9 @@ namespace System.ComponentModel.Tests
     {
         public InvalidConverter(string someString)
         {
-            throw new InvalidOperationException("This constructor should not be invoked by TypeDescriptor.GetConverter.");
+            throw new InvalidOperationException(
+                "This constructor should not be invoked by TypeDescriptor.GetConverter."
+            );
         }
         // Default constructor is missing, we expect the following exception when getting a converter:
         // System.MissingMethodException: No parameterless constructor defined for this object.

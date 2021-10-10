@@ -17,10 +17,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             DirectiveKind.SingleLine,
             builder =>
             {
-                builder.AddOptionalStringToken(Resources.PageDirective_RouteToken_Name, Resources.PageDirective_RouteToken_Description);
+                builder.AddOptionalStringToken(
+                    Resources.PageDirective_RouteToken_Name,
+                    Resources.PageDirective_RouteToken_Description
+                );
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
                 builder.Description = Resources.PageDirective_Description;
-            });
+            }
+        );
 
         private PageDirective(string routeTemplate, IntermediateNode directiveNode)
         {
@@ -43,7 +47,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             return builder;
         }
 
-        public static bool TryGetPageDirective(DocumentIntermediateNode documentNode, out PageDirective pageDirective)
+        public static bool TryGetPageDirective(
+            DocumentIntermediateNode documentNode,
+            out PageDirective pageDirective
+        )
         {
             var visitor = new Visitor();
             for (var i = 0; i < documentNode.Children.Count; i++)

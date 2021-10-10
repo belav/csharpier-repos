@@ -16,14 +16,20 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable<TestProvider> providersFromServiceLocation = GetProvidersFromService();
             IList<TestProvider> providersFromItemsThunk = GetProvidersFromItemsThunk().ToList();
-            IEnumerable<TestProvider> expectedProviders = providersFromServiceLocation.Concat(providersFromItemsThunk);
+            IEnumerable<TestProvider> expectedProviders = providersFromServiceLocation.Concat(
+                providersFromItemsThunk
+            );
 
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>();
             resolver.Setup(r => r.GetServices(typeof(TestProvider)))
                 .Returns(providersFromServiceLocation);
 
             // Act
-            IEnumerable<TestProvider> returnedProviders = MultiServiceResolver.GetCombined<TestProvider>(providersFromItemsThunk, resolver.Object);
+            IEnumerable<TestProvider> returnedProviders =
+                MultiServiceResolver.GetCombined<TestProvider>(
+                    providersFromItemsThunk,
+                    resolver.Object
+                );
 
             // Assert
             Assert.Equal(expectedProviders.ToList(), returnedProviders.ToList());
@@ -36,7 +42,8 @@ namespace System.Web.Mvc.Test
             IList<TestProvider> providersFromItemsThunk = GetProvidersFromItemsThunk().ToList();
 
             // Act
-            IEnumerable<TestProvider> returnedProviders = MultiServiceResolver.GetCombined<TestProvider>(providersFromItemsThunk, null);
+            IEnumerable<TestProvider> returnedProviders =
+                MultiServiceResolver.GetCombined<TestProvider>(providersFromItemsThunk, null);
 
             // Assert
             Assert.Equal(providersFromItemsThunk.ToList(), returnedProviders.ToList());
@@ -50,13 +57,15 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             var ex = Assert.Throws<MockException>(
-                () => MultiServiceResolver.GetCombined<TestProvider>(null, resolver.Object));
+                () => MultiServiceResolver.GetCombined<TestProvider>(null, resolver.Object)
+            );
             Assert.Equal(
-                "IDependencyResolver.GetServices(System.Web.Mvc.Test.MultiServiceResolverTest+TestProvider) invocation failed with mock behavior Strict." +
-                Environment.NewLine +
-                "All invocations on the mock must have a corresponding setup.",
+                "IDependencyResolver.GetServices(System.Web.Mvc.Test.MultiServiceResolverTest+TestProvider) invocation failed with mock behavior Strict."
+                    + Environment.NewLine
+                    + "All invocations on the mock must have a corresponding setup.",
                 ex.Message,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         private class TestProvider
@@ -65,20 +74,12 @@ namespace System.Web.Mvc.Test
 
         private IEnumerable<TestProvider> GetProvidersFromService()
         {
-            return new TestProvider[]
-            {
-                new TestProvider(),
-                new TestProvider()
-            };
+            return new TestProvider[] { new TestProvider(), new TestProvider() };
         }
 
         private IEnumerable<TestProvider> GetProvidersFromItemsThunk()
         {
-            return new TestProvider[]
-            {
-                new TestProvider(),
-                new TestProvider()
-            };
+            return new TestProvider[] { new TestProvider(), new TestProvider() };
         }
     }
 }

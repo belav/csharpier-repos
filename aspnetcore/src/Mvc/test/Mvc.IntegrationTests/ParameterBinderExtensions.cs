@@ -18,11 +18,15 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public static Task<ModelBindingResult> BindModelAsync(
             this ParameterBinder parameterBinder,
             ParameterDescriptor parameter,
-            ControllerContext context)
+            ControllerContext context
+        )
         {
-            var optionsAccessor = context.HttpContext.RequestServices.GetService<IOptions<MvcOptions>>();
+            var optionsAccessor = context.HttpContext.RequestServices.GetService<
+                IOptions<MvcOptions>
+            >();
             Assert.NotNull(optionsAccessor?.Value); // Guard
-            var modelMetadataProvider = context.HttpContext.RequestServices.GetService<IModelMetadataProvider>();
+            var modelMetadataProvider =
+                context.HttpContext.RequestServices.GetService<IModelMetadataProvider>();
             Assert.NotNull(modelMetadataProvider); // Guard
 
             // Imitate a bit of ControllerBinderDelegateProvider and PageBinderFactory
@@ -41,8 +45,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             }
 
             ModelMetadata metadata;
-            if (modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase &&
-                parameterInfo != null)
+            if (
+                modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase
+                && parameterInfo != null
+            )
             {
                 metadata = modelMetadataProviderBase.GetMetadataForParameter(parameterInfo);
             }
@@ -51,7 +57,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 metadata = modelMetadataProvider.GetMetadataForType(parameter.ParameterType);
             }
 
-            return parameterBinder.BindModelAsync(parameter, context, modelMetadataProvider, metadata);
+            return parameterBinder.BindModelAsync(
+                parameter,
+                context,
+                modelMetadataProvider,
+                metadata
+            );
         }
 
         public static async Task<ModelBindingResult> BindModelAsync(
@@ -59,19 +70,23 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             ParameterDescriptor parameter,
             ControllerContext context,
             IModelMetadataProvider modelMetadataProvider,
-            ModelMetadata modelMetadata)
+            ModelMetadata modelMetadata
+        )
         {
             var valueProvider = await CompositeValueProvider.CreateAsync(context);
             var modelBinderFactory = ModelBindingTestHelper.GetModelBinderFactory(
                 modelMetadataProvider,
-                context.HttpContext.RequestServices);
+                context.HttpContext.RequestServices
+            );
 
-            var modelBinder = modelBinderFactory.CreateBinder(new ModelBinderFactoryContext
-            {
-                BindingInfo = parameter.BindingInfo,
-                Metadata = modelMetadata,
-                CacheToken = parameter,
-            });
+            var modelBinder = modelBinderFactory.CreateBinder(
+                new ModelBinderFactoryContext
+                {
+                    BindingInfo = parameter.BindingInfo,
+                    Metadata = modelMetadata,
+                    CacheToken = parameter,
+                }
+            );
 
             return await parameterBinder.BindModelAsync(
                 context,
@@ -79,7 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 valueProvider,
                 parameter,
                 modelMetadata,
-                value: null);
+                value: null
+            );
         }
     }
 }

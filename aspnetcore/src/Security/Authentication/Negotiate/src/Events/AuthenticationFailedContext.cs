@@ -18,8 +18,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public AuthenticationFailedContext(
             HttpContext context,
             AuthenticationScheme scheme,
-            NegotiateOptions options)
-            : base(context, scheme, options, properties: null) { }
+            NegotiateOptions options
+        ) : base(context, scheme, options, properties: null) { }
 
         /// <summary>
         /// The exception that occurred while processing the authentication.

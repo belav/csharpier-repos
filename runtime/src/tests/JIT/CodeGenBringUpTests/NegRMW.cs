@@ -11,13 +11,18 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void NegRMW(ref int x) { x = -x; }
+    public static void NegRMW(ref int x)
+    {
+        x = -x;
+    }
 
     public static int Main()
     {
         int x = 12;
         NegRMW(ref x);
-        if (x == -12) return Pass;
-        else return Fail;
+        if (x == -12)
+            return Pass;
+        else
+            return Fail;
     }
 }

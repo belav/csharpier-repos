@@ -45,6 +45,7 @@ namespace System.Net.Tests
                 listener.Stop();
                 listener.Close();
             }
+
             finally
             {
                 listener.Close();
@@ -61,6 +62,7 @@ namespace System.Net.Tests
                 listener.Close();
                 listener.Abort();
             }
+
             finally
             {
                 listener.Close();
@@ -77,6 +79,7 @@ namespace System.Net.Tests
                 listener.Abort();
                 listener.Close();
             }
+
             finally
             {
                 listener.Close();
@@ -115,6 +118,7 @@ namespace System.Net.Tests
             {
                 Assert.Throws<HttpListenerException>(() => listener.Start());
             }
+
             finally
             {
                 // even though listener wasn't started (state is 'Closed'), Abort() must not throw.
@@ -136,7 +140,10 @@ namespace System.Net.Tests
             {
                 client.DefaultRequestHeaders.ConnectionClose = true;
 
-                HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, _factory.ListeningUrl);
+                HttpRequestMessage requestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    _factory.ListeningUrl
+                );
 
                 for (int i = 0; i < numHeaders; i++)
                 {
@@ -148,7 +155,10 @@ namespace System.Net.Tests
                 if (clientTask == await Task.WhenAny(server, clientTask))
                 {
                     (await clientTask).EnsureSuccessStatusCode();
-                    Assert.True(false, "Client should not have completed prior to server sending response");
+                    Assert.True(
+                        false,
+                        "Client should not have completed prior to server sending response"
+                    );
                 }
 
                 HttpListenerContext context = await server;

@@ -14,24 +14,30 @@ namespace System.Net.Security
     {
         public static Exception GetException(SecurityStatusPal status)
         {
-            return status.Exception ?? new Interop.AndroidCrypto.SslException((int)status.ErrorCode);
+            return status.Exception
+                ?? new Interop.AndroidCrypto.SslException((int)status.ErrorCode);
         }
 
         internal const bool StartMutualAuthAsAnonymous = false;
         internal const bool CanEncryptEmptyMessage = false;
 
-        public static void VerifyPackageInfo()
-        {
-        }
+        public static void VerifyPackageInfo() { }
 
         public static SecurityStatusPal AcceptSecurityContext(
             ref SafeFreeCredentials credential,
             ref SafeDeleteSslContext? context,
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
-            SslAuthenticationOptions sslAuthenticationOptions)
+            SslAuthenticationOptions sslAuthenticationOptions
+        )
         {
-            return HandshakeInternal(credential, ref context, inputBuffer, ref outputBuffer, sslAuthenticationOptions);
+            return HandshakeInternal(
+                credential,
+                ref context,
+                inputBuffer,
+                ref outputBuffer,
+                sslAuthenticationOptions
+            );
         }
 
         public static SecurityStatusPal InitializeSecurityContext(
@@ -40,16 +46,24 @@ namespace System.Net.Security
             string? targetName,
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
-            SslAuthenticationOptions sslAuthenticationOptions)
+            SslAuthenticationOptions sslAuthenticationOptions
+        )
         {
-            return HandshakeInternal(credential, ref context, inputBuffer, ref outputBuffer, sslAuthenticationOptions);
+            return HandshakeInternal(
+                credential,
+                ref context,
+                inputBuffer,
+                ref outputBuffer,
+                sslAuthenticationOptions
+            );
         }
 
         public static SafeFreeCredentials AcquireCredentialsHandle(
             SslStreamCertificateContext? certificateContext,
             SslProtocols protocols,
             EncryptionPolicy policy,
-            bool isServer)
+            bool isServer
+        )
         {
             return new SafeFreeSslCredentials(certificateContext, protocols, policy);
         }
@@ -59,7 +73,9 @@ namespace System.Net.Security
             if (context == null)
                 return null;
 
-            return Interop.AndroidCrypto.SSLStreamGetApplicationProtocol(((SafeDeleteSslContext)context).SslContext);
+            return Interop.AndroidCrypto.SSLStreamGetApplicationProtocol(
+                ((SafeDeleteSslContext)context).SslContext
+            );
         }
 
         public static SecurityStatusPal EncryptMessage(
@@ -68,10 +84,14 @@ namespace System.Net.Security
             int headerSize,
             int trailerSize,
             ref byte[] output,
-            out int resultSize)
+            out int resultSize
+        )
         {
             resultSize = 0;
-            Debug.Assert(input.Length > 0, $"{nameof(input.Length)} > 0 since {nameof(CanEncryptEmptyMessage)} is false");
+            Debug.Assert(
+                input.Length > 0,
+                $"{nameof(input.Length)} > 0 since {nameof(CanEncryptEmptyMessage)} is false"
+            );
 
             try
             {
@@ -110,7 +130,8 @@ namespace System.Net.Security
             SafeDeleteContext securityContext,
             byte[] buffer,
             ref int offset,
-            ref int count)
+            ref int count
+        )
         {
             try
             {
@@ -119,7 +140,11 @@ namespace System.Net.Security
 
                 sslContext.Write(buffer.AsSpan(offset, count));
 
-                PAL_SSLStreamStatus ret = Interop.AndroidCrypto.SSLStreamRead(sslHandle, buffer.AsSpan(offset, count), out int read);
+                PAL_SSLStreamStatus ret = Interop.AndroidCrypto.SSLStreamRead(
+                    sslHandle,
+                    buffer.AsSpan(offset, count),
+                    out int read
+                );
                 if (ret == PAL_SSLStreamStatus.Error)
                     return new SecurityStatusPal(SecurityStatusPalErrorCode.InternalError);
 
@@ -144,7 +169,8 @@ namespace System.Net.Security
 
         public static ChannelBinding? QueryContextChannelBinding(
             SafeDeleteContext securityContext,
-            ChannelBindingKind attribute)
+            ChannelBindingKind attribute
+        )
         {
             if (attribute == ChannelBindingKind.Endpoint)
                 return EndpointChannelBindingToken.Build(securityContext);
@@ -156,16 +182,20 @@ namespace System.Net.Security
 
         public static void QueryContextStreamSizes(
             SafeDeleteContext? securityContext,
-            out StreamSizes streamSizes)
+            out StreamSizes streamSizes
+        )
         {
             streamSizes = StreamSizes.Default;
         }
 
         public static void QueryContextConnectionInfo(
             SafeDeleteContext securityContext,
-            out SslConnectionInfo connectionInfo)
+            out SslConnectionInfo connectionInfo
+        )
         {
-            connectionInfo = new SslConnectionInfo(((SafeDeleteSslContext)securityContext).SslContext);
+            connectionInfo = new SslConnectionInfo(
+                ((SafeDeleteSslContext)securityContext).SslContext
+            );
         }
 
         private static SecurityStatusPal HandshakeInternal(
@@ -173,7 +203,8 @@ namespace System.Net.Security
             ref SafeDeleteSslContext? context,
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
-            SslAuthenticationOptions sslAuthenticationOptions)
+            SslAuthenticationOptions sslAuthenticationOptions
+        )
         {
             Debug.Assert(!credential.IsInvalid);
 
@@ -183,7 +214,10 @@ namespace System.Net.Security
 
                 if ((context == null) || context.IsInvalid)
                 {
-                    context = new SafeDeleteSslContext((credential as SafeFreeSslCredentials)!, sslAuthenticationOptions);
+                    context = new SafeDeleteSslContext(
+                        (credential as SafeFreeSslCredentials)!,
+                        sslAuthenticationOptions
+                    );
                     sslContext = context;
                 }
 
@@ -216,7 +250,8 @@ namespace System.Net.Security
             ref SafeFreeCredentials? credentialsHandle,
             SafeDeleteContext? securityContext,
             TlsAlertType alertType,
-            TlsAlertMessage alertMessage)
+            TlsAlertMessage alertMessage
+        )
         {
             // There doesn't seem to be an exposed API for writing an alert.
             // The API seems to assume that all alerts are generated internally.
@@ -225,11 +260,11 @@ namespace System.Net.Security
 
         public static SecurityStatusPal ApplyShutdownToken(
             ref SafeFreeCredentials? credentialsHandle,
-            SafeDeleteContext securityContext)
+            SafeDeleteContext securityContext
+        )
         {
             SafeDeleteSslContext sslContext = ((SafeDeleteSslContext)securityContext);
             SafeSslHandle sslHandle = sslContext.SslContext;
-
 
             bool success = Interop.AndroidCrypto.SSLStreamShutdown(sslHandle);
             if (success)

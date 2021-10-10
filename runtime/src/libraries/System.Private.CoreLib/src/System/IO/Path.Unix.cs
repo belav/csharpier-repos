@@ -33,12 +33,20 @@ namespace System.IO
 
             // We would ideally use realpath to do this, but it resolves symlinks, requires that the file actually exist,
             // and turns it into a full path, which we only want if fullCheck is true.
-            string collapsedString = PathInternal.RemoveRelativeSegments(path, PathInternal.GetRootLength(path));
+            string collapsedString = PathInternal.RemoveRelativeSegments(
+                path,
+                PathInternal.GetRootLength(path)
+            );
 
-            Debug.Assert(collapsedString.Length < path.Length || collapsedString.ToString() == path,
-                "Either we've removed characters, or the string should be unmodified from the input path.");
+            Debug.Assert(
+                collapsedString.Length < path.Length || collapsedString.ToString() == path,
+                "Either we've removed characters, or the string should be unmodified from the input path."
+            );
 
-            string result = collapsedString.Length == 0 ? PathInternal.DirectorySeparatorCharAsString : collapsedString;
+            string result =
+                collapsedString.Length == 0
+                    ? PathInternal.DirectorySeparatorCharAsString
+                    : collapsedString;
 
             return result;
         }
@@ -77,10 +85,11 @@ namespace System.IO
             // If it's not set, just return the default path.
             // If it is, return it, ensuring it ends with a slash.
             string? path = Environment.GetEnvironmentVariable(TempEnvVar);
-            return
-                string.IsNullOrEmpty(path) ? DefaultTempPath :
-                PathInternal.IsDirectorySeparator(path[path.Length - 1]) ? path :
-                path + PathInternal.DirectorySeparatorChar;
+            return string.IsNullOrEmpty(path)
+              ? DefaultTempPath
+              : PathInternal.IsDirectorySeparator(path[path.Length - 1])
+                  ? path
+                  : path + PathInternal.DirectorySeparatorChar;
         }
 
         public static string GetTempFileName()
@@ -120,13 +129,16 @@ namespace System.IO
         /// </summary>
         public static string? GetPathRoot(string? path)
         {
-            if (PathInternal.IsEffectivelyEmpty(path)) return null;
+            if (PathInternal.IsEffectivelyEmpty(path))
+                return null;
             return IsPathRooted(path) ? PathInternal.DirectorySeparatorCharAsString : string.Empty;
         }
 
         public static ReadOnlySpan<char> GetPathRoot(ReadOnlySpan<char> path)
         {
-            return IsPathRooted(path) ? PathInternal.DirectorySeparatorCharAsString.AsSpan() : ReadOnlySpan<char>.Empty;
+            return IsPathRooted(path)
+              ? PathInternal.DirectorySeparatorCharAsString.AsSpan()
+              : ReadOnlySpan<char>.Empty;
         }
 
         /// <summary>Gets whether the system is case-sensitive.</summary>
@@ -134,11 +146,11 @@ namespace System.IO
         {
             get
             {
-                #if TARGET_OSX || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
-                    return false;
-                #else
-                    return true;
-                #endif
+#if TARGET_OSX || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
+                return false;
+#else
+                return true;
+#endif
             }
         }
     }

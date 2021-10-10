@@ -14,7 +14,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
         //
         // Similar to https://github.com/dotnet/coreclr/blob/master/src/System.Private.CoreLib/shared/System/Globalization/CompareInfo.cs#L549
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AsciiIgnoreCaseEquals(ReadOnlySpan<char> a, ReadOnlySpan<char> b, int length)
+        public static bool AsciiIgnoreCaseEquals(
+            ReadOnlySpan<char> a,
+            ReadOnlySpan<char> b,
+            int length
+        )
         {
             // The caller should have checked the length. We enforce that here by THROWING if the
             // lengths are unequal.
@@ -24,7 +28,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 // behavior if it does.
                 ThrowArgumentExceptionForLength();
             }
-            
+
             ref var charA = ref MemoryMarshal.GetReference(a);
             ref var charB = ref MemoryMarshal.GetReference(b);
 
@@ -48,10 +52,13 @@ namespace Microsoft.AspNetCore.Routing.Matching
             const uint AsciiToLower = 0x20;
             return
                 // Equal when chars are exactly equal
-                charA == charB ||
-
+                charA == charB
+                ||
                 // Equal when converted to-lower AND they are letters
-                ((charA | AsciiToLower) == (charB | AsciiToLower) && (uint)((charA | AsciiToLower) - 'a') <= (uint)('z' - 'a'));
+                (
+                    (charA | AsciiToLower) == (charB | AsciiToLower)
+                    && (uint)((charA | AsciiToLower) - 'a') <= (uint)('z' - 'a')
+                );
         }
 
         public static bool IsAscii(string text)

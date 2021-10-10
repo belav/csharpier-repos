@@ -57,11 +57,10 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             private const int MonitorDelay = 10000; // 10 seconds
 
             private readonly List<byte[]> _blocks = new List<byte[]>();
-            private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+            private readonly CancellationTokenSource _cancellationTokenSource =
+                new CancellationTokenSource();
 
-            public MemoryHogger()
-            {
-            }
+            public MemoryHogger() { }
 
             public int Count
             {
@@ -76,7 +75,13 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             public Task PopulateAndMonitorAsync(int size)
             {
                 // run on background thread
-                return Task.Factory.StartNew(() => this.PopulateAndMonitorWorkerAsync(size), CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default).Unwrap();
+                return Task.Factory.StartNew(
+                        () => this.PopulateAndMonitorWorkerAsync(size),
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
+                    .Unwrap();
             }
 
             private async Task PopulateAndMonitorWorkerAsync(int size)
@@ -103,9 +108,7 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                             await Task.Yield();
                         }
                     }
-                    catch (OutOfMemoryException)
-                    {
-                    }
+                    catch (OutOfMemoryException) { }
 
                     // monitor memory to keep it paged in
                     while (true)
@@ -131,11 +134,10 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                                 await Task.Yield();
                             }
                         }
-                        catch (OutOfMemoryException)
-                        {
-                        }
+                        catch (OutOfMemoryException) { }
 
-                        await Task.Delay(MonitorDelay, _cancellationTokenSource.Token).ConfigureAwait(false);
+                        await Task.Delay(MonitorDelay, _cancellationTokenSource.Token)
+                            .ConfigureAwait(false);
                     }
                 }
                 catch (OperationCanceledException)

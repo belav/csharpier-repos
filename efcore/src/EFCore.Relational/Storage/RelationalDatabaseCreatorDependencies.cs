@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             ISqlGenerationHelper sqlGenerationHelper,
             IExecutionStrategyFactory executionStrategyFactory,
             ICurrentDbContext currentContext,
-            IRelationalCommandDiagnosticsLogger commandLogger)
+            IRelationalCommandDiagnosticsLogger commandLogger
+        )
         {
             Check.NotNull(model, nameof(model));
             Check.NotNull(connection, nameof(connection));

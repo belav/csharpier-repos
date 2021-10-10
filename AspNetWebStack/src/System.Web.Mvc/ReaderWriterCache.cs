@@ -7,16 +7,17 @@ using System.Threading;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Instances of this type are meant to be singletons.")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable",
+        Justification = "Instances of this type are meant to be singletons."
+    )]
     internal abstract class ReaderWriterCache<TKey, TValue>
     {
         private readonly Dictionary<TKey, TValue> _cache;
         private readonly ReaderWriterLockSlim _readerWriterLock = new ReaderWriterLockSlim();
 
-        protected ReaderWriterCache()
-            : this(null)
-        {
-        }
+        protected ReaderWriterCache() : this(null) { }
 
         protected ReaderWriterCache(IEqualityComparer<TKey> comparer)
         {
@@ -34,7 +35,11 @@ namespace System.Web.Mvc
             return FetchOrCreateItem(key, (Func<TValue> innerCreator) => innerCreator(), creator);
         }
 
-        protected TValue FetchOrCreateItem<TArgument>(TKey key, Func<TArgument, TValue> creator, TArgument state)
+        protected TValue FetchOrCreateItem<TArgument>(
+            TKey key,
+            Func<TArgument, TValue> creator,
+            TArgument state
+        )
         {
             // first, see if the item already exists in the cache
             _readerWriterLock.EnterReadLock();
@@ -46,6 +51,7 @@ namespace System.Web.Mvc
                     return existingEntry;
                 }
             }
+
             finally
             {
                 _readerWriterLock.ExitReadLock();
@@ -66,6 +72,7 @@ namespace System.Web.Mvc
                 _cache[key] = newEntry;
                 return newEntry;
             }
+
             finally
             {
                 _readerWriterLock.ExitWriteLock();

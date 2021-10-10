@@ -17,7 +17,9 @@ namespace System.Collections.Generic
     [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class List<T> : IList<T>, IList, IReadOnlyList<T>
     {
         private const int DefaultCapacity = 4;
@@ -25,7 +27,6 @@ namespace System.Collections.Generic
         internal T[] _items; // Do not rename (binary serialization)
         internal int _size; // Do not rename (binary serialization)
         private int _version; // Do not rename (binary serialization)
-
 #pragma warning disable CA1825 // avoid the extra generic instantiation for Array.Empty<T>()
         private static readonly T[] s_emptyArray = new T[0];
 #pragma warning restore CA1825
@@ -46,7 +47,10 @@ namespace System.Collections.Generic
         public List(int capacity)
         {
             if (capacity < 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.capacity,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (capacity == 0)
                 _items = s_emptyArray;
@@ -101,7 +105,10 @@ namespace System.Collections.Generic
             {
                 if (value < _size)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value, ExceptionResource.ArgumentOutOfRange_SmallCapacity);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.value,
+                        ExceptionResource.ArgumentOutOfRange_SmallCapacity
+                    );
                 }
 
                 if (value != _items.Length)
@@ -151,7 +158,6 @@ namespace System.Collections.Generic
                 }
                 return _items[index];
             }
-
             set
             {
                 if ((uint)index >= (uint)_size)
@@ -240,11 +246,9 @@ namespace System.Collections.Generic
         // required, the capacity of the list is increased to twice the previous
         // capacity or the new size, whichever is larger.
         //
-        public void AddRange(IEnumerable<T> collection)
-            => InsertRange(_size, collection);
+        public void AddRange(IEnumerable<T> collection) => InsertRange(_size, collection);
 
-        public ReadOnlyCollection<T> AsReadOnly()
-            => new ReadOnlyCollection<T>(this);
+        public ReadOnlyCollection<T> AsReadOnly() => new ReadOnlyCollection<T>(this);
 
         // Searches a section of the list for a given element using a binary search
         // algorithm. Elements of the list are compared to the search value using
@@ -271,18 +275,20 @@ namespace System.Collections.Generic
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
             if (count < 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (_size - index < count)
                 ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidOffLen);
 
             return Array.BinarySearch<T>(_items, index, count, item, comparer);
         }
 
-        public int BinarySearch(T item)
-            => BinarySearch(0, Count, item, null);
+        public int BinarySearch(T item) => BinarySearch(0, Count, item, null);
 
-        public int BinarySearch(T item, IComparer<T>? comparer)
-            => BinarySearch(0, Count, item, comparer);
+        public int BinarySearch(T item, IComparer<T>? comparer) =>
+            BinarySearch(0, Count, item, comparer);
 
         // Clears the contents of List.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -348,8 +354,7 @@ namespace System.Collections.Generic
 
         // Copies this List into array, which must be of a
         // compatible array type.
-        public void CopyTo(T[] array)
-            => CopyTo(array, 0);
+        public void CopyTo(T[] array) => CopyTo(array, 0);
 
         // Copies this List into array, which must be of a
         // compatible array type.
@@ -402,7 +407,10 @@ namespace System.Collections.Generic
         {
             if (capacity < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.capacity,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (_items.Length < capacity)
             {
@@ -425,17 +433,18 @@ namespace System.Collections.Generic
 
             // Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
             // Note that this check works even when _items.Length overflowed thanks to the (uint) cast
-            if ((uint)newcapacity > Array.MaxLength) newcapacity = Array.MaxLength;
+            if ((uint)newcapacity > Array.MaxLength)
+                newcapacity = Array.MaxLength;
 
             // If the computed capacity is still less than specified, set to the original argument.
             // Capacities exceeding Array.MaxLength will be surfaced as OutOfMemoryException by Array.Resize.
-            if (newcapacity < capacity) newcapacity = capacity;
+            if (newcapacity < capacity)
+                newcapacity = capacity;
 
             Capacity = newcapacity;
         }
 
-        public bool Exists(Predicate<T> match)
-            => FindIndex(match) != -1;
+        public bool Exists(Predicate<T> match) => FindIndex(match) != -1;
 
         public T? Find(Predicate<T> match)
         {
@@ -472,11 +481,10 @@ namespace System.Collections.Generic
             return list;
         }
 
-        public int FindIndex(Predicate<T> match)
-            => FindIndex(0, _size, match);
+        public int FindIndex(Predicate<T> match) => FindIndex(0, _size, match);
 
-        public int FindIndex(int startIndex, Predicate<T> match)
-            => FindIndex(startIndex, _size - startIndex, match);
+        public int FindIndex(int startIndex, Predicate<T> match) =>
+            FindIndex(startIndex, _size - startIndex, match);
 
         public int FindIndex(int startIndex, int count, Predicate<T> match)
         {
@@ -498,7 +506,8 @@ namespace System.Collections.Generic
             int endIndex = startIndex + count;
             for (int i = startIndex; i < endIndex; i++)
             {
-                if (match(_items[i])) return i;
+                if (match(_items[i]))
+                    return i;
             }
             return -1;
         }
@@ -520,11 +529,10 @@ namespace System.Collections.Generic
             return default;
         }
 
-        public int FindLastIndex(Predicate<T> match)
-            => FindLastIndex(_size - 1, _size, match);
+        public int FindLastIndex(Predicate<T> match) => FindLastIndex(_size - 1, _size, match);
 
-        public int FindLastIndex(int startIndex, Predicate<T> match)
-            => FindLastIndex(startIndex, startIndex + 1, match);
+        public int FindLastIndex(int startIndex, Predicate<T> match) =>
+            FindLastIndex(startIndex, startIndex + 1, match);
 
         public int FindLastIndex(int startIndex, int count, Predicate<T> match)
         {
@@ -594,14 +602,11 @@ namespace System.Collections.Generic
         // while an enumeration is in progress, the MoveNext and
         // GetObject methods of the enumerator will throw an exception.
         //
-        public Enumerator GetEnumerator()
-            => new Enumerator(this);
+        public Enumerator GetEnumerator() => new Enumerator(this);
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => new Enumerator(this);
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => new Enumerator(this);
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => new Enumerator(this);
+        IEnumerator IEnumerable.GetEnumerator() => new Enumerator(this);
 
         public List<T> GetRange(int index, int count)
         {
@@ -612,7 +617,10 @@ namespace System.Collections.Generic
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_size - index < count)
@@ -634,8 +642,7 @@ namespace System.Collections.Generic
         // This method uses the Array.IndexOf method to perform the
         // search.
         //
-        public int IndexOf(T item)
-            => Array.IndexOf(_items, item, 0, _size);
+        public int IndexOf(T item) => Array.IndexOf(_items, item, 0, _size);
 
         int IList.IndexOf(object? item)
         {
@@ -691,9 +698,13 @@ namespace System.Collections.Generic
             // Note that insertions at the end are legal.
             if ((uint)index > (uint)_size)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index, ExceptionResource.ArgumentOutOfRange_ListInsert);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.index,
+                    ExceptionResource.ArgumentOutOfRange_ListInsert
+                );
             }
-            if (_size == _items.Length) Grow(_size + 1);
+            if (_size == _items.Length)
+                Grow(_size + 1);
             if (index < _size)
             {
                 Array.Copy(_items, index, _items, index + 1, _size - index);
@@ -787,7 +798,7 @@ namespace System.Collections.Generic
         public int LastIndexOf(T item)
         {
             if (_size == 0)
-            {  // Special case for empty list
+            { // Special case for empty list
                 return -1;
             }
             else
@@ -830,22 +841,31 @@ namespace System.Collections.Generic
 
             if ((Count != 0) && (count < 0))
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_size == 0)
-            {  // Special case for empty list
+            { // Special case for empty list
                 return -1;
             }
 
             if (index >= _size)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index, ExceptionResource.ArgumentOutOfRange_BiggerThanCollection);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.index,
+                    ExceptionResource.ArgumentOutOfRange_BiggerThanCollection
+                );
             }
 
             if (count > index + 1)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_BiggerThanCollection);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_BiggerThanCollection
+                );
             }
 
             return Array.LastIndexOf(_items, item, index, count);
@@ -882,17 +902,20 @@ namespace System.Collections.Generic
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
-            int freeIndex = 0;   // the first free slot in items array
+            int freeIndex = 0; // the first free slot in items array
 
             // Find the first item which needs to be removed.
-            while (freeIndex < _size && !match(_items[freeIndex])) freeIndex++;
-            if (freeIndex >= _size) return 0;
+            while (freeIndex < _size && !match(_items[freeIndex]))
+                freeIndex++;
+            if (freeIndex >= _size)
+                return 0;
 
             int current = freeIndex + 1;
             while (current < _size)
             {
                 // Find the first item which needs to be kept.
-                while (current < _size && match(_items[current])) current++;
+                while (current < _size && match(_items[current]))
+                    current++;
 
                 if (current < _size)
                 {
@@ -942,7 +965,10 @@ namespace System.Collections.Generic
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_size - index < count)
@@ -965,8 +991,7 @@ namespace System.Collections.Generic
         }
 
         // Reverses the elements in this list.
-        public void Reverse()
-            => Reverse(0, Count);
+        public void Reverse() => Reverse(0, Count);
 
         // Reverses the elements in a range of this list. Following a call to this
         // method, an element in the range given by index and count
@@ -982,7 +1007,10 @@ namespace System.Collections.Generic
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_size - index < count)
@@ -997,13 +1025,11 @@ namespace System.Collections.Generic
 
         // Sorts the elements in this list.  Uses the default comparer and
         // Array.Sort.
-        public void Sort()
-            => Sort(0, Count, null);
+        public void Sort() => Sort(0, Count, null);
 
         // Sorts the elements in this list.  Uses Array.Sort with the
         // provided comparer.
-        public void Sort(IComparer<T>? comparer)
-            => Sort(0, Count, comparer);
+        public void Sort(IComparer<T>? comparer) => Sort(0, Count, comparer);
 
         // Sorts the elements in a section of this list. The sort compares the
         // elements to each other using the given IComparer interface. If
@@ -1022,7 +1048,10 @@ namespace System.Collections.Generic
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_size - index < count)
@@ -1113,9 +1142,7 @@ namespace System.Collections.Generic
                 _current = default;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {

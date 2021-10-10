@@ -6,10 +6,12 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
-    internal sealed class CallSiteValidator: CallSiteVisitor<CallSiteValidator.CallSiteValidatorState, Type>
+    internal sealed class CallSiteValidator
+        : CallSiteVisitor<CallSiteValidator.CallSiteValidatorState, Type>
     {
         // Keys are services being resolved via GetService, values - first scoped service in their call site tree
-        private readonly ConcurrentDictionary<Type, Type> _scopedServices = new ConcurrentDictionary<Type, Type>();
+        private readonly ConcurrentDictionary<Type, Type> _scopedServices =
+            new ConcurrentDictionary<Type, Type>();
 
         public void ValidateCallSite(ServiceCallSite callSite)
         {
@@ -20,32 +22,48 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             }
         }
 
-        public void ValidateResolution(Type serviceType, IServiceScope scope, IServiceScope rootScope)
+        public void ValidateResolution(
+            Type serviceType,
+            IServiceScope scope,
+            IServiceScope rootScope
+        )
         {
-            if (ReferenceEquals(scope, rootScope)
-                && _scopedServices.TryGetValue(serviceType, out Type scopedService))
+            if (
+                ReferenceEquals(scope, rootScope)
+                && _scopedServices.TryGetValue(serviceType, out Type scopedService)
+            )
             {
                 if (serviceType == scopedService)
                 {
                     throw new InvalidOperationException(
-                        SR.Format(SR.DirectScopedResolvedFromRootException, serviceType,
-                            nameof(ServiceLifetime.Scoped).ToLowerInvariant()));
+                        SR.Format(
+                            SR.DirectScopedResolvedFromRootException,
+                            serviceType,
+                            nameof(ServiceLifetime.Scoped).ToLowerInvariant()
+                        )
+                    );
                 }
 
                 throw new InvalidOperationException(
-                    SR.Format(SR.ScopedResolvedFromRootException,
+                    SR.Format(
+                        SR.ScopedResolvedFromRootException,
                         serviceType,
                         scopedService,
-                        nameof(ServiceLifetime.Scoped).ToLowerInvariant()));
+                        nameof(ServiceLifetime.Scoped).ToLowerInvariant()
+                    )
+                );
             }
         }
 
-        protected override Type VisitConstructor(ConstructorCallSite constructorCallSite, CallSiteValidatorState state)
+        protected override Type VisitConstructor(
+            ConstructorCallSite constructorCallSite,
+            CallSiteValidatorState state
+        )
         {
             Type result = null;
             foreach (ServiceCallSite parameterCallSite in constructorCallSite.ParameterCallSites)
             {
-                Type scoped =  VisitCallSite(parameterCallSite, state);
+                Type scoped = VisitCallSite(parameterCallSite, state);
                 if (result == null)
                 {
                     result = scoped;
@@ -54,8 +72,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return result;
         }
 
-        protected override Type VisitIEnumerable(IEnumerableCallSite enumerableCallSite,
-            CallSiteValidatorState state)
+        protected override Type VisitIEnumerable(
+            IEnumerableCallSite enumerableCallSite,
+            CallSiteValidatorState state
+        )
         {
             Type result = null;
             foreach (ServiceCallSite serviceCallSite in enumerableCallSite.ServiceCallSites)
@@ -69,13 +89,19 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return result;
         }
 
-        protected override Type VisitRootCache(ServiceCallSite singletonCallSite, CallSiteValidatorState state)
+        protected override Type VisitRootCache(
+            ServiceCallSite singletonCallSite,
+            CallSiteValidatorState state
+        )
         {
             state.Singleton = singletonCallSite;
             return VisitCallSiteMain(singletonCallSite, state);
         }
 
-        protected override Type VisitScopeCache(ServiceCallSite scopedCallSite, CallSiteValidatorState state)
+        protected override Type VisitScopeCache(
+            ServiceCallSite scopedCallSite,
+            CallSiteValidatorState state
+        )
         {
             // We are fine with having ServiceScopeService requested by singletons
             if (scopedCallSite is ServiceScopeFactoryCallSite)
@@ -84,25 +110,40 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             }
             if (state.Singleton != null)
             {
-                throw new InvalidOperationException(SR.Format(SR.ScopedInSingletonException,
-                    scopedCallSite.ServiceType,
-                    state.Singleton.ServiceType,
-                    nameof(ServiceLifetime.Scoped).ToLowerInvariant(),
-                    nameof(ServiceLifetime.Singleton).ToLowerInvariant()
-                    ));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.ScopedInSingletonException,
+                        scopedCallSite.ServiceType,
+                        state.Singleton.ServiceType,
+                        nameof(ServiceLifetime.Scoped).ToLowerInvariant(),
+                        nameof(ServiceLifetime.Singleton).ToLowerInvariant()
+                    )
+                );
             }
 
             VisitCallSiteMain(scopedCallSite, state);
             return scopedCallSite.ServiceType;
         }
 
-        protected override Type VisitConstant(ConstantCallSite constantCallSite, CallSiteValidatorState state) => null;
+        protected override Type VisitConstant(
+            ConstantCallSite constantCallSite,
+            CallSiteValidatorState state
+        ) => null;
 
-        protected override Type VisitServiceProvider(ServiceProviderCallSite serviceProviderCallSite, CallSiteValidatorState state) => null;
+        protected override Type VisitServiceProvider(
+            ServiceProviderCallSite serviceProviderCallSite,
+            CallSiteValidatorState state
+        ) => null;
 
-        protected override Type VisitServiceScopeFactory(ServiceScopeFactoryCallSite serviceScopeFactoryCallSite, CallSiteValidatorState state) => null;
+        protected override Type VisitServiceScopeFactory(
+            ServiceScopeFactoryCallSite serviceScopeFactoryCallSite,
+            CallSiteValidatorState state
+        ) => null;
 
-        protected override Type VisitFactory(FactoryCallSite factoryCallSite, CallSiteValidatorState state) => null;
+        protected override Type VisitFactory(
+            FactoryCallSite factoryCallSite,
+            CallSiteValidatorState state
+        ) => null;
 
         internal struct CallSiteValidatorState
         {

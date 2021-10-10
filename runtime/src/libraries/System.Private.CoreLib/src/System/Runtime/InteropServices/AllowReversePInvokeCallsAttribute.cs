@@ -4,12 +4,14 @@
 namespace System.Runtime.InteropServices
 {
     // This attribute was a Silverlight security measure and is no longer respected.
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public sealed class AllowReversePInvokeCallsAttribute : Attribute
     {
-        public AllowReversePInvokeCallsAttribute()
-        {
-        }
+        public AllowReversePInvokeCallsAttribute() { }
     }
 }

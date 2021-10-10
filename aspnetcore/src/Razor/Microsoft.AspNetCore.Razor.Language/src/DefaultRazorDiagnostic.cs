@@ -8,7 +8,11 @@ namespace Microsoft.AspNetCore.Razor.Language
 {
     internal class DefaultRazorDiagnostic : RazorDiagnostic
     {
-        internal DefaultRazorDiagnostic(RazorDiagnosticDescriptor descriptor, SourceSpan span, object[] args)
+        internal DefaultRazorDiagnostic(
+            RazorDiagnosticDescriptor descriptor,
+            SourceSpan span,
+            object[] args
+        )
         {
             Descriptor = descriptor;
             Span = span;
@@ -45,7 +49,7 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 return false;
             }
-            
+
             if (!Span.Equals(other.Span))
             {
                 return false;

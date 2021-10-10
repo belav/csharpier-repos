@@ -18,7 +18,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
         private readonly int _maxSegmentCount;
         private readonly bool _isDefaultEndpointSelector;
 
-        public DfaMatcher(ILogger<DfaMatcher> logger, EndpointSelector selector, DfaState[] states, int maxSegmentCount)
+        public DfaMatcher(
+            ILogger<DfaMatcher> logger,
+            EndpointSelector selector,
+            DfaState[] states,
+            int maxSegmentCount
+        )
         {
             _logger = logger;
             _selector = selector;
@@ -146,7 +151,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 if ((flags & Candidate.CandidateFlags.HasComplexSegments) != 0)
                 {
                     state.Values ??= new RouteValueDictionary();
-                    if (!ProcessComplexSegments(candidate.Endpoint, candidate.ComplexSegments, path, segments, state.Values))
+                    if (
+                        !ProcessComplexSegments(
+                            candidate.Endpoint,
+                            candidate.ComplexSegments,
+                            path,
+                            segments,
+                            state.Values
+                        )
+                    )
                     {
                         CandidateSet.SetValidity(ref state, false);
                         isMatch = false;
@@ -156,7 +169,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 if ((flags & Candidate.CandidateFlags.HasConstraints) != 0)
                 {
                     state.Values ??= new RouteValueDictionary();
-                    if (!ProcessConstraints(candidate.Endpoint, candidate.Constraints, httpContext, state.Values))
+                    if (
+                        !ProcessConstraints(
+                            candidate.Endpoint,
+                            candidate.Constraints,
+                            httpContext,
+                            state.Values
+                        )
+                    )
                     {
                         CandidateSet.SetValidity(ref state, false);
                         isMatch = false;
@@ -192,13 +212,18 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 return _selector.SelectAsync(httpContext, new CandidateSet(candidateState));
             }
 
-            return SelectEndpointWithPoliciesAsync(httpContext, policies, new CandidateSet(candidateState));
+            return SelectEndpointWithPoliciesAsync(
+                httpContext,
+                policies,
+                new CandidateSet(candidateState)
+            );
         }
 
         internal (Candidate[] candidates, IEndpointSelectorPolicy[] policies) FindCandidateSet(
             HttpContext httpContext,
             string path,
-            ReadOnlySpan<PathSegment> segments)
+            ReadOnlySpan<PathSegment> segments
+        )
         {
             var states = _states;
 
@@ -224,7 +249,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             KeyValuePair<string, object?>[] slots,
             (string parameterName, int segmentIndex, int slotIndex)[] captures,
             string path,
-            ReadOnlySpan<PathSegment> segments)
+            ReadOnlySpan<PathSegment> segments
+        )
         {
             for (var i = 0; i < captures.Length; i++)
             {
@@ -237,7 +263,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     {
                         slots[slotIndex] = new KeyValuePair<string, object?>(
                             parameterName,
-                            path.Substring(segment.Start, segment.Length));
+                            path.Substring(segment.Start, segment.Length)
+                        );
                     }
                 }
             }
@@ -247,7 +274,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             KeyValuePair<string, object?>[] slots,
             in (string parameterName, int segmentIndex, int slotIndex) catchAll,
             string path,
-            ReadOnlySpan<PathSegment> segments)
+            ReadOnlySpan<PathSegment> segments
+        )
         {
             // Read segmentIndex to local both to skip double read from stack value
             // and to use the same in-bounds validated variable to access the array.
@@ -257,7 +285,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 var segment = segments[segmentIndex];
                 slots[catchAll.slotIndex] = new KeyValuePair<string, object?>(
                     catchAll.parameterName,
-                    path.Substring(segment.Start));
+                    path.Substring(segment.Start)
+                );
             }
         }
 
@@ -266,7 +295,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             (RoutePatternPathSegment pathSegment, int segmentIndex)[] complexSegments,
             string path,
             ReadOnlySpan<PathSegment> segments,
-            RouteValueDictionary values)
+            RouteValueDictionary values
+        )
         {
             for (var i = 0; i < complexSegments.Length; i++)
             {
@@ -275,7 +305,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 var text = path.AsSpan(segment.Start, segment.Length);
                 if (!RoutePatternMatcher.MatchComplexSegment(complexSegment, text, values))
                 {
-                    Logger.CandidateRejectedByComplexSegment(_logger, path, endpoint, complexSegment);
+                    Logger.CandidateRejectedByComplexSegment(
+                        _logger,
+                        path,
+                        endpoint,
+                        complexSegment
+                    );
                     return false;
                 }
             }
@@ -287,14 +322,30 @@ namespace Microsoft.AspNetCore.Routing.Matching
             Endpoint endpoint,
             KeyValuePair<string, IRouteConstraint>[] constraints,
             HttpContext httpContext,
-            RouteValueDictionary values)
+            RouteValueDictionary values
+        )
         {
             for (var i = 0; i < constraints.Length; i++)
             {
                 var constraint = constraints[i];
-                if (!constraint.Value.Match(httpContext, NullRouter.Instance, constraint.Key, values, RouteDirection.IncomingRequest))
+                if (
+                    !constraint.Value.Match(
+                        httpContext,
+                        NullRouter.Instance,
+                        constraint.Key,
+                        values,
+                        RouteDirection.IncomingRequest
+                    )
+                )
                 {
-                    Logger.CandidateRejectedByConstraint(_logger, httpContext.Request.Path, endpoint, constraint.Key, constraint.Value, values[constraint.Key]);
+                    Logger.CandidateRejectedByConstraint(
+                        _logger,
+                        httpContext.Request.Path,
+                        endpoint,
+                        constraint.Key,
+                        constraint.Value,
+                        values[constraint.Key]
+                    );
                     return false;
                 }
             }
@@ -305,7 +356,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         private async Task SelectEndpointWithPoliciesAsync(
             HttpContext httpContext,
             IEndpointSelectorPolicy[] policies,
-            CandidateSet candidateSet)
+            CandidateSet candidateSet
+        )
         {
             for (var i = 0; i < policies.Length; i++)
             {
@@ -323,54 +375,114 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         internal static class EventIds
         {
-            public static readonly EventId CandidatesNotFound = new EventId(1000, "CandidatesNotFound");
+            public static readonly EventId CandidatesNotFound = new EventId(
+                1000,
+                "CandidatesNotFound"
+            );
             public static readonly EventId CandidatesFound = new EventId(1001, "CandidatesFound");
 
-            public static readonly EventId CandidateRejectedByComplexSegment = new EventId(1002, "CandidateRejectedByComplexSegment");
-            public static readonly EventId CandidateRejectedByConstraint = new EventId(1003, "CandidateRejectedByConstraint");
+            public static readonly EventId CandidateRejectedByComplexSegment = new EventId(
+                1002,
+                "CandidateRejectedByComplexSegment"
+            );
+            public static readonly EventId CandidateRejectedByConstraint = new EventId(
+                1003,
+                "CandidateRejectedByConstraint"
+            );
 
-            public static readonly EventId CandidateNotValid = new EventId(1004, "CandiateNotValid");
+            public static readonly EventId CandidateNotValid = new EventId(
+                1004,
+                "CandiateNotValid"
+            );
             public static readonly EventId CandidateValid = new EventId(1005, "CandiateValid");
         }
 
 #nullable disable
         private static class Logger
         {
-            private static readonly Action<ILogger, string, Exception> _candidatesNotFound = LoggerMessage.Define<string>(
-                LogLevel.Debug,
-                EventIds.CandidatesNotFound,
-                "No candidates found for the request path '{Path}'",
-                skipEnabledCheck: true);
+            private static readonly Action<ILogger, string, Exception> _candidatesNotFound =
+                LoggerMessage.Define<string>(
+                    LogLevel.Debug,
+                    EventIds.CandidatesNotFound,
+                    "No candidates found for the request path '{Path}'",
+                    skipEnabledCheck: true
+                );
 
-            private static readonly Action<ILogger, int, string, Exception> _candidatesFound = LoggerMessage.Define<int, string>(
-                LogLevel.Debug,
-                EventIds.CandidatesFound,
-                "{CandidateCount} candidate(s) found for the request path '{Path}'",
-                skipEnabledCheck: true);
+            private static readonly Action<ILogger, int, string, Exception> _candidatesFound =
+                LoggerMessage.Define<int, string>(
+                    LogLevel.Debug,
+                    EventIds.CandidatesFound,
+                    "{CandidateCount} candidate(s) found for the request path '{Path}'",
+                    skipEnabledCheck: true
+                );
 
-            private static readonly Action<ILogger, string, string, string, string, Exception> _candidateRejectedByComplexSegment = LoggerMessage.Define<string, string, string, string>(
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                string,
+                string,
+                Exception
+            > _candidateRejectedByComplexSegment = LoggerMessage.Define<
+                string,
+                string,
+                string,
+                string
+            >(
                 LogLevel.Debug,
                 EventIds.CandidateRejectedByComplexSegment,
                 "Endpoint '{Endpoint}' with route pattern '{RoutePattern}' was rejected by complex segment '{Segment}' for the request path '{Path}'",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
 
-            private static readonly Action<ILogger, string, string, string, string, object, string, Exception> _candidateRejectedByConstraint = LoggerMessage.Define<string, string, string, string, object, string>(
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                string,
+                string,
+                object,
+                string,
+                Exception
+            > _candidateRejectedByConstraint = LoggerMessage.Define<
+                string,
+                string,
+                string,
+                string,
+                object,
+                string
+            >(
                 LogLevel.Debug,
                 EventIds.CandidateRejectedByConstraint,
                 "Endpoint '{Endpoint}' with route pattern '{RoutePattern}' was rejected by constraint '{ConstraintName}':'{Constraint}' with value '{RouteValue}' for the request path '{Path}'",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
 
-            private static readonly Action<ILogger, string, string, string, Exception> _candidateNotValid = LoggerMessage.Define<string, string, string>(
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                string,
+                Exception
+            > _candidateNotValid = LoggerMessage.Define<string, string, string>(
                 LogLevel.Debug,
                 EventIds.CandidateNotValid,
                 "Endpoint '{Endpoint}' with route pattern '{RoutePattern}' is not valid for the request path '{Path}'",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
 
-            private static readonly Action<ILogger, string, string, string, Exception> _candidateValid = LoggerMessage.Define<string, string, string>(
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                string,
+                Exception
+            > _candidateValid = LoggerMessage.Define<string, string, string>(
                 LogLevel.Debug,
                 EventIds.CandidateValid,
                 "Endpoint '{Endpoint}' with route pattern '{RoutePattern}' is valid for the request path '{Path}'",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
 
             public static void CandidatesNotFound(ILogger logger, string path)
             {
@@ -382,23 +494,51 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 _candidatesFound(logger, candidates.Length, path, null);
             }
 
-            public static void CandidateRejectedByComplexSegment(ILogger logger, string path, Endpoint endpoint, RoutePatternPathSegment segment)
+            public static void CandidateRejectedByComplexSegment(
+                ILogger logger,
+                string path,
+                Endpoint endpoint,
+                RoutePatternPathSegment segment
+            )
             {
                 // This should return a real pattern since we're processing complex segments.... but just in case.
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
                     var routePattern = GetRoutePattern(endpoint);
-                    _candidateRejectedByComplexSegment(logger, endpoint.DisplayName, routePattern, segment.DebuggerToString(), path, null);
+                    _candidateRejectedByComplexSegment(
+                        logger,
+                        endpoint.DisplayName,
+                        routePattern,
+                        segment.DebuggerToString(),
+                        path,
+                        null
+                    );
                 }
             }
 
-            public static void CandidateRejectedByConstraint(ILogger logger, string path, Endpoint endpoint, string constraintName, IRouteConstraint constraint, object value)
+            public static void CandidateRejectedByConstraint(
+                ILogger logger,
+                string path,
+                Endpoint endpoint,
+                string constraintName,
+                IRouteConstraint constraint,
+                object value
+            )
             {
                 // This should return a real pattern since we're processing constraints.... but just in case.
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
                     var routePattern = GetRoutePattern(endpoint);
-                    _candidateRejectedByConstraint(logger, endpoint.DisplayName, routePattern, constraintName, constraint.ToString(), value, path, null);
+                    _candidateRejectedByConstraint(
+                        logger,
+                        endpoint.DisplayName,
+                        routePattern,
+                        constraintName,
+                        constraint.ToString(),
+                        value,
+                        path,
+                        null
+                    );
                 }
             }
 

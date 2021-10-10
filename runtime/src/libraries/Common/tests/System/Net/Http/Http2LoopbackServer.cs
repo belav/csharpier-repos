@@ -39,9 +39,10 @@ namespace System.Net.Test.Common
             get
             {
                 var localEndPoint = (IPEndPoint)_listenSocket.LocalEndPoint;
-                string host = _options.Address.AddressFamily == AddressFamily.InterNetworkV6 ?
-                    $"[{localEndPoint.Address}]" :
-                    localEndPoint.Address.ToString();
+                string host =
+                    _options.Address.AddressFamily == AddressFamily.InterNetworkV6
+                        ? $"[{localEndPoint.Address}]"
+                        : localEndPoint.Address.ToString();
 
                 string scheme = _options.UseSsl ? "https" : "http";
 
@@ -64,7 +65,11 @@ namespace System.Net.Test.Common
         private Http2LoopbackServer(Http2Options options)
         {
             _options = options;
-            _listenSocket = new Socket(_options.Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            _listenSocket = new Socket(
+                _options.Address.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             _listenSocket.Bind(new IPEndPoint(_options.Address, 0));
             _listenSocket.Listen(_options.ListenBacklog);
         }
@@ -85,15 +90,25 @@ namespace System.Net.Test.Common
 
             if (!AllowMultipleConnections && _connections.Count != 0)
             {
-                throw new InvalidOperationException("Connection already established. Set `AllowMultipleConnections = true` to bypass.");
+                throw new InvalidOperationException(
+                    "Connection already established. Set `AllowMultipleConnections = true` to bypass."
+                );
             }
 
             Socket connectionSocket = await _listenSocket.AcceptAsync().ConfigureAwait(false);
 
             var stream = new NetworkStream(connectionSocket, ownsSocket: true);
             Http2LoopbackConnection connection =
-                timeout != null ? await Http2LoopbackConnection.CreateAsync(connectionSocket, stream, _options, timeout.Value).ConfigureAwait(false) :
-                await Http2LoopbackConnection.CreateAsync(connectionSocket, stream, _options).ConfigureAwait(false);
+                timeout != null
+                    ? await Http2LoopbackConnection.CreateAsync(
+                              connectionSocket,
+                              stream,
+                              _options,
+                              timeout.Value
+                          )
+                          .ConfigureAwait(false)
+                    : await Http2LoopbackConnection.CreateAsync(connectionSocket, stream, _options)
+                          .ConfigureAwait(false);
             _connections.Add(connection);
 
             return connection;
@@ -104,26 +119,52 @@ namespace System.Net.Test.Common
             return await EstablishConnectionAsync();
         }
 
-        public Task<Http2LoopbackConnection> EstablishConnectionAsync(params SettingsEntry[] settingsEntries)
+        public Task<Http2LoopbackConnection> EstablishConnectionAsync(
+            params SettingsEntry[] settingsEntries
+        )
         {
             return EstablishConnectionAsync(timeout: null, ackTimeout: null, settingsEntries);
         }
 
-        public async Task<Http2LoopbackConnection> EstablishConnectionAsync(TimeSpan? timeout, TimeSpan? ackTimeout, params SettingsEntry[] settingsEntries)
+        public async Task<Http2LoopbackConnection> EstablishConnectionAsync(
+            TimeSpan? timeout,
+            TimeSpan? ackTimeout,
+            params SettingsEntry[] settingsEntries
+        )
         {
-            (Http2LoopbackConnection connection, _) = await EstablishConnectionGetSettingsAsync(timeout, ackTimeout, settingsEntries).ConfigureAwait(false);
+            (Http2LoopbackConnection connection, _) = await EstablishConnectionGetSettingsAsync(
+                    timeout,
+                    ackTimeout,
+                    settingsEntries
+                )
+                .ConfigureAwait(false);
             return connection;
         }
 
-        public Task<(Http2LoopbackConnection, SettingsFrame)> EstablishConnectionGetSettingsAsync(params SettingsEntry[] settingsEntries)
+        public Task<(Http2LoopbackConnection, SettingsFrame)> EstablishConnectionGetSettingsAsync(
+            params SettingsEntry[] settingsEntries
+        )
         {
-            return EstablishConnectionGetSettingsAsync(timeout: null, ackTimeout: null, settingsEntries);
+            return EstablishConnectionGetSettingsAsync(
+                timeout: null,
+                ackTimeout: null,
+                settingsEntries
+            );
         }
 
-        public async Task<(Http2LoopbackConnection, SettingsFrame)> EstablishConnectionGetSettingsAsync(TimeSpan? timeout, TimeSpan? ackTimeout, params SettingsEntry[] settingsEntries)
+        public async Task<(Http2LoopbackConnection, SettingsFrame)> EstablishConnectionGetSettingsAsync(
+            TimeSpan? timeout,
+            TimeSpan? ackTimeout,
+            params SettingsEntry[] settingsEntries
+        )
         {
-            Http2LoopbackConnection connection = await AcceptConnectionAsync(timeout).ConfigureAwait(false);
-            SettingsFrame clientSettingsFrame = await connection.ReadAndSendSettingsAsync(ackTimeout, settingsEntries).ConfigureAwait(false);
+            Http2LoopbackConnection connection = await AcceptConnectionAsync(timeout)
+                .ConfigureAwait(false);
+            SettingsFrame clientSettingsFrame = await connection.ReadAndSendSettingsAsync(
+                    ackTimeout,
+                    settingsEntries
+                )
+                .ConfigureAwait(false);
 
             return (connection, clientSettingsFrame);
         }
@@ -141,35 +182,60 @@ namespace System.Net.Test.Common
         // GenericLoopbackServer implementation
         //
 
-        public override async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
+        public override async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = ""
+        )
         {
-            using (Http2LoopbackConnection connection = await EstablishConnectionAsync().ConfigureAwait(false))
+            using (
+                Http2LoopbackConnection connection = await EstablishConnectionAsync()
+                    .ConfigureAwait(false)
+            )
             {
-                return await connection.HandleRequestAsync(statusCode, headers, content).ConfigureAwait(false);
-			}
+                return await connection.HandleRequestAsync(statusCode, headers, content)
+                    .ConfigureAwait(false);
+            }
         }
 
-        public override async Task AcceptConnectionAsync(Func<GenericLoopbackConnection, Task> funcAsync)
+        public override async Task AcceptConnectionAsync(
+            Func<GenericLoopbackConnection, Task> funcAsync
+        )
         {
-            using (Http2LoopbackConnection connection = await EstablishConnectionAsync().ConfigureAwait(false))
+            using (
+                Http2LoopbackConnection connection = await EstablishConnectionAsync()
+                    .ConfigureAwait(false)
+            )
             {
                 await funcAsync(connection).ConfigureAwait(false);
             }
         }
 
-        public static Task CreateClientAndServerAsync(Func<Uri, Task> clientFunc, Func<Http2LoopbackServer, Task> serverFunc, int timeout = 60_000)
+        public static Task CreateClientAndServerAsync(
+            Func<Uri, Task> clientFunc,
+            Func<Http2LoopbackServer, Task> serverFunc,
+            int timeout = 60_000
+        )
         {
             return CreateClientAndServerAsync(clientFunc, serverFunc, null, timeout);
         }
 
-        public static async Task CreateClientAndServerAsync(Func<Uri, Task> clientFunc, Func<Http2LoopbackServer, Task> serverFunc, Http2Options http2Options, int timeout = 60_000)
+        public static async Task CreateClientAndServerAsync(
+            Func<Uri, Task> clientFunc,
+            Func<Http2LoopbackServer, Task> serverFunc,
+            Http2Options http2Options,
+            int timeout = 60_000
+        )
         {
-            using (var server = Http2LoopbackServer.CreateServer(http2Options ?? new Http2Options()))
+            using (
+                var server = Http2LoopbackServer.CreateServer(http2Options ?? new Http2Options())
+            )
             {
                 Task clientTask = clientFunc(server.Address);
                 Task serverTask = serverFunc(server);
 
-                await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed(timeout).ConfigureAwait(false);
+                await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed(timeout)
+                    .ConfigureAwait(false);
             }
         }
     }
@@ -186,13 +252,18 @@ namespace System.Net.Test.Common
 
     public sealed class Http2LoopbackServerFactory : LoopbackServerFactory
     {
-        public static readonly Http2LoopbackServerFactory Singleton = new Http2LoopbackServerFactory();
+        public static readonly Http2LoopbackServerFactory Singleton =
+            new Http2LoopbackServerFactory();
 
-        public static async Task CreateServerAsync(Func<Http2LoopbackServer, Uri, Task> funcAsync, int millisecondsTimeout = 60_000)
+        public static async Task CreateServerAsync(
+            Func<Http2LoopbackServer, Uri, Task> funcAsync,
+            int millisecondsTimeout = 60_000
+        )
         {
             using (var server = Http2LoopbackServer.CreateServer())
             {
-                await funcAsync(server, server.Address).WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
+                await funcAsync(server, server.Address)
+                    .WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
             }
         }
 
@@ -201,9 +272,14 @@ namespace System.Net.Test.Common
             return Http2LoopbackServer.CreateServer(CreateOptions(options));
         }
 
-        public override async Task<GenericLoopbackConnection> CreateConnectionAsync(Socket socket, Stream stream, GenericLoopbackOptions options = null)
+        public override async Task<GenericLoopbackConnection> CreateConnectionAsync(
+            Socket socket,
+            Stream stream,
+            GenericLoopbackOptions options = null
+        )
         {
-            return await Http2LoopbackConnection.CreateAsync(socket, stream, CreateOptions(options)).ConfigureAwait(false);
+            return await Http2LoopbackConnection.CreateAsync(socket, stream, CreateOptions(options))
+                .ConfigureAwait(false);
         }
 
         private static Http2Options CreateOptions(GenericLoopbackOptions options)
@@ -219,11 +295,16 @@ namespace System.Net.Test.Common
             return http2Options;
         }
 
-        public override async Task CreateServerAsync(Func<GenericLoopbackServer, Uri, Task> funcAsync, int millisecondsTimeout = 60_000, GenericLoopbackOptions options = null)
+        public override async Task CreateServerAsync(
+            Func<GenericLoopbackServer, Uri, Task> funcAsync,
+            int millisecondsTimeout = 60_000,
+            GenericLoopbackOptions options = null
+        )
         {
             using (var server = CreateServer(options))
             {
-                await funcAsync(server, server.Address).WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
+                await funcAsync(server, server.Address)
+                    .WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
             }
         }
 

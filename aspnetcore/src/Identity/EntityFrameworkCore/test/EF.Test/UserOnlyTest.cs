@@ -27,11 +27,14 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             var services = new ServiceCollection();
 
-            services
-                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
+            services.AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
                 .AddDbContext<TestUserDbContext>(
-                    o => o.UseSqlite(fixture.Connection)
-                        .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)))
+                    o =>
+                        o.UseSqlite(fixture.Connection)
+                            .ConfigureWarnings(
+                                b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                            )
+                )
                 .AddIdentityCore<IdentityUser>(o => { })
                 .AddEntityFrameworkStores<TestUserDbContext>();
 
@@ -50,8 +53,12 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         [ConditionalFact]
         public async Task EnsureStartupUsageWorks()
         {
-            var userStore = _builder.ApplicationServices.GetRequiredService<IUserStore<IdentityUser>>();
-            var userManager = _builder.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
+            var userStore = _builder.ApplicationServices.GetRequiredService<
+                IUserStore<IdentityUser>
+            >();
+            var userManager = _builder.ApplicationServices.GetRequiredService<
+                UserManager<IdentityUser>
+            >();
 
             Assert.NotNull(userStore);
             Assert.NotNull(userManager);
@@ -66,8 +73,12 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         [ConditionalFact]
         public async Task FindByEmailThrowsWithTwoUsersWithSameEmail()
         {
-            var userStore = _builder.ApplicationServices.GetRequiredService<IUserStore<IdentityUser>>();
-            var manager = _builder.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
+            var userStore = _builder.ApplicationServices.GetRequiredService<
+                IUserStore<IdentityUser>
+            >();
+            var manager = _builder.ApplicationServices.GetRequiredService<
+                UserManager<IdentityUser>
+            >();
 
             Assert.NotNull(userStore);
             Assert.NotNull(manager);
@@ -79,7 +90,9 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             var userB = new IdentityUser(Guid.NewGuid().ToString());
             userB.Email = "dupe@dupe.com";
             IdentityResultAssert.IsSuccess(await manager.CreateAsync(userB, password));
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await manager.FindByEmailAsync("dupe@dupe.com"));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await manager.FindByEmailAsync("dupe@dupe.com")
+            );
         }
     }
 }

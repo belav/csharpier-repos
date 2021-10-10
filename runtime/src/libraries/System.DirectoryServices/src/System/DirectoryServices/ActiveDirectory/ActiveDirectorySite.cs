@@ -37,10 +37,12 @@ namespace System.DirectoryServices.ActiveDirectory
         private readonly ReadOnlySiteCollection _adjacentSites = new ReadOnlySiteCollection();
         private bool _disposed;
         private readonly DomainCollection _domains = new DomainCollection(null);
-        private readonly ReadOnlyDirectoryServerCollection _servers = new ReadOnlyDirectoryServerCollection();
+        private readonly ReadOnlyDirectoryServerCollection _servers =
+            new ReadOnlyDirectoryServerCollection();
         private readonly ReadOnlySiteLinkCollection _links = new ReadOnlySiteLinkCollection();
         private ActiveDirectorySiteOptions _siteOptions = ActiveDirectorySiteOptions.None;
-        private ReadOnlyDirectoryServerCollection _bridgeheadServers = new ReadOnlyDirectoryServerCollection();
+        private ReadOnlyDirectoryServerCollection _bridgeheadServers =
+            new ReadOnlyDirectoryServerCollection();
         private readonly DirectoryServerCollection _SMTPBridgeheadServers;
         private readonly DirectoryServerCollection _RPCBridgeheadServers;
         private byte[]? _replicationSchedule;
@@ -74,7 +76,13 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                sitedn = "CN=Sites," + (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+                sitedn =
+                    "CN=Sites,"
+                    + (string)PropertyManager.GetPropertyValue(
+                        context,
+                        de,
+                        PropertyManager.ConfigurationNamingContext
+                    )!;
                 de = DirectoryEntryManager.GetDirectoryEntry(context, sitedn);
             }
             catch (COMException e)
@@ -84,22 +92,32 @@ namespace System.DirectoryServices.ActiveDirectory
             catch (ActiveDirectoryObjectNotFoundException)
             {
                 // this is the case where the context is a config set and we could not find an ADAM instance in that config set
-                throw new ActiveDirectoryOperationException(SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name));
+                throw new ActiveDirectoryOperationException(
+                    SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name)
+                );
             }
 
             try
             {
-                ADSearcher adSearcher = new ADSearcher(de,
-                                                      "(&(objectClass=site)(objectCategory=site)(name=" + Utils.GetEscapedFilterValue(siteName) + "))",
-                                                      new string[] { "distinguishedName" },
-                                                      SearchScope.OneLevel,
-                                                      false, /* don't need paged search */
-                                                      false /* don't need to cache result */);
+                ADSearcher adSearcher = new ADSearcher(
+                    de,
+                    "(&(objectClass=site)(objectCategory=site)(name="
+                        + Utils.GetEscapedFilterValue(siteName)
+                        + "))",
+                    new string[] { "distinguishedName" },
+                    SearchScope.OneLevel,
+                    false, /* don't need paged search */
+                    false /* don't need to cache result */
+                );
                 SearchResult? srchResult = adSearcher.FindOne();
                 if (srchResult == null)
                 {
                     // no such site object
-                    throw new ActiveDirectoryObjectNotFoundException(SR.DSNotFound, typeof(ActiveDirectorySite), siteName);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.DSNotFound,
+                        typeof(ActiveDirectorySite),
+                        siteName
+                    );
                 }
                 // it is an existing site object
                 ActiveDirectorySite site = new ActiveDirectorySite(context, siteName, true);
@@ -110,14 +128,17 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (e.ErrorCode == unchecked((int)0x80072030))
                 {
                     // object is not found since we cannot even find the container in which to search
-                    throw new ActiveDirectoryObjectNotFoundException(SR.DSNotFound, typeof(ActiveDirectorySite), siteName);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.DSNotFound,
+                        typeof(ActiveDirectorySite),
+                        siteName
+                    );
                 }
                 else
                 {
                     throw ExceptionHelper.GetExceptionFromCOMException(context, e);
                 }
             }
-
             finally
             {
                 de.Dispose();
@@ -139,7 +160,11 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+                string config = (string)PropertyManager.GetPropertyValue(
+                    context,
+                    de,
+                    PropertyManager.ConfigurationNamingContext
+                )!;
                 _siteDN = "CN=Sites," + config;
                 // bind to the site container
                 de = DirectoryEntryManager.GetDirectoryEntry(context, _siteDN);
@@ -155,7 +180,9 @@ namespace System.DirectoryServices.ActiveDirectory
             catch (ActiveDirectoryObjectNotFoundException)
             {
                 // this is the case where the context is a config set and we could not find an ADAM instance in that config set
-                throw new ActiveDirectoryOperationException(SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name));
+                throw new ActiveDirectoryOperationException(
+                    SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name)
+                );
             }
             finally
             {
@@ -163,11 +190,22 @@ namespace System.DirectoryServices.ActiveDirectory
                     de.Dispose();
             }
 
-            _subnets = new ActiveDirectorySubnetCollection(context, "CN=" + siteName + "," + _siteDN);
+            _subnets = new ActiveDirectorySubnetCollection(
+                context,
+                "CN=" + siteName + "," + _siteDN
+            );
             string transportDN = "CN=IP,CN=Inter-Site Transports," + _siteDN;
-            _RPCBridgeheadServers = new DirectoryServerCollection(context, "CN=" + siteName + "," + _siteDN, transportDN);
+            _RPCBridgeheadServers = new DirectoryServerCollection(
+                context,
+                "CN=" + siteName + "," + _siteDN,
+                transportDN
+            );
             transportDN = "CN=SMTP,CN=Inter-Site Transports," + _siteDN;
-            _SMTPBridgeheadServers = new DirectoryServerCollection(context, "CN=" + siteName + "," + _siteDN, transportDN);
+            _SMTPBridgeheadServers = new DirectoryServerCollection(
+                context,
+                "CN=" + siteName + "," + _siteDN,
+                transportDN
+            );
         }
 
         internal ActiveDirectorySite(DirectoryContext context, string siteName, bool existing)
@@ -178,16 +216,47 @@ namespace System.DirectoryServices.ActiveDirectory
             _name = siteName;
             this.existing = existing;
 
-            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-            _siteDN = "CN=Sites," + (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                context,
+                WellKnownDN.RootDSE
+            );
+            _siteDN =
+                "CN=Sites,"
+                + (string)PropertyManager.GetPropertyValue(
+                    context,
+                    de,
+                    PropertyManager.ConfigurationNamingContext
+                )!;
 
-            cachedEntry = DirectoryEntryManager.GetDirectoryEntry(context, "CN=" + siteName + "," + _siteDN);
-            _subnets = new ActiveDirectorySubnetCollection(context, "CN=" + siteName + "," + _siteDN);
+            cachedEntry = DirectoryEntryManager.GetDirectoryEntry(
+                context,
+                "CN=" + siteName + "," + _siteDN
+            );
+            _subnets = new ActiveDirectorySubnetCollection(
+                context,
+                "CN=" + siteName + "," + _siteDN
+            );
 
             string transportDN = "CN=IP,CN=Inter-Site Transports," + _siteDN;
-            _RPCBridgeheadServers = new DirectoryServerCollection(context, (string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.DistinguishedName)!, transportDN);
+            _RPCBridgeheadServers = new DirectoryServerCollection(
+                context,
+                (string)PropertyManager.GetPropertyValue(
+                    context,
+                    cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!,
+                transportDN
+            );
             transportDN = "CN=SMTP,CN=Inter-Site Transports," + _siteDN;
-            _SMTPBridgeheadServers = new DirectoryServerCollection(context, (string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.DistinguishedName)!, transportDN);
+            _SMTPBridgeheadServers = new DirectoryServerCollection(
+                context,
+                (string)PropertyManager.GetPropertyValue(
+                    context,
+                    cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!,
+                transportDN
+            );
         }
 
         public static ActiveDirectorySite GetComputerSite()
@@ -202,7 +271,11 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 // computer is not in a site
                 if (result == ERROR_NO_SITENAME)
-                    throw new ActiveDirectoryObjectNotFoundException(SR.NoCurrentSite, typeof(ActiveDirectorySite), null);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.NoCurrentSite,
+                        typeof(ActiveDirectorySite),
+                        null
+                    );
                 else
                     throw ExceptionHelper.GetExceptionFromErrorCode(result);
             }
@@ -214,13 +287,27 @@ namespace System.DirectoryServices.ActiveDirectory
                     Debug.Assert(siteName != null);
 
                     // find the forest this machine belongs to
-                    string? forestName = Locator.GetDomainControllerInfo(null, null, null, (long)PrivateLocatorFlags.DirectoryServicesRequired).DnsForestName;
-                    DirectoryContext currentContext = Utils.GetNewDirectoryContext(forestName, DirectoryContextType.Forest, null);
+                    string? forestName =
+                        Locator.GetDomainControllerInfo(
+                            null,
+                            null,
+                            null,
+                            (long)PrivateLocatorFlags.DirectoryServicesRequired
+                        ).DnsForestName;
+                    DirectoryContext currentContext = Utils.GetNewDirectoryContext(
+                        forestName,
+                        DirectoryContextType.Forest,
+                        null
+                    );
 
                     // existing site
-                    ActiveDirectorySite site = ActiveDirectorySite.FindByName(currentContext, siteName);
+                    ActiveDirectorySite site = ActiveDirectorySite.FindByName(
+                        currentContext,
+                        siteName
+                    );
                     return site;
                 }
+
                 finally
                 {
                     if (ptr != (IntPtr)0)
@@ -363,7 +450,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         bool ISTGExist;
                         try
                         {
-                            ISTGExist = NTDSSiteEntry.Properties.Contains("interSiteTopologyGenerator");
+                            ISTGExist = NTDSSiteEntry.Properties.Contains(
+                                "interSiteTopologyGenerator"
+                            );
                         }
                         catch (COMException e)
                         {
@@ -372,13 +461,24 @@ namespace System.DirectoryServices.ActiveDirectory
 
                         if (ISTGExist)
                         {
-                            string serverDN = (string)PropertyManager.GetPropertyValue(context, NTDSSiteEntry, PropertyManager.InterSiteTopologyGenerator)!;
+                            string serverDN = (string)PropertyManager.GetPropertyValue(
+                                context,
+                                NTDSSiteEntry,
+                                PropertyManager.InterSiteTopologyGenerator
+                            )!;
                             string? hostname = null;
-                            DirectoryEntry tmp = DirectoryEntryManager.GetDirectoryEntry(context, serverDN);
+                            DirectoryEntry tmp = DirectoryEntryManager.GetDirectoryEntry(
+                                context,
+                                serverDN
+                            );
 
                             try
                             {
-                                hostname = (string)PropertyManager.GetPropertyValue(context, tmp.Parent, PropertyManager.DnsHostName)!;
+                                hostname = (string)PropertyManager.GetPropertyValue(
+                                    context,
+                                    tmp.Parent,
+                                    PropertyManager.DnsHostName
+                                )!;
                             }
                             catch (COMException e)
                             {
@@ -390,17 +490,35 @@ namespace System.DirectoryServices.ActiveDirectory
                             }
                             if (IsADAM)
                             {
-                                int port = (int)PropertyManager.GetPropertyValue(context, tmp, PropertyManager.MsDSPortLDAP)!;
+                                int port = (int)PropertyManager.GetPropertyValue(
+                                    context,
+                                    tmp,
+                                    PropertyManager.MsDSPortLDAP
+                                )!;
                                 string fullHostName = hostname!;
                                 if (port != 389)
                                 {
                                     fullHostName = hostname + ":" + port;
                                 }
-                                _topologyGenerator = new AdamInstance(Utils.GetNewDirectoryContext(fullHostName, DirectoryContextType.DirectoryServer, context), fullHostName);
+                                _topologyGenerator = new AdamInstance(
+                                    Utils.GetNewDirectoryContext(
+                                        fullHostName,
+                                        DirectoryContextType.DirectoryServer,
+                                        context
+                                    ),
+                                    fullHostName
+                                );
                             }
                             else
                             {
-                                _topologyGenerator = new DomainController(Utils.GetNewDirectoryContext(hostname, DirectoryContextType.DirectoryServer, context), hostname!);
+                                _topologyGenerator = new DomainController(
+                                    Utils.GetNewDirectoryContext(
+                                        hostname,
+                                        DirectoryContextType.DirectoryServer,
+                                        context
+                                    ),
+                                    hostname!
+                                );
                             }
                         }
                     }
@@ -440,7 +558,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         if (NTDSSiteEntry.Properties.Contains("options"))
                         {
-                            return (ActiveDirectorySiteOptions)NTDSSiteEntry.Properties["options"][0]!;
+                            return (ActiveDirectorySiteOptions)NTDSSiteEntry.Properties["options"][
+                                0
+                            ]!;
                         }
                         else
                             return ActiveDirectorySiteOptions.None;
@@ -639,7 +759,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                         else
                             // replace with the new value
-                            NTDSSiteEntry.Properties["schedule"].Value = value.GetUnmanagedSchedule();
+                            NTDSSiteEntry.Properties["schedule"].Value =
+                                value.GetUnmanagedSchedule();
                     }
                     catch (COMException e)
                     {
@@ -664,7 +785,10 @@ namespace System.DirectoryServices.ActiveDirectory
         {
             get
             {
-                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
+                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                    context,
+                    WellKnownDN.RootDSE
+                );
                 PropertyValueCollection values;
                 try
                 {
@@ -688,7 +812,15 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 if (_ntdsEntry == null)
                 {
-                    DirectoryEntry tmp = DirectoryEntryManager.GetDirectoryEntry(context, "CN=NTDS Site Settings," + (string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.DistinguishedName)!);
+                    DirectoryEntry tmp = DirectoryEntryManager.GetDirectoryEntry(
+                        context,
+                        "CN=NTDS Site Settings,"
+                            + (string)PropertyManager.GetPropertyValue(
+                                context,
+                                cachedEntry,
+                                PropertyManager.DistinguishedName
+                            )!
+                    );
                     try
                     {
                         tmp.RefreshCache();
@@ -785,8 +917,12 @@ namespace System.DirectoryServices.ActiveDirectory
                         try
                         {
                             DirectoryServer server = InterSiteTopologyGenerator!;
-                            string ntdsaName = (server is DomainController) ? ((DomainController)server).NtdsaObjectName : ((AdamInstance)server).NtdsaObjectName;
-                            NTDSSiteEntry.Properties["interSiteTopologyGenerator"].Value = ntdsaName;
+                            string ntdsaName =
+                                (server is DomainController)
+                                    ? ((DomainController)server).NtdsaObjectName
+                                    : ((AdamInstance)server).NtdsaObjectName;
+                            NTDSSiteEntry.Properties["interSiteTopologyGenerator"].Value =
+                                ntdsaName;
                         }
                         catch (COMException e)
                         {
@@ -802,12 +938,18 @@ namespace System.DirectoryServices.ActiveDirectory
                     try
                     {
                         // create nTDSSiteSettings object
-                        DirectoryEntry tmpEntry = cachedEntry.Children.Add("CN=NTDS Site Settings", "nTDSSiteSettings");
+                        DirectoryEntry tmpEntry = cachedEntry.Children.Add(
+                            "CN=NTDS Site Settings",
+                            "nTDSSiteSettings"
+                        );
                         //set properties on the Site NTDS settings object
                         DirectoryServer? replica = InterSiteTopologyGenerator;
                         if (replica != null)
                         {
-                            string ntdsaName = (replica is DomainController) ? ((DomainController)replica).NtdsaObjectName : ((AdamInstance)replica).NtdsaObjectName;
+                            string ntdsaName =
+                                (replica is DomainController)
+                                    ? ((DomainController)replica).NtdsaObjectName
+                                    : ((AdamInstance)replica).NtdsaObjectName;
                             tmpEntry.Properties["interSiteTopologyGenerator"].Value = ntdsaName;
                         }
                         tmpEntry.Properties["options"].Value = _siteOptions;
@@ -827,10 +969,14 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (!IsADAM)
                         {
                             // create the licensingSiteSettings object
-                            tmpEntry = cachedEntry.Children.Add("CN=Licensing Site Settings", "licensingSiteSettings");
+                            tmpEntry = cachedEntry.Children.Add(
+                                "CN=Licensing Site Settings",
+                                "licensingSiteSettings"
+                            );
                             tmpEntry.CommitChanges();
                         }
                     }
+
                     finally
                     {
                         // entry is created on the backend store successfully
@@ -876,7 +1022,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
         private ReadOnlyDirectoryServerCollection GetBridgeheadServers()
         {
-            NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname)new NativeComInterfaces.Pathname();
+            NativeComInterfaces.IAdsPathname pathCracker =
+                (NativeComInterfaces.IAdsPathname)new NativeComInterfaces.Pathname();
             // need to turn off the escaping for name
             pathCracker.EscapedMode = NativeComInterfaces.ADS_ESCAPEDMODE_OFF_EX;
 
@@ -891,18 +1038,35 @@ namespace System.DirectoryServices.ActiveDirectory
                 // get destination bridgehead servers
 
                 // first go to the servers container under the current site and then do a search to get the all server objects.
-                string serverContainer = "CN=Servers," + (string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.DistinguishedName)!;
-                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, serverContainer);
+                string serverContainer =
+                    "CN=Servers,"
+                    + (string)PropertyManager.GetPropertyValue(
+                        context,
+                        cachedEntry,
+                        PropertyManager.DistinguishedName
+                    )!;
+                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                    context,
+                    serverContainer
+                );
 
                 try
                 {
                     // go through connection objects and find out its fromServer property.
-                    ADSearcher adSearcher = new ADSearcher(de,
-                                                          "(|(objectCategory=server)(objectCategory=NTDSConnection))",
-                                                          new string[] { "fromServer", "distinguishedName", "dNSHostName", "objectCategory" },
-                                                          SearchScope.Subtree,
-                                                          true, /* need paged search */
-                                                          true /* need cached result as we need to go back to the first record */);
+                    ADSearcher adSearcher = new ADSearcher(
+                        de,
+                        "(|(objectCategory=server)(objectCategory=NTDSConnection))",
+                        new string[]
+                        {
+                            "fromServer",
+                            "distinguishedName",
+                            "dNSHostName",
+                            "objectCategory"
+                        },
+                        SearchScope.Subtree,
+                        true, /* need paged search */
+                        true /* need cached result as we need to go back to the first record */
+                    );
                     SearchResultCollection? conResults = null;
                     try
                     {
@@ -918,28 +1082,78 @@ namespace System.DirectoryServices.ActiveDirectory
                         // find out whether fromServer indicates replicating from a server in another site.
                         foreach (SearchResult r in conResults)
                         {
-                            string objectCategoryValue = (string)PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.ObjectCategory)!;
-                            if (Utils.Compare(objectCategoryValue, 0, ocValue.Length, ocValue, 0, ocValue.Length) == 0)
+                            string objectCategoryValue =
+                                (string)PropertyManager.GetSearchResultPropertyValue(
+                                    r,
+                                    PropertyManager.ObjectCategory
+                                )!;
+                            if (
+                                Utils.Compare(
+                                    objectCategoryValue,
+                                    0,
+                                    ocValue.Length,
+                                    ocValue,
+                                    0,
+                                    ocValue.Length
+                                ) == 0
+                            )
                             {
-                                hostNameTable.Add((string)PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.DistinguishedName)!, (string)PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.DnsHostName)!);
+                                hostNameTable.Add(
+                                    (string)PropertyManager.GetSearchResultPropertyValue(
+                                        r,
+                                        PropertyManager.DistinguishedName
+                                    )!,
+                                    (string)PropertyManager.GetSearchResultPropertyValue(
+                                        r,
+                                        PropertyManager.DnsHostName
+                                    )!
+                                );
                             }
                         }
 
                         foreach (SearchResult r in conResults)
                         {
-                            string objectCategoryValue = (string)PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.ObjectCategory)!;
-                            if (Utils.Compare(objectCategoryValue, 0, ocValue.Length, ocValue, 0, ocValue.Length) != 0)
+                            string objectCategoryValue =
+                                (string)PropertyManager.GetSearchResultPropertyValue(
+                                    r,
+                                    PropertyManager.ObjectCategory
+                                )!;
+                            if (
+                                Utils.Compare(
+                                    objectCategoryValue,
+                                    0,
+                                    ocValue.Length,
+                                    ocValue,
+                                    0,
+                                    ocValue.Length
+                                ) != 0
+                            )
                             {
-                                string fromServer = (string)PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.FromServer)!;
+                                string fromServer =
+                                    (string)PropertyManager.GetSearchResultPropertyValue(
+                                        r,
+                                        PropertyManager.FromServer
+                                    )!;
 
                                 // escaping manipulation
                                 string fromSite = Utils.GetPartialDN(fromServer, 3);
                                 pathCracker.Set(fromSite, NativeComInterfaces.ADS_SETTYPE_DN);
-                                fromSite = pathCracker.Retrieve(NativeComInterfaces.ADS_FORMAT_LEAF);
-                                Debug.Assert(fromSite != null && Utils.Compare(fromSite, 0, 3, "CN=", 0, 3) == 0);
+                                fromSite = pathCracker.Retrieve(
+                                    NativeComInterfaces.ADS_FORMAT_LEAF
+                                );
+                                Debug.Assert(
+                                    fromSite != null
+                                        && Utils.Compare(fromSite, 0, 3, "CN=", 0, 3) == 0
+                                );
                                 fromSite = fromSite.Substring(3);
 
-                                string serverObjectName = Utils.GetPartialDN((string)PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.DistinguishedName)!, 2);
+                                string serverObjectName = Utils.GetPartialDN(
+                                    (string)PropertyManager.GetSearchResultPropertyValue(
+                                        r,
+                                        PropertyManager.DistinguishedName
+                                    )!,
+                                    2
+                                );
                                 // don't know whether it is a bridgehead server yet.
                                 if (!bridgeHeadTable.Contains(serverObjectName))
                                 {
@@ -949,7 +1163,16 @@ namespace System.DirectoryServices.ActiveDirectory
                                         nonBridgHeadTable.Add(serverObjectName, hostName);
 
                                     // check whether from different site
-                                    if (Utils.Compare((string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.Cn)!, fromSite) != 0)
+                                    if (
+                                        Utils.Compare(
+                                            (string)PropertyManager.GetPropertyValue(
+                                                context,
+                                                cachedEntry,
+                                                PropertyManager.Cn
+                                            )!,
+                                            fromSite
+                                        ) != 0
+                                    )
                                     {
                                         // the server is a bridgehead server
                                         bridgeHeadTable.Add(serverObjectName, hostName);
@@ -959,11 +1182,13 @@ namespace System.DirectoryServices.ActiveDirectory
                             }
                         }
                     }
+
                     finally
                     {
                         conResults.Dispose();
                     }
                 }
+
                 finally
                 {
                     de.Dispose();
@@ -974,7 +1199,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     // go to sites container to get all the connecdtion object that replicates from servers in the current sites that have
                     // not been determined whether it is a bridgehead server or not.
-                    DirectoryEntry serverEntry = DirectoryEntryManager.GetDirectoryEntry(context, _siteDN);
+                    DirectoryEntry serverEntry = DirectoryEntryManager.GetDirectoryEntry(
+                        context,
+                        _siteDN
+                    );
                     // constructing the filter
                     StringBuilder str = new StringBuilder(100);
                     if (nonBridgHeadTable.Count > 1)
@@ -988,10 +1216,14 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     if (nonBridgHeadTable.Count > 1)
                         str.Append(')');
-                    ADSearcher adSearcher = new ADSearcher(serverEntry,
-                                                          "(&(objectClass=nTDSConnection)(objectCategory=NTDSConnection)" + str.ToString() + ")",
-                                                          new string[] { "fromServer", "distinguishedName" },
-                                                          SearchScope.Subtree);
+                    ADSearcher adSearcher = new ADSearcher(
+                        serverEntry,
+                        "(&(objectClass=nTDSConnection)(objectCategory=NTDSConnection)"
+                            + str.ToString()
+                            + ")",
+                        new string[] { "fromServer", "distinguishedName" },
+                        SearchScope.Subtree
+                    );
                     SearchResultCollection? conResults = null;
                     try
                     {
@@ -1006,20 +1238,44 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         foreach (SearchResult r in conResults)
                         {
-                            string fromServer = (string)PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.FromServer)!;
+                            string fromServer =
+                                (string)PropertyManager.GetSearchResultPropertyValue(
+                                    r,
+                                    PropertyManager.FromServer
+                                )!;
                             string serverObject = fromServer.Substring(17);
 
                             if (nonBridgHeadTable.Contains(serverObject))
                             {
-                                string otherSite = Utils.GetPartialDN((string)PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.DistinguishedName)!, 4);
+                                string otherSite = Utils.GetPartialDN(
+                                    (string)PropertyManager.GetSearchResultPropertyValue(
+                                        r,
+                                        PropertyManager.DistinguishedName
+                                    )!,
+                                    4
+                                );
                                 // escaping manipulation
                                 pathCracker.Set(otherSite, NativeComInterfaces.ADS_SETTYPE_DN);
-                                otherSite = pathCracker.Retrieve(NativeComInterfaces.ADS_FORMAT_LEAF);
-                                Debug.Assert(otherSite != null && Utils.Compare(otherSite, 0, 3, "CN=", 0, 3) == 0);
+                                otherSite = pathCracker.Retrieve(
+                                    NativeComInterfaces.ADS_FORMAT_LEAF
+                                );
+                                Debug.Assert(
+                                    otherSite != null
+                                        && Utils.Compare(otherSite, 0, 3, "CN=", 0, 3) == 0
+                                );
                                 otherSite = otherSite.Substring(3);
 
                                 // check whether from different sites
-                                if (Utils.Compare(otherSite, (string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.Cn)!) != 0)
+                                if (
+                                    Utils.Compare(
+                                        otherSite,
+                                        (string)PropertyManager.GetPropertyValue(
+                                            context,
+                                            cachedEntry,
+                                            PropertyManager.Cn
+                                        )!
+                                    ) != 0
+                                )
                                 {
                                     string val = (string)nonBridgHeadTable[serverObject]!;
                                     nonBridgHeadTable.Remove(serverObject);
@@ -1028,6 +1284,7 @@ namespace System.DirectoryServices.ActiveDirectory
                             }
                         }
                     }
+
                     finally
                     {
                         conResults.Dispose();
@@ -1043,18 +1300,39 @@ namespace System.DirectoryServices.ActiveDirectory
                     // construct directoryreplica
                     if (IsADAM)
                     {
-                        ADAMEntry = DirectoryEntryManager.GetDirectoryEntry(context, "CN=NTDS Settings," + e.Key);
-                        int port = (int)PropertyManager.GetPropertyValue(context, ADAMEntry, PropertyManager.MsDSPortLDAP)!;
+                        ADAMEntry = DirectoryEntryManager.GetDirectoryEntry(
+                            context,
+                            "CN=NTDS Settings," + e.Key
+                        );
+                        int port = (int)PropertyManager.GetPropertyValue(
+                            context,
+                            ADAMEntry,
+                            PropertyManager.MsDSPortLDAP
+                        )!;
                         string fullhost = host;
                         if (port != 389)
                         {
                             fullhost = host + ":" + port;
                         }
-                        replica = new AdamInstance(Utils.GetNewDirectoryContext(fullhost, DirectoryContextType.DirectoryServer, context), fullhost);
+                        replica = new AdamInstance(
+                            Utils.GetNewDirectoryContext(
+                                fullhost,
+                                DirectoryContextType.DirectoryServer,
+                                context
+                            ),
+                            fullhost
+                        );
                     }
                     else
                     {
-                        replica = new DomainController(Utils.GetNewDirectoryContext(host, DirectoryContextType.DirectoryServer, context), host);
+                        replica = new DomainController(
+                            Utils.GetNewDirectoryContext(
+                                host,
+                                DirectoryContextType.DirectoryServer,
+                                context
+                            ),
+                            host
+                        );
                     }
 
                     collection.Add(replica);
@@ -1131,16 +1409,32 @@ namespace System.DirectoryServices.ActiveDirectory
         private void GetSubnets()
         {
             // performs a search to find out the subnets that belong to this site
-            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-            string config = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                context,
+                WellKnownDN.RootDSE
+            );
+            string config = (string)PropertyManager.GetPropertyValue(
+                context,
+                de,
+                PropertyManager.ConfigurationNamingContext
+            )!;
             string subnetContainer = "CN=Subnets,CN=Sites," + config;
             de = DirectoryEntryManager.GetDirectoryEntry(context, subnetContainer);
 
-            ADSearcher adSearcher = new ADSearcher(de,
-                                                  "(&(objectClass=subnet)(objectCategory=subnet)(siteObject=" + Utils.GetEscapedFilterValue((string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.DistinguishedName)!) + "))",
-                                                  new string[] { "cn", "location" },
-                                                  SearchScope.OneLevel
-                                                  );
+            ADSearcher adSearcher = new ADSearcher(
+                de,
+                "(&(objectClass=subnet)(objectCategory=subnet)(siteObject="
+                    + Utils.GetEscapedFilterValue(
+                        (string)PropertyManager.GetPropertyValue(
+                            context,
+                            cachedEntry,
+                            PropertyManager.DistinguishedName
+                        )!
+                    )
+                    + "))",
+                new string[] { "cn", "location" },
+                SearchScope.OneLevel
+            );
             SearchResultCollection? results = null;
 
             try
@@ -1157,8 +1451,16 @@ namespace System.DirectoryServices.ActiveDirectory
                 string? subnetName = null;
                 foreach (SearchResult result in results)
                 {
-                    subnetName = (string)PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.Cn)!;
-                    ActiveDirectorySubnet subnet = new ActiveDirectorySubnet(context, subnetName, null, true);
+                    subnetName = (string)PropertyManager.GetSearchResultPropertyValue(
+                        result,
+                        PropertyManager.Cn
+                    )!;
+                    ActiveDirectorySubnet subnet = new ActiveDirectorySubnet(
+                        context,
+                        subnetName,
+                        null,
+                        true
+                    );
                     // set the cached entry
                     subnet.cachedEntry = result.GetDirectoryEntry();
                     // set the site info
@@ -1167,6 +1469,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     _subnets.Add(subnet);
                 }
             }
+
             finally
             {
                 results.Dispose();
@@ -1176,14 +1479,27 @@ namespace System.DirectoryServices.ActiveDirectory
 
         private void GetAdjacentSites()
         {
-            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
+            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                context,
+                WellKnownDN.RootDSE
+            );
             string config = (string)de.Properties["configurationNamingContext"][0]!;
             string transportContainer = "CN=Inter-Site Transports,CN=Sites," + config;
             de = DirectoryEntryManager.GetDirectoryEntry(context, transportContainer);
-            ADSearcher adSearcher = new ADSearcher(de,
-                                                  "(&(objectClass=siteLink)(objectCategory=SiteLink)(siteList=" + Utils.GetEscapedFilterValue((string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.DistinguishedName)!) + "))",
-                                                  new string[] { "cn", "distinguishedName" },
-                                                  SearchScope.Subtree);
+            ADSearcher adSearcher = new ADSearcher(
+                de,
+                "(&(objectClass=siteLink)(objectCategory=SiteLink)(siteList="
+                    + Utils.GetEscapedFilterValue(
+                        (string)PropertyManager.GetPropertyValue(
+                            context,
+                            cachedEntry,
+                            PropertyManager.DistinguishedName
+                        )!
+                    )
+                    + "))",
+                new string[] { "cn", "distinguishedName" },
+                SearchScope.Subtree
+            );
             SearchResultCollection? results = null;
 
             try
@@ -1201,13 +1517,21 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult result in results)
                 {
-                    string dn = (string)PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.DistinguishedName)!;
-                    string linkName = (string)PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.Cn)!;
+                    string dn = (string)PropertyManager.GetSearchResultPropertyValue(
+                        result,
+                        PropertyManager.DistinguishedName
+                    )!;
+                    string linkName = (string)PropertyManager.GetSearchResultPropertyValue(
+                        result,
+                        PropertyManager.Cn
+                    )!;
                     string transportName = (string)Utils.GetDNComponents(dn)[1].Value!;
                     ActiveDirectoryTransportType transportType;
                     if (string.Equals(transportName, "IP", StringComparison.OrdinalIgnoreCase))
                         transportType = ActiveDirectoryTransportType.Rpc;
-                    else if (string.Equals(transportName, "SMTP", StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        string.Equals(transportName, "SMTP", StringComparison.OrdinalIgnoreCase)
+                    )
                         transportType = ActiveDirectoryTransportType.Smtp;
                     else
                     {
@@ -1218,7 +1542,13 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     try
                     {
-                        link = new ActiveDirectorySiteLink(context, linkName, transportType, true, result.GetDirectoryEntry());
+                        link = new ActiveDirectorySiteLink(
+                            context,
+                            linkName,
+                            transportType,
+                            true,
+                            result.GetDirectoryEntry()
+                        );
                         foreach (ActiveDirectorySite tmpSite in link.Sites)
                         {
                             // don't add itself
@@ -1229,12 +1559,14 @@ namespace System.DirectoryServices.ActiveDirectory
                                 _adjacentSites.Add(tmpSite);
                         }
                     }
+
                     finally
                     {
                         link!.Dispose();
                     }
                 }
             }
+
             finally
             {
                 results.Dispose();
@@ -1244,14 +1576,31 @@ namespace System.DirectoryServices.ActiveDirectory
 
         private void GetLinks()
         {
-            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-            string config = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                context,
+                WellKnownDN.RootDSE
+            );
+            string config = (string)PropertyManager.GetPropertyValue(
+                context,
+                de,
+                PropertyManager.ConfigurationNamingContext
+            )!;
             string transportContainer = "CN=Inter-Site Transports,CN=Sites," + config;
             de = DirectoryEntryManager.GetDirectoryEntry(context, transportContainer);
-            ADSearcher adSearcher = new ADSearcher(de,
-                                                  "(&(objectClass=siteLink)(objectCategory=SiteLink)(siteList=" + Utils.GetEscapedFilterValue((string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.DistinguishedName)!) + "))",
-                                                  new string[] { "cn", "distinguishedName" },
-                                                  SearchScope.Subtree);
+            ADSearcher adSearcher = new ADSearcher(
+                de,
+                "(&(objectClass=siteLink)(objectCategory=SiteLink)(siteList="
+                    + Utils.GetEscapedFilterValue(
+                        (string)PropertyManager.GetPropertyValue(
+                            context,
+                            cachedEntry,
+                            PropertyManager.DistinguishedName
+                        )!
+                    )
+                    + "))",
+                new string[] { "cn", "distinguishedName" },
+                SearchScope.Subtree
+            );
             SearchResultCollection? results = null;
 
             try
@@ -1269,13 +1618,33 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     // construct the sitelinks at the same time
                     DirectoryEntry connectionEntry = result.GetDirectoryEntry();
-                    string cn = (string)PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.Cn)!;
-                    string transport = Utils.GetDNComponents((string)PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.DistinguishedName)!)[1].Value!;
+                    string cn = (string)PropertyManager.GetSearchResultPropertyValue(
+                        result,
+                        PropertyManager.Cn
+                    )!;
+                    string transport = Utils.GetDNComponents(
+                        (string)PropertyManager.GetSearchResultPropertyValue(
+                            result,
+                            PropertyManager.DistinguishedName
+                        )!
+                    )[1].Value!;
                     ActiveDirectorySiteLink? link = null;
                     if (string.Equals(transport, "IP", StringComparison.OrdinalIgnoreCase))
-                        link = new ActiveDirectorySiteLink(context, cn, ActiveDirectoryTransportType.Rpc, true, connectionEntry);
+                        link = new ActiveDirectorySiteLink(
+                            context,
+                            cn,
+                            ActiveDirectoryTransportType.Rpc,
+                            true,
+                            connectionEntry
+                        );
                     else if (string.Equals(transport, "SMTP", StringComparison.OrdinalIgnoreCase))
-                        link = new ActiveDirectorySiteLink(context, cn, ActiveDirectoryTransportType.Smtp, true, connectionEntry);
+                        link = new ActiveDirectorySiteLink(
+                            context,
+                            cn,
+                            ActiveDirectoryTransportType.Smtp,
+                            true,
+                            connectionEntry
+                        );
                     else
                     {
                         // should not happen
@@ -1286,6 +1655,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     _links.Add(link);
                 }
             }
+
             finally
             {
                 results.Dispose();
@@ -1299,21 +1669,42 @@ namespace System.DirectoryServices.ActiveDirectory
             if (!IsADAM)
             {
                 string serverName = cachedEntry.Options!.GetCurrentServerName();
-                DomainController dc = DomainController.GetDomainController(Utils.GetNewDirectoryContext(serverName, DirectoryContextType.DirectoryServer, context));
+                DomainController dc = DomainController.GetDomainController(
+                    Utils.GetNewDirectoryContext(
+                        serverName,
+                        DirectoryContextType.DirectoryServer,
+                        context
+                    )
+                );
                 IntPtr handle = dc.Handle;
 
                 Debug.Assert(handle != (IntPtr)0);
 
                 IntPtr info = (IntPtr)0;
                 // call DsReplicaSyncAllW
-                IntPtr functionPtr = UnsafeNativeMethods.GetProcAddress(DirectoryContext.ADHandle, "DsListDomainsInSiteW");
+                IntPtr functionPtr = UnsafeNativeMethods.GetProcAddress(
+                    DirectoryContext.ADHandle,
+                    "DsListDomainsInSiteW"
+                );
                 if (functionPtr == (IntPtr)0)
                 {
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
                 }
-                UnsafeNativeMethods.DsListDomainsInSiteW dsListDomainsInSiteW = (UnsafeNativeMethods.DsListDomainsInSiteW)Marshal.GetDelegateForFunctionPointer(functionPtr, typeof(UnsafeNativeMethods.DsListDomainsInSiteW));
+                UnsafeNativeMethods.DsListDomainsInSiteW dsListDomainsInSiteW =
+                    (UnsafeNativeMethods.DsListDomainsInSiteW)Marshal.GetDelegateForFunctionPointer(
+                        functionPtr,
+                        typeof(UnsafeNativeMethods.DsListDomainsInSiteW)
+                    );
 
-                int result = dsListDomainsInSiteW(handle, (string)PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.DistinguishedName)!, ref info);
+                int result = dsListDomainsInSiteW(
+                    handle,
+                    (string)PropertyManager.GetPropertyValue(
+                        context,
+                        cachedEntry,
+                        PropertyManager.DistinguishedName
+                    )!,
+                    ref info
+                );
                 if (result != 0)
                     throw ExceptionHelper.GetExceptionFromErrorCode(result, serverName);
 
@@ -1329,31 +1720,54 @@ namespace System.DirectoryServices.ActiveDirectory
                         IntPtr tmpPtr = (IntPtr)0;
                         for (int i = 0; i < count; i++)
                         {
-                            tmpPtr = IntPtr.Add(val, Marshal.SizeOf(typeof(DS_NAME_RESULT_ITEM)) * i);
+                            tmpPtr = IntPtr.Add(
+                                val,
+                                Marshal.SizeOf(typeof(DS_NAME_RESULT_ITEM)) * i
+                            );
                             DS_NAME_RESULT_ITEM nameResult = new DS_NAME_RESULT_ITEM();
                             Marshal.PtrToStructure(tmpPtr, nameResult);
-                            if (nameResult.status == DS_NAME_ERROR.DS_NAME_NO_ERROR || nameResult.status == DS_NAME_ERROR.DS_NAME_ERROR_DOMAIN_ONLY)
+                            if (
+                                nameResult.status == DS_NAME_ERROR.DS_NAME_NO_ERROR
+                                || nameResult.status == DS_NAME_ERROR.DS_NAME_ERROR_DOMAIN_ONLY
+                            )
                             {
                                 string? domainName = Marshal.PtrToStringUni(nameResult.pName);
                                 if (domainName != null && domainName.Length > 0)
                                 {
                                     string d = Utils.GetDnsNameFromDN(domainName);
-                                    Domain domain = new Domain(Utils.GetNewDirectoryContext(d, DirectoryContextType.Domain, context), d);
+                                    Domain domain = new Domain(
+                                        Utils.GetNewDirectoryContext(
+                                            d,
+                                            DirectoryContextType.Domain,
+                                            context
+                                        ),
+                                        d
+                                    );
                                     _domains.Add(domain);
                                 }
                             }
                         }
                     }
                 }
+
                 finally
                 {
                     // call DsFreeNameResultW
-                    functionPtr = UnsafeNativeMethods.GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
+                    functionPtr = UnsafeNativeMethods.GetProcAddress(
+                        DirectoryContext.ADHandle,
+                        "DsFreeNameResultW"
+                    );
                     if (functionPtr == (IntPtr)0)
                     {
-                        throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
+                        throw ExceptionHelper.GetExceptionFromErrorCode(
+                            Marshal.GetLastWin32Error()
+                        );
                     }
-                    UnsafeNativeMethods.DsFreeNameResultW dsFreeNameResultW = (UnsafeNativeMethods.DsFreeNameResultW)Marshal.GetDelegateForFunctionPointer(functionPtr, typeof(UnsafeNativeMethods.DsFreeNameResultW));
+                    UnsafeNativeMethods.DsFreeNameResultW dsFreeNameResultW =
+                        (UnsafeNativeMethods.DsFreeNameResultW)Marshal.GetDelegateForFunctionPointer(
+                            functionPtr,
+                            typeof(UnsafeNativeMethods.DsFreeNameResultW)
+                        );
 
                     dsFreeNameResultW(info);
                 }
@@ -1362,10 +1776,12 @@ namespace System.DirectoryServices.ActiveDirectory
 
         private void GetServers()
         {
-            ADSearcher adSearcher = new ADSearcher(cachedEntry,
-                                                  "(&(objectClass=server)(objectCategory=server))",
-                                                  new string[] { "dNSHostName" },
-                                                  SearchScope.Subtree);
+            ADSearcher adSearcher = new ADSearcher(
+                cachedEntry,
+                "(&(objectClass=server)(objectCategory=server))",
+                new string[] { "dNSHostName" },
+                SearchScope.Subtree
+            );
             SearchResultCollection? results = null;
             try
             {
@@ -1380,7 +1796,10 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 foreach (SearchResult result in results)
                 {
-                    string hostName = (string)PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.DnsHostName)!;
+                    string hostName = (string)PropertyManager.GetSearchResultPropertyValue(
+                        result,
+                        PropertyManager.DnsHostName
+                    )!;
                     DirectoryEntry de = result.GetDirectoryEntry();
                     DirectoryEntry? child = null;
                     DirectoryServer? replica = null;
@@ -1400,20 +1819,39 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     if (IsADAM)
                     {
-                        int port = (int)PropertyManager.GetPropertyValue(context, child, PropertyManager.MsDSPortLDAP)!;
+                        int port = (int)PropertyManager.GetPropertyValue(
+                            context,
+                            child,
+                            PropertyManager.MsDSPortLDAP
+                        )!;
                         string fullHostName = hostName;
                         if (port != 389)
                         {
                             fullHostName = hostName + ":" + port;
                         }
-                        replica = new AdamInstance(Utils.GetNewDirectoryContext(fullHostName, DirectoryContextType.DirectoryServer, context), fullHostName);
+                        replica = new AdamInstance(
+                            Utils.GetNewDirectoryContext(
+                                fullHostName,
+                                DirectoryContextType.DirectoryServer,
+                                context
+                            ),
+                            fullHostName
+                        );
                     }
                     else
-                        replica = new DomainController(Utils.GetNewDirectoryContext(hostName, DirectoryContextType.DirectoryServer, context), hostName);
+                        replica = new DomainController(
+                            Utils.GetNewDirectoryContext(
+                                hostName,
+                                DirectoryContextType.DirectoryServer,
+                                context
+                            ),
+                            hostName
+                        );
 
                     _servers.Add(replica);
                 }
             }
+
             finally
             {
                 results.Dispose();
@@ -1422,7 +1860,13 @@ namespace System.DirectoryServices.ActiveDirectory
 
         private void GetPreferredBridgeheadServers(ActiveDirectoryTransportType transport)
         {
-            string serverContainerDN = "CN=Servers," + PropertyManager.GetPropertyValue(context, cachedEntry, PropertyManager.DistinguishedName);
+            string serverContainerDN =
+                "CN=Servers,"
+                + PropertyManager.GetPropertyValue(
+                    context,
+                    cachedEntry,
+                    PropertyManager.DistinguishedName
+                );
             string? transportDN = null;
             if (transport == ActiveDirectoryTransportType.Smtp)
                 transportDN = "CN=SMTP,CN=Inter-Site Transports," + _siteDN;
@@ -1430,10 +1874,14 @@ namespace System.DirectoryServices.ActiveDirectory
                 transportDN = "CN=IP,CN=Inter-Site Transports," + _siteDN;
 
             DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, serverContainerDN);
-            ADSearcher adSearcher = new ADSearcher(de,
-                                                  "(&(objectClass=server)(objectCategory=Server)(bridgeheadTransportList=" + Utils.GetEscapedFilterValue(transportDN) + "))",
-                                                  new string[] { "dNSHostName", "distinguishedName" },
-                                                  SearchScope.OneLevel);
+            ADSearcher adSearcher = new ADSearcher(
+                de,
+                "(&(objectClass=server)(objectCategory=Server)(bridgeheadTransportList="
+                    + Utils.GetEscapedFilterValue(transportDN)
+                    + "))",
+                new string[] { "dNSHostName", "distinguishedName" },
+                SearchScope.OneLevel
+            );
             SearchResultCollection? results = null;
 
             try
@@ -1450,7 +1898,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 DirectoryEntry? ADAMEntry = null;
                 foreach (SearchResult result in results)
                 {
-                    string hostName = (string)PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.DnsHostName)!;
+                    string hostName = (string)PropertyManager.GetSearchResultPropertyValue(
+                        result,
+                        PropertyManager.DnsHostName
+                    )!;
                     DirectoryEntry resultEntry = result.GetDirectoryEntry();
                     DirectoryServer? replica = null;
 
@@ -1465,16 +1916,34 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     if (IsADAM)
                     {
-                        int port = (int)PropertyManager.GetPropertyValue(context, ADAMEntry, PropertyManager.MsDSPortLDAP)!;
+                        int port = (int)PropertyManager.GetPropertyValue(
+                            context,
+                            ADAMEntry,
+                            PropertyManager.MsDSPortLDAP
+                        )!;
                         string fullHostName = hostName;
                         if (port != 389)
                         {
                             fullHostName = hostName + ":" + port;
                         }
-                        replica = new AdamInstance(Utils.GetNewDirectoryContext(fullHostName, DirectoryContextType.DirectoryServer, context), fullHostName);
+                        replica = new AdamInstance(
+                            Utils.GetNewDirectoryContext(
+                                fullHostName,
+                                DirectoryContextType.DirectoryServer,
+                                context
+                            ),
+                            fullHostName
+                        );
                     }
                     else
-                        replica = new DomainController(Utils.GetNewDirectoryContext(hostName, DirectoryContextType.DirectoryServer, context), hostName);
+                        replica = new DomainController(
+                            Utils.GetNewDirectoryContext(
+                                hostName,
+                                DirectoryContextType.DirectoryServer,
+                                context
+                            ),
+                            hostName
+                        );
 
                     if (transport == ActiveDirectoryTransportType.Smtp)
                         _SMTPBridgeheadServers.Add(replica);
@@ -1482,6 +1951,7 @@ namespace System.DirectoryServices.ActiveDirectory
                         _RPCBridgeheadServers.Add(replica);
                 }
             }
+
             finally
             {
                 de.Dispose();

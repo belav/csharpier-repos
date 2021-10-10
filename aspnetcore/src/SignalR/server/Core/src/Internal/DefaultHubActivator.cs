@@ -7,10 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.SignalR.Internal
 {
-    internal class DefaultHubActivator<THub> : IHubActivator<THub> where THub: Hub
+    internal class DefaultHubActivator<THub> : IHubActivator<THub> where THub : Hub
     {
         // Object factory for THub instances
-        private static readonly Lazy<ObjectFactory> _objectFactory = new Lazy<ObjectFactory>(() => ActivatorUtilities.CreateFactory(typeof(THub), Type.EmptyTypes));
+        private static readonly Lazy<ObjectFactory> _objectFactory = new Lazy<ObjectFactory>(
+            () => ActivatorUtilities.CreateFactory(typeof(THub), Type.EmptyTypes)
+        );
         private readonly IServiceProvider _serviceProvider;
         private bool? _created;
 
@@ -41,7 +43,10 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                 throw new ArgumentNullException(nameof(hub));
             }
 
-            Debug.Assert(_created.HasValue, "hubs must be released with the hub activator they were created");
+            Debug.Assert(
+                _created.HasValue,
+                "hubs must be released with the hub activator they were created"
+            );
 
             if (_created.Value)
             {

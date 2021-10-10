@@ -9,7 +9,10 @@ namespace System.Threading
     public static partial class ThreadPool
     {
         internal static bool EnableDispatchAutoreleasePool { get; } =
-            AppContextConfigHelper.GetBooleanConfig("System.Threading.ThreadPool.EnableDispatchAutoreleasePool", false);
+            AppContextConfigHelper.GetBooleanConfig(
+                "System.Threading.ThreadPool.EnableDispatchAutoreleasePool",
+                false
+            );
     }
 
     internal sealed partial class ThreadPoolWorkQueue
@@ -31,6 +34,7 @@ namespace System.Threading
                 }
 #pragma warning restore CS0162
             }
+
             finally
             {
                 Interop.Sys.DrainAutoreleasePool(autoreleasePool);

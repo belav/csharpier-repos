@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             return TestWorkspace.CreateCSharp2(
                 new string[] { string.Empty, },
                 new CSharpParseOptions[] { new CSharpParseOptions(kind: SourceCodeKind.Regular), },
-                exportProvider: exportProvider);
+                exportProvider: exportProvider
+            );
         }
     }
 }

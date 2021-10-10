@@ -59,7 +59,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return boolResult;
         }
 
-        public override async ValueTask<ReadResult> ReadAsyncInternal(CancellationToken cancellationToken = default)
+        public override async ValueTask<ReadResult> ReadAsyncInternal(
+            CancellationToken cancellationToken = default
+        )
         {
             await TryStartAsync();
 
@@ -110,7 +112,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
                     if (_context.RequestTimedOut)
                     {
-                        KestrelBadHttpRequestException.Throw(RequestRejectionReason.RequestBodyTimeout);
+                        KestrelBadHttpRequestException.Throw(
+                            RequestRejectionReason.RequestBodyTimeout
+                        );
                     }
 
                     var readableBuffer = result.Buffer;
@@ -127,7 +131,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         if (!readableBuffer.IsEmpty)
                         {
                             bool done;
-                            done = Read(readableBuffer, _requestBodyPipe.Writer, out consumed, out examined);
+                            done = Read(
+                                readableBuffer,
+                                _requestBodyPipe.Writer,
+                                out consumed,
+                                out examined
+                            );
 
                             await _requestBodyPipe.Writer.FlushAsync();
 
@@ -143,6 +152,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                             ThrowUnexpectedEndOfRequestContent();
                         }
                     }
+
                     finally
                     {
                         _context.Input.AdvanceTo(consumed, examined);
@@ -201,7 +211,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return Task.CompletedTask;
         }
 
-        private bool Read(ReadOnlySequence<byte> readableBuffer, PipeWriter writableBuffer, out SequencePosition consumed, out SequencePosition examined)
+        private bool Read(
+            ReadOnlySequence<byte> readableBuffer,
+            PipeWriter writableBuffer,
+            out SequencePosition consumed,
+            out SequencePosition examined
+        )
         {
             consumed = default;
             examined = default;
@@ -290,7 +305,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return _mode == Mode.Complete;
         }
 
-        private void ParseChunkedPrefix(in ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+        private void ParseChunkedPrefix(
+            in ReadOnlySequence<byte> buffer,
+            out SequencePosition consumed,
+            out SequencePosition examined
+        )
         {
             consumed = buffer.Start;
             var reader = new SequenceReader<byte>(buffer);
@@ -347,7 +366,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             KestrelBadHttpRequestException.Throw(RequestRejectionReason.BadChunkSizeData);
         }
 
-        private void ParseExtension(ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+        private void ParseExtension(
+            ReadOnlySequence<byte> buffer,
+            out SequencePosition consumed,
+            out SequencePosition examined
+        )
         {
             // Chunk-extensions not currently parsed
             // Just drain the data
@@ -363,7 +386,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     examined = buffer.End;
                     AddAndCheckObservedBytes(buffer.Length);
                     return;
-                };
+                }
+                ;
 
                 var extensionCursor = extensionCursorPosition.Value;
                 var charsToByteCRExclusive = buffer.Slice(0, extensionCursor).Length;
@@ -399,7 +423,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             } while (_mode == Mode.Extension);
         }
 
-        private void ReadChunkedData(in ReadOnlySequence<byte> buffer, PipeWriter writableBuffer, out SequencePosition consumed, out SequencePosition examined)
+        private void ReadChunkedData(
+            in ReadOnlySequence<byte> buffer,
+            PipeWriter writableBuffer,
+            out SequencePosition consumed,
+            out SequencePosition examined
+        )
         {
             var actual = Math.Min(buffer.Length, _inputLength);
             consumed = buffer.GetPosition(actual);
@@ -416,7 +445,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
         }
 
-        private void ParseChunkedSuffix(in ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+        private void ParseChunkedSuffix(
+            in ReadOnlySequence<byte> buffer,
+            out SequencePosition consumed,
+            out SequencePosition examined
+        )
         {
             consumed = buffer.Start;
 
@@ -444,7 +477,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
         }
 
-        private void ParseChunkedTrailer(in ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+        private void ParseChunkedTrailer(
+            in ReadOnlySequence<byte> buffer,
+            out SequencePosition consumed,
+            out SequencePosition examined
+        )
         {
             consumed = buffer.Start;
 
@@ -515,16 +552,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             Complete
         };
 
-        private Pipe CreateRequestBodyPipe(Http1Connection context)
-            => new Pipe(new PipeOptions
-            (
-                pool: context.MemoryPool,
-                readerScheduler: context.ServiceContext.Scheduler,
-                writerScheduler: PipeScheduler.Inline,
-                pauseWriterThreshold: 1,
-                resumeWriterThreshold: 1,
-                useSynchronizationContext: false,
-                minimumSegmentSize: context.MemoryPool.GetMinimumSegmentSize()
-            ));
+        private Pipe CreateRequestBodyPipe(Http1Connection context) =>
+            new Pipe(
+                new PipeOptions(
+                    pool: context.MemoryPool,
+                    readerScheduler: context.ServiceContext.Scheduler,
+                    writerScheduler: PipeScheduler.Inline,
+                    pauseWriterThreshold: 1,
+                    resumeWriterThreshold: 1,
+                    useSynchronizationContext: false,
+                    minimumSegmentSize: context.MemoryPool.GetMinimumSegmentSize()
+                )
+            );
     }
 }

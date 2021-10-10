@@ -21,20 +21,28 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         }
 
         protected abstract Task<SyntaxNode?> GetSelectedNodeAsync(CodeRefactoringContext context);
-        protected abstract Task<SyntaxNode?> GetSelectedClassDeclarationAsync(CodeRefactoringContext context);
+        protected abstract Task<SyntaxNode?> GetSelectedClassDeclarationAsync(
+            CodeRefactoringContext context
+        );
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             // For simplicity if we can't add a document the don't supply this refactoring. Not checking this results in known
             // cases that won't work because the refactoring may try to add a document. There's non-trivial
-            // work to support a user interaction that makes sense for those cases. 
+            // work to support a user interaction that makes sense for those cases.
             // See: https://github.com/dotnet/roslyn/issues/50868
-            if (!context.Document.Project.Solution.Workspace.CanApplyChange(ApplyChangesKind.AddDocument))
+            if (
+                !context.Document.Project.Solution.Workspace.CanApplyChange(
+                    ApplyChangesKind.AddDocument
+                )
+            )
             {
                 return;
             }
 
-            var optionsService = _optionsService ?? context.Document.Project.Solution.Workspace.Services.GetService<IExtractClassOptionsService>();
+            var optionsService =
+                _optionsService
+                ?? context.Document.Project.Solution.Workspace.Services.GetService<IExtractClassOptionsService>();
             if (optionsService is null)
             {
                 return;
@@ -42,7 +50,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
 
             // If we register the action on a class node, no need to find selected members. Just allow
             // the action to be invoked with the dialog and no selected members
-            var action = await TryGetClassActionAsync(context, optionsService).ConfigureAwait(false)
+            var action =
+                await TryGetClassActionAsync(context, optionsService).ConfigureAwait(false)
                 ?? await TryGetMemberActionAsync(context, optionsService).ConfigureAwait(false);
 
             if (action != null)
@@ -51,7 +60,10 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             }
         }
 
-        private async Task<ExtractClassWithDialogCodeAction?> TryGetMemberActionAsync(CodeRefactoringContext context, IExtractClassOptionsService optionsService)
+        private async Task<ExtractClassWithDialogCodeAction?> TryGetMemberActionAsync(
+            CodeRefactoringContext context,
+            IExtractClassOptionsService optionsService
+        )
         {
             var selectedMemberNode = await GetSelectedNodeAsync(context).ConfigureAwait(false);
             if (selectedMemberNode is null)
@@ -60,8 +72,12 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             }
 
             var (document, span, cancellationToken) = context;
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var selectedMember = semanticModel.GetDeclaredSymbol(selectedMemberNode, cancellationToken);
+            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var selectedMember = semanticModel.GetDeclaredSymbol(
+                selectedMemberNode,
+                cancellationToken
+            );
             if (selectedMember is null || selectedMember.ContainingType is null)
             {
                 return null;
@@ -85,14 +101,27 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             }
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var containingTypeDeclarationNode = selectedMemberNode.FirstAncestorOrSelf<SyntaxNode>(syntaxFacts.IsTypeDeclaration);
+            var containingTypeDeclarationNode = selectedMemberNode.FirstAncestorOrSelf<SyntaxNode>(
+                syntaxFacts.IsTypeDeclaration
+            );
 
-            return new ExtractClassWithDialogCodeAction(document, span, optionsService, containingType, containingTypeDeclarationNode!, selectedMember);
+            return new ExtractClassWithDialogCodeAction(
+                document,
+                span,
+                optionsService,
+                containingType,
+                containingTypeDeclarationNode!,
+                selectedMember
+            );
         }
 
-        private async Task<ExtractClassWithDialogCodeAction?> TryGetClassActionAsync(CodeRefactoringContext context, IExtractClassOptionsService optionsService)
+        private async Task<ExtractClassWithDialogCodeAction?> TryGetClassActionAsync(
+            CodeRefactoringContext context,
+            IExtractClassOptionsService optionsService
+        )
         {
-            var selectedClassNode = await GetSelectedClassDeclarationAsync(context).ConfigureAwait(false);
+            var selectedClassNode = await GetSelectedClassDeclarationAsync(context)
+                .ConfigureAwait(false);
             if (selectedClassNode is null)
             {
                 return null;
@@ -100,15 +129,24 @@ namespace Microsoft.CodeAnalysis.ExtractClass
 
             var (document, span, cancellationToken) = context;
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var originalType = semanticModel.GetDeclaredSymbol(selectedClassNode, cancellationToken) as INamedTypeSymbol;
+            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var originalType =
+                semanticModel.GetDeclaredSymbol(selectedClassNode, cancellationToken)
+                as INamedTypeSymbol;
 
             if (originalType is null)
             {
                 return null;
             }
 
-            return new ExtractClassWithDialogCodeAction(document, span, optionsService, originalType, selectedClassNode);
+            return new ExtractClassWithDialogCodeAction(
+                document,
+                span,
+                optionsService,
+                originalType,
+                selectedClassNode
+            );
         }
     }
 }

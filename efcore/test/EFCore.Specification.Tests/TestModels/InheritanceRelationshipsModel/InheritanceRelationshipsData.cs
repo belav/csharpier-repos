@@ -51,11 +51,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 BaseCollectionsOnDerived,
                 CollectionsOnBase,
                 CollectionsOnDerived,
-                NestedCollections);
+                NestedCollections
+            );
         }
 
-        public virtual IQueryable<TEntity> Set<TEntity>()
-            where TEntity : class
+        public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
         {
             if (typeof(TEntity) == typeof(BaseInheritanceRelationshipEntity))
             {
@@ -64,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
 
             if (typeof(TEntity) == typeof(DerivedInheritanceRelationshipEntity))
             {
-                return (IQueryable<TEntity>)BaseEntities.OfType<DerivedInheritanceRelationshipEntity>().AsQueryable();
+                return (IQueryable<TEntity>)BaseEntities.OfType<DerivedInheritanceRelationshipEntity>()
+                    .AsQueryable();
             }
 
             if (typeof(TEntity) == typeof(BaseReferenceOnBase))
@@ -130,16 +131,19 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity));
         }
 
-        public static IReadOnlyList<BaseInheritanceRelationshipEntity> CreateBaseEntities()
-            => new List<BaseInheritanceRelationshipEntity>
+        public static IReadOnlyList<BaseInheritanceRelationshipEntity> CreateBaseEntities() =>
+            new List<BaseInheritanceRelationshipEntity>
             {
                 new()
                 {
                     Id = 1,
                     Name = "Base1",
                     OwnedReferenceOnBase = new OwnedEntity { Name = "OROB1" },
-                    OwnedCollectionOnBase =
-                        new List<OwnedEntity> { new() { Id = 1, Name = "OCOB11" }, new() { Id = 2, Name = "OCOB12" } },
+                    OwnedCollectionOnBase = new List<OwnedEntity>
+                    {
+                        new() { Id = 1, Name = "OCOB11" },
+                        new() { Id = 2, Name = "OCOB12" }
+                    },
                     BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                     CollectionOnBase = new List<CollectionOnBase>(),
                 },
@@ -148,7 +152,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                     Id = 2,
                     Name = "Base2",
                     OwnedReferenceOnBase = new OwnedEntity { Name = "OROB2" },
-                    OwnedCollectionOnBase = new List<OwnedEntity> { new() { Id = 3, Name = "OCOB21" } },
+                    OwnedCollectionOnBase = new List<OwnedEntity>
+                    {
+                        new() { Id = 3, Name = "OCOB21" }
+                    },
                     BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                     CollectionOnBase = new List<CollectionOnBase>(),
                 },
@@ -165,11 +172,17 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                     Id = 4,
                     Name = "Derived1(4)",
                     OwnedReferenceOnBase = new OwnedEntity { Name = "OROB4" },
-                    OwnedCollectionOnBase =
-                        new List<OwnedEntity> { new() { Id = 4, Name = "OCOB41" }, new() { Id = 5, Name = "OCOB42" } },
+                    OwnedCollectionOnBase = new List<OwnedEntity>
+                    {
+                        new() { Id = 4, Name = "OCOB41" },
+                        new() { Id = 5, Name = "OCOB42" }
+                    },
                     OwnedReferenceOnDerived = new OwnedEntity { Name = "OROD4" },
-                    OwnedCollectionOnDerived =
-                        new List<OwnedEntity> { new() { Id = 1, Name = "OCOD41" }, new() { Id = 2, Name = "OCOD42" } },
+                    OwnedCollectionOnDerived = new List<OwnedEntity>
+                    {
+                        new() { Id = 1, Name = "OCOD41" },
+                        new() { Id = 2, Name = "OCOD42" }
+                    },
                     BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                     BaseCollectionOnDerived = new List<BaseCollectionOnDerived>(),
                     CollectionOnBase = new List<CollectionOnBase>(),
@@ -181,9 +194,15 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                     Id = 5,
                     Name = "Derived2(5)",
                     OwnedReferenceOnBase = new OwnedEntity { Name = "OROB5" },
-                    OwnedCollectionOnBase = new List<OwnedEntity> { new() { Id = 6, Name = "OCOB51" } },
+                    OwnedCollectionOnBase = new List<OwnedEntity>
+                    {
+                        new() { Id = 6, Name = "OCOB51" }
+                    },
                     OwnedReferenceOnDerived = new OwnedEntity { Name = "OROD5" },
-                    OwnedCollectionOnDerived = new List<OwnedEntity> { new() { Id = 3, Name = "OCOD51" } },
+                    OwnedCollectionOnDerived = new List<OwnedEntity>
+                    {
+                        new() { Id = 3, Name = "OCOD51" }
+                    },
                     BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                     BaseCollectionOnDerived = new List<BaseCollectionOnDerived>(),
                     CollectionOnBase = new List<CollectionOnBase>(),
@@ -204,8 +223,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 },
             };
 
-        public static IReadOnlyList<BaseReferenceOnBase> CreateBaseReferencesOnBase()
-            => new List<BaseReferenceOnBase>
+        public static IReadOnlyList<BaseReferenceOnBase> CreateBaseReferencesOnBase() =>
+            new List<BaseReferenceOnBase>
             {
                 new()
                 {
@@ -257,8 +276,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 },
             };
 
-        public static IReadOnlyList<BaseReferenceOnDerived> CreateBaseReferencesOnDerived()
-            => new List<BaseReferenceOnDerived>
+        public static IReadOnlyList<BaseReferenceOnDerived> CreateBaseReferencesOnDerived() =>
+            new List<BaseReferenceOnDerived>
             {
                 new() { Id = 1, Name = "BROD1" },
                 new() { Id = 2, Name = "BROD2 (dangling)" },
@@ -268,8 +287,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 new DerivedReferenceOnDerived { Id = 6, Name = "DROD3 (dangling)" },
             };
 
-        public static IReadOnlyList<ReferenceOnBase> CreateReferencesOnBase()
-            => new List<ReferenceOnBase>
+        public static IReadOnlyList<ReferenceOnBase> CreateReferencesOnBase() =>
+            new List<ReferenceOnBase>
             {
                 new() { Id = 1, Name = "ROB1" },
                 new() { Id = 2, Name = "ROB2" },
@@ -277,16 +296,16 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 new() { Id = 4, Name = "ROB4" },
             };
 
-        public static IReadOnlyList<ReferenceOnDerived> CreateReferencesOnDerived()
-            => new List<ReferenceOnDerived>
+        public static IReadOnlyList<ReferenceOnDerived> CreateReferencesOnDerived() =>
+            new List<ReferenceOnDerived>
             {
                 new() { Id = 1, Name = "ROD1" },
                 new() { Id = 2, Name = "ROD2" },
                 new() { Id = 3, Name = "ROD3 (dangling)" },
             };
 
-        public static IReadOnlyList<NestedReferenceBase> CreateNestedReferences()
-            => new List<NestedReferenceBase>
+        public static IReadOnlyList<NestedReferenceBase> CreateNestedReferences() =>
+            new List<NestedReferenceBase>
             {
                 new() { Id = 1, Name = "NRB1" },
                 new() { Id = 2, Name = "NRB2" },
@@ -299,8 +318,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 new NestedReferenceDerived { Id = 9, Name = "NRD4 (dangling)" },
             };
 
-        public static IReadOnlyList<BaseCollectionOnBase> CreateBaseCollectionsOnBase()
-            => new List<BaseCollectionOnBase>
+        public static IReadOnlyList<BaseCollectionOnBase> CreateBaseCollectionsOnBase() =>
+            new List<BaseCollectionOnBase>
             {
                 new()
                 {
@@ -390,8 +409,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 },
             };
 
-        public static IReadOnlyList<BaseCollectionOnDerived> CreateBaseCollectionsOnDerived()
-            => new List<BaseCollectionOnDerived>
+        public static IReadOnlyList<BaseCollectionOnDerived> CreateBaseCollectionsOnDerived() =>
+            new List<BaseCollectionOnDerived>
             {
                 new() { Id = 1, Name = "BCOD11" },
                 new() { Id = 2, Name = "BCOD21 (dangling)" },
@@ -402,8 +421,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 new DerivedCollectionOnDerived { Id = 7, Name = "DCOD31 (dangling)" },
             };
 
-        public static IReadOnlyList<CollectionOnBase> CreateCollectionsOnBase()
-            => new List<CollectionOnBase>
+        public static IReadOnlyList<CollectionOnBase> CreateCollectionsOnBase() =>
+            new List<CollectionOnBase>
             {
                 new() { Id = 1, Name = "COB11" },
                 new() { Id = 2, Name = "COB12" },
@@ -416,8 +435,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 new() { Id = 9, Name = "COB52 (dangling)" },
             };
 
-        public static IReadOnlyList<CollectionOnDerived> CreateCollectionsOnDerived()
-            => new List<CollectionOnDerived>
+        public static IReadOnlyList<CollectionOnDerived> CreateCollectionsOnDerived() =>
+            new List<CollectionOnDerived>
             {
                 new() { Id = 1, Name = "COD11" },
                 new() { Id = 2, Name = "COD21" },
@@ -425,8 +444,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 new() { Id = 4, Name = "COD31 (dangling)" },
             };
 
-        public static IReadOnlyList<NestedCollectionBase> CreateNestedCollections()
-            => new List<NestedCollectionBase>
+        public static IReadOnlyList<NestedCollectionBase> CreateNestedCollections() =>
+            new List<NestedCollectionBase>
             {
                 new() { Id = 1, Name = "NCB11" },
                 new() { Id = 2, Name = "NCB21" },
@@ -443,27 +462,18 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 new NestedCollectionDerived { Id = 13, Name = "NCD52 (dangling)" },
             };
 
-        public static IReadOnlyList<PrincipalEntity> CreatePrincipalEntities()
-            => new List<PrincipalEntity>
+        public static IReadOnlyList<PrincipalEntity> CreatePrincipalEntities() =>
+            new List<PrincipalEntity>
             {
-                new() { Id = 1, Name = "PE1" }, new() { Id = 2, Name = "PE2" },
+                new() { Id = 1, Name = "PE1" },
+                new() { Id = 2, Name = "PE2" },
             };
 
-        public static IReadOnlyList<ReferencedEntity> CreateReferencedEntities()
-            => new List<ReferencedEntity>
+        public static IReadOnlyList<ReferencedEntity> CreateReferencedEntities() =>
+            new List<ReferencedEntity>
             {
-                new()
-                {
-                    Id = 1,
-                    Name = "RE1",
-                    Principals = new List<PrincipalEntity>()
-                },
-                new()
-                {
-                    Id = 2,
-                    Name = "RE2",
-                    Principals = new List<PrincipalEntity>()
-                },
+                new() { Id = 1, Name = "RE1", Principals = new List<PrincipalEntity>() },
+                new() { Id = 2, Name = "RE2", Principals = new List<PrincipalEntity>() },
             };
 
         public static void WireUp(
@@ -477,7 +487,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             IReadOnlyList<BaseCollectionOnDerived> baseCollectionsOnDerived,
             IReadOnlyList<CollectionOnBase> collectionsOnBase,
             IReadOnlyList<CollectionOnDerived> collectionsOnDerived,
-            IReadOnlyList<NestedCollectionBase> nestedCollections)
+            IReadOnlyList<NestedCollectionBase> nestedCollections
+        )
         {
             // BaseReferenceOnBase.NestedReference (inverse: ParentReference)
             // BaseReferenceOnBase.NestedCollection (inverse: ParentReference)
@@ -485,7 +496,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[0].ParentReference = baseReferencesOnBase[0];
             nestedReferences[0].ParentReferenceId = baseReferencesOnBase[0].Id;
 
-            baseReferencesOnBase[0].NestedCollection = new List<NestedCollectionBase> { nestedCollections[0] };
+            baseReferencesOnBase[0].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[0]
+            };
             nestedCollections[0].ParentReference = baseReferencesOnBase[0];
             nestedCollections[0].ParentReferenceId = baseReferencesOnBase[0].Id;
 
@@ -493,7 +507,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[4].ParentReference = baseReferencesOnBase[1];
             nestedReferences[4].ParentReferenceId = baseReferencesOnBase[1].Id;
 
-            baseReferencesOnBase[1].NestedCollection = new List<NestedCollectionBase> { nestedCollections[5] };
+            baseReferencesOnBase[1].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[5]
+            };
             nestedCollections[5].ParentReference = baseReferencesOnBase[1];
             nestedCollections[5].ParentReferenceId = baseReferencesOnBase[1].Id;
 
@@ -501,7 +518,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[1].ParentReference = baseReferencesOnBase[3];
             nestedReferences[1].ParentReferenceId = baseReferencesOnBase[3].Id;
 
-            baseReferencesOnBase[3].NestedCollection = new List<NestedCollectionBase> { nestedCollections[1], nestedCollections[2] };
+            baseReferencesOnBase[3].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[1],
+                nestedCollections[2]
+            };
             nestedCollections[1].ParentReference = baseReferencesOnBase[3];
             nestedCollections[1].ParentReferenceId = baseReferencesOnBase[3].Id;
             nestedCollections[2].ParentReference = baseReferencesOnBase[3];
@@ -511,7 +532,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[5].ParentReference = baseReferencesOnBase[4];
             nestedReferences[5].ParentReferenceId = baseReferencesOnBase[4].Id;
 
-            baseReferencesOnBase[4].NestedCollection = new List<NestedCollectionBase> { nestedCollections[6] };
+            baseReferencesOnBase[4].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[6]
+            };
             nestedCollections[6].ParentReference = baseReferencesOnBase[4];
             nestedCollections[6].ParentReferenceId = baseReferencesOnBase[4].Id;
 
@@ -519,7 +543,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[6].ParentReference = baseReferencesOnBase[6];
             nestedReferences[6].ParentReferenceId = baseReferencesOnBase[6].Id;
 
-            baseReferencesOnBase[6].NestedCollection = new List<NestedCollectionBase> { nestedCollections[7], nestedCollections[8] };
+            baseReferencesOnBase[6].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[7],
+                nestedCollections[8]
+            };
             nestedCollections[7].ParentReference = baseReferencesOnBase[6];
             nestedCollections[7].ParentReferenceId = baseReferencesOnBase[6].Id;
             nestedCollections[8].ParentReference = baseReferencesOnBase[6];
@@ -531,7 +559,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[0].ParentCollection = baseCollectionsOnBase[0];
             nestedReferences[0].ParentCollectionId = baseCollectionsOnBase[0].Id;
 
-            baseCollectionsOnBase[0].NestedCollection = new List<NestedCollectionBase> { nestedCollections[0] };
+            baseCollectionsOnBase[0].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[0]
+            };
             nestedCollections[0].ParentCollection = baseCollectionsOnBase[0];
             nestedCollections[0].ParentCollectionId = baseCollectionsOnBase[0].Id;
 
@@ -539,7 +570,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[4].ParentCollection = baseCollectionsOnBase[1];
             nestedReferences[4].ParentCollectionId = baseCollectionsOnBase[1].Id;
 
-            baseCollectionsOnBase[1].NestedCollection = new List<NestedCollectionBase> { nestedCollections[5] };
+            baseCollectionsOnBase[1].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[5]
+            };
             nestedCollections[5].ParentCollection = baseCollectionsOnBase[1];
             nestedCollections[5].ParentCollectionId = baseCollectionsOnBase[1].Id;
 
@@ -547,7 +581,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[1].ParentCollection = baseCollectionsOnBase[3];
             nestedReferences[1].ParentCollectionId = baseCollectionsOnBase[3].Id;
 
-            baseCollectionsOnBase[3].NestedCollection = new List<NestedCollectionBase> { nestedCollections[1], nestedCollections[2] };
+            baseCollectionsOnBase[3].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[1],
+                nestedCollections[2]
+            };
             nestedCollections[1].ParentCollection = baseCollectionsOnBase[3];
             nestedCollections[1].ParentCollectionId = baseCollectionsOnBase[3].Id;
             nestedCollections[2].ParentCollection = baseCollectionsOnBase[3];
@@ -557,7 +595,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[5].ParentCollection = baseCollectionsOnBase[5];
             nestedReferences[5].ParentCollectionId = baseCollectionsOnBase[5].Id;
 
-            baseCollectionsOnBase[5].NestedCollection = new List<NestedCollectionBase> { nestedCollections[6] };
+            baseCollectionsOnBase[5].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[6]
+            };
             nestedCollections[6].ParentCollection = baseCollectionsOnBase[5];
             nestedCollections[6].ParentCollectionId = baseCollectionsOnBase[5].Id;
 
@@ -565,7 +606,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[2].ParentCollection = baseCollectionsOnBase[6];
             nestedReferences[2].ParentCollectionId = baseCollectionsOnBase[6].Id;
 
-            baseCollectionsOnBase[6].NestedCollection = new List<NestedCollectionBase> { nestedCollections[3] };
+            baseCollectionsOnBase[6].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[3]
+            };
             nestedCollections[3].ParentCollection = baseCollectionsOnBase[6];
             nestedCollections[3].ParentCollectionId = baseCollectionsOnBase[6].Id;
 
@@ -573,7 +617,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[6].ParentCollection = baseCollectionsOnBase[8];
             nestedReferences[6].ParentCollectionId = baseCollectionsOnBase[8].Id;
 
-            baseCollectionsOnBase[8].NestedCollection = new List<NestedCollectionBase> { nestedCollections[7], nestedCollections[8] };
+            baseCollectionsOnBase[8].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[7],
+                nestedCollections[8]
+            };
             nestedCollections[7].ParentCollection = baseCollectionsOnBase[8];
             nestedCollections[7].ParentCollectionId = baseCollectionsOnBase[8].Id;
             nestedCollections[8].ParentCollection = baseCollectionsOnBase[8];
@@ -583,7 +631,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             nestedReferences[7].ParentCollection = baseCollectionsOnBase[11];
             nestedReferences[7].ParentCollectionId = baseCollectionsOnBase[11].Id;
 
-            baseCollectionsOnBase[11].NestedCollection = new List<NestedCollectionBase> { nestedCollections[9], nestedCollections[10] };
+            baseCollectionsOnBase[11].NestedCollection = new List<NestedCollectionBase>
+            {
+                nestedCollections[9],
+                nestedCollections[10]
+            };
             nestedCollections[9].ParentCollection = baseCollectionsOnBase[11];
             nestedCollections[9].ParentCollectionId = baseCollectionsOnBase[11].Id;
             nestedCollections[10].ParentCollection = baseCollectionsOnBase[11];
@@ -617,11 +669,18 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
 
             // BaseInheritanceRelationshipEntity.BaseCollectionOnBase (inverse: BaseParent)
             // BaseInheritanceRelationshipEntity.CollectionOnBase (inverse: Parent)
-            baseEntities[0].BaseCollectionOnBase = new List<BaseCollectionOnBase> { baseCollectionsOnBase[0] };
+            baseEntities[0].BaseCollectionOnBase = new List<BaseCollectionOnBase>
+            {
+                baseCollectionsOnBase[0]
+            };
             baseCollectionsOnBase[0].BaseParent = baseEntities[0];
             baseCollectionsOnBase[0].BaseParentId = baseEntities[0].Id;
 
-            baseEntities[0].CollectionOnBase = new List<CollectionOnBase> { collectionsOnBase[0], collectionsOnBase[1] };
+            baseEntities[0].CollectionOnBase = new List<CollectionOnBase>
+            {
+                collectionsOnBase[0],
+                collectionsOnBase[1]
+            };
             collectionsOnBase[0].Parent = baseEntities[0];
             collectionsOnBase[0].ParentId = baseEntities[0].Id;
             collectionsOnBase[1].Parent = baseEntities[0];
@@ -631,41 +690,58 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             collectionsOnBase[2].Parent = baseEntities[1];
             collectionsOnBase[2].ParentId = baseEntities[1].Id;
 
-            baseEntities[2].BaseCollectionOnBase = new List<BaseCollectionOnBase> { baseCollectionsOnBase[7] };
+            baseEntities[2].BaseCollectionOnBase = new List<BaseCollectionOnBase>
+            {
+                baseCollectionsOnBase[7]
+            };
             baseCollectionsOnBase[7].BaseParent = baseEntities[2];
             baseCollectionsOnBase[7].BaseParentId = baseEntities[2].Id;
 
-            baseEntities[3].BaseCollectionOnBase = new List<BaseCollectionOnBase> { baseCollectionsOnBase[5], baseCollectionsOnBase[6] };
+            baseEntities[3].BaseCollectionOnBase = new List<BaseCollectionOnBase>
+            {
+                baseCollectionsOnBase[5],
+                baseCollectionsOnBase[6]
+            };
             baseCollectionsOnBase[5].BaseParent = baseEntities[3];
             baseCollectionsOnBase[5].BaseParentId = baseEntities[3].Id;
             baseCollectionsOnBase[6].BaseParent = baseEntities[3];
             baseCollectionsOnBase[6].BaseParentId = baseEntities[3].Id;
 
-            baseEntities[3].CollectionOnBase = new List<CollectionOnBase> { collectionsOnBase[3], collectionsOnBase[4] };
+            baseEntities[3].CollectionOnBase = new List<CollectionOnBase>
+            {
+                collectionsOnBase[3],
+                collectionsOnBase[4]
+            };
             collectionsOnBase[3].Parent = baseEntities[3];
             collectionsOnBase[3].ParentId = baseEntities[3].Id;
             collectionsOnBase[4].Parent = baseEntities[3];
             collectionsOnBase[4].ParentId = baseEntities[3].Id;
 
-            // DerivedInheritanceRelationshipEntity navigations 
-            baseEntities[0].DerivedSefReferenceOnBase = (DerivedInheritanceRelationshipEntity)baseEntities[3];
-            ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseSelfReferenceOnDerived = baseEntities[0];
+            // DerivedInheritanceRelationshipEntity navigations
+            baseEntities[0].DerivedSefReferenceOnBase =
+                (DerivedInheritanceRelationshipEntity)baseEntities[3];
+            ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseSelfReferenceOnDerived =
+                baseEntities[0];
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseId = baseEntities[0].Id;
 
-            ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseReferenceOnDerived = baseReferencesOnDerived[0];
-            baseReferencesOnDerived[0].BaseParent = (DerivedInheritanceRelationshipEntity)baseEntities[3];
+            ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseReferenceOnDerived =
+                baseReferencesOnDerived[0];
+            baseReferencesOnDerived[0].BaseParent =
+                (DerivedInheritanceRelationshipEntity)baseEntities[3];
             baseReferencesOnDerived[0].BaseParentId = baseEntities[3].Id;
 
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).DerivedReferenceOnDerived =
                 (DerivedReferenceOnDerived)baseReferencesOnDerived[3];
 
-            ((DerivedInheritanceRelationshipEntity)baseEntities[3]).ReferenceOnDerived = referencesOnDerived[0];
+            ((DerivedInheritanceRelationshipEntity)baseEntities[3]).ReferenceOnDerived =
+                referencesOnDerived[0];
             referencesOnDerived[0].Parent = (DerivedInheritanceRelationshipEntity)baseEntities[3];
             referencesOnDerived[0].ParentId = baseEntities[3].Id;
 
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseCollectionOnDerived =
                 new List<BaseCollectionOnDerived> { baseCollectionsOnDerived[0] };
-            baseCollectionsOnDerived[0].BaseParent = (DerivedInheritanceRelationshipEntity)baseEntities[3];
+            baseCollectionsOnDerived[0].BaseParent =
+                (DerivedInheritanceRelationshipEntity)baseEntities[3];
             baseCollectionsOnDerived[0].ParentId = baseEntities[3].Id;
 
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).CollectionOnDerived =
@@ -673,10 +749,12 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             collectionsOnDerived[0].Parent = (DerivedInheritanceRelationshipEntity)baseEntities[3];
             collectionsOnDerived[0].ParentId = baseEntities[3].Id;
 
-            ((DerivedInheritanceRelationshipEntity)baseEntities[3]).DerivedCollectionOnDerived = new List<DerivedCollectionOnDerived>
-            {
-                (DerivedCollectionOnDerived)baseCollectionsOnDerived[3], (DerivedCollectionOnDerived)baseCollectionsOnDerived[4]
-            };
+            ((DerivedInheritanceRelationshipEntity)baseEntities[3]).DerivedCollectionOnDerived =
+                new List<DerivedCollectionOnDerived>
+                {
+                    (DerivedCollectionOnDerived)baseCollectionsOnDerived[3],
+                    (DerivedCollectionOnDerived)baseCollectionsOnDerived[4]
+                };
         }
     }
 }

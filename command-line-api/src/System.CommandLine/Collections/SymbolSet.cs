@@ -21,7 +21,7 @@ namespace System.CommandLine.Collections
             ResetIndex(item);
 
             if (item is Symbol symbol)
-            {   
+            {
                 symbol.OnNameOrAliasChanged += Resync;
             }
         }
@@ -60,7 +60,8 @@ namespace System.CommandLine.Collections
 
         internal bool IsAnyAliasInUse(
             ISymbol item,
-            [MaybeNullWhen(false)] out string aliasAlreadyInUse)
+            [MaybeNullWhen(false)] out string aliasAlreadyInUse
+        )
         {
             EnsureAliasIndexIsCurrent();
 
@@ -134,7 +135,7 @@ namespace System.CommandLine.Collections
                 }
             }
         }
-        
+
         internal IReadOnlyList<Option> Options
         {
             get

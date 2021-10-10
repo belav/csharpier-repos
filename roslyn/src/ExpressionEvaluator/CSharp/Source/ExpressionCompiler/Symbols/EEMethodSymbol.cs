@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         EEMethodSymbol method,
         DiagnosticBag diagnostics,
         out ImmutableArray<LocalSymbol> declaredLocals,
-        out ResultProperties properties);
+        out ResultProperties properties
+    );
 
     /// <summary>
     /// Synthesized expression evaluation method.
@@ -35,7 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         // We may thus assume that the method ordinal is always 0.
         //
         // Consider making the implementation more flexible in order to avoid this assumption.
-        // In future we might need to compile multiple expression and then we'll need to assign 
+        // In future we might need to compile multiple expression and then we'll need to assign
         // a unique method ordinal to each of them to avoid duplicate synthesized member names.
         private const int _methodOrdinal = 0;
 
@@ -72,10 +73,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<LocalSymbol> sourceLocals,
             ImmutableArray<LocalSymbol> sourceLocalsForBinding,
             ImmutableDictionary<string, DisplayClassVariable> sourceDisplayClassVariables,
-            GenerateMethodBody generateMethodBody)
+            GenerateMethodBody generateMethodBody
+        )
         {
             Debug.Assert(sourceMethod.IsDefinition);
-            Debug.Assert(TypeSymbol.Equals((TypeSymbol)sourceMethod.ContainingSymbol, container.SubstitutedSourceType.OriginalDefinition, TypeCompareKind.ConsiderEverything2));
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    (TypeSymbol)sourceMethod.ContainingSymbol,
+                    container.SubstitutedSourceType.OriginalDefinition,
+                    TypeCompareKind.ConsiderEverything2
+                )
+            );
             Debug.Assert(sourceLocals.All(l => l.ContainingSymbol == sourceMethod));
 
             _container = container;
@@ -86,18 +94,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // (since the old ones have the wrong owners).  Unfortunately, we have a circular dependency:
             //   1) Each new type parameter requires the entire map in order to be able to construct its constraint list.
             //   2) The map cannot be constructed until all new type parameters exist.
-            // Our solution is to pass each new type parameter a lazy reference to the type map.  We then 
-            // initialize the map as soon as the new type parameters are available - and before they are 
+            // Our solution is to pass each new type parameter a lazy reference to the type map.  We then
+            // initialize the map as soon as the new type parameters are available - and before they are
             // handed out - so that there is never a period where they can require the type map and find
             // it uninitialized.
 
             var sourceMethodTypeParameters = sourceMethod.TypeParameters;
-            var allSourceTypeParameters = container.SourceTypeParameters.Concat(sourceMethodTypeParameters);
+            var allSourceTypeParameters = container.SourceTypeParameters.Concat(
+                sourceMethodTypeParameters
+            );
 
             var getTypeMap = new Func<TypeMap>(() => this.TypeMap);
             _typeParameters = sourceMethodTypeParameters.SelectAsArray(
-                (tp, i, arg) => (TypeParameterSymbol)new EETypeParameterSymbol(this, tp, i, getTypeMap),
-                (object)null);
+                (tp, i, arg) =>
+                    (TypeParameterSymbol)new EETypeParameterSymbol(this, tp, i, getTypeMap),
+                (object)null
+            );
             _allTypeParameters = container.TypeParameters.Concat(_typeParameters);
             this.TypeMap = new TypeMap(allSourceTypeParameters, _allTypeParameters);
 
@@ -107,7 +119,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this.SubstitutedSourceMethod = sourceMethod.AsMember(substitutedSourceType);
             if (sourceMethod.Arity > 0)
             {
-                this.SubstitutedSourceMethod = this.SubstitutedSourceMethod.Construct(_typeParameters.As<TypeSymbol>());
+                this.SubstitutedSourceMethod = this.SubstitutedSourceMethod.Construct(
+                    _typeParameters.As<TypeSymbol>()
+                );
             }
             TypeParameterChecker.Check(this.SubstitutedSourceMethod, _allTypeParameters);
 
@@ -118,8 +132,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var substitutedSourceHasThisParameter = (object)substitutedSourceThisParameter != null;
             if (substitutedSourceHasThisParameter)
             {
-                _thisParameter = MakeParameterSymbol(0, GeneratedNames.ThisProxyFieldName(), substitutedSourceThisParameter);
-                Debug.Assert(TypeSymbol.Equals(_thisParameter.Type, this.SubstitutedSourceMethod.ContainingType, TypeCompareKind.ConsiderEverything2));
+                _thisParameter = MakeParameterSymbol(
+                    0,
+                    GeneratedNames.ThisProxyFieldName(),
+                    substitutedSourceThisParameter
+                );
+                Debug.Assert(
+                    TypeSymbol.Equals(
+                        _thisParameter.Type,
+                        this.SubstitutedSourceMethod.ContainingType,
+                        TypeCompareKind.ConsiderEverything2
+                    )
+                );
                 parameterBuilder.Add(_thisParameter);
             }
 
@@ -128,7 +152,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 var ordinal = substitutedSourceParameter.Ordinal + ordinalOffset;
                 Debug.Assert(ordinal == parameterBuilder.Count);
-                var parameter = MakeParameterSymbol(ordinal, substitutedSourceParameter.Name, substitutedSourceParameter);
+                var parameter = MakeParameterSymbol(
+                    ordinal,
+                    substitutedSourceParameter.Name,
+                    substitutedSourceParameter
+                );
                 parameterBuilder.Add(parameter);
             }
 
@@ -157,7 +185,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this.LocalsForBinding = localsBuilder.ToImmutableAndFree();
 
             // Create a map from variable name to display class field.
-            var displayClassVariables = PooledDictionary<string, DisplayClassVariable>.GetInstance();
+            var displayClassVariables = PooledDictionary<
+                string,
+                DisplayClassVariable
+            >.GetInstance();
             foreach (var pair in sourceDisplayClassVariables)
             {
                 var variable = pair.Value;
@@ -165,10 +196,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
                 // Note: we don't call ToOtherMethod in the local case because doing so would produce
                 // a new LocalSymbol that would not be ReferenceEquals to the one in this.LocalsForBinding.
-                var oldDisplayClassInstanceFromLocal = oldDisplayClassInstance as DisplayClassInstanceFromLocal;
-                var newDisplayClassInstance = (oldDisplayClassInstanceFromLocal == null) ?
-                    oldDisplayClassInstance.ToOtherMethod(this, this.TypeMap) :
-                    new DisplayClassInstanceFromLocal((EELocalSymbol)localsMap[oldDisplayClassInstanceFromLocal.Local]);
+                var oldDisplayClassInstanceFromLocal =
+                    oldDisplayClassInstance as DisplayClassInstanceFromLocal;
+                var newDisplayClassInstance =
+                    (oldDisplayClassInstanceFromLocal == null)
+                        ? oldDisplayClassInstance.ToOtherMethod(this, this.TypeMap)
+                        : new DisplayClassInstanceFromLocal(
+                              (EELocalSymbol)localsMap[oldDisplayClassInstanceFromLocal.Local]
+                          );
 
                 variable = variable.SubstituteFields(newDisplayClassInstance, this.TypeMap);
                 displayClassVariables.Add(pair.Key, variable);
@@ -181,9 +216,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             _generateMethodBody = generateMethodBody;
         }
 
-        private ParameterSymbol MakeParameterSymbol(int ordinal, string name, ParameterSymbol sourceParameter)
+        private ParameterSymbol MakeParameterSymbol(
+            int ordinal,
+            string name,
+            ParameterSymbol sourceParameter
+        )
         {
-            return SynthesizedParameterSymbol.Create(this, sourceParameter.TypeWithAnnotations, ordinal, sourceParameter.RefKind, name, sourceParameter.RefCustomModifiers);
+            return SynthesizedParameterSymbol.Create(
+                this,
+                sourceParameter.TypeWithAnnotations,
+                ordinal,
+                sourceParameter.RefKind,
+                name,
+                sourceParameter.RefCustomModifiers
+            );
         }
 
         internal override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
@@ -304,11 +350,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             }
         }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
-        public override FlowAnalysisAnnotations FlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
         public override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations
         {
@@ -427,17 +476,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get { throw ExceptionUtilities.Unreachable; }
         }
 
-        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(bool forceComplete) => throw ExceptionUtilities.Unreachable;
+        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(
+            bool forceComplete
+        ) => throw ExceptionUtilities.Unreachable;
 
         internal ResultProperties ResultProperties
         {
             get { return _lazyResultProperties; }
         }
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
             ImmutableArray<LocalSymbol> declaredLocalsArray;
-            var body = _generateMethodBody(this, diagnostics.DiagnosticBag, out declaredLocalsArray, out _lazyResultProperties);
+            var body = _generateMethodBody(
+                this,
+                diagnostics.DiagnosticBag,
+                out declaredLocalsArray,
+                out _lazyResultProperties
+            );
             var compilation = compilationState.Compilation;
 
             _lazyReturnType = TypeWithAnnotations.Create(CalculateReturnType(compilation, body));
@@ -459,7 +518,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // Check for use-site diagnostics (e.g. missing types in the signature).
             UseSiteInfo<AssemblySymbol> useSiteInfo = default;
             this.CalculateUseSiteDiagnostic(ref useSiteInfo);
-            if (useSiteInfo.DiagnosticInfo != null && useSiteInfo.DiagnosticInfo.Severity == DiagnosticSeverity.Error)
+            if (
+                useSiteInfo.DiagnosticInfo != null
+                && useSiteInfo.DiagnosticInfo.Severity == DiagnosticSeverity.Error
+            )
             {
                 diagnostics.Add(useSiteInfo.DiagnosticInfo, this.Locations[0]);
                 return;
@@ -477,7 +539,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         declaredLocals,
                         body,
                         declaredLocalsArray,
-                        diagnostics.DiagnosticBag);
+                        diagnostics.DiagnosticBag
+                    );
 
                     // Verify local declaration names.
                     foreach (var local in declaredLocals)
@@ -486,19 +549,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         var name = local.Name;
                         if (name.StartsWith("$", StringComparison.Ordinal))
                         {
-                            diagnostics.Add(ErrorCode.ERR_UnexpectedCharacter, local.Locations[0], name[0]);
+                            diagnostics.Add(
+                                ErrorCode.ERR_UnexpectedCharacter,
+                                local.Locations[0],
+                                name[0]
+                            );
                             return;
                         }
                     }
 
                     // Rewrite references to placeholder "locals".
-                    body = (BoundStatement)PlaceholderLocalRewriter.Rewrite(compilation, _container, declaredLocals, body, diagnostics.DiagnosticBag);
+                    body = (BoundStatement)PlaceholderLocalRewriter.Rewrite(
+                        compilation,
+                        _container,
+                        declaredLocals,
+                        body,
+                        diagnostics.DiagnosticBag
+                    );
 
                     if (diagnostics.HasAnyErrors())
                     {
                         return;
                     }
                 }
+
                 finally
                 {
                     declaredLocals.Free();
@@ -510,7 +584,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 // Insert an implicit return statement if necessary.
                 if (body.Kind != BoundKind.ReturnStatement)
                 {
-                    statementsBuilder.Add(new BoundReturnStatement(syntax, RefKind.None, expressionOpt: null));
+                    statementsBuilder.Add(
+                        new BoundReturnStatement(syntax, RefKind.None, expressionOpt: null)
+                    );
                 }
 
                 var localsSet = PooledHashSet<LocalSymbol>.GetInstance();
@@ -531,7 +607,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         }
                     }
 
-                    body = new BoundBlock(syntax, localsBuilder.ToImmutableAndFree(), statementsBuilder.ToImmutableAndFree()) { WasCompilerGenerated = true };
+                    body = new BoundBlock(
+                        syntax,
+                        localsBuilder.ToImmutableAndFree(),
+                        statementsBuilder.ToImmutableAndFree()
+                    ) {
+                        WasCompilerGenerated = true
+                    };
 
                     Debug.Assert(!diagnostics.HasAnyErrors());
                     Debug.Assert(!body.HasErrors);
@@ -539,7 +621,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     bool sawLambdas;
                     bool sawLocalFunctions;
                     bool sawAwaitInExceptionHandler;
-                    ImmutableArray<SourceSpan> dynamicAnalysisSpans = ImmutableArray<SourceSpan>.Empty;
+                    ImmutableArray<SourceSpan> dynamicAnalysisSpans =
+                        ImmutableArray<SourceSpan>.Empty;
                     body = LocalRewriter.Rewrite(
                         compilation: this.DeclaringCompilation,
                         method: this,
@@ -555,7 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         diagnostics: diagnostics,
                         sawLambdas: out sawLambdas,
                         sawLocalFunctions: out sawLocalFunctions,
-                        sawAwaitInExceptionHandler: out sawAwaitInExceptionHandler);
+                        sawAwaitInExceptionHandler: out sawAwaitInExceptionHandler
+                    );
 
                     Debug.Assert(!sawAwaitInExceptionHandler);
                     Debug.Assert(dynamicAnalysisSpans.Length == 0);
@@ -597,11 +681,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         compilation.Conversions,
                         _displayClassVariables,
                         body,
-                        diagnostics.DiagnosticBag);
+                        diagnostics.DiagnosticBag
+                    );
 
                     if (body.HasErrors)
                     {
-                        Debug.Assert(false, "Please add a test case capturing whatever caused this assert.");
+                        Debug.Assert(
+                            false,
+                            "Please add a test case capturing whatever caused this assert."
+                        );
                         return;
                     }
 
@@ -627,13 +715,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                             slotAllocatorOpt: null,
                             compilationState: compilationState,
                             diagnostics: diagnostics,
-                            assignLocals: localsSet);
+                            assignLocals: localsSet
+                        );
 
                         // we don't need this information:
                         closureDebugInfoBuilder.Free();
                         lambdaDebugInfoBuilder.Free();
                     }
                 }
+
                 finally
                 {
                     localsSet.Free();
@@ -645,7 +735,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 var localBuilder = ArrayBuilder<LocalSymbol>.GetInstance();
                 foreach (var local in this.Locals)
                 {
-                    Debug.Assert(!(local is EELocalSymbol) || (((EELocalSymbol)local).Ordinal == localBuilder.Count));
+                    Debug.Assert(
+                        !(local is EELocalSymbol)
+                            || (((EELocalSymbol)local).Ordinal == localBuilder.Count)
+                    );
                     localBuilder.Add(local);
                 }
                 foreach (var local in block.Locals)
@@ -658,7 +751,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     localBuilder.Add(local);
                 }
 
-                body = block.Update(localBuilder.ToImmutableAndFree(), block.LocalFunctions, block.Statements);
+                body = block.Update(
+                    localBuilder.ToImmutableAndFree(),
+                    block.LocalFunctions,
+                    block.Statements
+                );
                 TypeParameterChecker.Check(body, _allTypeParameters);
                 compilationState.AddSynthesizedMethod(this, body);
             }
@@ -677,12 +774,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             }
             if ((object)_thisParameter != null)
             {
-                var typeNameKind = GeneratedNames.GetKind(_thisParameter.TypeWithAnnotations.Type.Name);
-                if (typeNameKind != GeneratedNameKind.None && typeNameKind != GeneratedNameKind.AnonymousType)
+                var typeNameKind = GeneratedNames.GetKind(
+                    _thisParameter.TypeWithAnnotations.Type.Name
+                );
+                if (
+                    typeNameKind != GeneratedNameKind.None
+                    && typeNameKind != GeneratedNameKind.AnonymousType
+                )
                 {
-                    Debug.Assert(typeNameKind == GeneratedNameKind.LambdaDisplayClass ||
-                        typeNameKind == GeneratedNameKind.StateMachineType,
-                        $"Unexpected typeNameKind '{typeNameKind}'");
+                    Debug.Assert(
+                        typeNameKind == GeneratedNameKind.LambdaDisplayClass
+                            || typeNameKind == GeneratedNameKind.StateMachineType,
+                        $"Unexpected typeNameKind '{typeNameKind}'"
+                    );
                     return null;
                 }
                 return new BoundParameter(syntax, _thisParameter);
@@ -690,7 +794,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return null;
         }
 
-        private static TypeSymbol CalculateReturnType(CSharpCompilation compilation, BoundStatement bodyOpt)
+        private static TypeSymbol CalculateReturnType(
+            CSharpCompilation compilation,
+            BoundStatement bodyOpt
+        )
         {
             if (bodyOpt == null)
             {

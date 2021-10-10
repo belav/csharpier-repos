@@ -19,6 +19,8 @@ namespace System.Web.Http.Controllers
         /// </summary>
         /// <param name="controllerDescriptor">The controller descriptor.</param>
         /// <returns>A map of <see cref="HttpActionDescriptor"/> that the selector can select, or null if the selector does not have a well-defined mapping of <see cref="HttpActionDescriptor"/>.</returns>
-        ILookup<string, HttpActionDescriptor> GetActionMapping(HttpControllerDescriptor controllerDescriptor);
+        ILookup<string, HttpActionDescriptor> GetActionMapping(
+            HttpControllerDescriptor controllerDescriptor
+        );
     }
 }

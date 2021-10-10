@@ -23,11 +23,23 @@ namespace System.Security.Cryptography.CryptoConfigTests
         [Fact]
         public static void NamedCreateMethods_NullInput()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => AsymmetricAlgorithm.Create(null));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => HashAlgorithm.Create(null));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => KeyedHashAlgorithm.Create(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => AsymmetricAlgorithm.Create(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => HashAlgorithm.Create(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => KeyedHashAlgorithm.Create(null)
+            );
             AssertExtensions.Throws<ArgumentNullException>("name", () => HMAC.Create(null));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => SymmetricAlgorithm.Create(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => SymmetricAlgorithm.Create(null)
+            );
         }
 
         // The returned types on .NET Framework can differ when the machine is in FIPS mode.
@@ -54,8 +66,13 @@ namespace System.Security.Cryptography.CryptoConfigTests
                 Assert.NotNull(created);
                 Assert.IsAssignableFrom(baseType, created);
 
-                using (HashAlgorithm equivalent =
-                    (HashAlgorithm)baseType.GetMethod("Create", Type.EmptyTypes).Invoke(null, null))
+                using (
+                    HashAlgorithm equivalent = (HashAlgorithm)baseType.GetMethod(
+                            "Create",
+                            Type.EmptyTypes
+                        )
+                        .Invoke(null, null)
+                )
                 {
                     byte[] input = { 1, 2, 3, 4, 5 };
                     byte[] equivHash = equivalent.ComputeHash(input);

@@ -20,7 +20,15 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             var identity = _requestContext!.User?.Identity;
             if (identity != null && identity.IsAuthenticated)
             {
-                return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(_requestContext.User!, properties: null, authenticationScheme: _scheme!.Name)));
+                return Task.FromResult(
+                    AuthenticateResult.Success(
+                        new AuthenticationTicket(
+                            _requestContext.User!,
+                            properties: null,
+                            authenticationScheme: _scheme!.Name
+                        )
+                    )
+                );
             }
             return Task.FromResult(AuthenticateResult.NoResult());
         }

@@ -32,8 +32,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return false;
             }
 
-            return OriginalSpan.Equals(other.OriginalSpan) &&
-                GeneratedSpan.Equals(other.GeneratedSpan);
+            return OriginalSpan.Equals(other.OriginalSpan)
+                && GeneratedSpan.Equals(other.GeneratedSpan);
         }
 
         public override int GetHashCode()
@@ -47,7 +47,12 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "{0} -> {1}", OriginalSpan, GeneratedSpan);
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0} -> {1}",
+                OriginalSpan,
+                GeneratedSpan
+            );
         }
     }
 }

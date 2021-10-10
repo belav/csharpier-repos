@@ -21,7 +21,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public readonly bool IsActiveStatementCovered;
 
-        public ActiveStatementExceptionRegions(ImmutableArray<LinePositionSpan> spans, bool isActiveStatementCovered)
+        public ActiveStatementExceptionRegions(
+            ImmutableArray<LinePositionSpan> spans,
+            bool isActiveStatementCovered
+        )
         {
             Spans = spans;
             IsActiveStatementCovered = isActiveStatementCovered;

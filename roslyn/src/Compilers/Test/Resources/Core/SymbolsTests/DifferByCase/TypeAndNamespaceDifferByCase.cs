@@ -7,22 +7,14 @@
 
 namespace SomeName
 {
-public class Dummy
-{}
+    public class Dummy { }
 }
 
-public class somEnamE
-{
-}
+public class somEnamE { }
 
+public class somEnamE1 { }
 
-public class somEnamE1
-{
-}
-
-public class SomeName1
-{
-}
+public class SomeName1 { }
 
 namespace somEnamE2
 {

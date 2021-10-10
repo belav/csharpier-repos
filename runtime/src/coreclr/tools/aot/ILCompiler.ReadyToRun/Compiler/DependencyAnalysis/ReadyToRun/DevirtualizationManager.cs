@@ -21,13 +21,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override bool IsEffectivelySealed(MethodDesc method)
         {
-            return _compilationModuleGroup.VersionsWithMethodBody(method) && base.IsEffectivelySealed(method);
+            return _compilationModuleGroup.VersionsWithMethodBody(method)
+                && base.IsEffectivelySealed(method);
         }
 
         protected override MethodDesc ResolveVirtualMethod(MethodDesc declMethod, DefType implType)
         {
-            if (_compilationModuleGroup.VersionsWithMethodBody(declMethod) &&
-                _compilationModuleGroup.VersionsWithType(implType))
+            if (
+                _compilationModuleGroup.VersionsWithMethodBody(declMethod)
+                && _compilationModuleGroup.VersionsWithType(implType)
+            )
             {
                 /**
                  * It is possible for us to hit a scenario where a type implements

@@ -17,24 +17,27 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void Text_Is_Recognized()
         {
-            TestTokenizer("foo-9309&smlkmb;::-3029022,.sdkq92384",
-                          SyntaxFactory.Token(SyntaxKind.Text, "foo-9309&smlkmb;::-3029022,.sdkq92384"));
+            TestTokenizer(
+                "foo-9309&smlkmb;::-3029022,.sdkq92384",
+                SyntaxFactory.Token(SyntaxKind.Text, "foo-9309&smlkmb;::-3029022,.sdkq92384")
+            );
         }
 
         [Fact]
         public void Whitespace_Is_Recognized()
         {
-            TestTokenizer(" \t\f ",
-                          SyntaxFactory.Token(SyntaxKind.Whitespace, " \t\f "));
+            TestTokenizer(" \t\f ", SyntaxFactory.Token(SyntaxKind.Whitespace, " \t\f "));
         }
 
         [Fact]
         public void Newline_Is_Recognized()
         {
-            TestTokenizer("\n\r\r\n",
-                          SyntaxFactory.Token(SyntaxKind.NewLine, "\n"),
-                          SyntaxFactory.Token(SyntaxKind.NewLine, "\r"),
-                          SyntaxFactory.Token(SyntaxKind.NewLine, "\r\n"));
+            TestTokenizer(
+                "\n\r\r\n",
+                SyntaxFactory.Token(SyntaxKind.NewLine, "\n"),
+                SyntaxFactory.Token(SyntaxKind.NewLine, "\r"),
+                SyntaxFactory.Token(SyntaxKind.NewLine, "\r\n")
+            );
         }
 
         [Fact]
@@ -134,7 +137,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 "@* Foo * Bar * Baz *",
                 SyntaxFactory.Token(SyntaxKind.RazorCommentTransition, "@"),
                 SyntaxFactory.Token(SyntaxKind.RazorCommentStar, "*"),
-                SyntaxFactory.Token(SyntaxKind.RazorCommentLiteral, " Foo * Bar * Baz *"));
+                SyntaxFactory.Token(SyntaxKind.RazorCommentLiteral, " Foo * Bar * Baz *")
+            );
         }
 
         [Fact]
@@ -146,7 +150,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 SyntaxFactory.Token(SyntaxKind.RazorCommentStar, "*"),
                 SyntaxFactory.Token(SyntaxKind.RazorCommentLiteral, " Foo * Bar * Baz "),
                 SyntaxFactory.Token(SyntaxKind.RazorCommentStar, "*"),
-                SyntaxFactory.Token(SyntaxKind.RazorCommentTransition, "@"));
+                SyntaxFactory.Token(SyntaxKind.RazorCommentTransition, "@")
+            );
         }
 
         [Fact]
@@ -158,7 +163,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 SyntaxFactory.Token(SyntaxKind.RazorCommentStar, "*"),
                 SyntaxFactory.Token(SyntaxKind.RazorCommentLiteral, " Foo Bar Baz "),
                 SyntaxFactory.Token(SyntaxKind.RazorCommentStar, "*"),
-                SyntaxFactory.Token(SyntaxKind.RazorCommentTransition, "@"));
+                SyntaxFactory.Token(SyntaxKind.RazorCommentTransition, "@")
+            );
         }
     }
 }

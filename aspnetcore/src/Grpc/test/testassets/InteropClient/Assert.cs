@@ -61,7 +61,8 @@ namespace InteropTestsClient
             throw new InvalidOperationException("Failure assert.");
         }
 
-        public static async Task<TException> ThrowsAsync<TException>(Func<Task> action) where TException : Exception
+        public static async Task<TException> ThrowsAsync<TException>(Func<Task> action)
+            where TException : Exception
         {
             try
             {
@@ -74,7 +75,9 @@ namespace InteropTestsClient
                     return (TException)ex;
                 }
 
-                throw new InvalidOperationException($"Expected ${typeof(TException)} but got ${ex.GetType()}.");
+                throw new InvalidOperationException(
+                    $"Expected ${typeof(TException)} but got ${ex.GetType()}."
+                );
             }
 
             throw new InvalidOperationException("No exception thrown.");
@@ -93,7 +96,9 @@ namespace InteropTestsClient
                     return (TException)ex;
                 }
 
-                throw new InvalidOperationException($"Expected ${typeof(TException)} but got ${ex.GetType()}.");
+                throw new InvalidOperationException(
+                    $"Expected ${typeof(TException)} but got ${ex.GetType()}."
+                );
             }
 
             throw new InvalidOperationException("No exception thrown.");
@@ -119,7 +124,9 @@ namespace InteropTestsClient
         {
             if (expected.Count != actual.Count)
             {
-                throw new InvalidOperationException($"Collection lengths differ. {expected.Count} but got {actual.Count}.");
+                throw new InvalidOperationException(
+                    $"Collection lengths differ. {expected.Count} but got {actual.Count}."
+                );
             }
 
             for (var i = 0; i < expected.Count; i++)

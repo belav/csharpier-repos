@@ -53,7 +53,6 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act
             attr.OnActionExecuting(filterContext);
-
             // Assert
             // If we got this far without crashing, life is good :)
         }
@@ -66,7 +65,12 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnActionExecuting(null); }, "filterContext");
+                delegate
+                {
+                    attr.OnActionExecuting(null);
+                },
+                "filterContext"
+            );
         }
 
         private class SampleSyncController : Controller

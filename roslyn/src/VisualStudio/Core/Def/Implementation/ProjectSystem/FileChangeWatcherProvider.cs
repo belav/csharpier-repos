@@ -16,24 +16,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     [Export(typeof(FileChangeWatcherProvider))]
     internal sealed class FileChangeWatcherProvider
     {
-        private readonly TaskCompletionSource<IVsAsyncFileChangeEx> _fileChangeService = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource<IVsAsyncFileChangeEx> _fileChangeService =
+            new(TaskCreationOptions.RunContinuationsAsynchronously);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FileChangeWatcherProvider(IThreadingContext threadingContext, [Import(typeof(SVsServiceProvider))] Shell.IAsyncServiceProvider serviceProvider)
+        public FileChangeWatcherProvider(
+            IThreadingContext threadingContext,
+            [Import(typeof(SVsServiceProvider))] Shell.IAsyncServiceProvider serviceProvider
+        )
         {
             // We do not want background work to implicitly block on the availability of the SVsFileChangeEx to avoid any deadlock risk,
             // since the first fetch for a file watcher might end up happening on the background.
             Watcher = new FileChangeWatcher(_fileChangeService.Task);
 
-            System.Threading.Tasks.Task.Run(async () =>
+            System.Threading.Tasks.Task.Run(
+                async () =>
                 {
                     await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    var fileChangeService = (IVsAsyncFileChangeEx?)await serviceProvider.GetServiceAsync(typeof(SVsFileChangeEx)).ConfigureAwait(true);
+                    var fileChangeService =
+                        (IVsAsyncFileChangeEx?)await serviceProvider.GetServiceAsync(
+                                typeof(SVsFileChangeEx)
+                            )
+                            .ConfigureAwait(true);
                     Assumes.Present(fileChangeService);
                     _fileChangeService.SetResult(fileChangeService);
-                });
+                }
+            );
         }
 
         public FileChangeWatcher Watcher { get; }
@@ -46,7 +56,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         // fix for a preview release that's too risky to do it in. Other options involve more extensive
         // mocking or extracting of interfaces which is also just churn that will be immediately undone
         // once we clean up the constructor either.
-        internal void TrySetFileChangeService_TestOnly(IVsAsyncFileChangeEx fileChange)
-            => _fileChangeService.TrySetResult(fileChange);
+        internal void TrySetFileChangeService_TestOnly(IVsAsyncFileChangeEx fileChange) =>
+            _fileChangeService.TrySetResult(fileChange);
     }
 }

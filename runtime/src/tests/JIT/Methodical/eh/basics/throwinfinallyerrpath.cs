@@ -6,7 +6,6 @@ using System;
 
 namespace hello
 {
-
     class Class1
     {
         private static TestUtil.TestLog testLog;
@@ -57,6 +56,7 @@ namespace hello
                     inTry2();
                     throw new Exception();
                 }
+
                 finally
                 {
                     inFinally();

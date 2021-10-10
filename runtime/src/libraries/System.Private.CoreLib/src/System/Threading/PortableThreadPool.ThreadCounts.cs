@@ -24,7 +24,8 @@ namespace System.Threading
 
             private short GetInt16Value(byte shift) => (short)(_data >> shift);
             private void SetInt16Value(short value, byte shift) =>
-                _data = (_data & ~((ulong)ushort.MaxValue << shift)) | ((ulong)(ushort)value << shift);
+                _data =
+                    (_data & ~((ulong)ushort.MaxValue << shift)) | ((ulong)(ushort)value << shift);
 
             /// <summary>
             /// Number of threads processing work items.
@@ -83,13 +84,21 @@ namespace System.Threading
 
             public ThreadCounts VolatileRead() => new ThreadCounts(Volatile.Read(ref _data));
 
-            public ThreadCounts InterlockedCompareExchange(ThreadCounts newCounts, ThreadCounts oldCounts) =>
-                new ThreadCounts(Interlocked.CompareExchange(ref _data, newCounts._data, oldCounts._data));
+            public ThreadCounts InterlockedCompareExchange(
+                ThreadCounts newCounts,
+                ThreadCounts oldCounts
+            ) =>
+                new ThreadCounts(
+                    Interlocked.CompareExchange(ref _data, newCounts._data, oldCounts._data)
+                );
 
-            public static bool operator ==(ThreadCounts lhs, ThreadCounts rhs) => lhs._data == rhs._data;
-            public static bool operator !=(ThreadCounts lhs, ThreadCounts rhs) => lhs._data != rhs._data;
+            public static bool operator ==(ThreadCounts lhs, ThreadCounts rhs) =>
+                lhs._data == rhs._data;
+            public static bool operator !=(ThreadCounts lhs, ThreadCounts rhs) =>
+                lhs._data != rhs._data;
 
-            public override bool Equals([NotNullWhen(true)] object? obj) => obj is ThreadCounts other && _data == other._data;
+            public override bool Equals([NotNullWhen(true)] object? obj) =>
+                obj is ThreadCounts other && _data == other._data;
             public override int GetHashCode() => (int)_data + (int)(_data >> 32);
         }
     }

@@ -16,6 +16,7 @@ internal static partial class Interop
             [In] int len,
             [In] SocketFlags socketFlags,
             [In] byte[] socketAddress,
-            [In] int socketAddressSize);
+            [In] int socketAddressSize
+        );
     }
 }

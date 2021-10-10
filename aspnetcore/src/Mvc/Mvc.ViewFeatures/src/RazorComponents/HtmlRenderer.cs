@@ -15,17 +15,36 @@ namespace Microsoft.AspNetCore.Components.Rendering
 {
     internal class HtmlRenderer : Renderer
     {
-        private static readonly HashSet<string> SelfClosingElements = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"
+        private static readonly HashSet<string> SelfClosingElements = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        ) {
+            "area",
+            "base",
+            "br",
+            "col",
+            "embed",
+            "hr",
+            "img",
+            "input",
+            "link",
+            "meta",
+            "param",
+            "source",
+            "track",
+            "wbr"
         };
 
-        private static readonly Task CanceledRenderTask = Task.FromCanceled(new CancellationToken(canceled: true));
+        private static readonly Task CanceledRenderTask = Task.FromCanceled(
+            new CancellationToken(canceled: true)
+        );
 
         private readonly Func<string, string> _htmlEncoder;
 
-        public HtmlRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory, HtmlEncoder htmlEncoder)
-            : base(serviceProvider, loggerFactory)
+        public HtmlRenderer(
+            IServiceProvider serviceProvider,
+            ILoggerFactory loggerFactory,
+            HtmlEncoder htmlEncoder
+        ) : base(serviceProvider, loggerFactory)
         {
             _htmlEncoder = htmlEncoder.Encode;
         }
@@ -50,9 +69,15 @@ namespace Microsoft.AspNetCore.Components.Rendering
             return CanceledRenderTask;
         }
 
-        public async Task<ComponentRenderedText> RenderComponentAsync(Type componentType, ParameterView initialParameters)
+        public async Task<ComponentRenderedText> RenderComponentAsync(
+            Type componentType,
+            ParameterView initialParameters
+        )
         {
-            var (componentId, frames) = await CreateInitialRenderAsync(componentType, initialParameters);
+            var (componentId, frames) = await CreateInitialRenderAsync(
+                componentType,
+                initialParameters
+            );
 
             var context = new HtmlRenderingContext();
             var newPosition = RenderFrames(context, frames, 0, frames.Count);
@@ -60,16 +85,23 @@ namespace Microsoft.AspNetCore.Components.Rendering
             return new ComponentRenderedText(componentId, context.Result);
         }
 
-        public Task<ComponentRenderedText> RenderComponentAsync<TComponent>(ParameterView initialParameters) where TComponent : IComponent
+        public Task<ComponentRenderedText> RenderComponentAsync<TComponent>(
+            ParameterView initialParameters
+        ) where TComponent : IComponent
         {
             return RenderComponentAsync(typeof(TComponent), initialParameters);
         }
 
         /// <inheritdoc />
-        protected override void HandleException(Exception exception)
-            => ExceptionDispatchInfo.Capture(exception).Throw();
+        protected override void HandleException(Exception exception) =>
+            ExceptionDispatchInfo.Capture(exception).Throw();
 
-        private int RenderFrames(HtmlRenderingContext context, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
+        private int RenderFrames(
+            HtmlRenderingContext context,
+            ArrayRange<RenderTreeFrame> frames,
+            int position,
+            int maxElements
+        )
         {
             var nextPosition = position;
             var endPosition = position + maxElements;
@@ -89,7 +121,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
         private int RenderCore(
             HtmlRenderingContext context,
             ArrayRange<RenderTreeFrame> frames,
-            int position)
+            int position
+        )
         {
             ref var frame = ref frames.Array[position];
             switch (frame.FrameType)
@@ -97,7 +130,9 @@ namespace Microsoft.AspNetCore.Components.Rendering
                 case RenderTreeFrameType.Element:
                     return RenderElement(context, frames, position);
                 case RenderTreeFrameType.Attribute:
-                    throw new InvalidOperationException($"Attributes should only be encountered within {nameof(RenderElement)}");
+                    throw new InvalidOperationException(
+                        $"Attributes should only be encountered within {nameof(RenderElement)}"
+                    );
                 case RenderTreeFrameType.Text:
                     context.Result.Add(_htmlEncoder(frame.TextContent));
                     return ++position;
@@ -107,19 +142,27 @@ namespace Microsoft.AspNetCore.Components.Rendering
                 case RenderTreeFrameType.Component:
                     return RenderChildComponent(context, frames, position);
                 case RenderTreeFrameType.Region:
-                    return RenderFrames(context, frames, position + 1, frame.RegionSubtreeLength - 1);
+                    return RenderFrames(
+                        context,
+                        frames,
+                        position + 1,
+                        frame.RegionSubtreeLength - 1
+                    );
                 case RenderTreeFrameType.ElementReferenceCapture:
                 case RenderTreeFrameType.ComponentReferenceCapture:
                     return ++position;
                 default:
-                    throw new InvalidOperationException($"Invalid element frame type '{frame.FrameType}'.");
+                    throw new InvalidOperationException(
+                        $"Invalid element frame type '{frame.FrameType}'."
+                    );
             }
         }
 
         private int RenderChildComponent(
             HtmlRenderingContext context,
             ArrayRange<RenderTreeFrame> frames,
-            int position)
+            int position
+        )
         {
             ref var frame = ref frames.Array[position];
             var childFrames = GetCurrentRenderTreeFrames(frame.ComponentId);
@@ -130,20 +173,33 @@ namespace Microsoft.AspNetCore.Components.Rendering
         private int RenderElement(
             HtmlRenderingContext context,
             ArrayRange<RenderTreeFrame> frames,
-            int position)
+            int position
+        )
         {
             ref var frame = ref frames.Array[position];
             var result = context.Result;
             result.Add("<");
             result.Add(frame.ElementName);
-            var afterAttributes = RenderAttributes(context, frames, position + 1, frame.ElementSubtreeLength - 1, out var capturedValueAttribute);
+            var afterAttributes = RenderAttributes(
+                context,
+                frames,
+                position + 1,
+                frame.ElementSubtreeLength - 1,
+                out var capturedValueAttribute
+            );
 
             // When we see an <option> as a descendant of a <select>, and the option's "value" attribute matches the
             // "value" attribute on the <select>, then we auto-add the "selected" attribute to that option. This is
             // a way of converting Blazor's select binding feature to regular static HTML.
-            if (context.ClosestSelectValueAsString != null
+            if (
+                context.ClosestSelectValueAsString != null
                 && string.Equals(frame.ElementName, "option", StringComparison.OrdinalIgnoreCase)
-                && string.Equals(capturedValueAttribute, context.ClosestSelectValueAsString, StringComparison.Ordinal))
+                && string.Equals(
+                    capturedValueAttribute,
+                    context.ClosestSelectValueAsString,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 result.Add(" selected");
             }
@@ -153,13 +209,22 @@ namespace Microsoft.AspNetCore.Components.Rendering
             {
                 result.Add(">");
 
-                var isSelect = string.Equals(frame.ElementName, "select", StringComparison.OrdinalIgnoreCase);
+                var isSelect = string.Equals(
+                    frame.ElementName,
+                    "select",
+                    StringComparison.OrdinalIgnoreCase
+                );
                 if (isSelect)
                 {
                     context.ClosestSelectValueAsString = capturedValueAttribute;
                 }
 
-                var afterElement = RenderChildren(context, frames, afterAttributes, remainingElements);
+                var afterElement = RenderChildren(
+                    context,
+                    frames,
+                    afterAttributes,
+                    remainingElements
+                );
 
                 if (isSelect)
                 {
@@ -192,7 +257,12 @@ namespace Microsoft.AspNetCore.Components.Rendering
             }
         }
 
-        private int RenderChildren(HtmlRenderingContext context, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
+        private int RenderChildren(
+            HtmlRenderingContext context,
+            ArrayRange<RenderTreeFrame> frames,
+            int position,
+            int maxElements
+        )
         {
             if (maxElements == 0)
             {
@@ -204,7 +274,11 @@ namespace Microsoft.AspNetCore.Components.Rendering
 
         private int RenderAttributes(
             HtmlRenderingContext context,
-            ArrayRange<RenderTreeFrame> frames, int position, int maxElements, out string capturedValueAttribute)
+            ArrayRange<RenderTreeFrame> frames,
+            int position,
+            int maxElements,
+            out string capturedValueAttribute
+        )
         {
             capturedValueAttribute = null;
 
@@ -251,7 +325,10 @@ namespace Microsoft.AspNetCore.Components.Rendering
             return position + maxElements;
         }
 
-        private async Task<(int, ArrayRange<RenderTreeFrame>)> CreateInitialRenderAsync(Type componentType, ParameterView initialParameters)
+        private async Task<(int, ArrayRange<RenderTreeFrame>)> CreateInitialRenderAsync(
+            Type componentType,
+            ParameterView initialParameters
+        )
         {
             var component = InstantiateComponent(componentType);
             var componentId = AssignRootComponentId(component);

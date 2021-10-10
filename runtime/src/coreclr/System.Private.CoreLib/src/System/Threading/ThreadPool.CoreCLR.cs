@@ -34,7 +34,8 @@ namespace System.Threading
         private IntPtr _nativeRegisteredWaitHandle = InvalidHandleValue;
         private bool _releaseHandle;
 
-        private static bool IsValidHandle(IntPtr handle) => handle != InvalidHandleValue && handle != IntPtr.Zero;
+        private static bool IsValidHandle(IntPtr handle) =>
+            handle != InvalidHandleValue && handle != IntPtr.Zero;
 
         internal void SetNativeRegisteredWaitHandle(IntPtr nativeRegisteredWaitHandle)
         {
@@ -75,8 +76,13 @@ namespace System.Threading
             s_callbackLock.Acquire();
             try
             {
-                if (!IsValidHandle(_nativeRegisteredWaitHandle) ||
-                    !UnregisterWaitNative(_nativeRegisteredWaitHandle, waitObject?.SafeWaitHandle))
+                if (
+                    !IsValidHandle(_nativeRegisteredWaitHandle)
+                    || !UnregisterWaitNative(
+                        _nativeRegisteredWaitHandle,
+                        waitObject?.SafeWaitHandle
+                    )
+                )
                 {
                     return false;
                 }
@@ -88,6 +94,7 @@ namespace System.Threading
                     _releaseHandle = false;
                 }
             }
+
             finally
             {
                 s_callbackLock.Release();
@@ -121,6 +128,7 @@ namespace System.Threading
                     _releaseHandle = false;
                 }
             }
+
             finally
             {
                 s_callbackLock.Release();
@@ -160,13 +168,17 @@ namespace System.Threading
         void IThreadPoolWorkItem.Execute() => ExecuteUnmanagedThreadPoolWorkItem(_callback, _state);
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void ExecuteUnmanagedThreadPoolWorkItem(IntPtr callback, IntPtr state);
+        private static extern void ExecuteUnmanagedThreadPoolWorkItem(
+            IntPtr callback,
+            IntPtr state
+        );
     }
 
     public static partial class ThreadPool
     {
         // SOS's ThreadPool command depends on this name
-        internal static readonly bool UsePortableThreadPool = InitializeConfigAndDetermineUsePortableThreadPool();
+        internal static readonly bool UsePortableThreadPool =
+            InitializeConfigAndDetermineUsePortableThreadPool();
 
         // Time-senstiive work items are those that may need to run ahead of normal work items at least periodically. For a
         // runtime that does not support time-sensitive work items on the managed side, the thread pool yields the thread to the
@@ -185,12 +197,12 @@ namespace System.Threading
             int configVariableIndex = 0;
             while (true)
             {
-                int nextConfigVariableIndex =
-                    GetNextConfigUInt32Value(
-                        configVariableIndex,
-                        out uint configValue,
-                        out bool isBoolean,
-                        out char* appContextConfigNameUnsafe);
+                int nextConfigVariableIndex = GetNextConfigUInt32Value(
+                    configVariableIndex,
+                    out uint configValue,
+                    out bool isBoolean,
+                    out char* appContextConfigNameUnsafe
+                );
                 if (nextConfigVariableIndex < 0)
                 {
                     break;
@@ -227,11 +239,15 @@ namespace System.Threading
             int configVariableIndex,
             out uint configValue,
             out bool isBoolean,
-            out char* appContextConfigName);
+            out char* appContextConfigName
+        );
 
         private static bool GetEnableWorkerTracking() =>
             UsePortableThreadPool
-                ? AppContextConfigHelper.GetBooleanConfig("System.Threading.ThreadPool.EnableWorkerTracking", false)
+                ? AppContextConfigHelper.GetBooleanConfig(
+                      "System.Threading.ThreadPool.EnableWorkerTracking",
+                      false
+                  )
                 : GetEnableWorkerTrackingNative();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -262,13 +278,15 @@ namespace System.Threading
         {
             if (UsePortableThreadPool)
             {
-                return PortableThreadPool.ThreadPoolInstance.SetMaxThreads(workerThreads, completionPortThreads);
+                return PortableThreadPool.ThreadPoolInstance.SetMaxThreads(
+                    workerThreads,
+                    completionPortThreads
+                );
             }
 
-            return
-                workerThreads >= 0 &&
-                completionPortThreads >= 0 &&
-                SetMaxThreadsNative(workerThreads, completionPortThreads);
+            return workerThreads >= 0
+                && completionPortThreads >= 0
+                && SetMaxThreadsNative(workerThreads, completionPortThreads);
         }
 
         public static void GetMaxThreads(out int workerThreads, out int completionPortThreads)
@@ -285,13 +303,15 @@ namespace System.Threading
         {
             if (UsePortableThreadPool)
             {
-                return PortableThreadPool.ThreadPoolInstance.SetMinThreads(workerThreads, completionPortThreads);
+                return PortableThreadPool.ThreadPoolInstance.SetMinThreads(
+                    workerThreads,
+                    completionPortThreads
+                );
             }
 
-            return
-                workerThreads >= 0 &&
-                completionPortThreads >= 0 &&
-                SetMinThreadsNative(workerThreads, completionPortThreads);
+            return workerThreads >= 0
+                && completionPortThreads >= 0
+                && SetMinThreadsNative(workerThreads, completionPortThreads);
         }
 
         public static void GetMinThreads(out int workerThreads, out int completionPortThreads)
@@ -321,7 +341,8 @@ namespace System.Threading
         /// For a thread pool implementation that may have different types of threads, the count includes all types.
         /// </remarks>
         public static int ThreadCount =>
-            (UsePortableThreadPool ? PortableThreadPool.ThreadPoolInstance.ThreadCount : 0) + GetThreadCount();
+            (UsePortableThreadPool ? PortableThreadPool.ThreadPoolInstance.ThreadCount : 0)
+            + GetThreadCount();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern int GetThreadCount();
@@ -348,20 +369,21 @@ namespace System.Threading
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
         private static extern long GetCompletedWorkItemCount();
 
-        private static long PendingUnmanagedWorkItemCount => UsePortableThreadPool ? 0 : GetPendingUnmanagedWorkItemCount();
+        private static long PendingUnmanagedWorkItemCount =>
+            UsePortableThreadPool ? 0 : GetPendingUnmanagedWorkItemCount();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern long GetPendingUnmanagedWorkItemCount();
 
         private static RegisteredWaitHandle RegisterWaitForSingleObject(
-             WaitHandle? waitObject,
-             WaitOrTimerCallback? callBack,
-             object? state,
-             uint millisecondsTimeOutInterval,
-             bool executeOnlyOnce,
-             bool flowExecutionContext)
+            WaitHandle? waitObject,
+            WaitOrTimerCallback? callBack,
+            object? state,
+            uint millisecondsTimeOutInterval,
+            bool executeOnlyOnce,
+            bool flowExecutionContext
+        )
         {
-
             if (waitObject == null)
                 throw new ArgumentNullException(nameof(waitObject));
 
@@ -372,7 +394,8 @@ namespace System.Threading
                 waitObject,
                 new _ThreadPoolWaitOrTimerCallback(callBack, state, flowExecutionContext),
                 (int)millisecondsTimeOutInterval,
-                !executeOnlyOnce);
+                !executeOnlyOnce
+            );
 
             registeredWaitHandle.OnBeforeRegister();
 
@@ -382,20 +405,22 @@ namespace System.Threading
             }
             else
             {
-                IntPtr nativeRegisteredWaitHandle =
-                    RegisterWaitForSingleObjectNative(
-                        waitObject,
-                        registeredWaitHandle.Callback,
-                        (uint)registeredWaitHandle.TimeoutDurationMs,
-                        !registeredWaitHandle.Repeating,
-                        registeredWaitHandle);
+                IntPtr nativeRegisteredWaitHandle = RegisterWaitForSingleObjectNative(
+                    waitObject,
+                    registeredWaitHandle.Callback,
+                    (uint)registeredWaitHandle.TimeoutDurationMs,
+                    !registeredWaitHandle.Repeating,
+                    registeredWaitHandle
+                );
                 registeredWaitHandle.SetNativeRegisteredWaitHandle(nativeRegisteredWaitHandle);
             }
 
             return registeredWaitHandle;
         }
 
-        internal static void UnsafeQueueWaitCompletion(CompleteWaitThreadPoolWorkItem completeWaitWorkItem)
+        internal static void UnsafeQueueWaitCompletion(
+            CompleteWaitThreadPoolWorkItem completeWaitWorkItem
+        )
         {
             Debug.Assert(UsePortableThreadPool);
 
@@ -408,7 +433,9 @@ namespace System.Threading
 
 #if TARGET_WINDOWS // the IO completion thread pool is currently only available on Windows
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void QueueWaitCompletionNative(CompleteWaitThreadPoolWorkItem completeWaitWorkItem);
+        private static extern void QueueWaitCompletionNative(
+            CompleteWaitThreadPoolWorkItem completeWaitWorkItem
+        );
 #endif
 
         internal static void RequestWorkerThread()
@@ -444,7 +471,9 @@ namespace System.Threading
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern Interop.BOOL PerformRuntimeSpecificGateActivitiesNative(int cpuUtilization);
+        private static extern Interop.BOOL PerformRuntimeSpecificGateActivitiesNative(
+            int cpuUtilization
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern unsafe bool PostQueuedCompletionStatus(NativeOverlapped* overlapped);
@@ -457,35 +486,55 @@ namespace System.Threading
         private static void UnsafeQueueUnmanagedWorkItem(IntPtr callback, IntPtr state)
         {
             Debug.Assert(SupportsTimeSensitiveWorkItems);
-            UnsafeQueueTimeSensitiveWorkItemInternal(new UnmanagedThreadPoolWorkItem(callback, state));
+            UnsafeQueueTimeSensitiveWorkItemInternal(
+                new UnmanagedThreadPoolWorkItem(callback, state)
+            );
         }
 
         // Native methods:
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern bool SetMinThreadsNative(int workerThreads, int completionPortThreads);
+        private static extern bool SetMinThreadsNative(
+            int workerThreads,
+            int completionPortThreads
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern bool SetMaxThreadsNative(int workerThreads, int completionPortThreads);
+        private static extern bool SetMaxThreadsNative(
+            int workerThreads,
+            int completionPortThreads
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void GetMinThreadsNative(out int workerThreads, out int completionPortThreads);
+        private static extern void GetMinThreadsNative(
+            out int workerThreads,
+            out int completionPortThreads
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void GetMaxThreadsNative(out int workerThreads, out int completionPortThreads);
+        private static extern void GetMaxThreadsNative(
+            out int workerThreads,
+            out int completionPortThreads
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void GetAvailableThreadsNative(out int workerThreads, out int completionPortThreads);
+        private static extern void GetAvailableThreadsNative(
+            out int workerThreads,
+            out int completionPortThreads
+        );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool NotifyWorkItemComplete(object? threadLocalCompletionCountObject, int currentTimeMs)
+        internal static bool NotifyWorkItemComplete(
+            object? threadLocalCompletionCountObject,
+            int currentTimeMs
+        )
         {
             if (UsePortableThreadPool)
             {
-                return
-                    PortableThreadPool.ThreadPoolInstance.NotifyWorkItemComplete(
-                        threadLocalCompletionCountObject,
-                        currentTimeMs);
+                return PortableThreadPool.ThreadPoolInstance.NotifyWorkItemComplete(
+                    threadLocalCompletionCountObject,
+                    currentTimeMs
+                );
             }
 
             return NotifyWorkItemCompleteNative();
@@ -523,21 +572,26 @@ namespace System.Threading
         private static extern void NotifyWorkItemProgressNative();
 
         internal static object? GetOrCreateThreadLocalCompletionCountObject() =>
-            UsePortableThreadPool ? PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject() : null;
+            UsePortableThreadPool
+                ? PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject()
+                : null;
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern bool GetEnableWorkerTrackingNative();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern IntPtr RegisterWaitForSingleObjectNative(
-             WaitHandle waitHandle,
-             object state,
-             uint timeOutInterval,
-             bool executeOnlyOnce,
-             RegisteredWaitHandle registeredWaitHandle
-             );
+            WaitHandle waitHandle,
+            object state,
+            uint timeOutInterval,
+            bool executeOnlyOnce,
+            RegisteredWaitHandle registeredWaitHandle
+        );
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated.  Please use ThreadPool.BindHandle(SafeHandle) instead.", false)]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated.  Please use ThreadPool.BindHandle(SafeHandle) instead.",
+            false
+        )]
         public static bool BindHandle(IntPtr osHandle)
         {
             return BindIOCompletionCallbackNative(osHandle);
@@ -556,6 +610,7 @@ namespace System.Threading
                 osHandle.DangerousAddRef(ref mustReleaseSafeHandle);
                 ret = BindIOCompletionCallbackNative(osHandle.DangerousGetHandle());
             }
+
             finally
             {
                 if (mustReleaseSafeHandle)

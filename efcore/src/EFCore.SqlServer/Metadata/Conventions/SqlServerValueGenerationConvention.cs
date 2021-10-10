@@ -24,10 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public SqlServerValueGenerationConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies, relationalDependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies, relationalDependencies) { }
 
         /// <summary>
         ///     Called after an annotation is changed on a property.
@@ -42,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             if (name == SqlServerAnnotationNames.ValueGenerationStrategy)
             {
@@ -50,7 +49,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return;
             }
 
-            base.ProcessPropertyAnnotationChanged(propertyBuilder, name, annotation, oldAnnotation, context);
+            base.ProcessPropertyAnnotationChanged(
+                propertyBuilder,
+                name,
+                annotation,
+                oldAnnotation,
+                context
+            );
         }
 
         /// <summary>
@@ -69,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             return GetValueGenerated(
                 property,
                 StoreObjectIdentifier.Table(tableName, property.DeclaringEntityType.GetSchema()),
-                Dependencies.TypeMappingSource);
+                Dependencies.TypeMappingSource
+            );
         }
 
         /// <summary>
@@ -78,19 +84,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the store object. </param>
         /// <returns> The store value generation strategy to set for the given property. </returns>
-        public static new ValueGenerated? GetValueGenerated(IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
-            => RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
-                ?? (property.GetValueGenerationStrategy(storeObject) != SqlServerValueGenerationStrategy.None
+        public static new ValueGenerated? GetValueGenerated(
+            IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        ) =>
+            RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
+            ?? (
+                property.GetValueGenerationStrategy(storeObject)
+                != SqlServerValueGenerationStrategy.None
                     ? ValueGenerated.OnAdd
-                    : (ValueGenerated?)null);
+                    : (ValueGenerated?)null
+            );
 
         private ValueGenerated? GetValueGenerated(
             IReadOnlyProperty property,
             in StoreObjectIdentifier storeObject,
-            ITypeMappingSource typeMappingSource)
-            => RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
-                ?? (property.GetValueGenerationStrategy(storeObject, typeMappingSource) != SqlServerValueGenerationStrategy.None
+            ITypeMappingSource typeMappingSource
+        ) =>
+            RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
+            ?? (
+                property.GetValueGenerationStrategy(storeObject, typeMappingSource)
+                != SqlServerValueGenerationStrategy.None
                     ? ValueGenerated.OnAdd
-                    : (ValueGenerated?)null);
+                    : (ValueGenerated?)null
+            );
     }
 }

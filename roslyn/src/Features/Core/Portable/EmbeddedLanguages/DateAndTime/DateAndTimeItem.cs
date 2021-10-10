@@ -17,7 +17,12 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             public readonly bool IsDefault;
 
             public DateAndTimeItem(
-                string displayText, string inlineDescription, string fullDescription, CompletionChange change, bool isDefault)
+                string displayText,
+                string inlineDescription,
+                string fullDescription,
+                CompletionChange change,
+                bool isDefault
+            )
             {
                 DisplayText = displayText;
                 InlineDescription = inlineDescription;

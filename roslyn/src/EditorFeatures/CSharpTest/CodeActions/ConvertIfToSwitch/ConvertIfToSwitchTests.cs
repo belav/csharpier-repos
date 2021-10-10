@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestUnreachableEndPoint()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestReachableEndPoint()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
         public async Task TestMissingOnSubsequentBlock()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int M(int i)
     {
@@ -110,7 +111,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestElseBlock_01()
         {
             var source =
-@"class C
+                @"class C
 {
     int {|#0:M|}(int i)
     {
@@ -119,7 +120,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int {|#0:M|}(int i)
     {
@@ -141,7 +142,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int)"),
+                        DiagnosticResult.CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int)"),
                     },
                 },
                 FixedState =
@@ -150,7 +153,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int)"),
+                        DiagnosticResult.CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int)"),
                     },
                 },
                 CodeActionValidationMode = CodeActionValidationMode.None,
@@ -161,7 +166,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestElseBlock_02()
         {
             var source =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -178,7 +183,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -208,7 +213,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestMultipleCases_01()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -218,7 +223,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -253,7 +258,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestMultipleCases_02_CSharp8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -263,7 +268,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -293,7 +298,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestMultipleCases_02_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -303,7 +308,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -333,7 +338,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestExpressionOrder()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -342,7 +347,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -368,7 +373,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestConstantExpression()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -378,7 +383,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -405,7 +410,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestMissingOnNonConstantExpression()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -422,7 +427,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestMissingOnDifferentOperands()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i, int j)
     {
@@ -437,7 +442,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestMissingOnSingleCase()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -451,10 +456,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
         [CombinatorialData]
         public async Task TestIsExpression(
-            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)] LanguageVersion languageVersion)
+            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
+                LanguageVersion languageVersion
+        )
         {
             var source =
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -464,8 +471,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
 }";
             var fixedSource = languageVersion switch
             {
-                LanguageVersion.CSharp8 =>
-@"class C
+                LanguageVersion.CSharp8
+                  => @"class C
 {
     void M(object o)
     {
@@ -478,8 +485,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         }
     }
 }",
-                LanguageVersion.CSharp9 =>
-@"class C
+                LanguageVersion.CSharp9
+                  => @"class C
 {
     void M(object o)
     {
@@ -508,7 +515,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestIsPatternExpression_01()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -518,7 +525,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 return;
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -530,14 +537,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
         public async Task TestIsPatternExpression_02_CSharp8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -548,7 +556,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -574,7 +582,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestIsPatternExpression_02_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -585,7 +593,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -611,7 +619,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestIsPatternExpression_03()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -621,7 +629,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 return;
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -633,14 +641,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
         public async Task TestIsPatternExpression_04()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -650,7 +659,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 return;
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -662,14 +671,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
         public async Task TestComplexExpression_01()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -685,7 +695,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
             }
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -700,14 +710,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
         public async Task TestMissingIfCaretDoesntIntersectWithTheIfKeyword()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -722,7 +733,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestKeepBlockIfThereIsVariableDeclaration()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -736,7 +747,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -766,7 +777,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestMissingOnBreak_01()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -784,7 +795,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestMissingOnBreak_02()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -800,14 +811,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 source,
                 // /0/Test0.cs(7,27): error CS0103: The name 'b' does not exist in the current context
                 DiagnosticResult.CompilerError("CS0103").WithLocation(0).WithArguments("b"),
-                source);
+                source
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
         public async Task TestNestedBreak()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -824,7 +836,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -854,7 +866,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestSubsequentIfStatements_01()
         {
             var source =
-@"class C
+                @"class C
 {
     int M(int? i)
     {
@@ -864,7 +876,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int? i)
     {
@@ -902,7 +914,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int? i)
     {
@@ -928,7 +940,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestSwitchExpression_02()
         {
             var source =
-@"class C
+                @"class C
 {
     int M(int? i)
     {
@@ -938,7 +950,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int? i)
     {
@@ -964,7 +976,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestSubsequentIfStatements_02()
         {
             var source =
-@"class C
+                @"class C
 {
     int M(int? i)
     {
@@ -975,7 +987,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int? i)
     {
@@ -1003,7 +1015,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestSubsequentIfStatements_03()
         {
             var source =
-@"class C
+                @"class C
 {
     int {|#0:M|}(int? i)
     {
@@ -1017,7 +1029,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int {|#0:M|}(int? i)
     {
@@ -1045,7 +1057,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int?)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int?)"),
+                        DiagnosticResult.CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int?)"),
                     },
                 },
                 FixedState =
@@ -1054,7 +1068,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int?)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int?)"),
+                        DiagnosticResult.CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int?)"),
                     },
                 },
                 CodeActionValidationMode = CodeActionValidationMode.None,
@@ -1065,7 +1081,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestSubsequentIfStatements_04()
         {
             var source =
-@"class C
+                @"class C
 {
     string M(object i)
     {
@@ -1075,7 +1091,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     string M(object i)
     {
@@ -1104,7 +1120,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestSubsequentIfStatements_05()
         {
             var source =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -1115,7 +1131,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -1143,7 +1159,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestSubsequentIfStatements_06()
         {
             var source =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -1163,7 +1179,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -1194,7 +1210,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestSubsequentIfStatements_07()
         {
             var source =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -1223,7 +1239,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -1264,7 +1280,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestTrivia1()
         {
             var source =
-@"class C
+                @"class C
 {
     int {|#0:M|}(int x, int z)
     {
@@ -1283,7 +1299,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int {|#0:M|}(int x, int z)
     {
@@ -1311,13 +1327,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int, int)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int, int)"),
+                        DiagnosticResult.CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int, int)"),
                         // /0/Test0.cs(6,9): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(1).WithArguments("Console"),
+                        DiagnosticResult.CompilerError("CS0103")
+                            .WithLocation(1)
+                            .WithArguments("Console"),
                         // /0/Test0.cs(11,13): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(2).WithArguments("Console"),
+                        DiagnosticResult.CompilerError("CS0103")
+                            .WithLocation(2)
+                            .WithArguments("Console"),
                         // /0/Test0.cs(15,13): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(3).WithArguments("Console"),
+                        DiagnosticResult.CompilerError("CS0103")
+                            .WithLocation(3)
+                            .WithArguments("Console"),
                     },
                 },
                 FixedState =
@@ -1326,13 +1350,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(3,9): error CS0161: 'C.M(int, int)': not all code paths return a value
-                        DiagnosticResult.CompilerError("CS0161").WithLocation(0).WithArguments("C.M(int, int)"),
+                        DiagnosticResult.CompilerError("CS0161")
+                            .WithLocation(0)
+                            .WithArguments("C.M(int, int)"),
                         // /0/Test0.cs(6,9): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(1).WithArguments("Console"),
+                        DiagnosticResult.CompilerError("CS0103")
+                            .WithLocation(1)
+                            .WithArguments("Console"),
                         // /0/Test0.cs(11,13): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(2).WithArguments("Console"),
+                        DiagnosticResult.CompilerError("CS0103")
+                            .WithLocation(2)
+                            .WithArguments("Console"),
                         // /0/Test0.cs(15,13): error CS0103: The name 'Console' does not exist in the current context
-                        DiagnosticResult.CompilerError("CS0103").WithLocation(3).WithArguments("Console"),
+                        DiagnosticResult.CompilerError("CS0103")
+                            .WithLocation(3)
+                            .WithArguments("Console"),
                     },
                 },
                 CodeActionValidationMode = CodeActionValidationMode.None,
@@ -1344,7 +1376,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestTrivia2()
         {
             var source =
-@"class C
+                @"class C
 {
     int M(int i, string[] args)
     {
@@ -1355,7 +1387,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int i, string[] args)
     {
@@ -1382,7 +1414,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd1_CSharp8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1393,7 +1425,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1421,7 +1453,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd1_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1432,7 +1464,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1468,7 +1500,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd2_CSharp8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1479,7 +1511,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1507,7 +1539,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd2_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1518,7 +1550,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1554,7 +1586,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd3_CSharp8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1565,7 +1597,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1593,7 +1625,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd3_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1604,7 +1636,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1640,7 +1672,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd4()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1651,7 +1683,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1679,7 +1711,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd4_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1690,7 +1722,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1726,7 +1758,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd5()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1737,7 +1769,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1764,7 +1796,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd6()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1775,7 +1807,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1802,7 +1834,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd7()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1813,7 +1845,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1840,7 +1872,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1851,7 +1883,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1878,7 +1910,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1889,7 +1921,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1916,7 +1948,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd10()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1927,7 +1959,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1954,7 +1986,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd11()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1965,7 +1997,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -1992,7 +2024,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd12()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2003,7 +2035,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2030,7 +2062,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd13()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2041,7 +2073,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2068,7 +2100,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd14()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2079,7 +2111,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2106,7 +2138,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd15()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2117,7 +2149,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2144,7 +2176,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestCompoundLogicalAnd16()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2155,7 +2187,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2182,7 +2214,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestComplexExpression_02()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -2196,7 +2228,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
@@ -2208,7 +2240,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
@@ -2216,7 +2249,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestRange_CSharp8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2244,7 +2277,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestRange_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2259,7 +2292,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2286,7 +2319,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestComparison_CSharp8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2310,7 +2343,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestComparison_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2321,7 +2354,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2347,7 +2380,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestComparison_SwitchExpression_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -2362,7 +2395,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -2397,7 +2430,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestComplexIf_CSharp8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2421,7 +2454,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestComplexIf_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2432,7 +2465,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2471,7 +2504,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestComplexIf_Precedence_CSharp9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2482,7 +2515,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }";
             var fixedSource =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2508,7 +2541,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         public async Task TestInequality()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2520,7 +2553,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
 }";
 
             var fixedSource =
- @"class C
+                @"class C
 {
     void M(int i)
     {
@@ -2546,7 +2579,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
         public async Task TestTopLevelStatement()
         {
-            var source = @"
+            var source =
+                @"
 var e = new ET1();
 
 [||]if (e == ET1.A)
@@ -2563,7 +2597,8 @@ enum ET1
     C,
 }";
 
-            var fixedSource = @"
+            var fixedSource =
+                @"
 var e = new ET1();
 
 switch (e)
@@ -2591,7 +2626,8 @@ enum ET1
 
             test.ExpectedDiagnostics.Add(
                 // /0/Test0.cs(2,1): error CS8805: Program using top-level statements must be an executable.
-                DiagnosticResult.CompilerError("CS8805").WithSpan(2, 1, 2, 19));
+                DiagnosticResult.CompilerError("CS8805").WithSpan(2, 1, 2, 19)
+            );
 
             await test.RunAsync();
         }
@@ -2600,7 +2636,8 @@ enum ET1
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertIfToSwitch)]
         public async Task CommentsAtTheEndOfBlocksShouldBePlacedBeforeBreakStatements()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M(int p)
@@ -2621,7 +2658,8 @@ class C
     void DoB() { }
 }";
 
-            var fixedSource = @"
+            var fixedSource =
+                @"
 class C
 {
     void M(int p)

@@ -29,71 +29,110 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => entityType.AddProperty("Kuke", typeof(string))).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => entityType.AddProperty("Kuke", typeof(string))
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => entityType.RemoveProperty(property)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => entityType.RemoveProperty(property)
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.IsNullable = false).Message);
+                Assert.Throws<InvalidOperationException>(() => property.IsNullable = false).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.IsConcurrencyToken = false).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => property.IsConcurrencyToken = false
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.ValueGenerated = ValueGenerated.OnAddOrUpdate).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => property.ValueGenerated = ValueGenerated.OnAddOrUpdate
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetAfterSaveBehavior(PropertySaveBehavior.Throw)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => property.SetAfterSaveBehavior(PropertySaveBehavior.Throw)
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw)
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetField(null)).Message);
+                Assert.Throws<InvalidOperationException>(() => property.SetField(null)).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetIsUnicode(null)).Message);
+                Assert.Throws<InvalidOperationException>(() => property.SetIsUnicode(null)).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetMaxLength(null)).Message);
+                Assert.Throws<InvalidOperationException>(() => property.SetMaxLength(null)).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetPrecision(null)).Message);
+                Assert.Throws<InvalidOperationException>(() => property.SetPrecision(null)).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetScale(null)).Message);
+                Assert.Throws<InvalidOperationException>(() => property.SetScale(null)).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetPropertyAccessMode(null)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => property.SetPropertyAccessMode(null)
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetProviderClrType(null)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => property.SetProviderClrType(null)
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetValueComparer(null)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => property.SetValueComparer(null)
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetValueConverter(null)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => property.SetValueConverter(null)
+                ).Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => property.SetValueGeneratorFactory(null)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => property.SetValueGeneratorFactory(null)
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -147,8 +186,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.NullableKey(typeof(object).DisplayName(), stringProperty.Name),
                 Assert.Throws<InvalidOperationException>(
-                    () =>
-                        stringProperty.DeclaringEntityType.AddKey(stringProperty)).Message);
+                    () => stringProperty.DeclaringEntityType.AddKey(stringProperty)
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -159,7 +199,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.CannotBeNullable("Name", "object", "int"),
-                Assert.Throws<InvalidOperationException>(() => intProperty.IsNullable = true).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => intProperty.IsNullable = true
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -172,7 +215,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.CannotBeNullablePK("Name", "object"),
-                Assert.Throws<InvalidOperationException>(() => stringProperty.IsNullable = true).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => stringProperty.IsNullable = true
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -236,8 +282,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.False(property.IsConcurrencyToken);
         }
 
-        private static IMutableModel CreateModel()
-            => new Model();
+        private static IMutableModel CreateModel() => new Model();
 
         private class Entity
         {

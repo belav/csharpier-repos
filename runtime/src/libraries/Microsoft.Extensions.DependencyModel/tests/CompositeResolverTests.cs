@@ -19,29 +19,48 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         {
             var fail = new Mock<ICompilationAssemblyResolver>();
             var success = new Mock<ICompilationAssemblyResolver>();
-            success.Setup(r => r.TryResolveAssemblyPaths(It.IsAny<CompilationLibrary>(), It.IsAny<List<string>>()))
+            success.Setup(
+                    r =>
+                        r.TryResolveAssemblyPaths(
+                            It.IsAny<CompilationLibrary>(),
+                            It.IsAny<List<string>>()
+                        )
+                )
                 .Returns(true);
 
             var failTwo = new Mock<ICompilationAssemblyResolver>();
 
-            var resolvers = new[]
-            {
-                fail.Object,
-                success.Object,
-                failTwo.Object
-            };
+            var resolvers = new[] { fail.Object, success.Object, failTwo.Object };
 
             var resolver = new CompositeCompilationAssemblyResolver(resolvers);
             var result = resolver.TryResolveAssemblyPaths(null, null);
 
             Assert.True(result);
 
-            fail.Verify(r => r.TryResolveAssemblyPaths(It.IsAny<CompilationLibrary>(), It.IsAny<List<string>>()),
-                Times.Once());
-            success.Verify(r => r.TryResolveAssemblyPaths(It.IsAny<CompilationLibrary>(), It.IsAny<List<string>>()),
-                Times.Once());
-            failTwo.Verify(r => r.TryResolveAssemblyPaths(It.IsAny<CompilationLibrary>(), It.IsAny<List<string>>()),
-                Times.Never());
+            fail.Verify(
+                r =>
+                    r.TryResolveAssemblyPaths(
+                        It.IsAny<CompilationLibrary>(),
+                        It.IsAny<List<string>>()
+                    ),
+                Times.Once()
+            );
+            success.Verify(
+                r =>
+                    r.TryResolveAssemblyPaths(
+                        It.IsAny<CompilationLibrary>(),
+                        It.IsAny<List<string>>()
+                    ),
+                Times.Once()
+            );
+            failTwo.Verify(
+                r =>
+                    r.TryResolveAssemblyPaths(
+                        It.IsAny<CompilationLibrary>(),
+                        It.IsAny<List<string>>()
+                    ),
+                Times.Never()
+            );
         }
 
         [Fact]
@@ -49,11 +68,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         {
             var fail = new Mock<ICompilationAssemblyResolver>();
             var failTwo = new Mock<ICompilationAssemblyResolver>();
-            var resolvers = new[]
-            {
-                fail.Object,
-                failTwo.Object
-            };
+            var resolvers = new[] { fail.Object, failTwo.Object };
 
             var library = TestLibraryFactory.Create();
 
@@ -69,18 +84,22 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         {
             var fail = new Mock<ICompilationAssemblyResolver>();
             var success = new Mock<ICompilationAssemblyResolver>();
-            success.Setup(r => r.TryResolveAssemblyPaths(It.IsAny<CompilationLibrary>(), It.IsAny<List<string>>()))
+            success.Setup(
+                    r =>
+                        r.TryResolveAssemblyPaths(
+                            It.IsAny<CompilationLibrary>(),
+                            It.IsAny<List<string>>()
+                        )
+                )
                 .Returns(true)
-                .Callback((CompilationLibrary l, List<string> a) =>
-                {
-                    a.Add("Assembly");
-                });
+                .Callback(
+                    (CompilationLibrary l, List<string> a) =>
+                    {
+                        a.Add("Assembly");
+                    }
+                );
 
-            var resolvers = new[]
-            {
-                fail.Object,
-                success.Object
-            };
+            var resolvers = new[] { fail.Object, success.Object };
 
             var assemblies = new List<string>();
             var library = TestLibraryFactory.Create();

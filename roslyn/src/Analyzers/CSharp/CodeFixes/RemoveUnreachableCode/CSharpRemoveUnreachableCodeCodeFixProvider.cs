@@ -21,14 +21,22 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveUnreachableCode), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.RemoveUnreachableCode
+        ),
+        Shared
+    ]
     internal class CSharpRemoveUnreachableCodeCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpRemoveUnreachableCodeCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpRemoveUnreachableCodeCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.RemoveUnreachableCodeDiagnosticId);
@@ -43,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             // https://github.com/dotnet/roslyn/issues/42431 tracks adding a public API.
             var codeAction = new MyCodeAction(
                 CSharpCodeFixesResources.Remove_unreachable_code,
-                c => FixAsync(context.Document, diagnostic, c));
+                c => FixAsync(context.Document, diagnostic, c)
+            );
 #else
             // Only the first reported unreacha ble line will have a squiggle.  On that line, make the
             // code action normal priority as the user is likely bringing up the lightbulb to fix the
@@ -56,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             var codeAction = new MyCodeAction(
                 CSharpCodeFixesResources.Remove_unreachable_code,
                 c => FixAsync(context.Document, diagnostic, c),
-                priority);
+                priority
+            );
 #endif
 
             context.RegisterCodeFix(codeAction, diagnostic);
@@ -64,26 +74,32 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             return Task.CompletedTask;
         }
 
-        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => !IsSubsequentSection(diagnostic);
+        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+            !IsSubsequentSection(diagnostic);
 
-        private static bool IsSubsequentSection(Diagnostic diagnostic)
-            => diagnostic.Properties.ContainsKey(CSharpRemoveUnreachableCodeDiagnosticAnalyzer.IsSubsequentSection);
+        private static bool IsSubsequentSection(Diagnostic diagnostic) =>
+            diagnostic.Properties.ContainsKey(
+                CSharpRemoveUnreachableCodeDiagnosticAnalyzer.IsSubsequentSection
+            );
 
         protected override Task FixAllAsync(
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
                 var firstUnreachableStatementLocation = diagnostic.AdditionalLocations.First();
-                var firstUnreachableStatement = (StatementSyntax)firstUnreachableStatementLocation.FindNode(cancellationToken);
+                var firstUnreachableStatement =
+                    (StatementSyntax)firstUnreachableStatementLocation.FindNode(cancellationToken);
 
                 RemoveStatement(editor, firstUnreachableStatement);
 
-                var sections = RemoveUnreachableCodeHelpers.GetSubsequentUnreachableSections(firstUnreachableStatement);
+                var sections = RemoveUnreachableCodeHelpers.GetSubsequentUnreachableSections(
+                    firstUnreachableStatement
+                );
                 foreach (var section in sections)
                 {
                     foreach (var statement in section)
@@ -98,8 +114,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             // Local function
             static void RemoveStatement(SyntaxEditor editor, SyntaxNode statement)
             {
-                if (!statement.IsParentKind(SyntaxKind.Block)
-                    && !statement.IsParentKind(SyntaxKind.SwitchSection))
+                if (
+                    !statement.IsParentKind(SyntaxKind.Block)
+                    && !statement.IsParentKind(SyntaxKind.SwitchSection)
+                )
                 {
                     editor.ReplaceNode(statement, SyntaxFactory.Block());
                 }
@@ -116,16 +134,14 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             // https://github.com/dotnet/roslyn/issues/42431 tracks adding a public API.
             public MyCodeAction(
                 string title,
-                Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument, title)
-            {
-            }
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument, title) { }
 #else
             public MyCodeAction(
                 string title,
                 Func<CancellationToken, Task<Document>> createChangedDocument,
-                CodeActionPriority priority)
-                : base(title, createChangedDocument, title)
+                CodeActionPriority priority
+            ) : base(title, createChangedDocument, title)
             {
                 Priority = priority;
             }

@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
     /// </summary>
-    public class RelationalParameterBasedSqlProcessorFactory : IRelationalParameterBasedSqlProcessorFactory
+    public class RelationalParameterBasedSqlProcessorFactory
+        : IRelationalParameterBasedSqlProcessorFactory
     {
         private readonly RelationalParameterBasedSqlProcessorDependencies _dependencies;
 
@@ -30,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public RelationalParameterBasedSqlProcessorFactory(
-            RelationalParameterBasedSqlProcessorDependencies dependencies)
+            RelationalParameterBasedSqlProcessorDependencies dependencies
+        )
         {
             Check.NotNull(dependencies, nameof(dependencies));
 
@@ -43,7 +45,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual RelationalParameterBasedSqlProcessor Create(bool useRelationalNulls)
-            => new(_dependencies, useRelationalNulls);
+        public virtual RelationalParameterBasedSqlProcessor Create(bool useRelationalNulls) =>
+            new(_dependencies, useRelationalNulls);
     }
 }

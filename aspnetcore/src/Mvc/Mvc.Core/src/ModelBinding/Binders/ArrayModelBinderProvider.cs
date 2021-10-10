@@ -35,8 +35,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     binderType,
                     elementBinder,
                     loggerFactory,
-                    true /* allowValidatingTopLevelNodes */,
-                    mvcOptions)!;
+                    true /* allowValidatingTopLevelNodes */
+                    ,
+                    mvcOptions
+                )!;
             }
 
             return null;

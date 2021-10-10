@@ -71,7 +71,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         /// <param name="kind">The directive kind.</param>
         /// <param name="configure">A configuration delegate for the directive.</param>
         /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-        public static DirectiveDescriptor CreateDirective(string directive, DirectiveKind kind, Action<IDirectiveDescriptorBuilder> configure)
+        public static DirectiveDescriptor CreateDirective(
+            string directive,
+            DirectiveKind kind,
+            Action<IDirectiveDescriptorBuilder> configure
+        )
         {
             if (directive == null)
             {
@@ -104,7 +108,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         /// <param name="directive">The directive keyword.</param>
         /// <param name="configure">A configuration delegate for the directive.</param>
         /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-        public static DirectiveDescriptor CreateSingleLineDirective(string directive, Action<IDirectiveDescriptorBuilder> configure)
+        public static DirectiveDescriptor CreateSingleLineDirective(
+            string directive,
+            Action<IDirectiveDescriptorBuilder> configure
+        )
         {
             if (directive == null)
             {
@@ -135,7 +142,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         /// <param name="directive">The directive keyword.</param>
         /// <param name="configure">A configuration delegate for the directive.</param>
         /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-        public static DirectiveDescriptor CreateRazorBlockDirective(string directive, Action<IDirectiveDescriptorBuilder> configure)
+        public static DirectiveDescriptor CreateRazorBlockDirective(
+            string directive,
+            Action<IDirectiveDescriptorBuilder> configure
+        )
         {
             if (directive == null)
             {
@@ -166,7 +176,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         /// <param name="directive">The directive keyword.</param>
         /// <param name="configure">A configuration delegate for the directive.</param>
         /// <returns>A <see cref="DirectiveDescriptor"/> for the created directive.</returns>
-        public static DirectiveDescriptor CreateCodeBlockDirective(string directive, Action<IDirectiveDescriptorBuilder> configure)
+        public static DirectiveDescriptor CreateCodeBlockDirective(
+            string directive,
+            Action<IDirectiveDescriptorBuilder> configure
+        )
         {
             if (directive == null)
             {
@@ -202,14 +215,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 if (Directive.Length == 0)
                 {
-                    throw new InvalidOperationException(Resources.FormatDirectiveDescriptor_InvalidDirectiveKeyword(Directive));
+                    throw new InvalidOperationException(
+                        Resources.FormatDirectiveDescriptor_InvalidDirectiveKeyword(Directive)
+                    );
                 }
 
                 for (var i = 0; i < Directive.Length; i++)
                 {
                     if (!char.IsLetter(Directive[i]))
                     {
-                        throw new InvalidOperationException(Resources.FormatDirectiveDescriptor_InvalidDirectiveKeyword(Directive));
+                        throw new InvalidOperationException(
+                            Resources.FormatDirectiveDescriptor_InvalidDirectiveKeyword(Directive)
+                        );
                     }
                 }
 
@@ -221,23 +238,33 @@ namespace Microsoft.AspNetCore.Razor.Language
 
                     if (foundOptionalToken && !token.Optional)
                     {
-                        throw new InvalidOperationException(Resources.DirectiveDescriptor_InvalidNonOptionalToken);
+                        throw new InvalidOperationException(
+                            Resources.DirectiveDescriptor_InvalidNonOptionalToken
+                        );
                     }
                 }
 
-                return new DefaultDirectiveDescriptor(Directive, Kind, Usage, Tokens.ToArray(), DisplayName, Description);
+                return new DefaultDirectiveDescriptor(
+                    Directive,
+                    Kind,
+                    Usage,
+                    Tokens.ToArray(),
+                    DisplayName,
+                    Description
+                );
             }
         }
 
         private class DefaultDirectiveDescriptor : DirectiveDescriptor
         {
             public DefaultDirectiveDescriptor(
-                string directive, 
-                DirectiveKind kind, 
+                string directive,
+                DirectiveKind kind,
                 DirectiveUsage usage,
                 DirectiveTokenDescriptor[] tokens,
                 string displayName,
-                string description)
+                string description
+            )
             {
                 Directive = directive;
                 Kind = kind;

@@ -14,10 +14,7 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var helper = GetJsonHelper();
-            var obj = new
-            {
-                HTML = "<b>John Doe</b>"
-            };
+            var obj = new { HTML = "<b>John Doe</b>" };
             var expectedOutput = "{\"html\":\"\\u003cb\\u003eJohn Doe\\u003c/b\\u003e\"}";
 
             // Act
@@ -48,10 +45,7 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var helper = GetJsonHelper();
-            var obj = new
-            {
-                HTML = $"Hello \n \b \a world"
-            };
+            var obj = new { HTML = $"Hello \n \b \a world" };
             var expectedOutput = "{\"html\":\"Hello \\n \\b \\u0007 world\"}";
 
             // Act
@@ -67,10 +61,7 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var helper = GetJsonHelper();
-            var obj = new
-            {
-                HTML = $"Hello pingüino"
-            };
+            var obj = new { HTML = $"Hello pingüino" };
             var expectedOutput = "{\"html\":\"Hello pingüino\"}";
 
             // Act
@@ -86,10 +77,7 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var helper = GetJsonHelper();
-            var obj = new
-            {
-                HTML = $"Hello &nbsp; &lt;John&gt;"
-            };
+            var obj = new { HTML = $"Hello &nbsp; &lt;John&gt;" };
             var expectedOutput = "{\"html\":\"Hello \\u0026nbsp; \\u0026lt;John\\u0026gt;\"}";
 
             // Act
@@ -100,16 +88,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.Equal(expectedOutput, htmlString.ToString());
         }
 
-
         [Fact]
         public virtual void Serialize_WithHTMLNonAsciiAndControlChars()
         {
             // Arrange
             var helper = GetJsonHelper();
-            var obj = new
-            {
-                HTML = "<b>Hello \n pingüino</b>"
-            };
+            var obj = new { HTML = "<b>Hello \n pingüino</b>" };
             var expectedOutput = "{\"html\":\"\\u003cb\\u003eHello \\n pingüino\\u003c/b\\u003e\"}";
 
             // Act

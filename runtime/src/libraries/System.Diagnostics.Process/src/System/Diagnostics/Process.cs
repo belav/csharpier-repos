@@ -21,7 +21,9 @@ namespace System.Diagnostics
     ///       processes. Enables you to start and stop system processes.
     ///    </para>
     /// </devdoc>
-    [Designer("System.Diagnostics.Design.ProcessDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Designer(
+        "System.Diagnostics.Design.ProcessDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public partial class Process : Component
     {
         private bool _haveProcessId;
@@ -106,7 +108,12 @@ namespace System.Diagnostics
             _errorStreamReadMode = StreamReadMode.Undefined;
         }
 
-        private Process(string machineName, bool isRemoteMachine, int processId, ProcessInfo? processInfo)
+        private Process(
+            string machineName,
+            bool isRemoteMachine,
+            int processId,
+            ProcessInfo? processInfo
+        )
         {
             GC.SuppressFinalize(this);
             _processInfo = processInfo;
@@ -268,10 +275,7 @@ namespace System.Diagnostics
             [SupportedOSPlatform("windows")]
             [SupportedOSPlatform("macos")]
             [SupportedOSPlatform("freebsd")]
-            set
-            {
-                SetWorkingSetLimits(null, value);
-            }
+            set { SetWorkingSetLimits(null, value); }
         }
 
         /// <summary>
@@ -288,10 +292,7 @@ namespace System.Diagnostics
             [SupportedOSPlatform("windows")]
             [SupportedOSPlatform("macos")]
             [SupportedOSPlatform("freebsd")]
-            set
-            {
-                SetWorkingSetLimits(value, null);
-            }
+            set { SetWorkingSetLimits(value, null); }
         }
 
         public ProcessModuleCollection Modules
@@ -316,7 +317,9 @@ namespace System.Diagnostics
             }
         }
 
-        [ObsoleteAttribute("This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.NonpagedSystemMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [ObsoleteAttribute(
+            "This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.NonpagedSystemMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public int NonpagedSystemMemorySize
         {
             get
@@ -325,7 +328,6 @@ namespace System.Diagnostics
                 return unchecked((int)_processInfo!.PoolNonPagedBytes);
             }
         }
-
 
         public long PagedMemorySize64
         {
@@ -336,7 +338,9 @@ namespace System.Diagnostics
             }
         }
 
-        [ObsoleteAttribute("This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PagedMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [ObsoleteAttribute(
+            "This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PagedMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public int PagedMemorySize
         {
             get
@@ -345,7 +349,6 @@ namespace System.Diagnostics
                 return unchecked((int)_processInfo!.PageFileBytes);
             }
         }
-
 
         public long PagedSystemMemorySize64
         {
@@ -356,7 +359,9 @@ namespace System.Diagnostics
             }
         }
 
-        [ObsoleteAttribute("This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PagedSystemMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [ObsoleteAttribute(
+            "This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PagedSystemMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public int PagedSystemMemorySize
         {
             get
@@ -365,7 +370,6 @@ namespace System.Diagnostics
                 return unchecked((int)_processInfo!.PoolPagedBytes);
             }
         }
-
 
         public long PeakPagedMemorySize64
         {
@@ -376,7 +380,9 @@ namespace System.Diagnostics
             }
         }
 
-        [ObsoleteAttribute("This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PeakPagedMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [ObsoleteAttribute(
+            "This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PeakPagedMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public int PeakPagedMemorySize
         {
             get
@@ -395,7 +401,9 @@ namespace System.Diagnostics
             }
         }
 
-        [ObsoleteAttribute("This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PeakWorkingSet64 instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [ObsoleteAttribute(
+            "This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PeakWorkingSet64 instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public int PeakWorkingSet
         {
             get
@@ -414,7 +422,9 @@ namespace System.Diagnostics
             }
         }
 
-        [ObsoleteAttribute("This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PeakVirtualMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [ObsoleteAttribute(
+            "This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PeakVirtualMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public int PeakVirtualMemorySize
         {
             get
@@ -471,7 +481,11 @@ namespace System.Diagnostics
             {
                 if (!Enum.IsDefined(typeof(ProcessPriorityClass), value))
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(ProcessPriorityClass));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(ProcessPriorityClass)
+                    );
                 }
 
                 PriorityClassCore = value;
@@ -489,7 +503,9 @@ namespace System.Diagnostics
             }
         }
 
-        [ObsoleteAttribute("This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PrivateMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [ObsoleteAttribute(
+            "This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.PrivateMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public int PrivateMemorySize
         {
             get
@@ -601,10 +617,16 @@ namespace System.Diagnostics
                     ProcessThread[] newThreadsArray = new ProcessThread[count];
                     for (int i = 0; i < count; i++)
                     {
-                        newThreadsArray[i] = new ProcessThread(_isRemoteMachine, _processId, (ThreadInfo)_processInfo._threadInfoList[i]);
+                        newThreadsArray[i] = new ProcessThread(
+                            _isRemoteMachine,
+                            _processId,
+                            (ThreadInfo)_processInfo._threadInfoList[i]
+                        );
                     }
 
-                    ProcessThreadCollection newThreads = new ProcessThreadCollection(newThreadsArray);
+                    ProcessThreadCollection newThreads = new ProcessThreadCollection(
+                        newThreadsArray
+                    );
                     _threads = newThreads;
                 }
                 return _threads;
@@ -632,7 +654,9 @@ namespace System.Diagnostics
             }
         }
 
-        [ObsoleteAttribute("This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.VirtualMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [ObsoleteAttribute(
+            "This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.VirtualMemorySize64 instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public int VirtualMemorySize
         {
             get
@@ -651,10 +675,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public bool EnableRaisingEvents
         {
-            get
-            {
-                return _watchForExit;
-            }
+            get { return _watchForExit; }
             set
             {
                 if (value != _watchForExit)
@@ -674,7 +695,6 @@ namespace System.Diagnostics
                 }
             }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -755,7 +775,9 @@ namespace System.Diagnostics
             }
         }
 
-        [ObsoleteAttribute("This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.WorkingSet64 instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [ObsoleteAttribute(
+            "This property has been deprecated because the type of the property can't represent all valid results. Please use System.Diagnostics.Process.WorkingSet64 instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public int WorkingSet
         {
             get
@@ -767,14 +789,8 @@ namespace System.Diagnostics
 
         public event EventHandler Exited
         {
-            add
-            {
-                _onExited += value;
-            }
-            remove
-            {
-                _onExited -= value;
-            }
+            add { _onExited += value; }
+            remove { _onExited -= value; }
         }
 
         /// <devdoc>
@@ -783,7 +799,10 @@ namespace System.Diagnostics
         /// <internalonly/>
         private void CompletionCallback(object? waitHandleContext, bool wasSignaled)
         {
-            Debug.Assert(waitHandleContext != null, "Process.CompletionCallback called with no waitHandleContext");
+            Debug.Assert(
+                waitHandleContext != null,
+                "Process.CompletionCallback called with no waitHandleContext"
+            );
             lock (this)
             {
                 // Check the exited event that we get from the threadpool
@@ -866,7 +885,13 @@ namespace System.Diagnostics
                 // If they are referenced it is the user's responsibility to dispose of them.
                 try
                 {
-                    if (_standardOutput != null && (_outputStreamReadMode == StreamReadMode.AsyncMode || _outputStreamReadMode == StreamReadMode.Undefined))
+                    if (
+                        _standardOutput != null
+                        && (
+                            _outputStreamReadMode == StreamReadMode.AsyncMode
+                            || _outputStreamReadMode == StreamReadMode.Undefined
+                        )
+                    )
                     {
                         if (_outputStreamReadMode == StreamReadMode.AsyncMode)
                         {
@@ -876,7 +901,13 @@ namespace System.Diagnostics
                         _standardOutput.Close();
                     }
 
-                    if (_standardError != null && (_errorStreamReadMode == StreamReadMode.AsyncMode || _errorStreamReadMode == StreamReadMode.Undefined))
+                    if (
+                        _standardError != null
+                        && (
+                            _errorStreamReadMode == StreamReadMode.AsyncMode
+                            || _errorStreamReadMode == StreamReadMode.Undefined
+                        )
+                    )
                     {
                         if (_errorStreamReadMode == StreamReadMode.AsyncMode)
                         {
@@ -891,6 +922,7 @@ namespace System.Diagnostics
                         _standardInput.Close();
                     }
                 }
+
                 finally
                 {
                     _standardOutput = null;
@@ -1011,7 +1043,12 @@ namespace System.Diagnostics
                 throw new ArgumentException(SR.Format(SR.MissingProccess, processId.ToString()));
             }
 
-            return new Process(machineName, ProcessManager.IsRemoteMachine(machineName), processId, null);
+            return new Process(
+                machineName,
+                ProcessManager.IsRemoteMachine(machineName),
+                processId,
+                null
+            );
         }
 
         /// <devdoc>
@@ -1064,7 +1101,12 @@ namespace System.Diagnostics
             for (int i = 0; i < processInfos.Length; i++)
             {
                 ProcessInfo processInfo = processInfos[i];
-                processes[i] = new Process(machineName, isRemoteMachine, processInfo.ProcessId, processInfo);
+                processes[i] = new Process(
+                    machineName,
+                    isRemoteMachine,
+                    processInfo.ProcessId,
+                    processInfo
+                );
             }
             return processes;
         }
@@ -1228,7 +1270,10 @@ namespace System.Diagnostics
             //Cannot start a new process and store its handle if the object has been disposed, since finalization has been suppressed.
             CheckDisposed();
 
-            SerializationGuard.ThrowIfDeserializationInProgress("AllowProcessCreation", ref s_cachedSerializationSwitch);
+            SerializationGuard.ThrowIfDeserializationInProgress(
+                "AllowProcessCreation",
+                ref s_cachedSerializationSwitch
+            );
 
             return StartCore(startInfo);
         }
@@ -1306,9 +1351,7 @@ namespace System.Diagnostics
                 throw new ArgumentNullException(nameof(startInfo));
 
             process.StartInfo = startInfo;
-            return process.Start() ?
-                process :
-                null;
+            return process.Start() ? process : null;
         }
 
         /// <devdoc>
@@ -1480,7 +1523,13 @@ namespace System.Diagnostics
                 else
                 {
                     // CASE 1.1 & CASE 3.1: Process exits or is canceled here
-                    using (cancellationToken.UnsafeRegister(static (s, cancellationToken) => ((TaskCompletionSource)s!).TrySetCanceled(cancellationToken), tcs))
+                    using (
+                        cancellationToken.UnsafeRegister(
+                            static (s, cancellationToken) =>
+                                ((TaskCompletionSource)s!).TrySetCanceled(cancellationToken),
+                            tcs
+                        )
+                    )
                     {
                         await tcs.Task.ConfigureAwait(false);
                     }
@@ -1489,6 +1538,7 @@ namespace System.Diagnostics
                 // Wait until output streams have been drained
                 await WaitUntilOutputEOF(cancellationToken).ConfigureAwait(false);
             }
+
             finally
             {
                 Exited -= handler;
@@ -1540,11 +1590,14 @@ namespace System.Diagnostics
                 }
 
                 Stream s = _standardOutput.BaseStream;
-                _output = new AsyncStreamReader(s, OutputReadNotifyUser, _standardOutput.CurrentEncoding);
+                _output = new AsyncStreamReader(
+                    s,
+                    OutputReadNotifyUser,
+                    _standardOutput.CurrentEncoding
+                );
             }
             _output.BeginReadLine();
         }
-
 
         /// <devdoc>
         /// <para>
@@ -1580,7 +1633,11 @@ namespace System.Diagnostics
                 }
 
                 Stream s = _standardError.BaseStream;
-                _error = new AsyncStreamReader(s, ErrorReadNotifyUser, _standardError.CurrentEncoding);
+                _error = new AsyncStreamReader(
+                    s,
+                    ErrorReadNotifyUser,
+                    _standardError.CurrentEncoding
+                );
             }
             _error.BeginReadLine();
         }

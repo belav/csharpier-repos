@@ -9,12 +9,12 @@ namespace Internal.ReadyToRunConstants
     [Flags]
     public enum ReadyToRunFlags
     {
-        READYTORUN_FLAG_PlatformNeutralSource = 0x00000001,     // Set if the original IL assembly was platform-neutral
-        READYTORUN_FLAG_SkipTypeValidation = 0x00000002,        // Set of methods with native code was determined using profile data
+        READYTORUN_FLAG_PlatformNeutralSource = 0x00000001, // Set if the original IL assembly was platform-neutral
+        READYTORUN_FLAG_SkipTypeValidation = 0x00000002, // Set of methods with native code was determined using profile data
         READYTORUN_FLAG_Partial = 0x00000004,
-        READYTORUN_FLAG_NonSharedPInvokeStubs = 0x00000008,     // PInvoke stubs compiled into image are non-shareable (no secret parameter)
-        READYTORUN_FLAG_EmbeddedMSIL = 0x00000010,              // MSIL is embedded in the composite R2R executable
-        READYTORUN_FLAG_Component = 0x00000020,                 // This is the header describing a component assembly of composite R2R
+        READYTORUN_FLAG_NonSharedPInvokeStubs = 0x00000008, // PInvoke stubs compiled into image are non-shareable (no secret parameter)
+        READYTORUN_FLAG_EmbeddedMSIL = 0x00000010, // MSIL is embedded in the composite R2R executable
+        READYTORUN_FLAG_Component = 0x00000020, // This is the header describing a component assembly of composite R2R
     }
 
     /// <summary>
@@ -66,61 +66,44 @@ namespace Internal.ReadyToRunConstants
     public enum ReadyToRunFixupKind
     {
         Invalid = 0x00,
-
         ThisObjDictionaryLookup = 0x07,
         TypeDictionaryLookup = 0x08,
         MethodDictionaryLookup = 0x09,
-
         TypeHandle = 0x10,
         MethodHandle = 0x11,
         FieldHandle = 0x12,
-
-        MethodEntry = 0x13,                 // For calling a method entry point
-        MethodEntry_DefToken = 0x14,        // Smaller version of MethodEntry - method is def token
-        MethodEntry_RefToken = 0x15,        // Smaller version of MethodEntry - method is ref token
-
-        VirtualEntry = 0x16,                // For invoking a virtual method
-        VirtualEntry_DefToken = 0x17,       // Smaller version of VirtualEntry - method is def token
-        VirtualEntry_RefToken = 0x18,       // Smaller version of VirtualEntry - method is ref token
-        VirtualEntry_Slot = 0x19,           // Smaller version of VirtualEntry - type & slot
-
-        Helper = 0x1A,                      // Helper
-        StringHandle = 0x1B,                // String handle
-
-        NewObject = 0x1C,                   // Dynamically created new helper
+        MethodEntry = 0x13, // For calling a method entry point
+        MethodEntry_DefToken = 0x14, // Smaller version of MethodEntry - method is def token
+        MethodEntry_RefToken = 0x15, // Smaller version of MethodEntry - method is ref token
+        VirtualEntry = 0x16, // For invoking a virtual method
+        VirtualEntry_DefToken = 0x17, // Smaller version of VirtualEntry - method is def token
+        VirtualEntry_RefToken = 0x18, // Smaller version of VirtualEntry - method is ref token
+        VirtualEntry_Slot = 0x19, // Smaller version of VirtualEntry - type & slot
+        Helper = 0x1A, // Helper
+        StringHandle = 0x1B, // String handle
+        NewObject = 0x1C, // Dynamically created new helper
         NewArray = 0x1D,
-
-        IsInstanceOf = 0x1E,                // Dynamically created casting helper
+        IsInstanceOf = 0x1E, // Dynamically created casting helper
         ChkCast = 0x1F,
-
-        FieldAddress = 0x20,                // For accessing a cross-module static fields
-        CctorTrigger = 0x21,                // Static constructor trigger
-
-        StaticBaseNonGC = 0x22,             // Dynamically created static base helpers
+        FieldAddress = 0x20, // For accessing a cross-module static fields
+        CctorTrigger = 0x21, // Static constructor trigger
+        StaticBaseNonGC = 0x22, // Dynamically created static base helpers
         StaticBaseGC = 0x23,
         ThreadStaticBaseNonGC = 0x24,
         ThreadStaticBaseGC = 0x25,
-
-        FieldBaseOffset = 0x26,             // Field base offset
-        FieldOffset = 0x27,                 // Field offset
-
+        FieldBaseOffset = 0x26, // Field base offset
+        FieldOffset = 0x27, // Field offset
         TypeDictionary = 0x28,
         MethodDictionary = 0x29,
-
-        Check_TypeLayout = 0x2A,            // size, alignment, HFA, reference map
+        Check_TypeLayout = 0x2A, // size, alignment, HFA, reference map
         Check_FieldOffset = 0x2B,
-
-        DelegateCtor = 0x2C,                // optimized delegate ctor
+        DelegateCtor = 0x2C, // optimized delegate ctor
         DeclaringTypeHandle = 0x2D,
-
-        IndirectPInvokeTarget = 0x2E,       // Target (indirect) of an inlined pinvoke
-        PInvokeTarget = 0x2F,               // Target of an inlined pinvoke
-
+        IndirectPInvokeTarget = 0x2E, // Target (indirect) of an inlined pinvoke
+        PInvokeTarget = 0x2F, // Target of an inlined pinvoke
         Check_InstructionSetSupport = 0x30, // Define the set of instruction sets that must be supported/unsupported to use the fixup
-
-        Verify_FieldOffset = 0x31,  // Generate a runtime check to ensure that the field offset matches between compile and runtime. Unlike CheckFieldOffset, this will generate a runtime exception on failure instead of silently dropping the method
-        Verify_TypeLayout = 0x32,  // Generate a runtime check to ensure that the type layout (size, alignment, HFA, reference map) matches between compile and runtime. Unlike Check_TypeLayout, this will generate a runtime failure instead of silently dropping the method
-
+        Verify_FieldOffset = 0x31, // Generate a runtime check to ensure that the field offset matches between compile and runtime. Unlike CheckFieldOffset, this will generate a runtime exception on failure instead of silently dropping the method
+        Verify_TypeLayout = 0x32, // Generate a runtime check to ensure that the type layout (size, alignment, HFA, reference map) matches between compile and runtime. Unlike Check_TypeLayout, this will generate a runtime failure instead of silently dropping the method
         ModuleOverride = 0x80,
         // followed by sig-encoded UInt with assemblyref index into either the assemblyref
         // table of the MSIL metadata of the master context module for the signature or
@@ -136,13 +119,11 @@ namespace Internal.ReadyToRunConstants
     [Flags]
     public enum ReadyToRunHelper
     {
-        Invalid                     = 0x00,
-
+        Invalid = 0x00,
         // Not a real helper - handle to current module passed to delay load helpers.
-        Module                      = 0x01,
-        GSCookie                    = 0x02,
-        IndirectTrapThreads         = 0x03,
-
+        Module = 0x01,
+        GSCookie = 0x02,
+        IndirectTrapThreads = 0x03,
         //
         // Delay load helpers
         //
@@ -150,134 +131,112 @@ namespace Internal.ReadyToRunConstants
         // All delay load helpers use custom calling convention:
         // - scratch register - address of indirection cell. 0 = address is inferred from callsite.
         // - stack - section index, module handle
-        DelayLoad_MethodCall        = 0x08,
-
-        DelayLoad_Helper            = 0x10,
-        DelayLoad_Helper_Obj        = 0x11,
-        DelayLoad_Helper_ObjObj     = 0x12,
-
+        DelayLoad_MethodCall = 0x08,
+        DelayLoad_Helper = 0x10,
+        DelayLoad_Helper_Obj = 0x11,
+        DelayLoad_Helper_ObjObj = 0x12,
         // Exception handling helpers
-        Throw                       = 0x20,
-        Rethrow                     = 0x21,
-        Overflow                    = 0x22,
-        RngChkFail                  = 0x23,
-        FailFast                    = 0x24,
-        ThrowNullRef                = 0x25,
-        ThrowDivZero                = 0x26,
-
+        Throw = 0x20,
+        Rethrow = 0x21,
+        Overflow = 0x22,
+        RngChkFail = 0x23,
+        FailFast = 0x24,
+        ThrowNullRef = 0x25,
+        ThrowDivZero = 0x26,
         // Write barriers
-        WriteBarrier                = 0x30,
-        CheckedWriteBarrier         = 0x31,
-        ByRefWriteBarrier           = 0x32,
-
+        WriteBarrier = 0x30,
+        CheckedWriteBarrier = 0x31,
+        ByRefWriteBarrier = 0x32,
         // Array helpers
-        Stelem_Ref                  = 0x38,
-        Ldelema_Ref                 = 0x39,
-
-        MemSet                      = 0x40,
-        MemCpy                      = 0x41,
-
+        Stelem_Ref = 0x38,
+        Ldelema_Ref = 0x39,
+        MemSet = 0x40,
+        MemCpy = 0x41,
         // P/Invoke support
-        PInvokeBegin                = 0x42,
-        PInvokeEnd                  = 0x43,
-        GCPoll                      = 0x44,
-        ReversePInvokeEnter         = 0x45,
-        ReversePInvokeExit          = 0x46,
-
+        PInvokeBegin = 0x42,
+        PInvokeEnd = 0x43,
+        GCPoll = 0x44,
+        ReversePInvokeEnter = 0x45,
+        ReversePInvokeExit = 0x46,
         // Get string handle lazily
         GetString = 0x50,
-
         // Used by /Tuning for Profile optimizations
         LogMethodEnter = 0x51,
-
         // Reflection helpers
-        GetRuntimeTypeHandle        = 0x54,
-        GetRuntimeMethodHandle      = 0x55,
-        GetRuntimeFieldHandle       = 0x56,
-
-        Box                         = 0x58,
-        Box_Nullable                = 0x59,
-        Unbox                       = 0x5A,
-        Unbox_Nullable              = 0x5B,
-        NewMultiDimArr              = 0x5C,
-        NewMultiDimArr_NonVarArg    = 0x5D,
-
+        GetRuntimeTypeHandle = 0x54,
+        GetRuntimeMethodHandle = 0x55,
+        GetRuntimeFieldHandle = 0x56,
+        Box = 0x58,
+        Box_Nullable = 0x59,
+        Unbox = 0x5A,
+        Unbox_Nullable = 0x5B,
+        NewMultiDimArr = 0x5C,
+        NewMultiDimArr_NonVarArg = 0x5D,
         // Helpers used with generic handle lookup cases
-        NewObject                   = 0x60,
-        NewArray                    = 0x61,
-        CheckCastAny                = 0x62,
-        CheckInstanceAny            = 0x63,
-        GenericGcStaticBase         = 0x64,
-        GenericNonGcStaticBase      = 0x65,
-        GenericGcTlsBase            = 0x66,
-        GenericNonGcTlsBase         = 0x67,
-        VirtualFuncPtr              = 0x68,
-
+        NewObject = 0x60,
+        NewArray = 0x61,
+        CheckCastAny = 0x62,
+        CheckInstanceAny = 0x63,
+        GenericGcStaticBase = 0x64,
+        GenericNonGcStaticBase = 0x65,
+        GenericGcTlsBase = 0x66,
+        GenericNonGcTlsBase = 0x67,
+        VirtualFuncPtr = 0x68,
         // Long mul/div/shift ops
-        LMul                        = 0xC0,
-        LMulOfv                     = 0xC1,
-        ULMulOvf                    = 0xC2,
-        LDiv                        = 0xC3,
-        LMod                        = 0xC4,
-        ULDiv                       = 0xC5,
-        ULMod                       = 0xC6,
-        LLsh                        = 0xC7,
-        LRsh                        = 0xC8,
-        LRsz                        = 0xC9,
-        Lng2Dbl                     = 0xCA,
-        ULng2Dbl                    = 0xCB,
-
+        LMul = 0xC0,
+        LMulOfv = 0xC1,
+        ULMulOvf = 0xC2,
+        LDiv = 0xC3,
+        LMod = 0xC4,
+        ULDiv = 0xC5,
+        ULMod = 0xC6,
+        LLsh = 0xC7,
+        LRsh = 0xC8,
+        LRsz = 0xC9,
+        Lng2Dbl = 0xCA,
+        ULng2Dbl = 0xCB,
         // 32-bit division helpers
-        Div                         = 0xCC,
-        Mod                         = 0xCD,
-        UDiv                        = 0xCE,
-        UMod                        = 0xCF,
-
+        Div = 0xCC,
+        Mod = 0xCD,
+        UDiv = 0xCE,
+        UMod = 0xCF,
         // Floating point conversions
-        Dbl2Int                     = 0xD0,
-        Dbl2IntOvf                  = 0xD1,
-        Dbl2Lng                     = 0xD2,
-        Dbl2LngOvf                  = 0xD3,
-        Dbl2UInt                    = 0xD4,
-        Dbl2UIntOvf                 = 0xD5,
-        Dbl2ULng                    = 0xD6,
-        Dbl2ULngOvf                 = 0xD7,
-
+        Dbl2Int = 0xD0,
+        Dbl2IntOvf = 0xD1,
+        Dbl2Lng = 0xD2,
+        Dbl2LngOvf = 0xD3,
+        Dbl2UInt = 0xD4,
+        Dbl2UIntOvf = 0xD5,
+        Dbl2ULng = 0xD6,
+        Dbl2ULngOvf = 0xD7,
         // Floating point ops
-        DblRem                      = 0xE0,
-        FltRem                      = 0xE1,
-        DblRound                    = 0xE2,
-        FltRound                    = 0xE3,
-
+        DblRem = 0xE0,
+        FltRem = 0xE1,
+        DblRound = 0xE2,
+        FltRound = 0xE3,
         // Personality rountines
-        PersonalityRoutine          = 0xF0,
+        PersonalityRoutine = 0xF0,
         PersonalityRoutineFilterFunclet = 0xF1,
-
         // Synchronized methods
-        MonitorEnter                = 0xF8,
-        MonitorExit                 = 0xF9,
-
+        MonitorEnter = 0xF8,
+        MonitorExit = 0xF9,
         // JIT32 x86-specific write barriers
-        WriteBarrier_EAX            = 0x100,
-        WriteBarrier_EBX            = 0x101,
-        WriteBarrier_ECX            = 0x102,
-        WriteBarrier_ESI            = 0x103,
-        WriteBarrier_EDI            = 0x104,
-        WriteBarrier_EBP            = 0x105,
-        CheckedWriteBarrier_EAX     = 0x106,
-        CheckedWriteBarrier_EBX     = 0x107,
-        CheckedWriteBarrier_ECX     = 0x108,
-        CheckedWriteBarrier_ESI     = 0x109,
-        CheckedWriteBarrier_EDI     = 0x10A,
-        CheckedWriteBarrier_EBP     = 0x10B,
-
+        WriteBarrier_EAX = 0x100,
+        WriteBarrier_EBX = 0x101,
+        WriteBarrier_ECX = 0x102,
+        WriteBarrier_ESI = 0x103,
+        WriteBarrier_EDI = 0x104,
+        WriteBarrier_EBP = 0x105,
+        CheckedWriteBarrier_EAX = 0x106,
+        CheckedWriteBarrier_EBX = 0x107,
+        CheckedWriteBarrier_ECX = 0x108,
+        CheckedWriteBarrier_ESI = 0x109,
+        CheckedWriteBarrier_EDI = 0x10A,
+        CheckedWriteBarrier_EBP = 0x10B,
         // JIT32 x86-specific exception handling
-        EndCatch                    = 0x110,
-
-        StackProbe                  = 0x111,
-
-        GetCurrentManagedThreadId   = 0x112,
-
+        EndCatch = 0x110,
+        StackProbe = 0x111,
+        GetCurrentManagedThreadId = 0x112,
         // **********************************************************************************************
         //
         // These are not actually part of the R2R file format. We have them here because it's convenient.
@@ -286,31 +245,23 @@ namespace Internal.ReadyToRunConstants
 
         // Marker to be used in asserts.
         FirstFakeHelper,
-
         ThrowArgumentOutOfRange,
         ThrowArgument,
         ThrowPlatformNotSupported,
         ThrowNotImplemented,
-
         DebugBreak,
-
         GetRuntimeType,
-
         AreTypesEquivalent,
-
         CheckCastClass,
         CheckInstanceClass,
         CheckCastArray,
         CheckInstanceArray,
         CheckCastInterface,
         CheckInstanceInterface,
-
         MonitorEnterStatic,
         MonitorExitStatic,
-
         // GVM lookup helper
         GVMLookupForSlot,
-
         // TypedReference
         TypeHandleToRuntimeType,
         GetRefAny,
@@ -331,6 +282,8 @@ namespace Internal.ReadyToRunConstants
     public static class ReadyToRunRuntimeConstants
     {
         public const int READYTORUN_PInvokeTransitionFrameSizeInPointerUnits = 11;
-        public static int READYTORUN_ReversePInvokeTransitionFrameSizeInPointerUnits(TargetArchitecture target) => target == TargetArchitecture.X86 ? 5 : 2;
+        public static int READYTORUN_ReversePInvokeTransitionFrameSizeInPointerUnits(
+            TargetArchitecture target
+        ) => target == TargetArchitecture.X86 ? 5 : 2;
     }
 }

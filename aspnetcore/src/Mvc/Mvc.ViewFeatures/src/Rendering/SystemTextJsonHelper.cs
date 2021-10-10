@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
         public SystemTextJsonHelper(IOptions<JsonOptions> options)
         {
-            _htmlSafeJsonSerializerOptions = GetHtmlSafeSerializerOptions(options.Value.JsonSerializerOptions);
+            _htmlSafeJsonSerializerOptions = GetHtmlSafeSerializerOptions(
+                options.Value.JsonSerializerOptions
+            );
         }
 
         /// <inheritdoc />
@@ -26,9 +28,14 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             return new HtmlString(json);
         }
 
-        private static JsonSerializerOptions GetHtmlSafeSerializerOptions(JsonSerializerOptions serializerOptions)
+        private static JsonSerializerOptions GetHtmlSafeSerializerOptions(
+            JsonSerializerOptions serializerOptions
+        )
         {
-            if (serializerOptions.Encoder is null || serializerOptions.Encoder == JavaScriptEncoder.Default)
+            if (
+                serializerOptions.Encoder is null
+                || serializerOptions.Encoder == JavaScriptEncoder.Default
+            )
             {
                 return serializerOptions;
             }

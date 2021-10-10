@@ -78,6 +78,7 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         internal bool DeferToServer { get; set; }
 
         // For testing
-        internal INegotiateStateFactory StateFactory { get; set; } = new ReflectedNegotiateStateFactory();
+        internal INegotiateStateFactory StateFactory { get; set; } =
+            new ReflectedNegotiateStateFactory();
     }
 }

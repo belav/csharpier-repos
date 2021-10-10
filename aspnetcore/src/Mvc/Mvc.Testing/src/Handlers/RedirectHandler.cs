@@ -21,10 +21,7 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         /// <summary>
         /// Creates a new instance of <see cref="RedirectHandler"/>.
         /// </summary>
-        public RedirectHandler()
-            : this(maxRedirects: DefaultMaxRedirects)
-        {
-        }
+        public RedirectHandler() : this(maxRedirects: DefaultMaxRedirects) { }
 
         /// <summary>
         /// Creates a new instance of <see cref="RedirectHandler"/>.
@@ -47,18 +44,25 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         public int MaxRedirects { get; }
 
         /// <inheritdoc />
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             var remainingRedirects = MaxRedirects;
             var redirectRequest = new HttpRequestMessage();
-            var originalRequestContent = HasBody(request) ? await DuplicateRequestContent(request) : null;
+            var originalRequestContent = HasBody(request)
+                ? await DuplicateRequestContent(request)
+                : null;
             CopyRequestHeaders(request.Headers, redirectRequest.Headers);
             var response = await base.SendAsync(request, cancellationToken);
             while (IsRedirect(response) && remainingRedirects > 0)
             {
                 remainingRedirects--;
                 UpdateRedirectRequest(response, redirectRequest, originalRequestContent);
-                originalRequestContent = HasBody(redirectRequest) ? await DuplicateRequestContent(redirectRequest) : null;
+                originalRequestContent = HasBody(redirectRequest)
+                    ? await DuplicateRequestContent(redirectRequest)
+                    : null;
                 response = await base.SendAsync(redirectRequest, cancellationToken);
             }
 
@@ -88,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         private static void CopyContentHeaders(
             HttpContent originalRequestContent,
             HttpContent newRequestContent,
-            HttpContent contentCopy)
+            HttpContent contentCopy
+        )
         {
             foreach (var header in originalRequestContent.Headers)
             {
@@ -99,7 +104,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
 
         private static void CopyRequestHeaders(
             HttpRequestHeaders originalRequestHeaders,
-            HttpRequestHeaders newRequestHeaders)
+            HttpRequestHeaders newRequestHeaders
+        )
         {
             foreach (var header in originalRequestHeaders)
             {
@@ -107,7 +113,9 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
             }
         }
 
-        private static async Task<(Stream originalBody, Stream copy)> CopyBody(HttpRequestMessage request)
+        private static async Task<(Stream originalBody, Stream copy)> CopyBody(
+            HttpRequestMessage request
+        )
         {
             var originalBody = await request.Content.ReadAsStreamAsync();
             var bodyCopy = new MemoryStream();
@@ -131,7 +139,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         private static void UpdateRedirectRequest(
             HttpResponseMessage response,
             HttpRequestMessage redirect,
-            HttpContent originalContent)
+            HttpContent originalContent
+        )
         {
             var location = response.Headers.Location;
             if (location != null)
@@ -139,8 +148,11 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
                 if (!location.IsAbsoluteUri)
                 {
                     location = new Uri(
-                        new Uri(response.RequestMessage.RequestUri.GetLeftPart(UriPartial.Authority)),
-                        location);
+                        new Uri(
+                            response.RequestMessage.RequestUri.GetLeftPart(UriPartial.Authority)
+                        ),
+                        location
+                    );
                 }
 
                 redirect.RequestUri = location;
@@ -164,13 +176,13 @@ namespace Microsoft.AspNetCore.Mvc.Testing.Handlers
         }
 
         private static bool ShouldKeepVerb(HttpResponseMessage response) =>
-            response.StatusCode == HttpStatusCode.RedirectKeepVerb ||
-                (int)response.StatusCode == 308;
+            response.StatusCode == HttpStatusCode.RedirectKeepVerb
+            || (int)response.StatusCode == 308;
 
         private bool IsRedirect(HttpResponseMessage response) =>
-            response.StatusCode == HttpStatusCode.MovedPermanently ||
-                response.StatusCode == HttpStatusCode.Redirect ||
-                response.StatusCode == HttpStatusCode.RedirectKeepVerb ||
-                (int)response.StatusCode == 308;
+            response.StatusCode == HttpStatusCode.MovedPermanently
+            || response.StatusCode == HttpStatusCode.Redirect
+            || response.StatusCode == HttpStatusCode.RedirectKeepVerb
+            || (int)response.StatusCode == 308;
     }
 }

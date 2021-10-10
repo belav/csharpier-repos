@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
         public MigrationsEndPointMiddleware(
             RequestDelegate next,
             ILogger<MigrationsEndPointMiddleware> logger,
-            IOptions<MigrationsEndPointOptions> options)
+            IOptions<MigrationsEndPointOptions> options
+        )
         {
             if (next == null)
             {
@@ -83,13 +84,17 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 
                         context.Response.StatusCode = (int)HttpStatusCode.NoContent;
                         context.Response.Headers.Add("Pragma", new[] { "no-cache" });
-                        context.Response.Headers.Add("Cache-Control", new[] { "no-cache,no-store" });
+                        context.Response.Headers.Add(
+                            "Cache-Control",
+                            new[] { "no-cache,no-store" }
+                        );
 
                         _logger.MigrationsApplied(dbName);
                     }
                     catch (Exception ex)
                     {
-                        var message = Strings.FormatMigrationsEndPointMiddleware_Exception(dbName) + ex;
+                        var message =
+                            Strings.FormatMigrationsEndPointMiddleware_Exception(dbName) + ex;
 
                         _logger.MigrationsEndPointMiddlewareException(dbName, ex);
 
@@ -112,7 +117,10 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             {
                 logger.NoContextType();
 
-                await WriteErrorToResponse(context.Response, Strings.MigrationsEndPointMiddleware_NoContextType);
+                await WriteErrorToResponse(
+                    context.Response,
+                    Strings.MigrationsEndPointMiddleware_NoContextType
+                );
 
                 return null;
             }
@@ -121,9 +129,15 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             var registeredContexts = context.RequestServices.GetServices<DbContextOptions>()
                 .Select(o => o.ContextType);
 
-            if (!registeredContexts.Any(c => string.Equals(contextTypeName, c.AssemblyQualifiedName)))
+            if (
+                !registeredContexts.Any(
+                    c => string.Equals(contextTypeName, c.AssemblyQualifiedName)
+                )
+            )
             {
-                var message = Strings.FormatMigrationsEndPointMiddleware_ContextNotRegistered(contextTypeName);
+                var message = Strings.FormatMigrationsEndPointMiddleware_ContextNotRegistered(
+                    contextTypeName
+                );
 
                 logger.ContextNotRegistered(contextTypeName);
 

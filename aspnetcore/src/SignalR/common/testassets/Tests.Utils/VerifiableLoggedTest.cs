@@ -17,14 +17,22 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             LoggerFactory = NullLoggerFactory.Instance;
         }
 
-        public virtual IDisposable StartVerifiableLog(Func<WriteContext, bool> expectedErrorsFilter = null)
+        public virtual IDisposable StartVerifiableLog(
+            Func<WriteContext, bool> expectedErrorsFilter = null
+        )
         {
             return CreateScope(expectedErrorsFilter);
         }
 
-        private VerifyNoErrorsScope CreateScope(Func<WriteContext, bool> expectedErrorsFilter = null)
+        private VerifyNoErrorsScope CreateScope(
+            Func<WriteContext, bool> expectedErrorsFilter = null
+        )
         {
-            return new VerifyNoErrorsScope(LoggerFactory, wrappedDisposable: null, expectedErrorsFilter);
+            return new VerifyNoErrorsScope(
+                LoggerFactory,
+                wrappedDisposable: null,
+                expectedErrorsFilter
+            );
         }
     }
 }

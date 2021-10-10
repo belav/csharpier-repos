@@ -20,9 +20,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         // The order is set to execute after the DefaultPageApplicationModelProvider.
         public int Order => -1000 + 10;
 
-        public void OnProvidersExecuted(PageApplicationModelProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
 
         public void OnProvidersExecuting(PageApplicationModelProviderContext context)
         {
@@ -34,7 +32,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var pageApplicationModel = context.PageApplicationModel;
             var handlerType = pageApplicationModel.HandlerType.AsType();
 
-            var tempDataProperties = SaveTempDataPropertyFilterBase.GetTempDataProperties(_tempDataSerializer, handlerType);
+            var tempDataProperties = SaveTempDataPropertyFilterBase.GetTempDataProperties(
+                _tempDataSerializer,
+                handlerType
+            );
             if (tempDataProperties == null)
             {
                 return;

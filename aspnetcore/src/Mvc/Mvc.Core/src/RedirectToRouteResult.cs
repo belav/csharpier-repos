@@ -23,9 +23,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// </summary>
         /// <param name="routeValues">The parameters for the route.</param>
         public RedirectToRouteResult(object? routeValues)
-            : this(routeName: null, routeValues: routeValues)
-        {
-        }
+            : this(routeName: null, routeValues: routeValues) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -33,12 +31,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// </summary>
         /// <param name="routeName">The name of the route.</param>
         /// <param name="routeValues">The parameters for the route.</param>
-        public RedirectToRouteResult(
-            string? routeName,
-            object? routeValues)
-            : this(routeName, routeValues, permanent: false)
-        {
-        }
+        public RedirectToRouteResult(string? routeName, object? routeValues)
+            : this(routeName, routeValues, permanent: false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -47,13 +41,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="routeName">The name of the route.</param>
         /// <param name="routeValues">The parameters for the route.</param>
         /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
-        public RedirectToRouteResult(
-            string? routeName,
-            object? routeValues,
-            bool permanent)
-            : this(routeName, routeValues, permanent, fragment: null)
-        {
-        }
+        public RedirectToRouteResult(string? routeName, object? routeValues, bool permanent)
+            : this(routeName, routeValues, permanent, fragment: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -67,10 +56,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? routeName,
             object? routeValues,
             bool permanent,
-            bool preserveMethod)
-            : this(routeName, routeValues, permanent, preserveMethod, fragment: null)
-        {
-        }
+            bool preserveMethod
+        ) : this(routeName, routeValues, permanent, preserveMethod, fragment: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -79,13 +66,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="routeName">The name of the route.</param>
         /// <param name="routeValues">The parameters for the route.</param>
         /// <param name="fragment">The fragment to add to the URL.</param>
-        public RedirectToRouteResult(
-            string? routeName,
-            object? routeValues,
-            string? fragment)
-            : this(routeName, routeValues, permanent: false, fragment: fragment)
-        {
-        }
+        public RedirectToRouteResult(string? routeName, object? routeValues, string? fragment)
+            : this(routeName, routeValues, permanent: false, fragment: fragment) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -99,10 +81,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? routeName,
             object? routeValues,
             bool permanent,
-            string? fragment)
-            : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment)
-        {
-        }
+            string? fragment
+        ) : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -118,7 +98,8 @@ namespace Microsoft.AspNetCore.Mvc
             object? routeValues,
             bool permanent,
             bool preserveMethod,
-            string? fragment)
+            string? fragment
+        )
         {
             RouteName = routeName;
             RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);
@@ -165,7 +146,9 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<RedirectToRouteResult>>();
+            var executor = context.HttpContext.RequestServices.GetRequiredService<
+                IActionResultExecutor<RedirectToRouteResult>
+            >();
             return executor.ExecuteAsync(context, this);
         }
     }

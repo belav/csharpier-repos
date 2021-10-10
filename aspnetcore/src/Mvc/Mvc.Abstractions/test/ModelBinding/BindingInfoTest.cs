@@ -14,10 +14,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void GetBindingInfo_WithAttributes_ConstructsBindingInfo()
         {
             // Arrange
-            var attributes = new object[]
-            {
-                new FromQueryAttribute { Name = "Test" },
-            };
+            var attributes = new object[] { new FromQueryAttribute { Name = "Test" }, };
 
             // Act
             var bindingInfo = BindingInfo.GetBindingInfo(attributes);
@@ -33,10 +30,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             // Arrange
             var bindAttribute = new BindAttribute(include: "SomeProperty");
-            var attributes = new object[]
-            {
-                bindAttribute,
-            };
+            var attributes = new object[] { bindAttribute, };
 
             // Act
             var bindingInfo = BindingInfo.GetBindingInfo(attributes);
@@ -83,16 +77,23 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             // Arrange
             var attributes = new object[]
             {
-                new ModelBinderAttribute { BinderType = typeof(ComplexObjectModelBinder), Name = "Test" },
+                new ModelBinderAttribute
+                {
+                    BinderType = typeof(ComplexObjectModelBinder),
+                    Name = "Test"
+                },
             };
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType).BindingDetails(metadata =>
-            {
-                metadata.BindingSource = BindingSource.Special;
-                metadata.BinderType = typeof(SimpleTypeModelBinder);
-                metadata.BinderModelName = "Different";
-            });
+            provider.ForType(modelType)
+                .BindingDetails(
+                    metadata =>
+                    {
+                        metadata.BindingSource = BindingSource.Special;
+                        metadata.BinderType = typeof(SimpleTypeModelBinder);
+                        metadata.BinderModelName = "Different";
+                    }
+                );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act
@@ -116,12 +117,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             };
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType).BindingDetails(metadata =>
-            {
-                metadata.BindingSource = BindingSource.Special;
-                metadata.BinderType = typeof(SimpleTypeModelBinder);
-                metadata.BinderModelName = "Different";
-            });
+            provider.ForType(modelType)
+                .BindingDetails(
+                    metadata =>
+                    {
+                        metadata.BindingSource = BindingSource.Special;
+                        metadata.BinderType = typeof(SimpleTypeModelBinder);
+                        metadata.BinderModelName = "Different";
+                    }
+                );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act
@@ -141,10 +145,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var attributes = new object[] { new ControllerAttribute(), new BindNeverAttribute(), };
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType).BindingDetails(metadata =>
-            {
-                metadata.BinderType = typeof(ComplexObjectModelBinder);
-            });
+            provider.ForType(modelType)
+                .BindingDetails(
+                    metadata =>
+                    {
+                        metadata.BinderType = typeof(ComplexObjectModelBinder);
+                    }
+                );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act
@@ -167,10 +174,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             };
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType).BindingDetails(metadata =>
-            {
-                metadata.BindingSource = BindingSource.Services;
-            });
+            provider.ForType(modelType)
+                .BindingDetails(
+                    metadata =>
+                    {
+                        metadata.BindingSource = BindingSource.Services;
+                    }
+                );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act
@@ -194,10 +204,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var propertyFilterProvider = Mock.Of<IPropertyFilterProvider>();
             var modelType = typeof(Guid);
             var provider = new TestModelMetadataProvider();
-            provider.ForType(modelType).BindingDetails(metadata =>
-            {
-                metadata.PropertyFilterProvider = propertyFilterProvider;
-            });
+            provider.ForType(modelType)
+                .BindingDetails(
+                    metadata =>
+                    {
+                        metadata.PropertyFilterProvider = propertyFilterProvider;
+                    }
+                );
             var modelMetadata = provider.GetMetadataForType(modelType);
 
             // Act

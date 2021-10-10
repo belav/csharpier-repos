@@ -23,7 +23,8 @@ class Program
         }
 
         {
-            MethodInfo mi = typeof(IFoo<object>).GetMethod("GimmeU").MakeGenericMethod(typeof(string));
+            MethodInfo mi = typeof(IFoo<object>).GetMethod("GimmeU")
+                .MakeGenericMethod(typeof(string));
             object val = mi.Invoke(null, Array.Empty<object>());
             if (!object.ReferenceEquals(val, typeof(string)))
                 throw new Exception();

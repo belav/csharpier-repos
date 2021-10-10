@@ -63,8 +63,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public RelationalAnnotationProviderDependencies()
-        {
-        }
+        public RelationalAnnotationProviderDependencies() { }
     }
 }

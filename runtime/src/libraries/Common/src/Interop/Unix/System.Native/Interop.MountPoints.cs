@@ -11,24 +11,29 @@ internal static partial class Interop
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private unsafe delegate void MountPointFound(byte* name);
 
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetAllMountPoints", SetLastError = true)]
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetAllMountPoints",
+            SetLastError = true
+        )]
         private static extern int GetAllMountPoints(MountPointFound mpf);
 
         internal static string[] GetAllMountPoints()
         {
             int count = 0;
             var found = new string[4];
-
             unsafe
             {
-                GetAllMountPoints((byte* name) =>
-                {
-                    if (count == found.Length)
+                GetAllMountPoints(
+                    (byte* name) =>
                     {
-                        Array.Resize(ref found, count * 2);
+                        if (count == found.Length)
+                        {
+                            Array.Resize(ref found, count * 2);
+                        }
+                        found[count++] = Marshal.PtrToStringAnsi((IntPtr)name)!;
                     }
-                    found[count++] = Marshal.PtrToStringAnsi((IntPtr)name)!;
-                });
+                );
             }
 
             Array.Resize(ref found, count);

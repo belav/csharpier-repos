@@ -18,6 +18,10 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
         /// <summary>
         /// Don't call this directly. use <see cref="DocumentExtensions.ReuseExistingSpeculativeModelAsync(Document, SyntaxNode, CancellationToken)"/> (or an overload).
         /// </summary>
-        ValueTask<SemanticModel> ReuseExistingSpeculativeModelAsync(Document document, SyntaxNode node, CancellationToken cancellationToken);
+        ValueTask<SemanticModel> ReuseExistingSpeculativeModelAsync(
+            Document document,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -34,7 +34,7 @@ namespace System.Data.OleDb
         private readonly byte _precision;
 
         private readonly int _index;
-        private readonly int _indexForAccessor;    // HCHAPTER
+        private readonly int _indexForAccessor; // HCHAPTER
         private readonly int _indexWithinAccessor; // HCHAPTER
 
         private readonly bool _ifIRowsetElseIRow;
@@ -49,9 +49,18 @@ namespace System.Data.OleDb
         // for Value, ValueByteArray, ValueString, ValueVariant
         private object? _value;
 
-        internal ColumnBinding(OleDbDataReader dataReader, int index, int indexForAccessor, int indexWithinAccessor,
-                                OleDbParameter? parameter, RowBinding rowbinding, Bindings bindings, tagDBBINDING binding, int offset,
-                                bool ifIRowsetElseIRow)
+        internal ColumnBinding(
+            OleDbDataReader dataReader,
+            int index,
+            int indexForAccessor,
+            int indexWithinAccessor,
+            OleDbParameter? parameter,
+            RowBinding rowbinding,
+            Bindings bindings,
+            tagDBBINDING binding,
+            int offset,
+            bool ifIRowsetElseIRow
+        )
         {
             Debug.Assert(null != rowbinding, "null rowbinding");
             Debug.Assert(null != bindings, "null bindings");
@@ -169,9 +178,13 @@ namespace System.Data.OleDb
 
         internal bool IsValueNull()
         {
-            return ((DBStatus.S_ISNULL == StatusValue())
-                    || (((NativeDBType.VARIANT == DbType) || (NativeDBType.PROPVARIANT == DbType))
-                        && (Convert.IsDBNull(ValueVariant()))));
+            return (
+                (DBStatus.S_ISNULL == StatusValue())
+                || (
+                    ((NativeDBType.VARIANT == DbType) || (NativeDBType.PROPVARIANT == DbType))
+                    && (Convert.IsDBNull(ValueVariant()))
+                )
+            );
         }
 
         private int LengthValue()
@@ -532,7 +545,9 @@ namespace System.Data.OleDb
                     case NativeDBType.UI8:
                         if (value is decimal)
                         {
-                            Value_UI8(Convert.ToUInt64((decimal)value, CultureInfo.InvariantCulture));
+                            Value_UI8(
+                                Convert.ToUInt64((decimal)value, CultureInfo.InvariantCulture)
+                            );
                         }
                         else
                         {
@@ -621,7 +636,10 @@ namespace System.Data.OleDb
             Debug.Assert((NativeDBType.BOOL == DbType), "Value_BOOL");
             LengthValue(0);
             StatusValue(DBStatus.S_OK);
-            RowBinding.WriteInt16(ValueOffset, (short)(value ? ODB.VARIANT_TRUE : ODB.VARIANT_FALSE));
+            RowBinding.WriteInt16(
+                ValueOffset,
+                (short)(value ? ODB.VARIANT_TRUE : ODB.VARIANT_FALSE)
+            );
         }
 
         private string Value_BSTR()
@@ -641,6 +659,7 @@ namespace System.Data.OleDb
                     value = Marshal.PtrToStringBSTR(ptr);
                 }
             }
+
             finally
             {
                 if (mustRelease)
@@ -677,6 +696,7 @@ namespace System.Data.OleDb
                     Marshal.Copy(ptr, value, 0, value.Length);
                 }
             }
+
             finally
             {
                 if (mustRelease)
@@ -693,7 +713,9 @@ namespace System.Data.OleDb
 
             // we expect the provider/server to apply the silent truncation when binding BY_REF
             // if (value.Length < ValueBindingOffset) { throw "Offset must refer to a location within the value" }
-            int length = ((ValueBindingOffset < value.Length) ? (value.Length - ValueBindingOffset) : 0);
+            int length = (
+                (ValueBindingOffset < value.Length) ? (value.Length - ValueBindingOffset) : 0
+            );
             LengthValue(((0 < ValueBindingSize) ? Math.Min(ValueBindingSize, length) : length));
             StatusValue(DBStatus.S_OK);
 
@@ -710,7 +732,10 @@ namespace System.Data.OleDb
         private string Value_ByRefWSTR()
         {
             Debug.Assert((NativeDBType.BYREF | NativeDBType.WSTR) == DbType, "Value_ByRefWSTR");
-            Debug.Assert((DBStatus.S_OK == StatusValue()) || (DBStatus.S_TRUNCATED == StatusValue()), "Value_ByRefWSTR");
+            Debug.Assert(
+                (DBStatus.S_OK == StatusValue()) || (DBStatus.S_TRUNCATED == StatusValue()),
+                "Value_ByRefWSTR"
+            );
             string value = "";
             RowBinding bindings = RowBinding;
             bool mustRelease = false;
@@ -725,6 +750,7 @@ namespace System.Data.OleDb
                     value = Marshal.PtrToStringUni(ptr, charCount);
                 }
             }
+
             finally
             {
                 if (mustRelease)
@@ -740,8 +766,12 @@ namespace System.Data.OleDb
             Debug.Assert((NativeDBType.BYREF | NativeDBType.WSTR) == DbType, "Value_ByRefWSTR");
             // we expect the provider/server to apply the silent truncation when binding BY_REF
             // if (value.Length < ValueBindingOffset) { throw "Offset must refer to a location within the value" }
-            int length = ((ValueBindingOffset < value.Length) ? (value.Length - ValueBindingOffset) : 0);
-            LengthValue(((0 < ValueBindingSize) ? Math.Min(ValueBindingSize, length) : length) * 2); /* charcount->bytecount*/
+            int length = (
+                (ValueBindingOffset < value.Length) ? (value.Length - ValueBindingOffset) : 0
+            );
+            LengthValue(
+                ((0 < ValueBindingSize) ? Math.Min(ValueBindingSize, length) : length) * 2
+            ); /* charcount->bytecount*/
             StatusValue(DBStatus.S_OK);
 
             IntPtr ptr = ADP.PtrZero;
@@ -759,8 +789,12 @@ namespace System.Data.OleDb
             Debug.Assert((NativeDBType.BYREF | NativeDBType.WSTR) == DbType, "Value_ByRefWSTR");
             // we expect the provider/server to apply the silent truncation when binding BY_REF
             // if (value.Length < ValueBindingOffset) { throw "Offset must refer to a location within the value" }
-            int length = ((ValueBindingOffset < value.Length) ? (value.Length - ValueBindingOffset) : 0);
-            LengthValue(((0 < ValueBindingSize) ? Math.Min(ValueBindingSize, length) : length) * 2); /* charcount->bytecount*/
+            int length = (
+                (ValueBindingOffset < value.Length) ? (value.Length - ValueBindingOffset) : 0
+            );
+            LengthValue(
+                ((0 < ValueBindingSize) ? Math.Min(ValueBindingSize, length) : length) * 2
+            ); /* charcount->bytecount*/
             StatusValue(DBStatus.S_OK);
 
             IntPtr ptr = ADP.PtrZero;
@@ -776,7 +810,10 @@ namespace System.Data.OleDb
         private byte[] Value_BYTES()
         {
             Debug.Assert(NativeDBType.BYTES == DbType, "Value_BYTES");
-            Debug.Assert((DBStatus.S_OK == StatusValue()) || (DBStatus.S_TRUNCATED == StatusValue()), "Value_BYTES");
+            Debug.Assert(
+                (DBStatus.S_OK == StatusValue()) || (DBStatus.S_TRUNCATED == StatusValue()),
+                "Value_BYTES"
+            );
             int byteCount = Math.Min(LengthValue(), ColumnBindingMaxLen);
             byte[] value = new byte[byteCount];
             RowBinding.ReadBytes(ValueOffset, value, 0, byteCount);
@@ -786,7 +823,11 @@ namespace System.Data.OleDb
         {
             Debug.Assert(null != value, "Value_BYTES null");
             // we silently truncate when the user has specified a given Size
-            int bytecount = ((ValueBindingOffset < value.Length) ? Math.Min(value.Length - ValueBindingOffset, ColumnBindingMaxLen) : 0);
+            int bytecount = (
+                (ValueBindingOffset < value.Length)
+                    ? Math.Min(value.Length - ValueBindingOffset, ColumnBindingMaxLen)
+                    : 0
+            );
             LengthValue(bytecount);
             StatusValue(DBStatus.S_OK);
             if (0 < bytecount)
@@ -872,11 +913,12 @@ namespace System.Data.OleDb
             int[] buffer = new int[4];
             RowBinding.ReadInt32Array(ValueOffset, buffer, 0, 4);
             return new decimal(
-                buffer[2],  // low
-                buffer[3],  // mid
-                buffer[1],  // high
+                buffer[2], // low
+                buffer[3], // mid
+                buffer[1], // high
                 (0 != (buffer[0] & unchecked((int)0x80000000))), // sign
-                unchecked((byte)((buffer[0] & unchecked((int)0x00FF0000)) >> 16))); // scale
+                unchecked((byte)((buffer[0] & unchecked((int)0x00FF0000)) >> 16))
+            ); // scale
         }
         private void Value_DECIMAL(decimal value)
         {
@@ -892,9 +934,7 @@ namespace System.Data.OleDb
             StatusValue(DBStatus.S_OK);
 
             int[] tmp = decimal.GetBits(value);
-            int[] buffer = new int[4] {
-                tmp[3], tmp[2], tmp[0], tmp[1]
-            };
+            int[] buffer = new int[4] { tmp[3], tmp[2], tmp[0], tmp[1] };
             RowBinding.WriteInt32Array(ValueOffset, buffer, 0, 4);
         }
 
@@ -948,7 +988,8 @@ namespace System.Data.OleDb
             Debug.Assert(NativeDBType.HCHAPTER == DbType, "Value_HCHAPTER");
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_HCHAPTER");
 
-            return DataReader().ResetChapter(IndexForAccessor, IndexWithinAccessor, RowBinding, ValueOffset);
+            return DataReader()
+                .ResetChapter(IndexForAccessor, IndexWithinAccessor, RowBinding, ValueOffset);
         }
 
         private sbyte Value_I1()
@@ -1022,6 +1063,7 @@ namespace System.Data.OleDb
                 IntPtr ptr = bindings.ReadIntPtr(ValueOffset);
                 value = Marshal.GetObjectForIUnknown(ptr);
             }
+
             finally
             {
                 if (mustRelease)
@@ -1043,12 +1085,18 @@ namespace System.Data.OleDb
             if (s_getIDispatchForObject == null)
             {
                 object? delegateInstance = null;
-                MethodInfo? mi = typeof(Marshal).GetMethod("GetIDispatchForObject", BindingFlags.Public | BindingFlags.Static);
+                MethodInfo? mi = typeof(Marshal).GetMethod(
+                    "GetIDispatchForObject",
+                    BindingFlags.Public | BindingFlags.Static
+                );
                 if (mi == null)
                 {
                     throw new NotSupportedException(SR.PlatformNotSupported_GetIDispatchForObject);
                 }
-                Volatile.Write(ref delegateInstance, mi.CreateDelegate(typeof(Func<object, IntPtr>)));
+                Volatile.Write(
+                    ref delegateInstance,
+                    mi.CreateDelegate(typeof(Func<object, IntPtr>))
+                );
                 s_getIDispatchForObject = delegateInstance as Func<object, IntPtr>;
                 ptr = s_getIDispatchForObject!(value);
             }
@@ -1069,6 +1117,7 @@ namespace System.Data.OleDb
                 IntPtr ptr = bindings.ReadIntPtr(ValueOffset);
                 value = Marshal.GetObjectForIUnknown(ptr);
             }
+
             finally
             {
                 if (mustRelease)
@@ -1198,7 +1247,10 @@ namespace System.Data.OleDb
         private string Value_WSTR()
         {
             Debug.Assert(NativeDBType.WSTR == DbType, "Value_WSTR");
-            Debug.Assert((DBStatus.S_OK == StatusValue()) || (DBStatus.S_TRUNCATED == StatusValue()), "Value_WSTR");
+            Debug.Assert(
+                (DBStatus.S_OK == StatusValue()) || (DBStatus.S_TRUNCATED == StatusValue()),
+                "Value_WSTR"
+            );
             Debug.Assert(2 < ColumnBindingMaxLen, "Value_WSTR");
             int byteCount = Math.Min(LengthValue(), ColumnBindingMaxLen - 2);
             return RowBinding.PtrToStringUni(ValueOffset, byteCount / 2);
@@ -1208,7 +1260,11 @@ namespace System.Data.OleDb
             Debug.Assert(null != value, "Value_BYTES null");
             Debug.Assert(NativeDBType.WSTR == DbType, "Value_WSTR");
             // we silently truncate when the user has specified a given Size
-            int charCount = ((ValueBindingOffset < value.Length) ? Math.Min(value.Length - ValueBindingOffset, (ColumnBindingMaxLen - 2) / 2) : 0);
+            int charCount = (
+                (ValueBindingOffset < value.Length)
+                    ? Math.Min(value.Length - ValueBindingOffset, (ColumnBindingMaxLen - 2) / 2)
+                    : 0
+            );
 
             LengthValue(charCount * 2);
             StatusValue(DBStatus.S_OK);
@@ -1223,7 +1279,11 @@ namespace System.Data.OleDb
             Debug.Assert(null != value, "Value_BYTES null");
             Debug.Assert(NativeDBType.WSTR == DbType, "Value_WSTR");
             // we silently truncate when the user has specified a given Size
-            int charCount = ((ValueBindingOffset < value.Length) ? Math.Min(value.Length - ValueBindingOffset, (ColumnBindingMaxLen - 2) / 2) : 0);
+            int charCount = (
+                (ValueBindingOffset < value.Length)
+                    ? Math.Min(value.Length - ValueBindingOffset, (ColumnBindingMaxLen - 2) / 2)
+                    : 0
+            );
 
             LengthValue(charCount * 2);
             StatusValue(DBStatus.S_OK);
@@ -1234,13 +1294,19 @@ namespace System.Data.OleDb
         }
         private object Value_VARIANT()
         {
-            Debug.Assert((NativeDBType.VARIANT == DbType) || (NativeDBType.PROPVARIANT == DbType), "Value_VARIANT");
+            Debug.Assert(
+                (NativeDBType.VARIANT == DbType) || (NativeDBType.PROPVARIANT == DbType),
+                "Value_VARIANT"
+            );
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_VARIANT");
             return RowBinding.GetVariantValue(ValueOffset);
         }
         private void Value_VARIANT(object value)
         {
-            Debug.Assert((NativeDBType.VARIANT == DbType) || (NativeDBType.PROPVARIANT == DbType), "Value_VARIANT");
+            Debug.Assert(
+                (NativeDBType.VARIANT == DbType) || (NativeDBType.PROPVARIANT == DbType),
+                "Value_VARIANT"
+            );
             LengthValue(0);
             StatusValue(DBStatus.S_OK);
             RowBinding.SetVariantValue(ValueOffset, value);

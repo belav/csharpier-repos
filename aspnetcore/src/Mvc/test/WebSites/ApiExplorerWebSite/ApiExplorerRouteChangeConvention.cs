@@ -18,17 +18,19 @@ namespace ApiExplorerWebSite
 
         public void Apply(ActionModel action)
         {
-            if (action.Attributes.OfType<ReloadAttribute>().Any() && ChangeToken.TokenSource.IsCancellationRequested)
+            if (
+                action.Attributes.OfType<ReloadAttribute>().Any()
+                && ChangeToken.TokenSource.IsCancellationRequested
+            )
             {
                 action.ActionName = "NewIndex";
                 action.Selectors.Clear();
-                action.Selectors.Add(new SelectorModel
-                {
-                    AttributeRouteModel = new AttributeRouteModel
+                action.Selectors.Add(
+                    new SelectorModel
                     {
-                        Template = "NewIndex"
+                        AttributeRouteModel = new AttributeRouteModel { Template = "NewIndex" }
                     }
-                });
+                );
             }
         }
     }

@@ -40,16 +40,9 @@ namespace Microsoft.AspNetCore.Mvc
         // Null or empty property names are invalid. (Those containing just whitespace are legal.)
         public static TheoryData<string> NullOrEmptyNames
         {
-            get
-            {
-                return new TheoryData<string>
-                {
-                    null,
-                    string.Empty,
-                };
-            }
+            get { return new TheoryData<string> { null, string.Empty, }; }
         }
-        
+
         [Fact]
         public void Constructor_WithNullAction_IgnoresArgument()
         {
@@ -96,10 +89,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Equal(2, attribute.RouteData.Count);
             Assert.Contains("controller", attribute.RouteData.Keys);
-            var resultName = Assert.Single(
+            var resultName =
+                Assert.Single(
                     attribute.RouteData,
-                    keyValuePair => string.Equals(keyValuePair.Key, "action", StringComparison.Ordinal))
-                .Value;
+                    keyValuePair =>
+                        string.Equals(keyValuePair.Key, "action", StringComparison.Ordinal)
+                ).Value;
             Assert.Equal(action, resultName);
             Assert.Null(attribute.RouteName);
         }
@@ -114,10 +109,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Equal(2, attribute.RouteData.Count);
             Assert.Contains("action", attribute.RouteData.Keys);
-            var resultName = Assert.Single(
+            var resultName =
+                Assert.Single(
                     attribute.RouteData,
-                    keyValuePair => string.Equals(keyValuePair.Key, "controller", StringComparison.Ordinal))
-                .Value;
+                    keyValuePair =>
+                        string.Equals(keyValuePair.Key, "controller", StringComparison.Ordinal)
+                ).Value;
             Assert.Equal(controller, resultName);
             Assert.Null(attribute.RouteName);
         }
@@ -128,20 +125,26 @@ namespace Microsoft.AspNetCore.Mvc
         public void Constructor_WithActionControllerAreaName_UpdatesAreaRouteData(string areaName)
         {
             // Arrange & Act
-            var attribute = new TestableRemoteAttribute("AnAction", "AController", areaName: areaName);
+            var attribute = new TestableRemoteAttribute(
+                "AnAction",
+                "AController",
+                areaName: areaName
+            );
 
             // Assert
             Assert.Equal(3, attribute.RouteData.Count);
             Assert.Contains("action", attribute.RouteData.Keys);
             Assert.Contains("controller", attribute.RouteData.Keys);
-            var resultName = Assert.Single(
+            var resultName =
+                Assert.Single(
                     attribute.RouteData,
-                    keyValuePair => string.Equals(keyValuePair.Key, "area", StringComparison.Ordinal))
-                .Value;
+                    keyValuePair =>
+                        string.Equals(keyValuePair.Key, "area", StringComparison.Ordinal)
+                ).Value;
             Assert.Equal(areaName, resultName);
             Assert.Null(attribute.RouteName);
         }
-        
+
         [Fact]
         public void GetUrl_WithBadRouteName_Throws()
         {
@@ -150,7 +153,9 @@ namespace Microsoft.AspNetCore.Mvc
             var context = GetValidationContextWithArea(currentArea: null);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => testableAttribute.InvokeGetUrl(context));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => testableAttribute.InvokeGetUrl(context)
+            );
             Assert.Equal("No URL for remote validation could be found.", exception.Message);
         }
 
@@ -166,7 +171,7 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Act
             var actualUrl = testableRemoteAttribute.InvokeGetUrl(context);
-            
+
             // Assert
             Assert.Equal(url, actualUrl);
 
@@ -194,7 +199,7 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.Equal("Action", routeDictionary["action"] as string);
             Assert.Equal("Controller", routeDictionary["controller"] as string);
         }
-        
+
         [Fact]
         public void GetUrl_WithActionControllerArea_CallsUrlHelperWithExpectedValues()
         {
@@ -314,7 +319,11 @@ namespace Microsoft.AspNetCore.Mvc
         public void GetUrl_WithActionControllerAreaInArea_FindsControllerInDifferentArea()
         {
             // Arrange
-            var testableAttribute = new TestableRemoteAttribute("Action", "Controller", "AnotherArea");
+            var testableAttribute = new TestableRemoteAttribute(
+                "Action",
+                "Controller",
+                "AnotherArea"
+            );
             var context = GetValidationContextWithArea(currentArea: "Test");
 
             // Act
@@ -348,11 +357,32 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-additionalfields", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal("original", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-additionalfields", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-type", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-url", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                }
+            );
         }
 
         private static ClientModelValidationContext GetValidationContext(string url)
@@ -360,9 +390,8 @@ namespace Microsoft.AspNetCore.Mvc
             var urlHelper = new MockUrlHelper(url, routeName: null);
             return GetValidationContext(urlHelper);
         }
-        
-        private static ClientModelValidationContext GetValidationContext(
-            IUrlHelper urlHelper)
+
+        private static ClientModelValidationContext GetValidationContext(IUrlHelper urlHelper)
         {
             var serviceCollection = GetServiceCollection();
             var factory = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
@@ -371,20 +400,20 @@ namespace Microsoft.AspNetCore.Mvc
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var actionContext = GetActionContext(serviceProvider, routeData: null);
 
-            factory
-                .Setup(f => f.GetUrlHelper(actionContext))
-                .Returns(urlHelper);
-            
+            factory.Setup(f => f.GetUrlHelper(actionContext)).Returns(urlHelper);
+
             var metadataProvider = new EmptyModelMetadataProvider();
             var metadata = metadataProvider.GetMetadataForProperty(
                 containerType: typeof(string),
-                propertyName: nameof(string.Length));
-            
+                propertyName: nameof(string.Length)
+            );
+
             return new ClientModelValidationContext(
                 actionContext,
                 metadata,
                 metadataProvider,
-                new AttributeDictionary());
+                new AttributeDictionary()
+            );
         }
 
         private static ClientModelValidationContext GetValidationContextWithArea(string currentArea)
@@ -394,15 +423,8 @@ namespace Microsoft.AspNetCore.Mvc
             var routeCollection = GetRouteCollectionWithArea(serviceProvider);
             var routeData = new RouteData
             {
-                Routers =
-                {
-                    routeCollection,
-                },
-                Values =
-                {
-                    { "action", "Index" },
-                    { "controller", "Home" },
-                },
+                Routers = { routeCollection, },
+                Values = { { "action", "Index" }, { "controller", "Home" }, },
             };
             if (!string.IsNullOrEmpty(currentArea))
             {
@@ -413,9 +435,7 @@ namespace Microsoft.AspNetCore.Mvc
 
             var urlHelper = new UrlHelper(actionContext);
             var factory = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
-            factory
-                .Setup(f => f.GetUrlHelper(actionContext))
-                .Returns(urlHelper);
+            factory.Setup(f => f.GetUrlHelper(actionContext)).Returns(urlHelper);
 
             // Make an IUrlHelperFactory available through the ActionContext.
             serviceCollection.AddSingleton<IUrlHelperFactory>(factory.Object);
@@ -425,13 +445,15 @@ namespace Microsoft.AspNetCore.Mvc
             var metadataProvider = new EmptyModelMetadataProvider();
             var metadata = metadataProvider.GetMetadataForProperty(
                 containerType: typeof(string),
-                propertyName: nameof(string.Length));
+                propertyName: nameof(string.Length)
+            );
 
             return new ClientModelValidationContext(
-                 actionContext,
-                 metadata,
-                 metadataProvider,
-                 new AttributeDictionary());
+                actionContext,
+                metadata,
+                metadataProvider,
+                new AttributeDictionary()
+            );
         }
 
         private static IRouter GetRouteCollectionWithArea(IServiceProvider serviceProvider)
@@ -442,44 +464,42 @@ namespace Microsoft.AspNetCore.Mvc
             // area value. Skip usual "area:exists" constraint because that isn't relevant for link generation and it
             // complicates the setup significantly.
             builder.MapRoute("areaRoute", "{area}/{controller}/{action}");
-            builder.MapRoute("default", "{controller}/{action}", new { controller = "Home", action = "Index" });
+            builder.MapRoute(
+                "default",
+                "{controller}/{action}",
+                new { controller = "Home", action = "Index" }
+            );
 
             return builder.Build();
         }
-        
+
         private static RouteBuilder GetRouteBuilder(IServiceProvider serviceProvider)
         {
             var app = new Mock<IApplicationBuilder>(MockBehavior.Strict);
-            app
-                .SetupGet(a => a.ApplicationServices)
-                .Returns(serviceProvider);
+            app.SetupGet(a => a.ApplicationServices).Returns(serviceProvider);
 
             var builder = new RouteBuilder(app.Object);
 
             var handler = new Mock<IRouter>(MockBehavior.Strict);
-            handler
-                .Setup(router => router.GetVirtualPath(It.IsAny<VirtualPathContext>()))
+            handler.Setup(router => router.GetVirtualPath(It.IsAny<VirtualPathContext>()))
                 .Returns((VirtualPathData)null);
             builder.DefaultHandler = handler.Object;
 
             return builder;
         }
 
-        private static ActionContext GetActionContext(IServiceProvider serviceProvider, RouteData routeData)
+        private static ActionContext GetActionContext(
+            IServiceProvider serviceProvider,
+            RouteData routeData
+        )
         {
             // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory instance)
             // through the HttpContext.
-            var httpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider,
-            };
+            var httpContext = new DefaultHttpContext { RequestServices = serviceProvider, };
 
             if (routeData == null)
             {
-                routeData = new RouteData
-                {
-                    Routers = { Mock.Of<IRouter>(), },
-                };
+                routeData = new RouteData { Routers = { Mock.Of<IRouter>(), }, };
             }
 
             return new ActionContext(httpContext, routeData, new ActionDescriptor());
@@ -488,14 +508,18 @@ namespace Microsoft.AspNetCore.Mvc
         private static ServiceCollection GetServiceCollection()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection
-                .AddSingleton<ILoggerFactory>(new NullLoggerFactory());
+            serviceCollection.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             serviceCollection.AddOptions();
             serviceCollection.AddRouting();
 
             serviceCollection.AddSingleton<IInlineConstraintResolver>(
-                provider => new DefaultInlineConstraintResolver(provider.GetRequiredService<IOptions<RouteOptions>>(), provider));
+                provider =>
+                    new DefaultInlineConstraintResolver(
+                        provider.GetRequiredService<IOptions<RouteOptions>>(),
+                        provider
+                    )
+            );
 
             return serviceCollection;
         }
@@ -550,35 +574,22 @@ namespace Microsoft.AspNetCore.Mvc
 
         private class TestableRemoteAttribute : RemoteAttribute
         {
-            public TestableRemoteAttribute(string routeName)
-                : base(routeName)
-            {
-            }
+            public TestableRemoteAttribute(string routeName) : base(routeName) { }
 
             public TestableRemoteAttribute(string action, string controller)
-                : base(action, controller)
-            {
-            }
+                : base(action, controller) { }
 
             public TestableRemoteAttribute(string action, string controller, string areaName)
-                : base(action, controller, areaName)
-            {
-            }
+                : base(action, controller, areaName) { }
 
             public new string RouteName
             {
-                get
-                {
-                    return base.RouteName;
-                }
+                get { return base.RouteName; }
             }
 
             public new RouteValueDictionary RouteData
             {
-                get
-                {
-                    return base.RouteData;
-                }
+                get { return base.RouteData; }
             }
 
             public string InvokeGetUrl(ClientModelValidationContext context)

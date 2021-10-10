@@ -28,7 +28,12 @@ namespace Microsoft.AspNetCore.Mvc
         public void Constructor_InitializesActionName(string actionName)
         {
             // Act
-            var result = new AcceptedAtActionResult(actionName: actionName, controllerName: null, routeValues: null, value: null);
+            var result = new AcceptedAtActionResult(
+                actionName: actionName,
+                controllerName: null,
+                routeValues: null,
+                value: null
+            );
 
             // Assert
             Assert.Equal(actionName, result.ActionName);
@@ -41,7 +46,12 @@ namespace Microsoft.AspNetCore.Mvc
         public void Constructor_InitializesControllerName(string controllerName)
         {
             // Act
-            var result = new AcceptedAtActionResult(actionName: null, controllerName: controllerName, routeValues: null, value: null);
+            var result = new AcceptedAtActionResult(
+                actionName: null,
+                controllerName: controllerName,
+                routeValues: null,
+                value: null
+            );
 
             // Assert
             Assert.Equal(controllerName, result.ControllerName);
@@ -59,10 +69,18 @@ namespace Microsoft.AspNetCore.Mvc
 
         [Theory]
         [MemberData(nameof(RouteValuesData))]
-        public void Constructor_InitializesRouteValues(object routeValues, int expectedRouteValuesCount)
+        public void Constructor_InitializesRouteValues(
+            object routeValues,
+            int expectedRouteValuesCount
+        )
         {
             // Act
-            var result = new AcceptedAtActionResult(actionName: null, controllerName: null, routeValues: routeValues, value: null);
+            var result = new AcceptedAtActionResult(
+                actionName: null,
+                controllerName: null,
+                routeValues: routeValues,
+                value: null
+            );
 
             // Assert
             if (expectedRouteValuesCount == -1)
@@ -77,30 +95,23 @@ namespace Microsoft.AspNetCore.Mvc
 
         public static TheoryData<object> ValuesData
         {
-            get
-            {
-                return new TheoryData<object>
-                {
-                    null,
-                    "Test string",
-                    new object(),
-                };
-            }
+            get { return new TheoryData<object> { null, "Test string", new object(), }; }
         }
 
         [Theory]
         [MemberData(nameof(ValuesData))]
         public void Constructor_InitializesStatusCodeAndValue(object value)
         {
-            // Arrange 
+            // Arrange
             var url = "testAction";
 
-            // Act         
+            // Act
             var result = new AcceptedAtActionResult(
                 actionName: url,
                 controllerName: null,
                 routeValues: null,
-                value: value);
+                value: value
+            );
 
             // Assert
             Assert.Equal(StatusCodes.Status202Accepted, result.StatusCode);
@@ -110,8 +121,13 @@ namespace Microsoft.AspNetCore.Mvc
         [Fact]
         public void UrlHelper_Get_ReturnsNull()
         {
-            // Act         
-            var result = new AcceptedAtActionResult(actionName: null, controllerName: null, routeValues: null, value: null);
+            // Act
+            var result = new AcceptedAtActionResult(
+                actionName: null,
+                controllerName: null,
+                routeValues: null,
+                value: null
+            );
 
             // Assert
             Assert.Null(result.UrlHelper);
@@ -138,7 +154,8 @@ namespace Microsoft.AspNetCore.Mvc
                 actionName: url,
                 controllerName: null,
                 routeValues: null,
-                value: value);
+                value: value
+            );
 
             result.UrlHelper = urlHelper;
             await result.ExecuteResultAsync(actionContext);
@@ -162,7 +179,8 @@ namespace Microsoft.AspNetCore.Mvc
                 actionName: expectedUrl,
                 controllerName: null,
                 routeValues: null,
-                value: null);
+                value: null
+            );
 
             result.UrlHelper = urlHelper;
             await result.ExecuteResultAsync(actionContext);
@@ -188,25 +206,36 @@ namespace Microsoft.AspNetCore.Mvc
                 actionName: null,
                 controllerName: null,
                 routeValues: null,
-                value: null);
+                value: null
+            );
 
             result.UrlHelper = urlHelper;
 
             // Assert
-            await ExceptionAssert.ThrowsAsync<InvalidOperationException>(() =>
-                result.ExecuteResultAsync(actionContext),
-                "No route matches the supplied values.");
+            await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
+                () => result.ExecuteResultAsync(actionContext),
+                "No route matches the supplied values."
+            );
         }
 
         [Fact]
         public void OnFormatting_NullUrlHelperContextHasRequestServices_ReturnsRequestServicesAction()
         {
             // Arrange
-            var context = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var context = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
             context.HttpContext.RequestServices = new ForwardingServiceProvider();
 
             // Act
-            var result = new AcceptedAtActionResult(actionName: null, controllerName: null, routeValues: null, value: null);
+            var result = new AcceptedAtActionResult(
+                actionName: null,
+                controllerName: null,
+                routeValues: null,
+                value: null
+            );
             result.OnFormatting(context);
 
             // Assert
@@ -219,10 +248,19 @@ namespace Microsoft.AspNetCore.Mvc
         public void OnFormatting_NullUrlHelperContextNoRequestServices_ThrowsArgumentNullException()
         {
             // Arrange
-            var context = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var context = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
-            var result = new AcceptedAtActionResult(actionName: null, controllerName: null, routeValues: null, value: null);
+            var result = new AcceptedAtActionResult(
+                actionName: null,
+                controllerName: null,
+                routeValues: null,
+                value: null
+            );
 
             // Assert
             Assert.Throws<ArgumentNullException>("provider", () => result.OnFormatting(context));
@@ -232,7 +270,12 @@ namespace Microsoft.AspNetCore.Mvc
         public void OnFormatting_NullContext_ThrowsArgumentNullException()
         {
             // Act
-            var result = new AcceptedAtActionResult("actionName", "controllerName", "routeValues", "value");
+            var result = new AcceptedAtActionResult(
+                "actionName",
+                "controllerName",
+                "routeValues",
+                "value"
+            );
 
             // Assert
             Assert.Throws<ArgumentNullException>("context", () => result.OnFormatting(null));
@@ -243,10 +286,7 @@ namespace Microsoft.AspNetCore.Mvc
             var routeData = new RouteData();
             routeData.Routers.Add(Mock.Of<IRouter>());
 
-            return new ActionContext(
-                httpContext,
-                routeData,
-                new ActionDescriptor());
+            return new ActionContext(httpContext, routeData, new ActionDescriptor());
         }
 
         private static HttpContext GetHttpContext(Mock<IOutputFormatter> formatter)
@@ -258,11 +298,9 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static Mock<IOutputFormatter> CreateMockFormatter()
         {
-            var formatter = new Mock<IOutputFormatter>
-            {
-                CallBase = true
-            };
-            formatter.Setup(f => f.CanWriteResult(It.IsAny<OutputFormatterWriteContext>())).Returns(true);
+            var formatter = new Mock<IOutputFormatter> { CallBase = true };
+            formatter.Setup(f => f.CanWriteResult(It.IsAny<OutputFormatterWriteContext>()))
+                .Returns(true);
 
             return formatter;
         }
@@ -272,11 +310,14 @@ namespace Microsoft.AspNetCore.Mvc
             var options = Options.Create(new MvcOptions());
             options.Value.OutputFormatters.Add(formatter.Object);
             var services = new ServiceCollection();
-            services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-                new TestHttpResponseStreamWriterFactory(),
-                NullLoggerFactory.Instance,
-                options));
+            services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+                new ObjectResultExecutor(
+                    new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                    new TestHttpResponseStreamWriterFactory(),
+                    NullLoggerFactory.Instance,
+                    options
+                )
+            );
 
             return services.BuildServiceProvider();
         }
@@ -296,7 +337,8 @@ namespace Microsoft.AspNetCore.Mvc
 
         private class ForwardingUrlHelperFactory : IUrlHelperFactory
         {
-            public IUrlHelper GetUrlHelper(ActionContext context) => new ForwardingUrlHelper() { ActionValue = "abc" };
+            public IUrlHelper GetUrlHelper(ActionContext context) =>
+                new ForwardingUrlHelper() { ActionValue = "abc" };
         }
 
         private class ForwardingUrlHelper : IUrlHelper

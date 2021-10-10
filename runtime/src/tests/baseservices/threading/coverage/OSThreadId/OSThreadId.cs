@@ -17,7 +17,10 @@ namespace Threading.Tests
             // The property to be tested is internal.
             Type runtimeThreadType = typeof(object).Assembly.GetType("System.Threading.Thread");
             Assert(runtimeThreadType != null);
-            PropertyInfo osThreadIdProperty = runtimeThreadType.GetProperty("CurrentOSThreadId", BindingFlags.NonPublic | BindingFlags.Static);
+            PropertyInfo osThreadIdProperty = runtimeThreadType.GetProperty(
+                "CurrentOSThreadId",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Assert(osThreadIdProperty != null);
             s_osThreadIdGetMethod = osThreadIdProperty.GetGetMethod(true);
             Assert(s_osThreadIdGetMethod != null);

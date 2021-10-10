@@ -1,6 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.  
+// See the LICENSE file in the project root for more information.
 
 #nullable disable
 
@@ -16,18 +16,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
 {
     internal static class SymbolDependentsBuilder
     {
-        public static ImmutableDictionary<ISymbol, Task<ImmutableArray<ISymbol>>> FindMemberToDependentsMap(
+        public static ImmutableDictionary<
+            ISymbol,
+            Task<ImmutableArray<ISymbol>>
+        > FindMemberToDependentsMap(
             ImmutableArray<ISymbol> membersInType,
             Project project,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return membersInType.ToImmutableDictionary(
                 member => member,
-                member => Task.Run(() =>
-                {
-                    var builder = new SymbolWalker(membersInType, project, member, cancellationToken);
-                    return builder.FindMemberDependentsAsync();
-                }, cancellationToken));
+                member =>
+                    Task.Run(
+                        () =>
+                        {
+                            var builder = new SymbolWalker(
+                                membersInType,
+                                project,
+                                member,
+                                cancellationToken
+                            );
+                            return builder.FindMemberDependentsAsync();
+                        },
+                        cancellationToken
+                    )
+            );
         }
 
         private class SymbolWalker : OperationWalker
@@ -42,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
                 ImmutableArray<ISymbol> membersInType,
                 Project project,
                 ISymbol member,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 _project = project;
                 _membersInType = membersInType.ToImmutableHashSet();
@@ -53,12 +68,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
 
             public async Task<ImmutableArray<ISymbol>> FindMemberDependentsAsync()
             {
-                var tasks = _member.DeclaringSyntaxReferences.Select(@ref => @ref.GetSyntaxAsync(_cancellationToken));
+                var tasks = _member.DeclaringSyntaxReferences.Select(
+                    @ref => @ref.GetSyntaxAsync(_cancellationToken)
+                );
                 var syntaxes = await Task.WhenAll(tasks).ConfigureAwait(false);
-                var compilation = await _project.GetCompilationAsync(_cancellationToken).ConfigureAwait(false);
+                var compilation = await _project.GetCompilationAsync(_cancellationToken)
+                    .ConfigureAwait(false);
                 foreach (var syntax in syntaxes)
                 {
-                    Visit(compilation.GetSemanticModel(syntax.SyntaxTree).GetOperation(syntax, _cancellationToken));
+                    Visit(
+                        compilation.GetSemanticModel(syntax.SyntaxTree)
+                            .GetOperation(syntax, _cancellationToken)
+                    );
                 }
 
                 return _dependents.ToImmutableArray();
@@ -67,8 +88,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
             public override void Visit(IOperation operation)
             {
                 _cancellationToken.ThrowIfCancellationRequested();
-                if (operation is IMemberReferenceOperation memberReferenceOp &&
-                    _membersInType.Contains(memberReferenceOp.Member))
+                if (
+                    operation is IMemberReferenceOperation memberReferenceOp
+                    && _membersInType.Contains(memberReferenceOp.Member)
+                )
                 {
                     _dependents.Add(memberReferenceOp.Member);
                 }
@@ -76,8 +99,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
                 // This check is added for checking method invoked in the member
                 // It is separated since IInvocationOperation is not subtype of IMemberReferenceOperation
                 // issue for this https://github.com/dotnet/roslyn/issues/26206#issuecomment-382105829
-                if (operation is IInvocationOperation methodReferenceOp &&
-                    _membersInType.Contains(methodReferenceOp.TargetMethod))
+                if (
+                    operation is IInvocationOperation methodReferenceOp
+                    && _membersInType.Contains(methodReferenceOp.TargetMethod)
+                )
                 {
                     _dependents.Add(methodReferenceOp.TargetMethod);
                 }

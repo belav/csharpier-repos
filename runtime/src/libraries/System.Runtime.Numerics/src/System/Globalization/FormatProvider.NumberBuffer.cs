@@ -19,10 +19,7 @@ namespace System.Globalization
 
                 public char* digits
                 {
-                    get
-                    {
-                        return overrideDigits;
-                    }
+                    get { return overrideDigits; }
                 }
 
                 public char* overrideDigits; // Used for BigNumber support which can't be limited to 32 characters.

@@ -47,17 +47,24 @@ namespace Microsoft.CodeAnalysis.Indentation
         /// Determines the desired indentation of a given line.
         /// </summary>
         IndentationResult GetIndentation(
-            Document document, int lineNumber,
-            FormattingOptions.IndentStyle indentStyle, CancellationToken cancellationToken);
+            Document document,
+            int lineNumber,
+            FormattingOptions.IndentStyle indentStyle,
+            CancellationToken cancellationToken
+        );
     }
 
     internal static class IIndentationServiceExtensions
     {
         public static IndentationResult GetIndentation(
-            this IIndentationService service, Document document,
-            int lineNumber, CancellationToken cancellationToken)
+            this IIndentationService service,
+            Document document,
+            int lineNumber,
+            CancellationToken cancellationToken
+        )
         {
-            var options = document.GetOptionsAsync(cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+            var options = document.GetOptionsAsync(cancellationToken)
+                .WaitAndGetResult_CanCallOnBackground(cancellationToken);
             var style = options.GetOption(FormattingOptions.SmartIndent, document.Project.Language);
 
             return service.GetIndentation(document, lineNumber, style, cancellationToken);

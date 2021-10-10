@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.Structure
         /// Returns the providers always available to the service.
         /// This does not included providers imported via MEF composition.
         /// </summary>
-        protected virtual ImmutableArray<BlockStructureProvider> GetBuiltInProviders()
-            => ImmutableArray<BlockStructureProvider>.Empty;
+        protected virtual ImmutableArray<BlockStructureProvider> GetBuiltInProviders() =>
+            ImmutableArray<BlockStructureProvider>.Empty;
 
         private ImmutableArray<BlockStructureProvider> GetImportedProviders()
         {
@@ -39,25 +39,29 @@ namespace Microsoft.CodeAnalysis.Structure
             var mefExporter = (IMefHostExportProvider)_workspace.Services.HostServices;
 
             var providers = mefExporter.GetExports<BlockStructureProvider, LanguageMetadata>()
-                                       .Where(lz => lz.Metadata.Language == language)
-                                       .Select(lz => lz.Value);
+                .Where(lz => lz.Metadata.Language == language)
+                .Select(lz => lz.Value);
 
             return providers.ToImmutableArray();
         }
 
         public override async Task<BlockStructure> GetBlockStructureAsync(
             Document document,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var context = await CreateContextAsync(document, cancellationToken).ConfigureAwait(false);
+            var context = await CreateContextAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             return await GetBlockStructureAsync(context, _providers).ConfigureAwait(false);
         }
 
         public override BlockStructure GetBlockStructure(
             Document document,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var context = CreateContextAsync(document, cancellationToken).WaitAndGetResult(cancellationToken);
+            var context = CreateContextAsync(document, cancellationToken)
+                .WaitAndGetResult(cancellationToken);
             return GetBlockStructure(context, _providers);
         }
 
@@ -65,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Structure
             SyntaxTree syntaxTree,
             OptionSet options,
             bool isMetadataAsSource,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var context = CreateContext(syntaxTree, options, isMetadataAsSource, cancellationToken);
             return await GetBlockStructureAsync(context, _providers).ConfigureAwait(false);
@@ -75,17 +80,23 @@ namespace Microsoft.CodeAnalysis.Structure
             SyntaxTree syntaxTree,
             OptionSet options,
             bool isMetadataAsSource,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var context = CreateContext(syntaxTree, options, isMetadataAsSource, cancellationToken);
             return GetBlockStructure(context, _providers);
         }
 
-        private static async Task<BlockStructureContext> CreateContextAsync(Document document, CancellationToken cancellationToken)
+        private static async Task<BlockStructureContext> CreateContextAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var options = document.Project.Solution.Options;
-            var isMetadataAsSource = document.Project.Solution.Workspace.Kind == WorkspaceKind.MetadataAsSource;
+            var isMetadataAsSource =
+                document.Project.Solution.Workspace.Kind == WorkspaceKind.MetadataAsSource;
             return CreateContext(syntaxTree, options, isMetadataAsSource, cancellationToken);
         }
 
@@ -93,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Structure
             SyntaxTree syntaxTree,
             OptionSet options,
             bool isMetadataAsSource,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var optionProvider = new BlockStructureOptionProvider(options, isMetadataAsSource);
             return new BlockStructureContext(syntaxTree, optionProvider, cancellationToken);
@@ -101,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Structure
 
         private static async Task<BlockStructure> GetBlockStructureAsync(
             BlockStructureContext context,
-            ImmutableArray<BlockStructureProvider> providers)
+            ImmutableArray<BlockStructureProvider> providers
+        )
         {
             foreach (var provider in providers)
             {
@@ -113,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Structure
 
         private static BlockStructure GetBlockStructure(
             BlockStructureContext context,
-            ImmutableArray<BlockStructureProvider> providers)
+            ImmutableArray<BlockStructureProvider> providers
+        )
         {
             foreach (var provider in providers)
             {
@@ -127,36 +141,59 @@ namespace Microsoft.CodeAnalysis.Structure
         {
             var language = context.SyntaxTree.Options.Language;
 
-            var showIndentGuidesForCodeLevelConstructs = context.OptionProvider.GetOption(BlockStructureOptions.ShowBlockStructureGuidesForCodeLevelConstructs, language);
-            var showIndentGuidesForDeclarationLevelConstructs = context.OptionProvider.GetOption(BlockStructureOptions.ShowBlockStructureGuidesForDeclarationLevelConstructs, language);
-            var showIndentGuidesForCommentsAndPreprocessorRegions = context.OptionProvider.GetOption(BlockStructureOptions.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions, language);
-            var showOutliningForCodeLevelConstructs = context.OptionProvider.GetOption(BlockStructureOptions.ShowOutliningForCodeLevelConstructs, language);
-            var showOutliningForDeclarationLevelConstructs = context.OptionProvider.GetOption(BlockStructureOptions.ShowOutliningForDeclarationLevelConstructs, language);
-            var showOutliningForCommentsAndPreprocessorRegions = context.OptionProvider.GetOption(BlockStructureOptions.ShowOutliningForCommentsAndPreprocessorRegions, language);
+            var showIndentGuidesForCodeLevelConstructs = context.OptionProvider.GetOption(
+                BlockStructureOptions.ShowBlockStructureGuidesForCodeLevelConstructs,
+                language
+            );
+            var showIndentGuidesForDeclarationLevelConstructs = context.OptionProvider.GetOption(
+                BlockStructureOptions.ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                language
+            );
+            var showIndentGuidesForCommentsAndPreprocessorRegions =
+                context.OptionProvider.GetOption(
+                    BlockStructureOptions.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
+                    language
+                );
+            var showOutliningForCodeLevelConstructs = context.OptionProvider.GetOption(
+                BlockStructureOptions.ShowOutliningForCodeLevelConstructs,
+                language
+            );
+            var showOutliningForDeclarationLevelConstructs = context.OptionProvider.GetOption(
+                BlockStructureOptions.ShowOutliningForDeclarationLevelConstructs,
+                language
+            );
+            var showOutliningForCommentsAndPreprocessorRegions = context.OptionProvider.GetOption(
+                BlockStructureOptions.ShowOutliningForCommentsAndPreprocessorRegions,
+                language
+            );
 
             using var _ = ArrayBuilder<BlockSpan>.GetInstance(out var updatedSpans);
             foreach (var span in context.Spans)
             {
-                var updatedSpan = UpdateBlockSpan(span,
+                var updatedSpan = UpdateBlockSpan(
+                    span,
                     showIndentGuidesForCodeLevelConstructs,
                     showIndentGuidesForDeclarationLevelConstructs,
                     showIndentGuidesForCommentsAndPreprocessorRegions,
                     showOutliningForCodeLevelConstructs,
                     showOutliningForDeclarationLevelConstructs,
-                    showOutliningForCommentsAndPreprocessorRegions);
+                    showOutliningForCommentsAndPreprocessorRegions
+                );
                 updatedSpans.Add(updatedSpan);
             }
 
             return new BlockStructure(updatedSpans.ToImmutable());
         }
 
-        private static BlockSpan UpdateBlockSpan(BlockSpan blockSpan,
+        private static BlockSpan UpdateBlockSpan(
+            BlockSpan blockSpan,
             bool showIndentGuidesForCodeLevelConstructs,
             bool showIndentGuidesForDeclarationLevelConstructs,
             bool showIndentGuidesForCommentsAndPreprocessorRegions,
             bool showOutliningForCodeLevelConstructs,
             bool showOutliningForDeclarationLevelConstructs,
-            bool showOutliningForCommentsAndPreprocessorRegions)
+            bool showOutliningForCommentsAndPreprocessorRegions
+        )
         {
             var type = blockSpan.Type;
 
@@ -164,9 +201,11 @@ namespace Microsoft.CodeAnalysis.Structure
             var isMemberLevel = BlockTypes.IsCodeLevelConstruct(type);
             var isComment = BlockTypes.IsCommentOrPreprocessorRegion(type);
 
-            if ((!showIndentGuidesForDeclarationLevelConstructs && isTopLevel) ||
-                (!showIndentGuidesForCodeLevelConstructs && isMemberLevel) ||
-                (!showIndentGuidesForCommentsAndPreprocessorRegions && isComment))
+            if (
+                (!showIndentGuidesForDeclarationLevelConstructs && isTopLevel)
+                || (!showIndentGuidesForCodeLevelConstructs && isMemberLevel)
+                || (!showIndentGuidesForCommentsAndPreprocessorRegions && isComment)
+            )
             {
                 type = BlockTypes.Nonstructural;
             }
@@ -174,9 +213,11 @@ namespace Microsoft.CodeAnalysis.Structure
             var isCollapsible = blockSpan.IsCollapsible;
             if (isCollapsible)
             {
-                if ((!showOutliningForDeclarationLevelConstructs && isTopLevel) ||
-                    (!showOutliningForCodeLevelConstructs && isMemberLevel) ||
-                    (!showOutliningForCommentsAndPreprocessorRegions && isComment))
+                if (
+                    (!showOutliningForDeclarationLevelConstructs && isTopLevel)
+                    || (!showOutliningForCodeLevelConstructs && isMemberLevel)
+                    || (!showOutliningForCommentsAndPreprocessorRegions && isComment)
+                )
                 {
                     isCollapsible = false;
                 }

@@ -17,8 +17,8 @@ namespace Internal.Cryptography
     //
     internal sealed class HMACCommon
     {
-        public HMACCommon(string hashAlgorithmId, byte[] key, int blockSize) :
-            this(hashAlgorithmId, (ReadOnlySpan<byte>)key, blockSize)
+        public HMACCommon(string hashAlgorithmId, byte[] key, int blockSize)
+            : this(hashAlgorithmId, (ReadOnlySpan<byte>)key, blockSize)
         {
             // If the key is smaller than the block size, the delegated ctor won't have initialized ActualKey,
             // so set it here as would ChangeKey.
@@ -85,8 +85,7 @@ namespace Internal.Cryptography
             _hMacProvider.AppendHashData(source);
 
         // Compute the hash based on the appended data and resets the HashProvider for more hashing.
-        public byte[] FinalizeHashAndReset() =>
-            _hMacProvider.FinalizeHashAndReset();
+        public byte[] FinalizeHashAndReset() => _hMacProvider.FinalizeHashAndReset();
 
         public int FinalizeHashAndReset(Span<byte> destination) =>
             _hMacProvider.FinalizeHashAndReset(destination);

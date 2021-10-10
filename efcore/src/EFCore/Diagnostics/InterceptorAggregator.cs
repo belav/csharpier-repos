@@ -21,8 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     The interceptor type.
         /// </summary>
-        public virtual Type InterceptorType
-            => typeof(TInterceptor);
+        public virtual Type InterceptorType => typeof(TInterceptor);
 
         /// <summary>
         ///     <para>

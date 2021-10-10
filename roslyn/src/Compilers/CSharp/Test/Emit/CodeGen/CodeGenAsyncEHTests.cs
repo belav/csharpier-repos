@@ -17,23 +17,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
     public class CodeGenAsyncEHTests : EmitMetadataTestBase
     {
-        private static readonly MetadataReference[] s_asyncRefs = new[] { MscorlibRef_v4_0_30316_17626, SystemRef_v4_0_30319_17929, SystemCoreRef_v4_0_30319_17929 };
-
-        public CodeGenAsyncEHTests()
+        private static readonly MetadataReference[] s_asyncRefs = new[]
         {
-        }
+            MscorlibRef_v4_0_30316_17626,
+            SystemRef_v4_0_30319_17929,
+            SystemCoreRef_v4_0_30319_17929
+        };
 
-        private CompilationVerifier CompileAndVerify(string source, string expectedOutput = null, IEnumerable<MetadataReference> references = null, CSharpCompilationOptions options = null)
+        public CodeGenAsyncEHTests() { }
+
+        private CompilationVerifier CompileAndVerify(
+            string source,
+            string expectedOutput = null,
+            IEnumerable<MetadataReference> references = null,
+            CSharpCompilationOptions options = null
+        )
         {
             references = (references != null) ? references.Concat(s_asyncRefs) : s_asyncRefs;
-            return base.CompileAndVerify(source, targetFramework: TargetFramework.Empty, expectedOutput: expectedOutput, references: references, options: options);
+            return base.CompileAndVerify(
+                source,
+                targetFramework: TargetFramework.Empty,
+                expectedOutput: expectedOutput,
+                references: references,
+                options: options
+            );
         }
 
         [Fact]
         [WorkItem(624970, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624970")]
         public void AsyncWithEH()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -149,7 +164,8 @@ class Test
         [Fact]
         public void AsyncWithEHCodeQuality()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -203,11 +219,14 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 10
 ";
-            CompileAndVerify(source, expectedOutput: expected).
-VerifyIL("Test.<G>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+            CompileAndVerify(source, expectedOutput: expected)
+                .VerifyIL(
+                    "Test.<G>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                    @"
 {
   // Code size      819 (0x333)
   .maxstack  3
@@ -569,13 +588,15 @@ VerifyIL("Test.<G>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNe
   IL_032d:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_0332:  ret
 }
-");
+"
+                );
         }
 
         [Fact, WorkItem(855080, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/855080")]
         public void GenericCatchVariableInAsyncMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -617,7 +638,8 @@ namespace ConsoleApplication1
         [Fact]
         public void AsyncWithException1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -647,7 +669,8 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 -1
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -656,7 +679,8 @@ class Test
         [Fact]
         public void AsyncWithException2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -685,7 +709,8 @@ class Test
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 exception
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -694,7 +719,8 @@ exception
         [Fact]
         public void AsyncInFinally001()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -727,11 +753,14 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 2
 ";
-            CompileAndVerify(source, expectedOutput: expected).
-VerifyIL("Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+            CompileAndVerify(source, expectedOutput: expected)
+                .VerifyIL(
+                    "Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                    @"
 {
   // Code size      210 (0xd2)
   .maxstack  3
@@ -838,13 +867,18 @@ VerifyIL("Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNe
   IL_00cc:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_00d1:  ret
 }
-");
+"
+                );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes
+        )]
         public void AsyncInFinally002()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -893,15 +927,20 @@ class Test
         }
     }
 }";
-            var expected = @"FOne or more errors occurred.
+            var expected =
+                @"FOne or more errors occurred.
 ";
             CompileAndVerify(source, expectedOutput: expected);
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void AsyncInFinally003()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -934,27 +973,40 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 2
 ";
-            var v = CompileAndVerify(source, s_asyncRefs, targetFramework: TargetFramework.Empty, options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All), expectedOutput: expected, symbolValidator: module =>
-            {
-                Assert.Equal(new[]
+            var v = CompileAndVerify(
+                source,
+                s_asyncRefs,
+                targetFramework: TargetFramework.Empty,
+                options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
+                expectedOutput: expected,
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>t__builder",
-                    "<x>5__1",
-                    "<>s__2", // pending exception
-                    "<>s__3", // pending branch
-                    "<>s__4", // return value
-                    "<>s__5", // spill
-                    "<>s__6", // spill
-                    "<>s__7", // spill
-                    "<>u__1", // awaiter
-                }, module.GetFieldNames("Test.<G>d__1"));
-            });
+                    Assert.Equal(
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>t__builder",
+                            "<x>5__1",
+                            "<>s__2", // pending exception
+                            "<>s__3", // pending branch
+                            "<>s__4", // return value
+                            "<>s__5", // spill
+                            "<>s__6", // spill
+                            "<>s__7", // spill
+                            "<>u__1", // awaiter
+                        },
+                        module.GetFieldNames("Test.<G>d__1")
+                    );
+                }
+            );
 
-            v.VerifyPdb("Test.G", @"
+            v.VerifyPdb(
+                "Test.G",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -977,10 +1029,12 @@ class Test
     </method>
   </methods>
 </symbols>
-");
+"
+            );
 
-            v.VerifyIL("Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"{
+            v.VerifyIL(
+                "Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"{
   // Code size      461 (0x1cd)
   .maxstack  3
   .locals init (int V_0,
@@ -1188,13 +1242,16 @@ class Test
   IL_01c6:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_01cb:  nop
   IL_01cc:  ret
-}", sequencePoints: "Test+<G>d__1.MoveNext");
+}",
+                sequencePoints: "Test+<G>d__1.MoveNext"
+            );
         }
 
         [Fact]
         public void AsyncInFinally004()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1233,7 +1290,8 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 2
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -1242,7 +1300,8 @@ class Test
         [Fact]
         public void AsyncInFinallyNested001()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1303,7 +1362,8 @@ class Test
         [Fact]
         public void AsyncInFinallyNested002()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1365,7 +1425,8 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"hello
+            var expected =
+                @"hello
 15";
             CompileAndVerify(source, expectedOutput: expected);
         }
@@ -1373,7 +1434,8 @@ class Test
         [Fact]
         public void AsyncInFinallyNested003()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1436,7 +1498,8 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"bye
+            var expected =
+                @"bye
 15";
             CompileAndVerify(source, expectedOutput: expected);
         }
@@ -1444,7 +1507,8 @@ class Test
         [Fact]
         public void AsyncInCatch001()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1478,11 +1542,14 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 2
 ";
-            CompileAndVerify(source, expectedOutput: expected).
-VerifyIL("Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+            CompileAndVerify(source, expectedOutput: expected)
+                .VerifyIL(
+                    "Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                    @"
 {
   // Code size      170 (0xaa)
   .maxstack  3
@@ -1580,13 +1647,15 @@ VerifyIL("Test.<G>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNe
   IL_00a4:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_00a9:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void AsyncInCatchRethrow()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1640,7 +1709,8 @@ class Test
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 Attempted to divide by zero.
 2
 ";
@@ -1651,7 +1721,8 @@ Attempted to divide by zero.
         [Fact]
         public void AsyncInCatchRethrow01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1709,7 +1780,8 @@ class Test
         }
     }
 }";
-            var expected = @"rethrowing
+            var expected =
+                @"rethrowing
 Attempted to divide by zero.
 2
 ";
@@ -1720,7 +1792,8 @@ Attempted to divide by zero.
         [Fact]
         public void AsyncInCatchRethrow02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1783,7 +1856,8 @@ class Test
         }
     }
 }";
-            var expected = @"rethrowing
+            var expected =
+                @"rethrowing
 Attempted to divide by zero.
 4
 ";
@@ -1793,7 +1867,8 @@ Attempted to divide by zero.
         [Fact]
         public void AsyncInCatchFilter()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1837,7 +1912,8 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 hello
 2
 ";
@@ -1847,7 +1923,8 @@ hello
         [Fact]
         public void AsyncInCatchFilterLifted()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1894,7 +1971,8 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"True
+            var expected =
+                @"True
 2
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -1903,7 +1981,8 @@ class Test
         [Fact]
         public void AsyncInCatchFinallyMixed()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1974,7 +2053,8 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 hello
 42
 ";
@@ -1984,7 +2064,8 @@ hello
         [Fact]
         public void AsyncInCatchFinallyMixed_InAsyncLambda()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -2058,7 +2139,8 @@ class Test
         Console.WriteLine(t2.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 hello
 42
 ";
@@ -2068,7 +2150,8 @@ hello
         [Fact]
         public void DoFinallyBodies()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 using System;
 
@@ -2095,7 +2178,8 @@ class Driver
         Console.WriteLine(Driver.finally_count);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 1
 ";
             CompileAndVerify(source, expected);

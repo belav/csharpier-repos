@@ -28,50 +28,67 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpHelpContextService()
-        {
-        }
+        public CSharpHelpContextService() { }
 
         public override string Language
         {
-            get
-            {
-                return "csharp";
-            }
+            get { return "csharp"; }
         }
 
         public override string Product
         {
-            get
-            {
-                return "csharp";
-            }
+            get { return "csharp"; }
         }
 
-        private static string Keyword(string text)
-            => text + "_CSharpKeyword";
+        private static string Keyword(string text) => text + "_CSharpKeyword";
 
-        public override async Task<string> GetHelpTermAsync(Document document, TextSpan span, CancellationToken cancellationToken)
+        public override async Task<string> GetHelpTermAsync(
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
 
             // For now, find the token under the start of the selection.
-            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var token = await syntaxTree.GetTouchingTokenAsync(span.Start, cancellationToken, findInsideTrivia: true).ConfigureAwait(false);
+            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var token = await syntaxTree.GetTouchingTokenAsync(
+                    span.Start,
+                    cancellationToken,
+                    findInsideTrivia: true
+                )
+                .ConfigureAwait(false);
 
             if (IsValid(token, span))
             {
-                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(span, cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(
+                        span,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                var result = TryGetText(token, semanticModel, document, syntaxFacts, cancellationToken);
+                var result = TryGetText(
+                    token,
+                    semanticModel,
+                    document,
+                    syntaxFacts,
+                    cancellationToken
+                );
                 if (string.IsNullOrEmpty(result))
                 {
                     var previousToken = token.GetPreviousToken();
                     if (IsValid(previousToken, span))
                     {
-                        result = TryGetText(previousToken, semanticModel, document, syntaxFacts, cancellationToken);
+                        result = TryGetText(
+                            previousToken,
+                            semanticModel,
+                            document,
+                            syntaxFacts,
+                            cancellationToken
+                        );
                     }
                 }
 
@@ -79,8 +96,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             }
 
             var trivia = root.FindTrivia(span.Start, findInsideTrivia: true);
-            if (trivia.Span.IntersectsWith(span) && trivia.Kind() == SyntaxKind.PreprocessingMessageTrivia &&
-                trivia.Token.GetAncestor<RegionDirectiveTriviaSyntax>() != null)
+            if (
+                trivia.Span.IntersectsWith(span)
+                && trivia.Kind() == SyntaxKind.PreprocessingMessageTrivia
+                && trivia.Token.GetAncestor<RegionDirectiveTriviaSyntax>() != null
+            )
             {
                 return "#region";
             }
@@ -111,18 +131,27 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
         private static bool IsValid(SyntaxToken token, TextSpan span)
         {
             // If the token doesn't actually intersect with our position, give up
-            return token.Kind() == SyntaxKind.EndIfDirectiveTrivia || token.Span.IntersectsWith(span);
+            return token.Kind() == SyntaxKind.EndIfDirectiveTrivia
+                || token.Span.IntersectsWith(span);
         }
 
-        private string TryGetText(SyntaxToken token, SemanticModel semanticModel, Document document, ISyntaxFactsService syntaxFacts, CancellationToken cancellationToken)
+        private string TryGetText(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            Document document,
+            ISyntaxFactsService syntaxFacts,
+            CancellationToken cancellationToken
+        )
         {
-            if (TryGetTextForSpecialCharacters(token, out var text) ||
-                TryGetTextForContextualKeyword(token, out text) ||
-                TryGetTextForCombinationKeyword(token, syntaxFacts, out text) ||
-                TryGetTextForKeyword(token, syntaxFacts, out text) ||
-                TryGetTextForPreProcessor(token, syntaxFacts, out text) ||
-                TryGetTextForOperator(token, document, out text) ||
-                TryGetTextForSymbol(token, semanticModel, document, cancellationToken, out text))
+            if (
+                TryGetTextForSpecialCharacters(token, out var text)
+                || TryGetTextForContextualKeyword(token, out text)
+                || TryGetTextForCombinationKeyword(token, syntaxFacts, out text)
+                || TryGetTextForKeyword(token, syntaxFacts, out text)
+                || TryGetTextForPreProcessor(token, syntaxFacts, out text)
+                || TryGetTextForOperator(token, document, out text)
+                || TryGetTextForSymbol(token, semanticModel, document, cancellationToken, out text)
+            )
             {
                 return text;
             }
@@ -132,9 +161,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
         private bool TryGetTextForSpecialCharacters(SyntaxToken token, out string text)
         {
-            if (token.IsKind(SyntaxKind.InterpolatedStringStartToken) ||
-                token.IsKind(SyntaxKind.InterpolatedStringEndToken) ||
-                token.IsKind(SyntaxKind.InterpolatedStringTextToken))
+            if (
+                token.IsKind(SyntaxKind.InterpolatedStringStartToken)
+                || token.IsKind(SyntaxKind.InterpolatedStringEndToken)
+                || token.IsKind(SyntaxKind.InterpolatedStringTextToken)
+            )
             {
                 text = "$_CSharpKeyword";
                 return true;
@@ -156,13 +187,21 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return false;
         }
 
-        private bool TryGetTextForSymbol(SyntaxToken token, SemanticModel semanticModel, Document document, CancellationToken cancellationToken, out string text)
+        private bool TryGetTextForSymbol(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            Document document,
+            CancellationToken cancellationToken,
+            out string text
+        )
         {
             ISymbol symbol;
             if (token.Parent is TypeArgumentListSyntax)
             {
                 var genericName = token.GetAncestor<GenericNameSyntax>();
-                symbol = semanticModel.GetSymbolInfo(genericName, cancellationToken).Symbol ?? semanticModel.GetTypeInfo(genericName, cancellationToken).Type;
+                symbol =
+                    semanticModel.GetSymbolInfo(genericName, cancellationToken).Symbol
+                    ?? semanticModel.GetTypeInfo(genericName, cancellationToken).Type;
             }
             else if (token.Parent is NullableTypeSyntax && token.IsKind(SyntaxKind.QuestionToken))
             {
@@ -171,19 +210,32 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             }
             else
             {
-                symbol = semanticModel.GetSemanticInfo(token, document.Project.Solution.Workspace, cancellationToken)
-                                      .GetAnySymbol(includeType: true);
+                symbol = semanticModel.GetSemanticInfo(
+                        token,
+                        document.Project.Solution.Workspace,
+                        cancellationToken
+                    )
+                    .GetAnySymbol(includeType: true);
 
                 if (symbol == null)
                 {
-                    var bindableParent = document.GetLanguageService<ISyntaxFactsService>().TryGetBindableParent(token);
-                    var overloads = bindableParent != null ? semanticModel.GetMemberGroup(bindableParent) : ImmutableArray<ISymbol>.Empty;
+                    var bindableParent = document.GetLanguageService<ISyntaxFactsService>()
+                        .TryGetBindableParent(token);
+                    var overloads =
+                        bindableParent != null
+                            ? semanticModel.GetMemberGroup(bindableParent)
+                            : ImmutableArray<ISymbol>.Empty;
                     symbol = overloads.FirstOrDefault();
                 }
             }
 
             // Local: return the name if it's the declaration, otherwise the type
-            if (symbol is ILocalSymbol localSymbol && !symbol.DeclaringSyntaxReferences.Any(d => d.GetSyntax().DescendantTokens().Contains(token)))
+            if (
+                symbol is ILocalSymbol localSymbol
+                && !symbol.DeclaringSyntaxReferences.Any(
+                    d => d.GetSyntax().DescendantTokens().Contains(token)
+                )
+            )
             {
                 symbol = localSymbol.Type;
             }
@@ -206,24 +258,37 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return symbol != null;
         }
 
-        private static bool TryGetTextForOperator(SyntaxToken token, Document document, out string text)
+        private static bool TryGetTextForOperator(
+            SyntaxToken token,
+            Document document,
+            out string text
+        )
         {
-            if (token.IsKind(SyntaxKind.ExclamationToken) &&
-                token.Parent.IsKind(SyntaxKind.SuppressNullableWarningExpression))
+            if (
+                token.IsKind(SyntaxKind.ExclamationToken)
+                && token.Parent.IsKind(SyntaxKind.SuppressNullableWarningExpression)
+            )
             {
                 text = Keyword("nullForgiving");
                 return true;
             }
 
             // Workaround IsPredefinedOperator returning true for '<' in generics.
-            if (token is { RawKind: (int)SyntaxKind.LessThanToken, Parent: not BinaryExpressionSyntax })
+            if (
+                token is
+                { RawKind: (int)SyntaxKind.LessThanToken, Parent: not BinaryExpressionSyntax }
+            )
             {
                 text = null;
                 return false;
             }
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
-            if (syntaxFacts.IsOperator(token) || syntaxFacts.IsPredefinedOperator(token) || SyntaxFacts.IsAssignmentExpressionOperatorToken(token.Kind()))
+            if (
+                syntaxFacts.IsOperator(token)
+                || syntaxFacts.IsPredefinedOperator(token)
+                || SyntaxFacts.IsAssignmentExpressionOperatorToken(token.Kind())
+            )
             {
                 text = Keyword(syntaxFacts.GetText(token.RawKind));
                 return true;
@@ -241,7 +306,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 return true;
             }
 
-            if (token.IsKind(SyntaxKind.QuestionToken) && token.Parent is ConditionalExpressionSyntax)
+            if (
+                token.IsKind(SyntaxKind.QuestionToken)
+                && token.Parent is ConditionalExpressionSyntax
+            )
             {
                 text = "?_CSharpKeyword";
                 return true;
@@ -257,7 +325,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return false;
         }
 
-        private static bool TryGetTextForPreProcessor(SyntaxToken token, ISyntaxFactsService syntaxFacts, out string text)
+        private static bool TryGetTextForPreProcessor(
+            SyntaxToken token,
+            ISyntaxFactsService syntaxFacts,
+            out string text
+        )
         {
             if (syntaxFacts.IsPreprocessorKeyword(token))
             {
@@ -265,7 +337,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 return true;
             }
 
-            if (token.IsKind(SyntaxKind.EndOfDirectiveToken) && token.GetAncestor<RegionDirectiveTriviaSyntax>() != null)
+            if (
+                token.IsKind(SyntaxKind.EndOfDirectiveToken)
+                && token.GetAncestor<RegionDirectiveTriviaSyntax>() != null
+            )
             {
                 text = "#region";
                 return true;
@@ -298,11 +373,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                             text = "partialtype_CSharpKeyword";
                             return true;
                         }
-
                         break;
 
                     case SyntaxKind.WhereKeyword:
-                        if (token.Parent.GetAncestorOrThis<TypeParameterConstraintClauseSyntax>() != null)
+                        if (
+                            token.Parent.GetAncestorOrThis<TypeParameterConstraintClauseSyntax>()
+                            != null
+                        )
                         {
                             text = "whereconstraint_CSharpKeyword";
                         }
@@ -318,17 +395,25 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             text = null;
             return false;
         }
-        private static bool TryGetTextForCombinationKeyword(SyntaxToken token, ISyntaxFactsService syntaxFacts, out string text)
+        private static bool TryGetTextForCombinationKeyword(
+            SyntaxToken token,
+            ISyntaxFactsService syntaxFacts,
+            out string text
+        )
         {
             switch (token.Kind())
             {
-                case SyntaxKind.PrivateKeyword when ModifiersContains(token, syntaxFacts, SyntaxKind.ProtectedKeyword):
-                case SyntaxKind.ProtectedKeyword when ModifiersContains(token, syntaxFacts, SyntaxKind.PrivateKeyword):
+                case SyntaxKind.PrivateKeyword
+                      when ModifiersContains(token, syntaxFacts, SyntaxKind.ProtectedKeyword):
+                case SyntaxKind.ProtectedKeyword
+                      when ModifiersContains(token, syntaxFacts, SyntaxKind.PrivateKeyword):
                     text = "privateprotected_CSharpKeyword";
                     return true;
 
-                case SyntaxKind.ProtectedKeyword when ModifiersContains(token, syntaxFacts, SyntaxKind.InternalKeyword):
-                case SyntaxKind.InternalKeyword when ModifiersContains(token, syntaxFacts, SyntaxKind.ProtectedKeyword):
+                case SyntaxKind.ProtectedKeyword
+                      when ModifiersContains(token, syntaxFacts, SyntaxKind.InternalKeyword):
+                case SyntaxKind.InternalKeyword
+                      when ModifiersContains(token, syntaxFacts, SyntaxKind.ProtectedKeyword):
                     text = "protectedinternal_CSharpKeyword";
                     return true;
 
@@ -345,13 +430,21 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             text = null;
             return false;
 
-            static bool ModifiersContains(SyntaxToken token, ISyntaxFactsService syntaxFacts, SyntaxKind kind)
+            static bool ModifiersContains(
+                SyntaxToken token,
+                ISyntaxFactsService syntaxFacts,
+                SyntaxKind kind
+            )
             {
                 return syntaxFacts.GetModifiers(token.Parent).Any(t => t.IsKind(kind));
             }
         }
 
-        private static bool TryGetTextForKeyword(SyntaxToken token, ISyntaxFactsService syntaxFacts, out string text)
+        private static bool TryGetTextForKeyword(
+            SyntaxToken token,
+            ISyntaxFactsService syntaxFacts,
+            out string text
+        )
         {
             if (token.IsKind(SyntaxKind.InKeyword))
             {
@@ -374,19 +467,28 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 return true;
             }
 
-            if (token.IsKind(SyntaxKind.ClassKeyword) && token.Parent is ClassOrStructConstraintSyntax)
+            if (
+                token.IsKind(SyntaxKind.ClassKeyword)
+                && token.Parent is ClassOrStructConstraintSyntax
+            )
             {
                 text = Keyword("classconstraint");
                 return true;
             }
 
-            if (token.IsKind(SyntaxKind.StructKeyword) && token.Parent is ClassOrStructConstraintSyntax)
+            if (
+                token.IsKind(SyntaxKind.StructKeyword)
+                && token.Parent is ClassOrStructConstraintSyntax
+            )
             {
                 text = Keyword("structconstraint");
                 return true;
             }
 
-            if (token.IsKind(SyntaxKind.UsingKeyword) && token.Parent is UsingStatementSyntax or LocalDeclarationStatementSyntax)
+            if (
+                token.IsKind(SyntaxKind.UsingKeyword)
+                && token.Parent is UsingStatementSyntax or LocalDeclarationStatementSyntax
+            )
             {
                 text = Keyword("using-statement");
                 return true;
@@ -398,8 +500,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 return true;
             }
 
-            if (token.ValueText == "var" && token.IsKind(SyntaxKind.IdentifierToken) &&
-                token.Parent.Parent is VariableDeclarationSyntax declaration && token.Parent == declaration.Type)
+            if (
+                token.ValueText == "var"
+                && token.IsKind(SyntaxKind.IdentifierToken)
+                && token.Parent.Parent is VariableDeclarationSyntax declaration
+                && token.Parent == declaration.Type
+            )
             {
                 text = "var_CSharpKeyword";
                 return true;
@@ -419,7 +525,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
         {
             var displayString = symbol.ToDisplayString(TypeFormat);
 
-            if (symbol is ITypeSymbol type && type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T)
+            if (
+                symbol is ITypeSymbol type
+                && type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T
+            )
             {
                 return "System.Nullable`1";
             }

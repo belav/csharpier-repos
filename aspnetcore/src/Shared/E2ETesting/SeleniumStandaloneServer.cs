@@ -37,7 +37,9 @@ namespace Microsoft.AspNetCore.E2ETesting
         {
             if (Instance != null || _diagnosticsMessageSink != null)
             {
-                throw new InvalidOperationException("Selenium standalone singleton already created.");
+                throw new InvalidOperationException(
+                    "Selenium standalone singleton already created."
+                );
             }
 
             // The assembly level attribute AssemblyFixture takes care of this being being instantiated before tests run
@@ -51,7 +53,8 @@ namespace Microsoft.AspNetCore.E2ETesting
             Uri uri,
             Process process,
             string sentinelPath,
-            Process sentinelProcess)
+            Process sentinelProcess
+        )
         {
             Uri = uri;
             _process = process;
@@ -63,7 +66,9 @@ namespace Microsoft.AspNetCore.E2ETesting
 
         internal static SeleniumStandaloneServer Instance { get; private set; }
 
-        public static async Task<SeleniumStandaloneServer> GetInstanceAsync(ITestOutputHelper output)
+        public static async Task<SeleniumStandaloneServer> GetInstanceAsync(
+            ITestOutputHelper output
+        )
         {
             try
             {
@@ -74,6 +79,7 @@ namespace Microsoft.AspNetCore.E2ETesting
                     await InitializeInstance(output);
                 }
             }
+
             finally
             {
                 _semaphore.Release();
@@ -87,20 +93,24 @@ namespace Microsoft.AspNetCore.E2ETesting
             var port = FindAvailablePort();
             var uri = new UriBuilder("http", "localhost", port, "/wd/hub").Uri;
 
-            var seleniumConfigPath = typeof(SeleniumStandaloneServer).Assembly
-                .GetCustomAttributes<AssemblyMetadataAttribute>()
-                .FirstOrDefault(k => k.Key == "Microsoft.AspNetCore.Testing.SeleniumConfigPath")
-                ?.Value;
+            var seleniumConfigPath =
+                typeof(SeleniumStandaloneServer).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                    .FirstOrDefault(
+                        k => k.Key == "Microsoft.AspNetCore.Testing.SeleniumConfigPath"
+                    )?.Value;
 
             if (seleniumConfigPath == null)
             {
-                throw new InvalidOperationException("Selenium config path not configured. Does this project import the E2ETesting.targets?");
+                throw new InvalidOperationException(
+                    "Selenium config path not configured. Does this project import the E2ETesting.targets?"
+                );
             }
 
             var psi = new ProcessStartInfo
             {
                 FileName = "npm",
-                Arguments = $"run selenium-standalone start -- --config \"{seleniumConfigPath}\" -- -port {port}",
+                Arguments =
+                    $"run selenium-standalone start -- --config \"{seleniumConfigPath}\" -- -port {port}",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
             };
@@ -117,13 +127,18 @@ namespace Microsoft.AspNetCore.E2ETesting
             if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
             {
                 // Just create a random tracking folder on helix
-                trackingFolder = Path.Combine(Directory.GetCurrentDirectory(), Path.GetRandomFileName());
+                trackingFolder = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    Path.GetRandomFileName()
+                );
                 Directory.CreateDirectory(trackingFolder);
             }
 
             if (!Directory.Exists(trackingFolder))
             {
-                throw new InvalidOperationException($"Invalid tracking folder. Set the 'SeleniumProcessTrackingFolder' MSBuild property to a valid folder.");
+                throw new InvalidOperationException(
+                    $"Invalid tracking folder. Set the 'SeleniumProcessTrackingFolder' MSBuild property to a valid folder."
+                );
             }
 
             Process process = null;
@@ -167,10 +182,7 @@ namespace Microsoft.AspNetCore.E2ETesting
                 }
             }
 
-            var httpClient = new HttpClient
-            {
-                Timeout = TimeSpan.FromSeconds(1),
-            };
+            var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(1), };
 
             var retries = 0;
             do
@@ -186,9 +198,7 @@ namespace Microsoft.AspNetCore.E2ETesting
                         return;
                     }
                 }
-                catch (OperationCanceledException)
-                {
-                }
+                catch (OperationCanceledException) { }
 
                 retries++;
             } while (retries < 30);
@@ -196,8 +206,11 @@ namespace Microsoft.AspNetCore.E2ETesting
             // Make output null so that we stop logging to it.
             output = null;
             logOutput.CompleteAdding();
-            var exitCodeString = process.HasExited ? process.ExitCode.ToString(CultureInfo.InvariantCulture) : "Process has not yet exited.";
-            var message = $@"Failed to launch the server.
+            var exitCodeString = process.HasExited
+                ? process.ExitCode.ToString(CultureInfo.InvariantCulture)
+                : "Process has not yet exited.";
+            var message =
+                $@"Failed to launch the server.
 ExitCode: {exitCodeString}
 Captured output lines:
 {string.Join(Environment.NewLine, logOutput.GetConsumingEnumerable())}.";
@@ -207,17 +220,22 @@ Captured output lines:
             throw new InvalidOperationException(message);
         }
 
-        private static Process StartSentinelProcess(Process process, string sentinelFile, int timeout)
+        private static Process StartSentinelProcess(
+            Process process,
+            string sentinelFile,
+            int timeout
+        )
         {
             // This sentinel process will start and will kill any rouge selenium server that want' torn down
             // via normal means.
             var psi = new ProcessStartInfo
             {
                 FileName = "powershell",
-                Arguments = $"-NoProfile -NonInteractive -Command \"Start-Sleep {timeout}; " +
-                $"if(Test-Path {sentinelFile}){{ " +
-                $"Write-Output 'Stopping process {process.Id}'; Stop-Process {process.Id}; }}" +
-                $"else{{ Write-Output 'Sentinel file {sentinelFile} not found.'}}",
+                Arguments =
+                    $"-NoProfile -NonInteractive -Command \"Start-Sleep {timeout}; "
+                    + $"if(Test-Path {sentinelFile}){{ "
+                    + $"Write-Output 'Stopping process {process.Id}'; Stop-Process {process.Id}; }}"
+                    + $"else{{ Write-Output 'Sentinel file {sentinelFile} not found.'}}",
             };
 
             return Process.Start(psi);
@@ -250,19 +268,28 @@ Captured output lines:
             }
         }
 
-        private static async Task<string> WriteTrackingFileAsync(ITestOutputHelper output, string trackingFolder, Process process)
+        private static async Task<string> WriteTrackingFileAsync(
+            ITestOutputHelper output,
+            string trackingFolder,
+            Process process
+        )
         {
             var pidFile = Path.Combine(trackingFolder, $"{process.Id}.{Guid.NewGuid()}.pid");
             for (var i = 0; i < 3; i++)
             {
                 try
                 {
-                    await File.WriteAllTextAsync(pidFile, process.Id.ToString(CultureInfo.InvariantCulture));
+                    await File.WriteAllTextAsync(
+                        pidFile,
+                        process.Id.ToString(CultureInfo.InvariantCulture)
+                    );
                     return pidFile;
                 }
                 catch
                 {
-                    output.WriteLine($"Can't write file to process tracking folder: {trackingFolder}");
+                    output.WriteLine(
+                        $"Can't write file to process tracking folder: {trackingFolder}"
+                    );
                 }
             }
 
@@ -278,6 +305,7 @@ Captured output lines:
                 listener.Start();
                 return ((IPEndPoint)listener.LocalEndpoint).Port;
             }
+
             finally
             {
                 listener.Stop();
@@ -285,9 +313,10 @@ Captured output lines:
         }
 
         private static string GetProcessTrackingFolder() =>
-            typeof(SeleniumStandaloneServer).Assembly
-                .GetCustomAttributes<AssemblyMetadataAttribute>()
-                .Single(a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.ProcessTracking").Value;
+            typeof(SeleniumStandaloneServer).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                .Single(
+                    a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.ProcessTracking"
+                ).Value;
 
         public void Dispose()
         {

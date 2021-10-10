@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// switch in catch 
+// switch in catch
 
 using System;
 
@@ -48,7 +48,6 @@ namespace strswitch
 
             for (int i = 0; i < s.Length; i++)
             {
-
                 beginloop:
                 try
                 {
@@ -58,6 +57,7 @@ namespace strswitch
                         {
                             continue;
                         }
+
                         finally
                         {
                             Console.WriteLine("In inner finally");
@@ -74,11 +74,11 @@ namespace strswitch
                             default:
                                 goto continueloop;
                         }
-
                     }
 
                     Console.WriteLine("Unreached");
                 }
+
                 finally
                 {
                     Console.WriteLine("In outer finally\n");
@@ -86,13 +86,11 @@ namespace strswitch
 
                 continueloop:
                 Console.WriteLine("Continuing");
-
             }
             finish:
             // stop recoding
             testLog.StopRecording();
             return testLog.VerifyOutput();
-
         }
     }
 }

@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
         protected override string DocumentKind => MvcViewDocumentKind;
 
-        protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode) => true;
+        protected override bool IsMatch(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) => true;
 
         public MvcViewDocumentClassifierPass() : this(false) { }
 
@@ -25,16 +28,24 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         }
 
         protected override void OnDocumentStructureCreated(
-            RazorCodeDocument codeDocument, 
-            NamespaceDeclarationIntermediateNode @namespace, 
-            ClassDeclarationIntermediateNode @class, 
-            MethodDeclarationIntermediateNode method)
+            RazorCodeDocument codeDocument,
+            NamespaceDeclarationIntermediateNode @namespace,
+            ClassDeclarationIntermediateNode @class,
+            MethodDeclarationIntermediateNode method
+        )
         {
             base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 
-            if (!codeDocument.TryComputeNamespace(fallbackToRootNamespace: false, out var namespaceName))
+            if (
+                !codeDocument.TryComputeNamespace(
+                    fallbackToRootNamespace: false,
+                    out var namespaceName
+                )
+            )
             {
-                @namespace.Content = _useConsolidatedMvcViews ? "AspNetCoreGeneratedDocument" : "AspNetCore";
+                @namespace.Content = _useConsolidatedMvcViews
+                    ? "AspNetCoreGeneratedDocument"
+                    : "AspNetCore";
             }
             else
             {
@@ -52,7 +63,6 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             {
                 @class.ClassName = className;
             }
-            
 
             @class.BaseType = "global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<TModel>";
             @class.Modifiers.Clear();

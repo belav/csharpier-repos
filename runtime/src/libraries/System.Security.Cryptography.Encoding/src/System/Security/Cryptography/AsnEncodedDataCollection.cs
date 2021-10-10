@@ -15,8 +15,7 @@ namespace System.Security.Cryptography
             _list = new List<AsnEncodedData>();
         }
 
-        public AsnEncodedDataCollection(AsnEncodedData asnEncodedData)
-            : this()
+        public AsnEncodedDataCollection(AsnEncodedData asnEncodedData) : this()
         {
             _list.Add(asnEncodedData);
         }
@@ -40,18 +39,12 @@ namespace System.Security.Cryptography
 
         public AsnEncodedData this[int index]
         {
-            get
-            {
-                return _list[index];
-            }
+            get { return _list[index]; }
         }
 
         public int Count
         {
-            get
-            {
-                return _list.Count;
-            }
+            get { return _list.Count; }
         }
 
         public AsnEncodedDataEnumerator GetEnumerator()
@@ -97,18 +90,12 @@ namespace System.Security.Cryptography
 
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         private readonly List<AsnEncodedData> _list;

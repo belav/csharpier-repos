@@ -15,14 +15,20 @@ namespace Microsoft.CodeAnalysis
         private DiagnosticDescriptor? _descriptor;
         internal ObsoleteAttributeData Data { get; }
 
-        internal CustomObsoleteDiagnosticInfo(CommonMessageProvider messageProvider, int errorCode, ObsoleteAttributeData data, params object[] arguments)
-            : base(messageProvider, errorCode, arguments)
+        internal CustomObsoleteDiagnosticInfo(
+            CommonMessageProvider messageProvider,
+            int errorCode,
+            ObsoleteAttributeData data,
+            params object[] arguments
+        ) : base(messageProvider, errorCode, arguments)
         {
             Data = data;
         }
 
-        private CustomObsoleteDiagnosticInfo(CustomObsoleteDiagnosticInfo baseInfo, DiagnosticSeverity effectiveSeverity)
-            : base(baseInfo, effectiveSeverity)
+        private CustomObsoleteDiagnosticInfo(
+            CustomObsoleteDiagnosticInfo baseInfo,
+            DiagnosticSeverity effectiveSeverity
+        ) : base(baseInfo, effectiveSeverity)
         {
             Data = baseInfo.Data;
         }
@@ -111,7 +117,8 @@ namespace Microsoft.CodeAnalysis
                 isEnabledByDefault: baseDescriptor.IsEnabledByDefault,
                 description: baseDescriptor.Description,
                 helpLinkUri: helpLinkUri,
-                customTags: customTags);
+                customTags: customTags
+            );
         }
     }
 }

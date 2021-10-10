@@ -41,7 +41,9 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var httpContext = CreateHttpContext();
-            httpContext.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(), "myapp"));
+            httpContext.SetEndpoint(
+                new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(), "myapp")
+            );
 
             var middleware = CreateMiddleware();
 
@@ -63,17 +65,22 @@ namespace Microsoft.AspNetCore.Routing
 
             var sink = new TestSink(
                 TestSink.EnableWithTypeName<EndpointRoutingMiddleware>,
-                TestSink.EnableWithTypeName<EndpointRoutingMiddleware>);
+                TestSink.EnableWithTypeName<EndpointRoutingMiddleware>
+            );
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
             var listener = new DiagnosticListener("TestListener");
 
-            using var subscription = listener.Subscribe(new DelegateObserver(pair =>
-            {
-                eventFired = true;
+            using var subscription = listener.Subscribe(
+                new DelegateObserver(
+                    pair =>
+                    {
+                        eventFired = true;
 
-                Assert.Equal("Microsoft.AspNetCore.Routing.EndpointMatched", pair.Key);
-                Assert.IsAssignableFrom<HttpContext>(pair.Value);
-            }));
+                        Assert.Equal("Microsoft.AspNetCore.Routing.EndpointMatched", pair.Key);
+                        Assert.IsAssignableFrom<HttpContext>(pair.Value);
+                    }
+                )
+            );
 
             var httpContext = CreateHttpContext();
 
@@ -143,20 +150,25 @@ namespace Microsoft.AspNetCore.Routing
             var httpContext = CreateHttpContext();
 
             var matcherFactory = new Mock<MatcherFactory>();
-            matcherFactory
-                .Setup(f => f.CreateMatcher(It.IsAny<EndpointDataSource>()))
+            matcherFactory.Setup(f => f.CreateMatcher(It.IsAny<EndpointDataSource>()))
                 .Throws(new InvalidTimeZoneException())
                 .Verifiable();
 
             var middleware = CreateMiddleware(matcherFactory: matcherFactory.Object);
 
             // Act
-            await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await middleware.Invoke(httpContext));
-            await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await middleware.Invoke(httpContext));
+            await Assert.ThrowsAsync<InvalidTimeZoneException>(
+                async () => await middleware.Invoke(httpContext)
+            );
+            await Assert.ThrowsAsync<InvalidTimeZoneException>(
+                async () => await middleware.Invoke(httpContext)
+            );
 
             // Assert
-            matcherFactory
-                .Verify(f => f.CreateMatcher(It.IsAny<EndpointDataSource>()), Times.Exactly(2));
+            matcherFactory.Verify(
+                f => f.CreateMatcher(It.IsAny<EndpointDataSource>()),
+                Times.Exactly(2)
+            );
         }
 
         private HttpContext CreateHttpContext()
@@ -173,7 +185,8 @@ namespace Microsoft.AspNetCore.Routing
             Logger<EndpointRoutingMiddleware> logger = null,
             MatcherFactory matcherFactory = null,
             DiagnosticListener listener = null,
-            RequestDelegate next = null)
+            RequestDelegate next = null
+        )
         {
             next ??= c => Task.CompletedTask;
             logger ??= new Logger<EndpointRoutingMiddleware>(NullLoggerFactory.Instance);
@@ -185,7 +198,8 @@ namespace Microsoft.AspNetCore.Routing
                 logger,
                 new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>()),
                 listener,
-                next);
+                next
+            );
 
             return middleware;
         }
@@ -198,15 +212,9 @@ namespace Microsoft.AspNetCore.Routing
             {
                 _onNext = onNext;
             }
-            public void OnCompleted()
-            {
+            public void OnCompleted() { }
 
-            }
-
-            public void OnError(Exception error)
-            {
-
-            }
+            public void OnError(Exception error) { }
 
             public void OnNext(KeyValuePair<string, object> value)
             {

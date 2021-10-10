@@ -19,6 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         void ProcessSkipNavigationRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionSkipNavigation navigation,
-            IConventionContext<IConventionSkipNavigation> context);
+            IConventionContext<IConventionSkipNavigation> context
+        );
     }
 }

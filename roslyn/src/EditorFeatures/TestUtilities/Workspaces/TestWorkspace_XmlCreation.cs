@@ -24,18 +24,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string[] files = null,
             string[] metadataReferences = null,
             string extension = null,
-            bool commonReferences = true)
+            bool commonReferences = true
+        )
         {
             var documentElements = new List<XElement>();
 
             if (files != null)
             {
                 var index = 0;
-                extension ??= (language == LanguageNames.CSharp) ? CSharpExtension : VisualBasicExtension;
+                extension ??=
+                    (language == LanguageNames.CSharp) ? CSharpExtension : VisualBasicExtension;
 
                 foreach (var file in files)
                 {
-                    documentElements.Add(CreateDocumentElement(file, GetDefaultTestSourceDocumentName(index++, extension), parseOptions));
+                    documentElements.Add(
+                        CreateDocumentElement(
+                            file,
+                            GetDefaultTestSourceDocumentName(index++, extension),
+                            parseOptions
+                        )
+                    );
                 }
             }
 
@@ -47,12 +55,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 }
             }
 
-            var projectElement = CreateProjectElement(compilationOptions?.ModuleName ?? "Test", language, commonReferences, parseOptions, compilationOptions, documentElements);
+            var projectElement = CreateProjectElement(
+                compilationOptions?.ModuleName ?? "Test",
+                language,
+                commonReferences,
+                parseOptions,
+                compilationOptions,
+                documentElements
+            );
             return CreateWorkspaceElement(projectElement);
         }
 
-        protected static XElement CreateWorkspaceElement(
-            params XElement[] projectElements)
+        protected static XElement CreateWorkspaceElement(params XElement[] projectElements)
         {
             return new XElement(WorkspaceElementName, projectElements);
         }
@@ -63,17 +77,22 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             bool commonReferences,
             ParseOptions parseOptions,
             CompilationOptions compilationOptions,
-            params object[] elements)
+            params object[] elements
+        )
         {
-            return new XElement(ProjectElementName,
+            return new XElement(
+                ProjectElementName,
                 new XAttribute(AssemblyNameAttributeName, assemblyName),
                 new XAttribute(LanguageAttributeName, language),
                 commonReferences ? new XAttribute(CommonReferencesAttributeName, true) : null,
                 parseOptions == null ? null : CreateLanguageVersionAttribute(parseOptions),
                 parseOptions == null ? null : CreateDocumentationModeAttribute(parseOptions),
                 parseOptions == null ? null : CreateFeaturesAttribute(parseOptions),
-                compilationOptions == null ? null : CreateCompilationOptionsElement(compilationOptions),
-                elements);
+                compilationOptions == null
+                  ? null
+                  : CreateCompilationOptionsElement(compilationOptions),
+                elements
+            );
         }
 
         private static XAttribute CreateLanguageVersionAttribute(ParseOptions parseOptions)
@@ -82,11 +101,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             var vbOptions = parseOptions as VisualBasicParseOptions;
             if (csharpOptions != null)
             {
-                return new XAttribute(LanguageVersionAttributeName, CodeAnalysis.CSharp.LanguageVersionFacts.ToDisplayString(csharpOptions.LanguageVersion));
+                return new XAttribute(
+                    LanguageVersionAttributeName,
+                    CodeAnalysis.CSharp.LanguageVersionFacts.ToDisplayString(
+                        csharpOptions.LanguageVersion
+                    )
+                );
             }
             else if (vbOptions != null)
             {
-                return new XAttribute(LanguageVersionAttributeName, CodeAnalysis.VisualBasic.LanguageVersionFacts.ToDisplayString(vbOptions.LanguageVersion));
+                return new XAttribute(
+                    LanguageVersionAttributeName,
+                    CodeAnalysis.VisualBasic.LanguageVersionFacts.ToDisplayString(
+                        vbOptions.LanguageVersion
+                    )
+                );
             }
             else
             {
@@ -113,7 +142,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             }
             else
             {
-                return new XAttribute(DocumentationModeAttributeName, parseOptions.DocumentationMode);
+                return new XAttribute(
+                    DocumentationModeAttributeName,
+                    parseOptions.DocumentationMode
+                );
             }
         }
 
@@ -129,7 +161,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             }
             else if (options is CodeAnalysis.VisualBasic.VisualBasicCompilationOptions vbOptions)
             {
-                element.Add(vbOptions.GlobalImports.AsEnumerable().Select(i => new XElement(GlobalImportElementName, i.Name)));
+                element.Add(
+                    vbOptions.GlobalImports.AsEnumerable()
+                        .Select(i => new XElement(GlobalImportElementName, i.Name))
+                );
 
                 if (vbOptions.RootNamespace != null)
                 {
@@ -139,7 +174,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             if (options.GeneralDiagnosticOption != ReportDiagnostic.Default)
             {
-                element.SetAttributeValue(ReportDiagnosticAttributeName, options.GeneralDiagnosticOption);
+                element.SetAttributeValue(
+                    ReportDiagnosticAttributeName,
+                    options.GeneralDiagnosticOption
+                );
             }
 
             if (options.CheckOverflow)
@@ -160,23 +198,31 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             return element;
         }
 
-        private static XElement CreateMetadataReference(string path)
-            => new XElement(MetadataReferenceElementName, path);
+        private static XElement CreateMetadataReference(string path) =>
+            new XElement(MetadataReferenceElementName, path);
 
-        protected static XElement CreateDocumentElement(string code, string filePath, ParseOptions parseOptions = null)
+        protected static XElement CreateDocumentElement(
+            string code,
+            string filePath,
+            ParseOptions parseOptions = null
+        )
         {
-            return new XElement(DocumentElementName,
+            return new XElement(
+                DocumentElementName,
                 new XAttribute(FilePathAttributeName, filePath),
                 CreateParseOptionsElement(parseOptions),
-                code.Replace("\r\n", "\n"));
+                code.Replace("\r\n", "\n")
+            );
         }
 
         private static XElement CreateParseOptionsElement(ParseOptions parseOptions)
         {
             return parseOptions == null
-                ? null
-                : new XElement(ParseOptionsElementName,
-                    new XAttribute(KindAttributeName, parseOptions.Kind));
+              ? null
+              : new XElement(
+                    ParseOptionsElementName,
+                    new XAttribute(KindAttributeName, parseOptions.Kind)
+                );
         }
     }
 }

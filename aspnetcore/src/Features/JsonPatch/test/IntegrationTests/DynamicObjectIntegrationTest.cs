@@ -17,17 +17,25 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             dynamicTestObject.Nested = new NestedObject();
             dynamicTestObject.Nested.DynamicProperty = new DynamicTestObject();
             dynamicTestObject.Nested.DynamicProperty.InBetweenFirst = new DynamicTestObject();
-            dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond = new DynamicTestObject();
-            dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond.StringProperty = "A";
+            dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond =
+                new DynamicTestObject();
+            dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond.StringProperty =
+                "A";
 
             var patchDocument = new JsonPatchDocument();
-            patchDocument.Add("/Nested/DynamicProperty/InBetweenFirst/InBetweenSecond/StringProperty", "B");
+            patchDocument.Add(
+                "/Nested/DynamicProperty/InBetweenFirst/InBetweenSecond/StringProperty",
+                "B"
+            );
 
             // Act
             patchDocument.ApplyTo(dynamicTestObject);
 
             // Assert
-            Assert.Equal("B", dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond.StringProperty);
+            Assert.Equal(
+                "B",
+                dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond.StringProperty
+            );
         }
 
         [Fact]
@@ -48,22 +56,24 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             //   member of an existing array.
 
             // Arrange
-            var nestedObject = new NestedObject()
-            {
-                DynamicProperty = new DynamicTestObject()
-            };
+            var nestedObject = new NestedObject() { DynamicProperty = new DynamicTestObject() };
 
             var patchDocument = new JsonPatchDocument();
             patchDocument.Add("DynamicProperty/OtherProperty/IntProperty", 1);
 
             // Act
-            var exception = Assert.Throws<JsonPatchException>(() =>
-            {
-                patchDocument.ApplyTo(nestedObject);
-            });
+            var exception = Assert.Throws<JsonPatchException>(
+                () =>
+                {
+                    patchDocument.ApplyTo(nestedObject);
+                }
+            );
 
             // Assert
-            Assert.Equal("The target location specified by path segment 'OtherProperty' was not found.", exception.Message);
+            Assert.Equal(
+                "The target location specified by path segment 'OtherProperty' was not found.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -76,7 +86,10 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             dynamicTestObject.NestedDynamicObject.AnotherStringProperty = "B";
 
             var patchDocument = new JsonPatchDocument();
-            patchDocument.Copy("NestedDynamicObject/StringProperty", "NestedDynamicObject/AnotherStringProperty");
+            patchDocument.Copy(
+                "NestedDynamicObject/StringProperty",
+                "NestedDynamicObject/AnotherStringProperty"
+            );
 
             // Act
             patchDocument.ApplyTo(dynamicTestObject);
@@ -84,7 +97,6 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             // Assert
             Assert.Equal("A", dynamicTestObject.NestedDynamicObject.AnotherStringProperty);
         }
-
 
         [Fact]
         public void MoveToNonExistingProperty_InDynamicObject_ShouldAddNewProperty()
@@ -149,24 +161,25 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
         {
             // Arrange
             dynamic dynamicTestObject = new DynamicTestObject();
-            dynamicTestObject.SimpleObject = new SimpleObject()
-            {
-                StringProperty = "A"
-            };
+            dynamicTestObject.SimpleObject = new SimpleObject() { StringProperty = "A" };
 
             var patchDocument = new JsonPatchDocument();
             patchDocument.Remove("Simpleobject/stringProperty");
 
             // Act
-            var exception = Assert.Throws<JsonPatchException>(() =>
-            {
-                patchDocument.ApplyTo(dynamicTestObject);
-            });
+            var exception = Assert.Throws<JsonPatchException>(
+                () =>
+                {
+                    patchDocument.ApplyTo(dynamicTestObject);
+                }
+            );
 
             // Assert
-            Assert.Equal("The target location specified by path segment 'Simpleobject' was not found.", exception.Message);
+            Assert.Equal(
+                "The target location specified by path segment 'Simpleobject' was not found.",
+                exception.Message
+            );
         }
-
 
         [Fact]
         public void ReplaceNestedTypedObject_InDynamicObject()
@@ -179,10 +192,7 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
                 IntegerList = new List<int>() { 1, 2, 3 }
             };
 
-            var newObject = new SimpleObject()
-            {
-                DoubleValue = 1
-            };
+            var newObject = new SimpleObject() { DoubleValue = 1 };
 
             var patchDocument = new JsonPatchDocument();
             patchDocument.Replace("SimpleObject", newObject);
@@ -224,13 +234,18 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             patchDocument.Test("Nested/IntegerList/0", 2);
 
             // Act
-            var exception = Assert.Throws<JsonPatchException>(() =>
-            {
-                patchDocument.ApplyTo(dynamicTestObject);
-            });
+            var exception = Assert.Throws<JsonPatchException>(
+                () =>
+                {
+                    patchDocument.ApplyTo(dynamicTestObject);
+                }
+            );
 
             // Assert
-            Assert.Equal("The current value '1' at position '0' is not equal to the test value '2'.", exception.Message);
+            Assert.Equal(
+                "The current value '1' at position '0' is not equal to the test value '2'.",
+                exception.Message
+            );
         }
     }
 }

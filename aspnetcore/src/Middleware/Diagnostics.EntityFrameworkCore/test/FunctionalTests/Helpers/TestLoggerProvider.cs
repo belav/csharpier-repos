@@ -21,9 +21,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.FunctionalTests.H
             return _logger;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public class TestLogger : ILogger
         {
@@ -42,7 +40,13 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.FunctionalTests.H
                 }
             }
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            )
             {
                 lock (_sync)
                 {
@@ -64,8 +68,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.FunctionalTests.H
             {
                 public static NullScope Instance = new NullScope();
 
-                public void Dispose()
-                { }
+                public void Dispose() { }
             }
         }
     }

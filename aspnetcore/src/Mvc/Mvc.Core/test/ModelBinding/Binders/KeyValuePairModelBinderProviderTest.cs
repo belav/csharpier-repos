@@ -36,18 +36,20 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var provider = new KeyValuePairModelBinderProvider();
 
             var context = new TestModelBinderProviderContext(typeof(KeyValuePair<string, int>));
-            context.OnCreatingBinder(m =>
-            {
-                if (m.ModelType == typeof(string) || m.ModelType == typeof(int))
+            context.OnCreatingBinder(
+                m =>
                 {
-                    return Mock.Of<IModelBinder>();
+                    if (m.ModelType == typeof(string) || m.ModelType == typeof(int))
+                    {
+                        return Mock.Of<IModelBinder>();
+                    }
+                    else
+                    {
+                        Assert.False(true, "Not the right model type");
+                        return null;
+                    }
                 }
-                else
-                {
-                    Assert.False(true, "Not the right model type");
-                    return null;
-                }
-            });
+            );
 
             // Act
             var result = provider.GetBinder(context);

@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
         public void CompositeRouteConstraint_Match_CallsMatchOnInnerConstraints(
             bool inner1Result,
             bool inner2Result,
-            bool expected)
+            bool expected
+        )
         {
             // Arrange
             var inner1 = MockConstraintWithResult(inner1Result);
@@ -34,20 +35,19 @@ namespace Microsoft.AspNetCore.Routing.Tests
             Assert.Equal(expected, actual);
         }
 
-        static Expression<Func<IRouteConstraint, bool>> ConstraintMatchMethodExpression =
-            c => c.Match(
+        static Expression<Func<IRouteConstraint, bool>> ConstraintMatchMethodExpression = c =>
+            c.Match(
                 It.IsAny<HttpContext>(),
                 It.IsAny<IRouter>(),
                 It.IsAny<string>(),
                 It.IsAny<RouteValueDictionary>(),
-                It.IsAny<RouteDirection>());
+                It.IsAny<RouteDirection>()
+            );
 
         private static Mock<IRouteConstraint> MockConstraintWithResult(bool result)
         {
             var mock = new Mock<IRouteConstraint>();
-            mock.Setup(ConstraintMatchMethodExpression)
-                .Returns(result)
-                .Verifiable();
+            mock.Setup(ConstraintMatchMethodExpression).Returns(result).Verifiable();
             return mock;
         }
     }

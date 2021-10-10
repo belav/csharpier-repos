@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Builder
         /// </remarks>
         public static IEndpointConventionBuilder MapFallbackToFile(
             this IEndpointRouteBuilder endpoints,
-            string filePath)
+            string filePath
+        )
         {
             if (endpoints == null)
             {
@@ -77,7 +78,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapFallbackToFile(
             this IEndpointRouteBuilder endpoints,
             string filePath,
-            StaticFileOptions options)
+            StaticFileOptions options
+        )
         {
             if (endpoints == null)
             {
@@ -122,7 +124,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapFallbackToFile(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            string filePath)
+            string filePath
+        )
         {
             if (endpoints == null)
             {
@@ -171,7 +174,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             string filePath,
-            StaticFileOptions options)
+            StaticFileOptions options
+        )
         {
             if (endpoints == null)
             {
@@ -188,24 +192,31 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentNullException(nameof(filePath));
             }
 
-            return endpoints.MapFallback(pattern, CreateRequestDelegate(endpoints, filePath, options));
+            return endpoints.MapFallback(
+                pattern,
+                CreateRequestDelegate(endpoints, filePath, options)
+            );
         }
 
         private static RequestDelegate CreateRequestDelegate(
             IEndpointRouteBuilder endpoints,
             string filePath,
-            StaticFileOptions? options = null)
+            StaticFileOptions? options = null
+        )
         {
             var app = endpoints.CreateApplicationBuilder();
-            app.Use(next => context =>
-            {
-                context.Request.Path = "/" + filePath;
+            app.Use(
+                next =>
+                    context =>
+                    {
+                        context.Request.Path = "/" + filePath;
 
-                // Set endpoint to null so the static files middleware will handle the request.
-                context.SetEndpoint(null);
+                        // Set endpoint to null so the static files middleware will handle the request.
+                        context.SetEndpoint(null);
 
-                return next(context);
-            });
+                        return next(context);
+                    }
+            );
 
             if (options == null)
             {

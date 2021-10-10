@@ -57,7 +57,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
 
             // Act 1
-            var addStatus = adapter.TryAdd(target, segment, resolver, "new", out string errorMessage);
+            var addStatus = adapter.TryAdd(
+                target,
+                segment,
+                resolver,
+                "new",
+                out string errorMessage
+            );
 
             // Assert 1
             Assert.True(addStatus);
@@ -65,7 +71,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             Assert.Equal("new", target.NewProperty);
 
             // Act 2
-            var getStatus = adapter.TryGet(target, segment, resolver, out object getValue, out string getErrorMessage);
+            var getStatus = adapter.TryGet(
+                target,
+                segment,
+                resolver,
+                out object getValue,
+                out string getErrorMessage
+            );
 
             // Assert 2
             Assert.True(getStatus);
@@ -83,12 +95,21 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
 
             // Act
-            var getStatus = adapter.TryGet(target, segment, resolver, out object getValue, out string getErrorMessage);
+            var getStatus = adapter.TryGet(
+                target,
+                segment,
+                resolver,
+                out object getValue,
+                out string getErrorMessage
+            );
 
             // Assert
             Assert.False(getStatus);
             Assert.Null(getValue);
-            Assert.Equal($"The target location specified by path segment '{segment}' was not found.", getErrorMessage);
+            Assert.Equal(
+                $"The target location specified by path segment '{segment}' was not found.",
+                getErrorMessage
+            );
         }
 
         [Fact]
@@ -103,7 +124,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
 
             // Act
-            var status = adapter.TryTraverse(target, segment, resolver, out object nextTarget, out string errorMessage);
+            var status = adapter.TryTraverse(
+                target,
+                segment,
+                resolver,
+                out object nextTarget,
+                out string errorMessage
+            );
 
             // Assert
             Assert.True(status);
@@ -122,11 +149,20 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
 
             // Act
-            var status = adapter.TryTraverse(target.NestedObject, segment, resolver, out object nextTarget, out string errorMessage);
+            var status = adapter.TryTraverse(
+                target.NestedObject,
+                segment,
+                resolver,
+                out object nextTarget,
+                out string errorMessage
+            );
 
             // Assert
             Assert.False(status);
-            Assert.Equal($"The target location specified by path segment '{segment}' was not found.", errorMessage);
+            Assert.Equal(
+                $"The target location specified by path segment '{segment}' was not found.",
+                errorMessage
+            );
         }
 
         [Fact]
@@ -140,7 +176,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
 
             // Act
-            var status = adapter.TryReplace(target, segment, resolver, "new", out string errorMessage);
+            var status = adapter.TryReplace(
+                target,
+                segment,
+                resolver,
+                "new",
+                out string errorMessage
+            );
 
             // Assert
             Assert.True(status);
@@ -158,11 +200,20 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
 
             // Act
-            var status = adapter.TryReplace(target, segment, resolver, "test", out string errorMessage);
+            var status = adapter.TryReplace(
+                target,
+                segment,
+                resolver,
+                "test",
+                out string errorMessage
+            );
 
             // Assert
             Assert.False(status);
-            Assert.Equal($"The target location specified by path segment '{segment}' was not found.", errorMessage);
+            Assert.Equal(
+                $"The target location specified by path segment '{segment}' was not found.",
+                errorMessage
+            );
         }
 
         [Fact]
@@ -176,7 +227,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
 
             // Act
-            var status = adapter.TryReplace(target, segment, resolver, "test", out string errorMessage);
+            var status = adapter.TryReplace(
+                target,
+                segment,
+                resolver,
+                "test",
+                out string errorMessage
+            );
 
             // Assert
             Assert.False(status);
@@ -195,7 +252,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
 
             // Act 1
-            var addStatus = adapter.TryAdd(target, segment, resolver, value, out string errorMessage);
+            var addStatus = adapter.TryAdd(
+                target,
+                segment,
+                resolver,
+                value,
+                out string errorMessage
+            );
 
             // Assert 1
             Assert.True(addStatus);
@@ -203,7 +266,12 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             Assert.Equal(value, target.NewProperty);
 
             // Act 2
-            var removeStatus = adapter.TryRemove(target, segment, resolver, out string removeErrorMessage);
+            var removeStatus = adapter.TryRemove(
+                target,
+                segment,
+                resolver,
+                out string removeErrorMessage
+            );
 
             // Assert 2
             Assert.True(removeStatus);
@@ -221,11 +289,19 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
 
             // Act
-            var removeStatus = adapter.TryRemove(target, segment, resolver, out string removeErrorMessage);
+            var removeStatus = adapter.TryRemove(
+                target,
+                segment,
+                resolver,
+                out string removeErrorMessage
+            );
 
             // Assert
             Assert.False(removeStatus);
-            Assert.Equal($"The target location specified by path segment '{segment}' was not found.", removeErrorMessage);
+            Assert.Equal(
+                $"The target location specified by path segment '{segment}' was not found.",
+                removeErrorMessage
+            );
         }
 
         [Fact]
@@ -233,18 +309,19 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         {
             var adapter = new DynamicObjectAdapter();
             dynamic target = new DynamicTestObject();
-            var value = new List<object>()
-            {
-                "Joana",
-                2,
-                new Customer("Joana", 25)
-            };
+            var value = new List<object>() { "Joana", 2, new Customer("Joana", 25) };
             target.NewProperty = value;
             var segment = "NewProperty";
             var resolver = new DefaultContractResolver();
 
             // Act
-            var testStatus = adapter.TryTest(target, segment, resolver, value, out string errorMessage);
+            var testStatus = adapter.TryTest(
+                target,
+                segment,
+                resolver,
+                value,
+                out string errorMessage
+            );
 
             // Assert
             Assert.Equal(value, target.NewProperty);
@@ -255,16 +332,23 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         [Fact]
         public void TryTest_ThrowsJsonPatchException_IfTestFails()
         {
-            // Arrange            
+            // Arrange
             var adapter = new DynamicObjectAdapter();
             dynamic target = new DynamicTestObject();
             target.NewProperty = "Joana";
             var segment = "NewProperty";
             var resolver = new DefaultContractResolver();
-            var expectedErrorMessage = $"The current value 'Joana' at path '{segment}' is not equal to the test value 'John'.";
+            var expectedErrorMessage =
+                $"The current value 'Joana' at path '{segment}' is not equal to the test value 'John'.";
 
             // Act
-            var testStatus = adapter.TryTest(target, segment, resolver, "John", out string errorMessage);
+            var testStatus = adapter.TryTest(
+                target,
+                segment,
+                resolver,
+                "John",
+                out string errorMessage
+            );
 
             // Assert
             Assert.False(testStatus);

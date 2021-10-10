@@ -15,27 +15,26 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         public void DefaultTagHelperOptimizationPass_Execute_ReplacesChildren()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @addTagHelper TestTagHelper, TestAssembly
-<p foo=""17"" attr=""value"">");
+<p foo=""17"" attr=""value"">"
+            );
 
             var tagHelpers = new[]
             {
                 TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
                     .TypeName("TestTagHelper")
-                    .BoundAttributeDescriptor(attribute => attribute
-                        .Name("Foo")
-                        .TypeName("System.Int32")
-                        .PropertyName("FooProp"))
+                    .BoundAttributeDescriptor(
+                        attribute =>
+                            attribute.Name("Foo").TypeName("System.Int32").PropertyName("FooProp")
+                    )
                     .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                     .Build()
             };
 
             var engine = CreateEngine(tagHelpers);
-            var pass = new DefaultTagHelperOptimizationPass()
-            {
-                Engine = engine
-            };
+            var pass = new DefaultTagHelperOptimizationPass() { Engine = engine };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -46,8 +45,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             var @class = irDocument.FindPrimaryClass();
             Assert.IsType<DefaultTagHelperRuntimeIntermediateNode>(@class.Children[0]);
 
-            var fieldDeclaration = Assert.IsType<FieldDeclarationIntermediateNode>(@class.Children[1]);
-            Assert.Equal(bool.TrueString, fieldDeclaration.Annotations[CommonAnnotations.DefaultTagHelperExtension.TagHelperField]);
+            var fieldDeclaration = Assert.IsType<FieldDeclarationIntermediateNode>(
+                @class.Children[1]
+            );
+            Assert.Equal(
+                bool.TrueString,
+                fieldDeclaration.Annotations[
+                    CommonAnnotations.DefaultTagHelperExtension.TagHelperField
+                ]
+            );
             Assert.Equal("__TestTagHelper", fieldDeclaration.FieldName);
             Assert.Equal("global::TestTagHelper", fieldDeclaration.FieldType);
             Assert.Equal("private", fieldDeclaration.Modifiers.First());
@@ -59,21 +65,31 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             Assert.Equal("p", body.TagName);
             Assert.Equal(TagMode.StartTagAndEndTag, body.TagMode);
 
-            var create = Assert.IsType<DefaultTagHelperCreateIntermediateNode>(tagHelper.Children[1]);
+            var create = Assert.IsType<DefaultTagHelperCreateIntermediateNode>(
+                tagHelper.Children[1]
+            );
             Assert.Equal("__TestTagHelper", create.FieldName);
             Assert.Equal("TestTagHelper", create.TypeName);
             Assert.Equal(tagHelpers[0], create.TagHelper, TagHelperDescriptorComparer.Default);
 
-            var property = Assert.IsType<DefaultTagHelperPropertyIntermediateNode>(tagHelper.Children[2]);
+            var property = Assert.IsType<DefaultTagHelperPropertyIntermediateNode>(
+                tagHelper.Children[2]
+            );
             Assert.Equal("foo", property.AttributeName);
             Assert.Equal(AttributeStructure.DoubleQuotes, property.AttributeStructure);
-            Assert.Equal(tagHelpers[0].BoundAttributes[0], property.BoundAttribute, BoundAttributeDescriptorComparer.Default);
+            Assert.Equal(
+                tagHelpers[0].BoundAttributes[0],
+                property.BoundAttribute,
+                BoundAttributeDescriptorComparer.Default
+            );
             Assert.Equal("__TestTagHelper", property.FieldName);
             Assert.False(property.IsIndexerNameMatch);
             Assert.Equal("FooProp", property.PropertyName);
             Assert.Equal(tagHelpers[0], property.TagHelper, TagHelperDescriptorComparer.Default);
 
-            var htmlAttribute = Assert.IsType<DefaultTagHelperHtmlAttributeIntermediateNode>(tagHelper.Children[3]);
+            var htmlAttribute = Assert.IsType<DefaultTagHelperHtmlAttributeIntermediateNode>(
+                tagHelper.Children[3]
+            );
             Assert.Equal("attr", htmlAttribute.AttributeName);
             Assert.Equal(AttributeStructure.DoubleQuotes, htmlAttribute.AttributeStructure);
 
@@ -88,13 +104,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
         private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
         {
-            return RazorProjectEngine.Create(b =>
-            {
-                b.Features.Add(new TestTagHelperFeature(tagHelpers));
-            }).Engine;
+            return RazorProjectEngine.Create(
+                b =>
+                {
+                    b.Features.Add(new TestTagHelperFeature(tagHelpers));
+                }
+            ).Engine;
         }
 
-        private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+        private DocumentIntermediateNode CreateIRDocument(
+            RazorEngine engine,
+            RazorCodeDocument codeDocument
+        )
         {
             for (var i = 0; i < engine.Phases.Count; i++)
             {

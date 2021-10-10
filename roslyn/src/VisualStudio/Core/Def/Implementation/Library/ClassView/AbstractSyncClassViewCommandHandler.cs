@@ -19,8 +19,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassView
 {
-    internal abstract class AbstractSyncClassViewCommandHandler : ForegroundThreadAffinitizedObject,
-        ICommandHandler<SyncClassViewCommandArgs>
+    internal abstract class AbstractSyncClassViewCommandHandler
+        : ForegroundThreadAffinitizedObject,
+          ICommandHandler<SyncClassViewCommandArgs>
     {
         private const string ClassView = "Class View";
 
@@ -30,8 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
 
         protected AbstractSyncClassViewCommandHandler(
             IThreadingContext threadingContext,
-            SVsServiceProvider serviceProvider)
-            : base(threadingContext)
+            SVsServiceProvider serviceProvider
+        ) : base(threadingContext)
         {
             Contract.ThrowIfNull(serviceProvider);
 
@@ -50,9 +51,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
 
             var snapshot = args.SubjectBuffer.CurrentSnapshot;
 
-            using var waitScope = context.OperationContext.AddScope(allowCancellation: true, string.Format(ServicesVSResources.Synchronizing_with_0, ClassView));
+            using var waitScope = context.OperationContext.AddScope(
+                allowCancellation: true,
+                string.Format(ServicesVSResources.Synchronizing_with_0, ClassView)
+            );
             var document = snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
-                context.OperationContext).WaitAndGetResult(context.OperationContext.UserCancellationToken);
+                    context.OperationContext
+                )
+                .WaitAndGetResult(context.OperationContext.UserCancellationToken);
             if (document == null)
             {
                 return true;
@@ -71,19 +77,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
             }
 
             var userCancellationToken = context.OperationContext.UserCancellationToken;
-            var semanticModel = document
-                .GetSemanticModelAsync(userCancellationToken)
+            var semanticModel = document.GetSemanticModelAsync(userCancellationToken)
                 .WaitAndGetResult(userCancellationToken);
 
-            var root = semanticModel.SyntaxTree
-                .GetRootAsync(userCancellationToken)
+            var root = semanticModel.SyntaxTree.GetRootAsync(userCancellationToken)
                 .WaitAndGetResult(userCancellationToken);
 
-            var memberDeclaration = syntaxFactsService.GetContainingMemberDeclaration(root, caretPosition);
+            var memberDeclaration = syntaxFactsService.GetContainingMemberDeclaration(
+                root,
+                caretPosition
+            );
 
-            var symbol = memberDeclaration != null
-                ? semanticModel.GetDeclaredSymbol(memberDeclaration, userCancellationToken)
-                : null;
+            var symbol =
+                memberDeclaration != null
+                    ? semanticModel.GetDeclaredSymbol(memberDeclaration, userCancellationToken)
+                    : null;
 
             while (symbol != null && !IsValidSymbolToSynchronize(symbol))
             {
@@ -93,7 +101,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
             IVsNavInfo navInfo = null;
             if (symbol != null)
             {
-                navInfo = libraryService.NavInfoFactory.CreateForSymbol(symbol, document.Project, semanticModel.Compilation, useExpandedHierarchy: true);
+                navInfo = libraryService.NavInfoFactory.CreateForSymbol(
+                    symbol,
+                    document.Project,
+                    semanticModel.Compilation,
+                    useExpandedHierarchy: true
+                );
             }
 
             if (navInfo == null)
@@ -106,19 +119,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
                 return true;
             }
 
-            var navigationTool = IServiceProviderExtensions.GetService<SVsClassView, IVsNavigationTool>(_serviceProvider);
+            var navigationTool = IServiceProviderExtensions.GetService<
+                SVsClassView,
+                IVsNavigationTool
+            >(_serviceProvider);
             navigationTool.NavigateToNavInfo(navInfo);
             return true;
         }
 
         private static bool IsValidSymbolToSynchronize(ISymbol symbol) =>
-            symbol.Kind == SymbolKind.Event ||
-            symbol.Kind == SymbolKind.Field ||
-            symbol.Kind == SymbolKind.Method ||
-            symbol.Kind == SymbolKind.NamedType ||
-            symbol.Kind == SymbolKind.Property;
+            symbol.Kind == SymbolKind.Event
+            || symbol.Kind == SymbolKind.Field
+            || symbol.Kind == SymbolKind.Method
+            || symbol.Kind == SymbolKind.NamedType
+            || symbol.Kind == SymbolKind.Property;
 
-        public CommandState GetCommandState(SyncClassViewCommandArgs args)
-            => Commanding.CommandState.Available;
+        public CommandState GetCommandState(SyncClassViewCommandArgs args) =>
+            Commanding.CommandState.Available;
     }
 }

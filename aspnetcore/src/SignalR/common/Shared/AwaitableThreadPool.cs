@@ -18,10 +18,7 @@ namespace Microsoft.AspNetCore.Internal
 
         public readonly struct Awaitable : ICriticalNotifyCompletion
         {
-            public void GetResult()
-            {
-
-            }
+            public void GetResult() { }
 
             public Awaitable GetAwaiter() => this;
 

@@ -71,6 +71,7 @@ namespace System.IO.Tests
                     Flush(fs, flushToDisk);
                 }
             }
+
             finally
             {
                 File.SetAttributes(fileName, FileAttributes.Normal);
@@ -85,7 +86,15 @@ namespace System.IO.Tests
         {
             string fileName = GetTestFilePath();
             File.WriteAllBytes(fileName, TestBuffer);
-            using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite, 2))
+            using (
+                FileStream fs = new FileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite,
+                    2
+                )
+            )
             {
                 Assert.Equal(TestBuffer[0], fs.ReadByte());
                 Flush(fs, flushToDisk);
@@ -101,8 +110,23 @@ namespace System.IO.Tests
             string fileName = GetTestFilePath();
 
             // ensure that we'll be using a buffer larger than our test data
-            using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite, TestBuffer.Length * 2))
-            using (FileStream fsr = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (
+                FileStream fs = new FileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite,
+                    TestBuffer.Length * 2
+                )
+            )
+            using (
+                FileStream fsr = new FileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.ReadWrite
+                )
+            )
             {
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
                 Assert.Equal(TestBuffer.Length, fs.Length);
@@ -123,7 +147,12 @@ namespace System.IO.Tests
         [Fact]
         public void FlushCallsFlush_flushToDisk_False()
         {
-            using (StoreFlushArgFileStream fs = new StoreFlushArgFileStream(GetTestFilePath(), FileMode.Create))
+            using (
+                StoreFlushArgFileStream fs = new StoreFlushArgFileStream(
+                    GetTestFilePath(),
+                    FileMode.Create
+                )
+            )
             {
                 fs.Flush();
                 Assert.True(fs.LastFlushArg.HasValue);
@@ -134,7 +163,12 @@ namespace System.IO.Tests
         [Fact]
         public void SafeFileHandleCallsFlush_flushToDisk_False()
         {
-            using (StoreFlushArgFileStream fs = new StoreFlushArgFileStream(GetTestFilePath(), FileMode.Create))
+            using (
+                StoreFlushArgFileStream fs = new StoreFlushArgFileStream(
+                    GetTestFilePath(),
+                    FileMode.Create
+                )
+            )
             {
                 GC.KeepAlive(fs.SafeFileHandle); // this should call Flush, which should call StoreFlushArgFileStream.Flush(false)
 
@@ -153,7 +187,10 @@ namespace System.IO.Tests
             using (var pipeStream = new AnonymousPipeServerStream(PipeDirection.In))
             using (var clientHandle = pipeStream.ClientSafePipeHandle)
             {
-                SafeFileHandle handle = new SafeFileHandle((IntPtr)int.Parse(pipeStream.GetClientHandleAsString()), false);
+                SafeFileHandle handle = new SafeFileHandle(
+                    (IntPtr)int.Parse(pipeStream.GetClientHandleAsString()),
+                    false
+                );
                 using (FileStream fs = new FileStream(handle, FileAccess.Write, 1, false))
                 {
                     Flush(fs, flushToDisk);
@@ -171,9 +208,7 @@ namespace System.IO.Tests
 
         private sealed class StoreFlushArgFileStream : FileStream
         {
-            public StoreFlushArgFileStream(string path, FileMode mode) : base(path, mode)
-            {
-            }
+            public StoreFlushArgFileStream(string path, FileMode mode) : base(path, mode) { }
 
             public bool? LastFlushArg { get; set; }
 
@@ -183,6 +218,5 @@ namespace System.IO.Tests
                 base.Flush(flushToDisk);
             }
         }
-
     }
 }

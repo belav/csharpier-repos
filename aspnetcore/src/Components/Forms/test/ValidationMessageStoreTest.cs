@@ -29,7 +29,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             var field1 = new FieldIdentifier(new object(), "field1");
             var field2 = new FieldIdentifier(new object(), "field2");
             var field3 = new FieldIdentifier(new object(), "field3");
-            
+
             // Act
             messages.Add(field1, "Field 1 message 1");
             messages.Add(field1, "Field 1 message 2");

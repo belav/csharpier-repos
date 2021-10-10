@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     var handler = services.GetRequiredService<MvcAttributeRouteHandler>();
                     handler.Actions = actions;
                     return handler;
-                });
+                }
+            );
         }
     }
 }

@@ -21,13 +21,11 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public interface IGen<T>
 {
     void _Init(T fld1);
     bool InstVerify(System.Type t1);
 }
-
 
 public interface IGenSubInt : IGen<int> { }
 public interface IGenSubDouble : IGen<double> { }
@@ -39,7 +37,6 @@ public interface IGenSubConstructedValue : IGen<ValX1<string>> { }
 public interface IGenSub1DIntArray : IGen<int[]> { }
 public interface IGenSub2DStringArray : IGen<string[,]> { }
 public interface IGenSubJaggedObjectArray : IGen<object[][]> { }
-
 
 public class GenInt : IGenSubInt
 {
@@ -73,7 +70,6 @@ public class GenDouble : IGenSubDouble
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -96,7 +92,6 @@ public class GenString : IGenSubString
     {
         Fld1 = fld1;
     }
-
 
     public bool InstVerify(System.Type t1)
     {
@@ -144,7 +139,6 @@ public class GenGuid : IGenSubGuid
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -167,7 +161,6 @@ public class GenConstructedReference : IGenSubConstructedReference
     {
         Fld1 = fld1;
     }
-
 
     public bool InstVerify(System.Type t1)
     {
@@ -192,7 +185,6 @@ public class GenConstructedValue : IGenSubConstructedValue
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -206,7 +198,6 @@ public class GenConstructedValue : IGenSubConstructedValue
         return result;
     }
 }
-
 
 public class Gen1DIntArray : IGenSub1DIntArray
 {
@@ -240,7 +231,6 @@ public class Gen2DStringArray : IGenSub2DStringArray
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -264,7 +254,6 @@ public class GenJaggedObjectArray : IGenSubJaggedObjectArray
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -279,7 +268,6 @@ public class GenJaggedObjectArray : IGenSubJaggedObjectArray
     }
 }
 
-
 public class Test
 {
     public static int counter = 0;
@@ -292,7 +280,6 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -348,5 +335,4 @@ public class Test
             return 1;
         }
     }
-
 }

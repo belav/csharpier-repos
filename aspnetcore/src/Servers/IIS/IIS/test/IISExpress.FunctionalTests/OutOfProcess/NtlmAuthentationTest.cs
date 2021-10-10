@@ -21,13 +21,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         // TODO either enable windows auth on our CI or use containers to test this
         // behavior
 
-        public NtlmAuthenticationTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public NtlmAuthenticationTests(PublishedSitesFixture fixture) : base(fixture) { }
 
-        public static TestMatrix TestVariants
-            => TestMatrix.ForServers(DeployerSelector.ServerType)
-                .WithTfms(Tfm.Default);
+        public static TestMatrix TestVariants =>
+            TestMatrix.ForServers(DeployerSelector.ServerType).WithTfms(Tfm.Default);
 
         [ConditionalTheory]
         [RequiresIIS(IISCapability.WindowsAuthentication)]
