@@ -1032,7 +1032,11 @@ namespace System.Reflection.Metadata.Ecma335
         public void AddEventMap(TypeDefinitionHandle declaringType, EventDefinitionHandle eventList)
         {
             _eventMapTable.Add(
-                new EventMapRow { Parent = declaringType.RowId, EventList = eventList.RowId }
+                new EventMapRow
+                {
+                    Parent = declaringType.RowId,
+                    EventList = eventList.RowId
+                }
             );
         }
 
@@ -1316,7 +1320,13 @@ namespace System.Reflection.Metadata.Ecma335
         /// </remarks>
         public void AddFieldLayout(FieldDefinitionHandle field, int offset)
         {
-            _fieldLayoutTable.Add(new FieldLayoutRow { Field = field.RowId, Offset = offset });
+            _fieldLayoutTable.Add(
+                new FieldLayoutRow
+                {
+                    Field = field.RowId,
+                    Offset = offset
+                }
+            );
         }
 
         /// <summary>
@@ -1337,7 +1347,11 @@ namespace System.Reflection.Metadata.Ecma335
             _fieldMarshalTableLastParent = codedIndex;
 
             _fieldMarshalTable.Add(
-                new FieldMarshalRow { Parent = codedIndex, NativeType = descriptor }
+                new FieldMarshalRow
+                {
+                    Parent = codedIndex,
+                    NativeType = descriptor
+                }
             );
         }
 
@@ -1361,7 +1375,13 @@ namespace System.Reflection.Metadata.Ecma335
                 Throw.ArgumentOutOfRange(nameof(offset));
             }
 
-            _fieldRvaTable.Add(new FieldRvaRow { Field = field.RowId, Offset = offset });
+            _fieldRvaTable.Add(
+                new FieldRvaRow
+                {
+                    Field = field.RowId,
+                    Offset = offset
+                }
+            );
         }
 
         /// <summary>
@@ -1615,7 +1635,11 @@ namespace System.Reflection.Metadata.Ecma335
         public void AddEncLogEntry(EntityHandle entity, EditAndContinueOperation code)
         {
             _encLogTable.Add(
-                new EncLogRow { Token = entity.Token, FuncCode = unchecked((byte)code) }
+                new EncLogRow
+                {
+                    Token = entity.Token,
+                    FuncCode = unchecked((byte)code)
+                }
             );
         }
 
@@ -1768,7 +1792,13 @@ namespace System.Reflection.Metadata.Ecma335
         /// </param>
         public LocalConstantHandle AddLocalConstant(StringHandle name, BlobHandle signature)
         {
-            _localConstantTable.Add(new LocalConstantRow { Name = name, Signature = signature });
+            _localConstantTable.Add(
+                new LocalConstantRow
+                {
+                    Name = name,
+                    Signature = signature
+                }
+            );
 
             return LocalConstantHandle.FromRowId(_localConstantTable.Count);
         }
@@ -1783,7 +1813,11 @@ namespace System.Reflection.Metadata.Ecma335
         public ImportScopeHandle AddImportScope(ImportScopeHandle parentScope, BlobHandle imports)
         {
             _importScopeTable.Add(
-                new ImportScopeRow { Parent = parentScope.RowId, Imports = imports }
+                new ImportScopeRow
+                {
+                    Parent = parentScope.RowId,
+                    Imports = imports
+                }
             );
 
             return ImportScopeHandle.FromRowId(_importScopeTable.Count);

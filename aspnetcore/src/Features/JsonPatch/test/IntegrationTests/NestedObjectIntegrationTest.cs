@@ -274,7 +274,11 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             // Arrange
             var targetObject = new SimpleObjectWithNestedObject()
             {
-                SimpleObject = new SimpleObject() { IntegerValue = 2, AnotherIntegerValue = 3 }
+                SimpleObject = new SimpleObject()
+                {
+                    IntegerValue = 2,
+                    AnotherIntegerValue = 3
+                }
             };
 
             var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -295,8 +299,16 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
         public void Move_KeepsObjectReference()
         {
             // Arrange
-            var sDto = new SimpleObject() { StringProperty = "A", AnotherStringProperty = "B" };
-            var iDto = new InheritedObject() { StringProperty = "C", AnotherStringProperty = "D" };
+            var sDto = new SimpleObject()
+            {
+                StringProperty = "A",
+                AnotherStringProperty = "B"
+            };
+            var iDto = new InheritedObject()
+            {
+                StringProperty = "C",
+                AnotherStringProperty = "D"
+            };
             var targetObject = new SimpleObjectWithNestedObject()
             {
                 SimpleObject = sDto,

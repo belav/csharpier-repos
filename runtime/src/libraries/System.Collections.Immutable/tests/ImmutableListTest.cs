@@ -639,8 +639,18 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ReplaceWithEqualityComparerTest()
         {
-            var list = ImmutableList.Create(new Person { Name = "Andrew", Age = 20 });
-            var newAge = new Person { Name = "Andrew", Age = 21 };
+            var list = ImmutableList.Create(
+                new Person
+                {
+                    Name = "Andrew",
+                    Age = 20
+                }
+            );
+            var newAge = new Person
+            {
+                Name = "Andrew",
+                Age = 21
+            };
             var updatedList = list.Replace(newAge, newAge, new NameOnlyEqualityComparer());
             Assert.Equal(newAge.Age, updatedList[0].Age);
 

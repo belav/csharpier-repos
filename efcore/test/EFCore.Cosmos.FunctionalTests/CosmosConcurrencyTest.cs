@@ -24,7 +24,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         public virtual Task Adding_the_same_entity_twice_results_in_DbUpdateException()
         {
             return ConcurrencyTestAsync<DbUpdateException>(
-                ctx => ctx.Customers.Add(new Customer { Id = "1", Name = "CreatedTwice", })
+                ctx =>
+                    ctx.Customers.Add(
+                        new Customer
+                        {
+                            Id = "1",
+                            Name = "CreatedTwice",
+                        }
+                    )
             );
         }
 
@@ -32,7 +39,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         public virtual Task Updating_then_deleting_the_same_entity_results_in_DbUpdateConcurrencyException()
         {
             return ConcurrencyTestAsync<DbUpdateConcurrencyException>(
-                ctx => ctx.Customers.Add(new Customer { Id = "2", Name = "Added", }),
+                ctx =>
+                    ctx.Customers.Add(
+                        new Customer
+                        {
+                            Id = "2",
+                            Name = "Added",
+                        }
+                    ),
                 ctx => ctx.Customers.Single(c => c.Id == "2").Name = "Updated",
                 ctx => ctx.Customers.Remove(ctx.Customers.Single(c => c.Id == "2"))
             );
@@ -42,7 +56,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         public virtual Task Updating_then_updating_the_same_entity_results_in_DbUpdateConcurrencyException()
         {
             return ConcurrencyTestAsync<DbUpdateConcurrencyException>(
-                ctx => ctx.Customers.Add(new Customer { Id = "3", Name = "Added", }),
+                ctx =>
+                    ctx.Customers.Add(
+                        new Customer
+                        {
+                            Id = "3",
+                            Name = "Added",
+                        }
+                    ),
                 ctx => ctx.Customers.Single(c => c.Id == "3").Name = "Updated",
                 ctx => ctx.Customers.Single(c => c.Id == "3").Name = "Updated"
             );
@@ -53,7 +74,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName);
 
-            var customer = new Customer { Id = "4", Name = "Theon", };
+            var customer = new Customer
+            {
+                Id = "4",
+                Name = "Theon",
+            };
 
             await using (
                 var context = new ConcurrencyContext(
@@ -91,7 +116,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             await using var testDatabase = CosmosTestStore.Create(DatabaseName);
 
-            var customer = new Customer { Id = "3", Name = "Theon", };
+            var customer = new Customer
+            {
+                Id = "3",
+                Name = "Theon",
+            };
 
             await using (
                 var context = new ConcurrencyContext(

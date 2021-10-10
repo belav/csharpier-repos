@@ -35,9 +35,21 @@ namespace System.Runtime.InteropServices.Tests
         {
             Array array = new Point[]
             {
-                new Point() { x = 100, y = 100 },
-                new Point() { x = -1, y = -1 },
-                new Point() { x = 0, y = 0 }
+                new Point()
+                {
+                    x = 100,
+                    y = 100
+                },
+                new Point()
+                {
+                    x = -1,
+                    y = -1
+                },
+                new Point()
+                {
+                    x = 0,
+                    y = 0
+                }
             };
 
             GCHandle handle = GCHandle.Alloc(array, GCHandleType.Pinned);
@@ -93,9 +105,21 @@ namespace System.Runtime.InteropServices.Tests
         {
             var array = new Point[]
             {
-                new Point() { x = 100, y = 100 },
-                new Point() { x = -1, y = -1 },
-                new Point() { x = 0, y = 0 }
+                new Point()
+                {
+                    x = 100,
+                    y = 100
+                },
+                new Point()
+                {
+                    x = -1,
+                    y = -1
+                },
+                new Point()
+                {
+                    x = 0,
+                    y = 0
+                }
             };
 
             GCHandle handle = GCHandle.Alloc(array, GCHandleType.Pinned);

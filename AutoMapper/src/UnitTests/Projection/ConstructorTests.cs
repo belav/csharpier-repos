@@ -72,7 +72,14 @@ namespace AutoMapper.UnitTests.Projection
                     {
                         new SourceItem
                         {
-                            Values = new[] { new SourceValue { Value1 = 1, Value2 = 2 } }
+                            Values = new[]
+                            {
+                                new SourceValue
+                                {
+                                    Value1 = 1,
+                                    Value2 = 2
+                                }
+                            }
                         }
                     }
                 }

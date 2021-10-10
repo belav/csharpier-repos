@@ -112,7 +112,11 @@ namespace IdentitySample.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -244,7 +248,11 @@ namespace IdentitySample.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -398,7 +406,12 @@ namespace IdentitySample.Controllers
             }
             var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
             var factorOptions = userFactors.Select(
-                    purpose => new SelectListItem { Text = purpose, Value = purpose }
+                    purpose =>
+                        new SelectListItem
+                        {
+                            Text = purpose,
+                            Value = purpose
+                        }
                 )
                 .ToList();
             return View(

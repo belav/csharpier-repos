@@ -322,10 +322,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 context.Entry(principal).State = entityState;
             }
 
-            var dependent = new Child { Name = "1", Parent = principal };
+            var dependent = new Child
+            {
+                Name = "1",
+                Parent = principal
+            };
             principal.Child1 = dependent;
 
-            var subDependent = new SubChild { Name = "1S", Parent = dependent };
+            var subDependent = new SubChild
+            {
+                Name = "1S",
+                Parent = dependent
+            };
             dependent.SubChild = subDependent;
 
             if (useTrackGraph == null)
@@ -738,10 +746,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 context.Entry(principal).State = entityState;
             }
 
-            var dependent = new Child { Name = "1", Parent = principal };
+            var dependent = new Child
+            {
+                Name = "1",
+                Parent = principal
+            };
             principal.ChildCollection1 = CreateChildCollection(collectionType, dependent);
 
-            var subDependent = new SubChild { Name = "1S", Parent = dependent };
+            var subDependent = new SubChild
+            {
+                Name = "1S",
+                Parent = dependent
+            };
             dependent.SubChildCollection = CreateChildCollection(collectionType, subDependent);
 
             if (useTrackGraph == null)
@@ -4842,8 +4858,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using var context = new OwnedModifiedContext(Guid.NewGuid().ToString());
 
-            var details = new ProductDetails { Color = "C1", Size = "S1" };
-            var product = new Product { Name = "Product1", Details = details };
+            var details = new ProductDetails
+            {
+                Color = "C1",
+                Size = "S1"
+            };
+            var product = new Product
+            {
+                Name = "Product1",
+                Details = details
+            };
 
             context.Add(product);
 
@@ -4868,7 +4892,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Empty(context.ChangeTracker.Entries());
             Assert.Equal(EntityState.Detached, context.Entry(details).State);
 
-            var newDetails = new ProductDetails { Color = "C2", Size = "S2" };
+            var newDetails = new ProductDetails
+            {
+                Color = "C2",
+                Size = "S2"
+            };
 
             var newProduct = new Product
             {
@@ -4934,9 +4962,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public void Can_save_multiple_deep_owned_entities()
         {
             using var context = new StreetContext(nameof(StreetContext));
-            var address1 = new StreetAddress { Street = "1", City = "City" };
+            var address1 = new StreetAddress
+            {
+                Street = "1",
+                City = "City"
+            };
 
-            var address2 = new StreetAddress { Street = "2", City = "City" };
+            var address2 = new StreetAddress
+            {
+                Street = "2",
+                City = "City"
+            };
 
             var distributor = new Distributor
             {
@@ -5017,7 +5053,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var info = new Info { Title = "MyBook" };
 
-            var book = new Book { BookId = MyBookId, Pages = 99, EnglishInfo = info };
+            var book = new Book
+            {
+                BookId = MyBookId,
+                Pages = 99,
+                EnglishInfo = info
+            };
 
             using (var context = new BooksContext(nameof(BooksContext)))
             {
@@ -5048,7 +5089,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 var newInfo = new Info { Title = "MyBook Rev 2" };
 
-                var newBook = new Book { BookId = MyBookId, Pages = 100, EnglishInfo = newInfo };
+                var newBook = new Book
+                {
+                    BookId = MyBookId,
+                    Pages = 100,
+                    EnglishInfo = newInfo
+                };
 
                 context.Remove(book);
 
@@ -5091,7 +5137,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var info = new Info { Title = "MyBook" };
 
-            var book = new Book { BookId = MyBookId, Pages = 99, EnglishInfo = info };
+            var book = new Book
+            {
+                BookId = MyBookId,
+                Pages = 99,
+                EnglishInfo = info
+            };
 
             using (var context = new BooksContext(nameof(BooksContext)))
             {
@@ -5122,7 +5173,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 var newInfo = new Info { Title = "MyBook Rev 2" };
 
-                var newBook = new Book { BookId = MyBookId, Pages = 100, EnglishInfo = newInfo };
+                var newBook = new Book
+                {
+                    BookId = MyBookId,
+                    Pages = 100,
+                    EnglishInfo = newInfo
+                };
 
                 context.Remove(book);
 
@@ -5211,16 +5267,28 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 new TestOrderItem
                 {
                     ProductName = "Test Product 1",
-                    Price = new TestMoney { Amount = 99.99, Currency = TestCurrency.EUR }
+                    Price = new TestMoney
+                    {
+                        Amount = 99.99,
+                        Currency = TestCurrency.EUR
+                    }
                 },
                 new TestOrderItem
                 {
                     ProductName = "Test Product 3",
-                    Price = new TestMoney { Amount = 8.95, Currency = TestCurrency.USD }
+                    Price = new TestMoney
+                    {
+                        Amount = 8.95,
+                        Currency = TestCurrency.USD
+                    }
                 }
             };
 
-            var order = new TestOrder { CustomerName = "Test Customer", TestOrderItems = items };
+            var order = new TestOrder
+            {
+                CustomerName = "Test Customer",
+                TestOrderItems = items
+            };
 
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
@@ -5376,26 +5444,46 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 new TestOrderItem
                 {
                     ProductName = "Test Product 1",
-                    Price = new TestMoney { Amount = 99.99, Currency = TestCurrency.EUR }
+                    Price = new TestMoney
+                    {
+                        Amount = 99.99,
+                        Currency = TestCurrency.EUR
+                    }
                 },
                 new TestOrderItem
                 {
                     ProductName = "Test Product 2",
-                    Price = new TestMoney { Amount = 10, Currency = TestCurrency.EUR }
+                    Price = new TestMoney
+                    {
+                        Amount = 10,
+                        Currency = TestCurrency.EUR
+                    }
                 },
                 new TestOrderItem
                 {
                     ProductName = "Test Product 3",
-                    Price = new TestMoney { Amount = 8.95, Currency = TestCurrency.USD }
+                    Price = new TestMoney
+                    {
+                        Amount = 8.95,
+                        Currency = TestCurrency.USD
+                    }
                 },
                 new TestOrderItem
                 {
                     ProductName = "Test Product 4",
-                    Price = new TestMoney { Amount = 2.99, Currency = TestCurrency.USD }
+                    Price = new TestMoney
+                    {
+                        Amount = 2.99,
+                        Currency = TestCurrency.USD
+                    }
                 }
             };
 
-            var order = new TestOrder { CustomerName = "Test Customer", TestOrderItems = items };
+            var order = new TestOrder
+            {
+                CustomerName = "Test Customer",
+                TestOrderItems = items
+            };
 
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(

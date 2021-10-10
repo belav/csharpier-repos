@@ -23,7 +23,11 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Values_are_copied_into_change_tracker()
         {
             using var db = Fixture.CreateContext();
-            var entity = new PointEntity { Id = Guid.NewGuid(), Point = new Point(0, 0) };
+            var entity = new PointEntity
+            {
+                Id = Guid.NewGuid(),
+                Point = new Point(0, 0)
+            };
             db.Attach(entity);
 
             entity.Point.X = 1;
@@ -35,7 +39,11 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Values_arent_compared_by_reference()
         {
             using var db = Fixture.CreateContext();
-            var entity = new PointEntity { Id = Guid.NewGuid(), Point = new Point(0, 0) };
+            var entity = new PointEntity
+            {
+                Id = Guid.NewGuid(),
+                Point = new Point(0, 0)
+            };
             db.Attach(entity);
 
             entity.Point = new Point(0, 0);
@@ -70,8 +78,16 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     context.AddRange(
-                        new PointEntity { Id = id1, Point = point },
-                        new PolygonEntity { Id = id2, Polygon = polygon }
+                        new PointEntity
+                        {
+                            Id = id1,
+                            Point = point
+                        },
+                        new PolygonEntity
+                        {
+                            Id = id2,
+                            Polygon = polygon
+                        }
                     );
 
                     context.SaveChanges();

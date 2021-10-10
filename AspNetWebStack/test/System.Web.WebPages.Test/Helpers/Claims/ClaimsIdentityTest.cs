@@ -46,8 +46,16 @@ namespace System.Web.Helpers.Claims.Test
                 {
                     return new MyClaim[]
                     {
-                        new MyClaim() { ClaimType = "claim-type-1", Value = "claim-value-1" },
-                        new MyClaim() { ClaimType = "claim-type-2", Value = "claim-value-2" }
+                        new MyClaim()
+                        {
+                            ClaimType = "claim-type-1",
+                            Value = "claim-value-1"
+                        },
+                        new MyClaim()
+                        {
+                            ClaimType = "claim-type-2",
+                            Value = "claim-value-2"
+                        }
                     };
                 }
             }

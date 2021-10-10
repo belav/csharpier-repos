@@ -412,7 +412,11 @@ namespace Microsoft.EntityFrameworkCore
                             {
                                 Id = -1,
                                 Name = "Wubbsy Racing",
-                                Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" }
+                                Chassis = new Chassis
+                                {
+                                    TeamId = -1,
+                                    Name = "Wubbsy"
+                                }
                             }
                         );
 
@@ -423,7 +427,11 @@ namespace Microsoft.EntityFrameworkCore
                             {
                                 Id = -1,
                                 Name = "Wubbsy Racing",
-                                Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" }
+                                Chassis = new Chassis
+                                {
+                                    TeamId = -1,
+                                    Name = "Wubbsy"
+                                }
                             }
                         );
 
@@ -542,7 +550,11 @@ namespace Microsoft.EntityFrameworkCore
                         using (BeginTransaction(context.Database))
                         {
                             var entry = context.Drivers.Add(
-                                new Driver { Name = "Larry David", TeamId = Team.Ferrari }
+                                new Driver
+                                {
+                                    Name = "Larry David",
+                                    TeamId = Team.Ferrari
+                                }
                             );
 
                             if (async)
@@ -599,7 +611,12 @@ namespace Microsoft.EntityFrameworkCore
                         using (BeginTransaction(context.Database))
                         {
                             var entry = context.Drivers.Add(
-                                new Driver { Id = 676, Name = "Larry David", TeamId = Team.Ferrari }
+                                new Driver
+                                {
+                                    Id = 676,
+                                    Name = "Larry David",
+                                    TeamId = Team.Ferrari
+                                }
                             );
 
                             entry.State = state;

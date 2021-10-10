@@ -43,7 +43,13 @@ namespace Newtonsoft.Json.Bson
 
         public void Add(string name, BsonToken token)
         {
-            _children.Add(new BsonProperty { Name = new BsonString(name, false), Value = token });
+            _children.Add(
+                new BsonProperty
+                {
+                    Name = new BsonString(name, false),
+                    Value = token
+                }
+            );
             token.Parent = this;
         }
 

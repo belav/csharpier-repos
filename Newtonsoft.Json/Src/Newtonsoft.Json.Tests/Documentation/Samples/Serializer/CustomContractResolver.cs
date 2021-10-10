@@ -89,7 +89,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Person person = new Person { FirstName = "Dennis", LastName = "Deepwater-Diver" };
+            Person person = new Person
+            {
+                FirstName = "Dennis",
+                LastName = "Deepwater-Diver"
+            };
 
             string startingWithF = JsonConvert.SerializeObject(
                 person,

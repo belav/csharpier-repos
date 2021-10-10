@@ -118,7 +118,13 @@ namespace Microsoft.EntityFrameworkCore
                             .EnableSensitiveDataLogging();
 
                         using var context = new DbContext(optionsBuilder.Options);
-                        context.Add(new AnotherEntityWithCompositeKeys { Id = 1, SecondId = 2 });
+                        context.Add(
+                            new AnotherEntityWithCompositeKeys
+                            {
+                                Id = 1,
+                                SecondId = 2
+                            }
+                        );
                         context.SaveChanges();
                     }
                 ).Message

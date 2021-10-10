@@ -91,7 +91,11 @@ namespace AutoMapper.UnitTests.Bug
                 .Map<Container, Container2>(
                     new Container()
                     {
-                        Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" }
+                        Item = new ProxyOfSubA()
+                        {
+                            Name = "Martin",
+                            Description = "Hello"
+                        }
                     }
                 );
             Assert.IsType<SubB>(mapped.Item);
@@ -109,7 +113,13 @@ namespace AutoMapper.UnitTests.Bug
             );
 
             var mapped = config.CreateMapper()
-                .Map<BaseA, SubB>(new ProxyOfSubA() { Name = "Martin", Description = "Hello" });
+                .Map<BaseA, SubB>(
+                    new ProxyOfSubA()
+                    {
+                        Name = "Martin",
+                        Description = "Hello"
+                    }
+                );
             Assert.IsType<SubB>(mapped);
         }
 
@@ -129,7 +139,11 @@ namespace AutoMapper.UnitTests.Bug
                 .Map<Container, Container2>(
                     new Container()
                     {
-                        Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" }
+                        Item = new ProxyOfSubA()
+                        {
+                            Name = "Martin",
+                            Description = "Hello"
+                        }
                     }
                 );
             Assert.IsType<SubB>(mapped.Item);

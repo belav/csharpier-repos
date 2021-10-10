@@ -15,7 +15,11 @@
                     cfg.AllowNullCollections = false;
                     cfg.CreateMap<Source, Destination>();
 
-                    _source = new Source { Name = null, Data = null };
+                    _source = new Source
+                    {
+                        Name = null,
+                        Data = null
+                    };
                 }
             );
 

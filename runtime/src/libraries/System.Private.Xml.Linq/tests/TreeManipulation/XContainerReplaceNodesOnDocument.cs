@@ -23,8 +23,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(OnDocument)
                 {
-                    Attribute = new VariationAttribute("XDocument(empty): Replace with single node")
-                    {
+                    Attribute = new VariationAttribute(
+                        "XDocument(empty): Replace with single node"
+                    ) {
                         Params = new object[] { 1, "", true },
                         Priority = 2
                     }

@@ -5180,7 +5180,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
+                    new CodeMemberMethod
+                    {
+                        ReturnType = new CodeTypeReference("as"),
+                        Name = "is"
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    private @as @is() {{{nl}    }}{nl}}}{nl}"
@@ -5245,7 +5249,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
+                    new CodeMemberMethod
+                    {
+                        ReturnType = new CodeTypeReference("as"),
+                        Name = "is"
+                    }
                 ),
                 customOptions,
                 $"public class type{nl}{{{nl}$private @as @is(){nl}${{{nl}$}}{nl}}}{nl}"
@@ -5267,7 +5275,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Abstract }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Abstract
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    abstract void name();{nl}}}{nl}"
@@ -5275,7 +5287,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Final }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Final
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
@@ -5283,7 +5299,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Static }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Static
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    static void name() {{{nl}    }}{nl}}}{nl}"
@@ -5291,7 +5311,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Override }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Override
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    override void name() {{{nl}    }}{nl}}}{nl}"
@@ -5299,7 +5323,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Const }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Const
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
@@ -5307,7 +5335,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.ScopeMask }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.ScopeMask
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
@@ -5315,7 +5347,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.New }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.New
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    new void name() {{{nl}    }}{nl}}}{nl}"
@@ -5323,7 +5359,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.VTableMask }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.VTableMask
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
@@ -5331,7 +5371,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Overloaded }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Overloaded
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
@@ -5339,7 +5383,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Assembly }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Assembly
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    internal virtual void name() {{{nl}    }}{nl}}}{nl}"
@@ -5359,7 +5407,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Family }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Family
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    protected virtual void name() {{{nl}    }}{nl}}}{nl}"
@@ -5379,7 +5431,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Private }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Private
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    private void name() {{{nl}    }}{nl}}}{nl}"
@@ -5387,7 +5443,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Public }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.Public
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    public virtual void name() {{{nl}    }}{nl}}}{nl}"
@@ -5395,7 +5455,11 @@ text
             yield return new object[]
             {
                 CreateType(
-                    new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.AccessMask }
+                    new CodeMemberMethod
+                    {
+                        Name = "name",
+                        Attributes = MemberAttributes.AccessMask
+                    }
                 ),
                 null,
                 $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
@@ -6061,7 +6125,11 @@ text
                 }
             );
             fullInterface.Members.Add(
-                new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
+                new CodeMemberMethod
+                {
+                    ReturnType = new CodeTypeReference("as"),
+                    Name = "is"
+                }
             );
             fullInterface.Members.Add(
                 new CodeMemberMethod
@@ -6273,7 +6341,11 @@ text
                 }
             );
             fullEnum.Members.Add(
-                new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
+                new CodeMemberMethod
+                {
+                    ReturnType = new CodeTypeReference("as"),
+                    Name = "is"
+                }
             );
             fullEnum.Members.Add(
                 new CodeMemberMethod
@@ -6518,7 +6590,11 @@ text
                 }
             );
             fullDelegate.Members.Add(
-                new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
+                new CodeMemberMethod
+                {
+                    ReturnType = new CodeTypeReference("as"),
+                    Name = "is"
+                }
             );
             fullDelegate.Members.Add(
                 new CodeMemberMethod
@@ -7524,13 +7600,21 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
             };
             yield return new object[]
             {
-                new CodeTypeDeclaration("name") { IsPartial = true, IsStruct = true },
+                new CodeTypeDeclaration("name")
+                {
+                    IsPartial = true,
+                    IsStruct = true
+                },
                 null,
                 $"public partial struct name {{{nl}}}{nl}"
             };
             yield return new object[]
             {
-                new CodeTypeDeclaration("name") { IsPartial = true, IsEnum = true },
+                new CodeTypeDeclaration("name")
+                {
+                    IsPartial = true,
+                    IsEnum = true
+                },
                 null,
                 $"public enum name {{{nl}}}{nl}"
             };

@@ -138,8 +138,18 @@ internal class Program
         GenAbstractImpl<int> ga2 = new GenAbstractImpl<int>();
 
         long expectedI8 = (long)(((ulong)(uint)expected << 32) | (uint)expected);
-        S16 expectedS16 = new S16 { A = expected, B = expected, };
-        S32 expectedS32 = new S32 { A = expected, B = expected, C = expected, D = expected, };
+        S16 expectedS16 = new S16
+        {
+            A = expected,
+            B = expected,
+        };
+        S32 expectedS32 = new S32
+        {
+            A = expected,
+            B = expected,
+            C = expected,
+            D = expected,
+        };
         int ten = 10;
 
         TestCalc(CalcStatic, expected, "Static non-generic");
@@ -393,7 +403,13 @@ internal class Program
     private static S32 CalcStaticRetbuf(int x, int acc)
     {
         if (x == 0)
-            return new S32 { A = acc, B = acc, C = acc, D = acc, };
+            return new S32
+            {
+                A = acc,
+                B = acc,
+                C = acc,
+                D = acc,
+            };
 
         S32 s = default;
         Calc(ref x, ref s, ref acc);
@@ -451,7 +467,11 @@ internal class Program
     private static S16 CalcStaticS16(int x, int acc)
     {
         if (x == 0)
-            return new S16 { A = acc, B = acc };
+            return new S16
+            {
+                A = acc,
+                B = acc
+            };
 
         S32 s = default;
         Calc(ref x, ref s, ref acc);
@@ -587,7 +607,13 @@ internal class Program
     private static S32 CalcStaticCalliRetbuf(int x, int acc)
     {
         if (x == 0)
-            return new S32 { A = acc, B = acc, C = acc, D = acc, };
+            return new S32
+            {
+                A = acc,
+                B = acc,
+                C = acc,
+                D = acc,
+            };
 
         S32 s = default;
         Calc(ref x, ref s, ref acc);
@@ -1089,7 +1115,13 @@ class Instance
             _x = x;
 
         if (_x == 0)
-            return new S32 { A = acc, B = acc, C = acc, D = acc, };
+            return new S32
+            {
+                A = acc,
+                B = acc,
+                C = acc,
+                D = acc,
+            };
 
         S32 s = default;
         Program.Calc(ref _x, ref s, ref acc);
@@ -1174,7 +1206,13 @@ class Instance
             _x = x;
 
         if (_x == 0)
-            return new S32 { A = acc, B = acc, C = acc, D = acc, };
+            return new S32
+            {
+                A = acc,
+                B = acc,
+                C = acc,
+                D = acc,
+            };
 
         S32 s = default;
         Program.Calc(ref _x, ref s, ref acc);
@@ -1238,7 +1276,19 @@ class Instance
         S32 s = new S32();
         IL.Push(s);
 
-        SGC2 sgc = new SGC2 { A = b, B = { A = c, B = d, C = e, D = f, }, C = g, D = h };
+        SGC2 sgc = new SGC2
+        {
+            A = b,
+            B =
+            {
+                A = c,
+                B = d,
+                C = e,
+                D = f,
+            },
+            C = g,
+            D = h
+        };
         IL.Push(sgc);
         IL.Push(ref interior);
 
@@ -1337,7 +1387,13 @@ class ClassImpl : BaseClass
             _x = x;
 
         if (_x == 0)
-            return new S32 { A = acc, B = acc, C = acc, D = acc, };
+            return new S32
+            {
+                A = acc,
+                B = acc,
+                C = acc,
+                D = acc,
+            };
 
         S32 s = default;
         Program.Calc(ref _x, ref s, ref acc);
@@ -1420,7 +1476,13 @@ class InterfaceImpl : IInterface
             _x = x;
 
         if (_x == 0)
-            return new S32 { A = acc, B = acc, C = acc, D = acc, };
+            return new S32
+            {
+                A = acc,
+                B = acc,
+                C = acc,
+                D = acc,
+            };
 
         S32 s = default;
         Program.Calc(ref _x, ref s, ref acc);

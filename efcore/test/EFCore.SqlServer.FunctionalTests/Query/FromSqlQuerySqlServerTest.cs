@@ -850,7 +850,11 @@ WHERE EXISTS (
         }
 
         protected override DbParameter CreateDbParameter(string name, object value) =>
-            new SqlParameter { ParameterName = name, Value = value };
+            new SqlParameter
+            {
+                ParameterName = name,
+                Value = value
+            };
 
         private void AssertSql(params string[] expected) =>
             Fixture.TestSqlLoggerFactory.AssertBaseline(expected);

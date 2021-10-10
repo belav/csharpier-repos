@@ -87,14 +87,22 @@ namespace BasicWebSite.Controllers
 
         public IActionResult JsonHelperInView()
         {
-            Person person = new Person { id = 9000, FullName = "John <b>Smith</b>" };
+            Person person = new Person
+            {
+                id = 9000,
+                FullName = "John <b>Smith</b>"
+            };
 
             return View(person);
         }
 
         public IActionResult JsonHelperWithSettingsInView(bool snakeCase)
         {
-            var person = new Person { id = 9000, FullName = "John <b>Smith</b>" };
+            var person = new Person
+            {
+                id = 9000,
+                FullName = "John <b>Smith</b>"
+            };
             ViewData["naming"] = snakeCase
                 ? (NamingStrategy)new SnakeCaseNamingStrategy()
                 : new DefaultNamingStrategy();

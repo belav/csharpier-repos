@@ -65,7 +65,11 @@ namespace Microsoft.AspNetCore.Identity.Test
             // Setup
             var userManager = MockHelpers.MockUserManager<PocoUser>();
             var roleManager = MockHelpers.MockRoleManager<PocoRole>();
-            var user = new PocoUser { UserName = "Foo", Email = "foo@bar.com" };
+            var user = new PocoUser
+            {
+                UserName = "Foo",
+                Email = "foo@bar.com"
+            };
             userManager.Setup(m => m.SupportsUserClaim).Returns(supportClaims);
             userManager.Setup(m => m.SupportsUserRole).Returns(supportRoles);
             userManager.Setup(m => m.SupportsUserEmail).Returns(supportsUserEmail);

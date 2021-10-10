@@ -30,7 +30,11 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
                 dataProtectionProvider
             );
             var jsResultTask = new ValueTask<object>((object)null);
-            var data = new TestModel { StringProperty = "Hello", IntProperty = 123 };
+            var data = new TestModel
+            {
+                StringProperty = "Hello",
+                IntProperty = 123
+            };
             var keyName = "testKey";
             var expectedPurpose =
                 $"{typeof(TestProtectedBrowserStorage).FullName}:testStore:{keyName}";
@@ -65,7 +69,11 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
                 dataProtectionProvider
             );
             var jsResultTask = new ValueTask<object>((object)null);
-            var data = new TestModel { StringProperty = "Hello", IntProperty = 123 };
+            var data = new TestModel
+            {
+                StringProperty = "Hello",
+                IntProperty = 123
+            };
             var keyName = "testKey";
             var customPurpose = "my custom purpose";
 
@@ -131,7 +139,11 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
                 jsRuntime,
                 dataProtectionProvider
             );
-            var data = new TestModel { StringProperty = "Hello", IntProperty = 123 };
+            var data = new TestModel
+            {
+                StringProperty = "Hello",
+                IntProperty = 123
+            };
             var keyName = "testKey";
             var expectedPurpose =
                 $"{typeof(TestProtectedBrowserStorage).FullName}:testStore:{keyName}";
@@ -164,7 +176,11 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
                 jsRuntime,
                 dataProtectionProvider
             );
-            var data = new TestModel { StringProperty = "Hello", IntProperty = 123 };
+            var data = new TestModel
+            {
+                StringProperty = "Hello",
+                IntProperty = 123
+            };
             var keyName = "testKey";
             var customPurpose = "my custom purpose";
             var storedJson = "{\"StringProperty\":\"Hello\",\"IntProperty\":123}";

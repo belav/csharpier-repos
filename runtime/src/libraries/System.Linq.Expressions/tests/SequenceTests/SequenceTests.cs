@@ -692,7 +692,11 @@ namespace System.Linq.Expressions.Tests
         {
             NWindProxy.Customer[] custs = new[]
             {
-                new NWindProxy.Customer { CustomerID = "BUBBA", ContactName = "Bubba Gump" }
+                new NWindProxy.Customer
+                {
+                    CustomerID = "BUBBA",
+                    ContactName = "Bubba Gump"
+                }
             };
             NWindProxy.Order[] orders = new[] { new NWindProxy.Order { CustomerID = "BUBBA" } };
 
@@ -2774,7 +2778,12 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void NewClassWithMemberInitializers(bool useInterpreter)
         {
-            Expression<Func<int, ClassX>> f = v => new ClassX { A = v, B = v };
+            Expression<Func<int, ClassX>> f = v =>
+                new ClassX
+                {
+                    A = v,
+                    B = v
+                };
             Func<int, ClassX> d = f.Compile(useInterpreter);
             Assert.Equal(5, d(5).A);
             Assert.Equal(7, d(7).B);
@@ -2793,7 +2802,12 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void NewStructWithMemberInitializers(bool useInterpreter)
         {
-            Expression<Func<int, StructX>> f = v => new StructX { A = v, B = v };
+            Expression<Func<int, StructX>> f = v =>
+                new StructX
+                {
+                    A = v,
+                    B = v
+                };
             Func<int, StructX> d = f.Compile(useInterpreter);
             Assert.Equal(5, d(5).A);
             Assert.Equal(7, d(7).B);
@@ -2853,7 +2867,12 @@ namespace System.Linq.Expressions.Tests
         public void NewClassWithMemberListInitializer(bool useInterpreter)
         {
             Expression<Func<int, ClassX>> f = v =>
-                new ClassX { A = v, B = v + 1, Ys = { new ClassY { B = v + 2 } } };
+                new ClassX
+                {
+                    A = v,
+                    B = v + 1,
+                    Ys = { new ClassY { B = v + 2 } }
+                };
             Func<int, ClassX> d = f.Compile(useInterpreter);
             ClassX x = d(5);
             Assert.Equal(5, x.A);
@@ -2867,7 +2886,12 @@ namespace System.Linq.Expressions.Tests
         public void NewClassWithMemberListOfStructInitializer(bool useInterpreter)
         {
             Expression<Func<int, ClassX>> f = v =>
-                new ClassX { A = v, B = v + 1, SYs = { new StructY { B = v + 2 } } };
+                new ClassX
+                {
+                    A = v,
+                    B = v + 1,
+                    SYs = { new StructY { B = v + 2 } }
+                };
             Func<int, ClassX> d = f.Compile(useInterpreter);
             ClassX x = d(5);
             Assert.Equal(5, x.A);
@@ -2881,7 +2905,12 @@ namespace System.Linq.Expressions.Tests
         public static void NewClassWithMemberMemberInitializer(bool useInterpreter)
         {
             Expression<Func<int, ClassX>> f = v =>
-                new ClassX { A = v, B = v + 1, Y = { B = v + 2 } };
+                new ClassX
+                {
+                    A = v,
+                    B = v + 1,
+                    Y = { B = v + 2 }
+                };
             Func<int, ClassX> d = f.Compile(useInterpreter);
             ClassX x = d(5);
             Assert.Equal(5, x.A);
@@ -2894,7 +2923,12 @@ namespace System.Linq.Expressions.Tests
         public void NewStructWithMemberListInitializer(bool useInterpreter)
         {
             Expression<Func<int, StructX>> f = v =>
-                new StructX { A = v, B = v + 1, Ys = { new ClassY { B = v + 2 } } };
+                new StructX
+                {
+                    A = v,
+                    B = v + 1,
+                    Ys = { new ClassY { B = v + 2 } }
+                };
             Func<int, StructX> d = f.Compile(useInterpreter);
             StructX x = d(5);
             Assert.Equal(5, x.A);
@@ -2908,7 +2942,12 @@ namespace System.Linq.Expressions.Tests
         public void NewStructWithStructMemberMemberInitializer(bool useInterpreter)
         {
             Expression<Func<int, StructX>> f = v =>
-                new StructX { A = v, B = v + 1, SY = new StructY { B = v + 2 } };
+                new StructX
+                {
+                    A = v,
+                    B = v + 1,
+                    SY = new StructY { B = v + 2 }
+                };
             Func<int, StructX> d = f.Compile(useInterpreter);
             StructX x = d(5);
             Assert.Equal(5, x.A);

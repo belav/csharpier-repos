@@ -232,7 +232,11 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
 
                     List<ChildModel> childModels = new List<ChildModel>
                     {
-                        new ChildModel { ID = 1, Parent = _parent }
+                        new ChildModel
+                        {
+                            ID = 1,
+                            Parent = _parent
+                        }
                     };
 
                     Dictionary<int, ParentModel> parents = childModels.ToDictionary(

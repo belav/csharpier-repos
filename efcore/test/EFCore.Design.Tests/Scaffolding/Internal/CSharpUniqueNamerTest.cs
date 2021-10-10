@@ -18,9 +18,23 @@ namespace Microsoft.EntityFrameworkCore
                 new CSharpUtilities(),
                 null
             );
-            var table = new DatabaseTable { Database = new DatabaseModel(), Name = "foo" };
-            var input1 = new DatabaseColumn { Table = table, Name = "Id", StoreType = "int" };
-            var input2 = new DatabaseColumn { Table = table, Name = "Id", StoreType = "int" };
+            var table = new DatabaseTable
+            {
+                Database = new DatabaseModel(),
+                Name = "foo"
+            };
+            var input1 = new DatabaseColumn
+            {
+                Table = table,
+                Name = "Id",
+                StoreType = "int"
+            };
+            var input2 = new DatabaseColumn
+            {
+                Table = table,
+                Name = "Id",
+                StoreType = "int"
+            };
 
             Assert.Equal("Id", namer.GetName(input1));
             Assert.Equal("Id", namer.GetName(input1));
@@ -37,8 +51,16 @@ namespace Microsoft.EntityFrameworkCore
                 null
             );
             var database = new DatabaseModel();
-            var table1 = new DatabaseTable { Database = database, Name = "A B C" };
-            var table2 = new DatabaseTable { Database = database, Name = "A_B_C" };
+            var table1 = new DatabaseTable
+            {
+                Database = database,
+                Name = "A B C"
+            };
+            var table2 = new DatabaseTable
+            {
+                Database = database,
+                Name = "A_B_C"
+            };
             Assert.Equal("A_B_C", namer.GetName(table1));
             Assert.Equal("A_B_C1", namer.GetName(table2));
         }
@@ -54,7 +76,11 @@ namespace Microsoft.EntityFrameworkCore
                 new CSharpUtilities(),
                 pluralizer.Singularize
             );
-            var table = new DatabaseTable { Database = new DatabaseModel(), Name = input };
+            var table = new DatabaseTable
+            {
+                Database = new DatabaseModel(),
+                Name = input
+            };
             Assert.Equal(output, namer.GetName(table));
         }
 
@@ -69,7 +95,11 @@ namespace Microsoft.EntityFrameworkCore
                 new CSharpUtilities(),
                 pluralizer.Pluralize
             );
-            var table = new DatabaseTable { Database = new DatabaseModel(), Name = input };
+            var table = new DatabaseTable
+            {
+                Database = new DatabaseModel(),
+                Name = input
+            };
             Assert.Equal(output, namer.GetName(table));
         }
     }

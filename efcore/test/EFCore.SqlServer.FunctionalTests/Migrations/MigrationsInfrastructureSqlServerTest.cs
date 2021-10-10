@@ -1504,7 +1504,14 @@ namespace ModelSnapshot22
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Blog>().HasData(new Blog { Id = 1, Name = "HalfADonkey" });
+            modelBuilder.Entity<Blog>()
+                .HasData(
+                    new Blog
+                    {
+                        Id = 1,
+                        Name = "HalfADonkey"
+                    }
+                );
         }
     }
 }

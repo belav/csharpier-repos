@@ -291,7 +291,12 @@ namespace System.ComponentModel.Tests
             public override ISite Site
             {
                 get =>
-                    new MockSite { Container = new Container(), DesignMode = true, Name = "Name1" };
+                    new MockSite
+                    {
+                        Container = new Container(),
+                        DesignMode = true,
+                        Name = "Name1"
+                    };
                 set { }
             }
         }

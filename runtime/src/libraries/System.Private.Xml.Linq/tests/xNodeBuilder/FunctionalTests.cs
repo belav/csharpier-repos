@@ -613,8 +613,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(document_4)
                         {
-                            Attribute = new VariationAttribute("Multiple EndDocument should error")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Multiple EndDocument should error"
+                            ) {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -1383,8 +1384,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeNode_XmlReader6)
                         {
-                            Attribute = new VariationAttribute("WriteNode when reader state is EOF")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteNode when reader state is EOF"
+                            ) {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -1415,8 +1417,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeNode_XmlReader9)
                         {
-                            Attribute = new VariationAttribute("WriteNode with reader on 100 Nodes")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteNode with reader on 100 Nodes"
+                            ) {
                                 Id = 9,
                                 Priority = 1
                             }
@@ -2363,8 +2366,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(attrNamespace_24)
                         {
-                            Attribute = new VariationAttribute("Attach prefix with empty namespace")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Attach prefix with empty namespace"
+                            ) {
                                 Id = 24,
                                 Priority = 1
                             }
@@ -2969,8 +2973,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(charEntity_4)
                         {
-                            Attribute = new VariationAttribute("Character from low surrogate range")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Character from low surrogate range"
+                            ) {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -3082,8 +3087,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(surrogateEntity_7)
                         {
-                            Attribute = new VariationAttribute("Swap high-low surrogate characters")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Swap high-low surrogate characters"
+                            ) {
                                 Id = 7,
                                 Priority = 1
                             }
@@ -3661,8 +3667,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeString_5)
                         {
-                            Attribute = new VariationAttribute("WriteString with entity reference")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteString with entity reference"
+                            ) {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -3775,8 +3782,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(whitespace_4)
                         {
-                            Attribute = new VariationAttribute("WriteWhitespace with String.Empty ")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteWhitespace with String.Empty "
+                            ) {
                                 Param = "String.Empty",
                                 Id = 5,
                                 Priority = 1
@@ -3797,8 +3805,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(whitespace_5)
                         {
-                            Attribute = new VariationAttribute("WriteWhitespace with invalid char")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteWhitespace with invalid char"
+                            ) {
                                 Param = 0,
                                 Id = 8,
                                 Priority = 1
@@ -3808,8 +3817,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(whitespace_5)
                         {
-                            Attribute = new VariationAttribute("WriteWhitespace with invalid char")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteWhitespace with invalid char"
+                            ) {
                                 Param = 16,
                                 Id = 9,
                                 Priority = 1
@@ -3819,8 +3829,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(whitespace_5)
                         {
-                            Attribute = new VariationAttribute("WriteWhitespace with invalid char")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteWhitespace with invalid char"
+                            ) {
                                 Param = 97,
                                 Id = 6,
                                 Priority = 1
@@ -3830,8 +3841,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(whitespace_5)
                         {
-                            Attribute = new VariationAttribute("WriteWhitespace with invalid char")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteWhitespace with invalid char"
+                            ) {
                                 Param = 31,
                                 Id = 10,
                                 Priority = 1
@@ -3841,8 +3853,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(whitespace_5)
                         {
-                            Attribute = new VariationAttribute("WriteWhitespace with invalid char")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteWhitespace with invalid char"
+                            ) {
                                 Param = 14,
                                 Id = 7,
                                 Priority = 1
@@ -4378,8 +4391,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeRaw_6)
                         {
-                            Attribute = new VariationAttribute("WriteRaw with count > buffer size")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteRaw with count > buffer size"
+                            ) {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -4398,8 +4412,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeRaw_8)
                         {
-                            Attribute = new VariationAttribute("WriteRaw with index > buffer size")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteRaw with index > buffer size"
+                            ) {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -4439,8 +4454,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeRaw_12)
                         {
-                            Attribute = new VariationAttribute("WriteRaw with valid surrogate pair")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteRaw with valid surrogate pair"
+                            ) {
                                 Id = 12,
                                 Priority = 1
                             }
@@ -4997,8 +5013,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeState_9)
                         {
-                            Attribute = new VariationAttribute("Call WriteEntityRef after Close()")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Call WriteEntityRef after Close()"
+                            ) {
                                 Param = "WriteEntityRef",
                                 Id = 14,
                                 Priority = 1
@@ -5008,8 +5025,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeState_9)
                         {
-                            Attribute = new VariationAttribute("Call WriteCharEntiry after Close()")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Call WriteCharEntiry after Close()"
+                            ) {
                                 Param = "WriteCharEntity",
                                 Id = 15,
                                 Priority = 1
@@ -5031,8 +5049,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeState_9)
                         {
-                            Attribute = new VariationAttribute("Call WriteWhitespace after Close()")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Call WriteWhitespace after Close()"
+                            ) {
                                 Param = "WriteWhitespace",
                                 Id = 17,
                                 Priority = 1
@@ -5154,8 +5173,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeState_9)
                         {
-                            Attribute = new VariationAttribute("Call WriteAttributes after Close()")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Call WriteAttributes after Close()"
+                            ) {
                                 Param = "WriteAttributes",
                                 Id = 28,
                                 Priority = 1
@@ -5200,8 +5220,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(writeState_9)
                         {
-                            Attribute = new VariationAttribute("Call WriteEndElement after Close()")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Call WriteEndElement after Close()"
+                            ) {
                                 Param = "WriteEndElement",
                                 Id = 8,
                                 Priority = 1
@@ -5936,8 +5957,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(var_3)
                         {
-                            Attribute = new VariationAttribute("WriteAttributeString(String.Empty)")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteAttributeString(String.Empty)"
+                            ) {
                                 Param = "",
                                 Priority = 2
                             }
@@ -6143,8 +6165,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(var_19)
                         {
-                            Attribute = new VariationAttribute("WriteProcessingInstruction('', '')")
-                            {
+                            Attribute = new VariationAttribute(
+                                "WriteProcessingInstruction('', '')"
+                            ) {
                                 Param = "",
                                 Priority = 2
                             }

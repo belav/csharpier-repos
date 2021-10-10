@@ -183,7 +183,11 @@ namespace System.Net.Sockets
             fixed (byte* sockAddr = socketAddress)
             fixed (byte* b = &MemoryMarshal.GetReference(buffer))
             {
-                var iov = new Interop.Sys.IOVector { Base = b, Count = (UIntPtr)buffer.Length };
+                var iov = new Interop.Sys.IOVector
+                {
+                    Base = b,
+                    Count = (UIntPtr)buffer.Length
+                };
 
                 var messageHeader = new Interop.Sys.MessageHeader
                 {
@@ -282,7 +286,11 @@ namespace System.Net.Sockets
             fixed (byte* sockAddr = socketAddress)
             fixed (byte* b = &MemoryMarshal.GetReference(buffer))
             {
-                var iov = new Interop.Sys.IOVector { Base = b + offset, Count = (UIntPtr)count };
+                var iov = new Interop.Sys.IOVector
+                {
+                    Base = b + offset,
+                    Count = (UIntPtr)count
+                };
 
                 var messageHeader = new Interop.Sys.MessageHeader
                 {
@@ -568,7 +576,11 @@ namespace System.Net.Sockets
             fixed (byte* rawSocketAddress = socketAddress)
             fixed (byte* b = &MemoryMarshal.GetReference(buffer))
             {
-                var iov = new Interop.Sys.IOVector { Base = b, Count = (UIntPtr)buffer.Length };
+                var iov = new Interop.Sys.IOVector
+                {
+                    Base = b,
+                    Count = (UIntPtr)buffer.Length
+                };
 
                 messageHeader = new Interop.Sys.MessageHeader
                 {
@@ -2764,7 +2776,11 @@ namespace System.Net.Sockets
                 bool success = false;
                 socket.InternalSafeHandle.DangerousAddRef(ref success);
                 int fd = (int)socket.InternalSafeHandle.DangerousGetHandle();
-                arr[arrOffset++] = new Interop.PollEvent { Events = events, FileDescriptor = fd };
+                arr[arrOffset++] = new Interop.PollEvent
+                {
+                    Events = events,
+                    FileDescriptor = fd
+                };
                 refsAdded++;
             }
         }

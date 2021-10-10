@@ -3089,7 +3089,11 @@ namespace System.Text.Json.Tests
         [InlineData(false)]
         public void InvalidJsonContinueShouldSucceed(bool formatted)
         {
-            var options = new JsonWriterOptions { Indented = formatted, SkipValidation = true };
+            var options = new JsonWriterOptions
+            {
+                Indented = formatted,
+                SkipValidation = true
+            };
             var output = new ArrayBufferWriter<byte>(1024);
 
             using var jsonUtf8 = new Utf8JsonWriter(output, options);
@@ -5497,7 +5501,11 @@ namespace System.Text.Json.Tests
             {
                 string expectedStr = "[}";
 
-                var options = new JsonWriterOptions { Indented = formatted, SkipValidation = true };
+                var options = new JsonWriterOptions
+                {
+                    Indented = formatted,
+                    SkipValidation = true
+                };
                 var output = new ArrayBufferWriter<byte>(1024);
 
                 using var jsonUtf8 = new Utf8JsonWriter(output, options);
@@ -5512,7 +5520,11 @@ namespace System.Text.Json.Tests
             {
                 string expectedStr = "{]";
 
-                var options = new JsonWriterOptions { Indented = formatted, SkipValidation = true };
+                var options = new JsonWriterOptions
+                {
+                    Indented = formatted,
+                    SkipValidation = true
+                };
                 var output = new ArrayBufferWriter<byte>(1024);
 
                 using var jsonUtf8 = new Utf8JsonWriter(output, options);

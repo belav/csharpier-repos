@@ -22,7 +22,11 @@ namespace System.Web.Http.Routing
 
         public static RoutingContext Valid(List<string> pathSegments)
         {
-            return new RoutingContext() { PathSegments = pathSegments, IsValid = true, };
+            return new RoutingContext()
+            {
+                PathSegments = pathSegments,
+                IsValid = true,
+            };
         }
 
         private RoutingContext() { }

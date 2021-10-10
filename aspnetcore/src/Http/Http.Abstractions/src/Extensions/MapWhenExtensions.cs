@@ -48,7 +48,11 @@ namespace Microsoft.AspNetCore.Builder
             var branch = branchBuilder.Build();
 
             // put middleware in pipeline
-            var options = new MapWhenOptions { Predicate = predicate, Branch = branch, };
+            var options = new MapWhenOptions
+            {
+                Predicate = predicate,
+                Branch = branch,
+            };
             return app.Use(next => new MapWhenMiddleware(next, options).Invoke);
         }
     }

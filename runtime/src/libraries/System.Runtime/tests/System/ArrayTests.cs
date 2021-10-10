@@ -1230,11 +1230,36 @@ namespace System.Tests
         {
             var array = new NonGenericStruct[]
             {
-                new NonGenericStruct { x = 1, s = "Hello", z = 2 },
-                new NonGenericStruct { x = 2, s = "Hello", z = 3 },
-                new NonGenericStruct { x = 3, s = "Hello", z = 4 },
-                new NonGenericStruct { x = 4, s = "Hello", z = 5 },
-                new NonGenericStruct { x = 5, s = "Hello", z = 6 }
+                new NonGenericStruct
+                {
+                    x = 1,
+                    s = "Hello",
+                    z = 2
+                },
+                new NonGenericStruct
+                {
+                    x = 2,
+                    s = "Hello",
+                    z = 3
+                },
+                new NonGenericStruct
+                {
+                    x = 3,
+                    s = "Hello",
+                    z = 4
+                },
+                new NonGenericStruct
+                {
+                    x = 4,
+                    s = "Hello",
+                    z = 5
+                },
+                new NonGenericStruct
+                {
+                    x = 5,
+                    s = "Hello",
+                    z = 6
+                }
             };
 
             Array.Clear(array, 0, 5);
@@ -1247,11 +1272,36 @@ namespace System.Tests
 
             array = new NonGenericStruct[]
             {
-                new NonGenericStruct { x = 1, s = "Hello", z = 2 },
-                new NonGenericStruct { x = 2, s = "Hello", z = 3 },
-                new NonGenericStruct { x = 3, s = "Hello", z = 4 },
-                new NonGenericStruct { x = 4, s = "Hello", z = 5 },
-                new NonGenericStruct { x = 5, s = "Hello", z = 6 }
+                new NonGenericStruct
+                {
+                    x = 1,
+                    s = "Hello",
+                    z = 2
+                },
+                new NonGenericStruct
+                {
+                    x = 2,
+                    s = "Hello",
+                    z = 3
+                },
+                new NonGenericStruct
+                {
+                    x = 3,
+                    s = "Hello",
+                    z = 4
+                },
+                new NonGenericStruct
+                {
+                    x = 4,
+                    s = "Hello",
+                    z = 5
+                },
+                new NonGenericStruct
+                {
+                    x = 5,
+                    s = "Hello",
+                    z = 6
+                }
             };
 
             Array.Clear(array, 2, 3);
@@ -2035,11 +2085,36 @@ namespace System.Tests
             NonGenericStruct[] structArray2 = CreateStructArray();
             NonGenericStruct[] overlappingStructArrayExpected = new NonGenericStruct[]
             {
-                new NonGenericStruct { x = 1, s = "Hello1", z = 2 },
-                new NonGenericStruct { x = 2, s = "Hello2", z = 3 },
-                new NonGenericStruct { x = 2, s = "Hello2", z = 3 },
-                new NonGenericStruct { x = 3, s = "Hello3", z = 4 },
-                new NonGenericStruct { x = 4, s = "Hello4", z = 5 }
+                new NonGenericStruct
+                {
+                    x = 1,
+                    s = "Hello1",
+                    z = 2
+                },
+                new NonGenericStruct
+                {
+                    x = 2,
+                    s = "Hello2",
+                    z = 3
+                },
+                new NonGenericStruct
+                {
+                    x = 2,
+                    s = "Hello2",
+                    z = 3
+                },
+                new NonGenericStruct
+                {
+                    x = 3,
+                    s = "Hello3",
+                    z = 4
+                },
+                new NonGenericStruct
+                {
+                    x = 4,
+                    s = "Hello4",
+                    z = 5
+                }
             };
             yield return new object[]
             {
@@ -9973,11 +10048,36 @@ namespace System.Tests
         {
             return new NonGenericStruct[]
             {
-                new NonGenericStruct { x = 1, s = "Hello1", z = 2 },
-                new NonGenericStruct { x = 2, s = "Hello2", z = 3 },
-                new NonGenericStruct { x = 3, s = "Hello3", z = 4 },
-                new NonGenericStruct { x = 4, s = "Hello4", z = 5 },
-                new NonGenericStruct { x = 5, s = "Hello5", z = 6 }
+                new NonGenericStruct
+                {
+                    x = 1,
+                    s = "Hello1",
+                    z = 2
+                },
+                new NonGenericStruct
+                {
+                    x = 2,
+                    s = "Hello2",
+                    z = 3
+                },
+                new NonGenericStruct
+                {
+                    x = 3,
+                    s = "Hello3",
+                    z = 4
+                },
+                new NonGenericStruct
+                {
+                    x = 4,
+                    s = "Hello4",
+                    z = 5
+                },
+                new NonGenericStruct
+                {
+                    x = 5,
+                    s = "Hello5",
+                    z = 6
+                }
             };
         }
 

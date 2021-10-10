@@ -47,7 +47,11 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
             var batchId = nextRenderBatchId++;
             var tcs = new TaskCompletionSource();
             _unacknowledgedRenderBatches.Enqueue(
-                new UnacknowledgedRenderBatch { BatchId = batchId, CompletionSource = tcs, }
+                new UnacknowledgedRenderBatch
+                {
+                    BatchId = batchId,
+                    CompletionSource = tcs,
+                }
             );
 
             _ipcSender.ApplyRenderBatch(batchId, renderBatch);

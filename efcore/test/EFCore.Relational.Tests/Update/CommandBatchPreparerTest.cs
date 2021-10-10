@@ -28,7 +28,13 @@ namespace Microsoft.EntityFrameworkCore.Update
             var stateManager = CreateContextServices(CreateSimpleFKModel())
                 .GetRequiredService<IStateManager>();
 
-            var entry = stateManager.GetOrCreateEntry(new FakeEntity { Id = 42, Value = "Test" });
+            var entry = stateManager.GetOrCreateEntry(
+                new FakeEntity
+                {
+                    Id = 42,
+                    Value = "Test"
+                }
+            );
 
             entry.SetEntityState(EntityState.Added);
 
@@ -71,7 +77,13 @@ namespace Microsoft.EntityFrameworkCore.Update
             var stateManager = CreateContextServices(CreateSimpleFKModel())
                 .GetRequiredService<IStateManager>();
 
-            var entry = stateManager.GetOrCreateEntry(new FakeEntity { Id = 42, Value = "Test" });
+            var entry = stateManager.GetOrCreateEntry(
+                new FakeEntity
+                {
+                    Id = 42,
+                    Value = "Test"
+                }
+            );
 
             entry.SetEntityState(EntityState.Modified);
 
@@ -114,7 +126,13 @@ namespace Microsoft.EntityFrameworkCore.Update
             var stateManager = CreateContextServices(CreateSimpleFKModel())
                 .GetRequiredService<IStateManager>();
 
-            var entry = stateManager.GetOrCreateEntry(new FakeEntity { Id = 42, Value = "Test" });
+            var entry = stateManager.GetOrCreateEntry(
+                new FakeEntity
+                {
+                    Id = 42,
+                    Value = "Test"
+                }
+            );
 
             entry.SetEntityState(EntityState.Deleted);
 
@@ -147,7 +165,13 @@ namespace Microsoft.EntityFrameworkCore.Update
             var configuration = CreateContextServices(CreateSimpleFKModel());
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
-            var entry = stateManager.GetOrCreateEntry(new FakeEntity { Id = 42, Value = "Test" });
+            var entry = stateManager.GetOrCreateEntry(
+                new FakeEntity
+                {
+                    Id = 42,
+                    Value = "Test"
+                }
+            );
             entry.SetEntityState(EntityState.Added);
 
             var modelData = new UpdateAdapter(stateManager);
@@ -172,7 +196,13 @@ namespace Microsoft.EntityFrameworkCore.Update
             var configuration = CreateContextServices(CreateSimpleFKModel());
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
-            var entry = stateManager.GetOrCreateEntry(new FakeEntity { Id = 42, Value = "Test" });
+            var entry = stateManager.GetOrCreateEntry(
+                new FakeEntity
+                {
+                    Id = 42,
+                    Value = "Test"
+                }
+            );
             entry.SetEntityState(EntityState.Added);
 
             var modelData = new UpdateAdapter(stateManager);
@@ -198,7 +228,11 @@ namespace Microsoft.EntityFrameworkCore.Update
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
             var firstEntry = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 42, Value = "Test" }
+                new FakeEntity
+                {
+                    Id = 42,
+                    Value = "Test"
+                }
             );
             firstEntry.SetEntityState(EntityState.Added);
 
@@ -225,17 +259,29 @@ namespace Microsoft.EntityFrameworkCore.Update
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
             var previousParent = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 42, Value = "Test" }
+                new FakeEntity
+                {
+                    Id = 42,
+                    Value = "Test"
+                }
             );
             previousParent.SetEntityState(EntityState.Deleted);
 
             var newParent = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 3, Value = "Test" }
+                new FakeEntity
+                {
+                    Id = 3,
+                    Value = "Test"
+                }
             );
             newParent.SetEntityState(EntityState.Added);
 
             var relatedEntry = stateManager.GetOrCreateEntry(
-                new RelatedFakeEntity { Id = 1, RelatedId = 3 }
+                new RelatedFakeEntity
+                {
+                    Id = 1,
+                    RelatedId = 3
+                }
             );
             relatedEntry.SetEntityState(EntityState.Modified);
             relatedEntry.SetOriginalValue(relatedEntry.EntityType.FindProperty("RelatedId"), 42);
@@ -260,17 +306,29 @@ namespace Microsoft.EntityFrameworkCore.Update
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
             var parentEntity = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 1, Value = "Test" }
+                new FakeEntity
+                {
+                    Id = 1,
+                    Value = "Test"
+                }
             );
             parentEntity.SetEntityState(EntityState.Unchanged);
 
             var previousChild = stateManager.GetOrCreateEntry(
-                new RelatedFakeEntity { Id = 42, RelatedId = 1 }
+                new RelatedFakeEntity
+                {
+                    Id = 42,
+                    RelatedId = 1
+                }
             );
             previousChild.SetEntityState(EntityState.Deleted);
 
             var newChild = stateManager.GetOrCreateEntry(
-                new RelatedFakeEntity { Id = 23, RelatedId = 1 }
+                new RelatedFakeEntity
+                {
+                    Id = 23,
+                    RelatedId = 1
+                }
             );
             newChild.SetEntityState(EntityState.Added);
 
@@ -294,27 +352,47 @@ namespace Microsoft.EntityFrameworkCore.Update
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
             var parentEntity = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 1, Value = "Test" }
+                new FakeEntity
+                {
+                    Id = 1,
+                    Value = "Test"
+                }
             );
             parentEntity.SetEntityState(EntityState.Unchanged);
 
             var oldEntity = stateManager.GetOrCreateEntry(
-                new RelatedFakeEntity { Id = 2, RelatedId = 1 }
+                new RelatedFakeEntity
+                {
+                    Id = 2,
+                    RelatedId = 1
+                }
             );
             oldEntity.SetEntityState(EntityState.Deleted);
 
             var oldChildEntity = stateManager.GetOrCreateEntry(
-                new AnotherFakeEntity { Id = 3, AnotherId = 2 }
+                new AnotherFakeEntity
+                {
+                    Id = 3,
+                    AnotherId = 2
+                }
             );
             oldChildEntity.SetEntityState(EntityState.Deleted);
 
             var newEntity = stateManager.GetOrCreateEntry(
-                new RelatedFakeEntity { Id = 4, RelatedId = 1 }
+                new RelatedFakeEntity
+                {
+                    Id = 4,
+                    RelatedId = 1
+                }
             );
             newEntity.SetEntityState(EntityState.Added);
 
             var newChildEntity = stateManager.GetOrCreateEntry(
-                new AnotherFakeEntity { Id = 5, AnotherId = 4 }
+                new AnotherFakeEntity
+                {
+                    Id = 5,
+                    AnotherId = 4
+                }
             );
             newChildEntity.SetEntityState(EntityState.Added);
 
@@ -348,7 +426,11 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
-            var fakeEntity = new FakeEntity { Id = 42, Value = "Test" };
+            var fakeEntity = new FakeEntity
+            {
+                Id = 42,
+                Value = "Test"
+            };
             var entry = stateManager.GetOrCreateEntry(fakeEntity);
             entry.SetEntityState(EntityState.Added);
 
@@ -381,17 +463,30 @@ namespace Microsoft.EntityFrameworkCore.Update
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
             var fakeEntry = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 42, Value = "Test" }
+                new FakeEntity
+                {
+                    Id = 42,
+                    Value = "Test"
+                }
             );
             fakeEntry.SetEntityState(EntityState.Added);
 
             var relatedFakeEntry = stateManager.GetOrCreateEntry(
-                new RelatedFakeEntity { Id = 1, RelatedId = 42 }
+                new RelatedFakeEntity
+                {
+                    Id = 1,
+                    RelatedId = 42
+                }
             );
             relatedFakeEntry.SetEntityState(EntityState.Added);
 
             var fakeEntry2 = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 2, RelatedId = 1, Value = "Test2" }
+                new FakeEntity
+                {
+                    Id = 2,
+                    RelatedId = 1,
+                    Value = "Test2"
+                }
             );
             fakeEntry2.SetEntityState(EntityState.Modified);
             fakeEntry2.SetOriginalValue(
@@ -419,7 +514,13 @@ namespace Microsoft.EntityFrameworkCore.Update
             var configuration = CreateContextServices(CreateTwoLevelFKModel());
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
-            var entry = stateManager.GetOrCreateEntry(new FakeEntity { Id = 1, Value = "Test" });
+            var entry = stateManager.GetOrCreateEntry(
+                new FakeEntity
+                {
+                    Id = 1,
+                    Value = "Test"
+                }
+            );
             entry.SetEntityState(EntityState.Added);
 
             Assert.Equal(
@@ -446,12 +547,20 @@ namespace Microsoft.EntityFrameworkCore.Update
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
             var fakeEntry = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 42, RelatedId = 1 }
+                new FakeEntity
+                {
+                    Id = 42,
+                    RelatedId = 1
+                }
             );
             fakeEntry.SetEntityState(EntityState.Added);
 
             var relatedFakeEntry = stateManager.GetOrCreateEntry(
-                new RelatedFakeEntity { Id = 1, RelatedId = 42 }
+                new RelatedFakeEntity
+                {
+                    Id = 1,
+                    RelatedId = 42
+                }
             );
             relatedFakeEntry.SetEntityState(EntityState.Added);
 
@@ -493,17 +602,30 @@ ForeignKey { 'RelatedId' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabl
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
             var fakeEntry = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 42, UniqueValue = "Test" }
+                new FakeEntity
+                {
+                    Id = 42,
+                    UniqueValue = "Test"
+                }
             );
             fakeEntry.SetEntityState(EntityState.Added);
 
             var relatedFakeEntry = stateManager.GetOrCreateEntry(
-                new RelatedFakeEntity { Id = 1, RelatedId = 42 }
+                new RelatedFakeEntity
+                {
+                    Id = 1,
+                    RelatedId = 42
+                }
             );
             relatedFakeEntry.SetEntityState(EntityState.Added);
 
             var fakeEntry2 = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 2, RelatedId = 1, UniqueValue = "Test2" }
+                new FakeEntity
+                {
+                    Id = 2,
+                    RelatedId = 1,
+                    UniqueValue = "Test2"
+                }
             );
             fakeEntry2.SetEntityState(EntityState.Modified);
             fakeEntry2.SetOriginalValue(
@@ -553,16 +675,30 @@ Index { 'UniqueValue' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabled;
             var configuration = CreateContextServices(model);
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
-            var fakeEntry = stateManager.GetOrCreateEntry(new FakeEntity { Id = 1, RelatedId = 2 });
+            var fakeEntry = stateManager.GetOrCreateEntry(
+                new FakeEntity
+                {
+                    Id = 1,
+                    RelatedId = 2
+                }
+            );
             fakeEntry.SetEntityState(EntityState.Deleted);
 
             var relatedFakeEntry = stateManager.GetOrCreateEntry(
-                new RelatedFakeEntity { Id = 2, RelatedId = 1 }
+                new RelatedFakeEntity
+                {
+                    Id = 2,
+                    RelatedId = 1
+                }
             );
             relatedFakeEntry.SetEntityState(EntityState.Deleted);
 
             var anotherFakeEntry = stateManager.GetOrCreateEntry(
-                new AnotherFakeEntity { Id = 3, AnotherId = 2 }
+                new AnotherFakeEntity
+                {
+                    Id = 3,
+                    AnotherId = 2
+                }
             );
             anotherFakeEntry.SetEntityState(EntityState.Deleted);
 
@@ -604,12 +740,20 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
             var fakeEntry = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 1, UniqueValue = "Test" }
+                new FakeEntity
+                {
+                    Id = 1,
+                    UniqueValue = "Test"
+                }
             );
             fakeEntry.SetEntityState(EntityState.Deleted);
 
             var fakeEntry2 = stateManager.GetOrCreateEntry(
-                new FakeEntity { Id = 2, UniqueValue = "Test2" }
+                new FakeEntity
+                {
+                    Id = 2,
+                    UniqueValue = "Test2"
+                }
             );
             fakeEntry2.SetEntityState(EntityState.Modified);
             fakeEntry2.SetOriginalValue(
@@ -633,7 +777,11 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
 
-            var first = new FakeEntity { Id = 42, Value = "Test" };
+            var first = new FakeEntity
+            {
+                Id = 42,
+                Value = "Test"
+            };
             var firstEntry = stateManager.GetOrCreateEntry(first);
             firstEntry.SetEntityState(EntityState.Added);
             var second = new RelatedFakeEntity { Id = 42 };
@@ -690,7 +838,11 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
 
-            var entity = new FakeEntity { Id = 42, Value = "Null" };
+            var entity = new FakeEntity
+            {
+                Id = 42,
+                Value = "Null"
+            };
             var entry = stateManager.GetOrCreateEntry(entity);
 
             entry.SetEntityState(EntityState.Modified);
@@ -746,7 +898,11 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
 
-            var first = new FakeEntity { Id = 42, Value = "Test" };
+            var first = new FakeEntity
+            {
+                Id = 42,
+                Value = "Test"
+            };
             var firstEntry = stateManager.GetOrCreateEntry(first);
             firstEntry.SetEntityState(EntityState.Deleted);
             var second = new RelatedFakeEntity { Id = 42 };
@@ -799,7 +955,11 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
 
-            var first = new FakeEntity { Id = 42, Value = "Test" };
+            var first = new FakeEntity
+            {
+                Id = 42,
+                Value = "Test"
+            };
             var firstEntry = stateManager.GetOrCreateEntry(first);
             firstEntry.SetEntityState(EntityState.Added);
             var second = new RelatedFakeEntity { Id = 42 };
@@ -866,7 +1026,11 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                 .GetRequiredService<ICurrentDbContext>();
             var stateManager = currentDbContext.GetDependencies().StateManager;
 
-            var first = new FakeEntity { Id = 42, Value = "Test" };
+            var first = new FakeEntity
+            {
+                Id = 42,
+                Value = "Test"
+            };
             var firstEntry = stateManager.GetOrCreateEntry(first);
             firstEntry.SetEntityState(EntityState.Modified);
             var second = new RelatedFakeEntity { Id = 42 };

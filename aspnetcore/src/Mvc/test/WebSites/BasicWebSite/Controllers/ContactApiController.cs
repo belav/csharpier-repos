@@ -64,7 +64,12 @@ namespace BasicWebSite
             string email
         )
         {
-            return new Contact { ContactId = id, Name = name, Email = email, };
+            return new Contact
+            {
+                ContactId = id,
+                Name = name,
+                Email = email,
+            };
         }
 
         [HttpGet("[action]")]

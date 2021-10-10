@@ -204,7 +204,11 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("-alias")
             {
-                new Argument { Name = "arg", Arity = ArgumentArity.ZeroOrOne }
+                new Argument
+                {
+                    Name = "arg",
+                    Arity = ArgumentArity.ZeroOrOne
+                }
             };
 
             command.Arguments.Single().Name.Should().Be("arg");

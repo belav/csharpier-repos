@@ -138,7 +138,14 @@ namespace AutoMapper.UnitTests
                         }
                     }
                 },
-                OtherInnerSources = { new OtherInnerSource { Title = "title", Author = "author" } }
+                OtherInnerSources =
+                {
+                    new OtherInnerSource
+                    {
+                        Title = "title",
+                        Author = "author"
+                    }
+                }
             };
             var destination = Mapper.Map<Destination>(source);
             var plan = Configuration.BuildExecutionPlan(typeof(Source), typeof(Destination));
@@ -206,9 +213,20 @@ namespace AutoMapper.UnitTests
                 Name = "name",
                 InnerSources =
                 {
-                    new InnerSource { Description = "description", Publisher = "publisher" }
+                    new InnerSource
+                    {
+                        Description = "description",
+                        Publisher = "publisher"
+                    }
                 },
-                OtherInnerSources = { new OtherInnerSource { Title = "title", Author = "author" } }
+                OtherInnerSources =
+                {
+                    new OtherInnerSource
+                    {
+                        Title = "title",
+                        Author = "author"
+                    }
+                }
             };
             var destination = Mapper.Map<Destination>(source);
             var plan = Configuration.BuildExecutionPlan(typeof(Source), typeof(Destination));
@@ -272,7 +290,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
         }
@@ -920,7 +943,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
             source.InnerSource.Name.ShouldBe("name");
@@ -972,7 +1000,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
             source.InnerSource.ShouldBeNull();
@@ -1440,7 +1473,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source<InnerSource, OtherInnerSource>>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
             source.InnerSource.Name.ShouldBe("name");
@@ -1492,7 +1530,12 @@ namespace AutoMapper.UnitTests
         public void Should_unflatten()
         {
             var source = Mapper.Map<Source<InnerSource, OtherInnerSource>>(
-                new Destination { Description = "description", Name = "name", Title = "title" }
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
             );
             source.Name.ShouldBe("name");
             source.InnerSource.ShouldBeNull();
@@ -1714,7 +1757,11 @@ namespace AutoMapper.UnitTests
             Mapper.Map<Destination>(
                     new ParentOfSource
                     {
-                        InnerSource = new Source { FirstName = "first", LastName = "last" }
+                        InnerSource = new Source
+                        {
+                            FirstName = "first",
+                            LastName = "last"
+                        }
                     }
                 )
                 .FullName.ShouldBe("first last");
@@ -1757,7 +1804,11 @@ namespace AutoMapper.UnitTests
             Mapper.Map<Destination>(
                     new ParentOfSource
                     {
-                        InnerSource = new Source { FirstName = "first", LastName = "last" }
+                        InnerSource = new Source
+                        {
+                            FirstName = "first",
+                            LastName = "last"
+                        }
                     }
                 )
                 .FullName.ShouldBe("first last");
@@ -1898,7 +1949,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_override_IncludeMembers() =>
             Mapper.Map<CreateCustomerDto>(
-                    new Customer { Name = "Postcode", Address = new Address() }
+                    new Customer
+                    {
+                        Name = "Postcode",
+                        Address = new Address()
+                    }
                 )
                 .Postcode.ShouldBe("Postcode");
     }
@@ -1947,7 +2002,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_override_IncludeMembers() =>
             Mapper.Map<CreateCustomerDto>(
-                    new NewCustomer { Postcode = "Postcode", Address = new Address() }
+                    new NewCustomer
+                    {
+                        Postcode = "Postcode",
+                        Address = new Address()
+                    }
                 )
                 .Postcode.ShouldBe("Postcode");
     }

@@ -1171,7 +1171,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 var cacheKey = Assert.IsType<CacheTagKey>(key);
                 Assert.Equal(Key1, cacheKey.Key);
 
-                Entry = new TestCacheEntry { Key = key, DisposeCallback = ManualResetEvent2.Set, };
+                Entry = new TestCacheEntry
+                {
+                    Key = key,
+                    DisposeCallback = ManualResetEvent2.Set,
+                };
 
                 return Entry;
             }

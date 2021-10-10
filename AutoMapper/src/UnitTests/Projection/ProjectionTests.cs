@@ -60,7 +60,13 @@ namespace AutoMapper.UnitTests.Projection
                     ECommercePublished = true,
                     Articles = new[]
                     {
-                        new Article { Id = 1, IsDefault = true, NationId = 1, ProductId = 1 }
+                        new Article
+                        {
+                            Id = 1,
+                            IsDefault = true,
+                            NationId = 1,
+                            ProductId = 1
+                        }
                     }
                 }
             }.AsQueryable();

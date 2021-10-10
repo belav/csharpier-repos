@@ -32,8 +32,16 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     context.AFewBytes.AddRange(
-                        new AFewBytes { Id = id1, Bytes = bytes },
-                        new AFewBytes { Id = id2, Bytes = bytes }
+                        new AFewBytes
+                        {
+                            Id = id1,
+                            Bytes = bytes
+                        },
+                        new AFewBytes
+                        {
+                            Id = id2,
+                            Bytes = bytes
+                        }
                     );
 
                     context.SaveChanges();
@@ -75,7 +83,11 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     var entry = context.Products.Attach(
-                        new Product { Id = productId, Price = 1.49M }
+                        new Product
+                        {
+                            Id = productId,
+                            Price = 1.49M
+                        }
                     );
 
                     entry.Property(c => c.Price).CurrentValue = 1.99M;
@@ -311,7 +323,13 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.Products.Remove(new Product { Id = productId, Price = 1.49M });
+                    context.Products.Remove(
+                        new Product
+                        {
+                            Id = productId,
+                            Price = 1.49M
+                        }
+                    );
 
                     context.SaveChanges();
                 },
@@ -421,14 +439,26 @@ namespace Microsoft.EntityFrameworkCore
                     var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
                     var entry1 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 77, PrincipalId = 777 }
+                        new Category
+                        {
+                            Id = 77,
+                            PrincipalId = 777
+                        }
                     );
                     var entry2 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 78, PrincipalId = 778 }
+                        new Category
+                        {
+                            Id = 78,
+                            PrincipalId = 778
+                        }
                     );
                     var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
                     var entry4 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId2, Price = 2.49M }
+                        new Product
+                        {
+                            Id = productId2,
+                            Price = 2.49M
+                        }
                     );
 
                     entry1.SetEntityState(EntityState.Added);
@@ -463,14 +493,26 @@ namespace Microsoft.EntityFrameworkCore
                     var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
                     var entry1 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 77, PrincipalId = 777 }
+                        new Category
+                        {
+                            Id = 77,
+                            PrincipalId = 777
+                        }
                     );
                     var entry2 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 78, PrincipalId = 778 }
+                        new Category
+                        {
+                            Id = 78,
+                            PrincipalId = 778
+                        }
                     );
                     var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
                     var entry4 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId2, Price = 2.49M }
+                        new Product
+                        {
+                            Id = productId2,
+                            Price = 2.49M
+                        }
                     );
 
                     entry1.SetEntityState(EntityState.Added);
@@ -507,14 +549,26 @@ namespace Microsoft.EntityFrameworkCore
                     var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
                     var entry1 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 77, PrincipalId = 777 }
+                        new Category
+                        {
+                            Id = 77,
+                            PrincipalId = 777
+                        }
                     );
                     var entry2 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 78, PrincipalId = 778 }
+                        new Category
+                        {
+                            Id = 78,
+                            PrincipalId = 778
+                        }
                     );
                     var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
                     var entry4 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId2, Price = 2.49M }
+                        new Product
+                        {
+                            Id = productId2,
+                            Price = 2.49M
+                        }
                     );
 
                     entry1.SetEntityState(EntityState.Added);
@@ -549,14 +603,26 @@ namespace Microsoft.EntityFrameworkCore
                     var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
                     var entry1 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 77, PrincipalId = 777 }
+                        new Category
+                        {
+                            Id = 77,
+                            PrincipalId = 777
+                        }
                     );
                     var entry2 = stateManager.GetOrCreateEntry(
-                        new Category { Id = 78, PrincipalId = 778 }
+                        new Category
+                        {
+                            Id = 78,
+                            PrincipalId = 778
+                        }
                     );
                     var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
                     var entry4 = stateManager.GetOrCreateEntry(
-                        new Product { Id = productId2, Price = 2.49M }
+                        new Product
+                        {
+                            Id = productId2,
+                            Price = 2.49M
+                        }
                     );
 
                     entry1.SetEntityState(EntityState.Added);

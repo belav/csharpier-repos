@@ -37,7 +37,11 @@ namespace System.Net.Formatting.Tests
         [Fact]
         public Task PrivateProperty()
         {
-            var source2 = new PrivateProperty { FirstName = "John", LastName = "Smith" };
+            var source2 = new PrivateProperty
+            {
+                FirstName = "John",
+                LastName = "Smith"
+            };
             source2.SetItem("shoes");
             return SerializerConsistencyHepers.TestAsync(source2);
         }
@@ -45,7 +49,12 @@ namespace System.Net.Formatting.Tests
         [Fact]
         public Task NormalClass()
         {
-            var source = new NormalClass { FirstName = "John", LastName = "Smith", Item = "Socks" };
+            var source = new NormalClass
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Item = "Socks"
+            };
             return SerializerConsistencyHepers.TestAsync(source);
         }
 
@@ -53,7 +62,11 @@ namespace System.Net.Formatting.Tests
         public Task InheritedProperties()
         {
             // Will we pick up inherited properties from a base object?
-            BaseClass source = new DerivedClass { Property = "base", DerivedProperty = "derived" };
+            BaseClass source = new DerivedClass
+            {
+                Property = "base",
+                DerivedProperty = "derived"
+            };
             source.SetField("private");
             return SerializerConsistencyHepers.TestAsync(source, typeof(DerivedClass));
         }

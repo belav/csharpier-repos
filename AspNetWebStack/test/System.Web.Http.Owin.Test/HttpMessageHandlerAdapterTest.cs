@@ -924,7 +924,11 @@ namespace System.Web.Http.Owin
         {
             var mockNext = new Mock<OwinMiddleware>(MockBehavior.Strict, null);
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            var handler = new HandlerStub() { Response = response, AddNoRouteMatchedKey = true };
+            var handler = new HandlerStub()
+            {
+                Response = response,
+                AddNoRouteMatchedKey = true
+            };
             var bufferPolicySelector = CreateBufferPolicySelector(
                 bufferInput: false,
                 bufferOutput: false
@@ -948,7 +952,11 @@ namespace System.Web.Http.Owin
         {
             var mockNext = new Mock<OwinMiddleware>(MockBehavior.Strict, null);
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.NotFound);
-            var handler = new HandlerStub() { Response = response, AddNoRouteMatchedKey = false };
+            var handler = new HandlerStub()
+            {
+                Response = response,
+                AddNoRouteMatchedKey = false
+            };
             var bufferPolicySelector = CreateBufferPolicySelector(
                 bufferInput: false,
                 bufferOutput: false
@@ -975,7 +983,11 @@ namespace System.Web.Http.Owin
                 .Returns(TaskHelpers.Completed())
                 .Verifiable();
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.NotFound);
-            var handler = new HandlerStub() { Response = response, AddNoRouteMatchedKey = true };
+            var handler = new HandlerStub()
+            {
+                Response = response,
+                AddNoRouteMatchedKey = true
+            };
             var bufferPolicySelector = CreateBufferPolicySelector(
                 bufferInput: false,
                 bufferOutput: false

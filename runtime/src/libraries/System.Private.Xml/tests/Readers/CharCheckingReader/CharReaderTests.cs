@@ -36,13 +36,21 @@ namespace System.Xml.Tests
             module.AddChild(
                 new TCDepthReader()
                 {
-                    Attribute = new TestCase() { Name = "Depth", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "Depth",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(
                 new TCNamespaceReader()
                 {
-                    Attribute = new TestCase() { Name = "Namespace", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "Namespace",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(
@@ -58,25 +66,41 @@ namespace System.Xml.Tests
             module.AddChild(
                 new TCXmlSpaceReader()
                 {
-                    Attribute = new TestCase() { Name = "XmlSpace", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "XmlSpace",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(
                 new TCXmlLangReader()
                 {
-                    Attribute = new TestCase() { Name = "XmlLang", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "XmlLang",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(
                 new TCSkipReader()
                 {
-                    Attribute = new TestCase() { Name = "Skip", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "Skip",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(
                 new TCInvalidXMLReader()
                 {
-                    Attribute = new TestCase() { Name = "InvalidXML", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "InvalidXML",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(
@@ -282,7 +306,11 @@ namespace System.Xml.Tests
             module.AddChild(
                 new TCHasValueReader()
                 {
-                    Attribute = new TestCase() { Name = "HasValue", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "HasValue",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(
@@ -298,7 +326,11 @@ namespace System.Xml.Tests
             module.AddChild(
                 new TCReadReader()
                 {
-                    Attribute = new TestCase() { Name = "Read", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "Read",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(
@@ -314,7 +346,11 @@ namespace System.Xml.Tests
             module.AddChild(
                 new TCDisposeReader()
                 {
-                    Attribute = new TestCase() { Name = "Dispose", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "Dispose",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(
@@ -330,7 +366,11 @@ namespace System.Xml.Tests
             module.AddChild(
                 new TCXmlNodeIntegrityTestFile()
                 {
-                    Attribute = new TestCase() { Name = "BeforeRead", Desc = "BeforeRead" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "BeforeRead",
+                        Desc = "BeforeRead"
+                    }
                 }
             );
             module.AddChild(
@@ -346,7 +386,11 @@ namespace System.Xml.Tests
             module.AddChild(
                 new TCXmlNodeIntegrityTestFile()
                 {
-                    Attribute = new TestCase() { Name = "AfterClose", Desc = "AfterClose" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "AfterClose",
+                        Desc = "AfterClose"
+                    }
                 }
             );
             module.AddChild(
@@ -392,7 +436,11 @@ namespace System.Xml.Tests
             module.AddChild(
                 new TCReadValueReader()
                 {
-                    Attribute = new TestCase() { Name = "ReadValue", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "ReadValue",
+                        Desc = "CharCheckingReader"
+                    }
                 }
             );
             module.AddChild(

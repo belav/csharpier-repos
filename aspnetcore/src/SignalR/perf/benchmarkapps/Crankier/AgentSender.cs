@@ -48,7 +48,11 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             {
                 await _outputStreamWriter.WriteLineAsync(
                     JsonConvert.SerializeObject(
-                        new Message { Command = method, Value = parameters }
+                        new Message
+                        {
+                            Command = method,
+                            Value = parameters
+                        }
                     )
                 );
                 await _outputStreamWriter.FlushAsync();

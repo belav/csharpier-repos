@@ -1806,7 +1806,16 @@ class Tests
 
     public static int test_0_vtype_arg_soft_float()
     {
-        return pass_vtype_return_float(new AStruct2() { i = 2, j = 4 }) > 0.0 ? 0 : 1;
+        return
+            pass_vtype_return_float(
+                new AStruct2()
+                {
+                    i = 2,
+                    j = 4
+                }
+            ) > 0.0
+          ? 0
+          : 1;
     }
 
     static int range_check_strlen(int i, string s)
@@ -2144,7 +2153,13 @@ class Tests
 
     static int test_0_arm64_hfa_on_stack()
     {
-        var s = new HFA4D() { a = 1.0, b = 2.0, c = 3.0, d = 4.0 };
+        var s = new HFA4D()
+        {
+            a = 1.0,
+            b = 2.0,
+            c = 3.0,
+            d = 4.0
+        };
         var res = arm64_hfa_on_stack_inner(1, 2, 3, 4, 5, 6, 7, 8, s);
         return res == 10.0 ? 0 : 1;
     }

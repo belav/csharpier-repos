@@ -68,8 +68,9 @@ namespace System.Web.Http.Validation.Validators
 
             // Per the WCF RIA Services team, instance can never be null (if you have
             // no parent, you pass yourself for the "instance" parameter).
-            ValidationContext context = new ValidationContext(instance: container ?? metadata.Model)
-            {
+            ValidationContext context = new ValidationContext(
+                instance: container ?? metadata.Model
+            ) {
                 DisplayName = metadata.GetDisplayName(),
                 MemberName = memberName,
             };

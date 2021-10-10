@@ -38,7 +38,11 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         private Command(string executable, string args)
         {
             // Set the things we need
-            var psi = new ProcessStartInfo() { FileName = executable, Arguments = args };
+            var psi = new ProcessStartInfo()
+            {
+                FileName = executable,
+                Arguments = args
+            };
 
             Process = new Process() { StartInfo = psi };
         }

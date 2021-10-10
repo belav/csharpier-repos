@@ -32,7 +32,11 @@ namespace BasicWebSite.Controllers.ContentNegotiation
 
         private User CreateUser()
         {
-            return new User() { Name = "John", Address = "One Microsoft Way" };
+            return new User()
+            {
+                Name = "John",
+                Address = "One Microsoft Way"
+            };
         }
     }
 }

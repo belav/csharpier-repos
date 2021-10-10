@@ -58,7 +58,11 @@ namespace System.Tests
         {
             OtherType data = new OtherType
             {
-                oneStruct = new OneStruct { field = "field", b = 2343 }
+                oneStruct = new OneStruct
+                {
+                    field = "field",
+                    b = 2343
+                }
             };
             Type dataType = data.GetType();
             Assert.Throws<ArgumentNullException>(
@@ -110,7 +114,11 @@ namespace System.Tests
         [Fact]
         public static void MakeTypedReference_ToObjectTests()
         {
-            OneStruct structObj = new OneStruct { field = "field", b = 2343 };
+            OneStruct structObj = new OneStruct
+            {
+                field = "field",
+                b = 2343
+            };
             OtherType data = new OtherType { oneStruct = structObj };
             Type dataType = data.GetType();
             TypedReference reference = TypedReference.MakeTypedReference(
@@ -133,7 +141,11 @@ namespace System.Tests
         [Fact]
         public static void MakeTypedReference_ReadOnlyField_Succeeds()
         {
-            var os = new OneStruct() { b = 42, field = "data" };
+            var os = new OneStruct()
+            {
+                b = 42,
+                field = "data"
+            };
             var c = new ClassWithReadOnlyField(os);
             TypedReference tr = TypedReference.MakeTypedReference(
                 c,

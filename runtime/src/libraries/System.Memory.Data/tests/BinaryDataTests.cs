@@ -339,7 +339,13 @@ namespace System.Tests
         [Fact]
         public void CanCreateBinaryDataFromCustomType()
         {
-            TestModel payload = new TestModel { A = "value", B = 5, C = true, D = null };
+            TestModel payload = new TestModel
+            {
+                A = "value",
+                B = 5,
+                C = true,
+                D = null
+            };
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
@@ -421,7 +427,12 @@ namespace System.Tests
         [Fact]
         public void ToObjectThrowsExceptionOnIncompatibleType()
         {
-            TestModel payload = new TestModel { A = "value", B = 5, C = true };
+            TestModel payload = new TestModel
+            {
+                A = "value",
+                B = 5,
+                C = true
+            };
             BinaryData data = BinaryData.FromObjectAsJson(payload);
             Assert.ThrowsAny<Exception>(() => data.ToObjectFromJson<string>());
         }

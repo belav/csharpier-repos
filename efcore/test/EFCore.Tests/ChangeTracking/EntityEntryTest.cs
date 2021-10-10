@@ -29,7 +29,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.True(context.Entry(new CompositeNotStoreGenerated { Id1 = 1 }).IsKeySet);
             Assert.True(context.Entry(new CompositeNotStoreGenerated { Id2 = true }).IsKeySet);
             Assert.True(
-                context.Entry(new CompositeNotStoreGenerated { Id1 = 1, Id2 = true }).IsKeySet
+                context.Entry(
+                    new CompositeNotStoreGenerated
+                    {
+                        Id1 = 1,
+                        Id2 = true
+                    }
+                ).IsKeySet
             );
         }
 
@@ -49,7 +55,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.False(context.Entry(new CompositeStoreGenerated { Id1 = 1 }).IsKeySet);
             Assert.True(context.Entry(new CompositeStoreGenerated { Id2 = true }).IsKeySet);
             Assert.True(
-                context.Entry(new CompositeStoreGenerated { Id1 = 1, Id2 = true }).IsKeySet
+                context.Entry(
+                    new CompositeStoreGenerated
+                    {
+                        Id1 = 1,
+                        Id2 = true
+                    }
+                ).IsKeySet
             );
         }
 

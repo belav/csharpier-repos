@@ -1101,7 +1101,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
             dynamic dy = mc;
             List<Test> list = new List<Test>()
             {
-                new Test() { _field1 = dy.Property_Float, _field2 = dy.Property_FloatNullArr }
+                new Test()
+                {
+                    _field1 = dy.Property_Float,
+                    _field2 = dy.Property_FloatNullArr
+                }
             };
             if (
                 list.Count == 1

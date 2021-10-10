@@ -93,9 +93,21 @@ namespace Microsoft.EntityFrameworkCore
                 async context =>
                 {
                     context.AddRange(
-                        new Client { ClientId = "C1", Description = "D1", },
-                        new Client { ClientId = "C2", Description = "D2", },
-                        new Client { ClientId = "C3", Description = "D3", }
+                        new Client
+                        {
+                            ClientId = "C1",
+                            Description = "D1",
+                        },
+                        new Client
+                        {
+                            ClientId = "C2",
+                            Description = "D2",
+                        },
+                        new Client
+                        {
+                            ClientId = "C3",
+                            Description = "D3",
+                        }
                     );
 
                     await context.SaveChangesAsync();

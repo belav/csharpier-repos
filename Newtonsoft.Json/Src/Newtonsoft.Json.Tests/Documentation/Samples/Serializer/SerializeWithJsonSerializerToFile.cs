@@ -53,7 +53,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Movie movie = new Movie { Name = "Bad Boys", Year = 1995 };
+            Movie movie = new Movie
+            {
+                Name = "Bad Boys",
+                Year = 1995
+            };
 
             // serialize JSON to a string and then write string to a file
             File.WriteAllText(@"c:\movie.json", JsonConvert.SerializeObject(movie));

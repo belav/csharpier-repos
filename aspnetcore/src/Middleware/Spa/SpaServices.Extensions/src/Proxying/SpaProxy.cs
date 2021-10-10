@@ -41,7 +41,11 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Proxy
 
         public static HttpClient CreateHttpClientForProxy(TimeSpan requestTimeout)
         {
-            var handler = new HttpClientHandler { AllowAutoRedirect = false, UseCookies = false, };
+            var handler = new HttpClientHandler
+            {
+                AllowAutoRedirect = false,
+                UseCookies = false,
+            };
 
             return new HttpClient(handler) { Timeout = requestTimeout };
         }

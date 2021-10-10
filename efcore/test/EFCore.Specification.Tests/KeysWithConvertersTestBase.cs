@@ -2767,19 +2767,55 @@ namespace Microsoft.EntityFrameworkCore
 
             context.Set<TPrincipal>()
                 .AddRange(
-                    new TPrincipal { BackingId = 1, Foo = "X1" },
-                    new TPrincipal { BackingId = 2, Foo = "X2" },
-                    new TPrincipal { BackingId = 3, Foo = "X3" },
-                    new TPrincipal { BackingId = 4, Foo = "X4" }
+                    new TPrincipal
+                    {
+                        BackingId = 1,
+                        Foo = "X1"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = 2,
+                        Foo = "X2"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = 3,
+                        Foo = "X3"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = 4,
+                        Foo = "X4"
+                    }
                 );
 
             context.Set<TDependent>()
                 .AddRange(
-                    new TDependent { BackingId = 101, BackingPrincipalId = 1 },
-                    new TDependent { BackingId = 102, BackingPrincipalId = 2 },
-                    new TDependent { BackingId = 103, BackingPrincipalId = 3 },
-                    new TDependent { BackingId = 104, BackingPrincipalId = 3 },
-                    new TDependent { BackingId = 105, BackingPrincipalId = 3 },
+                    new TDependent
+                    {
+                        BackingId = 101,
+                        BackingPrincipalId = 1
+                    },
+                    new TDependent
+                    {
+                        BackingId = 102,
+                        BackingPrincipalId = 2
+                    },
+                    new TDependent
+                    {
+                        BackingId = 103,
+                        BackingPrincipalId = 3
+                    },
+                    new TDependent
+                    {
+                        BackingId = 104,
+                        BackingPrincipalId = 3
+                    },
+                    new TDependent
+                    {
+                        BackingId = 105,
+                        BackingPrincipalId = 3
+                    },
                     new TDependent { BackingId = 106 }
                 );
 
@@ -2794,20 +2830,60 @@ namespace Microsoft.EntityFrameworkCore
 
             context.Set<TPrincipal>()
                 .AddRange(
-                    new TPrincipal { BackingId = 11, Foo = "X1" },
-                    new TPrincipal { BackingId = 12, Foo = "X2" },
-                    new TPrincipal { BackingId = 13, Foo = "X3" },
-                    new TPrincipal { BackingId = 14, Foo = "X4" }
+                    new TPrincipal
+                    {
+                        BackingId = 11,
+                        Foo = "X1"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = 12,
+                        Foo = "X2"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = 13,
+                        Foo = "X3"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = 14,
+                        Foo = "X4"
+                    }
                 );
 
             context.Set<TDependent>()
                 .AddRange(
-                    new TDependent { BackingId = 111, BackingPrincipalId = 11 },
-                    new TDependent { BackingId = 112, BackingPrincipalId = 12 },
-                    new TDependent { BackingId = 113, BackingPrincipalId = 13 },
-                    new TDependent { BackingId = 114, BackingPrincipalId = 13 },
-                    new TDependent { BackingId = 115, BackingPrincipalId = 13 },
-                    new TDependent { BackingId = 116, BackingPrincipalId = 13 }
+                    new TDependent
+                    {
+                        BackingId = 111,
+                        BackingPrincipalId = 11
+                    },
+                    new TDependent
+                    {
+                        BackingId = 112,
+                        BackingPrincipalId = 12
+                    },
+                    new TDependent
+                    {
+                        BackingId = 113,
+                        BackingPrincipalId = 13
+                    },
+                    new TDependent
+                    {
+                        BackingId = 114,
+                        BackingPrincipalId = 13
+                    },
+                    new TDependent
+                    {
+                        BackingId = 115,
+                        BackingPrincipalId = 13
+                    },
+                    new TDependent
+                    {
+                        BackingId = 116,
+                        BackingPrincipalId = 13
+                    }
                 );
 
             Assert.Equal(10, context.SaveChanges());
@@ -2934,10 +3010,26 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             context.Set<TPrincipal>()
                 .AddRange(
-                    new TPrincipal { BackingId = new byte[] { 1 }, Foo = "X1" },
-                    new TPrincipal { BackingId = new byte[] { 2, 2 }, Foo = "X2" },
-                    new TPrincipal { BackingId = new byte[] { 3, 3, 3 }, Foo = "X3" },
-                    new TPrincipal { BackingId = new byte[] { 4, 4, 4, 4 }, Foo = "X4" }
+                    new TPrincipal
+                    {
+                        BackingId = new byte[] { 1 },
+                        Foo = "X1"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = new byte[] { 2, 2 },
+                        Foo = "X2"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = new byte[] { 3, 3, 3 },
+                        Foo = "X3"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = new byte[] { 4, 4, 4, 4 },
+                        Foo = "X4"
+                    }
                 );
 
             context.Set<TDependent>()
@@ -2980,10 +3072,26 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             context.Set<TPrincipal>()
                 .AddRange(
-                    new TPrincipal { BackingId = new byte[] { 11 }, Foo = "X1" },
-                    new TPrincipal { BackingId = new byte[] { 12, 12 }, Foo = "X2" },
-                    new TPrincipal { BackingId = new byte[] { 13, 13, 13 }, Foo = "X3" },
-                    new TPrincipal { BackingId = new byte[] { 14, 14, 14, 14 }, Foo = "X4" }
+                    new TPrincipal
+                    {
+                        BackingId = new byte[] { 11 },
+                        Foo = "X1"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = new byte[] { 12, 12 },
+                        Foo = "X2"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = new byte[] { 13, 13, 13 },
+                        Foo = "X3"
+                    },
+                    new TPrincipal
+                    {
+                        BackingId = new byte[] { 14, 14, 14, 14 },
+                        Foo = "X4"
+                    }
                 );
 
             context.Set<TDependent>()

@@ -602,7 +602,11 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test.Routing
 
             var httpContext = new DefaultHttpContext
             {
-                Request = { Scheme = expectedProtocol, Host = new HostString(expectedHost), }
+                Request =
+                {
+                    Scheme = expectedProtocol,
+                    Host = new HostString(expectedHost),
+                }
             };
             var actionContext = new ActionContext(
                 httpContext,
@@ -637,7 +641,11 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test.Routing
 
             var httpContext = new DefaultHttpContext
             {
-                Request = { Scheme = "http://", Host = new HostString(expectedHost), }
+                Request =
+                {
+                    Scheme = "http://",
+                    Host = new HostString(expectedHost),
+                }
             };
             var actionContext = new ActionContext(
                 httpContext,
@@ -672,7 +680,11 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test.Routing
 
             var httpContext = new DefaultHttpContext
             {
-                Request = { Scheme = expectedProtocol, Host = new HostString("www.asp.net"), }
+                Request =
+                {
+                    Scheme = expectedProtocol,
+                    Host = new HostString("www.asp.net"),
+                }
             };
             var actionContext = new ActionContext(
                 httpContext,
@@ -710,7 +722,11 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test.Routing
             {
                 HttpContext = new DefaultHttpContext
                 {
-                    Request = { Scheme = expectedProtocol, Host = new HostString(expectedHost), }
+                    Request =
+                    {
+                        Scheme = expectedProtocol,
+                        Host = new HostString(expectedHost),
+                    }
                 },
                 RouteData = new RouteData { Values = { { "page", "ambient-page" }, } },
             };
@@ -750,7 +766,11 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test.Routing
             {
                 HttpContext = new DefaultHttpContext
                 {
-                    Request = { Scheme = "http://", Host = new HostString(expectedHost), }
+                    Request =
+                    {
+                        Scheme = "http://",
+                        Host = new HostString(expectedHost),
+                    }
                 },
                 RouteData = new RouteData { Values = { { "page", "ambient-page" }, } },
             };
@@ -790,7 +810,11 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test.Routing
             {
                 HttpContext = new DefaultHttpContext
                 {
-                    Request = { Scheme = expectedProtocol, Host = new HostString("www.asp.net"), }
+                    Request =
+                    {
+                        Scheme = expectedProtocol,
+                        Host = new HostString("www.asp.net"),
+                    }
                 },
                 RouteData = new RouteData { Values = { { "page", "ambient-page" }, } },
             };

@@ -250,7 +250,11 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task WriteTokenWithParentAsync()
         {
-            JObject o = new JObject { ["prop1"] = new JArray(1), ["prop2"] = 1 };
+            JObject o = new JObject
+            {
+                ["prop1"] = new JArray(1),
+                ["prop2"] = 1
+            };
 
             JTokenWriter writer = new JTokenWriter();
 

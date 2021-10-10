@@ -38,8 +38,10 @@ namespace System.CommandLine.Suggest
             try
             {
                 // Invoke target with args
-                var processStartInfo = new ProcessStartInfo(exeFileName, suggestionTargetArguments)
-                {
+                var processStartInfo = new ProcessStartInfo(
+                    exeFileName,
+                    suggestionTargetArguments
+                ) {
                     UseShellExecute = false,
                     RedirectStandardOutput = true
                 };

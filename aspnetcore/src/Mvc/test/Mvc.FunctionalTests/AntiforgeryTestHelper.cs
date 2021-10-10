@@ -27,7 +27,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var cookieKey = cookie[0];
             var cookieData = cookie[1];
 
-            return new CookieMetadata() { Key = cookieKey, Value = cookieData };
+            return new CookieMetadata()
+            {
+                Key = cookieKey,
+                Value = cookieData
+            };
         }
 
         public class CookieMetadata

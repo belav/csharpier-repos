@@ -34,7 +34,13 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateContext())
             {
                 context.Set<BuiltInNullableDataTypes>()
-                    .Add(new BuiltInNullableDataTypes { Id = 14, TestNullableDecimal = 3m });
+                    .Add(
+                        new BuiltInNullableDataTypes
+                        {
+                            Id = 14,
+                            TestNullableDecimal = 3m
+                        }
+                    );
 
                 Assert.Equal(1, context.SaveChanges());
             }
@@ -192,7 +198,12 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private static MappedSizedDataTypes CreateMappedSizedDataTypes(int id) =>
-            new() { Id = id, Nvarchar = "Into", Binary = new byte[] { 10, 11, 12, 13 } };
+            new()
+            {
+                Id = id,
+                Nvarchar = "Into",
+                Binary = new byte[] { 10, 11, 12, 13 }
+            };
 
         [ConditionalFact]
         public virtual void Can_insert_and_read_back_nulls_for_all_mapped_sized_data_types()
@@ -274,7 +285,13 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateContext())
             {
                 context.Set<MappedPrecisionAndScaledDataTypes>()
-                    .Add(new MappedPrecisionAndScaledDataTypes { Id = 77, Decimal = 101.1m });
+                    .Add(
+                        new MappedPrecisionAndScaledDataTypes
+                        {
+                            Id = 77,
+                            Decimal = 101.1m
+                        }
+                    );
 
                 Assert.Equal(1, context.SaveChanges());
             }
@@ -448,7 +465,13 @@ namespace Microsoft.EntityFrameworkCore
 
         private static MappedSizedDataTypesWithIdentity CreateMappedSizedDataTypesWithIdentity(
             int id
-        ) => new() { AltId = id, Nvarchar = "Into", Binary = new byte[] { 10, 11, 12, 13 } };
+        ) =>
+            new()
+            {
+                AltId = id,
+                Nvarchar = "Into",
+                Binary = new byte[] { 10, 11, 12, 13 }
+            };
 
         [ConditionalFact]
         public virtual void Can_insert_and_read_back_nulls_for_all_mapped_sized_data_types_with_Identity()
@@ -740,11 +763,29 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateContext())
             {
                 context.Set<MappedPrecisionAndScaledDataTypes>()
-                    .Add(new MappedPrecisionAndScaledDataTypes { Id = 177, Decimal = 101.1m });
+                    .Add(
+                        new MappedPrecisionAndScaledDataTypes
+                        {
+                            Id = 177,
+                            Decimal = 101.1m
+                        }
+                    );
                 context.Set<MappedPrecisionAndScaledDataTypes>()
-                    .Add(new MappedPrecisionAndScaledDataTypes { Id = 178, Decimal = 101.1m });
+                    .Add(
+                        new MappedPrecisionAndScaledDataTypes
+                        {
+                            Id = 178,
+                            Decimal = 101.1m
+                        }
+                    );
                 context.Set<MappedPrecisionAndScaledDataTypes>()
-                    .Add(new MappedPrecisionAndScaledDataTypes { Id = 179, Decimal = 101.1m });
+                    .Add(
+                        new MappedPrecisionAndScaledDataTypes
+                        {
+                            Id = 179,
+                            Decimal = 101.1m
+                        }
+                    );
 
                 Assert.Equal(3, context.SaveChanges());
             }

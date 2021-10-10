@@ -513,7 +513,11 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var post = new LazyPropertyPost { Id = id, LazyPropertyBlogId = fk };
+                var post = new LazyPropertyPost
+                {
+                    Id = id,
+                    LazyPropertyBlogId = fk
+                };
                 Assert.Null(post.GetLoader());
 
                 context.Attach(post);
@@ -588,7 +592,11 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var post = new LazyFieldPost { Id = id, LazyFieldBlogId = fk };
+                var post = new LazyFieldPost
+                {
+                    Id = id,
+                    LazyFieldBlogId = fk
+                };
                 Assert.Null(post.GetLoader());
 
                 context.Attach(post);
@@ -642,7 +650,11 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var post = new LazyPcsPost { Id = id, LazyPcsBlogId = fk };
+                var post = new LazyPcsPost
+                {
+                    Id = id,
+                    LazyPcsBlogId = fk
+                };
                 Assert.Null(post.GetLoader());
 
                 context.Attach(post);

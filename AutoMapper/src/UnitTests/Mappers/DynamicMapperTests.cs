@@ -66,7 +66,13 @@ namespace AutoMapper.UnitTests.Mappers.Dynamic
             var data = new[] { 1, 2, 3 };
             _destination = config.CreateMapper()
                 .Map<DynamicDictionary>(
-                    new Destination { Foo = "Foo", Bar = "Bar", Data = data, Baz = 12 }
+                    new Destination
+                    {
+                        Foo = "Foo",
+                        Bar = "Bar",
+                        Data = data,
+                        Baz = 12
+                    }
                 );
             ((int)_destination.Count).ShouldBe(4);
             Assert.Equal("Foo", _destination.Foo);

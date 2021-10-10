@@ -35,7 +35,11 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
 
             var document = manifest.ToXmlDocument();
 
-            var settings = new XmlWriterSettings() { Encoding = Encoding.UTF8, CloseOutput = true };
+            var settings = new XmlWriterSettings()
+            {
+                Encoding = Encoding.UTF8,
+                CloseOutput = true
+            };
 
             using (var xmlWriter = GetXmlWriter(settings))
             {

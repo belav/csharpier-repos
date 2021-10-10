@@ -382,8 +382,10 @@ public class Program
                     Version httpVersion = ctx.GetRandomVersion(httpVersions);
 
                     using (
-                        var req = new HttpRequestMessage(HttpMethod.Post, serverUri + "/duplexSlow")
-                        {
+                        var req = new HttpRequestMessage(
+                            HttpMethod.Post,
+                            serverUri + "/duplexSlow"
+                        ) {
                             Version = httpVersion,
                             Content = new ByteAtATimeNoLengthContent(
                                 Encoding.ASCII.GetBytes(content)

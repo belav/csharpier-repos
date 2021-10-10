@@ -430,7 +430,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             int start,
             int deleteCount,
             int[] data
-        ) => new() { Start = start, DeleteCount = deleteCount, Data = data };
+        ) =>
+            new()
+            {
+                Start = start,
+                DeleteCount = deleteCount,
+                Data = data
+            };
 
         private sealed class LongestCommonSemanticTokensSubsequence
             : LongestCommonSubsequence<SemanticToken[]>

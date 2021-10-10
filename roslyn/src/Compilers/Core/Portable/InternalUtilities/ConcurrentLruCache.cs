@@ -106,7 +106,14 @@ namespace Microsoft.CodeAnalysis.InternalUtilities
         private void UnsafeAddNodeToTop(K key, V value)
         {
             var node = new LinkedListNode<K>(key);
-            _cache.Add(key, new CacheValue { Node = node, Value = value });
+            _cache.Add(
+                key,
+                new CacheValue
+                {
+                    Node = node,
+                    Value = value
+                }
+            );
             _nodeList.AddFirst(node);
         }
 

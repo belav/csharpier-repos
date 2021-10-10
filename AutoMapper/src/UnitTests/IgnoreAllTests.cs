@@ -189,7 +189,11 @@ namespace AutoMapper.UnitTests
             );
             config.AssertConfigurationIsValid();
 
-            Source source = new Source { ShouldBeMapped = "Value1", ShouldNotBeMapped = "Value2" };
+            Source source = new Source
+            {
+                ShouldBeMapped = "Value1",
+                ShouldNotBeMapped = "Value2"
+            };
 
             Destination destination = config.CreateMapper().Map<Source, Destination>(source);
             destination.ShouldNotBeMapped.ShouldBe(null);

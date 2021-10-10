@@ -283,7 +283,13 @@ public class Tests
     /* Test structures as in arguments of delegates */
     public static int test_0_marshal_in_struct_delegate()
     {
-        SimpleStruct ss = new SimpleStruct() { a = true, b = false, c = true, d = "TEST2" };
+        SimpleStruct ss = new SimpleStruct()
+        {
+            a = true,
+            b = false,
+            c = true,
+            d = "TEST2"
+        };
         InStructDelegate d = new InStructDelegate(delegate_test_struct_in);
 
         return mono_test_marshal_in_struct(1, ref ss, 2, d);

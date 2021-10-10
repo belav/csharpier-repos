@@ -57,12 +57,20 @@ namespace Newtonsoft.Json.Tests.Issues
                 {
                     Prop1 = new HashSet<TestClass2>
                     {
-                        new TestClass2 { MyProperty1 = "Test1", MyProperty2 = "Test2", }
+                        new TestClass2
+                        {
+                            MyProperty1 = "Test1",
+                            MyProperty2 = "Test2",
+                        }
                     },
                     Prop2 = new List<string> { "Test1", "Test1" },
                     Prop3 = new HashSet<TestClass2>
                     {
-                        new TestClass2 { MyProperty1 = "Test1", MyProperty2 = "Test2", }
+                        new TestClass2
+                        {
+                            MyProperty1 = "Test1",
+                            MyProperty2 = "Test2",
+                        }
                     },
                 }
             };

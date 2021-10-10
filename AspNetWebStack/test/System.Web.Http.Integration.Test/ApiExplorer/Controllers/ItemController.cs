@@ -7,7 +7,11 @@ namespace System.Web.Http.ApiExplorer
     {
         public Item GetItem(string name, int series)
         {
-            return new Item() { Name = name, Series = series };
+            return new Item()
+            {
+                Name = name,
+                Series = series
+            };
         }
 
         [HttpPost]

@@ -66,8 +66,16 @@
                     EntityID = 1,
                     SubEntities =
                     {
-                        new SubEntity { Name = "First", Description = "First Description" },
-                        new SubEntity { Name = "Second", Description = "First Description" },
+                        new SubEntity
+                        {
+                            Name = "First",
+                            Description = "First Description"
+                        },
+                        new SubEntity
+                        {
+                            Name = "Second",
+                            Description = "First Description"
+                        },
                     },
                     Title = "Entities"
                 };
@@ -100,8 +108,16 @@
                     EntityID = 1,
                     SubEntities =
                     {
-                        new SubEntity { Name = "First", Description = "First Description" },
-                        new SubEntity { Name = "Second", Description = "First Description" },
+                        new SubEntity
+                        {
+                            Name = "First",
+                            Description = "First Description"
+                        },
+                        new SubEntity
+                        {
+                            Name = "Second",
+                            Description = "First Description"
+                        },
                     },
                     Title = "Entities"
                 };

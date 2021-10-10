@@ -193,7 +193,11 @@ namespace Microsoft.AspNetCore.Routing.DecisionTree
                 }
             }
 
-            return new DecisionTreeNode<TItem>() { Criteria = reducedCriteria, Matches = matches, };
+            return new DecisionTreeNode<TItem>()
+            {
+                Criteria = reducedCriteria,
+                Matches = matches,
+            };
         }
 
         private class TreeBuilderContext

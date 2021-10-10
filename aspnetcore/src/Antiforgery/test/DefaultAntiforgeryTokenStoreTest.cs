@@ -307,7 +307,11 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
 
             var options = new AntiforgeryOptions()
             {
-                Cookie = { Name = _cookieName, SecurePolicy = policy },
+                Cookie =
+                {
+                    Name = _cookieName,
+                    SecurePolicy = policy
+                },
             };
 
             var tokenStore = new DefaultAntiforgeryTokenStore(new TestOptionsManager(options));
@@ -371,7 +375,11 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             httpContext.SetupGet(hc => hc.Request.Path).Returns("/index.html");
             var options = new AntiforgeryOptions
             {
-                Cookie = { Name = _cookieName, Path = expectedCookiePath }
+                Cookie =
+                {
+                    Name = _cookieName,
+                    Path = expectedCookiePath
+                }
             };
             var tokenStore = new DefaultAntiforgeryTokenStore(new TestOptionsManager(options));
 
@@ -400,7 +408,11 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
             httpContext.SetupGet(hc => hc.Request.Path).Returns("/index.html");
             var options = new AntiforgeryOptions
             {
-                Cookie = { Name = _cookieName, Domain = expectedCookieDomain }
+                Cookie =
+                {
+                    Name = _cookieName,
+                    Domain = expectedCookieDomain
+                }
             };
             var tokenStore = new DefaultAntiforgeryTokenStore(new TestOptionsManager(options));
 

@@ -2700,7 +2700,11 @@ namespace System.Text.Json.Tests
             )
             {
                 var state = new JsonReaderState(
-                    new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                    new JsonReaderOptions
+                    {
+                        CommentHandling = commentHandling,
+                        MaxDepth = maxDepth
+                    }
                 );
                 var json = new Utf8JsonReader(dataUtf8, false, state);
 
@@ -2723,7 +2727,11 @@ namespace System.Text.Json.Tests
             {
                 var json = new Utf8JsonReader(
                     dataUtf8,
-                    new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                    new JsonReaderOptions
+                    {
+                        CommentHandling = commentHandling,
+                        MaxDepth = maxDepth
+                    }
                 );
 
                 try
@@ -2798,7 +2806,11 @@ namespace System.Text.Json.Tests
             )
             {
                 var state = new JsonReaderState(
-                    new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                    new JsonReaderOptions
+                    {
+                        CommentHandling = commentHandling,
+                        MaxDepth = maxDepth
+                    }
                 );
                 var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
 
@@ -2825,7 +2837,11 @@ namespace System.Text.Json.Tests
             {
                 var json = new Utf8JsonReader(
                     dataUtf8,
-                    new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                    new JsonReaderOptions
+                    {
+                        CommentHandling = commentHandling,
+                        MaxDepth = maxDepth
+                    }
                 );
 
                 try
@@ -2862,7 +2878,11 @@ namespace System.Text.Json.Tests
             )
             {
                 var state = new JsonReaderState(
-                    new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                    new JsonReaderOptions
+                    {
+                        CommentHandling = commentHandling,
+                        MaxDepth = maxDepth
+                    }
                 );
                 var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
 

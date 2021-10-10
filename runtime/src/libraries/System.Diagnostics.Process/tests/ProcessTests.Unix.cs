@@ -140,7 +140,11 @@ namespace System.Diagnostics.Tests
             string fileToOpen = Path.Combine(Environment.CurrentDirectory, "_no_such_file.TXT");
             using (
                 var px = Process.Start(
-                    new ProcessStartInfo { UseShellExecute = true, FileName = fileToOpen }
+                    new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        FileName = fileToOpen
+                    }
                 )
             )
             {
@@ -176,7 +180,11 @@ namespace System.Diagnostics.Tests
             {
                 using (
                     var px = Process.Start(
-                        new ProcessStartInfo { UseShellExecute = true, FileName = fileToOpen }
+                        new ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            FileName = fileToOpen
+                        }
                     )
                 )
                 {
@@ -1167,7 +1175,11 @@ namespace System.Diagnostics.Tests
 
         private static string StartAndReadToEnd(string filename, string[] arguments)
         {
-            var psi = new ProcessStartInfo { FileName = filename, RedirectStandardOutput = true };
+            var psi = new ProcessStartInfo
+            {
+                FileName = filename,
+                RedirectStandardOutput = true
+            };
             foreach (var arg in arguments)
             {
                 psi.ArgumentList.Add(arg);

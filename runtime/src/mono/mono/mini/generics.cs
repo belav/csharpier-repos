@@ -1122,15 +1122,69 @@ class Tests
     public static int test_0_fullaot_sflda_cctor()
     {
         List<Doc> documents = new List<Doc>();
-        documents.Add(new Doc { Name = "Doc1", Type = DocType.One });
-        documents.Add(new Doc { Name = "Doc2", Type = DocType.Two });
-        documents.Add(new Doc { Name = "Doc3", Type = DocType.Three });
-        documents.Add(new Doc { Name = "Doc4", Type = DocType.One });
-        documents.Add(new Doc { Name = "Doc5", Type = DocType.Two });
-        documents.Add(new Doc { Name = "Doc6", Type = DocType.Three });
-        documents.Add(new Doc { Name = "Doc7", Type = DocType.One });
-        documents.Add(new Doc { Name = "Doc8", Type = DocType.Two });
-        documents.Add(new Doc { Name = "Doc9", Type = DocType.Three });
+        documents.Add(
+            new Doc
+            {
+                Name = "Doc1",
+                Type = DocType.One
+            }
+        );
+        documents.Add(
+            new Doc
+            {
+                Name = "Doc2",
+                Type = DocType.Two
+            }
+        );
+        documents.Add(
+            new Doc
+            {
+                Name = "Doc3",
+                Type = DocType.Three
+            }
+        );
+        documents.Add(
+            new Doc
+            {
+                Name = "Doc4",
+                Type = DocType.One
+            }
+        );
+        documents.Add(
+            new Doc
+            {
+                Name = "Doc5",
+                Type = DocType.Two
+            }
+        );
+        documents.Add(
+            new Doc
+            {
+                Name = "Doc6",
+                Type = DocType.Three
+            }
+        );
+        documents.Add(
+            new Doc
+            {
+                Name = "Doc7",
+                Type = DocType.One
+            }
+        );
+        documents.Add(
+            new Doc
+            {
+                Name = "Doc8",
+                Type = DocType.Two
+            }
+        );
+        documents.Add(
+            new Doc
+            {
+                Name = "Doc9",
+                Type = DocType.Three
+            }
+        );
 
         List<DocType> categories = documents.Select(d => d.Type)
             .Distinct()

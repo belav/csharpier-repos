@@ -1514,7 +1514,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task ComplexBinder_BindsDictionaryProperty_WithIEnumerableComplexTypeValue_Success()
         {
             // Arrange
-            var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car1) };
+            var parameter = new ParameterDescriptor()
+            {
+                Name = "p",
+                ParameterType = typeof(Car1)
+            };
 
             var testContext = GetTestContext(
                 request =>
@@ -1624,7 +1628,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task ComplexBinder_BindsDictionaryProperty_WithArrayOfComplexTypeValue_Success()
         {
             // Arrange
-            var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car2) };
+            var parameter = new ParameterDescriptor()
+            {
+                Name = "p",
+                ParameterType = typeof(Car2)
+            };
 
             var testContext = GetTestContext(
                 request =>
@@ -1734,7 +1742,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task ComplexBinder_BindsDictionaryProperty_WithIEnumerableOfKeyValuePair_Success()
         {
             // Arrange
-            var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car3) };
+            var parameter = new ParameterDescriptor()
+            {
+                Name = "p",
+                ParameterType = typeof(Car3)
+            };
 
             var testContext = GetTestContext(
                 request =>
@@ -2078,7 +2090,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task Foo_ComplexBinder_BindsKeyValuePairProperty_WithPrefix_Success()
         {
             // Arrange
-            var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car4) };
+            var parameter = new ParameterDescriptor()
+            {
+                Name = "p",
+                ParameterType = typeof(Car4)
+            };
 
             // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
             var testContext = GetTestContext(

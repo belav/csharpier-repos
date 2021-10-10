@@ -51,7 +51,11 @@ namespace System.Web.Http.SelfHost
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 request.Method = HttpMethod.Post;
                 request.Content = new ObjectContent<NullResponseCustomer>(
-                    new NullResponseCustomer() { Name = "Sue", Age = 39 },
+                    new NullResponseCustomer()
+                    {
+                        Name = "Sue",
+                        Age = 39
+                    },
                     new JsonMediaTypeFormatter()
                 );
 
@@ -110,7 +114,11 @@ namespace System.Web.Http.SelfHost
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 request.Method = HttpMethod.Post;
                 request.Content = new ObjectContent<NullResponseCustomer>(
-                    new NullResponseCustomer() { Name = "Sue", Age = 39 },
+                    new NullResponseCustomer()
+                    {
+                        Name = "Sue",
+                        Age = 39
+                    },
                     new JsonMediaTypeFormatter()
                 );
 
@@ -166,7 +174,11 @@ namespace System.Web.Http.SelfHost
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 request.Method = HttpMethod.Post;
                 request.Content = new ObjectContent<NullResponseCustomer>(
-                    new NullResponseCustomer() { Name = "Sue", Age = 39 },
+                    new NullResponseCustomer()
+                    {
+                        Name = "Sue",
+                        Age = 39
+                    },
                     new JsonMediaTypeFormatter()
                 );
 
@@ -226,7 +238,11 @@ namespace System.Web.Http.SelfHost
         [HttpGet]
         public NullResponseCustomer GetNormalResponse()
         {
-            return new NullResponseCustomer() { Name = "Fred", Age = 39 };
+            return new NullResponseCustomer()
+            {
+                Name = "Fred",
+                Age = 39
+            };
         }
 
         [HttpPost]

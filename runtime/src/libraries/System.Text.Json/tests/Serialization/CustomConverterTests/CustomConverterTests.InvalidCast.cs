@@ -12,7 +12,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             var obj = new ObjectWrapperWithProperty
             {
-                Object = new WrittenObject { Int = 123, String = "Hello", }
+                Object = new WrittenObject
+                {
+                    Int = 123,
+                    String = "Hello",
+                }
             };
 
             var json = JsonSerializer.Serialize(obj);
@@ -28,7 +32,11 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions { IncludeFields = true };
             var obj = new ObjectWrapperWithField
             {
-                Object = new WrittenObject { Int = 123, String = "Hello", }
+                Object = new WrittenObject
+                {
+                    Int = 123,
+                    String = "Hello",
+                }
             };
 
             var json = JsonSerializer.Serialize(obj);
@@ -154,7 +162,11 @@ namespace System.Text.Json.Serialization.Tests
             )
             {
                 reader.GetString();
-                return new Derived() { String = "Hello", Double = Math.PI };
+                return new Derived()
+                {
+                    String = "Hello",
+                    Double = Math.PI
+                };
             }
 
             public override void Write(
@@ -181,7 +193,11 @@ namespace System.Text.Json.Serialization.Tests
             )
             {
                 reader.GetString();
-                return new Derived() { String = "Hello", Double = Math.PI };
+                return new Derived()
+                {
+                    String = "Hello",
+                    Double = Math.PI
+                };
             }
 
             public override void Write(

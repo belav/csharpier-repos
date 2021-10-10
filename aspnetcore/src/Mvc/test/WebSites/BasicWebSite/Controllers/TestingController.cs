@@ -36,7 +36,13 @@ namespace BasicWebSite.Controllers
                 );
             }
 
-            return Ok(new RedirectHandlerResponse { Url = value, Body = number.Value });
+            return Ok(
+                new RedirectHandlerResponse
+                {
+                    Url = value,
+                    Body = number.Value
+                }
+            );
         }
 
         [HttpGet("Testing/RedirectHandler/Headers")]

@@ -137,8 +137,16 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void Seed(PoolableDbContext context)
             {
-                var address1 = new Address { Street = "3 Dragons Way", City = "Meereen" };
-                var address2 = new Address { Street = "42 Castle Black", City = "The Wall" };
+                var address1 = new Address
+                {
+                    Street = "3 Dragons Way",
+                    City = "Meereen"
+                };
+                var address2 = new Address
+                {
+                    Street = "42 Castle Black",
+                    City = "The Wall"
+                };
                 var address3 = new Address
                 {
                     Street = "House of Black and White",
@@ -147,9 +155,21 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 context.Set<Person>()
                     .AddRange(
-                        new Person { Name = "Daenerys Targaryen", Address = address1 },
-                        new Person { Name = "John Snow", Address = address2 },
-                        new Person { Name = "Arya Stark", Address = address3 },
+                        new Person
+                        {
+                            Name = "Daenerys Targaryen",
+                            Address = address1
+                        },
+                        new Person
+                        {
+                            Name = "John Snow",
+                            Address = address2
+                        },
+                        new Person
+                        {
+                            Name = "Arya Stark",
+                            Address = address3
+                        },
                         new Person { Name = "Harry Strickland" }
                     );
 
@@ -176,9 +196,21 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 context.Set<Person2>()
                     .AddRange(
-                        new Person2 { Name = "Daenerys Targaryen", Address = address21 },
-                        new Person2 { Name = "John Snow", Address = address22 },
-                        new Person2 { Name = "Arya Stark", Address = address23 }
+                        new Person2
+                        {
+                            Name = "Daenerys Targaryen",
+                            Address = address21
+                        },
+                        new Person2
+                        {
+                            Name = "John Snow",
+                            Address = address22
+                        },
+                        new Person2
+                        {
+                            Name = "Arya Stark",
+                            Address = address23
+                        }
                     );
 
                 context.Set<Address2>().AddRange(address21, address22, address23);

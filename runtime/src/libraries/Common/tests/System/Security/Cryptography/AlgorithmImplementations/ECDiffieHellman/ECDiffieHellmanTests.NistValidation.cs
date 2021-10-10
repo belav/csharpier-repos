@@ -122,14 +122,22 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             ECParameters iutParameters = new ECParameters
             {
                 Curve = namedCurve,
-                Q = { X = iutQx.HexToByteArray(), Y = iutQy.HexToByteArray(), },
+                Q =
+                {
+                    X = iutQx.HexToByteArray(),
+                    Y = iutQy.HexToByteArray(),
+                },
                 D = iutD.HexToByteArray(),
             };
 
             ECParameters cavsParameters = new ECParameters
             {
                 Curve = namedCurve,
-                Q = { X = cavsQx.HexToByteArray(), Y = cavsQy.HexToByteArray(), },
+                Q =
+                {
+                    X = cavsQx.HexToByteArray(),
+                    Y = cavsQy.HexToByteArray(),
+                },
             };
 
             Verify(ref iutParameters, ref cavsParameters, explicitCurve, iutZ.HexToByteArray());

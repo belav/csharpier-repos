@@ -50,8 +50,16 @@ namespace AutoMapper.IntegrationTests.Net4
                 context.MyTable.AddRange(
                     new[]
                     {
-                        new MyTable { Id = 1, EnumValue = (int)MyEnum.Value2 },
-                        new MyTable { Id = 2, EnumValueNullable = (int?)MyEnum.Value1 },
+                        new MyTable
+                        {
+                            Id = 1,
+                            EnumValue = (int)MyEnum.Value2
+                        },
+                        new MyTable
+                        {
+                            Id = 2,
+                            EnumValueNullable = (int?)MyEnum.Value1
+                        },
                     }
                 );
                 base.Seed(context);

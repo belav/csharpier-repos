@@ -113,7 +113,14 @@ namespace AutoMapper.UnitTests.MappingInheritance
         [Fact]
         public void Mapper_Should_Allow_Overriding_Of_Destination_Type()
         {
-            var order = new Order() { Customer = new Customer() { Id = 1, Name = "A" } };
+            var order = new Order()
+            {
+                Customer = new Customer()
+                {
+                    Id = 1,
+                    Name = "A"
+                }
+            };
 
             var config = new MapperConfiguration(
                 cfg =>
@@ -161,7 +168,14 @@ namespace AutoMapper.UnitTests.MappingInheritance
         [Fact]
         public void Mapper_Should_Allow_Overriding_Of_Destination_Type()
         {
-            var order = new Order() { Customer = new Customer() { Id = 1, Name = "A" } };
+            var order = new Order()
+            {
+                Customer = new Customer()
+                {
+                    Id = 1,
+                    Name = "A"
+                }
+            };
             var config = new MapperConfiguration(
                 cfg =>
                 {
@@ -230,7 +244,11 @@ namespace AutoMapper.UnitTests.MappingInheritance
 
         protected override void Because_of()
         {
-            var dto = new NodeDto<int> { ID = 1, Name = "Hi" };
+            var dto = new NodeDto<int>
+            {
+                ID = 1,
+                Name = "Hi"
+            };
             _destination = Mapper.Map<INodeModel<int>>(dto);
         }
 

@@ -446,7 +446,11 @@ namespace System.Buffers.Binary.Tests
             );
             Assert.False(MemoryMarshal.TryWrite<double>(span, ref doubleValue));
 
-            var structValue = new TestHelpers.TestValueTypeWithReference { I = 1, S = "1" };
+            var structValue = new TestHelpers.TestValueTypeWithReference
+            {
+                I = 1,
+                S = "1"
+            };
             TestHelpers.AssertThrows<ArgumentException, byte>(
                 span,
                 (_span) =>

@@ -234,18 +234,66 @@ namespace System.Net.Http.Functional.Tests
 
                 // Send a bunch of valid SETTINGS values (that won't interfere with processing requests)
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync(
-                    new SettingsEntry { SettingId = SettingId.HeaderTableSize, Value = 0 },
-                    new SettingsEntry { SettingId = SettingId.HeaderTableSize, Value = 1 },
-                    new SettingsEntry { SettingId = SettingId.HeaderTableSize, Value = 345678 },
-                    new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 0 },
-                    new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 1 },
-                    new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 4567890 },
-                    new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 1 },
-                    new SettingsEntry { SettingId = SettingId.MaxFrameSize, Value = 16384 },
-                    new SettingsEntry { SettingId = SettingId.MaxFrameSize, Value = 16777215 },
-                    new SettingsEntry { SettingId = SettingId.MaxHeaderListSize, Value = 0 },
-                    new SettingsEntry { SettingId = SettingId.MaxHeaderListSize, Value = 10000000 },
-                    new SettingsEntry { SettingId = (SettingId)5678, Value = 1234 }
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.HeaderTableSize,
+                        Value = 0
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.HeaderTableSize,
+                        Value = 1
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.HeaderTableSize,
+                        Value = 345678
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.InitialWindowSize,
+                        Value = 0
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.InitialWindowSize,
+                        Value = 1
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.InitialWindowSize,
+                        Value = 4567890
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.MaxConcurrentStreams,
+                        Value = 1
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.MaxFrameSize,
+                        Value = 16384
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.MaxFrameSize,
+                        Value = 16777215
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.MaxHeaderListSize,
+                        Value = 0
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.MaxHeaderListSize,
+                        Value = 10000000
+                    },
+                    new SettingsEntry
+                    {
+                        SettingId = (SettingId)5678,
+                        Value = 1234
+                    }
                 );
 
                 int streamId = await connection.ReadRequestHeaderAsync();
@@ -274,7 +322,11 @@ namespace System.Net.Http.Functional.Tests
 
                 // Send invalid initial SETTINGS value
                 await server.EstablishConnectionAsync(
-                    new SettingsEntry { SettingId = settingId, Value = value }
+                    new SettingsEntry
+                    {
+                        SettingId = settingId,
+                        Value = value
+                    }
                 );
 
                 await AssertProtocolErrorAsync(sendTask, expectedError);
@@ -374,7 +426,11 @@ namespace System.Net.Http.Functional.Tests
                 // Send SETTINGS frame to change stream limit to 0, allowing us to send a REFUSED_STREAM error due to the new limit
                 await connection.ExpectSettingsAckAsync();
                 Frame frame = new SettingsFrame(
-                    new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 0 }
+                    new SettingsEntry()
+                    {
+                        SettingId = SettingId.MaxConcurrentStreams,
+                        Value = 0
+                    }
                 );
                 await connection.WriteFrameAsync(frame);
 
@@ -391,7 +447,11 @@ namespace System.Net.Http.Functional.Tests
                 // Send SETTINGS frame to change stream limit to 1, allowing the request to now be processed
                 await connection.ExpectSettingsAckAsync();
                 frame = new SettingsFrame(
-                    new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 1 }
+                    new SettingsEntry()
+                    {
+                        SettingId = SettingId.MaxConcurrentStreams,
+                        Value = 1
+                    }
                 );
                 await connection.WriteFrameAsync(frame);
 
@@ -426,7 +486,11 @@ namespace System.Net.Http.Functional.Tests
                 // Send SETTINGS frame to change stream limit to 0, allowing us to send a REFUSED_STREAM error due to the new limit
                 await connection.ExpectSettingsAckAsync();
                 Frame frame = new SettingsFrame(
-                    new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 0 }
+                    new SettingsEntry()
+                    {
+                        SettingId = SettingId.MaxConcurrentStreams,
+                        Value = 0
+                    }
                 );
                 await connection.WriteFrameAsync(frame);
 
@@ -443,7 +507,11 @@ namespace System.Net.Http.Functional.Tests
                 // Send SETTINGS frame to change stream limit to 1, allowing the request to now be processed
                 await connection.ExpectSettingsAckAsync();
                 frame = new SettingsFrame(
-                    new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 1 }
+                    new SettingsEntry()
+                    {
+                        SettingId = SettingId.MaxConcurrentStreams,
+                        Value = 1
+                    }
                 );
                 await connection.WriteFrameAsync(frame);
 
@@ -1862,7 +1930,11 @@ namespace System.Net.Http.Functional.Tests
                 await connection.ExpectSettingsAckAsync();
                 await connection.WriteFrameAsync(
                     new SettingsFrame(
-                        new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 0 }
+                        new SettingsEntry
+                        {
+                            SettingId = SettingId.InitialWindowSize,
+                            Value = 0
+                        }
                     )
                 );
 
@@ -1879,7 +1951,11 @@ namespace System.Net.Http.Functional.Tests
                 await connection.ExpectSettingsAckAsync();
                 await connection.WriteFrameAsync(
                     new SettingsFrame(
-                        new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 1 }
+                        new SettingsEntry
+                        {
+                            SettingId = SettingId.InitialWindowSize,
+                            Value = 1
+                        }
                     )
                 );
 
@@ -1912,7 +1988,11 @@ namespace System.Net.Http.Functional.Tests
                 await connection.ExpectSettingsAckAsync();
                 await connection.WriteFrameAsync(
                     new SettingsFrame(
-                        new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 2 }
+                        new SettingsEntry
+                        {
+                            SettingId = SettingId.InitialWindowSize,
+                            Value = 2
+                        }
                     )
                 );
 
@@ -2150,7 +2230,11 @@ namespace System.Net.Http.Functional.Tests
                 // Change MaxConcurrentStreams setting and wait for ack.
                 // (We don't want to send any new requests until we receive the ack, otherwise we may have a timing issue.)
                 SettingsFrame settingsFrame = new SettingsFrame(
-                    new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 0 }
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.MaxConcurrentStreams,
+                        Value = 0
+                    }
                 );
                 await connection.WriteFrameAsync(settingsFrame);
                 Frame settingsAckFrame = await connection.ReadFrameAsync(TimeSpan.FromSeconds(30));
@@ -2169,7 +2253,11 @@ namespace System.Net.Http.Functional.Tests
                 // Change MaxConcurrentStreams again to allow a single request to come through.
                 await connection.ExpectSettingsAckAsync();
                 settingsFrame = new SettingsFrame(
-                    new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 1 }
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.MaxConcurrentStreams,
+                        Value = 1
+                    }
                 );
                 await connection.WriteFrameAsync(settingsFrame);
 
@@ -2222,7 +2310,11 @@ namespace System.Net.Http.Functional.Tests
                 // Change MaxConcurrentStreams setting and wait for ack.
                 // (We don't want to send any new requests until we receive the ack, otherwise we may have a timing issue.)
                 SettingsFrame settingsFrame = new SettingsFrame(
-                    new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 0 }
+                    new SettingsEntry
+                    {
+                        SettingId = SettingId.MaxConcurrentStreams,
+                        Value = 0
+                    }
                 );
                 await connection.WriteFrameAsync(settingsFrame);
                 Frame settingsAckFrame = await connection.ReadFrameAsync(TimeSpan.FromSeconds(30));

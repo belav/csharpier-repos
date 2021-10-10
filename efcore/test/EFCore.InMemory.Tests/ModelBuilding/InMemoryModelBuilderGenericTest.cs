@@ -53,15 +53,27 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 {
                     var parent =
                         context.Add(
-                            new ModifierGroupHeader { GroupHeaderId = 77, AccountId = 90 }
+                            new ModifierGroupHeader
+                            {
+                                GroupHeaderId = 77,
+                                AccountId = 90
+                            }
                         ).Entity;
                     var child1 =
                         context.Add(
-                            new ModifierGroupHeader { GroupHeaderId = 78, AccountId = 90 }
+                            new ModifierGroupHeader
+                            {
+                                GroupHeaderId = 78,
+                                AccountId = 90
+                            }
                         ).Entity;
                     var child2 =
                         context.Add(
-                            new ModifierGroupHeader { GroupHeaderId = 79, AccountId = 90 }
+                            new ModifierGroupHeader
+                            {
+                                GroupHeaderId = 79,
+                                AccountId = 90
+                            }
                         ).Entity;
 
                     child1.ModifierGroupHeader2 = parent;
@@ -186,9 +198,30 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 using (var context = new DbContext(contextOptions))
                 {
-                    var node1 = context.Add(new Node { ListId = 90, PreviousNodeId = 77 }).Entity;
-                    var node2 = context.Add(new Node { ListId = 90, PreviousNodeId = 78 }).Entity;
-                    var node3 = context.Add(new Node { ListId = 90, PreviousNodeId = 79 }).Entity;
+                    var node1 =
+                        context.Add(
+                            new Node
+                            {
+                                ListId = 90,
+                                PreviousNodeId = 77
+                            }
+                        ).Entity;
+                    var node2 =
+                        context.Add(
+                            new Node
+                            {
+                                ListId = 90,
+                                PreviousNodeId = 78
+                            }
+                        ).Entity;
+                    var node3 =
+                        context.Add(
+                            new Node
+                            {
+                                ListId = 90,
+                                PreviousNodeId = 79
+                            }
+                        ).Entity;
 
                     node1.NextNode = node2;
                     node3.PreviousNode = node2;

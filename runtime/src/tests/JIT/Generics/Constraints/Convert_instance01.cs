@@ -4,17 +4,11 @@
 
 using System;
 
-public interface IFoo
-{
-}
+public interface IFoo { }
 
-public class FooClass : IFoo
-{
-}
+public class FooClass : IFoo { }
 
-public struct FooStruct : IFoo
-{
-}
+public struct FooStruct : IFoo { }
 
 public class GenClass<T> where T : IFoo
 {

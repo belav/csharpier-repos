@@ -840,7 +840,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(table, nameof(table));
 
-            var operation = new DropColumnOperation { Schema = schema, Table = table, Name = name };
+            var operation = new DropColumnOperation
+            {
+                Schema = schema,
+                Table = table,
+                Name = name
+            };
             Operations.Add(operation);
 
             return new OperationBuilder<DropColumnOperation>(operation);
@@ -888,7 +893,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             Check.NotEmpty(name, nameof(name));
 
-            var operation = new DropIndexOperation { Schema = schema, Table = table, Name = name };
+            var operation = new DropIndexOperation
+            {
+                Schema = schema,
+                Table = table,
+                Name = name
+            };
             Operations.Add(operation);
 
             return new OperationBuilder<DropIndexOperation>(operation);
@@ -949,7 +959,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             Check.NotEmpty(name, nameof(name));
 
-            var operation = new DropSequenceOperation { Schema = schema, Name = name };
+            var operation = new DropSequenceOperation
+            {
+                Schema = schema,
+                Name = name
+            };
             Operations.Add(operation);
 
             return new OperationBuilder<DropSequenceOperation>(operation);
@@ -994,7 +1008,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             Check.NotEmpty(name, nameof(name));
 
-            var operation = new DropTableOperation { Schema = schema, Name = name };
+            var operation = new DropTableOperation
+            {
+                Schema = schema,
+                Name = name
+            };
             Operations.Add(operation);
 
             return new OperationBuilder<DropTableOperation>(operation);

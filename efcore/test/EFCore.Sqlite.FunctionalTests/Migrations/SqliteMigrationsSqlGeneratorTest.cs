@@ -766,7 +766,13 @@ SELECT changes();
         [ConditionalFact]
         public virtual void AlterTable_mostly_works_when_no_model()
         {
-            Generate(new AlterTableOperation { Name = "Blogs", Comment = "The Blogs table" });
+            Generate(
+                new AlterTableOperation
+                {
+                    Name = "Blogs",
+                    Comment = "The Blogs table"
+                }
+            );
 
             Assert.Empty(Sql);
         }
@@ -777,7 +783,11 @@ SELECT changes();
             var ex = Assert.Throws<NotSupportedException>(
                 () =>
                     Generate(
-                        new DropForeignKeyOperation { Table = "Posts", Name = "FK_Posts_BlogId" }
+                        new DropForeignKeyOperation
+                        {
+                            Table = "Posts",
+                            Name = "FK_Posts_BlogId"
+                        }
                     )
             );
 
@@ -791,7 +801,14 @@ SELECT changes();
         public virtual void DropPrimaryKey_throws_when_no_model()
         {
             var ex = Assert.Throws<NotSupportedException>(
-                () => Generate(new DropPrimaryKeyOperation { Table = "Blogs", Name = "PK_Blogs" })
+                () =>
+                    Generate(
+                        new DropPrimaryKeyOperation
+                        {
+                            Table = "Blogs",
+                            Name = "PK_Blogs"
+                        }
+                    )
             );
 
             Assert.Equal(
@@ -806,7 +823,11 @@ SELECT changes();
             var ex = Assert.Throws<NotSupportedException>(
                 () =>
                     Generate(
-                        new DropUniqueConstraintOperation { Table = "Blogs", Name = "AK_Blogs_Uri" }
+                        new DropUniqueConstraintOperation
+                        {
+                            Table = "Blogs",
+                            Name = "AK_Blogs_Uri"
+                        }
                     )
             );
 
@@ -820,7 +841,14 @@ SELECT changes();
         public virtual void DropColumn_throws_when_no_model()
         {
             var ex = Assert.Throws<NotSupportedException>(
-                () => Generate(new DropColumnOperation { Table = "Posts", Name = "Rating" })
+                () =>
+                    Generate(
+                        new DropColumnOperation
+                        {
+                            Table = "Posts",
+                            Name = "Rating"
+                        }
+                    )
             );
 
             Assert.Equal(

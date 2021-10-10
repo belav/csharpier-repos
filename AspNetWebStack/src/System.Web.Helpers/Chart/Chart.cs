@@ -173,7 +173,13 @@ namespace System.Web.Helpers
         /// <param name="name">Legend name.</param>
         public Chart AddLegend(string title = null, string name = null)
         {
-            _legends.Add(new LegendData { Name = name, Title = title });
+            _legends.Add(
+                new LegendData
+                {
+                    Name = name,
+                    Title = title
+                }
+            );
             return this;
         }
 
@@ -257,7 +263,13 @@ namespace System.Web.Helpers
         /// <param name="name">Title name.</param>
         public Chart AddTitle(string text = null, string name = null)
         {
-            _titles.Add(new TitleData { Name = name, Text = text });
+            _titles.Add(
+                new TitleData
+                {
+                    Name = name,
+                    Text = text
+                }
+            );
             return this;
         }
 
@@ -266,7 +278,12 @@ namespace System.Web.Helpers
         /// <param name="max">The maximum value on X-axis. Default NaN</param>
         public Chart SetXAxis(string title = "", double min = 0, double max = Double.NaN)
         {
-            _xAxis = new ChartAxisData { Title = title, Minimum = min, Maximum = max };
+            _xAxis = new ChartAxisData
+            {
+                Title = title,
+                Minimum = min,
+                Maximum = max
+            };
             return this;
         }
 
@@ -275,7 +292,12 @@ namespace System.Web.Helpers
         /// <param name="max">The maximum value on Y-axis. Default NaN</param>
         public Chart SetYAxis(string title = "", double min = 0, double max = Double.NaN)
         {
-            _yAxis = new ChartAxisData { Title = title, Minimum = min, Maximum = max };
+            _yAxis = new ChartAxisData
+            {
+                Title = title,
+                Minimum = min,
+                Maximum = max
+            };
             return this;
         }
 

@@ -225,7 +225,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
             Assert.Equal("CS1513", results[0].Diagnostics.Single().Code);
             Assert.Equal(
-                new Position { Line = 0, Character = 9 },
+                new Position
+                {
+                    Line = 0,
+                    Character = 9
+                },
                 results[0].Diagnostics.Single().Range.Start
             );
 
@@ -240,7 +244,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
             Assert.Equal("CS1513", results[0].Diagnostics.Single().Code);
             Assert.Equal(
-                new Position { Line = 0, Character = 10 },
+                new Position
+                {
+                    Line = 0,
+                    Character = 10
+                },
                 results[0].Diagnostics.Single().Range.Start
             );
         }
@@ -520,7 +528,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             Assert.Equal(2, results.Length);
             Assert.Equal("CS1513", results[0].Diagnostics.Single().Code);
             Assert.Equal(
-                new Position { Line = 0, Character = 9 },
+                new Position
+                {
+                    Line = 0,
+                    Character = 9
+                },
                 results[0].Diagnostics.Single().Range.Start
             );
 
@@ -543,7 +555,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
             Assert.Equal("CS1513", results2[0].Diagnostics.Single().Code);
             Assert.Equal(
-                new Position { Line = 0, Character = 10 },
+                new Position
+                {
+                    Line = 0,
+                    Character = 10
+                },
                 results2[0].Diagnostics.Single().Range.Start
             );
 
@@ -566,7 +582,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             Assert.Equal(2, results.Length);
             Assert.Equal("CS1513", results[0].Diagnostics.Single().Code);
             Assert.Equal(
-                new Position { Line = 0, Character = 9 },
+                new Position
+                {
+                    Line = 0,
+                    Character = 9
+                },
                 results[0].Diagnostics.Single().Range.Start
             );
 

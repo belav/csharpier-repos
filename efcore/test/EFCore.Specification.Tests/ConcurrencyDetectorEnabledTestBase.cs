@@ -24,7 +24,13 @@ namespace Microsoft.EntityFrameworkCore
             await ConcurrencyDetectorTest(
                 async c =>
                 {
-                    c.Products.Add(new Product { Id = 2, Name = "Unicorn Replacement Horn Pack" });
+                    c.Products.Add(
+                        new Product
+                        {
+                            Id = 2,
+                            Name = "Unicorn Replacement Horn Pack"
+                        }
+                    );
                     return async ? await c.SaveChangesAsync() : c.SaveChanges();
                 }
             );

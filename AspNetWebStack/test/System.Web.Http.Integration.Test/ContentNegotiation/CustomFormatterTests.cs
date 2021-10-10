@@ -30,7 +30,11 @@ namespace System.Web.Http.ContentNegotiation
         [Fact]
         public async Task CustomFormatter_Overrides_SetResponseHeaders_During_Conneg()
         {
-            Order reqOrdr = new Order() { OrderId = "100", OrderValue = 100.00 };
+            Order reqOrdr = new Order()
+            {
+                OrderId = "100",
+                OrderValue = 100.00
+            };
             HttpRequestMessage request = new HttpRequestMessage
             {
                 Content = new ObjectContent<Order>(reqOrdr, new XmlMediaTypeFormatter())
@@ -98,7 +102,11 @@ namespace System.Web.Http.ContentNegotiation
         [Fact]
         public async Task CustomFormatter_Post_Returns_Request_ComplexType_Content()
         {
-            Order reqOrdr = new Order() { OrderId = "100", OrderValue = 100.00 };
+            Order reqOrdr = new Order()
+            {
+                OrderId = "100",
+                OrderValue = 100.00
+            };
             HttpRequestMessage request = new HttpRequestMessage
             {
                 Content = new ObjectContent<Order>(reqOrdr, new PlainTextFormatter())

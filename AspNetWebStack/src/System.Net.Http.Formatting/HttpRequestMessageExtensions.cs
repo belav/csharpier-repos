@@ -34,7 +34,11 @@ namespace System.Net.Http
                 throw Error.ArgumentNull("request");
             }
 
-            return new HttpResponseMessage { StatusCode = statusCode, RequestMessage = request };
+            return new HttpResponseMessage
+            {
+                StatusCode = statusCode,
+                RequestMessage = request
+            };
         }
 
         /// <summary>

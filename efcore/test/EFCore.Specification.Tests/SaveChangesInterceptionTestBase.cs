@@ -56,7 +56,13 @@ namespace Microsoft.EntityFrameworkCore
                 exceptionFromEvent = args.Exception;
             };
 
-            context.Add(new Singularity { Id = 35, Type = "Red Dwarf" });
+            context.Add(
+                new Singularity
+                {
+                    Id = 35,
+                    Type = "Red Dwarf"
+                }
+            );
 
             using var transaction = context.Database.BeginTransaction();
 
@@ -129,7 +135,13 @@ namespace Microsoft.EntityFrameworkCore
                 exceptionFromEvent = args.Exception;
             };
 
-            context.Add(new Singularity { Id = 35, Type = "Red Dwarf" });
+            context.Add(
+                new Singularity
+                {
+                    Id = 35,
+                    Type = "Red Dwarf"
+                }
+            );
 
             using var transaction = context.Database.BeginTransaction();
 
@@ -224,7 +236,13 @@ namespace Microsoft.EntityFrameworkCore
                 exceptionFromEvent = args.Exception;
             };
 
-            context.Add(new Singularity { Id = 35, Type = "Red Dwarf" });
+            context.Add(
+                new Singularity
+                {
+                    Id = 35,
+                    Type = "Red Dwarf"
+                }
+            );
 
             using var transaction = context.Database.BeginTransaction();
 
@@ -310,7 +328,13 @@ namespace Microsoft.EntityFrameworkCore
 
             if (!concurrencyError)
             {
-                context.Add(new Singularity { Id = 35, Type = "Red Dwarf" });
+                context.Add(
+                    new Singularity
+                    {
+                        Id = 35,
+                        Type = "Red Dwarf"
+                    }
+                );
                 var ___ = async ? await context.SaveChangesAsync() : context.SaveChanges();
                 context.ChangeTracker.Clear();
             }
@@ -337,9 +361,13 @@ namespace Microsoft.EntityFrameworkCore
                 exceptionFromEvent = args.Exception;
             };
 
-            context.Entry(new Singularity { Id = 35, Type = "Red Dwarf" }).State = concurrencyError
-                ? EntityState.Modified
-                : EntityState.Added;
+            context.Entry(
+                new Singularity
+                {
+                    Id = 35,
+                    Type = "Red Dwarf"
+                }
+            ).State = concurrencyError ? EntityState.Modified : EntityState.Added;
 
             using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
 
@@ -420,7 +448,13 @@ namespace Microsoft.EntityFrameworkCore
                 }
             );
 
-            context.Add(new Singularity { Id = 35, Type = "Red Dwarf" });
+            context.Add(
+                new Singularity
+                {
+                    Id = 35,
+                    Type = "Red Dwarf"
+                }
+            );
 
             using var transaction = context.Database.BeginTransaction();
 

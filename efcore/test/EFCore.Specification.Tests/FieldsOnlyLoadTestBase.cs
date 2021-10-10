@@ -743,7 +743,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child = context.Attach(new Child { Id = 767, ParentId = null }).Entity;
+            var child =
+                context.Attach(
+                    new Child
+                    {
+                        Id = 767,
+                        ParentId = null
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -783,7 +790,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single = context.Attach(new Single { Id = 767, ParentId = null }).Entity;
+            var single =
+                context.Attach(
+                    new Single
+                    {
+                        Id = 767,
+                        ParentId = null
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -824,7 +838,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child = context.Attach(new Child { Id = 767, ParentId = null }).Entity;
+            var child =
+                context.Attach(
+                    new Child
+                    {
+                        Id = 767,
+                        ParentId = null
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -861,7 +882,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single = context.Attach(new Single { Id = 767, ParentId = null }).Entity;
+            var single =
+                context.Attach(
+                    new Single
+                    {
+                        Id = 767,
+                        ParentId = null
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -895,7 +923,14 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Load_collection_not_found(EntityState state, bool async)
         {
             using var context = CreateContext();
-            var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+            var parent =
+                context.Attach(
+                    new Parent
+                    {
+                        Id = 767,
+                        AlternateId = "NewRoot"
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -935,7 +970,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
+            var child =
+                context.Attach(
+                    new Child
+                    {
+                        Id = 767,
+                        ParentId = 787
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -975,7 +1017,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
+            var single =
+                context.Attach(
+                    new Single
+                    {
+                        Id = 767,
+                        ParentId = 787
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -1016,7 +1065,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+            var parent =
+                context.Attach(
+                    new Parent
+                    {
+                        Id = 767,
+                        AlternateId = "NewRoot"
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -1057,7 +1113,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+            var parent =
+                context.Attach(
+                    new Parent
+                    {
+                        Id = 767,
+                        AlternateId = "NewRoot"
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -1094,7 +1157,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
+            var child =
+                context.Attach(
+                    new Child
+                    {
+                        Id = 767,
+                        ParentId = 787
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -1131,7 +1201,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
+            var single =
+                context.Attach(
+                    new Single
+                    {
+                        Id = 767,
+                        ParentId = 787
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -1168,7 +1245,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+            var parent =
+                context.Attach(
+                    new Parent
+                    {
+                        Id = 767,
+                        AlternateId = "NewRoot"
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -2079,7 +2163,14 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Load_collection_not_found_untyped(EntityState state, bool async)
         {
             using var context = CreateContext();
-            var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+            var parent =
+                context.Attach(
+                    new Parent
+                    {
+                        Id = 767,
+                        AlternateId = "NewRoot"
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -2119,7 +2210,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
+            var child =
+                context.Attach(
+                    new Child
+                    {
+                        Id = 767,
+                        ParentId = 787
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -2159,7 +2257,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
+            var single =
+                context.Attach(
+                    new Single
+                    {
+                        Id = 767,
+                        ParentId = 787
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -2200,7 +2305,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+            var parent =
+                context.Attach(
+                    new Parent
+                    {
+                        Id = 767,
+                        AlternateId = "NewRoot"
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -2241,7 +2353,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+            var parent =
+                context.Attach(
+                    new Parent
+                    {
+                        Id = 767,
+                        AlternateId = "NewRoot"
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -2279,7 +2398,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
+            var child =
+                context.Attach(
+                    new Child
+                    {
+                        Id = 767,
+                        ParentId = 787
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -2317,7 +2443,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
+            var single =
+                context.Attach(
+                    new Single
+                    {
+                        Id = 767,
+                        ParentId = 787
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -2355,7 +2488,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+            var parent =
+                context.Attach(
+                    new Parent
+                    {
+                        Id = 767,
+                        AlternateId = "NewRoot"
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -3102,7 +3242,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child = context.Attach(new ChildAk { Id = 767, ParentId = null }).Entity;
+            var child =
+                context.Attach(
+                    new ChildAk
+                    {
+                        Id = 767,
+                        ParentId = null
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -3142,7 +3289,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single = context.Attach(new SingleAk { Id = 767, ParentId = null }).Entity;
+            var single =
+                context.Attach(
+                    new SingleAk
+                    {
+                        Id = 767,
+                        ParentId = null
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -3183,7 +3337,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child = context.Attach(new ChildAk { Id = 767, ParentId = null }).Entity;
+            var child =
+                context.Attach(
+                    new ChildAk
+                    {
+                        Id = 767,
+                        ParentId = null
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -3220,7 +3381,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single = context.Attach(new SingleAk { Id = 767, ParentId = null }).Entity;
+            var single =
+                context.Attach(
+                    new SingleAk
+                    {
+                        Id = 767,
+                        ParentId = null
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -4063,7 +4231,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child = context.Attach(new ChildCompositeKey { Id = 767, ParentId = 567 }).Entity;
+            var child =
+                context.Attach(
+                    new ChildCompositeKey
+                    {
+                        Id = 767,
+                        ParentId = 567
+                    }
+                ).Entity;
 
             ClearLog();
 
@@ -4105,7 +4280,11 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             var single =
                 context.Attach(
-                    new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" }
+                    new SingleCompositeKey
+                    {
+                        Id = 767,
+                        ParentAlternateId = "Boot"
+                    }
                 ).Entity;
 
             ClearLog();
@@ -4149,7 +4328,11 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             var child =
                 context.Attach(
-                    new ChildCompositeKey { Id = 767, ParentAlternateId = "Boot" }
+                    new ChildCompositeKey
+                    {
+                        Id = 767,
+                        ParentAlternateId = "Boot"
+                    }
                 ).Entity;
 
             ClearLog();
@@ -4187,7 +4370,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single = context.Attach(new SingleCompositeKey { Id = 767, ParentId = 567 }).Entity;
+            var single =
+                context.Attach(
+                    new SingleCompositeKey
+                    {
+                        Id = 767,
+                        ParentId = 567
+                    }
+                ).Entity;
 
             ClearLog();
 

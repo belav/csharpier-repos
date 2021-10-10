@@ -506,7 +506,11 @@ namespace Microsoft.EntityFrameworkCore
 
                 context.ChangeTracker.DetectChanges();
 
-                bike.Operator = new LicensedOperator { Name = "repairman", LicenseType = "Repair" };
+                bike.Operator = new LicensedOperator
+                {
+                    Name = "repairman",
+                    LicenseType = "Repair"
+                };
 
                 TestSqlLoggerFactory.Clear();
                 context.SaveChanges();
@@ -611,7 +615,11 @@ namespace Microsoft.EntityFrameworkCore
                 var newBike = new Vehicle
                 {
                     Name = "Trek Pro Fit Madone 6 Series",
-                    Operator = new LicensedOperator { Name = "repairman", LicenseType = "Repair" },
+                    Operator = new LicensedOperator
+                    {
+                        Name = "repairman",
+                        LicenseType = "Repair"
+                    },
                     SeatingCapacity = 2
                 };
 

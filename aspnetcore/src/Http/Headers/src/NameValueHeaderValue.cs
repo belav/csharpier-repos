@@ -88,7 +88,11 @@ namespace Microsoft.Net.Http.Headers
         /// <returns>A copy.</returns>
         public NameValueHeaderValue Copy()
         {
-            return new NameValueHeaderValue() { _name = _name, _value = _value };
+            return new NameValueHeaderValue()
+            {
+                _name = _name,
+                _value = _value
+            };
         }
 
         /// <summary>

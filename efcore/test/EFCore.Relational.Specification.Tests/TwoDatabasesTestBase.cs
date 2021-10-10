@@ -204,7 +204,18 @@ namespace Microsoft.EntityFrameworkCore
                 base.OnModelCreating(modelBuilder);
 
                 modelBuilder.Entity<Foo>()
-                    .HasData(new Foo { Id = 1, Bar = "One" }, new Foo { Id = 2, Bar = "Two" });
+                    .HasData(
+                        new Foo
+                        {
+                            Id = 1,
+                            Bar = "One"
+                        },
+                        new Foo
+                        {
+                            Id = 2,
+                            Bar = "Two"
+                        }
+                    );
             }
         }
 

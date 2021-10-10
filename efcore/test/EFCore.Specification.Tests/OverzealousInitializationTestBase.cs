@@ -96,9 +96,21 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var artists = new[]
                 {
-                    new Artist { Id = 1, Name = "Freddie" },
-                    new Artist { Id = 2, Name = "Kendrick" },
-                    new Artist { Id = 3, Name = "Jarvis" }
+                    new Artist
+                    {
+                        Id = 1,
+                        Name = "Freddie"
+                    },
+                    new Artist
+                    {
+                        Id = 2,
+                        Name = "Kendrick"
+                    },
+                    new Artist
+                    {
+                        Id = 3,
+                        Name = "Jarvis"
+                    }
                 };
 
                 for (var i = 1; i <= 10; i++)

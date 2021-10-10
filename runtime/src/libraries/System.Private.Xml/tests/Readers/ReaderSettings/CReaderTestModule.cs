@@ -53,7 +53,11 @@ namespace System.Xml.Tests
             module.AddChild(
                 new TCLineInfo()
                 {
-                    Attribute = new TestCase() { Name = "LineInfo", Desc = "LineInfo" }
+                    Attribute = new TestCase()
+                    {
+                        Name = "LineInfo",
+                        Desc = "LineInfo"
+                    }
                 }
             );
             module.AddChild(

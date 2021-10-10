@@ -96,7 +96,11 @@ namespace RoutingWebSite
                         case DynamicOrderScenarios.DynamicControllerAndPages:
                             endpoints.MapDynamicPageRoute<Transformer>(
                                 "{**dynamic-order-page-controller-before:regex(^((?!dynamic\\-order\\-page\\-controller\\-after).)*$)}",
-                                new TransformerState() { Identifier = "before", ForPages = true }
+                                new TransformerState()
+                                {
+                                    Identifier = "before",
+                                    ForPages = true
+                                }
                             );
                             endpoints.MapDynamicControllerRoute<Transformer>(
                                 "{dynamic-order-page-controller}",
@@ -104,7 +108,11 @@ namespace RoutingWebSite
                             );
                             endpoints.MapDynamicPageRoute<Transformer>(
                                 "dynamic-order-page-controller-after",
-                                new TransformerState() { Identifier = "after", ForPages = true }
+                                new TransformerState()
+                                {
+                                    Identifier = "after",
+                                    ForPages = true
+                                }
                             );
                             break;
                         default:

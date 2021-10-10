@@ -35,7 +35,11 @@ namespace AutoMapper.UnitTests.Bug
 
         protected override void Because_of()
         {
-            var source = new Source() { Id = 1, ListProperty = _sourceList, };
+            var source = new Source()
+            {
+                Id = 1,
+                ListProperty = _sourceList,
+            };
             _destination = new Destination()
             {
                 Id = 2,

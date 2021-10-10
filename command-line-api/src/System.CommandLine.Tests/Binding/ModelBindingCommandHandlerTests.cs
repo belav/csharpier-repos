@@ -126,7 +126,11 @@ namespace System.CommandLine.Tests.Binding
 
             var command = new Command("the-command")
             {
-                new Argument { Name = "value", ArgumentType = type }
+                new Argument
+                {
+                    Name = "value",
+                    ArgumentType = type
+                }
             };
 
             var console = new TestConsole();
@@ -341,7 +345,11 @@ namespace System.CommandLine.Tests.Binding
 
             var command = new Command("command")
             {
-                new Argument { Name = "value", ArgumentType = c.ParameterType }
+                new Argument
+                {
+                    Name = "value",
+                    ArgumentType = c.ParameterType
+                }
             };
             command.Handler = handler;
 
@@ -384,7 +392,11 @@ namespace System.CommandLine.Tests.Binding
 
             var handler = CommandHandler.Create(captureMethod);
 
-            var argument = new Argument { Name = "value", ArgumentType = c.ParameterType };
+            var argument = new Argument
+            {
+                Name = "value",
+                ArgumentType = c.ParameterType
+            };
 
             var command = new Command("command") { argument };
             if (!(handler is ModelBindingCommandHandler bindingHandler))

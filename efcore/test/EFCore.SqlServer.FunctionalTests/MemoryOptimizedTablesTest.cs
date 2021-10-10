@@ -28,8 +28,16 @@ namespace Microsoft.EntityFrameworkCore
                 var bigUn = new BigUn();
                 var fastUns = new[]
                 {
-                    new FastUn { Name = "First 'un", BigUn = bigUn },
-                    new FastUn { Name = "Second 'un", BigUn = bigUn }
+                    new FastUn
+                    {
+                        Name = "First 'un",
+                        BigUn = bigUn
+                    },
+                    new FastUn
+                    {
+                        Name = "Second 'un",
+                        BigUn = bigUn
+                    }
                 };
                 using (var context = CreateContext())
                 {

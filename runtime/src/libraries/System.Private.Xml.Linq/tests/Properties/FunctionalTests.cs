@@ -330,8 +330,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(ValidVariation)
                         {
-                            Attribute = new VariationAttribute("XElement - name with xml namespace")
-                            {
+                            Attribute = new VariationAttribute(
+                                "XElement - name with xml namespace"
+                            ) {
                                 Params = new object[]
                                 {
                                     "<element>value</element>",
@@ -344,8 +345,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(ValidVariation)
                         {
-                            Attribute = new VariationAttribute("XElement - element with namespace")
-                            {
+                            Attribute = new VariationAttribute(
+                                "XElement - element with namespace"
+                            ) {
                                 Params = new object[]
                                 {
                                     "<p:element xmlns:p='mynamespace'><p:child>value</p:child></p:element>",
@@ -516,8 +518,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(SmokeTest)
                         {
-                            Attribute = new VariationAttribute("GET: Mixed content - no text nodes")
-                            {
+                            Attribute = new VariationAttribute(
+                                "GET: Mixed content - no text nodes"
+                            ) {
                                 Params = new object[]
                                 {
                                     "<X>t0<A Id='a0'><B/><B xmlns='a'><?Pi c?></B><!--commm--><C></C></A>t00</X>"
@@ -622,8 +625,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(Value_Set)
                         {
-                            Attribute = new VariationAttribute("SET: Empty element, String content")
-                            {
+                            Attribute = new VariationAttribute(
+                                "SET: Empty element, String content"
+                            ) {
                                 Params = new object[] { "<X>t0<A/>t00</X>", "\nt1 " },
                                 Priority = 0
                             }

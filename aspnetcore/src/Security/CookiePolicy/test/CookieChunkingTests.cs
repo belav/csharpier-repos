@@ -162,7 +162,11 @@ namespace Microsoft.AspNetCore.Internal
             new ChunkingCookieManager().DeleteCookie(
                 context,
                 "TestCookie",
-                new CookieOptions() { Domain = "foo.com", Secure = true }
+                new CookieOptions()
+                {
+                    Domain = "foo.com",
+                    Secure = true
+                }
             );
             var cookies = context.Response.Headers["Set-Cookie"];
             Assert.Equal(8, cookies.Count);

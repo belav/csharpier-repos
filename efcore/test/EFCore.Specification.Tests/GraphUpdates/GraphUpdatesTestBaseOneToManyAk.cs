@@ -513,19 +513,43 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             var newRoot = new Root { AlternateId = Guid.NewGuid() };
-            var new1 = new RequiredAk1 { AlternateId = Guid.NewGuid(), Parent = newRoot };
-            var new1d = new RequiredAk1Derived { AlternateId = Guid.NewGuid(), Parent = newRoot };
+            var new1 = new RequiredAk1
+            {
+                AlternateId = Guid.NewGuid(),
+                Parent = newRoot
+            };
+            var new1d = new RequiredAk1Derived
+            {
+                AlternateId = Guid.NewGuid(),
+                Parent = newRoot
+            };
             var new1dd = new RequiredAk1MoreDerived
             {
                 AlternateId = Guid.NewGuid(),
                 Parent = newRoot
             };
-            var new2a = new RequiredAk2 { AlternateId = Guid.NewGuid(), Parent = new1 };
-            var new2b = new RequiredAk2 { AlternateId = Guid.NewGuid(), Parent = new1 };
+            var new2a = new RequiredAk2
+            {
+                AlternateId = Guid.NewGuid(),
+                Parent = new1
+            };
+            var new2b = new RequiredAk2
+            {
+                AlternateId = Guid.NewGuid(),
+                Parent = new1
+            };
             var new2ca = new RequiredComposite2 { Parent = new1 };
             var new2cb = new RequiredComposite2 { Parent = new1 };
-            var new2d = new RequiredAk2Derived { AlternateId = Guid.NewGuid(), Parent = new1 };
-            var new2dd = new RequiredAk2MoreDerived { AlternateId = Guid.NewGuid(), Parent = new1 };
+            var new2d = new RequiredAk2Derived
+            {
+                AlternateId = Guid.NewGuid(),
+                Parent = new1
+            };
+            var new2dd = new RequiredAk2MoreDerived
+            {
+                AlternateId = Guid.NewGuid(),
+                Parent = new1
+            };
             Root root = null;
             IReadOnlyList<EntityEntry> entries = null;
 

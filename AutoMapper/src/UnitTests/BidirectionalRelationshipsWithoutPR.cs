@@ -69,7 +69,11 @@ namespace AutoMapper.UnitTests
         public void Should_map_ok()
         {
             var flowStep = new FlowStep();
-            var flowDecision = new FlowDecision { False = flowStep, True = flowStep };
+            var flowDecision = new FlowDecision
+            {
+                False = flowStep,
+                True = flowStep
+            };
             flowStep.Next = flowDecision;
             var source = new FlowChart { Nodes = new FlowNode[] { flowStep, flowDecision } };
             var dest = Map<FlowChartModel>(source);

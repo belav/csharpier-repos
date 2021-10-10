@@ -338,7 +338,11 @@ namespace Microsoft.EntityFrameworkCore
                 }
 
                 attendee.SessionsAttendees.Add(
-                    new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId }
+                    new SessionAttendee
+                    {
+                        AttendeeId = attendee.Id,
+                        SessionId = sessionId
+                    }
                 );
 
                 await _db.SaveChangesAsync();
@@ -946,7 +950,12 @@ namespace Microsoft.EntityFrameworkCore
                             };
 
                             session.SessionSpeakers = sessionSpeakers.Select(
-                                    s => new SessionSpeaker { Session = session, Speaker = s }
+                                    s =>
+                                        new SessionSpeaker
+                                        {
+                                            Session = session,
+                                            Speaker = s
+                                        }
                                 )
                                 .ToList();
 
@@ -960,7 +969,12 @@ namespace Microsoft.EntityFrameworkCore
                                         : attendees1.Concat(attendees2).Concat(attendees3).ToList();
 
                             session.SessionAttendees = attendees.Select(
-                                    a => new SessionAttendee { Session = session, Attendee = a }
+                                    a =>
+                                        new SessionAttendee
+                                        {
+                                            Session = session,
+                                            Attendee = a
+                                        }
                                 )
                                 .ToList();
 

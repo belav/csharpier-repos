@@ -455,7 +455,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         ) =>
             new LSP.DidOpenTextDocumentParams()
             {
-                TextDocument = new TextDocumentItem { Text = source, Uri = location.Uri }
+                TextDocument = new TextDocumentItem
+                {
+                    Text = source,
+                    Uri = location.Uri
+                }
             };
 
         private static LSP.DidChangeTextDocumentParams CreateDidChangeTextDocumentParams(

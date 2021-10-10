@@ -35,18 +35,30 @@ namespace System.Web.Http.Validation
                     { "foo", typeof(string), new Dictionary<string, string>() },
                     // Object Traversal : make sure we can traverse the object graph without throwing
                     {
-                        new ValueType() { Reference = "ref", Value = 256 },
+                        new ValueType()
+                        {
+                            Reference = "ref",
+                            Value = 256
+                        },
                         typeof(ValueType),
                         new Dictionary<string, string>()
                     },
                     {
-                        new ReferenceType() { Reference = "ref", Value = 256 },
+                        new ReferenceType()
+                        {
+                            Reference = "ref",
+                            Value = 256
+                        },
                         typeof(ReferenceType),
                         new Dictionary<string, string>()
                     },
                     // Classes
                     {
-                        new Person() { Name = "Rick", Profession = "Astronaut" },
+                        new Person()
+                        {
+                            Name = "Rick",
+                            Profession = "Astronaut"
+                        },
                         typeof(Person),
                         new Dictionary<string, string>()
                     },
@@ -60,7 +72,11 @@ namespace System.Web.Http.Validation
                         }
                     },
                     {
-                        new Person() { Name = "Rick", Friend = new Person() },
+                        new Person()
+                        {
+                            Name = "Rick",
+                            Friend = new Person()
+                        },
                         typeof(Person),
                         new Dictionary<string, string>()
                         {

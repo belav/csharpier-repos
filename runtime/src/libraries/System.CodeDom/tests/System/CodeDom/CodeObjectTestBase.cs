@@ -25,7 +25,11 @@ namespace System.CodeDom.Tests
 
             codeObject.UserData.Add("key2", "value");
             Assert.Equal(
-                new ListDictionary() { ["key1"] = "value", ["key2"] = "value" },
+                new ListDictionary()
+                {
+                    ["key1"] = "value",
+                    ["key2"] = "value"
+                },
                 codeObject.UserData
             );
         }

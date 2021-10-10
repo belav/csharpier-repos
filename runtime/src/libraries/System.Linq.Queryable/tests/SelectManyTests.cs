@@ -14,11 +14,31 @@ namespace System.Linq.Tests.LegacyTests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
-                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
-                new StringWithIntArray { name = "Chris", total = new int?[0] },
-                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
+                new StringWithIntArray
+                {
+                    name = "Prakash",
+                    total = new int?[] { 1, 2, 3, 4 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Bob",
+                    total = new int?[] { 5, 6 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Chris",
+                    total = new int?[0]
+                },
+                new StringWithIntArray
+                {
+                    name = null,
+                    total = new int?[] { 8, 9 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Prakash",
+                    total = new int?[] { -10, 100 }
+                }
             };
             int?[] expected = { 1, 2, 3, 4, 5, 6, 8, 9, -10, 100 };
             Assert.Equal(expected, source.AsQueryable().SelectMany(e => e.total));
@@ -29,11 +49,31 @@ namespace System.Linq.Tests.LegacyTests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
-                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
-                new StringWithIntArray { name = "Chris", total = new int?[0] },
-                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
+                new StringWithIntArray
+                {
+                    name = "Prakash",
+                    total = new int?[] { 1, 2, 3, 4 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Bob",
+                    total = new int?[] { 5, 6 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Chris",
+                    total = new int?[0]
+                },
+                new StringWithIntArray
+                {
+                    name = null,
+                    total = new int?[] { 8, 9 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Prakash",
+                    total = new int?[] { -10, 100 }
+                }
             };
             int?[] expected = { 1, 2, 3, 4, 5, 6, 8, 9, -10, 100 };
             Assert.Equal(expected, source.AsQueryable().SelectMany((e, index) => e.total));
@@ -44,11 +84,31 @@ namespace System.Linq.Tests.LegacyTests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
-                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
-                new StringWithIntArray { name = "Chris", total = new int?[0] },
-                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
+                new StringWithIntArray
+                {
+                    name = "Prakash",
+                    total = new int?[] { 1, 2, 3, 4 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Bob",
+                    total = new int?[] { 5, 6 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Chris",
+                    total = new int?[0]
+                },
+                new StringWithIntArray
+                {
+                    name = null,
+                    total = new int?[] { 8, 9 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Prakash",
+                    total = new int?[] { -10, 100 }
+                }
             };
             string[] expected = { "1", "2", "3", "4", "5", "6", "8", "9", "-10", "100" };
 
@@ -175,11 +235,31 @@ namespace System.Linq.Tests.LegacyTests
         {
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name = "Prakash", total = new int?[] { 1, 2, 3, 4 } },
-                new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
-                new StringWithIntArray { name = "Chris", total = new int?[0] },
-                new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Robert", total = new int?[] { -10, 100 } }
+                new StringWithIntArray
+                {
+                    name = "Prakash",
+                    total = new int?[] { 1, 2, 3, 4 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Bob",
+                    total = new int?[] { 5, 6 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Chris",
+                    total = new int?[0]
+                },
+                new StringWithIntArray
+                {
+                    name = null,
+                    total = new int?[] { 8, 9 }
+                },
+                new StringWithIntArray
+                {
+                    name = "Robert",
+                    total = new int?[] { -10, 100 }
+                }
             };
 
             string[] expected = { "-10", "100" };

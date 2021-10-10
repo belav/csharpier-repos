@@ -100,8 +100,20 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BooFooContext(options))
             {
-                context.Add(new Foo { Goo1 = null, Goo2 = new Goo() });
-                context.Add(new Boo { Goo1 = new Goo(), Goo2 = new Goo() });
+                context.Add(
+                    new Foo
+                    {
+                        Goo1 = null,
+                        Goo2 = new Goo()
+                    }
+                );
+                context.Add(
+                    new Boo
+                    {
+                        Goo1 = new Goo(),
+                        Goo2 = new Goo()
+                    }
+                );
                 context.SaveChanges();
 
                 var foos = context.Foos.Single();

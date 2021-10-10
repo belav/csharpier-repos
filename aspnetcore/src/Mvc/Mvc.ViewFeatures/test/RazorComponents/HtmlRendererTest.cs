@@ -928,7 +928,11 @@ namespace Microsoft.AspNetCore.Components.Rendering
                 () =>
                     htmlRenderer.RenderComponentAsync<NestedAsyncComponent>(
                         ParameterView.FromDictionary(
-                            new Dictionary<string, object> { ["Nested"] = false, ["Value"] = 10 }
+                            new Dictionary<string, object>
+                            {
+                                ["Nested"] = false,
+                                ["Value"] = 10
+                            }
                         )
                     )
             );

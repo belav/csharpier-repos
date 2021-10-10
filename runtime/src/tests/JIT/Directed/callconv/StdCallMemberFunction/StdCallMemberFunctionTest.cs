@@ -219,7 +219,11 @@ unsafe class StdCallMemberFunctionTest
         int unused
     )
     {
-        return new StdCallMemberFunctionNative.SizeF { width = c->width, height = c->height };
+        return new StdCallMemberFunctionNative.SizeF
+        {
+            width = c->width,
+            height = c->height
+        };
     }
 
     [UnmanagedCallersOnly(

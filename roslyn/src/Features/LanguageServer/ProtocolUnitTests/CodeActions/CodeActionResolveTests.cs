@@ -43,8 +43,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 groupName: "Roslyn1",
                 applicableRange: new LSP.Range
                 {
-                    Start = new Position { Line = 4, Character = 8 },
-                    End = new Position { Line = 4, Character = 11 }
+                    Start = new Position
+                    {
+                        Line = 4,
+                        Character = 8
+                    },
+                    End = new Position
+                    {
+                        Line = 4,
+                        Character = 11
+                    }
                 },
                 diagnostics: null
             );
@@ -61,7 +69,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             {
                 GenerateTextEdit(
                     "var",
-                    new LSP.Range { Start = new Position(4, 8), End = new Position(4, 11) }
+                    new LSP.Range
+                    {
+                        Start = new Position(4, 8),
+                        End = new Position(4, 11)
+                    }
                 )
             };
 
@@ -78,8 +90,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 diagnostics: null,
                 applicableRange: new LSP.Range
                 {
-                    Start = new Position { Line = 4, Character = 8 },
-                    End = new Position { Line = 4, Character = 11 }
+                    Start = new Position
+                    {
+                        Line = 4,
+                        Character = 8
+                    },
+                    End = new Position
+                    {
+                        Line = 4,
+                        Character = 11
+                    }
                 },
                 edit: GenerateWorkspaceEdit(locations, expectedTextEdits)
             );
@@ -118,8 +138,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 groupName: "Roslyn2",
                 applicableRange: new LSP.Range
                 {
-                    Start = new Position { Line = 4, Character = 8 },
-                    End = new Position { Line = 4, Character = 11 }
+                    Start = new Position
+                    {
+                        Line = 4,
+                        Character = 8
+                    },
+                    End = new Position
+                    {
+                        Line = 4,
+                        Character = 11
+                    }
                 },
                 diagnostics: null
             );
@@ -140,11 +168,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                     @"private const int V = 1;
 
 ",
-                    new LSP.Range { Start = new Position(2, 4), End = new Position(2, 4) }
+                    new LSP.Range
+                    {
+                        Start = new Position(2, 4),
+                        End = new Position(2, 4)
+                    }
                 ),
                 GenerateTextEdit(
                     "V",
-                    new LSP.Range { Start = new Position(4, 16), End = new Position(4, 17) }
+                    new LSP.Range
+                    {
+                        Start = new Position(4, 16),
+                        End = new Position(4, 17)
+                    }
                 )
             };
 
@@ -162,8 +198,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 groupName: "Roslyn2",
                 applicableRange: new LSP.Range
                 {
-                    Start = new Position { Line = 4, Character = 8 },
-                    End = new Position { Line = 4, Character = 11 }
+                    Start = new Position
+                    {
+                        Line = 4,
+                        Character = 8
+                    },
+                    End = new Position
+                    {
+                        Line = 4,
+                        Character = 11
+                    }
                 },
                 diagnostics: null,
                 edit: GenerateWorkspaceEdit(locations, expectedTextEdits)
@@ -196,7 +240,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
         }
 
         private static LSP.TextEdit GenerateTextEdit(string newText, LSP.Range range) =>
-            new LSP.TextEdit { NewText = newText, Range = range };
+            new LSP.TextEdit
+            {
+                NewText = newText,
+                Range = range
+            };
 
         private static WorkspaceEdit GenerateWorkspaceEdit(
             Dictionary<string, IList<LSP.Location>> locations,

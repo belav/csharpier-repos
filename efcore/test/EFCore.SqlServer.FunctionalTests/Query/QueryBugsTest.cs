@@ -315,7 +315,11 @@ WHERE ((((((((([d].[SmallDateTime] IN ('1970-09-03T12:00:00', '1971-09-03T12:00:
                                 CustomerName = "Steve Jones",
                                 PostcodeID = 3
                             },
-                            new Customer { CustomerID = 4, CustomerName = "Jim Warren" },
+                            new Customer
+                            {
+                                CustomerID = 4,
+                                CustomerName = "Jim Warren"
+                            },
                             new Customer
                             {
                                 CustomerID = 5,
@@ -565,7 +569,13 @@ INSERT ZeroKey VALUES (NULL)"
             {
                 modelBuilder.Entity<Product>()
                     .ToTable("Product")
-                    .HasData(new Product { Id = 1, Name = "Product 1" });
+                    .HasData(
+                        new Product
+                        {
+                            Id = 1,
+                            Name = "Product 1"
+                        }
+                    );
             }
 
             public class Product
@@ -642,8 +652,16 @@ LEFT JOIN [Customer] AS [c] ON ([o].[CustomerFirstName] = [c].[FirstName]) AND (
                         m.HasKey(c => new { c.FirstName, c.LastName });
                         m.HasMany(c => c.Orders).WithOne(o => o.Customer);
                         m.HasData(
-                            new Customer { FirstName = "Customer", LastName = "One" },
-                            new Customer { FirstName = "Customer", LastName = "Two" }
+                            new Customer
+                            {
+                                FirstName = "Customer",
+                                LastName = "One"
+                            },
+                            new Customer
+                            {
+                                FirstName = "Customer",
+                                LastName = "Two"
+                            }
                         );
                     }
                 );
@@ -791,8 +809,16 @@ LEFT JOIN [Customer] AS [c] ON ([o].[CustomerFirstName] = [c].[FirstName]) AND (
                             .WithOne(d => d.Targaryen)
                             .HasForeignKey<TargaryenDetails>(d => d.TargaryenId);
                         m.HasData(
-                            new Targaryen { Id = 1, Name = "Aerys II" },
-                            new Targaryen { Id = 2, Name = "Daenerys" }
+                            new Targaryen
+                            {
+                                Id = 1,
+                                Name = "Aerys II"
+                            },
+                            new Targaryen
+                            {
+                                Id = 2,
+                                Name = "Daenerys"
+                            }
                         );
                     }
                 );
@@ -812,10 +838,29 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 modelBuilder.Entity<Dragon>()
                     .ToTable("Dragon")
                     .HasData(
-                        new Dragon { Id = 1, Name = "Drogon", MotherId = 2 },
-                        new Dragon { Id = 2, Name = "Rhaegal", MotherId = 2 },
-                        new Dragon { Id = 3, Name = "Viserion", MotherId = 2 },
-                        new Dragon { Id = 4, Name = "Balerion" }
+                        new Dragon
+                        {
+                            Id = 1,
+                            Name = "Drogon",
+                            MotherId = 2
+                        },
+                        new Dragon
+                        {
+                            Id = 2,
+                            Name = "Rhaegal",
+                            MotherId = 2
+                        },
+                        new Dragon
+                        {
+                            Id = 3,
+                            Name = "Viserion",
+                            MotherId = 2
+                        },
+                        new Dragon
+                        {
+                            Id = 4,
+                            Name = "Balerion"
+                        }
                     );
             }
 
@@ -852,7 +897,13 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
         [ConditionalFact]
         public void Compiler_generated_local_closure_produces_valid_parameter_name_1742()
         {
-            Execute1742(new CustomerDetails_1742 { FirstName = "Foo", LastName = "Bar" });
+            Execute1742(
+                new CustomerDetails_1742
+                {
+                    FirstName = "Foo",
+                    LastName = "Bar"
+                }
+            );
         }
 
         private void Execute1742(CustomerDetails_1742 details)
@@ -1393,9 +1444,21 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
                 Children.AddRange(c11, c12, c13, c21, c22, c31, c32);
 
-                var e1 = new Entity3101 { Id = 1, Children = new[] { c11, c12, c13 } };
-                var e2 = new Entity3101 { Id = 2, Children = new[] { c21, c22 } };
-                var e3 = new Entity3101 { Id = 3, Children = new[] { c31, c32 } };
+                var e1 = new Entity3101
+                {
+                    Id = 1,
+                    Children = new[] { c11, c12, c13 }
+                };
+                var e2 = new Entity3101
+                {
+                    Id = 2,
+                    Children = new[] { c21, c22 }
+                };
+                var e3 = new Entity3101
+                {
+                    Id = 3,
+                    Children = new[] { c31, c32 }
+                };
 
                 e2.RootEntity = e1;
 
@@ -2492,7 +2555,11 @@ WHERE [w].[Val] = 1"
 
                 var blogs = context.Blogs.FromSqlRaw(
                         "[dbo].[GetPersonAndVoteCount]  @id, @Value out",
-                        new SqlParameter { ParameterName = "id", Value = 1 },
+                        new SqlParameter
+                        {
+                            ParameterName = "id",
+                            Value = 1
+                        },
                         valueParam
                     )
                     .ToList();
@@ -2617,11 +2684,20 @@ BEGIN
                 var teachers = new List<PersonTeacher9038>
                 {
                     new PersonTeacher9038 { Name = "Ms. Frizzle" },
-                    new PersonTeacher9038 { Name = "Mr. Garrison", Family = famalies[0] }
+                    new PersonTeacher9038
+                    {
+                        Name = "Mr. Garrison",
+                        Family = famalies[0]
+                    }
                 };
                 var students = new List<PersonKid9038>
                 {
-                    new PersonKid9038 { Name = "Arnold", Grade = 2, Teacher = teachers[0] },
+                    new PersonKid9038
+                    {
+                        Name = "Arnold",
+                        Grade = 2,
+                        Teacher = teachers[0]
+                    },
                     new PersonKid9038
                     {
                         Name = "Eric",
@@ -2791,8 +2867,16 @@ ORDER BY [p].[Id], [c].[Id]"
                 var c13 = new Child10635 { Name = "Child113" };
                 var c21 = new Child10635 { Name = "Child121" };
 
-                var p1 = new Parent10635 { Name = "Parent1", Children = new[] { c11, c12, c13 } };
-                var p2 = new Parent10635 { Name = "Parent2", Children = new[] { c21 } };
+                var p1 = new Parent10635
+                {
+                    Name = "Parent1",
+                    Children = new[] { c11, c12, c13 }
+                };
+                var p2 = new Parent10635
+                {
+                    Name = "Parent2",
+                    Children = new[] { c21 }
+                };
                 Parents.AddRange(p1, p2);
                 Children.AddRange(c11, c12, c13, c21);
                 SaveChanges();
@@ -3204,10 +3288,26 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL"
                 var f4 = new Faction { Name = "Northern Realms" };
                 var f5 = new Faction { Name = "Scioia'tael" };
 
-                var l11 = new Leader { Faction = f1, Name = "Bran Tuirseach" };
-                var l12 = new Leader { Faction = f1, Name = "Crach an Craite" };
-                var l13 = new Leader { Faction = f1, Name = "Eist Tuirseach" };
-                var l14 = new Leader { Faction = f1, Name = "Harald the Cripple" };
+                var l11 = new Leader
+                {
+                    Faction = f1,
+                    Name = "Bran Tuirseach"
+                };
+                var l12 = new Leader
+                {
+                    Faction = f1,
+                    Name = "Crach an Craite"
+                };
+                var l13 = new Leader
+                {
+                    Faction = f1,
+                    Name = "Eist Tuirseach"
+                };
+                var l14 = new Leader
+                {
+                    Faction = f1,
+                    Name = "Harald the Cripple"
+                };
 
                 Factions.AddRange(f1, f2, f3, f4, f5);
                 Leaders.AddRange(l11, l12, l13, l14);
@@ -3728,7 +3828,11 @@ FROM [Prices] AS [p]"
                     from e in context.Employees
                     join d in context.EmployeeDevices on e.Id equals d.EmployeeId into grouping
                     from j in grouping.DefaultIfEmpty()
-                    select new MyContext13025.Holder13025 { Name = e.Name, DeviceId = j.DeviceId }
+                    select new MyContext13025.Holder13025
+                    {
+                        Name = e.Name,
+                        DeviceId = j.DeviceId
+                    }
                 ).ToList();
             }
         }
@@ -3750,7 +3854,11 @@ FROM [Prices] AS [p]"
                         Name = "Test1",
                         Devices = new List<EmployeeDevice13025>
                         {
-                            new EmployeeDevice13025 { DeviceId = 1, Device = "Battery" }
+                            new EmployeeDevice13025
+                            {
+                                DeviceId = 1,
+                                Device = "Battery"
+                            }
                         }
                     }
                 );
@@ -4759,7 +4867,11 @@ WHERE [c].[Name] = N'Leeds'"
             public void Seed()
             {
                 var london = new TCity15204 { Name = "London" };
-                var sam = new TBuilder15204 { Name = "Sam", City = london };
+                var sam = new TBuilder15204
+                {
+                    Name = "Sam",
+                    City = london
+                };
 
                 MandatorSet.Add(
                     new TMandator15204
@@ -4794,7 +4906,11 @@ WHERE [c].[Name] = N'Leeds'"
                             {
                                 Identity = Guid.NewGuid(),
                                 LongName = "Two L1",
-                                Builder = new TBuilder15204 { Name = "John", City = london }
+                                Builder = new TBuilder15204
+                                {
+                                    Name = "John",
+                                    City = london
+                                }
                             },
                             new TBuilding15204
                             {
@@ -5549,7 +5665,12 @@ FROM [Blogs] AS [b]"
             {
                 var personsToFind = await context.Persons.Where(p => p.Age >= 21)
                     .Select(
-                        p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
+                        p =>
+                            new MyContext17644.PersonDetailView17644
+                            {
+                                Name = p.Name,
+                                Age = p.Age
+                            }
                     )
                     .FirstAsync<MyContext17644.PersonView17644>();
 
@@ -5565,7 +5686,12 @@ WHERE [p].[Age] >= 21"
             {
                 var personsToFind = await context.Persons.Where(p => p.Age >= 21)
                     .Select(
-                        p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
+                        p =>
+                            new MyContext17644.PersonDetailView17644
+                            {
+                                Name = p.Name,
+                                Age = p.Age
+                            }
                     )
                     .FirstOrDefaultAsync<MyContext17644.PersonView17644>();
 
@@ -5581,7 +5707,12 @@ WHERE [p].[Age] >= 21"
             {
                 var personsToFind = await context.Persons.Where(p => p.Age >= 21)
                     .Select(
-                        p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
+                        p =>
+                            new MyContext17644.PersonDetailView17644
+                            {
+                                Name = p.Name,
+                                Age = p.Age
+                            }
                     )
                     .SingleAsync<MyContext17644.PersonView17644>();
 
@@ -5597,7 +5728,12 @@ WHERE [p].[Age] >= 21"
             {
                 var personsToFind = await context.Persons.Where(p => p.Age >= 21)
                     .Select(
-                        p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
+                        p =>
+                            new MyContext17644.PersonDetailView17644
+                            {
+                                Name = p.Name,
+                                Age = p.Age
+                            }
                     )
                     .SingleOrDefaultAsync<MyContext17644.PersonView17644>();
 
@@ -5614,7 +5750,12 @@ WHERE [p].[Age] >= 21"
                 var personsToFind = await context.Persons.Where(p => p.Age >= 21)
                     .OrderBy(p => p.Id)
                     .Select(
-                        p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
+                        p =>
+                            new MyContext17644.PersonDetailView17644
+                            {
+                                Name = p.Name,
+                                Age = p.Age
+                            }
                     )
                     .LastAsync<MyContext17644.PersonView17644>();
 
@@ -5632,7 +5773,12 @@ ORDER BY [p].[Id] DESC"
                 var personsToFind = await context.Persons.Where(p => p.Age >= 21)
                     .OrderBy(p => p.Id)
                     .Select(
-                        p => new MyContext17644.PersonDetailView17644 { Name = p.Name, Age = p.Age }
+                        p =>
+                            new MyContext17644.PersonDetailView17644
+                            {
+                                Name = p.Name,
+                                Age = p.Age
+                            }
                     )
                     .LastOrDefaultAsync<MyContext17644.PersonView17644>();
 
@@ -5653,7 +5799,11 @@ ORDER BY [p].[Id] DESC"
 
             public void Seed()
             {
-                var person = new Person17644 { Name = "John Doe", Age = 21 };
+                var person = new Person17644
+                {
+                    Name = "John Doe",
+                    Age = 21
+                };
                 Persons.Add(person);
                 SaveChanges();
             }
@@ -6483,9 +6633,21 @@ FROM [MockEntities] AS [m]"
             public void Seed()
             {
                 AddRange(
-                    new MockEntity { Name = "Entity1", NavigationEntity = null },
-                    new MockEntity { Name = "Entity2", NavigationEntity = null },
-                    new MockEntity { Name = "NewEntity", NavigationEntity = null }
+                    new MockEntity
+                    {
+                        Name = "Entity1",
+                        NavigationEntity = null
+                    },
+                    new MockEntity
+                    {
+                        Name = "Entity2",
+                        NavigationEntity = null
+                    },
+                    new MockEntity
+                    {
+                        Name = "NewEntity",
+                        NavigationEntity = null
+                    }
                 );
 
                 SaveChanges();
@@ -7516,8 +7678,16 @@ FROM [Businesses] AS [b]"
 
             public void Seed()
             {
-                var shop1 = new Shop18346 { IsOnline = true, Name = "Amzn" };
-                var shop2 = new Shop18346 { IsOnline = false, Name = "Mom and Pop's Shoppe" };
+                var shop1 = new Shop18346
+                {
+                    IsOnline = true,
+                    Name = "Amzn"
+                };
+                var shop2 = new Shop18346
+                {
+                    IsOnline = false,
+                    Name = "Mom and Pop's Shoppe"
+                };
                 var brand = new Brand18346 { Name = "Tsla" };
                 Businesses.AddRange(shop1, shop2, brand);
                 SaveChanges();
@@ -7882,10 +8052,26 @@ WHERE (([e].[Name] <> N'Foo') OR [e].[Name] IS NULL) AND ([e].[TenantId] = @__ef
 
             public void Seed()
             {
-                var e1 = new MyEntity18510 { Name = "e1", TenantId = 1 };
-                var e2 = new MyEntity18510 { Name = "e2", TenantId = 2 };
-                var e3 = new MyEntity18510 { Name = "e3", TenantId = 2 };
-                var e4 = new MyEntity18510 { Name = "Foo", TenantId = 2 };
+                var e1 = new MyEntity18510
+                {
+                    Name = "e1",
+                    TenantId = 1
+                };
+                var e2 = new MyEntity18510
+                {
+                    Name = "e2",
+                    TenantId = 2
+                };
+                var e3 = new MyEntity18510
+                {
+                    Name = "e3",
+                    TenantId = 2
+                };
+                var e4 = new MyEntity18510
+                {
+                    Name = "Foo",
+                    TenantId = 2
+                };
 
                 Entities.AddRange(e1, e2, e3, e4);
                 SaveChanges();
@@ -8187,7 +8373,11 @@ ORDER BY [u].[Id] DESC"
                             Address = null
                         }
                     },
-                    new User22054 { Contact = null, Data = null }
+                    new User22054
+                    {
+                        Contact = null,
+                        Data = null
+                    }
                 );
 
                 SaveChanges();
@@ -8496,8 +8686,16 @@ WHERE (([a].[Id] = @__entity_equality_a_0_Id) AND ([a0].[Id] = @__entity_equalit
                 SaveChanges();
 
                 AddRange(
-                    new EqualAuto15215 { Auto = Autos.Find(1), AnotherAuto = Autos.Find(2) },
-                    new EqualAuto15215 { Auto = Autos.Find(5), AnotherAuto = Autos.Find(4) }
+                    new EqualAuto15215
+                    {
+                        Auto = Autos.Find(1),
+                        AnotherAuto = Autos.Find(2)
+                    },
+                    new EqualAuto15215
+                    {
+                        Auto = Autos.Find(5),
+                        AnotherAuto = Autos.Find(4)
+                    }
                 );
 
                 SaveChanges();
@@ -8601,14 +8799,22 @@ ORDER BY [t].[Id], [t].[MasterTrunk22340Id], [t].[MasterTrunk22340Id0], [f0].[Cu
                     {
                         Currencies = new Currency22340[]
                         {
-                            new Currency22340() { Amount = 10, Code = 999 }
+                            new Currency22340()
+                            {
+                                Amount = 10,
+                                Code = 999
+                            }
                         }
                     },
                     StaticBag = new CurrencyBag22340()
                     {
                         Currencies = new Currency22340[]
                         {
-                            new Currency22340() { Amount = 555, Code = 111 }
+                            new Currency22340()
+                            {
+                                Amount = 555,
+                                Code = 111
+                            }
                         }
                     }
                 };
@@ -9012,11 +9218,31 @@ FROM [Blogs] AS [b]"
             {
                 var b1 = new Blog11835 { Title = "B1" };
                 var b2 = new Blog11835 { Title = "B2" };
-                var p11 = new Post11835 { Name = "P11", Blog = b1 };
-                var p12 = new Post11835 { Name = "P12", Blog = b1 };
-                var p13 = new Post11835 { Name = "P13", Blog = b1 };
-                var p21 = new Post11835 { Name = "P21", Blog = b2 };
-                var p22 = new Post11835 { Name = "P22", Blog = b2 };
+                var p11 = new Post11835
+                {
+                    Name = "P11",
+                    Blog = b1
+                };
+                var p12 = new Post11835
+                {
+                    Name = "P12",
+                    Blog = b1
+                };
+                var p13 = new Post11835
+                {
+                    Name = "P13",
+                    Blog = b1
+                };
+                var p21 = new Post11835
+                {
+                    Name = "P21",
+                    Blog = b2
+                };
+                var p22 = new Post11835
+                {
+                    Name = "P22",
+                    Blog = b2
+                };
 
                 Blogs.AddRange(b1, b2);
                 Posts.AddRange(p11, p12, p13, p21, p22);
@@ -9581,13 +9807,33 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]"
             {
                 var tmp_a = new A19253[]
                 {
-                    new A19253 { a = "a0", a1 = "a1", forkey = "a" },
-                    new A19253 { a = "a2", a1 = "a1", forkey = "d" },
+                    new A19253
+                    {
+                        a = "a0",
+                        a1 = "a1",
+                        forkey = "a"
+                    },
+                    new A19253
+                    {
+                        a = "a2",
+                        a1 = "a1",
+                        forkey = "d"
+                    },
                 };
                 var tmp_b = new B19253[]
                 {
-                    new B19253 { b = "b0", b1 = "b1", forkey = "a" },
-                    new B19253 { b = "b2", b1 = "b1", forkey = "c" },
+                    new B19253
+                    {
+                        b = "b0",
+                        b1 = "b1",
+                        forkey = "a"
+                    },
+                    new B19253
+                    {
+                        b = "b2",
+                        b1 = "b1",
+                        forkey = "c"
+                    },
                 };
                 A.AddRange(tmp_a);
                 B.AddRange(tmp_b);

@@ -56,7 +56,11 @@ namespace Microsoft.AspNetCore.SignalR.Client
 
         // The receive loop has a single reader and single writer at a time so optimize the channel for that
         private static readonly UnboundedChannelOptions _receiveLoopOptions =
-            new UnboundedChannelOptions { SingleReader = true, SingleWriter = true };
+            new UnboundedChannelOptions
+            {
+                SingleReader = true,
+                SingleWriter = true
+            };
 
         private static readonly MethodInfo _sendStreamItemsMethod =
             typeof(HubConnection).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)

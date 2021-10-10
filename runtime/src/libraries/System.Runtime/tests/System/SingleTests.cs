@@ -629,7 +629,11 @@ namespace System.Tests
                 1,
                 3,
                 NumberStyles.Currency,
-                new NumberFormatInfo() { CurrencySymbol = "$", CurrencyGroupSeparator = "," },
+                new NumberFormatInfo()
+                {
+                    CurrencySymbol = "$",
+                    CurrencyGroupSeparator = ","
+                },
                 (float)10
             };
             yield return new object[]

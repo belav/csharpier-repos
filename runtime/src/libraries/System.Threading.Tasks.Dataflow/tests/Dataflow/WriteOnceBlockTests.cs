@@ -138,7 +138,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 () =>
                     new WriteOnceBlock<int>(
                         i => i,
-                        new DataflowBlockOptions { BoundedCapacity = 10, MaxMessagesPerTask = 1 }
+                        new DataflowBlockOptions
+                        {
+                            BoundedCapacity = 10,
+                            MaxMessagesPerTask = 1
+                        }
                     )
             };
             foreach (var generator in generators)

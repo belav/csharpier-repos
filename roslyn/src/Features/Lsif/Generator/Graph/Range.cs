@@ -39,7 +39,11 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
 
         internal static Position ConvertLinePositionToPosition(LinePosition linePosition)
         {
-            return new Position { Line = linePosition.Line, Character = linePosition.Character };
+            return new Position
+            {
+                Line = linePosition.Line,
+                Character = linePosition.Character
+            };
         }
     }
 }

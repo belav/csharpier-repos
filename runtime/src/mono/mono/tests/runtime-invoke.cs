@@ -290,7 +290,14 @@ class Tests
     {
         public Point Location
         {
-            get { return new Point() { x = 10, y = 20 }; }
+            get
+            {
+                return new Point()
+                {
+                    x = 10,
+                    y = 20
+                };
+            }
         }
     }
 

@@ -410,7 +410,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Arrange
             var parameterType = typeof(Class1);
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-            var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+            var parameter = new ParameterDescriptor()
+            {
+                Name = "p",
+                ParameterType = parameterType
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
@@ -446,7 +450,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Arrange
             var parameterType = typeof(ActionParameter_DefaultValueConstructor);
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-            var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+            var parameter = new ParameterDescriptor()
+            {
+                Name = "p",
+                ParameterType = parameterType
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
@@ -472,7 +480,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Arrange
             var parameterType = typeof(Class1);
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-            var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+            var parameter = new ParameterDescriptor()
+            {
+                Name = "p",
+                ParameterType = parameterType
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
@@ -513,7 +525,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Arrange
             var parameterType = typeof(PointStruct);
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-            var parameter = new ParameterDescriptor() { ParameterType = parameterType, Name = "p" };
+            var parameter = new ParameterDescriptor()
+            {
+                ParameterType = parameterType,
+                Name = "p"
+            };
             var testContext = ModelBindingTestHelper.GetTestContext();
 
             // Act & Assert
@@ -581,7 +597,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameterType =
                 typeof(ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel);
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-            var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+            var parameter = new ParameterDescriptor()
+            {
+                Name = "p",
+                ParameterType = parameterType
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
@@ -617,7 +637,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Arrange
             var parameterType = typeof(ActionParameter_RecordTypeWithMultipleConstructors);
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-            var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+            var parameter = new ParameterDescriptor()
+            {
+                Name = "p",
+                ParameterType = parameterType
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {

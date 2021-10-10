@@ -1898,11 +1898,21 @@ new List<ArgumentException>()
         [Fact]
         public void HostObjectInRootNamespace()
         {
-            var obj = new InteractiveFixtures_TopLevelHostObject { X = 1, Y = 2, Z = 3 };
+            var obj = new InteractiveFixtures_TopLevelHostObject
+            {
+                X = 1,
+                Y = 2,
+                Z = 3
+            };
             var r0 = CSharpScript.EvaluateAsync<int>("X + Y + Z", globals: obj);
             Assert.Equal(6, r0.Result);
 
-            obj = new InteractiveFixtures_TopLevelHostObject { X = 1, Y = 2, Z = 3 };
+            obj = new InteractiveFixtures_TopLevelHostObject
+            {
+                X = 1,
+                Y = 2,
+                Z = 3
+            };
             var r1 = CSharpScript.EvaluateAsync<int>("X", globals: obj);
             Assert.Equal(1, r1.Result);
         }

@@ -51,8 +51,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 groupName: "Roslyn1",
                 applicableRange: new LSP.Range
                 {
-                    Start = new Position { Line = 4, Character = 8 },
-                    End = new Position { Line = 4, Character = 11 }
+                    Start = new Position
+                    {
+                        Line = 4,
+                        Character = 8
+                    },
+                    End = new Position
+                    {
+                        Line = 4,
+                        Character = 11
+                    }
                 },
                 diagnostics: null
             );
@@ -93,8 +101,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 groupName: "Roslyn2",
                 applicableRange: new LSP.Range
                 {
-                    Start = new Position { Line = 4, Character = 12 },
-                    End = new Position { Line = 4, Character = 12 }
+                    Start = new Position
+                    {
+                        Line = 4,
+                        Character = 12
+                    },
+                    End = new Position
+                    {
+                        Line = 4,
+                        Character = 12
+                    }
                 },
                 diagnostics: null
             );
@@ -165,8 +181,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             // 3. Invoking code actions on a different range should generate a new cached item.
             caretLocation.Range = new LSP.Range
             {
-                Start = new LSP.Position() { Line = 0, Character = 0 },
-                End = new LSP.Position() { Line = 0, Character = 0 }
+                Start = new LSP.Position()
+                {
+                    Line = 0,
+                    Character = 0
+                },
+                End = new LSP.Position()
+                {
+                    Line = 0,
+                    Character = 0
+                }
             };
 
             await RunCodeActionsAndAssertActionsInCacheAsync(
@@ -213,8 +237,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             // and boot out the oldest item in the cache.
             caretLocation.Range = new LSP.Range
             {
-                Start = new LSP.Position() { Line = 0, Character = 0 },
-                End = new LSP.Position() { Line = 0, Character = 1 }
+                Start = new LSP.Position()
+                {
+                    Line = 0,
+                    Character = 0
+                },
+                End = new LSP.Position()
+                {
+                    Line = 0,
+                    Character = 1
+                }
             };
 
             await RunCodeActionsAndAssertActionsInCacheAsync(

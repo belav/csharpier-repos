@@ -171,7 +171,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void IsModified_tracks_state_of_owned_entity()
         {
             using var context = new FreezerContext();
-            var chunky = new Chunky { Chunk = new Chunk { Size = 1, Shape = "Sphere" } };
+            var chunky = new Chunky
+            {
+                Chunk = new Chunk
+                {
+                    Size = 1,
+                    Shape = "Sphere"
+                }
+            };
             context.Add(chunky);
 
             var reference = context.Entry(chunky).Member(nameof(Chunky.Chunk));
@@ -182,7 +189,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.False(reference.IsModified);
 
-            chunky.Chunk = new Chunk { Size = 2, Shape = "Cube" };
+            chunky.Chunk = new Chunk
+            {
+                Size = 2,
+                Shape = "Cube"
+            };
             context.ChangeTracker.DetectChanges();
 
             Assert.True(reference.IsModified);

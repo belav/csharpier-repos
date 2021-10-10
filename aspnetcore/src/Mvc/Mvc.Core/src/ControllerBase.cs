@@ -304,7 +304,11 @@ namespace Microsoft.AspNetCore.Mvc
         [NonAction]
         public virtual ContentResult Content(string content, MediaTypeHeaderValue? contentType)
         {
-            return new ContentResult { Content = content, ContentType = contentType?.ToString() };
+            return new ContentResult
+            {
+                Content = content,
+                ContentType = contentType?.ToString()
+            };
         }
 
         /// <summary>

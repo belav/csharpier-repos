@@ -17,7 +17,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner
                 EndTime = session.EndTime,
                 Speakers = session.SessionSpeakers?.Select(
                         ss =>
-                            new ConferenceDTO.Speaker { Id = ss.SpeakerId, Name = ss.Speaker.Name }
+                            new ConferenceDTO.Speaker
+                            {
+                                Id = ss.SpeakerId,
+                                Name = ss.Speaker.Name
+                            }
                     )
                     .ToList(),
                 TrackId = session.TrackId,

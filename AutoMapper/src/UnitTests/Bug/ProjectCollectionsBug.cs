@@ -57,8 +57,20 @@
 
                 var be = new BEntity();
                 be.BP1 = 3;
-                be.BP2.Add(new AEntity() { AP1 = 1, AP2 = "hello" });
-                be.BP2.Add(new AEntity() { AP1 = 2, AP2 = "two" });
+                be.BP2.Add(
+                    new AEntity()
+                    {
+                        AP1 = 1,
+                        AP2 = "hello"
+                    }
+                );
+                be.BP2.Add(
+                    new AEntity()
+                    {
+                        AP1 = 2,
+                        AP2 = "two"
+                    }
+                );
 
                 var b = config.CreateMapper().Map<BEntity, B>(be);
 

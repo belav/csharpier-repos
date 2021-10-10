@@ -32,7 +32,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Should_be_overriden_by_MapFrom()
         {
-            var person = new Person { Birthday = new DateTime(2000, 1, 1), Name = "Shy" };
+            var person = new Person
+            {
+                Birthday = new DateTime(2000, 1, 1),
+                Name = "Shy"
+            };
             Mapper.Map<PersonDto>(person).AgeV.ShouldBe(17);
         }
     }

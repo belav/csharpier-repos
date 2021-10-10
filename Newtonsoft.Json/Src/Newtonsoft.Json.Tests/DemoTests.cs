@@ -65,7 +65,12 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public void JsonConverter()
         {
-            HtmlColor red = new HtmlColor { Red = 255, Green = 0, Blue = 0 };
+            HtmlColor red = new HtmlColor
+            {
+                Red = 255,
+                Green = 0,
+                Blue = 0
+            };
 
             string json = JsonConvert.SerializeObject(
                 red,
@@ -189,7 +194,11 @@ namespace Newtonsoft.Json.Tests
             //   "2014-06-02T00:00:00": 50
             // }
 
-            City c = new City { Name = "Oslo", Population = 650000 };
+            City c = new City
+            {
+                Name = "Oslo",
+                Population = 650000
+            };
 
             string cityJson = JsonConvert.SerializeObject(c, Formatting.Indented);
             // {

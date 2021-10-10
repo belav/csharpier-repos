@@ -723,7 +723,11 @@ namespace System.Security.Cryptography.Xml
             if (serialNumber == null || serialNumber.Length == 0)
                 throw new ArgumentException(SR.Arg_EmptyOrNullString, nameof(serialNumber));
 
-            return new X509IssuerSerial() { IssuerName = issuerName, SerialNumber = serialNumber };
+            return new X509IssuerSerial()
+            {
+                IssuerName = issuerName,
+                SerialNumber = serialNumber
+            };
         }
 
         internal static X509Certificate2Collection BuildBagOfCerts(

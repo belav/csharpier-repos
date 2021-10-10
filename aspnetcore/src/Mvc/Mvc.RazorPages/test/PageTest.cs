@@ -46,7 +46,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 new HtmlHelperOptions()
             );
 
-            var page = new TestPage { PageContext = pageContext, ViewContext = viewContext, };
+            var page = new TestPage
+            {
+                PageContext = pageContext,
+                ViewContext = viewContext,
+            };
 
             // Act & Assert
             Assert.Same(pageContext, page.PageContext);

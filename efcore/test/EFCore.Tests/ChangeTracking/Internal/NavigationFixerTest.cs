@@ -77,7 +77,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal1 = new Category { Id = 11 };
             var principal2 = new Category { Id = 12 };
-            var dependent = new Product { Id = 21, CategoryId = 12 };
+            var dependent = new Product
+            {
+                Id = 21,
+                CategoryId = 12
+            };
 
             manager.StartTracking(manager.GetOrCreateEntry(principal1));
             manager.StartTracking(manager.GetOrCreateEntry(principal2));
@@ -97,9 +101,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var contextServices = CreateContextServices();
             var manager = contextServices.GetRequiredService<IStateManager>();
 
-            var dependent1 = new Product { Id = 21, CategoryId = 11 };
-            var dependent2 = new Product { Id = 22, CategoryId = 12 };
-            var dependent3 = new Product { Id = 23, CategoryId = 11 };
+            var dependent1 = new Product
+            {
+                Id = 21,
+                CategoryId = 11
+            };
+            var dependent2 = new Product
+            {
+                Id = 22,
+                CategoryId = 12
+            };
+            var dependent3 = new Product
+            {
+                Id = 23,
+                CategoryId = 11
+            };
 
             var principal = new Category { Id = 11 };
 
@@ -175,8 +191,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var contextServices = CreateContextServices();
             var manager = contextServices.GetRequiredService<IStateManager>();
 
-            var entity1 = new Product { Id = 21, AlternateProductId = 22 };
-            var entity2 = new Product { Id = 22, AlternateProductId = 23 };
+            var entity1 = new Product
+            {
+                Id = 21,
+                AlternateProductId = 22
+            };
+            var entity2 = new Product
+            {
+                Id = 22,
+                AlternateProductId = 23
+            };
             var entity3 = new Product { Id = 23 };
 
             var entry1 = manager.StartTracking(manager.GetOrCreateEntry(entity1));
@@ -223,7 +247,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal1 = new Category { Id = 11 };
             var principal2 = new Category { Id = 12 };
-            var dependent = new Product { Id = 21, Category = principal2 };
+            var dependent = new Product
+            {
+                Id = 21,
+                Category = principal2
+            };
 
             manager.StartTracking(manager.GetOrCreateEntry(principal1));
             manager.StartTracking(manager.GetOrCreateEntry(principal2));
@@ -273,9 +301,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal = new Category { Id = 11 };
 
-            var dependent1 = new Product { Id = 21, Category = principal };
+            var dependent1 = new Product
+            {
+                Id = 21,
+                Category = principal
+            };
             var dependent2 = new Product { Id = 22 };
-            var dependent3 = new Product { Id = 23, Category = principal };
+            var dependent3 = new Product
+            {
+                Id = 23,
+                Category = principal
+            };
 
             manager.StartTracking(manager.GetOrCreateEntry(dependent1))
                 .SetEntityState(EntityState.Added);
@@ -487,7 +523,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal1 = new Category { Id = 11 };
             var principal2 = new Category { Id = 12 };
-            var dependent = new Product { Id = 21, CategoryId = 0 };
+            var dependent = new Product
+            {
+                Id = 21,
+                CategoryId = 0
+            };
 
             manager.StartTracking(manager.GetOrCreateEntry(principal1));
             manager.StartTracking(manager.GetOrCreateEntry(principal2));
@@ -532,7 +572,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal1 = new Category { Id = 11 };
             var principal2 = new Category { Id = 12 };
-            var dependent = new Product { Id = 21, CategoryId = 12 };
+            var dependent = new Product
+            {
+                Id = 21,
+                CategoryId = 12
+            };
 
             manager.StartTracking(manager.GetOrCreateEntry(principal1));
             manager.StartTracking(manager.GetOrCreateEntry(principal2));
@@ -577,7 +621,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal1 = new Category { Id = 11 };
             var principal2 = new Category { Id = 12 };
-            var dependent = new Product { Id = 21, CategoryId = 12 };
+            var dependent = new Product
+            {
+                Id = 21,
+                CategoryId = 12
+            };
 
             manager.StartTracking(manager.GetOrCreateEntry(principal1));
             manager.StartTracking(manager.GetOrCreateEntry(principal2));
@@ -751,7 +799,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             model = contextServices.GetRequiredService<IModel>();
             var manager = contextServices.GetRequiredService<IStateManager>();
 
-            var entity1 = new Product { Id = 21, AlternateProductId = 22 };
+            var entity1 = new Product
+            {
+                Id = 21,
+                AlternateProductId = 22
+            };
             var entity2 = new Product { Id = 22 };
             var entity3 = new Product { Id = 23 };
 
@@ -808,8 +860,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             model = contextServices.GetRequiredService<IModel>();
             var manager = contextServices.GetRequiredService<IStateManager>();
 
-            var entity1 = new Product { Id = 21, AlternateProductId = 22 };
-            var entity2 = new Product { Id = 22, AlternateProductId = 23 };
+            var entity1 = new Product
+            {
+                Id = 21,
+                AlternateProductId = 22
+            };
+            var entity2 = new Product
+            {
+                Id = 22,
+                AlternateProductId = 23
+            };
             var entity3 = new Product { Id = 23 };
 
             var entry1 = manager.StartTracking(manager.GetOrCreateEntry(entity1));
@@ -867,17 +927,49 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             model = contextServices.GetRequiredService<IModel>();
             var manager = contextServices.GetRequiredService<IStateManager>();
 
-            var photo1 = new ProductPhoto { ProductId = 1, PhotoId = "Photo1" };
-            var photo2 = new ProductPhoto { ProductId = 1, PhotoId = "Photo2" };
-            var photo3 = new ProductPhoto { ProductId = 2, PhotoId = "Photo1" };
-            var photo4 = new ProductPhoto { ProductId = 2, PhotoId = "Photo2" };
+            var photo1 = new ProductPhoto
+            {
+                ProductId = 1,
+                PhotoId = "Photo1"
+            };
+            var photo2 = new ProductPhoto
+            {
+                ProductId = 1,
+                PhotoId = "Photo2"
+            };
+            var photo3 = new ProductPhoto
+            {
+                ProductId = 2,
+                PhotoId = "Photo1"
+            };
+            var photo4 = new ProductPhoto
+            {
+                ProductId = 2,
+                PhotoId = "Photo2"
+            };
 
             var reviewId1 = Guid.NewGuid();
             var reviewId2 = Guid.NewGuid();
-            var review1 = new ProductReview { ProductId = 1, ReviewId = reviewId1 };
-            var review2 = new ProductReview { ProductId = 1, ReviewId = reviewId2 };
-            var review3 = new ProductReview { ProductId = 2, ReviewId = reviewId1 };
-            var review4 = new ProductReview { ProductId = 2, ReviewId = reviewId2 };
+            var review1 = new ProductReview
+            {
+                ProductId = 1,
+                ReviewId = reviewId1
+            };
+            var review2 = new ProductReview
+            {
+                ProductId = 1,
+                ReviewId = reviewId2
+            };
+            var review3 = new ProductReview
+            {
+                ProductId = 2,
+                ReviewId = reviewId1
+            };
+            var review4 = new ProductReview
+            {
+                ProductId = 2,
+                ReviewId = reviewId2
+            };
 
             var tag1 = new ProductTag
             {
@@ -1060,9 +1152,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal1 = new Category { Id = 11 };
             var principal2 = new Category { Id = 12 };
-            var dependent1 = new Product { Id = 21, CategoryId = 12 };
-            var dependent2 = new Product { Id = 22, CategoryId = 12 };
-            var dependent3 = new Product { Id = 23, CategoryId = 11 };
+            var dependent1 = new Product
+            {
+                Id = 21,
+                CategoryId = 12
+            };
+            var dependent2 = new Product
+            {
+                Id = 22,
+                CategoryId = 12
+            };
+            var dependent3 = new Product
+            {
+                Id = 23,
+                CategoryId = 11
+            };
 
             var principal1Entry = manager.StartTracking(manager.GetOrCreateEntry(principal1));
             var principal2Entry = manager.StartTracking(manager.GetOrCreateEntry(principal2));
@@ -1132,9 +1236,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal1 = new Category { Id = 11 };
             var principal2 = new Category { Id = 12 };
-            var dependent1 = new Product { Id = 21, CategoryId = 12 };
-            var dependent2 = new Product { Id = 22, CategoryId = 12 };
-            var dependent3 = new Product { Id = 23, CategoryId = 11 };
+            var dependent1 = new Product
+            {
+                Id = 21,
+                CategoryId = 12
+            };
+            var dependent2 = new Product
+            {
+                Id = 22,
+                CategoryId = 12
+            };
+            var dependent3 = new Product
+            {
+                Id = 23,
+                CategoryId = 11
+            };
 
             var principal1Entry = manager.StartTracking(manager.GetOrCreateEntry(principal1));
             var principal2Entry = manager.StartTracking(manager.GetOrCreateEntry(principal2));
@@ -1193,8 +1309,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal1 = new Product { Id = 21 };
             var principal2 = new Product { Id = 22 };
-            var dependent1 = new Product { Id = 23, AlternateProductId = 21 };
-            var dependent2 = new Product { Id = 24, AlternateProductId = 22 };
+            var dependent1 = new Product
+            {
+                Id = 23,
+                AlternateProductId = 21
+            };
+            var dependent2 = new Product
+            {
+                Id = 24,
+                AlternateProductId = 22
+            };
 
             var principalEntry1 = manager.StartTracking(manager.GetOrCreateEntry(principal1));
             var principalEntry2 = manager.StartTracking(manager.GetOrCreateEntry(principal2));
@@ -1241,8 +1365,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var principal1 = new Product { Id = 21 };
             var principal2 = new Product { Id = 22 };
-            var dependent1 = new Product { Id = 23, AlternateProductId = 21 };
-            var dependent2 = new Product { Id = 24, AlternateProductId = 22 };
+            var dependent1 = new Product
+            {
+                Id = 23,
+                AlternateProductId = 21
+            };
+            var dependent2 = new Product
+            {
+                Id = 24,
+                AlternateProductId = 22
+            };
 
             var principalEntry1 = manager.StartTracking(manager.GetOrCreateEntry(principal1));
             var principalEntry2 = manager.StartTracking(manager.GetOrCreateEntry(principal2));

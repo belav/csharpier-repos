@@ -116,7 +116,11 @@ namespace Microsoft.AspNetCore.Identity.Test
         {
             // Setup
             var store = new Mock<IUserSecurityStampStore<PocoUser>>();
-            var user = new PocoUser { UserName = "Foo", SecurityStamp = "sssss" };
+            var user = new PocoUser
+            {
+                UserName = "Foo",
+                SecurityStamp = "sssss"
+            };
             store.Setup(s => s.CreateAsync(user, CancellationToken.None))
                 .ReturnsAsync(IdentityResult.Success)
                 .Verifiable();
@@ -143,7 +147,11 @@ namespace Microsoft.AspNetCore.Identity.Test
         {
             // Setup
             var store = new Mock<IUserEmailStore<PocoUser>>();
-            var user = new PocoUser { UserName = "Foo", Email = "Foo@foo.com" };
+            var user = new PocoUser
+            {
+                UserName = "Foo",
+                Email = "Foo@foo.com"
+            };
             store.Setup(s => s.CreateAsync(user, CancellationToken.None))
                 .ReturnsAsync(IdentityResult.Success)
                 .Verifiable();
@@ -239,7 +247,11 @@ namespace Microsoft.AspNetCore.Identity.Test
         {
             // Setup
             var store = new Mock<IUserEmailStore<PocoUser>>();
-            var user = new PocoUser { UserName = "Foo", Email = "email" };
+            var user = new PocoUser
+            {
+                UserName = "Foo",
+                Email = "email"
+            };
             store.Setup(s => s.GetUserNameAsync(user, CancellationToken.None))
                 .Returns(Task.FromResult(user.UserName))
                 .Verifiable();
@@ -439,7 +451,11 @@ namespace Microsoft.AspNetCore.Identity.Test
         {
             // Setup
             var store = new Mock<IUserEmailStore<PocoUser>>();
-            var user = new PocoUser { UserName = "Foo", Email = "Bar" };
+            var user = new PocoUser
+            {
+                UserName = "Foo",
+                Email = "Bar"
+            };
             store.Setup(s => s.FindByNameAsync("#Foo", CancellationToken.None))
                 .Returns(Task.FromResult(user))
                 .Verifiable();
@@ -2636,8 +2652,16 @@ namespace Microsoft.AspNetCore.Identity.Test
                 .GetRequiredService<UserManager<PocoUser>>();
 
             manager.Options.User.RequireUniqueEmail = true;
-            var user = new PocoUser() { UserName = "dupeEmail", Email = "dupe@email.com" };
-            var user2 = new PocoUser() { UserName = "dupeEmail2", Email = "dupe@email.com" };
+            var user = new PocoUser()
+            {
+                UserName = "dupeEmail",
+                Email = "dupe@email.com"
+            };
+            var user2 = new PocoUser()
+            {
+                UserName = "dupeEmail2",
+                Email = "dupe@email.com"
+            };
             store.Setup(s => s.FindByEmailAsync("DUPE@EMAIL.COM", CancellationToken.None))
                 .Returns(Task.FromResult(user2))
                 .Verifiable();

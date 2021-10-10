@@ -2654,7 +2654,12 @@ namespace Microsoft.EntityFrameworkCore
             private Building() { }
 
             public static Building Create(Guid buildingId, string name, decimal value) =>
-                new() { BuildingId = buildingId, Name = name, Value = value };
+                new()
+                {
+                    BuildingId = buildingId,
+                    Name = name,
+                    Value = value
+                };
 
             public Guid BuildingId { get; set; }
             public string Name { get; set; }
@@ -2863,10 +2868,26 @@ namespace Microsoft.EntityFrameworkCore
 
                 var offices = new List<Office>
                 {
-                    new() { BuildingId = buildings[0].BuildingId, Number = "1/1221" },
-                    new() { BuildingId = buildings[0].BuildingId, Number = "1/1223" },
-                    new() { BuildingId = buildings[0].BuildingId, Number = "2/1458" },
-                    new() { BuildingId = buildings[0].BuildingId, Number = "2/1789" }
+                    new()
+                    {
+                        BuildingId = buildings[0].BuildingId,
+                        Number = "1/1221"
+                    },
+                    new()
+                    {
+                        BuildingId = buildings[0].BuildingId,
+                        Number = "1/1223"
+                    },
+                    new()
+                    {
+                        BuildingId = buildings[0].BuildingId,
+                        Number = "2/1458"
+                    },
+                    new()
+                    {
+                        BuildingId = buildings[0].BuildingId,
+                        Number = "2/1789"
+                    }
                 };
 
                 foreach (var office in offices)

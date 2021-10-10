@@ -26,7 +26,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Product
             {
                 Id1 = 78,
@@ -63,8 +67,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78, Category = principal };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Category = principal
+            };
             principal.Products.Add(dependent);
 
             context.Entry(dependent).State = entityState;
@@ -93,7 +106,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Product
             {
                 Id1 = 78,
@@ -128,7 +145,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Product
             {
                 Id1 = 78,
@@ -164,7 +185,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Product
             {
                 Id1 = 78,
@@ -200,8 +225,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
             principal.Products.Add(dependent);
 
             context.Entry(dependent).State = entityState;
@@ -230,8 +263,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78, Category = principal };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Category = principal
+            };
 
             context.Entry(dependent).State = entityState;
             context.Entry(principal).State = entityState;
@@ -259,7 +301,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Product
             {
                 Id1 = 78,
@@ -296,8 +342,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78, Category = principal };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Category = principal
+            };
             principal.Products.Add(dependent);
 
             context.Entry(principal).State = entityState;
@@ -326,7 +381,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Product
             {
                 Id1 = 78,
@@ -361,7 +420,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Product
             {
                 Id1 = 78,
@@ -397,7 +460,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Product
             {
                 Id1 = 78,
@@ -433,8 +500,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
             principal.Products.Add(dependent);
 
             context.Entry(principal).State = entityState;
@@ -463,8 +538,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78, Category = principal };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Category = principal
+            };
 
             context.Entry(principal).State = entityState;
             context.Entry(dependent).State = entityState;
@@ -492,7 +576,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductPN
             {
                 Id1 = 78,
@@ -526,7 +614,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductPN
             {
                 Id1 = 78,
@@ -560,7 +652,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductPN
             {
                 Id1 = 78,
@@ -595,8 +691,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
             principal.Products.Add(dependent);
 
             context.Entry(dependent).State = entityState;
@@ -624,7 +728,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductPN
             {
                 Id1 = 78,
@@ -659,8 +767,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
             principal.Products.Add(dependent);
 
             context.Entry(principal).State = entityState;
@@ -688,7 +804,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductDN
             {
                 Id1 = 78,
@@ -722,7 +842,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductDN
             {
                 Id1 = 78,
@@ -757,8 +881,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductDN { Id1 = 78, Id2 = Guid78, Category = principal };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductDN
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Category = principal
+            };
 
             context.Entry(dependent).State = entityState;
             context.Entry(principal).State = entityState;
@@ -785,7 +918,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductDN
             {
                 Id1 = 78,
@@ -819,7 +956,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductDN
             {
                 Id1 = 78,
@@ -854,8 +995,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductDN { Id1 = 78, Id2 = Guid78, Category = principal };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductDN
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Category = principal
+            };
 
             context.Entry(principal).State = entityState;
             context.Entry(dependent).State = entityState;
@@ -882,7 +1032,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryNN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductNN
             {
                 Id1 = 78,
@@ -915,7 +1069,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
+            var principal = new CategoryNN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ProductNN
             {
                 Id1 = 78,
@@ -948,7 +1106,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Child
             {
                 Id1 = 78,
@@ -985,8 +1147,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78, Parent = principal };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Parent = principal
+            };
             principal.Child = dependent;
 
             context.Entry(dependent).State = entityState;
@@ -1015,7 +1186,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Child
             {
                 Id1 = 78,
@@ -1050,7 +1225,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Child
             {
                 Id1 = 78,
@@ -1086,7 +1265,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Child
             {
                 Id1 = 78,
@@ -1122,8 +1305,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
             principal.Child = dependent;
 
             context.Entry(dependent).State = entityState;
@@ -1152,8 +1343,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78, Parent = principal };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Parent = principal
+            };
 
             context.Entry(dependent).State = entityState;
             context.Entry(principal).State = entityState;
@@ -1181,7 +1381,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Child
             {
                 Id1 = 78,
@@ -1218,8 +1422,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78, Parent = principal };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Parent = principal
+            };
             principal.Child = dependent;
 
             context.Entry(principal).State = entityState;
@@ -1248,7 +1461,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Child
             {
                 Id1 = 78,
@@ -1283,7 +1500,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Child
             {
                 Id1 = 78,
@@ -1319,7 +1540,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new Child
             {
                 Id1 = 78,
@@ -1355,8 +1580,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
             principal.Child = dependent;
 
             context.Entry(principal).State = entityState;
@@ -1385,8 +1618,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78, Parent = principal };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Parent = principal
+            };
 
             context.Entry(principal).State = entityState;
             context.Entry(dependent).State = entityState;
@@ -1414,7 +1656,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildPN
             {
                 Id1 = 78,
@@ -1448,7 +1694,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildPN
             {
                 Id1 = 78,
@@ -1482,7 +1732,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildPN
             {
                 Id1 = 78,
@@ -1517,8 +1771,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
             principal.Child = dependent;
 
             context.Entry(dependent).State = entityState;
@@ -1546,7 +1808,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildPN
             {
                 Id1 = 78,
@@ -1581,8 +1847,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
             principal.Child = dependent;
 
             context.Entry(principal).State = entityState;
@@ -1610,7 +1884,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildDN
             {
                 Id1 = 78,
@@ -1644,7 +1922,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildDN
             {
                 Id1 = 78,
@@ -1679,8 +1961,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildDN { Id1 = 78, Id2 = Guid78, Parent = principal };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildDN
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Parent = principal
+            };
 
             context.Entry(dependent).State = entityState;
             context.Entry(principal).State = entityState;
@@ -1707,7 +1998,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildDN
             {
                 Id1 = 78,
@@ -1741,7 +2036,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildDN
             {
                 Id1 = 78,
@@ -1776,8 +2075,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildDN { Id1 = 78, Id2 = Guid78, Parent = principal };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildDN
+            {
+                Id1 = 78,
+                Id2 = Guid78,
+                Parent = principal
+            };
 
             context.Entry(principal).State = entityState;
             context.Entry(dependent).State = entityState;
@@ -1804,7 +2112,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentNN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildNN
             {
                 Id1 = 78,
@@ -1837,7 +2149,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
+            var principal = new ParentNN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
             var dependent = new ChildNN
             {
                 Id1 = 78,
@@ -1870,8 +2186,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -1908,8 +2232,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -1944,8 +2276,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -1980,8 +2320,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2017,8 +2365,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2054,8 +2410,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2085,8 +2449,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2120,8 +2492,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2155,8 +2535,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2188,8 +2576,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2221,8 +2617,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2255,8 +2659,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2289,8 +2701,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2323,8 +2743,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Category { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Product { Id1 = 78, Id2 = Guid78 };
+            var principal = new Category
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Product
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2354,8 +2782,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2389,8 +2825,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2421,8 +2865,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2457,8 +2909,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2487,8 +2947,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2520,8 +2988,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2551,8 +3027,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2586,8 +3070,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2622,8 +3114,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2656,8 +3156,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2688,8 +3196,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2721,8 +3237,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2751,8 +3275,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductNN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryNN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductNN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2785,8 +3317,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ProductNN { Id1 = 78, Id2 = Guid78 };
+            var principal = new CategoryNN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ProductNN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -2816,8 +3356,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2854,8 +3402,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2890,8 +3446,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2926,8 +3490,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -2963,8 +3535,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3000,8 +3580,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3031,8 +3619,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3066,8 +3662,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3101,8 +3705,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3134,8 +3746,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3167,8 +3787,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3201,8 +3829,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3235,8 +3871,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3267,8 +3911,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new Parent { Id1 = 77, Id2 = Guid77 };
-            var dependent = new Child { Id1 = 78, Id2 = Guid78 };
+            var principal = new Parent
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new Child
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3298,8 +3950,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3333,8 +3993,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3365,8 +4033,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3401,8 +4077,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3431,8 +4115,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3464,8 +4156,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildPN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentPN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildPN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3495,8 +4195,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3530,8 +4238,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3566,8 +4282,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3600,8 +4324,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3632,8 +4364,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3665,8 +4405,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildDN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentDN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildDN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 
@@ -3695,8 +4443,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildNN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentNN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildNN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(dependent).State = entityState;
 
@@ -3729,8 +4485,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         )
         {
             using var context = new FixupContext();
-            var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
-            var dependent = new ChildNN { Id1 = 78, Id2 = Guid78 };
+            var principal = new ParentNN
+            {
+                Id1 = 77,
+                Id2 = Guid77
+            };
+            var dependent = new ChildNN
+            {
+                Id1 = 78,
+                Id2 = Guid78
+            };
 
             context.Entry(principal).State = entityState;
 

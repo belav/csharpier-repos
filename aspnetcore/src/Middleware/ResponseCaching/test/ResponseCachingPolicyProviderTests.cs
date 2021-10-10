@@ -174,7 +174,11 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var sink = new TestSink();
             var context = TestUtils.CreateTestContext(sink);
             context.HttpContext.Response.Headers[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue() { Public = true, NoCache = true }.ToString();
+                new CacheControlHeaderValue()
+                {
+                    Public = true,
+                    NoCache = true
+                }.ToString();
 
             Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
             TestUtils.AssertLoggedMessages(
@@ -189,7 +193,11 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var sink = new TestSink();
             var context = TestUtils.CreateTestContext(sink);
             context.HttpContext.Response.Headers[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue() { Public = true, NoStore = true }.ToString();
+                new CacheControlHeaderValue()
+                {
+                    Public = true,
+                    NoStore = true
+                }.ToString();
 
             Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
             TestUtils.AssertLoggedMessages(
@@ -236,7 +244,11 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var sink = new TestSink();
             var context = TestUtils.CreateTestContext(sink);
             context.HttpContext.Response.Headers[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue() { Public = true, Private = true }.ToString();
+                new CacheControlHeaderValue()
+                {
+                    Public = true,
+                    Private = true
+                }.ToString();
 
             Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
             TestUtils.AssertLoggedMessages(

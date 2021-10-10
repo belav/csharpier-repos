@@ -107,8 +107,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(ValidAddIntoXDocument)
                 {
-                    Attribute = new VariationAttribute("XDocument valid add - connected (multiple)")
-                    {
+                    Attribute = new VariationAttribute(
+                        "XDocument valid add - connected (multiple)"
+                    ) {
                         Params = new object[] { true, 3 },
                         Priority = 1
                     }

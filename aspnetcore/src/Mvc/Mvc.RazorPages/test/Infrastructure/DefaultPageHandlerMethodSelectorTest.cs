@@ -205,9 +205,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_ReturnsNullWhenNoHandlerMatchesHandler()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
+            var descriptor1 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Add",
+            };
 
-            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
+            var descriptor2 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Delete",
+            };
 
             var pageContext = new PageContext
             {
@@ -235,9 +243,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_ReturnsHandlerThatMatchesHandler()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
+            var descriptor1 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Add",
+            };
 
-            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
+            var descriptor2 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Delete",
+            };
 
             var pageContext = new PageContext
             {
@@ -272,7 +288,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 Name = "10/31/2018 07:37:38 -07:00",
             };
 
-            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
+            var descriptor2 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Delete",
+            };
 
             var pageContext = new PageContext
             {
@@ -309,9 +329,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_HandlerFromQueryString()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
+            var descriptor1 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Add",
+            };
 
-            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
+            var descriptor2 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Delete",
+            };
 
             var pageContext = new PageContext
             {
@@ -346,9 +374,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_HandlerConsidersRouteDataFirst()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
+            var descriptor1 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Add",
+            };
 
-            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
+            var descriptor2 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Delete",
+            };
 
             var pageContext = new PageContext
             {
@@ -383,9 +419,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_HandlerMultipleTimesInQueryString_UsesFirst()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
+            var descriptor1 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Add",
+            };
 
-            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
+            var descriptor2 = new HandlerMethodDescriptor
+            {
+                HttpMethod = "POST",
+                Name = "Delete",
+            };
 
             var pageContext = new PageContext
             {

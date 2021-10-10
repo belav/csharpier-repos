@@ -389,8 +389,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(reader_15)
                 {
-                    Attribute = new VariationAttribute("Read XElement with nwf no closing bracket")
-                    {
+                    Attribute = new VariationAttribute(
+                        "Read XElement with nwf no closing bracket"
+                    ) {
                         Params = new object[] { "<A >" },
                         Priority = 2
                     }
@@ -399,8 +400,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(reader_15)
                 {
-                    Attribute = new VariationAttribute("Read XElement with nwf no opening bracket")
-                    {
+                    Attribute = new VariationAttribute(
+                        "Read XElement with nwf no opening bracket"
+                    ) {
                         Params = new object[] { "A></A>" },
                         Priority = 2
                     }
@@ -439,8 +441,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(reader_16)
                 {
-                    Attribute = new VariationAttribute("Read XDocument with nwf no opening bracket")
-                    {
+                    Attribute = new VariationAttribute(
+                        "Read XDocument with nwf no opening bracket"
+                    ) {
                         Params = new object[] { "A></A>" },
                         Priority = 2
                     }
@@ -469,8 +472,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(reader_16)
                 {
-                    Attribute = new VariationAttribute("Read XDocument with nwf no closing bracket")
-                    {
+                    Attribute = new VariationAttribute(
+                        "Read XDocument with nwf no closing bracket"
+                    ) {
                         Params = new object[] { "<A >" },
                         Priority = 2
                     }

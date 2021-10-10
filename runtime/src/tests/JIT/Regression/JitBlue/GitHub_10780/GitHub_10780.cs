@@ -13,7 +13,11 @@ namespace N
         public int Left;
         public int Right;
 
-        public static Pair TenFour = new Pair() { Left = 10, Right = 4 };
+        public static Pair TenFour = new Pair()
+        {
+            Left = 10,
+            Right = 4
+        };
     }
 
     static class C

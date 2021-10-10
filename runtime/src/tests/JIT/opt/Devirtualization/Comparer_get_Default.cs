@@ -199,8 +199,16 @@ class Program
                 var enumByteB = Unsafe.As<long, Enum_byte>(ref b);
                 Compare_Enum_Byte(enumByteA, enumByteB);
 
-                var structA = new Struct1 { a = a, b = b };
-                var structB = new Struct1 { a = b, b = a };
+                var structA = new Struct1
+                {
+                    a = a,
+                    b = b
+                };
+                var structB = new Struct1
+                {
+                    a = b,
+                    b = a
+                };
                 Compare_Struct1(structA, structB);
 
                 Compare_DateTime(

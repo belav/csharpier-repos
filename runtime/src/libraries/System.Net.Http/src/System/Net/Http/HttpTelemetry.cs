@@ -225,7 +225,11 @@ namespace System.Net.Http
                         DataPointer = (IntPtr)(arg2Ptr),
                         Size = (arg2.Length + 1) * sizeof(char)
                     };
-                    descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(int) };
+                    descrs[2] = new EventData
+                    {
+                        DataPointer = (IntPtr)(&arg3),
+                        Size = sizeof(int)
+                    };
                     descrs[3] = new EventData
                     {
                         DataPointer = (IntPtr)(arg4Ptr),
@@ -267,9 +271,21 @@ namespace System.Net.Http
                 const int NumEventDatas = 3;
                 EventData* descrs = stackalloc EventData[NumEventDatas];
 
-                descrs[0] = new EventData { DataPointer = (IntPtr)(&arg1), Size = sizeof(double) };
-                descrs[1] = new EventData { DataPointer = (IntPtr)(&arg2), Size = sizeof(byte) };
-                descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(byte) };
+                descrs[0] = new EventData
+                {
+                    DataPointer = (IntPtr)(&arg1),
+                    Size = sizeof(double)
+                };
+                descrs[1] = new EventData
+                {
+                    DataPointer = (IntPtr)(&arg2),
+                    Size = sizeof(byte)
+                };
+                descrs[2] = new EventData
+                {
+                    DataPointer = (IntPtr)(&arg3),
+                    Size = sizeof(byte)
+                };
 
                 WriteEventCore(eventId, NumEventDatas, descrs);
             }
@@ -290,8 +306,16 @@ namespace System.Net.Http
                 const int NumEventDatas = 2;
                 EventData* descrs = stackalloc EventData[NumEventDatas];
 
-                descrs[0] = new EventData { DataPointer = (IntPtr)(&arg1), Size = sizeof(byte) };
-                descrs[1] = new EventData { DataPointer = (IntPtr)(&arg2), Size = sizeof(byte) };
+                descrs[0] = new EventData
+                {
+                    DataPointer = (IntPtr)(&arg1),
+                    Size = sizeof(byte)
+                };
+                descrs[1] = new EventData
+                {
+                    DataPointer = (IntPtr)(&arg2),
+                    Size = sizeof(byte)
+                };
 
                 WriteEventCore(eventId, NumEventDatas, descrs);
             }

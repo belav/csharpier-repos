@@ -520,8 +520,16 @@ public static partial class DataContractJsonSerializerTests
     {
         SimpleType[] x = new SimpleType[]
         {
-            new SimpleType { P1 = "abc", P2 = 11 },
-            new SimpleType { P1 = "def", P2 = 12 }
+            new SimpleType
+            {
+                P1 = "abc",
+                P2 = 11
+            },
+            new SimpleType
+            {
+                P1 = "def",
+                P2 = 12
+            }
         };
         SimpleType[] y = SerializeAndDeserialize<SimpleType[]>(
             x,
@@ -545,14 +553,30 @@ public static partial class DataContractJsonSerializerTests
         {
             F1 = new SimpleType[]
             {
-                new SimpleType { P1 = "ab", P2 = 1 },
-                new SimpleType { P1 = "cd", P2 = 2 }
+                new SimpleType
+                {
+                    P1 = "ab",
+                    P2 = 1
+                },
+                new SimpleType
+                {
+                    P1 = "cd",
+                    P2 = 2
+                }
             },
             F2 = new int[] { -1, 3 },
             P1 = new SimpleType[]
             {
-                new SimpleType { P1 = "ef", P2 = 5 },
-                new SimpleType { P1 = "gh", P2 = 7 }
+                new SimpleType
+                {
+                    P1 = "ef",
+                    P2 = 5
+                },
+                new SimpleType
+                {
+                    P1 = "gh",
+                    P2 = 7
+                }
             },
             P2 = new int[] { 11, 12 }
         };
@@ -586,8 +610,16 @@ public static partial class DataContractJsonSerializerTests
     public static void DCJS_ArrayAsGetOnly()
     {
         TypeWithGetOnlyArrayProperties x = new TypeWithGetOnlyArrayProperties();
-        x.P1[0] = new SimpleType { P1 = "ab", P2 = 1 };
-        x.P1[1] = new SimpleType { P1 = "cd", P2 = 2 };
+        x.P1[0] = new SimpleType
+        {
+            P1 = "ab",
+            P2 = 1
+        };
+        x.P1[1] = new SimpleType
+        {
+            P1 = "cd",
+            P2 = 2
+        };
         x.P2[0] = -1;
         x.P2[1] = 3;
 
@@ -1169,7 +1201,15 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_CustomType()
     {
-        MyTypeA x = new MyTypeA { PropX = new MyTypeC { PropC = 'a', PropB = true }, PropY = 45, };
+        MyTypeA x = new MyTypeA
+        {
+            PropX = new MyTypeC
+            {
+                PropC = 'a',
+                PropB = true
+            },
+            PropY = 45,
+        };
         MyTypeA y = SerializeAndDeserialize<MyTypeA>(
             x,
             @"{""P_Col_Array"":null,""PropX"":{""__type"":""MyTypeC:#SerializationTypes"",""PropA"":null,""PropC"":""a"",""PropB"":true},""PropY"":45}"
@@ -1263,7 +1303,11 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_EnumAsMember()
     {
-        TypeWithEnumMembers x = new TypeWithEnumMembers { F1 = MyEnum.Three, P1 = MyEnum.Two };
+        TypeWithEnumMembers x = new TypeWithEnumMembers
+        {
+            F1 = MyEnum.Three,
+            P1 = MyEnum.Two
+        };
         TypeWithEnumMembers y = SerializeAndDeserialize<TypeWithEnumMembers>(
             x,
             @"{""F1"":2,""P1"":1}"
@@ -1716,7 +1760,11 @@ public static partial class DataContractJsonSerializerTests
         {
             Optional = IntEnum.Option1,
             OptionalInt = 42,
-            Struct1 = new SomeStruct { A = 1, B = 2 }
+            Struct1 = new SomeStruct
+            {
+                A = 1,
+                B = 2
+            }
         };
 
         // Act
@@ -1914,8 +1962,22 @@ public static partial class DataContractJsonSerializerTests
     public static void DCJS_TypeWithGenericDictionaryAsKnownType()
     {
         TypeWithGenericDictionaryAsKnownType value = new TypeWithGenericDictionaryAsKnownType {  };
-        value.Foo.Add(10, new Level() { Name = "Foo", LevelNo = 1 });
-        value.Foo.Add(20, new Level() { Name = "Bar", LevelNo = 2 });
+        value.Foo.Add(
+            10,
+            new Level()
+            {
+                Name = "Foo",
+                LevelNo = 1
+            }
+        );
+        value.Foo.Add(
+            20,
+            new Level()
+            {
+                Name = "Bar",
+                LevelNo = 2
+            }
+        );
         var deserializedValue = SerializeAndDeserialize<TypeWithGenericDictionaryAsKnownType>(
             value,
             @"{""Foo"":[{""Key"":10,""Value"":{""LevelNo"":1,""Name"":""Foo""}},{""Key"":20,""Value"":{""LevelNo"":2,""Name"":""Bar""}}]}"
@@ -2477,7 +2539,11 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_DataMemberNames()
     {
-        var obj = new AppEnvironment() { ScreenDpi = 440, ScreenOrientation = "horizontal" };
+        var obj = new AppEnvironment()
+        {
+            ScreenDpi = 440,
+            ScreenOrientation = "horizontal"
+        };
         var actual = SerializeAndDeserialize(
             obj,
             @"{""screen_dpi(x:y)"":440,""screen:orientation"":""horizontal""}"
@@ -2594,7 +2660,11 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_TypeWithPrimitiveProperties()
     {
-        TypeWithPrimitiveProperties x = new TypeWithPrimitiveProperties { P1 = "abc", P2 = 11 };
+        TypeWithPrimitiveProperties x = new TypeWithPrimitiveProperties
+        {
+            P1 = "abc",
+            P2 = 11
+        };
         TypeWithPrimitiveProperties y = SerializeAndDeserialize<TypeWithPrimitiveProperties>(
             x,
             "{\"P1\":\"abc\",\"P2\":11}"
@@ -2606,7 +2676,11 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_TypeWithPrimitiveFields()
     {
-        TypeWithPrimitiveFields x = new TypeWithPrimitiveFields { P1 = "abc", P2 = 11 };
+        TypeWithPrimitiveFields x = new TypeWithPrimitiveFields
+        {
+            P1 = "abc",
+            P2 = 11
+        };
         TypeWithPrimitiveFields y = SerializeAndDeserialize<TypeWithPrimitiveFields>(
             x,
             "{\"P1\":\"abc\",\"P2\":11}"
@@ -2740,8 +2814,16 @@ public static partial class DataContractJsonSerializerTests
     {
         var value = new TypeWithPrimitiveProperties[]
         {
-            new TypeWithPrimitiveProperties() { P1 = "abc", P2 = 123 },
-            new TypeWithPrimitiveProperties() { P1 = "def", P2 = 456 },
+            new TypeWithPrimitiveProperties()
+            {
+                P1 = "abc",
+                P2 = 123
+            },
+            new TypeWithPrimitiveProperties()
+            {
+                P1 = "def",
+                P2 = 456
+            },
         };
         var deserialized = SerializeAndDeserialize(
             value,
@@ -2853,8 +2935,16 @@ public static partial class DataContractJsonSerializerTests
     {
         var value = new TypeImplementsGenericICollection<TypeWithPrimitiveProperties>()
         {
-            new TypeWithPrimitiveProperties() { P1 = "abc", P2 = 123 },
-            new TypeWithPrimitiveProperties() { P1 = "def", P2 = 456 },
+            new TypeWithPrimitiveProperties()
+            {
+                P1 = "abc",
+                P2 = 123
+            },
+            new TypeWithPrimitiveProperties()
+            {
+                P1 = "def",
+                P2 = 456
+            },
         };
         var deserialized = SerializeAndDeserialize(
             value,
@@ -3694,7 +3784,11 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_VerifyIndentation()
     {
-        var testClass = new TestClass() { floatNum = 2.3f, intList = new List<int>() { 2, 3, 4 } };
+        var testClass = new TestClass()
+        {
+            floatNum = 2.3f,
+            intList = new List<int>() { 2, 3, 4 }
+        };
 
         string spaceChars = "    ";
         var dcjsSettings = new DataContractJsonSerializerSettings()
@@ -3729,7 +3823,11 @@ public static partial class DataContractJsonSerializerTests
         Assert.True(value2.intList[1] == 3);
         Assert.True(value2.intList[2] == 4);
 
-        var emptyList = new TestClass() { floatNum = 2.3f, intList = new List<int>() };
+        var emptyList = new TestClass()
+        {
+            floatNum = 2.3f,
+            intList = new List<int>()
+        };
         spaceChars = "  ";
         var value3 = VerifyIndentationOfSerializedXml(
             emptyList,

@@ -4002,7 +4002,11 @@ namespace System.Web.Mvc.Html.Test
             {
                 { "foo", "ViewDataFoo" }
             };
-            viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
+            viewData.Model = new FooBarModel
+            {
+                foo = "ViewItemFoo",
+                bar = "ViewItemBar"
+            };
             ModelState modelState = new ModelState();
             modelState.Value = HtmlHelperTest.GetValueProviderResult("ViewDataFoo", "ViewDataFoo");
             viewData.ModelState["foo"] = modelState;
@@ -4013,7 +4017,11 @@ namespace System.Web.Mvc.Html.Test
         private static ViewDataDictionary<string> GetRadioButtonNestedAndUnsetViewData()
         {
             ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel> {  };
-            viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
+            viewData.Model = new FooBarModel
+            {
+                foo = "ViewItemFoo",
+                bar = "ViewItemBar"
+            };
 
             Expression<Func<FooBarModel, string>> containedExpression = m => m.foo;
 
@@ -4048,7 +4056,11 @@ namespace System.Web.Mvc.Html.Test
             {
                 { "foo", "ViewDataFoo" }
             };
-            viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
+            viewData.Model = new FooBarModel
+            {
+                foo = "ViewItemFoo",
+                bar = "ViewItemBar"
+            };
 
             return viewData;
         }
@@ -4059,7 +4071,11 @@ namespace System.Web.Mvc.Html.Test
             {
                 { "foo", "ViewDataFoo" }
             };
-            viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
+            viewData.Model = new FooBarModel
+            {
+                foo = "ViewItemFoo",
+                bar = "ViewItemBar"
+            };
             ModelState modelStateFoo = new ModelState();
             modelStateFoo.Errors.Add(new ModelError("foo error 1"));
             modelStateFoo.Errors.Add(new ModelError("foo error 2"));

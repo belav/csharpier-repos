@@ -230,7 +230,11 @@ namespace System.Drawing.Drawing2D
 
                 // Return the result in a managed array
 
-                Blend blend = new Blend(count) { Factors = factors, Positions = positions };
+                Blend blend = new Blend(count)
+                {
+                    Factors = factors,
+                    Positions = positions
+                };
 
                 return blend;
             }

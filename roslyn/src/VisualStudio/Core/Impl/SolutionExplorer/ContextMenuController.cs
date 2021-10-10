@@ -45,7 +45,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             var guidContextMenu = Guids.RoslynGroupId;
             var locationPoints = new[]
             {
-                new POINTS() { x = (short)location.X, y = (short)location.Y }
+                new POINTS()
+                {
+                    x = (short)location.X,
+                    y = (short)location.Y
+                }
             };
             return shell != null
                 && ErrorHandler.Succeeded(

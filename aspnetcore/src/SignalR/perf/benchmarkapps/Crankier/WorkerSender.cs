@@ -62,7 +62,13 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
         private async Task Send(string method, JToken parameters)
         {
             await _outputStreamWriter.WriteLineAsync(
-                JsonConvert.SerializeObject(new Message() { Command = method, Value = parameters })
+                JsonConvert.SerializeObject(
+                    new Message()
+                    {
+                        Command = method,
+                        Value = parameters
+                    }
+                )
             );
 
             await _outputStreamWriter.FlushAsync();

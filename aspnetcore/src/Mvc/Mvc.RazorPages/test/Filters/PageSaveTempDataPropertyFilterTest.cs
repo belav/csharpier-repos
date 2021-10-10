@@ -26,7 +26,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             {
                 ["TempDataProperty-Test"] = "Old-Value",
             };
-            var pageModel = new TestPageModel() { Test = "TestString", Test2 = "Test2", };
+            var pageModel = new TestPageModel()
+            {
+                Test = "TestString",
+                Test2 = "Test2",
+            };
 
             var filter = CreatePageSaveTempDataPropertyFilter(tempData, "TempDataProperty-");
             filter.Subject = pageModel;

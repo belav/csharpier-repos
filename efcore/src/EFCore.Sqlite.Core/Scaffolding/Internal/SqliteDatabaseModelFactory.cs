@@ -203,8 +203,16 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
                     var type = reader.GetString(1);
                     var table =
                         type == "table"
-                            ? new DatabaseTable { Database = databaseModel, Name = name }
-                            : new DatabaseView { Database = databaseModel, Name = name };
+                            ? new DatabaseTable
+                              {
+                                  Database = databaseModel,
+                                  Name = name
+                              }
+                            : new DatabaseView
+                              {
+                                  Database = databaseModel,
+                                  Name = name
+                              };
 
                     GetColumns(connection, table);
                     GetPrimaryKey(connection, table);

@@ -83,8 +83,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(XElementValidCreate)
                 {
-                    Attribute = new VariationAttribute("(BVT)XElement - multiple nodes, connected")
-                    {
+                    Attribute = new VariationAttribute(
+                        "(BVT)XElement - multiple nodes, connected"
+                    ) {
                         Params = new object[] { true, 2 },
                         Priority = 0
                     }

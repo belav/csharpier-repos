@@ -54,7 +54,11 @@ namespace System.Runtime.InteropServices.Tests
             int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
                 .ToInt32();
 
-            object structure = new BlittableStruct { value1 = 10, value2 = 20 };
+            object structure = new BlittableStruct
+            {
+                value1 = 10,
+                value2 = 20
+            };
 
             Marshal.WriteByte(structure, offset1, 11);
             Marshal.WriteByte(structure, offset2, 21);
@@ -115,7 +119,11 @@ namespace System.Runtime.InteropServices.Tests
             int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
                 .ToInt32();
 
-            object structure = new BlittableStruct { value1 = 10, value2 = 20 };
+            object structure = new BlittableStruct
+            {
+                value1 = 10,
+                value2 = 20
+            };
 
             Assert.Equal(10, Marshal.ReadByte(structure, offset1));
             Assert.Equal(20, Marshal.ReadByte(structure, offset2));

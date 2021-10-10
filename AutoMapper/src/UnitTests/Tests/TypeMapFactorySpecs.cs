@@ -213,7 +213,12 @@ namespace AutoMapper.UnitTests.Tests
 
             var mapper = config.CreateMapper();
             var dest = mapper.Map<Destination>(
-                new Source { Ävíator = 3, SubAirlinaFlight = 4, Value = 5 }
+                new Source
+                {
+                    Ävíator = 3,
+                    SubAirlinaFlight = 4,
+                    Value = 5
+                }
             );
             dest.Aviator.ShouldBe(3);
             dest.SubAirlineFlight.ShouldBe(4);
@@ -260,7 +265,12 @@ namespace AutoMapper.UnitTests.Tests
 
             var mapper = config.CreateMapper();
             var dest = mapper.Map<Destination>(
-                new Source { Ävíator = 3, SubAirlinaFlight = 4, Value = 5 }
+                new Source
+                {
+                    Ävíator = 3,
+                    SubAirlinaFlight = 4,
+                    Value = 5
+                }
             );
             dest.Aviator.ShouldBe(3);
             dest.SubAirlineFlight.ShouldBe(4);

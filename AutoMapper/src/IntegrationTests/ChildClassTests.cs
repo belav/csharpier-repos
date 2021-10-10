@@ -64,7 +64,11 @@ namespace AutoMapper.IntegrationTests.Net4
                     {
                         BaseID = 1,
                         Base1 = "base1",
-                        Sub = new Sub() { BaseId = 1, Sub1 = "sub1" }
+                        Sub = new Sub()
+                        {
+                            BaseId = 1,
+                            Sub1 = "sub1"
+                        }
                     }
                 );
 

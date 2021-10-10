@@ -54,7 +54,11 @@ namespace GenDefinedCharList
                     {
                         ranges.Add(
                             rangeName,
-                            new UnicodeRange() { FirstCodePoint = codepoint, Category = category }
+                            new UnicodeRange()
+                            {
+                                FirstCodePoint = codepoint,
+                                Category = category
+                            }
                         );
                     }
                     else

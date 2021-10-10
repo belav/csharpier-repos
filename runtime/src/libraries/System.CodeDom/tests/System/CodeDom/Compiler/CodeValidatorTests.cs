@@ -343,11 +343,19 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { new CodeEntryPointMethod { Name = "0" } };
             yield return new object[]
             {
-                new CodeEntryPointMethod { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeEntryPointMethod
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             };
             yield return new object[]
             {
-                new CodeEntryPointMethod { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeEntryPointMethod
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             };
             yield return new object[]
             {
@@ -511,11 +519,19 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { new CodeConstructor { Name = "0" } };
             yield return new object[]
             {
-                new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             };
             yield return new object[]
             {
-                new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             };
             yield return new object[]
             {
@@ -636,11 +652,19 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { new CodeTypeConstructor { Name = "0" } };
             yield return new object[]
             {
-                new CodeTypeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeTypeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             };
             yield return new object[]
             {
-                new CodeTypeConstructor { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeTypeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             };
             yield return new object[]
             {
@@ -1082,10 +1106,18 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeDeclaration.Members.Add(new CodeEntryPointMethod { Name = "name" });
             fullTypeDeclaration.Members.Add(new CodeEntryPointMethod { Name = "0" });
             fullTypeDeclaration.Members.Add(
-                new CodeEntryPointMethod { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeEntryPointMethod
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             );
             fullTypeDeclaration.Members.Add(
-                new CodeEntryPointMethod { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeEntryPointMethod
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             );
             fullTypeDeclaration.Members.Add(
                 new CodeEntryPointMethod
@@ -1108,10 +1140,18 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeDeclaration.Members.Add(new CodeConstructor { Name = string.Empty });
             fullTypeDeclaration.Members.Add(new CodeConstructor { Name = "0" });
             fullTypeDeclaration.Members.Add(
-                new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             );
             fullTypeDeclaration.Members.Add(
-                new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             );
             fullTypeDeclaration.Members.Add(
                 new CodeConstructor
@@ -1134,10 +1174,18 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeDeclaration.Members.Add(new CodeTypeConstructor { Name = "name" });
             fullTypeDeclaration.Members.Add(new CodeTypeConstructor { Name = "0" });
             fullTypeDeclaration.Members.Add(
-                new CodeTypeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeTypeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             );
             fullTypeDeclaration.Members.Add(
-                new CodeTypeConstructor { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeTypeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             );
             fullTypeDeclaration.Members.Add(
                 new CodeTypeConstructor
@@ -1233,10 +1281,18 @@ namespace System.CodeDom.Compiler.Tests
             fullDelegate.Members.Add(new CodeEntryPointMethod { Name = "name" });
             fullDelegate.Members.Add(new CodeEntryPointMethod { Name = "0" });
             fullDelegate.Members.Add(
-                new CodeEntryPointMethod { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeEntryPointMethod
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             );
             fullDelegate.Members.Add(
-                new CodeEntryPointMethod { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeEntryPointMethod
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             );
             fullDelegate.Members.Add(
                 new CodeEntryPointMethod
@@ -1259,10 +1315,18 @@ namespace System.CodeDom.Compiler.Tests
             fullDelegate.Members.Add(new CodeConstructor { Name = string.Empty });
             fullDelegate.Members.Add(new CodeConstructor { Name = "0" });
             fullDelegate.Members.Add(
-                new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             );
             fullDelegate.Members.Add(
-                new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             );
             fullDelegate.Members.Add(
                 new CodeConstructor
@@ -1285,10 +1349,18 @@ namespace System.CodeDom.Compiler.Tests
             fullDelegate.Members.Add(new CodeTypeConstructor { Name = "name" });
             fullDelegate.Members.Add(new CodeTypeConstructor { Name = "0" });
             fullDelegate.Members.Add(
-                new CodeTypeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeTypeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             );
             fullDelegate.Members.Add(
-                new CodeTypeConstructor { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeTypeConstructor
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             );
             fullDelegate.Members.Add(
                 new CodeTypeConstructor
@@ -2394,23 +2466,43 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { new CodeMemberMethod { Name = "0" } };
             yield return new object[]
             {
-                new CodeMemberMethod { Name = "name", ReturnType = new CodeTypeReference() }
+                new CodeMemberMethod
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference()
+                }
             };
             yield return new object[]
             {
-                new CodeMemberMethod { Name = "name", ReturnType = new CodeTypeReference("0") }
+                new CodeMemberMethod
+                {
+                    Name = "name",
+                    ReturnType = new CodeTypeReference("0")
+                }
             };
             yield return new object[]
             {
-                new CodeMemberMethod { Name = "name", ReturnType = invalidTypeReference1 }
+                new CodeMemberMethod
+                {
+                    Name = "name",
+                    ReturnType = invalidTypeReference1
+                }
             };
             yield return new object[]
             {
-                new CodeMemberMethod { Name = "name", ReturnType = invalidTypeReference2 }
+                new CodeMemberMethod
+                {
+                    Name = "name",
+                    ReturnType = invalidTypeReference2
+                }
             };
             yield return new object[]
             {
-                new CodeMemberMethod { Name = "name", ReturnType = invalidTypeReference3 }
+                new CodeMemberMethod
+                {
+                    Name = "name",
+                    ReturnType = invalidTypeReference3
+                }
             };
             yield return new object[]
             {

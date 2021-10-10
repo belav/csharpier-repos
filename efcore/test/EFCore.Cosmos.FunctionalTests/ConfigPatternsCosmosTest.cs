@@ -63,7 +63,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             );
             var options = CreateOptions(testDatabase);
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using var context = new CustomerContext(options);
             context.Database.EnsureCreated();
@@ -85,7 +89,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     );
                     var options = CreateOptions(testDatabase);
 
-                    var customer = new Customer { Id = 42, Name = "Theon" };
+                    var customer = new Customer
+                    {
+                        Id = 42,
+                        Name = "Theon"
+                    };
 
                     using var context = new CustomerContext(options);
                     context.Database.EnsureCreated();
@@ -109,7 +117,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             );
             var options = CreateOptions(testDatabase);
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using var context = new CustomerContext(options);
             context.Database.EnsureCreated();
@@ -131,7 +143,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     );
                     var options = CreateOptions(testDatabase);
 
-                    var customer = new Customer { Id = 42, Name = "Theon" };
+                    var customer = new Customer
+                    {
+                        Id = 42,
+                        Name = "Theon"
+                    };
 
                     using var context = new CustomerContext(options);
                     context.Database.EnsureCreated();

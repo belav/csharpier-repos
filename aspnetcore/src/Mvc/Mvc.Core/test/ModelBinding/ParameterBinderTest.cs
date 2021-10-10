@@ -77,7 +77,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 actionContext,
                 CreateMockModelBinder(modelBindingResult),
                 CreateMockValueProvider(),
-                new ParameterDescriptor { Name = "myParam", ParameterType = typeof(Person) },
+                new ParameterDescriptor
+                {
+                    Name = "myParam",
+                    ParameterType = typeof(Person)
+                },
                 mockModelMetadata.Object,
                 "ignoredvalue"
             );
@@ -118,7 +122,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 actionContext,
                 CreateMockModelBinder(modelBindingResult),
                 CreateMockValueProvider(),
-                new ParameterDescriptor { Name = "myParam", ParameterType = typeof(Person) },
+                new ParameterDescriptor
+                {
+                    Name = "myParam",
+                    ParameterType = typeof(Person)
+                },
                 mockModelMetadata.Object,
                 "ignoredvalue"
             );
@@ -288,7 +296,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 actionContext,
                 CreateMockModelBinder(modelBindingResult),
                 CreateMockValueProvider(),
-                new ParameterDescriptor { Name = "myParam", ParameterType = typeof(Person) },
+                new ParameterDescriptor
+                {
+                    Name = "myParam",
+                    ParameterType = typeof(Person)
+                },
                 mockModelMetadata.Object,
                 50
             ); // This value is ignored, because test explicitly set the ModelBindingResult
@@ -342,7 +354,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 actionContext,
                 CreateMockModelBinder(modelBindingResult),
                 CreateMockValueProvider(),
-                new ParameterDescriptor { Name = "myParam", ParameterType = typeof(Person) },
+                new ParameterDescriptor
+                {
+                    Name = "myParam",
+                    ParameterType = typeof(Person)
+                },
                 modelMetadata,
                 "ignored"
             );

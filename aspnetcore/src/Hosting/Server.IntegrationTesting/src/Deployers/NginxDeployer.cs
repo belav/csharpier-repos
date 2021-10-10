@@ -128,7 +128,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 using (
                     var process = new Process
                     {
-                        StartInfo = { FileName = "whoami", RedirectStandardOutput = true, }
+                        StartInfo =
+                        {
+                            FileName = "whoami",
+                            RedirectStandardOutput = true,
+                        }
                     }
                 )
                 {

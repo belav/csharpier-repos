@@ -60,7 +60,11 @@ namespace System.Web.Mvc.Test
             MockViewMasterPageDummyViewData vmp = new MockViewMasterPageDummyViewData();
             MockViewPageDummyViewData vp = new MockViewPageDummyViewData();
             vmp.Page = vp;
-            vp.ViewData.Model = new DummyViewData { MyInt = 123, MyString = "abc" };
+            vp.ViewData.Model = new DummyViewData
+            {
+                MyInt = 123,
+                MyString = "abc"
+            };
 
             // Assert
             Assert.Equal(123, vmp.ViewData.Model.MyInt);

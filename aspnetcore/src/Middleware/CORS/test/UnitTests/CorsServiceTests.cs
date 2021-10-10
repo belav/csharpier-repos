@@ -18,7 +18,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             // Arrange
             var corsService = GetCorsService();
             var requestContext = GetHttpContext("POST", origin: null);
-            var policy = new CorsPolicy { Origins = { "*" }, SupportsCredentials = true, };
+            var policy = new CorsPolicy
+            {
+                Origins = { "*" },
+                SupportsCredentials = true,
+            };
 
             // Act & Assert
             ExceptionAssert.ThrowsArgument(
@@ -616,7 +620,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void ApplyResult_NoAllowOrigin_AllowOriginHeaderNotAdded()
         {
             // Arrange
-            var result = new CorsResult { IsOriginAllowed = true, AllowedOrigin = null };
+            var result = new CorsResult
+            {
+                IsOriginAllowed = true,
+                AllowedOrigin = null
+            };
 
             var httpContext = new DefaultHttpContext();
             var service = GetCorsService();
@@ -632,7 +640,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void ApplyResult_AllowCredentials_AllowCredentialsHeaderAdded()
         {
             // Arrange
-            var result = new CorsResult { IsOriginAllowed = true, SupportsCredentials = true };
+            var result = new CorsResult
+            {
+                IsOriginAllowed = true,
+                SupportsCredentials = true
+            };
 
             var service = GetCorsService();
 
@@ -648,7 +660,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void ApplyResult_AddVaryHeader_VaryHeaderAdded()
         {
             // Arrange
-            var result = new CorsResult { IsOriginAllowed = true, VaryByOrigin = true };
+            var result = new CorsResult
+            {
+                IsOriginAllowed = true,
+                VaryByOrigin = true
+            };
 
             var httpContext = new DefaultHttpContext();
             var service = GetCorsService();
@@ -664,7 +680,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void ApplyResult_AppendsVaryHeader()
         {
             // Arrange
-            var result = new CorsResult { IsOriginAllowed = true, VaryByOrigin = true };
+            var result = new CorsResult
+            {
+                IsOriginAllowed = true,
+                VaryByOrigin = true
+            };
 
             var httpContext = new DefaultHttpContext();
             httpContext.Response.Headers["Vary"] = "Cookie";
@@ -681,7 +701,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void ApplyResult_NoAllowCredentials_AllowCredentialsHeaderNotAdded()
         {
             // Arrange
-            var result = new CorsResult { IsOriginAllowed = true, SupportsCredentials = false };
+            var result = new CorsResult
+            {
+                IsOriginAllowed = true,
+                SupportsCredentials = false
+            };
 
             var httpContext = new DefaultHttpContext();
             var service = GetCorsService();

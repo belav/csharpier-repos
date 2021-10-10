@@ -178,7 +178,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [ConditionalFact]
         public virtual void RenameTableOperation_legacy() =>
             Generate(
-                new RenameTableOperation { Name = "People", Schema = "dbo", NewName = "Person" }
+                new RenameTableOperation
+                {
+                    Name = "People",
+                    Schema = "dbo",
+                    NewName = "Person"
+                }
             );
 
         [ConditionalFact]

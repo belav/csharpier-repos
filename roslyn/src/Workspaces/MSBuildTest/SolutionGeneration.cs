@@ -156,7 +156,11 @@ EndGlobal
 
         public static IBuilder Property(string propertyName, string propertyValue)
         {
-            return new PropertyBuilder { Name = propertyName, Value = propertyValue };
+            return new PropertyBuilder
+            {
+                Name = propertyName,
+                Value = propertyValue
+            };
         }
 
         public static IBuilder Sign

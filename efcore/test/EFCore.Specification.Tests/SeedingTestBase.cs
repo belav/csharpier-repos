@@ -68,8 +68,16 @@ namespace Microsoft.EntityFrameworkCore
             protected override void OnModelCreating(ModelBuilder modelBuilder) =>
                 modelBuilder.Entity<Seed>()
                     .HasData(
-                        new Seed { Id = 321, Species = "Apple" },
-                        new Seed { Id = 322, Species = "Orange" }
+                        new Seed
+                        {
+                            Id = 321,
+                            Species = "Apple"
+                        },
+                        new Seed
+                        {
+                            Id = 322,
+                            Species = "Orange"
+                        }
                     );
         }
 

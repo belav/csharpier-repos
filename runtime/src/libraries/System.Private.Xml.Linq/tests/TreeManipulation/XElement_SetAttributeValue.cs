@@ -87,8 +87,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(OnXElement)
                 {
-                    Attribute = new VariationAttribute("Replace attribute (multiple attr. (first))")
-                    {
+                    Attribute = new VariationAttribute(
+                        "Replace attribute (multiple attr. (first))"
+                    ) {
                         Params = new object[]
                         {
                             "<A a1='original' x='x' y='y'>text</A>",
@@ -118,8 +119,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(OnXElement)
                 {
-                    Attribute = new VariationAttribute("Replace attribute (multiple attr. (last))")
-                    {
+                    Attribute = new VariationAttribute(
+                        "Replace attribute (multiple attr. (last))"
+                    ) {
                         Params = new object[]
                         {
                             "<A x='x' y='y' a1='original'>text</A>",

@@ -83,7 +83,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
                 customer.Orders.Add(order);
 
                 orderQueries.Add(
-                    new OrderQuery { CustomerID = order.CustomerID, Customer = order.Customer }
+                    new OrderQuery
+                    {
+                        CustomerID = order.CustomerID,
+                        Customer = order.Customer
+                    }
                 );
             }
 

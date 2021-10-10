@@ -76,7 +76,11 @@ namespace Ignitor
                 BrowserRendererId = 0,
                 EventHandlerId = changeEventDescriptor.EventId,
                 EventName = "change",
-                EventFieldInfo = new EventFieldInfo { ComponentId = 0, FieldValue = value }
+                EventFieldInfo = new EventFieldInfo
+                {
+                    ComponentId = 0,
+                    FieldValue = value
+                }
             };
 
             return DispatchEventCore(connection, Serialize(webEventDescriptor), Serialize(args));

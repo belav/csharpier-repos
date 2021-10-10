@@ -55,7 +55,11 @@ namespace System.Runtime.CompilerServices.Tests
         public static unsafe void GetObjectValue()
         {
             // Object RuntimeHelpers.GetObjectValue(Object)
-            TestStruct t = new TestStruct() { i1 = 2, i2 = 4 };
+            TestStruct t = new TestStruct()
+            {
+                i1 = 2,
+                i2 = 4
+            };
             object tOV = RuntimeHelpers.GetObjectValue(t);
             Assert.Equal(t, (TestStruct)tOV);
 

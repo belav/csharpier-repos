@@ -195,7 +195,11 @@ namespace AutoMapper.UnitTests
             {
                 CustomerHolder = new CustomerHolder
                 {
-                    Customer = new Customer { Name = "George Costanza", Total = 74.85m }
+                    Customer = new Customer
+                    {
+                        Name = "George Costanza",
+                        Total = 74.85m
+                    }
                 }
             };
             var dto = Mapper.Map<OrderDto>(model);
@@ -248,7 +252,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_unflatten()
         {
-            var dto = new OrderDto { CustomerName = "George Costanza", Total = 74.85m };
+            var dto = new OrderDto
+            {
+                CustomerName = "George Costanza",
+                Total = 74.85m
+            };
             var model = Mapper.Map<Order>(dto);
             model.CustomerHolder.Customer.Name.ShouldBe("George Costanza");
             model.CustomerHolder.Customer.Total.ShouldBe(74.85m);
@@ -282,7 +290,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_map_reverse()
         {
-            var dto = new OrderDto { OrderId = 123, OrderName = "Test order" };
+            var dto = new OrderDto
+            {
+                OrderId = 123,
+                OrderName = "Test order"
+            };
             var model = Mapper.Map<OrderEntity>(dto);
             model.order_id.ShouldBe(123);
             model.order_name.ShouldBe("Test order");

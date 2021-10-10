@@ -328,7 +328,13 @@ public class TestRunner
             foreach (string opt in opt_sets)
             {
                 foreach (string s in tests)
-                    test_info.Enqueue(new TestInfo { test = s, opt_set = opt });
+                    test_info.Enqueue(
+                        new TestInfo
+                        {
+                            test = s,
+                            opt_set = opt
+                        }
+                    );
             }
         }
 

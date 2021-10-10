@@ -64,7 +64,11 @@ namespace Microsoft.AspNetCore.Routing.Template
         /// <returns>A <see cref="TemplatePart"/> instance.</returns>
         public static TemplatePart CreateLiteral(string text)
         {
-            return new TemplatePart() { IsLiteral = true, Text = text, };
+            return new TemplatePart()
+            {
+                IsLiteral = true,
+                Text = text,
+            };
         }
 
         /// <summary>

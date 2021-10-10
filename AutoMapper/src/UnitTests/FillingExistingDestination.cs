@@ -127,7 +127,11 @@ namespace AutoMapper.UnitTests
 
         protected override void Because_of()
         {
-            _source = new Source { Value = 10, Child = new ChildSource { Value = 20 } };
+            _source = new Source
+            {
+                Value = 10,
+                Child = new ChildSource { Value = 20 }
+            };
             _originalDest = new Destination
             {
                 Value = 1111,

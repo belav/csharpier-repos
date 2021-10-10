@@ -29,7 +29,11 @@ namespace System.Web.WebPages.Test
                         var href = "~/world/test.aspx";
                         var expected = "/world/test.aspx";
                         var context = new HttpContextWrapper(HttpContext.Current);
-                        var page = new MockPage { VirtualPath = vpath, Context = context };
+                        var page = new MockPage
+                        {
+                            VirtualPath = vpath,
+                            Context = context
+                        };
 
                         // Act
                         var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
@@ -62,7 +66,11 @@ namespace System.Web.WebPages.Test
                         var href = "~/world/test.aspx";
                         var expected = "/WebSite1/world/test.aspx";
                         var context = new HttpContextWrapper(HttpContext.Current);
-                        var page = new MockPage() { VirtualPath = vpath, Context = context };
+                        var page = new MockPage()
+                        {
+                            VirtualPath = vpath,
+                            Context = context
+                        };
 
                         // Act
                         var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
@@ -95,7 +103,11 @@ namespace System.Web.WebPages.Test
                         var href = "~/world/test.aspx";
                         var expected = "/WebSite1/world/test.aspx";
                         var context = new HttpContextWrapper(HttpContext.Current);
-                        var page = new MockPage() { VirtualPath = vpath, Context = context };
+                        var page = new MockPage()
+                        {
+                            VirtualPath = vpath,
+                            Context = context
+                        };
 
                         // Act
                         var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
@@ -128,7 +140,11 @@ namespace System.Web.WebPages.Test
                         var href = "world/test.aspx";
                         var expected = "/WebSite1/subfolder1/world/test.aspx";
                         var context = new HttpContextWrapper(HttpContext.Current);
-                        var page = new MockPage() { VirtualPath = vpath, Context = context };
+                        var page = new MockPage()
+                        {
+                            VirtualPath = vpath,
+                            Context = context
+                        };
 
                         // Act
                         var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);

@@ -39,9 +39,21 @@ namespace AutoMapper.IntegrationTests.Net4
                 context.EntityA.AddRange(
                     new[]
                     {
-                        new DbEntityA { ID = 1, Name = "Alain Brito" },
-                        new DbEntityA { ID = 2, Name = "Jimmy Bogard" },
-                        new DbEntityA { ID = 3, Name = "Bill Gates" }
+                        new DbEntityA
+                        {
+                            ID = 1,
+                            Name = "Alain Brito"
+                        },
+                        new DbEntityA
+                        {
+                            ID = 2,
+                            Name = "Jimmy Bogard"
+                        },
+                        new DbEntityA
+                        {
+                            ID = 3,
+                            Name = "Bill Gates"
+                        }
                     }
                 );
                 base.Seed(context);

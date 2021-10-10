@@ -173,12 +173,36 @@ namespace System.Linq.Tests
         {
             Record[] source = new[]
             {
-                new Record { Name = "Tim", Score = 55 },
-                new Record { Name = "Chris", Score = 49 },
-                new Record { Name = "Robert", Score = -100 },
-                new Record { Name = "Chris", Score = 24 },
-                new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 55
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 49
+                },
+                new Record
+                {
+                    Name = "Robert",
+                    Score = -100
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 24
+                },
+                new Record
+                {
+                    Name = "Prakash",
+                    Score = 9
+                },
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 25
+                }
             };
             Expression<Func<Record, string>> keySelector = null;
 
@@ -239,12 +263,36 @@ namespace System.Linq.Tests
         {
             Record[] source = new[]
             {
-                new Record { Name = "Tim", Score = 55 },
-                new Record { Name = "Chris", Score = 49 },
-                new Record { Name = "Robert", Score = -100 },
-                new Record { Name = "Chris", Score = 24 },
-                new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 55
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 49
+                },
+                new Record
+                {
+                    Name = "Robert",
+                    Score = -100
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 24
+                },
+                new Record
+                {
+                    Name = "Prakash",
+                    Score = 9
+                },
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 25
+                }
             };
 
             Expression<Func<Record, int>> elementSelector = null;
@@ -282,12 +330,36 @@ namespace System.Linq.Tests
         {
             Record[] source =
             {
-                new Record { Name = "Tim", Score = 55 },
-                new Record { Name = "Chris", Score = 49 },
-                new Record { Name = "Robert", Score = -100 },
-                new Record { Name = "Chris", Score = 24 },
-                new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 55
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 49
+                },
+                new Record
+                {
+                    Name = "Robert",
+                    Score = -100
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 24
+                },
+                new Record
+                {
+                    Name = "Prakash",
+                    Score = 9
+                },
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 25
+                }
             };
 
             Expression<Func<string, IEnumerable<int>, long>> resultSelector = null;
@@ -310,12 +382,36 @@ namespace System.Linq.Tests
         {
             Record[] source =
             {
-                new Record { Name = "Tim", Score = 55 },
-                new Record { Name = "Chris", Score = 49 },
-                new Record { Name = "Robert", Score = -100 },
-                new Record { Name = "Chris", Score = 24 },
-                new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 55
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 49
+                },
+                new Record
+                {
+                    Name = "Robert",
+                    Score = -100
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 24
+                },
+                new Record
+                {
+                    Name = "Prakash",
+                    Score = 9
+                },
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 25
+                }
             };
 
             Expression<Func<string, IEnumerable<int>, long>> resultSelector = null;
@@ -331,12 +427,36 @@ namespace System.Linq.Tests
         {
             Record[] source =
             {
-                new Record { Name = "Tim", Score = 55 },
-                new Record { Name = "Chris", Score = 49 },
-                new Record { Name = "Robert", Score = -100 },
-                new Record { Name = "Chris", Score = 24 },
-                new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 55
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 49
+                },
+                new Record
+                {
+                    Name = "Robert",
+                    Score = -100
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 24
+                },
+                new Record
+                {
+                    Name = "Prakash",
+                    Score = 9
+                },
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 25
+                }
             };
 
             Expression<Func<string, IEnumerable<Record>, long>> resultSelector = null;
@@ -352,7 +472,15 @@ namespace System.Linq.Tests
         {
             string[] key = { "Tim", "Tim", "Tim", "Tim" };
             int[] element = { 60, -10, 40, 100 };
-            var source = key.Zip(element, (k, e) => new Record { Name = k, Score = e });
+            var source = key.Zip(
+                element,
+                (k, e) =>
+                    new Record
+                    {
+                        Name = k,
+                        Score = e
+                    }
+            );
 
             Expression<Func<string, IEnumerable<Record>, long>> resultSelector = null;
 
@@ -385,12 +513,36 @@ namespace System.Linq.Tests
             int[] element = { 55, 25, 49, 24, -100, 9 };
             Record[] source =
             {
-                new Record { Name = "Tim", Score = 55 },
-                new Record { Name = "Chris", Score = 49 },
-                new Record { Name = "Robert", Score = -100 },
-                new Record { Name = "Chris", Score = 24 },
-                new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "miT", Score = 25 }
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 55
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 49
+                },
+                new Record
+                {
+                    Name = "Robert",
+                    Score = -100
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 24
+                },
+                new Record
+                {
+                    Name = "Prakash",
+                    Score = 9
+                },
+                new Record
+                {
+                    Name = "miT",
+                    Score = 25
+                }
             };
             long[] expected = { 240, 365, -600, 63 };
 
@@ -413,12 +565,36 @@ namespace System.Linq.Tests
             int[] element = { 55, 49, 9, -100, 24, 25 };
             Record[] source =
             {
-                new Record { Name = "Tim", Score = 55 },
-                new Record { Name = null, Score = 49 },
-                new Record { Name = "Robert", Score = -100 },
-                new Record { Name = "Chris", Score = 24 },
-                new Record { Name = null, Score = 9 },
-                new Record { Name = "miT", Score = 25 }
+                new Record
+                {
+                    Name = "Tim",
+                    Score = 55
+                },
+                new Record
+                {
+                    Name = null,
+                    Score = 49
+                },
+                new Record
+                {
+                    Name = "Robert",
+                    Score = -100
+                },
+                new Record
+                {
+                    Name = "Chris",
+                    Score = 24
+                },
+                new Record
+                {
+                    Name = null,
+                    Score = 9
+                },
+                new Record
+                {
+                    Name = "miT",
+                    Score = 25
+                }
             };
             long[] expected = { 165, 58, -600, 120, 75 };
 
@@ -438,7 +614,14 @@ namespace System.Linq.Tests
         public void SingleNonNullElement()
         {
             string[] key = { "Tim" };
-            Record[] source = { new Record { Name = key[0], Score = 60 } };
+            Record[] source =
+            {
+                new Record
+                {
+                    Name = key[0],
+                    Score = 60
+                }
+            };
 
             AssertGroupingCorrect(
                 key.AsQueryable(),
@@ -452,7 +635,15 @@ namespace System.Linq.Tests
         {
             string[] key = { "Tim", "Tim", "Tim", "Tim" };
             int[] scores = { 60, -10, 40, 100 };
-            var source = key.Zip(scores, (k, e) => new Record { Name = k, Score = e });
+            var source = key.Zip(
+                scores,
+                (k, e) =>
+                    new Record
+                    {
+                        Name = k,
+                        Score = e
+                    }
+            );
 
             AssertGroupingCorrect(
                 key.AsQueryable(),
@@ -469,10 +660,26 @@ namespace System.Linq.Tests
             long[] expected = { 570 };
             Record[] source =
             {
-                new Record { Name = "Tim", Score = element[0] },
-                new Record { Name = "Tim", Score = element[1] },
-                new Record { Name = "miT", Score = element[2] },
-                new Record { Name = "miT", Score = element[3] }
+                new Record
+                {
+                    Name = "Tim",
+                    Score = element[0]
+                },
+                new Record
+                {
+                    Name = "Tim",
+                    Score = element[1]
+                },
+                new Record
+                {
+                    Name = "miT",
+                    Score = element[2]
+                },
+                new Record
+                {
+                    Name = "miT",
+                    Score = element[3]
+                }
             };
 
             Assert.Equal(
@@ -492,10 +699,26 @@ namespace System.Linq.Tests
             int[] element = { 60, -10, 40, 100 };
             Record[] source =
             {
-                new Record { Name = "Tim", Score = element[0] },
-                new Record { Name = "Tim", Score = element[1] },
-                new Record { Name = "miT", Score = element[2] },
-                new Record { Name = "miT", Score = element[3] },
+                new Record
+                {
+                    Name = "Tim",
+                    Score = element[0]
+                },
+                new Record
+                {
+                    Name = "Tim",
+                    Score = element[1]
+                },
+                new Record
+                {
+                    Name = "miT",
+                    Score = element[2]
+                },
+                new Record
+                {
+                    Name = "miT",
+                    Score = element[3]
+                },
             };
 
             long[] expected = { 150, 420 };

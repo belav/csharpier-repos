@@ -1978,7 +1978,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                     eb.HasOne(e => e.EntityWithStringKey).WithOne();
 
                                     eb.HasData(
-                                        new EntityWithTwoProperties { AlternateId = 1, Id = -1 }
+                                        new EntityWithTwoProperties
+                                        {
+                                            AlternateId = 1,
+                                            Id = -1
+                                        }
                                     );
                                 }
                             );
@@ -2232,7 +2236,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                     eb.HasOne(e => e.EntityWithStringKey).WithOne();
 
                                     eb.HasData(
-                                        new EntityWithTwoProperties { AlternateId = 1, Id = -1 }
+                                        new EntityWithTwoProperties
+                                        {
+                                            AlternateId = 1,
+                                            Id = -1
+                                        }
                                     );
                                 }
                             );

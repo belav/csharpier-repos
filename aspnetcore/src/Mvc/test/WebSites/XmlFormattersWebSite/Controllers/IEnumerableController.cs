@@ -30,8 +30,16 @@ namespace XmlFormattersWebSite.Controllers
         {
             return new[]
             {
-                new Person() { Id = 10, Name = "Mike" },
-                new Person() { Id = 11, Name = "Jimmy" }
+                new Person()
+                {
+                    Id = 10,
+                    Name = "Mike"
+                },
+                new Person()
+                {
+                    Id = 11,
+                    Name = "Jimmy"
+                }
             };
         }
 

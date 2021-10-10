@@ -375,7 +375,11 @@ namespace System.Text.Json.Serialization.Tests
         public static void DictionaryObjectLoop()
         {
             Dictionary<string, Employee> root = new Dictionary<string, Employee>();
-            root["Angela"] = new Employee() { Name = "Angela", Contacts = root };
+            root["Angela"] = new Employee()
+            {
+                Name = "Angela",
+                Contacts = root
+            };
 
             string expected = JsonConvert.SerializeObject(
                 root,
@@ -639,7 +643,13 @@ namespace System.Text.Json.Serialization.Tests
         public static void ArrayObjectLoop()
         {
             List<Employee> root = new List<Employee>();
-            root.Add(new Employee() { Name = "Angela", Subordinates = root });
+            root.Add(
+                new Employee()
+                {
+                    Name = "Angela",
+                    Subordinates = root
+                }
+            );
 
             string expected = JsonConvert.SerializeObject(
                 root,

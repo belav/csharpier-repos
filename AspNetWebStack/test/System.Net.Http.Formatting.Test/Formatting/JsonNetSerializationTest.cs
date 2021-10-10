@@ -70,7 +70,14 @@ namespace System.Net.Http.Formatting
                         "\"4ed1cd44-11d7-4b27-b623-0b8b553c8906\""
                     },
                     // Structs
-                    { new Point() { x = 45, Y = -5 }, "{\"x\":45,\"Y\":-5}" },
+                    {
+                        new Point()
+                        {
+                            x = 45,
+                            Y = -5
+                        },
+                        "{\"x\":45,\"Y\":-5}"
+                    },
                     // Arrays
                     { new object[] {  }, "[]" },
                     { new int[] { 1, 2, 3 }, "[1,2,3]" },
@@ -78,8 +85,16 @@ namespace System.Net.Http.Formatting
                     {
                         new Point[]
                         {
-                            new Point() { x = 10, Y = 10 },
-                            new Point() { x = 20, Y = 20 }
+                            new Point()
+                            {
+                                x = 10,
+                                Y = 10
+                            },
+                            new Point()
+                            {
+                                x = 20,
+                                Y = 20
+                            }
                         },
                         "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
                     },
@@ -89,8 +104,16 @@ namespace System.Net.Http.Formatting
                     {
                         new List<Point>
                         {
-                            new Point() { x = 10, Y = 10 },
-                            new Point() { x = 20, Y = 20 }
+                            new Point()
+                            {
+                                x = 10,
+                                Y = 10
+                            },
+                            new Point()
+                            {
+                                x = 20,
+                                Y = 20
+                            }
                         },
                         "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
                     },
@@ -99,8 +122,16 @@ namespace System.Net.Http.Formatting
                     {
                         new MyList<Point>
                         {
-                            new Point() { x = 10, Y = 10 },
-                            new Point() { x = 20, Y = 20 }
+                            new Point()
+                            {
+                                x = 10,
+                                Y = 10
+                            },
+                            new Point()
+                            {
+                                x = 20,
+                                Y = 20
+                            }
                         },
                         "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
                     },
@@ -118,10 +149,22 @@ namespace System.Net.Http.Formatting
                     { new { Anon1 = 56, Anon2 = "foo" }, "{\"Anon1\":56,\"Anon2\":\"foo\"}" },
                     // Classes
                     {
-                        new DataContractType() { s = "foo", i = 49, NotAMember = "Error" },
+                        new DataContractType()
+                        {
+                            s = "foo",
+                            i = 49,
+                            NotAMember = "Error"
+                        },
                         "{\"s\":\"foo\",\"i\":49}"
                     },
-                    { new POCOType() { s = "foo", t = "Error" }, "{\"s\":\"foo\"}" },
+                    {
+                        new POCOType()
+                        {
+                            s = "foo",
+                            t = "Error"
+                        },
+                        "{\"s\":\"foo\"}"
+                    },
 #if !NETFX_CORE // Only publics are serialized in portable library
                     {
                         new SerializableType("protected")
@@ -196,7 +239,13 @@ namespace System.Net.Http.Formatting
                     { new ConsoleColor?(), "null", typeof(ConsoleColor?) },
                     { new int?(45), "45", typeof(int?) },
                     {
-                        new Point?(new Point() { x = 45, Y = -5 }),
+                        new Point?(
+                            new Point()
+                            {
+                                x = 45,
+                                Y = -5
+                            }
+                        ),
                         "{\"x\":45,\"Y\":-5}",
                         typeof(Point?)
                     },

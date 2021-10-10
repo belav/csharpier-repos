@@ -69,7 +69,11 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             _contents.Add(
-                new ContentInfoAsn { ContentType = Oids.Pkcs7Encrypted, Content = encrypted, }
+                new ContentInfoAsn
+                {
+                    ContentType = Oids.Pkcs7Encrypted,
+                    Content = encrypted,
+                }
             );
         }
 
@@ -125,7 +129,11 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             _contents.Add(
-                new ContentInfoAsn { ContentType = Oids.Pkcs7Encrypted, Content = encrypted, }
+                new ContentInfoAsn
+                {
+                    ContentType = Oids.Pkcs7Encrypted,
+                    Content = encrypted,
+                }
             );
         }
 

@@ -701,12 +701,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             public readonly Channel<ConnectionContext> ToServerAcceptQueue =
                 Channel.CreateUnbounded<ConnectionContext>(
-                    new UnboundedChannelOptions { SingleReader = true, SingleWriter = true }
+                    new UnboundedChannelOptions
+                    {
+                        SingleReader = true,
+                        SingleWriter = true
+                    }
                 );
 
             public readonly Channel<Http3ControlStream> ToClientAcceptQueue =
                 Channel.CreateUnbounded<Http3ControlStream>(
-                    new UnboundedChannelOptions { SingleReader = true, SingleWriter = true }
+                    new UnboundedChannelOptions
+                    {
+                        SingleReader = true,
+                        SingleWriter = true
+                    }
                 );
 
             private readonly Http3TestBase _testBase;

@@ -133,7 +133,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
 
             await Assert.ThrowsAsync<ArgumentException>("globals", () => fn());
             await Assert.ThrowsAsync<ArgumentException>("globals", () => fn(new object()));
-            Assert.Equal(4, fn(new Globals { X = 1, Y = 3 }).Result);
+            Assert.Equal(
+                4,
+                fn(
+                    new Globals
+                    {
+                        X = 1,
+                        Y = 3
+                    }
+                ).Result
+            );
         }
 
         [Fact]
@@ -336,7 +345,14 @@ throw e;",
         [Fact]
         public async Task TestRunScriptWithGlobals()
         {
-            var state = await CSharpScript.RunAsync("X + Y", globals: new Globals { X = 1, Y = 2 });
+            var state = await CSharpScript.RunAsync(
+                "X + Y",
+                globals: new Globals
+                {
+                    X = 1,
+                    Y = 2
+                }
+            );
             Assert.Equal(3, state.ReturnValue);
         }
 
@@ -344,7 +360,13 @@ throw e;",
         public async Task TestRunCreatedScriptWithExpectedGlobals()
         {
             var script = CSharpScript.Create("X + Y", globalsType: typeof(Globals));
-            var state = await script.RunAsync(new Globals { X = 1, Y = 2 });
+            var state = await script.RunAsync(
+                new Globals
+                {
+                    X = 1,
+                    Y = 2
+                }
+            );
             Assert.Equal(3, state.ReturnValue);
             Assert.Same(script, state.Script);
         }
@@ -357,7 +379,14 @@ throw e;",
             // Global variables passed to a script without a global type
             await Assert.ThrowsAsync<ArgumentException>(
                 "globals",
-                () => script.RunAsync(new Globals { X = 1, Y = 2 })
+                () =>
+                    script.RunAsync(
+                        new Globals
+                        {
+                            X = 1,
+                            Y = 2
+                        }
+                    )
             );
         }
 
@@ -442,7 +471,11 @@ throw e;",
         [Fact]
         public async Task ScriptVariables_Chain()
         {
-            var globals = new Globals { X = 10, Y = 20 };
+            var globals = new Globals
+            {
+                X = 10,
+                Y = 20
+            };
 
             var script = CSharpScript.Create("var a = '1';", globalsType: globals.GetType())
                 .ContinueWith("var b = 2u;")

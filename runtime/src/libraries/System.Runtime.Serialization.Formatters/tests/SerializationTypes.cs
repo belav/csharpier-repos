@@ -329,7 +329,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
         public BasicISerializableObject(int value1, string value2)
         {
-            _data = new NonSerializablePair<int, string> { Value1 = value1, Value2 = value2 };
+            _data = new NonSerializablePair<int, string>
+            {
+                Value1 = value1,
+                Value2 = value2
+            };
         }
 
         public BasicISerializableObject(SerializationInfo info, StreamingContext context)

@@ -148,14 +148,30 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             CompareTest(
                 typeof(JustAStruct),
-                new JustAStruct { A = 1, B = "B1" },
-                new JustAStruct { A = 1, B = "B2" }
+                new JustAStruct
+                {
+                    A = 1,
+                    B = "B1"
+                },
+                new JustAStruct
+                {
+                    A = 1,
+                    B = "B2"
+                }
             );
 
             CompareTest(
                 typeof(JustAStruct),
-                new JustAStruct { A = 1, B = "B" },
-                new JustAStruct { A = 2, B = "B" }
+                new JustAStruct
+                {
+                    A = 1,
+                    B = "B"
+                },
+                new JustAStruct
+                {
+                    A = 2,
+                    B = "B"
+                }
             );
         }
 
@@ -170,8 +186,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             CompareTest(
                 typeof(JustAStructWithEquality),
-                new JustAStructWithEquality { A = 1, B = "B" },
-                new JustAStructWithEquality { A = 2, B = "B" }
+                new JustAStructWithEquality
+                {
+                    A = 1,
+                    B = "B"
+                },
+                new JustAStructWithEquality
+                {
+                    A = 2,
+                    B = "B"
+                }
             );
         }
 
@@ -193,8 +217,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             CompareTest(
                 typeof(JustAStructWithEqualityOperators),
-                new JustAStructWithEqualityOperators { A = 1, B = "B" },
-                new JustAStructWithEqualityOperators { A = 2, B = "B" }
+                new JustAStructWithEqualityOperators
+                {
+                    A = 1,
+                    B = "B"
+                },
+                new JustAStructWithEqualityOperators
+                {
+                    A = 2,
+                    B = "B"
+                }
             );
         }
 

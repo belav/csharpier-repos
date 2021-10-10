@@ -28,8 +28,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(OnXElement)
                 {
-                    Attribute = new VariationAttribute("(BVT)XElement: Replace with multiple nodes")
-                    {
+                    Attribute = new VariationAttribute(
+                        "(BVT)XElement: Replace with multiple nodes"
+                    ) {
                         Params = new object[]
                         {
                             2,

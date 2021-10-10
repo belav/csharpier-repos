@@ -74,7 +74,11 @@ namespace N
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Inner getInner()
         {
-            return new Inner() { x = 7, y = 33 };
+            return new Inner()
+            {
+                x = 7,
+                y = 33
+            };
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]

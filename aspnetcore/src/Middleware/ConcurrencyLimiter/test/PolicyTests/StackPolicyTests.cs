@@ -15,7 +15,11 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests
         {
             var stack = new StackPolicy(
                 Options.Create(
-                    new QueuePolicyOptions { MaxConcurrentRequests = 0, RequestQueueLimit = 2, }
+                    new QueuePolicyOptions
+                    {
+                        MaxConcurrentRequests = 0,
+                        RequestQueueLimit = 2,
+                    }
                 )
             );
 
@@ -33,7 +37,11 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests
         {
             var stack = new StackPolicy(
                 Options.Create(
-                    new QueuePolicyOptions { MaxConcurrentRequests = 0, RequestQueueLimit = 3, }
+                    new QueuePolicyOptions
+                    {
+                        MaxConcurrentRequests = 0,
+                        RequestQueueLimit = 3,
+                    }
                 )
             );
 
@@ -59,7 +67,11 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests
         {
             var stack = new StackPolicy(
                 Options.Create(
-                    new QueuePolicyOptions { MaxConcurrentRequests = 2, RequestQueueLimit = 2, }
+                    new QueuePolicyOptions
+                    {
+                        MaxConcurrentRequests = 2,
+                        RequestQueueLimit = 2,
+                    }
                 )
             );
 
@@ -78,7 +90,11 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests
         {
             var stack = new StackPolicy(
                 Options.Create(
-                    new QueuePolicyOptions { MaxConcurrentRequests = 1, RequestQueueLimit = 2, }
+                    new QueuePolicyOptions
+                    {
+                        MaxConcurrentRequests = 1,
+                        RequestQueueLimit = 2,
+                    }
                 )
             );
 
@@ -102,7 +118,11 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests
         {
             var stack = new StackPolicy(
                 Options.Create(
-                    new QueuePolicyOptions { MaxConcurrentRequests = 0, RequestQueueLimit = 4, }
+                    new QueuePolicyOptions
+                    {
+                        MaxConcurrentRequests = 0,
+                        RequestQueueLimit = 4,
+                    }
                 )
             );
 
@@ -120,7 +140,11 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests
         {
             var stack = new StackPolicy(
                 Options.Create(
-                    new QueuePolicyOptions { MaxConcurrentRequests = 1, RequestQueueLimit = 4, }
+                    new QueuePolicyOptions
+                    {
+                        MaxConcurrentRequests = 1,
+                        RequestQueueLimit = 4,
+                    }
                 )
             );
 

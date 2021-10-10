@@ -214,10 +214,26 @@ namespace Microsoft.EntityFrameworkCore.Query
                 new MethodCallChainFilter { Tenant = 2 },
                 new ComplexFilter { IsEnabled = true },
                 new ComplexFilter { IsEnabled = false },
-                new ShortCircuitFilter { IsDeleted = false, IsModerated = false },
-                new ShortCircuitFilter { IsDeleted = true, IsModerated = false },
-                new ShortCircuitFilter { IsDeleted = false, IsModerated = true },
-                new ShortCircuitFilter { IsDeleted = true, IsModerated = true },
+                new ShortCircuitFilter
+                {
+                    IsDeleted = false,
+                    IsModerated = false
+                },
+                new ShortCircuitFilter
+                {
+                    IsDeleted = true,
+                    IsModerated = false
+                },
+                new ShortCircuitFilter
+                {
+                    IsDeleted = false,
+                    IsModerated = true
+                },
+                new ShortCircuitFilter
+                {
+                    IsDeleted = true,
+                    IsModerated = true
+                },
                 new DbContextStaticMemberFilter { UserId = 1 },
                 new DbContextStaticMemberFilter { UserId = 2 },
                 new DbContextStaticMemberFilter { UserId = 3 },
@@ -250,11 +266,31 @@ namespace Microsoft.EntityFrameworkCore.Query
                     Dependents = new List<DependentSetFilter> { new(), new() }
                 },
                 new PrincipalSetFilter(),
-                new MultiContextFilter { BossId = 1, IsEnabled = true },
-                new MultiContextFilter { BossId = 1, IsEnabled = false },
-                new MultiContextFilter { BossId = 1, IsEnabled = true },
-                new MultiContextFilter { BossId = 2, IsEnabled = true },
-                new MultiContextFilter { BossId = 2, IsEnabled = false }
+                new MultiContextFilter
+                {
+                    BossId = 1,
+                    IsEnabled = true
+                },
+                new MultiContextFilter
+                {
+                    BossId = 1,
+                    IsEnabled = false
+                },
+                new MultiContextFilter
+                {
+                    BossId = 1,
+                    IsEnabled = true
+                },
+                new MultiContextFilter
+                {
+                    BossId = 2,
+                    IsEnabled = true
+                },
+                new MultiContextFilter
+                {
+                    BossId = 2,
+                    IsEnabled = false
+                }
             );
 
             context.SaveChanges();

@@ -29,7 +29,13 @@ namespace Microsoft.AspNetCore.Identity.InMemory
             var roleEntity = _roles.Values.SingleOrDefault(r => r.NormalizedName == role);
             if (roleEntity != null)
             {
-                user.Roles.Add(new PocoUserRole { RoleId = roleEntity.Id, UserId = user.Id });
+                user.Roles.Add(
+                    new PocoUserRole
+                    {
+                        RoleId = roleEntity.Id,
+                        UserId = user.Id
+                    }
+                );
             }
             return Task.FromResult(0);
         }

@@ -727,7 +727,13 @@ public class Managed
                 case StructID.HFAId:
                     OverlappingHFA hfa = new OverlappingHFA
                     {
-                        hfa = new HFA { f1 = 2.0f, f2 = 10.5f, f3 = 15.2f, f4 = 0.12f }
+                        hfa = new HFA
+                        {
+                            f1 = 2.0f,
+                            f2 = 10.5f,
+                            f3 = 15.2f,
+                            f4 = 0.12f
+                        }
                     };
 
                     float expected = hfa.hfa.f1 * hfa.hfa.f2 * hfa.hfa.f3 * hfa.hfa.f4;

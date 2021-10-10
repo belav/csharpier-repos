@@ -66,7 +66,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string fixedSource
         )
         {
-            var test = new Test { TestCode = source, FixedCode = fixedSource, };
+            var test = new Test
+            {
+                TestCode = source,
+                FixedCode = fixedSource,
+            };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync();

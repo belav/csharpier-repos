@@ -342,7 +342,11 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             // Arrange
             var actionDescriptor = GetActionDescriptor();
             actionDescriptor.Parameters.Add(
-                new ControllerParameterDescriptor { Name = "foo", ParameterType = typeof(Person) }
+                new ControllerParameterDescriptor
+                {
+                    Name = "foo",
+                    ParameterType = typeof(Person)
+                }
             );
 
             var controllerContext = GetControllerContext(actionDescriptor);
@@ -1240,7 +1244,11 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                         else if (descriptor.Name == "transferInfo")
                         {
                             result = ModelBindingResult.Success(
-                                new TransferInfo { AccountId = 40, Amount = 250.0 }
+                                new TransferInfo
+                                {
+                                    AccountId = 40,
+                                    Amount = 250.0
+                                }
                             );
                         }
                         else
@@ -1289,7 +1297,11 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 BoundProperties = new List<ParameterDescriptor>(),
                 Parameters = new[]
                 {
-                    new ParameterDescriptor { Name = "name", ParameterType = typeof(string) }
+                    new ParameterDescriptor
+                    {
+                        Name = "name",
+                        ParameterType = typeof(string)
+                    }
                 },
             };
             var modelMetadataProvider = new EmptyModelMetadataProvider();

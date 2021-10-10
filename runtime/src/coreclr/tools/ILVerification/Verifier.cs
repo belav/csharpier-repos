@@ -266,7 +266,11 @@ namespace ILVerify
             void reportException(Exception e)
             {
                 builder.Add(
-                    new VerificationResult() { Method = methodHandle, Message = e.Message }
+                    new VerificationResult()
+                    {
+                        Method = methodHandle,
+                        Message = e.Message
+                    }
                 );
             }
 
@@ -349,7 +353,13 @@ namespace ILVerify
 
             void reportException(Exception e)
             {
-                builder.Add(new VerificationResult() { Type = typeHandle, Message = e.Message });
+                builder.Add(
+                    new VerificationResult()
+                    {
+                        Type = typeHandle,
+                        Message = e.Message
+                    }
+                );
             }
         }
 

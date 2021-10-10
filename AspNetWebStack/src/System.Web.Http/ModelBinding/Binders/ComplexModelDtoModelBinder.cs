@@ -20,8 +20,9 @@ namespace System.Web.Http.ModelBinding.Binders
             ComplexModelDto dto = (ComplexModelDto)bindingContext.Model;
             foreach (ModelMetadata propertyMetadata in dto.PropertyMetadata)
             {
-                ModelBindingContext propertyBindingContext = new ModelBindingContext(bindingContext)
-                {
+                ModelBindingContext propertyBindingContext = new ModelBindingContext(
+                    bindingContext
+                ) {
                     ModelMetadata = propertyMetadata,
                     ModelName = ModelBindingHelper.CreatePropertyModelName(
                         bindingContext.ModelName,

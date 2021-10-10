@@ -250,7 +250,11 @@ namespace System.Text.Json.Serialization.Tests
             MyGuidArray = new Guid[] { new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6") };
             MyUriArray = new Uri[] { new Uri("https://github.com/dotnet/runtime") };
             MyEnumArray = new SampleEnum[] { SampleEnum.Two };
-            MySimpleStruct = new SimpleStruct { One = 11, Two = 1.9999 };
+            MySimpleStruct = new SimpleStruct
+            {
+                One = 11,
+                Two = 1.9999
+            };
             MySimpleTestStruct = new SimpleTestStruct
             {
                 MyInt64 = 64,

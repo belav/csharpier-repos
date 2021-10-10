@@ -56,7 +56,11 @@ namespace System.Diagnostics
             // on the type without exception
             object proxyInstance = Activator.CreateInstance(proxyType, obj);
             IEnumerable<PropertyInfo> properties = GetDebuggerVisibleProperties(proxyType);
-            return new DebuggerAttributeInfo { Instance = proxyInstance, Properties = properties };
+            return new DebuggerAttributeInfo
+            {
+                Instance = proxyInstance,
+                Properties = properties
+            };
         }
 
         public static DebuggerBrowsableState? GetDebuggerBrowsableState(MemberInfo info)

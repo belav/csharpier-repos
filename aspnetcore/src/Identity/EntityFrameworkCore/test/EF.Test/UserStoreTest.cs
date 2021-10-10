@@ -37,7 +37,13 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             using (var db = CreateContext())
             {
                 var guid = Guid.NewGuid().ToString();
-                db.Users.Add(new IdentityUser { Id = guid, UserName = guid });
+                db.Users.Add(
+                    new IdentityUser
+                    {
+                        Id = guid,
+                        UserName = guid
+                    }
+                );
                 db.SaveChanges();
                 Assert.True(db.Users.Any(u => u.UserName == guid));
                 Assert.NotNull(db.Users.FirstOrDefault(u => u.UserName == guid));

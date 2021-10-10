@@ -94,7 +94,11 @@ namespace AutoMapper.UnitTests.Bug
             {
                 var source = new MapFrom
                 {
-                    Element = new MapFromElementDerived { Prop = "PROP1", Prop2 = "PROP2" }
+                    Element = new MapFromElementDerived
+                    {
+                        Prop = "PROP1",
+                        Prop2 = "PROP2"
+                    }
                 };
 
                 _destination = Mapper.Map<MapTo>(source);

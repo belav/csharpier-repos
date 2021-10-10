@@ -80,7 +80,13 @@ using System;
 
             var node = new CSharpExpressionIntermediateNode();
             var builder = IntermediateNodeBuilder.Create(node);
-            builder.Add(new IntermediateToken() { Content = "i++", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "i++",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             // Act
             writer.WriteCSharpExpression(context, node);
@@ -108,7 +114,13 @@ using System;
                 Source = new SourceSpan("test.cshtml", 0, 0, 0, 3),
             };
             var builder = IntermediateNodeBuilder.Create(node);
-            builder.Add(new IntermediateToken() { Content = "i++", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "i++",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             // Act
             writer.WriteCSharpExpression(context, node);
@@ -140,9 +152,21 @@ Test(i++);
 
             var node = new CSharpExpressionIntermediateNode();
             var builder = IntermediateNodeBuilder.Create(node);
-            builder.Add(new IntermediateToken() { Content = "i", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "i",
+                    Kind = TokenKind.CSharp,
+                }
+            );
             builder.Add(new MyExtensionIntermediateNode());
-            builder.Add(new IntermediateToken() { Content = "++", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "++",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             // Act
             writer.WriteCSharpExpression(context, node);
@@ -171,9 +195,21 @@ Test(i++);
                 Source = new SourceSpan("test.cshtml", 8, 0, 8, 3),
             };
             var builder = IntermediateNodeBuilder.Create(node);
-            builder.Add(new IntermediateToken() { Content = "i", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "i",
+                    Kind = TokenKind.CSharp,
+                }
+            );
             builder.Add(new MyExtensionIntermediateNode());
-            builder.Add(new IntermediateToken() { Content = "++", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "++",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             // Act
             writer.WriteCSharpExpression(context, node);
@@ -206,7 +242,13 @@ Test(i++);
 
             var node = new CSharpCodeIntermediateNode();
             IntermediateNodeBuilder.Create(node)
-                .Add(new IntermediateToken() { Kind = TokenKind.CSharp, Content = "  \t" });
+                .Add(
+                    new IntermediateToken()
+                    {
+                        Kind = TokenKind.CSharp,
+                        Content = "  \t"
+                    }
+                );
 
             // Act
             writer.WriteCSharpCode(context, node);
@@ -227,7 +269,11 @@ Test(i++);
             var node = new CSharpCodeIntermediateNode();
             IntermediateNodeBuilder.Create(node)
                 .Add(
-                    new IntermediateToken() { Kind = TokenKind.CSharp, Content = "if (true) { }" }
+                    new IntermediateToken()
+                    {
+                        Kind = TokenKind.CSharp,
+                        Content = "if (true) { }"
+                    }
                 );
 
             // Act
@@ -257,7 +303,11 @@ Test(i++);
             };
             IntermediateNodeBuilder.Create(node)
                 .Add(
-                    new IntermediateToken() { Kind = TokenKind.CSharp, Content = "if (true) { }", }
+                    new IntermediateToken()
+                    {
+                        Kind = TokenKind.CSharp,
+                        Content = "if (true) { }",
+                    }
                 );
 
             // Act
@@ -420,7 +470,11 @@ WriteLiteral(""👧‍👧"");
 
             var node = new HtmlContentIntermediateNode();
             node.Children.Add(
-                new IntermediateToken() { Content = "SomeContent", Kind = TokenKind.Html, }
+                new IntermediateToken()
+                {
+                    Content = "SomeContent",
+                    Kind = TokenKind.Html,
+                }
             );
 
             // Act
@@ -446,7 +500,11 @@ WriteLiteral(""👧‍👧"");
 
             var node = new HtmlContentIntermediateNode();
             node.Children.Add(
-                new IntermediateToken() { Content = new string('*', 2000), Kind = TokenKind.Html, }
+                new IntermediateToken()
+                {
+                    Content = new string('*', 2000),
+                    Kind = TokenKind.Html,
+                }
             );
 
             // Act

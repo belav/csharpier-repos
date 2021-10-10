@@ -870,7 +870,11 @@ namespace System.Reflection.Tests
             Verify(assemblyNameFromStr);
             Verify(new AssemblyName(assemblyNameFromStr.FullName));
 
-            assemblyNameFromStr = new AssemblyName() { Name = "a", Version = expectedVersion };
+            assemblyNameFromStr = new AssemblyName()
+            {
+                Name = "a",
+                Version = expectedVersion
+            };
             Verify(assemblyNameFromStr);
             Verify(new AssemblyName(assemblyNameFromStr.FullName));
         }

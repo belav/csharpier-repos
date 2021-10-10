@@ -259,7 +259,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         /// <returns>The created <see cref="ContentResult"/> object for the response.</returns>
         public virtual ContentResult Content(string content, MediaTypeHeaderValue contentType)
         {
-            return new ContentResult { Content = content, ContentType = contentType?.ToString() };
+            return new ContentResult
+            {
+                Content = content,
+                ContentType = contentType?.ToString()
+            };
         }
 
         /// <summary>
@@ -1336,7 +1340,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 Model = model,
             };
 
-            return new PartialViewResult { ViewName = viewName, ViewData = viewData };
+            return new PartialViewResult
+            {
+                ViewName = viewName,
+                ViewData = viewData
+            };
         }
 
         #region ViewComponentResult

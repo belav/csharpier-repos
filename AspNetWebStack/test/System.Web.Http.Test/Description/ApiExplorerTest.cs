@@ -158,7 +158,11 @@ namespace System.Web.Http.Description
             parameterDescriptorMock.SetupGet(p => p.ParameterType).Returns(typeof(ClassWithId));
             List<ApiParameterDescription> descriptions = new List<ApiParameterDescription>()
             {
-                new ApiParameterDescription() { Source = ApiParameterSource.FromUri, Name = "id" },
+                new ApiParameterDescription()
+                {
+                    Source = ApiParameterSource.FromUri,
+                    Name = "id"
+                },
                 new ApiParameterDescription()
                 {
                     Source = ApiParameterSource.FromUri,

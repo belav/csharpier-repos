@@ -828,7 +828,13 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void WritingScopes_LogsExpectedMessage(ConsoleLoggerFormat format)
         {
             // Arrange
-            var t = SetUp(new ConsoleLoggerOptions { IncludeScopes = true, Format = format });
+            var t = SetUp(
+                new ConsoleLoggerOptions
+                {
+                    IncludeScopes = true,
+                    Format = format
+                }
+            );
             var logger = t.Logger;
             var sink = t.Sink;
             var level = LogLevel.Information;
@@ -901,7 +907,13 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void WritingNestedScope_LogsNullScopeName(ConsoleLoggerFormat format)
         {
             // Arrange
-            var t = SetUp(new ConsoleLoggerOptions { IncludeScopes = true, Format = format });
+            var t = SetUp(
+                new ConsoleLoggerOptions
+                {
+                    IncludeScopes = true,
+                    Format = format
+                }
+            );
             var logger = t.Logger;
             var sink = t.Sink;
             var level = LogLevel.Information;
@@ -974,7 +986,13 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void WritingNestedScopes_LogsExpectedMessage(ConsoleLoggerFormat format)
         {
             // Arrange
-            var t = SetUp(new ConsoleLoggerOptions { IncludeScopes = true, Format = format });
+            var t = SetUp(
+                new ConsoleLoggerOptions
+                {
+                    IncludeScopes = true,
+                    Format = format
+                }
+            );
             var logger = t.Logger;
             var sink = t.Sink;
             var level = LogLevel.Information;
@@ -1054,7 +1072,13 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void WritingMultipleScopes_LogsExpectedMessage(ConsoleLoggerFormat format)
         {
             // Arrange
-            var t = SetUp(new ConsoleLoggerOptions { IncludeScopes = true, Format = format });
+            var t = SetUp(
+                new ConsoleLoggerOptions
+                {
+                    IncludeScopes = true,
+                    Format = format
+                }
+            );
             var logger = t.Logger;
             var sink = t.Sink;
             var level = LogLevel.Information;

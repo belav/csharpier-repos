@@ -574,7 +574,11 @@ acPiMCuFTnRSFYAhozpmsqoLyTREqwIhAMLJlZTGjEB2N+sEazH5ToEczQzKqp7t
 
         private static RSAParameters ToPublic(this RSAParameters rsaParams)
         {
-            return new RSAParameters { Exponent = rsaParams.Exponent, Modulus = rsaParams.Modulus };
+            return new RSAParameters
+            {
+                Exponent = rsaParams.Exponent,
+                Modulus = rsaParams.Modulus
+            };
         }
     }
 }

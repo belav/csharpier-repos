@@ -223,7 +223,11 @@ namespace System.DirectoryServices.Tests
         [Fact]
         public void Offset_SetWithApproximateTotal_SetsTargetPercentage()
         {
-            var listView = new DirectoryVirtualListView { ApproximateTotal = 200, Offset = 50 };
+            var listView = new DirectoryVirtualListView
+            {
+                ApproximateTotal = 200,
+                Offset = 50
+            };
             Assert.Equal(50, listView.Offset);
             Assert.Equal(25, listView.TargetPercentage);
         }

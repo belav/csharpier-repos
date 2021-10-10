@@ -121,8 +121,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void GetDescriptors_CopiesRouteValuesFromModel()
         {
             // Arrange
-            var model = new PageRouteModel("/Areas/Accounts/Pages/Test.cshtml", "/Test", "Accounts")
-            {
+            var model = new PageRouteModel(
+                "/Areas/Accounts/Pages/Test.cshtml",
+                "/Test",
+                "Accounts"
+            ) {
                 RouteValues = { { "page", "/Test" }, { "area", "Accounts" }, },
                 Selectors =
                 {
@@ -172,8 +175,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var expected = Mock.Of<IActionConstraint>();
-            var model = new PageRouteModel("/Areas/Accounts/Pages/Test.cshtml", "/Test", "Accounts")
-            {
+            var model = new PageRouteModel(
+                "/Areas/Accounts/Pages/Test.cshtml",
+                "/Test",
+                "Accounts"
+            ) {
                 Selectors =
                 {
                     new SelectorModel

@@ -316,8 +316,16 @@ namespace System.CommandLine.Tests.Help
             var commandName = "the-command";
             var visibleArgName = "visible";
             var command = new Command(commandName, "Does things");
-            var hiddenArg = new Argument<int> { Name = "hidden", IsHidden = true };
-            var visibleArg = new Argument<int> { Name = visibleArgName, IsHidden = false };
+            var hiddenArg = new Argument<int>
+            {
+                Name = "hidden",
+                IsHidden = true
+            };
+            var visibleArg = new Argument<int>
+            {
+                Name = visibleArgName,
+                IsHidden = false
+            };
             command.AddArgument(hiddenArg);
             command.AddArgument(visibleArg);
 
@@ -361,7 +369,11 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new Command("the-command", "command help")
             {
-                new Argument { Name = "arg command name", Description = "test" }
+                new Argument
+                {
+                    Name = "arg command name",
+                    Description = "test"
+                }
             };
 
             _helpBuilder.Write(command);
@@ -618,7 +630,11 @@ namespace System.CommandLine.Tests.Help
 
             var command = new RootCommand()
             {
-                new Argument { Name = name, Description = description }
+                new Argument
+                {
+                    Name = name,
+                    Description = description
+                }
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -643,7 +659,11 @@ namespace System.CommandLine.Tests.Help
 
             var command = new Command("outer", "Help text for the outer command")
             {
-                new Argument { Description = description, ArgumentType = type }
+                new Argument
+                {
+                    Description = description,
+                    ArgumentType = type
+                }
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -664,7 +684,11 @@ namespace System.CommandLine.Tests.Help
 
             var command = new Command("outer", "Help text for the outer command")
             {
-                new Argument { Description = description, ArgumentType = type }
+                new Argument
+                {
+                    Description = description,
+                    ArgumentType = type
+                }
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -1329,8 +1353,16 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new Command("the-command", "Does things.");
             var subCommand = new Command("the-subcommand");
-            var hidden = new Argument<int>() { Name = "the-hidden", IsHidden = true };
-            var visible = new Argument<int>() { Name = "the-visible", IsHidden = false };
+            var hidden = new Argument<int>()
+            {
+                Name = "the-hidden",
+                IsHidden = true
+            };
+            var visible = new Argument<int>()
+            {
+                Name = "the-visible",
+                IsHidden = false
+            };
             subCommand.AddArgument(hidden);
             subCommand.AddArgument(visible);
             command.AddCommand(subCommand);

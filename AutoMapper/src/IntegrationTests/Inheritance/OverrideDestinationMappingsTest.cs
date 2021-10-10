@@ -36,7 +36,11 @@ namespace AutoMapper.IntegrationTests.Net4
                             Id = 2,
                             Child = new ChildEntity { SomeValue = "Jimmy Bogard" }
                         },
-                        new Entity { Id = 3, Child = new ChildEntity { SomeValue = "Bill Gates" } }
+                        new Entity
+                        {
+                            Id = 3,
+                            Child = new ChildEntity { SomeValue = "Bill Gates" }
+                        }
                     }
                 );
                 base.Seed(context);

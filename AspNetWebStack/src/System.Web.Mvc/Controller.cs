@@ -1201,7 +1201,12 @@ namespace System.Web.Mvc
                 ViewData.Model = model;
             }
 
-            return new ViewResult { View = view, ViewData = ViewData, TempData = TempData };
+            return new ViewResult
+            {
+                View = view,
+                ViewData = ViewData,
+                TempData = TempData
+            };
         }
 
         IAsyncResult IAsyncController.BeginExecute(

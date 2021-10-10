@@ -648,7 +648,11 @@ namespace System.Drawing.Printing.Tests
         public void SetHdevmode_IntPtr_Success()
         {
             string printerName = GetNameOfTestPrinterSuitableForDevModeTesting();
-            var printerSettings = new PrinterSettings() { PrinterName = printerName, Copies = 3 };
+            var printerSettings = new PrinterSettings()
+            {
+                PrinterName = printerName,
+                Copies = 3
+            };
             var newPrinterSettings = new PrinterSettings()
             {
                 PrinterName = printerName,

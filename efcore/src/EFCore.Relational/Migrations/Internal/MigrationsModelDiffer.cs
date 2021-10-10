@@ -795,7 +795,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 yield break;
             }
 
-            var operation = new DropTableOperation { Schema = source.Schema, Name = source.Name };
+            var operation = new DropTableOperation
+            {
+                Schema = source.Schema,
+                Name = source.Name
+            };
             operation.AddAnnotations(MigrationsAnnotations.ForRemove(source));
 
             diffContext.AddDrop(source, operation);

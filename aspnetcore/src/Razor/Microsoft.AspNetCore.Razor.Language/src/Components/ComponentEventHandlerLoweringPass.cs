@@ -198,7 +198,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         $"{ComponentsApi.EventCallback.FactoryAccessor}.{ComponentsApi.EventCallbackFactory.CreateMethod}<{eventArgsType}>(this, ",
                     Kind = TokenKind.CSharp
                 },
-                new IntermediateToken() { Content = $")", Kind = TokenKind.CSharp }
+                new IntermediateToken()
+                {
+                    Content = $")",
+                    Kind = TokenKind.CSharp
+                }
             };
 
             for (var i = 0; i < original.Count; i++)
@@ -269,7 +273,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 );
                 return new[]
                 {
-                    new IntermediateToken() { Kind = TokenKind.CSharp, Content = string.Empty, },
+                    new IntermediateToken()
+                    {
+                        Kind = TokenKind.CSharp,
+                        Content = string.Empty,
+                    },
                 };
             }
 
@@ -288,7 +296,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     + "\"";
                 return new[]
                 {
-                    new IntermediateToken() { Content = content, Kind = TokenKind.CSharp, }
+                    new IntermediateToken()
+                    {
+                        Content = content,
+                        Kind = TokenKind.CSharp,
+                    }
                 };
             }
             else

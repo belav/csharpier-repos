@@ -71,7 +71,11 @@ namespace Microsoft.AspNetCore.Routing
                 }
             }
 
-            return new RouteValueDictionary() { _arrayStorage = items!, _count = start, };
+            return new RouteValueDictionary()
+            {
+                _arrayStorage = items!,
+                _count = start,
+            };
         }
 
         /// <summary>

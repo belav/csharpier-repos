@@ -691,10 +691,18 @@ namespace System.CodeDom.Compiler.Tests
                 }
             );
             ns.Types.Add(
-                new CodeTypeDeclaration("PartialClass") { IsClass = true, IsPartial = true }
+                new CodeTypeDeclaration("PartialClass")
+                {
+                    IsClass = true,
+                    IsPartial = true
+                }
             );
             ns.Types.Add(
-                new CodeTypeDeclaration("PartialClass") { IsClass = true, IsPartial = true }
+                new CodeTypeDeclaration("PartialClass")
+                {
+                    IsClass = true,
+                    IsPartial = true
+                }
             );
 
             AssertEqual(

@@ -53,7 +53,14 @@ namespace System.Diagnostics.Tests
                 var result = new List<KeyValuePair<string, object>>();
                 using (listener.Subscribe(new ObserverToList<TelemData>(result)))
                 {
-                    source.Write("StructPayload", new Payload() { Name = "Hi", Id = 67 });
+                    source.Write(
+                        "StructPayload",
+                        new Payload()
+                        {
+                            Name = "Hi",
+                            Id = 67
+                        }
+                    );
                     Assert.Equal(1, result.Count);
                     Assert.Equal("StructPayload", result[0].Key);
                     var payload = (Payload)result[0].Value;
@@ -62,7 +69,14 @@ namespace System.Diagnostics.Tests
                     Assert.Equal("Hi", payload.Name);
                 }
 
-                source.Write("StructPayload", new Payload() { Name = "Hi", Id = 67 });
+                source.Write(
+                    "StructPayload",
+                    new Payload()
+                    {
+                        Name = "Hi",
+                        Id = 67
+                    }
+                );
                 Assert.Equal(1, result.Count);
             }
         }

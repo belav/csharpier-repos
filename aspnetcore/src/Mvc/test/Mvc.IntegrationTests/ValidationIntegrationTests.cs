@@ -2023,7 +2023,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 BindingInfo = new BindingInfo { BindingSource = BindingSource.Body },
             };
 
-            var input = new Order12 { Id = 10, OrderFile = new byte[40], };
+            var input = new Order12
+            {
+                Id = 10,
+                OrderFile = new byte[40],
+            };
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>

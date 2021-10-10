@@ -311,7 +311,15 @@ namespace System.Linq.Tests
             };
 
             var memberships = Enumerable.Range(0, 50)
-                .Select(i => new Membership { Id = i, Role = roles[i % 3], CountMe = i % 3 == 0 });
+                .Select(
+                    i =>
+                        new Membership
+                        {
+                            Id = i,
+                            Role = roles[i % 3],
+                            CountMe = i % 3 == 0
+                        }
+                );
 
             //Run actual test
             var grouping = memberships.GroupBy(
@@ -341,9 +349,24 @@ namespace System.Linq.Tests
 
             var expected = new[]
             {
-                new RoleMetadata { Role = new Role { Id = 1 }, CountA = 17, CountrB = 0 },
-                new RoleMetadata { Role = new Role { Id = 2 }, CountA = 0, CountrB = 17 },
-                new RoleMetadata { Role = new Role { Id = 3 }, CountA = 0, CountrB = 16 }
+                new RoleMetadata
+                {
+                    Role = new Role { Id = 1 },
+                    CountA = 17,
+                    CountrB = 0
+                },
+                new RoleMetadata
+                {
+                    Role = new Role { Id = 2 },
+                    CountA = 0,
+                    CountrB = 17
+                },
+                new RoleMetadata
+                {
+                    Role = new Role { Id = 3 },
+                    CountA = 0,
+                    CountrB = 16
+                }
             };
 
             Assert.Equal(expected, result);

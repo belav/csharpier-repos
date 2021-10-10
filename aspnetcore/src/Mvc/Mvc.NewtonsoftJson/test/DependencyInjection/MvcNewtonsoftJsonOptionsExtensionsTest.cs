@@ -84,7 +84,11 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var options = CreateDefaultMvcJsonOptions().UseCamelCasing(processDictionaryKeys: true);
-            var dictionary = new Dictionary<string, int> { ["HelloWorld"] = 1, ["HELLOWORLD"] = 2 };
+            var dictionary = new Dictionary<string, int>
+            {
+                ["HelloWorld"] = 1,
+                ["HELLOWORLD"] = 2
+            };
             var expected = "{\"helloWorld\":1,\"helloworld\":2}";
 
             // Act

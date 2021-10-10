@@ -452,8 +452,16 @@ namespace AutoMapper.UnitTests
                 {
                     Values = new List<DestinationValuePair>
                     {
-                        new DestinationValuePair { Key = "Key1", Value = "Value1" },
-                        new DestinationValuePair { Key = "Key2", Value = "Value2" }
+                        new DestinationValuePair
+                        {
+                            Key = "Key1",
+                            Value = "Value1"
+                        },
+                        new DestinationValuePair
+                        {
+                            Key = "Key2",
+                            Value = "Value2"
+                        }
                     }.ToArray()
                 };
 
@@ -530,8 +538,16 @@ namespace AutoMapper.UnitTests
             {
                 Values = new List<DestinationValuePair>
                 {
-                    new DestinationValuePair { Key = "Key1", Value = "Value1" },
-                    new DestinationValuePair { Key = "Key2", Value = "Value2" }
+                    new DestinationValuePair
+                    {
+                        Key = "Key1",
+                        Value = "Value1"
+                    },
+                    new DestinationValuePair
+                    {
+                        Key = "Key2",
+                        Value = "Value2"
+                    }
                 }.ToArray()
             };
 
@@ -584,8 +600,16 @@ namespace AutoMapper.UnitTests
             {
                 Values = new List<DestinationValuePair>
                 {
-                    new DestinationValuePair { Key = "Key1", Value = "Value1" },
-                    new DestinationValuePair { Key = "Key2", Value = "Value2" }
+                    new DestinationValuePair
+                    {
+                        Key = "Key1",
+                        Value = "Value1"
+                    },
+                    new DestinationValuePair
+                    {
+                        Key = "Key2",
+                        Value = "Value2"
+                    }
                 }.ToArray()
             };
 

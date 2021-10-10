@@ -24,7 +24,11 @@ namespace Microsoft.EntityFrameworkCore
                 async c =>
                 {
                     c.Products.Add(
-                        new Product { Id = 3, Name = "Unicorn Horseshoe Protection Pack" }
+                        new Product
+                        {
+                            Id = 3,
+                            Name = "Unicorn Horseshoe Protection Pack"
+                        }
                     );
                     return async ? await c.SaveChangesAsync() : c.SaveChanges();
                 }

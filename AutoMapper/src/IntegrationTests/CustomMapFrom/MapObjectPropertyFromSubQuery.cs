@@ -299,7 +299,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -417,7 +422,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -536,7 +546,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -658,7 +673,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -668,12 +688,21 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 2 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 2
+                            }
                         }
                     }
                 );
                 context.ProductArticles.Add(
-                    new ProductArticle { Product = product1, OtherProduct = product2 }
+                    new ProductArticle
+                    {
+                        Product = product1,
+                        OtherProduct = product2
+                    }
                 );
             }
         }
@@ -800,7 +829,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -947,7 +981,12 @@ namespace AutoMapper.IntegrationTests
                         ECommercePublished = true,
                         Articles = new[]
                         {
-                            new Article { IsDefault = true, NationId = 1, ProductId = 1 }
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
                 );
@@ -1035,13 +1074,21 @@ namespace AutoMapper.IntegrationTests
             protected override void Seed(ClientContext context)
             {
                 var rack = new Rack();
-                var dh = new DataHall { DataCentreId = 10, Racks = { rack } };
+                var dh = new DataHall
+                {
+                    DataCentreId = 10,
+                    Racks = { rack }
+                };
                 context.DataHalls.Add(dh);
                 var cable = new Cable
                 {
                     Ends = new List<CableEnd>()
                     {
-                        new CableEnd { Name = "A", Rack = rack },
+                        new CableEnd
+                        {
+                            Name = "A",
+                            Rack = rack
+                        },
                         new CableEnd { Name = "B" },
                     }
                 };

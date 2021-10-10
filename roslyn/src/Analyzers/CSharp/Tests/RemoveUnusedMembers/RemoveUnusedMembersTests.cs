@@ -444,7 +444,11 @@ return 0;
 
             await new VerifyCS.Test
             {
-                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication, },
+                TestState =
+                {
+                    Sources = { code },
+                    OutputKind = OutputKind.ConsoleApplication,
+                },
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
@@ -1903,7 +1907,11 @@ class MyClass
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 BatchFixedCode = batchFixedSource,
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
                 DiagnosticSelector = fixableDiagnostics => fixableDiagnostics[diagnosticIndex],

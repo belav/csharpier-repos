@@ -374,9 +374,27 @@ namespace Microsoft.Web.Mvc.Test
         private static SelectList GetRadioButtonListData(bool selectBaz)
         {
             List<RadioItem> list = new List<RadioItem>();
-            list.Add(new RadioItem { Text = "text-foo", Value = "foo" });
-            list.Add(new RadioItem { Text = "text-bar", Value = "bar" });
-            list.Add(new RadioItem { Text = "text-baz", Value = "baz" });
+            list.Add(
+                new RadioItem
+                {
+                    Text = "text-foo",
+                    Value = "foo"
+                }
+            );
+            list.Add(
+                new RadioItem
+                {
+                    Text = "text-bar",
+                    Value = "bar"
+                }
+            );
+            list.Add(
+                new RadioItem
+                {
+                    Text = "text-baz",
+                    Value = "baz"
+                }
+            );
             return new SelectList(list, "value", "TEXT", selectBaz ? "baz" : "something-else");
         }
 

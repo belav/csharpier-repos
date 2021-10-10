@@ -33,13 +33,21 @@ class Driver
 
     static void CreateFirstBridge()
     {
-        Bridge b = new Bridge() { __test = 0, id = "first", };
+        Bridge b = new Bridge()
+        {
+            __test = 0,
+            id = "first",
+        };
         weak_track_handle = GCHandle.Alloc(b, GCHandleType.WeakTrackResurrection);
     }
 
     static void CreateSecondBridge()
     {
-        Bridge b = new Bridge() { __test = 1, id = "second", };
+        Bridge b = new Bridge()
+        {
+            __test = 1,
+            id = "second",
+        };
         weak_track_handle2 = GCHandle.Alloc(b, GCHandleType.WeakTrackResurrection);
     }
 

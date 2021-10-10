@@ -85,7 +85,11 @@ namespace System.Drawing.Printing.Tests
         [MemberData(nameof(Height_Set_TestData))]
         public void Height_Set_GetReturnsExpected(int rawKind, int value)
         {
-            var size = new PaperSize { RawKind = rawKind, Height = value };
+            var size = new PaperSize
+            {
+                RawKind = rawKind,
+                Height = value
+            };
             Assert.Equal(value, size.Height);
 
             // Set same.
@@ -126,7 +130,11 @@ namespace System.Drawing.Printing.Tests
         [MemberData(nameof(PaperName_Set_TestData))]
         public void PaperName_Set_GetReturnsExpected(int rawKind, string value)
         {
-            var size = new PaperSize { RawKind = rawKind, PaperName = value };
+            var size = new PaperSize
+            {
+                RawKind = rawKind,
+                PaperName = value
+            };
             Assert.Equal(value, size.PaperName);
 
             // Set same.
@@ -184,7 +192,11 @@ namespace System.Drawing.Printing.Tests
         [MemberData(nameof(Width_Set_TestData))]
         public void Width_Set_GetReturnsExpected(int rawKind, int value)
         {
-            var size = new PaperSize { RawKind = rawKind, Width = value };
+            var size = new PaperSize
+            {
+                RawKind = rawKind,
+                Width = value
+            };
             Assert.Equal(value, size.Width);
 
             // Set same.

@@ -254,7 +254,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 dataProtector,
                 new CookieTempDataProviderOptions
                 {
-                    Cookie = { Path = optionsPath, Domain = optionsDomain }
+                    Cookie =
+                    {
+                        Path = optionsPath,
+                        Domain = optionsDomain
+                    }
                 }
             );
             var responseCookies = new MockResponseCookieCollection();
@@ -365,7 +369,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             public void Append(string key, string value, CookieOptions options)
             {
-                _cookies[key] = new CookieInfo() { Key = key, Value = value, Options = options };
+                _cookies[key] = new CookieInfo()
+                {
+                    Key = key,
+                    Value = value,
+                    Options = options
+                };
             }
 
             public void Append(string key, string value)

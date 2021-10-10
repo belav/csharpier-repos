@@ -1350,7 +1350,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns></returns>
         protected virtual TUserRole CreateUserRole(TUser user, TRole role)
         {
-            return new TUserRole() { UserId = user.Id, RoleId = role.Id };
+            return new TUserRole()
+            {
+                UserId = user.Id,
+                RoleId = role.Id
+            };
         }
 
         /// <summary>

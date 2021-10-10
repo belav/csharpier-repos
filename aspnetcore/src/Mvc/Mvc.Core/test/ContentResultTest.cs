@@ -386,7 +386,11 @@ namespace Microsoft.AspNetCore.Mvc
         )
         {
             // Arrange
-            var contentResult = new ContentResult { Content = content, ContentType = contentType };
+            var contentResult = new ContentResult
+            {
+                Content = content,
+                ContentType = contentType
+            };
             var httpContext = GetHttpContext();
             var memoryStream = new MemoryStream();
             httpContext.Response.Body = memoryStream;

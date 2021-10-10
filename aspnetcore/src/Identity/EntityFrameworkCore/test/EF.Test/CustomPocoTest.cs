@@ -39,7 +39,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                 db.Database.EnsureCreated();
 
                 var oldName = Guid.NewGuid().ToString();
-                var user = new User<Guid> { UserName = oldName, Id = Guid.NewGuid() };
+                var user = new User<Guid>
+                {
+                    UserName = oldName,
+                    Id = Guid.NewGuid()
+                };
                 db.Users.Add(user);
                 await db.SaveChangesAsync();
                 var newName = Guid.NewGuid().ToString();
@@ -66,7 +70,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                 db.Database.EnsureCreated();
 
                 var oldName = Guid.NewGuid().ToString();
-                var user = new User<string> { UserName = oldName, Id = Guid.NewGuid().ToString() };
+                var user = new User<string>
+                {
+                    UserName = oldName,
+                    Id = Guid.NewGuid().ToString()
+                };
                 db.Users.Add(user);
                 await db.SaveChangesAsync();
                 var newName = Guid.NewGuid().ToString();

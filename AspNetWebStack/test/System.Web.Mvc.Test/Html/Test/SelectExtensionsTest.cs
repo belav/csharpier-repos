@@ -89,14 +89,37 @@ namespace System.Web.Mvc.Html.Test
                     Disabled = true,
                     Name = "DisabledGroup"
                 };
-                items.Add(new SelectListItem() { Text = "Alice", Value = "a" });
                 items.Add(
-                    new SelectListItem() { Text = "Bob", Value = "b", Group = disabledGroup }
+                    new SelectListItem()
+                    {
+                        Text = "Alice",
+                        Value = "a"
+                    }
                 );
                 items.Add(
-                    new SelectListItem() { Text = "Charlie", Value = "c", Group = disabledGroup }
+                    new SelectListItem()
+                    {
+                        Text = "Bob",
+                        Value = "b",
+                        Group = disabledGroup
+                    }
                 );
-                items.Add(new SelectListItem() { Text = "David", Value = "d", Disabled = true });
+                items.Add(
+                    new SelectListItem()
+                    {
+                        Text = "Charlie",
+                        Value = "c",
+                        Group = disabledGroup
+                    }
+                );
+                items.Add(
+                    new SelectListItem()
+                    {
+                        Text = "David",
+                        Value = "d",
+                        Disabled = true
+                    }
+                );
 
                 return items;
             }
@@ -112,17 +135,50 @@ namespace System.Web.Mvc.Html.Test
                 SelectListGroup swedish = new SelectListGroup { Name = "Swedish Cars" };
                 SelectListGroup german = new SelectListGroup { Name = "German Cars" };
                 SelectListGroup unnamed = new SelectListGroup();
-                items.Add(new SelectListItem() { Text = "other1", Value = "other1" });
-                items.Add(new SelectListItem() { Text = "other2", Value = "other2" });
                 items.Add(
-                    new SelectListItem() { Group = swedish, Text = "Volvo", Value = "volvo" }
-                );
-                items.Add(new SelectListItem() { Text = "other3", Value = "other3" });
-                items.Add(
-                    new SelectListItem() { Group = unnamed, Text = "other4", Value = "other4" }
+                    new SelectListItem()
+                    {
+                        Text = "other1",
+                        Value = "other1"
+                    }
                 );
                 items.Add(
-                    new SelectListItem() { Group = unnamed, Text = "other5", Value = "other5" }
+                    new SelectListItem()
+                    {
+                        Text = "other2",
+                        Value = "other2"
+                    }
+                );
+                items.Add(
+                    new SelectListItem()
+                    {
+                        Group = swedish,
+                        Text = "Volvo",
+                        Value = "volvo"
+                    }
+                );
+                items.Add(
+                    new SelectListItem()
+                    {
+                        Text = "other3",
+                        Value = "other3"
+                    }
+                );
+                items.Add(
+                    new SelectListItem()
+                    {
+                        Group = unnamed,
+                        Text = "other4",
+                        Value = "other4"
+                    }
+                );
+                items.Add(
+                    new SelectListItem()
+                    {
+                        Group = unnamed,
+                        Text = "other5",
+                        Value = "other5"
+                    }
                 );
                 items.Add(
                     new SelectListItem()
@@ -150,7 +206,13 @@ namespace System.Web.Mvc.Html.Test
                         Disabled = true
                     }
                 );
-                items.Add(new SelectListItem() { Text = "other6", Value = "other6" });
+                items.Add(
+                    new SelectListItem()
+                    {
+                        Text = "other6",
+                        Value = "other6"
+                    }
+                );
 
                 return items;
             }
@@ -1181,7 +1243,11 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             var selectList = new List<SelectListItem>
             {
-                new SelectListItem { Group = new SelectListGroup { Name = text, }, Text = "text", },
+                new SelectListItem
+                {
+                    Group = new SelectListGroup { Name = text, },
+                    Text = "text",
+                },
             };
             var helper = MvcHelper.GetHtmlHelper();
 
@@ -1291,7 +1357,11 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             var selectList = new List<SelectListItem>
             {
-                new SelectListItem { Text = "text", Value = text },
+                new SelectListItem
+                {
+                    Text = "text",
+                    Value = text
+                },
             };
             var helper = MvcHelper.GetHtmlHelper();
 
@@ -4665,12 +4735,24 @@ namespace System.Web.Mvc.Html.Test
             if (includeEmpty)
             {
                 // Similar to what we might generate for a Nullable<T>
-                selectList.Add(new SelectListItem { Text = String.Empty, Value = String.Empty, });
+                selectList.Add(
+                    new SelectListItem
+                    {
+                        Text = String.Empty,
+                        Value = String.Empty,
+                    }
+                );
             }
 
             foreach (string name in Enum.GetNames(typeof(EnumWithDisplay)))
             {
-                selectList.Add(new SelectListItem { Text = name, Value = name, });
+                selectList.Add(
+                    new SelectListItem
+                    {
+                        Text = name,
+                        Value = name,
+                    }
+                );
             }
 
             return selectList;
@@ -4685,7 +4767,13 @@ namespace System.Web.Mvc.Html.Test
             if (includeEmpty)
             {
                 // Similar to what we might generate for a Nullable<T>
-                selectList.Add(new SelectListItem { Text = String.Empty, Value = String.Empty, });
+                selectList.Add(
+                    new SelectListItem
+                    {
+                        Text = String.Empty,
+                        Value = String.Empty,
+                    }
+                );
             }
 
             foreach (
@@ -4699,7 +4787,13 @@ namespace System.Web.Mvc.Html.Test
             {
                 string name = field.Name;
                 object value = field.GetRawConstantValue();
-                selectList.Add(new SelectListItem { Text = name, Value = value.ToString(), });
+                selectList.Add(
+                    new SelectListItem
+                    {
+                        Text = name,
+                        Value = value.ToString(),
+                    }
+                );
             }
 
             return selectList;
@@ -4735,7 +4829,11 @@ namespace System.Web.Mvc.Html.Test
             {
                 { "foo", "ViewDataFoo" }
             };
-            viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
+            viewData.Model = new FooBarModel
+            {
+                foo = "ViewItemFoo",
+                bar = "ViewItemBar"
+            };
 
             ModelState modelStateFoo = new ModelState();
             modelStateFoo.Errors.Add(new ModelError("foo error 1"));

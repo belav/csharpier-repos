@@ -83,7 +83,11 @@ class Foo
 
     void F(bool b)
     {
-        Point lp = new Point { x = 3, y = 3 };
+        Point lp = new Point
+        {
+            x = 3,
+            y = 3
+        };
         ref int z = ref Pick(b, ref lp);
         z = 4;
         ref int z2 = ref Pick(b, ref mp);

@@ -25,8 +25,20 @@ namespace DebuggerTests
         {
             var point_arr = new Point[]
             {
-                new Point { X = 5, Y = -2, Id = "point_arr#Id#0", Color = RGB.Green },
-                new Point { X = 123, Y = 0, Id = "point_arr#Id#1", Color = RGB.Blue },
+                new Point
+                {
+                    X = 5,
+                    Y = -2,
+                    Id = "point_arr#Id#0",
+                    Color = RGB.Green
+                },
+                new Point
+                {
+                    X = 123,
+                    Y = 0,
+                    Id = "point_arr#Id#1",
+                    Color = RGB.Blue
+                },
             };
 
             var point_arr_empty = new Point[0];
@@ -44,9 +56,21 @@ namespace DebuggerTests
         {
             var class_arr = new SimpleClass[]
             {
-                new SimpleClass { X = 5, Y = -2, Id = "class_arr#Id#0", Color = RGB.Green },
+                new SimpleClass
+                {
+                    X = 5,
+                    Y = -2,
+                    Id = "class_arr#Id#0",
+                    Color = RGB.Green
+                },
                 null,
-                new SimpleClass { X = 123, Y = 0, Id = "class_arr#Id#2", Color = RGB.Blue },
+                new SimpleClass
+                {
+                    X = 123,
+                    Y = 0,
+                    Id = "class_arr#Id#2",
+                    Color = RGB.Blue
+                },
             };
 
             var class_arr_empty = new SimpleClass[0];
@@ -65,8 +89,18 @@ namespace DebuggerTests
             var gclass_arr = new GenericClass<int>[]
             {
                 null,
-                new GenericClass<int> { Id = "gclass_arr#1#Id", Color = RGB.Red, Value = 5 },
-                new GenericClass<int> { Id = "gclass_arr#2#Id", Color = RGB.Blue, Value = -12 },
+                new GenericClass<int>
+                {
+                    Id = "gclass_arr#1#Id",
+                    Color = RGB.Red,
+                    Value = 5
+                },
+                new GenericClass<int>
+                {
+                    Id = "gclass_arr#2#Id",
+                    Color = RGB.Blue,
+                    Value = -12
+                },
             };
 
             var gclass_arr_empty = new GenericClass<int>[0];
@@ -175,13 +209,37 @@ namespace DebuggerTests
                 },
                 PointsProperty = new Point[]
                 {
-                    new Point { X = 5, Y = -2, Id = "PointsProperty#Id#0", Color = RGB.Green },
-                    new Point { X = 123, Y = 0, Id = "PointsProperty#Id#1", Color = RGB.Blue },
+                    new Point
+                    {
+                        X = 5,
+                        Y = -2,
+                        Id = "PointsProperty#Id#0",
+                        Color = RGB.Green
+                    },
+                    new Point
+                    {
+                        X = 123,
+                        Y = 0,
+                        Id = "PointsProperty#Id#1",
+                        Color = RGB.Blue
+                    },
                 },
                 PointsField = new Point[]
                 {
-                    new Point { X = 5, Y = -2, Id = "PointsField#Id#0", Color = RGB.Green },
-                    new Point { X = 123, Y = 0, Id = "PointsField#Id#1", Color = RGB.Blue },
+                    new Point
+                    {
+                        X = 5,
+                        Y = -2,
+                        Id = "PointsField#Id#0",
+                        Color = RGB.Green
+                    },
+                    new Point
+                    {
+                        X = 123,
+                        Y = 0,
+                        Id = "PointsField#Id#1",
+                        Color = RGB.Blue
+                    },
                 }
             };
 
@@ -244,10 +302,28 @@ namespace DebuggerTests
         {
             var point_arr = new Point[]
             {
-                new Point { X = 5, Y = -2, Id = "point_arr#Id#0", Color = RGB.Red },
-                new Point { X = 123, Y = 0, Id = "point_arr#Id#1", Color = RGB.Blue }
+                new Point
+                {
+                    X = 5,
+                    Y = -2,
+                    Id = "point_arr#Id#0",
+                    Color = RGB.Red
+                },
+                new Point
+                {
+                    X = 123,
+                    Y = 0,
+                    Id = "point_arr#Id#1",
+                    Color = RGB.Blue
+                }
             };
-            var point = new Point { X = 45, Y = 51, Id = "point#Id", Color = RGB.Green };
+            var point = new Point
+            {
+                X = 45,
+                Y = 51,
+                Id = "point#Id",
+                Color = RGB.Green
+            };
 
             Console.WriteLine($"point_arr: {point_arr.Length}, T: {t1}, point: {point}");
             return await Task.FromResult((t1, new Point[] { point_arr[0], point_arr[1], point }));
@@ -347,7 +423,13 @@ namespace DebuggerTests
         public static async Task AsyncMethod(bool call_other)
         {
             int local_i = 5;
-            var sc = new SimpleClass { X = 10, Y = 45, Id = "sc#Id", Color = RGB.Blue };
+            var sc = new SimpleClass
+            {
+                X = 10,
+                Y = 45,
+                Id = "sc#Id",
+                Color = RGB.Blue
+            };
             if (call_other)
                 await new Point
                 {
@@ -439,10 +521,20 @@ namespace DebuggerTests
 
             ArrayTestsClass.EntryPointForStructMethod(true).Wait();
 
-            var sc = new SimpleClass { X = 10, Y = 45, Id = "sc#Id", Color = RGB.Blue };
-            new Point { X = 90, Y = -4, Id = "point#Id", Color = RGB.Green }.GenericInstanceMethod(
-                sc
-            );
+            var sc = new SimpleClass
+            {
+                X = 10,
+                Y = 45,
+                Id = "sc#Id",
+                Color = RGB.Blue
+            };
+            new Point
+            {
+                X = 90,
+                Y = -4,
+                Id = "point#Id",
+                Color = RGB.Green
+            }.GenericInstanceMethod(sc);
         }
     }
 }

@@ -22,7 +22,11 @@ namespace RazorWebSite
 
         public IActionResult ViewReplacesTModelTokenFromInheritedBasePages()
         {
-            var model = new Person { Name = "Bob", Address = new Address { ZipCode = "98052" } };
+            var model = new Person
+            {
+                Name = "Bob",
+                Address = new Address { ZipCode = "98052" }
+            };
 
             return View("/Views/InheritingInherits/Index.cshtml", model);
         }

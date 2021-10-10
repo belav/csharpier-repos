@@ -27,7 +27,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         {
             // Change this to use KnownMonikers.NuGetNoColor once we are able to move to Microsoft.VisualStudio.ImageCatalog v16.9
             public static ImageMoniker Package =>
-                new() { Guid = KnownImageIds.ImageCatalogGuid, Id = 3902 };
+                new()
+                {
+                    Guid = KnownImageIds.ImageCatalogGuid,
+                    Id = 3902
+                };
             public static ImageMoniker Project => KnownMonikers.Application;
             public static ImageMoniker Assembly => KnownMonikers.Reference;
         }

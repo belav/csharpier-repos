@@ -110,7 +110,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel
                         new[] { new Coordinate(0, 0), new Coordinate(1, 0) }
                     )
                 },
-                new LineStringEntity { Id = 2, LineString = null }
+                new LineStringEntity
+                {
+                    Id = 2,
+                    LineString = null
+                }
             };
 
         public static IReadOnlyList<PolygonEntity> CreatePolygonEntities(GeometryFactory factory) =>
@@ -156,7 +160,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel
                         }
                     )
                 },
-                new MultiLineStringEntity { Id = 2, MultiLineString = null }
+                new MultiLineStringEntity
+                {
+                    Id = 2,
+                    MultiLineString = null
+                }
             };
     }
 }

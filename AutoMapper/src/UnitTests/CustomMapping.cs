@@ -822,7 +822,11 @@ namespace AutoMapper.UnitTests
 
         protected override void Because_of()
         {
-            var model = new Source { SomeValue = 36, SomeOtherValue = 53 };
+            var model = new Source
+            {
+                SomeValue = 36,
+                SomeOtherValue = 53
+            };
 
             _result = Mapper.Map<Source, Dest>(model);
         }
@@ -1009,7 +1013,11 @@ namespace AutoMapper.UnitTests
 
         public When_specifying_a_custom_translator()
         {
-            _source = new Source { Value = 10, AnotherValue = 1000 };
+            _source = new Source
+            {
+                Value = 10,
+                AnotherValue = 1000
+            };
         }
 
         [Fact]
@@ -1058,7 +1066,11 @@ namespace AutoMapper.UnitTests
 
         public When_specifying_a_custom_translator_using_projection()
         {
-            _source = new Source { Value = 10, AnotherValue = 1000 };
+            _source = new Source
+            {
+                Value = 10,
+                AnotherValue = 1000
+            };
         }
 
         [Fact]
@@ -1107,7 +1119,11 @@ namespace AutoMapper.UnitTests
 
         public When_specifying_a_custom_translator_and_passing_in_the_destination_object()
         {
-            _source = new Source { Value = 10, AnotherValue = 1000 };
+            _source = new Source
+            {
+                Value = 10,
+                AnotherValue = 1000
+            };
 
             _dest = new Destination { Value = 2 };
         }
@@ -1158,7 +1174,11 @@ namespace AutoMapper.UnitTests
 
         public When_specifying_a_custom_translator_using_generics()
         {
-            _source = new Source { Value = 10, AnotherValue = 1000 };
+            _source = new Source
+            {
+                Value = 10,
+                AnotherValue = 1000
+            };
         }
 
         public class Converter : ITypeConverter<Source, Destination>
@@ -1648,7 +1668,12 @@ namespace AutoMapper.UnitTests
 
         protected override void Because_of()
         {
-            _source = new Source { Name = "jon", Value = "value", Foo = "bar" };
+            _source = new Source
+            {
+                Name = "jon",
+                Value = "value",
+                Foo = "bar"
+            };
             _dest = new Destination();
             _dest = Mapper.Map<Source, Destination>(_source);
         }

@@ -357,7 +357,11 @@ namespace IdentitySamples.Controllers
                 .ToList();
             ViewData["ShowRemoveButton"] = user.PasswordHash != null || userLogins.Count > 1;
             return View(
-                new ManageLoginsViewModel { CurrentLogins = userLogins, OtherLogins = otherLogins }
+                new ManageLoginsViewModel
+                {
+                    CurrentLogins = userLogins,
+                    OtherLogins = otherLogins
+                }
             );
         }
 

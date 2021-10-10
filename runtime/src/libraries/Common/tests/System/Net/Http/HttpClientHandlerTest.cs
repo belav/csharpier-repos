@@ -296,7 +296,11 @@ namespace System.Net.Http.Functional.Tests
                 return;
             }
 
-            var options = new LoopbackServer.Options { Address = address, UseSsl = useSsl };
+            var options = new LoopbackServer.Options
+            {
+                Address = address,
+                UseSsl = useSsl
+            };
             bool connectionAccepted = false;
             string host = "";
 

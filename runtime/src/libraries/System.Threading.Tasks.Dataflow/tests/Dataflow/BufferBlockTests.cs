@@ -59,7 +59,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 () => new BufferBlock<int>(new DataflowBlockOptions { BoundedCapacity = 10 }),
                 () =>
                     new BufferBlock<int>(
-                        new DataflowBlockOptions { BoundedCapacity = 10, MaxMessagesPerTask = 1 }
+                        new DataflowBlockOptions
+                        {
+                            BoundedCapacity = 10,
+                            MaxMessagesPerTask = 1
+                        }
                     )
             };
             foreach (var generator in generators)
@@ -118,7 +122,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     targets[i] = new ActionBlock<int>(item => values[slot] = item);
                     bb.LinkTo(
                         targets[i],
-                        new DataflowLinkOptions { MaxMessages = 1, Append = append }
+                        new DataflowLinkOptions
+                        {
+                            MaxMessages = 1,
+                            Append = append
+                        }
                     );
                 }
 

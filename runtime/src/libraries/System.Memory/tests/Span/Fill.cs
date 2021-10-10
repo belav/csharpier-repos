@@ -92,19 +92,49 @@ namespace System.SpanTests
         {
             TestValueTypeWithReference[] actual =
             {
-                new TestValueTypeWithReference() { I = 1, S = "a" },
-                new TestValueTypeWithReference() { I = 2, S = "b" },
-                new TestValueTypeWithReference() { I = 3, S = "c" }
+                new TestValueTypeWithReference()
+                {
+                    I = 1,
+                    S = "a"
+                },
+                new TestValueTypeWithReference()
+                {
+                    I = 2,
+                    S = "b"
+                },
+                new TestValueTypeWithReference()
+                {
+                    I = 3,
+                    S = "c"
+                }
             };
             TestValueTypeWithReference[] expected =
             {
-                new TestValueTypeWithReference() { I = 5, S = "d" },
-                new TestValueTypeWithReference() { I = 5, S = "d" },
-                new TestValueTypeWithReference() { I = 5, S = "d" }
+                new TestValueTypeWithReference()
+                {
+                    I = 5,
+                    S = "d"
+                },
+                new TestValueTypeWithReference()
+                {
+                    I = 5,
+                    S = "d"
+                },
+                new TestValueTypeWithReference()
+                {
+                    I = 5,
+                    S = "d"
+                }
             };
 
             var span = new Span<TestValueTypeWithReference>(actual);
-            span.Fill(new TestValueTypeWithReference() { I = 5, S = "d" });
+            span.Fill(
+                new TestValueTypeWithReference()
+                {
+                    I = 5,
+                    S = "d"
+                }
+            );
             Assert.Equal<TestValueTypeWithReference>(expected, actual);
         }
 

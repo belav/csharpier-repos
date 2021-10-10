@@ -1039,7 +1039,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             IList<object> values = new List<object>
             {
                 new Customer { Name = "Caroline Customer" },
-                new Purchase { ProductName = "Elbow Grease", Price = 5.99m, Quantity = 1 }
+                new Purchase
+                {
+                    ProductName = "Elbow Grease",
+                    Price = 5.99m,
+                    Quantity = 1
+                }
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1143,7 +1148,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             IList<object> values = new List<object>
             {
                 new Customer { Name = "Caroline Customer" },
-                new Purchase { ProductName = "Elbow Grease", Price = 5.99m, Quantity = 1 }
+                new Purchase
+                {
+                    ProductName = "Elbow Grease",
+                    Price = 5.99m,
+                    Quantity = 1
+                }
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1335,7 +1345,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Message message = new Message();
             message.Address = "http://www.google.com";
-            message.Body = new SearchDetails { Query = "Json.NET", Language = "en-us" };
+            message.Body = new SearchDetails
+            {
+                Query = "Json.NET",
+                Language = "en-us"
+            };
 
             string json = JsonConvert.SerializeObject(message, Formatting.Indented);
             // {
@@ -1364,14 +1378,36 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Dictionary<string, object> collection = new Dictionary<string, object>()
             {
-                { "First", new UrlStatus { Status = 404, Url = @"http://www.bing.com" } },
-                { "Second", new UrlStatus { Status = 400, Url = @"http://www.google.com" } },
+                {
+                    "First",
+                    new UrlStatus
+                    {
+                        Status = 404,
+                        Url = @"http://www.bing.com"
+                    }
+                },
+                {
+                    "Second",
+                    new UrlStatus
+                    {
+                        Status = 400,
+                        Url = @"http://www.google.com"
+                    }
+                },
                 {
                     "List",
                     new List<UrlStatus>
                     {
-                        new UrlStatus { Status = 300, Url = @"http://www.yahoo.com" },
-                        new UrlStatus { Status = 200, Url = @"http://www.askjeeves.com" }
+                        new UrlStatus
+                        {
+                            Status = 300,
+                            Url = @"http://www.yahoo.com"
+                        },
+                        new UrlStatus
+                        {
+                            Status = 200,
+                            Url = @"http://www.askjeeves.com"
+                        }
                     }
                 }
             };

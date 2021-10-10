@@ -32,7 +32,11 @@ namespace XmlFormattersWebSite
 
         public object Unwrap(Type declaredType)
         {
-            return new Person() { Id = this.Id, Name = this.Name };
+            return new Person()
+            {
+                Id = this.Id,
+                Name = this.Name
+            };
         }
     }
 }

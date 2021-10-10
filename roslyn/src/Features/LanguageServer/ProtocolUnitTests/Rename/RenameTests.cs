@@ -36,7 +36,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
             var renameLocation = locations["caret"].First();
             var renameValue = "RENAME";
             var expectedEdits = locations["renamed"].Select(
-                location => new LSP.TextEdit() { NewText = renameValue, Range = location.Range }
+                location =>
+                    new LSP.TextEdit()
+                    {
+                        NewText = renameValue,
+                        Range = location.Range
+                    }
             );
 
             var results = await RunRenameAsync(
@@ -78,7 +83,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
             var renameLocation = locations["caret"].First();
             var renameValue = "RENAME";
             var expectedEdits = locations["renamed"].Select(
-                location => new LSP.TextEdit() { NewText = renameValue, Range = location.Range }
+                location =>
+                    new LSP.TextEdit()
+                    {
+                        NewText = renameValue,
+                        Range = location.Range
+                    }
             );
 
             var results = await RunRenameAsync(
@@ -132,7 +142,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
             var renameLocation = locations["caret"].First();
             var renameValue = "RENAME";
             var expectedEdits = locations["renamed"].Select(
-                location => new LSP.TextEdit() { NewText = renameValue, Range = location.Range }
+                location =>
+                    new LSP.TextEdit()
+                    {
+                        NewText = renameValue,
+                        Range = location.Range
+                    }
             );
 
             var results = await RunRenameAsync(
@@ -163,14 +178,26 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
 
             AddMappedDocument(testLspServer.TestWorkspace, markup);
 
-            var startPosition = new LSP.Position { Line = 2, Character = 9 };
-            var endPosition = new LSP.Position { Line = 2, Character = 10 };
+            var startPosition = new LSP.Position
+            {
+                Line = 2,
+                Character = 9
+            };
+            var endPosition = new LSP.Position
+            {
+                Line = 2,
+                Character = 10
+            };
             var renameText = "RENAME";
             var renameParams = CreateRenameParams(
                 new LSP.Location
                 {
                     Uri = new Uri($"C:\\{TestSpanMapper.GeneratedFileName}"),
-                    Range = new LSP.Range { Start = startPosition, End = endPosition }
+                    Range = new LSP.Range
+                    {
+                        Start = startPosition,
+                        End = endPosition
+                    }
                 },
                 "RENAME"
             );

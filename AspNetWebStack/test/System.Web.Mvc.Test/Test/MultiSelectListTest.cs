@@ -558,9 +558,21 @@ namespace System.Web.Mvc.Test
         {
             return new[]
             {
-                new Item { Text = "A", Value = "Alpha" },
-                new Item { Text = "B", Value = "Bravo" },
-                new Item { Text = "C", Value = "Charlie" }
+                new Item
+                {
+                    Text = "A",
+                    Value = "Alpha"
+                },
+                new Item
+                {
+                    Text = "B",
+                    Value = "Bravo"
+                },
+                new Item
+                {
+                    Text = "C",
+                    Value = "Charlie"
+                }
             };
         }
 
@@ -608,9 +620,21 @@ namespace System.Web.Mvc.Test
         {
             return new Person[]
             {
-                new Person { FirstName = "John", SSN = "123456789" },
-                new Person { FirstName = "Jane", SSN = "987654321" },
-                new Person { FirstName = "Joe", SSN = "111111111" }
+                new Person
+                {
+                    FirstName = "John",
+                    SSN = "123456789"
+                },
+                new Person
+                {
+                    FirstName = "Jane",
+                    SSN = "987654321"
+                },
+                new Person
+                {
+                    FirstName = "Joe",
+                    SSN = "111111111"
+                }
             };
         }
 

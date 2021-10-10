@@ -460,7 +460,11 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var produce = new Produce { Name = "Apple", BarCode = 77 };
+                    var produce = new Produce
+                    {
+                        Name = "Apple",
+                        BarCode = 77
+                    };
                     context.Add(produce);
 
                     Assert.Equal(EntityState.Added, context.Entry(produce).State);

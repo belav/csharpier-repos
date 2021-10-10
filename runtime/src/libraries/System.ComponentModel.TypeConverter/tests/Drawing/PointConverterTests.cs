@@ -24,11 +24,19 @@ namespace System.ComponentModel.TypeConverterTests
             {
                 yield return Tuple.Create(
                     new Point(10, 20),
-                    new Dictionary<string, object> { ["X"] = 10, ["Y"] = 20, }
+                    new Dictionary<string, object>
+                    {
+                        ["X"] = 10,
+                        ["Y"] = 20,
+                    }
                 );
                 yield return Tuple.Create(
                     new Point(-2, 3),
-                    new Dictionary<string, object> { ["X"] = -2, ["Y"] = 3, }
+                    new Dictionary<string, object>
+                    {
+                        ["X"] = -2,
+                        ["Y"] = 3,
+                    }
                 );
             }
         }
@@ -166,7 +174,11 @@ namespace System.ComponentModel.TypeConverterTests
                 {
                     Converter.CreateInstance(
                         null,
-                        new Dictionary<string, object> { ["x"] = 1, ["y"] = -1, }
+                        new Dictionary<string, object>
+                        {
+                            ["x"] = 1,
+                            ["y"] = -1,
+                        }
                     );
                 }
             );

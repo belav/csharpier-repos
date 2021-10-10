@@ -243,7 +243,11 @@ namespace Roslyn.Test.Utilities
             };
 
         protected static LSP.MarkupContent CreateMarkupContent(LSP.MarkupKind kind, string value) =>
-            new LSP.MarkupContent() { Kind = kind, Value = value };
+            new LSP.MarkupContent()
+            {
+                Kind = kind,
+                Value = value
+            };
 
         protected static LSP.CompletionParams CreateCompletionParams(
             LSP.Location caret,
@@ -325,8 +329,16 @@ namespace Roslyn.Test.Utilities
                 NewText = newText,
                 Range = new LSP.Range
                 {
-                    Start = new LSP.Position { Line = startLine, Character = startChar },
-                    End = new LSP.Position { Line = endLine, Character = endChar }
+                    Start = new LSP.Position
+                    {
+                        Line = startLine,
+                        Character = startChar
+                    },
+                    End = new LSP.Position
+                    {
+                        Line = endLine,
+                        Character = endChar
+                    }
                 }
             };
 

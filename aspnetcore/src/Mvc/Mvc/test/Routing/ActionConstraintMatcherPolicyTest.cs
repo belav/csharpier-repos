@@ -121,8 +121,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = false, Order = 0 },
-                    new BooleanConstraint() { Pass = true, Order = 1 },
+                    new BooleanConstraint()
+                    {
+                        Pass = false,
+                        Order = 0
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 1
+                    },
                 },
             };
 
@@ -130,8 +138,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = true, Order = 0 },
-                    new BooleanConstraint() { Pass = false, Order = 1 },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 0
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = false,
+                        Order = 1
+                    },
                 },
             };
 
@@ -158,7 +174,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 0,
+                    },
                 },
             };
 
@@ -166,7 +186,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = true, Order = 1, },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 1,
+                    },
                 },
             };
 
@@ -192,7 +216,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 0,
+                    },
                 },
             };
 
@@ -202,7 +230,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = true, Order = 1, },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 1,
+                    },
                 },
             };
 
@@ -231,7 +263,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = false, Order = 0, },
+                    new BooleanConstraint()
+                    {
+                        Pass = false,
+                        Order = 0,
+                    },
                 },
             };
 
@@ -239,7 +275,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = false, Order = 1, },
+                    new BooleanConstraint()
+                    {
+                        Pass = false,
+                        Order = 1,
+                    },
                 },
             };
 
@@ -267,9 +307,21 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = true, Order = 2, },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 0,
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 1,
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 2,
+                    },
                 },
             };
 
@@ -277,9 +329,21 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = true, Order = 3, },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 0,
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 1,
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 3,
+                    },
                 },
             };
 
@@ -306,9 +370,21 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = false, Order = 2, },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 0,
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 1,
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = false,
+                        Order = 2,
+                    },
                 },
             };
 
@@ -316,9 +392,21 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = false, Order = 3, },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 0,
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = true,
+                        Order = 1,
+                    },
+                    new BooleanConstraint()
+                    {
+                        Pass = false,
+                        Order = 3,
+                    },
                 },
             };
 

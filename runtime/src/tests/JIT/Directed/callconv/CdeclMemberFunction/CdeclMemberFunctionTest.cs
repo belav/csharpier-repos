@@ -216,7 +216,11 @@ unsafe class CdeclMemberFunctionTest
         int unused
     )
     {
-        return new CdeclMemberFunctionNative.SizeF { width = c->width, height = c->height };
+        return new CdeclMemberFunctionNative.SizeF
+        {
+            width = c->width,
+            height = c->height
+        };
     }
 
     [UnmanagedCallersOnly(

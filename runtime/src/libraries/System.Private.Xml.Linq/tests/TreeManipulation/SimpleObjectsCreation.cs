@@ -393,8 +393,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(CreateXAttribute8)
                 {
-                    Attribute = new VariationAttribute("XAttribute - xml namespace - prefix redef")
-                    {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - xml namespace - prefix redef"
+                    ) {
                         Params = new object[] { "xml", "another", true },
                         Priority = 1
                     }

@@ -42,7 +42,11 @@ namespace AutoMapper.UnitTests
             protected override void Because_of()
             {
                 _destination = Mapper.Map<Destination>(
-                    new SourceChild { One = "first", Two = "second" }
+                    new SourceChild
+                    {
+                        One = "first",
+                        Two = "second"
+                    }
                 );
             }
 

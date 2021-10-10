@@ -2356,9 +2356,21 @@ namespace Microsoft.EntityFrameworkCore
             {
                 context.Set<BinaryKeyDataType>()
                     .AddRange(
-                        new BinaryKeyDataType { Id = new byte[] { 1, 2, 3 }, Ex = "X1" },
-                        new BinaryKeyDataType { Id = new byte[] { 1, 2, 3, 4 }, Ex = "X3" },
-                        new BinaryKeyDataType { Id = new byte[] { 1, 2, 3, 4, 5 }, Ex = "X2" }
+                        new BinaryKeyDataType
+                        {
+                            Id = new byte[] { 1, 2, 3 },
+                            Ex = "X1"
+                        },
+                        new BinaryKeyDataType
+                        {
+                            Id = new byte[] { 1, 2, 3, 4 },
+                            Ex = "X3"
+                        },
+                        new BinaryKeyDataType
+                        {
+                            Id = new byte[] { 1, 2, 3, 4, 5 },
+                            Ex = "X2"
+                        }
                     );
 
                 context.Set<BinaryForeignKeyDataType>()
@@ -2611,7 +2623,13 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateContext())
             {
                 context.Set<BuiltInNullableDataTypes>()
-                    .Add(new BuiltInNullableDataTypes { Id = 100, PartitionId = 100 });
+                    .Add(
+                        new BuiltInNullableDataTypes
+                        {
+                            Id = 100,
+                            PartitionId = 100
+                        }
+                    );
 
                 Assert.Equal(1, context.SaveChanges());
             }
@@ -3478,7 +3496,14 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Entity<Animal>().HasData(new Animal { Id = 1 });
 
                 modelBuilder.Entity<AnimalDetails>()
-                    .HasData(new AnimalDetails { Id = 1, AnimalId = 1, BoolField = true });
+                    .HasData(
+                        new AnimalDetails
+                        {
+                            Id = 1,
+                            AnimalId = 1,
+                            BoolField = true
+                        }
+                    );
 
                 modelBuilder.Entity<AnimalIdentification>()
                     .HasData(
@@ -3509,7 +3534,13 @@ namespace Microsoft.EntityFrameworkCore
                     );
 
                 modelBuilder.Entity<StringEnclosure>()
-                    .HasData(new StringEnclosure { Id = 1, Value = ReallyLargeString });
+                    .HasData(
+                        new StringEnclosure
+                        {
+                            Id = 1,
+                            Value = ReallyLargeString
+                        }
+                    );
             }
 
             protected static void MakeRequired<TEntity>(ModelBuilder modelBuilder)

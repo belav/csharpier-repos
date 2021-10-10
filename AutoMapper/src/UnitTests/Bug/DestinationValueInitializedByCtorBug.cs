@@ -54,7 +54,13 @@ namespace AutoMapper.UnitTests.Bug
 
             for (int i = 0; i < 10; i++)
             {
-                entities.Add(new ItemToMap() { Name = Guid.NewGuid().ToString(), Tag = tag, });
+                entities.Add(
+                    new ItemToMap()
+                    {
+                        Name = Guid.NewGuid().ToString(),
+                        Tag = tag,
+                    }
+                );
             }
 
             Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities);

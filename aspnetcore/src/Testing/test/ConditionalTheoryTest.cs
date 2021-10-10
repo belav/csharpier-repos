@@ -140,7 +140,11 @@ namespace Microsoft.AspNetCore.Testing
             new TheoryData<Skippable>
             {
                 new Skippable() { Data = 1 },
-                new Skippable() { Data = 2, Skip = "This row should be skipped." }
+                new Skippable()
+                {
+                    Data = 2,
+                    Skip = "This row should be skipped."
+                }
             };
 
         public class Skippable : IXunitSerializable

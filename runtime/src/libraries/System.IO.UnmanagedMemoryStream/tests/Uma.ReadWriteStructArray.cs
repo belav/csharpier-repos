@@ -276,7 +276,14 @@ namespace System.IO.Tests
             const int capacity = 100;
             UmaTestStruct[] inStructArr = new UmaTestStruct[1]
             {
-                new UmaTestStruct() { int1 = 1, int2 = 2, bool1 = false, char1 = 'p', bool2 = true }
+                new UmaTestStruct()
+                {
+                    int1 = 1,
+                    int2 = 2,
+                    bool1 = false,
+                    char1 = 'p',
+                    bool2 = true
+                }
             };
             UmaTestStruct[] outStructArr = new UmaTestStruct[1];
             using (TestSafeBuffer buffer = new TestSafeBuffer(capacity))
@@ -362,7 +369,14 @@ namespace System.IO.Tests
             const int capacity = 100;
             UmaTestStruct[] inStructArr = new UmaTestStruct[1]
             {
-                new UmaTestStruct() { int1 = 1, int2 = 2, bool1 = false, char1 = 'p', bool2 = true }
+                new UmaTestStruct()
+                {
+                    int1 = 1,
+                    int2 = 2,
+                    bool1 = false,
+                    char1 = 'p',
+                    bool2 = true
+                }
             };
             UmaTestStruct[] outStructArr = new UmaTestStruct[5000];
             using (TestSafeBuffer buffer = new TestSafeBuffer(capacity))

@@ -139,7 +139,11 @@ namespace System.Text.Json.Serialization.Tests
             MyEnum = SampleEnum.Two;
             MyInt64Enum = SampleEnumInt64.MinNegative;
             MyUInt64Enum = SampleEnumUInt64.Max;
-            MySimpleStruct = new SimpleStruct { One = 11, Two = 1.9999 };
+            MySimpleStruct = new SimpleStruct
+            {
+                One = 11,
+                Two = 1.9999
+            };
 
             MyInt16Array = new short[] { 1 };
             MyInt32Array = new int[] { 2 };

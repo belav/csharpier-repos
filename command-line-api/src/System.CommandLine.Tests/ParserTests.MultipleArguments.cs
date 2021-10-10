@@ -19,8 +19,16 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("the-command")
                 {
-                    new Argument<string> { Arity = new ArgumentArity(3, 3), Name = "several" },
-                    new Argument<string> { Arity = ArgumentArity.ZeroOrMore, Name = "one" }
+                    new Argument<string>
+                    {
+                        Arity = new ArgumentArity(3, 3),
+                        Name = "several"
+                    },
+                    new Argument<string>
+                    {
+                        Arity = ArgumentArity.ZeroOrMore,
+                        Name = "one"
+                    }
                 };
 
                 var result = command.Parse("1 2 3 4");

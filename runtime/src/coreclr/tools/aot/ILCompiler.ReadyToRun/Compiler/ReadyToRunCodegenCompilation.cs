@@ -175,7 +175,11 @@ namespace ILCompiler
                     methodIL = PInvokeILEmitter.EmitIL(key);
                 }
 
-                return new MethodILData() { Method = key, MethodIL = methodIL };
+                return new MethodILData()
+                {
+                    Method = key,
+                    MethodIL = methodIL
+                };
             }
 
             public class MethodILData

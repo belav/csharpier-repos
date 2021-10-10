@@ -1394,7 +1394,11 @@ namespace System.Web.Mvc.Test
                 string partialPath
             )
             {
-                return new TestView() { ControllerContext = controllerContext, Path = partialPath };
+                return new TestView()
+                {
+                    ControllerContext = controllerContext,
+                    Path = partialPath
+                };
             }
 
             protected override IView CreateView(

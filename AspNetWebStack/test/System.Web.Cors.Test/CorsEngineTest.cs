@@ -322,7 +322,11 @@ namespace System.Web.Cors.Test
                 AccessControlRequestMethod = "GET",
                 Origin = "foo"
             };
-            CorsPolicy policy = new CorsPolicy { AllowAnyOrigin = true, AllowAnyMethod = true };
+            CorsPolicy policy = new CorsPolicy
+            {
+                AllowAnyOrigin = true,
+                AllowAnyMethod = true
+            };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
 
@@ -413,7 +417,11 @@ namespace System.Web.Cors.Test
                 Origin = "foo"
             };
             requestContext.AccessControlRequestHeaders.Add("Content-Type");
-            CorsPolicy policy = new CorsPolicy { AllowAnyOrigin = true, AllowAnyMethod = true };
+            CorsPolicy policy = new CorsPolicy
+            {
+                AllowAnyOrigin = true,
+                AllowAnyMethod = true
+            };
             policy.Headers.Add("foo");
             policy.Headers.Add("bar");
             policy.Headers.Add("Content-Type");
@@ -437,7 +445,11 @@ namespace System.Web.Cors.Test
             };
             requestContext.AccessControlRequestHeaders.Add("match");
             requestContext.AccessControlRequestHeaders.Add("noMatch");
-            CorsPolicy policy = new CorsPolicy { AllowAnyOrigin = true, AllowAnyMethod = true };
+            CorsPolicy policy = new CorsPolicy
+            {
+                AllowAnyOrigin = true,
+                AllowAnyMethod = true
+            };
             policy.Headers.Add("match");
             policy.Headers.Add("foo");
 

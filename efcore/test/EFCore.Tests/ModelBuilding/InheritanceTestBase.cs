@@ -106,7 +106,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
 
                 modelBuilder.Entity<SelfRefManyToOneDerived>()
-                    .HasData(new SelfRefManyToOneDerived { Id = 1, SelfRefId = 1 });
+                    .HasData(
+                        new SelfRefManyToOneDerived
+                        {
+                            Id = 1,
+                            SelfRefId = 1
+                        }
+                    );
                 modelBuilder.Entity<SelfRefManyToOne>();
 
                 modelBuilder.FinalizeModel();

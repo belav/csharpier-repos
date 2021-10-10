@@ -260,10 +260,18 @@ namespace Microsoft.EntityFrameworkCore
             for (var i = 1; i < 11; i++)
             {
                 context.Add(
-                    new Pegasus { Name = "Rainbow Dash " + i, Identifier = i * 100 + idOffset }
+                    new Pegasus
+                    {
+                        Name = "Rainbow Dash " + i,
+                        Identifier = i * 100 + idOffset
+                    }
                 );
                 context.Add(
-                    new Pegasus { Name = "Fluttershy " + i, Identifier = i * 100 + idOffset + 1 }
+                    new Pegasus
+                    {
+                        Name = "Fluttershy " + i,
+                        Identifier = i * 100 + idOffset + 1
+                    }
                 );
             }
 

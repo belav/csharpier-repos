@@ -152,7 +152,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         private async Task ActionsWithApiBehaviorInferFromBodyParameters(string action)
         {
             // Arrange
-            var input = new Contact { ContactId = 13, Name = "Test123", };
+            var input = new Contact
+            {
+                ContactId = 13,
+                Name = "Test123",
+            };
 
             // Act
             var response = await Client.PostAsJsonAsync($"/contact/{action}", input);

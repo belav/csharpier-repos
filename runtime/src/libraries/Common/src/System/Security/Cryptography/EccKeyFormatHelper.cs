@@ -184,7 +184,11 @@ namespace System.Security.Cryptography
             ret = new ECParameters
             {
                 Curve = GetCurve(domainParameters),
-                Q = { X = x, Y = y, },
+                Q =
+                {
+                    X = x,
+                    Y = y,
+                },
                 D = key.PrivateKey.ToArray(),
             };
 

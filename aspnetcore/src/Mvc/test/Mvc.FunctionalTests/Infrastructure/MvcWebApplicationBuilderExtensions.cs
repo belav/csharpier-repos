@@ -40,7 +40,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 services =>
                 {
                     services.TryAddSingleton(
-                        new TestCulture { Culture = culture, UICulture = uiCulture }
+                        new TestCulture
+                        {
+                            Culture = culture,
+                            UICulture = uiCulture
+                        }
                     );
                     services.TryAddEnumerable(
                         ServiceDescriptor.Singleton<IStartupFilter, CultureReplacerStartupFilter>()

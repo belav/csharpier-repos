@@ -29,7 +29,13 @@ namespace System.Reflection.PortableExecutable
         internal void AddEntry(DebugDirectoryEntryType type, uint version, uint stamp, int dataSize)
         {
             _entries.Add(
-                new Entry() { Stamp = stamp, Version = version, Type = type, DataSize = dataSize, }
+                new Entry()
+                {
+                    Stamp = stamp,
+                    Version = version,
+                    Type = type,
+                    DataSize = dataSize,
+                }
             );
         }
 

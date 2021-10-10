@@ -304,7 +304,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         private void EnqueueCloseHandle(Action<IntPtr> callback, IntPtr handle)
         {
-            var closeHandle = new CloseHandle { Callback = callback, Handle = handle };
+            var closeHandle = new CloseHandle
+            {
+                Callback = callback,
+                Handle = handle
+            };
             lock (_closeHandleSync)
             {
                 _closeHandleAdding.Enqueue(closeHandle);

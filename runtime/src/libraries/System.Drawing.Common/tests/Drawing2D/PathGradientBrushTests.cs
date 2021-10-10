@@ -352,7 +352,11 @@ namespace System.Drawing.Drawing2D.Tests
                 )
             )
             {
-                brush.Blend = new Blend { Factors = factors, Positions = positions };
+                brush.Blend = new Blend
+                {
+                    Factors = factors,
+                    Positions = positions
+                };
                 Assert.Equal(factors, brush.Blend.Factors);
                 Assert.Equal(expectedSize, brush.Blend.Positions.Length);
                 if (expectedSize == positions.Length && expectedSize != 1)
@@ -402,23 +406,43 @@ namespace System.Drawing.Drawing2D.Tests
         {
             yield return new object[]
             {
-                new Blend() { Factors = new float[0], Positions = new float[0] }
+                new Blend()
+                {
+                    Factors = new float[0],
+                    Positions = new float[0]
+                }
             };
             yield return new object[]
             {
-                new Blend() { Factors = new float[2], Positions = new float[2] { 1, 1 } }
+                new Blend()
+                {
+                    Factors = new float[2],
+                    Positions = new float[2] { 1, 1 }
+                }
             };
             yield return new object[]
             {
-                new Blend() { Factors = new float[2], Positions = new float[2] { 0, 5 } }
+                new Blend()
+                {
+                    Factors = new float[2],
+                    Positions = new float[2] { 0, 5 }
+                }
             };
             yield return new object[]
             {
-                new Blend() { Factors = new float[3], Positions = new float[3] { 0, 1, 5 } }
+                new Blend()
+                {
+                    Factors = new float[3],
+                    Positions = new float[3] { 0, 1, 5 }
+                }
             };
             yield return new object[]
             {
-                new Blend() { Factors = new float[3], Positions = new float[3] { 1, 1, 1 } }
+                new Blend()
+                {
+                    Factors = new float[3],
+                    Positions = new float[3] { 1, 1, 1 }
+                }
             };
         }
 
@@ -435,7 +459,11 @@ namespace System.Drawing.Drawing2D.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Blend_InvalidFactorPositionsLengthMismatch_ThrowsArgumentOutOfRangeException()
         {
-            Blend invalidBlend = new Blend() { Factors = new float[2], Positions = new float[1] };
+            Blend invalidBlend = new Blend()
+            {
+                Factors = new float[2],
+                Positions = new float[1]
+            };
 
             using (PathGradientBrush brush = new PathGradientBrush(_defaultFloatPoints))
             {
@@ -454,10 +482,20 @@ namespace System.Drawing.Drawing2D.Tests
             {
                 Assert.Throws<NullReferenceException>(() => brush.Blend = null);
                 Assert.Throws<NullReferenceException>(
-                    () => brush.Blend = new Blend() { Factors = null, Positions = null }
+                    () =>
+                        brush.Blend = new Blend()
+                        {
+                            Factors = null,
+                            Positions = null
+                        }
                 );
                 Assert.Throws<NullReferenceException>(
-                    () => brush.Blend = new Blend() { Factors = null, Positions = new float[0] }
+                    () =>
+                        brush.Blend = new Blend()
+                        {
+                            Factors = null,
+                            Positions = new float[0]
+                        }
                 );
             }
         }
@@ -470,7 +508,12 @@ namespace System.Drawing.Drawing2D.Tests
                 AssertExtensions.Throws<ArgumentException, ArgumentNullException>(
                     "value",
                     "source",
-                    () => brush.Blend = new Blend() { Factors = new float[0], Positions = null }
+                    () =>
+                        brush.Blend = new Blend()
+                        {
+                            Factors = new float[0],
+                            Positions = null
+                        }
                 );
             }
         }

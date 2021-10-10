@@ -1050,12 +1050,20 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Read_From_Standard_Xml_Serialization()
         {
-            var manager = new Manager { Name = "Craig", Level = 1 };
+            var manager = new Manager
+            {
+                Name = "Craig",
+                Level = 1
+            };
             var employee = new Employee
             {
                 Name = "Dave",
                 Supervisor = manager,
-                Job = new Employment { Title = "Consultant", Salary = 100000M },
+                Job = new Employment
+                {
+                    Title = "Consultant",
+                    Salary = 100000M
+                },
                 Metadata = new Metadata { Tag = "Cool!" },
                 Key = new byte[] { 0x01, 0x02, 0x03 }
             };
@@ -1118,8 +1126,16 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Can_Read_Nillables_From_Standard_Xml_Serialization()
         {
-            var manager = new Manager { Name = "Craig", Level = 1 };
-            var group = new Group { Id = 2, Employees = new Employee[] { null, manager } };
+            var manager = new Manager
+            {
+                Name = "Craig",
+                Level = 1
+            };
+            var group = new Group
+            {
+                Id = 2,
+                Employees = new Employee[] { null, manager }
+            };
 
             using (var stream = new MemoryStream())
             {
@@ -1152,7 +1168,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             var employee = CreateXmlAdapter<IEmployee>(null, ref emp);
             employee.Name = "Dave";
             employee.Supervisor = manager;
-            employee.Job = new Employment { Title = "Consultant", Salary = 100000M };
+            employee.Job = new Employment
+            {
+                Title = "Consultant",
+                Salary = 100000M
+            };
             employee.Metadata = new Metadata { Tag = "Cool!" };
             employee.Key = new byte[] { 0x01, 0x02, 0x03 };
 

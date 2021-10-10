@@ -925,8 +925,16 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
                             b => b.HasData(new { BartonId = 1, Property = "Property", Value = 42 })
                         );
                         b.HasData(
-                            new Barton { Id = 1, Simple = "Simple" },
-                            new Barton { Id = 2, Simple = "Not" }
+                            new Barton
+                            {
+                                Id = 1,
+                                Simple = "Simple"
+                            },
+                            new Barton
+                            {
+                                Id = 2,
+                                Simple = "Not"
+                            }
                         );
                     }
                 );

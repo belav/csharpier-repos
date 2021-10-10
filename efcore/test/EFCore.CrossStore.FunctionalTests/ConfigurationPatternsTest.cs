@@ -277,7 +277,14 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using var context0 = createBlogContext();
                 Assert.Empty(context0.ChangeTracker.Entries());
-                var blog0 = context0.Add(new Blog { Id = 1, Name = "Giddyup" }).Entity;
+                var blog0 =
+                    context0.Add(
+                        new Blog
+                        {
+                            Id = 1,
+                            Name = "Giddyup"
+                        }
+                    ).Entity;
                 Assert.Same(blog0, context0.ChangeTracker.Entries().Select(e => e.Entity).Single());
                 await context0.SaveChangesAsync();
 

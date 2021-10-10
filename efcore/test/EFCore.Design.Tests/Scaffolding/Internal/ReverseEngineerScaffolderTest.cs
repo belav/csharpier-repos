@@ -35,7 +35,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 },
                 AdditionalFiles =
                 {
-                    new ScaffoldedFile { Path = "TestEntity.cs", Code = "// TestEntity" }
+                    new ScaffoldedFile
+                    {
+                        Path = "TestEntity.cs",
+                        Code = "// TestEntity"
+                    }
                 }
             };
 
@@ -75,7 +79,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 },
                 AdditionalFiles =
                 {
-                    new ScaffoldedFile { Path = "TestEntity.cs", Code = "// TestEntity" }
+                    new ScaffoldedFile
+                    {
+                        Path = "TestEntity.cs",
+                        Code = "// TestEntity"
+                    }
                 }
             };
 
@@ -106,7 +114,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             var scaffolder = CreateScaffolder();
             var scaffoldedModel = new ScaffoldedModel
             {
-                ContextFile = new ScaffoldedFile { Path = "Test.cs", Code = "// Test" }
+                ContextFile = new ScaffoldedFile
+                {
+                    Path = "Test.cs",
+                    Code = "// Test"
+                }
             };
 
             var result = scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: true);
@@ -140,7 +152,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     },
                     AdditionalFiles =
                     {
-                        new ScaffoldedFile { Path = "TestEntity.cs", Code = "// TestEntity" }
+                        new ScaffoldedFile
+                        {
+                            Path = "TestEntity.cs",
+                            Code = "// TestEntity"
+                        }
                     }
                 };
 

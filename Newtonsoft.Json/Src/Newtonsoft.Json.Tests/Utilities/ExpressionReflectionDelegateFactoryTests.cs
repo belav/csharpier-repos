@@ -308,7 +308,11 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void CreateGetField()
         {
-            FieldsTestClass c = new FieldsTestClass { BoolField = true, StringField = "String!" };
+            FieldsTestClass c = new FieldsTestClass
+            {
+                BoolField = true,
+                StringField = "String!"
+            };
 
             Func<object, object> getter =
                 ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(

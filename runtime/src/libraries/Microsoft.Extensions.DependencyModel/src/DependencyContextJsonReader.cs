@@ -391,7 +391,11 @@ namespace Microsoft.Extensions.DependencyModel
 
             reader.CheckEndObject();
 
-            return new Target() { Name = targetName, Libraries = libraries };
+            return new Target()
+            {
+                Name = targetName,
+                Libraries = libraries
+            };
         }
 
         private TargetLibrary ReadTargetLibrary(ref Utf8JsonReader reader, string targetLibraryName)

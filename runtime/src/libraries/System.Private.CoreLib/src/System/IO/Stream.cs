@@ -448,7 +448,12 @@ namespace System.IO
             // Otherwise, we need to wrap calls to Begin/EndWrite to ensure we use the derived type's functionality.
             return TaskFactory<int>.FromAsyncTrim(
                 this,
-                new ReadWriteParameters { Buffer = buffer, Offset = offset, Count = count },
+                new ReadWriteParameters
+                {
+                    Buffer = buffer,
+                    Offset = offset,
+                    Count = count
+                },
                 (stream, args, callback, state) =>
                     stream.BeginRead(args.Buffer, args.Offset, args.Count, callback, state), // cached by compiler
                 (stream, asyncResult) => stream.EndRead(asyncResult)
@@ -847,7 +852,12 @@ namespace System.IO
             // Otherwise, we need to wrap calls to Begin/EndWrite to ensure we use the derived type's functionality.
             return TaskFactory<VoidTaskResult>.FromAsyncTrim(
                 this,
-                new ReadWriteParameters { Buffer = buffer, Offset = offset, Count = count },
+                new ReadWriteParameters
+                {
+                    Buffer = buffer,
+                    Offset = offset,
+                    Count = count
+                },
                 (stream, args, callback, state) =>
                     stream.BeginWrite(args.Buffer, args.Offset, args.Count, callback, state), // cached by compiler
                 (stream, asyncResult) => // cached by compiler

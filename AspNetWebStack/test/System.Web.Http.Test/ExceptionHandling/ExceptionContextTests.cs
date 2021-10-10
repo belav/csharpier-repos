@@ -435,7 +435,11 @@ namespace System.Web.Http.ExceptionHandling
             HttpRequestMessage request
         )
         {
-            return new HttpControllerContext { RequestContext = requestContext, Request = request };
+            return new HttpControllerContext
+            {
+                RequestContext = requestContext,
+                Request = request
+            };
         }
 
         private static Exception CreateException()

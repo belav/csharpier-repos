@@ -72,7 +72,11 @@ struct ByteAndFloat
 
     public static ByteAndFloat Get()
     {
-        return new ByteAndFloat { Byte = 42, Float = 3.14159f };
+        return new ByteAndFloat
+        {
+            Byte = 42,
+            Float = 3.14159f
+        };
     }
 
     public bool Equals(ByteAndFloat other)
@@ -88,7 +92,11 @@ struct FloatAndByte
 
     public static FloatAndByte Get()
     {
-        return new FloatAndByte { Byte = 42, Float = 3.14159f };
+        return new FloatAndByte
+        {
+            Byte = 42,
+            Float = 3.14159f
+        };
     }
 
     public bool Equals(FloatAndByte other)
@@ -104,7 +112,11 @@ struct LongAndFloat
 
     public static LongAndFloat Get()
     {
-        return new LongAndFloat { Long = 0xfeedfaceabadf00d, Float = 3.14159f };
+        return new LongAndFloat
+        {
+            Long = 0xfeedfaceabadf00d,
+            Float = 3.14159f
+        };
     }
 
     public bool Equals(LongAndFloat other)
@@ -123,7 +135,11 @@ struct ByteAndDouble
 
     public static ByteAndDouble Get()
     {
-        return new ByteAndDouble { Byte = 42, Double = 3.14159d };
+        return new ByteAndDouble
+        {
+            Byte = 42,
+            Double = 3.14159d
+        };
     }
 
     public bool Equals(ByteAndDouble other)
@@ -139,7 +155,11 @@ struct DoubleAndByte
 
     public static DoubleAndByte Get()
     {
-        return new DoubleAndByte { Byte = 42, Double = 3.14159d };
+        return new DoubleAndByte
+        {
+            Byte = 42,
+            Double = 3.14159d
+        };
     }
 
     public bool Equals(DoubleAndByte other)
@@ -156,7 +176,11 @@ unsafe struct PointerAndByte
     public static PointerAndByte Get()
     {
         byte unused;
-        return new PointerAndByte { Pointer = &unused, Byte = 42 };
+        return new PointerAndByte
+        {
+            Pointer = &unused,
+            Byte = 42
+        };
     }
 
     public bool Equals(PointerAndByte other)
@@ -173,7 +197,11 @@ unsafe struct ByteAndPointer
     public static ByteAndPointer Get()
     {
         byte unused;
-        return new ByteAndPointer { Pointer = &unused, Byte = 42 };
+        return new ByteAndPointer
+        {
+            Pointer = &unused,
+            Byte = 42
+        };
     }
 
     public bool Equals(ByteAndPointer other)
@@ -191,7 +219,12 @@ unsafe struct ByteFloatAndPointer
     public static ByteFloatAndPointer Get()
     {
         byte unused;
-        return new ByteFloatAndPointer { Pointer = &unused, Float = 3.14159f, Byte = 42 };
+        return new ByteFloatAndPointer
+        {
+            Pointer = &unused,
+            Float = 3.14159f,
+            Byte = 42
+        };
     }
 
     public bool Equals(ByteFloatAndPointer other)
@@ -209,7 +242,12 @@ unsafe struct PointerFloatAndByte
     public static PointerFloatAndByte Get()
     {
         byte unused;
-        return new PointerFloatAndByte { Pointer = &unused, Float = 3.14159f, Byte = 42 };
+        return new PointerFloatAndByte
+        {
+            Pointer = &unused,
+            Float = 3.14159f,
+            Byte = 42
+        };
     }
 
     public bool Equals(PointerFloatAndByte other)
@@ -228,7 +266,13 @@ struct ShortIntFloatIntPtr
     public static ShortIntFloatIntPtr Get()
     {
         IntPtr unused = new IntPtr(42);
-        return new ShortIntFloatIntPtr { Short = 10, Int = 11, Float = 3.14f, Pointer = unused };
+        return new ShortIntFloatIntPtr
+        {
+            Short = 10,
+            Int = 11,
+            Float = 3.14f,
+            Pointer = unused
+        };
     }
 
     public bool Equals(ShortIntFloatIntPtr other)
@@ -247,7 +291,11 @@ struct TwoLongs
 
     public static TwoLongs Get()
     {
-        return new TwoLongs { Long1 = 0xb01dfaceddebac1e, Long2 = 0xfeedfaceabadf00d };
+        return new TwoLongs
+        {
+            Long1 = 0xb01dfaceddebac1e,
+            Long2 = 0xfeedfaceabadf00d
+        };
     }
 
     public bool Equals(TwoLongs other)
@@ -263,7 +311,11 @@ struct TwoFloats
 
     public static TwoFloats Get()
     {
-        return new TwoFloats { Float1 = 3.14159f, Float2 = 2.71828f };
+        return new TwoFloats
+        {
+            Float1 = 3.14159f,
+            Float2 = 2.71828f
+        };
     }
 
     public bool Equals(TwoFloats other)
@@ -279,7 +331,11 @@ struct TwoDoubles
 
     public static TwoDoubles Get()
     {
-        return new TwoDoubles { Double1 = 3.14159d, Double2 = 2.71828d };
+        return new TwoDoubles
+        {
+            Double1 = 3.14159d,
+            Double2 = 2.71828d
+        };
     }
 
     public bool Equals(TwoDoubles other)
@@ -543,8 +599,16 @@ struct Nested1
     {
         return new Nested1
         {
-            Field1 = new LongAndFloat { Long = 0xfeedfaceabadf00d, Float = 3.14159f },
-            Field2 = new LongAndFloat { Long = 0xbeeff00fdeadcafe, Float = 2.71928f }
+            Field1 = new LongAndFloat
+            {
+                Long = 0xfeedfaceabadf00d,
+                Float = 3.14159f
+            },
+            Field2 = new LongAndFloat
+            {
+                Long = 0xbeeff00fdeadcafe,
+                Float = 2.71928f
+            }
         };
     }
 
@@ -565,8 +629,16 @@ struct Nested2
     {
         return new Nested2
         {
-            Field1 = new ByteAndFloat { Byte = 42, Float = 3.14159f },
-            Field2 = new FloatAndByte { Byte = 24, Float = 2.71928f }
+            Field1 = new ByteAndFloat
+            {
+                Byte = 42,
+                Float = 3.14159f
+            },
+            Field2 = new FloatAndByte
+            {
+                Byte = 24,
+                Float = 2.71928f
+            }
         };
     }
 
@@ -586,7 +658,11 @@ unsafe struct Nested3
     public static Nested3 Get()
     {
         byte unused;
-        return new Nested3 { Field1 = &unused, Field2 = FloatAndByte.Get() };
+        return new Nested3
+        {
+            Field1 = &unused,
+            Field2 = FloatAndByte.Get()
+        };
     }
 
     public bool Equals(Nested3 other)
@@ -602,7 +678,11 @@ struct Nested4
 
     public static Nested4 Get()
     {
-        return new Nested4 { Field1 = InlineArray5.Get(), Field2 = 0xcafe };
+        return new Nested4
+        {
+            Field1 = InlineArray5.Get(),
+            Field2 = 0xcafe
+        };
     }
 
     public bool Equals(Nested4 other)
@@ -618,7 +698,11 @@ struct Nested5
 
     public static Nested5 Get()
     {
-        return new Nested5 { Field2 = InlineArray5.Get(), Field1 = 0xcafe };
+        return new Nested5
+        {
+            Field2 = InlineArray5.Get(),
+            Field1 = 0xcafe
+        };
     }
 
     public bool Equals(Nested5 other)
@@ -634,7 +718,11 @@ struct Nested6
 
     public static Nested6 Get()
     {
-        return new Nested6 { Field1 = InlineArray4.Get(), Field2 = 0xcafef00d };
+        return new Nested6
+        {
+            Field1 = InlineArray4.Get(),
+            Field2 = 0xcafef00d
+        };
     }
 
     public bool Equals(Nested6 other)
@@ -650,7 +738,11 @@ struct Nested7
 
     public static Nested7 Get()
     {
-        return new Nested7 { Field2 = InlineArray4.Get(), Field1 = 0xcafef00d };
+        return new Nested7
+        {
+            Field2 = InlineArray4.Get(),
+            Field1 = 0xcafef00d
+        };
     }
 
     public bool Equals(Nested7 other)
@@ -666,7 +758,11 @@ struct Nested8
 
     public static Nested8 Get()
     {
-        return new Nested8 { Field1 = InlineArray4.Get(), Field2 = 0xcafe };
+        return new Nested8
+        {
+            Field1 = InlineArray4.Get(),
+            Field2 = 0xcafe
+        };
     }
 
     public bool Equals(Nested8 other)
@@ -682,7 +778,11 @@ struct Nested9
 
     public static Nested9 Get()
     {
-        return new Nested9 { Field2 = InlineArray4.Get(), Field1 = 0xcafe };
+        return new Nested9
+        {
+            Field2 = InlineArray4.Get(),
+            Field1 = 0xcafe
+        };
     }
 
     public bool Equals(Nested9 other)

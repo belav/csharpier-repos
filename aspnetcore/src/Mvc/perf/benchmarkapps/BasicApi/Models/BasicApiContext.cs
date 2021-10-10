@@ -24,10 +24,26 @@ namespace BasicApi.Models
             var id = -1;
             var categories = new[]
             {
-                new Category { Id = id--, Name = "Dogs" },
-                new Category { Id = id--, Name = "Cats" },
-                new Category { Id = id--, Name = "Rabbits" },
-                new Category { Id = id, Name = "Lions" },
+                new Category
+                {
+                    Id = id--,
+                    Name = "Dogs"
+                },
+                new Category
+                {
+                    Id = id--,
+                    Name = "Cats"
+                },
+                new Category
+                {
+                    Id = id--,
+                    Name = "Rabbits"
+                },
+                new Category
+                {
+                    Id = id,
+                    Name = "Lions"
+                },
             };
 
             id = -1;

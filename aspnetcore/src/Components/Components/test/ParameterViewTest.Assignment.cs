@@ -589,7 +589,11 @@ namespace Microsoft.AspNetCore.Components
                 { nameof(HasInstanceProperties.IntProp), null },
                 { nameof(HasInstanceProperties.StringProp), null },
             }.Build();
-            var target = new HasInstanceProperties { IntProp = 123, StringProp = "Hello" };
+            var target = new HasInstanceProperties
+            {
+                IntProp = 123,
+                StringProp = "Hello"
+            };
 
             // Act
             parameters.SetParameterProperties(target);

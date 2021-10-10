@@ -159,7 +159,11 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                         )
                 )
                 .ReturnsAsync(
-                    new EndSessionValidationResult() { IsError = true, Error = "SomeError" }
+                    new EndSessionValidationResult()
+                    {
+                        IsError = true,
+                        Error = "SomeError"
+                    }
                 );
 
             var identityServerOptions = Options.Create(new IdentityServerOptions());

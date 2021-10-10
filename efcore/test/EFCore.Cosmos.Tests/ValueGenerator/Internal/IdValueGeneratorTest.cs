@@ -35,10 +35,34 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGenerator.Internal
 
             var ids = new List<string>
             {
-                Create(new Blog { Id = 1, OtherId = 1 }),
-                Create(new Post { Id = "1", OtherId = "1" }),
-                Create(new Post { Id = "1", OtherId = "1|" }),
-                Create(new Post { Id = "|1", OtherId = "1" }),
+                Create(
+                    new Blog
+                    {
+                        Id = 1,
+                        OtherId = 1
+                    }
+                ),
+                Create(
+                    new Post
+                    {
+                        Id = "1",
+                        OtherId = "1"
+                    }
+                ),
+                Create(
+                    new Post
+                    {
+                        Id = "1",
+                        OtherId = "1|"
+                    }
+                ),
+                Create(
+                    new Post
+                    {
+                        Id = "|1",
+                        OtherId = "1"
+                    }
+                ),
                 Create(new IntClassEntity { Id = new IntClass(1) }),
                 Create(new IntClassEntity { Id = new IntClass(2) }),
                 Create(new IntStructEntity { Id = new IntStruct(1) }),

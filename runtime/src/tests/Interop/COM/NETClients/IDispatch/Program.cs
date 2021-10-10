@@ -167,7 +167,13 @@ namespace NetClient
             Console.WriteLine($"IDispatch with structs not supported...");
             var dispatchTesting = (DispatchTesting)new DispatchTestingClass();
 
-            var input = new HFA_4() { x = 1f, y = 2f, z = 3f, w = 4f };
+            var input = new HFA_4()
+            {
+                x = 1f,
+                y = 2f,
+                z = 3f,
+                w = 4f
+            };
             Assert.Throws<NotSupportedException>(() => dispatchTesting.DoubleHVAValues(ref input));
         }
 

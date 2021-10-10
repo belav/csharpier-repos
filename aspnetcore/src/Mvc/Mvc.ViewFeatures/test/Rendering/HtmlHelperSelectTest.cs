@@ -1797,32 +1797,72 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                         typeof(EnumWithDisplayNames),
                         new List<SelectListItem>
                         {
-                            new SelectListItem { Text = "cero", Value = "0" },
+                            new SelectListItem
+                            {
+                                Text = "cero",
+                                Value = "0"
+                            },
                             new SelectListItem
                             {
                                 Text = nameof(EnumWithDisplayNames.One),
                                 Value = "1"
                             },
-                            new SelectListItem { Text = "dos", Value = "2" },
-                            new SelectListItem { Text = "tres", Value = "3" },
-                            new SelectListItem { Text = "name from resources", Value = "-2" },
-                            new SelectListItem { Text = "menos uno", Value = "-1" },
+                            new SelectListItem
+                            {
+                                Text = "dos",
+                                Value = "2"
+                            },
+                            new SelectListItem
+                            {
+                                Text = "tres",
+                                Value = "3"
+                            },
+                            new SelectListItem
+                            {
+                                Text = "name from resources",
+                                Value = "-2"
+                            },
+                            new SelectListItem
+                            {
+                                Text = "menos uno",
+                                Value = "-1"
+                            },
                         }
                     },
                     {
                         typeof(EnumWithDisplayNames?),
                         new List<SelectListItem>
                         {
-                            new SelectListItem { Text = "cero", Value = "0" },
+                            new SelectListItem
+                            {
+                                Text = "cero",
+                                Value = "0"
+                            },
                             new SelectListItem
                             {
                                 Text = nameof(EnumWithDisplayNames.One),
                                 Value = "1"
                             },
-                            new SelectListItem { Text = "dos", Value = "2" },
-                            new SelectListItem { Text = "tres", Value = "3" },
-                            new SelectListItem { Text = "name from resources", Value = "-2" },
-                            new SelectListItem { Text = "menos uno", Value = "-1" },
+                            new SelectListItem
+                            {
+                                Text = "dos",
+                                Value = "2"
+                            },
+                            new SelectListItem
+                            {
+                                Text = "tres",
+                                Value = "3"
+                            },
+                            new SelectListItem
+                            {
+                                Text = "name from resources",
+                                Value = "-2"
+                            },
+                            new SelectListItem
+                            {
+                                Text = "menos uno",
+                                Value = "-1"
+                            },
                         }
                     },
                     {
@@ -1911,10 +1951,26 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                         typeof(EnumWithFields),
                         new List<SelectListItem>
                         {
-                            new SelectListItem { Text = nameof(EnumWithFields.Zero), Value = "0" },
-                            new SelectListItem { Text = nameof(EnumWithFields.One), Value = "1" },
-                            new SelectListItem { Text = nameof(EnumWithFields.Two), Value = "2" },
-                            new SelectListItem { Text = nameof(EnumWithFields.Three), Value = "3" },
+                            new SelectListItem
+                            {
+                                Text = nameof(EnumWithFields.Zero),
+                                Value = "0"
+                            },
+                            new SelectListItem
+                            {
+                                Text = nameof(EnumWithFields.One),
+                                Value = "1"
+                            },
+                            new SelectListItem
+                            {
+                                Text = nameof(EnumWithFields.Two),
+                                Value = "2"
+                            },
+                            new SelectListItem
+                            {
+                                Text = nameof(EnumWithFields.Three),
+                                Value = "3"
+                            },
                             new SelectListItem
                             {
                                 Text = nameof(EnumWithFields.MinusTwo),
@@ -1931,10 +1987,26 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                         typeof(EnumWithFields?),
                         new List<SelectListItem>
                         {
-                            new SelectListItem { Text = nameof(EnumWithFields.Zero), Value = "0" },
-                            new SelectListItem { Text = nameof(EnumWithFields.One), Value = "1" },
-                            new SelectListItem { Text = nameof(EnumWithFields.Two), Value = "2" },
-                            new SelectListItem { Text = nameof(EnumWithFields.Three), Value = "3" },
+                            new SelectListItem
+                            {
+                                Text = nameof(EnumWithFields.Zero),
+                                Value = "0"
+                            },
+                            new SelectListItem
+                            {
+                                Text = nameof(EnumWithFields.One),
+                                Value = "1"
+                            },
+                            new SelectListItem
+                            {
+                                Text = nameof(EnumWithFields.Two),
+                                Value = "2"
+                            },
+                            new SelectListItem
+                            {
+                                Text = nameof(EnumWithFields.Three),
+                                Value = "3"
+                            },
                             new SelectListItem
                             {
                                 Text = nameof(EnumWithFields.MinusTwo),

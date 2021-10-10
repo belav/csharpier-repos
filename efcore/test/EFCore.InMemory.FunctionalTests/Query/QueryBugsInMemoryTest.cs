@@ -421,9 +421,21 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             context.Children.AddRange(c11, c12, c13, c21, c22, c31, c32);
 
-            var e1 = new Entity3101 { Id = 1, Children = new[] { c11, c12, c13 } };
-            var e2 = new Entity3101 { Id = 2, Children = new[] { c21, c22 } };
-            var e3 = new Entity3101 { Id = 3, Children = new[] { c31, c32 } };
+            var e1 = new Entity3101
+            {
+                Id = 1,
+                Children = new[] { c11, c12, c13 }
+            };
+            var e2 = new Entity3101
+            {
+                Id = 2,
+                Children = new[] { c21, c22 }
+            };
+            var e3 = new Entity3101
+            {
+                Id = 3,
+                Children = new[] { c31, c32 }
+            };
 
             e2.RootEntity = e1;
 
@@ -1064,7 +1076,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         private static void Seed20729(MyContext20729 context)
         {
             context.Owners.Add(
-                new Owner20729 { Owned1 = new Owned120729(), Owned2 = new Owned220729(), }
+                new Owner20729
+                {
+                    Owned1 = new Owned120729(),
+                    Owned2 = new Owned220729(),
+                }
             );
 
             context.SaveChanges();
@@ -1125,7 +1141,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     )
                     .SelectMany(
                         r => r.rightg.DefaultIfEmpty(),
-                        (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
+                        (x, y) =>
+                            new JoinResult19253<A19253, B19253>
+                            {
+                                Left = x.left,
+                                Right = y
+                            }
                     )
                     .Concat(
                         context.B.GroupJoin(
@@ -1169,7 +1190,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     )
                     .SelectMany(
                         r => r.rightg.DefaultIfEmpty(),
-                        (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
+                        (x, y) =>
+                            new JoinResult19253<A19253, B19253>
+                            {
+                                Left = x.left,
+                                Right = y
+                            }
                     )
                     .Union(
                         context.B.GroupJoin(
@@ -1212,7 +1238,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     )
                     .SelectMany(
                         r => r.rightg.DefaultIfEmpty(),
-                        (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
+                        (x, y) =>
+                            new JoinResult19253<A19253, B19253>
+                            {
+                                Left = x.left,
+                                Right = y
+                            }
                     )
                     .Except(
                         context.B.GroupJoin(
@@ -1254,7 +1285,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     )
                     .SelectMany(
                         r => r.rightg.DefaultIfEmpty(),
-                        (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
+                        (x, y) =>
+                            new JoinResult19253<A19253, B19253>
+                            {
+                                Left = x.left,
+                                Right = y
+                            }
                     )
                     .Intersect(
                         context.B.GroupJoin(
@@ -1318,13 +1354,33 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var tmp_a = new A19253[]
             {
-                new() { a = "a0", a1 = "a1", forkey = "a" },
-                new() { a = "a2", a1 = "a1", forkey = "d" },
+                new()
+                {
+                    a = "a0",
+                    a1 = "a1",
+                    forkey = "a"
+                },
+                new()
+                {
+                    a = "a2",
+                    a1 = "a1",
+                    forkey = "d"
+                },
             };
             var tmp_b = new B19253[]
             {
-                new() { b = "b0", b1 = "b1", forkey = "a" },
-                new() { b = "b2", b1 = "b1", forkey = "c" },
+                new()
+                {
+                    b = "b0",
+                    b1 = "b1",
+                    forkey = "a"
+                },
+                new()
+                {
+                    b = "b2",
+                    b1 = "b1",
+                    forkey = "c"
+                },
             };
             context.A.AddRange(tmp_a);
             context.B.AddRange(tmp_b);
@@ -1423,7 +1479,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     Id1 = 1,
                     Id2 = 11,
-                    OwnedProp = new OwnedClass23687 { A = "A", B = "B" }
+                    OwnedProp = new OwnedClass23687
+                    {
+                        A = "A",
+                        B = "B"
+                    }
                 }
             );
 
@@ -1661,7 +1721,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 new RootEntity18435
                 {
                     Value = "test",
-                    Owned = new TestOwned18435 { First = 2, Second = 4, AnotherValueType = "yay" },
+                    Owned = new TestOwned18435
+                    {
+                        First = 2,
+                        Second = 4,
+                        AnotherValueType = "yay"
+                    },
                     Child = new ChildEntity18435
                     {
                         Owned = new TestOwned18435
@@ -1733,7 +1798,13 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed19425(MyContext19425 context)
         {
-            context.FooTable.Add(new FooTable19425 { Id = 1, Bar = null });
+            context.FooTable.Add(
+                new FooTable19425
+                {
+                    Id = 1,
+                    Bar = null
+                }
+            );
 
             context.SaveChanges();
         }
@@ -1956,9 +2027,21 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed23360(MyContext23360 context)
         {
-            context.User.Add(new User23360() { Forename = "Peter", Surname = "Smith", });
+            context.User.Add(
+                new User23360()
+                {
+                    Forename = "Peter",
+                    Surname = "Smith",
+                }
+            );
 
-            context.Customer.Add(new Customer23360() { GivenName = "John", FamilyName = "Doe", });
+            context.Customer.Add(
+                new Customer23360()
+                {
+                    GivenName = "John",
+                    FamilyName = "Doe",
+                }
+            );
 
             context.SaveChanges();
         }

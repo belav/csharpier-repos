@@ -19,7 +19,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile { NoStore = true, Duration = null }
+                new CacheProfile
+                {
+                    NoStore = true,
+                    Duration = null
+                }
             );
             var context = GetActionExecutingContext();
 
@@ -485,7 +489,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile { Duration = 10, Location = ResponseCacheLocation.None }
+                new CacheProfile
+                {
+                    Duration = 10,
+                    Location = ResponseCacheLocation.None
+                }
             );
             executor.Location = ResponseCacheLocation.Client;
             var context = GetActionExecutingContext();
@@ -524,7 +532,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile { NoStore = true, VaryByHeader = "Accept" }
+                new CacheProfile
+                {
+                    NoStore = true,
+                    VaryByHeader = "Accept"
+                }
             );
             executor.VaryByHeader = "Test";
             var context = GetActionExecutingContext();

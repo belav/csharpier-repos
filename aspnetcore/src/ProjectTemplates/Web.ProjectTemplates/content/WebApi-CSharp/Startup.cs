@@ -72,7 +72,11 @@ namespace Company.WebApplication1
                 {
                     c.SwaggerDoc(
                         "v1",
-                        new OpenApiInfo { Title = "Company.WebApplication1", Version = "v1" }
+                        new OpenApiInfo
+                        {
+                            Title = "Company.WebApplication1",
+                            Version = "v1"
+                        }
                     );
                 }
             );

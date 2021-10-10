@@ -181,7 +181,11 @@ namespace Microsoft.JSInterop.Infrastructure
         {
             // Arrange: Track a .NET object to use as an arg
             var jsRuntime = new TestJSRuntime();
-            var arg3 = new TestDTO { IntVal = 999, StringVal = "My string" };
+            var arg3 = new TestDTO
+            {
+                IntVal = 999,
+                StringVal = "My string"
+            };
             var objectRef = DotNetObjectReference.Create(arg3);
             jsRuntime.Invoke<object>("unimportant", objectRef);
 
@@ -189,7 +193,11 @@ namespace Microsoft.JSInterop.Infrastructure
             var argsJson = JsonSerializer.Serialize(
                 new object[]
                 {
-                    new TestDTO { StringVal = "Another string", IntVal = 456 },
+                    new TestDTO
+                    {
+                        StringVal = "Another string",
+                        IntVal = 456
+                    },
                     new[] { 100, 200 },
                     objectRef
                 },
@@ -244,7 +252,11 @@ namespace Microsoft.JSInterop.Infrastructure
             // Arrange
             var jsRuntime = new TestJSRuntime();
             var method = nameof(SomePublicType.IncorrectDotNetObjectRefUsage);
-            var arg3 = new TestDTO { IntVal = 999, StringVal = "My string" };
+            var arg3 = new TestDTO
+            {
+                IntVal = 999,
+                StringVal = "My string"
+            };
             var objectRef = DotNetObjectReference.Create(arg3);
             jsRuntime.Invoke<object>("unimportant", objectRef);
 
@@ -252,7 +264,11 @@ namespace Microsoft.JSInterop.Infrastructure
             var argsJson = JsonSerializer.Serialize(
                 new object[]
                 {
-                    new TestDTO { StringVal = "Another string", IntVal = 456 },
+                    new TestDTO
+                    {
+                        StringVal = "Another string",
+                        IntVal = 456
+                    },
                     new[] { 100, 200 },
                     objectRef
                 },
@@ -391,7 +407,11 @@ namespace Microsoft.JSInterop.Infrastructure
         {
             // Arrange
             var jsRuntime = new TestJSRuntime();
-            var testDTO = new TestDTO { StringVal = "Hello", IntVal = 4 };
+            var testDTO = new TestDTO
+            {
+                StringVal = "Hello",
+                IntVal = 4
+            };
             var task = jsRuntime.InvokeAsync<TestDTO>("unimportant");
             var argsJson = JsonSerializer.Serialize(
                 new object[] { jsRuntime.LastInvocationAsyncHandle, true, testDTO },
@@ -433,7 +453,11 @@ namespace Microsoft.JSInterop.Infrastructure
         {
             // Arrange
             var jsRuntime = new TestJSRuntime();
-            var testDTO = new TestDTO { StringVal = "Hello", IntVal = 4 };
+            var testDTO = new TestDTO
+            {
+                StringVal = "Hello",
+                IntVal = 4
+            };
             var cts = new CancellationTokenSource();
             var task = jsRuntime.InvokeAsync<TestDTO>("unimportant", cts.Token);
             var argsJson = JsonSerializer.Serialize(
@@ -474,7 +498,11 @@ namespace Microsoft.JSInterop.Infrastructure
             // Arrange: Track some instance plus another object we'll pass as a param
             var jsRuntime = new TestJSRuntime();
             var targetInstance = new SomePublicType();
-            var arg2 = new TestDTO { IntVal = 1234, StringVal = "My string" };
+            var arg2 = new TestDTO
+            {
+                IntVal = 1234,
+                StringVal = "My string"
+            };
             jsRuntime.Invoke<object>(
                 "unimportant",
                 DotNetObjectReference.Create(targetInstance),
@@ -621,7 +649,11 @@ namespace Microsoft.JSInterop.Infrastructure
             var argsJson = JsonSerializer.Serialize(
                 new object[]
                 {
-                    new TestDTO { StringVal = "Another string", IntVal = 456 },
+                    new TestDTO
+                    {
+                        StringVal = "Another string",
+                        IntVal = 456
+                    },
                     new[] { 100, 200 },
                 },
                 jsRuntime.JsonSerializerOptions
@@ -659,7 +691,11 @@ namespace Microsoft.JSInterop.Infrastructure
             var argsJson = JsonSerializer.Serialize(
                 new object[]
                 {
-                    new TestDTO { StringVal = "Another string", IntVal = 456 },
+                    new TestDTO
+                    {
+                        StringVal = "Another string",
+                        IntVal = 456
+                    },
                     new[] { 100, 200 },
                     objectRef,
                     7,
@@ -696,7 +732,11 @@ namespace Microsoft.JSInterop.Infrastructure
             // Arrange: Track some instance plus another object we'll pass as a param
             var jsRuntime = new TestJSRuntime();
             var targetInstance = new SomePublicType();
-            var arg2 = new TestDTO { IntVal = 1234, StringVal = "My string" };
+            var arg2 = new TestDTO
+            {
+                IntVal = 1234,
+                StringVal = "My string"
+            };
             var arg1Ref = DotNetObjectReference.Create(targetInstance);
             var arg2Ref = DotNetObjectReference.Create(arg2);
             jsRuntime.Invoke<object>("unimportant", arg1Ref, arg2Ref);
@@ -705,7 +745,11 @@ namespace Microsoft.JSInterop.Infrastructure
             var argsJson = JsonSerializer.Serialize(
                 new object[]
                 {
-                    new TestDTO { IntVal = 1000, StringVal = "String via JSON" },
+                    new TestDTO
+                    {
+                        IntVal = 1000,
+                        StringVal = "String via JSON"
+                    },
                     arg2Ref,
                 },
                 jsRuntime.JsonSerializerOptions
@@ -1092,7 +1136,11 @@ namespace Microsoft.JSInterop.Infrastructure
 
             [JSInvokable("InvocableStaticNonVoid")]
             public static object MyInvocableNonVoid() =>
-                new TestDTO { StringVal = "Test", IntVal = 123 };
+                new TestDTO
+                {
+                    StringVal = "Test",
+                    IntVal = 123
+                };
 
             [JSInvokable("InvocableStaticWithParams")]
             public static object[] MyInvocableWithParams(
@@ -1125,7 +1173,11 @@ namespace Microsoft.JSInterop.Infrastructure
 
             [JSInvokable]
             public static TestDTO InvokableMethodWithoutCustomIdentifier() =>
-                new TestDTO { StringVal = "InvokableMethodWithoutCustomIdentifier", IntVal = 456 };
+                new TestDTO
+                {
+                    StringVal = "InvokableMethodWithoutCustomIdentifier",
+                    IntVal = 456
+                };
 
             [JSInvokable]
             public void InvokableInstanceVoid()

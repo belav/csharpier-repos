@@ -416,7 +416,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                 var metadataReader = reader.GetMetadataReader();
                 var def = metadataReader.GetAssemblyDefinition();
                 var name = metadataReader.GetString(def.Name);
-                return new AssemblyName() { Name = name, Version = def.Version };
+                return new AssemblyName()
+                {
+                    Name = name,
+                    Version = def.Version
+                };
             }
         }
 

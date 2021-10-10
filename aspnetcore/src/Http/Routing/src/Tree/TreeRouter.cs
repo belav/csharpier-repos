@@ -99,7 +99,11 @@ namespace Microsoft.AspNetCore.Routing.Tree
                     entry.RouteTemplate,
                     entry.Defaults
                 );
-                var outboundMatch = new OutboundMatch() { Entry = entry, TemplateBinder = binder };
+                var outboundMatch = new OutboundMatch()
+                {
+                    Entry = entry,
+                    TemplateBinder = binder
+                };
                 outboundMatches.Add(outboundMatch);
 
                 // Skip unnamed entries

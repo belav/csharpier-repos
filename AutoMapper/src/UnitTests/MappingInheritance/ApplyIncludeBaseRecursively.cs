@@ -43,7 +43,11 @@ namespace AutoMapper.UnitTests.MappingInheritance
         protected override void Because_of()
         {
             _destination = Mapper.Map<ViewModel>(
-                new SpecificEntity { Map = true, Property1 = "Test" }
+                new SpecificEntity
+                {
+                    Map = true,
+                    Property1 = "Test"
+                }
             );
         }
 

@@ -313,8 +313,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             using var context = new FreezerContext();
             var cherry = new Cherry();
-            var chunky1 = new Chunky { Id = 1, Garcia = cherry };
-            var chunky2 = new Chunky { Id = 2, Garcia = cherry };
+            var chunky1 = new Chunky
+            {
+                Id = 1,
+                Garcia = cherry
+            };
+            var chunky2 = new Chunky
+            {
+                Id = 2,
+                Garcia = cherry
+            };
             cherry.Monkeys = new List<Chunky> { chunky1, chunky2 };
             context.AttachRange(cherry, chunky1, chunky2);
 
@@ -349,8 +357,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             using var context = new FreezerContext();
             var cherry = new Cherry();
-            var chunky1 = new Chunky { Id = 1, Garcia = cherry };
-            var chunky2 = new Chunky { Id = 2, Garcia = cherry };
+            var chunky1 = new Chunky
+            {
+                Id = 1,
+                Garcia = cherry
+            };
+            var chunky2 = new Chunky
+            {
+                Id = 2,
+                Garcia = cherry
+            };
 
             cherry.Monkeys = new List<Chunky> { chunky1, chunky2 };
 
@@ -405,8 +421,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             using var context = new FreezerContext();
             var cherry = new Cherry();
-            var chunky1 = new Chunky { Id = 1, Garcia = cherry };
-            var chunky2 = new Chunky { Id = 2, Garcia = cherry };
+            var chunky1 = new Chunky
+            {
+                Id = 1,
+                Garcia = cherry
+            };
+            var chunky2 = new Chunky
+            {
+                Id = 2,
+                Garcia = cherry
+            };
             cherry.Monkeys = new List<Chunky> { chunky1, chunky2 };
 
             context.Entry(cherry).State = principalState;
@@ -445,8 +469,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             using var context = new FreezerContext();
             var cherry = new Cherry { Id = 1 };
-            var chunky1 = new Chunky { Id = 1, Garcia = cherry };
-            var chunky2 = new Chunky { Id = 2, Garcia = cherry };
+            var chunky1 = new Chunky
+            {
+                Id = 1,
+                Garcia = cherry
+            };
+            var chunky2 = new Chunky
+            {
+                Id = 2,
+                Garcia = cherry
+            };
             cherry.Monkeys = new List<Chunky> { chunky1, chunky2 };
 
             context.Attach(chunky1);

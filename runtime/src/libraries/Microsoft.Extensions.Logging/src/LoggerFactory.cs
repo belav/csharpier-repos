@@ -199,7 +199,11 @@ namespace Microsoft.Extensions.Logging
         private void AddProviderRegistration(ILoggerProvider provider, bool dispose)
         {
             _providerRegistrations.Add(
-                new ProviderRegistration { Provider = provider, ShouldDispose = dispose }
+                new ProviderRegistration
+                {
+                    Provider = provider,
+                    ShouldDispose = dispose
+                }
             );
 
             if (provider is ISupportExternalScope supportsExternalScope)

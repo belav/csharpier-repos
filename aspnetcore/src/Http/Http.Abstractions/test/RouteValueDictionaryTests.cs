@@ -84,7 +84,11 @@ namespace Microsoft.AspNetCore.Routing.Tests
                     new KeyValuePair<string, object?>("Age", 30),
                     new KeyValuePair<string, object?>(
                         "Address",
-                        new Address() { City = "Redmond", State = "WA" }
+                        new Address()
+                        {
+                            City = "Redmond",
+                            State = "WA"
+                        }
                     )
                 };
 
@@ -274,7 +278,11 @@ namespace Microsoft.AspNetCore.Routing.Tests
         public void CreateFromObject_CopiesPropertiesFromRegularType_PublicOnly()
         {
             // Arrange
-            var obj = new Visibility() { IsPublic = true, ItsInternalDealWithIt = 5 };
+            var obj = new Visibility()
+            {
+                IsPublic = true,
+                ItsInternalDealWithIt = 5
+            };
 
             // Act
             var dict = new RouteValueDictionary(obj);
@@ -326,7 +334,11 @@ namespace Microsoft.AspNetCore.Routing.Tests
         public void CreateFromObject_CopiesPropertiesFromRegularType_IncludesInherited()
         {
             // Arrange
-            var obj = new Derived() { TotallySweetProperty = true, DerivedProperty = false };
+            var obj = new Derived()
+            {
+                TotallySweetProperty = true,
+                DerivedProperty = false
+            };
 
             // Act
             var dict = new RouteValueDictionary(obj);

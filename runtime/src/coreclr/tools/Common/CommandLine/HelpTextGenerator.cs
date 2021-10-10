@@ -205,7 +205,14 @@ namespace Internal.CommandLine
         private static IEnumerable<HelpRow> GetCommandRows(ArgumentSyntax argumentSyntax)
         {
             return argumentSyntax.Commands.Where(c => !c.IsHidden)
-                .Select(c => new HelpRow { Header = c.Name, Text = c.Help });
+                .Select(
+                    c =>
+                        new HelpRow
+                        {
+                            Header = c.Name,
+                            Text = c.Help
+                        }
+                );
         }
 
         private static IEnumerable<HelpRow> GetArgumentRows(
@@ -215,7 +222,14 @@ namespace Internal.CommandLine
         {
             return argumentSyntax.GetArguments(command)
                 .Where(a => !a.IsHidden)
-                .Select(a => new HelpRow { Header = GetArgumentRowHeader(a), Text = a.Help });
+                .Select(
+                    a =>
+                        new HelpRow
+                        {
+                            Header = GetArgumentRowHeader(a),
+                            Text = a.Help
+                        }
+                );
         }
 
         private static string GetArgumentRowHeader(Argument argument)

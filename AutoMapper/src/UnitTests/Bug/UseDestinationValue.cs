@@ -98,8 +98,16 @@ namespace AutoMapper.UnitTests.Bug
 
         protected override void Because_of()
         {
-            var branchDto = new BranchDTO { ID = 51, Name = "B1" };
-            var orgDto = new OrganizationDTO { ID = 5, Name = "O1" };
+            var branchDto = new BranchDTO
+            {
+                ID = 51,
+                Name = "B1"
+            };
+            var orgDto = new OrganizationDTO
+            {
+                ID = 5,
+                Name = "O1"
+            };
             orgDto.BranchCollection.Models = new BranchDTO[] { branchDto };
 
             Mapper.Map<Organization>(orgDto);
@@ -199,8 +207,16 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Should_report_missing_constructor()
         {
-            var branchDto = new BranchDTO { ID = 51, Name = "B1" };
-            var orgDto = new OrganizationDTO { ID = 5, Name = "O1" };
+            var branchDto = new BranchDTO
+            {
+                ID = 51,
+                Name = "B1"
+            };
+            var orgDto = new OrganizationDTO
+            {
+                ID = 5,
+                Name = "O1"
+            };
             orgDto.BranchCollection.Models = new BranchDTO[] { branchDto };
 
             new Action(

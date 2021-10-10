@@ -94,7 +94,11 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                var pAdditional = new RESOURCE() { HeaderSize = cbHdr, DataSize = cbData };
+                var pAdditional = new RESOURCE()
+                {
+                    HeaderSize = cbHdr,
+                    DataSize = cbData
+                };
 
                 // Read the TYPE and NAME
 

@@ -190,7 +190,11 @@ namespace System.Web.Mvc.Html.Test
         )
         {
             // Arrange
-            var model = new DontHtmlEncodeModel { Encoded = text, NotEncoded = text, };
+            var model = new DontHtmlEncodeModel
+            {
+                Encoded = text,
+                NotEncoded = text,
+            };
             var viewData = new ViewDataDictionary<DontHtmlEncodeModel>(model);
             var helper = MvcHelper.GetHtmlHelper(viewData);
             var propertyName = htmlEncode ? "Encoded" : "NotEncoded";
@@ -211,7 +215,11 @@ namespace System.Web.Mvc.Html.Test
         )
         {
             // Arrange
-            var model = new DontHtmlEncodeModel { Encoded = text, NotEncoded = text, };
+            var model = new DontHtmlEncodeModel
+            {
+                Encoded = text,
+                NotEncoded = text,
+            };
             var viewData = new ViewDataDictionary<DontHtmlEncodeModel>(model);
             var helper = MvcHelper.GetHtmlHelper(viewData);
 

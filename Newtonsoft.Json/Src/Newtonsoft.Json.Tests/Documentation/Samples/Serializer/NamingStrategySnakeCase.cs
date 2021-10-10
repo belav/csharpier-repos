@@ -53,7 +53,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            User user1 = new User { UserName = "jamesn", Enabled = true };
+            User user1 = new User
+            {
+                UserName = "jamesn",
+                Enabled = true
+            };
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {

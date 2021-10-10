@@ -267,14 +267,22 @@ __tagHelperExecutionContext = __tagHelperScopeManager.End();
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.Html, Content = "Blah-" }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.Html,
+                                Content = "Blah-"
+                            }
                         }
                     },
                     new CSharpCodeAttributeValueIntermediateNode()
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "\"Foo\"", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "\"Foo\"",
+                            }
                         },
                     }
                 }
@@ -314,7 +322,11 @@ Render Children
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.Html, Content = "\"value\"", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.Html,
+                                Content = "\"value\"",
+                            }
                         },
                     }
                 }
@@ -356,14 +368,22 @@ __tagHelperExecutionContext.AddHtmlAttribute(""name"", Html.Raw(__tagHelperStrin
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.Html, Content = "Blah-" }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.Html,
+                                Content = "Blah-"
+                            }
                         }
                     },
                     new CSharpCodeAttributeValueIntermediateNode()
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "\"Foo\"", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "\"Foo\"",
+                            }
                         },
                     }
                 }
@@ -502,7 +522,11 @@ EndAddHtmlAttributeValues(__tagHelperExecutionContext);
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.Html, Content = "value", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.Html,
+                                Content = "value",
+                            }
                         },
                     }
                 }
@@ -547,7 +571,11 @@ __InputTagHelper.StringProp = ""value"";
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "\"3+5\"", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "\"3+5\"",
+                            }
                         },
                     }
                 }
@@ -593,7 +621,11 @@ __InputTagHelper.StringProp = string.Empty;
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "32",
+                            }
                         },
                     }
                 }
@@ -689,7 +721,11 @@ __InputTagHelper.IntProp = 32;
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "32",
+                            }
                         },
                     }
                 }
@@ -734,7 +770,11 @@ __InputTagHelper.IntProp = 32;
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "32",
+                            }
                         },
                     }
                 }
@@ -785,7 +825,11 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "32",
+                            }
                         },
                     }
                 }
@@ -829,7 +873,11 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.Html, Content = "\"value\"", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.Html,
+                                Content = "\"value\"",
+                            }
                         },
                     }
                 }
@@ -880,7 +928,11 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.St
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "32",
+                            }
                         },
                     }
                 },
@@ -977,7 +1029,11 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.In
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "32",
+                            }
                         },
                     }
                 }
@@ -1023,7 +1079,11 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.In
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "32",
+                            }
                         },
                     }
                 }
@@ -1079,7 +1139,11 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelpe
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "17", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "17",
+                            }
                         },
                     }
                 }
@@ -1100,7 +1164,11 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelpe
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "32",
+                            }
                         },
                     }
                 }
@@ -1153,7 +1221,11 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelpe
                     {
                         Children =
                         {
-                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "32",
+                            }
                         },
                     }
                 }

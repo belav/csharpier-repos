@@ -202,10 +202,30 @@ namespace System.Runtime.InteropServices.Tests
 
             TestStruct[] structArray = new TestStruct[]
             {
-                new TestStruct { I = 11, L = 22, D = 33 },
-                new TestStruct { I = 44, L = 55, D = 66 },
-                new TestStruct { I = 77, L = 88, D = 99 },
-                new TestStruct { I = 100, L = 200, D = 300 },
+                new TestStruct
+                {
+                    I = 11,
+                    L = 22,
+                    D = 33
+                },
+                new TestStruct
+                {
+                    I = 44,
+                    L = 55,
+                    D = 66
+                },
+                new TestStruct
+                {
+                    I = 77,
+                    L = 88,
+                    D = 99
+                },
+                new TestStruct
+                {
+                    I = 100,
+                    L = 200,
+                    D = 300
+                },
             };
             TestArray(structArray);
             TestSpan<TestStruct>(structArray);

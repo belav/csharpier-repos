@@ -62,7 +62,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            User user = new User { UserName = @"domain\username", Status = UserStatus.Deleted };
+            User user = new User
+            {
+                UserName = @"domain\username",
+                Status = UserStatus.Deleted
+            };
 
             string json = JsonConvert.SerializeObject(user, Formatting.Indented);
 

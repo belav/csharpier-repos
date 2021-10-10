@@ -175,7 +175,11 @@ namespace Microsoft.EntityFrameworkCore
                         sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue =
                             1;
 
-                        sponsor.Details = new SponsorDetails { Days = 11, Space = 51m };
+                        sponsor.Details = new SponsorDetails
+                        {
+                            Days = 11,
+                            Space = 51m
+                        };
 
                         context.ChangeTracker.DetectChanges();
 

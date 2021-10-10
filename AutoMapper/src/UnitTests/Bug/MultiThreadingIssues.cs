@@ -112,7 +112,11 @@ namespace AutoMapper.UnitTests.Bug
             }
             if (n == 2)
             {
-                return new Type1Point2() { FirstName = @"Fred", MiddleName = @"G" };
+                return new Type1Point2()
+                {
+                    FirstName = @"Fred",
+                    MiddleName = @"G"
+                };
             }
             if (n == 3)
             {

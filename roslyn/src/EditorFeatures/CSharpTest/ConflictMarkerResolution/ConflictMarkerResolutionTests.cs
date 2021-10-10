@@ -736,7 +736,11 @@ class X {
 }
 {|CS8300:>>>>>>>|} merge rev";
 
-            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
+            await new VerifyCS.Test
+            {
+                TestCode = source,
+                FixedCode = source,
+            }.RunAsync();
         }
 
         [WorkItem(23847, "https://github.com/dotnet/roslyn/issues/23847")]
@@ -749,7 +753,11 @@ class X {
 }
 {|CS8300:=======|}";
 
-            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
+            await new VerifyCS.Test
+            {
+                TestCode = source,
+                FixedCode = source,
+            }.RunAsync();
         }
 
         [WorkItem(21107, "https://github.com/dotnet/roslyn/issues/21107")]

@@ -563,7 +563,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var source1 = new BufferBlock<int>();
             var source2 = new BufferBlock<int>();
             var jb = new JoinBlock<int, int>(
-                new GroupingDataflowBlockOptions { Greedy = false, MaxNumberOfGroups = 1 }
+                new GroupingDataflowBlockOptions
+                {
+                    Greedy = false,
+                    MaxNumberOfGroups = 1
+                }
             );
 
             source1.Completion.ContinueWith(_ => jb.Target1.Complete(), TaskScheduler.Default);
@@ -592,7 +596,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     var source1 = new BufferBlock<int>();
                     var source2 = new BufferBlock<int>();
                     var jb = new JoinBlock<int, int>(
-                        new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1, Greedy = greedy }
+                        new GroupingDataflowBlockOptions
+                        {
+                            MaxNumberOfGroups = 1,
+                            Greedy = greedy
+                        }
                     );
 
                     var ignored = source1.Completion.ContinueWith(
@@ -808,8 +816,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestLinkTo_Append()
         {
-            var append = new DataflowLinkOptions() { Append = true, PropagateCompletion = true };
-            var prepend = new DataflowLinkOptions() { Append = false, PropagateCompletion = true };
+            var append = new DataflowLinkOptions()
+            {
+                Append = true,
+                PropagateCompletion = true
+            };
+            var prepend = new DataflowLinkOptions()
+            {
+                Append = false,
+                PropagateCompletion = true
+            };
 
             var source = new BufferBlock<int>();
             var targets = new ActionBlock<int>[6];

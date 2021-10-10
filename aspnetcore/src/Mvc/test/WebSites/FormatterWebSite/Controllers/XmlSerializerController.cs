@@ -31,7 +31,11 @@ namespace FormatterWebSite
         [HttpPost]
         public DummyClass GetDerivedDummyClass(int sampleInput)
         {
-            return new DerivedDummyClass { SampleInt = sampleInput, SampleIntInDerived = 50 };
+            return new DerivedDummyClass
+            {
+                SampleInt = sampleInput,
+                SampleIntInDerived = 50
+            };
         }
 
         [HttpPost]

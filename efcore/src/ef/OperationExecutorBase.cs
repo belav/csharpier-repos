@@ -122,7 +122,11 @@ namespace Microsoft.EntityFrameworkCore.Tools
         public IDictionary RemoveMigration(string? contextType, bool force) =>
             InvokeOperation<IDictionary>(
                 "RemoveMigration",
-                new Dictionary<string, object?> { ["contextType"] = contextType, ["force"] = force }
+                new Dictionary<string, object?>
+                {
+                    ["contextType"] = contextType,
+                    ["force"] = force
+                }
             );
 
         public IEnumerable<IDictionary> GetMigrations(

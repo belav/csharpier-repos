@@ -271,7 +271,11 @@ namespace System.Diagnostics.Tests
             Assert.Throws<Win32Exception>(
                 () =>
                     Process.Start(
-                        new ProcessStartInfo { UseShellExecute = true, FileName = fileToOpen }
+                        new ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            FileName = fileToOpen
+                        }
                     )
             );
         }
@@ -298,7 +302,11 @@ namespace System.Diagnostics.Tests
 
             using (
                 var px = Process.Start(
-                    new ProcessStartInfo { UseShellExecute = true, FileName = fileToOpen }
+                    new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        FileName = fileToOpen
+                    }
                 )
             )
             {
@@ -344,7 +352,11 @@ namespace System.Diagnostics.Tests
 
             using (
                 var process = Process.Start(
-                    new ProcessStartInfo { UseShellExecute = true, FileName = filename }
+                    new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        FileName = filename
+                    }
                 )
             )
             {

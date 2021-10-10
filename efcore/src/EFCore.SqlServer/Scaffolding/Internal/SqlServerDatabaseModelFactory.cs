@@ -643,8 +643,16 @@ WHERE "
 
                     var table =
                         type == "table"
-                            ? new DatabaseTable { Database = databaseModel, Name = name }
-                            : new DatabaseView { Database = databaseModel, Name = name };
+                            ? new DatabaseTable
+                              {
+                                  Database = databaseModel,
+                                  Name = name
+                              }
+                            : new DatabaseView
+                              {
+                                  Database = databaseModel,
+                                  Name = name
+                              };
 
                     table.Schema = schema;
                     table.Comment = comment;

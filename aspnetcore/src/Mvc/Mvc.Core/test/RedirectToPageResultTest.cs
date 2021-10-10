@@ -252,7 +252,11 @@ namespace Microsoft.AspNetCore.Mvc
             httpContext.SetupGet(c => c.RequestServices).Returns(CreateServices());
             var routeData = new RouteData
             {
-                Values = { ["page"] = expected, ["handler"] = "delete", }
+                Values =
+                {
+                    ["page"] = expected,
+                    ["handler"] = "delete",
+                }
             };
 
             var actionContext = new ActionContext(

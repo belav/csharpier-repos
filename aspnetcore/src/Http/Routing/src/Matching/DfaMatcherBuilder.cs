@@ -103,7 +103,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             List<(RouteEndpoint endpoint, int precedenceDigit, List<DfaNode> parents)> previousWork =
                 null;
 
-            var root = new DfaNode() { PathDepth = 0, Label = includeLabel ? "/" : null };
+            var root = new DfaNode()
+            {
+                PathDepth = 0,
+                Label = includeLabel ? "/" : null
+            };
 
             // To prepare for this we need to compute the max depth, as well as
             // a seed list of items to process (entry, root).

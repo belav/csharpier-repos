@@ -1849,19 +1849,31 @@ class C
 }";
             await new VerifyCS.Test
             {
-                TestState = { Sources = { code }, DocumentationMode = DocumentationMode.None, },
+                TestState =
+                {
+                    Sources = { code },
+                    DocumentationMode = DocumentationMode.None,
+                },
             }.RunAsync();
 
             // fully parsing doc comments; System is necessary
             await new VerifyCS.Test
             {
-                TestState = { Sources = { code }, DocumentationMode = DocumentationMode.Parse, },
+                TestState =
+                {
+                    Sources = { code },
+                    DocumentationMode = DocumentationMode.Parse,
+                },
             }.RunAsync();
 
             // fully parsing and diagnosing doc comments; System is necessary
             await new VerifyCS.Test
             {
-                TestState = { Sources = { code }, DocumentationMode = DocumentationMode.Diagnose, },
+                TestState =
+                {
+                    Sources = { code },
+                    DocumentationMode = DocumentationMode.Diagnose,
+                },
             }.RunAsync();
         }
 
@@ -1938,7 +1950,11 @@ class Program
 
             await new VerifyCS.Test
             {
-                TestState = { Sources = { code }, MarkupHandling = markupMode, },
+                TestState =
+                {
+                    Sources = { code },
+                    MarkupHandling = markupMode,
+                },
                 FixedCode = fixedCode,
                 SolutionTransforms =
                 {

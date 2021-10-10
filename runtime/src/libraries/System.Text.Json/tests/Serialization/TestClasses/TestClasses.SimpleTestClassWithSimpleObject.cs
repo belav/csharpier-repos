@@ -76,7 +76,11 @@ namespace System.Text.Json.Serialization.Tests
             MyDateTime = new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc);
             MyGuid = new Guid("5BB9D872-DA8A-471E-AA70-08E19102683D");
             MyEnum = SampleEnum.Two;
-            MyStruct = new SimpleStruct { One = 1, Two = 3.14 };
+            MyStruct = new SimpleStruct
+            {
+                One = 1,
+                Two = 3.14
+            };
         }
 
         public virtual void Verify()

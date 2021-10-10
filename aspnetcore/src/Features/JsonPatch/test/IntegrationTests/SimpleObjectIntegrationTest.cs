@@ -67,7 +67,11 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
         public void MoveIntegerProperty_ToAnotherIntegerProperty()
         {
             // Arrange
-            var targetObject = new SimpleObject() { IntegerValue = 2, AnotherIntegerValue = 3 };
+            var targetObject = new SimpleObject()
+            {
+                IntegerValue = 2,
+                AnotherIntegerValue = 3
+            };
 
             var patchDocument = new JsonPatchDocument();
             patchDocument.Move("IntegerValue", "AnotherIntegerValue");

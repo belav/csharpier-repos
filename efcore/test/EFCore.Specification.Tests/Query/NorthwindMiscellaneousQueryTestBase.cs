@@ -294,7 +294,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Entity_equality_local_composite_key(bool async)
         {
-            var local = new OrderDetail { OrderID = 10248, ProductID = 11 };
+            var local = new OrderDetail
+            {
+                OrderID = 10248,
+                ProductID = 11
+            };
 
             return AssertQuery(
                 async,
@@ -360,7 +364,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from od in ss.Set<OrderDetail>()
-                    where od.Equals(new OrderDetail { OrderID = 10248, ProductID = 11 })
+                    where
+                        od.Equals(
+                            new OrderDetail
+                            {
+                                OrderID = 10248,
+                                ProductID = 11
+                            }
+                        )
                     select od,
                 entryCount: 1
             );
@@ -467,7 +478,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Orders.Where(
                             o =>
                                 o.OrderDetails.FirstOrDefault()
-                                == new OrderDetail { OrderID = 10248, ProductID = 11 }
+                                == new OrderDetail
+                                {
+                                    OrderID = 10248,
+                                    ProductID = 11
+                                }
                         )
                         .ToList()
             );
@@ -593,7 +608,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                         ss =>
                             ss.Set<Customer>()
                                 .Where(c => c.IsLondon)
-                                .Select(c => new Customer { CustomerID = "Foo", City = c.City })
+                                .Select(
+                                    c =>
+                                        new Customer
+                                        {
+                                            CustomerID = "Foo",
+                                            City = c.City
+                                        }
+                                )
                     ),
                 CoreStrings.QueryUnableToTranslateMember(
                     nameof(Customer.IsLondon),
@@ -1731,7 +1753,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             var actual = context.Set<Order>()
                 .Where(o => o.OrderID < 10300)
-                .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
+                .Select(
+                    o =>
+                        new OrderCountDTO
+                        {
+                            Id = o.CustomerID,
+                            Count = o.OrderID
+                        }
+                )
                 .Distinct()
                 .ToList()
                 .OrderBy(e => e.Count)
@@ -1740,7 +1769,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             var expected = Fixture.GetExpectedData()
                 .Set<Order>()
                 .Where(o => o.OrderID < 10300)
-                .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
+                .Select(
+                    o =>
+                        new OrderCountDTO
+                        {
+                            Id = o.CustomerID,
+                            Count = o.OrderID
+                        }
+                )
                 .Distinct()
                 .ToList()
                 .OrderBy(e => e.Count)
@@ -1760,7 +1796,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             var actual = context.Set<Customer>()
                 .Where(c => c.CustomerID.StartsWith("A"))
-                .Select(c => new OrderCountDTO { Id = c.CustomerID, Count = c.Orders.Count })
+                .Select(
+                    c =>
+                        new OrderCountDTO
+                        {
+                            Id = c.CustomerID,
+                            Count = c.Orders.Count
+                        }
+                )
                 .ToList()
                 .OrderBy(e => e.Id)
                 .ToList();
@@ -1768,7 +1811,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             var expected = Fixture.GetExpectedData()
                 .Set<Customer>()
                 .Where(c => c.CustomerID.StartsWith("A"))
-                .Select(c => new OrderCountDTO { Id = c.CustomerID, Count = c.Orders.Count })
+                .Select(
+                    c =>
+                        new OrderCountDTO
+                        {
+                            Id = c.CustomerID,
+                            Count = c.Orders.Count
+                        }
+                )
                 .ToList()
                 .OrderBy(e => e.Id)
                 .ToList();
@@ -1791,7 +1841,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from o in ss.Set<Order>()
                         .Where(o => o.OrderID < 10300)
-                        .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
+                        .Select(
+                            o =>
+                                new OrderCountDTO
+                                {
+                                    Id = o.CustomerID,
+                                    Count = o.OrderID
+                                }
+                        )
                         .Distinct()
                     from c in ss.Set<Customer>().Where(c => c.CustomerID == o.Id)
                     select c,
@@ -1810,7 +1867,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from o in ss.Set<Order>()
                         .Where(o => o.OrderID < 10300)
-                        .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
+                        .Select(
+                            o =>
+                                new OrderCountDTO
+                                {
+                                    Id = o.CustomerID,
+                                    Count = o.OrderID
+                                }
+                        )
                         .Distinct()
                     from c in ss.Set<Customer>().Where(c => o.Id == c.CustomerID)
                     select c,
@@ -1826,7 +1890,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 from c in context.Set<Customer>().Where(c => c.CustomerID.StartsWith("A"))
                 from o in context.Set<Order>()
                     .Where(o => o.OrderID < 10300)
-                    .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
+                    .Select(
+                        o =>
+                            new OrderCountDTO
+                            {
+                                Id = o.CustomerID,
+                                Count = o.OrderID
+                            }
+                    )
                     .Distinct()
                 select new { c, o }
             ).ToList().OrderBy(e => e.c.CustomerID + " " + e.o.Count).ToList();
@@ -1838,7 +1909,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 from o in Fixture.GetExpectedData()
                     .Set<Order>()
                     .Where(o => o.OrderID < 10300)
-                    .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
+                    .Select(
+                        o =>
+                            new OrderCountDTO
+                            {
+                                Id = o.CustomerID,
+                                Count = o.OrderID
+                            }
+                    )
                     .Distinct()
                 select new { c, o }
             ).ToList().OrderBy(e => e.c.CustomerID + " " + e.o.Count).ToList();

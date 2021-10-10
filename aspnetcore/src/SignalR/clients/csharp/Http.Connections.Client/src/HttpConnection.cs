@@ -126,7 +126,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
             {
                 throw new ArgumentNullException(nameof(url));
             }
-            return new HttpConnectionOptions { Url = url, Transports = transports };
+            return new HttpConnectionOptions
+            {
+                Url = url,
+                Transports = transports
+            };
         }
 
         /// <summary>

@@ -29,7 +29,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_prefer_the_property()
             {
-                var destination = Map<Destination>(new Source { Value = 42, OtherValue = 42 });
+                var destination = Map<Destination>(
+                    new Source
+                    {
+                        Value = 42,
+                        OtherValue = 42
+                    }
+                );
                 destination.Value.ShouldBe(42);
                 destination.OtherValue.ShouldBe(42);
             }
@@ -74,7 +80,11 @@ namespace AutoMapper.UnitTests
                 var model = new[]
                 {
                     new ModelObject { BaseString = "Base1" },
-                    new ModelSubObject { BaseString = "Base2", SubString = "Sub2" }
+                    new ModelSubObject
+                    {
+                        BaseString = "Base2",
+                        SubString = "Sub2"
+                    }
                 };
                 _result = (DtoObject[])Mapper.Map(
                     model,
@@ -136,7 +146,11 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                var model = new ModelSubObject { BaseString = "Base2", SubString = "Sub2" };
+                var model = new ModelSubObject
+                {
+                    BaseString = "Base2",
+                    SubString = "Sub2"
+                };
 
                 _result = Mapper.Map<ModelObject, DtoObject>(model);
             }
@@ -188,7 +202,11 @@ namespace AutoMapper.UnitTests
             {
                 var model = new IModelObject[]
                 {
-                    new ModelSubObject { BaseString = "Base2", SubString = "Sub2" }
+                    new ModelSubObject
+                    {
+                        BaseString = "Base2",
+                        SubString = "Sub2"
+                    }
                 };
                 _result = (DtoObject[])Mapper.Map(
                     model,
@@ -266,7 +284,11 @@ namespace AutoMapper.UnitTests
             {
                 var model = new Model
                 {
-                    Object = new ModelSubObject { BaseString = "Base2", SubString = "Sub2" }
+                    Object = new ModelSubObject
+                    {
+                        BaseString = "Base2",
+                        SubString = "Sub2"
+                    }
                 };
 
                 _result = Mapper.Map<Model, DtoModel>(model);
@@ -1717,7 +1739,11 @@ namespace AutoMapper.UnitTests
             protected override void Because_of()
             {
                 _destination = Mapper.Map<Source, Destination>(
-                    new Source { Value = 5, Value2 = 10 }
+                    new Source
+                    {
+                        Value = 5,
+                        Value2 = 10
+                    }
                 );
             }
 

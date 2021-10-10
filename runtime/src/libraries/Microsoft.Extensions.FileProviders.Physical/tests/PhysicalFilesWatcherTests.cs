@@ -100,14 +100,22 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             var cts2 = new CancellationTokenSource();
             var cts3 = new CancellationTokenSource();
 
-            var token1 = new TestPollingChangeToken { Id = 1, CancellationTokenSource = cts1 };
+            var token1 = new TestPollingChangeToken
+            {
+                Id = 1,
+                CancellationTokenSource = cts1
+            };
             var token2 = new TestPollingChangeToken
             {
                 Id = 2,
                 HasChanged = true,
                 CancellationTokenSource = cts2
             };
-            var token3 = new TestPollingChangeToken { Id = 3, CancellationTokenSource = cts3 };
+            var token3 = new TestPollingChangeToken
+            {
+                Id = 3,
+                CancellationTokenSource = cts3
+            };
 
             var tokens = new ConcurrentDictionary<IPollingChangeToken, IPollingChangeToken>
             {
@@ -147,8 +155,16 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                 HasChanged = true,
                 CancellationTokenSource = cts1
             };
-            var token2 = new TestPollingChangeToken { Id = 2, CancellationTokenSource = cts2 };
-            var token3 = new TestPollingChangeToken { Id = 3, CancellationTokenSource = cts3 };
+            var token2 = new TestPollingChangeToken
+            {
+                Id = 2,
+                CancellationTokenSource = cts2
+            };
+            var token3 = new TestPollingChangeToken
+            {
+                Id = 3,
+                CancellationTokenSource = cts3
+            };
             var token4 = new TestPollingChangeToken
             {
                 Id = 4,

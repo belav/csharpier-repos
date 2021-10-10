@@ -31,7 +31,11 @@ namespace AutoMapper.UnitTests.Mappers
         protected override void Because_of()
         {
             _destination = Mapper.Map<StringDictionary>(
-                new Destination { Foo = "Foo", Bar = "Bar" }
+                new Destination
+                {
+                    Foo = "Foo",
+                    Bar = "Bar"
+                }
             );
         }
 
@@ -329,7 +333,11 @@ namespace AutoMapper.UnitTests.Mappers
             source["String"] = null;
             source["SomeBody"] = new SomeOne();
             source["SomeOne"] = null;
-            var destination = new Destination { NullableInt = 1, NullableDate = DateTime.Now };
+            var destination = new Destination
+            {
+                NullableInt = 1,
+                NullableDate = DateTime.Now
+            };
             var someBody = destination.SomeBody;
 
             Mapper.Map(source, destination);

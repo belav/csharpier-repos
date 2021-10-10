@@ -39,7 +39,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
             CancellationTokenSource cancellationTokenSource
         ) =>
             await XunitTestCaseExtensions.TrySkipAsync(this, messageBus)
-                ? new RunSummary { Total = 1, Skipped = 1 }
+                ? new RunSummary
+                  {
+                      Total = 1,
+                      Skipped = 1
+                  }
                 : await base.RunAsync(
                       diagnosticMessageSink,
                       messageBus,

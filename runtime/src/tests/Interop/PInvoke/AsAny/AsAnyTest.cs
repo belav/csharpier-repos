@@ -1007,7 +1007,11 @@ class AsAnyTests
         Console.WriteLine("Scenario: Running Layout Tests:");
         Console.WriteLine("------------------------");
 
-        A layoutStruct = new A { a = 12, b = 3 };
+        A layoutStruct = new A
+        {
+            a = 12,
+            b = 3
+        };
 
         Assert.AreEqual(layoutStruct.b, PassLayout(layoutStruct));
         Console.WriteLine("------------------------");

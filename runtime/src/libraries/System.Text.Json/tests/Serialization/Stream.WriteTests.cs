@@ -229,7 +229,11 @@ namespace System.Text.Json.Serialization.Tests
                     StartTime = new DateTime(i, DateTimeKind.Utc),
                     EndTime = new DateTime(i * 10000, DateTimeKind.Utc),
                     TrackId = i,
-                    Track = new Track() { Id = i, Name = new string('N', i), },
+                    Track = new Track()
+                    {
+                        Id = i,
+                        Name = new string('N', i),
+                    },
                 };
 
                 for (int j = 0; j < 5; j++)

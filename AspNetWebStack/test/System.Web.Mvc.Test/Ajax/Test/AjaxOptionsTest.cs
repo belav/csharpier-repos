@@ -362,7 +362,11 @@ namespace System.Web.Mvc.Ajax.Test
         )
         {
             // Arrange
-            AjaxOptions options = new AjaxOptions { UpdateTargetId = id, LoadingElementId = id };
+            AjaxOptions options = new AjaxOptions
+            {
+                UpdateTargetId = id,
+                LoadingElementId = id
+            };
 
             // Act
             var attributes = options.ToUnobtrusiveHtmlAttributes();

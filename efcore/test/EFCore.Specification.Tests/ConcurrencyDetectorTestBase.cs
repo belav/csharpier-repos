@@ -99,7 +99,13 @@ namespace Microsoft.EntityFrameworkCore
 
             public static void Seed(ConcurrencyDetectorDbContext context)
             {
-                context.Products.Add(new() { Id = 1, Name = "Unicorn Party Pack" });
+                context.Products.Add(
+                    new()
+                    {
+                        Id = 1,
+                        Name = "Unicorn Party Pack"
+                    }
+                );
                 context.SaveChanges();
             }
         }

@@ -84,7 +84,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 KnownTypes = new List<Type> { typeof(Car) }
             };
 
-            Car car = new Car { Maker = "Ford", Model = "Explorer" };
+            Car car = new Car
+            {
+                Maker = "Ford",
+                Model = "Explorer"
+            };
 
             string json = JsonConvert.SerializeObject(
                 car,

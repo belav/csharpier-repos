@@ -57,7 +57,11 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
             );
             var host = TextEditorFactory.CreateTextViewHost(view, setFocus: true);
 
-            var window = new Window { Content = host.HostControl, ShowActivated = true, };
+            var window = new Window
+            {
+                Content = host.HostControl,
+                ShowActivated = true,
+            };
 
             window.Closed += (s, a) =>
             {

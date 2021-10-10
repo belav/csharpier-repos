@@ -31,7 +31,11 @@ namespace AutoMapper.UnitTests.Bug
 
         protected override void Because_of()
         {
-            var source = new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new[] { 5, 6 }, };
+            var source = new Source
+            {
+                Values = new[] { 1, 2, 3, 4 },
+                Values2 = new[] { 5, 6 },
+            };
             _destination = Mapper.Map<Source, Destination>(source);
         }
 

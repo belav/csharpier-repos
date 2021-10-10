@@ -181,9 +181,17 @@ namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel
                 Nation = "Tyrus"
             };
 
-            var hanover = new City { Location = "Hanover's location", Name = "Hanover" };
+            var hanover = new City
+            {
+                Location = "Hanover's location",
+                Name = "Hanover"
+            };
 
-            var unknown = new City { Location = "Unknown", Name = "Unknown" };
+            var unknown = new City
+            {
+                Location = "Unknown",
+                Name = "Unknown"
+            };
 
             var cities = new List<City> { jacinto, ephyra, hanover, unknown };
             return cities;
@@ -255,7 +263,12 @@ namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel
                     AmmunitionType = AmmunitionType.Cartridge,
                     IsAutomatic = false
                 },
-                new() { Id = 10, Name = "Mauler's Flail", IsAutomatic = false }
+                new()
+                {
+                    Id = 10,
+                    Name = "Mauler's Flail",
+                    IsAutomatic = false
+                }
             };
 
         public static IReadOnlyList<CogTag> CreateTags() =>
@@ -426,7 +439,12 @@ namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel
         public static IReadOnlyList<LocustHighCommand> CreateHighCommands() =>
             new List<LocustHighCommand>
             {
-                new() { Id = 1, Name = "Locust Main Command", IsOperational = true }
+                new()
+                {
+                    Id = 1,
+                    Name = "Locust Main Command",
+                    IsOperational = true
+                }
             };
 
         public static void WireUp(

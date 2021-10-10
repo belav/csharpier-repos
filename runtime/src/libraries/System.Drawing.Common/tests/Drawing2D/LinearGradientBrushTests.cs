@@ -708,7 +708,11 @@ namespace System.Drawing.Drawing2D.Tests
                 )
             )
             {
-                var blend = new Blend { Factors = factors, Positions = positions };
+                var blend = new Blend
+                {
+                    Factors = factors,
+                    Positions = positions
+                };
                 brush.Blend = blend;
 
                 Assert.Equal(blend.Factors, brush.Blend.Factors);
@@ -733,7 +737,11 @@ namespace System.Drawing.Drawing2D.Tests
                 )
             )
             {
-                var blend = new Blend { Factors = factors, Positions = positions };
+                var blend = new Blend
+                {
+                    Factors = factors,
+                    Positions = positions
+                };
                 AssertExtensions.Throws<ArgumentException>(null, () => brush.Blend = blend);
             }
         }
@@ -790,7 +798,12 @@ namespace System.Drawing.Drawing2D.Tests
                 AssertExtensions.Throws<ArgumentException, ArgumentNullException>(
                     "value",
                     "source",
-                    () => brush.Blend = new Blend { Factors = new float[2], Positions = null }
+                    () =>
+                        brush.Blend = new Blend
+                        {
+                            Factors = new float[2],
+                            Positions = null
+                        }
                 );
             }
         }
@@ -812,7 +825,11 @@ namespace System.Drawing.Drawing2D.Tests
                     "value",
                     null,
                     () =>
-                        brush.Blend = new Blend { Factors = new float[2], Positions = new float[1] }
+                        brush.Blend = new Blend
+                        {
+                            Factors = new float[2],
+                            Positions = new float[1]
+                        }
                 );
             }
         }
@@ -833,7 +850,11 @@ namespace System.Drawing.Drawing2D.Tests
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () =>
-                        brush.Blend = new Blend { Factors = new float[0], Positions = new float[0] }
+                        brush.Blend = new Blend
+                        {
+                            Factors = new float[0],
+                            Positions = new float[0]
+                        }
                 );
             }
         }
@@ -1173,7 +1194,11 @@ namespace System.Drawing.Drawing2D.Tests
             {
                 Assert.NotNull(brush.InterpolationColors);
 
-                brush.Blend = new Blend { Factors = new float[1], Positions = new float[1] };
+                brush.Blend = new Blend
+                {
+                    Factors = new float[1],
+                    Positions = new float[1]
+                };
                 AssertExtensions.Throws<ArgumentException>(null, () => brush.InterpolationColors);
             }
         }

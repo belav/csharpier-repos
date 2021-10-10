@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.Editor.Wpf
         public static ImageMoniker GetImageMoniker(this Glyph glyph)
         {
             var imageId = glyph.GetImageId();
-            return new ImageMoniker() { Guid = imageId.Guid, Id = imageId.Id };
+            return new ImageMoniker()
+            {
+                Guid = imageId.Guid,
+                Id = imageId.Id
+            };
         }
     }
 }

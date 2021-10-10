@@ -14,7 +14,11 @@ namespace System.Web.Http.ApiExplorer
         {
             return Content<User>(
                 HttpStatusCode.OK,
-                new User { FirstName = "foo", LastName = "bar" }
+                new User
+                {
+                    FirstName = "foo",
+                    LastName = "bar"
+                }
             );
         }
 

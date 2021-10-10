@@ -297,7 +297,11 @@ namespace JitBench
                     if (primaryMetricSelector(benchmark, metric))
                     {
                         rows.Add(
-                            new ResultTableRowModel() { Benchmark = benchmark, Metric = metric }
+                            new ResultTableRowModel()
+                            {
+                                Benchmark = benchmark,
+                                Metric = metric
+                            }
                         );
                     }
                 }

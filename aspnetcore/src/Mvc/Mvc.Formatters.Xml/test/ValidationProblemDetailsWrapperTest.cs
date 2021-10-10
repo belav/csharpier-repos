@@ -150,7 +150,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             {
                 Title = "Some title",
                 Detail = "Some detail",
-                Extensions = { ["key1"] = "Test Value 1", ["[Key2]"] = "Test Value 2" },
+                Extensions =
+                {
+                    ["key1"] = "Test Value 1",
+                    ["[Key2]"] = "Test Value 2"
+                },
                 Errors =
                 {
                     { "error1", new[] { "Test error 1", "Test error 2" } },
@@ -196,7 +200,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             {
                 Title = "Some title",
                 Detail = "Some detail",
-                Extensions = { ["key1"] = "Test Value 1", ["[Key2]"] = "Test Value 2" },
+                Extensions =
+                {
+                    ["key1"] = "Test Value 1",
+                    ["[Key2]"] = "Test Value 2"
+                },
             };
 
             var wrapper = new ValidationProblemDetailsWrapper(problemDetails);

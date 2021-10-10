@@ -113,7 +113,11 @@ namespace Templates.Test
                     Url = PageUrls.HomeUrl,
                     Links = menuLinks.Append(PageUrls.DocsUrl).Concat(footerLinks)
                 },
-                new Page { Url = PageUrls.PrivacyFullUrl, Links = menuLinks.Concat(footerLinks) }
+                new Page
+                {
+                    Url = PageUrls.PrivacyFullUrl,
+                    Links = menuLinks.Concat(footerLinks)
+                }
             };
 
             using (var aspNetProcess = project.StartBuiltProjectAsync())

@@ -58,7 +58,13 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Serialize()
         {
-            Dict d = new Dict(new Dictionary<string, object> { ["prop1"] = 1, ["prop2"] = 2 });
+            Dict d = new Dict(
+                new Dictionary<string, object>
+                {
+                    ["prop1"] = 1,
+                    ["prop2"] = 2
+                }
+            );
 
             string json = JsonConvert.SerializeObject(d);
             Assert.AreEqual(@"{""prop1"":1,""prop2"":2}", json);

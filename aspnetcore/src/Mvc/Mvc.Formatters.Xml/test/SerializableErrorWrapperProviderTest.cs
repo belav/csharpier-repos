@@ -42,7 +42,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var wrapperProvider = new SerializableErrorWrapperProvider();
-            var person = new Person() { Id = 10, Name = "John" };
+            var person = new Person()
+            {
+                Id = 10,
+                Name = "John"
+            };
 
             var expectedMessage =
                 "The object to be wrapped must be of type "

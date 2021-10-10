@@ -864,7 +864,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_BindRequiredFieldMissing_RaisesModelError()
         {
             // Arrange
-            var model = new ModelWithBindRequired { Name = "original value", Age = -20 };
+            var model = new ModelWithBindRequired
+            {
+                Name = "original value",
+                Age = -20
+            };
 
             var property = GetMetadataForProperty(
                 model.GetType(),
@@ -900,7 +904,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_DataMemberIsRequiredFieldMissing_RaisesModelError()
         {
             // Arrange
-            var model = new ModelWithDataMemberIsRequired { Name = "original value", Age = -20 };
+            var model = new ModelWithDataMemberIsRequired
+            {
+                Name = "original value",
+                Age = -20
+            };
 
             var bindingContext = CreateContext(GetMetadataForType(model.GetType()), model);
 
@@ -936,7 +944,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelAsync_ValueTypePropertyWithBindRequired_SetToNull_CapturesException()
         {
             // Arrange
-            var model = new ModelWithBindRequired { Name = "original value", Age = -20 };
+            var model = new ModelWithBindRequired
+            {
+                Name = "original value",
+                Age = -20
+            };
 
             var bindingContext = CreateContext(GetMetadataForType(model.GetType()), model);
 

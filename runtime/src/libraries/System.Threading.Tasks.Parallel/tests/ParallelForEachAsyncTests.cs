@@ -818,7 +818,11 @@ namespace System.Threading.Tasks.Tests
 
             Task t = Parallel.ForEachAsync(
                 Iterate(),
-                new ParallelOptions { CancellationToken = cts.Token, MaxDegreeOfParallelism = 2 },
+                new ParallelOptions
+                {
+                    CancellationToken = cts.Token,
+                    MaxDegreeOfParallelism = 2
+                },
                 async (item, cancellationToken) =>
                 {
                     if (item == 0)
@@ -859,7 +863,11 @@ namespace System.Threading.Tasks.Tests
 
             Task t = Parallel.ForEachAsync(
                 Iterate(),
-                new ParallelOptions { CancellationToken = cts.Token, MaxDegreeOfParallelism = 2 },
+                new ParallelOptions
+                {
+                    CancellationToken = cts.Token,
+                    MaxDegreeOfParallelism = 2
+                },
                 async (item, cancellationToken) =>
                 {
                     if (item == 0)

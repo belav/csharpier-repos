@@ -84,6 +84,10 @@ WHERE ""c"".""ContactTitle"" = @__contactTitle_1",
         }
 
         protected override DbParameter CreateDbParameter(string name, object value) =>
-            new SqliteParameter { ParameterName = name, Value = value };
+            new SqliteParameter
+            {
+                ParameterName = name,
+                Value = value
+            };
     }
 }

@@ -1375,7 +1375,11 @@ namespace Microsoft.EntityFrameworkCore
                 Single = new2,
                 SingleComposite = new2c
             };
-            var newRoot = new Root { AlternateId = Guid.NewGuid(), RequiredSingleAk = new1 };
+            var newRoot = new Root
+            {
+                AlternateId = Guid.NewGuid(),
+                RequiredSingleAk = new1
+            };
             Root root = null;
             IReadOnlyList<EntityEntry> entries = null;
             RequiredSingleAk1 old1 = null;
@@ -1723,7 +1727,11 @@ namespace Microsoft.EntityFrameworkCore
             var new2 = new RequiredNonPkSingleAk2 { AlternateId = Guid.NewGuid() };
             var new2d = new RequiredNonPkSingleAk2Derived { AlternateId = Guid.NewGuid() };
             var new2dd = new RequiredNonPkSingleAk2MoreDerived { AlternateId = Guid.NewGuid() };
-            var new1 = new RequiredNonPkSingleAk1 { AlternateId = Guid.NewGuid(), Single = new2 };
+            var new1 = new RequiredNonPkSingleAk1
+            {
+                AlternateId = Guid.NewGuid(),
+                Single = new2
+            };
             var new1d = new RequiredNonPkSingleAk1Derived
             {
                 AlternateId = Guid.NewGuid(),

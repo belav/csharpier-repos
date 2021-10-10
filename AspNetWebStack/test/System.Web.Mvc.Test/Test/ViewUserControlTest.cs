@@ -357,7 +357,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             ViewPage p = new ViewPage();
             p.ViewData = new ViewDataDictionary();
-            p.ViewData["Foo"] = new DummyViewData { MyInt = 123, MyString = "Whatever" };
+            p.ViewData["Foo"] = new DummyViewData
+            {
+                MyInt = 123,
+                MyString = "Whatever"
+            };
 
             MockViewUserControl<MyViewData> vuc = new MockViewUserControl<MyViewData>()
             {
@@ -389,7 +393,11 @@ namespace System.Web.Mvc.Test
             };
             p.Controls[0].Controls.Add(vuc);
             p.ViewData = new ViewDataDictionary();
-            p.ViewData["Foo"] = new MyViewData { IntProp = 123, StringProp = "miao" };
+            p.ViewData["Foo"] = new MyViewData
+            {
+                IntProp = 123,
+                StringProp = "miao"
+            };
 
             // Act
             int intProp = vuc.ViewData.Model.IntProp;

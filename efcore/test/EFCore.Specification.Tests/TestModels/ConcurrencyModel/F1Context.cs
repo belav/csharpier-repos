@@ -44,28 +44,44 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
             {
                 Id = 1,
                 Name = "FO 108X",
-                StorageLocation = new Location { Latitude = 47.64491, Longitude = -122.128101 },
+                StorageLocation = new Location
+                {
+                    Latitude = 47.64491,
+                    Longitude = -122.128101
+                },
                 EngineSupplier = engineSuppliers.Single(s => s.Name == "Mercedes")
             };
             var renaultEngine = new Engine
             {
                 Id = 2,
                 Name = "RS27-2010",
-                StorageLocation = new Location { Latitude = 47.644199, Longitude = -122.127049 },
+                StorageLocation = new Location
+                {
+                    Latitude = 47.644199,
+                    Longitude = -122.127049
+                },
                 EngineSupplier = engineSuppliers.Single(s => s.Name == "Renault")
             };
             var ferrariEngine = new Engine
             {
                 Id = 3,
                 Name = "056",
-                StorageLocation = new Location { Latitude = 47.64256, Longitude = -122.130609 },
+                StorageLocation = new Location
+                {
+                    Latitude = 47.64256,
+                    Longitude = -122.130609
+                },
                 EngineSupplier = engineSuppliers.Single(s => s.Name == "Ferrari")
             };
             var cosworthEngine = new Engine
             {
                 Id = 4,
                 Name = "CA2010",
-                StorageLocation = new Location { Latitude = 47.644851, Longitude = -122.129781 },
+                StorageLocation = new Location
+                {
+                    Latitude = 47.644851,
+                    Longitude = -122.129781
+                },
                 EngineSupplier = engineSuppliers.Single(s => s.Name == "Cosworth")
             };
 
@@ -838,15 +854,31 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
                 context.Drivers.Add(driver);
             }
 
-            var shell = new Sponsor { Id = 1, Name = "Shell" };
+            var shell = new Sponsor
+            {
+                Id = 1,
+                Name = "Shell"
+            };
             var vodafone = new TitleSponsor
             {
                 Id = 2,
                 Name = "Vodafone",
-                Details = new SponsorDetails { Days = 10, Space = 50m }
+                Details = new SponsorDetails
+                {
+                    Days = 10,
+                    Space = 50m
+                }
             };
-            var bridgestone = new Sponsor { Id = 3, Name = "Bridgestone" };
-            var fia = new Sponsor { Id = 4, Name = "FIA" };
+            var bridgestone = new Sponsor
+            {
+                Id = 3,
+                Name = "Bridgestone"
+            };
+            var fia = new Sponsor
+            {
+                Id = 4,
+                Name = "FIA"
+            };
 
             foreach (var sponsor in new List<Sponsor> { shell, vodafone, bridgestone, fia })
             {

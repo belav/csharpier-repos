@@ -35,7 +35,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             );
 
             var modelState = testContext.ModelState;
-            var model = new Address { Street = "DefaultStreet", City = "Toronto", };
+            var model = new Address
+            {
+                Street = "DefaultStreet",
+                City = "Toronto",
+            };
             var oldModel = model;
 
             // Act
@@ -127,7 +131,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 new Person1
                 {
                     Name = "One",
-                    Address = new Address { Street = "DefaultStreet", City = "Toronto", },
+                    Address = new Address
+                    {
+                        Street = "DefaultStreet",
+                        City = "Toronto",
+                    },
                 },
                 new Person1 { Name = "Two" },
                 new Person1 { Name = "Three" },
@@ -178,7 +186,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var model = new Person1
             {
                 Name = "Joe",
-                Address = new Address { Street = "DefaultStreet", City = "Toronto", },
+                Address = new Address
+                {
+                    Street = "DefaultStreet",
+                    City = "Toronto",
+                },
             };
             var oldModel = model;
 
@@ -315,8 +327,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Address =
                 {
-                    new Address { Street = "Old street", City = "Redmond", },
-                    new Address { Street = "Older street", City = "Toronto", },
+                    new Address
+                    {
+                        Street = "Old street",
+                        City = "Redmond",
+                    },
+                    new Address
+                    {
+                        Street = "Older street",
+                        City = "Toronto",
+                    },
                 },
             };
 
@@ -473,7 +493,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Address = new Address[]
                 {
-                    new Address { Street = "Old street", City = "Toronto", },
+                    new Address
+                    {
+                        Street = "Old street",
+                        City = "Toronto",
+                    },
                 },
             };
             var collection = model.Address;
@@ -542,7 +566,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         private class Person7
         {
             public IEnumerable<Address> Address { get; } =
-                new Address[] { new Address() { City = "Redmond", Street = "One Microsoft Way" } };
+                new Address[]
+                {
+                    new Address()
+                    {
+                        City = "Redmond",
+                        Street = "One Microsoft Way"
+                    }
+                };
         }
 
         [Fact]
@@ -586,7 +617,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         private class Person8
         {
             public ICollection<Address> Address { get; } =
-                new Address[] { new Address() { City = "Redmond", Street = "One Microsoft Way" } };
+                new Address[]
+                {
+                    new Address()
+                    {
+                        City = "Redmond",
+                        Street = "One Microsoft Way"
+                    }
+                };
         }
 
         [Fact]
@@ -639,7 +677,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             );
 
             var modelState = testContext.ModelState;
-            var model = new Address { Street = "DefaultStreet", City = "Toronto", };
+            var model = new Address
+            {
+                Street = "DefaultStreet",
+                City = "Toronto",
+            };
             var oldModel = model;
 
             // Act
@@ -724,7 +766,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 new Person1
                 {
                     Name = "One",
-                    Address = new Address { Street = "DefaultStreet", City = "Toronto", },
+                    Address = new Address
+                    {
+                        Street = "DefaultStreet",
+                        City = "Toronto",
+                    },
                 },
                 new Person1 { Name = "Two" },
                 new Person1 { Name = "Three" },
@@ -775,7 +821,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var model = new Person1
             {
                 Name = "Joe",
-                Address = new Address { Street = "DefaultStreet", City = "Toronto", },
+                Address = new Address
+                {
+                    Street = "DefaultStreet",
+                    City = "Toronto",
+                },
             };
             var oldModel = model;
 
@@ -906,8 +956,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Address =
                 {
-                    new Address { Street = "Old street", City = "Redmond", },
-                    new Address { Street = "Older street", City = "Toronto", },
+                    new Address
+                    {
+                        Street = "Old street",
+                        City = "Redmond",
+                    },
+                    new Address
+                    {
+                        Street = "Older street",
+                        City = "Toronto",
+                    },
                 },
             };
 
@@ -995,7 +1053,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Address = new Address[]
                 {
-                    new Address { Street = "Old street", City = "Toronto", },
+                    new Address
+                    {
+                        Street = "Old street",
+                        City = "Toronto",
+                    },
                 },
             };
             var collection = model.Address;

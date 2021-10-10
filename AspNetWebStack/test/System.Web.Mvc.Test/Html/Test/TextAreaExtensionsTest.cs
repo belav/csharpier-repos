@@ -38,7 +38,11 @@ namespace System.Web.Mvc.Html.Test
             {
                 { "foo", "ViewDataFoo" }
             };
-            viewData.Model = new TextAreaModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
+            viewData.Model = new TextAreaModel
+            {
+                foo = "ViewItemFoo",
+                bar = "ViewItemBar"
+            };
             return viewData;
         }
 
@@ -48,7 +52,11 @@ namespace System.Web.Mvc.Html.Test
             {
                 { "foo", "ViewDataFoo" }
             };
-            viewData.Model = new TextAreaModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
+            viewData.Model = new TextAreaModel
+            {
+                foo = "ViewItemFoo",
+                bar = "ViewItemBar"
+            };
 
             ModelState modelStateFoo = new ModelState();
             modelStateFoo.Errors.Add(new ModelError("foo error 1"));

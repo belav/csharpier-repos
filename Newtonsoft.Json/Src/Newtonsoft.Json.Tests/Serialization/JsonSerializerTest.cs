@@ -775,7 +775,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeMetadataType2()
         {
-            FaqItem c = new FaqItem() { FaqId = 1, Sections = { new FaqSection() } };
+            FaqItem c = new FaqItem()
+            {
+                FaqId = 1,
+                Sections = { new FaqSection() }
+            };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
@@ -4580,8 +4584,22 @@ Path '', line 1, position 1."
         {
             ThisGenericTest<KeyValueId> g = new ThisGenericTest<KeyValueId>();
 
-            g.Add(new KeyValueId { Id = 1, Key = "key1", Value = "value1" });
-            g.Add(new KeyValueId { Id = 2, Key = "key2", Value = "value2" });
+            g.Add(
+                new KeyValueId
+                {
+                    Id = 1,
+                    Key = "key1",
+                    Value = "value1"
+                }
+            );
+            g.Add(
+                new KeyValueId
+                {
+                    Id = 2,
+                    Key = "key2",
+                    Value = "value2"
+                }
+            );
 
             g.MyProperty = "some value";
 
@@ -5439,8 +5457,16 @@ Path '', line 1, position 1."
         {
             ClientMap source = new ClientMap()
             {
-                position = new Pos() { X = 100, Y = 200 },
-                center = new PosDouble() { X = 251.6, Y = 361.3 }
+                position = new Pos()
+                {
+                    X = 100,
+                    Y = 200
+                },
+                center = new PosDouble()
+                {
+                    X = 251.6,
+                    Y = 361.3
+                }
             };
 
             string json = JsonConvert.SerializeObject(
@@ -5935,7 +5961,12 @@ Path '', line 1, position 1."
         public void DeserializeStructProperty()
         {
             VectorParent obj = new VectorParent();
-            obj.Position = new TestObjects.Vector { X = 1, Y = 2, Z = 3 };
+            obj.Position = new TestObjects.Vector
+            {
+                X = 1,
+                Y = 2,
+                Z = 3
+            };
 
             string str = JsonConvert.SerializeObject(obj);
 
@@ -7018,7 +7049,11 @@ Path '', line 1, position 1."
         public void DeserializeNullableEnum()
         {
             string json = JsonConvert.SerializeObject(
-                new WithEnums { Id = 7, NullableEnum = null }
+                new WithEnums
+                {
+                    Id = 7,
+                    NullableEnum = null
+                }
             );
 
             Assert.AreEqual(@"{""Id"":7,""NullableEnum"":null}", json);
@@ -7028,7 +7063,11 @@ Path '', line 1, position 1."
             Assert.AreEqual(null, e.NullableEnum);
 
             json = JsonConvert.SerializeObject(
-                new WithEnums { Id = 7, NullableEnum = MyEnum.Value2 }
+                new WithEnums
+                {
+                    Id = 7,
+                    NullableEnum = MyEnum.Value2
+                }
             );
 
             Assert.AreEqual(@"{""Id"":7,""NullableEnum"":1}", json);
@@ -7491,7 +7530,11 @@ Path '', line 1, position 1."
 
             string json = JsonConvert.SerializeObject(
                 new RequiredObject(),
-                new JsonSerializerSettings { Error = error, Formatting = Formatting.Indented }
+                new JsonSerializerSettings
+                {
+                    Error = error,
+                    Formatting = Formatting.Indented
+                }
             );
 
             StringAssert.AreEqual(
@@ -7717,7 +7760,11 @@ Path '', line 1, position 1."
         [Test]
         public void SerializeAndDeserializeWithAttributes()
         {
-            var testObj = new PersonSerializable() { Name = "John Doe", Age = 28 };
+            var testObj = new PersonSerializable()
+            {
+                Name = "John Doe",
+                Age = 28
+            };
 
             var json = Serialize(testObj);
             var objDeserialized = Deserialize<PersonSerializable>(json);
@@ -8361,7 +8408,11 @@ This is just junk, though.";
             string json = JsonConvert.SerializeObject(
                 dates,
                 Formatting.Indented,
-                new JsonSerializerSettings { DateFormatString = "yyyy tt", Culture = culture }
+                new JsonSerializerSettings
+                {
+                    DateFormatString = "yyyy tt",
+                    Culture = culture
+                }
             );
 
             StringAssert.AreEqual(
@@ -9025,7 +9076,11 @@ This is just junk, though.";
         [Test]
         public void ConvertibleIdTest()
         {
-            var c = new TestClassConvertable { Id = new ConvertibleId { Value = 1 }, X = 2 };
+            var c = new TestClassConvertable
+            {
+                Id = new ConvertibleId { Value = 1 },
+                X = 2
+            };
             var s = JsonConvert.SerializeObject(c, Formatting.Indented);
             StringAssert.AreEqual(
                 @"{

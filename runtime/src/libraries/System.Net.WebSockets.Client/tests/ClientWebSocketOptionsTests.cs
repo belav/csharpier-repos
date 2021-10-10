@@ -259,7 +259,11 @@ namespace System.Net.WebSockets.Client.Tests
                             );
                         }
                     ),
-                new LoopbackServer.Options { UseSsl = secure, WebSocketEndpoint = true }
+                new LoopbackServer.Options
+                {
+                    UseSsl = secure,
+                    WebSocketEndpoint = true
+                }
             );
 
             Assert.Equal(secure, callbackInvoked);
@@ -314,7 +318,11 @@ namespace System.Net.WebSockets.Client.Tests
                                 );
                             }
                         ),
-                    new LoopbackServer.Options { UseSsl = true, WebSocketEndpoint = true }
+                    new LoopbackServer.Options
+                    {
+                        UseSsl = true,
+                        WebSocketEndpoint = true
+                    }
                 );
             }
         }

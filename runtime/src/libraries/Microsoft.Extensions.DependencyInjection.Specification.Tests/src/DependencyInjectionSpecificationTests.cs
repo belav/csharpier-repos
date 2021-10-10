@@ -258,7 +258,11 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 p =>
                 {
                     var fakeService = p.GetRequiredService<IFakeService>();
-                    return new TransientFactoryService { FakeService = fakeService, Value = 42 };
+                    return new TransientFactoryService
+                    {
+                        FakeService = fakeService,
+                        Value = 42
+                    };
                 }
             );
             var provider = CreateServiceProvider(collection);
@@ -283,7 +287,11 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 p =>
                 {
                     var fakeService = p.GetService<IFakeService>();
-                    return new TransientFactoryService { FakeService = fakeService, Value = 42 };
+                    return new TransientFactoryService
+                    {
+                        FakeService = fakeService,
+                        Value = 42
+                    };
                 }
             );
             collection.AddScoped(

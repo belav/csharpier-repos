@@ -353,7 +353,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
             object[] obj = new object[5];
             obj[0] = 1;
             obj[1] = obj;
-            obj[2] = n2 = new ListNode() { data = obj, next = n1 };
+            obj[2] = n2 = new ListNode()
+            {
+                data = obj,
+                next = n1
+            };
             obj[3] = new object[] { 4, 5, obj, 6, new ListNode() };
             obj[4] = 3;
             n1.next = n2;

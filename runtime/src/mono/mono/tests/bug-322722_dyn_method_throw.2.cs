@@ -2,9 +2,7 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
-public class MyException : Exception
-{
-}
+public class MyException : Exception { }
 
 class Driver
 {

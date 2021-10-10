@@ -30,7 +30,11 @@ namespace System.Web.Http.ModelBinding
         [InlineData("text/json")]
         public async Task Action_Directly_Reads_HttpRequestMessage(string mediaType)
         {
-            Order order = new Order() { OrderId = "99", OrderValue = 100.0 };
+            Order order = new Order()
+            {
+                OrderId = "99",
+                OrderValue = 100.0
+            };
             var formatter = new MediaTypeFormatterCollection().FindWriter(
                 typeof(Order),
                 new MediaTypeHeaderValue(mediaType)

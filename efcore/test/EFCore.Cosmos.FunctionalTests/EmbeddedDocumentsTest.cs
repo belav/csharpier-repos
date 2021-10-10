@@ -141,7 +141,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     Notes = new List<Note> { note1, note2 }
                 };
                 context.Add(
-                    new Person { Id = 2, Addresses = new List<Address> { existingAddress1Person2 } }
+                    new Person
+                    {
+                        Id = 2,
+                        Addresses = new List<Address> { existingAddress1Person2 }
+                    }
                 );
                 existingAddress1Person3 = new Address
                 {
@@ -304,7 +308,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     AddressTitle = new AddressTitle()
                 };
 
-                context.Add(new Person { Id = 1, Addresses = new List<Address> { address } });
+                context.Add(
+                    new Person
+                    {
+                        Id = 1,
+                        Addresses = new List<Address> { address }
+                    }
+                );
                 Assert.Equal("DefaultTitle", address.AddressTitle.Title);
 
                 await context.SaveChangesAsync();
@@ -341,7 +351,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             {
                 await context.Database.EnsureCreatedAsync();
                 var person = new Person { Id = 1 };
-                address = new Address { Street = "Second", City = "Village" };
+                address = new Address
+                {
+                    Street = "Second",
+                    City = "Village"
+                };
                 person.Addresses.Add(address);
                 context.Add(person);
 
@@ -416,8 +430,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                         Id = 3,
                         Addresses = new[]
                         {
-                            new Address { Street = "First", City = "City" },
-                            new Address { Street = "Second", City = "City" }
+                            new Address
+                            {
+                                Street = "First",
+                                City = "City"
+                            },
+                            new Address
+                            {
+                                Street = "Second",
+                                City = "City"
+                            }
                         }
                     }
                 );

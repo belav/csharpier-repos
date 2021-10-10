@@ -58,7 +58,11 @@ namespace System.Buffers.Text.Tests
                 );
                 yield return new ParserTestData<decimal>(
                     "-0.01e" + int.MinValue,
-                    new MutableDecimal() { Scale = 28, IsNegative = true }.ToDecimal(),
+                    new MutableDecimal()
+                    {
+                        Scale = 28,
+                        IsNegative = true
+                    }.ToDecimal(),
                     'E',
                     expectedSuccess: true
                 );

@@ -67,7 +67,13 @@ namespace Microsoft.EntityFrameworkCore
 
             changeDetector.DetectChangesCalled = false;
 
-            var entry = context.Attach(new Product { Id = 1, Name = "Little Hedgehogs" });
+            var entry = context.Attach(
+                new Product
+                {
+                    Id = 1,
+                    Name = "Little Hedgehogs"
+                }
+            );
 
             entry.Entity.Name = "Big Hedgehogs";
 
@@ -93,7 +99,13 @@ namespace Microsoft.EntityFrameworkCore
 
             changeDetector.DetectChangesCalled = false;
 
-            var entry = context.Attach(new Product { Id = 1, Name = "Little Hedgehogs" });
+            var entry = context.Attach(
+                new Product
+                {
+                    Id = 1,
+                    Name = "Little Hedgehogs"
+                }
+            );
 
             entry.Entity.Name = "Big Hedgehogs";
 
@@ -488,7 +500,14 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.True(context.ChangeTracker.AutoDetectChangesEnabled);
 
-                var product = context.Add(new Product { Id = 1, Name = "Little Hedgehogs" }).Entity;
+                var product =
+                    context.Add(
+                        new Product
+                        {
+                            Id = 1,
+                            Name = "Little Hedgehogs"
+                        }
+                    ).Entity;
 
                 if (async)
                 {
@@ -529,7 +548,14 @@ namespace Microsoft.EntityFrameworkCore
                 context.ChangeTracker.AutoDetectChangesEnabled = false;
                 Assert.False(context.ChangeTracker.AutoDetectChangesEnabled);
 
-                var product = context.Add(new Product { Id = 1, Name = "Little Hedgehogs" }).Entity;
+                var product =
+                    context.Add(
+                        new Product
+                        {
+                            Id = 1,
+                            Name = "Little Hedgehogs"
+                        }
+                    ).Entity;
 
                 if (async)
                 {
@@ -584,7 +610,13 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ButTheHedgehogContext(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var entry = context.Attach(new Product { Id = 1, Name = "Little Hedgehogs" });
+            var entry = context.Attach(
+                new Product
+                {
+                    Id = 1,
+                    Name = "Little Hedgehogs"
+                }
+            );
 
             entry.Entity.Name = "Cracked Cookies";
 
@@ -612,7 +644,13 @@ namespace Microsoft.EntityFrameworkCore
             );
             context.ChangeTracker.AutoDetectChangesEnabled = false;
 
-            var entry = context.Attach(new Product { Id = 1, Name = "Little Hedgehogs" });
+            var entry = context.Attach(
+                new Product
+                {
+                    Id = 1,
+                    Name = "Little Hedgehogs"
+                }
+            );
 
             entry.Entity.Name = "Cracked Cookies";
 
@@ -643,53 +681,245 @@ namespace Microsoft.EntityFrameworkCore
 
             changeDetector.DetectChangesCalled = false;
 
-            context.Add(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.Add((object)new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.AddRange(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.AddRange(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.AddRange(new List<Product> { new() { Id = id++, Name = "Little Hedgehogs" } });
+            context.Add(
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
+            context.Add(
+                (object)new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
             context.AddRange(
-                new List<object> { new Product { Id = id++, Name = "Little Hedgehogs" } }
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
             );
-            await context.AddAsync(new Product { Id = id++, Name = "Little Hedgehogs" });
-            await context.AddAsync((object)new Product { Id = id++, Name = "Little Hedgehogs" });
-            await context.AddRangeAsync(new Product { Id = id++, Name = "Little Hedgehogs" });
-            await context.AddRangeAsync(new Product { Id = id++, Name = "Little Hedgehogs" });
+            context.AddRange(
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
+            context.AddRange(
+                new List<Product>
+                {
+                    new()
+                    {
+                        Id = id++,
+                        Name = "Little Hedgehogs"
+                    }
+                }
+            );
+            context.AddRange(
+                new List<object>
+                {
+                    new Product
+                    {
+                        Id = id++,
+                        Name = "Little Hedgehogs"
+                    }
+                }
+            );
+            await context.AddAsync(
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
+            await context.AddAsync(
+                (object)new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
             await context.AddRangeAsync(
-                new List<Product> { new() { Id = id++, Name = "Little Hedgehogs" } }
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
             );
             await context.AddRangeAsync(
-                new List<object> { new Product { Id = id++, Name = "Little Hedgehogs" } }
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
             );
-            context.Attach(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.Attach((object)new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.AttachRange(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.AttachRange(new Product { Id = id++, Name = "Little Hedgehogs" });
+            await context.AddRangeAsync(
+                new List<Product>
+                {
+                    new()
+                    {
+                        Id = id++,
+                        Name = "Little Hedgehogs"
+                    }
+                }
+            );
+            await context.AddRangeAsync(
+                new List<object>
+                {
+                    new Product
+                    {
+                        Id = id++,
+                        Name = "Little Hedgehogs"
+                    }
+                }
+            );
+            context.Attach(
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
+            context.Attach(
+                (object)new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
             context.AttachRange(
-                new List<Product> { new() { Id = id++, Name = "Little Hedgehogs" } }
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
             );
             context.AttachRange(
-                new List<object> { new Product { Id = id++, Name = "Little Hedgehogs" } }
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
             );
-            context.Update(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.Update((object)new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.UpdateRange(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.UpdateRange(new Product { Id = id++, Name = "Little Hedgehogs" });
+            context.AttachRange(
+                new List<Product>
+                {
+                    new()
+                    {
+                        Id = id++,
+                        Name = "Little Hedgehogs"
+                    }
+                }
+            );
+            context.AttachRange(
+                new List<object>
+                {
+                    new Product
+                    {
+                        Id = id++,
+                        Name = "Little Hedgehogs"
+                    }
+                }
+            );
+            context.Update(
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
+            context.Update(
+                (object)new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
             context.UpdateRange(
-                new List<Product> { new() { Id = id++, Name = "Little Hedgehogs" } }
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
             );
             context.UpdateRange(
-                new List<object> { new Product { Id = id++, Name = "Little Hedgehogs" } }
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
             );
-            context.Remove(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.Remove((object)new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.RemoveRange(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.RemoveRange(new Product { Id = id++, Name = "Little Hedgehogs" });
-            context.RemoveRange(
-                new List<Product> { new() { Id = id++, Name = "Little Hedgehogs" } }
+            context.UpdateRange(
+                new List<Product>
+                {
+                    new()
+                    {
+                        Id = id++,
+                        Name = "Little Hedgehogs"
+                    }
+                }
+            );
+            context.UpdateRange(
+                new List<object>
+                {
+                    new Product
+                    {
+                        Id = id++,
+                        Name = "Little Hedgehogs"
+                    }
+                }
+            );
+            context.Remove(
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
+            context.Remove(
+                (object)new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
             );
             context.RemoveRange(
-                new List<object> { new Product { Id = id, Name = "Little Hedgehogs" } }
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
+            context.RemoveRange(
+                new Product
+                {
+                    Id = id++,
+                    Name = "Little Hedgehogs"
+                }
+            );
+            context.RemoveRange(
+                new List<Product>
+                {
+                    new()
+                    {
+                        Id = id++,
+                        Name = "Little Hedgehogs"
+                    }
+                }
+            );
+            context.RemoveRange(
+                new List<object>
+                {
+                    new Product
+                    {
+                        Id = id,
+                        Name = "Little Hedgehogs"
+                    }
+                }
             );
 
             Assert.False(changeDetector.DetectChangesCalled);
@@ -935,8 +1165,19 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = new NullShadowKeyContext())
             {
                 var assembly = new TestAssembly { Name = "Assembly1" };
-                var testClass = new TestClass { Assembly = assembly, Name = "Class1" };
-                var test = context.Tests.Add(new Test { Class = testClass, Name = "Test1" }).Entity;
+                var testClass = new TestClass
+                {
+                    Assembly = assembly,
+                    Name = "Class1"
+                };
+                var test =
+                    context.Tests.Add(
+                        new Test
+                        {
+                            Class = testClass,
+                            Name = "Test1"
+                        }
+                    ).Entity;
 
                 context.SaveChanges();
 

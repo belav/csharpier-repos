@@ -7799,7 +7799,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     source.Entity<Animal>(
                         x =>
                         {
-                            x.HasData(new Animal { Id = 43, Name = "Bob" });
+                            x.HasData(
+                                new Animal
+                                {
+                                    Id = 43,
+                                    Name = "Bob"
+                                }
+                            );
                         }
                     ),
                 target =>
@@ -7810,7 +7816,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
                             x.HasDiscriminator<int>("Discriminator").HasValue(3);
 
-                            x.HasData(new Shark { Id = 43, Name = "Bob" });
+                            x.HasData(
+                                new Shark
+                                {
+                                    Id = 43,
+                                    Name = "Bob"
+                                }
+                            );
                         }
                     ),
                 upOps =>

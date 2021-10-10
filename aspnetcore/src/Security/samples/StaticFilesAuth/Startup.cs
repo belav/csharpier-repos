@@ -172,7 +172,11 @@ namespace StaticFilesAuth
         private void SetupFileServer(IApplicationBuilder builder, IFileProvider files)
         {
             builder.UseFileServer(
-                new FileServerOptions() { EnableDirectoryBrowsing = true, FileProvider = files }
+                new FileServerOptions()
+                {
+                    EnableDirectoryBrowsing = true,
+                    FileProvider = files
+                }
             );
         }
 

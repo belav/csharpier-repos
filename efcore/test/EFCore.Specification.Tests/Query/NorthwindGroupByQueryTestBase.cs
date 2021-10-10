@@ -439,7 +439,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     ss.Set<Order>()
                         .GroupBy(o => o.OrderID)
-                        .Select(x => new LongIntDto { Id = x.Key, Count = x.Count() }),
+                        .Select(
+                            x =>
+                                new LongIntDto
+                                {
+                                    Id = x.Key,
+                                    Count = x.Count()
+                                }
+                        ),
                 elementSorter: e => e.Id,
                 elementAsserter: (e, a) =>
                 {
@@ -2480,7 +2487,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     ss.Set<Order>()
                         .Select(
-                            o => new ProjectedType { Order = o.OrderID, Customer = o.CustomerID }
+                            o =>
+                                new ProjectedType
+                                {
+                                    Order = o.OrderID,
+                                    Customer = o.CustomerID
+                                }
                         )
                         .GroupBy(a => a.Customer),
                 a => a.Key == "ALFKI"
@@ -3271,7 +3283,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     ss.Set<Order>()
                         .Select(
-                            o => new ProjectedType { Order = o.OrderID, Customer = o.CustomerID }
+                            o =>
+                                new ProjectedType
+                                {
+                                    Order = o.OrderID,
+                                    Customer = o.CustomerID
+                                }
                         )
                         .GroupBy(p => p.Customer)
                         .SelectMany(g => g),

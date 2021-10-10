@@ -89,8 +89,16 @@ public class Tests
         gshared<string>(sarr, 0, 1);
 
         Foo[] arr = new Foo[2];
-        arr[0] = new Foo() { i = 1, j = 2 };
-        arr[1] = new Foo() { i = 3, j = 4 };
+        arr[0] = new Foo()
+        {
+            i = 1,
+            j = 2
+        };
+        arr[1] = new Foo()
+        {
+            i = 3,
+            j = 4
+        };
 
         gshared<Foo>(arr, 0, 1);
         if (arr[0].i != 3 || arr[0].j != 4)
@@ -111,8 +119,16 @@ public class Tests
     public static int test_0_vt_ldelem_stelem()
     {
         Foo[] arr = new Foo[2];
-        arr[0] = new Foo() { i = 1, j = 2 };
-        arr[1] = new Foo() { i = 3, j = 4 };
+        arr[0] = new Foo()
+        {
+            i = 1,
+            j = 2
+        };
+        arr[1] = new Foo()
+        {
+            i = 3,
+            j = 4
+        };
 
         ldelem_stelem<Foo>(arr, 0, 1);
         if (arr[0].i != 3 || arr[0].j != 4)
@@ -138,8 +154,16 @@ public class Tests
     public static int test_0_vt_initobj()
     {
         Foo[] arr = new Foo[2];
-        arr[0] = new Foo() { i = 1, j = 2 };
-        arr[1] = new Foo() { i = 3, j = 4 };
+        arr[0] = new Foo()
+        {
+            i = 1,
+            j = 2
+        };
+        arr[1] = new Foo()
+        {
+            i = 3,
+            j = 4
+        };
 
         initobj<Foo>(arr, 0, 1);
         if (arr[0].i != 0 || arr[0].j != 0)
@@ -185,7 +209,11 @@ public class Tests
     public static int test_0_vt_box()
     {
         Foo[] arr = new Foo[2];
-        arr[0] = new Foo() { i = 1, j = 2 };
+        arr[0] = new Foo()
+        {
+            i = 1,
+            j = 2
+        };
 
         object[] arr2 = new object[16];
         box<int, Foo>(arr, arr2);
@@ -218,7 +246,11 @@ public class Tests
         Foo[] arr = new Foo[2];
 
         object[] arr2 = new object[16];
-        arr2[0] = new Foo() { i = 1, j = 2 };
+        arr2[0] = new Foo()
+        {
+            i = 1,
+            j = 2
+        };
         unbox_any<Foo>(arr, arr2);
         if (arr[0].i != 1 || arr[0].j != 2)
             return 2;
@@ -297,9 +329,17 @@ public class Tests
     {
         var foo = new GFoo<Foo>()
         {
-            t = new Foo() { i = 1, j = 2 },
+            t = new Foo()
+            {
+                i = 1,
+                j = 2
+            },
             i = 5,
-            f = new Foo() { i = 5, j = 6 }
+            f = new Foo()
+            {
+                i = 5,
+                j = 6
+            }
         };
         var farr = new GFoo<Foo>[] { foo };
 
@@ -318,7 +358,11 @@ public class Tests
         ldfld<Foo>(farr, arr);
         if (arr[0].i != 1 || arr[0].j != 2)
             return 3;
-        arr[0] = new Foo() { i = 3, j = 4 };
+        arr[0] = new Foo()
+        {
+            i = 3,
+            j = 4
+        };
         stfld<Foo>(farr, arr);
         if (farr[0].t.i != 3 || farr[0].t.j != 4)
             return 4;
@@ -350,7 +394,14 @@ public class Tests
 
     public static int test_0_stsfld()
     {
-        Foo[] farr = new Foo[] { new Foo() { i = 1, j = 2 } };
+        Foo[] farr = new Foo[]
+        {
+            new Foo()
+            {
+                i = 1,
+                j = 2
+            }
+        };
         stsfld<Foo>(farr);
 
         if (GFoo<Foo>.static_t.i != 1 || GFoo<Foo>.static_t.j != 2)
@@ -362,7 +413,11 @@ public class Tests
             return 2;
 
         var iarr = new int[10];
-        GFoo<Foo>.static_f = new Foo() { i = 5, j = 6 };
+        GFoo<Foo>.static_f = new Foo()
+        {
+            i = 5,
+            j = 6
+        };
         ldsflda<Foo>(iarr);
         if (iarr[0] != 5)
             return 3;
@@ -476,9 +531,17 @@ public class Tests
         if (t != typeof(int))
             return 3;
         var v = args_simple<GFoo2<int>>(
-            new GFoo2<int>() { t = 11, t2 = 12 },
+            new GFoo2<int>()
+            {
+                t = 11,
+                t2 = 12
+            },
             44,
-            new GFoo2<int>() { t = 11, t2 = 12 }
+            new GFoo2<int>()
+            {
+                t = 11,
+                t2 = 12
+            }
         );
         if (v != 44)
             return 4;
@@ -508,12 +571,20 @@ public class Tests
         short s = return_t<short>(16);
         if (s != 16)
             return 5;
-        var v = new GFoo2<int>() { t = 55, t2 = 32 };
+        var v = new GFoo2<int>()
+        {
+            t = 55,
+            t2 = 32
+        };
         var v2 = return_t<GFoo2<int>>(v);
         if (v2.t != 55 || v2.t2 != 32)
             return 6;
         IFaceGSharedVtIn o = new ClassGSharedVtIn();
-        var v3 = new GFoo2<long>() { t = 55, t2 = 32 };
+        var v3 = new GFoo2<long>()
+        {
+            t = 55,
+            t2 = 32
+        };
         var v4 = o.return_t<GFoo2<long>>(v3);
         if (v4.t != 55 || v4.t2 != 32)
             return 7;
@@ -588,7 +659,11 @@ public class Tests
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static GFoo2<T> newobj_vt<T>(T t1, T t2)
     {
-        return new GFoo2<T>() { t = t1, t2 = t2 };
+        return new GFoo2<T>()
+        {
+            t = t1,
+            t2 = t2
+        };
     }
 
     public static int test_0_gshared_new_vt()
@@ -630,7 +705,12 @@ public class Tests
     {
         object o = t;
         T t2 = (T)o;
-        return new A() { a = 1, b = 2, c = 3 };
+        return new A()
+        {
+            a = 1,
+            b = 2,
+            c = 3
+        };
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -669,7 +749,12 @@ public class Tests
             return 3;
         if (return2_t_out(2.0f) != 2.0f)
             return 4;
-        A a = new A() { a = 1, b = 2, c = 3 };
+        A a = new A()
+        {
+            a = 1,
+            b = 2,
+            c = 3
+        };
         A a2 = return2_t_out(a);
         if (a2.a != 1 || a2.b != 2 || a2.c != 3)
             return 5;
@@ -758,7 +843,14 @@ public class Tests
         int i = 1;
         for (int j = 0; j < 10; ++j)
             i++;
-        locals<Foo1>(new Foo1() { i1 = 1, i2 = 2, i3 = 3 });
+        locals<Foo1>(
+            new Foo1()
+            {
+                i1 = 1,
+                i2 = 2,
+                i3 = 3
+            }
+        );
         return 0;
     }
 
@@ -1339,7 +1431,11 @@ public class Tests
     {
         public Pair<int, int> return_vtype()
         {
-            return new Pair<int, int>() { First = 1, Second = 2 };
+            return new Pair<int, int>()
+            {
+                First = 1,
+                Second = 2
+            };
         }
         public AnEnum return_enum()
         {
@@ -1378,7 +1474,11 @@ public class Tests
     {
         IConstrainedCalls c = new CConstrainedCalls();
 
-        Foo foo = new Foo() { i = 5, n = 6 };
+        Foo foo = new Foo()
+        {
+            i = 5,
+            n = 6
+        };
         int val = 3;
         var r = c.normal_args<ConstrainedCalls, int>(
             new ConstrainedCalls(),
@@ -1422,14 +1522,32 @@ public class Tests
         {
             return p;
         };
-        var r1 = call_del<Pair<int, int>>(new Pair<int, int> { First = 1, Second = 2 }, del1);
+        var r1 = call_del<Pair<int, int>>(
+            new Pair<int, int>
+            {
+                First = 1,
+                Second = 2
+            },
+            del1
+        );
         if (r1.First != 1 || r1.Second != 2)
             return 1;
-        var r2 = call_del<Pair<int, int>>(new Pair<int, int> { First = 3, Second = 4 }, del2);
+        var r2 = call_del<Pair<int, int>>(
+            new Pair<int, int>
+            {
+                First = 3,
+                Second = 4
+            },
+            del2
+        );
         if (r2.First != 3 || r2.Second != 4)
             return 2;
         var r3 = call_del<Pair<double, int>>(
-            new Pair<double, int> { First = 1.0, Second = 2 },
+            new Pair<double, int>
+            {
+                First = 1.0,
+                Second = 2
+            },
             del3
         );
         if (r3.First != 1.0 || r3.Second != 2)
@@ -2453,7 +2571,13 @@ public class Tests
             6,
             7,
             8,
-            new BStruct() { a = 1, b = 2, c = 3, d = 4 }
+            new BStruct()
+            {
+                a = 1,
+                b = 2,
+                c = 3,
+                d = 4
+            }
         );
         if (res != 10)
             return 1;
@@ -2503,7 +2627,14 @@ public class Tests
 
         IFoo4<AStruct> foo2 = new Foo4<AStruct>();
         var arr2 = new AStruct[10, 10];
-        var res2 = foo2.Get(arr2, new AStruct() { a = 1, b = 2 });
+        var res2 = foo2.Get(
+            arr2,
+            new AStruct()
+            {
+                a = 1,
+                b = 2
+            }
+        );
         if (res2.a != 1 || res2.b != 2)
             return 2;
         return 0;
@@ -2923,7 +3054,11 @@ public class Tests
     public static int test_0_span()
     {
         IFaceSpan iface = new ImplSpan();
-        var s = new AStruct() { a = 1, b = 2 };
+        var s = new AStruct()
+        {
+            a = 1,
+            b = 2
+        };
         return iface.foo<AStruct>(s);
     }
 

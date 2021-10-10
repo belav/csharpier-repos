@@ -156,7 +156,11 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
                 var authTokens = new List<AuthenticationToken>();
 
                 authTokens.Add(
-                    new AuthenticationToken { Name = "access_token", Value = tokens.AccessToken }
+                    new AuthenticationToken
+                    {
+                        Name = "access_token",
+                        Value = tokens.AccessToken
+                    }
                 );
                 if (!string.IsNullOrEmpty(tokens.RefreshToken))
                 {
@@ -172,7 +176,11 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
                 if (!string.IsNullOrEmpty(tokens.TokenType))
                 {
                     authTokens.Add(
-                        new AuthenticationToken { Name = "token_type", Value = tokens.TokenType }
+                        new AuthenticationToken
+                        {
+                            Name = "token_type",
+                            Value = tokens.TokenType
+                        }
                     );
                 }
 

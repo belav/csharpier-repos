@@ -113,7 +113,11 @@ namespace System.Text.Json.Serialization.Tests
 
         public void Initialize()
         {
-            MySimpleClass = new SimpleTestClass { MyString = "Hello", MyDouble = 3.14 };
+            MySimpleClass = new SimpleTestClass
+            {
+                MyString = "Hello",
+                MyDouble = 3.14
+            };
             MyInt32 = 32;
             MyInt32Array = new int[] { 32 };
         }
@@ -1788,7 +1792,12 @@ namespace System.Text.Json.Serialization.Tests
             name = "Microsoft";
             sites = new List<BasicJsonAddress>
             {
-                new BasicJsonAddress { street = "1 Lone Tree Rd S", city = "Fargo", zip = 58104 },
+                new BasicJsonAddress
+                {
+                    street = "1 Lone Tree Rd S",
+                    city = "Fargo",
+                    zip = 58104
+                },
                 new BasicJsonAddress
                 {
                     street = "8055 Microsoft Way",

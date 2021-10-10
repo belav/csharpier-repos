@@ -29,7 +29,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         public MatchingPairs(IEnumerable<MatchingPair> pairs) => Pairs = pairs.ToList();
 
         public void Add(string old, string @new) =>
-            Pairs.Add(new MatchingPair { Old = old, New = @new });
+            Pairs.Add(
+                new MatchingPair
+                {
+                    Old = old,
+                    New = @new
+                }
+            );
 
         public IEnumerator GetEnumerator() => Pairs.GetEnumerator();
 

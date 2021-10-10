@@ -47,7 +47,11 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 var course = new TrainingCourse { CourseName = "Course 1" };
                 context.TrainingCourses.Add(course);
-                var content = new TrainingContent { ContentName = "Content 1", Course = course };
+                var content = new TrainingContent
+                {
+                    ContentName = "Content 1",
+                    Course = course
+                };
                 context.TrainingContents.Add(content);
                 course.Content.Add(content);
             }

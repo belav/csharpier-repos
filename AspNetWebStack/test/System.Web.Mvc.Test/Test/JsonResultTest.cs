@@ -173,7 +173,11 @@ namespace System.Web.Mvc.Test
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
                 .Verifiable();
 
-            JsonResult result = new JsonResult { Data = data, ContentType = contentType, };
+            JsonResult result = new JsonResult
+            {
+                Data = data,
+                ContentType = contentType,
+            };
 
             // Act
             result.ExecuteResult(mockControllerContext.Object);
@@ -207,7 +211,11 @@ namespace System.Web.Mvc.Test
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
                 .Verifiable();
 
-            JsonResult result = new JsonResult { Data = data, ContentEncoding = contentEncoding };
+            JsonResult result = new JsonResult
+            {
+                Data = data,
+                ContentEncoding = contentEncoding
+            };
 
             // Act
             result.ExecuteResult(mockControllerContext.Object);
@@ -259,7 +267,11 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(jsonData)).Verifiable();
 
-            JsonResult result = new JsonResult { Data = data, MaxJsonLength = 2200000 };
+            JsonResult result = new JsonResult
+            {
+                Data = data,
+                MaxJsonLength = 2200000
+            };
 
             // Act
             result.ExecuteResult(mockControllerContext.Object);
@@ -295,7 +307,11 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(jsonData)).Verifiable();
 
-            JsonResult result = new JsonResult { Data = data, RecursionLimit = 2 };
+            JsonResult result = new JsonResult
+            {
+                Data = data,
+                RecursionLimit = 2
+            };
 
             // Act & Assert
             Assert.Throws<ArgumentException>(

@@ -1024,32 +1024,88 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             context.Database.EnsureCreated();
 
             context.AddRange(
-                new Blog { Id = 77, TopPostId = 78 },
-                new Post { Id = 78, BlogId = 77 },
+                new Blog
+                {
+                    Id = 77,
+                    TopPostId = 78
+                },
+                new Post
+                {
+                    Id = 78,
+                    BlogId = 77
+                },
                 new Widget { Id = 77 },
-                new Widget { Id = 78, ParentWidgetId = 77 },
+                new Widget
+                {
+                    Id = 78,
+                    ParentWidgetId = 77
+                },
                 new WidgetPN { Id = 77 },
-                new WidgetPN { Id = 78, ParentWidgetId = 77 },
+                new WidgetPN
+                {
+                    Id = 78,
+                    ParentWidgetId = 77
+                },
                 new WidgetDN { Id = 77 },
-                new WidgetDN { Id = 78, ParentWidgetId = 77 },
+                new WidgetDN
+                {
+                    Id = 78,
+                    ParentWidgetId = 77
+                },
                 new Smidget { Id = 77 },
-                new Smidget { Id = 78, ParentSmidgetId = 77 },
+                new Smidget
+                {
+                    Id = 78,
+                    ParentSmidgetId = 77
+                },
                 new SmidgetPN { Id = 77 },
-                new SmidgetPN { Id = 78, ParentSmidgetId = 77 },
+                new SmidgetPN
+                {
+                    Id = 78,
+                    ParentSmidgetId = 77
+                },
                 new SmidgetDN { Id = 77 },
-                new SmidgetDN { Id = 78, ParentSmidgetId = 77 },
+                new SmidgetDN
+                {
+                    Id = 78,
+                    ParentSmidgetId = 77
+                },
                 new Category { Id = 77 },
-                new Product { Id = 78, CategoryId = 77 },
+                new Product
+                {
+                    Id = 78,
+                    CategoryId = 77
+                },
                 new CategoryPN { Id = 77 },
-                new ProductPN { Id = 78, CategoryId = 77 },
+                new ProductPN
+                {
+                    Id = 78,
+                    CategoryId = 77
+                },
                 new CategoryDN { Id = 77 },
-                new ProductDN { Id = 78, CategoryId = 77 },
+                new ProductDN
+                {
+                    Id = 78,
+                    CategoryId = 77
+                },
                 new Parent { Id = 77 },
-                new Child { Id = 78, ParentId = 77 },
+                new Child
+                {
+                    Id = 78,
+                    ParentId = 77
+                },
                 new ParentPN { Id = 77 },
-                new ChildPN { Id = 78, ParentId = 77 },
+                new ChildPN
+                {
+                    Id = 78,
+                    ParentId = 77
+                },
                 new ParentDN { Id = 77 },
-                new ChildDN { Id = 78, ParentId = 77 },
+                new ChildDN
+                {
+                    Id = 78,
+                    ParentId = 77
+                },
                 new Order
                 {
                     Id = 77,

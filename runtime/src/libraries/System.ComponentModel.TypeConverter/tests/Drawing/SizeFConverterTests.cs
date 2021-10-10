@@ -24,11 +24,19 @@ namespace System.ComponentModel.TypeConverterTests
             {
                 yield return Tuple.Create(
                     new SizeF(10, 20),
-                    new Dictionary<string, object> { ["Width"] = 10f, ["Height"] = 20f, }
+                    new Dictionary<string, object>
+                    {
+                        ["Width"] = 10f,
+                        ["Height"] = 20f,
+                    }
                 );
                 yield return Tuple.Create(
                     new SizeF(-2, 3),
-                    new Dictionary<string, object> { ["Width"] = -2f, ["Height"] = 3f, }
+                    new Dictionary<string, object>
+                    {
+                        ["Width"] = -2f,
+                        ["Height"] = 3f,
+                    }
                 );
             }
         }
@@ -166,7 +174,11 @@ namespace System.ComponentModel.TypeConverterTests
         [Fact]
         public void CreateInstance_CaseSensitive()
         {
-            var propertyValues = new Dictionary<string, object> { ["width"] = 1, ["Height"] = 1, };
+            var propertyValues = new Dictionary<string, object>
+            {
+                ["width"] = 1,
+                ["Height"] = 1,
+            };
             Assert.Throws<ArgumentException>(() => Converter.CreateInstance(null, propertyValues));
         }
 

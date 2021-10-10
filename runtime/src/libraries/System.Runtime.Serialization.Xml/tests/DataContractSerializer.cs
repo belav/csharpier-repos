@@ -671,8 +671,16 @@ public static partial class DataContractSerializerTests
     {
         SimpleType[] x = new SimpleType[]
         {
-            new SimpleType { P1 = "abc", P2 = 11 },
-            new SimpleType { P1 = "def", P2 = 12 }
+            new SimpleType
+            {
+                P1 = "abc",
+                P2 = 11
+            },
+            new SimpleType
+            {
+                P1 = "def",
+                P2 = 12
+            }
         };
         SimpleType[] y = DataContractSerializerHelper.SerializeAndDeserialize<SimpleType[]>(
             x,
@@ -696,14 +704,30 @@ public static partial class DataContractSerializerTests
         {
             F1 = new SimpleType[]
             {
-                new SimpleType { P1 = "ab", P2 = 1 },
-                new SimpleType { P1 = "cd", P2 = 2 }
+                new SimpleType
+                {
+                    P1 = "ab",
+                    P2 = 1
+                },
+                new SimpleType
+                {
+                    P1 = "cd",
+                    P2 = 2
+                }
             },
             F2 = new int[] { -1, 3 },
             P1 = new SimpleType[]
             {
-                new SimpleType { P1 = "ef", P2 = 5 },
-                new SimpleType { P1 = "gh", P2 = 7 }
+                new SimpleType
+                {
+                    P1 = "ef",
+                    P2 = 5
+                },
+                new SimpleType
+                {
+                    P1 = "gh",
+                    P2 = 7
+                }
             },
             P2 = new int[] { 11, 12 }
         };
@@ -738,8 +762,16 @@ public static partial class DataContractSerializerTests
     public static void DCS_ArrayAsGetOnly()
     {
         TypeWithGetOnlyArrayProperties x = new TypeWithGetOnlyArrayProperties();
-        x.P1[0] = new SimpleType { P1 = "ab", P2 = 1 };
-        x.P1[1] = new SimpleType { P1 = "cd", P2 = 2 };
+        x.P1[0] = new SimpleType
+        {
+            P1 = "ab",
+            P2 = 1
+        };
+        x.P1[1] = new SimpleType
+        {
+            P1 = "cd",
+            P2 = 2
+        };
         x.P2[0] = -1;
         x.P2[1] = 3;
 
@@ -1358,7 +1390,15 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_CustomType()
     {
-        MyTypeA x = new MyTypeA { PropX = new MyTypeC { PropC = 'a', PropB = true }, PropY = 45, };
+        MyTypeA x = new MyTypeA
+        {
+            PropX = new MyTypeC
+            {
+                PropC = 'a',
+                PropB = true
+            },
+            PropY = 45,
+        };
 
         MyTypeA y = DataContractSerializerHelper.SerializeAndDeserialize<MyTypeA>(
             x,
@@ -1517,7 +1557,11 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_EnumAsMember()
     {
-        TypeWithEnumMembers x = new TypeWithEnumMembers { F1 = MyEnum.Three, P1 = MyEnum.Two };
+        TypeWithEnumMembers x = new TypeWithEnumMembers
+        {
+            F1 = MyEnum.Three,
+            P1 = MyEnum.Two
+        };
         TypeWithEnumMembers y =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithEnumMembers>(
                 x,
@@ -1591,7 +1635,11 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_DataMemberNames()
     {
-        var obj = new AppEnvironment() { ScreenDpi = 440, ScreenOrientation = "horizontal" };
+        var obj = new AppEnvironment()
+        {
+            ScreenDpi = 440,
+            ScreenOrientation = "horizontal"
+        };
         var actual = DataContractSerializerHelper.SerializeAndDeserialize(
             obj,
             "<AppEnvironment xmlns=\"http://schemas.datacontract.org/2004/07/\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><screen_dpi_x0028_x_x003A_y_x0029_>440</screen_dpi_x0028_x_x003A_y_x0029_><screen_x003A_orientation>horizontal</screen_x003A_orientation></AppEnvironment>"
@@ -2103,7 +2151,11 @@ public static partial class DataContractSerializerTests
         {
             Optional = IntEnum.Option1,
             OptionalInt = 42,
-            Struct1 = new SomeStruct { A = 1, B = 2 }
+            Struct1 = new SomeStruct
+            {
+                A = 1,
+                B = 2
+            }
         };
 
         // Act
@@ -2122,7 +2174,11 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_SimpleStructWithProperties()
     {
-        SimpleStructWithProperties x = new SimpleStructWithProperties() { Num = 1, Text = "Foo" };
+        SimpleStructWithProperties x = new SimpleStructWithProperties()
+        {
+            Num = 1,
+            Text = "Foo"
+        };
         var y = DataContractSerializerHelper.SerializeAndDeserialize(
             x,
             "<SimpleStructWithProperties xmlns=\"http://schemas.datacontract.org/2004/07/SerializationTypes\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Num>1</Num><Text>Foo</Text></SimpleStructWithProperties>"
@@ -2269,7 +2325,11 @@ public static partial class DataContractSerializerTests
     {
         //Constructor# 5
         DateTimeOffset dto = new DateTimeOffset(new DateTime(2015, 11, 11), new TimeSpan(0, 0, 0));
-        var value = new KnownTypesThroughConstructor() { EnumValue = dto, SimpleTypeValue = dto };
+        var value = new KnownTypesThroughConstructor()
+        {
+            EnumValue = dto,
+            SimpleTypeValue = dto
+        };
         var actual =
             DataContractSerializerHelper.SerializeAndDeserialize<KnownTypesThroughConstructor>(
                 value,
@@ -2764,7 +2824,11 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_TypeWithTypeProperty()
     {
-        TypeWithTypeProperty value = new TypeWithTypeProperty { Id = 123, Name = "Jon Doe" };
+        TypeWithTypeProperty value = new TypeWithTypeProperty
+        {
+            Id = 123,
+            Name = "Jon Doe"
+        };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithTypeProperty>(
                 value,
@@ -2799,8 +2863,22 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithGenericDictionaryAsKnownType()
     {
         TypeWithGenericDictionaryAsKnownType value = new TypeWithGenericDictionaryAsKnownType {  };
-        value.Foo.Add(10, new Level() { Name = "Foo", LevelNo = 1 });
-        value.Foo.Add(20, new Level() { Name = "Bar", LevelNo = 2 });
+        value.Foo.Add(
+            10,
+            new Level()
+            {
+                Name = "Foo",
+                LevelNo = 1
+            }
+        );
+        value.Foo.Add(
+            20,
+            new Level()
+            {
+                Name = "Bar",
+                LevelNo = 2
+            }
+        );
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithGenericDictionaryAsKnownType>(
                 value,
@@ -3399,8 +3477,16 @@ public static partial class DataContractSerializerTests
     public static void DCS_ArrayOfSimpleType_PreserveObjectReferences_True()
     {
         var x = new SimpleType[3];
-        var simpleObject1 = new SimpleType() { P1 = "simpleObject1", P2 = 1 };
-        var simpleObject2 = new SimpleType() { P1 = "simpleObject2", P2 = 2 };
+        var simpleObject1 = new SimpleType()
+        {
+            P1 = "simpleObject1",
+            P2 = 1
+        };
+        var simpleObject2 = new SimpleType()
+        {
+            P1 = "simpleObject2",
+            P2 = 2
+        };
         x[0] = simpleObject1;
         x[1] = simpleObject1;
         x[2] = simpleObject2;
@@ -3429,8 +3515,16 @@ public static partial class DataContractSerializerTests
     public static void DCS_ArrayOfSimpleType_PreserveObjectReferences_False()
     {
         var x = new SimpleType[3];
-        var simpleObject1 = new SimpleType() { P1 = "simpleObject1", P2 = 1 };
-        var simpleObject2 = new SimpleType() { P1 = "simpleObject2", P2 = 2 };
+        var simpleObject1 = new SimpleType()
+        {
+            P1 = "simpleObject1",
+            P2 = 1
+        };
+        var simpleObject2 = new SimpleType()
+        {
+            P1 = "simpleObject2",
+            P2 = 2
+        };
         x[0] = simpleObject1;
         x[1] = simpleObject1;
         x[2] = simpleObject2;
@@ -3461,8 +3555,16 @@ public static partial class DataContractSerializerTests
     public static void DCS_CircularTypes_PreserveObjectReferences_True()
     {
         var root = new TypeWithListOfReferenceChildren();
-        var typeOfReferenceChildA = new TypeOfReferenceChild { Root = root, Name = "A" };
-        var typeOfReferenceChildB = new TypeOfReferenceChild { Root = root, Name = "B" };
+        var typeOfReferenceChildA = new TypeOfReferenceChild
+        {
+            Root = root,
+            Name = "A"
+        };
+        var typeOfReferenceChildB = new TypeOfReferenceChild
+        {
+            Root = root,
+            Name = "B"
+        };
         root.Children = new List<TypeOfReferenceChild>
         {
             typeOfReferenceChildA,
@@ -3503,8 +3605,16 @@ public static partial class DataContractSerializerTests
     public static void DCS_CircularTypes_PreserveObjectReferences_False()
     {
         var root = new TypeWithListOfReferenceChildren();
-        var typeOfReferenceChildA = new TypeOfReferenceChild { Root = root, Name = "A" };
-        var typeOfReferenceChildB = new TypeOfReferenceChild { Root = root, Name = "B" };
+        var typeOfReferenceChildA = new TypeOfReferenceChild
+        {
+            Root = root,
+            Name = "A"
+        };
+        var typeOfReferenceChildB = new TypeOfReferenceChild
+        {
+            Root = root,
+            Name = "B"
+        };
         root.Children = new List<TypeOfReferenceChild>
         {
             typeOfReferenceChildA,
@@ -3547,7 +3657,11 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_TypeWithPrimitiveProperties()
     {
-        TypeWithPrimitiveProperties x = new TypeWithPrimitiveProperties { P1 = "abc", P2 = 11 };
+        TypeWithPrimitiveProperties x = new TypeWithPrimitiveProperties
+        {
+            P1 = "abc",
+            P2 = 11
+        };
         TypeWithPrimitiveProperties y =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithPrimitiveProperties>(
                 x,
@@ -3560,7 +3674,11 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_TypeWithPrimitiveFields()
     {
-        TypeWithPrimitiveFields x = new TypeWithPrimitiveFields { P1 = "abc", P2 = 11 };
+        TypeWithPrimitiveFields x = new TypeWithPrimitiveFields
+        {
+            P1 = "abc",
+            P2 = 11
+        };
         TypeWithPrimitiveFields y =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithPrimitiveFields>(
                 x,
@@ -3711,8 +3829,16 @@ public static partial class DataContractSerializerTests
     {
         var value = new TypeWithPrimitiveProperties[]
         {
-            new TypeWithPrimitiveProperties() { P1 = "abc", P2 = 123 },
-            new TypeWithPrimitiveProperties() { P1 = "def", P2 = 456 },
+            new TypeWithPrimitiveProperties()
+            {
+                P1 = "abc",
+                P2 = 123
+            },
+            new TypeWithPrimitiveProperties()
+            {
+                P1 = "def",
+                P2 = 456
+            },
         };
         var deserialized = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
@@ -3730,7 +3856,11 @@ public static partial class DataContractSerializerTests
         var value = new SimpleType[count];
         for (int i = 0; i < count; i++)
         {
-            value[i] = new SimpleType() { P1 = i.ToString(), P2 = i };
+            value[i] = new SimpleType()
+            {
+                P1 = i.ToString(),
+                P2 = i
+            };
         }
 
         var deserialized = DataContractSerializerHelper.SerializeAndDeserialize(
@@ -3872,8 +4002,16 @@ public static partial class DataContractSerializerTests
     {
         var value = new TypeImplementsGenericICollection<TypeWithPrimitiveProperties>()
         {
-            new TypeWithPrimitiveProperties() { P1 = "abc", P2 = 123 },
-            new TypeWithPrimitiveProperties() { P1 = "def", P2 = 456 },
+            new TypeWithPrimitiveProperties()
+            {
+                P1 = "abc",
+                P2 = 123
+            },
+            new TypeWithPrimitiveProperties()
+            {
+                P1 = "def",
+                P2 = 456
+            },
         };
         var deserialized = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
@@ -6488,7 +6626,11 @@ public static partial class DataContractSerializerTests
     {
         var emp1 = new EmployeeC("Steve");
         var emp2 = new EmployeeC("Lilian");
-        var value = new Manager("Tony") { age = 30, emps = new EmployeeC[] { emp1, emp2 } };
+        var value = new Manager("Tony")
+        {
+            age = 30,
+            emps = new EmployeeC[] { emp1, emp2 }
+        };
 
         Manager actual = DataContractSerializerHelper.SerializeAndDeserialize(
             value,

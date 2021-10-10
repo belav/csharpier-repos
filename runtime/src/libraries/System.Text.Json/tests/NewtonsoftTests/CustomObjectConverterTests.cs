@@ -38,9 +38,17 @@ namespace System.Text.Json.Tests
             NullInterfaceTestClass initial = new NullInterfaceTestClass
             {
                 Company = "Company!",
-                DecimalRange = new Range<decimal> { First = 0, Last = 1 },
+                DecimalRange = new Range<decimal>
+                {
+                    First = 0,
+                    Last = 1
+                },
                 Id = new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
-                IntRange = new Range<int> { First = int.MinValue, Last = int.MaxValue },
+                IntRange = new Range<int>
+                {
+                    First = int.MinValue,
+                    Last = int.MaxValue
+                },
                 Year = 2010,
                 NullDecimalRange = null
             };
@@ -161,7 +169,11 @@ namespace System.Text.Json.Tests
         [Fact]
         public void AssertShouldSerializeTest()
         {
-            MyClass myClass = new MyClass { Value = "Foo", Thing = new MyThing { Number = 456, } };
+            MyClass myClass = new MyClass
+            {
+                Value = "Foo",
+                Thing = new MyThing { Number = 456, }
+            };
             string json = JsonSerializer.Serialize(myClass);
 
             const string expected = @"{""Value"":""Foo"",""Thing"":{""Number"":456}}";

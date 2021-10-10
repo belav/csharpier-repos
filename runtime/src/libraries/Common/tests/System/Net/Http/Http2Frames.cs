@@ -496,7 +496,13 @@ namespace System.Net.Test.Common
                 uint value = BinaryPrimitives.ReadUInt32BigEndian(buffer);
                 buffer = buffer.Slice(4);
 
-                entries.Add(new SettingsEntry { SettingId = id, Value = value });
+                entries.Add(
+                    new SettingsEntry
+                    {
+                        SettingId = id,
+                        Value = value
+                    }
+                );
             }
 
             return new SettingsFrame(header.Flags, entries.ToArray());

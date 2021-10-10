@@ -16,7 +16,13 @@ namespace System.ComponentModel.Composition
             CompositionBatch batch = new CompositionBatch();
             var importer = new AllPublicImportOnly();
             batch.AddPart(importer);
-            batch.AddPart(new AllPublicExportOnly() { ExportA = 5, ExportB = 10 });
+            batch.AddPart(
+                new AllPublicExportOnly()
+                {
+                    ExportA = 5,
+                    ExportB = 10
+                }
+            );
             container.Compose(batch);
 
             Assert.Equal(5, importer.ImportA);
@@ -28,7 +34,11 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.Create();
             CompositionBatch batch = new CompositionBatch();
-            var importer = new AllPublic() { ExportA = 5, ExportB = 10 };
+            var importer = new AllPublic()
+            {
+                ExportA = 5,
+                ExportB = 10
+            };
             batch.AddPart(importer);
             container.Compose(batch);
 
@@ -57,7 +67,13 @@ namespace System.ComponentModel.Composition
             CompositionBatch batch = new CompositionBatch();
             var importer = new AllPrivateImportOnly();
             batch.AddPart(importer);
-            batch.AddPart(new AllPublicExportOnly() { ExportA = 5, ExportB = 10 });
+            batch.AddPart(
+                new AllPublicExportOnly()
+                {
+                    ExportA = 5,
+                    ExportB = 10
+                }
+            );
             container.Compose(batch);
 
             Assert.Equal(5, importer.PublicImportA);

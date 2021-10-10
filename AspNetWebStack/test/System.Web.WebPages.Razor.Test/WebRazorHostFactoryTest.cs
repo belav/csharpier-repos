@@ -196,7 +196,11 @@ namespace System.Web.WebPages.Razor.Test
         public void CreateHostFromConfigUsesDefaultFactoryIfNoHostSectionFound()
         {
             // Arrange
-            RazorWebSectionGroup config = new RazorWebSectionGroup() { Host = null, Pages = null };
+            RazorWebSectionGroup config = new RazorWebSectionGroup()
+            {
+                Host = null,
+                Pages = null
+            };
 
             // Act
             WebPageRazorHost host = WebRazorHostFactory.CreateHostFromConfig(

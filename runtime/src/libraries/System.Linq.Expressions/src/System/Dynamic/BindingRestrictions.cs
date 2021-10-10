@@ -182,7 +182,13 @@ namespace System.Dynamic
                     node = Expression.AndAlso(_tests.Pop().Node, node);
                     depth++;
                 }
-                _tests.Push(new AndNode { Node = node, Depth = depth });
+                _tests.Push(
+                    new AndNode
+                    {
+                        Node = node,
+                        Depth = depth
+                    }
+                );
             }
         }
 

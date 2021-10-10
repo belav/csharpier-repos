@@ -15,7 +15,11 @@ namespace System.IO.Tests.Enumeration
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.FileName.ToString(),
-                new EnumerationOptions() { RecurseSubdirectories = true, MaxRecursionDepth = depth }
+                new EnumerationOptions()
+                {
+                    RecurseSubdirectories = true,
+                    MaxRecursionDepth = depth
+                }
             );
         }
 

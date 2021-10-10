@@ -507,7 +507,13 @@ namespace System.Web.WebPages.Html
             if (optionText != null)
             {
                 builder.AppendLine(
-                    ListItemToOption(new SelectListItem { Text = optionText, Value = String.Empty })
+                    ListItemToOption(
+                        new SelectListItem
+                        {
+                            Text = optionText,
+                            Value = String.Empty
+                        }
+                    )
                 );
             }
             if (selectList != null)

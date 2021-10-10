@@ -19,7 +19,11 @@ namespace HtmlGenerationWebSite.Controllers
                 Number = 0,
                 HomePage = new Uri("http://www.contoso.com")
             },
-            new Product { ProductName = "Product_1", Number = 1, },
+            new Product
+            {
+                ProductName = "Product_1",
+                Number = 1,
+            },
             new Product
             {
                 ProductName = "Product_2",
@@ -56,7 +60,13 @@ namespace HtmlGenerationWebSite.Controllers
 
         public IActionResult Enum()
         {
-            return View(new AClass { DayOfWeek = Models.DayOfWeek.Friday, Month = Month.FirstOne });
+            return View(
+                new AClass
+                {
+                    DayOfWeek = Models.DayOfWeek.Friday,
+                    Month = Month.FirstOne
+                }
+            );
         }
 
         public IActionResult Order()
@@ -130,7 +140,12 @@ namespace HtmlGenerationWebSite.Controllers
                     OfficeNumber = "1002",
                     Gender = Gender.Female
                 },
-                new Employee { Name = "EmployeeName_2", Number = 2, Remote = true },
+                new Employee
+                {
+                    Name = "EmployeeName_2",
+                    Number = 2,
+                    Remote = true
+                },
             };
 
             // Extra data that should be ignored / not used within a template.

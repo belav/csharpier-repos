@@ -1122,7 +1122,11 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = code,
-                FixedState = { Sources = { fixedCode }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { fixedCode },
+                    MarkupHandling = MarkupMode.Allow,
+                },
             }.RunAsync();
         }
 

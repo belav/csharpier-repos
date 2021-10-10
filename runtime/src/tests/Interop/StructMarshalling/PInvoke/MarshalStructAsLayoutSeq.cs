@@ -964,7 +964,13 @@ public class Managed
                     break;
                 case StructID.HFAId:
                 {
-                    HFA hfa = new HFA { f1 = 2.0f, f2 = 10.5f, f3 = 15.2f, f4 = 0.12f };
+                    HFA hfa = new HFA
+                    {
+                        f1 = 2.0f,
+                        f2 = 10.5f,
+                        f3 = 15.2f,
+                        f4 = 0.12f
+                    };
 
                     float expected = hfa.f1 * hfa.f2 * hfa.f3 * hfa.f4;
                     float actual;
@@ -980,7 +986,11 @@ public class Managed
                 }
                 case StructID.DoubleHFAId:
                 {
-                    DoubleHFA doubleHFA = new DoubleHFA { d1 = 123.456, d2 = 456.789 };
+                    DoubleHFA doubleHFA = new DoubleHFA
+                    {
+                        d1 = 123.456,
+                        d2 = 456.789
+                    };
 
                     double expected = doubleHFA.d1 * doubleHFA.d2;
                     double actual;
@@ -996,10 +1006,22 @@ public class Managed
                 }
                 case StructID.Int32CLongId:
                 {
-                    Int32CLongStruct str1 = new Int32CLongStruct { i = 2, l = new CLong(30) };
-                    Int32CLongStruct str2 = new Int32CLongStruct { i = 10, l = new CLong(50) };
+                    Int32CLongStruct str1 = new Int32CLongStruct
+                    {
+                        i = 2,
+                        l = new CLong(30)
+                    };
+                    Int32CLongStruct str2 = new Int32CLongStruct
+                    {
+                        i = 10,
+                        l = new CLong(50)
+                    };
 
-                    Int32CLongStruct expected = new Int32CLongStruct { i = 12, l = new CLong(80) };
+                    Int32CLongStruct expected = new Int32CLongStruct
+                    {
+                        i = 12,
+                        l = new CLong(80)
+                    };
 
                     Console.WriteLine("\tCalling AddCLongs.");
                     Int32CLongStruct actual = AddCLongs(str1, str2);

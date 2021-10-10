@@ -101,6 +101,11 @@ class A
         private static LSP.DocumentHighlight CreateDocumentHighlight(
             LSP.DocumentHighlightKind kind,
             LSP.Location location
-        ) => new LSP.DocumentHighlight() { Kind = kind, Range = location.Range };
+        ) =>
+            new LSP.DocumentHighlight()
+            {
+                Kind = kind,
+                Range = location.Range
+            };
     }
 }

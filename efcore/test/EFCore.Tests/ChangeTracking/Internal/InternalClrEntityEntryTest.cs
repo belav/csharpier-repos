@@ -112,7 +112,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             using var context = new KClrContext();
             var ownerEntry = context.Entry(
-                    new OwnerClass { Id = 1, Owned = new OwnedClass { Value = "Kool" } }
+                    new OwnerClass
+                    {
+                        Id = 1,
+                        Owned = new OwnedClass { Value = "Kool" }
+                    }
                 )
                 .GetInfrastructure();
 
@@ -185,19 +189,34 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         [ConditionalFact]
         public void Setting_CLR_property_with_snapshot_change_tracking_requires_DetectChanges() =>
-            SetPropertyClrTest(new SomeEntity { Id = 1, Name = "Kool" }, needsDetectChanges: true);
+            SetPropertyClrTest(
+                new SomeEntity
+                {
+                    Id = 1,
+                    Name = "Kool"
+                },
+                needsDetectChanges: true
+            );
 
         [ConditionalFact]
         public void Setting_CLR_property_with_changed_only_notifications_does_not_require_DetectChanges() =>
             SetPropertyClrTest(
-                new ChangedOnlyEntity { Id = 1, Name = "Kool" },
+                new ChangedOnlyEntity
+                {
+                    Id = 1,
+                    Name = "Kool"
+                },
                 needsDetectChanges: false
             );
 
         [ConditionalFact]
         public void Setting_CLR_property_with_full_notifications_does_not_require_DetectChanges() =>
             SetPropertyClrTest(
-                new FullNotificationEntity { Id = 1, Name = "Kool" },
+                new FullNotificationEntity
+                {
+                    Id = 1,
+                    Name = "Kool"
+                },
                 needsDetectChanges: false
             );
 

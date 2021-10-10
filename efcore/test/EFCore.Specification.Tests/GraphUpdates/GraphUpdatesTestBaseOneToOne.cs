@@ -1417,7 +1417,11 @@ namespace Microsoft.EntityFrameworkCore
             var new2d = new RequiredNonPkSingle2Derived();
             var new2dd = new RequiredNonPkSingle2MoreDerived();
             var new1 = new RequiredNonPkSingle1 { Single = new2 };
-            var new1d = new RequiredNonPkSingle1Derived { Single = new2d, Root = new Root() };
+            var new1d = new RequiredNonPkSingle1Derived
+            {
+                Single = new2d,
+                Root = new Root()
+            };
             var new1dd = new RequiredNonPkSingle1MoreDerived
             {
                 Single = new2dd,

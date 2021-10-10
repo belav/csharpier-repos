@@ -172,7 +172,11 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                             tokenValidatedContext.Properties.StoreTokens(
                                 new[]
                                 {
-                                    new AuthenticationToken { Name = "access_token", Value = token }
+                                    new AuthenticationToken
+                                    {
+                                        Name = "access_token",
+                                        Value = token
+                                    }
                                 }
                             );
                         }

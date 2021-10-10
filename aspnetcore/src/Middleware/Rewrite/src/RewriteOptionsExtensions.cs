@@ -143,7 +143,11 @@ namespace Microsoft.AspNetCore.Rewrite
         )
         {
             options.Rules.Add(
-                new RedirectToHttpsRule { StatusCode = statusCode, SSLPort = sslPort }
+                new RedirectToHttpsRule
+                {
+                    StatusCode = statusCode,
+                    SSLPort = sslPort
+                }
             );
             return options;
         }

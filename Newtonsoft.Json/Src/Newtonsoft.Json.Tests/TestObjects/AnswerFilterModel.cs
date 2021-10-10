@@ -48,7 +48,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
         {
             answerValues = (
                 from answer in Enum.GetNames(typeof(Antworten))
-                select new SelectListItem { Text = answer, Value = answer, Selected = false }
+                select new SelectListItem
+                {
+                    Text = answer,
+                    Value = answer,
+                    Selected = false
+                }
             ).ToList();
         }
 

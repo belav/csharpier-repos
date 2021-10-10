@@ -88,7 +88,11 @@ static class C { }
             var caretLocation = locations["caret"].First();
 
             // 1. Range handler
-            var range = new LSP.Range { Start = new Position(1, 0), End = new Position(2, 0) };
+            var range = new LSP.Range
+            {
+                Start = new Position(1, 0),
+                End = new Position(2, 0)
+            };
             var rangeResults = await RunGetSemanticTokensRangeAsync(
                 testLspServer,
                 caretLocation,

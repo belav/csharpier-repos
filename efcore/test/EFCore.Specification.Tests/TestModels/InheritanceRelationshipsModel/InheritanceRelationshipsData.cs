@@ -141,8 +141,16 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                     OwnedReferenceOnBase = new OwnedEntity { Name = "OROB1" },
                     OwnedCollectionOnBase = new List<OwnedEntity>
                     {
-                        new() { Id = 1, Name = "OCOB11" },
-                        new() { Id = 2, Name = "OCOB12" }
+                        new()
+                        {
+                            Id = 1,
+                            Name = "OCOB11"
+                        },
+                        new()
+                        {
+                            Id = 2,
+                            Name = "OCOB12"
+                        }
                     },
                     BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                     CollectionOnBase = new List<CollectionOnBase>(),
@@ -154,7 +162,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                     OwnedReferenceOnBase = new OwnedEntity { Name = "OROB2" },
                     OwnedCollectionOnBase = new List<OwnedEntity>
                     {
-                        new() { Id = 3, Name = "OCOB21" }
+                        new()
+                        {
+                            Id = 3,
+                            Name = "OCOB21"
+                        }
                     },
                     BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                     CollectionOnBase = new List<CollectionOnBase>(),
@@ -174,14 +186,30 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                     OwnedReferenceOnBase = new OwnedEntity { Name = "OROB4" },
                     OwnedCollectionOnBase = new List<OwnedEntity>
                     {
-                        new() { Id = 4, Name = "OCOB41" },
-                        new() { Id = 5, Name = "OCOB42" }
+                        new()
+                        {
+                            Id = 4,
+                            Name = "OCOB41"
+                        },
+                        new()
+                        {
+                            Id = 5,
+                            Name = "OCOB42"
+                        }
                     },
                     OwnedReferenceOnDerived = new OwnedEntity { Name = "OROD4" },
                     OwnedCollectionOnDerived = new List<OwnedEntity>
                     {
-                        new() { Id = 1, Name = "OCOD41" },
-                        new() { Id = 2, Name = "OCOD42" }
+                        new()
+                        {
+                            Id = 1,
+                            Name = "OCOD41"
+                        },
+                        new()
+                        {
+                            Id = 2,
+                            Name = "OCOD42"
+                        }
                     },
                     BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                     BaseCollectionOnDerived = new List<BaseCollectionOnDerived>(),
@@ -196,12 +224,20 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                     OwnedReferenceOnBase = new OwnedEntity { Name = "OROB5" },
                     OwnedCollectionOnBase = new List<OwnedEntity>
                     {
-                        new() { Id = 6, Name = "OCOB51" }
+                        new()
+                        {
+                            Id = 6,
+                            Name = "OCOB51"
+                        }
                     },
                     OwnedReferenceOnDerived = new OwnedEntity { Name = "OROD5" },
                     OwnedCollectionOnDerived = new List<OwnedEntity>
                     {
-                        new() { Id = 3, Name = "OCOD51" }
+                        new()
+                        {
+                            Id = 3,
+                            Name = "OCOD51"
+                        }
                     },
                     BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                     BaseCollectionOnDerived = new List<BaseCollectionOnDerived>(),
@@ -279,43 +315,131 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
         public static IReadOnlyList<BaseReferenceOnDerived> CreateBaseReferencesOnDerived() =>
             new List<BaseReferenceOnDerived>
             {
-                new() { Id = 1, Name = "BROD1" },
-                new() { Id = 2, Name = "BROD2 (dangling)" },
-                new() { Id = 3, Name = "BROD3 (dangling)" },
-                new DerivedReferenceOnDerived { Id = 4, Name = "DROD1" },
-                new DerivedReferenceOnDerived { Id = 5, Name = "DROD2" },
-                new DerivedReferenceOnDerived { Id = 6, Name = "DROD3 (dangling)" },
+                new()
+                {
+                    Id = 1,
+                    Name = "BROD1"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "BROD2 (dangling)"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "BROD3 (dangling)"
+                },
+                new DerivedReferenceOnDerived
+                {
+                    Id = 4,
+                    Name = "DROD1"
+                },
+                new DerivedReferenceOnDerived
+                {
+                    Id = 5,
+                    Name = "DROD2"
+                },
+                new DerivedReferenceOnDerived
+                {
+                    Id = 6,
+                    Name = "DROD3 (dangling)"
+                },
             };
 
         public static IReadOnlyList<ReferenceOnBase> CreateReferencesOnBase() =>
             new List<ReferenceOnBase>
             {
-                new() { Id = 1, Name = "ROB1" },
-                new() { Id = 2, Name = "ROB2" },
-                new() { Id = 3, Name = "ROB3" },
-                new() { Id = 4, Name = "ROB4" },
+                new()
+                {
+                    Id = 1,
+                    Name = "ROB1"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "ROB2"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "ROB3"
+                },
+                new()
+                {
+                    Id = 4,
+                    Name = "ROB4"
+                },
             };
 
         public static IReadOnlyList<ReferenceOnDerived> CreateReferencesOnDerived() =>
             new List<ReferenceOnDerived>
             {
-                new() { Id = 1, Name = "ROD1" },
-                new() { Id = 2, Name = "ROD2" },
-                new() { Id = 3, Name = "ROD3 (dangling)" },
+                new()
+                {
+                    Id = 1,
+                    Name = "ROD1"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "ROD2"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "ROD3 (dangling)"
+                },
             };
 
         public static IReadOnlyList<NestedReferenceBase> CreateNestedReferences() =>
             new List<NestedReferenceBase>
             {
-                new() { Id = 1, Name = "NRB1" },
-                new() { Id = 2, Name = "NRB2" },
-                new() { Id = 3, Name = "NRB3" },
-                new() { Id = 4, Name = "NRB4 (dangling)" },
-                new NestedReferenceDerived { Id = 5, Name = "NRD1" },
-                new NestedReferenceDerived { Id = 6, Name = "NRD2" },
-                new NestedReferenceDerived { Id = 7, Name = "NRD3" },
-                new NestedReferenceDerived { Id = 8, Name = "NRD4" },
-                new NestedReferenceDerived { Id = 9, Name = "NRD4 (dangling)" },
+                new()
+                {
+                    Id = 1,
+                    Name = "NRB1"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "NRB2"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "NRB3"
+                },
+                new()
+                {
+                    Id = 4,
+                    Name = "NRB4 (dangling)"
+                },
+                new NestedReferenceDerived
+                {
+                    Id = 5,
+                    Name = "NRD1"
+                },
+                new NestedReferenceDerived
+                {
+                    Id = 6,
+                    Name = "NRD2"
+                },
+                new NestedReferenceDerived
+                {
+                    Id = 7,
+                    Name = "NRD3"
+                },
+                new NestedReferenceDerived
+                {
+                    Id = 8,
+                    Name = "NRD4"
+                },
+                new NestedReferenceDerived
+                {
+                    Id = 9,
+                    Name = "NRD4 (dangling)"
+                },
             };
 
         public static IReadOnlyList<BaseCollectionOnBase> CreateBaseCollectionsOnBase() =>
@@ -412,68 +536,218 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
         public static IReadOnlyList<BaseCollectionOnDerived> CreateBaseCollectionsOnDerived() =>
             new List<BaseCollectionOnDerived>
             {
-                new() { Id = 1, Name = "BCOD11" },
-                new() { Id = 2, Name = "BCOD21 (dangling)" },
-                new() { Id = 3, Name = "BCOD22 (dangling)" },
-                new DerivedCollectionOnDerived { Id = 4, Name = "DCOD11" },
-                new DerivedCollectionOnDerived { Id = 5, Name = "DCOD12" },
-                new DerivedCollectionOnDerived { Id = 6, Name = "DCOD21" },
-                new DerivedCollectionOnDerived { Id = 7, Name = "DCOD31 (dangling)" },
+                new()
+                {
+                    Id = 1,
+                    Name = "BCOD11"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "BCOD21 (dangling)"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "BCOD22 (dangling)"
+                },
+                new DerivedCollectionOnDerived
+                {
+                    Id = 4,
+                    Name = "DCOD11"
+                },
+                new DerivedCollectionOnDerived
+                {
+                    Id = 5,
+                    Name = "DCOD12"
+                },
+                new DerivedCollectionOnDerived
+                {
+                    Id = 6,
+                    Name = "DCOD21"
+                },
+                new DerivedCollectionOnDerived
+                {
+                    Id = 7,
+                    Name = "DCOD31 (dangling)"
+                },
             };
 
         public static IReadOnlyList<CollectionOnBase> CreateCollectionsOnBase() =>
             new List<CollectionOnBase>
             {
-                new() { Id = 1, Name = "COB11" },
-                new() { Id = 2, Name = "COB12" },
-                new() { Id = 3, Name = "COB21" },
-                new() { Id = 4, Name = "COB31" },
-                new() { Id = 5, Name = "COB32" },
-                new() { Id = 6, Name = "COB33" },
-                new() { Id = 7, Name = "COB41" },
-                new() { Id = 8, Name = "COB51 (dangling)" },
-                new() { Id = 9, Name = "COB52 (dangling)" },
+                new()
+                {
+                    Id = 1,
+                    Name = "COB11"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "COB12"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "COB21"
+                },
+                new()
+                {
+                    Id = 4,
+                    Name = "COB31"
+                },
+                new()
+                {
+                    Id = 5,
+                    Name = "COB32"
+                },
+                new()
+                {
+                    Id = 6,
+                    Name = "COB33"
+                },
+                new()
+                {
+                    Id = 7,
+                    Name = "COB41"
+                },
+                new()
+                {
+                    Id = 8,
+                    Name = "COB51 (dangling)"
+                },
+                new()
+                {
+                    Id = 9,
+                    Name = "COB52 (dangling)"
+                },
             };
 
         public static IReadOnlyList<CollectionOnDerived> CreateCollectionsOnDerived() =>
             new List<CollectionOnDerived>
             {
-                new() { Id = 1, Name = "COD11" },
-                new() { Id = 2, Name = "COD21" },
-                new() { Id = 3, Name = "COD22" },
-                new() { Id = 4, Name = "COD31 (dangling)" },
+                new()
+                {
+                    Id = 1,
+                    Name = "COD11"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "COD21"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "COD22"
+                },
+                new()
+                {
+                    Id = 4,
+                    Name = "COD31 (dangling)"
+                },
             };
 
         public static IReadOnlyList<NestedCollectionBase> CreateNestedCollections() =>
             new List<NestedCollectionBase>
             {
-                new() { Id = 1, Name = "NCB11" },
-                new() { Id = 2, Name = "NCB21" },
-                new() { Id = 3, Name = "NCB22" },
-                new() { Id = 4, Name = "NCB31" },
-                new() { Id = 5, Name = "NCB41 (dangling)" },
-                new NestedCollectionDerived { Id = 6, Name = "NCD11" },
-                new NestedCollectionDerived { Id = 7, Name = "NCD21" },
-                new NestedCollectionDerived { Id = 8, Name = "NCD21" },
-                new NestedCollectionDerived { Id = 9, Name = "NCD32" },
-                new NestedCollectionDerived { Id = 10, Name = "NCD41" },
-                new NestedCollectionDerived { Id = 11, Name = "NCD42" },
-                new NestedCollectionDerived { Id = 12, Name = "NCD52 (dangling)" },
-                new NestedCollectionDerived { Id = 13, Name = "NCD52 (dangling)" },
+                new()
+                {
+                    Id = 1,
+                    Name = "NCB11"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "NCB21"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "NCB22"
+                },
+                new()
+                {
+                    Id = 4,
+                    Name = "NCB31"
+                },
+                new()
+                {
+                    Id = 5,
+                    Name = "NCB41 (dangling)"
+                },
+                new NestedCollectionDerived
+                {
+                    Id = 6,
+                    Name = "NCD11"
+                },
+                new NestedCollectionDerived
+                {
+                    Id = 7,
+                    Name = "NCD21"
+                },
+                new NestedCollectionDerived
+                {
+                    Id = 8,
+                    Name = "NCD21"
+                },
+                new NestedCollectionDerived
+                {
+                    Id = 9,
+                    Name = "NCD32"
+                },
+                new NestedCollectionDerived
+                {
+                    Id = 10,
+                    Name = "NCD41"
+                },
+                new NestedCollectionDerived
+                {
+                    Id = 11,
+                    Name = "NCD42"
+                },
+                new NestedCollectionDerived
+                {
+                    Id = 12,
+                    Name = "NCD52 (dangling)"
+                },
+                new NestedCollectionDerived
+                {
+                    Id = 13,
+                    Name = "NCD52 (dangling)"
+                },
             };
 
         public static IReadOnlyList<PrincipalEntity> CreatePrincipalEntities() =>
             new List<PrincipalEntity>
             {
-                new() { Id = 1, Name = "PE1" },
-                new() { Id = 2, Name = "PE2" },
+                new()
+                {
+                    Id = 1,
+                    Name = "PE1"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "PE2"
+                },
             };
 
         public static IReadOnlyList<ReferencedEntity> CreateReferencedEntities() =>
             new List<ReferencedEntity>
             {
-                new() { Id = 1, Name = "RE1", Principals = new List<PrincipalEntity>() },
-                new() { Id = 2, Name = "RE2", Principals = new List<PrincipalEntity>() },
+                new()
+                {
+                    Id = 1,
+                    Name = "RE1",
+                    Principals = new List<PrincipalEntity>()
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "RE2",
+                    Principals = new List<PrincipalEntity>()
+                },
             };
 
         public static void WireUp(

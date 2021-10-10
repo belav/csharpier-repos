@@ -1497,10 +1497,25 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
         {
             var list = new List<Test>()
             {
-                new Test() { _field1 = null, _field2 = string.Empty, _field3 = 1 },
+                new Test()
+                {
+                    _field1 = null,
+                    _field2 = string.Empty,
+                    _field3 = 1
+                },
                 new Test(),
-                new Test() { _field1 = null, _field2 = null, _field3 = 0 },
-                new Test() { _field1 = new MyStruct(), _field2 = string.Empty, _field3 = 10 },
+                new Test()
+                {
+                    _field1 = null,
+                    _field2 = null,
+                    _field3 = 0
+                },
+                new Test()
+                {
+                    _field1 = new MyStruct(),
+                    _field2 = string.Empty,
+                    _field3 = 10
+                },
             };
             MemberClass mc = new MemberClass();
             dynamic dy = mc;

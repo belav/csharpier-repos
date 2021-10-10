@@ -1711,16 +1711,39 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
                 );
 
-                modelBuilder.Entity<Planet>(pb => pb.HasData(new Planet { Id = 1, StarId = 1 }));
+                modelBuilder.Entity<Planet>(
+                    pb =>
+                        pb.HasData(
+                            new Planet
+                            {
+                                Id = 1,
+                                StarId = 1
+                            }
+                        )
+                );
 
                 modelBuilder.Entity<Moon>(
-                    mb => mb.HasData(new Moon { Id = 1, PlanetId = 1, Diameter = 3474 })
+                    mb =>
+                        mb.HasData(
+                            new Moon
+                            {
+                                Id = 1,
+                                PlanetId = 1,
+                                Diameter = 3474
+                            }
+                        )
                 );
 
                 modelBuilder.Entity<Star>(
                     sb =>
                     {
-                        sb.HasData(new Star { Id = 1, Name = "Sol" });
+                        sb.HasData(
+                            new Star
+                            {
+                                Id = 1,
+                                Name = "Sol"
+                            }
+                        );
                         sb.OwnsMany(
                             s => s.Composition,
                             ob =>
@@ -1743,8 +1766,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                             b => b.HasData(new { BartonId = 1, Property = "Property", Value = 42 })
                         );
                         b.HasData(
-                            new Barton { Id = 1, Simple = "Simple" },
-                            new Barton { Id = 2, Simple = "Not" }
+                            new Barton
+                            {
+                                Id = 1,
+                                Simple = "Simple"
+                            },
+                            new Barton
+                            {
+                                Id = 2,
+                                Simple = "Not"
+                            }
                         );
                     }
                 );
@@ -1830,7 +1861,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             private static IReadOnlyList<Planet> CreatePlanets() =>
-                new List<Planet> { new() { Id = 1, StarId = 1 } };
+                new List<Planet>
+                {
+                    new()
+                    {
+                        Id = 1,
+                        StarId = 1
+                    }
+                };
 
             private static IReadOnlyList<Star> CreateStars() =>
                 new List<Star>
@@ -1841,38 +1879,72 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Name = "Sol",
                         Composition = new List<Element>
                         {
-                            new() { Id = "H", Name = "Hydrogen", StarId = 1 },
-                            new() { Id = "He", Name = "Helium", StarId = 1 }
+                            new()
+                            {
+                                Id = "H",
+                                Name = "Hydrogen",
+                                StarId = 1
+                            },
+                            new()
+                            {
+                                Id = "He",
+                                Name = "Helium",
+                                StarId = 1
+                            }
                         }
                     }
                 };
 
             private static IReadOnlyList<Moon> CreateMoons() =>
-                new List<Moon> { new() { Id = 1, PlanetId = 1, Diameter = 3474 } };
+                new List<Moon>
+                {
+                    new()
+                    {
+                        Id = 1,
+                        PlanetId = 1,
+                        Diameter = 3474
+                    }
+                };
 
             private static IReadOnlyList<OwnedPerson> CreateOwnedPeople()
             {
                 var personAddress1 = new OwnedAddress
                 {
                     PlaceType = "Land",
-                    Country = new OwnedCountry { Name = "USA", PlanetId = 1 }
+                    Country = new OwnedCountry
+                    {
+                        Name = "USA",
+                        PlanetId = 1
+                    }
                 };
                 personAddress1["AddressLine"] = "804 S. Lakeshore Road";
                 personAddress1["ZipCode"] = 38654;
-                var ownedPerson1 = new OwnedPerson { Id = 1, PersonAddress = personAddress1 };
+                var ownedPerson1 = new OwnedPerson
+                {
+                    Id = 1,
+                    PersonAddress = personAddress1
+                };
                 ownedPerson1["Name"] = "Mona Cy";
 
                 var personAddress2 = new OwnedAddress
                 {
                     PlaceType = "Land",
-                    Country = new OwnedCountry { Name = "USA", PlanetId = 1 }
+                    Country = new OwnedCountry
+                    {
+                        Name = "USA",
+                        PlanetId = 1
+                    }
                 };
                 personAddress2["AddressLine"] = "7 Church Dr.";
                 personAddress2["ZipCode"] = 28655;
                 var branchAddress2 = new OwnedAddress
                 {
                     PlaceType = "Land",
-                    Country = new OwnedCountry { Name = "Canada", PlanetId = 1 }
+                    Country = new OwnedCountry
+                    {
+                        Name = "Canada",
+                        PlanetId = 1
+                    }
                 };
                 branchAddress2["BranchName"] = "BranchA";
 
@@ -1887,20 +1959,32 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var personAddress3 = new OwnedAddress
                 {
                     PlaceType = "Land",
-                    Country = new OwnedCountry { Name = "USA", PlanetId = 1 }
+                    Country = new OwnedCountry
+                    {
+                        Name = "USA",
+                        PlanetId = 1
+                    }
                 };
                 personAddress3["AddressLine"] = "72 Hickory Rd.";
                 personAddress3["ZipCode"] = 07728;
                 var branchAddress3 = new OwnedAddress
                 {
                     PlaceType = "Land",
-                    Country = new OwnedCountry { Name = "Canada", PlanetId = 1 }
+                    Country = new OwnedCountry
+                    {
+                        Name = "Canada",
+                        PlanetId = 1
+                    }
                 };
                 branchAddress3["BranchName"] = "BranchB";
                 var leafAAddress3 = new OwnedAddress
                 {
                     PlaceType = "Land",
-                    Country = new OwnedCountry { Name = "Mexico", PlanetId = 1 }
+                    Country = new OwnedCountry
+                    {
+                        Name = "Mexico",
+                        PlanetId = 1
+                    }
                 };
                 leafAAddress3["LeafType"] = 1;
                 var ownedPerson3 = new LeafA
@@ -1915,14 +1999,22 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var personAddress4 = new OwnedAddress
                 {
                     PlaceType = "Land",
-                    Country = new OwnedCountry { Name = "USA", PlanetId = 1 }
+                    Country = new OwnedCountry
+                    {
+                        Name = "USA",
+                        PlanetId = 1
+                    }
                 };
                 personAddress4["AddressLine"] = "28 Strawberry St.";
                 personAddress4["ZipCode"] = 19053;
                 var leafBAddress4 = new OwnedAddress
                 {
                     PlaceType = "Land",
-                    Country = new OwnedCountry { Name = "Panama", PlanetId = 1 }
+                    Country = new OwnedCountry
+                    {
+                        Name = "Panama",
+                        PlanetId = 1
+                    }
                 };
                 leafBAddress4["LeafBType"] = "Green";
                 var ownedPerson4 = new LeafB
@@ -1933,7 +2025,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 };
                 ownedPerson4["Name"] = "Vanda Waldemar";
 
-                var order1 = new Order { Id = -10, Client = ownedPerson1 };
+                var order1 = new Order
+                {
+                    Id = -10,
+                    Client = ownedPerson1
+                };
                 order1["OrderDate"] = Convert.ToDateTime("2018-07-11 10:01:41");
                 order1.Details = new List<OrderDetail>
                 {
@@ -1941,22 +2037,38 @@ namespace Microsoft.EntityFrameworkCore.Query
                     new() { Detail = "Full Price Order" }
                 };
 
-                var order2 = new Order { Id = -11, Client = ownedPerson1 };
+                var order2 = new Order
+                {
+                    Id = -11,
+                    Client = ownedPerson1
+                };
                 order2["OrderDate"] = Convert.ToDateTime("2015-03-03 04:37:59");
                 order2.Details = new List<OrderDetail>();
                 ownedPerson1.Orders = new List<Order> { order1, order2 };
 
-                var order3 = new Order { Id = -20, Client = ownedPerson2 };
+                var order3 = new Order
+                {
+                    Id = -20,
+                    Client = ownedPerson2
+                };
                 order3["OrderDate"] = Convert.ToDateTime("2015-05-25 20:35:48");
                 order3.Details = new List<OrderDetail> { new() { Detail = "Internal Order" } };
                 ownedPerson2.Orders = new List<Order> { order3 };
 
-                var order4 = new Order { Id = -30, Client = ownedPerson3 };
+                var order4 = new Order
+                {
+                    Id = -30,
+                    Client = ownedPerson3
+                };
                 order4["OrderDate"] = Convert.ToDateTime("2014-11-10 04:32:42");
                 order4.Details = new List<OrderDetail> { new() { Detail = "Bulk Order" } };
                 ownedPerson3.Orders = new List<Order> { order4 };
 
-                var order5 = new Order { Id = -40, Client = ownedPerson4 };
+                var order5 = new Order
+                {
+                    Id = -40,
+                    Client = ownedPerson4
+                };
                 order5["OrderDate"] = Convert.ToDateTime("2016-04-25 19:23:56");
                 order5.Details = new List<OrderDetail>();
                 ownedPerson4.Orders = new List<Order> { order5 };
@@ -1979,9 +2091,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         Id = 1,
                         Simple = "Simple",
-                        Throned = new Throned { Property = "Property", Value = 42 }
+                        Throned = new Throned
+                        {
+                            Property = "Property",
+                            Value = 42
+                        }
                     },
-                    new() { Id = 2, Simple = "Not", }
+                    new()
+                    {
+                        Id = 2,
+                        Simple = "Not",
+                    }
                 };
 
             private static void WireUp(

@@ -335,7 +335,11 @@ namespace System.Web.Mvc
 
                 if (success)
                 {
-                    return new ViewDataInfo() { Container = indexableObject, Value = value };
+                    return new ViewDataInfo()
+                    {
+                        Container = indexableObject,
+                        Value = value
+                    };
                 }
 
                 return null;

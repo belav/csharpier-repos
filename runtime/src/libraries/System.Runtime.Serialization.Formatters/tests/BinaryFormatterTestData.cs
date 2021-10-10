@@ -9241,9 +9241,21 @@ namespace System.Runtime.Serialization.Formatters.Tests
             // Graph with cycles
             {
                 var a = new Graph<int> { Value = 1 };
-                var b = new Graph<int> { Value = 2, Links = new[] { a } };
-                var c = new Graph<int> { Value = 3, Links = new[] { a, b } };
-                var d = new Graph<int> { Value = 3, Links = new[] { a, b, c } };
+                var b = new Graph<int>
+                {
+                    Value = 2,
+                    Links = new[] { a }
+                };
+                var c = new Graph<int>
+                {
+                    Value = 3,
+                    Links = new[] { a, b }
+                };
+                var d = new Graph<int>
+                {
+                    Value = 3,
+                    Links = new[] { a, b, c }
+                };
                 a.Links = new[] { b, c, d }; // complete the cycle
                 yield return new object[]
                 {
@@ -9295,7 +9307,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                new StructWithStringFields { String1 = "hello", String2 = "world" },
+                new StructWithStringFields
+                {
+                    String1 = "hello",
+                    String2 = "world"
+                },
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(
@@ -9312,8 +9328,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
             {
                 new StructContainingOtherStructs
                 {
-                    Nested1 = new StructWithStringFields { String1 = "a", String2 = "b" },
-                    Nested2 = new StructWithStringFields { String1 = "3", String2 = "4" }
+                    Nested1 = new StructWithStringFields
+                    {
+                        String1 = "a",
+                        String2 = "b"
+                    },
+                    Nested2 = new StructWithStringFields
+                    {
+                        String1 = "3",
+                        String2 = "4"
+                    }
                 },
                 new TypeSerializableValue[]
                 {
@@ -9366,13 +9390,29 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 {
                     new StructContainingOtherStructs
                     {
-                        Nested1 = new StructWithStringFields { String1 = "a", String2 = "b" },
-                        Nested2 = new StructWithStringFields { String1 = "3", String2 = "4" }
+                        Nested1 = new StructWithStringFields
+                        {
+                            String1 = "a",
+                            String2 = "b"
+                        },
+                        Nested2 = new StructWithStringFields
+                        {
+                            String1 = "3",
+                            String2 = "4"
+                        }
                     },
                     new StructContainingOtherStructs
                     {
-                        Nested1 = new StructWithStringFields { String1 = "e", String2 = "f" },
-                        Nested2 = new StructWithStringFields { String1 = "7", String2 = "8" }
+                        Nested1 = new StructWithStringFields
+                        {
+                            String1 = "e",
+                            String2 = "f"
+                        },
+                        Nested2 = new StructWithStringFields
+                        {
+                            String1 = "7",
+                            String2 = "8"
+                        }
                     },
                 }
             };

@@ -206,7 +206,11 @@ let main argv =
                 WorkingDirectory = _tempDir,
                 RedirectStandardOutput = true,
             };
-            var process = new Process() { EnableRaisingEvents = true, StartInfo = processInfo };
+            var process = new Process()
+            {
+                EnableRaisingEvents = true,
+                StartInfo = processInfo
+            };
             process.OutputDataReceived += LogData;
             process.ErrorDataReceived += LogData;
             process.Start();

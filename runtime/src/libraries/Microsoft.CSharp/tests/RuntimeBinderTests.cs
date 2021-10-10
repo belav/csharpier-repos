@@ -138,7 +138,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void AccessMemberOfNonGenericNestedInGeneric()
         {
             Func<dynamic, int> dynamicDelegate = e => e.Id;
-            var dto = new OuterType<int>.MyEntity { Id = 1, Name = "Foo" };
+            var dto = new OuterType<int>.MyEntity
+            {
+                Id = 1,
+                Name = "Foo"
+            };
             Assert.Equal(1, dynamicDelegate(dto));
         }
 

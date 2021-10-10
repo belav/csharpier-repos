@@ -60,7 +60,11 @@ namespace System.Diagnostics.Tracing
             EventSource sourceToEnable = null;
             lock (_eventSourceList)
             {
-                var settings = new Settings() { Level = level, Keywords = keywords };
+                var settings = new Settings()
+                {
+                    Level = level,
+                    Keywords = keywords
+                };
 
                 if (name is not null)
                     _names.Add(name, settings);

@@ -279,8 +279,22 @@ namespace AutoMapper.UnitTests
                 {
                     var be = new BEntity();
                     be.BP1 = 3;
-                    be.BP2.Add(new AEntity() { AP1 = 1, AP2 = "hello", B = be });
-                    be.BP2.Add(new AEntity() { AP1 = 2, AP2 = "two", B = be });
+                    be.BP2.Add(
+                        new AEntity()
+                        {
+                            AP1 = 1,
+                            AP2 = "hello",
+                            B = be
+                        }
+                    );
+                    be.BP2.Add(
+                        new AEntity()
+                        {
+                            AP1 = 2,
+                            AP2 = "two",
+                            B = be
+                        }
+                    );
 
                     var belist = new List<BEntity>();
                     belist.Add(be);

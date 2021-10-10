@@ -100,7 +100,14 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Find_composite_key_tracked()
         {
             using var context = CreateContext();
-            var entity = context.Attach(new CompositeKey { Id1 = 88, Id2 = "Rabbit" }).Entity;
+            var entity =
+                context.Attach(
+                    new CompositeKey
+                    {
+                        Id1 = 88,
+                        Id2 = "Rabbit"
+                    }
+                ).Entity;
 
             Assert.Same(entity, Find<CompositeKey>(context, 88, "Rabbit"));
         }
@@ -400,7 +407,14 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Find_composite_key_tracked_async()
         {
             using var context = CreateContext();
-            var entity = context.Attach(new CompositeKey { Id1 = 88, Id2 = "Rabbit" }).Entity;
+            var entity =
+                context.Attach(
+                    new CompositeKey
+                    {
+                        Id1 = 88,
+                        Id2 = "Rabbit"
+                    }
+                ).Entity;
 
             Assert.Same(entity, await FindAsync<CompositeKey>(context, 88, "Rabbit"));
         }
@@ -708,12 +722,38 @@ namespace Microsoft.EntityFrameworkCore
             protected override void Seed(PoolableDbContext context)
             {
                 context.AddRange(
-                    new IntKey { Id = 77, Foo = "Smokey" },
-                    new NullableIntKey { Id = 77, Foo = "Smokey" },
-                    new StringKey { Id = "Cat", Foo = "Alice" },
-                    new CompositeKey { Id1 = 77, Id2 = "Dog", Foo = "Olive" },
-                    new BaseType { Id = 77, Foo = "Baxter" },
-                    new DerivedType { Id = 78, Foo = "Strawberry", Boo = "Cheesecake" }
+                    new IntKey
+                    {
+                        Id = 77,
+                        Foo = "Smokey"
+                    },
+                    new NullableIntKey
+                    {
+                        Id = 77,
+                        Foo = "Smokey"
+                    },
+                    new StringKey
+                    {
+                        Id = "Cat",
+                        Foo = "Alice"
+                    },
+                    new CompositeKey
+                    {
+                        Id1 = 77,
+                        Id2 = "Dog",
+                        Foo = "Olive"
+                    },
+                    new BaseType
+                    {
+                        Id = 77,
+                        Foo = "Baxter"
+                    },
+                    new DerivedType
+                    {
+                        Id = 78,
+                        Foo = "Strawberry",
+                        Boo = "Cheesecake"
+                    }
                 );
 
                 var entry = context.Entry(new ShadowKey { Foo = "Clippy" });

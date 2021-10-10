@@ -551,7 +551,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow
+                },
                 CodeFixTestBehaviors = testBehaviors,
                 NumberOfIncrementalIterations = iterations,
                 NumberOfFixAllIterations = iterations,
@@ -621,7 +625,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow
+                },
                 CodeFixTestBehaviors = testBehaviors,
                 NumberOfIncrementalIterations = iterations,
                 NumberOfFixAllIterations = iterations,
@@ -1171,7 +1179,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             var test = new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow
+                },
                 CodeFixTestBehaviors = testBehaviors,
                 NumberOfIncrementalIterations = iterations,
                 NumberOfFixAllIterations = iterations,
@@ -1281,7 +1293,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             var test = new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow
+                },
                 CodeFixTestBehaviors = testBehaviors,
                 Options =
                 {
@@ -2874,7 +2890,11 @@ class Q
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow
+                },
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeFixTestBehaviors = testBehaviors,
                 NumberOfIncrementalIterations = iterations,
@@ -3102,7 +3122,11 @@ class Q
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow
+                },
                 BatchFixedCode = batchFixedSource,
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeFixTestBehaviors = testBehaviors,
@@ -3243,7 +3267,11 @@ class Q
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow
+                },
                 BatchFixedCode = batchFixedSource,
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeFixTestBehaviors = testBehaviors,
@@ -3424,7 +3452,11 @@ class Q
             var test = new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow
+                },
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeFixTestBehaviors = testBehaviors,
                 Options =
@@ -8568,7 +8600,11 @@ class C
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow
+                },
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeFixTestBehaviors = testBehaviors,
                 NumberOfIncrementalIterations = iterations,

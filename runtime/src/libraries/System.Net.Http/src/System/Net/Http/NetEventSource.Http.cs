@@ -117,9 +117,21 @@ namespace System.Net
                     const int NumEventDatas = 5;
                     var descrs = stackalloc EventData[NumEventDatas];
 
-                    descrs[0] = new EventData { DataPointer = (IntPtr)(&arg1), Size = sizeof(int) };
-                    descrs[1] = new EventData { DataPointer = (IntPtr)(&arg2), Size = sizeof(int) };
-                    descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(int) };
+                    descrs[0] = new EventData
+                    {
+                        DataPointer = (IntPtr)(&arg1),
+                        Size = sizeof(int)
+                    };
+                    descrs[1] = new EventData
+                    {
+                        DataPointer = (IntPtr)(&arg2),
+                        Size = sizeof(int)
+                    };
+                    descrs[2] = new EventData
+                    {
+                        DataPointer = (IntPtr)(&arg3),
+                        Size = sizeof(int)
+                    };
                     descrs[3] = new EventData
                     {
                         DataPointer = (IntPtr)string4Bytes,

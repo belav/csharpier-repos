@@ -292,7 +292,11 @@ namespace System.Text.Json.Serialization.Tests
             string value = new string(randomChar, stringLength);
             var kvp = new KeyValuePair<string, SimpleStruct>(
                 value,
-                new SimpleStruct { One = 1, Two = 2 }
+                new SimpleStruct
+                {
+                    One = 1,
+                    Two = 2
+                }
             );
 
             if (type == typeof(string))

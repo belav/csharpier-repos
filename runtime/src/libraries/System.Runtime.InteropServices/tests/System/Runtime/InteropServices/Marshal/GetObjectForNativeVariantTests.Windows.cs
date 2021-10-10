@@ -438,7 +438,11 @@ namespace System.Runtime.InteropServices.Tests
                     VT_RECORD,
                     new UnionTypes
                     {
-                        _record = new Record { _record = IntPtr.Zero, _recordInfo = (IntPtr)1 }
+                        _record = new Record
+                        {
+                            _record = IntPtr.Zero,
+                            _recordInfo = (IntPtr)1
+                        }
                     }
                 ),
                 null
@@ -525,7 +529,11 @@ namespace System.Runtime.InteropServices.Tests
                     VT_RECORD,
                     new UnionTypes
                     {
-                        _record = new Record { _record = pRecord, _recordInfo = pRecordInfo }
+                        _record = new Record
+                        {
+                            _record = pRecord,
+                            _recordInfo = pRecordInfo
+                        }
                     }
                 );
 

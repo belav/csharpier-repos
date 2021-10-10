@@ -85,7 +85,13 @@ namespace AutoMapper.IntegrationTests.Parameterization
 
                 username = "Jane";
                 query = db.Entities.Select(
-                    e => new EntityDto { Id = e.Id, Value = e.Value, UserName = username }
+                    e =>
+                        new EntityDto
+                        {
+                            Id = e.Id,
+                            Value = e.Value,
+                            UserName = username
+                        }
                 );
                 dtos = await query.ToListAsync();
                 dtos.All(dto => dto.UserName == username).ShouldBeTrue();

@@ -320,7 +320,15 @@ static class DivProgram
             return Fail;
         }
 
-        if (DivConst.I4_DivPow2Embdedded_Point(new Point { X = 513, Y = 412 }) != 52)
+        if (
+            DivConst.I4_DivPow2Embdedded_Point(
+                new Point
+                {
+                    X = 513,
+                    Y = 412
+                }
+            ) != 52
+        )
         {
             return Fail;
         }

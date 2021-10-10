@@ -463,7 +463,11 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { expected },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -504,7 +508,11 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { expected },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -545,7 +553,11 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { expected },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -586,7 +598,11 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { expected },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -629,7 +645,11 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { expected },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -672,7 +692,11 @@ public class Class1
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { expected },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }

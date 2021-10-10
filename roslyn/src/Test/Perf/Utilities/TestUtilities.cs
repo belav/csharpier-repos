@@ -134,7 +134,11 @@ namespace Roslyn.Test.Performance.Utilities
             startInfo.RedirectStandardError = true;
             startInfo.UseShellExecute = false;
             startInfo.WorkingDirectory = workingDirectory;
-            var process = new Process { StartInfo = startInfo, EnableRaisingEvents = true, };
+            var process = new Process
+            {
+                StartInfo = startInfo,
+                EnableRaisingEvents = true,
+            };
 
             if (cancellationToken != default(CancellationToken))
             {

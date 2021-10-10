@@ -136,7 +136,11 @@ namespace Newtonsoft.Json.Tests.Issues
             StringWriter sw = new StringWriter();
             XmlWriter writer = XmlWriter.Create(
                 sw,
-                new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true }
+                new XmlWriterSettings
+                {
+                    Indent = true,
+                    OmitXmlDeclaration = true
+                }
             );
 
             while (reader.Read())

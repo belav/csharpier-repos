@@ -46,14 +46,30 @@ namespace Microsoft.EntityFrameworkCore
             {
                 modelBuilder.Entity<Singularity>()
                     .HasData(
-                        new Singularity { Id = 77, Type = "Black Hole" },
-                        new Singularity { Id = 88, Type = "Bing Bang" }
+                        new Singularity
+                        {
+                            Id = 77,
+                            Type = "Black Hole"
+                        },
+                        new Singularity
+                        {
+                            Id = 88,
+                            Type = "Bing Bang"
+                        }
                     );
 
                 modelBuilder.Entity<Brane>()
                     .HasData(
-                        new Brane { Id = 77, Type = "Black Hole?" },
-                        new Brane { Id = 88, Type = "Bing Bang?" }
+                        new Brane
+                        {
+                            Id = 77,
+                            Type = "Black Hole?"
+                        },
+                        new Brane
+                        {
+                            Id = 88,
+                            Type = "Bing Bang?"
+                        }
                     );
             }
         }

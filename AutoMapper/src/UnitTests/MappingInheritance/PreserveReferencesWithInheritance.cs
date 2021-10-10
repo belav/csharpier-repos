@@ -96,13 +96,21 @@ namespace AutoMapper.UnitTests
 
         protected override void Because_of()
         {
-            var field = new Source.Field { Name = "AddResult", Type = typeof(Int32) };
+            var field = new Source.Field
+            {
+                Name = "AddResult",
+                Type = typeof(Int32)
+            };
             var @class = new Source.Class
             {
                 Properties = new List<Source.Member> { field },
                 Type = typeof(float)
             };
-            var returnValue = new Source.Instance { Type = typeof(float), Definition = @class };
+            var returnValue = new Source.Instance
+            {
+                Type = typeof(float),
+                Definition = @class
+            };
             @class.Definition = @class;
 
             var source = new List<Source.Member>

@@ -15,10 +15,18 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
         public string ResourcePath { get; set; }
 
         public static TestEntry Directory(string name, params TestEntry[] entries) =>
-            new TestEntry() { Name = name, Children = entries };
+            new TestEntry()
+            {
+                Name = name,
+                Children = entries
+            };
 
         public static TestEntry File(string name, string path = null) =>
-            new TestEntry() { Name = name, ResourcePath = path ?? name };
+            new TestEntry()
+            {
+                Name = name,
+                ResourcePath = path ?? name
+            };
 
         public XElement ToXElement() =>
             IsFile

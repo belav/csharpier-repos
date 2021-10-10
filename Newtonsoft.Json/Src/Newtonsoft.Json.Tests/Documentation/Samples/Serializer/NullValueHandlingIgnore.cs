@@ -54,7 +54,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Person person = new Person { Name = "Nigal Newborn", Age = 1 };
+            Person person = new Person
+            {
+                Name = "Nigal Newborn",
+                Age = 1
+            };
 
             string jsonIncludeNullValues = JsonConvert.SerializeObject(person, Formatting.Indented);
 

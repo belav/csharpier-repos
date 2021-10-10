@@ -21,7 +21,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void PublicSetterInParentWorks()
         {
-            var source = new Source { ParentProperty = "ParentProperty", ChildProperty = 1 };
+            var source = new Source
+            {
+                ParentProperty = "ParentProperty",
+                ChildProperty = 1
+            };
             var target = Mapper.Map<Source, Child>(source);
             target.ParentProperty.ShouldBe(source.ParentProperty);
             target.ChildProperty.ShouldBe(source.ChildProperty);
@@ -30,7 +34,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void PublicSetterInGrandparentWorks()
         {
-            var source = new Source { ParentProperty = "ParentProperty", ChildProperty = 1 };
+            var source = new Source
+            {
+                ParentProperty = "ParentProperty",
+                ChildProperty = 1
+            };
             var target = Mapper.Map<Source, GrandChild>(source);
             target.ParentProperty.ShouldBe(source.ParentProperty);
             target.ChildProperty.ShouldBe(source.ChildProperty);
@@ -39,7 +47,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void PublicSetterInGrandGrandparentWorks()
         {
-            var source = new Source { ParentProperty = "ParentProperty", ChildProperty = 1 };
+            var source = new Source
+            {
+                ParentProperty = "ParentProperty",
+                ChildProperty = 1
+            };
             var target = Mapper.Map<Source, GrandGrandChild>(source);
             target.ParentProperty.ShouldBe(source.ParentProperty);
             target.ChildProperty.ShouldBe(source.ChildProperty);
@@ -48,7 +60,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void PrivateSetterInParentWorks()
         {
-            var source = new Source { ParentProperty = "ParentProperty", ChildProperty = 1 };
+            var source = new Source
+            {
+                ParentProperty = "ParentProperty",
+                ChildProperty = 1
+            };
             var target = Mapper.Map<Source, ChildPrivate>(source);
             target.ParentProperty.ShouldBe(source.ParentProperty);
             target.ChildProperty.ShouldBe(source.ChildProperty);
@@ -57,7 +73,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void PrivateSetterInGrandparentWorks()
         {
-            var source = new Source { ParentProperty = "ParentProperty", ChildProperty = 1 };
+            var source = new Source
+            {
+                ParentProperty = "ParentProperty",
+                ChildProperty = 1
+            };
             var target = Mapper.Map<Source, GrandChildPrivate>(source);
             target.ParentProperty.ShouldBe(source.ParentProperty);
             target.ChildProperty.ShouldBe(source.ChildProperty);
@@ -66,7 +86,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void PrivateSetterInGrandGrandparentWorks()
         {
-            var source = new Source { ParentProperty = "ParentProperty", ChildProperty = 1 };
+            var source = new Source
+            {
+                ParentProperty = "ParentProperty",
+                ChildProperty = 1
+            };
             var target = Mapper.Map<Source, GrandGrandChildPrivate>(source);
             target.ParentProperty.ShouldBe(source.ParentProperty);
             target.ChildProperty.ShouldBe(source.ChildProperty);

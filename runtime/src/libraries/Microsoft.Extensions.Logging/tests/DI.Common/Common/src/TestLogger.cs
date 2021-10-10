@@ -28,7 +28,13 @@ namespace Microsoft.Extensions.Logging.Testing
         {
             _scope = state;
 
-            _sink.Begin(new BeginScopeContext() { LoggerName = _name, Scope = state, });
+            _sink.Begin(
+                new BeginScopeContext()
+                {
+                    LoggerName = _name,
+                    Scope = state,
+                }
+            );
 
             return TestDisposable.Instance;
         }

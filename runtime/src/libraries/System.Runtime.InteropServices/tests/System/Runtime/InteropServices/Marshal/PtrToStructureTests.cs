@@ -15,7 +15,11 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_NonGenericType_ReturnsExpected()
         {
-            var structure = new SomeTestStruct { i = 10, s = "hello" };
+            var structure = new SomeTestStruct
+            {
+                i = 10,
+                s = "hello"
+            };
 
             int size = Marshal.SizeOf(structure);
             IntPtr ptr = Marshal.AllocHGlobal(size);
@@ -40,7 +44,11 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_GenericType_ReturnsExpected()
         {
-            var structure = new SomeTestStruct { i = 10, s = "hello" };
+            var structure = new SomeTestStruct
+            {
+                i = 10,
+                s = "hello"
+            };
 
             int size = Marshal.SizeOf(structure);
             IntPtr ptr = Marshal.AllocHGlobal(size);
@@ -62,7 +70,11 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_NonGenericObject_ReturnsExpected()
         {
-            var structure = new SomeTestStruct { i = 10, s = "hello" };
+            var structure = new SomeTestStruct
+            {
+                i = 10,
+                s = "hello"
+            };
 
             int size = Marshal.SizeOf(structure);
             IntPtr ptr = Marshal.AllocHGlobal(size);
@@ -85,7 +97,11 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_GenericObject_ReturnsExpected()
         {
-            var structure = new SomeTestStruct { i = 10, s = "hello" };
+            var structure = new SomeTestStruct
+            {
+                i = 10,
+                s = "hello"
+            };
 
             int size = Marshal.SizeOf(structure);
             IntPtr ptr = Marshal.AllocHGlobal(size);

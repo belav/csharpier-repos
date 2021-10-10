@@ -1658,7 +1658,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter();
             var product = new Product();
             var order = new Order();
-            var orderDetails = new OrderDetails { Order = order, Product = product };
+            var orderDetails = new OrderDetails
+            {
+                Order = order,
+                Product = product
+            };
 
             context.Add(orderDetails);
             if (saveEntities)
@@ -1803,7 +1807,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             // Construct initial state
             var parent1 = new Category { Id = 1 };
             var parent2 = new Category { Id = 2 };
-            var child = new Product { Id = 3, Category = parent1 };
+            var child = new Product
+            {
+                Id = 3,
+                Category = parent1
+            };
 
             context.AddRange(parent1, parent2, child);
             context.ChangeTracker.AcceptAllChanges();
@@ -2095,7 +2103,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Adding_derived_owned_throws(bool useAdd)
         {
             using var context = new EarlyLearningCenter();
-            var dreams = new Dreams { Sweet = new Sweet { Id = 1 }, Are = new OfThis() };
+            var dreams = new Dreams
+            {
+                Sweet = new Sweet { Id = 1 },
+                Are = new OfThis()
+            };
 
             context.Entry(dreams.Sweet).State = EntityState.Unchanged;
 
@@ -2131,7 +2143,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Moving_derived_owned_to_non_derived_reference_throws()
         {
             using var context = new EarlyLearningCenter();
-            var dreams = new Dreams { Sweet = new Sweet { Id = 1 }, OfThis = new OfThis() };
+            var dreams = new Dreams
+            {
+                Sweet = new Sweet { Id = 1 },
+                OfThis = new OfThis()
+            };
 
             context.Entry(dreams.Sweet).State = EntityState.Unchanged;
             context.Add(dreams);
@@ -2466,10 +2482,26 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var order1 = new Order();
             var order2 = new Order();
 
-            var orderDetails1a = new OrderDetails { Order = order1, Product = product1 };
-            var orderDetails1b = new OrderDetails { Order = order1, Product = product2 };
-            var orderDetails2a = new OrderDetails { Order = order2, Product = product1 };
-            var orderDetails2b = new OrderDetails { Order = order2, Product = product2 };
+            var orderDetails1a = new OrderDetails
+            {
+                Order = order1,
+                Product = product1
+            };
+            var orderDetails1b = new OrderDetails
+            {
+                Order = order1,
+                Product = product2
+            };
+            var orderDetails2a = new OrderDetails
+            {
+                Order = order2,
+                Product = product1
+            };
+            var orderDetails2b = new OrderDetails
+            {
+                Order = order2,
+                Product = product2
+            };
 
             context.Add(product1);
             context.Add(order1);
@@ -2499,10 +2531,26 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var order1 = new Order();
             var order2 = new Order();
 
-            var orderDetails1a = new OrderDetails { Order = order1, Product = product1 };
-            var orderDetails1b = new OrderDetails { Order = order1, Product = product2 };
-            var orderDetails2a = new OrderDetails { Order = order2, Product = product1 };
-            var orderDetails2b = new OrderDetails { Order = order2, Product = product2 };
+            var orderDetails1a = new OrderDetails
+            {
+                Order = order1,
+                Product = product1
+            };
+            var orderDetails1b = new OrderDetails
+            {
+                Order = order1,
+                Product = product2
+            };
+            var orderDetails2a = new OrderDetails
+            {
+                Order = order2,
+                Product = product1
+            };
+            var orderDetails2b = new OrderDetails
+            {
+                Order = order2,
+                Product = product2
+            };
 
             context.Add(orderDetails1a);
             context.Add(orderDetails2a);
@@ -2589,7 +2637,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Entries_calls_DetectChanges_by_default(bool useGenericOverload)
         {
             using var context = new EarlyLearningCenter();
-            var entry = context.Attach(new Product { Id = 1, CategoryId = 66 });
+            var entry = context.Attach(
+                new Product
+                {
+                    Id = 1,
+                    CategoryId = 66
+                }
+            );
 
             entry.Entity.CategoryId = 77;
 
@@ -2615,7 +2669,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter();
             context.ChangeTracker.AutoDetectChangesEnabled = false;
 
-            var entry = context.Attach(new Product { Id = 1, CategoryId = 66 });
+            var entry = context.Attach(
+                new Product
+                {
+                    Id = 1,
+                    CategoryId = 66
+                }
+            );
 
             entry.Entity.CategoryId = 77;
 
@@ -2643,7 +2703,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter();
             context.ChangeTracker.AutoDetectChangesEnabled = false;
 
-            var entry = context.Attach(new Product { Id = 1, CategoryId = 66 });
+            var entry = context.Attach(
+                new Product
+                {
+                    Id = 1,
+                    CategoryId = 66
+                }
+            );
 
             entry.Entity.CategoryId = 77;
 

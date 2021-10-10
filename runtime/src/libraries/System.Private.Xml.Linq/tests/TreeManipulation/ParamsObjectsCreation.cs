@@ -165,8 +165,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(XDocumentAddParamsInvalid)
                 {
-                    Attribute = new VariationAttribute("XDocument - Invalid case - XDocument node")
-                    {
+                    Attribute = new VariationAttribute(
+                        "XDocument - Invalid case - XDocument node"
+                    ) {
                         Param = "Document",
                         Priority = 2
                     }
@@ -186,8 +187,9 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(XDocumentAddParamsInvalid)
                 {
-                    Attribute = new VariationAttribute("XDocument - Invalid case - attribute node")
-                    {
+                    Attribute = new VariationAttribute(
+                        "XDocument - Invalid case - attribute node"
+                    ) {
                         Param = "Attribute",
                         Priority = 1
                     }

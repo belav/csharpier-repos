@@ -131,7 +131,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_unflatten()
         {
-            var dto = new OrderDto { CustomerName = "George Costanza", Total = 74.85m };
+            var dto = new OrderDto
+            {
+                CustomerName = "George Costanza",
+                Total = 74.85m
+            };
             var model = Mapper.Map<Order>(dto);
             model.CustomerHolder.Customer.Name.ShouldBe("George Costanza");
             model.CustomerHolder.Customer.Total.ShouldBe(74.85m);
@@ -237,7 +241,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_unflatten()
         {
-            var dto = new OrderDto { CustomerName = "George Costanza", Total = 74.85m };
+            var dto = new OrderDto
+            {
+                CustomerName = "George Costanza",
+                Total = 74.85m
+            };
             var model = Mapper.Map<Order>(dto);
             model.Value.ShouldBe(0);
             model.CustomerHolder.Customer.Name.ShouldBeNull();
@@ -373,7 +381,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_unflatten()
         {
-            var dto = new OrderDto { CustomerName = "George Costanza", Total = 74.85m };
+            var dto = new OrderDto
+            {
+                CustomerName = "George Costanza",
+                Total = 74.85m
+            };
             var model = Mapper.Map<Order>(dto);
             model.CustomerHolder.Customer.Name.ShouldBe("George Costanza");
             model.CustomerHolder.Customer.Total.ShouldBe(74.85m);
@@ -423,7 +435,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_unflatten()
         {
-            var dto = new OrderDto { CustomerName = "George Costanza", Total = 74.85m };
+            var dto = new OrderDto
+            {
+                CustomerName = "George Costanza",
+                Total = 74.85m
+            };
             var model = Mapper.Map<Order>(dto);
             model.CustomerHolder.Customer.Name.ShouldBe("George Costanza");
             model.CustomerHolder.Customer.Total.ShouldBe(74.85m);

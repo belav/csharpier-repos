@@ -748,7 +748,11 @@ namespace Microsoft.AspNetCore.Mvc
 
                 yield return new object[]
                 {
-                    new MyModel { Property1 = "Property_1", Property2 = "Property_2" },
+                    new MyModel
+                    {
+                        Property1 = "Property_1",
+                        Property2 = "Property_2"
+                    },
                     "ViewName_1"
                 };
             }

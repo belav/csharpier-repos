@@ -95,8 +95,9 @@ namespace System.Web.Mvc.Test
                 "MyProperty"
             );
             ControllerContext context = new ControllerContext();
-            AnnotationsCompareAttribute attribute = new AnnotationsCompareAttribute("OtherProperty")
-            {
+            AnnotationsCompareAttribute attribute = new AnnotationsCompareAttribute(
+                "OtherProperty"
+            ) {
                 ErrorMessageResourceName = "CompareAttributeTestResource",
                 ErrorMessageResourceType = typeof(MyResources),
             };

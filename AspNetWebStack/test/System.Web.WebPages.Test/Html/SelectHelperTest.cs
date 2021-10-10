@@ -1082,9 +1082,21 @@ namespace System.Web.WebPages.Test
 
         private static IEnumerable<SelectListItem> GetSelectList()
         {
-            yield return new SelectListItem() { Text = "Alpha", Value = "A" };
-            yield return new SelectListItem() { Text = "Bravo", Value = "B" };
-            yield return new SelectListItem() { Text = "Charlie", Value = "C" };
+            yield return new SelectListItem()
+            {
+                Text = "Alpha",
+                Value = "A"
+            };
+            yield return new SelectListItem()
+            {
+                Text = "Bravo",
+                Value = "B"
+            };
+            yield return new SelectListItem()
+            {
+                Text = "Charlie",
+                Value = "C"
+            };
         }
     }
 }

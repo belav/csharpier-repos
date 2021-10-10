@@ -57,9 +57,20 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void MergeObjectSelf()
         {
-            var a = new JObject { ["1"] = 1, ["2"] = 2 };
+            var a = new JObject
+            {
+                ["1"] = 1,
+                ["2"] = 2
+            };
             a.Merge(a, new JsonMergeSettings { MergeArrayHandling = MergeArrayHandling.Replace });
-            Assert.AreEqual(new JObject { ["1"] = 1, ["2"] = 2 }, a);
+            Assert.AreEqual(
+                new JObject
+                {
+                    ["1"] = 1,
+                    ["2"] = 2
+                },
+                a
+            );
         }
 
         [Test]

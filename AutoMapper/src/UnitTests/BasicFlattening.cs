@@ -102,9 +102,24 @@ namespace AutoMapper.UnitTests
                     Foo1 = new Foo { Name = "foo one" },
                     Foos = new List<Foo>
                     {
-                        new Foo { Name = "j1", Int64 = 123, NullInt = 321 },
-                        new Foo { Name = "j2", Int32 = 12345, NullInt = 54321 },
-                        new Foo { Name = "j3", Int32 = 12345, NullInt = 54321 },
+                        new Foo
+                        {
+                            Name = "j1",
+                            Int64 = 123,
+                            NullInt = 321
+                        },
+                        new Foo
+                        {
+                            Name = "j2",
+                            Int32 = 12345,
+                            NullInt = 54321
+                        },
+                        new Foo
+                        {
+                            Name = "j3",
+                            Int32 = 12345,
+                            NullInt = 54321
+                        },
                     },
                     FooArr = new[]
                     {
@@ -201,7 +216,11 @@ namespace AutoMapper.UnitTests
 
         protected override void Because_of()
         {
-            var orderModel = new OrderModel() { Number = "1", Vendor = null };
+            var orderModel = new OrderModel()
+            {
+                Number = "1",
+                Vendor = null
+            };
             _dto = Mapper.Map<OrderDTO>(orderModel);
         }
 

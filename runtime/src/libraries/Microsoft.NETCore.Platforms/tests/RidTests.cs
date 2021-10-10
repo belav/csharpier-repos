@@ -35,12 +35,20 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
             yield return new object[]
             {
                 "linux-x64",
-                new RID() { BaseRID = "linux", Architecture = "x64" }
+                new RID()
+                {
+                    BaseRID = "linux",
+                    Architecture = "x64"
+                }
             };
             yield return new object[]
             {
                 "linux-x64",
-                new RID() { BaseRID = "linux", Architecture = "x64" }
+                new RID()
+                {
+                    BaseRID = "linux",
+                    Architecture = "x64"
+                }
             };
             yield return new object[]
             {
@@ -85,12 +93,22 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
             yield return new object[]
             {
                 "foo-bar-arm",
-                new RID() { BaseRID = "foo", Architecture = "bar", Qualifier = "arm" }
+                new RID()
+                {
+                    BaseRID = "foo",
+                    Architecture = "bar",
+                    Qualifier = "arm"
+                }
             }; // demonstrates ambiguity, avoid using `-` in base
             yield return new object[]
             {
                 "linux-musl-x64",
-                new RID() { BaseRID = "linux", Architecture = "musl", Qualifier = "x64" }
+                new RID()
+                {
+                    BaseRID = "linux",
+                    Architecture = "musl",
+                    Qualifier = "x64"
+                }
             }; // yes, we already have ambiguous RIDs
         }
 

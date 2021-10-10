@@ -52,7 +52,11 @@ namespace System.Runtime.ExceptionServices.Tests
             using (
                 RemoteInvokeHandle handle = RemoteExecutor.Invoke(
                     () => CauseAVInNative(),
-                    new RemoteInvokeOptions { CheckExitCode = false, StartInfo = psi }
+                    new RemoteInvokeOptions
+                    {
+                        CheckExitCode = false,
+                        StartInfo = psi
+                    }
                 )
             )
             {

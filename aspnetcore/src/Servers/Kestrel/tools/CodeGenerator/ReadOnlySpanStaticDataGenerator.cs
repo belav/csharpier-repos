@@ -18,7 +18,12 @@ namespace CodeGenerator
         )
         {
             var properties = allProperties.Select(
-                (p, index) => new Property { Data = p, Index = index }
+                (p, index) =>
+                    new Property
+                    {
+                        Data = p,
+                        Index = index
+                    }
             );
 
             return $@"// Copyright (c) .NET Foundation. All rights reserved.

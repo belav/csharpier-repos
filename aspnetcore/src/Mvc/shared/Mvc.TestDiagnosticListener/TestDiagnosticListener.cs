@@ -208,7 +208,11 @@ namespace Microsoft.AspNetCore.Mvc
         [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeView")]
         public virtual void OnBeforeView(IProxyView view, IProxyViewContext viewContext)
         {
-            BeforeView = new OnBeforeViewEventData() { View = view, ViewContext = viewContext, };
+            BeforeView = new OnBeforeViewEventData()
+            {
+                View = view,
+                ViewContext = viewContext,
+            };
         }
 
         public class OnAfterViewEventData
@@ -222,7 +226,11 @@ namespace Microsoft.AspNetCore.Mvc
         [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterView")]
         public virtual void OnAfterView(IProxyView view, IProxyViewContext viewContext)
         {
-            AfterView = new OnAfterViewEventData() { View = view, ViewContext = viewContext, };
+            AfterView = new OnAfterViewEventData()
+            {
+                View = view,
+                ViewContext = viewContext,
+            };
         }
 
         public class OnBeforeViewPageEventData
@@ -440,7 +448,11 @@ namespace Microsoft.AspNetCore.Mvc
         )
         {
             PageInstrumentationData.Add(
-                new EndPageInstrumentationData { HttpContext = httpContext, Path = path, }
+                new EndPageInstrumentationData
+                {
+                    HttpContext = httpContext,
+                    Path = path,
+                }
             );
         }
     }

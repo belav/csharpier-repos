@@ -80,7 +80,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             return Clients.All.SendAsync(
                 "Broadcast",
-                new Result { Message = "test", paramName = "param" }
+                new Result
+                {
+                    Message = "test",
+                    paramName = "param"
+                }
             );
         }
 

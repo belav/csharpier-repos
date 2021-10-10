@@ -244,7 +244,11 @@ namespace System.Text.Json.Serialization.Tests
 
             string expected = @"{""MyInt"":""1"",""MyNullableFloat"":""2""}";
 
-            var obj = new Class_With_BoxedNumbers { MyInt = @int, MyNullableFloat = nullableFloat };
+            var obj = new Class_With_BoxedNumbers
+            {
+                MyInt = @int,
+                MyNullableFloat = nullableFloat
+            };
 
             string serialized = JsonSerializer.Serialize(obj);
             JsonTestHelper.AssertJsonEqual(expected, serialized);
@@ -1186,7 +1190,11 @@ namespace System.Text.Json.Serialization.Tests
                     )
             );
 
-            var obj = new ClassWithNumbers { IntNumber = 1, FloatNumber = float.NaN };
+            var obj = new ClassWithNumbers
+            {
+                IntNumber = 1,
+                FloatNumber = float.NaN
+            };
 
             JsonTestHelper.AssertJsonEqual(
                 json,

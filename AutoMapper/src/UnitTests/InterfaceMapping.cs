@@ -249,7 +249,11 @@ namespace AutoMapper.UnitTests.InterfaceMapping
 
         protected override void Because_of()
         {
-            var bo = new class2 { prop1 = "PROP1", prop2 = "PROP2" };
+            var bo = new class2
+            {
+                prop1 = "PROP1",
+                prop2 = "PROP2"
+            };
             _result = Mapper.Map(bo, new class2DTO());
         }
 
@@ -479,7 +483,13 @@ namespace AutoMapper.UnitTests.InterfaceMapping
 
         protected override void Because_of()
         {
-            _result = Mapper.Map<ISource, Destination>(new Source { Id = 7, SecondId = 42 });
+            _result = Mapper.Map<ISource, Destination>(
+                new Source
+                {
+                    Id = 7,
+                    SecondId = 42
+                }
+            );
         }
 
         [Fact]
@@ -552,7 +562,13 @@ namespace AutoMapper.UnitTests.InterfaceMapping
 
         protected override void Because_of()
         {
-            _result = Mapper.Map<ISource, Destination>(new Source { Id = 7, SecondId = 42 });
+            _result = Mapper.Map<ISource, Destination>(
+                new Source
+                {
+                    Id = 7,
+                    SecondId = 42
+                }
+            );
         }
 
         [Fact]

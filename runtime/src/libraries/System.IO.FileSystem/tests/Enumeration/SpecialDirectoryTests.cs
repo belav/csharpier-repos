@@ -69,7 +69,11 @@ namespace System.IO.Tests.Enumeration
             // Files that begin with periods are considered hidden on Unix
             string[] paths = GetNames(
                 TestDirectory,
-                new EnumerationOptions { ReturnSpecialDirectories = true, AttributesToSkip = 0 }
+                new EnumerationOptions
+                {
+                    ReturnSpecialDirectories = true,
+                    AttributesToSkip = 0
+                }
             );
             Assert.Contains(".", paths);
             Assert.Contains("..", paths);

@@ -507,7 +507,11 @@ namespace Microsoft.AspNetCore.Http.Features
 
             IFormFeature formFeature = new FormFeature(
                 context.Request,
-                new FormOptions() { BufferBody = bufferRequest, ValueCountLimit = 2 }
+                new FormOptions()
+                {
+                    BufferBody = bufferRequest,
+                    ValueCountLimit = 2
+                }
             );
             context.Features.Set<IFormFeature>(formFeature);
 
@@ -536,7 +540,11 @@ namespace Microsoft.AspNetCore.Http.Features
 
             IFormFeature formFeature = new FormFeature(
                 context.Request,
-                new FormOptions() { BufferBody = bufferRequest, ValueCountLimit = 2 }
+                new FormOptions()
+                {
+                    BufferBody = bufferRequest,
+                    ValueCountLimit = 2
+                }
             );
             context.Features.Set<IFormFeature>(formFeature);
 

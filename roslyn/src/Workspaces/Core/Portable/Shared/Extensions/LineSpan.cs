@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public int End { get; private set; }
 
         public static LineSpan FromBounds(int start, int end) =>
-            new LineSpan() { Start = start, End = end };
+            new LineSpan()
+            {
+                Start = start,
+                End = end
+            };
 
         public bool Equals(LineSpan other) => this.Start == other.Start && this.End == other.End;
 

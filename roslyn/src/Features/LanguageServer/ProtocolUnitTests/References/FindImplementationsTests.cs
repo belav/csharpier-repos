@@ -90,13 +90,21 @@ class A : IA
 
             AddMappedDocument(testLspServer.TestWorkspace, markup);
 
-            var position = new LSP.Position { Line = 2, Character = 9 };
+            var position = new LSP.Position
+            {
+                Line = 2,
+                Character = 9
+            };
             var results = await RunFindImplementationAsync(
                 testLspServer,
                 new LSP.Location
                 {
                     Uri = new Uri($"C:\\{TestSpanMapper.GeneratedFileName}"),
-                    Range = new LSP.Range { Start = position, End = position }
+                    Range = new LSP.Range
+                    {
+                        Start = position,
+                        End = position
+                    }
                 }
             );
             AssertLocationsEqual(ImmutableArray.Create(TestSpanMapper.MappedFileLocation), results);

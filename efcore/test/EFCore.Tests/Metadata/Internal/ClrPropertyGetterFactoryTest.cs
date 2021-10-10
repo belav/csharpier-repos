@@ -144,7 +144,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 new Fuel(1.0),
                 new ClrPropertyGetterFactory().Create((IPropertyBase)fuelProperty)
-                    .GetClrValue(new Customer { Id = 7, Fuel = new Fuel(1.0) })
+                    .GetClrValue(
+                        new Customer
+                        {
+                            Id = 7,
+                            Fuel = new Fuel(1.0)
+                        }
+                    )
             );
         }
 
@@ -154,7 +160,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 new Fuel(1.0),
                 new ClrPropertyGetterFactory().Create(typeof(Customer).GetAnyProperty("Fuel"))
-                    .GetClrValue(new Customer { Id = 7, Fuel = new Fuel(1.0) })
+                    .GetClrValue(
+                        new Customer
+                        {
+                            Id = 7,
+                            Fuel = new Fuel(1.0)
+                        }
+                    )
             );
         }
 

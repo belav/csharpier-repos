@@ -23,13 +23,21 @@ namespace System.Xml.Tests
             module.AddChild(
                 new EncodeDecodeTests
                 {
-                    Attribute = new TestCase { Name = "EncodeName/DecodeName", Desc = "XmlConvert" }
+                    Attribute = new TestCase
+                    {
+                        Name = "EncodeName/DecodeName",
+                        Desc = "XmlConvert"
+                    }
                 }
             );
             module.AddChild(
                 new MiscellaneousTests
                 {
-                    Attribute = new TestCase { Name = "Misc. Bug Regressions", Desc = "XmlConvert" }
+                    Attribute = new TestCase
+                    {
+                        Name = "Misc. Bug Regressions",
+                        Desc = "XmlConvert"
+                    }
                 }
             );
             module.AddChild(

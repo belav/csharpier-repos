@@ -415,7 +415,11 @@ namespace System.Formats.Cbor.Tests
             var ecParameters = new ECParameters()
             {
                 Curve = ECCurve.CreateFromFriendlyName(curveFriendlyName),
-                Q = new ECPoint() { X = hexQx.HexToByteArray(), Y = hexQy.HexToByteArray() },
+                Q = new ECPoint()
+                {
+                    X = hexQx.HexToByteArray(),
+                    Y = hexQy.HexToByteArray()
+                },
             };
 
             using ECDsa ecDsa = ECDsa.Create(ecParameters);

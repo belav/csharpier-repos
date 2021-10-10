@@ -121,7 +121,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             modelState.SetModelValue("parameter", "test", "test");
             validationState.Add(
                 model,
-                new ValidationStateEntry() { Key = "parameter", SuppressValidation = true }
+                new ValidationStateEntry()
+                {
+                    Key = "parameter",
+                    SuppressValidation = true
+                }
             );
 
             // Act
@@ -168,7 +172,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             var validator = CreateValidator();
 
-            var model = (object)new ValueType() { Reference = "ref", Value = 256 };
+            var model = (object)new ValueType()
+            {
+                Reference = "ref",
+                Value = 256
+            };
 
             modelState.SetModelValue("parameter.Reference", "ref", "ref");
             modelState.SetModelValue("parameter.Value", "256", "256");
@@ -200,7 +208,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             var validator = CreateValidator();
 
-            var model = (object)new ReferenceType() { Reference = "ref", Value = 256 };
+            var model = (object)new ReferenceType()
+            {
+                Reference = "ref",
+                Value = 256
+            };
 
             modelState.SetModelValue("parameter.Reference", "ref", "ref");
             modelState.SetModelValue("parameter.Value", "256", "256");
@@ -285,7 +297,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             validationState.Add(model, new ValidationStateEntry() { Key = "person" });
             validationState.Add(
                 model.Address,
-                new ValidationStateEntry() { Key = "person.Address", SuppressValidation = true }
+                new ValidationStateEntry()
+                {
+                    Key = "person.Address",
+                    SuppressValidation = true
+                }
             );
 
             // Act
@@ -391,7 +407,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             var validator = CreateValidator();
 
-            var model = (object)new Person() { Name = "Rick", Friend = new Person() };
+            var model = (object)new Person()
+            {
+                Name = "Rick",
+                Friend = new Person()
+            };
 
             modelState.SetModelValue("Name", "Rick", "Rick");
             validationState.Add(model, new ValidationStateEntry() { Key = string.Empty });

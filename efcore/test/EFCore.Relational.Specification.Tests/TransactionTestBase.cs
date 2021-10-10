@@ -47,7 +47,13 @@ namespace Microsoft.EntityFrameworkCore
             {
                 context.Database.AutoTransactionsEnabled = false;
 
-                context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 77,
+                        Name = "Bobble"
+                    }
+                );
 
                 context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
                     EntityState.Added;
@@ -82,7 +88,13 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.True(context.Database.AutoTransactionsEnabled);
 
-                context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 77,
+                        Name = "Bobble"
+                    }
+                );
 
                 context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
                     EntityState.Added;
@@ -117,7 +129,13 @@ namespace Microsoft.EntityFrameworkCore
                     context.Database.EnlistTransaction(transaction);
                     context.Database.AutoTransactionsEnabled = autoTransactionsEnabled;
 
-                    context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                    context.Add(
+                        new TransactionCustomer
+                        {
+                            Id = 77,
+                            Name = "Bobble"
+                        }
+                    );
 
                     context.Entry(
                         context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
@@ -201,7 +219,13 @@ namespace Microsoft.EntityFrameworkCore
                     context.Database.EnlistTransaction(transaction);
                     context.Database.AutoTransactionsEnabled = autoTransactionsEnabled;
 
-                    context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                    context.Add(
+                        new TransactionCustomer
+                        {
+                            Id = 77,
+                            Name = "Bobble"
+                        }
+                    );
 
                     context.Entry(
                         context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
@@ -254,7 +278,13 @@ namespace Microsoft.EntityFrameworkCore
                 context.Database.EnlistTransaction(transaction);
                 context.Database.AutoTransactionsEnabled = autoTransactionsEnabled;
 
-                context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 77,
+                        Name = "Bobble"
+                    }
+                );
 
                 context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
                     EntityState.Added;
@@ -297,7 +327,13 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     context.Database.AutoTransactionsEnabled = autoTransactionsEnabled;
 
-                    context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                    context.Add(
+                        new TransactionCustomer
+                        {
+                            Id = 77,
+                            Name = "Bobble"
+                        }
+                    );
 
                     context.Entry(
                         context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
@@ -381,7 +417,13 @@ namespace Microsoft.EntityFrameworkCore
                     connection = context.Database.GetDbConnection();
                     Assert.Equal(ConnectionState.Closed, connection.State);
 
-                    context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                    context.Add(
+                        new TransactionCustomer
+                        {
+                            Id = 77,
+                            Name = "Bobble"
+                        }
+                    );
 
                     context.Entry(
                         context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
@@ -429,7 +471,13 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using (TestUtilities.TestStore.CreateTransactionScope())
                 {
-                    context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                    context.Add(
+                        new TransactionCustomer
+                        {
+                            Id = 77,
+                            Name = "Bobble"
+                        }
+                    );
 
                     context.Entry(
                         context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
@@ -467,7 +515,13 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using (var tr = new TransactionScope())
                 {
-                    context.Add(new TransactionCustomer { Id = 77, Name = "Bobbie" });
+                    context.Add(
+                        new TransactionCustomer
+                        {
+                            Id = 77,
+                            Name = "Bobbie"
+                        }
+                    );
                     context.SaveChanges();
                     tr.Complete();
                     TestStore.CloseConnection();
@@ -477,7 +531,13 @@ namespace Microsoft.EntityFrameworkCore
                         )
                     )
                     {
-                        context.Add(new TransactionOrder { Id = 300, Name = "Order3" });
+                        context.Add(
+                            new TransactionOrder
+                            {
+                                Id = 300,
+                                Name = "Order3"
+                            }
+                        );
                         context.SaveChanges();
                         nestedTransaction.Complete();
                         TestStore.CloseConnection();
@@ -512,7 +572,13 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using (var tr = new TransactionScope())
                 {
-                    context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                    context.Add(
+                        new TransactionCustomer
+                        {
+                            Id = 77,
+                            Name = "Bobble"
+                        }
+                    );
                     context.SaveChanges();
                     TestStore.CloseConnection();
                     using (
@@ -521,7 +587,13 @@ namespace Microsoft.EntityFrameworkCore
                         )
                     )
                     {
-                        context.Add(new TransactionOrder { Id = 300, Name = "Order3" });
+                        context.Add(
+                            new TransactionOrder
+                            {
+                                Id = 300,
+                                Name = "Order3"
+                            }
+                        );
                         context.SaveChanges();
                         nestedTransaction.Complete();
                         TestStore.CloseConnection();
@@ -556,7 +628,13 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using (TestUtilities.TestStore.CreateTransactionScope())
                 {
-                    context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                    context.Add(
+                        new TransactionCustomer
+                        {
+                            Id = 77,
+                            Name = "Bobble"
+                        }
+                    );
 
                     context.Entry(
                         context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
@@ -584,7 +662,13 @@ namespace Microsoft.EntityFrameworkCore
 
                 Assert.Equal(ConnectionState.Open, connection.State);
 
-                context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 77,
+                        Name = "Bobble"
+                    }
+                );
 
                 if (async)
                 {
@@ -1337,7 +1421,13 @@ namespace Microsoft.EntityFrameworkCore
                     ? await context.Database.BeginTransactionAsync()
                     : context.Database.BeginTransaction();
 
-                context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 77,
+                        Name = "Bobble"
+                    }
+                );
 
                 if (async)
                 {
@@ -1348,8 +1438,20 @@ namespace Microsoft.EntityFrameworkCore
                     context.SaveChanges();
                 }
 
-                context.Add(new TransactionCustomer { Id = 78, Name = "Hobble" });
-                context.Add(new TransactionCustomer { Id = 1, Name = "Gobble" }); // Cause SaveChanges failure
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 78,
+                        Name = "Hobble"
+                    }
+                );
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 1,
+                        Name = "Gobble"
+                    }
+                ); // Cause SaveChanges failure
 
                 if (async)
                 {
@@ -1382,7 +1484,13 @@ namespace Microsoft.EntityFrameworkCore
                     ? await context.Database.BeginTransactionAsync()
                     : context.Database.BeginTransaction();
 
-                context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 77,
+                        Name = "Bobble"
+                    }
+                );
 
                 if (async)
                 {
@@ -1393,8 +1501,20 @@ namespace Microsoft.EntityFrameworkCore
                     context.SaveChanges();
                 }
 
-                context.Add(new TransactionCustomer { Id = 78, Name = "Hobble" });
-                context.Add(new TransactionCustomer { Id = 1, Name = "Gobble" }); // Cause SaveChanges failure
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 78,
+                        Name = "Hobble"
+                    }
+                );
+                context.Add(
+                    new TransactionCustomer
+                    {
+                        Id = 1,
+                        Name = "Gobble"
+                    }
+                ); // Cause SaveChanges failure
 
                 if (async)
                 {
@@ -1611,15 +1731,31 @@ namespace Microsoft.EntityFrameworkCore
         protected static readonly IReadOnlyList<TransactionCustomer> Customers =
             new List<TransactionCustomer>
             {
-                new() { Id = 1, Name = "Bob" },
-                new() { Id = 2, Name = "Dave" }
+                new()
+                {
+                    Id = 1,
+                    Name = "Bob"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "Dave"
+                }
             };
 
         protected static readonly IReadOnlyList<TransactionOrder> Orders =
             new List<TransactionOrder>
             {
-                new() { Id = 100, Name = "Order1" },
-                new() { Id = 200, Name = "Order2" }
+                new()
+                {
+                    Id = 100,
+                    Name = "Order1"
+                },
+                new()
+                {
+                    Id = 200,
+                    Name = "Order2"
+                }
             };
 
         protected abstract class TransactionEntity

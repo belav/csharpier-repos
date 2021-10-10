@@ -334,7 +334,11 @@ where TValue : class
                             ParameterName = "a",
                             TypeName = "int",
                         },
-                        new MethodParameter() { ParameterName = "b", TypeName = "string", }
+                        new MethodParameter()
+                        {
+                            ParameterName = "b",
+                            TypeName = "string",
+                        }
                     },
                     ReturnType = "string",
                 }

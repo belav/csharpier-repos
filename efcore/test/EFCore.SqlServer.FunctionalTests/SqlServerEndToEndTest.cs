@@ -34,8 +34,16 @@ namespace Microsoft.EntityFrameworkCore
         public void Can_use_decimal_and_byte_as_identity_columns()
         {
             using var testDatabase = SqlServerTestStore.CreateInitialized(DatabaseName);
-            var nownNum1 = new NownNum { Id = 77.0m, TheWalrus = "Crying" };
-            var nownNum2 = new NownNum { Id = 78.0m, TheWalrus = "Walrus" };
+            var nownNum1 = new NownNum
+            {
+                Id = 77.0m,
+                TheWalrus = "Crying"
+            };
+            var nownNum2 = new NownNum
+            {
+                Id = 78.0m,
+                TheWalrus = "Walrus"
+            };
 
             var numNum1 = new NumNum { TheWalrus = "I" };
             var numNum2 = new NumNum { TheWalrus = "Am" };
@@ -46,8 +54,16 @@ namespace Microsoft.EntityFrameworkCore
             var adNum1 = new AdNum { TheWalrus = "Eggman" };
             var adNum2 = new AdNum { TheWalrus = "Eggmen" };
 
-            var byteNownNum1 = new ByteNownNum { Id = 77, Lucy = "Tangerine" };
-            var byteNownNum2 = new ByteNownNum { Id = 78, Lucy = "Trees" };
+            var byteNownNum1 = new ByteNownNum
+            {
+                Id = 77,
+                Lucy = "Tangerine"
+            };
+            var byteNownNum2 = new ByteNownNum
+            {
+                Id = 78,
+                Lucy = "Trees"
+            };
 
             var byteNum1 = new ByteNum { Lucy = "Marmalade" };
             var byteNum2 = new ByteNum { Lucy = "Skies" };
@@ -258,8 +274,16 @@ namespace Microsoft.EntityFrameworkCore
             var sNum1 = new SNum { TheWalrus = "I" };
             var sNum2 = new SNum { TheWalrus = "Am" };
 
-            var enNum1 = new EnNum { TheWalrus = "Goo goo", Id = ENum.BNum };
-            var enNum2 = new EnNum { TheWalrus = "g'joob", Id = ENum.CNum };
+            var enNum1 = new EnNum
+            {
+                TheWalrus = "Goo goo",
+                Id = ENum.BNum
+            };
+            var enNum2 = new EnNum
+            {
+                TheWalrus = "g'joob",
+                Id = ENum.CNum
+            };
 
             var bNum1 = new BNum { TheWalrus = "Eggman" };
             var bNum2 = new BNum { TheWalrus = "Eggmen" };
@@ -364,11 +388,19 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = new CompositeKeysDbContext(options))
             {
                 context.Database.EnsureCreatedResiliently();
-                var first = new Int32CompositeKeys { Id1 = 1, Id2 = 2 };
+                var first = new Int32CompositeKeys
+                {
+                    Id1 = 1,
+                    Id2 = 2
+                };
 
                 context.Add(first);
 
-                var second = new Int64CompositeKeys { Id1 = 1, Id2 = 2 };
+                var second = new Int64CompositeKeys
+                {
+                    Id1 = 1,
+                    Id2 = 2
+                };
 
                 context.Add(second);
                 await context.SaveChangesAsync();
@@ -750,7 +782,11 @@ namespace Microsoft.EntityFrameworkCore
 
             var player = new PlayerCharacter(new Level { Game = new Game() });
 
-            var weapon = new Item { Id = 1, Game = player.Game };
+            var weapon = new Item
+            {
+                Id = 1,
+                Game = player.Game
+            };
 
             context.Characters.Add(player);
 
@@ -775,7 +811,11 @@ namespace Microsoft.EntityFrameworkCore
 
                 var player = new PlayerCharacter(new Level { Game = new Game() });
 
-                var weapon = new Item { Id = 1, Game = player.Game };
+                var weapon = new Item
+                {
+                    Id = 1,
+                    Game = player.Game
+                };
 
                 player.Items.Add(weapon);
                 context.Characters.Add(player);
@@ -812,11 +852,21 @@ namespace Microsoft.EntityFrameworkCore
 
                 var player = new PlayerCharacter(new Level { Game = new Game() });
 
-                var weapon = new Item { Id = 1, Game = player.Game };
+                var weapon = new Item
+                {
+                    Id = 1,
+                    Game = player.Game
+                };
 
                 player.Items.Add(weapon);
 
-                player.Items.Add(new Item { Id = 2, Game = player.Game });
+                player.Items.Add(
+                    new Item
+                    {
+                        Id = 2,
+                        Game = player.Game
+                    }
+                );
 
                 context.Characters.Add(player);
 

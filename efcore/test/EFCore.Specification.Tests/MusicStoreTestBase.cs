@@ -122,7 +122,14 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Name = "Genre " + g,
                             Albums = Enumerable.Range(1, numberOfAlbums)
-                                .Select(n => new Album { Artist = artist, Title = "Greatest Hits" })
+                                .Select(
+                                    n =>
+                                        new Album
+                                        {
+                                            Artist = artist,
+                                            Title = "Greatest Hits"
+                                        }
+                                )
                                 .ToList()
                         }
                 )
@@ -359,7 +366,13 @@ namespace Microsoft.EntityFrameworkCore
 
                             var cartItems = Enumerable.Range(1, itemCount)
                                 .Select(
-                                    n => new CartItem { Album = album, Count = 1, CartId = cartId }
+                                    n =>
+                                        new CartItem
+                                        {
+                                            Album = album,
+                                            Count = 1,
+                                            CartId = cartId
+                                        }
                                 )
                                 .ToArray();
 
@@ -415,7 +428,11 @@ namespace Microsoft.EntityFrameworkCore
                                         ArtistId = album.ArtistId,
                                         Name = artist.Name
                                     },
-                                    Genre = new Genre { GenreId = album.GenreId, Name = genre.Name }
+                                    Genre = new Genre
+                                    {
+                                        GenreId = album.GenreId,
+                                        Name = genre.Name
+                                    }
                                 };
 
                             var foundAlbums = q.ToList();

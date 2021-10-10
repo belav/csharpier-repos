@@ -72,14 +72,22 @@ namespace AutoMapper.Internal.Mappers
             {
                 if (source.TryGetValue(name, out var value))
                 {
-                    return new Match { Value = value, Count = 1 };
+                    return new Match
+                    {
+                        Value = value,
+                        Count = 1
+                    };
                 }
                 var matches = source.Where(s => s.Key.Trim() == name)
                     .Select(s => s.Value)
                     .ToArray();
                 if (matches.Length == 1)
                 {
-                    return new Match { Value = matches[0], Count = 1 };
+                    return new Match
+                    {
+                        Value = matches[0],
+                        Count = 1
+                    };
                 }
                 return new Match { Count = matches.Length };
             }

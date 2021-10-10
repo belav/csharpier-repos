@@ -448,7 +448,14 @@ namespace System.Web.Helpers
 
         private SortInfo SortInfo
         {
-            get { return new SortInfo { SortColumn = SortColumn, SortDirection = SortDirection }; }
+            get
+            {
+                return new SortInfo
+                {
+                    SortColumn = SortColumn,
+                    SortDirection = SortDirection
+                };
+            }
         }
 
         public string SortDirectionFieldName
@@ -1200,7 +1207,11 @@ namespace System.Web.Helpers
             }
             return (
                 from n in names
-                select new WebGridColumn { ColumnName = n, CanSort = true }
+                select new WebGridColumn
+                {
+                    ColumnName = n,
+                    CanSort = true
+                }
             ).ToArray();
         }
 

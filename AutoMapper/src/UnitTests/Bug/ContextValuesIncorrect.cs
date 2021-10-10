@@ -34,7 +34,11 @@ namespace AutoMapper.UnitTests.Bug
 
             protected override void Because_of()
             {
-                var source = new Foo { Value = 3, Value2 = 4 };
+                var source = new Foo
+                {
+                    Value = 3,
+                    Value2 = 4
+                };
                 _destination = new FooDto { Value = 5 };
 
                 Mapper.Map(source, _destination);

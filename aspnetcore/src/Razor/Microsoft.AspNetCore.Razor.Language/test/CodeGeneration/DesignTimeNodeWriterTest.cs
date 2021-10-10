@@ -81,7 +81,13 @@ using System;
 
             var node = new CSharpExpressionIntermediateNode();
             var builder = IntermediateNodeBuilder.Create(node);
-            builder.Add(new IntermediateToken() { Content = "i++", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "i++",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             // Act
             writer.WriteCSharpExpression(context, node);
@@ -108,7 +114,13 @@ using System;
                 Source = new SourceSpan("test.cshtml", 0, 0, 0, 3),
             };
             var builder = IntermediateNodeBuilder.Create(node);
-            builder.Add(new IntermediateToken() { Content = "i++", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "i++",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             // Act
             writer.WriteCSharpExpression(context, node);
@@ -139,9 +151,21 @@ __o = i++;
 
             var node = new CSharpExpressionIntermediateNode();
             var builder = IntermediateNodeBuilder.Create(node);
-            builder.Add(new IntermediateToken() { Content = "i", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "i",
+                    Kind = TokenKind.CSharp,
+                }
+            );
             builder.Add(new MyExtensionIntermediateNode());
-            builder.Add(new IntermediateToken() { Content = "++", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "++",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             // Act
             writer.WriteCSharpExpression(context, node);
@@ -169,9 +193,21 @@ __o = i++;
                 Source = new SourceSpan("test.cshtml", 8, 0, 8, 3),
             };
             var builder = IntermediateNodeBuilder.Create(node);
-            builder.Add(new IntermediateToken() { Content = "i", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "i",
+                    Kind = TokenKind.CSharp,
+                }
+            );
             builder.Add(new MyExtensionIntermediateNode());
-            builder.Add(new IntermediateToken() { Content = "++", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "++",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             // Act
             writer.WriteCSharpExpression(context, node);
@@ -206,7 +242,13 @@ __o = i++;
                 Source = new SourceSpan("test.cshtml", 0, 0, 0, 3),
             };
             IntermediateNodeBuilder.Create(node)
-                .Add(new IntermediateToken() { Kind = TokenKind.CSharp, Content = "    " });
+                .Add(
+                    new IntermediateToken()
+                    {
+                        Kind = TokenKind.CSharp,
+                        Content = "    "
+                    }
+                );
 
             // Act
             writer.WriteCSharpCode(context, node);
@@ -238,7 +280,11 @@ __o = i++;
             var node = new CSharpCodeIntermediateNode();
             IntermediateNodeBuilder.Create(node)
                 .Add(
-                    new IntermediateToken() { Kind = TokenKind.CSharp, Content = "if (true) { }" }
+                    new IntermediateToken()
+                    {
+                        Kind = TokenKind.CSharp,
+                        Content = "if (true) { }"
+                    }
                 );
 
             // Act
@@ -267,7 +313,11 @@ __o = i++;
             };
             IntermediateNodeBuilder.Create(node)
                 .Add(
-                    new IntermediateToken() { Kind = TokenKind.CSharp, Content = "if (true) { }", }
+                    new IntermediateToken()
+                    {
+                        Kind = TokenKind.CSharp,
+                        Content = "if (true) { }",
+                    }
                 );
 
             // Act

@@ -27,7 +27,11 @@ namespace SslStress.Utils
         }
 
         public StreamCounter Clone() =>
-            new StreamCounter() { BytesRead = BytesRead, BytesWritten = BytesWritten };
+            new StreamCounter()
+            {
+                BytesRead = BytesRead,
+                BytesWritten = BytesWritten
+            };
     }
 
     public class CountingStream : Stream

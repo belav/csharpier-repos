@@ -1436,7 +1436,11 @@ namespace Microsoft.AspNetCore.Identity.Test
         public async Task GetExternalLoginInfoAsyncReturnsCorrectProviderDisplayName()
         {
             // Arrange
-            var user = new PocoUser { Id = "foo", UserName = "Foo" };
+            var user = new PocoUser
+            {
+                Id = "foo",
+                UserName = "Foo"
+            };
             var userManager = SetupUserManager(user);
             var context = new DefaultHttpContext();
             var identity = new ClaimsIdentity();
@@ -1476,7 +1480,11 @@ namespace Microsoft.AspNetCore.Identity.Test
         public async Task ExternalLoginInfoAsyncReturnsAuthenticationPropertiesWithCustomValue()
         {
             // Arrange
-            var user = new PocoUser { Id = "foo", UserName = "Foo" };
+            var user = new PocoUser
+            {
+                Id = "foo",
+                UserName = "Foo"
+            };
             var userManager = SetupUserManager(user);
             var context = new DefaultHttpContext();
             var identity = new ClaimsIdentity();

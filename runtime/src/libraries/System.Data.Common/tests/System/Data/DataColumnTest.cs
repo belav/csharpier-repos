@@ -853,7 +853,11 @@ namespace System.Data.Tests
 
         private DataColumn MakeColumn(string col, string test)
         {
-            return new DataColumn() { ColumnName = col, Expression = test };
+            return new DataColumn()
+            {
+                ColumnName = col,
+                Expression = test
+            };
         }
     }
 }

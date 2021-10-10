@@ -442,7 +442,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new List<int> { 9, 8, 7, 6 } }
+                new Source
+                {
+                    Values = new[] { 1, 2, 3, 4 },
+                    Values2 = new List<int> { 9, 8, 7, 6 }
+                }
             );
         }
 
@@ -494,7 +498,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new List<int> { 9, 8, 7, 6 } }
+                new Source
+                {
+                    Values = new[] { 1, 2, 3, 4 },
+                    Values2 = new List<int> { 9, 8, 7, 6 }
+                }
             );
         }
 
@@ -541,7 +549,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
             );
         protected override void Because_of() =>
             _destination = Mapper.Map<Destination>(
-                new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new List<int> { 9, 8, 7, 6 } }
+                new Source
+                {
+                    Values = new[] { 1, 2, 3, 4 },
+                    Values2 = new List<int> { 9, 8, 7, 6 }
+                }
             );
         [Fact]
         public void Should_map_the_list_of_source_items()
@@ -615,7 +627,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new List<int> { 9, 8, 7, 6 } }
+                new Source
+                {
+                    Values = new[] { 1, 2, 3, 4 },
+                    Values2 = new List<int> { 9, 8, 7, 6 }
+                }
             );
         }
 

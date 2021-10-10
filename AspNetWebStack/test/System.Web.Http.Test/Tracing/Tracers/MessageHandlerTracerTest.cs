@@ -97,8 +97,11 @@ namespace System.Web.Http.Tracing.Tracers
                     Kind = TraceKind.Begin,
                     Operation = "SendAsync"
                 },
-                new TraceRecord(request, TraceCategories.MessageHandlersCategory, TraceLevel.Error)
-                {
+                new TraceRecord(
+                    request,
+                    TraceCategories.MessageHandlersCategory,
+                    TraceLevel.Error
+                ) {
                     Kind = TraceKind.End,
                     Operation = "SendAsync"
                 }
@@ -160,8 +163,11 @@ namespace System.Web.Http.Tracing.Tracers
                     Kind = TraceKind.Begin,
                     Operation = "SendAsync"
                 },
-                new TraceRecord(request, TraceCategories.MessageHandlersCategory, TraceLevel.Error)
-                {
+                new TraceRecord(
+                    request,
+                    TraceCategories.MessageHandlersCategory,
+                    TraceLevel.Error
+                ) {
                     Kind = TraceKind.End,
                     Operation = "SendAsync"
                 }

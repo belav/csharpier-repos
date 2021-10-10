@@ -549,7 +549,11 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             // Arrange
 
             // Act
-            var mouseEventArgs = new MouseEventArgs() { Type = "click", Detail = 1 };
+            var mouseEventArgs = new MouseEventArgs()
+            {
+                Type = "click",
+                Detail = 1
+            };
             var browserDescriptor = new WebEventDescriptor()
             {
                 BrowserRendererId = 0,

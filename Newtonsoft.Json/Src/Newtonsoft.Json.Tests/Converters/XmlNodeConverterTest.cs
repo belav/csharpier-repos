@@ -154,7 +154,11 @@ namespace Newtonsoft.Json.Tests.Converters
             StringWriter sw = new StringWriter();
             XmlWriter writer = XmlWriter.Create(
                 sw,
-                new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true }
+                new XmlWriterSettings
+                {
+                    Indent = true,
+                    OmitXmlDeclaration = true
+                }
             );
 
             while (reader.Read())
@@ -3370,7 +3374,11 @@ namespace Newtonsoft.Json.Tests.Converters
             StringWriter sw = new StringWriter();
             XmlWriter writer = XmlWriter.Create(
                 sw,
-                new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true }
+                new XmlWriterSettings
+                {
+                    Indent = true,
+                    OmitXmlDeclaration = true
+                }
             );
             node.WriteTo(writer);
             writer.Flush();

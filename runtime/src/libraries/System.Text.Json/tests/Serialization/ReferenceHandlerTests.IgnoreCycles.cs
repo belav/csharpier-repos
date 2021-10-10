@@ -375,14 +375,22 @@ namespace System.Text.Json.Serialization.Tests
             async Task Verify<T>(string expectedPayload) where T : new()
             {
                 T value = new();
-                var root = new TreeNode<T> { Left = value, Right = value };
+                var root = new TreeNode<T>
+                {
+                    Left = value,
+                    Right = value
+                };
                 await Test_Serialize_And_SerializeAsync(
                     root,
                     $@"{{""Left"":{expectedPayload},""Right"":{expectedPayload}}}",
                     s_optionsIgnoreCycles
                 );
 
-                var rootWithObjectProperties = new TreeNode<object> { Left = value, Right = value };
+                var rootWithObjectProperties = new TreeNode<object>
+                {
+                    Left = value,
+                    Right = value
+                };
                 await Test_Serialize_And_SerializeAsync(
                     rootWithObjectProperties,
                     $@"{{""Left"":{expectedPayload},""Right"":{expectedPayload}}}",

@@ -244,7 +244,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var sampleInput = new TestLevelTwo
             {
                 SampleString = "TestString",
-                TestOne = new TestLevelOne { SampleInt = 10, sampleString = "TestLevelOne string" }
+                TestOne = new TestLevelOne
+                {
+                    SampleInt = 10,
+                    sampleString = "TestLevelOne string"
+                }
             };
             var formatter = new XmlSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(
@@ -278,7 +282,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 sampleInput.GetType()
             );
             var formatter = new XmlSerializerOutputFormatter(
-                new System.Xml.XmlWriterSettings { OmitXmlDeclaration = false, CloseOutput = false }
+                new System.Xml.XmlWriterSettings
+                {
+                    OmitXmlDeclaration = false,
+                    CloseOutput = false
+                }
             );
 
             // Act

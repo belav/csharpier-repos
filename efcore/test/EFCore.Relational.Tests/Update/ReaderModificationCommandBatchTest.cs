@@ -688,7 +688,11 @@ namespace Microsoft.EntityFrameworkCore.Update
             return RelationalTestHelpers.Instance.CreateInternalEntry(
                 model,
                 entityState,
-                new T1 { Id = 1, Name = computeNonKeyValue ? null : "Test" }
+                new T1
+                {
+                    Id = 1,
+                    Name = computeNonKeyValue ? null : "Test"
+                }
             );
         }
 

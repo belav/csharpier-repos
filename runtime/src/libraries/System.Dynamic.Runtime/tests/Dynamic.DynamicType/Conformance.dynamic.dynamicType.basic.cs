@@ -2002,7 +2002,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
 
         public static int MainMethod()
         {
-            dynamic a = new A { S = { Length = 10 }, X = { 1, 2, 3 } };
+            dynamic a = new A
+            {
+                S = { Length = 10 },
+                X = { 1, 2, 3 }
+            };
             return 0;
         }
 

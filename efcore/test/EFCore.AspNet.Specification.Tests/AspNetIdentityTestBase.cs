@@ -682,13 +682,21 @@ namespace Microsoft.EntityFrameworkCore
                 new[] { new Claim("T1", "V1"), new Claim("T1", "V2"), new Claim("T2", "V3") }
             );
 
-            var adminRole = new TRole { NormalizedName = "admin", Name = "Admin" };
+            var adminRole = new TRole
+            {
+                NormalizedName = "admin",
+                Name = "Admin"
+            };
             await roleStore.CreateAsync(adminRole);
             await userStore.AddToRoleAsync(user, "admin");
             await roleStore.AddClaimAsync(adminRole, new Claim("AC1", "V1"));
             await roleStore.AddClaimAsync(adminRole, new Claim("AC2", "V1"));
 
-            var moderatorRole = new TRole { NormalizedName = "moderator", Name = "Moderator" };
+            var moderatorRole = new TRole
+            {
+                NormalizedName = "moderator",
+                Name = "Moderator"
+            };
             await roleStore.CreateAsync(moderatorRole);
             await userStore.AddToRoleAsync(user, "moderator");
             await roleStore.AddClaimAsync(moderatorRole, new Claim("MC1", "V1"));

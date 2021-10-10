@@ -242,7 +242,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var sampleInput = new TestLevelTwo
             {
                 SampleString = "TestString",
-                TestOne = new TestLevelOne { SampleInt = 10, sampleString = "TestLevelOne string" }
+                TestOne = new TestLevelOne
+                {
+                    SampleInt = 10,
+                    sampleString = "TestLevelOne string"
+                }
             };
             var formatter = new XmlDataContractSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(
@@ -278,7 +282,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 sampleInput.GetType()
             );
             var formatter = new XmlDataContractSerializerOutputFormatter(
-                new XmlWriterSettings { OmitXmlDeclaration = false, CloseOutput = false }
+                new XmlWriterSettings
+                {
+                    OmitXmlDeclaration = false,
+                    CloseOutput = false
+                }
             );
 
             // Act
@@ -526,7 +534,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public async Task WriteAsync_ThrowsWhenNotConfiguredWithKnownTypes()
         {
             // Arrange
-            var sampleInput = new SomeDummyClass { SampleInt = 1, SampleString = "TestString" };
+            var sampleInput = new SomeDummyClass
+            {
+                SampleInt = 1,
+                SampleString = "TestString"
+            };
             var formatter = new XmlDataContractSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(sampleInput, typeof(DummyClass));
 
@@ -543,7 +555,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var child = new Child { Id = 1 };
-            var parent = new Parent { Name = "Parent", Children = new List<Child> { child } };
+            var parent = new Parent
+            {
+                Name = "Parent",
+                Children = new List<Child> { child }
+            };
             child.Parent = parent;
 
             var formatter = new XmlDataContractSerializerOutputFormatter();
@@ -675,7 +691,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             );
 
             var child = new Child { Id = sampleId };
-            var parent = new Parent { Name = sampleName, Children = new List<Child> { child } };
+            var parent = new Parent
+            {
+                Name = sampleName,
+                Children = new List<Child> { child }
+            };
             child.Parent = parent;
 
             var settings = new DataContractSerializerSettings { PreserveObjectReferences = true };

@@ -48,7 +48,11 @@ namespace Microsoft.AspNetCore.Internal.Tests
                     new KeyValuePair<string, object?>("Age", 30),
                     new KeyValuePair<string, object?>(
                         "Address",
-                        new Address() { City = "Redmond", State = "WA" }
+                        new Address()
+                        {
+                            City = "Redmond",
+                            State = "WA"
+                        }
                     )
                 };
             }

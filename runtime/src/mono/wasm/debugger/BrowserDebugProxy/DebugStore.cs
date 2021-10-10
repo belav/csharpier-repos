@@ -119,7 +119,12 @@ namespace Microsoft.WebAssembly.Diagnostics
             return new BreakpointRequest(id, args);
         }
 
-        public BreakpointRequest Clone() => new BreakpointRequest { Id = Id, request = request };
+        public BreakpointRequest Clone() =>
+            new BreakpointRequest
+            {
+                Id = Id,
+                request = request
+            };
 
         public bool IsMatch(SourceFile sourceFile)
         {

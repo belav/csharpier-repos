@@ -77,7 +77,11 @@ namespace AutoMapper.UnitTests.Bug
                                 }
                             )
                 );
-                var src = new EnumTestSource { Prop1 = new[] { Enum1.One }, Prop2 = null };
+                var src = new EnumTestSource
+                {
+                    Prop1 = new[] { Enum1.One },
+                    Prop2 = null
+                };
                 var dest = config.CreateMapper().Map<EnumTestDest>(src); // will throw
                 _c1Called.ShouldBeTrue();
                 _c2Called.ShouldBeTrue();

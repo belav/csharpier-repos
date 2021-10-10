@@ -123,7 +123,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Sould_Map_MapToAttribute_To_Property_With_Matching_Name()
         {
-            var category = new Category { Id = "3", Key = "MyKey" };
+            var category = new Category
+            {
+                Id = "3",
+                Key = "MyKey"
+            };
             CategoryDto result = Mapper.Map<CategoryDto>(category);
             result.Id.ShouldBe("3");
             result.MyValueProperty.ShouldBe("MyKey");

@@ -773,7 +773,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             if (!string.IsNullOrEmpty(format?.Content))
             {
                 valueExpressionTokens.Add(
-                    new IntermediateToken() { Content = ", format: ", Kind = TokenKind.CSharp, }
+                    new IntermediateToken()
+                    {
+                        Content = ", format: ",
+                        Kind = TokenKind.CSharp,
+                    }
                 );
                 valueExpressionTokens.Add(format);
             }
@@ -781,13 +785,21 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             if (!string.IsNullOrEmpty(culture?.Content))
             {
                 valueExpressionTokens.Add(
-                    new IntermediateToken() { Content = ", culture: ", Kind = TokenKind.CSharp, }
+                    new IntermediateToken()
+                    {
+                        Content = ", culture: ",
+                        Kind = TokenKind.CSharp,
+                    }
                 );
                 valueExpressionTokens.Add(culture);
             }
 
             valueExpressionTokens.Add(
-                new IntermediateToken() { Content = ")", Kind = TokenKind.CSharp, }
+                new IntermediateToken()
+                {
+                    Content = ")",
+                    Kind = TokenKind.CSharp,
+                }
             );
 
             // Now rewrite the content of the change-handler node. There are two cases we care about
@@ -817,7 +829,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             );
 
             changeExpressionTokens.Add(
-                new IntermediateToken() { Content = original.Content, Kind = TokenKind.CSharp }
+                new IntermediateToken()
+                {
+                    Content = original.Content,
+                    Kind = TokenKind.CSharp
+                }
             );
 
             if (format != null)
@@ -843,7 +859,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             changeExpressionTokens.Add(
-                new IntermediateToken() { Content = ")", Kind = TokenKind.CSharp, }
+                new IntermediateToken()
+                {
+                    Content = ")",
+                    Kind = TokenKind.CSharp,
+                }
             );
         }
 
@@ -856,7 +876,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 node.Diagnostics.Add(
                     ComponentDiagnosticFactory.Create_TemplateInvalidLocation(template.Source)
                 );
-                return new IntermediateToken() { Kind = TokenKind.CSharp, Content = string.Empty, };
+                return new IntermediateToken()
+                {
+                    Kind = TokenKind.CSharp,
+                    Content = string.Empty,
+                };
             }
 
             if (node.Children[0] is HtmlContentIntermediateNode htmlContentNode)
@@ -870,7 +894,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         htmlContentNode.Children.OfType<IntermediateToken>().Select(t => t.Content)
                     )
                     + "\"";
-                return new IntermediateToken() { Kind = TokenKind.CSharp, Content = content };
+                return new IntermediateToken()
+                {
+                    Kind = TokenKind.CSharp,
+                    Content = content
+                };
             }
             else if (node.Children[0] is CSharpExpressionIntermediateNode cSharpNode)
             {

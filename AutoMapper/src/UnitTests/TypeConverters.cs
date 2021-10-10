@@ -144,7 +144,14 @@ namespace AutoMapper.UnitTests.CustomMapping
         protected override void Because_of()
         {
             _destination = Mapper.Map<Destination>(
-                new Source { TheId = new Id { Prefix = "p", Value = "v" } }
+                new Source
+                {
+                    TheId = new Id
+                    {
+                        Prefix = "p",
+                        Value = "v"
+                    }
+                }
             );
         }
 

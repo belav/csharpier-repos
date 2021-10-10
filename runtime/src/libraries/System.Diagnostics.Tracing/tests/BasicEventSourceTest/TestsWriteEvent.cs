@@ -546,7 +546,14 @@ namespace BasicEventSourceTests
                         "WriteEvent/SelfDescribingOnly/UserData",
                         delegate()
                         {
-                            logger.EventUserDataInt(new UserData() { x = 3, y = 8 }, 5);
+                            logger.EventUserDataInt(
+                                new UserData()
+                                {
+                                    x = 3,
+                                    y = 8
+                                },
+                                5
+                            );
                         },
                         delegate(Event evt)
                         {

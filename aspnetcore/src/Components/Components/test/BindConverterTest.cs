@@ -230,7 +230,11 @@ namespace Microsoft.AspNetCore.Components
         public void FormatValue_TypeConverter()
         {
             // Arrange
-            var value = new Person() { Name = "Glenn", Age = 47, };
+            var value = new Person()
+            {
+                Name = "Glenn",
+                Age = 47,
+            };
 
             var expected = JsonSerializer.Serialize(value);
 

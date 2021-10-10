@@ -25,7 +25,11 @@ static class C { }
 ";
             using var testLspServer = CreateTestLspServer(markup, out var locations);
 
-            var range = new LSP.Range { Start = new Position(1, 0), End = new Position(2, 0) };
+            var range = new LSP.Range
+            {
+                Start = new Position(1, 0),
+                End = new Position(2, 0)
+            };
             var results = await RunGetSemanticTokensRangeAsync(
                 testLspServer,
                 locations["caret"].First(),

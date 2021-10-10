@@ -21,7 +21,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     {
                         ClientErrorMapping =
                         {
-                            [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                            [405] = new ClientErrorData
+                            {
+                                Link = "Some link",
+                                Title = "Summary"
+                            },
                         },
                     }
                 )
@@ -55,7 +59,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     {
                         ClientErrorMapping =
                         {
-                            [415] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                            [415] = new ClientErrorData
+                            {
+                                Link = "Some link",
+                                Title = "Summary"
+                            },
                         },
                     }
                 )
@@ -129,7 +137,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     {
                         ClientErrorMapping =
                         {
-                            [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                            [405] = new ClientErrorData
+                            {
+                                Link = "Some link",
+                                Title = "Summary"
+                            },
                         },
                     }
                 )

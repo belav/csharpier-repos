@@ -34,7 +34,11 @@
 
         protected override void Because_of()
         {
-            testEntity = new Entity { Value1 = 1, Value2 = 2, };
+            testEntity = new Entity
+            {
+                Value1 = 1,
+                Value2 = 2,
+            };
             testModel = Mapper.Map<Entity, EditModel>(testEntity);
         }
 

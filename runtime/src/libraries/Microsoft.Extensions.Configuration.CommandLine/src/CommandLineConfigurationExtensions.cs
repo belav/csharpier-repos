@@ -159,7 +159,11 @@ namespace Microsoft.Extensions.Configuration
         )
         {
             configurationBuilder.Add(
-                new CommandLineConfigurationSource { Args = args, SwitchMappings = switchMappings }
+                new CommandLineConfigurationSource
+                {
+                    Args = args,
+                    SwitchMappings = switchMappings
+                }
             );
             return configurationBuilder;
         }

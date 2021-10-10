@@ -26,7 +26,11 @@ namespace System.Composition.Hosting.Util
             if (_elements == null)
                 _elements = new Element[ElementsCapacity];
 
-            var newElement = new Element { Index = index, Value = value };
+            var newElement = new Element
+            {
+                Index = index,
+                Value = value
+            };
 
             var elementIndex = index & ElementIndexMask;
             var e = _elements[elementIndex];

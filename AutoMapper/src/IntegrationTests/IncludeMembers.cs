@@ -219,11 +219,19 @@ namespace AutoMapper.IntegrationTests
                     Name = "name",
                     InnerSources =
                     {
-                        new InnerSource { Description = "description", Publisher = "publisher" }
+                        new InnerSource
+                        {
+                            Description = "description",
+                            Publisher = "publisher"
+                        }
                     },
                     OtherInnerSources =
                     {
-                        new OtherInnerSource { Title = "title", Author = "author" }
+                        new OtherInnerSource
+                        {
+                            Title = "title",
+                            Author = "author"
+                        }
                     }
                 };
                 context.Sources.Add(source);
@@ -312,11 +320,19 @@ namespace AutoMapper.IntegrationTests
                     Name = "name",
                     InnerSources =
                     {
-                        new InnerSource { Description1 = "description", Publisher = "publisher" }
+                        new InnerSource
+                        {
+                            Description1 = "description",
+                            Publisher = "publisher"
+                        }
                     },
                     OtherInnerSources =
                     {
-                        new OtherInnerSource { Title1 = "title", Author = "author" }
+                        new OtherInnerSource
+                        {
+                            Title1 = "title",
+                            Author = "author"
+                        }
                     }
                 };
                 context.Sources.Add(source);
@@ -444,7 +460,11 @@ namespace AutoMapper.IntegrationTests
                         {
                             OtherInnerSourceDetails =
                             {
-                                new OtherInnerSourceDetails { Title = "title", Author = "author" }
+                                new OtherInnerSourceDetails
+                                {
+                                    Title = "title",
+                                    Author = "author"
+                                }
                             }
                         }
                     }
@@ -599,7 +619,11 @@ namespace AutoMapper.IntegrationTests
                         {
                             OtherInnerSourceDetails =
                             {
-                                new OtherInnerSourceDetails { Title = "title", Author = "author" }
+                                new OtherInnerSourceDetails
+                                {
+                                    Title = "title",
+                                    Author = "author"
+                                }
                             }
                         }
                     }
@@ -747,7 +771,11 @@ namespace AutoMapper.IntegrationTests
                         {
                             OtherInnerSourceDetails =
                             {
-                                new OtherInnerSourceDetails { Title = "title", Author = "author" }
+                                new OtherInnerSourceDetails
+                                {
+                                    Title = "title",
+                                    Author = "author"
+                                }
                             }
                         }
                     }
@@ -883,7 +911,11 @@ namespace AutoMapper.IntegrationTests
                         {
                             OtherInnerSourceDetails =
                             {
-                                new OtherInnerSourceDetails { Title = "title", Author = "author" }
+                                new OtherInnerSourceDetails
+                                {
+                                    Title = "title",
+                                    Author = "author"
+                                }
                             }
                         }
                     }
@@ -1038,7 +1070,11 @@ namespace AutoMapper.IntegrationTests
                         {
                             OtherInnerSourceDetails =
                             {
-                                new OtherInnerSourceDetails { Title = "title", Author = "author" }
+                                new OtherInnerSourceDetails
+                                {
+                                    Title = "title",
+                                    Author = "author"
+                                }
                             }
                         }
                     }

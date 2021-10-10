@@ -72,7 +72,11 @@ namespace AutoMapper.UnitTests.ValueTypes
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { Value1 = 4, Value2 = "hello" }
+                new Source
+                {
+                    Value1 = 4,
+                    Value2 = "hello"
+                }
             );
         }
 
@@ -114,7 +118,12 @@ namespace AutoMapper.UnitTests.ValueTypes
         [Fact]
         public void Should_map_correctly()
         {
-            var source = new matrixDigiInStruct1 { CNCinfo = 5, Reg1 = 6, Reg2 = 7 };
+            var source = new matrixDigiInStruct1
+            {
+                CNCinfo = 5,
+                Reg1 = 6,
+                Reg2 = 7
+            };
             var dest = Mapper.Map<matrixDigiInStruct1, DigiIn1>(source);
 
             dest.CncInfo.ShouldBe(source.CNCinfo);
@@ -153,7 +162,11 @@ namespace AutoMapper.UnitTests.ValueTypes
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { Value1 = "10", Value2 = "20" }
+                new Source
+                {
+                    Value1 = "10",
+                    Value2 = "20"
+                }
             );
         }
 

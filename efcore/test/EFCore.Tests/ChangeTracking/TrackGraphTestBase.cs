@@ -238,7 +238,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter(GetType().Name);
             var sweet = new Sweet
             {
-                Dreams = new Dreams { Are = new AreMade(), Made = new AreMade() }
+                Dreams = new Dreams
+                {
+                    Are = new AreMade(),
+                    Made = new AreMade()
+                }
             };
 
             if (setPrincipalKey)
@@ -467,7 +471,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Can_attach_child_with_reference_to_parent()
         {
             using var context = new EarlyLearningCenter(GetType().Name);
-            var product = new Product { Id = 1, Category = new Category { Id = 1 } };
+            var product = new Product
+            {
+                Id = 1,
+                Category = new Category { Id = 1 }
+            };
 
             Assert.Equal(
                 new List<string>
@@ -496,7 +504,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var product = new Product
             {
                 Id = 1,
-                Details = new ProductDetails { Id = 1, Tag = new ProductDetailsTag { Id = 1 } }
+                Details = new ProductDetails
+                {
+                    Id = 1,
+                    Tag = new ProductDetailsTag { Id = 1 }
+                }
             };
 
             Assert.Equal(
@@ -528,7 +540,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var tag = new ProductDetailsTag
             {
                 Id = 1,
-                Details = new ProductDetails { Id = 1, Product = new Product { Id = 1 } }
+                Details = new ProductDetails
+                {
+                    Id = 1,
+                    Product = new Product { Id = 1 }
+                }
             };
 
             Assert.Equal(
@@ -590,7 +606,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Entities_that_are_already_tracked_will_not_get_attached()
         {
             using var context = new EarlyLearningCenter(GetType().Name);
-            var existingProduct = context.Attach(new Product { Id = 2, CategoryId = 1 }).Entity;
+            var existingProduct =
+                context.Attach(
+                    new Product
+                    {
+                        Id = 2,
+                        CategoryId = 1
+                    }
+                ).Entity;
 
             var category = new Category
             {
@@ -635,9 +658,24 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Id = 1,
                 Products = new List<Product>
                 {
-                    new() { Id = 1, CategoryId = 1, Details = new ProductDetails { Id = 1 } },
-                    new() { Id = 2, CategoryId = 1, Details = new ProductDetails { Id = 2 } },
-                    new() { Id = 3, CategoryId = 1, Details = new ProductDetails { Id = 3 } }
+                    new()
+                    {
+                        Id = 1,
+                        CategoryId = 1,
+                        Details = new ProductDetails { Id = 1 }
+                    },
+                    new()
+                    {
+                        Id = 2,
+                        CategoryId = 1,
+                        Details = new ProductDetails { Id = 2 }
+                    },
+                    new()
+                    {
+                        Id = 3,
+                        CategoryId = 1,
+                        Details = new ProductDetails { Id = 3 }
+                    }
                 }
             };
 
@@ -696,7 +734,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Graph_iterator_does_not_go_visit_Apple()
         {
             using var context = new EarlyLearningCenter(GetType().Name);
-            var details = new ProductDetails { Id = 1, Product = new Product { Id = 1 } };
+            var details = new ProductDetails
+            {
+                Id = 1,
+                Product = new Product { Id = 1 }
+            };
             details.Product.Details = details;
 
             Assert.Equal(
@@ -971,9 +1013,24 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Id = 1,
                 Products = new List<Product>
                 {
-                    new() { Id = 1, CategoryId = 1, Details = new ProductDetails { Id = 1 } },
-                    new() { Id = 2, CategoryId = 1, Details = new ProductDetails { Id = 2 } },
-                    new() { Id = 3, CategoryId = 1, Details = new ProductDetails { Id = 3 } }
+                    new()
+                    {
+                        Id = 1,
+                        CategoryId = 1,
+                        Details = new ProductDetails { Id = 1 }
+                    },
+                    new()
+                    {
+                        Id = 2,
+                        CategoryId = 1,
+                        Details = new ProductDetails { Id = 2 }
+                    },
+                    new()
+                    {
+                        Id = 3,
+                        CategoryId = 1,
+                        Details = new ProductDetails { Id = 3 }
+                    }
                 }
             };
 
@@ -1090,9 +1147,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Id = 77,
                 Products = new List<Product>
                 {
-                    new() { Id = 77, CategoryId = expectModified ? 0 : 77 },
-                    new() { Id = 0, CategoryId = expectModified ? 0 : 77 },
-                    new() { Id = 78, CategoryId = expectModified ? 0 : 77 }
+                    new()
+                    {
+                        Id = 77,
+                        CategoryId = expectModified ? 0 : 77
+                    },
+                    new()
+                    {
+                        Id = 0,
+                        CategoryId = expectModified ? 0 : 77
+                    },
+                    new()
+                    {
+                        Id = 78,
+                        CategoryId = expectModified ? 0 : 77
+                    }
                 }
             };
 
@@ -1133,9 +1202,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Id = 77,
                 Products = new List<Product>
                 {
-                    new() { Id = 77, CategoryId = 77 },
-                    new() { Id = 0, CategoryId = 77 },
-                    new() { Id = 78, CategoryId = 77 }
+                    new()
+                    {
+                        Id = 77,
+                        CategoryId = 77
+                    },
+                    new()
+                    {
+                        Id = 0,
+                        CategoryId = 77
+                    },
+                    new()
+                    {
+                        Id = 78,
+                        CategoryId = 77
+                    }
                 }
             };
 
@@ -1210,9 +1291,24 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Id = 1,
                 Products = new List<Product>
                 {
-                    new() { Id = 1, CategoryId = 1, Details = new ProductDetails { Id = 1 } },
-                    new() { Id = 2, CategoryId = 1, Details = new ProductDetails { Id = 2 } },
-                    new() { Id = 3, CategoryId = 1, Details = new ProductDetails { Id = 3 } }
+                    new()
+                    {
+                        Id = 1,
+                        CategoryId = 1,
+                        Details = new ProductDetails { Id = 1 }
+                    },
+                    new()
+                    {
+                        Id = 2,
+                        CategoryId = 1,
+                        Details = new ProductDetails { Id = 2 }
+                    },
+                    new()
+                    {
+                        Id = 3,
+                        CategoryId = 1,
+                        Details = new ProductDetails { Id = 3 }
+                    }
                 }
             };
 
@@ -1292,7 +1388,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         }
 
         private static Product CreateSimpleGraph(int id) =>
-            new() { Id = id, Category = new Category { Id = id } };
+            new()
+            {
+                Id = id,
+                Category = new Category { Id = id }
+            };
 
         private class ChangeDetectorProxy : ChangeDetector
         {

@@ -42,7 +42,11 @@ namespace AutoMapper.UnitTests.Projection
 
                 var sources = new List<Source>
                 {
-                    new Source { Value1 = new byte[] { 1, 2, 3 }, Value2 = new[] { 4, 5, 6 } }
+                    new Source
+                    {
+                        Value1 = new byte[] { 1, 2, 3 },
+                        Value2 = new[] { 4, 5, 6 }
+                    }
                 };
 
                 var expr = sources.AsQueryable().ProjectTo<Destination>(config);

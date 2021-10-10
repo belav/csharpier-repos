@@ -538,7 +538,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             foreach (var rebuild in rebuilds)
             {
                 operations.Add(
-                    new DropTableOperation { Name = rebuild.Key.Table, Schema = rebuild.Key.Schema }
+                    new DropTableOperation
+                    {
+                        Name = rebuild.Key.Table,
+                        Schema = rebuild.Key.Schema
+                    }
                 );
                 operations.Add(
                     new RenameTableOperation

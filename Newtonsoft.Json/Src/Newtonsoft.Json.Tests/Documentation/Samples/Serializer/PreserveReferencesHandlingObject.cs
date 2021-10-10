@@ -60,9 +60,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             #region Usage
             Directory root = new Directory { Name = "Root" };
-            Directory documents = new Directory { Name = "My Documents", Parent = root };
+            Directory documents = new Directory
+            {
+                Name = "My Documents",
+                Parent = root
+            };
 
-            File file = new File { Name = "ImportantLegalDocument.docx", Parent = documents };
+            File file = new File
+            {
+                Name = "ImportantLegalDocument.docx",
+                Parent = documents
+            };
 
             documents.Files = new List<File> { file };
 

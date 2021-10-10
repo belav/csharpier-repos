@@ -195,7 +195,11 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new PersonPolymorphicSerializerConverter());
 
-            Customer customer = new Customer { Name = "C", CreditLimit = 100 };
+            Customer customer = new Customer
+            {
+                Name = "C",
+                CreditLimit = 100
+            };
 
             {
                 // Verify the polymorphic case.

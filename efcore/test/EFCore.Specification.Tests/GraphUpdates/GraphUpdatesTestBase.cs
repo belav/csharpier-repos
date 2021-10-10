@@ -661,8 +661,16 @@ namespace Microsoft.EntityFrameworkCore
                 var bloog = new Bloog { Id = 515 };
 
                 context.AddRange(
-                    new Poost { Id = 516, Bloog = bloog },
-                    new Poost { Id = 517, Bloog = bloog }
+                    new Poost
+                    {
+                        Id = 516,
+                        Bloog = bloog
+                    },
+                    new Poost
+                    {
+                        Id = 517,
+                        Bloog = bloog
+                    }
                 );
 
                 var root = new SharedFkRoot();
@@ -671,7 +679,13 @@ namespace Microsoft.EntityFrameworkCore
                 var parent = new SharedFkParent { Root = root };
                 context.Add(parent);
 
-                context.Add(new SharedFkDependant { Root = root, Parent = parent });
+                context.Add(
+                    new SharedFkDependant
+                    {
+                        Root = root,
+                        Parent = parent
+                    }
+                );
 
                 context.SaveChanges();
             }

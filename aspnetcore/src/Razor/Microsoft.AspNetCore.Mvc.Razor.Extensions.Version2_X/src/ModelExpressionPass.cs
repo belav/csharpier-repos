@@ -101,7 +101,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
                     }
 
                     expression.Children.Add(
-                        new IntermediateToken() { Kind = TokenKind.CSharp, Content = ")", }
+                        new IntermediateToken()
+                        {
+                            Kind = TokenKind.CSharp,
+                            Content = ")",
+                        }
                     );
 
                     node.Children.Clear();

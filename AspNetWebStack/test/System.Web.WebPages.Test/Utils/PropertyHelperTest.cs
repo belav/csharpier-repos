@@ -202,7 +202,11 @@ namespace System.Web.WebPages.Test
         public void PropertyHelperForDerivedClass()
         {
             // Arrange
-            object derived = new DerivedClass { PropA = "propAValue", PropB = "propBValue" };
+            object derived = new DerivedClass
+            {
+                PropA = "propAValue",
+                PropB = "propBValue"
+            };
 
             // Act
             PropertyHelper[] helpers = PropertyHelper.GetProperties(derived).ToArray();

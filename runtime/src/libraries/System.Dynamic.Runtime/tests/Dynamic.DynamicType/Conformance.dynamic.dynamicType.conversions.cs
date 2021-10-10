@@ -1883,7 +1883,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             dynamic d = origin;
             byte origin2 = 20;
             dynamic d2 = origin2;
-            var c = new C() { F1 = d, P1 = d2 };
+            var c = new C()
+            {
+                F1 = d,
+                P1 = d2
+            };
             if ((c.F1 != origin) || (c.P1 != origin2))
             {
                 failcount++;

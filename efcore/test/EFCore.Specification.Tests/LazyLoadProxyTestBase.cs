@@ -3175,9 +3175,14 @@ namespace Microsoft.EntityFrameworkCore
                 );
 
                 context.Add(
-                    new Pyrson(new FullName(FirstName.Create("Amila"), LastName.Create("Udayanga")))
-                    {
-                        Address = new Address { Line1 = "Line1", Line2 = "Line2" }
+                    new Pyrson(
+                        new FullName(FirstName.Create("Amila"), LastName.Create("Udayanga"))
+                    ) {
+                        Address = new Address
+                        {
+                            Line1 = "Line1",
+                            Line2 = "Line2"
+                        }
                     }
                 );
 
@@ -3197,7 +3202,11 @@ namespace Microsoft.EntityFrameworkCore
                     new VirtualOneToOneOwner
                     {
                         Id = 200,
-                        Address = new OwnedAddress { Street = "Dead End", PostalCode = "N0 WA1R" }
+                        Address = new OwnedAddress
+                        {
+                            Street = "Dead End",
+                            PostalCode = "N0 WA1R"
+                        }
                     }
                 );
 
@@ -3207,7 +3216,11 @@ namespace Microsoft.EntityFrameworkCore
                         Id = 300,
                         Addresses = new List<OwnedAddress>
                         {
-                            new() { Street = "4 Privet Drive", PostalCode = "SURREY" }
+                            new()
+                            {
+                                Street = "4 Privet Drive",
+                                PostalCode = "SURREY"
+                            }
                         }
                     }
                 );
@@ -3218,9 +3231,21 @@ namespace Microsoft.EntityFrameworkCore
                         Id = 400,
                         Addresses = new List<OwnedAddress>
                         {
-                            new() { Street = "The Ministry", PostalCode = "MAG1C" },
-                            new() { Street = "Diagon Alley", PostalCode = "WC2H 0AW" },
-                            new() { Street = "Shell Cottage", PostalCode = "THE SEA" }
+                            new()
+                            {
+                                Street = "The Ministry",
+                                PostalCode = "MAG1C"
+                            },
+                            new()
+                            {
+                                Street = "Diagon Alley",
+                                PostalCode = "WC2H 0AW"
+                            },
+                            new()
+                            {
+                                Street = "Shell Cottage",
+                                PostalCode = "THE SEA"
+                            }
                         }
                     }
                 );
@@ -3231,7 +3256,11 @@ namespace Microsoft.EntityFrameworkCore
                         Id = 500,
                         Addresses = new List<OwnedAddress>
                         {
-                            new() { Street = "Spinner's End", PostalCode = "BE WA1R" }
+                            new()
+                            {
+                                Street = "Spinner's End",
+                                PostalCode = "BE WA1R"
+                            }
                         }
                     }
                 );
@@ -3242,7 +3271,11 @@ namespace Microsoft.EntityFrameworkCore
                         Id = 600,
                         Addresses = new List<OwnedAddress>
                         {
-                            new() { Street = "12 Grimmauld Place", PostalCode = "L0N D0N" }
+                            new()
+                            {
+                                Street = "12 Grimmauld Place",
+                                PostalCode = "L0N D0N"
+                            }
                         }
                     }
                 );

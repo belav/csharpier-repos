@@ -149,7 +149,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             if (!string.IsNullOrEmpty(node.Prefix))
             {
                 _currentAttributeValues.Add(
-                    new IntermediateToken() { Kind = TokenKind.Html, Content = node.Prefix }
+                    new IntermediateToken()
+                    {
+                        Kind = TokenKind.Html,
+                        Content = node.Prefix
+                    }
                 );
             }
 

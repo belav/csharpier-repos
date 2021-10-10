@@ -42,7 +42,13 @@ namespace AutoMapper.UnitTests.Bug
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Foo, FooDto>(new Foo() { Id = 5, Bar = null });
+            _destination = Mapper.Map<Foo, FooDto>(
+                new Foo()
+                {
+                    Id = 5,
+                    Bar = null
+                }
+            );
         }
 
         [Fact]

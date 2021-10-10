@@ -20131,7 +20131,12 @@ public class C
                 text,
                 new ErrorDescription[]
                 {
-                    new ErrorDescription { Code = 1739, Line = 6, Column = 20 }
+                    new ErrorDescription
+                    {
+                        Code = 1739,
+                        Line = 6,
+                        Column = 20
+                    }
                 }
             );
         }
@@ -20155,7 +20160,12 @@ public class C
                 text,
                 new ErrorDescription[]
                 {
-                    new ErrorDescription { Code = 1739, Line = 6, Column = 20 }
+                    new ErrorDescription
+                    {
+                        Code = 1739,
+                        Line = 6,
+                        Column = 20
+                    }
                 }
             );
         }
@@ -20206,7 +20216,12 @@ public class B
                 text,
                 new ErrorDescription[]
                 {
-                    new ErrorDescription { Code = 1742, Line = 7, Column = 17 }
+                    new ErrorDescription
+                    {
+                        Code = 1742,
+                        Line = 7,
+                        Column = 17
+                    }
                 }
             );
         }
@@ -20231,7 +20246,12 @@ public class C
                 text,
                 new ErrorDescription[]
                 {
-                    new ErrorDescription { Code = 1744, Line = 6, Column = 21 }
+                    new ErrorDescription
+                    {
+                        Code = 1744,
+                        Line = 6,
+                        Column = 21
+                    }
                 }
             );
         }
@@ -20257,7 +20277,12 @@ public class C
                 text,
                 new ErrorDescription[]
                 {
-                    new ErrorDescription { Code = 1744, Line = 6, Column = 17 }
+                    new ErrorDescription
+                    {
+                        Code = 1744,
+                        Line = 6,
+                        Column = 17
+                    }
                 }
             );
         }
@@ -20280,7 +20305,12 @@ public class C
                 text,
                 new ErrorDescription[]
                 {
-                    new ErrorDescription { Code = 1744, Line = 6, Column = 17 }
+                    new ErrorDescription
+                    {
+                        Code = 1744,
+                        Line = 6,
+                        Column = 17
+                    }
                 }
             );
         }
@@ -20303,7 +20333,12 @@ public class C
                 text,
                 new ErrorDescription[]
                 {
-                    new ErrorDescription { Code = 1744, Line = 6, Column = 33 }
+                    new ErrorDescription
+                    {
+                        Code = 1744,
+                        Line = 6,
+                        Column = 33
+                    }
                 }
             );
         }
@@ -20329,7 +20364,12 @@ public class C
                 text,
                 new ErrorDescription[]
                 {
-                    new ErrorDescription { Code = 1746, Line = 8, Column = 24 }
+                    new ErrorDescription
+                    {
+                        Code = 1746,
+                        Line = 8,
+                        Column = 24
+                    }
                 }
             );
         }

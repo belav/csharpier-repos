@@ -93,7 +93,11 @@ namespace System.Web.Mvc.Html.Test
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
             mockHttpContext.Setup(o => o.Items).Returns(new Hashtable());
 
-            return new ViewContext() { HttpContext = mockHttpContext.Object, Writer = writer };
+            return new ViewContext()
+            {
+                HttpContext = mockHttpContext.Object,
+                Writer = writer
+            };
         }
     }
 }

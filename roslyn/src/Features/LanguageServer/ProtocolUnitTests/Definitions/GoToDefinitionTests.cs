@@ -78,13 +78,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
 
             AddMappedDocument(testLspServer.TestWorkspace, markup);
 
-            var position = new LSP.Position { Line = 5, Character = 18 };
+            var position = new LSP.Position
+            {
+                Line = 5,
+                Character = 18
+            };
             var results = await RunGotoDefinitionAsync(
                 testLspServer,
                 new LSP.Location
                 {
                     Uri = new Uri($"C:\\{TestSpanMapper.GeneratedFileName}"),
-                    Range = new LSP.Range { Start = position, End = position }
+                    Range = new LSP.Range
+                    {
+                        Start = position,
+                        End = position
+                    }
                 }
             );
             AssertLocationsEqual(ImmutableArray.Create(TestSpanMapper.MappedFileLocation), results);

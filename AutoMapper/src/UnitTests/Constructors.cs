@@ -163,7 +163,13 @@ namespace AutoMapper.UnitTests.Constructors
             var parentDto = new ParentDTO<int> { IdParent = 1 };
             for (var i = 0; i < 5; i++)
             {
-                parentDto.Children.Add(new ChildDTO<int> { IdChild = i, Parent = parentDto });
+                parentDto.Children.Add(
+                    new ChildDTO<int>
+                    {
+                        IdChild = i,
+                        Parent = parentDto
+                    }
+                );
             }
             var parentModel = Mapper.Map<ParentModel<int>>(parentDto);
             var mappedChildren = Mapper.Map<List<ChildDTO<int>>, List<ChildModel<int>>>(
@@ -233,7 +239,13 @@ namespace AutoMapper.UnitTests.Constructors
             var parentDto = new ParentDTO { IdParent = 1 };
             for (var i = 0; i < 5; i++)
             {
-                parentDto.Children.Add(new ChildDTO { IdChild = i, Parent = parentDto });
+                parentDto.Children.Add(
+                    new ChildDTO
+                    {
+                        IdChild = i,
+                        Parent = parentDto
+                    }
+                );
             }
 
             var mappedChildren = Mapper.Map<List<ChildDTO>, List<ChildModel>>(parentDto.Children);
@@ -303,7 +315,13 @@ namespace AutoMapper.UnitTests.Constructors
             var parentDto = new ParentDTO { IdParent = 1 };
             for (var i = 0; i < 5; i++)
             {
-                parentDto.Children.Add(new ChildDTO { IdChild = i, Parent = parentDto });
+                parentDto.Children.Add(
+                    new ChildDTO
+                    {
+                        IdChild = i,
+                        Parent = parentDto
+                    }
+                );
             }
 
             var mappedChildren = Mapper.Map<List<ChildDTO>, List<ChildModel>>(parentDto.Children);
@@ -449,7 +467,13 @@ namespace AutoMapper.UnitTests.Constructors
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<PersonTarget>(new PersonSource { Age = 23, Name = "Marc" });
+            _destination = Mapper.Map<PersonTarget>(
+                new PersonSource
+                {
+                    Age = 23,
+                    Name = "Marc"
+                }
+            );
         }
 
         [Fact]
@@ -1123,7 +1147,13 @@ namespace AutoMapper.UnitTests.Constructors
 
             object o = ctor.Compile()(5);
 
-            _dest = Mapper.Map<Source, Dest>(new Source { Foo = 5, Bar = 10 });
+            _dest = Mapper.Map<Source, Dest>(
+                new Source
+                {
+                    Foo = 5,
+                    Bar = 10
+                }
+            );
         }
 
         [Fact]
@@ -1320,7 +1350,13 @@ namespace AutoMapper.UnitTests.Constructors
 
         protected override void Because_of()
         {
-            _dest = Mapper.Map<Source, Dest>(new Source { Foo = 5, Bar = 10 });
+            _dest = Mapper.Map<Source, Dest>(
+                new Source
+                {
+                    Foo = 5,
+                    Bar = 10
+                }
+            );
         }
 
         [Fact]

@@ -133,7 +133,11 @@ namespace BenchmarksGame
             int pi = 0;
             for (int i = 0; i < bodies.Length - 1; i++)
                 for (int j = i + 1; j < bodies.Length; j++)
-                    pairs[pi++] = new Pair() { bi = bodies[i], bj = bodies[j] };
+                    pairs[pi++] = new Pair()
+                    {
+                        bi = bodies[i],
+                        bj = bodies[j]
+                    };
 
             double px = 0.0,
                 py = 0.0,

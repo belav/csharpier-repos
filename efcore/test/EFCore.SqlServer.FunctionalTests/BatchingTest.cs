@@ -85,7 +85,12 @@ namespace Microsoft.EntityFrameworkCore
                     context.Owners.Add(owner1);
                     context.Owners.Add(owner2);
 
-                    var blog1 = new Blog { Id = Guid.NewGuid(), Owner = owner1, Order = 1 };
+                    var blog1 = new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner1,
+                        Order = 1
+                    };
 
                     context.Set<Blog>().Add(blog1);
                     expectedBlogs.Add(blog1);
@@ -95,12 +100,22 @@ namespace Microsoft.EntityFrameworkCore
                     owner2.Name = "2";
 
                     blog1.Order = 0;
-                    var blog2 = new Blog { Id = Guid.NewGuid(), Owner = owner1, Order = 1 };
+                    var blog2 = new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner1,
+                        Order = 1
+                    };
 
                     context.Set<Blog>().Add(blog2);
                     expectedBlogs.Add(blog2);
 
-                    var blog3 = new Blog { Id = Guid.NewGuid(), Owner = owner2, Order = 2 };
+                    var blog3 = new Blog
+                    {
+                        Id = Guid.NewGuid(),
+                        Owner = owner2,
+                        Order = 2
+                    };
 
                     context.Set<Blog>().Add(blog3);
                     expectedBlogs.Add(blog3);
@@ -117,7 +132,11 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var owner1 = new Owner { Id = "0", Name = "Zero" };
+                    var owner1 = new Owner
+                    {
+                        Id = "0",
+                        Name = "Zero"
+                    };
                     var owner2 = new Owner
                     {
                         Id = "A",
@@ -148,7 +167,11 @@ namespace Microsoft.EntityFrameworkCore
 
                     for (var i = 1; i < 4; i++)
                     {
-                        var blog = new Blog { Id = Guid.NewGuid(), Owner = owner };
+                        var blog = new Blog
+                        {
+                            Id = Guid.NewGuid(),
+                            Owner = owner
+                        };
 
                         context.Set<Blog>().Add(blog);
                         expectedBlogs.Add(blog);

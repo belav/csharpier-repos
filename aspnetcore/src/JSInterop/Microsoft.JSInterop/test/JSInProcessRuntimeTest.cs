@@ -112,7 +112,13 @@ namespace Microsoft.JSInterop
                 long targetInstanceId
             )
             {
-                InvokeCalls.Add(new InvokeArgs { Identifier = identifier, ArgsJson = argsJson });
+                InvokeCalls.Add(
+                    new InvokeArgs
+                    {
+                        Identifier = identifier,
+                        ArgsJson = argsJson
+                    }
+                );
                 return NextResultJson;
             }
 

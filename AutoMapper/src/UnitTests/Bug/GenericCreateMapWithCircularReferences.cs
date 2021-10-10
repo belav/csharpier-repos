@@ -27,7 +27,13 @@ namespace AutoMapper.UnitTests.Bug
         {
             var role = new Role<int>();
             var user = new User<int>() { UsersInRoles = new List<UsersInRole<int>>() };
-            user.UsersInRoles.Add(new UsersInRole<int>() { Role = role, User = user });
+            user.UsersInRoles.Add(
+                new UsersInRole<int>()
+                {
+                    Role = role,
+                    User = user
+                }
+            );
 
             var result = Mapper.Map<UserPoco<int>>(user);
         }

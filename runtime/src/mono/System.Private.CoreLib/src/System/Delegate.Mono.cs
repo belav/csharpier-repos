@@ -102,7 +102,11 @@ namespace System
             if (!target.IsRuntimeImplemented())
                 throw new ArgumentException(SR.Argument_MustBeRuntimeType, nameof(target));
 
-            this.data = new DelegateData() { method_name = method, target_type = target };
+            this.data = new DelegateData()
+            {
+                method_name = method,
+                target_type = target
+            };
         }
 
         public object? Target => GetTarget();

@@ -280,7 +280,11 @@ namespace System.Net.Sockets
             }
 
             // By default or if the non-abortive path failed, set linger timeout to zero to get an abortive close (RST).
-            var linger = new Interop.Sys.LingerOption { OnOff = 1, Seconds = 0 };
+            var linger = new Interop.Sys.LingerOption
+            {
+                OnOff = 1,
+                Seconds = 0
+            };
 
             errorCode = Interop.Sys.SetLingerOption(handle, &linger);
 #if DEBUG

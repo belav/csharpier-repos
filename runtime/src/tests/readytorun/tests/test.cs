@@ -317,7 +317,11 @@ public struct MyGrowingStruct
 
     static public MyGrowingStruct Construct()
     {
-        return new MyGrowingStruct() { x = 111, y = 222 };
+        return new MyGrowingStruct()
+        {
+            x = 111,
+            y = 222
+        };
     }
 
     public static void Check(ref MyGrowingStruct s)
@@ -339,7 +343,11 @@ public struct MyChangingStruct
 
     static public MyChangingStruct Construct()
     {
-        return new MyChangingStruct() { x = 111, y = 222 };
+        return new MyChangingStruct()
+        {
+            x = 111,
+            y = 222
+        };
     }
 
     public static void Check(ref MyChangingStruct s)
@@ -360,7 +368,11 @@ public struct MyChangingHFAStruct
 #endif
     static public MyChangingHFAStruct Construct()
     {
-        return new MyChangingHFAStruct() { x = 12, y = 23 };
+        return new MyChangingHFAStruct()
+        {
+            x = 12,
+            y = 23
+        };
     }
 
     public static void Check(MyChangingHFAStruct s)

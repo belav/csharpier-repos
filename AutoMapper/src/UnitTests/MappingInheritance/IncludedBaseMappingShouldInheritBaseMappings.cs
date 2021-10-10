@@ -96,7 +96,11 @@ namespace AutoMapper.UnitTests.Bug
             var mapper = config.CreateMapper();
 
             var dto = mapper.Map<DtoSubObject>(
-                new ModelSubObject { DifferentBaseString = "123", SubString = "456" }
+                new ModelSubObject
+                {
+                    DifferentBaseString = "123",
+                    SubString = "456"
+                }
             );
 
             "123".ShouldBe(dto.BaseString);
@@ -118,7 +122,11 @@ namespace AutoMapper.UnitTests.Bug
             );
             var mapper = config.CreateMapper();
             var dto = mapper.Map<ModelSubObject, DtoSubObject>(
-                new ModelSubObject { DifferentBaseString = "123", SubString = "456" }
+                new ModelSubObject
+                {
+                    DifferentBaseString = "123",
+                    SubString = "456"
+                }
             );
 
             "123".ShouldBe(dto.BaseString);
@@ -156,7 +164,11 @@ namespace AutoMapper.UnitTests.Bug
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<DtoSubObject>(
-                new ModelSubObject { DifferentBaseString = "123", SubString = "456" }
+                new ModelSubObject
+                {
+                    DifferentBaseString = "123",
+                    SubString = "456"
+                }
             );
 
             "789".ShouldBe(dto.BaseString);
@@ -178,7 +190,11 @@ namespace AutoMapper.UnitTests.Bug
             );
             var mapper = config.CreateMapper();
             var dto = mapper.Map<ModelSubObject, DtoSubObject>(
-                new ModelSubObject { DifferentBaseString = "123", SubString = "456" }
+                new ModelSubObject
+                {
+                    DifferentBaseString = "123",
+                    SubString = "456"
+                }
             );
 
             "789".ShouldBe(dto.BaseString);
@@ -202,7 +218,11 @@ namespace AutoMapper.UnitTests.Bug
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<OtherDto>(
-                new ModelSubObject { DifferentBaseString = "123", SubString = "456" }
+                new ModelSubObject
+                {
+                    DifferentBaseString = "123",
+                    SubString = "456"
+                }
             );
 
             "456".ShouldBe(dto.SubString);
@@ -224,7 +244,11 @@ namespace AutoMapper.UnitTests.Bug
             );
             var mapper = config.CreateMapper();
             var dto = mapper.Map<ModelSubObject, OtherDto>(
-                new ModelSubObject { DifferentBaseString = "123", SubString = "456" }
+                new ModelSubObject
+                {
+                    DifferentBaseString = "123",
+                    SubString = "456"
+                }
             );
 
             "456".ShouldBe(dto.SubString);
@@ -261,7 +285,11 @@ namespace AutoMapper.UnitTests.Bug
             );
             var mapper = config.CreateMapper();
             var dto = mapper.Map<ModelObject, DtoObject>(
-                new ModelSubObject { DifferentBaseString = "123", SubString = "456" }
+                new ModelSubObject
+                {
+                    DifferentBaseString = "123",
+                    SubString = "456"
+                }
             );
 
             dto.ShouldBeOfType<DtoSubObject>();
@@ -282,7 +310,11 @@ namespace AutoMapper.UnitTests.Bug
             );
             var mapper = config.CreateMapper();
             var dto = mapper.Map<ModelObject, DtoObject>(
-                new ModelSubObject { DifferentBaseString = "123", SubString = "456" }
+                new ModelSubObject
+                {
+                    DifferentBaseString = "123",
+                    SubString = "456"
+                }
             );
 
             dto.ShouldBeOfType<DtoSubObject>();

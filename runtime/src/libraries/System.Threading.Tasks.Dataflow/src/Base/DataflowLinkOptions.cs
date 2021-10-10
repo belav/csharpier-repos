@@ -72,7 +72,11 @@ namespace System.Threading.Tasks.Dataflow
         /// Do not change the values of this instance.  It is shared by all of our blocks that need to unlink after one message has been consumed.
         /// </remarks>
         internal static readonly DataflowLinkOptions UnlinkAfterOneAndPropagateCompletion =
-            new DataflowLinkOptions() { MaxMessages = 1, PropagateCompletion = true };
+            new DataflowLinkOptions()
+            {
+                MaxMessages = 1,
+                PropagateCompletion = true
+            };
 
         /// <summary>Initializes the <see cref="DataflowLinkOptions"/>.</summary>
         public DataflowLinkOptions() { }

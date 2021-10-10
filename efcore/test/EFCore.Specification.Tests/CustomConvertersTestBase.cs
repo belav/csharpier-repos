@@ -24,7 +24,11 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateContext())
             {
                 context.AddRange(
-                    new Person { Id = 1, Name = "Lewis" },
+                    new Person
+                    {
+                        Id = 1,
+                        Name = "Lewis"
+                    },
                     new Person
                     {
                         Id = 2,
@@ -37,7 +41,11 @@ namespace Microsoft.EntityFrameworkCore
                         Name = "Kimi",
                         SSN = new SocialSecurityNumber { Number = 222222222 }
                     },
-                    new Person { Id = 4, Name = "Valtteri" }
+                    new Person
+                    {
+                        Id = 4,
+                        Name = "Valtteri"
+                    }
                 );
 
                 context.SaveChanges();
@@ -227,7 +235,14 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateContext())
             {
                 var load =
-                    context.Set<Load>().Add(new Load { LoadId = 1, Fuel = new Fuel(1.1) }).Entity;
+                    context.Set<Load>()
+                        .Add(
+                            new Load
+                            {
+                                LoadId = 1,
+                                Fuel = new Fuel(1.1)
+                            }
+                        ).Entity;
 
                 Assert.Equal(1, context.SaveChanges());
             }
@@ -401,7 +416,13 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateContext())
             {
                 context.Set<SimpleCounter>()
-                    .Add(new SimpleCounter { CounterId = 1, StyleKey = "Swag" });
+                    .Add(
+                        new SimpleCounter
+                        {
+                            CounterId = 1,
+                            StyleKey = "Swag"
+                        }
+                    );
                 context.SaveChanges();
             }
 
@@ -1415,8 +1436,16 @@ namespace Microsoft.EntityFrameworkCore
 
                 modelBuilder.Entity<Post>()
                     .HasData(
-                        new Post { PostId = 1, BlogId = 1 },
-                        new Post { PostId = 2, BlogId = null }
+                        new Post
+                        {
+                            PostId = 1,
+                            BlogId = 1
+                        },
+                        new Post
+                        {
+                            PostId = 2,
+                            BlogId = null
+                        }
                     );
 
                 modelBuilder.Entity<EntityWithValueWrapper>(
@@ -1466,7 +1495,11 @@ namespace Microsoft.EntityFrameworkCore
                             );
 
                         b.HasData(
-                            new CollectionEnum { Id = 1, Roles = new List<Roles> { Roles.Seller } }
+                            new CollectionEnum
+                            {
+                                Id = 1,
+                                Roles = new List<Roles> { Roles.Seller }
+                            }
                         );
                     }
                 );

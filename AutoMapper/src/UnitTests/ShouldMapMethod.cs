@@ -125,7 +125,11 @@ namespace AutoMapper.UnitTests
         protected override void Because_of()
         {
             _destination = Mapper.Map<Source, Destination>(
-                new Source { SomeValue = SomeValue, AnotherValue = AnotherValue }
+                new Source
+                {
+                    SomeValue = SomeValue,
+                    AnotherValue = AnotherValue
+                }
             );
         }
 

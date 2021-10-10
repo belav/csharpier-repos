@@ -46,7 +46,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             // Arrange
             var attributes = new object[]
             {
-                new BindPropertyAttribute { Name = "PropertyPrefix", SupportsGet = true, },
+                new BindPropertyAttribute
+                {
+                    Name = "PropertyPrefix",
+                    SupportsGet = true,
+                },
             };
 
             // Act

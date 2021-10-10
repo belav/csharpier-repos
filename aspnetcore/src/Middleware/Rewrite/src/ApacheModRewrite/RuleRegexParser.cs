@@ -15,11 +15,19 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
             }
             if (regex[0] == '!')
             {
-                return new ParsedModRewriteInput { Invert = true, Operand = regex.Substring(1) };
+                return new ParsedModRewriteInput
+                {
+                    Invert = true,
+                    Operand = regex.Substring(1)
+                };
             }
             else
             {
-                return new ParsedModRewriteInput { Invert = false, Operand = regex };
+                return new ParsedModRewriteInput
+                {
+                    Invert = false,
+                    Operand = regex
+                };
             }
         }
     }

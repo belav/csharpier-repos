@@ -279,8 +279,22 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // Arrange
             var dictionary = new Dictionary<int, ModelWithProperties>
             {
-                { 23, new ModelWithProperties { Id = 43, Name = "Wilma" } },
-                { 27, new ModelWithProperties { Id = 98, Name = "Fred" } },
+                {
+                    23,
+                    new ModelWithProperties
+                    {
+                        Id = 43,
+                        Name = "Wilma"
+                    }
+                },
+                {
+                    27,
+                    new ModelWithProperties
+                    {
+                        Id = 98,
+                        Name = "Fred"
+                    }
+                },
             };
             var stringDictionary = new Dictionary<string, string>
             {

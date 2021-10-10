@@ -2089,7 +2089,11 @@ class Program
     }
 }";
 
-            await new TestWithDialog { TestCode = code, FixedCode = fixedCode, }.RunAsync();
+            await new TestWithDialog
+            {
+                TestCode = code,
+                FixedCode = fixedCode,
+            }.RunAsync();
         }
 
         [WorkItem(25707, "https://github.com/dotnet/roslyn/issues/25707")]
@@ -2118,7 +2122,11 @@ class Program
     }
 }";
 
-            await new TestWithDialog { TestCode = code, FixedCode = fixedCode, }.RunAsync();
+            await new TestWithDialog
+            {
+                TestCode = code,
+                FixedCode = fixedCode,
+            }.RunAsync();
         }
 
         [WorkItem(41958, "https://github.com/dotnet/roslyn/issues/41958")]
@@ -2167,7 +2175,11 @@ class Derived : Middle
     }
 }";
 
-            await new TestWithDialog { TestCode = code, FixedCode = fixedCode, }.RunAsync();
+            await new TestWithDialog
+            {
+                TestCode = code,
+                FixedCode = fixedCode,
+            }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -2592,7 +2604,11 @@ ref struct Program
     }
 }";
 
-            await new TestWithDialog { TestCode = code, FixedCode = fixedCode, }.RunAsync();
+            await new TestWithDialog
+            {
+                TestCode = code,
+                FixedCode = fixedCode,
+            }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEqualsAndGetHashCode)]
@@ -3786,7 +3802,11 @@ class Program
     int [|a|];
 }";
 
-            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
+            await new VerifyCS.Test
+            {
+                TestCode = code,
+                FixedCode = code,
+            }.RunAsync();
         }
 
         [WorkItem(40053, "https://github.com/dotnet/roslyn/issues/40053")]

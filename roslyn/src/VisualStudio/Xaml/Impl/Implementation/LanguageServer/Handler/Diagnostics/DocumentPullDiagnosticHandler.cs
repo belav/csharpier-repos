@@ -34,7 +34,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             TextDocumentIdentifier? identifier,
             VSDiagnostic[]? diagnostics,
             string? resultId
-        ) => new DiagnosticReport { Diagnostics = diagnostics, ResultId = resultId };
+        ) =>
+            new DiagnosticReport
+            {
+                Diagnostics = diagnostics,
+                ResultId = resultId
+            };
 
         protected override ImmutableArray<Document> GetDocuments(RequestContext context)
         {

@@ -957,7 +957,12 @@ class E : A.B.D { }
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
                 // E.F is inaccessible where written; cascaded ERR_BadVisBaseClass is therefore suppressed
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadAccess, Line = 2, Column = 15 }
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadAccess,
+                    Line = 2,
+                    Column = 15
+                }
             );
         }
 
@@ -3081,7 +3086,12 @@ class Test
 ";
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadSKknown, Line = 6, Column = 10 }
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadSKknown,
+                    Line = 6,
+                    Column = 10
+                }
             );
         }
 
@@ -3935,7 +3945,12 @@ public class MyClass
 ";
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadVarargs, Line = 5, Column = 28 }
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadVarargs,
+                    Line = 5,
+                    Column = 28
+                }
             );
 
             var ns = comp.SourceModule.GlobalNamespace.GetMembers("NS").Single() as NamespaceSymbol;
@@ -3961,7 +3976,12 @@ abstract class C<T>
 ";
             DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadVarargs, Line = 9, Column = 5 },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadVarargs,
+                    Line = 9,
+                    Column = 5
+                },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_BadVarargs,
@@ -5581,7 +5601,12 @@ public class A { }
 ";
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadArity, Line = 5, Column = 19 },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadArity,
+                    Line = 5,
+                    Column = 19
+                },
                 //new ErrorDescription { Code = (int)ErrorCode.ERR_BadArity, Line = 13, Column = 13 }, // Dev10 miss this due to other errors
                 //new ErrorDescription { Code = (int)ErrorCode.ERR_BadArity, Line = 13, Column = 23 }, // Dev10 miss this due to other errors
                 new ErrorDescription
@@ -5590,7 +5615,12 @@ public class A { }
                     Line = 17,
                     Column = 9
                 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadArity, Line = 18, Column = 16 }
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadArity,
+                    Line = 18,
+                    Column = 16
+                }
             );
 
             var ns = comp.SourceModule.GlobalNamespace.GetMembers("NS").Single() as NamespaceSymbol;
@@ -20109,7 +20139,12 @@ class NamedExample
 ";
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription { Code = 1737, Line = 3, Column = 45 }
+                new ErrorDescription
+                {
+                    Code = 1737,
+                    Line = 3,
+                    Column = 45
+                }
             );
         }
 
@@ -20129,8 +20164,18 @@ class NamedExample
 ";
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription { Code = 1741, Line = 3, Column = 21 },
-                new ErrorDescription { Code = 1741, Line = 5, Column = 22 }
+                new ErrorDescription
+                {
+                    Code = 1741,
+                    Line = 3,
+                    Column = 21
+                },
+                new ErrorDescription
+                {
+                    Code = 1741,
+                    Line = 5,
+                    Column = 22
+                }
             );
         }
 
@@ -20269,7 +20314,12 @@ class Test
 ";
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription { Code = 1750, Line = 3, Column = 50 }
+                new ErrorDescription
+                {
+                    Code = 1750,
+                    Line = 3,
+                    Column = 50
+                }
             );
         }
 
@@ -20288,9 +20338,19 @@ class Test
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
                 // 'i': A value of type '<null>' cannot be used as a default parameter because there are no standard conversions to type 'int'
-                new ErrorDescription { Code = 1750, Line = 3, Column = 24 },
+                new ErrorDescription
+                {
+                    Code = 1750,
+                    Line = 3,
+                    Column = 24
+                },
                 // 'params': error CS1751: Cannot specify a default value for a parameter array
-                new ErrorDescription { Code = 1751, Line = 3, Column = 34 }
+                new ErrorDescription
+                {
+                    Code = 1751,
+                    Line = 3,
+                    Column = 34
+                }
             );
         }
 
@@ -20560,9 +20620,19 @@ public static class ErrorCode
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
                 // (5,25): error CS17: 'x' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
-                new ErrorDescription { Code = 1763, Line = 5, Column = 25 },
+                new ErrorDescription
+                {
+                    Code = 1763,
+                    Line = 5,
+                    Column = 25
+                },
                 // (75): error CS17: 'y' is of type 'System.ValueType'. A default parameter value of a reference type other than string can only be initialized with null
-                new ErrorDescription { Code = 1763, Line = 7, Column = 35 }
+                new ErrorDescription
+                {
+                    Code = 1763,
+                    Line = 7,
+                    Column = 35
+                }
             );
         }
 
@@ -24969,7 +25039,12 @@ class Program
 ";
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadAccess, Line = 15, Column = 9 }
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadAccess,
+                    Line = 15,
+                    Column = 9
+                }
             );
         }
 
@@ -25041,7 +25116,12 @@ class Program
 ";
             var comp = DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadAccess, Line = 29, Column = 15 }
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadAccess,
+                    Line = 29,
+                    Column = 15
+                }
             );
         }
 

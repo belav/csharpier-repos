@@ -574,8 +574,11 @@ namespace System.ServiceModel.Syndication.Tests
         {
             if (!IgnoreEmptyTextNodes || !string.IsNullOrEmpty(text))
             {
-                XmlDiffCharacterData textNode = new XmlDiffCharacterData(text, nt, NormalizeNewline)
-                {
+                XmlDiffCharacterData textNode = new XmlDiffCharacterData(
+                    text,
+                    nt,
+                    NormalizeNewline
+                ) {
                     LineNumber = pInfo.LineNumber,
                     LinePosition = pInfo.LinePosition
                 };

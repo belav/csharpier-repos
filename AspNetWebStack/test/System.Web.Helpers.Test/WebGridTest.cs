@@ -1664,10 +1664,26 @@ namespace System.Web.Helpers.Test
                 new NonGenericEnumerable(
                     new[]
                     {
-                        new Person { FirstName = "Joe", LastName = "Smith" },
-                        new Person { FirstName = "Bob", LastName = "Johnson" },
-                        new Person { FirstName = "Sam", LastName = "Jones" },
-                        new Person { FirstName = "Tom", LastName = "Anderson" }
+                        new Person
+                        {
+                            FirstName = "Joe",
+                            LastName = "Smith"
+                        },
+                        new Person
+                        {
+                            FirstName = "Bob",
+                            LastName = "Johnson"
+                        },
+                        new Person
+                        {
+                            FirstName = "Sam",
+                            LastName = "Jones"
+                        },
+                        new Person
+                        {
+                            FirstName = "Tom",
+                            LastName = "Anderson"
+                        }
                     }
                 )
             );
@@ -1687,10 +1703,26 @@ namespace System.Web.Helpers.Test
                 new NonGenericEnumerable(
                     new[]
                     {
-                        new Person { FirstName = "Joe", LastName = "Smith" },
-                        new Person { FirstName = "Bob", LastName = "Johnson" },
-                        new Person { FirstName = "Sam", LastName = "Jones" },
-                        new Person { FirstName = "Tom", LastName = "Anderson" }
+                        new Person
+                        {
+                            FirstName = "Joe",
+                            LastName = "Smith"
+                        },
+                        new Person
+                        {
+                            FirstName = "Bob",
+                            LastName = "Johnson"
+                        },
+                        new Person
+                        {
+                            FirstName = "Sam",
+                            LastName = "Jones"
+                        },
+                        new Person
+                        {
+                            FirstName = "Tom",
+                            LastName = "Anderson"
+                        }
                     }
                 )
             );
@@ -2235,7 +2267,14 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             IEnumerable<dynamic> elements = Dynamics(
-                new[] { new Person { FirstName = "Foo", LastName = "Bar" } }
+                new[]
+                {
+                    new Person
+                    {
+                        FirstName = "Foo",
+                        LastName = "Bar"
+                    }
+                }
             );
 
             // Act
@@ -2267,11 +2306,37 @@ namespace System.Web.Helpers.Test
             var context = GetContext(collection);
             IList<Employee> employees = new List<Employee>();
             employees.Add(
-                new Employee { Name = "A", Salary = 5, Manager = new Employee { Name = "-" } }
+                new Employee
+                {
+                    Name = "A",
+                    Salary = 5,
+                    Manager = new Employee { Name = "-" }
+                }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = employees[0] });
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 5, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 5,
+                    Manager = employees[1]
+                }
+            );
 
             var grid = new WebGrid(context, defaultSort: "Name").Bind(employees);
 
@@ -2291,11 +2356,37 @@ namespace System.Web.Helpers.Test
             var context = GetContext(collection);
             IList<Employee> employees = new List<Employee>();
             employees.Add(
-                new Employee { Name = "A", Salary = 5, Manager = new Employee { Name = "-" } }
+                new Employee
+                {
+                    Name = "A",
+                    Salary = 5,
+                    Manager = new Employee { Name = "-" }
+                }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = employees[0] });
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 5, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 5,
+                    Manager = employees[1]
+                }
+            );
 
             var grid = new WebGrid(context, canSort: true, defaultSort: "Name").Bind(employees);
 
@@ -2323,17 +2414,50 @@ namespace System.Web.Helpers.Test
             var context = GetContext(collection);
             IList<Employee> employees = new List<Employee>();
             employees.Add(
-                new Employee { Name = "A", Salary = 5, Manager = new Employee { Name = "-" } }
+                new Employee
+                {
+                    Name = "A",
+                    Salary = 5,
+                    Manager = new Employee { Name = "-" }
+                }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = employees[0] });
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 10, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 10,
+                    Manager = employees[1]
+                }
+            );
 
             var grid = new WebGrid(context, canSort: true).Bind(employees);
 
             // Act
             var html = grid.Table(
-                columns: new[] { new WebGridColumn { ColumnName = "Salary", CanSort = false } }
+                columns: new[]
+                {
+                    new WebGridColumn
+                    {
+                        ColumnName = "Salary",
+                        CanSort = false
+                    }
+                }
             );
 
             // Assert
@@ -2353,11 +2477,37 @@ namespace System.Web.Helpers.Test
             var context = GetContext(collection);
             IList<Employee> employees = new List<Employee>();
             employees.Add(
-                new Employee { Name = "A", Salary = 5, Manager = new Employee { Name = "-" } }
+                new Employee
+                {
+                    Name = "A",
+                    Salary = 5,
+                    Manager = new Employee { Name = "-" }
+                }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = employees[0] });
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 5, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 5,
+                    Manager = employees[1]
+                }
+            );
             var grid = new WebGrid(context).Bind(
                 employees,
                 columnNames: new[] { "Name", "Manager.Name" }
@@ -2377,10 +2527,29 @@ namespace System.Web.Helpers.Test
             var context = GetContext();
             IList<Employee> employees = new List<Employee>();
             employees.Add(
-                new Employee { Name = "A", Salary = 5, Manager = new Employee { Name = "-" } }
+                new Employee
+                {
+                    Name = "A",
+                    Salary = 5,
+                    Manager = new Employee { Name = "-" }
+                }
             );
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 10, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 10,
+                    Manager = employees[1]
+                }
+            );
 
             // Act
             var grid = new WebGrid(context).Bind(
@@ -2415,10 +2584,29 @@ namespace System.Web.Helpers.Test
             var context = GetContext();
             IList<Employee> employees = new List<Employee>();
             employees.Add(
-                new Employee { Name = "A", Salary = 5, Manager = new Employee { Name = "-" } }
+                new Employee
+                {
+                    Name = "A",
+                    Salary = 5,
+                    Manager = new Employee { Name = "-" }
+                }
             );
-            employees.Add(new Employee { Name = "C", Salary = 15, Manager = employees[0] });
-            employees.Add(new Employee { Name = "D", Salary = 10, Manager = employees[1] });
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 15,
+                    Manager = employees[0]
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "D",
+                    Salary = 10,
+                    Manager = employees[1]
+                }
+            );
 
             // Act
             var grid = new WebGrid(context, defaultSort: "Salary").Bind(
@@ -2452,11 +2640,28 @@ namespace System.Web.Helpers.Test
             var context = GetContext();
             IList<Employee> employees = new List<Employee>();
             employees.Add(
-                new Employee { Name = "A", Salary = 10, Manager = new Employee { Name = "C" } }
+                new Employee
+                {
+                    Name = "A",
+                    Salary = 10,
+                    Manager = new Employee { Name = "C" }
+                }
             );
-            employees.Add(new Employee { Name = "B", Salary = 20, Manager = null });
             employees.Add(
-                new Employee { Name = "C", Salary = 30, Manager = new Employee { Name = "A" } }
+                new Employee
+                {
+                    Name = "B",
+                    Salary = 20,
+                    Manager = null
+                }
+            );
+            employees.Add(
+                new Employee
+                {
+                    Name = "C",
+                    Salary = 30,
+                    Manager = new Employee { Name = "A" }
+                }
             );
 
             // Act
@@ -2501,7 +2706,11 @@ namespace System.Web.Helpers.Test
 
         private static IEnumerable<Person> Iterator()
         {
-            yield return new Person { FirstName = "Foo", LastName = "Bar" };
+            yield return new Person
+            {
+                FirstName = "Foo",
+                LastName = "Bar"
+            };
         }
 
         [Fact]
@@ -2510,11 +2719,21 @@ namespace System.Web.Helpers.Test
             // Arrange
             IList<Person> listElements = new List<Person>
             {
-                new Person { FirstName = "Foo", LastName = "Bar" }
+                new Person
+                {
+                    FirstName = "Foo",
+                    LastName = "Bar"
+                }
             };
             HashSet<dynamic> setElements = new HashSet<dynamic>
             {
-                new DynamicWrapper(new Person { FirstName = "Foo", LastName = "Bar" })
+                new DynamicWrapper(
+                    new Person
+                    {
+                        FirstName = "Foo",
+                        LastName = "Bar"
+                    }
+                )
             };
 
             // Act
@@ -2531,7 +2750,14 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             IEnumerable<Person> elements = new NonGenericEnumerable(
-                new[] { new Person { FirstName = "Foo", LastName = "Bar" } }
+                new[]
+                {
+                    new Person
+                    {
+                        FirstName = "Foo",
+                        LastName = "Bar"
+                    }
+                }
             );
 
             // Act
@@ -2546,7 +2772,14 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             IEnumerable<Person> elements = new GenericEnumerable<Person>(
-                new[] { new Person { FirstName = "Foo", LastName = "Bar" } }
+                new[]
+                {
+                    new Person
+                    {
+                        FirstName = "Foo",
+                        LastName = "Bar"
+                    }
+                }
             );
 
             // Act
@@ -2562,7 +2795,11 @@ namespace System.Web.Helpers.Test
             // Arrange
             IEnumerable<dynamic> elements = new[]
             {
-                new Person { FirstName = "Foo", LastName = "Bar" }
+                new Person
+                {
+                    FirstName = "Foo",
+                    LastName = "Bar"
+                }
             };
 
             // Act

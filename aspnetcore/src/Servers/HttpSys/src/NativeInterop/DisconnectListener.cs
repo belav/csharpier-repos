@@ -65,7 +65,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             var cts = new CancellationTokenSource();
             var returnToken = cts.Token;
 
-            var overlapped = new Overlapped { OffsetHigh = 0, OffsetLow = 0 };
+            var overlapped = new Overlapped
+            {
+                OffsetHigh = 0,
+                OffsetLow = 0
+            };
 
             // We're not using boundHandle.AllocateNativeOverlapped here because we want to avoid capturing the ExecutionContext (see https://github.com/dotnet/runtime/issues/42549)
             // Instead, we're going to use lower level APIs to get access to UnsafePack (which avoids the capture)

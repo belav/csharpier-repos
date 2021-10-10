@@ -14,9 +14,21 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var props = new AuthenticationProperties();
             var tokens = new List<AuthenticationToken>();
-            var tok1 = new AuthenticationToken { Name = "One", Value = "1" };
-            var tok2 = new AuthenticationToken { Name = "Two", Value = "2" };
-            var tok3 = new AuthenticationToken { Name = "Three", Value = "3" };
+            var tok1 = new AuthenticationToken
+            {
+                Name = "One",
+                Value = "1"
+            };
+            var tok2 = new AuthenticationToken
+            {
+                Name = "Two",
+                Value = "2"
+            };
+            var tok3 = new AuthenticationToken
+            {
+                Name = "Three",
+                Value = "3"
+            };
             tokens.Add(tok1);
             tokens.Add(tok2);
             tokens.Add(tok3);
@@ -33,16 +45,37 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var props = new AuthenticationProperties();
             var tokens = new List<AuthenticationToken>();
-            var tok1 = new AuthenticationToken { Name = "One", Value = "1" };
-            var tok2 = new AuthenticationToken { Name = "Two", Value = "2" };
-            var tok3 = new AuthenticationToken { Name = "Three", Value = "3" };
+            var tok1 = new AuthenticationToken
+            {
+                Name = "One",
+                Value = "1"
+            };
+            var tok2 = new AuthenticationToken
+            {
+                Name = "Two",
+                Value = "2"
+            };
+            var tok3 = new AuthenticationToken
+            {
+                Name = "Three",
+                Value = "3"
+            };
             tokens.Add(tok1);
             tokens.Add(tok2);
             tokens.Add(tok3);
 
             props.StoreTokens(tokens);
 
-            props.StoreTokens(new[] { new AuthenticationToken { Name = "Zero", Value = "0" } });
+            props.StoreTokens(
+                new[]
+                {
+                    new AuthenticationToken
+                    {
+                        Name = "Zero",
+                        Value = "0"
+                    }
+                }
+            );
 
             Assert.Equal("0", props.GetTokenValue("Zero"));
             Assert.Null(props.GetTokenValue("One"));
@@ -56,9 +89,21 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var props = new AuthenticationProperties();
             var tokens = new List<AuthenticationToken>();
-            var tok1 = new AuthenticationToken { Name = "One", Value = "1" };
-            var tok2 = new AuthenticationToken { Name = "Two", Value = "2" };
-            var tok3 = new AuthenticationToken { Name = "Three", Value = "3" };
+            var tok1 = new AuthenticationToken
+            {
+                Name = "One",
+                Value = "1"
+            };
+            var tok2 = new AuthenticationToken
+            {
+                Name = "Two",
+                Value = "2"
+            };
+            var tok3 = new AuthenticationToken
+            {
+                Name = "Three",
+                Value = "3"
+            };
             tokens.Add(tok1);
             tokens.Add(tok2);
             tokens.Add(tok3);
@@ -80,9 +125,21 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var props = new AuthenticationProperties();
             var tokens = new List<AuthenticationToken>();
-            var tok1 = new AuthenticationToken { Name = "One", Value = "1" };
-            var tok2 = new AuthenticationToken { Name = "Two", Value = "2" };
-            var tok3 = new AuthenticationToken { Name = "Three", Value = "3" };
+            var tok1 = new AuthenticationToken
+            {
+                Name = "One",
+                Value = "1"
+            };
+            var tok2 = new AuthenticationToken
+            {
+                Name = "Two",
+                Value = "2"
+            };
+            var tok3 = new AuthenticationToken
+            {
+                Name = "Three",
+                Value = "3"
+            };
             tokens.Add(tok1);
             tokens.Add(tok2);
             tokens.Add(tok3);
@@ -103,9 +160,21 @@ namespace Microsoft.AspNetCore.Authentication
         {
             var props = new AuthenticationProperties();
             var tokens = new List<AuthenticationToken>();
-            var tok1 = new AuthenticationToken { Name = "One", Value = "1" };
-            var tok2 = new AuthenticationToken { Name = "Two", Value = "2" };
-            var tok3 = new AuthenticationToken { Name = "Three", Value = "3" };
+            var tok1 = new AuthenticationToken
+            {
+                Name = "One",
+                Value = "1"
+            };
+            var tok2 = new AuthenticationToken
+            {
+                Name = "Two",
+                Value = "2"
+            };
+            var tok3 = new AuthenticationToken
+            {
+                Name = "Three",
+                Value = "3"
+            };
             tokens.Add(tok1);
             tokens.Add(tok2);
             tokens.Add(tok3);

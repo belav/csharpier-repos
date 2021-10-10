@@ -218,7 +218,14 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             MockObjectVisitor visitor = CreateObjectVisitor();
-            PersonNode node = new PersonNode { Person = new Person { Name = "David", Age = 23.3 } };
+            PersonNode node = new PersonNode
+            {
+                Person = new Person
+                {
+                    Name = "David",
+                    Age = 23.3
+                }
+            };
             node.Next = node;
 
             // Act

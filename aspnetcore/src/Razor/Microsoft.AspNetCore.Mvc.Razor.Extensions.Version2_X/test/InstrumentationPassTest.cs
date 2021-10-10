@@ -21,7 +21,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             var builder = IntermediateNodeBuilder.Create(document);
             builder.Push(new HtmlContentIntermediateNode());
-            builder.Add(new IntermediateToken() { Content = "Hi", Kind = TokenKind.Html, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "Hi",
+                    Kind = TokenKind.Html,
+                }
+            );
             builder.Pop();
 
             var pass = new InstrumentationPass()
@@ -86,7 +92,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             var builder = IntermediateNodeBuilder.Create(document);
             builder.Push(new HtmlContentIntermediateNode());
-            builder.Add(new IntermediateToken() { Content = "Hi", Kind = TokenKind.Html, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "Hi",
+                    Kind = TokenKind.Html,
+                }
+            );
             builder.Pop();
 
             var pass = new InstrumentationPass()
@@ -112,7 +124,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             var builder = IntermediateNodeBuilder.Create(document);
             builder.Push(new CSharpExpressionIntermediateNode() { Source = CreateSource(2), });
-            builder.Add(new IntermediateToken() { Content = "Hi", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "Hi",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             var pass = new InstrumentationPass()
             {
@@ -142,7 +160,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             var builder = IntermediateNodeBuilder.Create(document);
             builder.Push(new CSharpExpressionIntermediateNode());
-            builder.Add(new IntermediateToken() { Content = "Hi", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "Hi",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             var pass = new InstrumentationPass()
             {
@@ -172,7 +196,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             builder.Push(new CSharpExpressionIntermediateNode() { Source = CreateSource(5) });
 
-            builder.Add(new IntermediateToken() { Content = "Hi", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "Hi",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             var pass = new InstrumentationPass()
             {
@@ -216,7 +246,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             builder.Push(new CSharpExpressionIntermediateNode() { Source = CreateSource(5) });
 
-            builder.Add(new IntermediateToken() { Content = "Hi", Kind = TokenKind.CSharp, });
+            builder.Add(
+                new IntermediateToken()
+                {
+                    Content = "Hi",
+                    Kind = TokenKind.CSharp,
+                }
+            );
 
             var pass = new InstrumentationPass()
             {

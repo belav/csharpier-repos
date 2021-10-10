@@ -114,7 +114,11 @@ namespace Microsoft.AspNetCore.Mvc
             var urlHelper = factory.GetUrlHelper(context.ActionContext);
 
             var url = urlHelper.RouteUrl(
-                new UrlRouteContext() { RouteName = RouteName, Values = RouteData, }
+                new UrlRouteContext()
+                {
+                    RouteName = RouteName,
+                    Values = RouteData,
+                }
             );
 
             if (url == null)

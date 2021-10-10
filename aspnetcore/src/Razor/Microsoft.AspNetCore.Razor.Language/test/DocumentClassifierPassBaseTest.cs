@@ -47,7 +47,11 @@ namespace Microsoft.AspNetCore.Razor.Language
                 Options = RazorCodeGenerationOptions.CreateDefault(),
             };
 
-            var pass = new TestDocumentClassifierPass() { Engine = Engine, ShouldMatch = false, };
+            var pass = new TestDocumentClassifierPass()
+            {
+                Engine = Engine,
+                ShouldMatch = false,
+            };
 
             // Act
             pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);

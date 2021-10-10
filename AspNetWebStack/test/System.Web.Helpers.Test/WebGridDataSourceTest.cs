@@ -218,7 +218,11 @@ namespace System.Web.Helpers.Test
 
             // Act
             var rows = dataSource.GetRows(
-                new SortInfo { SortColumn = "col", SortDirection = SortDirection.Descending },
+                new SortInfo
+                {
+                    SortColumn = "col",
+                    SortDirection = SortDirection.Descending
+                },
                 0
             );
 
@@ -247,7 +251,11 @@ namespace System.Web.Helpers.Test
 
             // Act
             var rows = dataSource.GetRows(
-                new SortInfo { SortColumn = "Foo.Bar", SortDirection = SortDirection.Descending },
+                new SortInfo
+                {
+                    SortColumn = "Foo.Bar",
+                    SortDirection = SortDirection.Descending
+                },
                 0
             );
 
@@ -278,7 +286,11 @@ namespace System.Web.Helpers.Test
 
             // Act
             var rows = dataSource.GetRows(
-                new SortInfo { SortColumn = "col", SortDirection = SortDirection.Descending },
+                new SortInfo
+                {
+                    SortColumn = "col",
+                    SortDirection = SortDirection.Descending
+                },
                 0
             );
 
@@ -308,7 +320,11 @@ namespace System.Web.Helpers.Test
 
             // Act
             var rows = dataSource.GetRows(
-                new SortInfo { SortColumn = "col", SortDirection = SortDirection.Descending },
+                new SortInfo
+                {
+                    SortColumn = "col",
+                    SortDirection = SortDirection.Descending
+                },
                 0
             );
 
@@ -359,7 +375,11 @@ namespace System.Web.Helpers.Test
 
             // Act
             var rows = dataSource.GetRows(
-                new SortInfo { SortColumn = "LastName", SortDirection = SortDirection.Descending },
+                new SortInfo
+                {
+                    SortColumn = "LastName",
+                    SortDirection = SortDirection.Descending
+                },
                 0
             );
 
@@ -421,11 +441,31 @@ namespace System.Web.Helpers.Test
         {
             return new[]
             {
-                new Person { FirstName = "B1", LastName = "B2" },
-                new Person { FirstName = "A1", LastName = "A2" },
-                new Person { FirstName = "D1", LastName = "D2" },
-                new Person { FirstName = "C1", LastName = "C2" },
-                new Person { FirstName = "E1", LastName = "E2" },
+                new Person
+                {
+                    FirstName = "B1",
+                    LastName = "B2"
+                },
+                new Person
+                {
+                    FirstName = "A1",
+                    LastName = "A2"
+                },
+                new Person
+                {
+                    FirstName = "D1",
+                    LastName = "D2"
+                },
+                new Person
+                {
+                    FirstName = "C1",
+                    LastName = "C2"
+                },
+                new Person
+                {
+                    FirstName = "E1",
+                    LastName = "E2"
+                },
             };
         }
 

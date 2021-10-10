@@ -241,7 +241,11 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     IntValue = 32,
                     Name = "John Doe",
-                    Customer = new Customer { Name = "Customer Doe", CreditLimit = 1000 },
+                    Customer = new Customer
+                    {
+                        Name = "Customer Doe",
+                        CreditLimit = 1000
+                    },
                     DerivedCustomer = new DerivedCustomer
                     {
                         Name = "Derived Doe",

@@ -29,8 +29,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 KeepAliveInterval = TimeSpan.FromSeconds(15),
             };
 
-            return new HubConnectionContext(connection, contextOptions, NullLoggerFactory.Instance)
-            {
+            return new HubConnectionContext(
+                connection,
+                contextOptions,
+                NullLoggerFactory.Instance
+            ) {
                 Protocol = protocol ?? new JsonHubProtocol(),
                 UserIdentifier = userIdentifier,
             };

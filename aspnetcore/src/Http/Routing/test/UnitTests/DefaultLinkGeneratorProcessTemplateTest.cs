@@ -621,7 +621,11 @@ namespace Microsoft.AspNetCore.Routing
                     new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
                 ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
-                options: new LinkOptions { LowercaseUrls = false, LowercaseQueryStrings = false },
+                options: new LinkOptions
+                {
+                    LowercaseUrls = false,
+                    LowercaseQueryStrings = false
+                },
                 result: out var result
             );
 
@@ -658,7 +662,11 @@ namespace Microsoft.AspNetCore.Routing
                     new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
                 ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
-                options: new LinkOptions() { LowercaseUrls = true, LowercaseQueryStrings = true, },
+                options: new LinkOptions()
+                {
+                    LowercaseUrls = true,
+                    LowercaseQueryStrings = true,
+                },
                 result: out var result
             );
 

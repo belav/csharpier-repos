@@ -241,7 +241,11 @@ namespace Microsoft.Extensions.Caching.Memory
         public void AddingReplacementWhenTotalSizeExceedsCapacityDoesNotUpdateAndRemovesOldEntry()
         {
             var cache = new MemoryCache(
-                new MemoryCacheOptions { SizeLimit = 10, CompactionPercentage = 0.5 }
+                new MemoryCacheOptions
+                {
+                    SizeLimit = 10,
+                    CompactionPercentage = 0.5
+                }
             );
 
             Assert.Equal(0, cache.Size);
@@ -262,7 +266,11 @@ namespace Microsoft.Extensions.Caching.Memory
         public async Task AddingReplacementWhenTotalSizeExceedsCapacityDoesNotUpdateRemovesOldEntryAndTriggersCompaction()
         {
             var cache = new MemoryCache(
-                new MemoryCacheOptions { SizeLimit = 10, CompactionPercentage = 0.5 }
+                new MemoryCacheOptions
+                {
+                    SizeLimit = 10,
+                    CompactionPercentage = 0.5
+                }
             );
 
             var entryOptions = new MemoryCacheEntryOptions { Size = 6 };
@@ -295,7 +303,11 @@ namespace Microsoft.Extensions.Caching.Memory
         public void AddingReplacementExceedsCapacityRemovesOldEntry()
         {
             var cache = new MemoryCache(
-                new MemoryCacheOptions { SizeLimit = 10, CompactionPercentage = 0.5 }
+                new MemoryCacheOptions
+                {
+                    SizeLimit = 10,
+                    CompactionPercentage = 0.5
+                }
             );
 
             Assert.Equal(0, cache.Size);
@@ -330,7 +342,11 @@ namespace Microsoft.Extensions.Caching.Memory
         public async Task ExpiringEntryDecreasesCacheSize()
         {
             var cache = new MemoryCache(
-                new MemoryCacheOptions { ExpirationScanFrequency = TimeSpan.Zero, SizeLimit = 10 }
+                new MemoryCacheOptions
+                {
+                    ExpirationScanFrequency = TimeSpan.Zero,
+                    SizeLimit = 10
+                }
             );
 
             var entryOptions = new MemoryCacheEntryOptions { Size = 5 };
@@ -366,7 +382,11 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             var testClock = new TestClock();
             var cache = new MemoryCache(
-                new MemoryCacheOptions { Clock = testClock, SizeLimit = 10 }
+                new MemoryCacheOptions
+                {
+                    Clock = testClock,
+                    SizeLimit = 10
+                }
             );
 
             var entryOptions = new MemoryCacheEntryOptions

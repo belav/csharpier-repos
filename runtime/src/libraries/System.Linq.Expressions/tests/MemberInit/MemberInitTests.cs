@@ -14,7 +14,16 @@ namespace System.Linq.Expressions.Tests
         public static void CheckMemberInitTest(bool useInterpreter)
         {
             VerifyMemberInit(
-                () => new X { Y = { Z = 42, YS = { 2, 3 } }, XS = { 5, 7 } },
+                () =>
+                    new X
+                    {
+                        Y =
+                        {
+                            Z = 42,
+                            YS = { 2, 3 }
+                        },
+                        XS = { 5, 7 }
+                    },
                 x => x.Y.Z == 42 && x.XS.Sum() == 5 + 7 && x.Y.YS.Sum() == 2 + 3,
                 useInterpreter
             );
@@ -23,7 +32,16 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void Reduce(bool useInterpreter)
         {
-            Expression<Func<X>> l = () => new X { Y = { Z = 42, YS = { 2, 3 } }, XS = { 5, 7 } };
+            Expression<Func<X>> l = () =>
+                new X
+                {
+                    Y =
+                    {
+                        Z = 42,
+                        YS = { 2, 3 }
+                    },
+                    XS = { 5, 7 }
+                };
             MemberInitExpression e = l.Body as MemberInitExpression;
             l = Expression.Lambda<Func<X>>(e.ReduceAndCheck());
             VerifyMemberInit(

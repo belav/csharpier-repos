@@ -937,7 +937,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             dynamic dy = mc;
             int?[] p2 = new int?[] { int.MinValue, null };
             decimal[] p1 = null;
-            var result = new InnerTest() { Field = dy + p2, MyProp = p1 + dy };
+            var result = new InnerTest()
+            {
+                Field = dy + p2,
+                MyProp = p1 + dy
+            };
             if (result.Field == false && result.MyProp == byte.MinValue)
                 return 0;
             return 1;
@@ -1891,7 +1895,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             MyStruct?[] p1 = null;
             List<Test> list = new List<Test>()
             {
-                new Test() { _field1 = (object[])dy, _field2 = (MyClass)p1 }
+                new Test()
+                {
+                    _field1 = (object[])dy,
+                    _field2 = (MyClass)p1
+                }
             };
             if (list.Count != 1)
                 return 1;
@@ -1970,8 +1978,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
                     _field3 = byte.MaxValue
                 },
                 new Test(),
-                new Test() { _field1 = null, _field2 = null, _field3 = 0 },
-                new Test() { _field1 = decimal.MinValue, _field2 = int.MaxValue, _field3 = 10 },
+                new Test()
+                {
+                    _field1 = null,
+                    _field2 = null,
+                    _field3 = 0
+                },
+                new Test()
+                {
+                    _field1 = decimal.MinValue,
+                    _field2 = int.MaxValue,
+                    _field3 = 10
+                },
             };
             MyStruct mc = new MyStruct();
             dynamic dy = mc;

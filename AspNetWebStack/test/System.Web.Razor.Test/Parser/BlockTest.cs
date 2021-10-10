@@ -32,7 +32,11 @@ namespace System.Web.Razor.Test.Parser
         public void ConstructorCopiesBasicValuesFromBlockBuilder()
         {
             // Arrange
-            BlockBuilder builder = new BlockBuilder() { Name = "Foo", Type = BlockType.Helper };
+            BlockBuilder builder = new BlockBuilder()
+            {
+                Name = "Foo",
+                Type = BlockType.Helper
+            };
 
             // Act
             Block actual = builder.Build();

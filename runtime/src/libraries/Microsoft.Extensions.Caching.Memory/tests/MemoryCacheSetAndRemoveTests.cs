@@ -459,7 +459,11 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             var cache = CreateCache();
             var obj = new object();
-            var key = new Person { Id = 10, Name = "Mike" };
+            var key = new Person
+            {
+                Id = 10,
+                Name = "Mike"
+            };
 
             var result = cache.Set(key, obj);
             Assert.Same(obj, result);

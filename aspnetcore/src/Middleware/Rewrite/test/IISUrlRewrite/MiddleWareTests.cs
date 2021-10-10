@@ -920,7 +920,11 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
             // arrange
             var inputParser = new InputParser();
 
-            var ruleBuilder = new UrlRewriteRuleBuilder { Name = "test", Global = false };
+            var ruleBuilder = new UrlRewriteRuleBuilder
+            {
+                Name = "test",
+                Global = false
+            };
             ruleBuilder.AddUrlMatch(".*");
 
             var condition = new UriMatchCondition(

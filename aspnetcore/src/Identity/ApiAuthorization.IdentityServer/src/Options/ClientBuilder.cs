@@ -219,7 +219,12 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
         private static Client CreateClient(string name)
         {
-            var client = new Client { ClientId = name, ClientName = name, RequireConsent = false };
+            var client = new Client
+            {
+                ClientId = name,
+                ClientName = name,
+                RequireConsent = false
+            };
 
             return client;
         }

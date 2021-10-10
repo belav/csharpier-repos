@@ -107,7 +107,13 @@ namespace System.Web.Mvc.Html
             if (checkedType != type)
             {
                 // Underlying type was non-null so handle Nullable<T>; ensure returned list has a spot for null
-                selectList.Add(new SelectListItem { Text = String.Empty, Value = String.Empty, });
+                selectList.Add(
+                    new SelectListItem
+                    {
+                        Text = String.Empty,
+                        Value = String.Empty,
+                    }
+                );
             }
 
             // Populate the list

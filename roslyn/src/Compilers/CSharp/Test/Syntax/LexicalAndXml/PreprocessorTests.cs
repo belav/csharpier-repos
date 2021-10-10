@@ -897,8 +897,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "A" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "C" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "A"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "C"
+                }
             );
         }
 
@@ -938,8 +946,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "B" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "C" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "B"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "C"
+                }
             );
         }
 
@@ -979,8 +995,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "A" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "C" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "A"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "C"
+                }
             );
         }
 
@@ -1020,8 +1044,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "B" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "C" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "B"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "C"
+                }
             );
         }
 
@@ -1061,8 +1093,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "A" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "C" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "A"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "C"
+                }
             );
         }
 
@@ -1100,7 +1140,14 @@ class A
                     Status = NodeStatus.IsActive
                 }
             );
-            VerifyMembers(node, new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "C" });
+            VerifyMembers(
+                node,
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "C"
+                }
+            );
         }
 
         [Fact]
@@ -1146,8 +1193,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "A" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "D" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "A"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "D"
+                }
             );
         }
 
@@ -1194,8 +1249,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "B" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "D" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "B"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "D"
+                }
             );
         }
 
@@ -1242,8 +1305,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "C" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "D" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "C"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "D"
+                }
             );
         }
 
@@ -1290,8 +1361,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "A" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "D" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "A"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "D"
+                }
             );
         }
 
@@ -1345,8 +1424,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "A" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "E" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "A"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "E"
+                }
             );
         }
 
@@ -1400,8 +1487,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "C" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "E" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "C"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "E"
+                }
             );
         }
 
@@ -1455,8 +1550,16 @@ class A
             );
             VerifyMembers(
                 node,
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "D" },
-                new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "E" }
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "D"
+                },
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "E"
+                }
             );
         }
 
@@ -2548,7 +2651,14 @@ class A
                 SyntaxKind.ElseDirectiveTrivia,
                 SyntaxKind.EndIfDirectiveTrivia
             );
-            VerifyMembers(node, new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "B" });
+            VerifyMembers(
+                node,
+                new MemberInfo
+                {
+                    Kind = SyntaxKind.ClassDeclaration,
+                    Text = "B"
+                }
+            );
         }
 
         [Fact]

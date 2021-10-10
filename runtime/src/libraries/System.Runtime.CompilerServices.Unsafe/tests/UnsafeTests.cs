@@ -855,7 +855,11 @@ namespace System.Runtime.CompilerServices
 
             Unsafe.WriteUnaligned(
                 ref unaligned[1],
-                new Int32Double { Int32 = 123456789, Double = 3.42 }
+                new Int32Double
+                {
+                    Int32 = 123456789,
+                    Double = 3.42
+                }
             );
 
             Int32Double actual = Int32Double.Aligned(unaligned);
@@ -898,7 +902,14 @@ namespace System.Runtime.CompilerServices
 
             fixed (byte* p = unaligned)
             {
-                Unsafe.WriteUnaligned(p + 1, new Int32Double { Int32 = 123456789, Double = 3.42 });
+                Unsafe.WriteUnaligned(
+                    p + 1,
+                    new Int32Double
+                    {
+                        Int32 = 123456789,
+                        Double = 3.42
+                    }
+                );
             }
 
             Int32Double actual = Int32Double.Aligned(unaligned);
@@ -1021,7 +1032,13 @@ namespace System.Runtime.CompilerServices
             Unsafe.SkipInit(out doubleValue);
             Assert.Equal<double>(10, doubleValue);
 
-            Byte4 byte4Value = new Byte4 { B0 = 11, B1 = 12, B2 = 13, B3 = 14 };
+            Byte4 byte4Value = new Byte4
+            {
+                B0 = 11,
+                B1 = 12,
+                B2 = 13,
+                B3 = 14
+            };
             Unsafe.SkipInit(out byte4Value);
             Assert.Equal<byte>(11, byte4Value.B0);
             Assert.Equal<byte>(12, byte4Value.B1);
@@ -1045,12 +1062,20 @@ namespace System.Runtime.CompilerServices
             Assert.Equal<short>(19, byte4Short2Value.S4);
             Assert.Equal<short>(20, byte4Short2Value.S6);
 
-            Int32Double int32DoubleValue = new Int32Double { Int32 = 21, Double = 22 };
+            Int32Double int32DoubleValue = new Int32Double
+            {
+                Int32 = 21,
+                Double = 22
+            };
             Unsafe.SkipInit(out int32DoubleValue);
             Assert.Equal<int>(21, int32DoubleValue.Int32);
             Assert.Equal<double>(22, int32DoubleValue.Double);
 
-            StringInt32 stringInt32Value = new StringInt32 { String = "23", Int32 = 24 };
+            StringInt32 stringInt32Value = new StringInt32
+            {
+                String = "23",
+                Int32 = 24
+            };
             Unsafe.SkipInit(out stringInt32Value);
             Assert.Equal("23", stringInt32Value.String);
             Assert.Equal<int>(24, stringInt32Value.Int32);
@@ -1184,7 +1209,11 @@ namespace System.Runtime.CompilerServices
 
         public static unsafe byte[] Unaligned(int i, double d)
         {
-            var aligned = new Int32Double { Int32 = i, Double = d };
+            var aligned = new Int32Double
+            {
+                Int32 = i,
+                Double = d
+            };
             var unaligned = new byte[sizeof(Int32Double) + 1];
 
             fixed (byte* p = unaligned)

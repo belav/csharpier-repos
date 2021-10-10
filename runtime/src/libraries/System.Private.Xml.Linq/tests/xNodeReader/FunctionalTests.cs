@@ -47,13 +47,21 @@ namespace CoreXml.Test.XLinq
                 this.AddChild(
                     new TCDispose()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "Dispose", Desc = "Dispose" }
+                        Attribute = new TestCaseAttribute()
+                        {
+                            Name = "Dispose",
+                            Desc = "Dispose"
+                        }
                     }
                 );
                 this.AddChild(
                     new TCDepth()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "Depth", Desc = "Depth" }
+                        Attribute = new TestCaseAttribute()
+                        {
+                            Name = "Depth",
+                            Desc = "Depth"
+                        }
                     }
                 );
                 this.AddChild(
@@ -79,7 +87,11 @@ namespace CoreXml.Test.XLinq
                 this.AddChild(
                     new TCHasValue()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "HasValue", Desc = "HasValue" }
+                        Attribute = new TestCaseAttribute()
+                        {
+                            Name = "HasValue",
+                            Desc = "HasValue"
+                        }
                     }
                 );
                 this.AddChild(
@@ -95,19 +107,31 @@ namespace CoreXml.Test.XLinq
                 this.AddChild(
                     new TCXmlSpace()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "XmlSpace", Desc = "XmlSpace" }
+                        Attribute = new TestCaseAttribute()
+                        {
+                            Name = "XmlSpace",
+                            Desc = "XmlSpace"
+                        }
                     }
                 );
                 this.AddChild(
                     new TCXmlLang()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "XmlLang", Desc = "XmlLang" }
+                        Attribute = new TestCaseAttribute()
+                        {
+                            Name = "XmlLang",
+                            Desc = "XmlLang"
+                        }
                     }
                 );
                 this.AddChild(
                     new TCSkip()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "Skip", Desc = "Skip" }
+                        Attribute = new TestCaseAttribute()
+                        {
+                            Name = "Skip",
+                            Desc = "Skip"
+                        }
                     }
                 );
                 this.AddChild(
@@ -123,7 +147,11 @@ namespace CoreXml.Test.XLinq
                 this.AddChild(
                     new TCBaseURI()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "BaseUri", Desc = "BaseUri" }
+                        Attribute = new TestCaseAttribute()
+                        {
+                            Name = "BaseUri",
+                            Desc = "BaseUri"
+                        }
                     }
                 );
                 this.AddChild(
@@ -139,7 +167,11 @@ namespace CoreXml.Test.XLinq
                 this.AddChild(
                     new TCThisName()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "ThisName", Desc = "ThisName" }
+                        Attribute = new TestCaseAttribute()
+                        {
+                            Name = "ThisName",
+                            Desc = "ThisName"
+                        }
                     }
                 );
                 this.AddChild(
@@ -225,7 +257,11 @@ namespace CoreXml.Test.XLinq
                 this.AddChild(
                     new TCXmlns()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "Xlmns", Desc = "Xlmns" }
+                        Attribute = new TestCaseAttribute()
+                        {
+                            Name = "Xlmns",
+                            Desc = "Xlmns"
+                        }
                     }
                 );
                 this.AddChild(
@@ -4366,8 +4402,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(v2)
                         {
-                            Attribute = new VariationAttribute("ReadSubtree Test PI after element")
-                            {
+                            Attribute = new VariationAttribute(
+                                "ReadSubtree Test PI after element"
+                            ) {
                                 Params = new object[]
                                 {
                                     "elempi",
@@ -4530,8 +4567,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(v3)
                         {
-                            Attribute = new VariationAttribute("Read on descendant with same names")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Read on descendant with same names"
+                            ) {
                                 Params = new object[] { "DNS" },
                                 Priority = 1
                             }
@@ -4540,8 +4578,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(v3)
                         {
-                            Attribute = new VariationAttribute("Read on descendant with same names")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Read on descendant with same names"
+                            ) {
                                 Params = new object[] { "NNS" },
                                 Priority = 1
                             }
@@ -4550,8 +4589,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(v3)
                         {
-                            Attribute = new VariationAttribute("Read on descendant with same names")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Read on descendant with same names"
+                            ) {
                                 Params = new object[] { "NS" },
                                 Priority = 1
                             }
@@ -4757,8 +4797,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(v2)
                         {
-                            Attribute = new VariationAttribute("Read on following with same names")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Read on following with same names"
+                            ) {
                                 Params = new object[] { "NNS" },
                                 Priority = 1
                             }
@@ -4767,8 +4808,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(v2)
                         {
-                            Attribute = new VariationAttribute("Read on following with same names")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Read on following with same names"
+                            ) {
                                 Params = new object[] { "NS" },
                                 Priority = 1
                             }
@@ -4777,8 +4819,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(v2)
                         {
-                            Attribute = new VariationAttribute("Read on following with same names")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Read on following with same names"
+                            ) {
                                 Params = new object[] { "DNS" },
                                 Priority = 1
                             }
@@ -5350,8 +5393,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(OpenOnNodeType)
                         {
-                            Attribute = new VariationAttribute("Open on node type: PI (root level)")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Open on node type: PI (root level)"
+                            ) {
                                 Params = new object[]
                                 {
                                     XmlNodeType.ProcessingInstruction,
@@ -5399,8 +5443,9 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(OpenOnNodeType)
                         {
-                            Attribute = new VariationAttribute("Open on node type: XElement (root)")
-                            {
+                            Attribute = new VariationAttribute(
+                                "Open on node type: XElement (root)"
+                            ) {
                                 Params = new object[]
                                 {
                                     XmlNodeType.Element,

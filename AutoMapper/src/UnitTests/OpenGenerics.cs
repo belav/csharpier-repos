@@ -528,7 +528,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Can_remap_explicit_members()
         {
-            var source = new Foo<int> { A = 5, B = 10 };
+            var source = new Foo<int>
+            {
+                A = 5,
+                B = 10
+            };
 
             var dest = Mapper.Map<Foo<int>, Bar<int>>(source);
 

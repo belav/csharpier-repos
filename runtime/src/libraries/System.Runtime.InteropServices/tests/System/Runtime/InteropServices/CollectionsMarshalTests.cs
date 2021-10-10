@@ -181,7 +181,12 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(dict[2].Value, itemRef.Value);
             Assert.Equal(dict[2].Property, itemRef.Property);
 
-            itemRef = new() { Value = 7, Property = 8 };
+            itemRef =
+                new()
+                {
+                    Value = 7,
+                    Property = 8
+                };
 
             Assert.Equal(7, itemRef.Value);
             Assert.Equal(8, itemRef.Property);
@@ -235,7 +240,12 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(dict[2].Value, itemRef.Value);
             Assert.Equal(dict[2].Property, itemRef.Property);
 
-            itemRef = new() { Value = 7, Property = 8 };
+            itemRef =
+                new()
+                {
+                    Value = 7,
+                    Property = 8
+                };
 
             Assert.Equal(7, itemRef.Value);
             Assert.Equal(8, itemRef.Property);

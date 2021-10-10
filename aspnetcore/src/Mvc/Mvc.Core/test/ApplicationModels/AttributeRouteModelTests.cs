@@ -911,7 +911,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             string name = null
         )
         {
-            return new AttributeRouteModel { Template = template, Order = order, Name = name };
+            return new AttributeRouteModel
+            {
+                Template = template,
+                Order = order,
+                Name = name
+            };
         }
     }
 }

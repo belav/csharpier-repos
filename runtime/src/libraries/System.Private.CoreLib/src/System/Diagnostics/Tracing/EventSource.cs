@@ -2530,7 +2530,11 @@ namespace System.Diagnostics.Tracing
                     );
                     manifestBuilder.StartEvent(
                         EventName,
-                        new EventAttribute(0) { Level = level, Task = (EventTask)0xFFFE }
+                        new EventAttribute(0)
+                        {
+                            Level = level,
+                            Task = (EventTask)0xFFFE
+                        }
                     );
                     manifestBuilder.AddEventParameter(typeof(string), "message");
                     manifestBuilder.EndEvent();
@@ -3683,7 +3687,11 @@ namespace System.Diagnostics.Tracing
                 // Add an entry unconditionally for event ID 0 which will be for a string message.
                 manifest.StartEvent(
                     "EventSourceMessage",
-                    new EventAttribute(0) { Level = EventLevel.LogAlways, Task = (EventTask)0xFFFE }
+                    new EventAttribute(0)
+                    {
+                        Level = EventLevel.LogAlways,
+                        Task = (EventTask)0xFFFE
+                    }
                 );
                 manifest.AddEventParameter(typeof(string), "message");
                 manifest.EndEvent();

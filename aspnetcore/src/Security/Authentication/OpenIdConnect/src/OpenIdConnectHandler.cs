@@ -1402,8 +1402,12 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                 properties.Items.Remove(OAuthConstants.CodeVerifierKey);
             }
 
-            var context = new AuthorizationCodeReceivedContext(Context, Scheme, Options, properties)
-            {
+            var context = new AuthorizationCodeReceivedContext(
+                Context,
+                Scheme,
+                Options,
+                properties
+            ) {
                 ProtocolMessage = authorizationResponse,
                 TokenEndpointRequest = tokenEndpointRequest,
                 Principal = user,

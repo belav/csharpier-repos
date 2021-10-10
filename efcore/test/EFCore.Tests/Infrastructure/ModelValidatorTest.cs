@@ -1271,7 +1271,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<A>().HasData(new A { Id = 1 });
-            modelBuilder.Entity<D>().HasData(new D { Id = 2, P0 = 3 });
+            modelBuilder.Entity<D>()
+                .HasData(
+                    new D
+                    {
+                        Id = 2,
+                        P0 = 3
+                    }
+                );
 
             Validate(modelBuilder.Model);
         }
@@ -1316,7 +1323,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CoreStrings.SeedDatumDerivedType(nameof(A), nameof(D)),
                 Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Entity<A>().HasData(new D { Id = 2, P0 = 3 })
+                    () =>
+                        modelBuilder.Entity<A>()
+                            .HasData(
+                                new D
+                                {
+                                    Id = 2,
+                                    P0 = 3
+                                }
+                            )
                 ).Message
             );
         }
@@ -1331,7 +1346,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 Assert.Throws<InvalidOperationException>(
                     () =>
                         modelBuilder.Entity<B>()
-                            .OwnsOne(b => b.A, a => a.HasData(new D { Id = 2, P0 = 3 }))
+                            .OwnsOne(
+                                b => b.A,
+                                a =>
+                                    a.HasData(
+                                        new D
+                                        {
+                                            Id = 2,
+                                            P0 = 3
+                                        }
+                                    )
+                            )
                             .OwnsOne(b => b.AnotherA)
                 ).Message
             );
@@ -1504,7 +1529,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 e =>
                 {
                     e.HasMany(o => o.Products).WithMany(p => p.Orders);
-                    e.HasData(new Order { Id = 1, Products = new List<Product> { new() } });
+                    e.HasData(
+                        new Order
+                        {
+                            Id = 1,
+                            Products = new List<Product> { new() }
+                        }
+                    );
                 }
             );
 

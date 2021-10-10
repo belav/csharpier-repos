@@ -34,7 +34,11 @@ namespace System.ComponentModel.Tests
             {
                 Assert.Equal(typeof(NumberFormatInfo), formatType);
 
-                return new NumberFormatInfo { PositiveSign = "!", NegativeSign = "?" };
+                return new NumberFormatInfo
+                {
+                    PositiveSign = "!",
+                    NegativeSign = "?"
+                };
             }
         }
     }

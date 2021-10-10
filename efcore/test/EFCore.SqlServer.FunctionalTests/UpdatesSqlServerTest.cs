@@ -35,7 +35,11 @@ namespace Microsoft.EntityFrameworkCore
                                 new() { CategoryId = 77 }
                             }
                         },
-                        new Category { Id = 77, PrincipalId = 777 }
+                        new Category
+                        {
+                            Id = 77,
+                            PrincipalId = 777
+                        }
                     );
 
                     context.SaveChanges();

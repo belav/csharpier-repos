@@ -20,7 +20,11 @@ namespace Microsoft.Extensions.Options.Tests
             var sp = services.BuildServiceProvider();
 
             var validations = sp.GetService<IEnumerable<IValidateOptions<ComplexOptions>>>();
-            var options = new ComplexOptions { Boolean = true, Integer = 13 };
+            var options = new ComplexOptions
+            {
+                Boolean = true,
+                Integer = 13
+            };
             foreach (var v in validations)
             {
                 Assert.True(v.Validate(Options.DefaultName, options).Succeeded);

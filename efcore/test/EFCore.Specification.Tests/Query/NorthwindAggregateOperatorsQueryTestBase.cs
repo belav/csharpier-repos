@@ -32,7 +32,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             Assert.False(
                 context.Set<Order>()
-                    .Select(o => new ProjectedType { Order = o.OrderID, Customer = o.CustomerID })
+                    .Select(
+                        o =>
+                            new ProjectedType
+                            {
+                                Order = o.OrderID,
+                                Customer = o.CustomerID
+                            }
+                    )
                     .All(p => p.Customer == "ALFKI")
             );
         }

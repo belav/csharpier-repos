@@ -1569,7 +1569,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     One = o.CustomerID,
                                     Two = o.CustomerID == "ALFKI"
-                                        ? new MyStruct { X = o.OrderID, Y = o.CustomerID.Length }
+                                        ? new MyStruct
+                                          {
+                                              X = o.OrderID,
+                                              Y = o.CustomerID.Length
+                                          }
                                         : (MyStruct?)null
                                 }
                         ),
@@ -2271,8 +2275,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             c =>
                                 c.City == "Seattle"
-                                    ? new IdName<string> { Id = "PAY", Name = "Pay" }
-                                    : new IdName<string> { Id = "REC", Name = "Receive" }
+                                    ? new IdName<string>
+                                      {
+                                          Id = "PAY",
+                                          Name = "Pay"
+                                      }
+                                    : new IdName<string>
+                                      {
+                                          Id = "REC",
+                                          Name = "Receive"
+                                      }
                         ),
                 assertOrder: true,
                 elementAsserter: (e, a) =>

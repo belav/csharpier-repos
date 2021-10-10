@@ -602,8 +602,16 @@ public static partial class XmlSerializerTests
     {
         SimpleType[] x = new SimpleType[]
         {
-            new SimpleType { P1 = "abc", P2 = 11 },
-            new SimpleType { P1 = "def", P2 = 12 }
+            new SimpleType
+            {
+                P1 = "abc",
+                P2 = 11
+            },
+            new SimpleType
+            {
+                P1 = "def",
+                P2 = 12
+            }
         };
         SimpleType[] y = SerializeAndDeserialize<SimpleType[]>(
             x,
@@ -1033,7 +1041,11 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_DefaultNamespaceChange_SimpleTypeAsRoot()
     {
-        var value = new SimpleType { P1 = "abc", P2 = 11 };
+        var value = new SimpleType
+        {
+            P1 = "abc",
+            P2 = 11
+        };
         var o = SerializeAndDeserialize<SimpleType>(
             value,
             @"<?xml version=""1.0""?>
@@ -1053,7 +1065,11 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_DefaultNamespaceChange_SimpleTypeAsRoot_WithXmlSerializerNamespaces()
     {
-        var value = new SimpleType { P1 = "abc", P2 = 11 };
+        var value = new SimpleType
+        {
+            P1 = "abc",
+            P2 = 11
+        };
         XmlSerializerNamespaces xns = new XmlSerializerNamespaces();
         xns.Add("aa", "testNs");
         var o = SerializeAndDeserialize<SimpleType>(
@@ -1078,8 +1094,16 @@ public static partial class XmlSerializerTests
     {
         SimpleType[] x = new SimpleType[]
         {
-            new SimpleType { P1 = "abc", P2 = 11 },
-            new SimpleType { P1 = "def", P2 = 12 }
+            new SimpleType
+            {
+                P1 = "abc",
+                P2 = 11
+            },
+            new SimpleType
+            {
+                P1 = "def",
+                P2 = 12
+            }
         };
         SimpleType[] y = SerializeAndDeserialize<SimpleType[]>(
             x,
@@ -1471,8 +1495,16 @@ public static partial class XmlSerializerTests
         {
             Instruments = new Music.Instrument[]
             {
-                new Music.Brass() { Name = "Trumpet", IsValved = true },
-                new Music.Brass() { Name = "Cornet", IsValved = true }
+                new Music.Brass()
+                {
+                    Name = "Trumpet",
+                    IsValved = true
+                },
+                new Music.Brass()
+                {
+                    Name = "Cornet",
+                    IsValved = true
+                }
             }
         };
         var overrides = new XmlAttributeOverrides();
@@ -2004,7 +2036,11 @@ public static partial class XmlSerializerTests
             typeof(SoapEncodedTestType4)
         );
         var ser = new XmlSerializer(myTypeMapping);
-        var value = new SoapEncodedTestType4() { IntValue = 11, DoubleValue = 12.0 };
+        var value = new SoapEncodedTestType4()
+        {
+            IntValue = 11,
+            DoubleValue = 12.0
+        };
 
         var actual = SerializeAndDeserialize(
             value: value,
@@ -2016,7 +2052,11 @@ public static partial class XmlSerializerTests
         Assert.Equal(value.IntValue, actual.IntValue);
         Assert.Equal(value.DoubleValue, actual.DoubleValue);
 
-        value = new SoapEncodedTestType4() { IntValue = null, DoubleValue = null };
+        value = new SoapEncodedTestType4()
+        {
+            IntValue = null,
+            DoubleValue = null
+        };
 
         actual = SerializeAndDeserialize(
             value: value,
@@ -2045,7 +2085,11 @@ public static partial class XmlSerializerTests
         XmlTypeMapping structMapping = new SoapReflectionImporter().ImportTypeMapping(
             typeof(SomeStruct?)
         );
-        SomeStruct? structValue = new SomeStruct() { A = 1, B = 2 };
+        SomeStruct? structValue = new SomeStruct()
+        {
+            A = 1,
+            B = 2
+        };
 
         var structActual = SerializeAndDeserialize(
             value: structValue,
@@ -2288,7 +2332,12 @@ public static partial class XmlSerializerTests
         soapImporter.IncludeType(typeof(MySpecialOrder2));
         XmlTypeMapping myTypeMapping = soapImporter.ImportTypeMapping(typeof(MyOrder));
         var ser = new XmlSerializer(myTypeMapping);
-        var value = new MySpecialOrder() { ID = 10, Name = "MyName", SecondaryID = 1000 };
+        var value = new MySpecialOrder()
+        {
+            ID = 10,
+            Name = "MyName",
+            SecondaryID = 1000
+        };
 
         var actual = SerializeAndDeserialize(
             value: value,
@@ -2332,7 +2381,11 @@ public static partial class XmlSerializerTests
             new MyItem() { ItemName = "AAA" },
             new MyItem() { ItemName = "BBB" }
         };
-        var value = new MyGroup() { GroupName = "MyName", MyItems = things };
+        var value = new MyGroup()
+        {
+            GroupName = "MyName",
+            MyItems = things
+        };
 
         string baseline =
             "<root>\r\n  <MyGroup xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" id=\"id1\">\r\n    <GroupName xsi:type=\"xsd:string\">MyName</GroupName>\r\n    <MyItems href=\"#id2\" />\r\n  </MyGroup>\r\n  <q1:Array id=\"id2\" q1:arrayType=\"MyItem[2]\" xmlns:q1=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n    <Item href=\"#id3\" />\r\n    <Item href=\"#id4\" />\r\n  </q1:Array>\r\n  <MyItem id=\"id3\" d2p1:type=\"MyItem\" xmlns:d2p1=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n    <ItemName xmlns:q2=\"http://www.w3.org/2001/XMLSchema\" d2p1:type=\"q2:string\">AAA</ItemName>\r\n  </MyItem>\r\n  <MyItem id=\"id4\" d2p1:type=\"MyItem\" xmlns:d2p1=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n    <ItemName xmlns:q3=\"http://www.w3.org/2001/XMLSchema\" d2p1:type=\"q3:string\">BBB</ItemName>\r\n  </MyItem>\r\n</root>";
@@ -2357,7 +2410,11 @@ public static partial class XmlSerializerTests
             new MyItem() { ItemName = "AAA" },
             new MyItem() { ItemName = "BBB" }
         };
-        var value = new MyGroup2() { GroupName = "MyName", MyItems = things };
+        var value = new MyGroup2()
+        {
+            GroupName = "MyName",
+            MyItems = things
+        };
 
         string baseline =
             "<root>\r\n  <MyGroup2 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" id=\"id1\">\r\n    <GroupName xsi:type=\"xsd:string\">MyName</GroupName>\r\n    <MyItems href=\"#id2\" />\r\n  </MyGroup2>\r\n  <q1:Array id=\"id2\" q1:arrayType=\"MyItem[2]\" xmlns:q1=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n    <Item href=\"#id3\" />\r\n    <Item href=\"#id4\" />\r\n  </q1:Array>\r\n  <MyItem id=\"id3\" d2p1:type=\"MyItem\" xmlns:d2p1=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n    <ItemName xmlns:q2=\"http://www.w3.org/2001/XMLSchema\" d2p1:type=\"q2:string\">AAA</ItemName>\r\n  </MyItem>\r\n  <MyItem id=\"id4\" d2p1:type=\"MyItem\" xmlns:d2p1=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n    <ItemName xmlns:q3=\"http://www.w3.org/2001/XMLSchema\" d2p1:type=\"q3:string\">BBB</ItemName>\r\n  </MyItem>\r\n</root>";
@@ -2431,7 +2488,11 @@ public static partial class XmlSerializerTests
         {
             Optional = IntEnum.Option1,
             OptionalInt = 42,
-            Struct1 = new SomeStruct { A = 1, B = 2 }
+            Struct1 = new SomeStruct
+            {
+                A = 1,
+                B = 2
+            }
         };
         string baseline =
             "<root><WithNullables xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" id=\"id1\"><Optional xsi:type=\"IntEnum\">Option1</Optional><OptionalInt xsi:type=\"xsd:int\">42</OptionalInt><Struct1 href=\"#id2\" /></WithNullables><SomeStruct id=\"id2\" d2p1:type=\"SomeStruct\" xmlns:d2p1=\"http://www.w3.org/2001/XMLSchema-instance\"><A xmlns:q1=\"http://www.w3.org/2001/XMLSchema\" d2p1:type=\"q1:int\">1</A><B xmlns:q2=\"http://www.w3.org/2001/XMLSchema\" d2p1:type=\"q2:int\">2</B></SomeStruct></root>";
@@ -2451,7 +2512,11 @@ public static partial class XmlSerializerTests
     {
         var mapping = new SoapReflectionImporter().ImportTypeMapping(typeof(WithEnums));
         var serializer = new XmlSerializer(mapping);
-        var item = new WithEnums() { Int = IntEnum.Option1, Short = ShortEnum.Option2 };
+        var item = new WithEnums()
+        {
+            Int = IntEnum.Option1,
+            Short = ShortEnum.Option2
+        };
         var actual = SerializeAndDeserialize(
             item,
             "<?xml version=\"1.0\"?>\r\n<WithEnums xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" id=\"id1\">\r\n  <Int xsi:type=\"IntEnum\">Option1</Int>\r\n  <Short xsi:type=\"ShortEnum\">Option2</Short>\r\n</WithEnums>",
@@ -3468,7 +3533,11 @@ public static partial class XmlSerializerTests
     public static void XmlMembersMapping_Soap_SoapComplexType()
     {
         string memberName = "EchoComositeTypeXmlSerializerFormatSoapResult";
-        var requestBodyValue = new SoapComplexType() { BoolValue = true, StringValue = "hello" };
+        var requestBodyValue = new SoapComplexType()
+        {
+            BoolValue = true,
+            StringValue = "hello"
+        };
 
         string baseline =
             "<root><q1:EchoComositeTypeXmlSerializerFormatSoapResponse xmlns:q1=\"http://tempuri.org/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><EchoComositeTypeXmlSerializerFormatSoapResult href=\"#id1\"/></q1:EchoComositeTypeXmlSerializerFormatSoapResponse><q2:SoapComplexType id=\"id1\" a:type=\"q2:SoapComplexType\" xmlns:q2=\"http://tempuri.org/encoded\" xmlns:a=\"http://www.w3.org/2001/XMLSchema-instance\"><BoolValue a:type=\"q3:boolean\" xmlns:q3=\"http://www.w3.org/2001/XMLSchema\">true</BoolValue><StringValue a:type=\"q4:string\" xmlns:q4=\"http://www.w3.org/2001/XMLSchema\">hello</StringValue></q2:SoapComplexType></root>";
@@ -3750,8 +3819,16 @@ public static partial class XmlSerializerTests
     {
         SimpleType[] x = new SimpleType[]
         {
-            new SimpleType { P1 = "abc", P2 = 11 },
-            new SimpleType { P1 = "def", P2 = 12 }
+            new SimpleType
+            {
+                P1 = "abc",
+                P2 = 11
+            },
+            new SimpleType
+            {
+                P1 = "def",
+                P2 = 12
+            }
         };
         Func<XmlSerializer> serializerFactory = () =>
         {

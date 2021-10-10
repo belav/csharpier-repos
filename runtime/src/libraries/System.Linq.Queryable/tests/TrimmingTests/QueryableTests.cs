@@ -10,9 +10,21 @@ class Program
     {
         Customer[] customers = new Customer[]
         {
-            new Customer() { Name = "Bob", Age = 23 },
-            new Customer() { Name = "Sue", Age = 43 },
-            new Customer() { Name = "Pat", Age = 20 },
+            new Customer()
+            {
+                Name = "Bob",
+                Age = 23
+            },
+            new Customer()
+            {
+                Name = "Sue",
+                Age = 43
+            },
+            new Customer()
+            {
+                Name = "Pat",
+                Age = 20
+            },
         };
 
         var query = customers.AsQueryable().OrderByDescending(c => c.Age).Skip(1).Take(1);

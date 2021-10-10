@@ -42,7 +42,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             groupBoxStyle.Setters.Add(
                 new Setter(
                     GroupBox.PaddingProperty,
-                    new Thickness() { Left = 7, Right = 7, Top = 7 }
+                    new Thickness()
+                    {
+                        Left = 7,
+                        Right = 7,
+                        Top = 7
+                    }
                 )
             );
             groupBoxStyle.Setters.Add(
@@ -70,7 +75,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             var textBoxStyle = new System.Windows.Style(typeof(TextBox));
             textBoxStyle.Setters.Add(
-                new Setter(TextBox.MarginProperty, new Thickness() { Left = 7, Right = 7 })
+                new Setter(
+                    TextBox.MarginProperty,
+                    new Thickness()
+                    {
+                        Left = 7,
+                        Right = 7
+                    }
+                )
             );
             textBoxStyle.Setters.Add(
                 new Setter(

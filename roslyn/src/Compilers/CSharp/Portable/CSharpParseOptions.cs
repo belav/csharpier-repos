@@ -93,7 +93,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var effectiveKind = kind.MapSpecifiedToEffectiveKind();
-            return new CSharpParseOptions(this) { SpecifiedKind = kind, Kind = effectiveKind };
+            return new CSharpParseOptions(this)
+            {
+                SpecifiedKind = kind,
+                Kind = effectiveKind
+            };
         }
 
         public CSharpParseOptions WithLanguageVersion(LanguageVersion version)

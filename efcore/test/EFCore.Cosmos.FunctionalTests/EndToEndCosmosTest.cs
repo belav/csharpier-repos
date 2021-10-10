@@ -32,7 +32,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using (var context = new CustomerContext(options))
             {
@@ -78,7 +82,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using (var context = new CustomerContext(options))
             {
@@ -124,7 +132,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
             string storeId = null;
             using (var context = new CustomerContext(options))
             {
@@ -192,7 +204,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using (var context = new CustomerContext(options))
             {
@@ -279,7 +295,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using (var context = new CustomerContext(options))
             {
@@ -613,14 +633,26 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             const int pk1 = 1;
             const int pk2 = 2;
 
-            var customer = new Customer { Id = 42, Name = "Theon", PartitionKey = pk1 };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon",
+                PartitionKey = pk1
+            };
 
             await using (var context = new PartitionKeyContextCustomValueGenerator(options))
             {
                 await context.Database.EnsureCreatedAsync();
 
                 context.Add(customer);
-                context.Add(new Customer { Id = 42, Name = "Theon Twin", PartitionKey = pk2 });
+                context.Add(
+                    new Customer
+                    {
+                        Id = 42,
+                        Name = "Theon Twin",
+                        PartitionKey = pk2
+                    }
+                );
 
                 await context.SaveChangesAsync();
             }
@@ -657,14 +689,26 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             const int pk1 = 1;
             const int pk2 = 2;
 
-            var customer = new Customer { Id = 42, Name = "Theon", PartitionKey = pk1 };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon",
+                PartitionKey = pk1
+            };
 
             using (var context = new PartitionKeyContextCustomValueGenerator(options))
             {
                 context.Database.EnsureCreated();
 
                 context.Add(customer);
-                context.Add(new Customer { Id = 42, Name = "Theon Twin", PartitionKey = pk2 });
+                context.Add(
+                    new Customer
+                    {
+                        Id = 42,
+                        Name = "Theon Twin",
+                        PartitionKey = pk2
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -701,7 +745,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             var options = Fixture.CreateOptions();
             const int pk1 = 1;
 
-            var customer = new Customer { Id = 42, Name = "Theon", PartitionKey = pk1 };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon",
+                PartitionKey = pk1
+            };
 
             using (var context = new PartitionKeyContextNoValueGenerator(options))
             {
@@ -754,7 +803,12 @@ OFFSET 0 LIMIT 1"
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon", PartitionKey = 1 };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon",
+                PartitionKey = 1
+            };
 
             await using (var context = new PartitionKeyContextNonPrimaryKey(options))
             {
@@ -780,7 +834,11 @@ OFFSET 0 LIMIT 1"
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new CustomerNoPartitionKey { Id = 42, Name = "Theon" };
+            var customer = new CustomerNoPartitionKey
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             await using (var context = new PartitionKeyContextEntityWithNoPartitionKey(options))
             {
@@ -806,7 +864,11 @@ OFFSET 0 LIMIT 1"
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             await using (var context = new PartitionKeyContextPrimaryKey(options))
             {
@@ -832,7 +894,11 @@ OFFSET 0 LIMIT 1"
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new CustomerWithResourceId { id = "42", Name = "Theon" };
+            var customer = new CustomerWithResourceId
+            {
+                id = "42",
+                Name = "Theon"
+            };
 
             await using (var context = new PartitionKeyContextWithPrimaryKeyResourceId(options))
             {
@@ -1011,7 +1077,11 @@ OFFSET 0 LIMIT 1"
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using (var context = new NoDiscriminatorCustomerContext(options))
             {
@@ -1065,7 +1135,11 @@ OFFSET 0 LIMIT 1"
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using (var context = new ExtraCustomerContext(options))
             {
@@ -1133,7 +1207,11 @@ OFFSET 0 LIMIT 1"
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using (var context = new UnmappedCustomerContext(options))
             {
@@ -1177,7 +1255,11 @@ OFFSET 0 LIMIT 1"
             );
             var options = Fixture.CreateOptions(testDatabase);
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
             using (var context = new CustomerContext(options))
             {
                 context.Add(customer);
@@ -1268,7 +1350,11 @@ OFFSET 0 LIMIT 1"
         {
             var options = Fixture.CreateOptions();
 
-            var entity = new ConflictingId { id = "42", Name = "Theon" };
+            var entity = new ConflictingId
+            {
+                id = "42",
+                Name = "Theon"
+            };
 
             using (var context = new ConflictingIdContext(options))
             {

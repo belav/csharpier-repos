@@ -33,7 +33,11 @@ namespace Microsoft.AspNetCore.Authentication
             {
                 throw new ArgumentNullException(nameof(ticket));
             }
-            return new HandleRequestResult() { Ticket = ticket, Properties = ticket.Properties };
+            return new HandleRequestResult()
+            {
+                Ticket = ticket,
+                Properties = ticket.Properties
+            };
         }
 
         /// <summary>
@@ -57,7 +61,11 @@ namespace Microsoft.AspNetCore.Authentication
             AuthenticationProperties? properties
         )
         {
-            return new HandleRequestResult() { Failure = failure, Properties = properties };
+            return new HandleRequestResult()
+            {
+                Failure = failure,
+                Properties = properties
+            };
         }
 
         /// <summary>

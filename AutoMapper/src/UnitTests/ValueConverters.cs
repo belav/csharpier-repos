@@ -61,7 +61,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 
@@ -140,7 +146,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 
@@ -208,7 +220,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 
@@ -280,7 +298,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 
@@ -348,7 +372,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 
@@ -432,7 +462,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 
@@ -500,7 +536,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 
@@ -584,7 +626,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 
@@ -652,7 +700,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 
@@ -724,7 +778,13 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_apply_converters()
             {
-                var source = new Source { Value1 = 1, Value2 = 2, Value3 = 3, Value4 = 4 };
+                var source = new Source
+                {
+                    Value1 = 1,
+                    Value2 = 2,
+                    Value3 = 3,
+                    Value4 = 4
+                };
 
                 var dest = Mapper.Map<Source, Dest>(source);
 

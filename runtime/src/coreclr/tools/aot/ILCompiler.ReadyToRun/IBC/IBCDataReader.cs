@@ -328,7 +328,11 @@ namespace ILCompiler.IBC
                 uint hitCount = ReadSmallUInt();
 
                 blockList.Add(
-                    new IBC.BasicBlockData { ILOffset = ilOffset, ExecutionCount = hitCount }
+                    new IBC.BasicBlockData
+                    {
+                        ILOffset = ilOffset,
+                        ExecutionCount = hitCount
+                    }
                 );
             }
         }
@@ -352,7 +356,11 @@ namespace ILCompiler.IBC
             {
                 uint firstBlockHitCount = reader.Read7BitEncodedUInt();
                 result.BasicBlocks.Add(
-                    new IBC.BasicBlockData { ILOffset = 0, ExecutionCount = firstBlockHitCount }
+                    new IBC.BasicBlockData
+                    {
+                        ILOffset = 0,
+                        ExecutionCount = firstBlockHitCount
+                    }
                 );
             }
 
@@ -447,7 +455,12 @@ namespace ILCompiler.IBC
                 }
 
                 result.Add(
-                    new IBC.TokenData { Token = token, Flags = flags, ScenarioMask = scenarioMask }
+                    new IBC.TokenData
+                    {
+                        Token = token,
+                        Flags = flags,
+                        ScenarioMask = scenarioMask
+                    }
                 );
             }
 

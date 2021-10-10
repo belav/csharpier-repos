@@ -20,7 +20,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         // Single reader, single writer queue since all writes happen from the uv thread and reads happen sequentially
         private readonly Channel<LibuvConnection> _acceptQueue =
             Channel.CreateUnbounded<LibuvConnection>(
-                new UnboundedChannelOptions { SingleReader = true, SingleWriter = true }
+                new UnboundedChannelOptions
+                {
+                    SingleReader = true,
+                    SingleWriter = true
+                }
             );
 
         public ListenerContext(LibuvTransportContext transportContext)

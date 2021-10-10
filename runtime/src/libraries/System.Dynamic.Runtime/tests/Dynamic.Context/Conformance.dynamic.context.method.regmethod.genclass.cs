@@ -661,8 +661,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic dy = new MemberClassWithClassConstraint<MyClass>();
             var list = new List<M>()
             {
-                new M() { Field1 = 1, Field2 = 2 },
-                new M() { Field1 = 2, Field2 = 1 }
+                new M()
+                {
+                    Field1 = 1,
+                    Field2 = 2
+                },
+                new M()
+                {
+                    Field1 = 2,
+                    Field2 = 1
+                }
             };
             return list.Any(p => p.Field1 == (int)dy.Method_ReturnsInt()) ? 0 : 1;
         }

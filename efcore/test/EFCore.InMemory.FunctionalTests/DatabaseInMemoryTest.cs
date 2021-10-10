@@ -36,7 +36,11 @@ namespace Microsoft.EntityFrameworkCore
                 new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider)
                     .UseInMemoryDatabase(nameof(DatabaseInMemoryTest)).Options;
 
-            var customer = new Customer { Id = 42, Name = "Theon" };
+            var customer = new Customer
+            {
+                Id = 42,
+                Name = "Theon"
+            };
 
             using (var context = new DbContext(options))
             {
@@ -109,7 +113,13 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var db = new SimpleContext())
             {
-                db.Artists.Add(new SimpleContext.Artist { ArtistId = "JDId", Name = "John Doe" });
+                db.Artists.Add(
+                    new SimpleContext.Artist
+                    {
+                        ArtistId = "JDId",
+                        Name = "John Doe"
+                    }
+                );
                 await db.SaveChangesAsync();
             }
 

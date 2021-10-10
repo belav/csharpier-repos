@@ -510,7 +510,11 @@ namespace InteropTestsClient
             string oauth2Token = await credential.GetAccessTokenForRequestAsync();
 
             var credentials = GoogleGrpcCredentials.FromAccessToken(oauth2Token);
-            var request = new SimpleRequest { FillUsername = true, FillOauthScope = true };
+            var request = new SimpleRequest
+            {
+                FillUsername = true,
+                FillOauthScope = true
+            };
 
             var response = client.UnaryCall(request, new CallOptions(credentials: credentials));
 
@@ -691,7 +695,11 @@ namespace InteropTestsClient
         public static async Task RunStatusCodeAndMessageAsync(TestService.TestServiceClient client)
         {
             Console.WriteLine("running status_code_and_message");
-            var echoStatus = new EchoStatus { Code = 2, Message = "test status message" };
+            var echoStatus = new EchoStatus
+            {
+                Code = 2,
+                Message = "test status message"
+            };
 
             {
                 // step 1: test unary call

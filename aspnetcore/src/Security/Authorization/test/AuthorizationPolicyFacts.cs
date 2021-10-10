@@ -30,7 +30,11 @@ namespace Microsoft.AspNetCore.Authorization.Test
                 new AuthorizeAttribute(),
                 new AuthorizeAttribute("1") { AuthenticationSchemes = "dupe" },
                 new AuthorizeAttribute("2") { AuthenticationSchemes = "dupe" },
-                new AuthorizeAttribute { Roles = "r1,r2", AuthenticationSchemes = "roles" },
+                new AuthorizeAttribute
+                {
+                    Roles = "r1,r2",
+                    AuthenticationSchemes = "roles"
+                },
             };
             var options = new AuthorizationOptions();
             options.AddPolicy("1", policy => policy.RequireClaim("1"));

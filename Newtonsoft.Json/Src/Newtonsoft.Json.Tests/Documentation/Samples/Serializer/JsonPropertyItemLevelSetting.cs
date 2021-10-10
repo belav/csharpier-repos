@@ -63,7 +63,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             #region Usage
             Employee manager = new Employee { Name = "George-Michael" };
-            Employee worker = new Employee { Name = "Maeby", Manager = manager };
+            Employee worker = new Employee
+            {
+                Name = "Maeby",
+                Manager = manager
+            };
 
             Business business = new Business
             {

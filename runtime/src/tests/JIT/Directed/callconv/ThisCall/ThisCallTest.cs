@@ -286,7 +286,11 @@ unsafe class ThisCallTest
                 managedVtable->getSize = Marshal.GetFunctionPointerForDelegate(
                     (ThisCallNative.GetSizeFn)(
                         (ThisCallNative.C* c, int unused) =>
-                            new ThisCallNative.SizeF { width = c->width, height = c->height }
+                            new ThisCallNative.SizeF
+                            {
+                                width = c->width,
+                                height = c->height
+                            }
                     )
                 );
                 managedVtable->getWidth = Marshal.GetFunctionPointerForDelegate(
@@ -348,7 +352,11 @@ unsafe class ThisCallTest
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvThiscall) })]
     private static ThisCallNative.SizeF GetSize(ThisCallNative.C* c, int unused)
     {
-        return new ThisCallNative.SizeF { width = c->width, height = c->height };
+        return new ThisCallNative.SizeF
+        {
+            width = c->width,
+            height = c->height
+        };
     }
 
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvThiscall) })]

@@ -35,7 +35,11 @@ namespace FormatterWebSite.Controllers
                     throw new InvalidTimeZoneException();
                 }
 
-                yield return new Project { Id = i, Name = $"Project{i}", };
+                yield return new Project
+                {
+                    Id = i,
+                    Name = $"Project{i}",
+                };
             }
         }
     }

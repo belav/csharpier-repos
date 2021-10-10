@@ -29,12 +29,23 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         public static ISubclass InstantiateSubclass()
         {
-            return new Subclass { ID = 123, Name = "ABC", P1 = true, P2 = 44 };
+            return new Subclass
+            {
+                ID = 123,
+                Name = "ABC",
+                P1 = true,
+                P2 = 44
+            };
         }
 
         public static IMainClass InstantiateManiClass()
         {
-            return new MainClass { ID = 567, Name = "XYZ", Subclass = InstantiateSubclass() };
+            return new MainClass
+            {
+                ID = 567,
+                Name = "XYZ",
+                Subclass = InstantiateSubclass()
+            };
         }
     }
 }

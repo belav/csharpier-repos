@@ -25,7 +25,12 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
         public static Entry Directory(string name) => new Entry { Name = name };
 
         public static Entry File(string name, string assemblyResourceName) =>
-            new Entry { Name = name, AssemblyResourceName = assemblyResourceName, IsFile = true };
+            new Entry
+            {
+                Name = name,
+                AssemblyResourceName = assemblyResourceName,
+                IsFile = true
+            };
 
         internal void AddChild(Entry child)
         {

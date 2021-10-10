@@ -110,7 +110,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Should_map_ok()
         {
-            var user = new ConcreteUserDto { Id = "my-id", Name = "my-User" };
+            var user = new ConcreteUserDto
+            {
+                Id = "my-id",
+                Name = "my-User"
+            };
             var userEntity = Mapper.Map<ConcreteUserEntity>(user);
             userEntity.Id.ShouldBeNull();
             userEntity.Name.ShouldBe("my-User");

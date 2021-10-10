@@ -108,7 +108,11 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 )
                 {
                     current.Matches.Add(
-                        new InboundMatch() { Entry = entry, TemplateMatcher = matcher }
+                        new InboundMatch()
+                        {
+                            Entry = entry,
+                            TemplateMatcher = matcher
+                        }
                     );
                 }
 
@@ -165,7 +169,13 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 Debug.Fail("We shouldn't get here.");
             }
 
-            current.Matches.Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
+            current.Matches.Add(
+                new InboundMatch()
+                {
+                    Entry = entry,
+                    TemplateMatcher = matcher
+                }
+            );
             current.Matches.Sort(
                 (x, y) =>
                 {

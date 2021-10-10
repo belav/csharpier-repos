@@ -240,7 +240,11 @@ namespace Microsoft.Extensions.Internal
         public void PropertyHelper_ForDerivedClass()
         {
             // Arrange
-            var derived = new DerivedClass { PropA = "propAValue", PropB = "propBValue" };
+            var derived = new DerivedClass
+            {
+                PropA = "propAValue",
+                PropB = "propBValue"
+            };
 
             // Act
             var helpers = PropertyHelper.GetProperties(derived.GetType().GetTypeInfo()).ToArray();
@@ -726,7 +730,12 @@ namespace Microsoft.Extensions.Internal
         public void ObjectToDictionary_ReturnsInheritedProperties()
         {
             // Arrange
-            var value = new ThreeDPoint() { X = 5, Y = 10, Z = 17 };
+            var value = new ThreeDPoint()
+            {
+                X = 5,
+                Y = 10,
+                Z = 17
+            };
 
             // Act
             var dictValues = PropertyHelper.ObjectToDictionary(value);

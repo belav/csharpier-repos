@@ -599,7 +599,11 @@ namespace System.Diagnostics.Tests
                             MyClass val = new MyClass()
                             {
                                 Url = "MyUrl",
-                                Point = new MyPoint() { X = 3, Y = 5 }
+                                Point = new MyPoint()
+                                {
+                                    X = 3,
+                                    Y = 5
+                                }
                             };
                             if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener.Write(
@@ -738,7 +742,11 @@ namespace System.Diagnostics.Tests
                             MyClass val = new MyClass()
                             {
                                 Url = "MyUrl",
-                                Point = new MyPoint() { X = 3, Y = 5 }
+                                Point = new MyPoint()
+                                {
+                                    X = 3,
+                                    Y = 5
+                                }
                             };
                             if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener.Write(
@@ -941,7 +949,11 @@ namespace System.Diagnostics.Tests
                             MyClass val = new MyClass()
                             {
                                 Url = "MyUrl",
-                                Point = new MyPoint() { X = 3, Y = 5 }
+                                Point = new MyPoint()
+                                {
+                                    X = 3,
+                                    Y = 5
+                                }
                             };
                             if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener.Write(
@@ -1176,7 +1188,11 @@ namespace System.Diagnostics.Tests
                             /***************************************************************************************/
                             // Emit an arguments object that points at null things
 
-                            MyClass val1 = new MyClass() { Url = "myUrlVal", Point = null };
+                            MyClass val1 = new MyClass()
+                            {
+                                Url = "myUrlVal",
+                                Point = null
+                            };
                             if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener.Write(
                                     "TestEvent1",
@@ -1210,7 +1226,11 @@ namespace System.Diagnostics.Tests
                             MyClass val2 = new MyClass()
                             {
                                 Url = null,
-                                Point = new MyPoint() { X = 8, Y = 9 }
+                                Point = new MyPoint()
+                                {
+                                    X = 8,
+                                    Y = 9
+                                }
                             };
                             if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener.Write(
@@ -1273,7 +1293,11 @@ namespace System.Diagnostics.Tests
                             MyClass val = new MyClass()
                             {
                                 Url = "MyUrl",
-                                Point = new MyPoint() { X = 3, Y = 5 }
+                                Point = new MyPoint()
+                                {
+                                    X = 3,
+                                    Y = 5
+                                }
                             };
                             if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener.Write(
@@ -1331,7 +1355,11 @@ namespace System.Diagnostics.Tests
                             MyClass val = new MyClass()
                             {
                                 Url = "MyUrl",
-                                Point = new MyPoint() { X = 3, Y = 5 }
+                                Point = new MyPoint()
+                                {
+                                    X = 3,
+                                    Y = 5
+                                }
                             };
                             if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener.Write(
@@ -1818,7 +1846,11 @@ namespace System.Diagnostics.Tests
                             // DiagnosticSourceEventSource.
                             diagnosticListener.Write(
                                 "MyEvent",
-                                new MyEvent { Number = 1, OtherNumber = 2 }
+                                new MyEvent
+                                {
+                                    Number = 1,
+                                    OtherNumber = 2
+                                }
                             );
                             Assert.Equal(1, eventListener.EventCount);
                             Assert.Equal("MySource", eventListener.LastEvent.SourceName);

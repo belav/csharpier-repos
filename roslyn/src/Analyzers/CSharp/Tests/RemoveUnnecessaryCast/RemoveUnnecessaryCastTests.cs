@@ -666,7 +666,11 @@ class Test
             await new VerifyCS.Test
             {
                 TestState = { Sources = { source }, },
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 BatchFixedState = { Sources = { batchFixedSource }, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
@@ -713,7 +717,11 @@ class Test
             await new VerifyCS.Test
             {
                 TestState = { Sources = { source }, },
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 BatchFixedState = { Sources = { batchFixedSource }, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
                 DiagnosticSelector = diagnostics => diagnostics[1],
@@ -4971,7 +4979,11 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
+                FixedState =
+                {
+                    Sources = { fixedSource },
+                    MarkupHandling = MarkupMode.Allow,
+                },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -5013,7 +5025,11 @@ enum Sign
         }
     }";
 
-            await new VerifyCS.Test { TestCode = source, FixedCode = fixedSource, }.RunAsync();
+            await new VerifyCS.Test
+            {
+                TestCode = source,
+                FixedCode = fixedSource,
+            }.RunAsync();
         }
 
         [WorkItem(18510, "https://github.com/dotnet/roslyn/issues/18510")]
@@ -5037,7 +5053,11 @@ enum Sign
         }
     }";
 
-            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
+            await new VerifyCS.Test
+            {
+                TestCode = source,
+                FixedCode = source,
+            }.RunAsync();
         }
 
         [WorkItem(25456, "https://github.com/dotnet/roslyn/issues/25456#issuecomment-373549735")]

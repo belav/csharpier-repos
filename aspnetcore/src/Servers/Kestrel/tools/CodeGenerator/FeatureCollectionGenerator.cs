@@ -21,7 +21,12 @@ namespace CodeGenerator
             // NOTE: This list MUST always match the set of feature interfaces implemented by TransportConnection.
             // See also: src/Kestrel/Http/TransportConnection.FeatureCollection.cs
             var features = allFeatures.Select(
-                (type, index) => new KnownFeature { Name = type, Index = index }
+                (type, index) =>
+                    new KnownFeature
+                    {
+                        Name = type,
+                        Index = index
+                    }
             );
 
             return $@"// Copyright (c) .NET Foundation. All rights reserved.

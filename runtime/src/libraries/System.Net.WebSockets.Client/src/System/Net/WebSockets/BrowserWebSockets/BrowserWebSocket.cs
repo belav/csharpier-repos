@@ -29,7 +29,11 @@ namespace System.Net.WebSockets
     {
         private readonly Channel<ReceivePayload> _receiveMessageQueue =
             Channel.CreateUnbounded<ReceivePayload>(
-                new UnboundedChannelOptions() { SingleReader = true, SingleWriter = true, }
+                new UnboundedChannelOptions()
+                {
+                    SingleReader = true,
+                    SingleWriter = true,
+                }
             );
 
         private TaskCompletionSource? _tcsClose;

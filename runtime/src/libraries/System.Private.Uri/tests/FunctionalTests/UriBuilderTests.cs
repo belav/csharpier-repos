@@ -629,12 +629,21 @@ namespace System.PrivateUri.Tests
             };
             yield return new object[]
             {
-                new UriBuilder() { Scheme = "unknown", Host = "" },
+                new UriBuilder()
+                {
+                    Scheme = "unknown",
+                    Host = ""
+                },
                 "unknown:/"
             };
             yield return new object[]
             {
-                new UriBuilder() { Scheme = "unknown", Host = "", Path = "path1/path2" },
+                new UriBuilder()
+                {
+                    Scheme = "unknown",
+                    Host = "",
+                    Path = "path1/path2"
+                },
                 "unknown:path1/path2"
             };
             yield return new object[]
@@ -644,40 +653,78 @@ namespace System.PrivateUri.Tests
             };
             yield return new object[]
             {
-                new UriBuilder() { UserName = "username", Password = "password" },
+                new UriBuilder()
+                {
+                    UserName = "username",
+                    Password = "password"
+                },
                 "http://username:password@localhost/"
             };
             yield return new object[] { new UriBuilder() { Port = 80 }, "http://localhost:80/" };
             yield return new object[] { new UriBuilder() { Port = 0 }, "http://localhost:0/" };
-            yield return new object[] { new UriBuilder() { Host = "", Port = 80 }, "http:///" };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Path = "" },
+                new UriBuilder()
+                {
+                    Host = "",
+                    Port = 80
+                },
+                "http:///"
+            };
+            yield return new object[]
+            {
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = ""
+                },
                 "http://host/"
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Path = "/" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = "/"
+                },
                 "http://host/"
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Path = @"\" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = @"\"
+                },
                 "http://host/"
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Path = "path" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = "path"
+                },
                 "http://host/path"
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Path = "path", Query = "query" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = "path",
+                    Query = "query"
+                },
                 "http://host/path?query"
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Path = "path", Fragment = "fragment" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = "path",
+                    Fragment = "fragment"
+                },
                 "http://host/path#fragment"
             };
             yield return new object[]
@@ -693,17 +740,30 @@ namespace System.PrivateUri.Tests
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Query = "query" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Query = "query"
+                },
                 "http://host/?query"
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Fragment = "fragment" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Fragment = "fragment"
+                },
                 "http://host/#fragment"
             };
             yield return new object[]
             {
-                new UriBuilder() { Host = "host", Query = "query", Fragment = "fragment" },
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Query = "query",
+                    Fragment = "fragment"
+                },
                 "http://host/?query#fragment"
             };
         }

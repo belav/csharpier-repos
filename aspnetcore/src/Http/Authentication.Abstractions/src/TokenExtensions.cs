@@ -143,7 +143,13 @@ namespace Microsoft.AspNetCore.Authentication
                     var token = properties.GetTokenValue(name);
                     if (token != null)
                     {
-                        tokens.Add(new AuthenticationToken { Name = name, Value = token });
+                        tokens.Add(
+                            new AuthenticationToken
+                            {
+                                Name = name,
+                                Value = token
+                            }
+                        );
                     }
                 }
             }

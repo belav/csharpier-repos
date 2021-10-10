@@ -52,7 +52,13 @@ namespace Microsoft.Extensions.Tools.Internal
         }
 
         public TemporaryCSharpProject WithProperty(string name, string value) =>
-            WithProperty(new PropertySpec { Name = name, Value = value });
+            WithProperty(
+                new PropertySpec
+                {
+                    Name = name,
+                    Value = value
+                }
+            );
 
         public TemporaryCSharpProject WithProperty(PropertySpec property)
         {
@@ -72,7 +78,15 @@ namespace Microsoft.Extensions.Tools.Internal
             string itemName,
             string include,
             string condition = null
-        ) => WithItem(new ItemSpec { Name = itemName, Include = include, Condition = condition });
+        ) =>
+            WithItem(
+                new ItemSpec
+                {
+                    Name = itemName,
+                    Include = include,
+                    Condition = condition
+                }
+            );
 
         public TemporaryCSharpProject WithItem(ItemSpec item)
         {
@@ -106,7 +120,12 @@ namespace Microsoft.Extensions.Tools.Internal
             }
 
             return WithItem(
-                new ItemSpec { Name = "ProjectReference", Include = reference.Path, Watch = watch }
+                new ItemSpec
+                {
+                    Name = "ProjectReference",
+                    Include = reference.Path,
+                    Watch = watch
+                }
             );
         }
 

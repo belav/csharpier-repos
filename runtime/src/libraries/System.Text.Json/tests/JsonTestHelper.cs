@@ -142,7 +142,11 @@ namespace System.Text.Json
         )
         {
             var state = new JsonReaderState(
-                new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                new JsonReaderOptions
+                {
+                    CommentHandling = commentHandling,
+                    MaxDepth = maxDepth
+                }
             );
             var reader = new Utf8JsonReader(data, true, state);
             return ReaderLoop(data.Length, out length, ref reader);
@@ -157,7 +161,11 @@ namespace System.Text.Json
         {
             ReadOnlySequence<byte> sequence = CreateSegments(data);
             var state = new JsonReaderState(
-                new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                new JsonReaderOptions
+                {
+                    CommentHandling = commentHandling,
+                    MaxDepth = maxDepth
+                }
             );
             var reader = new Utf8JsonReader(sequence, true, state);
             return ReaderLoop(data.Length, out length, ref reader);

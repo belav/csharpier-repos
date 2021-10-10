@@ -33,7 +33,11 @@
 
         protected override void Because_of()
         {
-            var model = new Model { Name = "Eric Cartman", Age = 12 };
+            var model = new Model
+            {
+                Name = "Eric Cartman",
+                Age = 12
+            };
 
             _destination = new Entity
             {

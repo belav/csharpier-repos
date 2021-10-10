@@ -40,7 +40,13 @@ namespace CodeGenerator.HttpUtilities
                 else if (currentBitsCount > 0)
                 {
                     var currentShift = (byte)(i - currentBitsCount - lastShift);
-                    shifts.Add(new ShiftInfo<ulong> { Mask = currentMask, Shift = currentShift });
+                    shifts.Add(
+                        new ShiftInfo<ulong>
+                        {
+                            Mask = currentMask,
+                            Shift = currentShift
+                        }
+                    );
                     lastShift = currentShift;
                     currentMask = 0;
                     currentBitsCount = 0;

@@ -135,7 +135,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     targets[i] = new ActionBlock<int[]>(item => values[slot] = item);
                     bb.LinkTo(
                         targets[i],
-                        new DataflowLinkOptions { MaxMessages = 1, Append = append }
+                        new DataflowLinkOptions
+                        {
+                            MaxMessages = 1,
+                            Append = append
+                        }
                     );
                 }
                 bb.PostRange(0, Messages);

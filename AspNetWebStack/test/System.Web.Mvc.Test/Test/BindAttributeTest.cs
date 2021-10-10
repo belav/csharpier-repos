@@ -87,7 +87,11 @@ namespace System.Web.Mvc.Test
         public void IsPropertyAllowedReturnsFalseForBlacklistOverridingWhitelistedProperties()
         {
             // Setup
-            BindAttribute attr = new BindAttribute { Include = "FOO,BAR", Exclude = "bar,QUx" };
+            BindAttribute attr = new BindAttribute
+            {
+                Include = "FOO,BAR",
+                Exclude = "bar,QUx"
+            };
 
             // Act & assert
             Assert.True(attr.IsPropertyAllowed("foo"));

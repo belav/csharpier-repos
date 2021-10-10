@@ -57,7 +57,11 @@ namespace System.CommandLine.Tests.Binding
 
             var command = new Command("the-command")
             {
-                new Argument { Name = "value", ArgumentType = type }
+                new Argument
+                {
+                    Name = "value",
+                    ArgumentType = type
+                }
             };
 
             var bindingContext = new BindingContext(command.Parse(commandLine));
@@ -81,7 +85,11 @@ namespace System.CommandLine.Tests.Binding
 
             var command = new Command("the-command")
             {
-                new Argument { Name = "value", ArgumentType = type }
+                new Argument
+                {
+                    Name = "value",
+                    ArgumentType = type
+                }
             };
 
             var bindingContext = new BindingContext(command.Parse(commandLine));
@@ -157,7 +165,11 @@ namespace System.CommandLine.Tests.Binding
 
             var command = new Command("the-command")
             {
-                new Argument { Name = "value", ArgumentType = type }
+                new Argument
+                {
+                    Name = "value",
+                    ArgumentType = type
+                }
             };
             var parser = new Parser(command);
 

@@ -1036,7 +1036,11 @@ namespace System.Text.Json.Tests
                 );
 
                 var state = new JsonReaderState(
-                    new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                    new JsonReaderOptions
+                    {
+                        CommentHandling = commentHandling,
+                        MaxDepth = maxDepth
+                    }
                 );
                 var json = new Utf8JsonReader(sequence, isFinalBlock: true, state);
 
@@ -1081,7 +1085,11 @@ namespace System.Text.Json.Tests
                 );
 
                 var state = new JsonReaderState(
-                    new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                    new JsonReaderOptions
+                    {
+                        CommentHandling = commentHandling,
+                        MaxDepth = maxDepth
+                    }
                 );
                 var json = new Utf8JsonReader(sequence, isFinalBlock: true, state);
 
@@ -1370,12 +1378,20 @@ namespace System.Text.Json.Tests
         )
         {
             var stateSpan = new JsonReaderState(
-                new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                new JsonReaderOptions
+                {
+                    CommentHandling = commentHandling,
+                    MaxDepth = maxDepth
+                }
             );
             var jsonSpan = new Utf8JsonReader(dataUtf8, isFinalBlock: true, stateSpan);
 
             var stateSequence = new JsonReaderState(
-                new JsonReaderOptions { CommentHandling = commentHandling, MaxDepth = maxDepth }
+                new JsonReaderOptions
+                {
+                    CommentHandling = commentHandling,
+                    MaxDepth = maxDepth
+                }
             );
             var jsonSequence = new Utf8JsonReader(sequence, isFinalBlock: true, stateSequence);
 

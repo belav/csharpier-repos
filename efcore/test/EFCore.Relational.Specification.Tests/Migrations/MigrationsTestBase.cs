@@ -1729,11 +1729,31 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 builder =>
                     builder.Entity("Person")
                         .HasData(
-                            new Person { Id = 1, Name = "Daenerys Targaryen" },
-                            new Person { Id = 2, Name = "John Snow" },
-                            new Person { Id = 3, Name = "Arya Stark" },
-                            new Person { Id = 4, Name = "Harry Strickland" },
-                            new Person { Id = 5, Name = null }
+                            new Person
+                            {
+                                Id = 1,
+                                Name = "Daenerys Targaryen"
+                            },
+                            new Person
+                            {
+                                Id = 2,
+                                Name = "John Snow"
+                            },
+                            new Person
+                            {
+                                Id = 3,
+                                Name = "Arya Stark"
+                            },
+                            new Person
+                            {
+                                Id = 4,
+                                Name = "Harry Strickland"
+                            },
+                            new Person
+                            {
+                                Id = 5,
+                                Name = null
+                            }
                         ),
                 model => { }
             );
@@ -1749,11 +1769,24 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             e.Property<int>("Id");
                             e.Property<string>("Name");
                             e.HasKey("Id");
-                            e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
+                            e.HasData(
+                                new Person
+                                {
+                                    Id = 1,
+                                    Name = "Daenerys Targaryen"
+                                }
+                            );
                         }
                     ),
                 builder =>
-                    builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
+                    builder.Entity("Person")
+                        .HasData(
+                            new Person
+                            {
+                                Id = 2,
+                                Name = "John Snow"
+                            }
+                        ),
                 builder => { },
                 model => { }
             );
@@ -1771,13 +1804,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             e.HasKey("Id", "AnotherId");
                             e.Property<string>("Name");
                             e.HasData(
-                                new Person { Id = 1, AnotherId = 11, Name = "Daenerys Targaryen" }
+                                new Person
+                                {
+                                    Id = 1,
+                                    AnotherId = 11,
+                                    Name = "Daenerys Targaryen"
+                                }
                             );
                         }
                     ),
                 builder =>
                     builder.Entity("Person")
-                        .HasData(new Person { Id = 2, AnotherId = 12, Name = "John Snow" }),
+                        .HasData(
+                            new Person
+                            {
+                                Id = 2,
+                                AnotherId = 12,
+                                Name = "John Snow"
+                            }
+                        ),
                 builder => { },
                 model => { }
             );
@@ -1793,14 +1838,33 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             e.Property<int>("Id");
                             e.Property<string>("Name");
                             e.HasKey("Id");
-                            e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
+                            e.HasData(
+                                new Person
+                                {
+                                    Id = 1,
+                                    Name = "Daenerys Targaryen"
+                                }
+                            );
                         }
                     ),
                 builder =>
-                    builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
+                    builder.Entity("Person")
+                        .HasData(
+                            new Person
+                            {
+                                Id = 2,
+                                Name = "John Snow"
+                            }
+                        ),
                 builder =>
                     builder.Entity("Person")
-                        .HasData(new Person { Id = 2, Name = "Another John Snow" }),
+                        .HasData(
+                            new Person
+                            {
+                                Id = 2,
+                                Name = "Another John Snow"
+                            }
+                        ),
                 model => { }
             );
 
@@ -1817,16 +1881,35 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             e.HasKey("Id", "AnotherId");
                             e.Property<string>("Name");
                             e.HasData(
-                                new Person { Id = 1, AnotherId = 11, Name = "Daenerys Targaryen" }
+                                new Person
+                                {
+                                    Id = 1,
+                                    AnotherId = 11,
+                                    Name = "Daenerys Targaryen"
+                                }
                             );
                         }
                     ),
                 builder =>
                     builder.Entity("Person")
-                        .HasData(new Person { Id = 2, AnotherId = 11, Name = "John Snow" }),
+                        .HasData(
+                            new Person
+                            {
+                                Id = 2,
+                                AnotherId = 11,
+                                Name = "John Snow"
+                            }
+                        ),
                 builder =>
                     builder.Entity("Person")
-                        .HasData(new Person { Id = 2, AnotherId = 11, Name = "Another John Snow" }),
+                        .HasData(
+                            new Person
+                            {
+                                Id = 2,
+                                AnotherId = 11,
+                                Name = "Another John Snow"
+                            }
+                        ),
                 model => { }
             );
 
@@ -1842,15 +1925,36 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             e.Property<string>("Name");
                             e.Property<int>("Age");
                             e.HasKey("Id");
-                            e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen", Age = 18 });
+                            e.HasData(
+                                new Person
+                                {
+                                    Id = 1,
+                                    Name = "Daenerys Targaryen",
+                                    Age = 18
+                                }
+                            );
                         }
                     ),
                 builder =>
                     builder.Entity("Person")
-                        .HasData(new Person { Id = 2, Name = "John Snow", Age = 20 }),
+                        .HasData(
+                            new Person
+                            {
+                                Id = 2,
+                                Name = "John Snow",
+                                Age = 20
+                            }
+                        ),
                 builder =>
                     builder.Entity("Person")
-                        .HasData(new Person { Id = 2, Name = "Another John Snow", Age = 21 }),
+                        .HasData(
+                            new Person
+                            {
+                                Id = 2,
+                                Name = "Another John Snow",
+                                Age = 21
+                            }
+                        ),
                 model => { }
             );
 

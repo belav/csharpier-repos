@@ -22,7 +22,11 @@ namespace System.Net.Http.Formatting
         void CopyConstructor()
         {
             TestFormUrlEncodedMediaTypeFormatter formatter =
-                new TestFormUrlEncodedMediaTypeFormatter() { MaxDepth = 42, ReadBufferSize = 512 };
+                new TestFormUrlEncodedMediaTypeFormatter()
+                {
+                    MaxDepth = 42,
+                    ReadBufferSize = 512
+                };
 
             TestFormUrlEncodedMediaTypeFormatter derivedFormatter =
                 new TestFormUrlEncodedMediaTypeFormatter(formatter);

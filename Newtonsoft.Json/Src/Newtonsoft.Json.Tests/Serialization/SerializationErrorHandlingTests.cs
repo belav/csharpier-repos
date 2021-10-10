@@ -235,7 +235,11 @@ namespace Newtonsoft.Json.Tests.Serialization
                             ThrowError = "Handle this!",
                             Member2 = "Member1"
                         },
-                        new ListErrorObject { Member = "Value2", Member2 = "Member2" },
+                        new ListErrorObject
+                        {
+                            Member = "Value2",
+                            Member2 = "Member2"
+                        },
                         new ListErrorObject
                         {
                             Member = "Value3",
@@ -250,7 +254,11 @@ namespace Newtonsoft.Json.Tests.Serialization
                             ThrowError = "Handle this!",
                             Member2 = "Member1"
                         },
-                        new ListErrorObject { Member = "Value2", Member2 = "Member2" },
+                        new ListErrorObject
+                        {
+                            Member = "Value2",
+                            Member2 = "Member2"
+                        },
                         new ListErrorObject
                         {
                             Member = "Value3",
@@ -326,7 +334,11 @@ namespace Newtonsoft.Json.Tests.Serialization
                     ThrowError = "Handle this!",
                     Member2 = "Member1"
                 },
-                new ListErrorObject { Member = "Value2", Member2 = "Member2" },
+                new ListErrorObject
+                {
+                    Member = "Value2",
+                    Member2 = "Member2"
+                },
                 new ListErrorObject
                 {
                     Member = "Value3",
@@ -972,9 +984,21 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             var data = new List<ErrorPerson2>()
             {
-                new ErrorPerson2 { FirstName = "Scott", LastName = "Hanselman" },
-                new ErrorPerson2 { FirstName = "Scott", LastName = "Hunter" },
-                new ErrorPerson2 { FirstName = "Scott", LastName = "Guthrie" },
+                new ErrorPerson2
+                {
+                    FirstName = "Scott",
+                    LastName = "Hanselman"
+                },
+                new ErrorPerson2
+                {
+                    FirstName = "Scott",
+                    LastName = "Hunter"
+                },
+                new ErrorPerson2
+                {
+                    FirstName = "Scott",
+                    LastName = "Guthrie"
+                },
             };
 
             Dictionary<string, IEnumerable<IErrorPerson2>> dictionary = data.GroupBy(
@@ -996,10 +1020,26 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             var data = new List<ErrorPerson2>
             {
-                new ErrorPerson2 { FirstName = "Scott", LastName = "Hanselman" },
-                new ErrorPerson2 { FirstName = "Scott", LastName = "Hunter" },
-                new ErrorPerson2 { FirstName = "Scott", LastName = "Guthrie" },
-                new ErrorPerson2 { FirstName = "James", LastName = "Newton-King" },
+                new ErrorPerson2
+                {
+                    FirstName = "Scott",
+                    LastName = "Hanselman"
+                },
+                new ErrorPerson2
+                {
+                    FirstName = "Scott",
+                    LastName = "Hunter"
+                },
+                new ErrorPerson2
+                {
+                    FirstName = "Scott",
+                    LastName = "Guthrie"
+                },
+                new ErrorPerson2
+                {
+                    FirstName = "James",
+                    LastName = "Newton-King"
+                },
             };
 
             Dictionary<string, IEnumerable<IErrorPerson2>> dictionary = data.GroupBy(

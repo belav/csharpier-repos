@@ -61,7 +61,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 )
                 .ConfigureAwait(false);
 
-            var tokens = new LSP.SemanticTokens { ResultId = resultId, Data = tokensData };
+            var tokens = new LSP.SemanticTokens
+            {
+                ResultId = resultId,
+                Data = tokensData
+            };
             await _tokensCache.UpdateCacheAsync(request.TextDocument.Uri, tokens, cancellationToken)
                 .ConfigureAwait(false);
             return tokens;

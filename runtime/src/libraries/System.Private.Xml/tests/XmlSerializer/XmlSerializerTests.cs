@@ -87,14 +87,30 @@ public static partial class XmlSerializerTests
         {
             F1 = new SimpleType[]
             {
-                new SimpleType { P1 = "ab", P2 = 1 },
-                new SimpleType { P1 = "cd", P2 = 2 }
+                new SimpleType
+                {
+                    P1 = "ab",
+                    P2 = 1
+                },
+                new SimpleType
+                {
+                    P1 = "cd",
+                    P2 = 2
+                }
             },
             F2 = new int[] { -1, 3 },
             P1 = new SimpleType[]
             {
-                new SimpleType { P1 = "ef", P2 = 5 },
-                new SimpleType { P1 = "gh", P2 = 7 }
+                new SimpleType
+                {
+                    P1 = "ef",
+                    P2 = 5
+                },
+                new SimpleType
+                {
+                    P1 = "gh",
+                    P2 = 7
+                }
             },
             P2 = new int[] { 11, 12 }
         };
@@ -158,8 +174,16 @@ public static partial class XmlSerializerTests
     public static void Xml_ArrayAsGetOnly()
     {
         TypeWithGetOnlyArrayProperties x = new TypeWithGetOnlyArrayProperties();
-        x.P1[0] = new SimpleType { P1 = "ab", P2 = 1 };
-        x.P1[1] = new SimpleType { P1 = "cd", P2 = 2 };
+        x.P1[0] = new SimpleType
+        {
+            P1 = "ab",
+            P2 = 1
+        };
+        x.P1[1] = new SimpleType
+        {
+            P1 = "cd",
+            P2 = 2
+        };
         x.P2[0] = -1;
         x.P2[1] = 3;
 
@@ -265,7 +289,11 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_EnumAsMember()
     {
-        TypeWithEnumMembers x = new TypeWithEnumMembers { F1 = MyEnum.Three, P1 = MyEnum.Two };
+        TypeWithEnumMembers x = new TypeWithEnumMembers
+        {
+            F1 = MyEnum.Three,
+            P1 = MyEnum.Two
+        };
         TypeWithEnumMembers y = SerializeAndDeserialize<TypeWithEnumMembers>(
             x,
             @"<?xml version=""1.0""?>
@@ -515,7 +543,14 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Struct()
     {
-        var value = new WithStruct { Some = new SomeStruct { A = 1, B = 2 } };
+        var value = new WithStruct
+        {
+            Some = new SomeStruct
+            {
+                A = 1,
+                B = 2
+            }
+        };
         var result = SerializeAndDeserialize(
             value,
             @"<?xml version=""1.0""?>
@@ -535,7 +570,11 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Enums()
     {
-        var item = new WithEnums() { Int = IntEnum.Option1, Short = ShortEnum.Option2 };
+        var item = new WithEnums()
+        {
+            Int = IntEnum.Option1,
+            Short = ShortEnum.Option2
+        };
         var actual = SerializeAndDeserialize(
             item,
             @"<?xml version=""1.0""?>
@@ -555,7 +594,11 @@ public static partial class XmlSerializerTests
         {
             Optional = IntEnum.Option1,
             OptionalInt = 42,
-            Struct1 = new SomeStruct { A = 1, B = 2 }
+            Struct1 = new SomeStruct
+            {
+                A = 1,
+                B = 2
+            }
         };
         var actual = SerializeAndDeserialize(
             item,
@@ -805,7 +848,11 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_DifferentSerializeDeserializeOverloads()
     {
-        var expected = new SimpleType() { P1 = "p1 value", P2 = 123 };
+        var expected = new SimpleType()
+        {
+            P1 = "p1 value",
+            P2 = 123
+        };
         var serializer = new XmlSerializer(typeof(SimpleType));
         var writerTypes = new Type[] { typeof(TextWriter), typeof(XmlWriter) };
         Assert.Throws<InvalidOperationException>(
@@ -1015,10 +1062,26 @@ public static partial class XmlSerializerTests
         SimpleType[][] simpleType2D = new SimpleType[2][];
         simpleType2D[0] = new SimpleType[2];
         simpleType2D[1] = new SimpleType[2];
-        simpleType2D[0][0] = new SimpleType() { P1 = "0 0 value", P2 = 1 };
-        simpleType2D[0][1] = new SimpleType() { P1 = "0 1 value", P2 = 2 };
-        simpleType2D[1][0] = new SimpleType() { P1 = "1 0 value", P2 = 3 };
-        simpleType2D[1][1] = new SimpleType() { P1 = "1 1 value", P2 = 4 };
+        simpleType2D[0][0] = new SimpleType()
+        {
+            P1 = "0 0 value",
+            P2 = 1
+        };
+        simpleType2D[0][1] = new SimpleType()
+        {
+            P1 = "0 1 value",
+            P2 = 2
+        };
+        simpleType2D[1][0] = new SimpleType()
+        {
+            P1 = "1 0 value",
+            P2 = 3
+        };
+        simpleType2D[1][1] = new SimpleType()
+        {
+            P1 = "1 1 value",
+            P2 = 4
+        };
         return simpleType2D;
     }
 
@@ -1040,7 +1103,11 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_SimpleType()
     {
-        var obj = new SimpleType { P1 = "foo", P2 = 1 };
+        var obj = new SimpleType
+        {
+            P1 = "foo",
+            P2 = 1
+        };
         var deserializedObj = SerializeAndDeserialize(
             obj,
             @"<?xml version=""1.0"" encoding=""utf-16""?>
@@ -1493,7 +1560,12 @@ public static partial class XmlSerializerTests
             "<?xml version=\"1.0\"?>\r\n<Dog xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <Age>5</Age>\r\n  <Name>Bear</Name>\r\n  <Breed>GermanShepherd</Breed>\r\n</Dog>";
         var xsf = new XmlSerializerFactory();
         Func<XmlSerializer> serializerfunc = () => xsf.CreateSerializer(typeof(Dog));
-        var dog1 = new Dog() { Name = "Bear", Age = 5, Breed = DogBreed.GermanShepherd };
+        var dog1 = new Dog()
+        {
+            Name = "Bear",
+            Age = 5,
+            Breed = DogBreed.GermanShepherd
+        };
         var dog2 = SerializeAndDeserialize(dog1, baseline, serializerfunc);
         Assert.Equal(dog1.Name, dog2.Name);
         Assert.Equal(dog1.Age, dog2.Age);
@@ -1876,12 +1948,20 @@ public static partial class XmlSerializerTests
     public static void Xml_XSCoverTest()
     {
         var band = new Orchestra();
-        var brass = new Brass() { Name = "Trumpet", IsValved = true };
+        var brass = new Brass()
+        {
+            Name = "Trumpet",
+            IsValved = true
+        };
         Instrument[] myInstruments = { brass };
         band.Instruments = myInstruments;
 
         var attrs = new XmlAttributes();
-        var attr = new XmlElementAttribute() { ElementName = "Brass", Type = typeof(Brass) };
+        var attr = new XmlElementAttribute()
+        {
+            ElementName = "Brass",
+            Type = typeof(Brass)
+        };
 
         attrs.XmlElements.Add(attr);
         var attrOverrides = new XmlAttributeOverrides();
@@ -1944,7 +2024,12 @@ public static partial class XmlSerializerTests
         }
 
         band = new Orchestra();
-        var trumpet = new Trumpet() { Name = "TrumpetKeyC", IsValved = false, Modulation = 'C' };
+        var trumpet = new Trumpet()
+        {
+            Name = "TrumpetKeyC",
+            IsValved = false,
+            Modulation = 'C'
+        };
         band.Instruments = new Instrument[2] { brass, trumpet };
 
         attrs = new XmlAttributes();

@@ -54,7 +54,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public async Task ChangesTo_SerializerSettings_AffectSerialization()
         {
             // Arrange
-            var person = new User() { FullName = "John", age = 35 };
+            var person = new User()
+            {
+                FullName = "John",
+                age = 35
+            };
             var outputFormatterContext = GetOutputFormatterContext(person, typeof(User));
 
             var settings = new JsonSerializerSettings
@@ -86,7 +90,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public async Task ChangesTo_SerializerSettings_AfterSerialization_DoNotAffectSerialization()
         {
             // Arrange
-            var person = new User() { FullName = "John", age = 35 };
+            var person = new User()
+            {
+                FullName = "John",
+                age = 35
+            };
             var expectedOutput = JsonConvert.SerializeObject(person, new JsonSerializerSettings());
 
             var jsonFormatter = new TestableJsonOutputFormatter(new JsonSerializerSettings());
@@ -136,7 +144,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         )
         {
             // Arrange
-            var user = new User { FullName = "John", age = 35 };
+            var user = new User
+            {
+                FullName = "John",
+                age = 35
+            };
             var context = GetOutputFormatterContext(user, typeof(User));
 
             var settings = new JsonSerializerSettings
@@ -253,7 +265,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         )
         {
             // Arrange
-            var user = new UserWithJsonObject { age = 35, FullName = "John", };
+            var user = new UserWithJsonObject
+            {
+                age = 35,
+                FullName = "John",
+            };
             var expected = "{\"age\":35,\"full_name\":\"John\"}";
             var context = GetOutputFormatterContext(user, typeof(UserWithJsonProperty));
 
@@ -367,7 +383,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         {
             // Arrange
             var expected = "{\"$id\":\"1\",\"fullName\":\"John\",\"age\":35}";
-            var user = new User { FullName = "John", age = 35 };
+            var user = new User
+            {
+                FullName = "John",
+                age = 35
+            };
 
             var settings = new JsonSerializerSettings
             {

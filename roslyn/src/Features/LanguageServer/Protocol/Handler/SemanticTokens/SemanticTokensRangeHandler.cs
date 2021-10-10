@@ -63,7 +63,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            return new LSP.SemanticTokens { ResultId = resultId, Data = tokensData };
+            return new LSP.SemanticTokens
+            {
+                ResultId = resultId,
+                Data = tokensData
+            };
         }
     }
 }

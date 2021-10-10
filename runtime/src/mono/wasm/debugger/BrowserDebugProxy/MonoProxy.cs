@@ -147,7 +147,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                         {
                             await OnDefaultContext(
                                 sessionId,
-                                new ExecutionContext { Id = id, AuxData = aux_data },
+                                new ExecutionContext
+                                {
+                                    Id = id,
+                                    AuxData = aux_data
+                                },
                                 token
                             );
                         }

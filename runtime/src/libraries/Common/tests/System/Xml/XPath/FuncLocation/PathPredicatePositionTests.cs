@@ -340,8 +340,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"descendant-or-self::node()[position()=7 or position()=2]";
             var expected = new XPathResult(
                 0,
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                }
             );
             ;
 
@@ -365,7 +373,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"descendant-or-self::node()[position()<7][position()=2]";
             var expected = new XPathResult(
                 0,
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                }
             );
             ;
 
@@ -588,7 +600,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"preceding::node()[position()=6]";
             var expected = new XPathResult(
                 0,
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                }
             );
             ;
 
@@ -2946,7 +2962,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "novel"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2972,7 +2992,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Seven Years in Trenton"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2983,7 +3007,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Value =
                         "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2999,8 +3027,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Joe"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                }
             );
             ;
 
@@ -3289,14 +3325,22 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "USA"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "12"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3333,15 +3377,27 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "US"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "55"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3372,15 +3428,27 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Marsh"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "55.95"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3399,7 +3467,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Yes"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3418,7 +3490,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Ziff Davis"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3443,7 +3519,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Create a list of needed hardware"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3462,30 +3542,54 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "1998-06-23"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "Sport Cars - Can you really dream?\n\t\t\t"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "PC Magazine Best Product of 1997"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3516,15 +3620,27 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Robinson"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "55"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3573,15 +3689,27 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Robinson"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "10"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3606,14 +3734,22 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Ph.D."
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "08"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3626,7 +3762,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "2.50"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3639,7 +3779,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "0.98"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3688,7 +3832,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Trenton Forever"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3725,9 +3873,21 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "misery"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3740,22 +3900,38 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Robert Bob"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "Where is Trenton?"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "Where in the world is Trenton?"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                }
             );
             ;
 
@@ -5120,14 +5296,22 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                 @"preceding::*/child::text()[position()=1 or position()=last()][1]";
             var expected = new XPathResult(
                 0,
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "Seven Years in Trenton"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -5158,14 +5342,22 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "12"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "History of Trenton"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -5208,14 +5400,22 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "55"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "XQL The Golden Years"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -5252,7 +5452,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "55.95"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -5271,7 +5475,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Yes"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -5290,7 +5498,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Ziff Davis"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -5309,7 +5521,11 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Ziff Davis"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -5352,29 +5568,49 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "Sport Cars - Can you really dream?\n\t\t\t"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "PC Magazine Best Product of 1997"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "History of Trenton 2"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -5411,14 +5647,22 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "55"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "History of Trenton Vol 3"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Whitespace,
+                    HasNameTable = true
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,

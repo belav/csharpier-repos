@@ -799,7 +799,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         ob =>
                         {
                             ob.HasKey(o => o.OrderId);
-                            ob.HasData(new Order { OrderId = -2, CustomerId = -1 });
+                            ob.HasData(
+                                new Order
+                                {
+                                    OrderId = -2,
+                                    CustomerId = -1
+                                }
+                            );
                             ob.OwnsMany(
                                 o => o.Products,
                                 pb =>

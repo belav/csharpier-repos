@@ -25,7 +25,11 @@ namespace Microsoft.AspNetCore.Mvc
                 {
                     null,
                     "Test string",
-                    new Person { Id = 274, Name = "George", }
+                    new Person
+                    {
+                        Id = 274,
+                        Name = "George",
+                    }
                 };
             }
         }

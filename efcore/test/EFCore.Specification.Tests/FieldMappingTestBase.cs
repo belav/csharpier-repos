@@ -1895,9 +1895,21 @@ namespace Microsoft.EntityFrameworkCore
             where TBlog : IBlogAccessor, new()
             where TPost : IPostAccessor, new()
         {
-            posts.Add(new TPost { AccessId = 10, AccessTitle = "Post10" });
+            posts.Add(
+                new TPost
+                {
+                    AccessId = 10,
+                    AccessTitle = "Post10"
+                }
+            );
 
-            posts.Add(new TPost { AccessId = 11, AccessTitle = "Post11" });
+            posts.Add(
+                new TPost
+                {
+                    AccessId = 11,
+                    AccessTitle = "Post11"
+                }
+            );
 
             return new TBlog
             {
@@ -1911,12 +1923,26 @@ namespace Microsoft.EntityFrameworkCore
             where TBlog : IBlogAccessor, new()
             where TPost : IPostAccessor, new()
         {
-            var blog = new TBlog { AccessId = 20, AccessTitle = "Blog20" };
+            var blog = new TBlog
+            {
+                AccessId = 20,
+                AccessTitle = "Blog20"
+            };
 
             return new List<TPost>
             {
-                new() { AccessId = 20, AccessTitle = "Post20", AccessBlog = blog },
-                new() { AccessId = 21, AccessTitle = "Post21", AccessBlog = blog }
+                new()
+                {
+                    AccessId = 20,
+                    AccessTitle = "Post20",
+                    AccessBlog = blog
+                },
+                new()
+                {
+                    AccessId = 21,
+                    AccessTitle = "Post21",
+                    AccessBlog = blog
+                }
             };
         }
 
@@ -2363,7 +2389,11 @@ namespace Microsoft.EntityFrameworkCore
                     }
 
                     context.Add(
-                        new LoginSession { User = new User2(), Users = new List<User2> { new() } }
+                        new LoginSession
+                        {
+                            User = new User2(),
+                            Users = new List<User2> { new() }
+                        }
                     );
 
                     context.Add(

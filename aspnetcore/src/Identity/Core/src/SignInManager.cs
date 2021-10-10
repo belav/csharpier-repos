@@ -832,8 +832,12 @@ namespace Microsoft.AspNetCore.Identity
                 (await GetExternalAuthenticationSchemesAsync()).FirstOrDefault(
                     p => p.Name == provider
                 )?.DisplayName ?? provider;
-            return new ExternalLoginInfo(auth.Principal, provider, providerKey, providerDisplayName)
-            {
+            return new ExternalLoginInfo(
+                auth.Principal,
+                provider,
+                providerKey,
+                providerDisplayName
+            ) {
                 AuthenticationTokens = auth.Properties.GetTokens(),
                 AuthenticationProperties = auth.Properties
             };
